@@ -117325,6 +117325,55 @@
         }
       }
     },
+    "full-duplex-leaderboard": {
+      "url": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard",
+      "feed": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard/raw/main/data/unified-ratings.json",
+      "terms": "Hugging Face allows crawling. Full-Duplex Leaderboard publishes unified ratings and trace bundles publicly in its Space repository.",
+      "headline": "Turn-taking Youden's J (recall minus false positive rate) scaled to 100 on TurnBench dev. The source warns against averaging across separate tracks.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "ElevenLabs Agents",
+        "Mimi endpointer",
+        "OpenAI GPT-Realtime-mini, semantic VAD (high eagerness)",
+        "OpenAI GPT-Realtime-mini, server VAD (1.8 s silence)",
+        "Parakeet EOU 120M + Silero VAD",
+        "Silero VAD + silence timeout",
+        "Smart Turn v3",
+        "Smart Turn v3.2 + Silero VAD",
+        "VAP",
+        "WavLM-Base causal",
+        "WavLM-Large causal",
+        "p99 turn-1-mini 5.3M (CoreML FP32) + Silero VAD"
+      ],
+      "stats": {
+        "latency": {
+          "name": "Turn-taking latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "caughtRate": {
+          "name": "Turn ends caught",
+          "unit": "%",
+          "better": "higher"
+        },
+        "falseAlarmRate": {
+          "name": "False alarm rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "interruptionsCaught": {
+          "name": "Interruptions caught",
+          "unit": "%",
+          "better": "higher"
+        },
+        "interruptionFalseAlarmRate": {
+          "name": "Interruption false alarm rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "fullstackbench": {
       "url": "https://github.com/bytedance/FullStackBench",
       "feed": "https://arxiv.org/html/2412.00535",
@@ -131260,6 +131309,50 @@
         "e1m5": {
           "name": "Dexterous Hand: H2RCore",
           "group": "Dexterous Hand"
+        }
+      }
+    },
+    "ha-vln-2": {
+      "url": "https://uwmilab.github.io/HA-VLN-webpage/",
+      "feed": "https://uwmilab.github.io/HA-VLN-webpage/",
+      "terms": "The HA-VLN 2.0 authors publish the benchmark leaderboard table publicly on the project website.",
+      "headline": "Composite score combining navigation performance and social compliance (100 times navigation times 0.70 plus 0.30 times social).",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "BEVBert",
+        "BEVBert (Zero-shot)",
+        "ETPNav",
+        "ETPNav (Zero-shot)",
+        "HA-VLN-CMA* (+DA+EV)",
+        "HA-VLN-CMA* (Zero-shot)",
+        "HA-VLN-CMA-Base",
+        "HA-VLN-CMA-DA",
+        "HA-VLN-VL",
+        "HA-VLN-VL (Zero-shot)"
+      ],
+      "stats": {
+        "successRate": {
+          "name": "Success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "navigationError": {
+          "name": "Navigation error",
+          "unit": "score",
+          "better": "lower",
+          "note": "Final Euclidean distance to the goal in meters."
+        },
+        "collisionRate": {
+          "name": "Collision rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "totalCollisionCount": {
+          "name": "Total collision count",
+          "unit": "count",
+          "better": "lower",
+          "note": "Mean number of collisions per episode."
         }
       }
     },
@@ -158982,6 +159075,40 @@
         }
       }
     },
+    "kinetix": {
+      "url": "https://allenai.github.io/vla-evaluation-harness/leaderboard/",
+      "feed": "https://allenai.github.io/vla-evaluation-harness/leaderboard/leaderboard.json",
+      "terms": "The AllenAI VLA Evaluation Harness publishes its benchmark leaderboard as a public JSON file in its open-source repository.",
+      "host": "AllenAI VLA Evaluation Harness",
+      "headline": "Success rate at inference delay d=0 across the 12-task Kinetix real-time chunking protocol. Higher delay settings (d=1 through d=4) are stored as parts, and entries reporting only a cross-delay average are excluded.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "ACNet",
+        "Naive Async (from ACNet)",
+        "Naive Async (from REMAC)",
+        "REMAC",
+        "REMAC + BID",
+        "REMAC + RTC",
+        "RTC (from ACNet)",
+        "RTC (from REMAC)",
+        "Training-Time RTC (from ACNet)"
+      ],
+      "parts": {
+        "d1": {
+          "name": "Delay 1"
+        },
+        "d2": {
+          "name": "Delay 2"
+        },
+        "d3": {
+          "name": "Delay 3"
+        },
+        "d4": {
+          "name": "Delay 4"
+        }
+      }
+    },
     "kitab": {
       "url": "https://huggingface.co/datasets/microsoft/kitab",
       "feed": "https://huggingface.co/datasets/microsoft/kitab/resolve/main/README.md",
@@ -168492,6 +168619,53 @@
         }
       },
       "static": "paper"
+    },
+    "libero-mem": {
+      "url": "https://allenai.github.io/vla-evaluation-harness/leaderboard/",
+      "feed": "https://allenai.github.io/vla-evaluation-harness/leaderboard/leaderboard.json",
+      "terms": "The AllenAI VLA Evaluation Harness publishes its benchmark leaderboard as a public JSON file in its open-source repository.",
+      "host": "AllenAI VLA Evaluation Harness",
+      "headline": "Mean subgoal completion rate across the ten standard LIBERO-Mem tasks (T1 to T10). Entries on non-standard task subsets without an overall score are excluded.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Naive Embodied-SlotSSM",
+        "SlotVLA (h=1)",
+        "SlotVLA (h=8)",
+        "π₀ (from Embodied-SlotSSM)"
+      ],
+      "parts": {
+        "t1": {
+          "name": "Task 1"
+        },
+        "t2": {
+          "name": "Task 2"
+        },
+        "t3": {
+          "name": "Task 3"
+        },
+        "t4": {
+          "name": "Task 4"
+        },
+        "t5": {
+          "name": "Task 5"
+        },
+        "t6": {
+          "name": "Task 6"
+        },
+        "t7": {
+          "name": "Task 7"
+        },
+        "t8": {
+          "name": "Task 8"
+        },
+        "t9": {
+          "name": "Task 9"
+        },
+        "t10": {
+          "name": "Task 10"
+        }
+      }
     },
     "libero-para": {
       "url": "https://cau-hai-lab.github.io/LIBERO-Para/",
@@ -179518,6 +179692,47 @@
           "name": "DualArmLiquidMixing-v1",
           "group": "Level 4",
           "unit": "%"
+        }
+      }
+    },
+    "maniskill2": {
+      "url": "https://allenai.github.io/vla-evaluation-harness/leaderboard/",
+      "feed": "https://allenai.github.io/vla-evaluation-harness/leaderboard/leaderboard.json",
+      "terms": "The AllenAI VLA Evaluation Harness publishes its benchmark leaderboard as a public JSON file in its open-source repository.",
+      "host": "AllenAI VLA Evaluation Harness",
+      "headline": "Mean success rate across the standard five ManiSkill2 manipulation tasks. Papers reporting non-standard task subsets without an overall score are excluded.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CogACT (from DB-CogACT)",
+        "DB-CogACT",
+        "DB-OFT",
+        "DiT Policy",
+        "Dita",
+        "Dita (Robot Base, Continuous) (from OC-VLA)",
+        "Dita (Robot Base, Discrete) (from OC-VLA)",
+        "Dita (from GeoVLA)",
+        "GeoVLA",
+        "OC-VLA (Continuous)",
+        "OC-VLA (Discrete)",
+        "OC-VLA++ (Dita)",
+        "OFT (from DB-CogACT)"
+      ],
+      "parts": {
+        "pickCube": {
+          "name": "Pick cube"
+        },
+        "stackCube": {
+          "name": "Stack cube"
+        },
+        "pickSingleYcb": {
+          "name": "Pick single YCB"
+        },
+        "pickSingleEgad": {
+          "name": "Pick single EGAD"
+        },
+        "pickClutterYcb": {
+          "name": "Pick clutter YCB"
         }
       }
     },
@@ -191872,6 +192087,48 @@
         "prompts": {
           "name": "Prompts evaluated",
           "unit": "count"
+        }
+      }
+    },
+    "mikasa-robo": {
+      "url": "https://allenai.github.io/vla-evaluation-harness/leaderboard/",
+      "feed": "https://allenai.github.io/vla-evaluation-harness/leaderboard/leaderboard.json",
+      "terms": "The AllenAI VLA Evaluation Harness publishes its benchmark leaderboard as a public JSON file in its open-source repository.",
+      "host": "AllenAI VLA Evaluation Harness",
+      "headline": "Arithmetic mean success rate across the five standard MIKASA-Robo memory tasks. Entries on non-standard task subsets without an overall score are excluded.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "BC (from MIKASA)",
+        "CQL (from MIKASA)",
+        "CronusVLA (from MemoryVLA)",
+        "Decision Transformer (from MIKASA)",
+        "Diffusion Policy (from MIKASA)",
+        "ELMUR",
+        "MemoryVLA",
+        "MemoryVLA++",
+        "Octo-small (from MIKASA)",
+        "OpenVLA (from MIKASA)",
+        "OpenVLA-OFT (from MIKASA)",
+        "RATE (from MIKASA)",
+        "SpatialVLA (from MIKASA)",
+        "π₀ (from MIKASA)"
+      ],
+      "parts": {
+        "shellGameTouch": {
+          "name": "Shell game touch"
+        },
+        "interceptMedium": {
+          "name": "Intercept medium"
+        },
+        "rememberColor3": {
+          "name": "Remember color 3"
+        },
+        "rememberColor5": {
+          "name": "Remember color 5"
+        },
+        "rememberColor9": {
+          "name": "Remember color 9"
         }
       }
     },
@@ -239650,6 +239907,230 @@
         }
       }
     },
+    "open-tts-leaderboard-1-7": {
+      "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
+      "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
+      "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
+      "headline": "Average transcription error rate across 36 languages and five datasets (including ZTTS2-Eval Mini clean), with per-utterance error capped at 100% before pooling.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "BreezeBlue/Breeze-TTS-2",
+        "ComputationalLinguisticsPlatform/tiny-voca-gr ⁸",
+        "ConwayResearch/Underdog-Woof (Mira) ⁶",
+        "ConwayResearch/Underdog-Woof ⁴",
+        "DanielSuncost/tiny-voca-fr ⁷",
+        "Edge0/Audio8-TTS-Realistic-0.6b",
+        "Firoj112/pawp-tts-1.5m ¹",
+        "Firoj112/pawp-tts-300k ⁵",
+        "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
+        "IndexTeam/IndexTTS-2.5",
+        "LiquidAI/LFM3-Audio-2B",
+        "OpenMOSS-Team/MOSS-TTS",
+        "RL10x/tiny-voca-hindi ³",
+        "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
+        "ResembleAI/chatterbox (ChatterboxTTS)",
+        "Supertone/supertonic-3",
+        "WhissleAI/steer-tts",
+        "WhissleAI/steer-tts-edge",
+        "Zyphra/ZONOS3-Mini",
+        "Zyphra/ZONOS3-Mini ¹",
+        "ampixa/sanoTTS (amy) ³",
+        "ampixa/sanoTTS (heart) ⁹",
+        "ampixa/sanoTTS (heart-nano) ²",
+        "apptor/apptor-tiny-tts ⁹",
+        "bosonai/higgs-tts-3-4b",
+        "brenorb/tiny-broca ²",
+        "contextboxai/Kokoro-Vietnamese",
+        "drmhse/nano-edge-tts-standalone ³",
+        "egnch/tiny-voca-ru ⁴",
+        "empero-ai/PiVo-1.4M ⁷",
+        "facebook/seamless-m4t-v2-large",
+        "gachimoto/tiny-voca-ja ⁵",
+        "gradium/phonon-31m-en ¹",
+        "gradium/phonon-31m-en ⁶",
+        "gradium/phonon-40m-de ⁷",
+        "gradium/phonon-40m-en ²",
+        "gradium/phonon-40m-en ⁵",
+        "gradium/phonon-40m-es ¹",
+        "gradium/phonon-40m-fr ⁸",
+        "gradium/phonon-40m-pt ⁶",
+        "hexgrad/Kokoro-82M",
+        "jordand/echo-tts-base",
+        "joserui/tiny-voca-pt-pt ⁴",
+        "k2-fsa/OmniVoice",
+        "kjanh/KhanhTTS-OmniVoice ⁴",
+        "kjanh/KhanhTTS-OmniVoice ⁹",
+        "kyutai/pocket-tts",
+        "marcosmaceo/tiny-voca-es ⁸",
+        "maya-research/maya2-native",
+        "mehdi-hf/cilla-lite ⁶",
+        "mehdi-hf/cilla-mini ⁷",
+        "microsoft/VibeVoice-Realtime-0.5B",
+        "microsoft/speecht5_tts",
+        "mistralai/Voxtral-4B-TTS-2603",
+        "n4ze3m/tiny-voca (F2) ²",
+        "n4ze3m/tiny-voca (M2) ⁴",
+        "neuphonic/neutts-nano-q8-gguf",
+        "neuphonic/neutts-nano-q8-gguf ³",
+        "nvidia/magpie_tts_multilingual_357m",
+        "oddadmix/tiny-voca-arabic ¹",
+        "openbmb/VoxCPM2",
+        "owensong/Inflect-Atom-v3 ⁸",
+        "owensong/Inflect-Micro-v3",
+        "owensong/Inflect-Mini-v3",
+        "pnnbao-ump/VieNeu-TTS-v3-Nano",
+        "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+        "sahilmahendrakar/Paradee-8M-v1.3",
+        "software-mansion/Reverb-TTS",
+        "splendor1811/omnivoice-vietnamese ³",
+        "splendor1811/omnivoice-vietnamese ⁵",
+        "spybyscript/scyllasband",
+        "sulabhkatiyar/indic-tiny-tts-hindi",
+        "tencent/AuK",
+        "tencent/AuK-Flash",
+        "vibevoice/VibeVoice-1.5B-hf",
+        "wite-tech/clarvia-tts-tiny ²",
+        "ydqmkkx/GibbsTTS"
+      ],
+      "parts": {
+        "englishWer": {
+          "name": "English WER"
+        },
+        "chineseCer": {
+          "name": "Chinese CER"
+        },
+        "frenchWer": {
+          "name": "French WER"
+        },
+        "spanishWer": {
+          "name": "Spanish WER"
+        },
+        "germanWer": {
+          "name": "German WER"
+        },
+        "italianWer": {
+          "name": "Italian WER"
+        },
+        "japaneseCer": {
+          "name": "Japanese CER"
+        },
+        "koreanCer": {
+          "name": "Korean CER"
+        },
+        "russianWer": {
+          "name": "Russian WER"
+        },
+        "cantoneseCer": {
+          "name": "Cantonese CER"
+        },
+        "portugueseWer": {
+          "name": "Portuguese WER"
+        },
+        "dutchWer": {
+          "name": "Dutch WER"
+        },
+        "polishWer": {
+          "name": "Polish WER"
+        },
+        "czechWer": {
+          "name": "Czech WER"
+        },
+        "romanianWer": {
+          "name": "Romanian WER"
+        },
+        "greekWer": {
+          "name": "Greek WER"
+        },
+        "finnishWer": {
+          "name": "Finnish WER"
+        },
+        "turkishWer": {
+          "name": "Turkish WER"
+        },
+        "arabicWer": {
+          "name": "Arabic WER"
+        },
+        "hindiWer": {
+          "name": "Hindi WER"
+        },
+        "indonesianWer": {
+          "name": "Indonesian WER"
+        },
+        "thaiCer": {
+          "name": "Thai CER"
+        },
+        "vietnameseWer": {
+          "name": "Vietnamese WER"
+        },
+        "persianCer": {
+          "name": "Persian CER"
+        },
+        "ukrainianWer": {
+          "name": "Ukrainian WER"
+        },
+        "swedishWer": {
+          "name": "Swedish WER"
+        },
+        "danishWer": {
+          "name": "Danish WER"
+        },
+        "norwegianWer": {
+          "name": "Norwegian WER"
+        },
+        "filipinoWer": {
+          "name": "Filipino WER"
+        },
+        "malayWer": {
+          "name": "Malay WER"
+        },
+        "hungarianWer": {
+          "name": "Hungarian WER"
+        },
+        "hebrewWer": {
+          "name": "Hebrew WER"
+        },
+        "bulgarianWer": {
+          "name": "Bulgarian WER"
+        },
+        "croatianWer": {
+          "name": "Croatian WER"
+        },
+        "slovakWer": {
+          "name": "Slovak WER"
+        },
+        "catalanWer": {
+          "name": "Catalan WER"
+        }
+      },
+      "stats": {
+        "averageRtfx": {
+          "name": "Average real-time factor",
+          "unit": "speedup",
+          "better": "higher"
+        },
+        "averageSim": {
+          "name": "Average speaker similarity",
+          "unit": "score",
+          "better": "higher"
+        },
+        "utmosEn": {
+          "name": "UTMOS (English)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "komosKo": {
+          "name": "KOMOS (Korean)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "languagesScored": {
+          "name": "Languages scored",
+          "unit": "count",
+          "better": "higher"
+        }
+      }
+    },
     "openai-mrcr-v2": {
       "url": "https://contextarena.ai/?needles=8&mode=full&showExtra=true",
       "feed": "https://contextarena.ai/api/leaderboard?needles=8&mode=full (bin in_(131072,262144))",
@@ -266464,6 +266945,47 @@
         "Composite-Unseen": {
           "name": "Composite unseen",
           "group": "Split"
+        }
+      }
+    },
+    "robocerebra": {
+      "url": "https://allenai.github.io/vla-evaluation-harness/leaderboard/",
+      "feed": "https://allenai.github.io/vla-evaluation-harness/leaderboard/leaderboard.json",
+      "terms": "The AllenAI VLA Evaluation Harness publishes its benchmark leaderboard as a public JSON file in its open-source repository.",
+      "host": "AllenAI VLA Evaluation Harness",
+      "headline": "Mean success rate across the six RoboCerebra evaluation dimensions.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Cosmos-Reason1+OpenVLA* (from RoboCerebra)",
+        "GPT-4o+OpenVLA* (from RoboCerebra)",
+        "GT-plan + OpenVLA* (RoboCerebra Oracle)",
+        "HPE (Hierarchical Planning and Execution)",
+        "LLaVA-Next-Video+OpenVLA* (from RoboCerebra)",
+        "OpenVLA* (from RoboCerebra)",
+        "OpenVLA-Libero100 (from RoboCerebra)",
+        "Qwen2.5-VL+OpenVLA* (from RoboCerebra)",
+        "RoboBrain-2.0+OpenVLA* (from RoboCerebra)",
+        "VeBrain+OpenVLA* (from RoboCerebra)"
+      ],
+      "parts": {
+        "ideal": {
+          "name": "Ideal"
+        },
+        "randomDisturbance": {
+          "name": "Random disturbance"
+        },
+        "observationMismatching": {
+          "name": "Observation mismatching"
+        },
+        "memoryExploration": {
+          "name": "Memory exploration"
+        },
+        "memoryExecution": {
+          "name": "Memory execution"
+        },
+        "mix": {
+          "name": "Mix"
         }
       }
     },
@@ -297594,6 +298116,33 @@
         }
       }
     },
+    "t3bench": {
+      "url": "https://t3bench.com/",
+      "feed": "https://t3bench.com/",
+      "terms": "The T3Bench authors publish the benchmark leaderboard publicly on t3bench.com.",
+      "headline": "Average quality and alignment score across single-object, single-object-with-surroundings, and multi-object prompts.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "DreamFusion",
+        "Fantasia3D",
+        "LatentNeRF",
+        "Magic3D",
+        "ProlificDreamer",
+        "SJC"
+      ],
+      "parts": {
+        "singleObject": {
+          "name": "Single object"
+        },
+        "singleWithSurroundings": {
+          "name": "Single with surroundings"
+        },
+        "multiObject": {
+          "name": "Multi object"
+        }
+      }
+    },
     "taarofbench": {
       "url": "https://arxiv.org/html/2509.01035",
       "feed": "https://arxiv.org/html/2509.01035",
@@ -305624,6 +306173,73 @@
         "votes": {
           "name": "Votes",
           "unit": "count"
+        }
+      }
+    },
+    "tts-spaces-arena": {
+      "url": "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena",
+      "feed": "https://pendrokar-tts-spaces-arena.hf.space/gradio_api/call/get_leaderboard",
+      "terms": "Hugging Face allows crawling. The TTS Spaces Arena Space publishes Elo ratings and vote summaries publicly.",
+      "headline": "Elo rating from blind pairwise human votes across open and hosted text-to-speech Spaces, excluding preliminary unranked models.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CSM 1B",
+        "Chatterbox",
+        "Chatterbox Turbo",
+        "F5 TTS",
+        "Fish Speech",
+        "GPT-SoVITS ProPlus",
+        "GPT-SoVITS v2",
+        "HierSpeech++",
+        "IMS-Toucan EN",
+        "Index TTS",
+        "KaniTTS",
+        "KaniTTS 2",
+        "Kokoro v0.19",
+        "Kokoro v1.0",
+        "LLaSA 1B",
+        "LLaSA 3B",
+        "LLaSA 8B",
+        "Lightning v3.1",
+        "MARS 6",
+        "MOSS TTS",
+        "MaskGCT",
+        "MegaTTS",
+        "MeloTTS",
+        "MetaVoice",
+        "Microsoft Edge TTS",
+        "OpenAudio S1 Mini",
+        "OpenVoice",
+        "OpenVoice v2",
+        "Orpheus 3B v0.1",
+        "OuteTTS v0.2 500M",
+        "OuteTTS v0.3 1B",
+        "Parler Large",
+        "Parler Mini",
+        "Parler Mini Expresso",
+        "Parler Mini Multi v1.1",
+        "Qwen3 TTS CV (Fine)",
+        "Qwen3 TTS VD",
+        "Spark-TTS",
+        "StyleTTS v2",
+        "WhisperSpeech",
+        "XTTS v2",
+        "Zonos H",
+        "Zonos T",
+        "xVASynth v3",
+        "xVASynth v3 DeepMoji"
+      ],
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "votes": {
+          "name": "Votes",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },

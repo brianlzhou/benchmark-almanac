@@ -133147,6 +133147,7 @@
     "format": "open-ended",
     "family": "open-tts-leaderboard",
     "version": "1.6.0",
+    "successor": "open-tts-leaderboard-1-7",
     "description": "Speech models read multilingual text aloud. The board compares transcriptions with the reference text and measures voice similarity.",
     "org": "Hugging Face",
     "released": "2026-11",
@@ -202803,5 +202804,315 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "kinetix",
+    "name": "Kinetix",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Open-ended 2D physics control tasks in JAX, used to test whether robot policies perform reliably under inference delay.",
+    "org": "FLAIR, University of Oxford",
+    "released": "2024-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2410.23208",
+      "repo": "https://github.com/FLAIROx/Kinetix",
+      "site": "https://kinetix-env.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "The AllenAI VLA Evaluation Harness reports per-delay success rates (d=0 through d=4) on the 12-task real-time chunking protocol. Realtime mode is a setting on this record rather than a separate benchmark.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2410.23208",
+      "https://github.com/FLAIROx/Kinetix",
+      "https://kinetix-env.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "libero-mem",
+    "name": "LIBERO-Mem",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Ten LIBERO manipulation tasks requiring episodic memory, where the right action depends on what the robot observed earlier. Scored by subgoal completion rate.",
+    "org": "LIBERO-Mem authors",
+    "released": "2025-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2511.11478",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "Tasks differ from base LIBERO, so this is a distinct benchmark rather than a renamed copy.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2511.11478",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "maniskill2",
+    "name": "ManiSkill2",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Twenty simulated manipulation task families with rigid and soft objects, scored by success rate across standard manipulation tasks.",
+    "org": "UC San Diego (Hao Su Lab)",
+    "released": "2023-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2302.04659",
+      "repo": "https://github.com/haosulab/ManiSkill2",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "ManiSkill3 changed the simulator, tasks, and scoring, so ManiSkill2 keeps its own record. The AllenAI VLA Evaluation Harness ranks entries evaluated on the standard five-task set.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2302.04659",
+      "https://github.com/haosulab/ManiSkill2",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "mikasa-robo",
+    "name": "MIKASA-Robo",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Tabletop manipulation tasks that require memory, such as remembering a hidden object or a color shown earlier. Scored by average success rate across five standard tasks.",
+    "org": "AIRI and MIPT (CognitiveAISystems)",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.10550",
+      "repo": "https://github.com/CognitiveAISystems/MIKASA-Robo",
+      "site": "https://mikasarobo.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2502.10550",
+      "https://github.com/CognitiveAISystems/MIKASA-Robo",
+      "https://mikasarobo.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robocerebra",
+    "name": "RoboCerebra",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Long-horizon household manipulation tasks that test planning and reflection in a robot policy paired with a high-level planner across six evaluation dimensions.",
+    "org": "Beihang University (BUAA CoLab)",
+    "released": "2025-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.06677",
+      "repo": "https://github.com/buaa-colalab/RoboCerebra",
+      "site": "https://robocerebra.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2506.06677",
+      "https://github.com/buaa-colalab/RoboCerebra",
+      "https://robocerebra.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ha-vln-2",
+    "name": "HA-VLN 2.0",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Vision and language navigation among moving people, scored on reaching the goal while avoiding collisions in discrete and continuous environments.",
+    "org": "University of Washington, NUS, CMU and Microsoft Research",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.14229",
+      "repo": "https://github.com/UWMILab/HA-VLN",
+      "site": "https://uwmilab.github.io/HA-VLN-webpage/",
+      "leaderboard": "https://uwmilab.github.io/HA-VLN-webpage/"
+    },
+    "access": "public+private-holdout",
+    "note": "Agents are specialized navigation models such as BEVBert and ETPNav rather than frontier chat models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2503.14229",
+      "https://github.com/UWMILab/HA-VLN",
+      "https://uwmilab.github.io/HA-VLN-webpage/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "furniturebench",
+    "name": "FurnitureBench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Real-world robot furniture assembly with a reproducible hardware setup and matching simulator, scored on how many assembly phases a policy completes.",
+    "org": "KAIST CLVR Lab",
+    "released": "2023-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.12821",
+      "repo": "https://github.com/clvrai/furniture-bench"
+    },
+    "access": "public",
+    "note": "Paper results only. There is no live public leaderboard feed to import.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.12821",
+      "https://github.com/clvrai/furniture-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "t3bench",
+    "name": "T3Bench",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Three hundred text prompts at three levels of complexity for text-to-3D generation, scored for visual quality and text alignment from multi-view renders.",
+    "org": "Tsinghua University",
+    "released": "2023-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2310.02977",
+      "repo": "https://github.com/THU-LYJ-Lab/T3Bench",
+      "site": "https://t3bench.com/",
+      "leaderboard": "https://t3bench.com/"
+    },
+    "access": "public",
+    "note": "The project leaderboard reports six 2023 text-to-3D optimization methods across single-object, surroundings, and multi-object prompts.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2310.02977",
+      "https://github.com/THU-LYJ-Lab/T3Bench",
+      "https://t3bench.com/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-tts-leaderboard-1-7",
+    "name": "Open TTS Leaderboard 1.7.0",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "open-tts-leaderboard",
+    "version": "1.7.0",
+    "description": "Speech models read multilingual text aloud across 36 languages. The board compares transcriptions with reference text and measures speaker similarity.",
+    "org": "Hugging Face",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard/blob/main/leaderboard_data.py",
+      "site": "https://huggingface.co/blog/open-tts-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard"
+    },
+    "access": "public",
+    "note": "Adds the ZTTS2-Eval Mini clean split, rescores Arabic and Korean, and caps per-utterance WER and CER at 100% before pooling. Patch updates 1.7.1 through 1.7.3 add models under the same protocol.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/blog/open-tts-leaderboard",
+      "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
+      "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard/blob/main/leaderboard_data.py"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "tts-spaces-arena",
+    "name": "TTS Spaces Arena",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Blind pairwise voting arena that queries open and hosted text-to-speech Spaces on Hugging Face and ranks them by Elo.",
+    "org": "Pendrokar (Hugging Face community)",
+    "released": "2024-03",
+    "links": {
+      "repo": "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena/tree/main",
+      "dataset": "https://huggingface.co/datasets/Pendrokar/TTS_Arena",
+      "leaderboard": "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena"
+    },
+    "access": "public",
+    "note": "Maintains its own vote pool and model list separate from TTS-AGI TTS Arena V2.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena",
+      "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena/tree/main",
+      "https://huggingface.co/datasets/Pendrokar/TTS_Arena"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "full-duplex-leaderboard",
+    "name": "Full-Duplex Leaderboard",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Independent evaluation of full-duplex speech and real-time voice models across turn taking, spoken tool calling, and voice style with public measurement traces.",
+    "org": "aufklarer",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard"
+    },
+    "access": "public",
+    "note": "The source warns against averaging across separate tracks, so the imported board reports the primary Turn-taking track on TurnBench dev.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard",
+      "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard/raw/main/data/unified-ratings.json"
+    ],
+    "added": "2026-11-24"
   }
 ]

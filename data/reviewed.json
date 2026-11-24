@@ -9481,6 +9481,11 @@
       "via": "The publisher lists this evaluation in its research publications."
     },
     {
+      "id": "full-duplex-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces audit found an independent live full-duplex voice evaluation leaderboard with reproducible traces."
+    },
+    {
       "id": "fund-smart-routing-agent-ramp",
       "date": "2026-11-20",
       "via": "Ramp links to this evaluation from its research site or engineering blog."
@@ -9494,6 +9499,11 @@
       "id": "fungraph3d",
       "date": "2026-11-20",
       "via": "We followed the KeySG results table next to hierarchical object retrieval to a test of which part controls an object."
+    },
+    {
+      "id": "furniturebench",
+      "date": "2026-11-24",
+      "via": "Robotics benchmark audit found the standard RSS 2023 real-robot furniture assembly suite with 244 GitHub stars."
     },
     {
       "id": "futureeval-metaculus",
@@ -10404,6 +10414,11 @@
       "id": "h2r-bench",
       "date": "2026-11-19",
       "via": "A video benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "ha-vln-2",
+      "date": "2026-11-24",
+      "via": "GitHub benchmark search found the HA-VLN 2.0 human-aware vision-and-language navigation leaderboard with 525 stars."
     },
     {
       "id": "habit-bench",
@@ -12886,6 +12901,11 @@
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
     },
     {
+      "id": "kinetix",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found Kinetix scored under the 12-task real-time chunking protocol."
+    },
+    {
       "id": "kitti-depth-prediction",
       "date": "2026-11-19",
       "via": "Meta DINOv3 release reports this evaluation in its release results."
@@ -13554,6 +13574,11 @@
       "id": "libero-max",
       "date": "2026-11-01",
       "via": "GitHub keyword search for benchmark repos since 2025-07."
+    },
+    {
+      "id": "libero-mem",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found LIBERO-Mem episodic memory manipulation tasks."
     },
     {
       "id": "libero-para",
@@ -14499,6 +14524,11 @@
       "id": "maniladder",
       "date": "2026-11-19",
       "via": "A robotics benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "maniskill2",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found ManiSkill2 manipulation benchmarks separate from ManiSkill3."
     },
     {
       "id": "manta-animal-welfare",
@@ -15499,6 +15529,11 @@
       "id": "mijabench",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "mikasa-robo",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found MIKASA-Robo memory tabletop manipulation tasks."
     },
     {
       "id": "miklos-schweitzer-2025",
@@ -18064,6 +18099,11 @@
       "id": "open-tts-leaderboard-1-6",
       "date": "2026-11-20",
       "via": "We checked the publisher’s evaluation sources for this audit."
+    },
+    {
+      "id": "open-tts-leaderboard-1-7",
+      "date": "2026-11-24",
+      "via": "Version audit of hf-audio/open_tts_leaderboard leaderboard_data.py found minor release 1.7.0 adding ZTTS2-Eval Mini clean."
     },
     {
       "id": "openai-mrcr",
@@ -20714,6 +20754,11 @@
       "id": "robocasa-mem",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "robocerebra",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found RoboCerebra long-horizon household manipulation tasks."
     },
     {
       "id": "robochallenge-table30-v2",
@@ -23901,6 +23946,11 @@
       "via": "Gemini Embedding 2 technical report reports results for this evaluation."
     },
     {
+      "id": "t3bench",
+      "date": "2026-11-24",
+      "via": "GitHub 3D generation benchmark search found T3Bench with 1,100 stars and a public project leaderboard."
+    },
+    {
       "id": "taarofbench",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -24879,6 +24929,11 @@
       "id": "tts-arena",
       "date": "2026-11-01",
       "via": "Audio vertical check."
+    },
+    {
+      "id": "tts-spaces-arena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces arena audit found Pendrokar TTS Spaces Arena with its own live vote pool and Elo ratings."
     },
     {
       "id": "tua-bench-meta",
