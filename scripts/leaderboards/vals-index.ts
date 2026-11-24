@@ -33,6 +33,13 @@ export const VALS_LATENCY_CHART: BoardChart = {
   y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
 };
 
+export const VALS_STATS: NonNullable<Leaderboard['stats']> = {
+  latency: { name: 'Latency per test', unit: 'seconds', better: 'lower' },
+  turns: { name: 'Turns per test', unit: 'count', better: 'lower' },
+  priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+  priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+};
+
 interface ValsRun {
   accuracy?: number | null;
   latency?: number | null;
@@ -129,7 +136,7 @@ export async function valsRows(slug: string, columns: ValsColumns = {}): Promise
     const cell = r[model];
     const score = num(r[accuracy]?.text);
     if (!cell?.text || score === undefined) continue;
-    const href = cell.html.match(/href="\/models\/([^"]+)"/)?.[1] ?? '';
+    const href = cell.html.match(/href="\/models\/([^"#]+)"/)?.[1] ?? '';
     let name = cell.text.replace(/\(Nonthinking\)/i, '(non-thinking)');
     // "GPT 4o (2024-08-06)": a snapshot date, passed on so the resolver picks that snapshot
     const stamp = name.match(/\s*\((\d{4}-\d\d-\d\d)\)$/);
@@ -147,9 +154,9 @@ export async function valsRows(slug: string, columns: ValsColumns = {}): Promise
     const [runKey, run] = hit ?? [];
     // output tokens per test as the page computes Tokens / Test: the averages, or the totals over the tasks measured
     const measured = run?.token_tasks_measured ?? md.token_tasks_measured;
-    const tokens = !showTokens || !run ? undefined
-      : run.avg_input_tokens != null && run.avg_output_tokens != null ? run.avg_output_tokens
-      : run.token_totals?.output_tokens != null && measured ? run.token_totals.output_tokens / measured : undefined;
+    const tokens = !run ? undefined
+      : run.avg_output_tokens != null && run.avg_output_tokens > 0 ? run.avg_output_tokens
+      : showTokens && run.token_totals?.output_tokens != null && measured ? run.token_totals.output_tokens / measured : undefined;
     const metrics: Record<string, number> = {};
     if (price >= 0) {
       const prices = r[price]?.text.match(/^\$([\d.,]+)\s*\/\s*\$([\d.,]+)$/);
@@ -184,6 +191,9 @@ export async function valsRows(slug: string, columns: ValsColumns = {}): Promise
       harness: harnessText,
       cost: chartCost ? run?.cost_per_test ?? undefined : costValue,
       date: stamp?.[1],
+      link: href ? `https://www.vals.ai/models/${href}` : undefined,
+      low: metrics.ciLow,
+      high: metrics.ciHigh,
       ...(tokens ? { tokens } : {}),
       ...(Object.keys(metrics).length ? { metrics } : {}),
     });
@@ -236,13 +246,35 @@ export const VALS_ALIASES: Record<string, string> = {
   'Qwen 3 (235B)': 'qwen3-235b-a22b',
 };
 
+const VALS_INDEX_TASKS = {
+  vibe_code_bench: 'vibe_code_bench',
+  finance_agent: 'finance_agent',
+  emb: 'emb',
+  code_migration: 'code_migration',
+  legal_research: 'legal_research',
+  legal_agent_benchmark: 'legal_agent_benchmark',
+  terminal_bench_4: 'terminal_bench_4',
+  tax_agent_bench: 'tax_agent_bench',
+};
+
 const board: Leaderboard = {
   benchmark: 'vals-index',
   url: valsPage('vals_index'),
   feed: `${valsPage('vals_index')} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  parts: {
+    vibe_code_bench: { name: 'Vibe Code Bench v1.1.1', group: 'Benchmark' },
+    finance_agent: { name: 'Finance Agent v2.1', group: 'Benchmark' },
+    emb: { name: 'EMB v1.1', group: 'Benchmark' },
+    code_migration: { name: 'Code Migration v1.1', group: 'Benchmark' },
+    legal_research: { name: 'Legal Research', group: 'Benchmark' },
+    legal_agent_benchmark: { name: 'HLAB-Vals-1.1', group: 'Benchmark' },
+    terminal_bench_4: { name: 'Terminal-Bench 4.0', group: 'Benchmark' },
+    tax_agent_bench: { name: 'Tax Agent', group: 'Benchmark' },
+  },
+  stats: VALS_STATS,
   chart: VALS_LATENCY_CHART,
-  fetch: () => valsRows('vals_index'),
+  fetch: () => valsRows('vals_index', { tasks: VALS_INDEX_TASKS }),
 };
 export default board;
