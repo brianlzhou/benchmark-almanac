@@ -23,14 +23,13 @@ async function pedagogy(url: string, domain: string, minimum: number) {
   return overall.map(r => {
     const model = models.get(r.modelId);
     if (!model || !Number.isFinite(r.accuracy)) throw new Error('Invalid Fab AI score');
-    const metrics: Record<string, number> = { items: r.n, badFormat: r.bad_format };
+    const metrics: Record<string, number> = { badFormat: r.bad_format };
     for (const sub of results.filter(s => s.modelId === r.modelId)) {
       const categories = sub.categories.filter(c => c.value !== null);
       if (categories.length !== 1) continue;
       const { name, value } = categories[0];
       const key = name + '_' + value;
       metrics[key] = sub.accuracy;
-      (board.parts ??= {})[key] = { name: value!, group: name };
     }
     return { model, score: r.accuracy, metrics };
   });
@@ -39,10 +38,18 @@ async function pedagogy(url: string, domain: string, minimum: number) {
 
 const board: Leaderboard = {
   benchmark: "fab-pedagogy-benchmark",
+  parts: {
+    subject_Science: { name: 'Science', group: 'Subject' },
+    subject_Maths: { name: 'Maths', group: 'Subject' },
+    subject_Technology: { name: 'Technology', group: 'Subject' },
+    'subject_Social studies': { name: 'Social studies', group: 'Subject' },
+    level_Primary: { name: 'Primary', group: 'School level' },
+    level_Secondary: { name: 'Secondary', group: 'School level' },
+  },
   url: "https://www.fab-ai.org/benchmarks?benchmark=CDPK&cost=10&models=%5B%5D&pageView=table",
   feed,
   terms: "Fab AI marks the leaderboard as all rights reserved. The code repository has an MIT license. robots.txt allows the feed path.",
-  stats: { items: { name: 'Items', unit: 'count' }, badFormat: { name: 'Bad-format answers', unit: 'count', better: 'lower' } },
+  stats: { badFormat: { name: 'Bad-format answers', unit: 'count', better: 'lower' } },
   async fetch() {
     return pedagogy(feed, 'CDPK', 283);
   },

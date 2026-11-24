@@ -9,7 +9,7 @@ const FEED = "https://rajpurkar.github.io/SQuAD-explorer/";
 const board: Leaderboard = {
  benchmark: "squad-v2", url: "https://rajpurkar.github.io/SQuAD-explorer/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
- stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' }, tiedRank: { name: 'Tied rank', unit: 'rating', better: 'lower' } },
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
 
  async fetch() {
 
@@ -27,7 +27,7 @@ const t=tables(await fetchText(FEED))[0];if(t?.[0]?.map(c=>c.text).join('|')!=='
       const timestamp = day ? Date.parse(day + ' UTC') : NaN;
       rows.push({ model, score, setting: mode?.[1], submitter: submitter || undefined, link,
         date: Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : undefined,
-        metrics: { exactMatch: num(r[2].text)!, tiedRank: num(r[0].text)! } });
+        metrics: { exactMatch: num(r[2].text)! } });
     }
 if(!rows.length)throw new Error('No SQuAD 2.0 submissions');return rows;
  },

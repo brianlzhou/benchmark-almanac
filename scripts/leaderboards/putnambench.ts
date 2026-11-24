@@ -18,7 +18,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (default Lean-with-answer solved percentage)`,
   terms: 'Static JSON on the PutnamBench GitHub Pages site (robots.txt allows all); the PutnamBench repository releases its problems under Apache 2.0 (Lean, Isabelle) and MIT (Rocq).',
-  stats: { solved: { name: 'Problems solved', unit: 'count', better: 'higher' }, denominator: { name: 'Problems in split', unit: 'count' } },
+  stats: { solved: { name: 'Problems solved', unit: 'count', better: 'higher' } },
   aliases: {
     'gemini-2.5-pro-exp-0325': 'gemini-2-5-pro-mar-2025',
     'gemini-2.0-flash-thinking-121': 'gemini-2-0-flash-thinking-jan-2025',
@@ -41,13 +41,15 @@ const board: Leaderboard = {
         const denominator = Number(html.match(new RegExp(label + '[^<]*\\(out of (\\d+)\\)'))?.[1]);
         if (!denominator) throw new Error(`Missing denominator for ${split}`);
         const budget = e['condensed-compute-budget'];
+        const link = e.link?.trim();
         rows.push({
           model: /InternLM-Math/i.test(e.link ?? '') ? 'InternLM-Math 7B' : name.trim(),
           score: Number(((100 * solved) / denominator).toFixed(2)),
           setting: budget,
+          link: link && /^https?:\/\/\S+$/.test(link) ? link : undefined,
           date: /^\d{4}-\d\d-\d\d$/.test(e['date-added'] ?? '') ? e['date-added'] : undefined,
           cost: (() => { const m = budget?.match(/(?:avg\.?|average|mean)\s*\$([\d,.]+)/i) ?? budget?.match(/^\$([\d,.]+)\/task$/); return m ? Number(m[1].replace(/,/g, '')) : undefined; })(),
-          metrics: {solved, denominator},
+          metrics: { solved },
         });
       }
     }

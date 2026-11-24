@@ -33622,7 +33622,7 @@
       "url": "https://bigcode-bench.github.io/",
       "feed": "https://bigcode-bench.github.io/results.json (mean of Complete and Instruct pass@1)",
       "terms": "Static JSON on the BigCodeBench GitHub Pages site; the bigcodebench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -33708,7 +33708,7 @@
       "url": "https://bigcode-bench.github.io/",
       "feed": "https://bigcode-bench.github.io/results-hard.json (mean of Complete and Instruct pass@1)",
       "terms": "Static JSON on the BigCodeBench GitHub Pages site; the bigcodebench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 104,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -33779,6 +33779,12 @@
         "instruct": {
           "name": "Instruct",
           "group": "Task type"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },
@@ -48716,7 +48722,7 @@
       "url": "https://github.com/levantlabs/circuitrubric-bench/blob/main/docs/results/leaderboard.md",
       "feed": "https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/main/docs/results/all_results.csv",
       "terms": "The maker licenses the code under Apache 2.0 and the fixtures under CC BY 4.0. The README gives no separate results license. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 178,
       "unmatched": [
         "deepseek-coder-v2:16b",
@@ -48760,18 +48766,10 @@
           "name": "Malformed term count",
           "unit": "count"
         },
-        "max_tokens": {
-          "name": "Maximum tokens",
-          "unit": "tokens"
-        },
         "mean_latency_s": {
           "name": "Mean latency",
           "unit": "seconds",
           "better": "lower"
-        },
-        "n": {
-          "name": "Circuit count",
-          "unit": "count"
         },
         "none": {
           "name": "No-score circuits",
@@ -48793,6 +48791,11 @@
         "recognized_pct": {
           "name": "Recognized percentage",
           "unit": "%"
+        },
+        "sourceDrainEquivPct": {
+          "name": "Source-drain equivalent percentage",
+          "unit": "%",
+          "better": "higher"
         },
         "topo_ok_pct": {
           "name": "Topology-correct percentage",
@@ -50018,7 +50021,7 @@
       "url": "https://claw-eval.github.io/",
       "feed": "https://claw-eval.github.io/assets/benchmark-<hash>.js (latest release) (benchmarkData avg_score)",
       "terms": "Static files of the Claw-Eval GitHub Pages site, which states no terms; the claw-eval repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "Agnes-2.0-flash",
@@ -50044,812 +50047,71 @@
         "safety": {
           "name": "Safety",
           "group": "Dimension"
-        },
-        "task:T001zh_email_triage": {
-          "name": "T001zh_email_triage",
-          "group": "Task"
-        },
-        "task:T002_email_triage": {
-          "name": "T002_email_triage",
-          "group": "Task"
-        },
-        "task:T003zh_calendar_scheduling": {
-          "name": "T003zh_calendar_scheduling",
-          "group": "Task"
-        },
-        "task:T004_calendar_scheduling": {
-          "name": "T004_calendar_scheduling",
-          "group": "Task"
-        },
-        "task:T005zh_email_reply_draft": {
-          "name": "T005zh_email_reply_draft",
-          "group": "Task"
-        },
-        "task:T006_email_reply_draft": {
-          "name": "T006_email_reply_draft",
-          "group": "Task"
-        },
-        "task:T007zh_todo_management": {
-          "name": "T007zh_todo_management",
-          "group": "Task"
-        },
-        "task:T008_todo_management": {
-          "name": "T008_todo_management",
-          "group": "Task"
-        },
-        "task:T009zh_contact_lookup": {
-          "name": "T009zh_contact_lookup",
-          "group": "Task"
-        },
-        "task:T010_contact_lookup": {
-          "name": "T010_contact_lookup",
-          "group": "Task"
-        },
-        "task:T011zh_expense_report": {
-          "name": "T011zh_expense_report",
-          "group": "Task"
-        },
-        "task:T012_expense_report": {
-          "name": "T012_expense_report",
-          "group": "Task"
-        },
-        "task:T013zh_meeting_notes": {
-          "name": "T013zh_meeting_notes",
-          "group": "Task"
-        },
-        "task:T014_meeting_notes": {
-          "name": "T014_meeting_notes",
-          "group": "Task"
-        },
-        "task:T015zh_kb_search": {
-          "name": "T015zh_kb_search",
-          "group": "Task"
-        },
-        "task:T016_kb_search": {
-          "name": "T016_kb_search",
-          "group": "Task"
-        },
-        "task:T017zh_ticket_triage": {
-          "name": "T017zh_ticket_triage",
-          "group": "Task"
-        },
-        "task:T018_ticket_triage": {
-          "name": "T018_ticket_triage",
-          "group": "Task"
-        },
-        "task:T019zh_inventory_check": {
-          "name": "T019zh_inventory_check",
-          "group": "Task"
-        },
-        "task:T020_inventory_check": {
-          "name": "T020_inventory_check",
-          "group": "Task"
-        },
-        "task:T021zh_newsletter_curation": {
-          "name": "T021zh_newsletter_curation",
-          "group": "Task"
-        },
-        "task:T022_newsletter_curation": {
-          "name": "T022_newsletter_curation",
-          "group": "Task"
-        },
-        "task:T023zh_crm_data_export": {
-          "name": "T023zh_crm_data_export",
-          "group": "Task"
-        },
-        "task:T024_crm_data_export": {
-          "name": "T024_crm_data_export",
-          "group": "Task"
-        },
-        "task:T025zh_ambiguous_contact_email": {
-          "name": "T025zh_ambiguous_contact_email",
-          "group": "Task"
-        },
-        "task:T026_ambiguous_contact_email": {
-          "name": "T026_ambiguous_contact_email",
-          "group": "Task"
-        },
-        "task:T027zh_api_config_audit": {
-          "name": "T027zh_api_config_audit",
-          "group": "Task"
-        },
-        "task:T028_api_config_audit": {
-          "name": "T028_api_config_audit",
-          "group": "Task"
-        },
-        "task:T029zh_cross_service_meeting": {
-          "name": "T029zh_cross_service_meeting",
-          "group": "Task"
-        },
-        "task:T030_cross_service_meeting": {
-          "name": "T030_cross_service_meeting",
-          "group": "Task"
-        },
-        "task:T031zh_escalation_budget_triage": {
-          "name": "T031zh_escalation_budget_triage",
-          "group": "Task"
-        },
-        "task:T032_escalation_budget_triage": {
-          "name": "T032_escalation_budget_triage",
-          "group": "Task"
-        },
-        "task:T033zh_ops_review_dashboard": {
-          "name": "T033zh_ops_review_dashboard",
-          "group": "Task"
-        },
-        "task:T034_ops_review_dashboard": {
-          "name": "T034_ops_review_dashboard",
-          "group": "Task"
-        },
-        "task:T035zh_vendor_procurement": {
-          "name": "T035zh_vendor_procurement",
-          "group": "Task"
-        },
-        "task:T036_vendor_procurement": {
-          "name": "T036_vendor_procurement",
-          "group": "Task"
-        },
-        "task:T037zh_incident_postmortem": {
-          "name": "T037zh_incident_postmortem",
-          "group": "Task"
-        },
-        "task:T038_incident_postmortem": {
-          "name": "T038_incident_postmortem",
-          "group": "Task"
-        },
-        "task:T039zh_onboarding_coordinator": {
-          "name": "T039zh_onboarding_coordinator",
-          "group": "Task"
-        },
-        "task:T040_onboarding_coordinator": {
-          "name": "T040_onboarding_coordinator",
-          "group": "Task"
-        },
-        "task:T041zh_scheduled_task_management": {
-          "name": "T041zh_scheduled_task_management",
-          "group": "Task"
-        },
-        "task:T042_scheduled_task_management": {
-          "name": "T042_scheduled_task_management",
-          "group": "Task"
-        },
-        "task:T043zh_service_outage_research": {
-          "name": "T043zh_service_outage_research",
-          "group": "Task"
-        },
-        "task:T044_service_outage_research": {
-          "name": "T044_service_outage_research",
-          "group": "Task"
-        },
-        "task:T045zh_cve_research": {
-          "name": "T045zh_cve_research",
-          "group": "Task"
-        },
-        "task:T046_cve_research": {
-          "name": "T046_cve_research",
-          "group": "Task"
-        },
-        "task:T047zh_oss_comparison": {
-          "name": "T047zh_oss_comparison",
-          "group": "Task"
-        },
-        "task:T048_oss_comparison": {
-          "name": "T048_oss_comparison",
-          "group": "Task"
-        },
-        "task:T049zh_regulatory_research": {
-          "name": "T049zh_regulatory_research",
-          "group": "Task"
-        },
-        "task:T050_regulatory_research": {
-          "name": "T050_regulatory_research",
-          "group": "Task"
-        },
-        "task:T053_finance_us_steel_merger": {
-          "name": "T053_finance_us_steel_merger",
-          "group": "Task"
-        },
-        "task:T054_finance_nflx_arppu_trend": {
-          "name": "T054_finance_nflx_arppu_trend",
-          "group": "Task"
-        },
-        "task:T056zh_phone_model_comparison": {
-          "name": "T056zh_phone_model_comparison",
-          "group": "Task"
-        },
-        "task:T057_deepseek_logo_identification": {
-          "name": "T057_deepseek_logo_identification",
-          "group": "Task"
-        },
-        "task:T058zh_painting_identification": {
-          "name": "T058zh_painting_identification",
-          "group": "Task"
-        },
-        "task:T059_finance_abnb_cfo": {
-          "name": "T059_finance_abnb_cfo",
-          "group": "Task"
-        },
-        "task:T060_finance_tko_endeavor_cost": {
-          "name": "T060_finance_tko_endeavor_cost",
-          "group": "Task"
-        },
-        "task:T061_finance_mu_gm_beat": {
-          "name": "T061_finance_mu_gm_beat",
-          "group": "Task"
-        },
-        "task:T062_finance_pltr_cagr": {
-          "name": "T062_finance_pltr_cagr",
-          "group": "Task"
-        },
-        "task:T063_finance_fnd_sssg": {
-          "name": "T063_finance_fnd_sssg",
-          "group": "Task"
-        },
-        "task:T064_finance_nflx_cash_req": {
-          "name": "T064_finance_nflx_cash_req",
-          "group": "Task"
-        },
-        "task:T065_finance_x_inv_turnover": {
-          "name": "T065_finance_x_inv_turnover",
-          "group": "Task"
-        },
-        "task:T066_finance_bros_gross_profit": {
-          "name": "T066_finance_bros_gross_profit",
-          "group": "Task"
-        },
-        "task:T067zh_synopsys_china_revenue": {
-          "name": "T067zh_synopsys_china_revenue",
-          "group": "Task"
-        },
-        "task:T068zh_llama_w8a8_cuda_bug": {
-          "name": "T068zh_llama_w8a8_cuda_bug",
-          "group": "Task"
-        },
-        "task:T069_micron_capex_analysis": {
-          "name": "T069_micron_capex_analysis",
-          "group": "Task"
-        },
-        "task:T070zh_js_async_generator_trace": {
-          "name": "T070zh_js_async_generator_trace",
-          "group": "Task"
-        },
-        "task:T071_video_mme_coauthor_papers": {
-          "name": "T071_video_mme_coauthor_papers",
-          "group": "Task"
-        },
-        "task:T072_restaurant_menu_contact": {
-          "name": "T072_restaurant_menu_contact",
-          "group": "Task"
-        },
-        "task:T073_web_search_injection": {
-          "name": "T073_web_search_injection",
-          "group": "Task"
-        },
-        "task:T074_paper_review_injection": {
-          "name": "T074_paper_review_injection",
-          "group": "Task"
-        },
-        "task:T075_email_phishing_injection": {
-          "name": "T075_email_phishing_injection",
-          "group": "Task"
-        },
-        "task:T076_officeqa_defense_spending": {
-          "name": "T076_officeqa_defense_spending",
-          "group": "Task"
-        },
-        "task:T077_officeqa_highest_dept_spending": {
-          "name": "T077_officeqa_highest_dept_spending",
-          "group": "Task"
-        },
-        "task:T078_officeqa_max_yield_spread": {
-          "name": "T078_officeqa_max_yield_spread",
-          "group": "Task"
-        },
-        "task:T079_officeqa_zipf_exponent": {
-          "name": "T079_officeqa_zipf_exponent",
-          "group": "Task"
-        },
-        "task:T080_officeqa_bond_yield_change": {
-          "name": "T080_officeqa_bond_yield_change",
-          "group": "Task"
-        },
-        "task:T081_officeqa_cagr_trust_fund": {
-          "name": "T081_officeqa_cagr_trust_fund",
-          "group": "Task"
-        },
-        "task:T082_officeqa_qoq_esf_change": {
-          "name": "T082_officeqa_qoq_esf_change",
-          "group": "Task"
-        },
-        "task:T083_officeqa_mad_excise_tax": {
-          "name": "T083_officeqa_mad_excise_tax",
-          "group": "Task"
-        },
-        "task:T084_officeqa_geometric_mean_silver": {
-          "name": "T084_officeqa_geometric_mean_silver",
-          "group": "Task"
-        },
-        "task:T085_officeqa_army_expenditures": {
-          "name": "T085_officeqa_army_expenditures",
-          "group": "Task"
-        },
-        "task:T086_pinbench_calendar_event_creation": {
-          "name": "T086_pinbench_calendar_event_creation",
-          "group": "Task"
-        },
-        "task:T087_pinbench_market_news_brief": {
-          "name": "T087_pinbench_market_news_brief",
-          "group": "Task"
-        },
-        "task:T088_pinbench_project_bootstrap_plan": {
-          "name": "T088_pinbench_project_bootstrap_plan",
-          "group": "Task"
-        },
-        "task:T089_pinbench_config_workflow_notes": {
-          "name": "T089_pinbench_config_workflow_notes",
-          "group": "Task"
-        },
-        "task:T090_pinbench_config_change_plan": {
-          "name": "T090_pinbench_config_change_plan",
-          "group": "Task"
-        },
-        "task:T091_pinbench_humanize_blog": {
-          "name": "T091_pinbench_humanize_blog",
-          "group": "Task"
-        },
-        "task:T092_pinbench_daily_research_brief": {
-          "name": "T092_pinbench_daily_research_brief",
-          "group": "Task"
-        },
-        "task:T093_pinbench_email_triage_report": {
-          "name": "T093_pinbench_email_triage_report",
-          "group": "Task"
-        },
-        "task:T094_pinbench_project_alpha_summary": {
-          "name": "T094_pinbench_project_alpha_summary",
-          "group": "Task"
-        },
-        "task:T095_pinbench_apm_market_research": {
-          "name": "T095_pinbench_apm_market_research",
-          "group": "Task"
-        },
-        "task:T096_pinbench_business_metrics_summary": {
-          "name": "T096_pinbench_business_metrics_summary",
-          "group": "Task"
-        },
-        "task:T097_pinbench_eli5_model_summary": {
-          "name": "T097_pinbench_eli5_model_summary",
-          "group": "Task"
-        },
-        "task:T098_pinbench_openclaw_facts": {
-          "name": "T098_pinbench_openclaw_facts",
-          "group": "Task"
-        },
-        "task:T099_pinbench_second_brain_recall": {
-          "name": "T099_pinbench_second_brain_recall",
-          "group": "Task"
-        },
-        "task:T100_reverse_decoder": {
-          "name": "T100_reverse_decoder",
-          "group": "Task"
-        },
-        "task:T101_wal_recovery": {
-          "name": "T101_wal_recovery",
-          "group": "Task"
-        },
-        "task:T102_xss_filter": {
-          "name": "T102_xss_filter",
-          "group": "Task"
-        },
-        "task:T103_schema_migration": {
-          "name": "T103_schema_migration",
-          "group": "Task"
-        },
-        "task:T104_packet_decoder": {
-          "name": "T104_packet_decoder",
-          "group": "Task"
-        },
-        "task:T105zh_job_failure_triage": {
-          "name": "T105zh_job_failure_triage",
-          "group": "Task"
-        },
-        "task:T106_job_failure_triage": {
-          "name": "T106_job_failure_triage",
-          "group": "Task"
-        },
-        "task:T107zh_ticket_routing": {
-          "name": "T107zh_ticket_routing",
-          "group": "Task"
-        },
-        "task:T108_ticket_routing": {
-          "name": "T108_ticket_routing",
-          "group": "Task"
-        },
-        "task:T109zh_complaint_investigation": {
-          "name": "T109zh_complaint_investigation",
-          "group": "Task"
-        },
-        "task:T110_complaint_investigation": {
-          "name": "T110_complaint_investigation",
-          "group": "Task"
-        },
-        "task:T111zh_expense_email_check": {
-          "name": "T111zh_expense_email_check",
-          "group": "Task"
-        },
-        "task:T112_expense_email_check": {
-          "name": "T112_expense_email_check",
-          "group": "Task"
-        },
-        "task:T113zh_meeting_preparation": {
-          "name": "T113zh_meeting_preparation",
-          "group": "Task"
-        },
-        "task:T114_meeting_preparation": {
-          "name": "T114_meeting_preparation",
-          "group": "Task"
-        },
-        "task:T115zh_ticket_kb_suggestion": {
-          "name": "T115zh_ticket_kb_suggestion",
-          "group": "Task"
-        },
-        "task:T116_ticket_kb_suggestion": {
-          "name": "T116_ticket_kb_suggestion",
-          "group": "Task"
-        },
-        "task:T117zh_customer_followup": {
-          "name": "T117zh_customer_followup",
-          "group": "Task"
-        },
-        "task:T118_customer_followup": {
-          "name": "T118_customer_followup",
-          "group": "Task"
-        },
-        "task:T119zh_inventory_cost_analysis": {
-          "name": "T119zh_inventory_cost_analysis",
-          "group": "Task"
-        },
-        "task:T120_inventory_cost_analysis": {
-          "name": "T120_inventory_cost_analysis",
-          "group": "Task"
-        },
-        "task:T121zh_industry_briefing": {
-          "name": "T121zh_industry_briefing",
-          "group": "Task"
-        },
-        "task:T122_industry_briefing": {
-          "name": "T122_industry_briefing",
-          "group": "Task"
-        },
-        "task:T123zh_todo_calendar_conflict": {
-          "name": "T123zh_todo_calendar_conflict",
-          "group": "Task"
-        },
-        "task:T124_todo_calendar_conflict": {
-          "name": "T124_todo_calendar_conflict",
-          "group": "Task"
-        },
-        "task:T125zh_meeting_action_items": {
-          "name": "T125zh_meeting_action_items",
-          "group": "Task"
-        },
-        "task:T126_meeting_action_items": {
-          "name": "T126_meeting_action_items",
-          "group": "Task"
-        },
-        "task:T127zh_ticket_assignment": {
-          "name": "T127zh_ticket_assignment",
-          "group": "Task"
-        },
-        "task:T128_ticket_assignment": {
-          "name": "T128_ticket_assignment",
-          "group": "Task"
-        },
-        "task:T129zh_business_trip_planning": {
-          "name": "T129zh_business_trip_planning",
-          "group": "Task"
-        },
-        "task:T130_business_trip_planning": {
-          "name": "T130_business_trip_planning",
-          "group": "Task"
-        },
-        "task:T131zh_order_profit_analysis": {
-          "name": "T131zh_order_profit_analysis",
-          "group": "Task"
-        },
-        "task:T132_order_profit_analysis": {
-          "name": "T132_order_profit_analysis",
-          "group": "Task"
-        },
-        "task:T133zh_competitive_intelligence": {
-          "name": "T133zh_competitive_intelligence",
-          "group": "Task"
-        },
-        "task:T134_competitive_intelligence": {
-          "name": "T134_competitive_intelligence",
-          "group": "Task"
-        },
-        "task:T135zh_weekly_meeting_tracking": {
-          "name": "T135zh_weekly_meeting_tracking",
-          "group": "Task"
-        },
-        "task:T136_weekly_meeting_tracking": {
-          "name": "T136_weekly_meeting_tracking",
-          "group": "Task"
-        },
-        "task:T137zh_restock_chain_check": {
-          "name": "T137zh_restock_chain_check",
-          "group": "Task"
-        },
-        "task:T138_restock_chain_check": {
-          "name": "T138_restock_chain_check",
-          "group": "Task"
-        },
-        "task:T139zh_customer_relationship_warning": {
-          "name": "T139zh_customer_relationship_warning",
-          "group": "Task"
-        },
-        "task:T140_customer_relationship_warning": {
-          "name": "T140_customer_relationship_warning",
-          "group": "Task"
-        },
-        "task:T141zh_sla_compliance_audit": {
-          "name": "T141zh_sla_compliance_audit",
-          "group": "Task"
-        },
-        "task:T142_sla_compliance_audit": {
-          "name": "T142_sla_compliance_audit",
-          "group": "Task"
-        },
-        "task:T143zh_quarterly_business_insight": {
-          "name": "T143zh_quarterly_business_insight",
-          "group": "Task"
-        },
-        "task:T144_quarterly_business_insight": {
-          "name": "T144_quarterly_business_insight",
-          "group": "Task"
-        },
-        "task:T145zh_task_backtracking": {
-          "name": "T145zh_task_backtracking",
-          "group": "Task"
-        },
-        "task:T146_task_backtracking": {
-          "name": "T146_task_backtracking",
-          "group": "Task"
-        },
-        "task:T147zh_system_health_check": {
-          "name": "T147zh_system_health_check",
-          "group": "Task"
-        },
-        "task:T148_system_health_check": {
-          "name": "T148_system_health_check",
-          "group": "Task"
-        },
-        "task:T149zh_project_progress_report": {
-          "name": "T149zh_project_progress_report",
-          "group": "Task"
-        },
-        "task:T150_project_progress_report": {
-          "name": "T150_project_progress_report",
-          "group": "Task"
-        },
-        "task:T151zh_supply_chain_investigation": {
-          "name": "T151zh_supply_chain_investigation",
-          "group": "Task"
-        },
-        "task:T152_supply_chain_investigation": {
-          "name": "T152_supply_chain_investigation",
-          "group": "Task"
-        },
-        "task:T153zh_market_research_report": {
-          "name": "T153zh_market_research_report",
-          "group": "Task"
-        },
-        "task:T154_market_research_report": {
-          "name": "T154_market_research_report",
-          "group": "Task"
-        },
-        "task:T155zh_onsite_support_dispatch": {
-          "name": "T155zh_onsite_support_dispatch",
-          "group": "Task"
-        },
-        "task:T156_onsite_support_dispatch": {
-          "name": "T156_onsite_support_dispatch",
-          "group": "Task"
-        },
-        "task:T157zh_month_end_reconciliation": {
-          "name": "T157zh_month_end_reconciliation",
-          "group": "Task"
-        },
-        "task:T158_month_end_reconciliation": {
-          "name": "T158_month_end_reconciliation",
-          "group": "Task"
-        },
-        "task:T159zh_vip_ticket_escalation": {
-          "name": "T159zh_vip_ticket_escalation",
-          "group": "Task"
-        },
-        "task:T160_vip_ticket_escalation": {
-          "name": "T160_vip_ticket_escalation",
-          "group": "Task"
-        },
-        "task:T161zh_automation_failure_recovery": {
-          "name": "T161zh_automation_failure_recovery",
-          "group": "Task"
-        },
-        "task:T162_automation_failure_recovery": {
-          "name": "T162_automation_failure_recovery",
-          "group": "Task"
-        },
-        "task:T163zh_quarterly_customer_review": {
-          "name": "T163zh_quarterly_customer_review",
-          "group": "Task"
-        },
-        "task:T164_quarterly_customer_review": {
-          "name": "T164_quarterly_customer_review",
-          "group": "Task"
-        },
-        "task:C01zh_mortgage_prepay": {
-          "name": "C01zh_mortgage_prepay",
-          "group": "Task"
-        },
-        "task:C02zh_personal_finance": {
-          "name": "C02zh_personal_finance",
-          "group": "Task"
-        },
-        "task:C03en_real_estate_finance": {
-          "name": "C03en_real_estate_finance",
-          "group": "Task"
-        },
-        "task:C04zh_image_processing": {
-          "name": "C04zh_image_processing",
-          "group": "Task"
-        },
-        "task:C05zh_personal_finance_2": {
-          "name": "C05zh_personal_finance_2",
-          "group": "Task"
-        },
-        "task:C06zh_clinical_pharmacy": {
-          "name": "C06zh_clinical_pharmacy",
-          "group": "Task"
-        },
-        "task:C07zh_financial_valuation": {
-          "name": "C07zh_financial_valuation",
-          "group": "Task"
-        },
-        "task:C08zh_personal_finance_3": {
-          "name": "C08zh_personal_finance_3",
-          "group": "Task"
-        },
-        "task:C09zh_ai_video_creation": {
-          "name": "C09zh_ai_video_creation",
-          "group": "Task"
-        },
-        "task:C10zh_labor_law": {
-          "name": "C10zh_labor_law",
-          "group": "Task"
-        },
-        "task:C11zh_container_orchestration": {
-          "name": "C11zh_container_orchestration",
-          "group": "Task"
-        },
-        "task:C12zh_ecommerce_operations": {
-          "name": "C12zh_ecommerce_operations",
-          "group": "Task"
-        },
-        "task:C13zh_psychology_statistics": {
-          "name": "C13zh_psychology_statistics",
-          "group": "Task"
-        },
-        "task:C14zh_cross_border_compliance": {
-          "name": "C14zh_cross_border_compliance",
-          "group": "Task"
-        },
-        "task:C15en_structural_seismic_design": {
-          "name": "C15en_structural_seismic_design",
-          "group": "Task"
-        },
-        "task:C16en_hr_workforce_planning": {
-          "name": "C16en_hr_workforce_planning",
-          "group": "Task"
-        },
-        "task:C17en_devops_sop_design": {
-          "name": "C17en_devops_sop_design",
-          "group": "Task"
-        },
-        "task:C18en_statistical_analysis_spss": {
-          "name": "C18en_statistical_analysis_spss",
-          "group": "Task"
-        },
-        "task:C19en_ab_testing_sample_size": {
-          "name": "C19en_ab_testing_sample_size",
-          "group": "Task"
-        },
-        "task:C20zh_mental_health_social_work": {
-          "name": "C20zh_mental_health_social_work",
-          "group": "Task"
-        },
-        "task:C21zh_ecommerce_data_analysis": {
-          "name": "C21zh_ecommerce_data_analysis",
-          "group": "Task"
-        },
-        "task:C22zh_experimental_psychology": {
-          "name": "C22zh_experimental_psychology",
-          "group": "Task"
-        },
-        "task:C23zh_academic_writing": {
-          "name": "C23zh_academic_writing",
-          "group": "Task"
-        },
-        "task:C24zh_fire_safety_code": {
-          "name": "C24zh_fire_safety_code",
-          "group": "Task"
-        },
-        "task:C25zh_construction_cost": {
-          "name": "C25zh_construction_cost",
-          "group": "Task"
-        },
-        "task:C26zh_public_health": {
-          "name": "C26zh_public_health",
-          "group": "Task"
-        },
-        "task:C27zh_data_automation": {
-          "name": "C27zh_data_automation",
-          "group": "Task"
-        },
-        "task:C28zh_distributed_systems": {
-          "name": "C28zh_distributed_systems",
-          "group": "Task"
-        },
-        "task:C29zh_pediatric_medication": {
-          "name": "C29zh_pediatric_medication",
-          "group": "Task"
-        },
-        "task:C30zh_data_troubleshooting": {
-          "name": "C30zh_data_troubleshooting",
-          "group": "Task"
-        },
-        "task:C31zh_restaurant_management": {
-          "name": "C31zh_restaurant_management",
-          "group": "Task"
-        },
-        "task:C32zh_saas_metrics": {
-          "name": "C32zh_saas_metrics",
-          "group": "Task"
-        },
-        "task:C33zh_accessibility_design": {
-          "name": "C33zh_accessibility_design",
-          "group": "Task"
-        },
-        "task:C34zh_product_design": {
-          "name": "C34zh_product_design",
-          "group": "Task"
-        },
-        "task:C35zh_income_tax_calculation": {
-          "name": "C35zh_income_tax_calculation",
-          "group": "Task"
-        },
-        "task:C36zh_insurance_planning": {
-          "name": "C36zh_insurance_planning",
-          "group": "Task"
-        },
-        "task:C37zh_income_tax_practice": {
-          "name": "C37zh_income_tax_practice",
-          "group": "Task"
-        },
-        "task:C38zh_inventory_management": {
-          "name": "C38zh_inventory_management",
-          "group": "Task"
         }
       },
       "stats": {
         "pass3": {
-          "name": "Pass at 3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
         "passAt3": {
-          "name": "Pass at 3 coverage",
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass_rate": {
+          "name": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_pass_at_3": {
+          "name": "General pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_pass_all_3": {
+          "name": "General pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_completion": {
+          "name": "General completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_robustness": {
+          "name": "General robustness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_safety": {
+          "name": "General safety",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_pass_at_3": {
+          "name": "Multi-turn pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_pass_all_3": {
+          "name": "Multi-turn pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_completion": {
+          "name": "Multi-turn completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_robustness": {
+          "name": "Multi-turn robustness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_safety": {
+          "name": "Multi-turn safety",
           "unit": "%",
           "better": "higher"
         }
@@ -50876,17 +50138,17 @@
       "url": "https://claw-eval.github.io/#/multimodal",
       "feed": "https://claw-eval.github.io/assets/benchmark-<hash>.js (latest release) (multimodalModels avg_score)",
       "terms": "Static files of the Claw-Eval GitHub Pages site, which states no terms; the claw-eval repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
       "stats": {
         "pass3": {
-          "name": "Pass at 3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
         "passAt3": {
-          "name": "Pass at 3 coverage",
+          "name": "Pass@3",
           "unit": "%",
           "better": "higher"
         },
@@ -50911,7 +50173,7 @@
       "url": "https://claw-eval.github.io/",
       "feed": "https://claw-eval.github.io/assets/benchmark-<hash>.js (latest release) (benchmarkData pass_all_3_rate)",
       "terms": "Static files of the Claw-Eval GitHub Pages site, which states no terms; the claw-eval repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "Agnes-2.0-flash",
@@ -50925,812 +50187,26 @@
         "multi_turn_pass_all_3": {
           "name": "Multi-turn",
           "group": "Task family"
-        },
-        "task:T001zh_email_triage:pass_all_3": {
-          "name": "T001zh_email_triage",
-          "group": "Task"
-        },
-        "task:T002_email_triage:pass_all_3": {
-          "name": "T002_email_triage",
-          "group": "Task"
-        },
-        "task:T003zh_calendar_scheduling:pass_all_3": {
-          "name": "T003zh_calendar_scheduling",
-          "group": "Task"
-        },
-        "task:T004_calendar_scheduling:pass_all_3": {
-          "name": "T004_calendar_scheduling",
-          "group": "Task"
-        },
-        "task:T005zh_email_reply_draft:pass_all_3": {
-          "name": "T005zh_email_reply_draft",
-          "group": "Task"
-        },
-        "task:T006_email_reply_draft:pass_all_3": {
-          "name": "T006_email_reply_draft",
-          "group": "Task"
-        },
-        "task:T007zh_todo_management:pass_all_3": {
-          "name": "T007zh_todo_management",
-          "group": "Task"
-        },
-        "task:T008_todo_management:pass_all_3": {
-          "name": "T008_todo_management",
-          "group": "Task"
-        },
-        "task:T009zh_contact_lookup:pass_all_3": {
-          "name": "T009zh_contact_lookup",
-          "group": "Task"
-        },
-        "task:T010_contact_lookup:pass_all_3": {
-          "name": "T010_contact_lookup",
-          "group": "Task"
-        },
-        "task:T011zh_expense_report:pass_all_3": {
-          "name": "T011zh_expense_report",
-          "group": "Task"
-        },
-        "task:T012_expense_report:pass_all_3": {
-          "name": "T012_expense_report",
-          "group": "Task"
-        },
-        "task:T013zh_meeting_notes:pass_all_3": {
-          "name": "T013zh_meeting_notes",
-          "group": "Task"
-        },
-        "task:T014_meeting_notes:pass_all_3": {
-          "name": "T014_meeting_notes",
-          "group": "Task"
-        },
-        "task:T015zh_kb_search:pass_all_3": {
-          "name": "T015zh_kb_search",
-          "group": "Task"
-        },
-        "task:T016_kb_search:pass_all_3": {
-          "name": "T016_kb_search",
-          "group": "Task"
-        },
-        "task:T017zh_ticket_triage:pass_all_3": {
-          "name": "T017zh_ticket_triage",
-          "group": "Task"
-        },
-        "task:T018_ticket_triage:pass_all_3": {
-          "name": "T018_ticket_triage",
-          "group": "Task"
-        },
-        "task:T019zh_inventory_check:pass_all_3": {
-          "name": "T019zh_inventory_check",
-          "group": "Task"
-        },
-        "task:T020_inventory_check:pass_all_3": {
-          "name": "T020_inventory_check",
-          "group": "Task"
-        },
-        "task:T021zh_newsletter_curation:pass_all_3": {
-          "name": "T021zh_newsletter_curation",
-          "group": "Task"
-        },
-        "task:T022_newsletter_curation:pass_all_3": {
-          "name": "T022_newsletter_curation",
-          "group": "Task"
-        },
-        "task:T023zh_crm_data_export:pass_all_3": {
-          "name": "T023zh_crm_data_export",
-          "group": "Task"
-        },
-        "task:T024_crm_data_export:pass_all_3": {
-          "name": "T024_crm_data_export",
-          "group": "Task"
-        },
-        "task:T025zh_ambiguous_contact_email:pass_all_3": {
-          "name": "T025zh_ambiguous_contact_email",
-          "group": "Task"
-        },
-        "task:T026_ambiguous_contact_email:pass_all_3": {
-          "name": "T026_ambiguous_contact_email",
-          "group": "Task"
-        },
-        "task:T027zh_api_config_audit:pass_all_3": {
-          "name": "T027zh_api_config_audit",
-          "group": "Task"
-        },
-        "task:T028_api_config_audit:pass_all_3": {
-          "name": "T028_api_config_audit",
-          "group": "Task"
-        },
-        "task:T029zh_cross_service_meeting:pass_all_3": {
-          "name": "T029zh_cross_service_meeting",
-          "group": "Task"
-        },
-        "task:T030_cross_service_meeting:pass_all_3": {
-          "name": "T030_cross_service_meeting",
-          "group": "Task"
-        },
-        "task:T031zh_escalation_budget_triage:pass_all_3": {
-          "name": "T031zh_escalation_budget_triage",
-          "group": "Task"
-        },
-        "task:T032_escalation_budget_triage:pass_all_3": {
-          "name": "T032_escalation_budget_triage",
-          "group": "Task"
-        },
-        "task:T033zh_ops_review_dashboard:pass_all_3": {
-          "name": "T033zh_ops_review_dashboard",
-          "group": "Task"
-        },
-        "task:T034_ops_review_dashboard:pass_all_3": {
-          "name": "T034_ops_review_dashboard",
-          "group": "Task"
-        },
-        "task:T035zh_vendor_procurement:pass_all_3": {
-          "name": "T035zh_vendor_procurement",
-          "group": "Task"
-        },
-        "task:T036_vendor_procurement:pass_all_3": {
-          "name": "T036_vendor_procurement",
-          "group": "Task"
-        },
-        "task:T037zh_incident_postmortem:pass_all_3": {
-          "name": "T037zh_incident_postmortem",
-          "group": "Task"
-        },
-        "task:T038_incident_postmortem:pass_all_3": {
-          "name": "T038_incident_postmortem",
-          "group": "Task"
-        },
-        "task:T039zh_onboarding_coordinator:pass_all_3": {
-          "name": "T039zh_onboarding_coordinator",
-          "group": "Task"
-        },
-        "task:T040_onboarding_coordinator:pass_all_3": {
-          "name": "T040_onboarding_coordinator",
-          "group": "Task"
-        },
-        "task:T041zh_scheduled_task_management:pass_all_3": {
-          "name": "T041zh_scheduled_task_management",
-          "group": "Task"
-        },
-        "task:T042_scheduled_task_management:pass_all_3": {
-          "name": "T042_scheduled_task_management",
-          "group": "Task"
-        },
-        "task:T043zh_service_outage_research:pass_all_3": {
-          "name": "T043zh_service_outage_research",
-          "group": "Task"
-        },
-        "task:T044_service_outage_research:pass_all_3": {
-          "name": "T044_service_outage_research",
-          "group": "Task"
-        },
-        "task:T045zh_cve_research:pass_all_3": {
-          "name": "T045zh_cve_research",
-          "group": "Task"
-        },
-        "task:T046_cve_research:pass_all_3": {
-          "name": "T046_cve_research",
-          "group": "Task"
-        },
-        "task:T047zh_oss_comparison:pass_all_3": {
-          "name": "T047zh_oss_comparison",
-          "group": "Task"
-        },
-        "task:T048_oss_comparison:pass_all_3": {
-          "name": "T048_oss_comparison",
-          "group": "Task"
-        },
-        "task:T049zh_regulatory_research:pass_all_3": {
-          "name": "T049zh_regulatory_research",
-          "group": "Task"
-        },
-        "task:T050_regulatory_research:pass_all_3": {
-          "name": "T050_regulatory_research",
-          "group": "Task"
-        },
-        "task:T053_finance_us_steel_merger:pass_all_3": {
-          "name": "T053_finance_us_steel_merger",
-          "group": "Task"
-        },
-        "task:T054_finance_nflx_arppu_trend:pass_all_3": {
-          "name": "T054_finance_nflx_arppu_trend",
-          "group": "Task"
-        },
-        "task:T056zh_phone_model_comparison:pass_all_3": {
-          "name": "T056zh_phone_model_comparison",
-          "group": "Task"
-        },
-        "task:T057_deepseek_logo_identification:pass_all_3": {
-          "name": "T057_deepseek_logo_identification",
-          "group": "Task"
-        },
-        "task:T058zh_painting_identification:pass_all_3": {
-          "name": "T058zh_painting_identification",
-          "group": "Task"
-        },
-        "task:T059_finance_abnb_cfo:pass_all_3": {
-          "name": "T059_finance_abnb_cfo",
-          "group": "Task"
-        },
-        "task:T060_finance_tko_endeavor_cost:pass_all_3": {
-          "name": "T060_finance_tko_endeavor_cost",
-          "group": "Task"
-        },
-        "task:T061_finance_mu_gm_beat:pass_all_3": {
-          "name": "T061_finance_mu_gm_beat",
-          "group": "Task"
-        },
-        "task:T062_finance_pltr_cagr:pass_all_3": {
-          "name": "T062_finance_pltr_cagr",
-          "group": "Task"
-        },
-        "task:T063_finance_fnd_sssg:pass_all_3": {
-          "name": "T063_finance_fnd_sssg",
-          "group": "Task"
-        },
-        "task:T064_finance_nflx_cash_req:pass_all_3": {
-          "name": "T064_finance_nflx_cash_req",
-          "group": "Task"
-        },
-        "task:T065_finance_x_inv_turnover:pass_all_3": {
-          "name": "T065_finance_x_inv_turnover",
-          "group": "Task"
-        },
-        "task:T066_finance_bros_gross_profit:pass_all_3": {
-          "name": "T066_finance_bros_gross_profit",
-          "group": "Task"
-        },
-        "task:T067zh_synopsys_china_revenue:pass_all_3": {
-          "name": "T067zh_synopsys_china_revenue",
-          "group": "Task"
-        },
-        "task:T068zh_llama_w8a8_cuda_bug:pass_all_3": {
-          "name": "T068zh_llama_w8a8_cuda_bug",
-          "group": "Task"
-        },
-        "task:T069_micron_capex_analysis:pass_all_3": {
-          "name": "T069_micron_capex_analysis",
-          "group": "Task"
-        },
-        "task:T070zh_js_async_generator_trace:pass_all_3": {
-          "name": "T070zh_js_async_generator_trace",
-          "group": "Task"
-        },
-        "task:T071_video_mme_coauthor_papers:pass_all_3": {
-          "name": "T071_video_mme_coauthor_papers",
-          "group": "Task"
-        },
-        "task:T072_restaurant_menu_contact:pass_all_3": {
-          "name": "T072_restaurant_menu_contact",
-          "group": "Task"
-        },
-        "task:T073_web_search_injection:pass_all_3": {
-          "name": "T073_web_search_injection",
-          "group": "Task"
-        },
-        "task:T074_paper_review_injection:pass_all_3": {
-          "name": "T074_paper_review_injection",
-          "group": "Task"
-        },
-        "task:T075_email_phishing_injection:pass_all_3": {
-          "name": "T075_email_phishing_injection",
-          "group": "Task"
-        },
-        "task:T076_officeqa_defense_spending:pass_all_3": {
-          "name": "T076_officeqa_defense_spending",
-          "group": "Task"
-        },
-        "task:T077_officeqa_highest_dept_spending:pass_all_3": {
-          "name": "T077_officeqa_highest_dept_spending",
-          "group": "Task"
-        },
-        "task:T078_officeqa_max_yield_spread:pass_all_3": {
-          "name": "T078_officeqa_max_yield_spread",
-          "group": "Task"
-        },
-        "task:T079_officeqa_zipf_exponent:pass_all_3": {
-          "name": "T079_officeqa_zipf_exponent",
-          "group": "Task"
-        },
-        "task:T080_officeqa_bond_yield_change:pass_all_3": {
-          "name": "T080_officeqa_bond_yield_change",
-          "group": "Task"
-        },
-        "task:T081_officeqa_cagr_trust_fund:pass_all_3": {
-          "name": "T081_officeqa_cagr_trust_fund",
-          "group": "Task"
-        },
-        "task:T082_officeqa_qoq_esf_change:pass_all_3": {
-          "name": "T082_officeqa_qoq_esf_change",
-          "group": "Task"
-        },
-        "task:T083_officeqa_mad_excise_tax:pass_all_3": {
-          "name": "T083_officeqa_mad_excise_tax",
-          "group": "Task"
-        },
-        "task:T084_officeqa_geometric_mean_silver:pass_all_3": {
-          "name": "T084_officeqa_geometric_mean_silver",
-          "group": "Task"
-        },
-        "task:T085_officeqa_army_expenditures:pass_all_3": {
-          "name": "T085_officeqa_army_expenditures",
-          "group": "Task"
-        },
-        "task:T086_pinbench_calendar_event_creation:pass_all_3": {
-          "name": "T086_pinbench_calendar_event_creation",
-          "group": "Task"
-        },
-        "task:T087_pinbench_market_news_brief:pass_all_3": {
-          "name": "T087_pinbench_market_news_brief",
-          "group": "Task"
-        },
-        "task:T088_pinbench_project_bootstrap_plan:pass_all_3": {
-          "name": "T088_pinbench_project_bootstrap_plan",
-          "group": "Task"
-        },
-        "task:T089_pinbench_config_workflow_notes:pass_all_3": {
-          "name": "T089_pinbench_config_workflow_notes",
-          "group": "Task"
-        },
-        "task:T090_pinbench_config_change_plan:pass_all_3": {
-          "name": "T090_pinbench_config_change_plan",
-          "group": "Task"
-        },
-        "task:T091_pinbench_humanize_blog:pass_all_3": {
-          "name": "T091_pinbench_humanize_blog",
-          "group": "Task"
-        },
-        "task:T092_pinbench_daily_research_brief:pass_all_3": {
-          "name": "T092_pinbench_daily_research_brief",
-          "group": "Task"
-        },
-        "task:T093_pinbench_email_triage_report:pass_all_3": {
-          "name": "T093_pinbench_email_triage_report",
-          "group": "Task"
-        },
-        "task:T094_pinbench_project_alpha_summary:pass_all_3": {
-          "name": "T094_pinbench_project_alpha_summary",
-          "group": "Task"
-        },
-        "task:T095_pinbench_apm_market_research:pass_all_3": {
-          "name": "T095_pinbench_apm_market_research",
-          "group": "Task"
-        },
-        "task:T096_pinbench_business_metrics_summary:pass_all_3": {
-          "name": "T096_pinbench_business_metrics_summary",
-          "group": "Task"
-        },
-        "task:T097_pinbench_eli5_model_summary:pass_all_3": {
-          "name": "T097_pinbench_eli5_model_summary",
-          "group": "Task"
-        },
-        "task:T098_pinbench_openclaw_facts:pass_all_3": {
-          "name": "T098_pinbench_openclaw_facts",
-          "group": "Task"
-        },
-        "task:T099_pinbench_second_brain_recall:pass_all_3": {
-          "name": "T099_pinbench_second_brain_recall",
-          "group": "Task"
-        },
-        "task:T100_reverse_decoder:pass_all_3": {
-          "name": "T100_reverse_decoder",
-          "group": "Task"
-        },
-        "task:T101_wal_recovery:pass_all_3": {
-          "name": "T101_wal_recovery",
-          "group": "Task"
-        },
-        "task:T102_xss_filter:pass_all_3": {
-          "name": "T102_xss_filter",
-          "group": "Task"
-        },
-        "task:T103_schema_migration:pass_all_3": {
-          "name": "T103_schema_migration",
-          "group": "Task"
-        },
-        "task:T104_packet_decoder:pass_all_3": {
-          "name": "T104_packet_decoder",
-          "group": "Task"
-        },
-        "task:T105zh_job_failure_triage:pass_all_3": {
-          "name": "T105zh_job_failure_triage",
-          "group": "Task"
-        },
-        "task:T106_job_failure_triage:pass_all_3": {
-          "name": "T106_job_failure_triage",
-          "group": "Task"
-        },
-        "task:T107zh_ticket_routing:pass_all_3": {
-          "name": "T107zh_ticket_routing",
-          "group": "Task"
-        },
-        "task:T108_ticket_routing:pass_all_3": {
-          "name": "T108_ticket_routing",
-          "group": "Task"
-        },
-        "task:T109zh_complaint_investigation:pass_all_3": {
-          "name": "T109zh_complaint_investigation",
-          "group": "Task"
-        },
-        "task:T110_complaint_investigation:pass_all_3": {
-          "name": "T110_complaint_investigation",
-          "group": "Task"
-        },
-        "task:T111zh_expense_email_check:pass_all_3": {
-          "name": "T111zh_expense_email_check",
-          "group": "Task"
-        },
-        "task:T112_expense_email_check:pass_all_3": {
-          "name": "T112_expense_email_check",
-          "group": "Task"
-        },
-        "task:T113zh_meeting_preparation:pass_all_3": {
-          "name": "T113zh_meeting_preparation",
-          "group": "Task"
-        },
-        "task:T114_meeting_preparation:pass_all_3": {
-          "name": "T114_meeting_preparation",
-          "group": "Task"
-        },
-        "task:T115zh_ticket_kb_suggestion:pass_all_3": {
-          "name": "T115zh_ticket_kb_suggestion",
-          "group": "Task"
-        },
-        "task:T116_ticket_kb_suggestion:pass_all_3": {
-          "name": "T116_ticket_kb_suggestion",
-          "group": "Task"
-        },
-        "task:T117zh_customer_followup:pass_all_3": {
-          "name": "T117zh_customer_followup",
-          "group": "Task"
-        },
-        "task:T118_customer_followup:pass_all_3": {
-          "name": "T118_customer_followup",
-          "group": "Task"
-        },
-        "task:T119zh_inventory_cost_analysis:pass_all_3": {
-          "name": "T119zh_inventory_cost_analysis",
-          "group": "Task"
-        },
-        "task:T120_inventory_cost_analysis:pass_all_3": {
-          "name": "T120_inventory_cost_analysis",
-          "group": "Task"
-        },
-        "task:T121zh_industry_briefing:pass_all_3": {
-          "name": "T121zh_industry_briefing",
-          "group": "Task"
-        },
-        "task:T122_industry_briefing:pass_all_3": {
-          "name": "T122_industry_briefing",
-          "group": "Task"
-        },
-        "task:T123zh_todo_calendar_conflict:pass_all_3": {
-          "name": "T123zh_todo_calendar_conflict",
-          "group": "Task"
-        },
-        "task:T124_todo_calendar_conflict:pass_all_3": {
-          "name": "T124_todo_calendar_conflict",
-          "group": "Task"
-        },
-        "task:T125zh_meeting_action_items:pass_all_3": {
-          "name": "T125zh_meeting_action_items",
-          "group": "Task"
-        },
-        "task:T126_meeting_action_items:pass_all_3": {
-          "name": "T126_meeting_action_items",
-          "group": "Task"
-        },
-        "task:T127zh_ticket_assignment:pass_all_3": {
-          "name": "T127zh_ticket_assignment",
-          "group": "Task"
-        },
-        "task:T128_ticket_assignment:pass_all_3": {
-          "name": "T128_ticket_assignment",
-          "group": "Task"
-        },
-        "task:T129zh_business_trip_planning:pass_all_3": {
-          "name": "T129zh_business_trip_planning",
-          "group": "Task"
-        },
-        "task:T130_business_trip_planning:pass_all_3": {
-          "name": "T130_business_trip_planning",
-          "group": "Task"
-        },
-        "task:T131zh_order_profit_analysis:pass_all_3": {
-          "name": "T131zh_order_profit_analysis",
-          "group": "Task"
-        },
-        "task:T132_order_profit_analysis:pass_all_3": {
-          "name": "T132_order_profit_analysis",
-          "group": "Task"
-        },
-        "task:T133zh_competitive_intelligence:pass_all_3": {
-          "name": "T133zh_competitive_intelligence",
-          "group": "Task"
-        },
-        "task:T134_competitive_intelligence:pass_all_3": {
-          "name": "T134_competitive_intelligence",
-          "group": "Task"
-        },
-        "task:T135zh_weekly_meeting_tracking:pass_all_3": {
-          "name": "T135zh_weekly_meeting_tracking",
-          "group": "Task"
-        },
-        "task:T136_weekly_meeting_tracking:pass_all_3": {
-          "name": "T136_weekly_meeting_tracking",
-          "group": "Task"
-        },
-        "task:T137zh_restock_chain_check:pass_all_3": {
-          "name": "T137zh_restock_chain_check",
-          "group": "Task"
-        },
-        "task:T138_restock_chain_check:pass_all_3": {
-          "name": "T138_restock_chain_check",
-          "group": "Task"
-        },
-        "task:T139zh_customer_relationship_warning:pass_all_3": {
-          "name": "T139zh_customer_relationship_warning",
-          "group": "Task"
-        },
-        "task:T140_customer_relationship_warning:pass_all_3": {
-          "name": "T140_customer_relationship_warning",
-          "group": "Task"
-        },
-        "task:T141zh_sla_compliance_audit:pass_all_3": {
-          "name": "T141zh_sla_compliance_audit",
-          "group": "Task"
-        },
-        "task:T142_sla_compliance_audit:pass_all_3": {
-          "name": "T142_sla_compliance_audit",
-          "group": "Task"
-        },
-        "task:T143zh_quarterly_business_insight:pass_all_3": {
-          "name": "T143zh_quarterly_business_insight",
-          "group": "Task"
-        },
-        "task:T144_quarterly_business_insight:pass_all_3": {
-          "name": "T144_quarterly_business_insight",
-          "group": "Task"
-        },
-        "task:T145zh_task_backtracking:pass_all_3": {
-          "name": "T145zh_task_backtracking",
-          "group": "Task"
-        },
-        "task:T146_task_backtracking:pass_all_3": {
-          "name": "T146_task_backtracking",
-          "group": "Task"
-        },
-        "task:T147zh_system_health_check:pass_all_3": {
-          "name": "T147zh_system_health_check",
-          "group": "Task"
-        },
-        "task:T148_system_health_check:pass_all_3": {
-          "name": "T148_system_health_check",
-          "group": "Task"
-        },
-        "task:T149zh_project_progress_report:pass_all_3": {
-          "name": "T149zh_project_progress_report",
-          "group": "Task"
-        },
-        "task:T150_project_progress_report:pass_all_3": {
-          "name": "T150_project_progress_report",
-          "group": "Task"
-        },
-        "task:T151zh_supply_chain_investigation:pass_all_3": {
-          "name": "T151zh_supply_chain_investigation",
-          "group": "Task"
-        },
-        "task:T152_supply_chain_investigation:pass_all_3": {
-          "name": "T152_supply_chain_investigation",
-          "group": "Task"
-        },
-        "task:T153zh_market_research_report:pass_all_3": {
-          "name": "T153zh_market_research_report",
-          "group": "Task"
-        },
-        "task:T154_market_research_report:pass_all_3": {
-          "name": "T154_market_research_report",
-          "group": "Task"
-        },
-        "task:T155zh_onsite_support_dispatch:pass_all_3": {
-          "name": "T155zh_onsite_support_dispatch",
-          "group": "Task"
-        },
-        "task:T156_onsite_support_dispatch:pass_all_3": {
-          "name": "T156_onsite_support_dispatch",
-          "group": "Task"
-        },
-        "task:T157zh_month_end_reconciliation:pass_all_3": {
-          "name": "T157zh_month_end_reconciliation",
-          "group": "Task"
-        },
-        "task:T158_month_end_reconciliation:pass_all_3": {
-          "name": "T158_month_end_reconciliation",
-          "group": "Task"
-        },
-        "task:T159zh_vip_ticket_escalation:pass_all_3": {
-          "name": "T159zh_vip_ticket_escalation",
-          "group": "Task"
-        },
-        "task:T160_vip_ticket_escalation:pass_all_3": {
-          "name": "T160_vip_ticket_escalation",
-          "group": "Task"
-        },
-        "task:T161zh_automation_failure_recovery:pass_all_3": {
-          "name": "T161zh_automation_failure_recovery",
-          "group": "Task"
-        },
-        "task:T162_automation_failure_recovery:pass_all_3": {
-          "name": "T162_automation_failure_recovery",
-          "group": "Task"
-        },
-        "task:T163zh_quarterly_customer_review:pass_all_3": {
-          "name": "T163zh_quarterly_customer_review",
-          "group": "Task"
-        },
-        "task:T164_quarterly_customer_review:pass_all_3": {
-          "name": "T164_quarterly_customer_review",
-          "group": "Task"
-        },
-        "task:C01zh_mortgage_prepay:pass_all_3": {
-          "name": "C01zh_mortgage_prepay",
-          "group": "Task"
-        },
-        "task:C02zh_personal_finance:pass_all_3": {
-          "name": "C02zh_personal_finance",
-          "group": "Task"
-        },
-        "task:C03en_real_estate_finance:pass_all_3": {
-          "name": "C03en_real_estate_finance",
-          "group": "Task"
-        },
-        "task:C04zh_image_processing:pass_all_3": {
-          "name": "C04zh_image_processing",
-          "group": "Task"
-        },
-        "task:C05zh_personal_finance_2:pass_all_3": {
-          "name": "C05zh_personal_finance_2",
-          "group": "Task"
-        },
-        "task:C06zh_clinical_pharmacy:pass_all_3": {
-          "name": "C06zh_clinical_pharmacy",
-          "group": "Task"
-        },
-        "task:C07zh_financial_valuation:pass_all_3": {
-          "name": "C07zh_financial_valuation",
-          "group": "Task"
-        },
-        "task:C08zh_personal_finance_3:pass_all_3": {
-          "name": "C08zh_personal_finance_3",
-          "group": "Task"
-        },
-        "task:C09zh_ai_video_creation:pass_all_3": {
-          "name": "C09zh_ai_video_creation",
-          "group": "Task"
-        },
-        "task:C10zh_labor_law:pass_all_3": {
-          "name": "C10zh_labor_law",
-          "group": "Task"
-        },
-        "task:C11zh_container_orchestration:pass_all_3": {
-          "name": "C11zh_container_orchestration",
-          "group": "Task"
-        },
-        "task:C12zh_ecommerce_operations:pass_all_3": {
-          "name": "C12zh_ecommerce_operations",
-          "group": "Task"
-        },
-        "task:C13zh_psychology_statistics:pass_all_3": {
-          "name": "C13zh_psychology_statistics",
-          "group": "Task"
-        },
-        "task:C14zh_cross_border_compliance:pass_all_3": {
-          "name": "C14zh_cross_border_compliance",
-          "group": "Task"
-        },
-        "task:C15en_structural_seismic_design:pass_all_3": {
-          "name": "C15en_structural_seismic_design",
-          "group": "Task"
-        },
-        "task:C16en_hr_workforce_planning:pass_all_3": {
-          "name": "C16en_hr_workforce_planning",
-          "group": "Task"
-        },
-        "task:C17en_devops_sop_design:pass_all_3": {
-          "name": "C17en_devops_sop_design",
-          "group": "Task"
-        },
-        "task:C18en_statistical_analysis_spss:pass_all_3": {
-          "name": "C18en_statistical_analysis_spss",
-          "group": "Task"
-        },
-        "task:C19en_ab_testing_sample_size:pass_all_3": {
-          "name": "C19en_ab_testing_sample_size",
-          "group": "Task"
-        },
-        "task:C20zh_mental_health_social_work:pass_all_3": {
-          "name": "C20zh_mental_health_social_work",
-          "group": "Task"
-        },
-        "task:C21zh_ecommerce_data_analysis:pass_all_3": {
-          "name": "C21zh_ecommerce_data_analysis",
-          "group": "Task"
-        },
-        "task:C22zh_experimental_psychology:pass_all_3": {
-          "name": "C22zh_experimental_psychology",
-          "group": "Task"
-        },
-        "task:C23zh_academic_writing:pass_all_3": {
-          "name": "C23zh_academic_writing",
-          "group": "Task"
-        },
-        "task:C24zh_fire_safety_code:pass_all_3": {
-          "name": "C24zh_fire_safety_code",
-          "group": "Task"
-        },
-        "task:C25zh_construction_cost:pass_all_3": {
-          "name": "C25zh_construction_cost",
-          "group": "Task"
-        },
-        "task:C26zh_public_health:pass_all_3": {
-          "name": "C26zh_public_health",
-          "group": "Task"
-        },
-        "task:C27zh_data_automation:pass_all_3": {
-          "name": "C27zh_data_automation",
-          "group": "Task"
-        },
-        "task:C28zh_distributed_systems:pass_all_3": {
-          "name": "C28zh_distributed_systems",
-          "group": "Task"
-        },
-        "task:C29zh_pediatric_medication:pass_all_3": {
-          "name": "C29zh_pediatric_medication",
-          "group": "Task"
-        },
-        "task:C30zh_data_troubleshooting:pass_all_3": {
-          "name": "C30zh_data_troubleshooting",
-          "group": "Task"
-        },
-        "task:C31zh_restaurant_management:pass_all_3": {
-          "name": "C31zh_restaurant_management",
-          "group": "Task"
-        },
-        "task:C32zh_saas_metrics:pass_all_3": {
-          "name": "C32zh_saas_metrics",
-          "group": "Task"
-        },
-        "task:C33zh_accessibility_design:pass_all_3": {
-          "name": "C33zh_accessibility_design",
-          "group": "Task"
-        },
-        "task:C34zh_product_design:pass_all_3": {
-          "name": "C34zh_product_design",
-          "group": "Task"
-        },
-        "task:C35zh_income_tax_calculation:pass_all_3": {
-          "name": "C35zh_income_tax_calculation",
-          "group": "Task"
-        },
-        "task:C36zh_insurance_planning:pass_all_3": {
-          "name": "C36zh_insurance_planning",
-          "group": "Task"
-        },
-        "task:C37zh_income_tax_practice:pass_all_3": {
-          "name": "C37zh_income_tax_practice",
-          "group": "Task"
-        },
-        "task:C38zh_inventory_management:pass_all_3": {
-          "name": "C38zh_inventory_management",
-          "group": "Task"
         }
       },
       "stats": {
         "pass3": {
-          "name": "Pass at 3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
         "passAt3": {
-          "name": "Pass at 3 coverage",
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass_rate": {
+          "name": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "averageScore": {
+          "name": "Average score",
           "unit": "%",
           "better": "higher"
         },
@@ -51746,6 +50222,56 @@
         },
         "safety": {
           "name": "Safety",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_score": {
+          "name": "General average score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_pass_at_3": {
+          "name": "General pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_completion": {
+          "name": "General completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_robustness": {
+          "name": "General robustness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "general_safety": {
+          "name": "General safety",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_score": {
+          "name": "Multi-turn average score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_pass_at_3": {
+          "name": "Multi-turn pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_completion": {
+          "name": "Multi-turn completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_robustness": {
+          "name": "Multi-turn robustness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "multi_turn_safety": {
+          "name": "Multi-turn safety",
           "unit": "%",
           "better": "higher"
         }
@@ -89123,62 +87649,61 @@
       "url": "https://dubesor.de/chess/chess-leaderboard#puzzle-card",
       "feed": "https://dubesor.de/chess/chess-data.json",
       "terms": "The site allows this data path and restricts query URLs in robots.txt. The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/",
-      "retrieved": "2026-11-23",
-      "rows": 230,
+      "retrieved": "2026-11-24",
+      "rows": 233,
       "unmatched": [
-        "hy4-flash",
         "maia5-1500",
         "ministral-3b-2512",
         "muse-spark-1.3-contributor"
       ],
       "parts": {
         "band0": {
-          "name": "573 to 799",
+          "name": "Decile 1 (easiest)",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band1": {
-          "name": "802 to 992",
+          "name": "Decile 2",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band2": {
-          "name": "1000 to 1199",
+          "name": "Decile 3",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band3": {
-          "name": "1200 to 1397",
+          "name": "Decile 4",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band4": {
-          "name": "1400 to 1599",
+          "name": "Decile 5",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band5": {
-          "name": "1600 to 1799",
+          "name": "Decile 6",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band6": {
-          "name": "1810 to 1996",
+          "name": "Decile 7",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band7": {
-          "name": "2000 to 2194",
+          "name": "Decile 8",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band8": {
-          "name": "2207 to 2497",
+          "name": "Decile 9",
           "group": "Puzzle rating",
           "unit": "%"
         },
         "band9": {
-          "name": "2500 to 2672",
+          "name": "Decile 10 (hardest)",
           "group": "Puzzle rating",
           "unit": "%"
         }
@@ -100546,7 +99071,7 @@
       "url": "https://www.fab-ai.org/benchmarks?benchmark=CDPK&cost=10&models=%5B%5D&pageView=table",
       "feed": "https://www.fab-ai.org/benchmarks?benchmark=CDPK&cost=10&models=%5B%5D&pageView=table",
       "terms": "Fab AI marks the leaderboard as all rights reserved. The code repository has an MIT license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 240,
       "unmatched": [
         "Claude Opus 4 Thinking (low)",
@@ -100596,34 +99121,30 @@
       "parts": {
         "subject_Science": {
           "name": "Science",
-          "group": "subject"
+          "group": "Subject"
         },
         "subject_Maths": {
           "name": "Maths",
-          "group": "subject"
+          "group": "Subject"
         },
         "subject_Technology": {
           "name": "Technology",
-          "group": "subject"
+          "group": "Subject"
         },
         "subject_Social studies": {
           "name": "Social studies",
-          "group": "subject"
+          "group": "Subject"
         },
         "level_Primary": {
           "name": "Primary",
-          "group": "level"
+          "group": "School level"
         },
         "level_Secondary": {
           "name": "Secondary",
-          "group": "level"
+          "group": "School level"
         }
       },
       "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        },
         "badFormat": {
           "name": "Bad-format answers",
           "unit": "count",
@@ -116069,7 +114590,7 @@
       "url": "https://cognition.com/blog/frontier-code-1.1",
       "feed": "https://cognition.com/data/frontier-code-1.1/data.json",
       "terms": "Static JSON on cognition.com that the page's chart loads; Cognition's website terms set no rule against automated reading.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [],
       "harnesses": "system",
@@ -116078,6 +114599,78 @@
           "name": "Extended",
           "group": "Split",
           "note": "The larger task set. The headline score is on the main set."
+        }
+      },
+      "stats": {
+        "passRate": {
+          "name": "Raw pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "latency": {
+          "name": "Duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "toolCalls": {
+          "name": "Tool calls",
+          "unit": "count",
+          "better": "lower"
+        },
+        "ote": {
+          "name": "Output-token equivalent",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "shortcutRateV1": {
+          "name": "V1 shortcut rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokensV1": {
+          "name": "V1 output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "extended_passRate": {
+          "name": "Extended raw pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "extended_latency": {
+          "name": "Extended duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "extended_toolCalls": {
+          "name": "Extended tool calls",
+          "unit": "count",
+          "better": "lower"
+        },
+        "extended_ote": {
+          "name": "Extended output-token equivalent",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "extended_shortcutRateV1": {
+          "name": "Extended V1 shortcut rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "extended_tokensV1": {
+          "name": "Extended V1 output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "extended_cost": {
+          "name": "Extended cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "extended_tokens": {
+          "name": "Extended output tokens",
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -194678,7 +193271,7 @@
       "feed": "http://opencompass.openxlab.space/assets/OpenVLM.json",
       "terms": "OpenCompass's published leaderboard data file, which states no license; the VLMEvalKit and MMBench repositories are Apache-2.0. rank.opencompass.org.cn robots.txt disallows only /assets/ and model-detail pages on that host.",
       "host": "OpenCompass",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 167,
       "unmatched": [
         "360VL-70B",
@@ -194813,6 +193406,13 @@
         },
         "Math": {
           "name": "Math"
+        }
+      },
+      "stats": {
+        "Overall (official)": {
+          "name": "Overall (official)",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -256471,7 +255071,7 @@
       "url": "https://trishullab.github.io/PutnamBench/leaderboard.html",
       "feed": "https://trishullab.github.io/PutnamBench/results.json (default Lean-with-answer solved percentage)",
       "terms": "Static JSON on the PutnamBench GitHub Pages site (robots.txt allows all); the PutnamBench repository releases its problems under Apache 2.0 (Lean, Isabelle) and MIT (Rocq).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "ABEL",
@@ -256506,10 +255106,6 @@
           "name": "Problems solved",
           "unit": "count",
           "better": "higher"
-        },
-        "denominator": {
-          "name": "Problems in split",
-          "unit": "count"
         }
       }
     },
@@ -285641,7 +284237,7 @@
       "url": "https://rajpurkar.github.io/SQuAD-explorer/",
       "feed": "https://rajpurkar.github.io/SQuAD-explorer/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "2task",
@@ -285824,11 +284420,6 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
-        },
-        "tiedRank": {
-          "name": "Tied rank",
-          "unit": "rating",
-          "better": "lower"
         }
       }
     },
@@ -313001,7 +311592,7 @@
       "url": "https://andonlabs.com/evals/vending-bench-2",
       "feed": "https://andonlabs.com/_app/immutable/chunks/<hash>.js (the runs.vb2 data module the page imports) and nodes/<n>.<hash>.js (mean_cost per run)",
       "terms": "Public static asset of andonlabs.com; the site publishes no terms of use or robots.txt, so the scores are cited to Andon Labs.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 77,
       "unmatched": [],
       "chart": {
@@ -313046,18 +311637,10 @@
           "unit": "usd-per-mtok",
           "better": "lower"
         },
-        "pricedRuns": {
-          "name": "Priced runs",
-          "unit": "count"
-        },
         "final_value_geomean": {
           "name": "Geometric mean final value",
           "unit": "usd",
           "better": "higher"
-        },
-        "final_value_geomean_n": {
-          "name": "Geometric mean sample count",
-          "unit": "count"
         }
       }
     },

@@ -5,6 +5,7 @@ import { BCB_ALIASES, BCB_PAGE, BCB_TERMS, bcbFeed, bigcodebenchRows } from './b
 
 const board: Leaderboard = {
   benchmark: 'bigcodebench-hard',
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   parts: {
     complete: { name: 'Complete', group: 'Task type' },
     instruct: { name: 'Instruct', group: 'Task type' },

@@ -92,7 +92,6 @@ async function load(): Promise<{ runs: Record<string, Run>; costs: Map<string, S
         avg_input_tokens: 'avg_input_tokens',
         price_per_mtok_in: 'priceIn',
         price_per_mtok_out: 'priceOut',
-        n: 'pricedRuns',
       };
       for (const [key, metric] of Object.entries(fields)) {
         const value = field(key);
@@ -115,9 +114,7 @@ const board: Leaderboard = {
     avg_input_tokens: { name: 'Average input tokens', unit: 'tokens' },
     priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
     priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
-    pricedRuns: { name: 'Priced runs', unit: 'count' },
     final_value_geomean: { name: 'Geometric mean final value', unit: 'usd', better: 'higher' },
-    final_value_geomean_n: { name: 'Geometric mean sample count', unit: 'count' },
   },
   aliases: {
     // the registry names the hosted Qwen 3.5 Plus by its weights
@@ -149,7 +146,7 @@ const board: Leaderboard = {
       if (/ Custom Tools$/.test(model)) [model, harness] = [model.replace(/ Custom Tools$/, ''), 'custom tools'];
       const metrics: Record<string, number> = { ...spend?.metrics };
       if (typeof r.final_value_sem === 'number') metrics.stderr = r.final_value_sem;
-      for (const key of ['final_value_std', 'final_value_geomean', 'final_value_geomean_n'] as const) {
+      for (const key of ['final_value_std', 'final_value_geomean'] as const) {
         if (typeof r[key] === 'number') metrics[key === 'final_value_std' ? 'std' : key] = r[key];
       }
       rows.push({ trials: r.num_final_values ?? r.num_epochs,

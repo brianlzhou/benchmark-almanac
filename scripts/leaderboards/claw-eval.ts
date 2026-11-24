@@ -89,17 +89,15 @@ export async function clawRows(board: 'general' | 'multimodal', field: string, s
     }
     if (details) {
       for (const [key, value] of Object.entries(m.fields)) {
-        if (typeof value !== 'number' || !(key === 'tasks_evaluated' || key === 'pass_rate' || /^(general|multi_turn)_/.test(key))) continue;
-        metrics[key] = /(?:completion|robustness|safety|score_std)/.test(key) ? value * 100 : value;
+        if (typeof value !== 'number') continue;
+        if (key === 'tasks_evaluated' || /_n_tasks$/.test(key)) continue;
+        if (!(key === 'pass_rate' || /^(general|multi_turn)_/.test(key))) continue;
+        const outKey = key.endsWith('_std')
+          ? key.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase())
+          : key;
+        metrics[outKey] = /(?:completion|robustness|safety|score_std)/.test(key) ? value * 100 : value;
       }
       if (field !== 'avg_score' && typeof m.fields.avg_score === 'number') metrics.averageScore = m.fields.avg_score * 100;
-      for (const [task, values] of Object.entries(m.tasks)) {
-        for (const [stat, value] of Object.entries(values)) {
-          const key = 'task:' + task + (stat === 'score' ? '' : ':' + stat);
-          metrics[key] = typeof value === 'boolean' ? Number(value) * (stat === 'pass_all_3' && field === 'pass_all_3_rate' ? 100 : 1) : value * 100;
-          if ((field === 'avg_score' && stat === 'score') || (field === 'pass_all_3_rate' && stat === 'pass_all_3')) (details.parts ??= {})[key] = { name: task, group: 'Task' };
-        }
-      }
     }
     rows.push({ trials: details ? 3 : undefined, model: m.name, score: Number((v * scale).toFixed(2)), date: data.date, ...(Object.keys(metrics).length ? { metrics } : {}) });
   }
@@ -126,7 +124,21 @@ const board: Leaderboard = {
   feed: `${CLAW_FEED} (benchmarkData avg_score)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
-  stats: { pass3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3 coverage', unit: '%', better: 'higher' } },
+  stats: {
+    pass3: { name: 'Pass^3', unit: '%', better: 'higher' },
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    pass_rate: { name: 'Pass rate', unit: '%', better: 'higher' },
+    general_pass_at_3: { name: 'General pass@3', unit: '%', better: 'higher' },
+    general_pass_all_3: { name: 'General pass^3', unit: '%', better: 'higher' },
+    general_completion: { name: 'General completion', unit: '%', better: 'higher' },
+    general_robustness: { name: 'General robustness', unit: '%', better: 'higher' },
+    general_safety: { name: 'General safety', unit: '%', better: 'higher' },
+    multi_turn_pass_at_3: { name: 'Multi-turn pass@3', unit: '%', better: 'higher' },
+    multi_turn_pass_all_3: { name: 'Multi-turn pass^3', unit: '%', better: 'higher' },
+    multi_turn_completion: { name: 'Multi-turn completion', unit: '%', better: 'higher' },
+    multi_turn_robustness: { name: 'Multi-turn robustness', unit: '%', better: 'higher' },
+    multi_turn_safety: { name: 'Multi-turn safety', unit: '%', better: 'higher' },
+  },
   fetch: () => clawRows('general', 'avg_score', 100, true, board),
 };
 export default board;
