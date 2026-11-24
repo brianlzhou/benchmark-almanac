@@ -18,6 +18,10 @@ const board: Leaderboard = {
   benchmark: 'mattoolbench', url: url + '#leaderboard', feed: url,
   terms: 'The project page names the MIT License.',
   aliases: { 'doubao-seed-1-8': 'seed-1-8' },
+  parts: {
+    avantage: 'Avantage', jade: 'JADE', dm: 'DM', ms: 'MS', vesta: 'VESTA', guiavg: 'GUI Avg.',
+    origin: 'Origin', pymatgen: 'Pymatgen', mp: 'MP', oqmd: 'OQMD', optimade: 'OPTIMADE', codeavg: 'Code Avg.',
+  },
   stats: {
     avantageSR: { name: 'Avantage success rate', unit: '%', better: 'higher' }, avantageSteps: { name: 'Avantage steps', unit: 'count', better: 'lower' }, avantageStepsStar: { name: 'Avantage starred steps', unit: 'count', better: 'lower' }, avantageFTR: { name: 'Avantage first try rate', unit: '%', better: 'higher' },
     jadeSR: { name: 'Jade success rate', unit: '%', better: 'higher' }, jadeSteps: { name: 'Jade steps', unit: 'count', better: 'lower' }, jadeStepsStar: { name: 'Jade starred steps', unit: 'count', better: 'lower' }, jadeFTR: { name: 'Jade first try rate', unit: '%', better: 'higher' },
@@ -41,8 +45,6 @@ const board: Leaderboard = {
     const efficiency = domains(html, 'EFF_DATA');
     const overall = accuracy.find(d => d.isOverall);
     if (models.length < 7 || !overall || accuracy.length < 13 || efficiency.length !== accuracy.length) throw new Error('Incomplete MatToolBench tables');
-    const parts: Record<string, string> = {};
-    board.parts = parts;
     return models.map((model, i) => {
       const metrics: Record<string, number> = {};
       for (const [index, d] of accuracy.entries()) {
@@ -52,7 +54,7 @@ const board: Leaderboard = {
         const key = d.isOverall ? '' : label.replace(/[^a-z0-9]/gi, '').toLowerCase();
         const [score, sr] = d.values[i];
         if (d.values[i].length !== 2 || eff.values[i].length !== 3) throw new Error('Missing values for ' + label);
-        if (key && score !== null) { parts[key] = label; metrics[key] = score; }
+        if (key && score !== null) metrics[key] = score;
         for (const [j, value] of [sr, ...eff.values[i]].entries()) {
           if (value !== null) metrics[key + ['SR', 'Steps', 'StepsStar', 'FTR'][j]] = value;
         }

@@ -12,9 +12,6 @@ const board: Leaderboard = {
   stats: {
     bestOrderingAccuracy: { name: 'Best-ordering accuracy', unit: '%', better: 'higher' },
     orderingMean: { name: 'Mean ordering accuracy', unit: '%', better: 'higher' },
-    orderingCount: { name: 'Ordering count', unit: 'count' },
-    questions: { name: 'Question count', unit: 'count' },
-    orderingStd: { name: 'Ordering accuracy standard deviation', unit: '%' },
     experimentApiCalls: { name: 'Experiment API calls', unit: 'count' },
   },
   aliases: { 'qwen/qwen3-30b-a3b-instruct-2507': 'qwen3-30b-a3b-instruct-jul-2025' },
@@ -35,7 +32,7 @@ const board: Leaderboard = {
         if (rows.has(model) && rows.get(model)!.score !== score) throw new Error('Conflicting source score');
         rows.set(model, { model, score, setting: 'GSM8K, 100 random orderings', metrics: {
           bestOrderingAccuracy: Number(best) * 100, orderingMean: Number(mean) * 100, orderingStd: Number(sd) * 100,
-          orderingCount: 100, questions: 32, ...(role === 'target' ? { experimentApiCalls: +spend[1] } : {}),
+          ...(role === 'target' ? { experimentApiCalls: +spend[1] } : {}),
         }, ...(role === 'target' ? { cost: +spend[2] } : {}) });
       }
     }

@@ -2685,10 +2685,6 @@
         }
       },
       "stats": {
-        "clips": {
-          "name": "Audio clips",
-          "unit": "count"
-        },
         "latency": {
           "name": "Median latency",
           "unit": "seconds",
@@ -25783,10 +25779,6 @@
         "completed": {
           "name": "Completed tasks",
           "unit": "count"
-        },
-        "scheduled": {
-          "name": "Scheduled tasks",
-          "unit": "count"
         }
       }
     },
@@ -30596,21 +30588,12 @@
       "rows": 6,
       "unmatched": [],
       "stats": {
-        "runs": {
-          "name": "Runs",
-          "unit": "count"
-        },
-        "passAt3": {
-          "name": "Pass@3",
-          "unit": "%",
-          "better": "higher"
-        },
         "tasksSolved": {
           "name": "Tasks solved",
           "unit": "count"
         },
         "passAt1": {
-          "name": "Pass@1",
+          "name": "pass@1",
           "unit": "%",
           "better": "higher"
         },
@@ -30664,11 +30647,6 @@
         "medianTurns": {
           "name": "Median turns per run",
           "unit": "count"
-        },
-        "meanCostUsd": {
-          "name": "Mean cost per run",
-          "unit": "usd",
-          "better": "lower"
         },
         "timedOutRuns": {
           "name": "Timed-out runs",
@@ -62895,11 +62873,6 @@
         "pairedTStatistic": {
           "name": "Paired t-test statistic",
           "unit": "score"
-        },
-        "pValueUpperExclusive": {
-          "name": "P-value upper bound",
-          "unit": "score",
-          "note": "Published upper-exclusive p-value threshold."
         }
       }
     },
@@ -69741,26 +69714,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "RoofingQuoteCalls": {
-          "name": "Roofing quote calls",
-          "unit": "count"
-        },
-        "RoofingBookingCalls": {
-          "name": "Roofing booking calls",
-          "unit": "count"
-        },
-        "RoofingReadbackCalls": {
-          "name": "Roofing readback calls",
-          "unit": "count"
-        },
-        "RoofingTriageCalls": {
-          "name": "Roofing triage calls",
-          "unit": "count"
-        },
-        "RoofingAfterhoursCalls": {
-          "name": "Roofing afterhours calls",
-          "unit": "count"
-        },
         "GymMedianReplyMs": {
           "name": "Gym median reply time",
           "unit": "ms",
@@ -69775,22 +69728,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "GymQuoteCalls": {
-          "name": "Gym quote calls",
-          "unit": "count"
-        },
-        "GymBookingCalls": {
-          "name": "Gym booking calls",
-          "unit": "count"
-        },
-        "GymTriageCalls": {
-          "name": "Gym triage calls",
-          "unit": "count"
-        },
-        "GymAfterhoursCalls": {
-          "name": "Gym afterhours calls",
-          "unit": "count"
-        },
         "CoachingMedianReplyMs": {
           "name": "Coaching median reply time",
           "unit": "ms",
@@ -69804,22 +69741,6 @@
           "name": "Coaching interruption time",
           "unit": "seconds",
           "better": "lower"
-        },
-        "CoachingQuoteCalls": {
-          "name": "Coaching quote calls",
-          "unit": "count"
-        },
-        "CoachingBookingCalls": {
-          "name": "Coaching booking calls",
-          "unit": "count"
-        },
-        "CoachingTriageCalls": {
-          "name": "Coaching triage calls",
-          "unit": "count"
-        },
-        "CoachingAfterhoursCalls": {
-          "name": "Coaching afterhours calls",
-          "unit": "count"
         }
       }
     },
@@ -79974,10 +79895,6 @@
           "name": "Correct routing choices",
           "unit": "count"
         },
-        "routingCases": {
-          "name": "Routing cases",
-          "unit": "count"
-        },
         "calibrationError": {
           "name": "Calibration error",
           "unit": "score",
@@ -87965,56 +87882,6 @@
         "perturbation_surface": {
           "name": "Surface",
           "group": "Category"
-        }
-      },
-      "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "library_matplotlibCount": {
-          "name": "Matplotlib tasks",
-          "unit": "count"
-        },
-        "library_numpyCount": {
-          "name": "NumPy tasks",
-          "unit": "count"
-        },
-        "library_pandasCount": {
-          "name": "pandas tasks",
-          "unit": "count"
-        },
-        "library_pytorchCount": {
-          "name": "PyTorch tasks",
-          "unit": "count"
-        },
-        "library_scipyCount": {
-          "name": "SciPy tasks",
-          "unit": "count"
-        },
-        "library_sklearnCount": {
-          "name": "scikit-learn tasks",
-          "unit": "count"
-        },
-        "library_tensorflowCount": {
-          "name": "TensorFlow tasks",
-          "unit": "count"
-        },
-        "perturbation_difficult-rewriteCount": {
-          "name": "Difficult rewrite tasks",
-          "unit": "count"
-        },
-        "perturbation_originCount": {
-          "name": "Original perturbation tasks",
-          "unit": "count"
-        },
-        "perturbation_semanticCount": {
-          "name": "Semantic perturbation tasks",
-          "unit": "count"
-        },
-        "perturbation_surfaceCount": {
-          "name": "Surface perturbation tasks",
-          "unit": "count"
         }
       }
     },
@@ -112030,10 +111897,6 @@
           "name": "Resolved workloads",
           "unit": "%",
           "better": "higher"
-        },
-        "workloads": {
-          "name": "Workloads",
-          "unit": "count"
         }
       }
     },
@@ -123580,54 +123443,6 @@
         },
         "totalCount": {
           "name": "Total puzzles",
-          "unit": "count"
-        },
-        "Figure Completion count": {
-          "name": "Figure Completion puzzles",
-          "unit": "count"
-        },
-        "Spatial Generation count": {
-          "name": "Spatial Generation puzzles",
-          "unit": "count"
-        },
-        "Maze: Beginner count": {
-          "name": "Maze: Beginner puzzles",
-          "unit": "count"
-        },
-        "Maze: Intermediate count": {
-          "name": "Maze: Intermediate puzzles",
-          "unit": "count"
-        },
-        "Maze: Advanced count": {
-          "name": "Maze: Advanced puzzles",
-          "unit": "count"
-        },
-        "Sudoku count": {
-          "name": "Sudoku puzzles",
-          "unit": "count"
-        },
-        "Nonogram count": {
-          "name": "Nonogram puzzles",
-          "unit": "count"
-        },
-        "Tangram count": {
-          "name": "Tangram puzzles",
-          "unit": "count"
-        },
-        "Board Games count": {
-          "name": "Board Games puzzles",
-          "unit": "count"
-        },
-        "Matchsticks count": {
-          "name": "Matchsticks puzzles",
-          "unit": "count"
-        },
-        "Orthographic count": {
-          "name": "Orthographic puzzles",
-          "unit": "count"
-        },
-        "Math Visual Proof count": {
-          "name": "Math Visual Proof puzzles",
           "unit": "count"
         }
       }
@@ -152443,10 +152258,6 @@
           "name": "Direction gate rate",
           "unit": "%",
           "better": "higher"
-        },
-        "papers": {
-          "name": "Papers",
-          "unit": "count"
         },
         "almostG1": {
           "name": "Almost-pass gate 1 rate",
@@ -199681,13 +199492,7 @@
       "terms": "OpenAI publishes the evaluation report under its site terms at https://openai.com/policies/terms-of-use/.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": [],
-      "stats": {
-        "graderSamples": {
-          "name": "Grader samples per response",
-          "unit": "count"
-        }
-      }
+      "unmatched": []
     },
     "modelbench-reliability-under-constraints": {
       "url": "https://www.kaggle.com/benchmarks/ezeprincejr/modelbench-reliability-under-constraints",
@@ -244201,16 +244006,12 @@
         }
       },
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "passed": {
           "name": "Tasks passed",
           "unit": "count"
         },
         "passAt3": {
-          "name": "Pass@3",
+          "name": "pass@3",
           "unit": "%",
           "better": "higher"
         },
@@ -254249,14 +254050,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "orderingCount": {
-          "name": "Ordering count",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Question count",
-          "unit": "count"
-        },
         "experimentApiCalls": {
           "name": "Experiment API calls",
           "unit": "count"
@@ -256768,10 +256561,6 @@
         "DeepSeek R1 (snapshot unspecified)"
       ],
       "stats": {
-        "problems": {
-          "name": "Problems",
-          "unit": "count"
-        },
         "totalPoints": {
           "name": "Total points",
           "unit": "score",
@@ -258326,13 +258115,9 @@
       "unmatched": [],
       "stats": {
         "passAt3": {
-          "name": "Pass@3",
+          "name": "pass@3",
           "unit": "%",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -263414,10 +263199,6 @@
           "name": "Joint passes",
           "unit": "count"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "functionalSubsetMicro": {
           "name": "Functional subset micro score",
           "unit": "%",
@@ -268088,14 +267869,6 @@
           "name": "Mean minutes per task",
           "unit": "minutes",
           "better": "lower"
-        },
-        "scored": {
-          "name": "Scored tasks",
-          "unit": "count"
-        },
-        "registered": {
-          "name": "Registered tasks",
-          "unit": "count"
         },
         "totalTokens": {
           "name": "Mean total tokens per task",
@@ -280760,20 +280533,8 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "tasks_passed": {
           "name": "Tasks passed",
-          "unit": "count"
-        },
-        "boltz_budget": {
-          "name": "Boltz budget",
-          "unit": "count"
-        },
-        "admet_budget": {
-          "name": "ADMET budget",
           "unit": "count"
         }
       }
