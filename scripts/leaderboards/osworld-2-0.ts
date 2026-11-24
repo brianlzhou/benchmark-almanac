@@ -61,7 +61,10 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
     url: 'https://osworld-v2.xlang.ai/',
     feed: `${FEED} (releaseVersion ${release}, full set)`,
     terms: 'Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.',
-    stats: { partial: { name: 'Partial score', unit: '%', better: 'higher' } },
+    stats: {
+      partial: { name: 'Partial score', unit: '%', better: 'higher' },
+      runCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' },
+    },
     aliases: ALIASES,
     async fetch() {
       const data = await fetchJson<Data>(FEED);
@@ -73,6 +76,10 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
         if (version !== release || scope !== 'full' || typeof r.binaryAccuracy !== 'number') continue;
         const { model, harness } = splitAgent(r.model.trim());
         const steps = r.stepBudget && r.stepBudget !== budget ? `${r.stepBudget} steps` : undefined;
+        const metrics: Record<string, number> = {
+          ...(typeof r.partialScore === 'number' ? { partial: r.partialScore } : {}),
+          ...(r.estimatedCostUsd == null ? {} : { runCostUsd: r.estimatedCostUsd }),
+        };
         rows.push({
           model,
           score: r.binaryAccuracy,
@@ -84,13 +91,7 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
           link: [r.trajectoryUrl, r.reproductionGuideUrl, r.reproductionUrl].find((url) => url?.startsWith('https://')),
           cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / (r.taskCount || data.datasetSize || 108) : undefined),
           tokens: r.outputTokensPerTask ?? undefined,
-          metrics: {
-            stepBudget: r.stepBudget ?? budget,
-            ...(typeof r.partialScore === 'number' ? { partial: r.partialScore } : {}),
-            ...(r.taskCount == null ? {} : { taskCount: r.taskCount }),
-            ...(r.binarySuccessThreshold == null ? {} : { binarySuccessThreshold: r.binarySuccessThreshold }),
-            ...(r.estimatedCostUsd == null ? {} : { runCostUsd: r.estimatedCostUsd }),
-          },
+          ...(Object.keys(metrics).length ? { metrics } : {}),
         });
       }
       return rows;

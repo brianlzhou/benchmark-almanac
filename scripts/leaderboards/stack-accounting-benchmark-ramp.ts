@@ -9,7 +9,7 @@ const board: Leaderboard = {
   url: "https://builders.ramp.com/post/stack-benchmarking",
   feed,
   terms: "Ramp's robots.txt permits the site. The engineering post gives no separate data reuse license.",
-  stats: { pass1: { name: 'Pass at 1', unit: '%', better: 'higher' }, pass5: { name: 'Pass at 5', unit: '%', better: 'higher' }, powPass5: { name: 'Pass to the fifth power', unit: '%', better: 'higher' } },
+  stats: { passAt1: { name: 'Pass at 1', unit: '%', better: 'higher' }, passAt5: { name: 'Pass at 5', unit: '%', better: 'higher' }, pass5: { name: 'Pass to the fifth power', unit: '%', better: 'higher' } },
   aliases: { 'Opus 4.7': 'claude-opus-4-7', 'Opus 4.6': 'claude-opus-4-6' },
   chart: { title: 'Accuracy versus runtime', x: {key: 'latency', label: 'Runtime per task', unit: 's', better: 'lower'},
     y: {key: 'score', label: 'Mean criteria accuracy', unit: '%', better: 'higher'} },

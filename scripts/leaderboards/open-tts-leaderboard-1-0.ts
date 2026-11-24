@@ -6,15 +6,24 @@ import { text } from '../lib/html.ts';
 
 const feed = 'https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard';
 const languages = ["🇬🇧 English", "🇨🇳 Chinese", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇯🇵 Japanese", "🇰🇷 Korean", "🇷🇺 Russian", "🇭🇰 Cantonese", "🇵🇹 Portuguese", "🇳🇱 Dutch", "🇵🇱 Polish", "🇨🇿 Czech", "🇷🇴 Romanian", "🇬🇷 Greek", "🇫🇮 Finnish", "🇹🇷 Turkish", "🇸🇦 Arabic", "🇮🇳 Hindi", "🇮🇩 Indonesian", "🇹🇭 Thai", "🇻🇳 Vietnamese", "🇮🇷 Persian"];
+const langByFlag = Object.fromEntries(languages.map(l => l.split(' ') as [string, string]));
+const statKeys: Record<string, string> = {
+  'Average RTFx ⬆️': 'averageRtfx',
+  'Average SIM ⬆️': 'averageSim',
+  'UTMOS (en) ⬆️': 'utmosEn',
+  'KOMOS (ko) ⬆️': 'komosKo',
+};
 const datasets = ["Seed-TTS", "CV3-Eval", "MiniMax", "Neyshekar"];
 export function ttsRelease(benchmark:string,version:string,langCount:number,datasetCount:number,minimum:number,includeUtmos=false):Leaderboard {
+ const hasUtmos = includeUtmos || !['open-tts-leaderboard-1-0', 'open-tts-leaderboard-1-1'].includes(benchmark);
+ const hasKomos = !['open-tts-leaderboard-1-0', 'open-tts-leaderboard-1-1', 'open-tts-leaderboard-1-2', 'open-tts-leaderboard-1-3'].includes(benchmark);
  const board:Leaderboard={benchmark,feed,url:'https://huggingface.co/spaces/hf-audio/open_tts_leaderboard',
    terms:'Hugging Face allows crawling. The Space and source datasets retain their respective licenses.',
    stats:{
-     'Average RTFx ⬆️':{name:'Average real-time factor',unit:'speedup',better:'higher'},
-     'Average SIM ⬆️':{name:'Average speaker similarity',unit:'score',better:'higher'},
-     ...(includeUtmos?{'UTMOS (en) ⬆️':{name:'UTMOS for English',unit:'score',better:'higher'}}:{}),
-     cloningModeRank:{name:'Voice cloning rank',unit:'count',better:'lower'},
+     averageRtfx:{name:'Average real-time factor',unit:'speedup',better:'higher'},
+     averageSim:{name:'Average speaker similarity',unit:'score',better:'higher'},
+     ...(hasUtmos?{utmosEn:{name:'UTMOS (English)',unit:'score',better:'higher'}}:{}),
+     ...(hasKomos?{komosKo:{name:'KOMOS (Korean)',unit:'score',better:'higher'}}:{}),
      languagesScored:{name:'Languages scored',unit:'count'},
    },
    async fetch(){
@@ -40,9 +49,10 @@ export function ttsRelease(benchmark:string,version:string,langCount:number,data
          if(typeof r[score]!=='number' || !r[model]) throw new Error('Missing TTS mean or model');
          const metrics:Record<string,number>={};
          t.headers.forEach((k,i)=>{
-           const lang=/ (WER|CER)$/.test(k);
-           if(lang) board.parts![k]=k;
-           if(typeof r[i]==='number' && ![score,size].includes(i)) metrics[k==='Rank'?'cloningModeRank':k]=r[i] as number;
+           const lang=k.match(/^(.+) (WER|CER)$/);
+           const key=lang?`${langByFlag[lang[1]]??lang[1]} ${lang[2]}`:(statKeys[k]??k);
+           if(lang) board.parts![key]=key;
+           if(typeof r[i]==='number' && k!=='Rank' && ![score,size].includes(i)) metrics[key]=r[i] as number;
          });
          metrics.languagesScored=parseInt(String(r[coverage]));
          // the Space marks recently added models with a "NEW" badge inside the model cell, before any footnote mark

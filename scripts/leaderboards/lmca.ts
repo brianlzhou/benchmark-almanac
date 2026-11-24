@@ -12,6 +12,9 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at conceptualreasoning.ai; retain source attribution and follow the upstream terms.",
   aliases: { ...CRI_ALIASES },
+  stats: {
+    mean: { name: 'Raw mean score', unit: 'score', better: 'higher' },
+  },
   chart: { title: 'LMCA score versus cost', x: {key: 'cost', label: 'Cost per response', unit: '$', better: 'lower', log: true}, y: {key: 'score', label: 'LMCA', unit: '%', better: 'higher'} },
   async fetch() {
     const out: LeaderboardRow[] = [];

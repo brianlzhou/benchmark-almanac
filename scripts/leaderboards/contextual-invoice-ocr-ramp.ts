@@ -7,6 +7,15 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 type Result = { name: string; rateNx: number; costNx: number; latencyNx: number };
 const board: Leaderboard = {
   benchmark: 'contextual-invoice-ocr-ramp', url: rampPage, feed: rampPage, terms: rampTerms + ' ' + rampPage,
+  stats: {
+    relativeCost: { name: 'Relative cost per invoice', unit: 'speedup', better: 'lower', note: 'Multiple of the cheapest evaluated model.' },
+    relativeLatency: { name: 'Relative median latency', unit: 'speedup', better: 'lower', note: 'Multiple of the fastest evaluated model.' },
+  },
+  chart: {
+    title: 'Perfect extraction rate versus relative cost',
+    x: { key: 'relativeCost', label: 'Relative cost (multiple of cheapest)', unit: 'x', better: 'lower', log: true },
+    y: { key: 'score', label: 'Perfect extraction rate (multiple of lowest)', unit: 'x', better: 'higher' },
+  },
   async fetch() {
     const bundle = await rampBundle();
     if (!bundle.includes('Perfect Extraction Rate (multiple of lowest)')) throw new Error('Ramp extraction metric changed');

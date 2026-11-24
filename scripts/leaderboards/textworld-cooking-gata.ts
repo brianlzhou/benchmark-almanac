@@ -11,6 +11,9 @@ const board: Leaderboard = {
   url: 'https://app.primeintellect.ai/dashboard/environments/bryonkucharski/textworld_cooking_env/evals',
   feed: primeFeed(environment),
   terms: primeTerms + ' https://www.primeintellect.ai/terms-of-service',
+  stats: {
+    runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     return checked(await primeRows(this.url, environment, 1, 2), 2);
   },

@@ -92,7 +92,7 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
     parts: Object.fromEntries(PART_BASES.flatMap((base) => PART_TASKS.map((task) => [`${base}: ${task}`, { name: task, group: base }]))),
     stats: {
       runtimeTrials: { name: 'Runtime trials', unit: 'count' },
-      ...(version === 'v1' ? { runtimeSeconds: { name: 'Average runtime', unit: 'seconds', better: 'lower', note: 'Average time spent post-training, converted from hours.' } } : {}),
+      runtimeSeconds: { name: 'Average runtime', unit: 'seconds', better: 'lower', note: 'Average time spent post-training, converted from hours.' },
     },
     harnesses: 'system',
     verified: 'reviewed by PostTrainBench',
@@ -140,7 +140,7 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
             metrics[metric] = value;
             this.parts![metric] = { name: task, group: base };
             const spread = data.stdData?.[key]?.[base]?.[task];
-            if (typeof spread === 'number') metrics[metric + ' SD'] = spread;
+            if (typeof spread === 'number') metrics[metric + ' sd'] = spread;
           }
         }
         const sd = data.aggregatedScores?.[key]?.std;

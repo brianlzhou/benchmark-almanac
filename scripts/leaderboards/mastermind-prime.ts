@@ -8,6 +8,14 @@ const board: Leaderboard = {
   url: "https://app.primeintellect.ai/dashboard/environments/primeintellect/mastermind/evals",
   feed: primeFeed(env),
   terms: primeTerms,
+  stats: {
+    solved_reward: { name: 'Solved reward', unit: 'score', better: 'higher' },
+    partial_feedback_reward: { name: 'Partial feedback reward', unit: 'score', better: 'higher' },
+    candidate_reduction_reward: { name: 'Candidate reduction reward', unit: 'score', better: 'higher' },
+    speed_reward: { name: 'Speed reward', unit: 'score', better: 'higher' },
+    format_reward_func: { name: 'Format reward', unit: 'score', better: 'higher' },
+    runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' },
+  },
   fetch() { return primeRows(this.url, env, 1, 22); },
 };
 export default board;
