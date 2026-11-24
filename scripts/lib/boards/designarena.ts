@@ -29,18 +29,27 @@ const BASE = 'https://www.designarena.ai';
 
 export const DA_STATS_FULL = {
   winRate: { name: 'Win rate', unit: '%', better: 'higher' as const },
+  wins: { name: 'Wins', unit: 'count', better: 'higher' as const },
+  losses: { name: 'Losses', unit: 'count', better: 'lower' as const },
   battles: { name: 'Battles', unit: 'count' },
   generationSeconds: { name: 'Generation time', unit: 'seconds', better: 'lower' as const },
   costCount: { name: 'Priced generations', unit: 'count' },
 };
 export const DA_STATS_TIME = {
   winRate: DA_STATS_FULL.winRate,
+  wins: DA_STATS_FULL.wins,
+  losses: DA_STATS_FULL.losses,
   battles: DA_STATS_FULL.battles,
   generationSeconds: DA_STATS_FULL.generationSeconds,
+  costCount: DA_STATS_FULL.costCount,
 };
 export const DA_STATS_BASIC = {
   winRate: DA_STATS_FULL.winRate,
+  wins: DA_STATS_FULL.wins,
+  losses: DA_STATS_FULL.losses,
   battles: DA_STATS_FULL.battles,
+  generationSeconds: DA_STATS_FULL.generationSeconds,
+  costCount: DA_STATS_FULL.costCount,
 };
 
 export interface DaBoard {

@@ -63,6 +63,7 @@ export function geobenchBoard(benchmark: string, test: string): Leaderboard { re
     runInputTokens: { name: 'Run input tokens', unit: 'tokens' },
     runOutputTokens: { name: 'Run output tokens', unit: 'tokens' },
     max_tokens: { name: 'Maximum output tokens', unit: 'tokens' },
+    temperature: { name: 'Temperature', unit: 'score', note: 'Sampling temperature reported for the run.' },
     ...countryStats,
   },
   url: PAGE,
