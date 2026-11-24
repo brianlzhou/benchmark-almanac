@@ -41,6 +41,12 @@ const board: Leaderboard = {
   feed: `${PAGE} (Next.js page payload: leaderboard and agents)`,
   terms: 'Data embedded in the public page (robots.txt allows it and disallows only /api/ and /unlock); Snorkel publishes no terms for the site.',
   stats: { pass3: { name: 'Pass all three', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3', unit: '%', better: 'higher' }, steps: { name: 'Steps per task', unit: 'count' } },
+  chart: {
+    title: 'Tasteful solve rate vs. cost',
+    note: 'Tasteful solve rate (pass@1) against total token cost per task across reasoning efforts, matching the Pareto frontier chart on Senior SWE-Bench.',
+    x: { key: 'cost', label: 'Total cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Tasteful solve rate (pass@1)', unit: '%', better: 'higher' },
+  },
   aliases: {
     // anthropic/claude-horchata-eap, which the page names Opus 5
     'Opus 5': 'claude-opus-5',

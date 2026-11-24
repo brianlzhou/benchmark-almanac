@@ -18,6 +18,12 @@ const board: Leaderboard = {
     turns: { name: 'Turns per call', unit: 'count' },
     bargeInsPerCall: { name: 'Barge-ins per call', unit: 'count', better: 'lower' },
   },
+  chart: {
+    title: 'Cost vs. completed tasks',
+    note: 'Task completion rate against estimated cost per call, matching the scatter chart on the Veris VAmoS leaderboard.',
+    x: { key: 'cost', label: 'Estimated cost per call', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Task completion', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[0]?.text === 'Voice agent');
     const headers = ['Voice agent', 'Task completion', 'Connect', 'Latency', 'Turns', 'Barge-in/call', 'Cost', 'STT', 'LLM', 'TTS'];

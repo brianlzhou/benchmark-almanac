@@ -85,6 +85,10 @@ const parts = {
 const board: Leaderboard = {
   benchmark: 'osworld-verified',
   parts,
+  stats: {
+    tasks: { name: 'Tasks evaluated', unit: 'count' },
+    successes: { name: 'Tasks solved', unit: 'count', better: 'higher' },
+  },
   url: 'https://os-world.github.io/',
   feed: FEED,
   terms: 'Static file on the OSWorld project site; the OSWorld repository is Apache-2.0.',

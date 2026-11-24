@@ -25,9 +25,15 @@ const board: Leaderboard = {
   feed: `${FEED} (metrics.overall)`,
   terms: 'JSON file on the StructEval GitHub Pages site that the page loads; the page content is CC BY-SA 4.0.',
   stats: {
-    examples: { name: 'Examples', unit: 'count', note: 'Number of evaluation examples in the run.' },
     renderRate: { name: 'Render score', unit: '%', better: 'higher', note: 'Percentage of generated outputs that load or render without syntax errors.' },
+    paramsB: { name: 'Total parameters', unit: 'billions' },
     activeParamsB: { name: 'Active parameters', unit: 'billions' },
+  },
+  chart: {
+    title: 'Score vs. model size',
+    note: 'Overall score against total parameter count in billions for models with disclosed sizes, matching the model size chart on StructEval.',
+    x: { key: 'paramsB', label: 'Total parameters', unit: 'B', better: 'lower', log: true },
+    y: { key: 'score', label: 'Overall score', unit: '%', better: 'higher' },
   },
   parts: {
     renderable: {name: 'Renderable', group: 'Format'}, nonRenderable: {name: 'Non-renderable', group: 'Format'},
@@ -54,8 +60,8 @@ const board: Leaderboard = {
       for (const [name, value] of Object.entries(r.metrics ?? {})) {
         if (name !== 'overall' && Number.isFinite(value)) metrics[name.replace(/_(.)/g, (_, c: string) => c.toUpperCase())] = value;
       }
+      if (typeof r.parameters_b === 'number' && r.parameters_b > 0) metrics.paramsB = r.parameters_b;
       if (typeof r.active_parameters_b === 'number') metrics.activeParamsB = r.active_parameters_b;
-      if (typeof r.n === 'number') metrics.examples = r.n;
       rows.push({ model: r.name.trim(), score, date: r.evaluated_on, metrics,
         open: r.access === 'open' ? true : r.access === 'closed' ? false : undefined,
         params: r.parameters_b ?? undefined, link: r.artifact_url ? new URL(r.artifact_url, board.url).href : undefined,

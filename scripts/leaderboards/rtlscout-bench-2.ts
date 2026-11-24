@@ -12,21 +12,32 @@ type Run = { complete: boolean, name: string, label: string, reasoning_effort: s
 const board: Leaderboard = {
   benchmark: 'rtlscout-bench-2', url, feed,
   terms: "Felix Arnold publishes RTL Scout leaderboard data under CC BY 4.0. The GitHub Pages host provides no applicable robots rules.",
-  parts: {},
+  parts: {
+    'tpu-adp': { name: 'logikbench tpu', better: 'lower', note: 'Rank on this circuit design.' },
+    'jpeg-adp': { name: 'core_jpeg 2-D IDCT', better: 'lower', note: 'Rank on this circuit design.' },
+    'pdpu-adp': { name: 'PDPU posit dotp', better: 'lower', note: 'Rank on this circuit design.' },
+    'fpmul-adp': { name: 'FP16 multiplier', better: 'lower', note: 'Rank on this circuit design.' },
+    'alu-adp': { name: 'CV32E40P ALU', better: 'lower', note: 'Rank on this circuit design.' },
+  },
   stats: {
     reduction: { name: 'Cell reduction', unit: '%', better: 'higher' }, headroom: { name: 'Headroom', unit: '%', better: 'higher' }, frozenHeadroom: { name: 'Frozen headroom', unit: '%', better: 'higher' }, runtime: { name: 'Runtime per design', unit: 'seconds', better: 'lower' },
-    'tpu-adp': { name: 'TPU average design points', unit: 'count' }, 'tpu-adpReduction': { name: 'TPU cell reduction', unit: '%', better: 'higher' }, 'tpu-adpTrials': { name: 'TPU trials', unit: 'count' },
-    'jpeg-adp': { name: 'JPEG average design points', unit: 'count' }, 'jpeg-adpReduction': { name: 'JPEG cell reduction', unit: '%', better: 'higher' }, 'jpeg-adpTrials': { name: 'JPEG trials', unit: 'count' },
-    'pdpu-adp': { name: 'PDPU average design points', unit: 'count' }, 'pdpu-adpReduction': { name: 'PDPU cell reduction', unit: '%', better: 'higher' }, 'pdpu-adpTrials': { name: 'PDPU trials', unit: 'count' },
-    'fpmul-adp': { name: 'FPMUL average design points', unit: 'count' }, 'fpmul-adpReduction': { name: 'FPMUL cell reduction', unit: '%', better: 'higher' }, 'fpmul-adpTrials': { name: 'FPMUL trials', unit: 'count' },
-    'alu-adp': { name: 'ALU average design points', unit: 'count' }, 'alu-adpReduction': { name: 'ALU cell reduction', unit: '%', better: 'higher' }, 'alu-adpTrials': { name: 'ALU trials', unit: 'count' },
+    'tpu-adpReduction': { name: 'TPU cell reduction', unit: '%', better: 'higher' },
+    'jpeg-adpReduction': { name: 'JPEG cell reduction', unit: '%', better: 'higher' },
+    'pdpu-adpReduction': { name: 'PDPU cell reduction', unit: '%', better: 'higher' },
+    'fpmul-adpReduction': { name: 'FPMUL cell reduction', unit: '%', better: 'higher' },
+    'alu-adpReduction': { name: 'ALU cell reduction', unit: '%', better: 'higher' },
+  },
+  chart: {
+    title: 'Result vs. cost',
+    note: 'Headroom score across the five circuit designs against mean API cost per design, matching the Result vs. cost Pareto chart on RTLScout.',
+    x: { key: 'cost', label: 'Mean API cost per design', unit: '$', better: 'lower' },
+    y: { key: 'headroom', label: 'Headroom score', unit: '%', better: 'higher' },
   },
   async fetch() {
     const d = jsonAfter<{suite: string, overall: {tasks: {task: string, title: string}[], rows: Run[], n_complete: number}}>(await fetchText(feed), 'window.RTLSCOUT_DATA =');
     const { tasks, rows, n_complete } = d.overall;
     const complete = rows.filter(r => r.complete);
     if (d.suite !== 'suite-v2' || tasks.length !== 5 || complete.length !== n_complete || n_complete < 12) throw new Error('Incomplete RTLScout suite');
-    for (const t of tasks) board.parts![t.task] = { name: t.title, better: 'lower', note: 'Rank on this circuit design.' };
     return complete.map(r => {
       if (!r.name || !Number.isFinite(r.mean_rank)) throw new Error('Invalid RTLScout entry');
       const metrics: Record<string, number> = { reduction: r.reduction_pct, headroom: r.score * 100,
@@ -36,7 +47,6 @@ const board: Leaderboard = {
         if (!Number.isFinite(c?.rank)) throw new Error('Missing design rank: ' + task);
         metrics[task] = c.rank;
         metrics[task + 'Reduction'] = -c.pct;
-        metrics[task + 'Trials'] = c.n;
       }
       const trials = new Set(Object.values(r.cells).map(c => c.n));
       return { model: r.name, setting: r.label.match(/\(([^)]+)\)$/)?.[1] ?? r.reasoning_effort, score: r.mean_rank,

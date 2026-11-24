@@ -8,24 +8,33 @@ const board: Leaderboard = {
   url: "https://opengastronomy.org/benchmark/leaderboard/",
   feed,
   terms: "The leaderboard dataset metadata lists Apache 2.0. The results directory links one JSON document per model. The host permits crawling.",
-  parts: {}, costPer: 'run',
+  parts: {
+    vocabulary: { name: 'Vocabulary', group: 'Category' },
+    sensory: { name: 'Sensory', group: 'Category' },
+    composition: { name: 'Composition', group: 'Category' },
+    pairing: { name: 'Pairing', group: 'Category' },
+    explanation: { name: 'Explanation', group: 'Category' },
+    risk: { name: 'Risk', group: 'Category' },
+    structured_output: { name: 'Structured output', group: 'Category' },
+    regional: { name: 'Regional', group: 'Category' },
+    dietary: { name: 'Dietary', group: 'Category' },
+    safety: { name: 'Safety', group: 'Category' },
+    nutrition: { name: 'Nutrition', group: 'Category' },
+    menu_engineering: { name: 'Menu engineering', group: 'Category' },
+  },
+  costPer: 'run',
   stats: {
     latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
     meanLatency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
     inputTokens: { name: 'Input tokens', unit: 'tokens' },
     format: { name: 'Format score', unit: '%', better: 'higher' },
-    vocabulary: { name: 'Vocabulary score', unit: '%', better: 'higher' },
-    sensory: { name: 'Sensory score', unit: '%', better: 'higher' },
-    composition: { name: 'Composition score', unit: '%', better: 'higher' },
-    pairing: { name: 'Pairing score', unit: '%', better: 'higher' },
-    explanation: { name: 'Explanation score', unit: '%', better: 'higher' },
-    risk: { name: 'Risk score', unit: '%', better: 'higher' },
-    structured_output: { name: 'Structured output score', unit: '%', better: 'higher' },
-    regional: { name: 'Regional score', unit: '%', better: 'higher' },
-    dietary: { name: 'Dietary score', unit: '%', better: 'higher' },
-    safety: { name: 'Safety score', unit: '%', better: 'higher' },
-    nutrition: { name: 'Nutrition score', unit: '%', better: 'higher' },
-    menu_engineering: { name: 'Menu engineering score', unit: '%', better: 'higher' },
+    blendedPricePerMtok: { name: 'Blended price', unit: 'usd-per-mtok', better: 'lower' },
+  },
+  chart: {
+    title: 'Intelligence vs cost',
+    note: 'Aggregate score against blended price per million tokens, matching the Pareto chart on the OGS-Bench leaderboard.',
+    x: { key: 'blendedPricePerMtok', label: 'Blended price per 1M tokens', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Aggregate score', unit: '%', better: 'higher' },
   },
   async fetch() {
     const html = await fetchText(feed);
@@ -34,12 +43,12 @@ const board: Leaderboard = {
     const data = JSON.parse(match[1]);
     const rows = data.models.filter((m: {id:string}) => m.id !== 'baseline').map((m: {
       id: string; run_at: string; agg: { score:number; lo:number; hi:number }; cats: Record<string,{mean:number}>;
-      fmt: number; repro: {config_samples:number; config_closed_book:boolean}; metrics: {lat_med:number; lat_mean:number; in_tok:number; out_tok:number; usd_total:number|null}
+      fmt: number; pricing?: { blended?: number | null }; repro: {config_samples:number; config_closed_book:boolean}; metrics: {lat_med:number; lat_mean:number; in_tok:number; out_tok:number; usd_total:number|null}
     }) => {
       const metrics: Record<string,number> = { latency: m.metrics.lat_med / 1000, meanLatency: m.metrics.lat_mean / 1000, inputTokens: m.metrics.in_tok, format: m.fmt };
+      if (typeof m.pricing?.blended === 'number' && Number.isFinite(m.pricing.blended)) metrics.blendedPricePerMtok = m.pricing.blended;
       for (const key of data.categories.all) {
         if (!Number.isFinite(m.cats[key]?.mean)) throw new Error('Missing OGS category ' + key);
-        board.parts![key] = key.replaceAll('_',' ');
         metrics[key] = 100 * m.cats[key].mean;
       }
       if (!m.id || ![m.agg.score,m.agg.lo,m.agg.hi].every(Number.isFinite)) throw new Error('Missing OGS aggregate');
