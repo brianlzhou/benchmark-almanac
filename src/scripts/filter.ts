@@ -111,6 +111,18 @@ export function wireFilter(name: string) {
     if (hit) hit.checked = true;
   }
 
+  // keys whose filter also matches the version rows folded under a parent (the table's data-kid-keys): while one is
+  // on, a version that matches it shows under its parent, so a verdict on an earlier version isn't hidden
+  const kidKeys = new Set((table.dataset.kidKeys ?? '').split(' ').filter(Boolean));
+  const kidMatch = (k: HTMLElement) =>
+    selects.some((s) => {
+      const key = keyOf(s);
+      const vs = valuesOf(s);
+      if (!kidKeys.has(key) || !vs.length) return false;
+      const have = (k.dataset[key] ?? '').split(' ');
+      return vs.some((v) => have.includes(v));
+    });
+
   const setHidden = (r: HTMLElement, h: boolean) => {
     if (r.hidden !== h) r.hidden = h;
   };
@@ -123,7 +135,7 @@ export function wireFilter(name: string) {
     for (const k of kids) {
       const p = parentOf.get(k);
       const open = toggles.get(k.dataset.parent!)?.getAttribute('aria-expanded') === 'true';
-      setHidden(k, !p || !!p.hidden || !(open || (!!text && haystack.get(k)!.includes(text))));
+      setHidden(k, !p || !!p.hidden || !(open || (!!text && haystack.get(k)!.includes(text)) || kidMatch(k)));
     }
     const left = matched.length - Math.min(limit, matched.length);
     more.hidden = left <= 0;

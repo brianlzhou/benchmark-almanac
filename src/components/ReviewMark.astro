@@ -1,0 +1,49 @@
+---
+// A benchmark's verdict from Epoch AI's Benchmark Reviews, as a small mark beside its name in tables. It links to the
+// review on the benchmark's page. "Not enough info" gets no mark: it says nothing about the benchmark's quality.
+import { epochReviewOf, VERDICTS } from '../lib/epoch-reviews.ts';
+import { humanDate } from '../lib/format.ts';
+
+interface Props {
+  id: string;
+}
+const r = epochReviewOf(Astro.props.id);
+const v = r && r.verdict !== 'not-enough-info' ? VERDICTS[r.verdict] : undefined;
+---
+
+{
+  r && v && (
+    <a
+      class:list={['er-mark', 'hint', v.tone]}
+      href={`/benchmarks/${Astro.props.id}/#epoch-review`}
+      aria-label={`Epoch AI review: ${v.name}`}
+      data-tn={`Epoch AI: ${v.name}`}
+      data-ts={`Epoch AI reviewed it${r.reviewed ? ` on ${humanDate(r.reviewed)}` : ''}. “${v.what}”`}
+    >
+      {v.name}
+    </a>
+  )
+}
+
+<style>
+  .er-mark {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 7px;
+    padding: 0 6px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 16px;
+    vertical-align: 1px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .er-mark.good {
+    color: var(--status-good);
+  }
+  .er-mark.bad {
+    color: var(--status-bad);
+  }
+</style>

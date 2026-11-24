@@ -32,6 +32,7 @@ import {
 } from './data.ts';
 import type { Benchmark, Score } from './types.ts';
 import { issuesByBenchmark, PROBLEMS } from './audits.ts';
+import { epochReviewOf, VERDICTS as EPOCH_VERDICTS } from './epoch-reviews.ts';
 import { claimsForBenchmark, claimNote, gapText } from './claims.ts';
 import { unreadWhy } from './unread.ts';
 import { isArena } from './counts.ts';
@@ -121,6 +122,7 @@ export const CHECKS: Record<string, { group: AuditGroup; label: string; rule: st
   'consistency.direction': { group: 'consistency', label: 'Direction', problem: 'scores that run against the stated direction', rule: 'Stronger models on the capabilities index usually score better. Warns when, across eight or more models, the scores run against the stated direction.' },
   'consistency.dates': { group: 'consistency', label: 'Release date', problem: 'a lab report before the listed release', rule: 'Warns when a lab document reports the benchmark more than a month before its listed release, which suggests a wrong date.' },
   'consistency.issues': { group: 'consistency', public: true, label: 'Known issues', problem: 'an open audit finding', rule: 'Fails while a published audit’s finding is still open. Disputed findings and fixes made only in a copy get a warning.' },
+  'consistency.review': { group: 'consistency', public: true, label: 'Epoch AI review', problem: 'a Flawed verdict from Epoch AI', rule: 'Passes when Epoch AI’s Benchmark Reviews rate the benchmark Verified. Warns when they rate it Flawed. Not enough info, or no review yet, is a note.' },
   'consistency.versions': { group: 'consistency', label: 'Versions', problem: 'a missing or misordered successor', rule: 'For a test with several versions, each older version should name the one that replaced it, and come out before it.' },
 
   'links.main': { group: 'links', label: 'Links respond', problem: 'a broken link', rule: 'From our link check. Fails on a page that’s gone (404, 410 or no such host). Warns on server errors and timeouts. A 403 or 429 usually means bot protection, so it counts as unknown.' },
@@ -620,6 +622,19 @@ export function auditOf(id: string): BenchAudit {
           : issues.length
             ? `${count(issues.length, 'finding')}, all fixed.`
             : 'No published audit found problems.',
+    );
+  }
+  {
+    const r = epochReviewOf(id);
+    const when = r?.reviewed ? ` on ${humanDate(r.reviewed)}` : '';
+    add(
+      'consistency.review',
+      r?.verdict === 'verified' ? 'pass' : r?.verdict === 'flawed' ? 'warn' : 'info',
+      !r
+        ? 'Epoch AI hasn’t reviewed it.'
+        : r.verdict === 'not-enough-info'
+          ? 'Epoch AI found too little public information to review it.'
+          : `Epoch AI rated it ${EPOCH_VERDICTS[r.verdict].name}${when}.`,
     );
   }
   {
