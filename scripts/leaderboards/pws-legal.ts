@@ -29,9 +29,16 @@ const board: Leaderboard = {
   terms: 'The benchmark is private and the public article provides its reported result table. Results are credited to Parallel Web Systems.',
   headline: 'Answer accuracy on 238 held-out legal questions',
   stats: { costPer1000Questions: { name: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' } },
+  chart: {
+    title: 'Accuracy versus cost per 1,000 questions',
+    x: { key: 'costPer1000Questions', label: 'Cost per 1,000 questions', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'Parallel Web Systems plots answer accuracy against end-to-end cost per 1,000 questions.',
+  },
   fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({
     model: r.label,
     score: r.y,
+    cost: r.x / 1000,
     metrics: { costPer1000Questions: r.x },
   })),
 };

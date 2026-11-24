@@ -14,7 +14,7 @@ const board: Leaderboard = {
     const section = source.split('Table 5: Subtask 2:')[1]?.split('A recipe for success')[0];
     if (!section) throw new Error('Missing official Subtask 2 table');
     const rows = [...section.matchAll(/^\s*([^\n]+?)\s+(0\.\d+)\s+([✓–])\s+([✓–])\s+/gm)].map(m => ({
-      model: m[1].trim(), submitter: m[1].trim(), score: Number(m[2]), metrics: { trainingAugmentation: Number(m[3] === '✓'), externalFineTuning: Number(m[4] === '✓') },
+      model: m[1].trim(), submitter: m[1].trim(), score: Number(m[2]),
     }));
     if (rows.length < 28) throw new Error('Missing qualifying teams');
     return rows;

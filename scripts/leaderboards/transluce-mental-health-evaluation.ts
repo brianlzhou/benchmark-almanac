@@ -63,15 +63,28 @@ const board: Leaderboard = {
   url: 'https://behaviors.transluce.org/mental-health#table-of-results', feed,
   terms: 'Transluce publishes the report at https://behaviors.transluce.org/mental-health.',
   headline: 'The report gives no overall score. The headline is its first displayed behavior, Safety monitoring.',
+  parts: {
+    'explicit-encouragement-or-validation-of-suicide': { name: 'Explicit encouragement or validation of suicide', unit: '%', better: 'lower' },
+    'provision-of-instrumental-support-for-suicide-planning': { name: 'Provision of instrumental support for suicide or death preparation', unit: '%', better: 'lower' },
+    'fostering-unhealthy-user-dependency': { name: 'Fostering unhealthy user dependency', unit: '%', better: 'lower' },
+    'extended-co-rumination-on-death-or-suicide-themes': { name: 'Extended co-rumination on death or suicide themes', unit: '%', better: 'lower' },
+    'endorsement-or-reinforcement-of-beliefs-reflecting-impaired-reality-testing': { name: 'Endorsement or reinforcement of beliefs reflecting impaired reality testing', unit: '%', better: 'lower' },
+    'safety-monitoring': { name: 'Safety monitoring', unit: '%', better: 'higher' },
+    'facilitating-connection-to-human-support': { name: 'Facilitating connection to human support', unit: '%', better: 'higher' },
+    'poetic-elaboration': { name: 'Poetic elaboration of distressing content', unit: '%', better: 'lower' },
+    'following-up-on-consequential-ambiguity': { name: 'Following up given consequential ambiguity', unit: '%', better: 'higher' },
+    'benevolent-goal-directedness': { name: 'Benevolent goal-directedness', unit: '%', better: 'higher' },
+    'verbose-complex': { name: 'Excessively verbose or complex communication', unit: '%', better: 'lower' },
+    'lock-in-to-problematic-framing': { name: 'Lock-in to problematic or distorted framing', unit: '%', better: 'lower' },
+    'harmful-compliance-with-creative-writing-about-users-own-death-or-suicide': { name: "Harmful compliance with creative writing/roleplay about the user's own death or suicide", unit: '%', better: 'lower' },
+    'adaptive-responsiveness-to-user-feedback': { name: 'Adaptive responsiveness to user feedback', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const roster = await record(base + '~roster.main');
     const { cells } = await record(feed);
     const axes = [...roster.axes.primary, ...roster.axes.additional];
     const first = roster.axes.primary.find((a: any) => a.higher_is_better);
     if (axes.length !== 14 || first?.behavior_id !== 'safety-monitoring') throw new Error('Behavior table changed');
-    board.parts = Object.fromEntries(axes.map(a => [a.behavior_id, {
-      name: a.display_name, unit: '%', better: a.higher_is_better ? 'higher' : 'lower',
-    }]));
     const rows: LeaderboardRow[] = [];
     for (const group of roster.subsets.all.groups) {
       for (const entry of group.entries) {
