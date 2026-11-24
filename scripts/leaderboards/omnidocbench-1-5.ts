@@ -63,12 +63,22 @@ export async function omnidocRows(feed: string, skip: string[] = [], identifyFam
   return rows;
 }
 
+export const OMNIDOC_PARTS: Leaderboard['parts'] = {
+  textScore: { name: 'Text', note: 'One minus text edit distance, multiplied by 100.' },
+  formulaCdm: 'Formula CDM',
+  tableTeds: 'Table TEDS',
+};
+
+export const OMNIDOC_STATS: Leaderboard['stats'] = {
+  textEdit: { name: 'Text edit distance', unit: 'score', better: 'lower' },
+  tableTedsStructure: { name: 'Table TEDS structure', unit: 'score', better: 'higher' },
+  readOrderEdit: { name: 'Reading order edit distance', unit: 'score', better: 'lower' },
+};
+
 const board: Leaderboard = {
   benchmark: 'omnidocbench-1-5',
-  parts: {
-    textScore: { name: 'Text', note: 'One minus text edit distance, multiplied by 100.' },
-    formulaCdm: 'Formula CDM', tableTeds: 'Table TEDS',
-  },
+  parts: OMNIDOC_PARTS,
+  stats: OMNIDOC_STATS,
   url: 'https://github.com/opendatalab/OmniDocBench/tree/v1_5#end-to-end-evaluation',
   feed: `${FEED} (end-to-end table, Overall)`,
   terms: 'README on the v1_5 branch of opendatalab/OmniDocBench, which is Apache-2.0.',

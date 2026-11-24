@@ -9646,7 +9646,7 @@
       "url": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "feed": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "De-Identified System 1",
@@ -9688,7 +9688,15 @@
         "De-Identified System 7",
         "De-Identified System 8",
         "De-Identified System 9"
-      ]
+      ],
+      "stats": {
+        "naiveHazard": {
+          "name": "Naive hazard rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Baseline hazard rate without jailbreak attacks on the 0.5 en-US demo split."
+        }
+      }
     },
     "ailuminate-safety-1-2": {
       "url": "https://mlcommons.org/ailuminate/safety/results/",
@@ -34265,27 +34273,75 @@
       "url": "https://securebio.org/benchmarks/details/",
       "feed": "https://securebio.org/benchmarks/details/",
       "terms": "Public results published by the benchmark authors at securebio.org; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 73,
       "unmatched": [
         "GPT-4o mini (snapshot unspecified)",
         "Gemini 2.5 Flash (snapshot unspecified)",
         "Nemotron 3 Super 120B A12B",
         "Nemotron 3 Ultra 550B A55B"
-      ]
+      ],
+      "chart": {
+        "title": "Hazardous prompts refused vs benign prompts answered",
+        "x": {
+          "key": "score",
+          "label": "Benign prompts answered (BioTIER-permit)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "refuseRate",
+          "label": "Hazardous prompts refused (BioTIER-refuse)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each model plotted by benign prompt compliance against hazardous prompt refusal on the SecureBio BioTIER dashboard."
+      },
+      "stats": {
+        "refuseRate": {
+          "name": "Hazardous prompts refused",
+          "unit": "%",
+          "better": "higher",
+          "note": "BioTIER-refuse score on 398 dangerous biology prompts."
+        }
+      }
     },
     "biotier-securebio-refuse": {
       "url": "https://securebio.org/benchmarks/details/",
       "feed": "https://securebio.org/benchmarks/details/",
       "terms": "Public results published by the benchmark authors at securebio.org; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 73,
       "unmatched": [
         "GPT-4o mini (snapshot unspecified)",
         "Gemini 2.5 Flash (snapshot unspecified)",
         "Nemotron 3 Super 120B A12B",
         "Nemotron 3 Ultra 550B A55B"
-      ]
+      ],
+      "chart": {
+        "title": "Hazardous prompts refused vs benign prompts answered",
+        "x": {
+          "key": "permitRate",
+          "label": "Benign prompts answered (BioTIER-permit)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "score",
+          "label": "Hazardous prompts refused (BioTIER-refuse)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each model plotted by benign prompt compliance against hazardous prompt refusal on the SecureBio BioTIER dashboard."
+      },
+      "stats": {
+        "permitRate": {
+          "name": "Benign prompts answered",
+          "unit": "%",
+          "better": "higher",
+          "note": "BioTIER-permit score on 144 benign biology prompts."
+        }
+      }
     },
     "biovita-retrieval-benchmark": {
       "url": "https://arxiv.org/html/2603.23883",
@@ -34845,7 +34901,7 @@
       "feed": "https://euroeval.com/leaderboards-csv/dutch_all_models.csv",
       "terms": "EuroEval publishes its leaderboard for public use. https://euroeval.com/",
       "host": "EuroEval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "AI-Sweden-Models/Llama-3-8B-instruct (val)",
@@ -35084,7 +35140,19 @@
         "zai-org/GLM-4.7-Flash (val)",
         "zai-org/GLM-5.3-Flash (val)",
         "zai-org/GLM-5.3-Flash (zero-shot, val)"
-      ]
+      ],
+      "stats": {
+        "macroF1": {
+          "name": "Macro F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "failedExamples": {
+          "name": "Failed evaluations",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "blink": {
       "url": "https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658",
@@ -41341,9 +41409,26 @@
       "url": "https://dashboard.safe.ai/",
       "feed": "https://dashboard.safe.ai/ (page JS chunk, mean of erqa, mindcube, spatialviz, intphys2 and enigmaeval)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 55,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "erqa": {
+          "name": "ERQA"
+        },
+        "mindcube": {
+          "name": "MindCube"
+        },
+        "spatialviz": {
+          "name": "SpatialViz"
+        },
+        "intphys2": {
+          "name": "IntPhys 2"
+        },
+        "enigmaeval": {
+          "name": "EnigmaEval"
+        }
+      }
     },
     "caliper-bench-v3": {
       "url": "https://caliperbench.com/",
@@ -49327,22 +49412,54 @@
       "url": "https://www.clbench.com/",
       "feed": "https://www.clbench.com/data/clb-data.json",
       "terms": "Static JSON on the clbench.com GitHub Pages site, which states no terms; the CL-bench repository licenses its code Apache-2.0 under a Tencent notice.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
       "unmatched": [
         "Hy2.0",
         "Polyphony",
         "SEED 2.0 (high)",
         "SEED 2.0 (medium)"
-      ]
+      ],
+      "parts": {
+        "domain": {
+          "name": "Domain knowledge reasoning",
+          "unit": "%"
+        },
+        "rule": {
+          "name": "Rule system application",
+          "unit": "%"
+        },
+        "procedural": {
+          "name": "Procedural task execution",
+          "unit": "%"
+        },
+        "pattern": {
+          "name": "Empirical discovery and simulation",
+          "unit": "%"
+        }
+      }
     },
     "cl-bench-life": {
       "url": "https://www.clbench.com/",
       "feed": "https://www.clbench.com/data/life-data.json",
       "terms": "Static JSON on the clbench.com GitHub Pages site, which states no terms; the CL-bench repository licenses its code Apache-2.0 under a Tencent notice.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "interpersonal": {
+          "name": "Communication and social interactions",
+          "unit": "%"
+        },
+        "thought": {
+          "name": "Fragmented information and revisions",
+          "unit": "%"
+        },
+        "behavior": {
+          "name": "Behavioral records and activity trails",
+          "unit": "%"
+        }
+      }
     },
     "cladbench-v1": {
       "url": "https://github.com/cladbrain/cladbench#results",
@@ -51711,7 +51828,19 @@
         "VerbaNexAI II",
         "gipplab",
         "whereami"
-      ]
+      ],
+      "stats": {
+        "surpriseScore": {
+          "name": "Surprise profile score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "modelSizeGb": {
+          "name": "Model size",
+          "unit": "gb",
+          "better": "lower"
+        }
+      }
     },
     "clef-joker-2023-pun-detection": {
       "url": "https://ceur-ws.org/Vol-3497/paper-149.pdf",
@@ -80031,7 +80160,7 @@
       "url": "https://decodingtrust.github.io/leaderboard/",
       "feed": "https://decodingtrust.github.io/leaderboard/static/csv/leaderboard.csv (Average)",
       "terms": "Static CSV on the DecodingTrust GitHub Pages site; the DecodingTrust repository is CC BY-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alpaca (snapshot unspecified)",
@@ -80084,7 +80213,41 @@
         "hf/vita-group/vicuna-13b-v1.3_gptq@8bit_128g",
         "hf/vita-group/vicuna-13b-v1.3_magnitude_semistruct@0.5_2to4",
         "hf/vita-group/vicuna-13b-v1.3_sparsegpt_semistruct@0.5_2to4"
-      ]
+      ],
+      "parts": {
+        "toxicity": {
+          "name": "Toxicity",
+          "unit": "score"
+        },
+        "stereotypeBias": {
+          "name": "Stereotype bias",
+          "unit": "score"
+        },
+        "adversarialRobustness": {
+          "name": "Adversarial robustness",
+          "unit": "score"
+        },
+        "oodRobustness": {
+          "name": "Out-of-distribution robustness",
+          "unit": "score"
+        },
+        "advDemonstrations": {
+          "name": "Robustness to adversarial demonstrations",
+          "unit": "score"
+        },
+        "privacy": {
+          "name": "Privacy",
+          "unit": "score"
+        },
+        "machineEthics": {
+          "name": "Machine ethics",
+          "unit": "score"
+        },
+        "fairness": {
+          "name": "Fairness",
+          "unit": "score"
+        }
+      }
     },
     "deep-memory-retrieval": {
       "url": "https://arxiv.org/html/2310.08560",
@@ -87677,7 +87840,7 @@
       "url": "https://github.com/worldbench/drivebench",
       "feed": "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Dolphins 7B",
@@ -87695,7 +87858,7 @@
       "url": "https://github.com/worldbench/drivebench",
       "feed": "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Dolphins 7B",
@@ -87713,7 +87876,7 @@
       "url": "https://github.com/worldbench/drivebench",
       "feed": "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Dolphins 7B",
@@ -87731,7 +87894,7 @@
       "url": "https://github.com/worldbench/drivebench",
       "feed": "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Dolphins 7B",
@@ -95140,7 +95303,7 @@
       "url": "https://epoch.ai/eci?eciPreset=cyber",
       "feed": "https://epoch.ai/data/cyber/eci_scores.csv",
       "terms": "Epoch AI publishes this CSV under its public data terms. Results are credited to Epoch AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 65,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -95566,7 +95729,7 @@
       "url": "https://github.com/karolpiczak/ESC-50",
       "feed": "https://raw.githubusercontent.com/karolpiczak/ESC-50/master/README.md",
       "terms": "The repository is licensed under CC BY-NC. https://github.com/karolpiczak/ESC-50/blob/master/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "A Sequential Self Teaching Approach for Improving Generalization in Sound Event Recognition",
@@ -171210,7 +171373,7 @@
       "url": "https://huggingface.co/spaces/amu-cai/LLMZSZL_Leaderboard",
       "feed": "https://huggingface.co/spaces/amu-cai/LLMZSZL_Leaderboard/resolve/main/leaderboards/llmzszl.json",
       "terms": "The authors publish this leaderboard JSON in their Hugging Face Space. https://huggingface.co/spaces/amu-cai/LLMZSZL_Leaderboard/resolve/main/leaderboards/llmzszl.json",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 33,
       "unmatched": [
         "01-ai/Yi-1.5-34B-Chat",
@@ -216461,7 +216624,7 @@
       "url": "https://github.com/opendatalab/OmniDocBench/tree/v1_5#end-to-end-evaluation",
       "feed": "https://raw.githubusercontent.com/opendatalab/OmniDocBench/v1_5/README.md (end-to-end table, Overall)",
       "terms": "README on the v1_5 branch of opendatalab/OmniDocBench, which is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Dolphin",
@@ -216505,13 +216668,30 @@
         "tableTeds": {
           "name": "Table TEDS"
         }
+      },
+      "stats": {
+        "textEdit": {
+          "name": "Text edit distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tableTedsStructure": {
+          "name": "Table TEDS structure",
+          "unit": "score",
+          "better": "higher"
+        },
+        "readOrderEdit": {
+          "name": "Reading order edit distance",
+          "unit": "score",
+          "better": "lower"
+        }
       }
     },
     "omnidocbench-1-6": {
       "url": "https://github.com/opendatalab/OmniDocBench#end-to-end-evaluation",
       "feed": "https://raw.githubusercontent.com/opendatalab/OmniDocBench/main/README.md (end-to-end table, Overall)",
       "terms": "README of opendatalab/OmniDocBench, which is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "ABot-OCR",
@@ -216543,7 +216723,36 @@
         "Youtu-Parsing",
         "dots.ocr",
         "olmOCR"
-      ]
+      ],
+      "parts": {
+        "textScore": {
+          "name": "Text",
+          "note": "One minus text edit distance, multiplied by 100."
+        },
+        "formulaCdm": {
+          "name": "Formula CDM"
+        },
+        "tableTeds": {
+          "name": "Table TEDS"
+        }
+      },
+      "stats": {
+        "textEdit": {
+          "name": "Text edit distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tableTedsStructure": {
+          "name": "Table TEDS structure",
+          "unit": "score",
+          "better": "higher"
+        },
+        "readOrderEdit": {
+          "name": "Reading order edit distance",
+          "unit": "score",
+          "better": "lower"
+        }
+      }
     },
     "omniearth-bench": {
       "url": "https://omniearth-bench.github.io/",
@@ -244262,9 +244471,19 @@
       "url": "https://dashboard.safe.ai/",
       "feed": "https://dashboard.safe.ai/ (page JS chunk, scores.pct, political inconsistency)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "sentimentInconsistency": {
+          "name": "Sentiment inconsistency",
+          "unit": "%"
+        },
+        "helpfulnessInconsistency": {
+          "name": "Helpfulness inconsistency",
+          "unit": "%"
+        }
+      }
     },
     "pd-cft": {
       "url": "https://arxiv.org/abs/1607.02250",
@@ -262863,7 +263082,7 @@
       "url": "https://huggingface.co/spaces/VisionXLab/RISEBench_Leaderboard",
       "feed": "https://huggingface.co/spaces/VisionXLab/RISEBench_Leaderboard/resolve/main/data/leaderboard.json (risebench, en, accuracy.total)",
       "terms": "Static leaderboard file in the VisionXLab/RISEBench_Leaderboard Hugging Face Space, which states no license; the RISEBench code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "BAGEL (w/ CoT)",
@@ -262872,13 +263091,48 @@
         "HiDream-Edit",
         "OmniGen",
         "Ovis-U1"
-      ]
+      ],
+      "parts": {
+        "temporal": {
+          "name": "Temporal",
+          "unit": "%"
+        },
+        "causal": {
+          "name": "Causal",
+          "unit": "%"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "unit": "%"
+        },
+        "logical": {
+          "name": "Logical",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "instructionReasoning": {
+          "name": "Instruction reasoning",
+          "unit": "%",
+          "better": "higher"
+        },
+        "appearanceConsistency": {
+          "name": "Appearance consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "visualPlausibility": {
+          "name": "Visual plausibility",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "risebench-plus-plus": {
       "url": "https://huggingface.co/spaces/VisionXLab/RISEBench_Leaderboard",
       "feed": "https://huggingface.co/spaces/VisionXLab/RISEBench_Leaderboard/resolve/main/data/leaderboard.json (risebench-plusplus, en, accuracy.total)",
       "terms": "Static leaderboard file in the VisionXLab/RISEBench_Leaderboard Hugging Face Space, which states no license; the RISEBench code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [
         "BAGEL (w/ CoT)",
@@ -262898,7 +263152,66 @@
         "SenseNova-U1-A3B-MoT-SFT",
         "UniPic 3.0",
         "UniWorld-V2"
-      ]
+      ],
+      "parts": {
+        "temporal": {
+          "name": "Temporal",
+          "group": "Category",
+          "unit": "%"
+        },
+        "causal": {
+          "name": "Causal",
+          "group": "Category",
+          "unit": "%"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "group": "Category",
+          "unit": "%"
+        },
+        "logical": {
+          "name": "Logical",
+          "group": "Category",
+          "unit": "%"
+        },
+        "counterfactual": {
+          "name": "Counterfactual",
+          "group": "Category",
+          "unit": "%"
+        },
+        "hybrid": {
+          "name": "Hybrid",
+          "group": "Category",
+          "unit": "%"
+        },
+        "single": {
+          "name": "Single-image",
+          "group": "Input",
+          "unit": "%"
+        },
+        "multi": {
+          "name": "Multi-image",
+          "group": "Input",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "instructionReasoning": {
+          "name": "Instruction reasoning",
+          "unit": "%",
+          "better": "higher"
+        },
+        "appearanceConsistency": {
+          "name": "Appearance consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "visualPlausibility": {
+          "name": "Visual plausibility",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "riskrubric": {
       "url": "https://riskrubric.ai/",
@@ -297455,7 +297768,7 @@
       "url": "https://www.tbench.ai/?version=2.0",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench-2\",\"name\":\"2-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 139,
       "unmatched": [
         "AfterQuery-GPT-OSS-20B",
@@ -305608,7 +305921,7 @@
       "feed": "https://raw.githubusercontent.com/NavAI-pro/uzbek-text-norm/main/LEADERBOARD_ALL.md",
       "terms": "Read the USC column. The repository includes an MIT license. Retain the model-specific training overlap and decoding notes. https://github.com/NavAI-pro/uzbek-text-norm/blob/main/LICENSE The raw file host serves no robots.txt rules.",
       "host": "NavAI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Abduqayum/whisper-uzbek-medium-callcenter",

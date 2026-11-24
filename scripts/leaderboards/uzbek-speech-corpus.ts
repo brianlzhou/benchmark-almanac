@@ -31,7 +31,7 @@ const board: Leaderboard = {
       const setting=[label.includes('‖')?'Single-pass decoding':undefined,
         label.includes('⚠')?'FLEURS test data in training, USC train-only':undefined,
         label.includes('❓')?'Training data not disclosed':undefined].filter(Boolean).join(' / ');
-      const row: LeaderboardRow = { model: label.replace(/[★⚠️❓‖]/gu,'').trim(), setting:setting || undefined, harness:'uzbek_text_norm v0.3.0 (greedy)', score: numeric("USC") };
+      const row: LeaderboardRow = { model: label.replace(/[★⚠️❓‖]/gu,'').trim(), setting:setting || undefined, submitter: label.includes('★') ? 'NavAI' : undefined, harness:'uzbek_text_norm v0.3.0 (greedy)', score: numeric("USC") };
       if (!row.model || !Number.isFinite(row.score)) throw new Error('Missing model or score');
       rows.push(row);
     }

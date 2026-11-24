@@ -889,16 +889,16 @@
     ["uzbek-speech-corpus","Abduqayum/whisper-uzbek-medium-callcenter",null,"uzbek_text_norm v0.3.0 (greedy)",20.59,null,null,null],
     ["uzbek-speech-corpus","OvozifyLabs/whisper-small-uz-v1",null,"uzbek_text_norm v0.3.0 (greedy)",19.36,null,null,null],
     ["uzbek-speech-corpus","facebook/seamless-m4t-v2-large","Single-pass decoding","uzbek_text_norm v0.3.0 (greedy)",19.16,null,null,null],
-    ["uzbek-speech-corpus","navai-uz/whisper-tiny-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",18.71,null,null,null],
+    ["uzbek-speech-corpus","navai-uz/whisper-tiny-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",18.71,null,null,null,null,{"submitter":"NavAI"}],
     ["uzbek-speech-corpus","mrmuminov/whisper-small-uz",null,"uzbek_text_norm v0.3.0 (greedy)",17.33,null,null,null],
-    ["uzbek-speech-corpus","navai-uz/whisper-base-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",14.95,null,null,null],
+    ["uzbek-speech-corpus","navai-uz/whisper-base-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",14.95,null,null,null,null,{"submitter":"NavAI"}],
     ["uzbek-speech-corpus","Kotib/uzbek_stt_v1","Training data not disclosed","uzbek_text_norm v0.3.0 (greedy)",13.35,null,null,null],
     ["uzbek-speech-corpus","uzinfocom-edu-ai/asr-uz-fastconformer-large","Single-pass decoding","uzbek_text_norm v0.3.0 (greedy)",12.94,null,null,null],
     ["uzbek-speech-corpus","nvidia/stt_uz_fastconformer_hybrid_large_pc","Single-pass decoding","uzbek_text_norm v0.3.0 (greedy)",12.14,null,null,null],
-    ["uzbek-speech-corpus","navai-uz/whisper-small-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",11.81,null,null,null],
+    ["uzbek-speech-corpus","navai-uz/whisper-small-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",11.81,null,null,null,null,{"submitter":"NavAI"}],
     ["uzbek-speech-corpus","islomov/rubaistt_v2_medium","FLEURS test data in training, USC train-only","uzbek_text_norm v0.3.0 (greedy)",11.64,null,null,null],
     ["uzbek-speech-corpus","ai-sage/GigaAM-Multilingual (220M)","Single-pass decoding","uzbek_text_norm v0.3.0 (greedy)",11.36,null,null,null],
-    ["uzbek-speech-corpus","navai-uz/whisper-medium-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",9.7,null,null,null],
+    ["uzbek-speech-corpus","navai-uz/whisper-medium-uzbek",null,"uzbek_text_norm v0.3.0 (greedy)",9.7,null,null,null,null,{"submitter":"NavAI"}],
     ["uzbek-speech-corpus","ai-sage/GigaAM-Multilingual (Large)","Single-pass decoding","uzbek_text_norm v0.3.0 (greedy)",8.74,null,null,null]
   ]
 }
