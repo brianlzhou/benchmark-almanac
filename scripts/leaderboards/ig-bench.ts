@@ -8,7 +8,7 @@ import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://visionxlab.github.io/IdeasHaveGenomes/';
 const board: Leaderboard = {
-  benchmark: 'ig-bench', url: feed, feed,
+  benchmark: 'ig-bench', harnesses: 'system', url: feed, feed,
   headline: 'The authors report each track separately. The headline shows total IG-Exam exact accuracy.',
   terms: 'The authors publish the project leaderboard on GitHub Pages under the applicable terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   parts: {

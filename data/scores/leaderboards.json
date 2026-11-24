@@ -61515,11 +61515,12 @@
       "url": "https://cocoabench.github.io/assets/js/chart.js",
       "feed": "https://cocoabench.github.io/assets/js/chart.js",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Gemini-Flash-3.0"
-      ]
+      ],
+      "harnesses": "system"
     },
     "coconot": {
       "url": "https://arxiv.org/html/2407.12043",
@@ -75629,11 +75630,12 @@
       "url": "https://www.cybergym.io/cybergym-e2e/",
       "feed": "https://www.cybergym.io/assets/data/cybergym-e2e.json (current 920-task set, S3)",
       "terms": "Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Multi-model (DeepSeek-V4-Flash, Zhian-27B)"
       ],
+      "harnesses": "system",
       "stats": {
         "patchOnly": {
           "name": "Patch-only pass rate",
@@ -75661,9 +75663,10 @@
       "url": "https://www.cybergym.io/cybergym-e2e/",
       "feed": "https://www.cybergym.io/assets/data/cybergym-e2e.json (615-task cohort, S3)",
       "terms": "Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "patchOnly": {
           "name": "Patch-only pass rate",
@@ -87650,10 +87653,11 @@
       "url": "https://drivingbench.com/v1/",
       "feed": "https://drivingbench.com/v1/",
       "terms": "DrivingBench publishes the results as research software with no stated data license. https://drivingbench.com/v1/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "costPer": "run",
+      "harnesses": "system",
       "stats": {
         "inputTokens": {
           "name": "Input tokens",
@@ -112481,9 +112485,10 @@
       "url": "https://nithinsomu.github.io/cfdllmbench_v2/#results",
       "feed": "https://raw.githubusercontent.com/nithinsomu/cfdllmbench_v2/main/index.html",
       "terms": "The authors publish FoamBench V2 results and request attribution. https://nithinsomu.github.io/cfdllmbench_v2/#data",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "basic": {
           "name": "Basic"
@@ -115403,9 +115408,10 @@
       "url": "https://lab.einsia.ai/frontier3dbench",
       "feed": "https://lab.einsia.ai/frontier3dbench (Full results table, Total)",
       "terms": "Einsia publishes this static results table and Apache-2.0 benchmark code; task assets retain their own licenses and attribution.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "l1": {
           "name": "Level 1",
@@ -115575,11 +115581,12 @@
       "url": "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/",
       "feed": "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Apodex 1.1"
       ],
+      "harnesses": "system",
       "stats": {
         "nativeMeanScore": {
           "name": "Native mean score",
@@ -115795,9 +115802,10 @@
       "url": "https://frontier-cs.org/v1/",
       "feed": "https://frontier-cs.org/v1/",
       "terms": "Public MIT-licensed project results. The Almanac credits FrontierCS and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "frontiercs-2": {
       "url": "https://www.kaggle.com/benchmarks/frontiercs/frontiercs-2",
@@ -132968,9 +132976,10 @@
       "url": "https://harnessaudit.github.io/",
       "feed": "https://harnessaudit.github.io/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "SAR_t": {
           "name": "Tool-use safety adherence",
@@ -133844,9 +133853,10 @@
       "url": "https://microsoft.github.io/HealthAgentBench/v2/#leaderboard",
       "feed": "https://microsoft.github.io/HealthAgentBench/v2/#leaderboard",
       "terms": "MIT repository, no robots.txt on the maker site.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "healthbench": {
       "url": "https://openai.com/index/healthbench/",
@@ -140106,9 +140116,10 @@
       "feed": "https://visionxlab.github.io/IdeasHaveGenomes/",
       "terms": "The authors publish the project leaderboard on GitHub Pages under the applicable terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.",
       "headline": "The authors report each track separately. The headline shows total IG-Exam exact accuracy.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "t1": {
           "name": "T1 Abstraction"
@@ -207583,9 +207594,10 @@
       "url": "https://github.com/IntologyAI/NanoGPT-Bench",
       "feed": "https://raw.githubusercontent.com/IntologyAI/NanoGPT-Bench/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "nanogpt-speedrun-frontier-prime-intellect": {
       "url": "https://www.primeintellect.ai/research/nanogpt-speedrun",
@@ -220912,9 +220924,10 @@
       "url": "https://www.primeintellect.ai/blog/prime-agent",
       "feed": "https://www.primeintellect.ai/blog/prime-agent",
       "terms": "Prime Intellect publishes the comparison table in its public research article. https://www.primeintellect.ai/blog/prime-agent",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "open-arabic-llm-leaderboard-v1": {
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard-v1",
@@ -275901,9 +275914,10 @@
       "url": "https://sec-bench.github.io/",
       "feed": "https://sec-bench.github.io/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
+      "harnesses": "system",
       "verified": "Marked Verified in the official SEC-bench table.",
       "stats": {
         "patching": {
@@ -275966,9 +275980,10 @@
       "url": "https://sec-bench.github.io",
       "feed": "https://sec-bench.github.io/data/results.json (snapshot 260617, overall)",
       "terms": "Static JSON on the SEC-bench GitHub Pages site, whose repository is Apache-2.0; the SEC-bench Pro repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [],
+      "harnesses": "system",
       "verified": "Marked verified by SEC-bench",
       "parts": {
         "v8": {
@@ -278877,11 +278892,12 @@
       "url": "https://simuverity.github.io/SimuVerity/",
       "feed": "https://simuverity.github.io/SimuVerity/",
       "terms": "Public results published by the benchmark authors at simuverity.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Reference"
       ],
+      "harnesses": "system",
       "stats": {
         "delivered": {
           "name": "Delivered rate",
@@ -295511,6 +295527,7 @@
       "unmatched": [
         "Amazon Q Developer Agent (v20250402)"
       ],
+      "harnesses": "system",
       "parts": {
         "Java": {
           "name": "Java",
@@ -295529,27 +295546,27 @@
           "group": "Language"
         },
         "resolvedClassOnly": {
-          "name": "Single class",
+          "name": "class only",
           "group": "Patch complexity"
         },
         "resolvedFuncOnly": {
-          "name": "Single function",
+          "name": "function only",
           "group": "Patch complexity"
         },
         "resolvedMixed": {
-          "name": "Mixed class and function",
+          "name": "mixed",
           "group": "Patch complexity"
         },
         "resolvedNone": {
-          "name": "No class or function",
+          "name": "none",
           "group": "Patch complexity"
         },
         "resolvedSingleClass": {
-          "name": "Single class",
+          "name": "single class",
           "group": "Patch complexity"
         },
         "resolvedSingleFunc": {
-          "name": "Single function",
+          "name": "single function",
           "group": "Patch complexity"
         }
       },
@@ -299578,6 +299595,7 @@
         "v4 pro"
       ],
       "costPer": "run",
+      "harnesses": "system",
       "stats": {
         "robust": {
           "name": "Robust O-Eval",
@@ -301539,9 +301557,13 @@
       "url": "https://minnesotanlp.github.io/the-amazing-agent-race/",
       "feed": "https://minnesotanlp.github.io/the-amazing-agent-race/",
       "terms": "The authors release the project under the MIT License. https://github.com/minnesotanlp/the-amazing-agent-race/blob/main/LICENSE.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "stats": {
         "pitStopVisitRate": {
           "name": "Pit stop visit rate",
