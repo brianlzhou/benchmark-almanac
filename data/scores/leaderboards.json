@@ -2955,11 +2955,10 @@
       "terms": "The MTEB repository is public under its repository license. Cite MTEB and the ADVANCE dataset.",
       "headline": "The source reports no overall score, so this is the plain mean of the two retrieval directions.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
-        "jinaai/jina-embeddings-v5-omni-nano",
-        "mteb/baseline-random-encoder"
+        "jinaai/jina-embeddings-v5-omni-nano"
       ],
       "parts": {
         "a2i": {
@@ -9171,7 +9170,7 @@
       "url": "https://mteb-leaderboard.hf.space/tasks/AILAStatutes",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AILAStatutes/scores",
       "terms": "MTEB publishes its results dataset under CC0 1.0. https://huggingface.co/datasets/mteb/results The Space allows crawling in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -9370,6 +9369,7 @@
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
         "minishlab/M2V_multilingual_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-32M",
         "minishlab/potion-base-4M",
@@ -9391,7 +9391,6 @@
         "mongodb/voyage-law-2",
         "mongodb/voyage-multilingual-2",
         "mteb/baseline-bm25s",
-        "mteb/baseline-random-encoder",
         "nlpai-lab/KURE-Sparse-base",
         "nlpai-lab/KURE-Sparse-nano",
         "nlpai-lab/KURE-v3",
@@ -12587,7 +12586,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AmazonCounterfactualClassification/scores",
       "terms": "MTEB publishes its results under CC0 1.0 at https://huggingface.co/datasets/mteb/results.",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -12739,6 +12738,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -12749,7 +12749,6 @@
         "mongodb/voyage-3.5",
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -22772,7 +22771,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AskUbuntuDupQuestions/scores",
       "terms": "MTEB releases the model results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -22921,6 +22920,7 @@
         "google/text-embedding-004",
         "google/text-embedding-005",
         "google/text-multilingual-embedding-002",
+        "harims95/hobbylm-embed-140m",
         "hotchpotch/bekko-embedding-v1-a25m",
         "hotchpotch/bekko-embedding-v1-a8m",
         "hotchpotch/bekko-static-embedding-v1",
@@ -22989,7 +22989,6 @@
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
         "mteb/baseline-bm25s",
-        "mteb/baseline-random-encoder",
         "nomic-ai/modernbert-embed-base",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
@@ -28202,7 +28201,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/Banking77Classification/scores",
       "terms": "MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -28352,6 +28351,7 @@
         "google/text-embedding-004",
         "google/text-embedding-005",
         "google/text-multilingual-embedding-002",
+        "harims95/hobbylm-embed-140m",
         "hotchpotch/bekko-embedding-v1-a25m",
         "hotchpotch/bekko-embedding-v1-a8m",
         "hotchpotch/bekko-static-embedding-v1",
@@ -28424,7 +28424,6 @@
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-law-2",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/modernbert-embed-base",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
@@ -28822,39 +28821,9 @@
       "url": "https://github.com/lechmazur/bazaar",
       "feed": "https://raw.githubusercontent.com/lechmazur/bazaar/HEAD/README.md",
       "terms": "The publisher displays results at https://github.com/lechmazur/bazaar. I could not verify reuse terms. The raw GitHub host returns 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
-      "unmatched": [
-        "Adaptive (Baseline)",
-        "Adaptive Aggressive (Baseline)",
-        "Adaptive Aggressive Cliff (Baseline)",
-        "Adversarial Exploiter (Baseline)",
-        "Collusive (Baseline)",
-        "Contrarian (Baseline)",
-        "Enhanced Bayesian (Baseline)",
-        "Fictitious Play (Baseline)",
-        "GDX (Baseline)",
-        "Gjerstad-Dickhaut (Baseline)",
-        "LinearEq (Baseline)",
-        "Mean Reversion (Baseline)",
-        "Momentum (Baseline)",
-        "Penny Jumper (Baseline)",
-        "Q-Learning (Baseline)",
-        "Random (Baseline)",
-        "Regime Switcher (Baseline)",
-        "Regression (Baseline)",
-        "Risk-Aware (Baseline)",
-        "Roth-Erev (Baseline)",
-        "Shading +10 (Baseline)",
-        "Shading +5 (Baseline)",
-        "Signal Jammer (Baseline)",
-        "Sniper (Baseline)",
-        "Stochastic Shading Bandit (Baseline)",
-        "Threat Tit-for-Tat (Baseline)",
-        "Truthful (Baseline)",
-        "ZIC Pure Biased Activity (Baseline)",
-        "ZIC+ (Baseline)"
-      ],
+      "unmatched": [],
       "stats": {
         "avgCSA": {
           "name": "Average conditional surplus alpha",
@@ -29379,7 +29348,7 @@
       "url": "https://leaderboard.mteb.org/tasks/FiQA2018",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/FiQA2018/scores",
       "terms": "Both hosts allow this path in robots.txt. MTEB publishes results under CC0 1.0. https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -29532,6 +29501,7 @@
         "google/text-embedding-004",
         "google/text-embedding-005",
         "google/text-multilingual-embedding-002",
+        "harims95/hobbylm-embed-140m",
         "hotchpotch/bekko-embedding-v1-a25m",
         "hotchpotch/bekko-embedding-v1-a8m",
         "hotchpotch/bekko-static-embedding-v1",
@@ -29617,7 +29587,6 @@
         "mongodb/voyage-3-m-exp",
         "mongodb/voyage-large-2-instruct",
         "mteb/baseline-bm25s",
-        "mteb/baseline-random-encoder",
         "nlpai-lab/KURE-Sparse-base",
         "nomic-ai/modernbert-embed-base",
         "nomic-ai/nomic-embed-text-v1",
@@ -36064,7 +36033,7 @@
       "url": "https://super.gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/superglue/results/<id>.json (Firebase REST, ids from superglue/resultsVisibility.json), task BoolQ",
       "terms": "super.gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "ADAPET (ALBERT) - few-shot",
@@ -36084,7 +36053,6 @@
         "RoBERTa-iCETS",
         "RoBERTa-mtl-adv",
         "ST-MoE-32B",
-        "SuperGLUE Human Baselines",
         "T5 + UDG, Single Model (Google Brain)",
         "Text to Text PETL",
         "Turing NLR v5",
@@ -37679,7 +37647,7 @@
       "url": "https://build-arena.github.io/ConstructionChallenge/",
       "feed": "https://build-arena.github.io/ConstructionChallenge/",
       "terms": "The public Season 1 results page gives no separate score license. Its robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         " 16-block vertical rocket",
@@ -37707,7 +37675,6 @@
         "OrbitV2 Built by GLM-5.3 in ZCode",
         "OrbitX1 - GPT-6 Astra + DeepSeek v4.1 Flash two-agent pipeline (Autopilot)",
         "Per aspera: A 3-Block Autopilot Rocket",
-        "Random Walk",
         "Scrappy Space Hovercraft",
         "Skyvault - GPT-5.6 Sol using Codex CLI",
         "The Infinite Jest",
@@ -38387,12 +38354,12 @@
       "url": "https://arxiv.org/html/2510.21860",
       "feed": "https://arxiv.org/html/2510.21860",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)",
-        "Gemini ER 1.5",
-        "Human"
+        "Gemini ER 1.5"
       ],
       "parts": {
         "search": {
@@ -38419,8 +38386,7 @@
           "name": "End-to-end",
           "group": "Task type"
         }
-      },
-      "static": "paper"
+      }
     },
     "buttonbench": {
       "url": "https://github.com/adamholter/buttonbench/blob/main/README.md",
@@ -42456,7 +42422,7 @@
       "url": "https://catarena.ai/leaderboard",
       "feed": "https://catarena.ai/api/ranks/games",
       "terms": "Public CATArena competition API. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Claude Code [base model unspecified]",
@@ -42465,8 +42431,7 @@
         "Gemini CLI [base model unspecified]",
         "OpenAI Codex [base model unspecified]",
         "Qwen 3 Coder [variant unspecified]",
-        "Qwen Code CLI [base model unspecified]",
-        "Random"
+        "Qwen Code CLI [base model unspecified]"
       ]
     },
     "catarena-oibench-5": {
@@ -42588,7 +42553,7 @@
       "url": "https://super.gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/superglue/results/<id>.json (Firebase REST, ids from superglue/resultsVisibility.json), task CB accuracy",
       "terms": "super.gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "ADAPET (ALBERT) - few-shot",
@@ -42608,7 +42573,6 @@
         "RoBERTa-iCETS",
         "RoBERTa-mtl-adv",
         "ST-MoE-32B",
-        "SuperGLUE Human Baselines",
         "T5 + UDG, Single Model (Google Brain)",
         "Text to Text PETL",
         "Turing NLR v5",
@@ -43695,12 +43659,9 @@
       "url": "https://ceobench.com/",
       "feed": "https://ceobench.com/ (static HTML results table, Best-run cash)",
       "terms": "Static project page; ceobench.com serves no robots.txt (the path returns the page) and publishes no terms.",
-      "retrieved": "2026-11-23",
-      "rows": 19,
-      "unmatched": [
-        "Estimated final cash upper bound",
-        "Rule-based baseline"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 31,
+      "unmatched": [],
       "stats": {
         "bankruptcies": {
           "name": "Bankruptcies",
@@ -43722,9 +43683,16 @@
           "unit": "count",
           "better": "lower"
         },
-        "turnsPerWeek": {
-          "name": "Turns per week",
-          "unit": "count"
+        "meanCash": {
+          "name": "Mean final cash",
+          "unit": "usd",
+          "better": "higher",
+          "note": "Mean cash at the end of the three runs."
+        },
+        "cashSpread": {
+          "name": "Final cash spread",
+          "unit": "usd",
+          "note": "Standard deviation of final cash over the three runs."
         }
       }
     },
@@ -50847,11 +50815,10 @@
       "feed": "https://aclanthology.org/2020.coling-main.62.pdf",
       "terms": "ACL Anthology publishes this paper under public venue terms. https://aclanthology.org/2020.coling-main.62/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLEAR",
-        "Identity baseline",
         "NPT 1:1",
         "NPT 1:10",
         "NPT 1:25",
@@ -50887,7 +50854,7 @@
       "url": "https://hipe-eval.github.io/HIPE-2026/results",
       "feed": "https://hipe-eval.github.io/HIPE-2026/assets/results/ternary/results.d/system-rankings/ranking-overall-test-a.tsv",
       "terms": "The accuracy table contains submitted runs and baselines. I found no reuse terms for this TSV in the evaluation repository. https://github.com/hipe-eval/HIPE-2026-eval The HIPE results host returned 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Awakened",
@@ -50900,7 +50867,6 @@
         "MILRIT",
         "MaxFo-Ajie",
         "ROSTI",
-        "Random Decision Baseline",
         "Spinfo",
         "UMUTEAM",
         "VerbaNexAI I",
@@ -53643,7 +53609,8 @@
       "url": "https://arxiv.org/html/2004.05986",
       "feed": "https://arxiv.org/html/2004.05986",
       "terms": "The authors publish this paper on arXiv. Credit the CLUE authors for the reported baseline results.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ALBERT-tiny (CLUE checkpoint)",
@@ -53651,7 +53618,6 @@
         "BERT-base (CLUE checkpoint)",
         "BERT-wwm-ext-base (CLUE checkpoint)",
         "ERNIE-base (CLUE checkpoint)",
-        "Human",
         "RoBERTa-large (CLUE checkpoint)",
         "RoBERTa-wwm-ext-base (CLUE checkpoint)",
         "RoBERTa-wwm-ext-large (CLUE checkpoint)",
@@ -53695,7 +53661,6 @@
           "group": "Category"
         }
       },
-      "static": "paper",
       "stats": {
         "pretrainingBatchSize": {
           "name": "Pretraining batch size",
@@ -60636,7 +60601,7 @@
       "url": "https://cocodataset.org/#captions-leaderboard",
       "feed": "https://cocodataset.org/leaderboard/cap_c5.json",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "3D&CV",
@@ -60664,7 +60629,6 @@
         "Google",
         "HUCVL-METULcsL",
         "HUST_2017",
-        "Human",
         "Kyle Yang",
         "LC-JHU",
         "Lingxiang",
@@ -64816,12 +64780,10 @@
       "url": "https://arxiv.org/html/2604.25088v1#S1.F1",
       "feed": "https://arxiv.org/html/2604.25088v1/main_c.svg",
       "terms": "The Almanac credits the authors and links their published figure.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": [
-        "Human"
-      ],
-      "static": "paper"
+      "unmatched": []
     },
     "cooperative-codenames-bittker": {
       "url": "https://app.primeintellect.ai/dashboard/environments/maxbittker/codenames/evals",
@@ -66973,7 +66935,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/CEDRClassification/scores",
       "terms": "MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -67008,6 +66970,7 @@
         "Hum-Works/lodestone-base-4096-v1",
         "ICT-TIME-and-Querit/BOOM_4B_v1",
         "ICT-TIME-and-Querit/ICT-TIME-and-Querit-embedding-v1",
+        "IIIaHTu/komaru_embeddings",
         "Jaume/gemma-2b-embeddings",
         "Lajavaness/bilingual-embedding-base",
         "Lajavaness/bilingual-embedding-large",
@@ -67130,6 +67093,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -67140,7 +67104,6 @@
         "mongodb/voyage-3.5",
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -75484,7 +75447,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The authors release DaLAJ-GED under CC BY 4.0. The leaderboard gives no separate score license. https://sprakbanken.se/en/resources/dalaj-ged-superlim The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -75495,7 +75458,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -82757,7 +82719,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/DiaBlaBitextMining/scores",
       "terms": "The MTEB results dataset uses CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -82906,6 +82868,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -82916,7 +82879,6 @@
         "mongodb/voyage-3.5",
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -83936,7 +83898,7 @@
       "url": "https://randomtutu.github.io/DiscoX/",
       "feed": "https://randomtutu.github.io/DiscoX/",
       "terms": "The authors publish this public GitHub Pages table, with attribution retained and no separate score reuse license stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Claude-4 (snapshot unspecified)",
@@ -83947,7 +83909,6 @@
         "Gemini-2.5-Flash-Lite (snapshot unspecified)",
         "Gemini-2.5-Pro (snapshot unspecified)",
         "Google-NMT",
-        "Human Expert",
         "Kimi-K2 (snapshot unspecified)",
         "Qwen-3-235B (snapshot unspecified)",
         "Youdao-14B"
@@ -84268,15 +84229,15 @@
       "url": "https://github.com/microsoft/Do-You-See-Me",
       "feed": "https://arxiv.org/html/2506.02022",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Claude Sonnet-3.5 (snapshot unspecified)",
         "GPT-4o (snapshot unspecified)",
         "Gemini 2.0 Flash (snapshot unspecified)",
         "Gemini 2.5 Flash (snapshot unspecified)",
-        "Gemini-1.5-Flash (snapshot unspecified)",
-        "Human"
+        "Gemini-1.5-Flash (snapshot unspecified)"
       ],
       "parts": {
         "acc2d": {
@@ -84287,8 +84248,7 @@
           "name": "3D",
           "group": "Category"
         }
-      },
-      "static": "paper"
+      }
     },
     "doc2harness": {
       "url": "https://github.com/YuyaoGe/doc2harness",
@@ -96767,13 +96727,11 @@
       "feed": "https://aclanthology.org/2020.bionlp-1.13.pdf",
       "terms": "ACL Anthology terms apply. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
-        "BR Oracle Spans",
         "BR Pipeline",
         "Baseline",
-        "SB Oracle Spans",
         "SB Pipeline"
       ],
       "stats": {
@@ -110279,7 +110237,7 @@
       "terms": "MTEB releases its results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
       "headline": "Mean pairwise mean reciprocal rank across Robust04, News21 and Core17, on the MTEB scale from -1 to 1.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -110445,6 +110403,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-32M",
         "minishlab/potion-base-4M",
@@ -110456,7 +110415,6 @@
         "mongodb/voyage-3-lite",
         "mongodb/voyage-3.5",
         "mteb/baseline-bm25s",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -112661,7 +112619,7 @@
       "url": "https://fresh-stack.github.io/#leaderboard",
       "feed": "https://fresh-stack.github.io/leaderboard_data.json",
       "terms": "The authors publish this JSON leaderboard on the project website. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Arctic Embed L (v2.0)",
@@ -112697,11 +112655,6 @@
         "Octen-Embedding-8B",
         "OpenAI text-embedding-3-large",
         "OpenAI text-embedding-3-small",
-        "Oracle: BGE (Gemma-2) (Nuggets)",
-        "Oracle: BM25 (Nuggets)",
-        "Oracle: E5 (Mistral-7B) (Nuggets)",
-        "Oracle: Fusion (BM25, ...) (Nuggets)",
-        "Oracle: Voyage Large 2 (Nuggets)",
         "Perplexity Embed v1 (0.6B)",
         "Perplexity Embed v1 (4B)",
         "Perplexity Embed v2 Context (0.6B)",
@@ -126172,14 +126125,13 @@
       "feed": "https://arxiv.org/html/1902.09506",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BottomUp",
         "CNN",
         "CNN+LSTM",
         "Global Prior",
-        "Humans",
         "LSTM",
         "Local Prior",
         "MAC"
@@ -133224,11 +133176,10 @@
       "url": "https://hipe-eval.github.io/HIPE-OCRepair-2026/results",
       "feed": "https://raw.githubusercontent.com/hipe-eval/HIPE-OCRepair-2026-eval/main/results/system-rankings/ranking-overall-test-weighted.tsv",
       "terms": "The evaluation repository uses AGPL 3.0. It does not list separate terms for the ranking file. https://github.com/hipe-eval/HIPE-OCRepair-2026-eval/blob/main/LICENSE The robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Zakaria-ENSIAS_hipe-ocrepair-bench_v0.9_run1",
-        "baseline-no-correction_hipe-ocrepair-bench_v0.9_run1",
         "blocr_hipe-ocrepair-bench_v0.9_run1",
         "bnf-mistral_hipe-ocrepair-bench_v0.9_run1",
         "bnf-mistral_hipe-ocrepair-bench_v0.9_run2",
@@ -150183,7 +150134,7 @@
       "url": "https://mteb-leaderboard-backend.hf.space/v1/tasks/ItaCaseholdClassification/scores",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/ItaCaseholdClassification/scores",
       "terms": "MTEB publishes these results under the CC0 1.0 license. https://huggingface.co/datasets/mteb/results",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -150333,6 +150284,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -150341,7 +150293,6 @@
         "mongodb/voyage-3",
         "mongodb/voyage-3-lite",
         "mongodb/voyage-3.5",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -150866,11 +150817,10 @@
       "url": "https://voicearena.com/jarvis-bench",
       "feed": "https://voicearena.com/jarvis-bench",
       "terms": "Voice Arena links its site terms. https://voicearena.com/terms Voice Arena permits the public pages in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
-        "GPT-Live-1 (GPT 6 Astra, Medium)",
-        "Human Agent"
+        "GPT-Live-1 (GPT 6 Astra, Medium)"
       ],
       "parts": {
         "General conversations": {
@@ -152051,7 +152001,7 @@
       "url": "https://mteb-leaderboard-backend.hf.space/v1/tasks/JSICK/scores",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/JSICK/scores",
       "terms": "MTEB publishes these results under the CC0 1.0 license. https://huggingface.co/datasets/mteb/results",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -152210,6 +152160,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -152220,7 +152171,6 @@
         "mongodb/voyage-3.5",
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -154917,7 +154867,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/2707/leaderboard",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/7010/leaderboard/?page_size=1000&order_by=Top-1",
       "terms": "EvalAI publicly serves the challenge leaderboard. The Almanac credits EvalAI and the Perception Test organizers and links their board.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AGI / AGI-KV-8",
@@ -154925,7 +154875,6 @@
         "BoundedAccord / bounded-geometry-qwen-zero-shot",
         "CloudAI-evolve",
         "FZJ_IAS8",
-        "Host_37595_Team / zero-shot random baseline",
         "Huawei_SpaceMind",
         "LiouMIT / Qwen3-VL-32B three-expert consensus",
         "Lostagain",
@@ -157735,7 +157684,7 @@
       "url": "https://huggingface.co/datasets/mteb/KorSarcasmClassification",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/KorSarcasmClassification/scores",
       "terms": "MTEB publishes this task score API under the CC0 license for its results repository. https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -157884,6 +157833,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -157894,7 +157844,6 @@
         "mongodb/voyage-3.5",
         "mongodb/voyage-large-2-instruct",
         "mongodb/voyage-multilingual-2",
-        "mteb/baseline-random-encoder",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
         "nomic-ai/nomic-embed-text-v1-unsupervised",
@@ -165795,16 +165744,14 @@
       "url": "https://github.com/Future-House/LitQA",
       "feed": "https://raw.githubusercontent.com/Future-House/LitQA/main/README.md",
       "terms": "The page provides a public score table. Check its source for license details. https://github.com/Future-House/LitQA GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "AutoGPT",
         "Elicit",
-        "Human",
         "PaperQA",
         "Perplexity",
         "Perplexity (Co-pilot)",
-        "Random",
         "Scite_"
       ],
       "stats": {
@@ -172235,13 +172182,12 @@
       "url": "https://longbench2.github.io/#leaderboard",
       "feed": "https://longbench2.github.io/ (results table)",
       "terms": "Static GitHub Pages project page with no stated terms; the LongBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 55,
       "unmatched": [
         "GLM-4-Plus",
         "Gemini-Exp-1206",
-        "NExtLong 8B",
-        "Random"
+        "NExtLong 8B"
       ],
       "parts": {
         "easy": {
@@ -188966,7 +188912,7 @@
       "url": "https://futuremirex.com/mirex/wiki/2026:Music_Evaluation_via_CMI-RewardBench_Results",
       "feed": "https://futuremirex.com/mirex/wiki/2026:Music_Evaluation_via_CMI-RewardBench_Results",
       "terms": "The wiki footer specifies the GNU Free Documentation License 1.2 unless otherwise noted. https://futuremirex.com/mirex/wiki/2026:Music_Evaluation_via_CMI-RewardBench_Results The robots.txt route returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Baseline: CMI-RM",
@@ -188975,7 +188921,6 @@
         "CloudEar-overall",
         "Flip of \"SYSTASYS Resource-Lite V2 - Blind Freeze 2026\"",
         "MuseCritic",
-        "Random guess (always B)",
         "SYSTASYS Resource-Lite V2 - Blind Freeze 2026",
         "SongBench (Average)",
         "SongBench (Musicality)",
@@ -201687,13 +201632,11 @@
       "url": "https://mumin-dataset.github.io/leaderboard/",
       "feed": "https://mumin-dataset.github.io/leaderboard/",
       "terms": "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://mumin-dataset.github.io/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Hetero-GraphSAGE",
-        "LaBSE",
-        "Majority class",
-        "Random"
+        "LaBSE"
       ],
       "parts": {
         "claim": {
@@ -206509,7 +206452,7 @@
       "url": "https://lil.nlp.cornell.edu/nlvr/",
       "feed": "https://lil.nlp.cornell.edu/nlvr/",
       "terms": "The lab publishes a static results table. The page does not specify reuse terms for the scores. https://lil.nlp.cornell.edu/nlvr/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CNN+RNN",
@@ -206517,7 +206460,6 @@
         "Image Only (CNN)",
         "LXMERT",
         "MAC-Network",
-        "Majority Class",
         "MaxEnt",
         "N2NMN, policy search from scratch",
         "Text Only (RNN)",
@@ -207896,7 +207838,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/NorwegianCourtsBitextMining/scores",
       "terms": "MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -208055,6 +207997,7 @@
         "minishlab/M2V_base_glove",
         "minishlab/M2V_base_glove_subword",
         "minishlab/M2V_base_output",
+        "minishlab/blink-multilingual-64M",
         "minishlab/potion-base-2M",
         "minishlab/potion-base-4M",
         "minishlab/potion-base-8M",
@@ -208074,7 +208017,6 @@
         "mongodb/voyage-law-2",
         "mongodb/voyage-multilingual-2",
         "mongodb/voyage-multimodal-3",
-        "mteb/baseline-random-encoder",
         "nicher92/saga-embed_v1",
         "nomic-ai/nomic-embed-text-v1",
         "nomic-ai/nomic-embed-text-v1-ablated",
@@ -240501,10 +240443,9 @@
       "url": "https://www.cluebenchmarks.com/pclue.html",
       "feed": "https://www.cluebenchmarks.com/api/pclue/",
       "terms": "CLUE publishes this ranking and its public API. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
-        "Human",
         "base_test_3_21_m",
         "base_test_fix_multi",
         "base_test_no_fix_multi",
@@ -244245,13 +244186,12 @@
       "terms": "ACL Anthology papers are available under ACL terms. https://aclanthology.org/info/license/",
       "headline": "The paper reports ROUGE-1, ROUGE-2 and ROUGE-L, so this headline uses the first ROUGE-1 column.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "KLSum",
         "Lead-1",
         "Lead-K",
-        "Random-K",
         "TextRank"
       ],
       "stats": {
@@ -244846,12 +244786,12 @@
       "url": "https://arxiv.org/abs/2305.10415",
       "feed": "https://arxiv.org/html/2305.10415",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BLIP-2",
         "GPT-4 (snapshot unspecified)",
-        "GPT-4-Oracle",
         "LLaMA",
         "LLaVA-Med",
         "MedICap-GPT-4",
@@ -244861,7 +244801,6 @@
         "Open-Flamingo",
         "PMC-CLIP"
       ],
-      "static": "paper",
       "stats": {
         "blankingBleu1": {
           "name": "Blanking BLEU-1",
@@ -256821,258 +256760,6 @@
         "Command & Control": {
           "name": "Command & Control"
         }
-      },
-      "stats": {
-        "Provision Compute: Worst variant Pass@10": {
-          "name": "Provision Compute: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Covert Weight Exfil.: Worst variant Pass@10": {
-          "name": "Covert Weight Exfil.: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Weight Exfiltration: Worst variant Pass@10": {
-          "name": "Weight Exfiltration: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Make Me Pay: Worst variant Pass@10": {
-          "name": "Make Me Pay: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Copycat LLM API: Worst variant Pass@10": {
-          "name": "Copycat LLM API: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Replicate via Worm: Worst variant Pass@10": {
-          "name": "Replicate via Worm: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Spear Phishing: Worst variant Pass@10": {
-          "name": "Spear Phishing: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Fake Business Transact.: Worst variant Pass@10": {
-          "name": "Fake Business Transact.: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Inference Server: Worst variant Pass@10": {
-          "name": "Inference Server: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Recursive Replication: Worst variant Pass@10": {
-          "name": "Recursive Replication: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Start Subagent: Worst variant Pass@10": {
-          "name": "Start Subagent: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Explore & Exploit: Worst variant Pass@10": {
-          "name": "Explore & Exploit: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Rate of Infection: Worst variant Pass@10": {
-          "name": "Rate of Infection: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Software Signature: Worst variant Pass@10": {
-          "name": "Software Signature: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Command & Control: Worst variant Pass@10": {
-          "name": "Command & Control: Worst variant Pass@10",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Online Compute Acquis.: Pass@1": {
-          "name": "Online Compute Acquis.: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Provision Compute: Pass@1": {
-          "name": "Provision Compute: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Provision Compute: Worst variant Pass@1": {
-          "name": "Provision Compute: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AWS Signup: Pass@1": {
-          "name": "AWS Signup: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Covert Weight Exfil.: Pass@1": {
-          "name": "Covert Weight Exfil.: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Covert Weight Exfil.: Worst variant Pass@1": {
-          "name": "Covert Weight Exfil.: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Weight Exfiltration: Pass@1": {
-          "name": "Weight Exfiltration: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Weight Exfiltration: Worst variant Pass@1": {
-          "name": "Weight Exfiltration: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Create Bitcoin Wallet: Pass@1": {
-          "name": "Create Bitcoin Wallet: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Make Me Pay: Pass@1": {
-          "name": "Make Me Pay: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Make Me Pay: Worst variant Pass@1": {
-          "name": "Make Me Pay: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Copycat LLM API: Pass@1": {
-          "name": "Copycat LLM API: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Copycat LLM API: Worst variant Pass@1": {
-          "name": "Copycat LLM API: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Replicate via Worm: Pass@1": {
-          "name": "Replicate via Worm: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Replicate via Worm: Worst variant Pass@1": {
-          "name": "Replicate via Worm: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Spear Phishing: Pass@1": {
-          "name": "Spear Phishing: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Spear Phishing: Worst variant Pass@1": {
-          "name": "Spear Phishing: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Pass KYC Check: Pass@1": {
-          "name": "Pass KYC Check: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Fake Business Trans.: Pass@1": {
-          "name": "Fake Business Trans.: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Fake Business Trans.: Worst variant Pass@1": {
-          "name": "Fake Business Trans.: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Inference Server: Pass@1": {
-          "name": "Inference Server: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Inference Server: Worst variant Pass@1": {
-          "name": "Inference Server: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Serve Multi-GPU Model: Pass@1": {
-          "name": "Serve Multi-GPU Model: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Recursive Replication: Pass@1": {
-          "name": "Recursive Replication: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Recursive Replication: Worst variant Pass@1": {
-          "name": "Recursive Replication: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Start Subagent: Pass@1": {
-          "name": "Start Subagent: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Start Subagent: Worst variant Pass@1": {
-          "name": "Start Subagent: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Explore & Exploit: Pass@1": {
-          "name": "Explore & Exploit: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Explore & Exploit: Worst variant Pass@1": {
-          "name": "Explore & Exploit: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Rate of Infection: Pass@1": {
-          "name": "Rate of Infection: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Rate of Infection: Worst variant Pass@1": {
-          "name": "Rate of Infection: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Software Signature: Pass@1": {
-          "name": "Software Signature: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Software Signature: Worst variant Pass@1": {
-          "name": "Software Signature: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Command & Control: Pass@1": {
-          "name": "Command & Control: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Command & Control: Worst variant Pass@1": {
-          "name": "Command & Control: Worst variant Pass@1",
-          "unit": "%",
-          "better": "higher"
-        }
       }
     },
     "replicationbench": {
@@ -257808,7 +257495,7 @@
       "url": "https://huggingface.co/spaces/allenai/reward-bench",
       "feed": "https://huggingface.co/spaces/allenai/reward-bench/resolve/main/leaderboard/final-rbv1-data.csv (Score)",
       "terms": "CSV in the allenai/reward-bench Hugging Face Space, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
       "unmatched": [
         "0-hero/Matter-0.1-7B-DPO-preview",
@@ -257929,7 +257616,6 @@
         "opencompass/CompassJudger-1-7B-Instruct",
         "prometheus-eval/prometheus-7b-v2.0",
         "prometheus-eval/prometheus-8x7b-v2.0",
-        "random",
         "sfairXC/FsfairX-LLaMA3-RM-v0.1",
         "stabilityai/stable-code-instruct-3b",
         "stabilityai/stablelm-2-12b-chat",
@@ -262060,14 +261746,12 @@
       "url": "https://github.com/MAC-AutoML/RoTA-Bench",
       "feed": "https://raw.githubusercontent.com/MAC-AutoML/RoTA-Bench/main/website/assets/paper-data.json",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "IoU greedy",
         "Pose greedy",
-        "Random + IoU rollback",
-        "SpatioLM-InternVL3.5",
-        "Uniform random"
+        "SpatioLM-InternVL3.5"
       ],
       "chart": {
         "title": "Cost and performance",
@@ -263364,7 +263048,7 @@
       "url": "https://gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/leaderboard/glue.json (newest snapshot, Firebase REST), task RTE accuracy",
       "terms": "gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "0074",
@@ -263435,7 +263119,6 @@
         "Funnel-Transformer (Ensemble B10-10-10H1024)",
         "GAT-bert-base",
         "GKD-CLS",
-        "GLUE Human Baselines",
         "GLUEsubmit-test",
         "GLUEsubmit-test-1",
         "HAONAN PING",
@@ -267414,62 +267097,6 @@
         "outputTokens": {
           "name": "Mean output tokens",
           "unit": "tokens"
-        },
-        "final_answer_accuracy": {
-          "name": "Final answer accuracy",
-          "unit": "score"
-        },
-        "field_accuracy": {
-          "name": "Field accuracy",
-          "unit": "score"
-        },
-        "regret_score": {
-          "name": "Regret score",
-          "unit": "score"
-        },
-        "required_tools_used": {
-          "name": "Required tools used",
-          "unit": "score"
-        },
-        "workflow_efficiency": {
-          "name": "Workflow efficiency",
-          "unit": "score"
-        },
-        "screened_selected": {
-          "name": "Screened selected",
-          "unit": "score"
-        },
-        "campaign_budget_respected": {
-          "name": "Campaign budget respected",
-          "unit": "score"
-        },
-        "total_tool_calls": {
-          "name": "Total tool calls",
-          "unit": "count"
-        },
-        "inspect_problem_calls": {
-          "name": "Inspect problem calls",
-          "unit": "count"
-        },
-        "list_candidate_compounds_calls": {
-          "name": "List candidate compounds calls",
-          "unit": "count"
-        },
-        "rank_compounds_calls": {
-          "name": "Rank compounds calls",
-          "unit": "count"
-        },
-        "run_reaction_screen_calls": {
-          "name": "Run reaction screen calls",
-          "unit": "count"
-        },
-        "compare_compounds_calls": {
-          "name": "Compare compounds calls",
-          "unit": "count"
-        },
-        "submit_decision_calls": {
-          "name": "Submit decision calls",
-          "unit": "count"
         }
       }
     },
@@ -271342,11 +270969,9 @@
       "url": "https://usenaive.ai/benchmark/short-form-bench",
       "feed": "https://usenaive.ai/benchmark/short-form-bench (server-rendered table, business value)",
       "terms": "Server-rendered public page on usenaive.ai; robots.txt allows all paths and the naive terms do not restrict reading it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
-      "unmatched": [
-        "Do nothing (baseline)"
-      ],
+      "unmatched": [],
       "costPer": "run"
     },
     "shroom-cap": {
@@ -272872,10 +272497,9 @@
       "url": "https://eqbench.com/slop-score.html",
       "feed": "https://eqbench.com/data/leaderboard_results.json",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
-        "human-baseline",
         "inclusionai/ling-1t",
         "openai/chatgpt-4o-latest",
         "openrouter/polaris-alpha",
@@ -279851,7 +279475,7 @@
       "url": "https://github.com/lechmazur/step_game",
       "feed": "https://raw.githubusercontent.com/lechmazur/step_game/main/README.md (LLM Step-Game Leaderboard, mu)",
       "terms": "README table in the lechmazur/step_game GitHub repository, which states no license; scores are cited to Lech Mazur.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 66,
       "unmatched": [
         "GPT-4o Feb 2025",
@@ -279861,7 +279485,6 @@
         "Silent Collision Tracker",
         "Silent EVMax",
         "Silent Greedy",
-        "Silent Random",
         "Silent UCB"
       ],
       "stats": {
@@ -280597,10 +280220,9 @@
       "url": "https://alavico.github.io/sts-bench-results/",
       "feed": "https://alavico.github.io/sts-bench-results/",
       "terms": "The runner uses MIT. The separate results repository lists no license. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
-        "random",
         "scripted"
       ],
       "stats": {
@@ -280685,11 +280307,10 @@
       "url": "https://joinhandshake.com/research/benchmarks/studentbench/",
       "feed": "https://raw.githubusercontent.com/Handshake-AI-Research/studentbench/main/verification/figure_expected.json",
       "terms": "Handshake terms restrict bulk collection and republication. The almanac credits Handshake AI and links its published aggregate results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
-        "control",
-        "human"
+        "control"
       ],
       "chart": {
         "title": "Learning gain vs. session cost",
@@ -285025,7 +284646,7 @@
       "url": "https://super.gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/superglue/results/<id>.json (Firebase REST, ids from superglue/resultsVisibility.json), macroScore",
       "terms": "super.gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "ADAPET (ALBERT) - few-shot",
@@ -285045,7 +284666,6 @@
         "RoBERTa-iCETS",
         "RoBERTa-mtl-adv",
         "ST-MoE-32B",
-        "SuperGLUE Human Baselines",
         "T5 + UDG, Single Model (Google Brain)",
         "Text to Text PETL",
         "Turing NLR v5",
@@ -286252,7 +285872,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The download pages list licenses by dataset. The leaderboard gives no separate score license. https://sprakbanken.se/en/resources/superlim The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -286263,7 +285883,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "gpt-sw3-1.3b",
@@ -286566,7 +286185,7 @@
       "feed": "https://arxiv.org/html/1808.05326",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "1 turker",
@@ -286580,7 +286199,6 @@
         "ESIM+ELMo",
         "ESIM+GloVe",
         "ESIM+Numberbatch",
-        "Expert",
         "InferSent",
         "InferSent-Bilinear",
         "InferSent-MLP",
@@ -288270,7 +287888,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288281,7 +287899,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -288488,7 +288105,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288499,7 +288116,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -288527,7 +288143,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The SuperLim leaderboard lists no separate score reuse terms. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288538,7 +288154,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -288570,7 +288185,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288581,7 +288196,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -288642,7 +288256,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288653,7 +288267,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -288728,7 +288341,7 @@
       "url": "https://lab.kb.se/leaderboard/results",
       "feed": "https://lab.kb.se/leaderboard/_nuxt/results.67b82063.js",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI-Nordics/bert-large-swedish-cased",
@@ -288739,7 +288352,6 @@
         "KBLab/megatron-bert-large-swedish-cased-165k",
         "MaxFreq/Avg",
         "NbAiLab/nb-bert-base",
-        "Random",
         "Random Forest",
         "SVM",
         "xlm-roberta-base",
@@ -307638,11 +307250,10 @@
       "url": "https://huggingface.co/spaces/KlingTeam/VideoGen-RewardBench",
       "feed": "https://huggingface.co/api/spaces/KlingTeam/VideoGen-RewardBench/tree/main/evals",
       "terms": "The Hugging Face Space declares the MIT License. Hugging Face allows these paths in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "LiFT",
-        "Random",
         "VideoReward",
         "VideoScore",
         "VisionRewrd"
@@ -315886,14 +315497,13 @@
       "feed": "https://arxiv.org/html/2204.03162",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLIP (ViT-B/32)",
         "FLAVA Contrastive",
         "FLAVA ITM",
         "LXMERT",
-        "MTurk Human",
         "UNITER base",
         "UNITER large",
         "UniT ITMfinetuned",
@@ -318914,7 +318524,7 @@
       "url": "https://super.gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/superglue/results/<id>.json (Firebase REST, ids from superglue/resultsVisibility.json), task WSC",
       "terms": "super.gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "ADAPET (ALBERT) - few-shot",
@@ -318934,7 +318544,6 @@
         "RoBERTa-iCETS",
         "RoBERTa-mtl-adv",
         "ST-MoE-32B",
-        "SuperGLUE Human Baselines",
         "T5 + UDG, Single Model (Google Brain)",
         "Text to Text PETL",
         "Turing NLR v5",
@@ -320321,7 +319930,7 @@
       "url": "https://www.youzhexie.me/papers/YoCausal/index.html",
       "feed": "https://www.youzhexie.me/papers/YoCausal/index.html",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AnimateDiff-SD-1.5",
@@ -320329,7 +319938,6 @@
         "CogVideoX-2b",
         "CogVideoX-5b",
         "CogVideoX1.5-5b",
-        "Human",
         "HunyuanVideo",
         "LTX-Video-13b-0.9.8",
         "LTX-Video-2b-0.9.6",

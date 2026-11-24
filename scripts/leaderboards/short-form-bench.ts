@@ -3,6 +3,7 @@
 // per season. Business value is the score (the board's unit, dollars). Read through naiveRows in
 // clipping-bench.ts. The table's Cost / season, the LLM cost of one full season (one run of the benchmark,
 // as on Clipping Bench), is read here from the same table and kept as `cost` (costPer 'run').
+// The "Do nothing (baseline)" row takes no action at all, so it is not a model and the board leaves it out.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -12,6 +13,7 @@ const URL = 'https://usenaive.ai/benchmark/short-form-bench';
 
 const board: Leaderboard = {
   benchmark: 'short-form-bench',
+  notModels: /^Do nothing \(baseline\)$/,
   url: URL,
   feed: `${URL} (server-rendered table, business value)`,
   terms: NAIVE_TERMS,

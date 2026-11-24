@@ -1,4 +1,5 @@
 // HIPE ranks OCR corrections by weighted character match error rate. The official TSV includes confidence intervals and the number of test sets scored.
+// The baseline-no-correction run leaves the OCR text as it is, so it is not a model and the board leaves it out.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -6,6 +7,7 @@ const FEED = "https://raw.githubusercontent.com/hipe-eval/HIPE-OCRepair-2026-eva
 
 const board: Leaderboard = {
   benchmark: "hipe-ocrepair-2026",
+  notModels: /^baseline-no-correction_/,
   url: "https://hipe-eval.github.io/HIPE-OCRepair-2026/results",
   feed: FEED,
   terms: "The evaluation repository uses AGPL 3.0. It does not list separate terms for the ranking file. https://github.com/hipe-eval/HIPE-OCRepair-2026-eval/blob/main/LICENSE The robots URL returns HTML.",

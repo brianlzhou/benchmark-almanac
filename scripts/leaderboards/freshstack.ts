@@ -1,6 +1,8 @@
 // FreshStack evaluates retrieval systems on five niche technical domains. The
 // leaderboard ranks systems by mean Recall@50 and publishes mean alpha-nDCG@10
 // and Coverage@20 in a JSON file beside each system's domain results.
+// The Oracle rows retrieve with the answer's nuggets in hand, an upper bound rather than a system, so the board
+// leaves them out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -14,6 +16,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'freshstack',
+  notModels: /^Oracle: /,
   url: PAGE,
   feed: FEED,
   terms: 'The authors publish this JSON leaderboard on the project website. Separate score reuse terms are not stated.',

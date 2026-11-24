@@ -1,4 +1,5 @@
 // RoTA-Bench success percentages on the frozen 100-task test and separate pilot. Paper API costs use uncached list prices, including agent workflows; output tokens are per completed task.
+// The random agents (Uniform random, and Random + IoU rollback) are not models, so the board leaves them out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -7,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/MAC-AutoML/RoTA-Bench/main/websi
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "rota-bench",
+  notModels: /^Random \+ IoU rollback$/,
   url: "https://github.com/MAC-AutoML/RoTA-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

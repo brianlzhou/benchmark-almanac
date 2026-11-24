@@ -1,11 +1,13 @@
 // Published full-benchmark paper results. Subscores stay in metrics.
+// GPT-4-Oracle answers from the figure's original caption, which the paper calls "the upper bound of model
+// performance", so the board leaves it out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-span-tables.ts';
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2305.10415';
 export default {
-  benchmark:'pmc-vqa', static: 'paper',url:'https://arxiv.org/abs/2305.10415',feed,terms:PAPER_TERMS,
+  benchmark:'pmc-vqa', notModels:/^GPT-4-Oracle$/, static: 'paper',url:'https://arxiv.org/abs/2305.10415',feed,terms:PAPER_TERMS,
   stats: { blankingBleu1: { name: 'Blanking BLEU-1', unit: '%', better: 'higher' }, blankingAccuracy: { name: 'Blanking accuracy', unit: '%', better: 'higher' } },
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

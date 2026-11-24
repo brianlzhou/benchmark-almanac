@@ -20,6 +20,7 @@ import { pathToFileURL } from 'node:url';
 import { ROOT, dataPath, readJson, today, bodyHooks } from './lib/util.ts';
 import { readScores, writeScores } from './lib/scores.ts';
 import { LOCAL_BOARDS } from './lib/local-boards.ts';
+import { withoutNonModels } from './lib/not-models.ts';
 import { makeResolver } from './lib/models.ts';
 import type { BoardPart, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
 
@@ -271,7 +272,8 @@ for (const f of files) {
   const resolve = makeResolver(aliasesOf(board));
   try {
     begin();
-    const raw = await board.fetch();
+    // people, random guessing and oracles are not models, so no board keeps them (scripts/lib/not-models.ts)
+    const raw = withoutNonModels(await board.fetch(), board.notModels);
     {
       const watched = review(raw, feedFields[board.benchmark], new Set(Object.keys(decided[board.benchmark] ?? {})));
       if (watched.fields.length) feedFields[board.benchmark] = watched.fields;
