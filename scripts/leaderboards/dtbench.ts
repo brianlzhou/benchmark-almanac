@@ -82,7 +82,16 @@ const board: Leaderboard = {
   feed: `${CRI_FEED} (100 * dtbench_accuracy)`,
   terms: CRI_TERMS,
   aliases: CRI_ALIASES,
-  stats: { dtbench: { name: 'DTBench score', unit: '%', better: 'higher' } },
+  stats: {
+    dtbench: { name: 'DTBench score', unit: '%', better: 'higher' },
+    attitudeEdt: { name: 'EDT preference', unit: 'score', note: 'Share of Newcomb-like choices aligned with evidential decision theory.' },
+  },
+  chart: {
+    title: 'EDT preference versus DTBench capability',
+    x: { key: 'score', label: 'DTBench capability score', unit: '%', better: 'higher' },
+    y: { key: 'attitudeEdt', label: 'EDT preference' },
+    note: 'Share of Newcomb-like choices aligned with evidential decision theory against DTBench accuracy.',
+  },
   fetch: () => criColumn('dtbench_accuracy', { scale: 100, cost: 'dt_cost', includeEfforts: true, ci: 'dtbench_ci', ciCenter: 'dtbench', metrics: { dtbench: 'dtbench', dtbenchCi: 'dtbench_ci', attitudeEdt: 'attitude_edt' } }),
 };
 export default board;

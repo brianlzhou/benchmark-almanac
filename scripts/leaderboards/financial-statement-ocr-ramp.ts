@@ -7,6 +7,17 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const board: Leaderboard = {
   benchmark: 'financial-statement-ocr-ramp', url: rampPage, feed: rampPage, terms: rampTerms + ' ' + rampPage,
+  stats: {
+    relativeCost: { name: 'Relative cost per request', unit: 'speedup', better: 'lower', note: 'Multiple of the cheapest evaluated model.' },
+    tolerance5: { name: 'Match rate at 5% tolerance', unit: 'speedup', better: 'higher', note: 'Multiple of the lowest evaluated match rate at 5% tolerance.' },
+    tolerance10: { name: 'Match rate at 10% tolerance', unit: 'speedup', better: 'higher', note: 'Multiple of the lowest evaluated match rate at 10% tolerance.' },
+    tolerance25: { name: 'Match rate at 25% tolerance', unit: 'speedup', better: 'higher', note: 'Multiple of the lowest evaluated match rate at 25% tolerance.' },
+  },
+  chart: {
+    title: 'Match rate at 1% tolerance versus relative cost',
+    x: { key: 'relativeCost', label: 'Relative cost per request', unit: 'x', better: 'lower', log: true },
+    y: { key: 'score', label: 'Match rate at 1% tolerance (multiple of lowest)', unit: 'x', better: 'higher' },
+  },
   async fetch() {
     const bundle = await rampBundle();
     const costsAt = bundle.search(/\[\{name:"[^"]+",provider:"[^"]+",rateNx:[\d.]+,costNx:[\d.]+\}/);

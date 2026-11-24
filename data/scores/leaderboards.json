@@ -1957,11 +1957,18 @@
       "url": "https://conceptualreasoning.ai/",
       "feed": "https://conceptualreasoning.ai/data/cri-scores.csv (concord)",
       "terms": "Static CSV the conceptualreasoning.ai page loads; robots.txt allows all paths and the site states no terms or license.",
-      "retrieved": "2026-11-23",
-      "rows": 218,
+      "retrieved": "2026-11-24",
+      "rows": 232,
       "unmatched": [
         "DeepSeek Chat"
-      ]
+      ],
+      "stats": {
+        "concordNorm": {
+          "name": "Normalized concord",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "accounting-autocoding-ramp": {
       "url": "https://builders.ramp.com/post/financial-benchmarks",
@@ -65764,7 +65771,37 @@
       "rows": 32,
       "unmatched": [
         "gemini-2.5-pro (snapshot unspecified)"
-      ]
+      ],
+      "chart": {
+        "title": "Perfect extraction rate versus relative cost",
+        "x": {
+          "key": "relativeCost",
+          "label": "Relative cost (multiple of cheapest)",
+          "unit": "x",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Perfect extraction rate (multiple of lowest)",
+          "unit": "x",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "relativeCost": {
+          "name": "Relative cost per invoice",
+          "unit": "speedup",
+          "better": "lower",
+          "note": "Multiple of the cheapest evaluated model."
+        },
+        "relativeLatency": {
+          "name": "Relative median latency",
+          "unit": "speedup",
+          "better": "lower",
+          "note": "Multiple of the fastest evaluated model."
+        }
+      }
     },
     "contextualbench-salesforce": {
       "url": "https://arxiv.org/html/2409.09916",
@@ -88735,8 +88772,8 @@
       "url": "https://conceptualreasoning.ai/dtbench",
       "feed": "https://conceptualreasoning.ai/data/cri-scores.csv (100 * dtbench_accuracy)",
       "terms": "Static CSV the conceptualreasoning.ai page loads; robots.txt allows all paths and the site states no terms or license.",
-      "retrieved": "2026-11-23",
-      "rows": 252,
+      "retrieved": "2026-11-24",
+      "rows": 266,
       "unmatched": [
         "Code Llama 34B",
         "Command",
@@ -88755,11 +88792,30 @@
         "Mistral Small 3.2 24B",
         "Mistral Tiny"
       ],
+      "chart": {
+        "title": "EDT preference versus DTBench capability",
+        "x": {
+          "key": "score",
+          "label": "DTBench capability score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "attitudeEdt",
+          "label": "EDT preference"
+        },
+        "note": "Share of Newcomb-like choices aligned with evidential decision theory against DTBench accuracy."
+      },
       "stats": {
         "dtbench": {
           "name": "DTBench score",
           "unit": "%",
           "better": "higher"
+        },
+        "attitudeEdt": {
+          "name": "EDT preference",
+          "unit": "score",
+          "note": "Share of Newcomb-like choices aligned with evidential decision theory."
         }
       }
     },
@@ -109863,7 +109919,49 @@
       "rows": 14,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
-      ]
+      ],
+      "chart": {
+        "title": "Match rate at 1% tolerance versus relative cost",
+        "x": {
+          "key": "relativeCost",
+          "label": "Relative cost per request",
+          "unit": "x",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Match rate at 1% tolerance (multiple of lowest)",
+          "unit": "x",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "relativeCost": {
+          "name": "Relative cost per request",
+          "unit": "speedup",
+          "better": "lower",
+          "note": "Multiple of the cheapest evaluated model."
+        },
+        "tolerance5": {
+          "name": "Match rate at 5% tolerance",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Multiple of the lowest evaluated match rate at 5% tolerance."
+        },
+        "tolerance10": {
+          "name": "Match rate at 10% tolerance",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Multiple of the lowest evaluated match rate at 10% tolerance."
+        },
+        "tolerance25": {
+          "name": "Match rate at 25% tolerance",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Multiple of the lowest evaluated match rate at 25% tolerance."
+        }
+      }
     },
     "finben": {
       "url": "https://arxiv.org/html/2402.12659",
@@ -172628,8 +172726,8 @@
       "url": "https://conceptualreasoning.ai/lmca",
       "feed": "https://conceptualreasoning.ai/data/cri-scores.csv",
       "terms": "Public results published by the benchmark authors at conceptualreasoning.ai; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
-      "rows": 213,
+      "retrieved": "2026-11-24",
+      "rows": 227,
       "unmatched": [
         "DeepSeek Chat",
         "GPT-4 (snapshot unspecified)",
@@ -172652,6 +172750,13 @@
           "key": "score",
           "label": "LMCA",
           "unit": "%",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "mean": {
+          "name": "Raw mean score",
+          "unit": "score",
           "better": "higher"
         }
       }
@@ -180269,9 +180374,41 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/primeintellect/mastermind/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22rt2y2s5uo48uwsq1wfiuspas%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "solved_reward": {
+          "name": "Solved reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "partial_feedback_reward": {
+          "name": "Partial feedback reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "candidate_reduction_reward": {
+          "name": "Candidate reduction reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "speed_reward": {
+          "name": "Speed reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "format_reward_func": {
+          "name": "Format reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "mastermindeval": {
       "url": "https://arxiv.org/html/2503.05891",
@@ -238105,7 +238242,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238134,49 +238271,44 @@
         "sesame/csm-1b"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
-        },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238188,7 +238320,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238224,49 +238356,44 @@
         "vibevoice/VibeVoice-7B-hf"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
-        },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238278,7 +238405,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238294,8 +238421,8 @@
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
         "fishaudio/s2-pro",
-        "gradium/phonon-31m-en NEW ¹",
-        "gradium/phonon-40m-en NEW ²",
+        "gradium/phonon-31m-en ¹",
+        "gradium/phonon-40m-en ²",
         "hexgrad/Kokoro-82M",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
@@ -238316,54 +238443,49 @@
         "vibevoice/VibeVoice-7B-hf"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
         },
-        "UTMOS (en) ⬆️": {
-          "name": "UTMOS for English",
+        "utmosEn": {
+          "name": "UTMOS (English)",
           "unit": "score",
           "better": "higher"
-        },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238375,7 +238497,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238390,15 +238512,15 @@
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
         "fishaudio/s2-pro",
-        "gradium/phonon-31m-en NEW ¹",
-        "gradium/phonon-40m-de NEW ³",
-        "gradium/phonon-40m-de NEW ⁴",
-        "gradium/phonon-40m-en NEW ²",
-        "gradium/phonon-40m-en NEW ¹",
-        "gradium/phonon-40m-es NEW ²",
-        "gradium/phonon-40m-es NEW ³",
-        "gradium/phonon-40m-fr NEW ⁴",
-        "gradium/phonon-40m-fr NEW ⁷",
+        "gradium/phonon-31m-en ¹",
+        "gradium/phonon-40m-de ³",
+        "gradium/phonon-40m-de ⁴",
+        "gradium/phonon-40m-en ²",
+        "gradium/phonon-40m-en ¹",
+        "gradium/phonon-40m-es ²",
+        "gradium/phonon-40m-es ³",
+        "gradium/phonon-40m-fr ⁴",
+        "gradium/phonon-40m-fr ⁷",
         "hexgrad/Kokoro-82M",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
@@ -238421,91 +238543,91 @@
         "vibevoice/VibeVoice-7B-hf"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         },
-        "🇭🇰 CER": {
-          "name": "🇭🇰 CER"
+        "Cantonese CER": {
+          "name": "Cantonese CER"
         },
-        "🇵🇹 WER": {
-          "name": "🇵🇹 WER"
+        "Portuguese WER": {
+          "name": "Portuguese WER"
         },
-        "🇳🇱 WER": {
-          "name": "🇳🇱 WER"
+        "Dutch WER": {
+          "name": "Dutch WER"
         },
-        "🇵🇱 WER": {
-          "name": "🇵🇱 WER"
+        "Polish WER": {
+          "name": "Polish WER"
         },
-        "🇨🇿 WER": {
-          "name": "🇨🇿 WER"
+        "Czech WER": {
+          "name": "Czech WER"
         },
-        "🇷🇴 WER": {
-          "name": "🇷🇴 WER"
+        "Romanian WER": {
+          "name": "Romanian WER"
         },
-        "🇬🇷 WER": {
-          "name": "🇬🇷 WER"
+        "Greek WER": {
+          "name": "Greek WER"
         },
-        "🇫🇮 WER": {
-          "name": "🇫🇮 WER"
+        "Finnish WER": {
+          "name": "Finnish WER"
         },
-        "🇹🇷 WER": {
-          "name": "🇹🇷 WER"
+        "Turkish WER": {
+          "name": "Turkish WER"
         },
-        "🇸🇦 WER": {
-          "name": "🇸🇦 WER"
+        "Arabic WER": {
+          "name": "Arabic WER"
         },
-        "🇮🇳 WER": {
-          "name": "🇮🇳 WER"
+        "Hindi WER": {
+          "name": "Hindi WER"
         },
-        "🇮🇩 WER": {
-          "name": "🇮🇩 WER"
+        "Indonesian WER": {
+          "name": "Indonesian WER"
         },
-        "🇹🇭 CER": {
-          "name": "🇹🇭 CER"
+        "Thai CER": {
+          "name": "Thai CER"
         },
-        "🇻🇳 WER": {
-          "name": "🇻🇳 WER"
+        "Vietnamese WER": {
+          "name": "Vietnamese WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
         },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
+        "utmosEn": {
+          "name": "UTMOS (English)",
+          "unit": "score",
+          "better": "higher"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238517,7 +238639,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238533,13 +238655,13 @@
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
         "fishaudio/s2-pro",
-        "gradium/phonon-31m-en NEW ¹",
-        "gradium/phonon-40m-de NEW ⁵",
-        "gradium/phonon-40m-en NEW ²",
-        "gradium/phonon-40m-es NEW ⁴",
-        "gradium/phonon-40m-fr NEW ⁶",
-        "gradium/phonon-40m-fr NEW ⁸",
-        "gradium/phonon-40m-pt NEW ³",
+        "gradium/phonon-31m-en ¹",
+        "gradium/phonon-40m-de ⁵",
+        "gradium/phonon-40m-en ²",
+        "gradium/phonon-40m-es ⁴",
+        "gradium/phonon-40m-fr ⁶",
+        "gradium/phonon-40m-fr ⁸",
+        "gradium/phonon-40m-pt ³",
         "hexgrad/Kokoro-82M",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
@@ -238564,91 +238686,96 @@
         "ydqmkkx/GibbsTTS"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         },
-        "🇭🇰 CER": {
-          "name": "🇭🇰 CER"
+        "Cantonese CER": {
+          "name": "Cantonese CER"
         },
-        "🇵🇹 WER": {
-          "name": "🇵🇹 WER"
+        "Portuguese WER": {
+          "name": "Portuguese WER"
         },
-        "🇳🇱 WER": {
-          "name": "🇳🇱 WER"
+        "Dutch WER": {
+          "name": "Dutch WER"
         },
-        "🇵🇱 WER": {
-          "name": "🇵🇱 WER"
+        "Polish WER": {
+          "name": "Polish WER"
         },
-        "🇨🇿 WER": {
-          "name": "🇨🇿 WER"
+        "Czech WER": {
+          "name": "Czech WER"
         },
-        "🇷🇴 WER": {
-          "name": "🇷🇴 WER"
+        "Romanian WER": {
+          "name": "Romanian WER"
         },
-        "🇬🇷 WER": {
-          "name": "🇬🇷 WER"
+        "Greek WER": {
+          "name": "Greek WER"
         },
-        "🇫🇮 WER": {
-          "name": "🇫🇮 WER"
+        "Finnish WER": {
+          "name": "Finnish WER"
         },
-        "🇹🇷 WER": {
-          "name": "🇹🇷 WER"
+        "Turkish WER": {
+          "name": "Turkish WER"
         },
-        "🇸🇦 WER": {
-          "name": "🇸🇦 WER"
+        "Arabic WER": {
+          "name": "Arabic WER"
         },
-        "🇮🇳 WER": {
-          "name": "🇮🇳 WER"
+        "Hindi WER": {
+          "name": "Hindi WER"
         },
-        "🇮🇩 WER": {
-          "name": "🇮🇩 WER"
+        "Indonesian WER": {
+          "name": "Indonesian WER"
         },
-        "🇹🇭 CER": {
-          "name": "🇹🇭 CER"
+        "Thai CER": {
+          "name": "Thai CER"
         },
-        "🇻🇳 WER": {
-          "name": "🇻🇳 WER"
+        "Vietnamese WER": {
+          "name": "Vietnamese WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
         },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
+        "utmosEn": {
+          "name": "UTMOS (English)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "komosKo": {
+          "name": "KOMOS (Korean)",
+          "unit": "score",
+          "better": "higher"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238660,7 +238787,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238677,13 +238804,13 @@
         "contextboxai/Kokoro-Vietnamese",
         "facebook/seamless-m4t-v2-large",
         "fishaudio/s2-pro",
-        "gradium/phonon-31m-en NEW ¹",
-        "gradium/phonon-40m-de NEW ⁵",
-        "gradium/phonon-40m-en NEW ²",
-        "gradium/phonon-40m-es NEW ⁴",
-        "gradium/phonon-40m-fr NEW ⁶",
-        "gradium/phonon-40m-fr NEW ⁸",
-        "gradium/phonon-40m-pt NEW ³",
+        "gradium/phonon-31m-en ¹",
+        "gradium/phonon-40m-de ⁵",
+        "gradium/phonon-40m-en ²",
+        "gradium/phonon-40m-es ⁴",
+        "gradium/phonon-40m-fr ⁶",
+        "gradium/phonon-40m-fr ⁸",
+        "gradium/phonon-40m-pt ³",
         "hexgrad/Kokoro-82M",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
@@ -238709,91 +238836,96 @@
         "ydqmkkx/GibbsTTS"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         },
-        "🇭🇰 CER": {
-          "name": "🇭🇰 CER"
+        "Cantonese CER": {
+          "name": "Cantonese CER"
         },
-        "🇵🇹 WER": {
-          "name": "🇵🇹 WER"
+        "Portuguese WER": {
+          "name": "Portuguese WER"
         },
-        "🇳🇱 WER": {
-          "name": "🇳🇱 WER"
+        "Dutch WER": {
+          "name": "Dutch WER"
         },
-        "🇵🇱 WER": {
-          "name": "🇵🇱 WER"
+        "Polish WER": {
+          "name": "Polish WER"
         },
-        "🇨🇿 WER": {
-          "name": "🇨🇿 WER"
+        "Czech WER": {
+          "name": "Czech WER"
         },
-        "🇷🇴 WER": {
-          "name": "🇷🇴 WER"
+        "Romanian WER": {
+          "name": "Romanian WER"
         },
-        "🇬🇷 WER": {
-          "name": "🇬🇷 WER"
+        "Greek WER": {
+          "name": "Greek WER"
         },
-        "🇫🇮 WER": {
-          "name": "🇫🇮 WER"
+        "Finnish WER": {
+          "name": "Finnish WER"
         },
-        "🇹🇷 WER": {
-          "name": "🇹🇷 WER"
+        "Turkish WER": {
+          "name": "Turkish WER"
         },
-        "🇸🇦 WER": {
-          "name": "🇸🇦 WER"
+        "Arabic WER": {
+          "name": "Arabic WER"
         },
-        "🇮🇳 WER": {
-          "name": "🇮🇳 WER"
+        "Hindi WER": {
+          "name": "Hindi WER"
         },
-        "🇮🇩 WER": {
-          "name": "🇮🇩 WER"
+        "Indonesian WER": {
+          "name": "Indonesian WER"
         },
-        "🇹🇭 CER": {
-          "name": "🇹🇭 CER"
+        "Thai CER": {
+          "name": "Thai CER"
         },
-        "🇻🇳 WER": {
-          "name": "🇻🇳 WER"
+        "Vietnamese WER": {
+          "name": "Vietnamese WER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
         },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
+        "utmosEn": {
+          "name": "UTMOS (English)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "komosKo": {
+          "name": "KOMOS (Korean)",
+          "unit": "score",
+          "better": "higher"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -238805,7 +238937,7 @@
       "url": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
@@ -238871,94 +239003,99 @@
         "ydqmkkx/GibbsTTS"
       ],
       "parts": {
-        "🇬🇧 WER": {
-          "name": "🇬🇧 WER"
+        "English WER": {
+          "name": "English WER"
         },
-        "🇨🇳 CER": {
-          "name": "🇨🇳 CER"
+        "Chinese CER": {
+          "name": "Chinese CER"
         },
-        "🇫🇷 WER": {
-          "name": "🇫🇷 WER"
+        "French WER": {
+          "name": "French WER"
         },
-        "🇪🇸 WER": {
-          "name": "🇪🇸 WER"
+        "Spanish WER": {
+          "name": "Spanish WER"
         },
-        "🇩🇪 WER": {
-          "name": "🇩🇪 WER"
+        "German WER": {
+          "name": "German WER"
         },
-        "🇮🇹 WER": {
-          "name": "🇮🇹 WER"
+        "Italian WER": {
+          "name": "Italian WER"
         },
-        "🇯🇵 CER": {
-          "name": "🇯🇵 CER"
+        "Japanese CER": {
+          "name": "Japanese CER"
         },
-        "🇰🇷 CER": {
-          "name": "🇰🇷 CER"
+        "Korean CER": {
+          "name": "Korean CER"
         },
-        "🇷🇺 WER": {
-          "name": "🇷🇺 WER"
+        "Russian WER": {
+          "name": "Russian WER"
         },
-        "🇭🇰 CER": {
-          "name": "🇭🇰 CER"
+        "Cantonese CER": {
+          "name": "Cantonese CER"
         },
-        "🇵🇹 WER": {
-          "name": "🇵🇹 WER"
+        "Portuguese WER": {
+          "name": "Portuguese WER"
         },
-        "🇳🇱 WER": {
-          "name": "🇳🇱 WER"
+        "Dutch WER": {
+          "name": "Dutch WER"
         },
-        "🇵🇱 WER": {
-          "name": "🇵🇱 WER"
+        "Polish WER": {
+          "name": "Polish WER"
         },
-        "🇨🇿 WER": {
-          "name": "🇨🇿 WER"
+        "Czech WER": {
+          "name": "Czech WER"
         },
-        "🇷🇴 WER": {
-          "name": "🇷🇴 WER"
+        "Romanian WER": {
+          "name": "Romanian WER"
         },
-        "🇬🇷 WER": {
-          "name": "🇬🇷 WER"
+        "Greek WER": {
+          "name": "Greek WER"
         },
-        "🇫🇮 WER": {
-          "name": "🇫🇮 WER"
+        "Finnish WER": {
+          "name": "Finnish WER"
         },
-        "🇹🇷 WER": {
-          "name": "🇹🇷 WER"
+        "Turkish WER": {
+          "name": "Turkish WER"
         },
-        "🇸🇦 WER": {
-          "name": "🇸🇦 WER"
+        "Arabic WER": {
+          "name": "Arabic WER"
         },
-        "🇮🇳 WER": {
-          "name": "🇮🇳 WER"
+        "Hindi WER": {
+          "name": "Hindi WER"
         },
-        "🇮🇩 WER": {
-          "name": "🇮🇩 WER"
+        "Indonesian WER": {
+          "name": "Indonesian WER"
         },
-        "🇹🇭 CER": {
-          "name": "🇹🇭 CER"
+        "Thai CER": {
+          "name": "Thai CER"
         },
-        "🇻🇳 WER": {
-          "name": "🇻🇳 WER"
+        "Vietnamese WER": {
+          "name": "Vietnamese WER"
         },
-        "🇮🇷 CER": {
-          "name": "🇮🇷 CER"
+        "Persian CER": {
+          "name": "Persian CER"
         }
       },
       "stats": {
-        "Average RTFx ⬆️": {
+        "averageRtfx": {
           "name": "Average real-time factor",
           "unit": "speedup",
           "better": "higher"
         },
-        "Average SIM ⬆️": {
+        "averageSim": {
           "name": "Average speaker similarity",
           "unit": "score",
           "better": "higher"
         },
-        "cloningModeRank": {
-          "name": "Voice cloning rank",
-          "unit": "count",
-          "better": "lower"
+        "utmosEn": {
+          "name": "UTMOS (English)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "komosKo": {
+          "name": "KOMOS (Korean)",
+          "unit": "score",
+          "better": "higher"
         },
         "languagesScored": {
           "name": "Languages scored",
@@ -241696,7 +241833,7 @@
       "url": "https://osworld-v2.xlang.ai/",
       "feed": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json (releaseVersion v2026.06.24, full set)",
       "terms": "Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
       "harnesses": "system",
@@ -241706,6 +241843,11 @@
           "name": "Partial score",
           "unit": "%",
           "better": "higher"
+        },
+        "runCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -241713,7 +241855,7 @@
       "url": "https://osworld-v2.xlang.ai/",
       "feed": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json (releaseVersion v2026.08.08, full set)",
       "terms": "Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "harnesses": "system",
@@ -241730,7 +241872,7 @@
       "url": "https://osworld-v2.xlang.ai/",
       "feed": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json (releaseVersion v2.1, full set)",
       "terms": "Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "harnesses": "system",
@@ -241740,6 +241882,11 @@
           "name": "Partial score",
           "unit": "%",
           "better": "higher"
+        },
+        "runCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -251321,7 +251468,7 @@
       "url": "https://posttrainbench.com/?version=v1",
       "feed": "https://posttrainbench.com/scores-v1.js",
       "terms": "Generated data file on the PostTrainBench site; the benchmark repository (aisa-group/PostTrainBench) is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
       "chart": {
@@ -251473,7 +251620,7 @@
       "url": "https://posttrainbench.com/?version=v1.1",
       "feed": "https://posttrainbench.com/scores.js",
       "terms": "Generated data file on the PostTrainBench site; the benchmark repository (aisa-group/PostTrainBench) is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
       "chart": {
@@ -251612,6 +251759,12 @@
         "runtimeTrials": {
           "name": "Runtime trials",
           "unit": "count"
+        },
+        "runtimeSeconds": {
+          "name": "Average runtime",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Average time spent post-training, converted from hours."
         }
       }
     },
@@ -251619,7 +251772,7 @@
       "url": "https://posttrainbench.com/",
       "feed": "https://posttrainbench.com/scores-v1.2.js",
       "terms": "Generated data file on the PostTrainBench site; the benchmark repository (aisa-group/PostTrainBench) is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [],
       "chart": {
@@ -251742,6 +251895,12 @@
         "runtimeTrials": {
           "name": "Runtime trials",
           "unit": "count"
+        },
+        "runtimeSeconds": {
+          "name": "Average runtime",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Average time spent post-training, converted from hours."
         }
       }
     },
@@ -277997,9 +278156,56 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/tonyteo/skill-reward-hacking/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22b8yhjsdo7aduyv74u3pojolt%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "code_length_reward": {
+          "name": "Code length reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "description_length_reward": {
+          "name": "Description length reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "section_count_reward": {
+          "name": "Section count reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "response_length_reward": {
+          "name": "Response length reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refinement_count_reward": {
+          "name": "Refinement count reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tool_call_volume_reward": {
+          "name": "Tool call volume reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "hidden_keyword_reward": {
+          "name": "Hidden keyword reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "hidden_quantum_reward": {
+          "name": "Hidden quantum reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "hidden_semantic_reward": {
+          "name": "Hidden semantic reward",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "skills-il-human-or-ai": {
       "url": "https://agentskills.co.il/en/leaderboard",
@@ -285212,7 +285418,7 @@
       "url": "https://builders.ramp.com/post/stack-benchmarking",
       "feed": "https://builders.ramp.com/post/stack-benchmarking",
       "terms": "Ramp's robots.txt permits the site. The engineering post gives no separate data reuse license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Ramp Stack"
@@ -285247,8 +285453,18 @@
         }
       },
       "stats": {
-        "pass5": {
+        "passAt1": {
+          "name": "Pass at 1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt5": {
           "name": "Pass at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass5": {
+          "name": "Pass to the fifth power",
           "unit": "%",
           "better": "higher"
         }
@@ -299380,9 +299596,16 @@
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22kp1oyxpluvo83f0v80l9y12v%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations. https://www.primeintellect.ai/terms-of-service",
       "host": "Prime Intellect",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "tgif-qa": {
       "url": "https://arxiv.org/html/1704.04497",

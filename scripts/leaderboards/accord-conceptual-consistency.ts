@@ -9,6 +9,9 @@ const board: Leaderboard = {
   feed: `${CRI_FEED} (concord)`,
   terms: CRI_TERMS,
   aliases: CRI_ALIASES,
+  stats: {
+    concordNorm: { name: 'Normalized concord', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const rows = await criColumn('concord', { includeEfforts: true, ci: 'concord_ci', metrics: { concordNorm: 'concord_norm' } });
     return rows.map(row => ({ ...row, low: row.metrics?.ciLow, high: row.metrics?.ciHigh }));
