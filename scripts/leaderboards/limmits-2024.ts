@@ -28,7 +28,7 @@ const board: Leaderboard = {
     return settings.flatMap((setting, i) => scores[i * 2].map(r => {
       const other = scores[i * 2 + 1].find(s => s.model === r.model);
       if (!other) throw new Error('Missing speaker similarity for ' + r.model);
-      return { model: r.model, submitter: r.model, setting, score: r.avg, link: links[i * 2], metrics: { naturalnessSD: r.sd, similarity: other.avg, similaritySD: other.sd } };
+      return { model: r.model, submitter: r.model, setting, score: r.avg, link: links[i * 2], metrics: { naturalnessSd: r.sd, similarity: other.avg, similaritySd: other.sd } };
     }));
   },
 };

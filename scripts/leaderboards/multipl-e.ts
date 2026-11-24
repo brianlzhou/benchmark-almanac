@@ -19,7 +19,14 @@ const board: Leaderboard = {
   swift: { name: 'Swift', group: 'Language' },
 }, url: 'https://huggingface.co/spaces/bigcode/multilingual-code-evals', feed: FEED,
   terms: 'Public BigCode Space results, subject to its repository license and Hugging Face terms.',
-  stats: { 'Throughput (tokens/s)': { name: 'Throughput', unit: 'tokens/s', better: 'higher' } },
+  stats: {
+    'Throughput (tokens/s)': { name: 'Throughput', unit: 'tokens/s', better: 'higher' },
+    'Throughput (tokens/s) bs=50': { name: 'Throughput (batch size 50)', unit: 'tokens/s', better: 'higher' },
+    'Win Rate': { name: 'Win rate', unit: '%', better: 'higher' },
+    Seq_length: { name: 'Context length', unit: 'tokens' },
+    '#Languages': { name: 'Supported programming languages', unit: 'count' },
+    'Peak Memory (MB)': { name: 'Peak memory (MB)', unit: 'count', better: 'lower', note: 'Peak GPU memory in megabytes.' },
+  },
   async fetch() {
     const rows = parseCsv(await fetchText(FEED)).filter(r => r.Model && r['Average score']?.trim() && Number.isFinite(Number(r['Average score'])));
     if (!rows.length) throw new Error('No MultiPL-E scores');

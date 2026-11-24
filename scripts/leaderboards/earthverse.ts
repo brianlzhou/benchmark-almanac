@@ -19,6 +19,23 @@ const board: Leaderboard = {
   terms: 'The authors publish the scores at https://github.com/CuiZHIQ/EarthVerse without an explicit repository license.',
   costPer: 'run', reference: ['EarthVerse'], harnesses: 'system',
   parts: labels, aliases: { 'Nemotron Nano 9B V2': 'nvidia-nemotron-nano-9b-v2' },
+  stats: {
+    answer_correctness: { name: 'Answer correctness', unit: '%', better: 'higher' },
+    llm_rubric: { name: 'LLM rubric score', unit: '%', better: 'higher' },
+    strict_at_95: { name: 'Strict pass at 95%', unit: '%', better: 'higher' },
+    strict_correct_count_405: { name: 'Strict correct count', unit: 'count', better: 'higher' },
+    mean_unit_accuracy: { name: 'Mean unit accuracy', unit: '%', better: 'higher' },
+    steps: { name: 'Average rounds', unit: 'count' },
+    avg_tool_calls: { name: 'Average tool calls', unit: 'count' },
+    avg_file_reads: { name: 'Average file reads', unit: 'count' },
+    avg_unique_files: { name: 'Average unique files read', unit: 'count' },
+    avg_python_calls: { name: 'Average Python calls', unit: 'count' },
+    avg_evidence_queries: { name: 'Average evidence queries', unit: 'count' },
+    avg_latency_s: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    totalTokens: { name: 'Average total tokens', unit: 'tokens' },
+    availableResults: { name: 'Available results', unit: 'count' },
+    eligibleResults: { name: 'Eligible results', unit: 'count' },
+  },
   headline: 'Mean core averages answer correctness and the rubric score.',
   async fetch() {
     const data = await fetchJson<{ model_count: number; models: Entry[] }>(feed);

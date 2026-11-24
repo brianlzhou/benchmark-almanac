@@ -2129,6 +2129,8 @@
     ["livebench","gemini-4-carbon","high",null,"2026-11-11"],
     ["livebench","gemini-4-hydrogen","xhigh",null,"2026-11-14"],
     ["livebench","gemini-4-neon","xhigh",null,"2026-11-19"],
+    ["livebench","inkling-2-mini","xhigh",null,"2026-11-24"],
+    ["livebench","inkling-2-small","xhigh",null,"2026-11-24"],
     ["livesqlbench","~ShanHe 2.0",null,null,"2026-11-10"],
     ["livesqlbench","gemini-2-5-flash-jun-2025",null,null,"2026-11-23"],
     ["llm-aggrefact","~Decido-1","size 26B (4B active)",null,"2026-11-23"],

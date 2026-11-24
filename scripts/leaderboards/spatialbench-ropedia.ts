@@ -14,6 +14,7 @@ const board: Leaderboard = {
   headline: 'The board lists average absolute relative depth error first. Lower is better. The score includes the dense regime.',
   terms: 'The SpatialBench repository uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
   parts: Object.fromEntries(columns.map(({ label,name }) => [label, { name: label, unit: 'score', better: ['AbsRel','ATE'].includes(name) ? 'lower' : 'higher' }])),
+  stats: { secondsPerSequence: { name: 'Time per sequence', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t =>
       t[0]?.map(c => c.text).join('|') === ['Method','#Params (M)','Time (s)',...regimes].join('|')
