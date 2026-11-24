@@ -11,14 +11,32 @@ const PAGE = 'https://phyarena.github.io/';
 const FEED = 'https://phyarena.github.io/data/hipho.json';
 
 interface Data {
+  model_categories?: Record<string, string>;
   olympiads: { name: string; year: number; full_mark_human: number; models: { name: string; score: number | null }[] }[];
 }
+
+const OLYMPIADS = [
+  ['IPhO 2025', '2025 Olympiads'],
+  ['APhO 2025', '2025 Olympiads'],
+  ['EuPhO 2025', '2025 Olympiads'],
+  ['NBPhO 2025', '2025 Olympiads'],
+  ['PanPhO 2025', '2025 Olympiads'],
+  ['PanMechanics 2025', '2025 Olympiads'],
+  ['F=MA 2025', '2025 Olympiads'],
+  ['IPhO 2024', '2024 Olympiads'],
+  ['EuPhO 2024', '2024 Olympiads'],
+  ['NBPhO 2024', '2024 Olympiads'],
+  ['PanPhO 2024', '2024 Olympiads'],
+  ['PanMechanics 2024', '2024 Olympiads'],
+  ['F=MA 2024', '2024 Olympiads'],
+] as const;
 
 const board: Leaderboard = {
   benchmark: 'hipho',
   url: PAGE,
   feed: `${FEED} (mean of score / full mark over the 13 olympiads)`,
   terms: 'Static JSON on the PhyArena GitHub Pages site; GitHub Pages serves no robots.txt rules for it and the site states no terms.',
+  parts: Object.fromEntries(OLYMPIADS.map(([name, group]) => [name, { name, group, unit: '%' as const }])),
   aliases: {
     'Claude-4-Sonnet': 'claude-sonnet-4',
     'Claude-4-Sonnet-Thinking': 'claude-sonnet-4',
@@ -34,20 +52,33 @@ const board: Leaderboard = {
     const data = await fetchJson<Data>(FEED);
     const exams = data.olympiads.length;
     if (exams < 10) throw new Error(`expected 13 olympiads, found ${exams}`);
-    const parts = new Map<string, number[]>();
+    const parts = new Map<string, { xs: number[]; metrics: Record<string, number> }>();
     for (const o of data.olympiads) {
       if (!(o.full_mark_human > 0)) throw new Error(`no full mark for ${o.name} ${o.year}`);
+      const examKey = `${o.name} ${o.year}`;
       for (const m of o.models) {
         if (typeof m.score !== 'number') continue;
-        parts.set(m.name, [...(parts.get(m.name) ?? []), m.score / o.full_mark_human]);
+        const frac = m.score / o.full_mark_human;
+        const acc = parts.get(m.name) ?? { xs: [], metrics: {} };
+        acc.xs.push(frac);
+        acc.metrics[examKey] = Number((frac * 100).toFixed(1));
+        parts.set(m.name, acc);
       }
     }
     const rows: LeaderboardRow[] = [];
-    for (const [model, xs] of parts) {
-      if (xs.length !== exams) continue;
-      const score = Number(((xs.reduce((a, b) => a + b, 0) / exams) * 100).toFixed(1));
+    for (const [model, acc] of parts) {
+      if (acc.xs.length !== exams) continue;
+      const score = Number(((acc.xs.reduce((a, b) => a + b, 0) / exams) * 100).toFixed(1));
+      const cat = data.model_categories?.[model] ?? '';
+      const open = /^open-source/i.test(cat) ? true : /^closed-source/i.test(cat) ? false : undefined;
       // the alias drops the setting, so name it here
-      rows.push(/^Claude.*-Thinking$/.test(model) ? { model, score, setting: 'thinking' } : { model, score });
+      rows.push({
+        model,
+        score,
+        ...(/^Claude.*-Thinking$/.test(model) ? { setting: 'thinking' } : {}),
+        ...(open === undefined ? {} : { open }),
+        metrics: acc.metrics,
+      });
     }
     return rows;
   },

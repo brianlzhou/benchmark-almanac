@@ -14,9 +14,26 @@ const FEED = `${PAGE}naturebench-data.js`;
 
 type Score = { state: string; value: number | null };
 interface Data {
-  leaderboard: { name: string; harness?: string; tracks?: string[]; scores?: Record<string, Score> }[];
-  cases: { caseId: string; scores: Record<string, Score> }[];
+  models?: { id?: string; name?: string; runSource?: { label?: string; url?: string } }[];
+  leaderboard: { name: string; configurationId?: string; harness?: string; tracks?: string[]; scores?: Record<string, Score> }[];
+  cases: { caseId: string; domain?: string; scores: Record<string, Score> }[];
 }
+
+const DOMAINS: [string, string, string][] = [
+  ['Protein Biology', 'proteinBiology', 'Protein biology'],
+  ['Cellular Omics', 'cellularOmics', 'Cellular omics'],
+  ['Biomedical Modeling', 'biomedicalModeling', 'Biomedical modeling'],
+  ['Molecular Design', 'molecularDesign', 'Molecular design'],
+  ['Physical Modeling', 'physicalModeling', 'Physical modeling'],
+  ['Relational Reasoning', 'relationalReasoning', 'Relational reasoning'],
+];
+
+const median = (xs: number[]) => {
+  if (!xs.length) return undefined;
+  const s = [...xs].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+};
 
 const board: Leaderboard = {
   benchmark: 'naturebench',
@@ -24,6 +41,16 @@ const board: Leaderboard = {
   url: `${PAGE}#leaderboard`,
   feed: `${FEED} (Full track, Surpass-SOTA computed as the page does)`,
   terms: 'Static data file on the project site (GitHub Pages, no robots.txt rules); the FrontisAI/NatureBench repository is MIT-licensed.',
+  parts: Object.fromEntries(DOMAINS.map(([, k, name]) => [k, { name, unit: '%' as const }])),
+  stats: {
+    matchSota: { name: 'Match-SOTA', unit: '%', better: 'higher', note: 'Share of the 90 tasks with a valid non-negative score.' },
+    medianAll: { name: 'Median g (all)', unit: 'score', better: 'higher', note: 'Median SOTA-normalized gap across all 90 tasks, with invalid or unscored tasks set to -1.' },
+    meanAll: { name: 'Mean g (all)', unit: 'score', better: 'higher' },
+    medianValid: { name: 'Median g (valid)', unit: 'score', better: 'higher' },
+    completionRate: { name: 'Completion rate', unit: '%', better: 'higher' },
+    scoreRate: { name: 'Score rate', unit: '%', better: 'higher' },
+    invalid: { name: 'Invalid runs', unit: 'count', better: 'lower' },
+  },
   aliases: {
     'Opus 5': 'claude-opus-5',
   },
@@ -32,17 +59,65 @@ const board: Leaderboard = {
     const data = jsonAt<Data>(js, js.indexOf('{'));
     const total = data.cases.length;
     if (total !== 90) throw new Error(`expected 90 Full-track tasks, found ${total}`);
+    const byId = new Map((data.models ?? []).filter((m) => m.id).map((m) => [m.id!, m]));
+    const byName = new Map((data.models ?? []).filter((m) => m.name).map((m) => [m.name!, m]));
+    const domainTotals = new Map<string, number>();
+    for (const c of data.cases) if (c.domain) domainTotals.set(c.domain, (domainTotals.get(c.domain) ?? 0) + 1);
     const rows: LeaderboardRow[] = [];
     for (const row of data.leaderboard) {
       if (Array.isArray(row.tracks) && !row.tracks.includes('full')) continue;
       let surpass = 0;
+      let match = 0;
+      let invalid = 0;
+      let scored = 0;
+      const validValues: number[] = [];
+      const allValues: number[] = [];
+      const domainSurpass = new Map<string, number>();
       for (const c of data.cases) {
         const s = row.scores?.[c.caseId] ?? c.scores[row.name];
         if (!s) throw new Error(`no ${row.name} score for ${c.caseId}`);
-        if (s.state === 'valid' && Number.isFinite(s.value) && Number(s.value) > 0.1) surpass++;
+        if (s.state === 'invalid') invalid++;
+        if (s.state !== 'none') scored++;
+        const isValid = s.state === 'valid' && Number.isFinite(s.value);
+        const v = isValid ? Number(s.value) : -1;
+        allValues.push(v);
+        if (isValid) {
+          validValues.push(v);
+          if (v >= 0) match++;
+          if (v > 0.1) {
+            surpass++;
+            if (c.domain) domainSurpass.set(c.domain, (domainSurpass.get(c.domain) ?? 0) + 1);
+          }
+        }
       }
+      const metrics: Record<string, number> = {
+        matchSota: Number(((match / total) * 100).toFixed(2)),
+        meanAll: Number((allValues.reduce((a, b) => a + b, 0) / total).toFixed(4)),
+        completionRate: Number(((validValues.length / total) * 100).toFixed(2)),
+        scoreRate: Number(((scored / total) * 100).toFixed(2)),
+        invalid,
+      };
+      const medAll = median(allValues);
+      if (medAll !== undefined) metrics.medianAll = Number(medAll.toFixed(4));
+      const medValid = median(validValues);
+      if (medValid !== undefined) metrics.medianValid = Number(medValid.toFixed(4));
+      for (const [label, k] of DOMAINS) {
+        const n = domainTotals.get(label) ?? 0;
+        if (n > 0) metrics[k] = Number((((domainSurpass.get(label) ?? 0) / n) * 100).toFixed(2));
+      }
+      const cfg = (row.configurationId ? byId.get(row.configurationId) : undefined) ?? byName.get(row.name);
+      const src = cfg?.runSource;
+      const submitter = src?.label && src.label !== 'NatureBench run' ? src.label : undefined;
+      const link = src?.url && /^https?:\/\//i.test(src.url) ? src.url : undefined;
       const model = row.name.replace(/\s*\([^)]*\)$/, '').trim();
-      rows.push({ model, harness: row.harness, score: Number(((surpass / total) * 100).toFixed(2)) });
+      rows.push({
+        model,
+        harness: row.harness,
+        score: Number(((surpass / total) * 100).toFixed(2)),
+        ...(submitter ? { submitter } : {}),
+        ...(link ? { link } : {}),
+        metrics,
+      });
     }
     return rows;
   },

@@ -15,6 +15,10 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, Targeted ASR)`,
   terms: 'Static documentation page built from the AgentDojo repository, which is MIT-licensed.',
+  stats: {
+    utility: { name: 'Utility', unit: '%', better: 'higher' },
+    utilityUnderAttack: { name: 'Utility under attack', unit: '%', better: 'higher' },
+  },
   aliases: {
     'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024',
     'gemini-2.0-flash-exp': 'gemini-2-0-flash-dec-2024',
@@ -29,7 +33,7 @@ const board: Leaderboard = {
   async fetch() {
     const [t] = tables(await fetchText(PAGE));
     const head = t?.[0]?.map((c) => c.text);
-    const [model, defense, attack, asr, date] = ['Model', 'Defense', 'Attack', 'Targeted ASR', 'Date'].map((h) => head?.indexOf(h) ?? -1);
+    const [model, defense, attack, util, utilAtk, asr, date] = ['Model', 'Defense', 'Attack', 'Utility', 'Utility under attack', 'Targeted ASR', 'Date'].map((h) => head?.indexOf(h) ?? -1);
     if ([model, defense, attack, asr].some((i) => i < 0)) throw new Error(`unexpected AgentDojo header: ${head?.join(' | ')}`);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
@@ -42,12 +46,18 @@ const board: Leaderboard = {
       if (d && d !== 'None') settings.push(`defense: ${d}`);
       if (a && a !== 'important_instructions') settings.push(`attack: ${a}`);
       const stamp = name.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
+      const metrics: Record<string, number> = {};
+      const u = util >= 0 ? num(r[util]?.text) : undefined;
+      if (u !== undefined) metrics.utility = u;
+      const ua = utilAtk >= 0 ? num(r[utilAtk]?.text) : undefined;
+      if (ua !== undefined) metrics.utilityUnderAttack = ua;
       rows.push({
         model: name,
         score,
         link: r[head?.indexOf('Traces') ?? -1]?.html.match(/href=["'](https:\/\/[^"']+)["']/)?.[1],
         setting: settings.join(', ') || undefined,
         date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : date >= 0 ? r[date]?.text : undefined,
+        ...(Object.keys(metrics).length ? { metrics } : {}),
       });
     }
     return rows;

@@ -19,6 +19,7 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/allenai/reward-bench',
   feed: `${LIST} (eval-set/*.json, mean of six domains)`,
   terms: 'Hugging Face dataset allenai/reward-bench-2-results, which carries no license tag, read as the Apache-2.0 leaderboard Space reads it.',
+  parts: Object.fromEntries(DOMAINS.map((d) => [d, { name: d, unit: '%' as const }])),
   aliases: {
     // the GA model (the dataset keeps its preview runs in separate *-preview-* files)
     'google/gemini-2.5-flash': 'gemini-2-5-flash-jun-2025',
@@ -34,7 +35,15 @@ const board: Leaderboard = {
       const batch = await Promise.all(paths.slice(i, i + 8).map((p) => fetchJson<Result>(FILE(p)).catch(() => null)));
       for (const r of batch) {
         if (!r?.model) continue;
-        const values = DOMAINS.map((d) => r[d]).filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
+        const metrics: Record<string, number> = {};
+        const values: number[] = [];
+        for (const d of DOMAINS) {
+          const v = r[d];
+          if (typeof v === 'number' && Number.isFinite(v)) {
+            values.push(v);
+            metrics[d] = Number((100 * v).toFixed(2));
+          }
+        }
         if (!values.length) continue;
         // "openai/gpt-4o-2024-08-06": the date stamp picks the snapshot
         const stamp = r.model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
@@ -42,6 +51,7 @@ const board: Leaderboard = {
           model: r.model,
           score: (100 * values.reduce((a, b) => a + b, 0)) / values.length,
           date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined,
+          metrics,
         });
       }
     }

@@ -8,11 +8,23 @@ import { num, tables } from '../lib/html.ts';
 
 const URL = 'https://general365.github.io/';
 
+const CATEGORIES: [RegExp, string, string][] = [
+  [/Complex\s+Constraints/i, 'complexConstraints', 'Complex constraints'],
+  [/Branching.*Enumeration/i, 'branchingEnumeration', 'Branching and enumeration'],
+  [/Spatial.*Temporal/i, 'spatialTemporal', 'Spatial and temporal'],
+  [/Recursive.*Backtracking/i, 'recursiveBacktracking', 'Recursive and backtracking'],
+  [/Semantic\s+Interference/i, 'semanticInterference', 'Semantic interference'],
+  [/Implicit\s+Information/i, 'implicitInformation', 'Implicit information'],
+  [/Optimal\s+Strategy/i, 'optimalStrategy', 'Optimal strategy'],
+  [/Probability.*Uncertainty/i, 'probabilityUncertainty', 'Probability and uncertainty'],
+];
+
 const board: Leaderboard = {
   benchmark: 'general365',
   url: `${URL}#Leaderboard`,
   feed: `${URL} (leaderboard table, Overall)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the scores are cited to the General365 authors.',
+  parts: Object.fromEntries(CATEGORIES.map(([, k, name]) => [k, { name, unit: '%' as const }])),
   aliases: {
     'Qwen3-235B-Thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025',
     // V3.2 in its non-thinking (chat) mode
@@ -26,6 +38,7 @@ const board: Leaderboard = {
     const head = t[0].map((c) => c.text);
     const iModel = head.indexOf('Models');
     const iScore = head.indexOf('Overall');
+    const partCols = CATEGORIES.map(([re, k]) => [head.findIndex((h) => re.test(h)), k] as const).filter(([idx]) => idx >= 0);
     const rows: LeaderboardRow[] = [];
     let setting: string | undefined;
     const group = (label: string) => (/non-thinking|chat/i.test(label) ? 'non-thinking' : /thinking/i.test(label) ? 'thinking' : undefined);
@@ -40,7 +53,12 @@ const board: Leaderboard = {
       }
       const score = num(r[iScore]?.text);
       if (!r[iModel]?.text || score === undefined) continue;
-      rows.push({ model: r[iModel].text, score, setting });
+      const metrics: Record<string, number> = {};
+      for (const [idx, k] of partCols) {
+        const v = num(r[idx]?.text);
+        if (v !== undefined) metrics[k] = v;
+      }
+      rows.push({ model: r[iModel].text, score, setting, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no rows in the General365 table');
     return rows;

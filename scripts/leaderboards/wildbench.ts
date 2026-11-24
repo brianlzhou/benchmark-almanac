@@ -13,11 +13,27 @@ const FEED = 'https://huggingface.co/spaces/allenai/WildBench/resolve/main/data_
 
 const UNLISTED: Record<string, string> = { 'yi-large-preview': 'yi-large-preview (unlisted preview)', 'reka-edge': 'reka-edge (2024 release)' };
 
+const WB_PARTS: Record<string, { field: string; name: string }> = {
+  creative: { field: 'WB_score.Creative Tasks', name: 'Creative tasks' },
+  planning: { field: 'WB_score.Planning & Reasoning', name: 'Planning and reasoning' },
+  math: { field: 'WB_score.Math & Data Analysis', name: 'Math and data analysis' },
+  advice: { field: 'WB_score.Information/Advice seeking', name: 'Information and advice seeking' },
+  coding: { field: 'WB_score.Coding & Debugging', name: 'Coding and debugging' },
+};
+
 const board: Leaderboard = {
   benchmark: 'wildbench',
   url: 'https://huggingface.co/spaces/allenai/WildBench',
   feed: `${FEED} (WB_score)`,
   terms: 'Results file in the allenai/WildBench Hugging Face Space; the WildBench code is Apache-2.0 and the Space states no other terms.',
+  parts: Object.fromEntries(Object.entries(WB_PARTS).map(([k, { name }]) => [k, { name, unit: 'score' as const }])),
+  stats: {
+    wbElo: { name: 'WildBench Elo', unit: 'elo', better: 'higher' },
+    wbEloLc: { name: 'Length-controlled WildBench Elo', unit: 'elo', better: 'higher' },
+    taskMacro: { name: 'Task macro WB-Score', unit: 'score', better: 'higher' },
+    rewardAvg: { name: 'Average WB-Reward', unit: 'score', better: 'higher' },
+    responseLength: { name: 'Average response length', unit: 'count', note: 'Mean response length in characters.' },
+  },
   aliases: {
     'Meta-Llama-3-70B-Instruct': 'llama-3-70b',
     'Meta-Llama-3-8B-Instruct': 'llama-3-8b',
@@ -37,14 +53,29 @@ const board: Leaderboard = {
     'dbrx-instruct': 'dbrx',
   },
   async fetch() {
-    const data = await fetchJson<Record<string, { WB_score?: number }>>(FEED);
+    const data = await fetchJson<Record<string, Record<string, unknown>>>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const [name, m] of Object.entries(data)) {
       if (typeof m.WB_score !== 'number') continue;
       // "Qwen1.5-72B-Chat-greedy": decoding note, not part of the name
       const model = UNLISTED[name] ?? name.replace(/-greedy$/, '');
       const stamp = model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
-      rows.push({ model, score: m.WB_score, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : '2024-08-01' });
+      const metrics: Record<string, number> = {};
+      for (const [k, { field }] of Object.entries(WB_PARTS)) {
+        const v = m[field];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = Number(v.toFixed(2));
+      }
+      for (const [field, k] of [
+        ['WB_Elo', 'wbElo'],
+        ['WB_Elo_LC', 'wbEloLc'],
+        ['WB_score.task_macro', 'taskMacro'],
+        ['RewardScore_Avg', 'rewardAvg'],
+        ['Length', 'responseLength'],
+      ] as const) {
+        const v = m[field];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = Number(v.toFixed(2));
+      }
+      rows.push({ model, score: m.WB_score, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : '2024-08-01', ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },
