@@ -16,7 +16,7 @@ const board: Leaderboard = {
   url: "https://github.com/swagshaw/voxmem",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-  stats: { '#': {name: 'Rank', unit: 'count'}, Semantics: {name: 'Semantics score', unit: '%', better: 'higher'} },
+  stats: { Semantics: {name: 'Semantics score', unit: '%', better: 'higher'} },
   aliases: {},
   
   async fetch() {
@@ -29,7 +29,7 @@ const board: Leaderboard = {
         if (!name || /^(?:human|random|oracle|.*Average|Mean )(?:\b|$)/i.test(name) || score === undefined) continue;
         const metrics: Record<string, number> = {};
         for (let i = 0; i < t.head.length; i++) {
-          if (i === (1) || i === (7)) continue;
+          if (i === (1) || i === (7) || t.head[i] === '#') continue;
           const value = num(r[i]);
           if (value !== undefined) metrics[t.head[i]] = value;
         }

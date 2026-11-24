@@ -12,7 +12,7 @@ const metricNames: Record<string, { name: string; unit: string; better?: 'higher
   turnLatency: { name: 'Turn latency', unit: 'seconds', better: 'lower' }, bcSr: { name: 'Backchannel success rate', unit: '%', better: 'higher' },
   bcJsd: { name: 'Backchannel Jensen Shannon divergence', unit: 'score', better: 'lower' }, bcFreq: { name: 'Backchannel frequency', unit: 'score', note: 'Frequency measured on a 0 to 1 scale.' },
   intSr: { name: 'Interruption success rate', unit: '%', better: 'higher' }, intLatency: { name: 'Interruption latency', unit: 'seconds', better: 'lower' },
-  intRating: { name: 'Interruption rating', unit: 'rating', better: 'higher' }, rank: { name: 'Language rank', unit: 'count', better: 'lower' },
+  intRating: { name: 'Interruption rating', unit: 'rating', better: 'higher' },
 };
 const stats = Object.fromEntries(languages.flatMap(language => Object.entries(metricNames).map(([key, value]) => [language.replaceAll(' ', '') + '_' + key, { ...value, name: language + ' ' + value.name }])));
 const board: Leaderboard = {
@@ -44,13 +44,6 @@ const board: Leaderboard = {
       metrics[lang] = cells[9]!;
       cells.forEach((value, i) => { if (value !== undefined && i !== 9) metrics[lang + '_' + keys[i]] = value; });
       byModel.set(id, metrics);
-    }
-    for (const language of languages) {
-      const lang = language.replaceAll(' ', '');
-      [...byModel.entries()]
-        .filter(([, metrics]) => Number.isFinite(metrics[lang]))
-        .sort(([, a], [, b]) => b[lang] - a[lang])
-        .forEach(([id], index) => { byModel.get(id)![lang + '_rank'] = index + 1; });
     }
     const rows: LeaderboardRow[] = [];
     for (const [id, metrics] of byModel) {

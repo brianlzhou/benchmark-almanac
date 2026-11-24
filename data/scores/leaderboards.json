@@ -319,7 +319,7 @@
       "url": "https://pranalabs.github.io/3DSceneBench/",
       "feed": "https://pranalabs.github.io/3DSceneBench/data/results.js",
       "terms": "Prana Labs publishes this results file on its project site; robots.txt has no restrictions and no separate extraction terms are stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -412,11 +412,6 @@
         "usd_list": {
           "name": "List price",
           "unit": "usd",
-          "better": "lower"
-        },
-        "publishedSceneRank": {
-          "name": "Published scene rank",
-          "unit": "count",
           "better": "lower"
         }
       }
@@ -38884,7 +38879,7 @@
       "url": "https://browsesafe.perplexity.ai/",
       "feed": "https://browsesafe.perplexity.ai/data/leaderboard.json",
       "terms": "Public static results from Perplexity. The repository is MIT licensed. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Kimi K2 (snapshot unspecified)"
@@ -38900,14 +38895,11 @@
         }
       },
       "stats": {
-        "adapted": {
-          "name": "Adapted score",
-          "unit": "score",
-          "better": "higher"
-        },
         "seed": {
-          "name": "Seed",
-          "unit": "count"
+          "name": "Seed attack success rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Attack success rate of the observed injection on the first attempt."
         }
       }
     },
@@ -44026,7 +44018,7 @@
       "url": "https://catarena.ai/leaderboard",
       "feed": "https://catarena.ai/api/ranks/games",
       "terms": "Public results credited to the CATArena organizers. https://catarena.ai/leaderboard",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Claude-4/3.7 Hybrid"
@@ -44071,38 +44063,6 @@
           "note": "Time Ratio",
           "unit": "speedup",
           "better": "higher"
-        }
-      },
-      "stats": {
-        "gomokuRank": {
-          "name": "Gomoku rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "holdemRank": {
-          "name": "Holdem rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "oibench_5Rank": {
-          "name": "OIBench-5 rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "swe_perf_10Rank": {
-          "name": "SWE-Perf-10 rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "pommermanRank": {
-          "name": "Pommerman rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "tetrisRank": {
-          "name": "Tetris rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -45935,7 +45895,7 @@
       "url": "https://cg-bench.github.io/leaderboard/",
       "feed": "https://cg-bench.github.io/leaderboard/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Chat-UniVi-v1.5",
@@ -45956,29 +45916,8 @@
         "Videochat2"
       ],
       "stats": {
-        "publishedTableRank": {
-          "name": "Published table rank",
-          "unit": "count"
-        },
-        "llmParams": {
-          "name": "Language model parameters",
-          "unit": "billions"
-        },
-        "clueFrames": {
-          "name": "Clue frames",
-          "unit": "count"
-        },
-        "longFrames": {
-          "name": "Long-video frames",
-          "unit": "count"
-        },
         "clueAccuracy": {
           "name": "Clue accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "longAccuracy": {
-          "name": "Long-video accuracy",
           "unit": "%",
           "better": "higher"
         },
@@ -46757,7 +46696,7 @@
       "url": "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100",
       "feed": "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [
         "ChemPile-LoRA-Ensemble",
@@ -46840,12 +46779,6 @@
         "Toxicity and Safety": {
           "name": "Toxicity and safety",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "temperature": {
-          "name": "Temperature",
-          "unit": "score"
         }
       }
     },
@@ -50567,18 +50500,13 @@
       "url": "https://wilds.stanford.edu/leaderboard/#civilcomments",
       "feed": "https://wilds.stanford.edu/leaderboard/",
       "terms": "The WILDS team publishes and attributes each submission at https://wilds.stanford.edu/leaderboard/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DistillBERT-base-uncased",
         "distilbert-base-uncased"
       ],
       "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "valAvg": {
           "name": "Validation average accuracy",
           "unit": "%",
@@ -85895,17 +85823,12 @@
       "url": "https://docaifabric.com/benchmarks/",
       "feed": "https://docaifabric.com/benchmarks/",
       "terms": "DocAI Fabric reserves all rights. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Platform (orchestrated)"
       ],
       "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "classification": {
           "name": "Classification accuracy",
           "unit": "%",
@@ -111976,7 +111899,7 @@
       "url": "https://github.com/josefchen/flavourbench#result",
       "feed": "https://huggingface.co/datasets/josefchen/flavourbench/resolve/main/data-complete-core/leaderboard.jsonl",
       "terms": "Hugging Face allows this file in robots.txt. The authors license derived scores and prompts under CC BY 4.0. Provider responses retain their original terms. https://raw.githubusercontent.com/josefchen/flavourbench/main/LICENSES.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "Command R+ (08-2024)",
@@ -111999,49 +111922,13 @@
         "panel2": {
           "name": "Panel 2"
         }
-      },
-      "stats": {
-        "group": {
-          "name": "Statistical rank group",
-          "unit": "count"
-        },
-        "rank": {
-          "name": "Point estimate rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "standardError": {
-          "name": "Standard error",
-          "unit": "score",
-          "better": "lower"
-        },
-        "completed": {
-          "name": "Completed tasks",
-          "unit": "count"
-        },
-        "scheduled": {
-          "name": "Scheduled tasks",
-          "unit": "count"
-        },
-        "valid": {
-          "name": "Valid scored tasks",
-          "unit": "count"
-        },
-        "parseable": {
-          "name": "Parseable tasks",
-          "unit": "count"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
-        }
       }
     },
     "flavourbench-powered-v43": {
       "url": "https://huggingface.co/datasets/josefchen/flavourbench/blob/abfa738aece424a4a04f59b1261a7f10d0de82b2/data-powered/leaderboard.jsonl",
       "feed": "https://huggingface.co/datasets/josefchen/flavourbench/resolve/abfa738aece424a4a04f59b1261a7f10d0de82b2/data-powered/leaderboard.jsonl",
       "terms": "The archived dataset card licenses derived tables and prompts under CC BY 4.0. Provider responses keep their own terms. Hugging Face robots.txt permits the archived file.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "ByteDance Seed: Seed 2.1 Turbo",
@@ -112087,15 +111974,6 @@
           "unit": "score",
           "better": "higher",
           "note": "Fraction of responses that parse successfully, stored from 0 to 1."
-        },
-        "scheduled": {
-          "name": "Scheduled tasks",
-          "unit": "count"
-        },
-        "standardError": {
-          "name": "Standard error",
-          "unit": "score",
-          "better": "lower"
         }
       }
     },
@@ -116722,7 +116600,7 @@
       "feed": "https://voicearena.com/full-duplex-bench",
       "terms": "Voice Arena publishes its public leaderboard at https://voicearena.com/full-duplex-bench.",
       "headline": "Voice Arena reports no cross-language score, so this is the plain mean of its ten language success rates.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Phonic-1"
@@ -116805,11 +116683,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "IndianEnglish_rank": {
-          "name": "Indian English Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Hindi_pauseSr": {
           "name": "Hindi Pause success rate",
           "unit": "%",
@@ -116854,11 +116727,6 @@
           "name": "Hindi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Hindi_rank": {
-          "name": "Hindi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Bengali_pauseSr": {
           "name": "Bengali Pause success rate",
@@ -116905,11 +116773,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Bengali_rank": {
-          "name": "Bengali Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Punjabi_pauseSr": {
           "name": "Punjabi Pause success rate",
           "unit": "%",
@@ -116954,11 +116817,6 @@
           "name": "Punjabi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Punjabi_rank": {
-          "name": "Punjabi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Gujarati_pauseSr": {
           "name": "Gujarati Pause success rate",
@@ -117005,11 +116863,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Gujarati_rank": {
-          "name": "Gujarati Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Marathi_pauseSr": {
           "name": "Marathi Pause success rate",
           "unit": "%",
@@ -117054,11 +116907,6 @@
           "name": "Marathi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Marathi_rank": {
-          "name": "Marathi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Kannada_pauseSr": {
           "name": "Kannada Pause success rate",
@@ -117105,11 +116953,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Kannada_rank": {
-          "name": "Kannada Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Telugu_pauseSr": {
           "name": "Telugu Pause success rate",
           "unit": "%",
@@ -117154,11 +116997,6 @@
           "name": "Telugu Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Telugu_rank": {
-          "name": "Telugu Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Tamil_pauseSr": {
           "name": "Tamil Pause success rate",
@@ -117205,11 +117043,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Tamil_rank": {
-          "name": "Tamil Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Malayalam_pauseSr": {
           "name": "Malayalam Pause success rate",
           "unit": "%",
@@ -117254,11 +117087,6 @@
           "name": "Malayalam Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Malayalam_rank": {
-          "name": "Malayalam Language rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -125701,7 +125529,7 @@
       "url": "https://huggingface.co/spaces/Salesforce/GIFT-Eval",
       "feed": "https://salesforce-gift-eval.hf.space/config",
       "terms": "The Space lists apache-2.0 for its repository. https://huggingface.co/spaces/Salesforce/GIFT-Eval/blob/main/README.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Albert",
@@ -126187,18 +126015,13 @@
           "unit": "score",
           "better": "lower"
         },
-        "MASE_Rank": {
-          "name": "Mean absolute scaled error rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "CRPS": {
           "name": "Continuous ranked probability score",
           "unit": "score",
           "better": "lower"
         },
         "CRPS_Rank": {
-          "name": "Continuous ranked probability score rank",
+          "name": "Mean CRPS rank across datasets",
           "unit": "count",
           "better": "lower"
         }
@@ -167512,7 +167335,7 @@
       "url": "https://huggingface.co/datasets/LevelCFO/levelbench-100/blob/324ad485c988ff9f3d05f7683f5d89743f4dd45b/leaderboard.json",
       "feed": "https://huggingface.co/datasets/LevelCFO/levelbench-100/resolve/324ad485c988ff9f3d05f7683f5d89743f4dd45b/leaderboard.json",
       "terms": "This snapshot separates unassisted models, CLI agents, and playbooks with human review. Level permits attributed citation. Commercial redistribution requires a written license. https://levelcfo.com/data/benchmarks/cases/LICENSE_AND_IP_NOTICE.txt Hugging Face allows crawling.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [],
       "harnesses": "system",
@@ -167531,20 +167354,16 @@
         }
       },
       "stats": {
-        "publishedRank": {
-          "name": "Published rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "rule_guided_prompt_accuracy_pct": {
           "name": "Rule guided prompt accuracy",
           "unit": "%",
           "better": "higher"
         },
         "pass3": {
-          "name": "Pass at 3",
+          "name": "pass^3",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All three attempts pass."
         },
         "bad_book_entry_rate_pct": {
           "name": "Bad book entry rate",
@@ -167585,16 +167404,6 @@
           "name": "Double-entry bookkeeping lift consistency",
           "unit": "%",
           "better": "higher"
-        },
-        "wall_time_seconds": {
-          "name": "Wall time",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "estimated_cost_usd": {
-          "name": "Estimated cost",
-          "unit": "usd",
-          "better": "lower"
         },
         "pareto_score": {
           "name": "Pareto score",
@@ -170306,7 +170115,7 @@
       "url": "https://livesecbench.intokentech.cn/",
       "feed": "https://livesecbench.intokentech.cn/ (current Dataset distribution CSV, overall_score)",
       "terms": "Intoken permits crawling under robots.txt and publishes this results CSV, with attribution retained and no separate score reuse license stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "Ernie-5.0-Preview-1022 (snapshot not cataloged)",
@@ -170339,12 +170148,6 @@
         "psychological_health": {
           "name": "Psychological health",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "rankChange": {
-          "name": "Rank change",
-          "unit": "count"
         }
       }
     },
@@ -200628,7 +200431,7 @@
       "url": "https://unipat.ai/benchmarks/MonthlySWEBench",
       "feed": "https://unipat.ai/benchmarks/MonthlySWEBench (inline SWE_DATA, newest Overall snapshot)",
       "terms": "Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -200653,10 +200456,6 @@
         },
         "turnsCompleted": {
           "name": "Completed turns",
-          "unit": "count"
-        },
-        "completed": {
-          "name": "Completed tasks",
           "unit": "count"
         },
         "passed": {
@@ -200690,22 +200489,6 @@
         "timeoutTurnsMax": {
           "name": "Maximum timeout turns",
           "unit": "count"
-        },
-        "timeoutLimitSecondsMin": {
-          "name": "Minimum timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsMedian": {
-          "name": "Median timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsAvg": {
-          "name": "Average timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsMax": {
-          "name": "Maximum timeout limit",
-          "unit": "seconds"
         }
       }
     },
@@ -211686,7 +211469,7 @@
       "url": "https://github.com/adobe-research/NoLiMa",
       "feed": "https://raw.githubusercontent.com/adobe-research/NoLiMa/HEAD/README.md",
       "terms": "Adobe licenses its evaluation and needle set for noncommercial research. https://github.com/adobe-research/NoLiMa/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
       "parts": {
@@ -211737,10 +211520,6 @@
           "name": "Effective context length",
           "unit": "thousands",
           "better": "higher"
-        },
-        "effectiveLengthBelow1K": {
-          "name": "Effective context length below 1K",
-          "unit": "count"
         },
         "claimedLengthK": {
           "name": "Claimed context length",
@@ -246596,7 +246375,7 @@
       "url": "https://github.com/MoonshotAI/PerceptionBench#leaderboard",
       "feed": "https://raw.githubusercontent.com/MoonshotAI/PerceptionBench/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -246635,17 +246414,10 @@
         "Hallu": {
           "name": "Perception-related hallucination",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "Count": {
-          "name": "Item count",
-          "unit": "count"
         },
-        "#": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
+        "Count": {
+          "name": "Counting",
+          "group": "Task type"
         }
       }
     },
@@ -257020,11 +256792,6 @@
         }
       },
       "stats": {
-        "rank": {
-          "name": "Level 3 rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "delta": {
           "name": "Difference from Laguna-XS.2 in percentage points",
           "unit": "score",
@@ -270075,7 +269842,7 @@
       "url": "https://huggingface.co/spaces/mteb/leaderboard",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/RTEB%28beta%29/scores",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "codefuse-ai/F2LLM-v2-80M",
@@ -270089,52 +269856,28 @@
         "sentence-transformers/static-similarity-mrl-multilingual-v1"
       ],
       "parts": {
-        "appsRetrieval": {
-          "name": "AppsRetrieval",
-          "group": "Task"
-        },
-        "code1Retrieval": {
-          "name": "Code1Retrieval",
-          "group": "Task"
-        },
-        "englishFinance2Retrieval": {
-          "name": "EnglishFinance2Retrieval",
-          "group": "Task"
-        },
-        "hC3FinanceRetrieval": {
-          "name": "HC3FinanceRetrieval",
-          "group": "Task"
-        },
-        "aILAStatutes": {
-          "name": "AILAStatutes",
-          "group": "Task"
-        },
-        "germanLegal1Retrieval": {
-          "name": "GermanLegal1Retrieval",
-          "group": "Task"
-        },
-        "legalSummarization": {
-          "name": "LegalSummarization",
-          "group": "Task"
-        },
-        "freshStackRetrieval": {
-          "name": "FreshStackRetrieval",
+        "wikiSQLRetrieval": {
+          "name": "WikiSQLRetrieval",
           "group": "Task"
         },
         "humanEvalRetrieval": {
           "name": "HumanEvalRetrieval",
           "group": "Task"
         },
+        "appsRetrieval": {
+          "name": "AppsRetrieval",
+          "group": "Task"
+        },
         "aILACasedocs": {
           "name": "AILACasedocs",
           "group": "Task"
         },
-        "cUREv1": {
-          "name": "CUREv1",
+        "mBPPRetrieval": {
+          "name": "MBPPRetrieval",
           "group": "Task"
         },
-        "chatDoctorRetrieval": {
-          "name": "ChatDoctorRetrieval",
+        "englishHealthcare1Retrieval": {
+          "name": "EnglishHealthcare1Retrieval",
           "group": "Task"
         },
         "japaneseCode1Retrieval": {
@@ -270145,80 +269888,96 @@
           "name": "MIRACLRetrievalHardNegatives",
           "group": "Task"
         },
-        "mBPPRetrieval": {
-          "name": "MBPPRetrieval",
-          "group": "Task"
-        },
-        "wikiSQLRetrieval": {
-          "name": "WikiSQLRetrieval",
-          "group": "Task"
-        },
-        "dS1000Retrieval": {
-          "name": "DS1000Retrieval",
-          "group": "Task"
-        },
-        "englishFinance4Retrieval": {
-          "name": "EnglishFinance4Retrieval",
-          "group": "Task"
-        },
-        "legalQuAD": {
-          "name": "LegalQuAD",
-          "group": "Task"
-        },
-        "financeBenchRetrieval": {
-          "name": "FinanceBenchRetrieval",
-          "group": "Task"
-        },
-        "germanHealthcare1Retrieval": {
-          "name": "GermanHealthcare1Retrieval",
-          "group": "Task"
-        },
-        "englishHealthcare1Retrieval": {
-          "name": "EnglishHealthcare1Retrieval",
-          "group": "Task"
-        },
-        "german1Retrieval": {
-          "name": "German1Retrieval",
-          "group": "Task"
-        },
-        "japaneseLegal1Retrieval": {
-          "name": "JapaneseLegal1Retrieval",
+        "cUREv1": {
+          "name": "CUREv1",
           "group": "Task"
         },
         "finQARetrieval": {
           "name": "FinQARetrieval",
           "group": "Task"
         },
-        "frenchLegal1Retrieval": {
-          "name": "FrenchLegal1Retrieval",
+        "legalSummarization": {
+          "name": "LegalSummarization",
           "group": "Task"
         },
-        "englishFinance1Retrieval": {
-          "name": "EnglishFinance1Retrieval",
+        "hC3FinanceRetrieval": {
+          "name": "HC3FinanceRetrieval",
+          "group": "Task"
+        },
+        "englishFinance2Retrieval": {
+          "name": "EnglishFinance2Retrieval",
+          "group": "Task"
+        },
+        "aILAStatutes": {
+          "name": "AILAStatutes",
+          "group": "Task"
+        },
+        "sWEbenchCodeRetrieval": {
+          "name": "SWEbenchCodeRetrieval",
+          "group": "Task"
+        },
+        "legalQuAD": {
+          "name": "LegalQuAD",
+          "group": "Task"
+        },
+        "germanLegal1Retrieval": {
+          "name": "GermanLegal1Retrieval",
+          "group": "Task"
+        },
+        "dS1000Retrieval": {
+          "name": "DS1000Retrieval",
+          "group": "Task"
+        },
+        "chatDoctorRetrieval": {
+          "name": "ChatDoctorRetrieval",
+          "group": "Task"
+        },
+        "code1Retrieval": {
+          "name": "Code1Retrieval",
+          "group": "Task"
+        },
+        "freshStackRetrieval": {
+          "name": "FreshStackRetrieval",
           "group": "Task"
         },
         "englishFinance3Retrieval": {
           "name": "EnglishFinance3Retrieval",
           "group": "Task"
         },
+        "german1Retrieval": {
+          "name": "German1Retrieval",
+          "group": "Task"
+        },
+        "englishFinance1Retrieval": {
+          "name": "EnglishFinance1Retrieval",
+          "group": "Task"
+        },
+        "financeBenchRetrieval": {
+          "name": "FinanceBenchRetrieval",
+          "group": "Task"
+        },
+        "englishFinance4Retrieval": {
+          "name": "EnglishFinance4Retrieval",
+          "group": "Task"
+        },
         "french1Retrieval": {
           "name": "French1Retrieval",
           "group": "Task"
         },
-        "sWEbenchCodeRetrieval": {
-          "name": "SWEbenchCodeRetrieval",
+        "frenchLegal1Retrieval": {
+          "name": "FrenchLegal1Retrieval",
+          "group": "Task"
+        },
+        "japaneseLegal1Retrieval": {
+          "name": "JapaneseLegal1Retrieval",
+          "group": "Task"
+        },
+        "germanHealthcare1Retrieval": {
+          "name": "GermanHealthcare1Retrieval",
           "group": "Task"
         }
       },
       "stats": {
-        "completedTasks": {
-          "name": "Completed tasks",
-          "unit": "count"
-        },
-        "totalTasks": {
-          "name": "Total tasks",
-          "unit": "count"
-        },
         "activeParamsB": {
           "name": "Active parameters",
           "unit": "billions"
@@ -280037,7 +279796,7 @@
       "url": "https://huggingface.co/spaces/oro-agents/smb-bench",
       "feed": "https://huggingface.co/spaces/oro-agents/smb-bench/raw/main/data/report.json",
       "terms": "ORO publishes these results under CC BY 4.0 for comparisons and audits. Hugging Face robots.txt permits the raw paths. No restricted grader data is read.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -280131,18 +279890,6 @@
           "name": "Valid runs",
           "unit": "count"
         },
-        "plannedRuns": {
-          "name": "Planned runs",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "simulatedDays": {
-          "name": "Simulated days",
-          "unit": "count"
-        },
         "changedMarginScore": {
           "name": "Changed-quarter margin score",
           "unit": "score",
@@ -280168,16 +279915,6 @@
           "name": "Active minus control",
           "unit": "score",
           "better": "higher"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens per call",
-          "unit": "tokens"
-        },
-        "profit_all": {
-          "name": "Profit per quarter",
-          "unit": "usd",
-          "better": "higher",
-          "note": "Mean profit over the 18 benchmark tasks."
         },
         "profit_day0": {
           "name": "Profit on day 0",
@@ -290154,7 +289891,7 @@
       "url": "https://www.superclueai.com/specialized/DeepSWE",
       "feed": "https://www.superclueai.com/data/specialized_list/DeepSWE/2026%E5%B9%B410%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "harnesses": "system",
@@ -290176,10 +289913,6 @@
         "cachedTokens": {
           "name": "Cached input tokens",
           "unit": "tokens"
-        },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
         },
         "timeouts": {
           "name": "Timeouts",
@@ -302576,7 +302309,7 @@
       "url": "https://tis-100.wincon.dev/#leaderboard",
       "feed": "https://raw.githubusercontent.com/wincon-research/tis100-bench/main/models.csv",
       "terms": "The repository uses MIT and requests credit to Wincon and the model for programs. The site permits crawling and the raw file host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -302589,13 +302322,6 @@
         "proximity": {
           "name": "Record proximity",
           "unit": "%"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -316707,7 +316433,7 @@
       "url": "https://video-reality-test.github.io/",
       "feed": "https://video-reality-test.github.io/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -316744,13 +316470,6 @@
         "Step Video": {
           "name": "Step Video",
           "group": "Source model"
-        }
-      },
-      "stats": {
-        "reviewerRank": {
-          "name": "Reviewer rank",
-          "unit": "rating",
-          "better": "lower"
         }
       }
     },
@@ -321608,7 +321327,7 @@
       "url": "https://github.com/swagshaw/voxmem",
       "feed": "https://raw.githubusercontent.com/swagshaw/voxmem/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Audio-Flamingo-Next",
@@ -321633,10 +321352,6 @@
         }
       },
       "stats": {
-        "#": {
-          "name": "Rank",
-          "unit": "count"
-        },
         "Semantics": {
           "name": "Semantics score",
           "unit": "%",

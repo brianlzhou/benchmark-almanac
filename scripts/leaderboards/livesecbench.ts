@@ -15,7 +15,6 @@ const board: Leaderboard = {
 }, url: PAGE,
   feed: `${PAGE} (current Dataset distribution CSV, overall_score)`,
   terms: 'Intoken permits crawling under robots.txt and publishes this results CSV, with attribution retained and no separate score reuse license stated.',
-  stats:{rankChange:{name:'Rank change',unit:'count'}},
   aliases: {
     'Kimi-K2-0711': 'kimi-k2-jul-2025',
     'mistralai/mistral-large-2411': 'mistral-large-2-nov-2024',
@@ -42,8 +41,8 @@ const board: Leaderboard = {
       return { model, open: r.is_open_source === 'True' ? true : r.is_open_source === 'False' ? false : undefined,
         setting: r.is_reasoning === 'True' ? 'reasoning' : r.is_reasoning === 'False' ? 'non-reasoning' : undefined, score: Number(r.overall_score),
         date: dateParts ? `${dateParts[1]}-${dateParts[2].padStart(2, '0')}-${dateParts[3].padStart(2, '0')}` : undefined,
-        metrics: { ...(/^[-+]?\d+$/.test(r.rank_change) ? {rankChange: Number(r.rank_change)} : {}), ...Object.fromEntries(['ethics', 'legality', 'privacy', 'factuality', 'psychological_health'].flatMap(k =>
-          r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : [])) },
+        metrics: Object.fromEntries(['ethics', 'legality', 'privacy', 'factuality', 'psychological_health'].flatMap(k =>
+          r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : [])),
       };
     });
   },

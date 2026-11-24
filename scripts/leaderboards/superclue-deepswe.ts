@@ -14,5 +14,5 @@ export default workbookBoard({
   parts: [],
   settings: ["测评方式", "限时"],
   harness: "智能体框架",
-  metrics: {"costPerTaskCny": "平均每题价格(元)", "latencyMinutes": "平均每题运行时间(分钟)", "inputTokens": "平均每题输入tokens", "cachedTokens": "平均每题输入缓存命中tokens", "outputTokens": "平均每题输出tokens", "questions": "题目数量", "timeouts": "超时题目数量", "totalTokens": "平均每题token消耗"},
+  metrics: {"costPerTaskCny": "平均每题价格(元)", "latencyMinutes": "平均每题运行时间(分钟)", "inputTokens": "平均每题输入tokens", "cachedTokens": "平均每题输入缓存命中tokens", "outputTokens": "平均每题输出tokens", "timeouts": "超时题目数量", "totalTokens": "平均每题token消耗"},
 });

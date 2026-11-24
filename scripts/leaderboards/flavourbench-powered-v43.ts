@@ -29,7 +29,7 @@ const board: Leaderboard = {
     "Anthropic: Claude Fable 5": "claude-fable-5"
 },
   parts: { constraint: 'Constraint', cultural_composition: 'Cultural composition', pairing: 'Pairing', substitution: 'Substitution' },
-  stats: { completed: { name: 'Completed tasks', unit: 'count' }, completion_rate: { name: 'Completion rate', unit: 'score', better: 'higher', note: 'Fraction of eligible responses that complete the task, stored from 0 to 1.' }, parseable: { name: 'Parseable tasks', unit: 'count' }, parseable_rate: { name: 'Parseable task rate', unit: 'score', better: 'higher', note: 'Fraction of responses that parse successfully, stored from 0 to 1.' }, scheduled: { name: 'Scheduled tasks', unit: 'count' }, standardError: { name: 'Standard error', unit: 'score', better: 'lower' } },
+  stats: { completed: { name: 'Completed tasks', unit: 'count' }, completion_rate: { name: 'Completion rate', unit: 'score', better: 'higher', note: 'Fraction of eligible responses that complete the task, stored from 0 to 1.' }, parseable: { name: 'Parseable tasks', unit: 'count' }, parseable_rate: { name: 'Parseable task rate', unit: 'score', better: 'higher', note: 'Fraction of responses that parse successfully, stored from 0 to 1.' } },
   async fetch() {
     type Entry = { eligible: boolean; model_name: string; flavourbench_score: number; score_pointwise_95_ci: number[];
       score_simultaneous_95_ci: number[]; bootstrap_rank_95_interval: number[]; score_standard_error: number;
@@ -40,8 +40,9 @@ const board: Leaderboard = {
       const [simultaneousLow, simultaneousHigh] = r.score_simultaneous_95_ci;
       const [rankLow, rankHigh] = r.bootstrap_rank_95_interval;
       if (!r.model_name || ![r.flavourbench_score, low, high, ...Object.keys(board.parts!).map(k => r.family_scores[k])].every(Number.isFinite)) throw new Error('Incomplete FlavourBench score');
-      return { model: r.model_name, score: r.flavourbench_score, low, high, metrics: { ...r.family_scores, ...r.availability,
-        simultaneousLow, simultaneousHigh, rankLow, rankHigh, standardError: r.score_standard_error } };
+      const { scheduled: _scheduled, ...avail } = r.availability;
+      return { model: r.model_name, score: r.flavourbench_score, low, high, metrics: { ...r.family_scores, ...avail,
+        simultaneousLow, simultaneousHigh, rankLow, rankHigh, stderr: r.score_standard_error } };
     });
     if (rows.length !== 25) throw new Error('Unexpected ranked field in archived FlavourBench');
     return rows;
