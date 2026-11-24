@@ -1,5 +1,14 @@
 {
-  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "ai-agent-privacy": {
+    "agent": "wired",
+    "Agent": "wired",
+    "AgentDAM": "ignore",
+    "AgentDAM (ours)": "ignore",
+    "trajectories": "ignore"
+  },
+  "bird-python": {
+    "Verified": "wired"
+  },
   "boards": {
     "3dcodearena": {
       "Time (s)↕": "ignore",
@@ -3422,5 +3431,70 @@
     "zeroclue": {
       "param_desc": "ignore"
     }
+  },
+  "co-design-bench": {
+    "org": "ignore"
+  },
+  "cvqa": {
+    "submission__id": "wired",
+    "submission__method_name": "wired",
+    "submission__submission_metadata": "wired"
+  },
+  "drop": {
+    "Date": "wired",
+    "DATE": "ignore"
+  },
+  "etva": {
+    "Multi-agent QG": "ignore"
+  },
+  "ewok": {
+    "Mean LogProbs Accuracy": "wired"
+  },
+  "formal-logic-deduction": {
+    "steps": "ignore",
+    "Steps": "ignore",
+    "warmup steps": "ignore"
+  },
+  "jethics": {
+    "Parameters": "wired"
+  },
+  "livemace": {
+    "Traces": "wired"
+  },
+  "multimedqa": {
+    "Model (number of parameters)": "wired"
+  },
+  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "phyre": {
+    "Agent": "wired"
+  },
+  "s-ember": {
+    "Location trace": "ignore",
+    "Location Trace": "ignore",
+    "Time / duration": "ignore",
+    "Time Duration": "ignore",
+    "Interval Prediction": "wired"
+  },
+  "scenefun3d": {
+    "submission__id": "ignore",
+    "submission__method_name": "wired",
+    "submission__submitted_at": "wired"
+  },
+  "slip-zero-shot-transfer-suite": {
+    "#params.": "wired"
+  },
+  "valor-32k": {
+    "Params": "wired",
+    "Share weights": "ignore",
+    "std": "ignore"
+  },
+  "vigil3d": {
+    "# Parameters": "wired",
+    "Inference Time": "wired"
+  },
+  "worldprediction": {
+    "Avg. Duration (s)": "ignore",
+    "# Samples": "ignore",
+    "Avg. # Samples per Annotator": "ignore"
   }
 }
