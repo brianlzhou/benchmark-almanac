@@ -332,12 +332,23 @@ const epochScore = (r: EpochRow) => ({
   date: r[5] ?? modelById.get(r[1])?.released ?? null,
 });
 
-/** Epoch AI's own runs: independent, like a leaderboard. */
-export const epochScores: Score[] = epoch.rows.filter((r) => viaOf(r) === 'epoch').map((r) => ({ ...epochScore(r), source: 'epoch' as const }));
-
 const hostOf = (u: string | null | undefined) => (u ?? '').match(/https?:\/\/([^/\s?#]+)/i)?.[1].toLowerCase().replace(/^www\./, '') ?? '';
 // the hosts of the boards the almanac reads itself, per benchmark: Epoch's copy of one of them is a duplicate
 const readHosts = new Map(Object.entries(lb.boards).map(([id, x]) => [id, new Set([hostOf(x.url), hostOf(x.feed)].filter(Boolean))]));
+
+// Epoch AI's own benchmarks (FrontierMath, SpireClimb and others) have a board the almanac reads from epoch.ai, and
+// Epoch's data export holds the same runs. A run shows once: from the board when the board lists that model, and
+// from the export when the board doesn't (the board leaves out some older models the export keeps). Since 2026-11-24.
+const epochOwnBoardModels = new Map<string, Set<string>>();
+for (const s of boardRuns) if (readHosts.get(s.benchmark)?.has('epoch.ai')) {
+  if (!epochOwnBoardModels.has(s.benchmark)) epochOwnBoardModels.set(s.benchmark, new Set());
+  epochOwnBoardModels.get(s.benchmark)!.add(s.model);
+}
+
+/** Epoch AI's own runs: independent, like a leaderboard. */
+export const epochScores: Score[] = epoch.rows
+  .filter((r) => viaOf(r) === 'epoch' && !epochOwnBoardModels.get(r[0])?.has(r[1]))
+  .map((r) => ({ ...epochScore(r), source: 'epoch' as const }));
 
 /**
  * Scores Epoch AI collected from somewhere else, and where from. A copy of a leaderboard the almanac reads
