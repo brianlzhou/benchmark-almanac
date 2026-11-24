@@ -71,6 +71,8 @@ export const SCALE_ALIASES: Record<string, string> = {
   // the July 2025 Kimi K2 Instruct (the September one is "-0905")
   'kimi-k2-instruct': 'kimi-k2-jul-2025',
   'Muse Wonder 1.0': 'muse-wonder',
+  'Gemini 2.5 Pro 03-25': 'gemini-2-5-pro-mar-2025',
+  'Gemini 2.5 Pro 06-05': 'gemini-2-5-pro-jun-2025',
 };
 
 /** The feed line for a board: the page, and which tab's entries the importer reads. */
@@ -146,6 +148,17 @@ const HARNESSES: [RegExp, string][] = [
   [/^gemini[\s-]?cli$/i, 'Gemini CLI'],
   [/^co[\s-]?work$/i, 'Cowork'],
   [/^terminus[\s-]?2$/i, 'terminus-2'],
+  [/^one[\s-]?pass[\s-]?agent$/i, 'one-pass-agent'],
+  [/^mcp[\s-]?atlas$/i, 'mcp-atlas'],
+  [/^open[\s-]?code$/i, 'OpenCode'],
+  [/^open[\s-]?hands$/i, 'OpenHands'],
+  [/^deepseek[\s-]?harness$/i, 'DeepSeek Harness'],
+  [/^antigravity[\s-]?cli$/i, 'Antigravity CLI'],
+  [/^grok[\s-]?build$/i, 'Grok Build'],
+  [/^kimi[\s-]?code(?:[\s-]?cli)?$/i, 'Kimi Code'],
+  [/^mistral[\s-]?vibe$/i, 'Mistral Vibe'],
+  [/^muse[\s-]?code$/i, 'Muse Code'],
+  [/^devin$/i, 'Devin'],
 ];
 
 /** The harness for a name Scale writes ("Claude Code", "Mini-SWE", "codex"), or undefined. */
@@ -195,8 +208,9 @@ export function scaleName(raw: string): ScaleName {
       setting = lvl.toLowerCase();
       return paren;
     })
-    .replace(/\s(minimal|low|medium|high|xhigh)\s*(\(([^()]+)\))/i, (m, lvl: string, paren: string, inner: string) => {
+    .replace(/\s(minimal|low|medium|high|xhigh)\s*(\(([^()]+)\))/i, (m, lvl: string, paren: string, inner: string, offset: number) => {
       if (setting || !scaleHarness(inner)) return m;
+      if (/^medium$/i.test(lvl) && /\bmistral$/i.test(s.slice(0, offset))) return m;
       setting = lvl.toLowerCase();
       return ` ${paren}`;
     });

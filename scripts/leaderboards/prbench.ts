@@ -17,6 +17,8 @@ const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | nu
 
 const board: Leaderboard = {
   benchmark: 'prbench',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE, 'legal'),
   terms: SCALE_TERMS,

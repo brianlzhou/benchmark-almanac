@@ -8,6 +8,8 @@ const PAGE = scaleUrl('distressbench');
 
 const board: Leaderboard = {
   benchmark: 'distressbench',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,

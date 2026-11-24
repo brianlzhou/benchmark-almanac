@@ -9,6 +9,8 @@ const PAGE = scaleUrl('mcp_atlas');
 
 const board: Leaderboard = {
   benchmark: 'mcp-atlas',
+  harnesses: 'system',
+  reference: ['mcp-atlas'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,

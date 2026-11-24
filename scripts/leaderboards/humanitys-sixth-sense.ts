@@ -17,6 +17,8 @@ const PAGE = scaleUrl('hss');
 
 const board: Leaderboard = {
   benchmark: 'humanitys-sixth-sense',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,

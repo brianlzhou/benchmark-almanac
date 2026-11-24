@@ -8,6 +8,8 @@ const PAGE = scaleUrl('multichallenge');
 
 const board: Leaderboard = {
   benchmark: 'multichallenge',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: `${PAGE} (large and small model tabs in Next.js flight data)`,
   terms: `${SCALE_TERMS} The almanac credits and links Scale's source.`,

@@ -11,6 +11,8 @@ const PAGE = 'https://rsi-benchmark.com/tasks';
 
 const board: Leaderboard = {
   benchmark: 'rsi-bench-scale',
+  harnesses: 'system',
+  reference: ['terminus-2'],
   url: PAGE,
   feed: `${PAGE} (the leaderboard table in the static HTML)`,
   terms:

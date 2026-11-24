@@ -10,11 +10,16 @@ const board: Leaderboard = {
   feed,
   terms: "The dataset card lists BSD-2-Clause. The scoreboard gives no separate reuse license. https://huggingface.co/datasets/noelo-lab/decbench-dataset The site publishes crawler content signals in robots.txt.",
   parts: { ged: 'Structural Correctness (GED)', type_match: 'Type Correctness', byte_match: 'Recompilation Bytematch' },
+  stats: {
+    latency: { name: 'Mean time per function', unit: 'seconds', better: 'lower' },
+    medianLatency: { name: 'Median time per function', unit: 'seconds', better: 'lower' },
+    totalCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     type Counts = [number, number];
     const data = await fetchJson<{
       combos: Record<string, { overall: Record<string, Counts>; per_metric: Record<string, Record<string, Counts>> }>;
-      cost: Record<string, { dollars?: { model?: string; per_function: number }; time?: { mean_s: number } }>;
+      cost: Record<string, { dollars?: { model?: string; per_function: number; total?: number }; time?: { mean_s: number; median_s?: number } }>;
       decompiler_registry: Record<string, { display_name: string; url: string }>;
       decompiler_presets: Record<string, string[]>;
     }>(feed);
@@ -30,7 +35,11 @@ const board: Leaderboard = {
       const entry = data.decompiler_registry[key];
       const metrics: Record<string, number> = {};
       for (const metric of Object.keys(board.parts!)) metrics[metric] = percent(sample.per_metric[key][metric]);
-      if (usage.time) metrics.latency = usage.time.mean_s;
+      if (usage.time) {
+        metrics.latency = usage.time.mean_s;
+        if (typeof usage.time.median_s === 'number' && Number.isFinite(usage.time.median_s)) metrics.medianLatency = usage.time.median_s;
+      }
+      if (typeof usage.dollars.total === 'number' && Number.isFinite(usage.dollars.total)) metrics.totalCostUsd = usage.dollars.total;
       rows.push({ model: usage.dollars.model, harness: entry.display_name, link: entry.url, score: percent(counts), cost: usage.dollars.per_function, metrics });
     }
     if (rows.length < 2) throw new Error('Missing model-based decompiler results');

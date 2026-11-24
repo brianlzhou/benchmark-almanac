@@ -28,6 +28,8 @@ const MODES: [string, string][] = [
 
 const board: Leaderboard = {
   benchmark: 'audio-mc',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: `${PAGE} (the text and audio variants in the page's Next.js flight data)`,
   terms: `${SCALE_TERMS} The Almanac credits and links the source.`,

@@ -5,7 +5,7 @@ import type { Leaderboard } from './types.ts';
 import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 const PAGE = scaleUrl('swe_bench_pro');
 const board: Leaderboard = {
-  benchmark: 'swe-bench-pro-private', url: PAGE, feed: scaleFeed(PAGE, 'private'),
+  benchmark: 'swe-bench-pro-private', harnesses: 'system', reference: ['mini-SWE-agent', 'SWE-agent'], url: PAGE, feed: scaleFeed(PAGE, 'private'),
   terms: `${SCALE_TERMS} The almanac credits and links Scale's source.`,
   aliases: SCALE_ALIASES,
   fetch: async () => scaleRows(await fetchScaleEntries(PAGE, 'private'), (n) => ({ harness: n.harness ?? (n.marks.includes('*') ? 'mini-SWE-agent' : 'SWE-agent') })),

@@ -14,6 +14,8 @@ const ci = (e: ScaleEntry & { confidenceInterval_upper?: number }) => {
 
 const board: Leaderboard = {
   benchmark: 'swe-atlas-1-1',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: 'Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.',

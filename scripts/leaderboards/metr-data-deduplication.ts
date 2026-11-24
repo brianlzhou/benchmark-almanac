@@ -45,6 +45,10 @@ const board: Leaderboard = {
   url: "https://metr.org/evaluations/openai-o1-preview-report/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  aliases: {
+    "o1-preview (METR 2024 snapshot)": "o1-preview",
+    "o1-mini (METR 2024 snapshot)": "o1-mini",
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return checkedImageRows(IMAGE, SHA256, ROWS);
   },

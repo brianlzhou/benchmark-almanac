@@ -16,6 +16,8 @@ const ci = (e: ScaleEntry & { confidenceInterval_upper?: number }) => {
 
 const board: Leaderboard = {
   benchmark: 'fortress',
+  harnesses: 'system',
+  reference: ['one-pass-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,

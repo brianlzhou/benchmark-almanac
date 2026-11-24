@@ -13,6 +13,7 @@ const board:Leaderboard={
   diamond: { name: 'Diamond', group: 'Split' },
 },url:'https://github.com/idavidrein/gpqa',feed:FEED+' (saved full-set baseline table)',
   terms:'The GPQA repository publishes this analysis notebook under its MIT license. Benchmark Almanac credits and links the authors.',
+  aliases:{'Llama-2-70B-chat':'llama-2-70b','gpt-3.5-turbo-16k-0613':'gpt-3-5-turbo-jun-2023'},
   async fetch():Promise<LeaderboardRow[]> {
     const data=await fetchJson<Notebook>(FEED);
     for(const cell of data.cells){
