@@ -9,6 +9,10 @@ const board: Leaderboard = { benchmark: "frontiercad-assemblies", url: sourceBoa
   passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
   tokenCoverage: { name: 'Token coverage', unit: '%' },
   turnCoverage: { name: 'Turn coverage', unit: '%' },
+  meanTotalTokens: { name: 'Mean total tokens', unit: 'tokens', better: 'lower' },
+  meanTurns: { name: 'Mean turns', unit: 'count', better: 'lower' },
+  meanGeometry: { name: 'Mean geometry score', unit: 'score', better: 'higher' },
+  meanEditability: { name: 'Mean editability score', unit: 'score', better: 'higher' },
  },
  fetch: () => trackRows("^Assemblies;", "^Assemblies;\\s*") };
 export default board;

@@ -1,14 +1,20 @@
-// Read EvalPlus greedy pass@1, the prompt mode, model size, and published training-data flags.
-import type { LeaderboardRow } from '../../leaderboards/types.ts';
+// Read EvalPlus greedy pass@1, the prompt mode, model size, link, and published training-data flags.
+import type { BoardStat, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
 
 export const EVALPLUS_FEED = 'https://evalplus.github.io/results.json';
+
+export const EVALPLUS_STATS: Record<string, BoardStat> = {
+  activeParams: { name: 'Active parameters', unit: 'billions' },
+  fullyOpenTrainingData: { name: 'Fully open training data', unit: 'count', note: '1 when EvalPlus marks the model training data as fully open, 0 otherwise.' },
+  partiallyOpenTrainingData: { name: 'Partially open training data', unit: 'count', note: '1 when EvalPlus marks the model training data as partially open, 0 otherwise.' },
+};
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 /** One row per model with pass@1 on `task`: "humaneval", "humaneval+", "mbpp" or "mbpp+". */
 export async function evalplusRows(task: 'humaneval' | 'humaneval+' | 'mbpp' | 'mbpp+'): Promise<LeaderboardRow[]> {
-  const data = await fetchJson<Record<string, { 'pass@1'?: Record<string, number | null>; 'open-data'?: string; prompted?: boolean; size?: number | null }>>(EVALPLUS_FEED);
+  const data = await fetchJson<Record<string, { 'pass@1'?: Record<string, number | null>; 'open-data'?: string; prompted?: boolean; size?: number | null; link?: string }>>(EVALPLUS_FEED);
   const rows: LeaderboardRow[] = [];
   for (const [name, e] of Object.entries(data)) {
     const score = e['pass@1']?.[task];
@@ -33,9 +39,10 @@ export async function evalplusRows(task: 'humaneval' | 'humaneval+' | 'mbpp' | '
       metrics.fullyOpenTrainingData = Number(e['open-data'] === 'Full');
       metrics.partiallyOpenTrainingData = Number(e['open-data'] === 'Partial');
     }
+    const link = typeof e.link === 'string' && /^https?:\/\/\S+$/.test(e.link.trim()) ? e.link.trim() : undefined;
     rows.push({ model: historicalCommand ? 'Command-R+ (April 2024)' : model, score, date,
       setting: typeof e.prompted === 'boolean' ? (e.prompted ? 'chat prompt' : 'code completion') : undefined,
-
+      link,
       params: activeSize ? undefined : size,
       metrics });
   }

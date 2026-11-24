@@ -5,10 +5,31 @@
 // (pass@1, out of every task the model ran), and the other columns are means per task, as the page's summary table
 // shows them. The data version in each address comes from the page's script and only busts caches.
 import { gunzipSync } from 'node:zlib';
-import type { LeaderboardRow } from '../../leaderboards/types.ts';
+import type { BoardStat, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchBytes, parseCsv } from '../util.ts';
 
 export const RAMP_TERMS = 'Ramp Labs publishes the per-task results files its pages load. No license is stated, so we read them politely and credit Ramp with a link.';
+
+export const RAMP_STATS: Record<string, BoardStat> = {
+  latency: { name: 'Mean latency per task', unit: 'seconds', better: 'lower' },
+  toolCalls: { name: 'Mean tool calls per task', unit: 'count', better: 'lower' },
+  turns: { name: 'Mean turns per task', unit: 'count', better: 'lower' },
+  inputTokens: { name: 'Input tokens per task', unit: 'tokens' },
+  reasoningTokens: { name: 'Reasoning tokens per task', unit: 'tokens' },
+  totalTokens: { name: 'Total tokens per task', unit: 'tokens' },
+  cacheReadTokens: { name: 'Cache read tokens per task', unit: 'tokens' },
+  cacheCreationTokens: { name: 'Cache creation tokens per task', unit: 'tokens' },
+  thinkingBlocks: { name: 'Mean thinking blocks per task', unit: 'count' },
+  toolErrors: { name: 'Mean tool errors per task', unit: 'count', better: 'lower' },
+  timeoutRate: { name: 'Timeout rate', unit: '%', better: 'lower' },
+  toolCallsSearch: { name: 'Mean search tool calls per task', unit: 'count' },
+  toolCallsRead: { name: 'Mean read tool calls per task', unit: 'count' },
+  toolCallsEdit: { name: 'Mean edit tool calls per task', unit: 'count' },
+  toolCallsTest: { name: 'Mean test tool calls per task', unit: 'count' },
+  toolCallsQuality: { name: 'Mean quality tool calls per task', unit: 'count' },
+  toolCallsShell: { name: 'Mean shell tool calls per task', unit: 'count' },
+  tasks: { name: 'Tasks', unit: 'count' },
+};
 
 /** Harness names as the page shows them. */
 const HARNESS: Record<string, string> = {
@@ -48,7 +69,7 @@ export async function rampRows(file: string, opts: { ci95: boolean; minRows: num
     groups.get(g)!.push(r);
   }
   const mean = (rs: Record<string, string>[], k: string) => {
-    const xs = rs.map((r) => Number(r[k])).filter((x) => r_ok(x));
+    const xs = rs.map((r) => (r[k] === '' || r[k] === undefined ? NaN : Number(r[k]))).filter((x) => r_ok(x));
     return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : undefined;
   };
   const r_ok = (x: number) => Number.isFinite(x);
@@ -60,8 +81,20 @@ export async function rampRows(file: string, opts: { ci95: boolean; minRows: num
     const time = mean(rs, 'time_elapsed_seconds') ?? mean(rs, 'agent_elapsed');
     const metrics: Record<string, number> = {};
     const put = (k: string, v: number | undefined, digits = 1) => { if (v !== undefined) metrics[k] = Math.round(v * 10 ** digits) / 10 ** digits; };
-    put('latency', time); put('toolCalls', mean(rs, 'agent_tool_calls')); put('turns', mean(rs, 'agent_turn'));
+    put('latency', time); put('toolCalls', mean(rs, 'agent_tool_calls')); put('turns', mean(rs, 'agent_turns') ?? mean(rs, 'agent_turn'));
     put('inputTokens', mean(rs, 'agent_prompt_tokens'), 0); put('reasoningTokens', mean(rs, 'agent_reasoning_tokens'), 0);
+    put('totalTokens', mean(rs, 'agent_total_tokens'), 0);
+    put('cacheReadTokens', mean(rs, 'agent_cache_read_tokens'), 0);
+    put('cacheCreationTokens', mean(rs, 'agent_cache_creation_tokens'), 0);
+    put('thinkingBlocks', mean(rs, 'agent_thinking_blocks'));
+    put('toolErrors', mean(rs, 'agent_tool_errors'));
+    if ('agent_timeout' in rs[0]) put('timeoutRate', (rs.filter((r) => r.agent_timeout === 'True').length / rs.length) * 100);
+    put('toolCallsSearch', mean(rs, 'agent_tool_calls_search'));
+    put('toolCallsRead', mean(rs, 'agent_tool_calls_read'));
+    put('toolCallsEdit', mean(rs, 'agent_tool_calls_edit'));
+    put('toolCallsTest', mean(rs, 'agent_tool_calls_test'));
+    put('toolCallsQuality', mean(rs, 'agent_tool_calls_quality'));
+    put('toolCallsShell', mean(rs, 'agent_tool_calls_shell'));
     put('tasks', n, 0);
     const [low, high] = wilson(solved, n, 1.96);
     rows.push({

@@ -3,7 +3,7 @@
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
 type Metric = { value: number | null; unit: string; label: string };
-type Run = { model: string; metrics: Record<string, Metric>; raw?: { reasoning?: string } };
+type Run = { model: string; metrics: Record<string, Metric>; confidence_interval_95?: string | null; per_run_scores?: number[] | null; raw?: { reasoning?: string; harness?: string; ciHalf?: number; ci?: { lo?: number; hi?: number; runs?: number } } };
 const FEED='https://fireworks.ai/specialized-intelligence-index/api/index.json';
 export function fireworksBoard(benchmark:string,slug:string):Leaderboard {
  return {benchmark,url:`https://fireworks.ai/specialized-intelligence-index/benchmarks/${slug}`,feed:FEED,
@@ -18,8 +18,14 @@ export function fireworksBoard(benchmark:string,slug:string):Leaderboard {
     const cost=r.metrics.cost_per_task??r.metrics.cost_per_deck;
     const output=Object.values(r.metrics).find(m=>m.unit==='tokens'&&/^Output tokens \/ task$/i.test(m.label));
     const metrics=Object.fromEntries(Object.entries(r.metrics).filter(([k,v])=>k!=='score'&&typeof v.value==='number').map(([k,v])=>[k,v.value as number]));
-    if (['web-search/web-context', 'finance/sheetbench'].includes(slug) && typeof r.metrics.se?.value === 'number') metrics.stderr = r.metrics.se.value;
-    return {model:r.model,score,setting:r.raw?.reasoning,date:source.last_updated,cost:cost?.unit==='USD'?cost.value??undefined:undefined,tokens:output?.value??undefined,metrics};
+    if (typeof r.metrics.se?.value === 'number') metrics.stderr = r.metrics.se.value;
+    let low:number|undefined,high:number|undefined;
+    if (typeof r.raw?.ci?.lo === 'number' && typeof r.raw?.ci?.hi === 'number') { low = r.raw.ci.lo; high = r.raw.ci.hi; }
+    else if (typeof r.raw?.ciHalf === 'number' && Number.isFinite(r.raw.ciHalf) && r.raw.ciHalf >= 0) { low = Math.round((score - r.raw.ciHalf) * 100) / 100; high = Math.round((score + r.raw.ciHalf) * 100) / 100; }
+    else if (typeof r.confidence_interval_95 === 'string') { const m = r.confidence_interval_95.match(/(-?\d+(?:\.\d+)?)\s*[–-]\s*(-?\d+(?:\.\d+)?)/); if (m) { low = Number(m[1]); high = Number(m[2]); } }
+    const trials = r.per_run_scores?.length || (typeof r.metrics.k?.value === 'number' && r.metrics.k.value > 0 ? r.metrics.k.value : undefined);
+    const harness = typeof r.raw?.harness === 'string' && r.raw.harness.trim() ? r.raw.harness.trim() : undefined;
+    return {model:r.model,score,setting:r.raw?.reasoning,harness,date:source.last_updated,cost:cost?.unit==='USD'?cost.value??undefined:undefined,tokens:output?.value??undefined,trials,low,high,metrics};
    });
    if(!rows.length)throw new Error('Fireworks result rows missing');return rows;
   }

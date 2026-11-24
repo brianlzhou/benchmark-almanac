@@ -4,9 +4,9 @@
 // "GPT 4o (Aug 2024)" carry a month, which becomes the row date (the month's last day) so the resolver picks
 // the snapshot current then. The board was last updated in early 2025.
 import type { Leaderboard } from './types.ts';
-import { EVALPLUS_FEED, evalplusRows } from '../lib/boards/evalplus.ts';
+import { EVALPLUS_FEED, EVALPLUS_STATS, evalplusRows } from '../lib/boards/evalplus.ts';
 
-export { EVALPLUS_FEED, evalplusRows };
+export { EVALPLUS_FEED, EVALPLUS_STATS, evalplusRows };
 export const EVALPLUS_PAGE = 'https://evalplus.github.io/leaderboard.html';
 export const EVALPLUS_TERMS = 'Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.';
 
@@ -36,7 +36,7 @@ const board: Leaderboard = {
   feed: `${EVALPLUS_FEED} (pass@1 humaneval+)`,
   terms: EVALPLUS_TERMS,
   aliases: EVALPLUS_ALIASES,
-  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
+  stats: EVALPLUS_STATS,
   fetch: () => evalplusRows('humaneval+'),
 };
 export default board;

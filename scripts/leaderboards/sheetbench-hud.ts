@@ -5,7 +5,7 @@ board.stats = {
   duration_per_task: { name: 'Duration per task', unit: 'seconds', better: 'lower' },
   k: { name: 'Attempt budget', unit: 'count' },
   uncachedInput: { name: 'Uncached input tokens per task', unit: 'tokens' },
-  cachedTokens: { name: 'Cached tokens', unit: 'tokens' },
-  recordedOutput: { name: 'Output tokens', unit: 'tokens' },
+  cachedTokens: { name: 'Cached tokens', unit: 'tokens', note: 'Total cached input tokens across the evaluation run.' },
+  recordedOutput: { name: 'Output tokens', unit: 'tokens', note: 'Total output tokens recorded across the evaluation run.' },
 };
 export default board;

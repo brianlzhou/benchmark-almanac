@@ -4,7 +4,7 @@
 // Code, Codex, OpenCode and others, the v2.1 view). Rows in a lab's agent are their own entries. Read through
 // scripts/lib/boards/ramp-swebench.ts from the two results files the page loads.
 import type { Leaderboard } from './types.ts';
-import { RAMP_TERMS, rampRows } from '../lib/boards/ramp-swebench.ts';
+import { RAMP_STATS, RAMP_TERMS, rampRows } from '../lib/boards/ramp-swebench.ts';
 
 const BASH = 'https://labs.ramp.com/swebench/v2/data/results.csv.gz?v=76a34ea52c9f9485';
 const NATIVE = 'https://labs.ramp.com/swebench/v2/data/v21/results.csv.gz?v=2eb3d0363478edc5';
@@ -16,7 +16,7 @@ const board: Leaderboard = {
   terms: RAMP_TERMS,
   reference: ['mini-SWE-agent'],
   harnesses: 'system',
-  stats: { latency: { name: 'Mean latency per task', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Mean tool calls per task', unit: 'count', better: 'lower' }, inputTokens: { name: 'Input tokens per task', unit: 'tokens' }, reasoningTokens: { name: 'Reasoning tokens per task', unit: 'tokens' }, tasks: { name: 'Tasks', unit: 'count' } },
+  stats: RAMP_STATS,
   chart: { title: 'Score versus spend', x: { key: 'cost', label: 'Mean cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Resolved', unit: '%', better: 'higher' } },
   async fetch() {
     const bash = await rampRows(BASH, { ci95: true, minRows: 15 });

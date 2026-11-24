@@ -29084,7 +29084,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/healthcare/bedside-bench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Doximity Ask V7"
@@ -67005,7 +67005,7 @@
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks publishes these Epiq evaluations under https://fireworks.ai/terms-of-service.",
       "host": "Fireworks AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
       "chart": {
@@ -68140,7 +68140,7 @@
       "url": "https://benchmarks.coval.ai/stt",
       "feed": "https://benchmarks-api-6wxgp27p2a-ue.a.run.app/v1/results/aggregates?benchmark=STT&window=24h&include_series=false",
       "terms": "Public Coval dashboard API and Apache-2.0 benchmark repository. The almanac credits Coval and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "assemblyai/stt-3.7-realtime-agent",
@@ -68171,9 +68171,34 @@
         "zoom/scribe",
         "zoom/scribe-pro-v2.1"
       ],
+      "chart": {
+        "title": "Word error rate vs. time to final segment",
+        "x": {
+          "key": "AudioToFinalMean",
+          "label": "Mean time to final segment",
+          "unit": "s",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean word error rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      },
       "stats": {
         "mean": {
           "name": "Mean word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "min": {
+          "name": "Minimum word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "max": {
+          "name": "Maximum word error rate",
           "unit": "%",
           "better": "lower"
         },
@@ -68199,6 +68224,21 @@
         },
         "p95": {
           "name": "95th percentile word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werInsertions": {
+          "name": "WER insertions",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werDeletions": {
+          "name": "WER deletions",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werSubstitutions": {
+          "name": "WER substitutions",
           "unit": "%",
           "better": "lower"
         },
@@ -68238,7 +68278,7 @@
       "url": "https://benchmarks.coval.ai/tts",
       "feed": "https://benchmarks-api-6wxgp27p2a-ue.a.run.app/v1/results/aggregates?benchmark=TTS&window=24h&include_series=false",
       "terms": "Public Coval dashboard API and Apache-2.0 benchmark repository. The almanac credits Coval and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "airy/airy-tts-v1",
@@ -68272,9 +68312,34 @@
         "speechify/simba-3.2",
         "speechify/simba-3.5"
       ],
+      "chart": {
+        "title": "Time to first audio vs. word error rate",
+        "x": {
+          "key": "score",
+          "label": "Median time to first audio",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "WERMean",
+          "label": "Mean word error rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      },
       "stats": {
         "mean": {
           "name": "Mean time to first audio",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "min": {
+          "name": "Minimum time to first audio",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "max": {
+          "name": "Maximum time to first audio",
           "unit": "ms",
           "better": "lower"
         },
@@ -68324,6 +68389,21 @@
         },
         "WERMean": {
           "name": "Mean word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werInsertions": {
+          "name": "WER insertions",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werDeletions": {
+          "name": "WER deletions",
+          "unit": "%",
+          "better": "lower"
+        },
+        "werSubstitutions": {
+          "name": "WER substitutions",
           "unit": "%",
           "better": "lower"
         }
@@ -71606,7 +71686,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/customer-support/cresta-bench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
       "chart": {
@@ -74421,7 +74501,7 @@
       "url": "https://cwe-bench.com/#leaderboard",
       "feed": "https://cwe-bench.com/ (v2 all table data attributes)",
       "terms": "Collinear AI publishes the public results and Apache-2.0 dataset; the Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
       "chart": {
@@ -74439,12 +74519,42 @@
           "better": "higher"
         }
       },
+      "parts": {
+        "public": {
+          "name": "Public set",
+          "note": "Pass@1 on the public task subset."
+        },
+        "heldout": {
+          "name": "Held-out set",
+          "note": "Pass@1 on the private held-out task subset."
+        }
+      },
       "stats": {
         "passAt4": {
           "name": "Pass@4",
           "unit": "%",
           "better": "higher",
           "note": "Share of tasks solved within four rollouts under the deterministic programmatic verifier."
+        },
+        "publicPassAt4": {
+          "name": "Public set Pass@4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "heldoutPassAt4": {
+          "name": "Held-out set Pass@4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "publicCost": {
+          "name": "Public set mean cost per rollout",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "heldoutCost": {
+          "name": "Held-out set mean cost per rollout",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -77059,7 +77169,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/data-science/dayjob-data-science",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "chart": {
@@ -80403,6 +80513,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80447,6 +80567,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80474,6 +80604,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80503,6 +80643,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80526,6 +80676,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80554,6 +80714,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80587,6 +80757,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80640,6 +80820,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80669,6 +80859,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80714,6 +80914,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80732,6 +80942,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80771,6 +80991,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80798,6 +81028,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80849,6 +81089,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80876,6 +81126,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -80936,6 +81196,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -80963,6 +81233,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81032,6 +81312,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81097,6 +81387,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81124,6 +81424,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81155,6 +81465,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81212,6 +81532,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81272,6 +81602,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81305,6 +81645,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81340,6 +81690,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81381,6 +81741,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81408,6 +81778,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81437,6 +81817,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81464,6 +81854,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81507,6 +81907,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81534,6 +81944,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81575,6 +81995,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81630,6 +82060,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81672,6 +82112,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81732,6 +82182,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81776,6 +82236,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81804,6 +82274,16 @@
           "unit": "%",
           "better": "higher"
         },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
         "battles": {
           "name": "Battles",
           "unit": "count"
@@ -81831,6 +82311,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -81879,6 +82369,16 @@
           "name": "Win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
         },
         "battles": {
           "name": "Battles",
@@ -113349,7 +113849,7 @@
       "url": "https://normal.ai/research/frontiercad",
       "feed": "https://normal.ai/research/frontiercad",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -113380,7 +113880,7 @@
       "url": "https://normal.ai/research/frontiercad",
       "feed": "https://normal.ai/research/frontiercad",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -113394,9 +113894,8 @@
         },
         "passRate": {
           "name": "Pass rate",
-          "unit": "score",
-          "better": "higher",
-          "note": "Fraction of tasks passed, stored from 0 to 1."
+          "unit": "%",
+          "better": "higher"
         },
         "tokenCoverage": {
           "name": "Token coverage",
@@ -121211,7 +121710,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/slide-generation/genspark-slides-benchmark",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Gen-1 Slides"
@@ -121325,7 +121824,7 @@
       "url": "https://geobench.org/",
       "feed": "https://geobench.org/assets/index-*.js (JSON.parse data in the current bundle, all published maps)",
       "terms": "Data shipped in the public geobench.org bundle; the site states no terms and the GeoBench repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 59,
       "unmatched": [],
       "costPer": "run",
@@ -135104,7 +135603,7 @@
       "feed": "https://evalplus.github.io/results.json (pass@1 humaneval)",
       "terms": "Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.",
       "host": "EvalPlus",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -135191,6 +135690,16 @@
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
+        },
+        "fullyOpenTrainingData": {
+          "name": "Fully open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as fully open, 0 otherwise."
+        },
+        "partiallyOpenTrainingData": {
+          "name": "Partially open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as partially open, 0 otherwise."
         }
       }
     },
@@ -135256,7 +135765,7 @@
       "url": "https://evalplus.github.io/leaderboard.html",
       "feed": "https://evalplus.github.io/results.json (pass@1 humaneval+)",
       "terms": "Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -135343,6 +135852,16 @@
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
+        },
+        "fullyOpenTrainingData": {
+          "name": "Fully open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as fully open, 0 otherwise."
+        },
+        "partiallyOpenTrainingData": {
+          "name": "Partially open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as partially open, 0 otherwise."
         }
       }
     },
@@ -178320,7 +178839,7 @@
       "feed": "https://evalplus.github.io/results.json (pass@1 mbpp)",
       "terms": "Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.",
       "host": "EvalPlus",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 35,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -178382,6 +178901,16 @@
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
+        },
+        "fullyOpenTrainingData": {
+          "name": "Fully open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as fully open, 0 otherwise."
+        },
+        "partiallyOpenTrainingData": {
+          "name": "Partially open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as partially open, 0 otherwise."
         }
       }
     },
@@ -178389,7 +178918,7 @@
       "url": "https://evalplus.github.io/leaderboard.html",
       "feed": "https://evalplus.github.io/results.json (pass@1 mbpp+)",
       "terms": "Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 35,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -178451,6 +178980,16 @@
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
+        },
+        "fullyOpenTrainingData": {
+          "name": "Fully open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as fully open, 0 otherwise."
+        },
+        "partiallyOpenTrainingData": {
+          "name": "Partially open training data",
+          "unit": "count",
+          "note": "1 when EvalPlus marks the model training data as partially open, 0 otherwise."
         }
       }
     },
@@ -205571,7 +206110,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/web-search/web-context",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -250983,7 +251522,7 @@
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks publishes the Novee results under https://fireworks.ai/terms-of-service",
       "host": "Fireworks AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
       "chart": {
@@ -254039,7 +254578,7 @@
       "url": "https://labs.ramp.com/swebench/v1",
       "feed": "https://labs.ramp.com/swebench/data/results.csv.gz?v=1742b69260ebc328",
       "terms": "Ramp Labs publishes the per-task results files its pages load. No license is stated, so we read them politely and credit Ramp with a link.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "chart": {
@@ -254080,6 +254619,18 @@
           "name": "Reasoning tokens per task",
           "unit": "tokens"
         },
+        "totalTokens": {
+          "name": "Total tokens per task",
+          "unit": "tokens"
+        },
+        "cacheReadTokens": {
+          "name": "Cache read tokens per task",
+          "unit": "tokens"
+        },
+        "cacheCreationTokens": {
+          "name": "Cache creation tokens per task",
+          "unit": "tokens"
+        },
         "tasks": {
           "name": "Tasks",
           "unit": "count"
@@ -254090,7 +254641,7 @@
       "url": "https://labs.ramp.com/swebench#leaderboard",
       "feed": "https://labs.ramp.com/swebench/v2/data/results.csv.gz?v=76a34ea52c9f9485 and https://labs.ramp.com/swebench/v2/data/v21/results.csv.gz?v=2eb3d0363478edc5",
       "terms": "Ramp Labs publishes the per-task results files its pages load. No license is stated, so we read them politely and credit Ramp with a link.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 40,
       "unmatched": [
         "mai-code-2-flash"
@@ -254126,6 +254677,11 @@
           "unit": "count",
           "better": "lower"
         },
+        "turns": {
+          "name": "Mean turns per task",
+          "unit": "count",
+          "better": "lower"
+        },
         "inputTokens": {
           "name": "Input tokens per task",
           "unit": "tokens"
@@ -254133,6 +254689,56 @@
         "reasoningTokens": {
           "name": "Reasoning tokens per task",
           "unit": "tokens"
+        },
+        "totalTokens": {
+          "name": "Total tokens per task",
+          "unit": "tokens"
+        },
+        "cacheReadTokens": {
+          "name": "Cache read tokens per task",
+          "unit": "tokens"
+        },
+        "cacheCreationTokens": {
+          "name": "Cache creation tokens per task",
+          "unit": "tokens"
+        },
+        "thinkingBlocks": {
+          "name": "Mean thinking blocks per task",
+          "unit": "count"
+        },
+        "toolErrors": {
+          "name": "Mean tool errors per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "timeoutRate": {
+          "name": "Timeout rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "toolCallsSearch": {
+          "name": "Mean search tool calls per task",
+          "unit": "count"
+        },
+        "toolCallsRead": {
+          "name": "Mean read tool calls per task",
+          "unit": "count"
+        },
+        "toolCallsEdit": {
+          "name": "Mean edit tool calls per task",
+          "unit": "count"
+        },
+        "toolCallsTest": {
+          "name": "Mean test tool calls per task",
+          "unit": "count"
+        },
+        "toolCallsQuality": {
+          "name": "Mean quality tool calls per task",
+          "unit": "count"
+        },
+        "toolCallsShell": {
+          "name": "Mean shell tool calls per task",
+          "unit": "count"
         },
         "tasks": {
           "name": "Tasks",
@@ -254687,7 +255293,7 @@
       "url": "https://withspecific.com/blog/real-swe",
       "feed": "https://withspecific.com/blog/real-swe",
       "terms": "Specific terms restrict automated crawling. The almanac credits and links Specific.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "Particle-1"
@@ -254708,6 +255314,11 @@
         }
       },
       "stats": {
+        "passes": {
+          "name": "Passed rollouts",
+          "unit": "count",
+          "better": "higher"
+        },
         "meanToolCalls": {
           "name": "Mean tool calls per rollout",
           "unit": "count",
@@ -254716,6 +255327,41 @@
         "meanMinutes": {
           "name": "Mean minutes per rollout",
           "unit": "minutes",
+          "better": "lower"
+        },
+        "failUnverifiedAssumption": {
+          "name": "Unverified assumption failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failMissedRequirement": {
+          "name": "Missed requirement failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failMisunderstoodTask": {
+          "name": "Misunderstood task failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failIntegrationError": {
+          "name": "Integration error failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failWrongLogic": {
+          "name": "Wrong logic failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failRegression": {
+          "name": "Regression failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failWrongFile": {
+          "name": "Wrong file failures",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -271322,7 +271968,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/finance/sheetbench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "chart": {
@@ -271361,11 +272007,13 @@
         },
         "cachedTokens": {
           "name": "Cached tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "note": "Total cached input tokens across the evaluation run."
         },
         "recordedOutput": {
           "name": "Output tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "note": "Total output tokens recorded across the evaluation run."
         }
       }
     },
@@ -280788,9 +281436,7 @@
       "terms": "Handshake terms restrict bulk collection and republication. The almanac credits Handshake AI and links its published aggregate results.",
       "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": [
-        "control"
-      ],
+      "unmatched": [],
       "chart": {
         "title": "Learning gain vs. session cost",
         "x": {
@@ -280806,6 +281452,16 @@
           "better": "higher"
         }
       },
+      "parts": {
+        "quant": {
+          "name": "Quantitative",
+          "note": "Mean learning gain on quantitative topics, in percentage points."
+        },
+        "verbal": {
+          "name": "Verbal",
+          "note": "Mean learning gain on verbal topics, in percentage points."
+        }
+      },
       "stats": {
         "participants": {
           "name": "Participants",
@@ -280815,6 +281471,33 @@
           "name": "Median response time",
           "unit": "seconds",
           "better": "lower"
+        },
+        "adjustedGain": {
+          "name": "ANCOVA adjusted learning gain",
+          "unit": "score",
+          "better": "higher",
+          "note": "Covariate-adjusted marginal learning gain in percentage points."
+        },
+        "meanStudentMessages": {
+          "name": "Mean student messages",
+          "unit": "count"
+        },
+        "costPerGainPp": {
+          "name": "Cost per percentage point gained",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "strategyScore": {
+          "name": "Instructional strategy score",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of six instructional strategies observed in tutoring conversations."
+        },
+        "flagRate": {
+          "name": "Flagged answers per 100",
+          "unit": "score",
+          "better": "lower",
+          "note": "Flagged tutoring responses per 100 student-answered items."
         }
       }
     },
