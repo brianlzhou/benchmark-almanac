@@ -10,17 +10,48 @@ import { num } from '../lib/html.ts';
 
 const PAGE = 'https://epoch.ai/benchmarks/epoch-automation-reports';
 
+const EPOCH_CATS: Record<string, string> = {
+  'Graphic design': 'graphicDesign',
+  'Data insight generation': 'dataInsight',
+  'AI data center research': 'aiDataCenter',
+  Research: 'research',
+};
+
 const board: Leaderboard = {
   benchmark: 'epoch-automation-reports',
+  parts: {
+    graphicDesign: { name: 'Graphic design', group: 'Category' },
+    dataInsight: { name: 'Data insight generation', group: 'Category' },
+    aiDataCenter: { name: 'AI data center research', group: 'Category' },
+    research: { name: 'Research', group: 'Category' },
+  },
   url: PAGE,
   feed: `${PAGE} (server-rendered heatmap, average cells)`,
   terms: 'Server-rendered Epoch AI page (robots.txt allows /benchmarks/); Epoch publishes its benchmark data under CC BY 4.0.',
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
+    const byKey = new Map<string, { model: string; harness: string; score?: number; metrics: Record<string, number> }>();
+    for (const m of html.matchAll(/aria-label="([^"(]+?)\s*\(([^)]+)\),\s*([^:]+):\s*([\d.]+)%"/g)) {
+      const model = m[1].trim();
+      const harness = m[2].trim();
+      const label = m[3].trim();
+      const v = num(m[4]);
+      if (v === undefined) continue;
+      const key = `${model}|${harness}`;
+      const entry = byKey.get(key) ?? { model, harness, metrics: {} };
+      if (label === 'average') entry.score = v;
+      else if (EPOCH_CATS[label]) entry.metrics[EPOCH_CATS[label]] = v;
+      byKey.set(key, entry);
+    }
     const rows: LeaderboardRow[] = [];
-    for (const m of html.matchAll(/aria-label="([^"(]+?)\s*\(([^)]+)\), average: ([\d.]+)%"/g)) {
-      const score = num(m[3]);
-      if (score !== undefined) rows.push({ model: m[1].trim(), score, harness: m[2].trim() });
+    for (const e of byKey.values()) {
+      if (e.score === undefined) continue;
+      rows.push({
+        model: e.model,
+        score: e.score,
+        harness: e.harness,
+        metrics: Object.keys(e.metrics).length ? e.metrics : undefined,
+      });
     }
     if (!rows.length) throw new Error('no average cells on the Epoch Automation Reports page');
     return rows;

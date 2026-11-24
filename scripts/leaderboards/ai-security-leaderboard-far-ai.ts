@@ -42,13 +42,13 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     const re = /\{name:"([^"]+)",supersededBy:(?:"[^"]+"|null),archivedOn:(?:"([^"]+)"|null),logo:[^,]+,testingDate:(?:"([^"]+)"|null),minimalStandardVersion:[^,]+,value:(\d+),cost:"([^"]+)",badgeLabel:"([^"]+)",findings:\{([\s\S]*?)\}\}\}/g;
     for (const m of source.matchAll(re)) {
-      const findings = m[6];
+      const findings = m[7];
       const metrics: Record<string, number> = {};
       for (const domain of DOMAIN_KEYS) {
-        const hit = findings.match(new RegExp(`${domain.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}:\\{[^}]*avgCost:"([^\"]+)"`));
+        const hit = findings.match(new RegExp(`"?${domain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"?:\\{[^}]*avgCost:"([^"]+)"`));
         if (hit) metrics[domain.replace(/[^A-Za-z]+/g, '')] = value(hit[1]);
       }
-      rows.push({ model: m[1], score: value(m[5]), date: dateOf(m[3]), metrics });
+      rows.push({ model: m[1], score: value(m[5]), date: dateOf(m[3]), metrics: Object.keys(metrics).length ? metrics : undefined });
     }
     if (rows.length < 4) throw new Error(`FAR.AI: ${rows.length} models, expected at least 4`);
     return rows;

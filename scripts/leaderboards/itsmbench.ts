@@ -22,9 +22,15 @@ const board: Leaderboard = {
       const scoreMatch = html.match(/<span class="tnum ml-auto[^>]*">([0-9.]+)<\/span>/);
       if (!modelMatch || !scoreMatch) continue;
       const setting = html.match(/title="Published as &quot;([^&]+)&quot;/)?.[1];
+      const href = html.match(/href="(\/trajectories\?[^"]+)"/)?.[1];
       const score = Number(scoreMatch[1]);
       if (!Number.isFinite(score)) throw new Error('Invalid ITSMBench score');
-      rows.push({ model: modelMatch[1].trim(), score, setting: setting ? `pass^1; ${setting}` : 'pass^1' });
+      rows.push({
+        model: modelMatch[1].trim(),
+        score,
+        setting: setting ? `pass^1, ${setting}` : 'pass^1',
+        link: href ? new URL(href, feed).href : undefined,
+      });
     }
     if (rows.length < 2) throw new Error('Expected at least two ITSMBench models');
     return rows;

@@ -8,11 +8,23 @@ import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 import { CAIS_PAGE, CAIS_TERMS } from './cais-text-capabilities-index.ts';
 
-const DOMAINS = ['K', 'RW', 'M', 'R', 'WM', 'MS', 'MR', 'V', 'A', 'S'];
+const DOMAINS = [
+  ['K', 'k', 'General knowledge'],
+  ['RW', 'rw', 'Reading and writing'],
+  ['M', 'm', 'Math'],
+  ['R', 'r', 'Reasoning'],
+  ['WM', 'wm', 'Working memory'],
+  ['MS', 'ms', 'Memory storage'],
+  ['MR', 'mr', 'Memory retrieval'],
+  ['V', 'v', 'Visual'],
+  ['A', 'a', 'Auditory'],
+  ['S', 's', 'Speed'],
+] as const;
 const MODELS: Record<string, string> = { gpt4Data: 'GPT-4 (snapshot unspecified)', gpt5Data: 'GPT-5' };
 
 const board: Leaderboard = {
   benchmark: 'agi-definition-score',
+  parts: Object.fromEntries(DOMAINS.map(([, key, name]) => [key, { name, group: 'Domain', unit: 'score', note: 'Score out of 10.' }])),
   url: `${CAIS_PAGE}#automation`,
   feed: `${CAIS_PAGE} (page JS chunk, AGI radar gpt4Data and gpt5Data, sum of ten domains)`,
   terms: CAIS_TERMS,
@@ -27,8 +39,10 @@ const board: Leaderboard = {
         const at = js.search(new RegExp(`${prop}:\\w+=\\{`));
         if (at < 0) throw new Error(`${prop} not found`);
         const d = jsLiteral<Record<string, number>>(js, js.indexOf('{', at));
-        if (!DOMAINS.every((k) => typeof d[k] === 'number')) throw new Error(`unexpected ${prop} domains: ${Object.keys(d).join(', ')}`);
-        rows.push({ model, score: DOMAINS.reduce((a, k) => a + d[k], 0) });
+        if (!DOMAINS.every(([code]) => typeof d[code] === 'number')) throw new Error(`unexpected ${prop} domains: ${Object.keys(d).join(', ')}`);
+        const metrics: Record<string, number> = {};
+        for (const [code, key] of DOMAINS) metrics[key] = d[code];
+        rows.push({ model, score: DOMAINS.reduce((a, [code]) => a + d[code], 0), metrics });
       }
       return rows;
     }

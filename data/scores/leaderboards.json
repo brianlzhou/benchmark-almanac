@@ -7251,11 +7251,73 @@
       "url": "https://dashboard.safe.ai/#automation",
       "feed": "https://dashboard.safe.ai/ (page JS chunk, AGI radar gpt4Data and gpt5Data, sum of ten domains)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "GPT-4 (snapshot unspecified)"
-      ]
+      ],
+      "parts": {
+        "k": {
+          "name": "General knowledge",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "rw": {
+          "name": "Reading and writing",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "m": {
+          "name": "Math",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "r": {
+          "name": "Reasoning",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "wm": {
+          "name": "Working memory",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "ms": {
+          "name": "Memory storage",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "mr": {
+          "name": "Memory retrieval",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "v": {
+          "name": "Visual",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "a": {
+          "name": "Auditory",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "s": {
+          "name": "Speed",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        }
+      }
     },
     "agi-eval-community-base": {
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
@@ -9222,9 +9284,36 @@
       "url": "https://leaderboard.far.ai/",
       "feed": "https://leaderboard.far.ai/assets/index-B6DSpVcx.js",
       "terms": "FAR.AI publishes the leaderboard for research use and provides no separate data license. Results are credited to FAR.AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "Chemical": {
+          "name": "Chemical",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Biological": {
+          "name": "Biological",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "RadiologicalNuclear": {
+          "name": "Radiological & Nuclear",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Explosives": {
+          "name": "Explosives",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Cyber": {
+          "name": "Cyber",
+          "group": "Domain",
+          "unit": "usd"
+        }
+      }
     },
     "ai-spire-agi-eval": {
       "url": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
@@ -30965,7 +31054,8 @@
       "url": "https://www.lesswrong.com/posts/4pgGkbwvdmxKPcJsM/bench-on-the-clocktower",
       "feed": "https://res.cloudinary.com/lesswrong-2-0/image/upload/v1790323324/lexical_client_uploads/zladdbqfjjcqlrwjjdlg.png (chart labels transcribed 2026-11-05)",
       "terms": "Read once through LessWrong's public GraphQL API to confirm the chart; the win rates are cited to the post's authors.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": []
     },
@@ -45842,9 +45932,51 @@
       "url": "https://www.cheatbench.ai/",
       "feed": "https://www.cheatbench.ai/ (leaderboard table, Average)",
       "terms": "Server-rendered public page; the site has no robots.txt and no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "mr": {
+          "name": "Mathematical Research",
+          "group": "Category"
+        },
+        "mm": {
+          "name": "Multimodal",
+          "group": "Category"
+        },
+        "cw": {
+          "name": "Creative Writing",
+          "group": "Category"
+        },
+        "svg": {
+          "name": "SVG Competition",
+          "group": "Category"
+        },
+        "mc": {
+          "name": "Menial Computation",
+          "group": "Category"
+        },
+        "bio": {
+          "name": "Biology and Bioinformatics",
+          "group": "Category"
+        },
+        "kw": {
+          "name": "Knowledge Work",
+          "group": "Category"
+        },
+        "bg": {
+          "name": "Board Games",
+          "group": "Category"
+        },
+        "sy": {
+          "name": "Sycophancy",
+          "group": "Category"
+        },
+        "swe": {
+          "name": "Software Engineering",
+          "group": "Category"
+        }
+      }
     },
     "checkerbench": {
       "url": "https://arxiv.org/html/2610.07557",
@@ -74649,7 +74781,7 @@
       "url": "https://atlas.village.dev/benchmarks/ctf-archive-diamond",
       "feed": "https://atlas.village.dev/benchmarks/ctf-archive-diamond (the published leaderboard table)",
       "terms": "Village LLM Atlas publishes this table under CC BY-SA 4.0 and links each result source. Results are credited to Village.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
     },
@@ -95562,9 +95694,27 @@
       "url": "https://epoch.ai/benchmarks/epoch-automation-reports",
       "feed": "https://epoch.ai/benchmarks/epoch-automation-reports (server-rendered heatmap, average cells)",
       "terms": "Server-rendered Epoch AI page (robots.txt allows /benchmarks/); Epoch publishes its benchmark data under CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "graphicDesign": {
+          "name": "Graphic design",
+          "group": "Category"
+        },
+        "dataInsight": {
+          "name": "Data insight generation",
+          "group": "Category"
+        },
+        "aiDataCenter": {
+          "name": "AI data center research",
+          "group": "Category"
+        },
+        "research": {
+          "name": "Research",
+          "group": "Category"
+        }
+      }
     },
     "epoch-capabilities-index": {
       "url": "https://epoch.ai/eci",
@@ -112090,7 +112240,7 @@
       "url": "https://flageval.baai.ac.cn/#/leaderboard/debate",
       "feed": "https://flageval.baai.ac.cn/api/trending/arena/nlp",
       "terms": "The official FlagEval ranking feed is public. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Baichuan 4",
@@ -112104,7 +112254,18 @@
         "Qwen-Max-0919",
         "SenseChat-5",
         "Yi-34B-Chat"
-      ]
+      ],
+      "stats": {
+        "avgWinRate": {
+          "name": "Average win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "battles": {
+          "name": "Pairwise battles",
+          "unit": "count"
+        }
+      }
     },
     "flame-react-eval": {
       "url": "https://arxiv.org/html/2503.01619",
@@ -154097,7 +154258,7 @@
       "url": "https://enterpriseworlds.vibrantlabs.com/",
       "feed": "https://enterpriseworlds.vibrantlabs.com/",
       "terms": "Enterprise Worlds publishes this leaderboard for public reading. https://enterpriseworlds.vibrantlabs.com/ GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "GLM-5p2",
@@ -158779,7 +158940,8 @@
         "percept / adv",
         "qianlan",
         "redde / redde-v7"
-      ]
+      ],
+      "verified": "Verified by the EvalAI challenge host."
     },
     "kimi-asr-internal-moonshot-subset1": {
       "url": "https://github.com/MoonshotAI/Kimi-Audio-Evalkit/blob/main/LEADERBOARD.md",
@@ -158858,9 +159020,16 @@
       "url": "https://www.kimi.com/blog/kimi-k3-1-pro",
       "feed": "https://www.kimi.com/blog/kimi-k3-1-pro",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "hardWithTools": {
+          "name": "Hard subset (with tools)",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "kina": {
       "url": "https://huggingface.co/datasets/2077AIDataFoundation/KINA/resolve/main/README.md",
@@ -172088,7 +172257,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/primeintellect/llm-writer-negative-style/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22yv4pux6ewjrwcks8aqr8dugq%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect's robots.txt allows environment pages and disallows /api. The public dashboard reads this query. Prime Intellect's terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": []
     },
@@ -181865,7 +182034,7 @@
       "url": "https://mbabench.org",
       "feed": "https://mbabench.org",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "ChatGPT (Excel)",
@@ -193991,7 +194160,7 @@
       "url": "https://mls-bench.com/leaderboard",
       "feed": "https://mls-bench.com/leaderboard (server-rendered HTML table, MLS-Bench-Lite Performance)",
       "terms": "Server-rendered public page; the site publishes no robots.txt and no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": []
     },
@@ -277066,11 +277235,37 @@
       "url": "https://every.to/benchmarks/senior-engineer-benchmark",
       "feed": "https://every.to/benchmarks/senior-engineer-benchmark",
       "terms": "Every publishes the benchmark results on its public page. https://every.to/benchmarks/senior-engineer-benchmark",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "GPT-5.6"
-      ]
+      ],
+      "parts": {
+        "invariantPlan": {
+          "name": "Invariant clarity and plan quality (out of 20)",
+          "group": "Rubric"
+        },
+        "simplification": {
+          "name": "Simplification outcome (out of 25)",
+          "group": "Rubric"
+        },
+        "endToEndWiring": {
+          "name": "End-to-end wiring (out of 10)",
+          "group": "Rubric"
+        },
+        "noStubs": {
+          "name": "No stubs or parallel authority (out of 17)",
+          "group": "Rubric"
+        },
+        "correctnessProof": {
+          "name": "Correctness proof and incident preservation (out of 25)",
+          "group": "Rubric"
+        },
+        "runtimeDurability": {
+          "name": "Runtime durability and lifecycle (out of 3)",
+          "group": "Rubric"
+        }
+      }
     },
     "senior-engineer-benchmark-every-checks": {
       "url": "https://checks.every.to/p/senior-engineer-benchmark",
@@ -325560,11 +325755,29 @@
       "url": "https://workbuddybench.com/index.html",
       "feed": "https://workbuddybench.com/roster.js and https://workbuddybench.com/data.js (core-track Avg per harness)",
       "terms": "Static data scripts on workbuddybench.com, which has no robots.txt and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Hy4-dev"
-      ]
+      ],
+      "parts": {
+        "code": {
+          "name": "Code",
+          "group": "Track"
+        },
+        "web": {
+          "name": "Web",
+          "group": "Track"
+        },
+        "office": {
+          "name": "Office",
+          "group": "Track"
+        },
+        "security": {
+          "name": "Security",
+          "group": "Track"
+        }
+      }
     },
     "workbuddy-user-blind-evaluation-tencent": {
       "url": "https://huggingface.co/tencent/Hy4-flash#user-blind-evaluation",
