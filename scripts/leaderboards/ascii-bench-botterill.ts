@@ -16,7 +16,9 @@ const board: Leaderboard = {
   },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Rank|Model|Score|95% CI|Votes|Win rate');
-    if (!table || table.length < 14) throw new Error('Missing rated ASCII Bench models');
+    // The table lists only models with enough votes, and the count moves: 12 on the afternoon of 2026-11-23, 13 an
+    // hour later. The floor only catches a broken read, so it sits below that.
+    if (!table || table.length < 11) throw new Error('Missing rated ASCII Bench models');
     return table.slice(1).map(([, name, rating, interval, votes, wins]) => {
       const anchor = name.html.match(/<a\b[^>]*href="(\/models\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/);
       const bounds = interval.html.match(/title="(\d+)–(\d+)"/);

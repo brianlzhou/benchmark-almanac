@@ -18,6 +18,8 @@ export interface Store {
   rows: Row[];
   otherColumns?: string[];
   others?: Row[];
+  /** Importers that have failed every read so far, so their board has no facts to carry a `failed` record. */
+  unread?: Record<string, { since: string; date: string; error: string }>;
 }
 
 /** The rows file a board's entries live in: the first character of its id. */
@@ -73,6 +75,6 @@ export function writeScores(store: Store) {
   for (const f of readdirSync(dir)) if (f.endsWith('.json') && !shards.has(f.slice(0, -5))) rmSync(join(dir, f));
   writeFileSync(
     dataPath('scores', 'leaderboards.json'),
-    `{\n  "retrieved": ${JSON.stringify(index.retrieved)},\n  "rowsIn": "${ROWS_DIR}/<first character of the board id>.json",\n  "boards": ${JSON.stringify(index.boards, null, 2).replace(/\n/g, '\n  ')},\n  "columns": ${JSON.stringify(index.columns)},\n  "otherColumns": ${JSON.stringify(index.otherColumns ?? [])}\n}\n`,
+    `{\n  "retrieved": ${JSON.stringify(index.retrieved)},\n  "rowsIn": "${ROWS_DIR}/<first character of the board id>.json",\n  "boards": ${JSON.stringify(index.boards, null, 2).replace(/\n/g, '\n  ')},\n${index.unread && Object.keys(index.unread).length ? `  "unread": ${JSON.stringify(index.unread, null, 2).replace(/\n/g, '\n  ')},\n` : ''}  "columns": ${JSON.stringify(index.columns)},\n  "otherColumns": ${JSON.stringify(index.otherColumns ?? [])}\n}\n`,
   );
 }

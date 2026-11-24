@@ -22,13 +22,16 @@ export function ttsRelease(benchmark:string,version:string,langCount:number,data
      board.parts={};
      for(const clone of [false,true]){
        if(rows.length) await new Promise(resolve=>setTimeout(resolve,1100));
-       const res=await fetch(feed,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({data:[version,'',35.3,46,languages.slice(0,langCount),datasets.slice(0,datasetCount),clone]}),signal:AbortSignal.timeout(60000)});
+       // The callback takes every input in order. On 2026-11-23 the Space added an eighth, "Highlight models", and a
+       // call without it ends in an error event, so this sends it empty.
+       const res=await fetch(feed,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({data:[version,'',35.3,46,languages.slice(0,langCount),datasets.slice(0,datasetCount),clone,[]]}),signal:AbortSignal.timeout(60000)});
        if(!res.ok) throw new Error('TTS table callback failed: '+res.status);
        const {event_id}=await res.json();
        if(!/^[a-f\d]+$/.test(event_id)) throw new Error('Missing TTS event');
        await new Promise(resolve=>setTimeout(resolve,1100));
-       const raw=(await fetchText(feed+'/'+event_id)).match(/event: complete\r?\ndata: (.+)/)?.[1];
-       if(!raw) throw new Error('Incomplete TTS table callback');
+       const stream=await fetchText(feed+'/'+event_id);
+       const raw=stream.match(/event: complete\r?\ndata: (.+)/)?.[1];
+       if(!raw) throw new Error('Incomplete TTS table callback'+(/event: error/.test(stream)?' (the Space answered with an error event, so check its inputs at /gradio_api/info)':''));
        const valid=raw.replace(/"(?:\\.|[^"\\])*"|\bNaN\b/g, token=>token==='NaN'?'null':token);
        const t=JSON.parse(valid)[0].value as {headers:string[];data:(number|string|null)[][]};
        const get=(label:string)=>{const i=t.headers.indexOf(label);if(i<0) throw new Error('Missing '+label);return i;};
@@ -42,7 +45,8 @@ export function ttsRelease(benchmark:string,version:string,langCount:number,data
            if(typeof r[i]==='number' && ![score,size].includes(i)) metrics[k==='Rank'?'cloningModeRank':k]=r[i] as number;
          });
          metrics.languagesScored=parseInt(String(r[coverage]));
-         rows.push({model:text(String(r[model])),score:r[score] as number,setting:clone?'Voice cloning':'Without voice cloning',
+         // the Space marks recently added models with a "NEW" badge inside the model cell, before any footnote mark
+         rows.push({model:text(String(r[model])).replace(/\s+NEW(?=\s*[¹²³⁴⁵⁶⁷⁸⁹⁰]*$)/,''),score:r[score] as number,setting:clone?'Voice cloning':'Without voice cloning',
            link:String(r[model]).match(/href="([^"]+)"/)?.[1],params:typeof r[size]==='number'?r[size] as number:undefined,
            license:text(String(r[license]??'')),metrics});
        }
