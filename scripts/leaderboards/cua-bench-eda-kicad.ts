@@ -11,7 +11,6 @@ const board: Leaderboard = {
   stats: {
     fullPass: { name: 'Full passes', unit: 'count', better: 'higher' },
     partialPass: { name: 'Partial passes', unit: 'count', better: 'higher' },
-    tasks: { name: 'Tasks', unit: 'count' },
     meanReward: { name: 'Mean reward', unit: 'score', better: 'higher' },
   },
   terms: 'Cua allows this page in robots.txt. Its terms at https://cua.ai/terms-of-service give no separate score license.',
@@ -28,7 +27,7 @@ const board: Leaderboard = {
         throw new Error('Cua-Bench: incomplete result for ' + name);
       rows.push({ model: name.replace(/\s*[*†]+$/, ''), setting: name.includes('*') ? 'Function calling' : 'Native computer use',
         score: 100 * Number(pass[1]) / Number(pass[2]),
-        metrics: { fullPass: Number(pass[1]), partialPass: Number(part[1]), tasks: Number(pass[2]), meanReward: Number(reward) } });
+        metrics: { fullPass: Number(pass[1]), partialPass: Number(part[1]), meanReward: Number(reward) } });
     }
     if (rows.length < 10) throw new Error('Cua-Bench: expected at least 10 models');
     return rows;

@@ -25,7 +25,6 @@ const board: Leaderboard = {
    highCostTest: { name: 'High-cost test', group: 'Category' },
    highCostBilling: { name: 'High-cost billing', group: 'Category' },
  },
- stats: { scoredDomains: { name: 'Scored domains', unit: 'count' } },
  url: "https://decodingtrust-agent.com/leaderboard",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
@@ -36,16 +35,15 @@ const d = await fetchJson<{entries: {metricType:string;modelName:string;overall:
   categoryTables:{domainKey:string;metricType:string;categories:{key:string;label:string}[];entries:{modelKey:string;frameworkKey:string;categoryScores:Record<string,number>}[]}[]}>(FEED);
 return d.entries.filter(r => r.metricType === 'direct_asr' && Number.isFinite(r.overall))
   .map(r => {
-    const metrics = {...r.domainScores, scoredDomains: r.scoredDomains};
+    const metrics = {...r.domainScores};
     const categories: Record<string,string> = {'high-cost-billing':'highCostBilling','high-cost-test':'highCostTest','price-exploitation':'priceExploitation'};
     for (const table of d.categoryTables) {
       if (table.metricType !== r.metricType || !['medical','travel'].includes(table.domainKey)) continue;
       const entry = table.entries.find(e => e.modelKey === r.modelKey && e.frameworkKey === r.frameworkKey);
-      for (const {key,label} of table.categories) {
+      for (const {key} of table.categories) {
         const value = entry?.categoryScores[key];
         if (categories[key] && Number.isFinite(value)) {
           (metrics as Record<string, number>)[categories[key]] = value!;
-          board.parts![categories[key]] = {name:label,group:table.domainKey};
         }
       }
     }

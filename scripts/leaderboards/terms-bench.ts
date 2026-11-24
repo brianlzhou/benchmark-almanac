@@ -9,7 +9,6 @@ const board: Leaderboard = {
   terms: 'Public maker-published results. The almanac credits TERMS-Bench and links the source.',
   stats: {
     mean_utility: { name: 'Mean utility', unit: 'score', better: 'higher' },
-    se_plus: { name: 'Safety efficacy', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' },
     agr_plus: { name: 'Action goal reliability', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' },
     cse_plus: { name: 'Conditional safety efficacy', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' },
     fagr_minus: { name: 'Failure action goal rate', unit: 'score', better: 'lower', note: 'Rate from 0 to 1.' },
@@ -18,7 +17,6 @@ const board: Leaderboard = {
     stance_acc: { name: 'Stance accuracy', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' },
     crit_viol_pct: { name: 'Critical violation rate', unit: 'score', better: 'lower', note: 'Rate from 0 to 1.' },
     conditional_utility: { name: 'Conditional utility', unit: 'score', better: 'higher' },
-    n_episodes: { name: 'Episodes', unit: 'count' },
   },
   aliases: {'Doubao Seed 2.0 Pro': 'seed-2-0-pro', 'Gemma 4 31B': 'gemma-4-31b-it'},
   async fetch() {
@@ -27,7 +25,7 @@ const board: Leaderboard = {
     return d.rows.filter(r => r.kind !== 'baseline').map(r => {
       if (typeof r.regimes.overall.se_plus !== 'number') throw new Error('TERMS SE+ missing');
       return {model: r.display === 'GPT-4o mini' ? r.display + ' (snapshot unspecified)' : r.display, score: r.regimes.overall.se_plus,
-        setting: 'Overall; SE+', metrics: Object.fromEntries(Object.entries(r.regimes.overall).filter((x): x is [string, number] => typeof x[1] === 'number'))};
+        setting: 'Overall, SE+', metrics: Object.fromEntries(Object.entries(r.regimes.overall).filter((x): x is [string, number] => typeof x[1] === 'number' && x[0] !== 'se_plus' && x[0] !== 'n_episodes'))};
     });
   },
 };
