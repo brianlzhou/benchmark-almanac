@@ -8,6 +8,10 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-ar
 
 const board: Leaderboard = {
   benchmark: 'facts-search',
+  parts: {
+    public: { name: 'Public', group: 'Split' },
+    private: { name: 'Private', group: 'Split' },
+  },
   url: 'https://www.kaggle.com/benchmarks/google/facts-search/versions/1',
   feed: kaggleFeed('google', 'facts-search/versions/1'),
   terms: KAGGLE_TERMS,
@@ -15,6 +19,8 @@ const board: Leaderboard = {
   stats: { searches: { name: 'Average searches', unit: 'count', better: 'lower' }, hedging: { name: 'Hedging rate', unit: '%', better: 'lower' }, attempted: { name: 'Attempted accuracy', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' } },
   fetch: () =>
     kaggleRowsWithBounds('google', 'facts-search/versions/1', 'Score', 100, {
+      public: { task: 'Public Score', scale: 100, interval: true },
+      private: { task: 'Private Score', scale: 100, interval: true },
       hedging: { task: 'Hedging Rate', scale: 100 },
       attempted: { task: 'Attempted Accuracy', scale: 100 },
       f1: { task: 'F1', scale: 100 },

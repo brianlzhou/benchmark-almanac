@@ -12,12 +12,19 @@ const FEED = 'https://www.kaggle.com/api/v1/benchmarks/google/facts-grounding/le
 
 const board: Leaderboard = {
   benchmark: 'facts-grounding-v2',
+  parts: {
+    public: { name: 'Public', group: 'Split' },
+    private: { name: 'Private', group: 'Split' },
+  },
   url: 'https://www.kaggle.com/benchmarks/google/facts-grounding',
   feed: FEED,
   terms: "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
   aliases: {
     'Gemini 3.1 Pro Preview': 'gemini-3-1-pro',
   },
-  fetch: () => kaggleRows('google', 'facts-grounding', 'Score', 100),
+  fetch: () => kaggleRows('google', 'facts-grounding', 'Score', 100, {
+    public: { task: 'Public Score', scale: 100, interval: true },
+    private: { task: 'Private Score', scale: 100, interval: true },
+  }),
 };
 export default board;

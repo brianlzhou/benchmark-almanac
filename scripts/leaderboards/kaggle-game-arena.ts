@@ -1,9 +1,9 @@
 // Kaggle Game Arena (Kaggle and Google DeepMind), read through Kaggle's documented public leaderboard
 // endpoint (kaggle.com/docs/benchmarks), as simpleqa-verified.ts does. The suite board's "Score" task is
 // the overall rating across the games (the board's unit, not a percentage); "Matches Played" and
-// "Games Covered" are counts and are not kept. Other Kaggle Benchmarks importers use kaggleRows from here.
+// "Games Covered" are kept as stats. Other Kaggle Benchmarks importers use kaggleRows from here.
 // Each row also keeps the score's confidence interval from the same feed (a symmetric ± half-width, or an
-// uneven one for the game ratings) as its bounds, metrics.ciLow and ciHigh. A board can keep other tasks of
+// uneven one for the game ratings) as its row low/high bounds and metrics.ciLow/ciHigh. A board can keep other tasks of
 // its own as metrics through kaggleRows's `extra` argument. Kaggle game rows also keep Avg. Tokens/Turn
 // and Avg. Cost/Turn as tokensPerTurn and costPerTurn. These are never per-task cost or output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -73,6 +73,8 @@ export async function kaggleRows(owner: string, slug: string, task = 'Score', sc
     out.push({
       model: r.modelVersionName?.trim() || r.modelVersionSlug || '',
       score: value * scale,
+      ...(metrics.ciLow != null ? { low: metrics.ciLow } : {}),
+      ...(metrics.ciHigh != null ? { high: metrics.ciHigh } : {}),
       setting: r.modelVersionConfigName || undefined,
       harness: [r.agentName, r.harnessName].filter(Boolean).join(', ') || undefined,
       date: res?.evaluationDate?.slice(0, 10),
@@ -84,7 +86,7 @@ export async function kaggleRows(owner: string, slug: string, task = 'Score', sc
 
 /** Keep interval fields for boards that expose a score interval. */
 export async function kaggleRowsWithBounds(...args: Parameters<typeof kaggleRows>): Promise<LeaderboardRow[]> {
-  return (await kaggleRows(...args)).map((r) => ({ ...r, low: r.metrics?.ciLow, high: r.metrics?.ciHigh }));
+  return kaggleRows(...args);
 }
 
 const board: Leaderboard = {
@@ -93,6 +95,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRowsWithBounds('kaggle', 'game-arena'),
+  stats: {
+    matchesPlayed: { name: 'Matches played', unit: 'count' },
+    gamesCovered: { name: 'Games covered', unit: 'count' },
+  },
+  fetch: () => kaggleRowsWithBounds('kaggle', 'game-arena', 'Score', 1, {
+    matchesPlayed: { task: 'Matches Played' },
+    gamesCovered: { task: 'Games Covered' },
+  }),
 };
 export default board;

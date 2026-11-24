@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/kaggle/explode-arena',
   feed: kaggleFeed('kaggle', 'explode-arena'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('kaggle', 'explode-arena', "Arena", 1),
+  stats: { votes: { name: 'Votes', unit: 'count' } },
+  fetch: () => kaggleRowsWithBounds('kaggle', 'explode-arena', "Arena", 1, { votes: { task: 'Votes' } }),
 };
 export default board;
