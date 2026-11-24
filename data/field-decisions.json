@@ -66,8 +66,26 @@
     "agentworldbench": {
       "SWE-Bench Verified": "ignore"
     },
+    "agi-eval-community-base": {
+      "evalTime": "wired"
+    },
+    "agi-eval-community-fine-tuned": {
+      "evalTime": "wired"
+    },
+    "agi-eval-community-image-text-understanding": {
+      "evalTime": "wired"
+    },
+    "agi-eval-community-speech-synthesis": {
+      "evalTime": "wired"
+    },
     "agi-eval-community-text-to-image": {
       "evalTime": "ignore"
+    },
+    "agi-eval-community-text-to-video": {
+      "evalTime": "wired"
+    },
+    "agi-eval-community-voice-interaction": {
+      "evalTime": "wired"
     },
     "agrobench": {
       "Open-Source Vision Language Models (VLMs)": "ignore"
@@ -991,16 +1009,24 @@
     },
     "evoarena": {
       "Step Δ": "ignore",
-      "Agent": "ignore"
+      "Agent": "ignore",
+      "Step +EvoMem": "wired",
+      "Step Base": "wired"
     },
     "evoarena-personamem-evo": {
-      "Step Δ": "ignore"
+      "Step Δ": "ignore",
+      "Step +EvoMem": "wired",
+      "Step Base": "wired"
     },
     "evoarena-swe-chain-evo": {
-      "Step Δ": "ignore"
+      "Step Δ": "ignore",
+      "Step +EvoMem": "wired",
+      "Step Base": "wired"
     },
     "evoarena-terminal-bench-evo": {
-      "Step Δ": "ignore"
+      "Step Δ": "ignore",
+      "Step +EvoMem": "wired",
+      "Step Base": "wired"
     },
     "exams-v": {
       "Multimodal samples": "ignore",
@@ -1279,6 +1305,9 @@
     },
     "group-binary-search-riedl": {
       "Time-Trend": "ignore"
+    },
+    "gsm8k": {
+      "evalTime": "wired"
     },
     "gsr-bench": {
       "StepAudio-R1": "ignore",
@@ -2167,7 +2196,8 @@
       "metrics.latency_p99_s": "ignore",
       "metrics.throughput_qps": "ignore",
       "tts.throughput_qps": "ignore",
-      "seed": "ignore"
+      "seed": "ignore",
+      "throughput_qps": "wired"
     },
     "openstudio-mcp-1-2-1": {
       "Avg Cost": "ignore",
@@ -2467,6 +2497,9 @@
       "C3 ten turns from BM25": "ignore",
       "C4 ten preceding turns": "ignore",
       "Recency over user turns": "ignore"
+    },
+    "realworldqa": {
+      "evalTime": "wired"
     },
     "reasonseg": {
       "# data samples": "ignore"
@@ -3142,16 +3175,20 @@
       "Gemini-1.5-Pro (Gemini Team, 2024) (CoT)": "ignore"
     },
     "vision2web": {
-      "params": "ignore"
+      "params": "wired",
+      "org": "ignore"
     },
     "vision2web-s1-2026": {
-      "params": "ignore"
+      "params": "wired",
+      "org": "ignore"
     },
     "vision2web-s2-2026": {
-      "params": "ignore"
+      "params": "wired",
+      "org": "ignore"
     },
     "vision2web-s3-2026": {
-      "params": "ignore"
+      "params": "wired",
+      "org": "ignore"
     },
     "visionarena-bench": {
       "Avg. # Turns": "ignore",

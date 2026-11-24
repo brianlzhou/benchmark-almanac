@@ -17,7 +17,7 @@ const board: Leaderboard = {
     return list.map((entry: any) => {
       const score = Number(entry.projectList?.find((p: any) => p.project === '拟人度')?.score) * 100;
       if (!entry.name || !Number.isFinite(score)) throw new Error('AGI-Eval speech synthesis: ranking row missing score');
-      return { model: entry.name, score, date: entry.evalTime } satisfies LeaderboardRow;
+      return { model: entry.name, score, date: entry.evalTime, ...(entry.openStatus !== undefined ? { open: entry.openStatus === 1 } : {}) } satisfies LeaderboardRow;
     });
   },
 };

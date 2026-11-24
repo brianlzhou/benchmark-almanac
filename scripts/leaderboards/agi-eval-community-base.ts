@@ -12,28 +12,54 @@ const MODALITY = 'LARGE_LANGUAGE_MODEL';
 const MONTHS = 'https://agi-eval.org/commWebApi/model/rank/listDate';
 const parts = {
   codeReasoning: { name: 'Code reasoning', group: 'Skill' },
+  codeReasoningChinese: { name: 'Code reasoning Chinese', group: 'Skill' },
+  codeReasoningEnglish: { name: 'Code reasoning English', group: 'Skill' },
   cognition: { name: 'Cognition', group: 'Skill' },
+  cognitionChinese: { name: 'Cognition Chinese', group: 'Skill' },
+  cognitionEnglish: { name: 'Cognition English', group: 'Skill' },
   generalReasoning: { name: 'General reasoning', group: 'Skill' },
+  generalReasoningChinese: { name: 'General reasoning Chinese', group: 'Skill' },
+  generalReasoningEnglish: { name: 'General reasoning English', group: 'Skill' },
   interaction: { name: 'Interaction', group: 'Skill' },
+  interactionChinese: { name: 'Interaction Chinese', group: 'Skill' },
+  interactionEnglish: { name: 'Interaction English', group: 'Skill' },
   learning: { name: 'Learning', group: 'Skill' },
+  learningChinese: { name: 'Learning Chinese', group: 'Skill' },
+  learningEnglish: { name: 'Learning English', group: 'Skill' },
   mathReasoning: { name: 'Math reasoning', group: 'Skill' },
+  mathReasoningChinese: { name: 'Math reasoning Chinese', group: 'Skill' },
+  mathReasoningEnglish: { name: 'Math reasoning English', group: 'Skill' },
   subjectKnowledge: { name: 'Subject knowledge', group: 'Skill' },
+  subjectKnowledgeChinese: { name: 'Subject knowledge Chinese', group: 'Skill' },
   chinese: { name: 'Chinese', group: 'Language' },
   english: { name: 'English', group: 'Language' },
 };
 const projectKeys: Record<string, string> = {
   '代码推理': 'codeReasoning',
+  '代码推理_中': 'codeReasoningChinese',
+  '代码推理_英': 'codeReasoningEnglish',
   '认知能力': 'cognition',
+  '认知能力_中': 'cognitionChinese',
+  '认知能力_英': 'cognitionEnglish',
   '通用推理': 'generalReasoning',
+  '通用推理_中': 'generalReasoningChinese',
+  '通用推理_英': 'generalReasoningEnglish',
   '交互能力': 'interaction',
+  '交互能力_中': 'interactionChinese',
+  '交互能力_英': 'interactionEnglish',
   '学习能力': 'learning',
+  '学习能力_中': 'learningChinese',
+  '学习能力_英': 'learningEnglish',
   '数学推理': 'mathReasoning',
+  '数学推理_中': 'mathReasoningChinese',
+  '数学推理_英': 'mathReasoningEnglish',
   '学科知识': 'subjectKnowledge',
+  '学科知识_中': 'subjectKnowledgeChinese',
   '客观评测准确率_中': 'chinese',
   '客观评测准确率_英': 'english',
 };
 interface RankDateResponse { rescode: number; data?: { rankDateList?: string[] }; msg?: string }
-interface RankResponse { rescode: number; data?: { modelRankList?: Array<{ name?: string; evalTime?: string; projectList?: Array<{ project?: string; score?: string }> }> }; msg?: string }
+interface RankResponse { rescode: number; data?: { modelRankList?: Array<{ name?: string; evalTime?: string; openStatus?: number; projectList?: Array<{ project?: string; score?: string }> }> }; msg?: string }
 
 export async function fetchAgiEvalRows(modelType: string): Promise<LeaderboardRow[]> {
   const dates = await fetchJson<RankDateResponse>(MONTHS, {
@@ -61,7 +87,7 @@ export async function fetchAgiEvalRows(modelType: string): Promise<LeaderboardRo
       if (value !== undefined && Number.isFinite(value)) metrics[key] = value;
     }
     if (Object.keys(metrics).length < Object.keys(parts).length) throw new Error(`AGI-Eval ${modelType}: ${source.name} missing part scores`);
-    return { model: source.name, score, date: source.evalTime, metrics };
+    return { model: source.name, score, date: source.evalTime, ...(source.openStatus !== undefined ? { open: source.openStatus === 1 } : {}), metrics };
   });
 }
 

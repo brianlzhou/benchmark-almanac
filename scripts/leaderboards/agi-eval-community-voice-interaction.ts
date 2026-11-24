@@ -13,7 +13,7 @@ const parts = {
 };
 interface Dates { rescode:number; data?:{rankDateList?:string[]} }
 interface Top { rescode:number; data?:{modelRankList?:Array<{name?:string;score?:number}>} }
-interface Detail { rescode:number; data?:{modelRankList?:Array<{name?:string;evalTime?:string;projectList?:Array<{project?:string;score?:string}>}>} }
+interface Detail { rescode:number; data?:{modelRankList?:Array<{name?:string;evalTime?:string;openStatus?:number;projectList?:Array<{project?:string;score?:string}>}>} }
 const board: Leaderboard = {
   benchmark: 'agi-eval-community-voice-interaction', url: PAGE,
   feed: `${FEED} and ${TOP} (POST with the current month, VOICE_INTERACTION, PRIVATE)`,
@@ -30,7 +30,7 @@ const board: Leaderboard = {
     const tops=top.data?.modelRankList??[], rows=detail.data?.modelRankList??[]; if(top.rescode!==0||detail.rescode!==0||rows.length<8||tops.length!==rows.length) throw new Error(`AGI-Eval VOICE_INTERACTION: ${rows.length} rows, expected 8`);
     const scoreByName=new Map(tops.map(x=>[x.name,Number(x.score)]));
     const projects:Record<string,string>={ '休闲娱乐':'entertainment','共情与情景理解':'empathy','学习与自我提升':'learning','自然流畅度':'fluency','问题解决':'problemSolving' };
-    return rows.map(x=>{ if(!x.name||!x.projectList) throw new Error('AGI-Eval VOICE_INTERACTION: row missing name or scores'); const score=scoreByName.get(x.name); if(score===undefined||!Number.isFinite(score)) throw new Error(`AGI-Eval VOICE_INTERACTION: ${x.name} missing headline score`); const metrics:Record<string,number>={}; for(const p of x.projectList){const k=projects[p.project??''];const v=Number(p.score);if(k&&Number.isFinite(v))metrics[k]=v;} if(Object.keys(metrics).length!==5) throw new Error(`AGI-Eval VOICE_INTERACTION: ${x.name} missing dimension scores`); return {model:x.name,score,date:x.evalTime,metrics}; });
+    return rows.map(x=>{ if(!x.name||!x.projectList) throw new Error('AGI-Eval VOICE_INTERACTION: row missing name or scores'); const score=scoreByName.get(x.name); if(score===undefined||!Number.isFinite(score)) throw new Error(`AGI-Eval VOICE_INTERACTION: ${x.name} missing headline score`); const metrics:Record<string,number>={}; for(const p of x.projectList){const k=projects[p.project??''];const v=Number(p.score);if(k&&Number.isFinite(v))metrics[k]=v;} if(Object.keys(metrics).length!==5) throw new Error(`AGI-Eval VOICE_INTERACTION: ${x.name} missing dimension scores`); return {model:x.name,score,date:x.evalTime,...(x.openStatus!==undefined?{open:x.openStatus===1}:{}),metrics}; });
   },
 };
 export default board;

@@ -7106,7 +7106,7 @@
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, BASE, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "Llama4-Maverick-17B-128E-基座",
@@ -7117,28 +7117,80 @@
           "name": "Code reasoning",
           "group": "Skill"
         },
+        "codeReasoningChinese": {
+          "name": "Code reasoning Chinese",
+          "group": "Skill"
+        },
+        "codeReasoningEnglish": {
+          "name": "Code reasoning English",
+          "group": "Skill"
+        },
         "cognition": {
           "name": "Cognition",
+          "group": "Skill"
+        },
+        "cognitionChinese": {
+          "name": "Cognition Chinese",
+          "group": "Skill"
+        },
+        "cognitionEnglish": {
+          "name": "Cognition English",
           "group": "Skill"
         },
         "generalReasoning": {
           "name": "General reasoning",
           "group": "Skill"
         },
+        "generalReasoningChinese": {
+          "name": "General reasoning Chinese",
+          "group": "Skill"
+        },
+        "generalReasoningEnglish": {
+          "name": "General reasoning English",
+          "group": "Skill"
+        },
         "interaction": {
           "name": "Interaction",
+          "group": "Skill"
+        },
+        "interactionChinese": {
+          "name": "Interaction Chinese",
+          "group": "Skill"
+        },
+        "interactionEnglish": {
+          "name": "Interaction English",
           "group": "Skill"
         },
         "learning": {
           "name": "Learning",
           "group": "Skill"
         },
+        "learningChinese": {
+          "name": "Learning Chinese",
+          "group": "Skill"
+        },
+        "learningEnglish": {
+          "name": "Learning English",
+          "group": "Skill"
+        },
         "mathReasoning": {
           "name": "Math reasoning",
           "group": "Skill"
         },
+        "mathReasoningChinese": {
+          "name": "Math reasoning Chinese",
+          "group": "Skill"
+        },
+        "mathReasoningEnglish": {
+          "name": "Math reasoning English",
+          "group": "Skill"
+        },
         "subjectKnowledge": {
           "name": "Subject knowledge",
+          "group": "Skill"
+        },
+        "subjectKnowledgeChinese": {
+          "name": "Subject knowledge Chinese",
           "group": "Skill"
         },
         "chinese": {
@@ -7152,10 +7204,10 @@
       }
     },
     "agi-eval-community-fine-tuned": {
-      "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
-      "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, BASE, PRIVATE, and objective accuracy sort)",
+      "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=FINE_TUNED&rankType=PRIVATE",
+      "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, FINE_TUNED, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 114,
       "unmatched": [
         "Claude-3.5-Sonnet-1022",
@@ -7200,24 +7252,64 @@
           "name": "Cognition",
           "group": "Skill"
         },
+        "cognitionChinese": {
+          "name": "Cognition Chinese",
+          "group": "Skill"
+        },
+        "cognitionEnglish": {
+          "name": "Cognition English",
+          "group": "Skill"
+        },
         "generalReasoning": {
           "name": "General reasoning",
+          "group": "Skill"
+        },
+        "generalReasoningChinese": {
+          "name": "General reasoning Chinese",
+          "group": "Skill"
+        },
+        "generalReasoningEnglish": {
+          "name": "General reasoning English",
           "group": "Skill"
         },
         "interaction": {
           "name": "Interaction",
           "group": "Skill"
         },
+        "interactionChinese": {
+          "name": "Interaction Chinese",
+          "group": "Skill"
+        },
+        "interactionEnglish": {
+          "name": "Interaction English",
+          "group": "Skill"
+        },
         "learning": {
           "name": "Learning",
+          "group": "Skill"
+        },
+        "learningChinese": {
+          "name": "Learning Chinese",
+          "group": "Skill"
+        },
+        "learningEnglish": {
+          "name": "Learning English",
           "group": "Skill"
         },
         "mathReasoning": {
           "name": "Math reasoning",
           "group": "Skill"
         },
+        "mathReasoningChinese": {
+          "name": "Math reasoning Chinese",
+          "group": "Skill"
+        },
         "subjectKnowledge": {
           "name": "Subject knowledge",
+          "group": "Skill"
+        },
+        "subjectKnowledgeChinese": {
+          "name": "Subject knowledge Chinese",
           "group": "Skill"
         },
         "instructionFollowing": {
@@ -7236,6 +7328,10 @@
           "name": "Subject reasoning Chinese",
           "group": "Skill"
         },
+        "subjectReasoningEnglish": {
+          "name": "Subject reasoning English",
+          "group": "Skill"
+        },
         "chinese": {
           "name": "Chinese",
           "group": "Language"
@@ -7243,10 +7339,6 @@
         "english": {
           "name": "English",
           "group": "Language"
-        },
-        "subjectReasoningEnglish": {
-          "name": "Subject reasoning English",
-          "group": "Skill"
         }
       }
     },
@@ -7254,7 +7346,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=IMAGE_TEXT_UNDERSTANDING&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 68,
       "unmatched": [
         "BLIP3o-8B",
@@ -7330,6 +7422,30 @@
         "generalReasoning": {
           "name": "General reasoning",
           "group": "Project"
+        },
+        "videoToTextAccuracy": {
+          "name": "Video to text objective accuracy",
+          "group": "Project"
+        },
+        "videoToTextWinRate": {
+          "name": "Video to text overall win rate",
+          "group": "Project"
+        },
+        "imageToTextSubjectiveWinRate": {
+          "name": "Image to text subjective win rate",
+          "group": "Project"
+        },
+        "imageToTextWinRate": {
+          "name": "Image to text overall win rate",
+          "group": "Project"
+        },
+        "multimodalWinRate": {
+          "name": "Multimodal understanding overall win rate",
+          "group": "Project"
+        },
+        "videoToTextSubjectiveWinRate": {
+          "name": "Video to text subjective win rate",
+          "group": "Project"
         }
       }
     },
@@ -7337,7 +7453,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=SPEECH_SYNTHESIS&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "CosyVoice",
@@ -7377,7 +7493,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=TEXT_TO_VIDEO&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "API-SERVING",
@@ -7417,7 +7533,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=VOICE_INTERACTION&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList and https://agi-eval.org/commWebApi/model/rank/top (POST with the current month, VOICE_INTERACTION, PRIVATE)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Gemini live",
@@ -96805,7 +96921,7 @@
       "feed": "https://aiden0526.github.io/EvoArena/",
       "terms": "The makers publish the results and say the repository license is pending. https://github.com/Aiden0526/EvoArena#license",
       "headline": "The headline is mean step accuracy across the three domains, as shown in the project overview.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -96852,7 +96968,7 @@
       "url": "https://aiden0526.github.io/EvoArena/",
       "feed": "https://aiden0526.github.io/EvoArena/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "harnesses": "system",
@@ -96868,7 +96984,7 @@
       "url": "https://aiden0526.github.io/EvoArena/",
       "feed": "https://aiden0526.github.io/EvoArena/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "harnesses": "system",
@@ -96884,7 +97000,7 @@
       "url": "https://aiden0526.github.io/EvoArena/",
       "feed": "https://aiden0526.github.io/EvoArena/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "harnesses": "system",
@@ -127719,7 +127835,7 @@
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval serves its home page at robots.txt and gives no score reuse license on the public rankings.",
       "host": "AGI-Eval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 98,
       "unmatched": [
         "Doubao-1.5-Pro-32k",
@@ -235974,9 +236090,26 @@
       "url": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs/blob/2ce5ad6aa6bf8e40180dd0f3721bf93fd7744acb/SGNOMI/sglang-omni-tts-runtime/README.md",
       "feed": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs/raw/2ce5ad6aa6bf8e40180dd0f3721bf93fd7744acb/SGNOMI/sglang-omni-tts-runtime/measurements.json",
       "terms": "The foundation publishes public task results and linked source records; attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "requestsPerSecond": {
+          "name": "Best throughput",
+          "unit": "score",
+          "better": "higher",
+          "note": "Peak requests per second."
+        },
+        "submissions": {
+          "name": "Submissions",
+          "unit": "count"
+        },
+        "latency": {
+          "name": "Research runtime",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "openstudio-mcp-1-2-1": {
       "url": "https://github.com/NatLabRockies/openstudio-mcp/blob/develop/docs/testing/llm-test-benchmark.md#current-baseline--outcome-graded-matrix-at-a-600-s-completion-budget-2026-08",
@@ -255002,7 +255135,7 @@
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval serves its home page at robots.txt and gives no score reuse license on the public rankings.",
       "host": "AGI-Eval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Qwen-VL-Max-0809",
@@ -267338,18 +267471,6 @@
       "rows": 12,
       "unmatched": [],
       "stats": {
-        "steps": {
-          "name": "Mean turns",
-          "unit": "count"
-        },
-        "inputTokens": {
-          "name": "Mean input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Mean output tokens",
-          "unit": "tokens"
-        },
         "final_answer_accuracy": {
           "name": "Final answer accuracy",
           "unit": "score"
@@ -267405,6 +267526,18 @@
         "submit_decision_calls": {
           "name": "Submit decision calls",
           "unit": "count"
+        },
+        "steps": {
+          "name": "Mean turns",
+          "unit": "count"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens",
+          "unit": "tokens"
+        },
+        "outputTokens": {
+          "name": "Mean output tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -280118,7 +280251,7 @@
       "feed": "https://competitions.codalab.org/competitions/15333/results/26695",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
       "local": true,
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CodaLab submission Hustle",
@@ -280136,14 +280269,20 @@
         "CodaLab submission sjtuadapt",
         "CodaLab submission tbmihaylov",
         "CodaLab submission ukp"
-      ]
+      ],
+      "stats": {
+        "entries": {
+          "name": "Submissions",
+          "unit": "count"
+        }
+      }
     },
     "storycloze-2018": {
       "url": "https://competitions.codalab.org/competitions/15333",
       "feed": "https://competitions.codalab.org/competitions/15333/results/26694",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
       "local": true,
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CodaLab submission DecstionBack",
@@ -280157,7 +280296,13 @@
         "CodaLab submission malkin",
         "CodaLab submission verbs_are_all_you_need",
         "CodaLab submission yutongl"
-      ]
+      ],
+      "stats": {
+        "entries": {
+          "name": "Submissions",
+          "unit": "count"
+        }
+      }
     },
     "stratabench-land-v1": {
       "url": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2#what-changed-from-v1",
@@ -308882,7 +309027,7 @@
       "url": "https://vision2web-bench.github.io/",
       "feed": "https://vision2web-bench.github.io/data/leaderboard.json (S4-2026)",
       "terms": "The official GitHub Pages JSON states no separate reuse terms; the almanac credits and links the Vision2Web authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "parts": {
@@ -308932,7 +309077,7 @@
       "url": "https://vision2web-bench.github.io/",
       "feed": "https://vision2web-bench.github.io/data/leaderboard.json (S1-2026)",
       "terms": "The official GitHub Pages JSON states no separate reuse terms; the almanac credits and links the Vision2Web authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Qwen3-VL-32B",
@@ -308986,7 +309131,7 @@
       "url": "https://vision2web-bench.github.io/",
       "feed": "https://vision2web-bench.github.io/data/leaderboard.json (S2-2026)",
       "terms": "The official GitHub Pages JSON states no separate reuse terms; the almanac credits and links the Vision2Web authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "parts": {
@@ -309036,7 +309181,7 @@
       "url": "https://vision2web-bench.github.io/",
       "feed": "https://vision2web-bench.github.io/data/leaderboard.json (S3-2026)",
       "terms": "The official GitHub Pages JSON states no separate reuse terms; the almanac credits and links the Vision2Web authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "parts": {
