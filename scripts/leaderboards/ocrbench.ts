@@ -25,14 +25,17 @@ const board: Leaderboard = {
   async fetch() {
     const source = parseCsv(await fetchText(FEED));
     if (!source.length || !('Final Score' in source[0])) throw new Error('OCRBench Final Score column missing');
-    return source.filter(r => r.Model?.trim() && r['Final Score'].trim() && Number.isFinite(Number(r['Final Score']))).map(r => ({
-      model: /^(?:GPT4V|GPT-?4o|Gemini)$/i.test(r.Model.trim()) ? `${r.Model.trim()} (snapshot unspecified)` : r.Model.trim(),
-      score: Number(r['Final Score']) / 10,
-      open: r['Open Source']?.trim() === 'Yes' ? true : r['Open Source']?.trim() === 'No' ? false : undefined,
-
-      metrics: Object.fromEntries(Object.entries(categories).flatMap(([name, total]) =>
-        r[name]?.trim() && Number.isFinite(Number(r[name])) ? [[name, Number(r[name])], [name + ' accuracy', 100 * Number(r[name]) / total]] : [])),
-    }));
+    return source.filter(r => r.Model?.trim() && r['Final Score'].trim() && Number.isFinite(Number(r['Final Score']))).map(r => {
+      const link = r.Link?.trim();
+      return {
+        model: /^(?:GPT4V|GPT-?4o|Gemini)$/i.test(r.Model.trim()) ? `${r.Model.trim()} (snapshot unspecified)` : r.Model.trim(),
+        score: Number(r['Final Score']) / 10,
+        open: r['Open Source']?.trim() === 'Yes' ? true : r['Open Source']?.trim() === 'No' ? false : undefined,
+        link: link && /^https?:\/\//.test(link) ? link : undefined,
+        metrics: Object.fromEntries(Object.entries(categories).flatMap(([name, total]) =>
+          r[name]?.trim() && Number.isFinite(Number(r[name])) ? [[name, Number(r[name])], [name + ' accuracy', 100 * Number(r[name]) / total]] : [])),
+      };
+    });
   },
 };
 export default board;

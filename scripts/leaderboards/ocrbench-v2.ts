@@ -21,6 +21,11 @@ const board: Leaderboard = {
     Understanding: { name: 'Understanding', group: 'Task type' },
     Reasoning: { name: 'Reasoning', group: 'Task type' },
     chinese: { name: 'Chinese', group: 'Language' },
+    'chinese:Recognition': { name: 'Recognition', group: 'Chinese task type' },
+    'chinese:Extraction': { name: 'Extraction', group: 'Chinese task type' },
+    'chinese:Parsing': { name: 'Parsing', group: 'Chinese task type' },
+    'chinese:Understanding': { name: 'Understanding', group: 'Chinese task type' },
+    'chinese:Reasoning': { name: 'Reasoning', group: 'Chinese task type' },
   },
   url: PAGE,
   feed: `${PAGE} (static HTML, newest round, default English Average)`,
@@ -58,7 +63,6 @@ const board: Leaderboard = {
               const value = num(r[index + 6]?.text);
               if (value === undefined) continue;
               metrics['chinese:' + name] = value;
-              board.parts!['chinese:' + name] = { name, group: 'Chinese task type' };
             }
           }
           continue;

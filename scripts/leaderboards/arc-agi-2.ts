@@ -32,15 +32,17 @@ export async function arcRows(v: 'v2' | 'v3'): Promise<LeaderboardRow[]> {
     if (e.providerId === 'Human' || e.modelType === 'Custom') continue;
     let model = e.modelDisplayName.replace(/\s*[¹²³⁴⁵⁶⁷⁸⁹]+\s*$/, '').trim();
     let harness: string | undefined;
+    let agentOrg: string | undefined;
     // "GPT-6 Astra - Provider Adapter (High)": the ARC-AGI-3 harness that keeps reasoning state
     if (/ - Provider Adapter/.test(model)) {
       model = model.replace(' - Provider Adapter', '');
       harness = 'Provider Adapter';
     } else if (v === 'v3') harness = 'standard';
-    // "Gemini 3 Pro (Refine.)": a third-party refinement system built on the model
-    if (/\(Refine\.\)/.test(model)) {
-      model = model.replace(/\s*\(Refine\.\)/, '');
+    // "Gemini 3 Pro (Refine.)" or "Gemini 3 Pro (Refinement)": a third-party refinement system built on the model
+    if (/\(Refine(?:\.|ment)\)/.test(model)) {
+      model = model.replace(/\s*\(Refine(?:\.|ment)\)/, '');
       harness = `${e.providerDisplayName} refinement`;
+      agentOrg = e.providerDisplayName;
     }
     // "Claude 3.7 (16K)", "Claude Opus 4.6 (120K, Low)": a thinking-token budget, kept as the setting
     let setting: string | undefined;
@@ -55,6 +57,7 @@ export async function arcRows(v: 'v2' | 'v3'): Promise<LeaderboardRow[]> {
       score: e.score * 100,
       setting,
       harness,
+      agentOrg,
       date: e.modelReleaseDate?.slice(0, 10),
       cost: (v === 'v3' ? e.cost : e.costPerTask) ?? undefined,
       link: e.resultsUrl && /^(?:https?:\/\/|\/results\/)/.test(e.resultsUrl) ? new URL(e.resultsUrl, 'https://arcprize.org').href : undefined,
@@ -65,6 +68,7 @@ export async function arcRows(v: 'v2' | 'v3'): Promise<LeaderboardRow[]> {
 
 const board: Leaderboard = {
   benchmark: 'arc-agi-2',
+  harnesses: 'system',
   url: 'https://arcprize.org/leaderboard',
   feed: arcFeed('v2'),
   terms: 'Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.',

@@ -14,15 +14,41 @@ import v4 from './bfcl-v4.ts';
 const SNAPSHOT = '2025-06-14';
 const FEED = `https://raw.githubusercontent.com/HuanzhiMao/BFCL-Result/main/${SNAPSHOT}/score/data_overall.csv`;
 
+const splitColumns: Record<string, string[]> = {
+  'Non-live': [
+    'Non_Live Overall Acc', 'AST Summary', 'Simple AST', 'Python Simple AST', 'Java Simple AST',
+    'JavaScript Simple AST', 'Multiple AST', 'Parallel AST', 'Parallel Multiple AST', 'Irrelevance Detection',
+  ],
+  Live: [
+    'Live Overall Acc', 'AST Summary', 'Python Simple AST', 'Python Multiple AST', 'Python Parallel AST',
+    'Python Parallel Multiple AST', 'Irrelevance Detection', 'Relevance Detection',
+  ],
+  'Multi-turn': ['Multi Turn Overall Acc', 'Base', 'Miss Func', 'Miss Param', 'Long Context'],
+};
+
+const overallColumns = [
+  'Non-Live AST Acc', 'Non-Live Simple AST', 'Non-Live Multiple AST', 'Non-Live Parallel AST',
+  'Non-Live Parallel Multiple AST', 'Live Acc', 'Live Simple AST', 'Live Multiple AST', 'Live Parallel AST',
+  'Live Parallel Multiple AST', 'Multi Turn Acc', 'Multi Turn Base', 'Multi Turn Miss Func',
+  'Multi Turn Miss Param', 'Multi Turn Long Context', 'Relevance Detection', 'Irrelevance Detection',
+];
+
+const parts: NonNullable<Leaderboard['parts']> = {
+  ...Object.fromEntries(
+    Object.entries(splitColumns).flatMap(([group, cols]) =>
+      cols.map((name) => [`${group}: ${name}`, { name: name === 'Non_Live Overall Acc' ? 'Non-Live Overall Acc' : name, group }]),
+    ),
+  ),
+  ...Object.fromEntries(overallColumns.map((name) => [name, { name, group: 'Overall table' }])),
+};
+
 const board: Leaderboard = {
   benchmark: 'berkeley-function-calling-leaderboard-bfcl',
+  parts,
   url: 'https://github.com/HuanzhiMao/BFCL-Result',
   feed: `${FEED} (last V3 copy of the leaderboard)`,
   terms: "A BFCL maintainer's public archive of the leaderboard files (HuanzhiMao/BFCL-Result), Apache-2.0.",
   stats: {
-    'Non-live rank': { name: 'Non-live category rank', unit: 'count', better: 'lower' },
-    'Live rank': { name: 'Live category rank', unit: 'count', better: 'lower' },
-    'Multi-turn rank': { name: 'Multi-turn category rank', unit: 'count', better: 'lower' },
     latency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
     latencyP95: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
   },
@@ -44,23 +70,19 @@ const board: Leaderboard = {
     const csv = parseCsv(await fetchText(FEED));
     if (!csv[0] || 'Web Search Acc' in csv[0] || !('Multi Turn Acc' in csv[0])) throw new Error('snapshot is not in V3 form');
     const splitRows = new Map<string, Record<string, number>>();
-    const parts: NonNullable<Leaderboard['parts']> = {};
     for (const [file, group] of [['data_non_live', 'Non-live'], ['data_live', 'Live'], ['data_multi_turn', 'Multi-turn']]) {
       await new Promise(resolve => setTimeout(resolve, 1050));
       const split = parseCsv(await fetchText(FEED.replace('data_overall', file)));
       for (const row of split) {
         const metrics = splitRows.get(row.Model) ?? {};
         for (const [name, raw] of Object.entries(row)) {
-          if (name === 'Rank' && /^\d+$/.test(raw)) metrics[`${group} rank`] = Number(raw);
           if (!/^\d+(?:\.\d+)?%$/.test(raw)) continue;
           const key = `${group}: ${name}`;
-          metrics[key] = parseFloat(raw);
-          parts[key] = { name, group };
+          if (key in parts) metrics[key] = parseFloat(raw);
         }
         splitRows.set(row.Model, metrics);
       }
     }
-    board.parts = parts;
     return csv
       .filter((r) => r.Model && /%$/.test(r['Overall Acc']))
       .map((r) => {
@@ -71,18 +93,18 @@ const board: Leaderboard = {
         const latency = num(r['Latency Mean (s)']);
         const latencyStd = num(r['Latency Standard Deviation (s)']);
         const latencyP95 = num(r['Latency 95th Percentile (s)']);
+        const link = r['Model Link']?.trim();
         const metrics: Record<string, number> = { ...splitRows.get(r.Model), ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
-        for (const [name, raw] of Object.entries(r)) {
-          if (name === 'Overall Acc' || !/^\d+(?:\.\d+)?%$/.test(raw)) continue;
-          metrics[name] = parseFloat(raw);
-          parts[name] = { name, group: 'Overall table' };
+        for (const [col, raw] of Object.entries(r)) {
+          if (col === 'Overall Acc' || !(col in parts) || !/^\d+(?:\.\d+)?%$/.test(raw)) continue;
+          metrics[col] = parseFloat(raw);
         }
         return {
-
           model: name,
           score: parseFloat(r['Overall Acc']),
           setting: [thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,
           license: r.License || undefined,
+          link: link && /^https?:\/\//.test(link) ? link : undefined,
           date: SNAPSHOT,
           cost: per1k === undefined ? undefined : per1k / 1000,
           ...(Object.keys(metrics).length ? { metrics } : {}),

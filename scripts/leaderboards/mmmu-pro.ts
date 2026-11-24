@@ -6,6 +6,7 @@ import { MMMU_ALIASES, MMMU_FEED, MMMU_TERMS, mmmuRows } from './mmmu.ts';
 
 const board: Leaderboard = {
   benchmark: 'mmmu-pro',
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   parts: { original: { name: 'Standard', group: 'Format' }, vision: { name: 'Vision', group: 'Format' } },
   url: 'https://mmmu-benchmark.github.io/#leaderboard',
   feed: `${MMMU_FEED} (pro.overall)`,

@@ -33,21 +33,24 @@ const round = (x: number, d: number) => Number(x.toFixed(d));
 
 const meanKeys: Record<string, string> = {
   mean_input_tokens: 'inputTokens',
-  mean_output_tokens: 'outputTokens',
   mean_reasoning_tokens: 'reasoningTokens',
-  mean_cache_read_tokens: 'cachedTokens',
 };
+
+const skipResourceKeys = new Set([
+  'mean_agent_steps',
+  'mean_cost_usd',
+  'mean_output_tokens',
+  'mean_duration_seconds',
+  'mean_cache_read_tokens',
+]);
 
 function resourceMetrics(row: Row): Record<string, number> {
   const metrics: Record<string, number> = {};
   for (const [key, value] of Object.entries(row)) {
-    if (key !== 'mean_agent_steps' && num(value) && /^(mean_|median_|n_(?:passed|attempted|tasks_)|ci_(?:passed|attempted))/.test(key)) metrics[meanKeys[key] ?? key] = value;
+    if (!skipResourceKeys.has(key) && num(value) && /^(mean_|median_|n_(?:passed|attempted|tasks_))/.test(key)) metrics[meanKeys[key] ?? key] = value;
   }
   row.pass_rate_by_attempt?.forEach((value, i) => {
     if (num(value)) metrics[`attempt${i + 1}PassRate`] = value * 100;
-  });
-  row.completed_by_attempt?.forEach((value, i) => {
-    if (num(value)) metrics[`attempt${i + 1}Completed`] = value;
   });
   return metrics;
 }
@@ -56,9 +59,9 @@ export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
   const feed = `https://deepswe.datacurve.ai/artifacts/${version}/leaderboard-live.json`;
   const stats: Record<string, BoardStat> = {
     n_passed: { name: 'Passed attempts', unit: 'count' }, n_attempted: { name: 'Attempted runs', unit: 'count' }, n_tasks_attempted: { name: 'Tasks attempted', unit: 'count' }, n_tasks_passed_any: { name: 'Tasks passed at least once', unit: 'count' },
-    ci_passed: { name: 'Passed attempts used for interval', unit: 'count' }, ci_attempted: { name: 'Attempted runs used for interval', unit: 'count' }, mean_cost_usd: { name: 'Mean cost per attempt', unit: 'usd', better: 'lower' }, median_cost_usd: { name: 'Median cost per attempt', unit: 'usd', better: 'lower' },
-    inputTokens: { name: 'Mean input tokens', unit: 'tokens', better: 'lower' }, median_input_tokens: { name: 'Median input tokens', unit: 'tokens', better: 'lower' }, outputTokens: { name: 'Mean output tokens', unit: 'tokens', better: 'lower' }, median_output_tokens: { name: 'Median output tokens', unit: 'tokens', better: 'lower' }, mean_cache_tokens: { name: 'Mean cache tokens', unit: 'tokens', better: 'lower' },
-    mean_duration_seconds: { name: 'Mean attempt duration', unit: 'seconds', better: 'lower' }, median_duration_seconds: { name: 'Median duration', unit: 'seconds', better: 'lower' }, median_agent_steps: { name: 'Median agent steps', unit: 'count', better: 'lower' }, median_peak_context_tokens: { name: 'Median peak context tokens', unit: 'tokens', better: 'lower' }, median_output_tokens_to_pass: { name: 'Median output tokens for passed attempts', unit: 'tokens', better: 'lower' }, passAt4: { name: 'Pass@4', unit: '%', better: 'higher' }, time: { name: 'Mean duration including all attempts', unit: 'seconds', better: 'lower' }, mean_uncached_input_tokens: { name: 'Mean uncached input tokens', unit: 'tokens', better: 'lower' }, median_uncached_input_tokens: { name: 'Median uncached input tokens', unit: 'tokens', better: 'lower' }, cachedTokens: { name: 'Mean cached input tokens', unit: 'tokens', better: 'lower' }, median_cache_read_tokens: { name: 'Median cached input tokens', unit: 'tokens', better: 'lower' }, mean_cache_write_tokens: { name: 'Mean cache write tokens', unit: 'tokens', better: 'lower' }, median_cache_write_tokens: { name: 'Median cache write tokens', unit: 'tokens', better: 'lower' }, reasoningTokens: { name: 'Mean reasoning tokens', unit: 'tokens', better: 'lower' }, median_reasoning_tokens: { name: 'Median reasoning tokens', unit: 'tokens', better: 'lower' }, mean_compute_units: { name: 'Mean compute units', unit: 'count', better: 'lower' }, median_compute_units: { name: 'Median compute units', unit: 'count', better: 'lower' }, attempt1PassRate: { name: 'Attempt 1 pass rate', unit: '%', better: 'higher' }, attempt2PassRate: { name: 'Attempt 2 pass rate', unit: '%', better: 'higher' }, attempt3PassRate: { name: 'Attempt 3 pass rate', unit: '%', better: 'higher' }, attempt4PassRate: { name: 'Attempt 4 pass rate', unit: '%', better: 'higher' }, attempt1Completed: { name: 'Attempt 1 completed tasks', unit: 'count' }, attempt2Completed: { name: 'Attempt 2 completed tasks', unit: 'count' }, attempt3Completed: { name: 'Attempt 3 completed tasks', unit: 'count' }, attempt4Completed: { name: 'Attempt 4 completed tasks', unit: 'count' },
+    median_cost_usd: { name: 'Median cost per attempt', unit: 'usd', better: 'lower' },
+    inputTokens: { name: 'Mean input tokens', unit: 'tokens', better: 'lower' }, median_input_tokens: { name: 'Median input tokens', unit: 'tokens', better: 'lower' }, median_output_tokens: { name: 'Median output tokens', unit: 'tokens', better: 'lower' }, mean_cache_tokens: { name: 'Mean cached input tokens', unit: 'tokens', better: 'lower' },
+    median_duration_seconds: { name: 'Median duration', unit: 'seconds', better: 'lower' }, steps: { name: 'Mean agent steps', unit: 'count', better: 'lower' }, median_agent_steps: { name: 'Median agent steps', unit: 'count', better: 'lower' }, median_peak_context_tokens: { name: 'Median peak context tokens', unit: 'tokens', better: 'lower' }, median_output_tokens_to_pass: { name: 'Median output tokens for passed attempts', unit: 'tokens', better: 'lower' }, passAt4: { name: 'Pass@4', unit: '%', better: 'higher' }, time: { name: 'Mean attempt duration', unit: 'seconds', better: 'lower' }, mean_uncached_input_tokens: { name: 'Mean uncached input tokens', unit: 'tokens', better: 'lower' }, median_uncached_input_tokens: { name: 'Median uncached input tokens', unit: 'tokens', better: 'lower' }, median_cache_read_tokens: { name: 'Median cached input tokens', unit: 'tokens', better: 'lower' }, mean_cache_write_tokens: { name: 'Mean cache write tokens', unit: 'tokens', better: 'lower' }, median_cache_write_tokens: { name: 'Median cache write tokens', unit: 'tokens', better: 'lower' }, reasoningTokens: { name: 'Mean reasoning tokens', unit: 'tokens', better: 'lower' }, median_reasoning_tokens: { name: 'Median reasoning tokens', unit: 'tokens', better: 'lower' }, mean_compute_units: { name: 'Mean compute units', unit: 'count', better: 'lower' }, median_compute_units: { name: 'Median compute units', unit: 'count', better: 'lower' }, attempt1PassRate: { name: 'Attempt 1 pass rate', unit: '%', better: 'higher' }, attempt2PassRate: { name: 'Attempt 2 pass rate', unit: '%', better: 'higher' }, attempt3PassRate: { name: 'Attempt 3 pass rate', unit: '%', better: 'higher' }, attempt4PassRate: { name: 'Attempt 4 pass rate', unit: '%', better: 'higher' },
   };
   return {
     benchmark,
@@ -69,7 +72,7 @@ export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
     stats,
     chart: {
       title: 'DeepSWE score and agent steps',
-      note: 'Each point is one harness, model and reasoning effort; steps are the mean agent steps per task attempt.',
+      note: 'Each point is one harness, model and reasoning effort. Steps are the mean agent steps per task attempt.',
       x: { key: 'steps', label: 'Mean agent steps', unit: 'steps', better: 'lower', log: true },
       y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' },
     },

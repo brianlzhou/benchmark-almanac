@@ -14,7 +14,7 @@ const board: Leaderboard = {
   url: 'https://scicode-bench.github.io/leaderboard/',
   feed: FEED,
   terms: 'Markdown file in the scicode-bench/scicode-bench.github.io repository, which has no license; the SciCode repository is Apache-2.0.',
-  stats: { subproblem: { name: 'Subproblem resolve rate', unit: '%', better: 'higher' }, medalRank: { name: 'Medal rank', unit: 'count', better: 'lower' } },
+  stats: { subproblem: { name: 'Subproblem resolve rate', unit: '%', better: 'higher' } },
   aliases: {
     'OpenAI o1-preview': 'o1-preview',
     'OpenAI o1-mini': 'o1-mini',
@@ -50,8 +50,6 @@ const board: Leaderboard = {
       const subproblem = Number(cells[2]);
       const metrics: Record<string, number> = {};
       if (cells[2] && Number.isFinite(subproblem)) metrics.subproblem = subproblem;
-      const medal = ['🥇', '🥈', '🥉'].findIndex(symbol => cells[0].startsWith(symbol));
-      if (medal >= 0) metrics.medalRank = medal + 1;
       rows.push({ model, score, setting: effort?.[1], metrics });
     }
     if (!rows.length) throw new Error('no rows in the SciCode leaderboard table');

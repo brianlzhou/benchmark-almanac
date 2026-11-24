@@ -14,17 +14,63 @@ interface Entry {
   results?: { application?: Record<string, Record<string, number>>; overall?: Record<string, number>; group?: Record<string, Record<string, number>> };
 }
 
+const APPS: Record<string, string> = {
+  android_studio: 'Android Studio',
+  autocad: 'AutoCAD',
+  blender: 'Blender',
+  davinci: 'DaVinci',
+  eviews: 'EViews',
+  excel: 'Excel',
+  fruitloops: 'FruitLoops',
+  illustrator: 'Illustrator',
+  inventor: 'Inventor',
+  linux_common: 'Linux common',
+  macos_common: 'macOS common',
+  matlab: 'MATLAB',
+  origin: 'Origin',
+  photoshop: 'Photoshop',
+  powerpoint: 'PowerPoint',
+  premiere: 'Premiere',
+  pycharm: 'PyCharm',
+  quartus: 'Quartus',
+  solidworks: 'SolidWorks',
+  stata: 'Stata',
+  unreal_engine: 'Unreal Engine',
+  vivado: 'Vivado',
+  vmware: 'VMware',
+  vscode: 'VS Code',
+  windows_common: 'Windows common',
+  word: 'Word',
+};
+
+const DOMAINS: Record<string, string> = {
+  Creative: 'Creative',
+  CAD: 'CAD',
+  Scientific: 'Scientific',
+  Office: 'Office',
+  OS: 'OS',
+  Dev: 'Development and programming',
+};
+
 const board: Leaderboard = {
   benchmark: 'screenspot-pro',
   parts: {
     icon: { name: 'Icon', group: 'Category' },
     text: { name: 'Text', group: 'Category' },
-    Creative: { name: 'Creative', group: 'Domain' },
-    CAD: { name: 'CAD', group: 'Domain' },
-    Scientific: { name: 'Scientific', group: 'Domain' },
-    Office: { name: 'Office', group: 'Domain' },
-    OS: { name: 'OS', group: 'Domain' },
-    Dev: { name: 'Development and programming', group: 'Domain' },
+    ...Object.fromEntries(Object.entries(DOMAINS).map(([k, name]) => [k, { name, group: 'Domain' }])),
+    ...Object.fromEntries(
+      Object.entries(DOMAINS).flatMap(([k, name]) => [
+        [`Domain:${k}:icon`, { name: `${name} (icon)`, group: 'Domain' }],
+        [`Domain:${k}:text`, { name: `${name} (text)`, group: 'Domain' }],
+      ]),
+    ),
+    ...Object.fromEntries(
+      Object.entries(APPS).flatMap(([k, name]) => [
+        [`Application:${k}:avg`, { name, group: 'Application' }],
+        [`Application:${k}:icon`, { name: `${name} (icon)`, group: 'Application' }],
+        [`Application:${k}:text`, { name: `${name} (text)`, group: 'Application' }],
+      ]),
+    ),
   },
   harnesses: 'system',
   url: 'https://gui-agent.github.io/grounding-leaderboard/',
@@ -45,18 +91,19 @@ const board: Leaderboard = {
         if (Number.isFinite(values.avg)) metrics[group] = values.avg * 100;
       }
       for (const [kind, groups] of [['Application', e.results?.application], ['Domain', e.results?.group]] as const) {
-        for (const [name, values] of Object.entries(groups ?? {})) {
+        for (const [subName, values] of Object.entries(groups ?? {})) {
           for (const [split, value] of Object.entries(values)) {
             if (!Number.isFinite(value) || !['avg', 'icon', 'text'].includes(split)) continue;
             if (kind === 'Domain' && split === 'avg') continue;
-            const key = [kind, name, split].join(':');
-            const label = name.replace(/_/g, ' ') + (split === 'avg' ? '' : ' (' + split + ')');
+            const key = [kind, subName, split].join(':');
             metrics[key] = value * 100;
-            board.parts![key] = { name: label, group: kind };
           }
         }
       }
-      const entry: Partial<LeaderboardRow> = {};
+      const link = e.link?.trim();
+      const entry: Partial<LeaderboardRow> = {
+        link: link && /^https?:\/\//.test(link) ? link : undefined,
+      };
 
       if (e.description === 'Proprietary') { entry.license = e.description; entry.open = false; }
       const cascade = name.match(/^GroundCascade \(([^+]+) \+ ([^)]+)\)$/);

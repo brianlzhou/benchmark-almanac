@@ -78,13 +78,14 @@ const board: Leaderboard = {
           const value = num(r[column]?.replace(/%$/, ''));
           if (value !== undefined) metrics[key] = value;
         }
+        const link = r['Model Link']?.trim();
         return {
           model: xai ? xai[1] : name,
           score: parseFloat(r['Overall Acc']),
           setting: [xai ? xai[2] : thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,
           license: r.License || undefined,
+          link: link && /^https?:\/\//.test(link) ? link : undefined,
           cost: num(r['Total Cost ($)']),
-
           metrics,
         };
       });

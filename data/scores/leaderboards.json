@@ -18945,27 +18945,24 @@
       "url": "https://arcprize.org/leaderboard",
       "feed": "https://arcprize.org/media/data/leaderboard/v1.json",
       "terms": "Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.",
-      "retrieved": "2026-11-23",
-      "rows": 311,
+      "retrieved": "2026-11-24",
+      "rows": 313,
       "unmatched": [
-        "GPT-5.2 (Refinement)",
-        "Grok 4 (Refinement)",
         "Mercury 3 Preview (Instant)"
-      ]
+      ],
+      "harnesses": "system"
     },
     "arc-agi-2": {
       "url": "https://arcprize.org/leaderboard",
       "feed": "https://arcprize.org/media/data/leaderboard/v2.json",
       "terms": "Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.",
-      "retrieved": "2026-11-23",
-      "rows": 309,
+      "retrieved": "2026-11-24",
+      "rows": 312,
       "unmatched": [
         "Dots3-Note Preview (Max)",
-        "GPT-5.2 (Refinement)",
-        "Gemini 3 Pro (Refinement)",
-        "Grok 4 (Refinement)",
         "Mercury 3 Preview (Instant)"
-      ]
+      ],
+      "harnesses": "system"
     },
     "arc-agi-3": {
       "url": "https://arcprize.org/leaderboard",
@@ -32470,7 +32467,7 @@
       "url": "https://github.com/HuanzhiMao/BFCL-Result",
       "feed": "https://raw.githubusercontent.com/HuanzhiMao/BFCL-Result/main/2025-06-14/score/data_overall.csv (last V3 copy of the leaderboard)",
       "terms": "A BFCL maintainer's public archive of the leaderboard files (HuanzhiMao/BFCL-Result), Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 87,
       "unmatched": [
         "Bielik-11B-v2.3-Instruct",
@@ -32498,7 +32495,7 @@
       ],
       "parts": {
         "Non-live: Non_Live Overall Acc": {
-          "name": "Non_Live Overall Acc",
+          "name": "Non-Live Overall Acc",
           "group": "Non-live"
         },
         "Non-live: AST Summary": {
@@ -32659,21 +32656,6 @@
         }
       },
       "stats": {
-        "Non-live rank": {
-          "name": "Non-live category rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "Live rank": {
-          "name": "Live category rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "Multi-turn rank": {
-          "name": "Multi-turn category rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "latency": {
           "name": "Mean latency",
           "unit": "seconds",
@@ -32800,7 +32782,7 @@
       "url": "https://gorilla.cs.berkeley.edu/leaderboard.html",
       "feed": "https://gorilla.cs.berkeley.edu/data_overall.csv",
       "terms": "Static CSV on the Gorilla project site; the gorilla repository (ShishirPatil/gorilla) is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 94,
       "unmatched": [
         "Arch-Agent-1.5B",
@@ -81312,12 +81294,12 @@
       "url": "https://deepswe.datacurve.ai/",
       "feed": "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json",
       "terms": "Static JSON artifact on the DeepSWE site (robots.txt allows it); the deep-swe repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [],
       "chart": {
         "title": "DeepSWE score and agent steps",
-        "note": "Each point is one harness, model and reasoning effort; steps are the mean agent steps per task attempt.",
+        "note": "Each point is one harness, model and reasoning effort. Steps are the mean agent steps per task attempt.",
         "x": {
           "key": "steps",
           "label": "Mean agent steps",
@@ -81349,11 +81331,6 @@
           "name": "Tasks passed at least once",
           "unit": "count"
         },
-        "mean_cost_usd": {
-          "name": "Mean cost per attempt",
-          "unit": "usd",
-          "better": "lower"
-        },
         "median_cost_usd": {
           "name": "Median cost per attempt",
           "unit": "usd",
@@ -81369,29 +81346,24 @@
           "unit": "tokens",
           "better": "lower"
         },
-        "outputTokens": {
-          "name": "Mean output tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
         "median_output_tokens": {
           "name": "Median output tokens",
           "unit": "tokens",
           "better": "lower"
         },
         "mean_cache_tokens": {
-          "name": "Mean cache tokens",
+          "name": "Mean cached input tokens",
           "unit": "tokens",
-          "better": "lower"
-        },
-        "mean_duration_seconds": {
-          "name": "Mean attempt duration",
-          "unit": "seconds",
           "better": "lower"
         },
         "median_duration_seconds": {
           "name": "Median duration",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "steps": {
+          "name": "Mean agent steps",
+          "unit": "count",
           "better": "lower"
         },
         "median_agent_steps": {
@@ -81415,7 +81387,7 @@
           "better": "higher"
         },
         "time": {
-          "name": "Mean duration including all attempts",
+          "name": "Mean attempt duration",
           "unit": "seconds",
           "better": "lower"
         },
@@ -81426,11 +81398,6 @@
         },
         "median_uncached_input_tokens": {
           "name": "Median uncached input tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
-        "cachedTokens": {
-          "name": "Mean cached input tokens",
           "unit": "tokens",
           "better": "lower"
         },
@@ -81488,22 +81455,6 @@
           "name": "Attempt 4 pass rate",
           "unit": "%",
           "better": "higher"
-        },
-        "attempt1Completed": {
-          "name": "Attempt 1 completed tasks",
-          "unit": "count"
-        },
-        "attempt2Completed": {
-          "name": "Attempt 2 completed tasks",
-          "unit": "count"
-        },
-        "attempt3Completed": {
-          "name": "Attempt 3 completed tasks",
-          "unit": "count"
-        },
-        "attempt4Completed": {
-          "name": "Attempt 4 completed tasks",
-          "unit": "count"
         }
       }
     },
@@ -169819,7 +169770,7 @@
       "url": "https://livecodebench.github.io/leaderboard.html",
       "feed": "https://livecodebench.github.io/performances_generation.json",
       "terms": "Static JSON on the LiveCodeBench project site; the LiveCodeBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "XBai-o4-medium"
@@ -169848,12 +169799,6 @@
         "atcoder": {
           "name": "AtCoder",
           "group": "Platform"
-        }
-      },
-      "stats": {
-        "problems": {
-          "name": "Problems",
-          "unit": "count"
         }
       }
     },
@@ -169902,7 +169847,7 @@
       "url": "https://livecodebench.github.io/leaderboard.html",
       "feed": "https://livecodebench.github.io/performances_generation.json (problems from 2024-08-01 to 2025-02-01)",
       "terms": "Static JSON on the LiveCodeBench project site; the LiveCodeBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "XBai-o4-medium"
@@ -169934,7 +169879,7 @@
       "url": "https://livecodebench.github.io/leaderboard.html",
       "feed": "https://livecodebench.github.io/performances_generation.json (problems from 2024-08-01 to 2025-05-01)",
       "terms": "Static JSON on the LiveCodeBench project site; the LiveCodeBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "XBai-o4-medium"
@@ -198274,7 +198219,7 @@
       "url": "https://mmmu-benchmark.github.io/#leaderboard",
       "feed": "https://mmmu-benchmark.github.io/leaderboard_data.json (validation.overall)",
       "terms": "Static JSON on the MMMU GitHub Pages site, which states no license or terms; the MMMU repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 140,
       "unmatched": [
         "360VL",
@@ -198351,6 +198296,34 @@
         "techEng": {
           "name": "Tech and Engineering",
           "group": "Discipline"
+        },
+        "test_overall": {
+          "name": "Overall",
+          "group": "Test split"
+        },
+        "test_artDesign": {
+          "name": "Art and Design",
+          "group": "Test split"
+        },
+        "test_business": {
+          "name": "Business",
+          "group": "Test split"
+        },
+        "test_science": {
+          "name": "Science",
+          "group": "Test split"
+        },
+        "test_healthMedicine": {
+          "name": "Health and Medicine",
+          "group": "Test split"
+        },
+        "test_humanSocialSci": {
+          "name": "Humanities and Social Science",
+          "group": "Test split"
+        },
+        "test_techEng": {
+          "name": "Tech and Engineering",
+          "group": "Test split"
         }
       },
       "stats": {
@@ -198364,7 +198337,7 @@
       "url": "https://mmmu-benchmark.github.io/#leaderboard",
       "feed": "https://mmmu-benchmark.github.io/leaderboard_data.json (pro.overall)",
       "terms": "Static JSON on the MMMU GitHub Pages site, which states no license or terms; the MMMU repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 65,
       "unmatched": [
         "Chance Vision 1.5",
@@ -198380,6 +198353,12 @@
         "vision": {
           "name": "Vision",
           "group": "Format"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },
@@ -214889,7 +214868,7 @@
       "url": "https://huggingface.co/spaces/echo840/ocrbench-leaderboard",
       "feed": "https://huggingface.co/spaces/echo840/ocrbench-leaderboard/resolve/main/OCRBench.csv",
       "terms": "The authors publish this public Hugging Face CSV, with attribution retained and no separate score reuse license stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "BLIP2-6.7B",
@@ -214955,7 +214934,7 @@
       "url": "https://99franklin.github.io/ocrbench_v2/",
       "feed": "https://99franklin.github.io/ocrbench_v2/ (static HTML, newest round, default English Average)",
       "terms": "Static GitHub Pages site that states no terms; the MultimodalOCR repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)",
@@ -272877,7 +272856,7 @@
       "url": "https://scicode-bench.github.io/leaderboard/",
       "feed": "https://raw.githubusercontent.com/scicode-bench/scicode-bench.github.io/main/docs/leaderboard.md",
       "terms": "Markdown file in the scicode-bench/scicode-bench.github.io repository, which has no license; the SciCode repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
       "stats": {
@@ -272885,11 +272864,6 @@
           "name": "Subproblem resolve rate",
           "unit": "%",
           "better": "higher"
-        },
-        "medalRank": {
-          "name": "Medal rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -273865,7 +273839,7 @@
       "url": "https://gui-agent.github.io/grounding-leaderboard/",
       "feed": "https://gui-agent.github.io/grounding-leaderboard/results/screenspot_pro.json (results.overall.avg)",
       "terms": "Static JSON on the grounding leaderboard GitHub Pages site; the gui-agent/grounding-leaderboard repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "AdaZoom-GUI-4B",
@@ -273987,317 +273961,13 @@
           "name": "Development and programming",
           "group": "Domain"
         },
-        "Application:android_studio:avg": {
-          "name": "android studio",
-          "group": "Application"
-        },
-        "Application:android_studio:icon": {
-          "name": "android studio (icon)",
-          "group": "Application"
-        },
-        "Application:android_studio:text": {
-          "name": "android studio (text)",
-          "group": "Application"
-        },
-        "Application:autocad:avg": {
-          "name": "autocad",
-          "group": "Application"
-        },
-        "Application:autocad:icon": {
-          "name": "autocad (icon)",
-          "group": "Application"
-        },
-        "Application:autocad:text": {
-          "name": "autocad (text)",
-          "group": "Application"
-        },
-        "Application:blender:avg": {
-          "name": "blender",
-          "group": "Application"
-        },
-        "Application:blender:icon": {
-          "name": "blender (icon)",
-          "group": "Application"
-        },
-        "Application:blender:text": {
-          "name": "blender (text)",
-          "group": "Application"
-        },
-        "Application:davinci:avg": {
-          "name": "davinci",
-          "group": "Application"
-        },
-        "Application:davinci:icon": {
-          "name": "davinci (icon)",
-          "group": "Application"
-        },
-        "Application:davinci:text": {
-          "name": "davinci (text)",
-          "group": "Application"
-        },
-        "Application:eviews:avg": {
-          "name": "eviews",
-          "group": "Application"
-        },
-        "Application:eviews:icon": {
-          "name": "eviews (icon)",
-          "group": "Application"
-        },
-        "Application:eviews:text": {
-          "name": "eviews (text)",
-          "group": "Application"
-        },
-        "Application:excel:avg": {
-          "name": "excel",
-          "group": "Application"
-        },
-        "Application:excel:icon": {
-          "name": "excel (icon)",
-          "group": "Application"
-        },
-        "Application:excel:text": {
-          "name": "excel (text)",
-          "group": "Application"
-        },
-        "Application:fruitloops:avg": {
-          "name": "fruitloops",
-          "group": "Application"
-        },
-        "Application:fruitloops:icon": {
-          "name": "fruitloops (icon)",
-          "group": "Application"
-        },
-        "Application:fruitloops:text": {
-          "name": "fruitloops (text)",
-          "group": "Application"
-        },
-        "Application:illustrator:avg": {
-          "name": "illustrator",
-          "group": "Application"
-        },
-        "Application:illustrator:icon": {
-          "name": "illustrator (icon)",
-          "group": "Application"
-        },
-        "Application:illustrator:text": {
-          "name": "illustrator (text)",
-          "group": "Application"
-        },
-        "Application:inventor:avg": {
-          "name": "inventor",
-          "group": "Application"
-        },
-        "Application:inventor:icon": {
-          "name": "inventor (icon)",
-          "group": "Application"
-        },
-        "Application:inventor:text": {
-          "name": "inventor (text)",
-          "group": "Application"
-        },
-        "Application:linux_common:avg": {
-          "name": "linux common",
-          "group": "Application"
-        },
-        "Application:linux_common:icon": {
-          "name": "linux common (icon)",
-          "group": "Application"
-        },
-        "Application:linux_common:text": {
-          "name": "linux common (text)",
-          "group": "Application"
-        },
-        "Application:macos_common:avg": {
-          "name": "macos common",
-          "group": "Application"
-        },
-        "Application:macos_common:icon": {
-          "name": "macos common (icon)",
-          "group": "Application"
-        },
-        "Application:macos_common:text": {
-          "name": "macos common (text)",
-          "group": "Application"
-        },
-        "Application:matlab:avg": {
-          "name": "matlab",
-          "group": "Application"
-        },
-        "Application:matlab:icon": {
-          "name": "matlab (icon)",
-          "group": "Application"
-        },
-        "Application:matlab:text": {
-          "name": "matlab (text)",
-          "group": "Application"
-        },
-        "Application:origin:avg": {
-          "name": "origin",
-          "group": "Application"
-        },
-        "Application:origin:icon": {
-          "name": "origin (icon)",
-          "group": "Application"
-        },
-        "Application:origin:text": {
-          "name": "origin (text)",
-          "group": "Application"
-        },
-        "Application:photoshop:avg": {
-          "name": "photoshop",
-          "group": "Application"
-        },
-        "Application:photoshop:icon": {
-          "name": "photoshop (icon)",
-          "group": "Application"
-        },
-        "Application:photoshop:text": {
-          "name": "photoshop (text)",
-          "group": "Application"
-        },
-        "Application:powerpoint:avg": {
-          "name": "powerpoint",
-          "group": "Application"
-        },
-        "Application:powerpoint:icon": {
-          "name": "powerpoint (icon)",
-          "group": "Application"
-        },
-        "Application:powerpoint:text": {
-          "name": "powerpoint (text)",
-          "group": "Application"
-        },
-        "Application:premiere:avg": {
-          "name": "premiere",
-          "group": "Application"
-        },
-        "Application:premiere:icon": {
-          "name": "premiere (icon)",
-          "group": "Application"
-        },
-        "Application:premiere:text": {
-          "name": "premiere (text)",
-          "group": "Application"
-        },
-        "Application:pycharm:avg": {
-          "name": "pycharm",
-          "group": "Application"
-        },
-        "Application:pycharm:icon": {
-          "name": "pycharm (icon)",
-          "group": "Application"
-        },
-        "Application:pycharm:text": {
-          "name": "pycharm (text)",
-          "group": "Application"
-        },
-        "Application:quartus:avg": {
-          "name": "quartus",
-          "group": "Application"
-        },
-        "Application:quartus:icon": {
-          "name": "quartus (icon)",
-          "group": "Application"
-        },
-        "Application:quartus:text": {
-          "name": "quartus (text)",
-          "group": "Application"
-        },
-        "Application:solidworks:avg": {
-          "name": "solidworks",
-          "group": "Application"
-        },
-        "Application:solidworks:icon": {
-          "name": "solidworks (icon)",
-          "group": "Application"
-        },
-        "Application:solidworks:text": {
-          "name": "solidworks (text)",
-          "group": "Application"
-        },
-        "Application:stata:avg": {
-          "name": "stata",
-          "group": "Application"
-        },
-        "Application:stata:icon": {
-          "name": "stata (icon)",
-          "group": "Application"
-        },
-        "Application:stata:text": {
-          "name": "stata (text)",
-          "group": "Application"
-        },
-        "Application:unreal_engine:avg": {
-          "name": "unreal engine",
-          "group": "Application"
-        },
-        "Application:unreal_engine:icon": {
-          "name": "unreal engine (icon)",
-          "group": "Application"
-        },
-        "Application:unreal_engine:text": {
-          "name": "unreal engine (text)",
-          "group": "Application"
-        },
-        "Application:vivado:avg": {
-          "name": "vivado",
-          "group": "Application"
-        },
-        "Application:vivado:icon": {
-          "name": "vivado (icon)",
-          "group": "Application"
-        },
-        "Application:vivado:text": {
-          "name": "vivado (text)",
-          "group": "Application"
-        },
-        "Application:vmware:avg": {
-          "name": "vmware",
-          "group": "Application"
-        },
-        "Application:vmware:icon": {
-          "name": "vmware (icon)",
-          "group": "Application"
-        },
-        "Application:vmware:text": {
-          "name": "vmware (text)",
-          "group": "Application"
-        },
-        "Application:vscode:avg": {
-          "name": "vscode",
-          "group": "Application"
-        },
-        "Application:vscode:icon": {
-          "name": "vscode (icon)",
-          "group": "Application"
-        },
-        "Application:vscode:text": {
-          "name": "vscode (text)",
-          "group": "Application"
-        },
-        "Application:windows_common:avg": {
-          "name": "windows common",
-          "group": "Application"
-        },
-        "Application:windows_common:icon": {
-          "name": "windows common (icon)",
-          "group": "Application"
-        },
-        "Application:windows_common:text": {
-          "name": "windows common (text)",
-          "group": "Application"
-        },
-        "Application:word:avg": {
-          "name": "word",
-          "group": "Application"
-        },
-        "Application:word:icon": {
-          "name": "word (icon)",
-          "group": "Application"
-        },
-        "Application:word:text": {
-          "name": "word (text)",
-          "group": "Application"
+        "Domain:Creative:icon": {
+          "name": "Creative (icon)",
+          "group": "Domain"
+        },
+        "Domain:Creative:text": {
+          "name": "Creative (text)",
+          "group": "Domain"
         },
         "Domain:CAD:icon": {
           "name": "CAD (icon)",
@@ -274307,28 +273977,12 @@
           "name": "CAD (text)",
           "group": "Domain"
         },
-        "Domain:Creative:icon": {
-          "name": "Creative (icon)",
+        "Domain:Scientific:icon": {
+          "name": "Scientific (icon)",
           "group": "Domain"
         },
-        "Domain:Creative:text": {
-          "name": "Creative (text)",
-          "group": "Domain"
-        },
-        "Domain:Dev:icon": {
-          "name": "Dev (icon)",
-          "group": "Domain"
-        },
-        "Domain:Dev:text": {
-          "name": "Dev (text)",
-          "group": "Domain"
-        },
-        "Domain:OS:icon": {
-          "name": "OS (icon)",
-          "group": "Domain"
-        },
-        "Domain:OS:text": {
-          "name": "OS (text)",
+        "Domain:Scientific:text": {
+          "name": "Scientific (text)",
           "group": "Domain"
         },
         "Domain:Office:icon": {
@@ -274339,13 +273993,333 @@
           "name": "Office (text)",
           "group": "Domain"
         },
-        "Domain:Scientific:icon": {
-          "name": "Scientific (icon)",
+        "Domain:OS:icon": {
+          "name": "OS (icon)",
           "group": "Domain"
         },
-        "Domain:Scientific:text": {
-          "name": "Scientific (text)",
+        "Domain:OS:text": {
+          "name": "OS (text)",
           "group": "Domain"
+        },
+        "Domain:Dev:icon": {
+          "name": "Development and programming (icon)",
+          "group": "Domain"
+        },
+        "Domain:Dev:text": {
+          "name": "Development and programming (text)",
+          "group": "Domain"
+        },
+        "Application:android_studio:avg": {
+          "name": "Android Studio",
+          "group": "Application"
+        },
+        "Application:android_studio:icon": {
+          "name": "Android Studio (icon)",
+          "group": "Application"
+        },
+        "Application:android_studio:text": {
+          "name": "Android Studio (text)",
+          "group": "Application"
+        },
+        "Application:autocad:avg": {
+          "name": "AutoCAD",
+          "group": "Application"
+        },
+        "Application:autocad:icon": {
+          "name": "AutoCAD (icon)",
+          "group": "Application"
+        },
+        "Application:autocad:text": {
+          "name": "AutoCAD (text)",
+          "group": "Application"
+        },
+        "Application:blender:avg": {
+          "name": "Blender",
+          "group": "Application"
+        },
+        "Application:blender:icon": {
+          "name": "Blender (icon)",
+          "group": "Application"
+        },
+        "Application:blender:text": {
+          "name": "Blender (text)",
+          "group": "Application"
+        },
+        "Application:davinci:avg": {
+          "name": "DaVinci",
+          "group": "Application"
+        },
+        "Application:davinci:icon": {
+          "name": "DaVinci (icon)",
+          "group": "Application"
+        },
+        "Application:davinci:text": {
+          "name": "DaVinci (text)",
+          "group": "Application"
+        },
+        "Application:eviews:avg": {
+          "name": "EViews",
+          "group": "Application"
+        },
+        "Application:eviews:icon": {
+          "name": "EViews (icon)",
+          "group": "Application"
+        },
+        "Application:eviews:text": {
+          "name": "EViews (text)",
+          "group": "Application"
+        },
+        "Application:excel:avg": {
+          "name": "Excel",
+          "group": "Application"
+        },
+        "Application:excel:icon": {
+          "name": "Excel (icon)",
+          "group": "Application"
+        },
+        "Application:excel:text": {
+          "name": "Excel (text)",
+          "group": "Application"
+        },
+        "Application:fruitloops:avg": {
+          "name": "FruitLoops",
+          "group": "Application"
+        },
+        "Application:fruitloops:icon": {
+          "name": "FruitLoops (icon)",
+          "group": "Application"
+        },
+        "Application:fruitloops:text": {
+          "name": "FruitLoops (text)",
+          "group": "Application"
+        },
+        "Application:illustrator:avg": {
+          "name": "Illustrator",
+          "group": "Application"
+        },
+        "Application:illustrator:icon": {
+          "name": "Illustrator (icon)",
+          "group": "Application"
+        },
+        "Application:illustrator:text": {
+          "name": "Illustrator (text)",
+          "group": "Application"
+        },
+        "Application:inventor:avg": {
+          "name": "Inventor",
+          "group": "Application"
+        },
+        "Application:inventor:icon": {
+          "name": "Inventor (icon)",
+          "group": "Application"
+        },
+        "Application:inventor:text": {
+          "name": "Inventor (text)",
+          "group": "Application"
+        },
+        "Application:linux_common:avg": {
+          "name": "Linux common",
+          "group": "Application"
+        },
+        "Application:linux_common:icon": {
+          "name": "Linux common (icon)",
+          "group": "Application"
+        },
+        "Application:linux_common:text": {
+          "name": "Linux common (text)",
+          "group": "Application"
+        },
+        "Application:macos_common:avg": {
+          "name": "macOS common",
+          "group": "Application"
+        },
+        "Application:macos_common:icon": {
+          "name": "macOS common (icon)",
+          "group": "Application"
+        },
+        "Application:macos_common:text": {
+          "name": "macOS common (text)",
+          "group": "Application"
+        },
+        "Application:matlab:avg": {
+          "name": "MATLAB",
+          "group": "Application"
+        },
+        "Application:matlab:icon": {
+          "name": "MATLAB (icon)",
+          "group": "Application"
+        },
+        "Application:matlab:text": {
+          "name": "MATLAB (text)",
+          "group": "Application"
+        },
+        "Application:origin:avg": {
+          "name": "Origin",
+          "group": "Application"
+        },
+        "Application:origin:icon": {
+          "name": "Origin (icon)",
+          "group": "Application"
+        },
+        "Application:origin:text": {
+          "name": "Origin (text)",
+          "group": "Application"
+        },
+        "Application:photoshop:avg": {
+          "name": "Photoshop",
+          "group": "Application"
+        },
+        "Application:photoshop:icon": {
+          "name": "Photoshop (icon)",
+          "group": "Application"
+        },
+        "Application:photoshop:text": {
+          "name": "Photoshop (text)",
+          "group": "Application"
+        },
+        "Application:powerpoint:avg": {
+          "name": "PowerPoint",
+          "group": "Application"
+        },
+        "Application:powerpoint:icon": {
+          "name": "PowerPoint (icon)",
+          "group": "Application"
+        },
+        "Application:powerpoint:text": {
+          "name": "PowerPoint (text)",
+          "group": "Application"
+        },
+        "Application:premiere:avg": {
+          "name": "Premiere",
+          "group": "Application"
+        },
+        "Application:premiere:icon": {
+          "name": "Premiere (icon)",
+          "group": "Application"
+        },
+        "Application:premiere:text": {
+          "name": "Premiere (text)",
+          "group": "Application"
+        },
+        "Application:pycharm:avg": {
+          "name": "PyCharm",
+          "group": "Application"
+        },
+        "Application:pycharm:icon": {
+          "name": "PyCharm (icon)",
+          "group": "Application"
+        },
+        "Application:pycharm:text": {
+          "name": "PyCharm (text)",
+          "group": "Application"
+        },
+        "Application:quartus:avg": {
+          "name": "Quartus",
+          "group": "Application"
+        },
+        "Application:quartus:icon": {
+          "name": "Quartus (icon)",
+          "group": "Application"
+        },
+        "Application:quartus:text": {
+          "name": "Quartus (text)",
+          "group": "Application"
+        },
+        "Application:solidworks:avg": {
+          "name": "SolidWorks",
+          "group": "Application"
+        },
+        "Application:solidworks:icon": {
+          "name": "SolidWorks (icon)",
+          "group": "Application"
+        },
+        "Application:solidworks:text": {
+          "name": "SolidWorks (text)",
+          "group": "Application"
+        },
+        "Application:stata:avg": {
+          "name": "Stata",
+          "group": "Application"
+        },
+        "Application:stata:icon": {
+          "name": "Stata (icon)",
+          "group": "Application"
+        },
+        "Application:stata:text": {
+          "name": "Stata (text)",
+          "group": "Application"
+        },
+        "Application:unreal_engine:avg": {
+          "name": "Unreal Engine",
+          "group": "Application"
+        },
+        "Application:unreal_engine:icon": {
+          "name": "Unreal Engine (icon)",
+          "group": "Application"
+        },
+        "Application:unreal_engine:text": {
+          "name": "Unreal Engine (text)",
+          "group": "Application"
+        },
+        "Application:vivado:avg": {
+          "name": "Vivado",
+          "group": "Application"
+        },
+        "Application:vivado:icon": {
+          "name": "Vivado (icon)",
+          "group": "Application"
+        },
+        "Application:vivado:text": {
+          "name": "Vivado (text)",
+          "group": "Application"
+        },
+        "Application:vmware:avg": {
+          "name": "VMware",
+          "group": "Application"
+        },
+        "Application:vmware:icon": {
+          "name": "VMware (icon)",
+          "group": "Application"
+        },
+        "Application:vmware:text": {
+          "name": "VMware (text)",
+          "group": "Application"
+        },
+        "Application:vscode:avg": {
+          "name": "VS Code",
+          "group": "Application"
+        },
+        "Application:vscode:icon": {
+          "name": "VS Code (icon)",
+          "group": "Application"
+        },
+        "Application:vscode:text": {
+          "name": "VS Code (text)",
+          "group": "Application"
+        },
+        "Application:windows_common:avg": {
+          "name": "Windows common",
+          "group": "Application"
+        },
+        "Application:windows_common:icon": {
+          "name": "Windows common (icon)",
+          "group": "Application"
+        },
+        "Application:windows_common:text": {
+          "name": "Windows common (text)",
+          "group": "Application"
+        },
+        "Application:word:avg": {
+          "name": "Word",
+          "group": "Application"
+        },
+        "Application:word:icon": {
+          "name": "Word (icon)",
+          "group": "Application"
+        },
+        "Application:word:text": {
+          "name": "Word (text)",
+          "group": "Application"
         }
       }
     },
