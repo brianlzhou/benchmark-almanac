@@ -156,13 +156,11 @@ export async function oallRows(column: OallTask | 'Average', board?: Leaderboard
     if (board && column === 'Average') {
       for (const [task, value] of Object.entries(r.scores)) {
         metrics[task] = value;
-        (board.parts ??= {})[task] = { name: task, group: 'Benchmark' };
       }
       const seconds = Number(r.config?.total_evaluation_time_secondes);
       if (Number.isFinite(seconds) && seconds > 0) metrics.evaluationSeconds = seconds;
       const size = r.config?.model_size?.match(/^([\d.]+) GB$/);
       if (size) metrics.modelSizeGB = Number(size[1]);
-      if (typeof r.config?.num_fewshot_seeds === 'number') metrics.fewshotSeeds = r.config.num_fewshot_seeds;
     } else if (board && column !== 'Average') {
       const [overall, measure] = OALL_TASKS[column];
       const prefix = overall.split(':_average|')[0] + ':';
@@ -211,7 +209,12 @@ const board: Leaderboard = {
   benchmark: 'open-arabic-llm-leaderboard-v2',
   url: OALL_URL,
   feed: oallFeed('Average'),
-  terms: OALL_TERMS,
+  terms: 'Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it. The dataset states no license.',
+  parts: Object.fromEntries(Object.keys(OALL_TASKS).map(task => [task, { name: task, group: 'Benchmark' }])),
+  stats: {
+    evaluationSeconds: { name: 'Evaluation time', unit: 'seconds', better: 'lower' },
+    modelSizeGB: { name: 'Model size', unit: 'gb' },
+  },
   aliases: OALL_ALIASES,
   fetch: () => oallRows('Average', board),
 };

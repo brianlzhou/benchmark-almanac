@@ -221750,7 +221750,7 @@
     "open-arabic-llm-leaderboard-v2": {
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, Average)",
-      "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
+      "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it. The dataset states no license.",
       "retrieved": "2026-11-24",
       "rows": 52,
       "unmatched": [
@@ -221895,6 +221895,17 @@
         "ArbMMLU-HT": {
           "name": "ArbMMLU-HT",
           "group": "Benchmark"
+        }
+      },
+      "stats": {
+        "evaluationSeconds": {
+          "name": "Evaluation time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "modelSizeGB": {
+          "name": "Model size",
+          "unit": "gb"
         }
       }
     },
