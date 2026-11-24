@@ -11,7 +11,7 @@ const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | nu
   const half = e.confidenceInterval_upper;
   const s = Number(e.score);
   const r = (x: number) => Math.round(x * 100) / 100;
-  return typeof half === 'number' && half > 0 ? { metrics: { ciLow: r(s - half), ciHigh: r(s + half) } } : undefined;
+  return typeof half === 'number' && half > 0 ? { low: r(s - half), high: r(s + half), metrics: { ciLow: r(s - half), ciHigh: r(s + half) } } : undefined;
 };
 
 const board: Leaderboard = {

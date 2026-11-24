@@ -20,6 +20,10 @@ const board: Leaderboard = {
   url: `https://github.com/${REPO}`,
   feed: `${FEED} (prinzbench (full) score)`,
   terms: 'README table in the prinz-ai/prinzbench GitHub repository, which states no license; scores are cited to the author.',
+  parts: {
+    legalResearch: { name: 'Legal research', unit: 'score', note: 'Points out of 75.' },
+    search: { name: 'Search', unit: 'score', note: 'Points out of 24.' },
+  },
   aliases: {
     'fable-5': 'claude-fable-5',
     'opus-4.8': 'claude-opus-4-8',
@@ -34,6 +38,8 @@ const board: Leaderboard = {
     const t = mdTables(await fetchText(FEED)).find((x) => x.head.some((h) => /^prinzbench \(full\) score/.test(h)));
     if (!t) throw new Error('prinzbench table not found');
     const iScore = t.head.findIndex((h) => /^prinzbench \(full\) score/.test(h));
+    const iLegal = t.head.findIndex((h) => /^Legal Research Sub-Score/i.test(h));
+    const iSearch = t.head.findIndex((h) => /^Search Sub-Score/i.test(h));
     const rows: LeaderboardRow[] = [];
     for (const r of t.rows) {
       const score = Number(r[iScore]);
@@ -51,7 +57,12 @@ const board: Leaderboard = {
         model = thinking[1];
         setting = setting ? `thinking ${setting}` : 'thinking';
       }
-      rows.push({ model, score, setting });
+      const metrics: Record<string, number> = {};
+      const legal = iLegal >= 0 ? Number(r[iLegal]) : NaN;
+      if (Number.isFinite(legal)) metrics.legalResearch = legal;
+      const search = iSearch >= 0 ? Number(r[iSearch]) : NaN;
+      if (Number.isFinite(search)) metrics.search = search;
+      rows.push({ model, score, setting, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

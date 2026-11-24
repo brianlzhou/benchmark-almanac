@@ -13,10 +13,11 @@ const board: Leaderboard = {
   
   async fetch() {
     const s=await fetchText(FEED);const marker=s.indexOf('const leaderboard =');if(marker<0)throw new Error('SpatialViz array missing');
-    const d=jsLiteral<{model:string,overall?:number,direct?:number,cot?:number}[]>(s,s.indexOf('[',marker));const out:LeaderboardRow[]=[];
+    const d=jsLiteral<{model:string,source?:string,overall?:number,direct?:number,cot?:number}[]>(s,s.indexOf('[',marker));const out:LeaderboardRow[]=[];
     for(const r of d){
-      if(typeof r.overall==='number')out.push({model:r.model,score:r.overall});
-      else for(const k of ['direct','cot'] as const)if(typeof r[k]==='number')out.push({model:r.model,score:r[k]!,setting:k});
+      const open=r.source==='Open'?true:r.source==='Closed'?false:undefined;
+      if(typeof r.overall==='number')out.push({model:r.model,score:r.overall,open});
+      else for(const k of ['direct','cot'] as const)if(typeof r[k]==='number')out.push({model:r.model,score:r[k]!,setting:k,open});
     }return out;
   },
 };

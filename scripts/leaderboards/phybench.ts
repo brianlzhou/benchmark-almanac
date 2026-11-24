@@ -10,12 +10,32 @@ import { fetchText } from '../lib/util.ts';
 const SITE = 'https://www.phybench.cn';
 const PAGE = `${SITE}/leaderboard`;
 
+interface Scores {
+  ALL: number;
+  MECHANICS?: number;
+  ELECTRICITY?: number;
+  THERMODYNAMICS?: number;
+  OPTICS?: number;
+  MODERN?: number;
+  ADVANCED?: number;
+}
+
 interface Entry {
   name: string;
   id: string;
   note?: string;
-  acc: { ALL: number };
+  acc: Scores;
+  eed?: Scores;
 }
+
+const FIELDS: [keyof Scores, string, string][] = [
+  ['MECHANICS', 'mechanics', 'Mechanics'],
+  ['ELECTRICITY', 'electricity', 'Electricity'],
+  ['THERMODYNAMICS', 'thermodynamics', 'Thermodynamics'],
+  ['OPTICS', 'optics', 'Optics'],
+  ['MODERN', 'modern', 'Modern physics'],
+  ['ADVANCED', 'advanced', 'Advanced physics'],
+];
 
 async function chunk(from: string, pattern: RegExp): Promise<string> {
   const m = from.match(pattern);
@@ -28,6 +48,10 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${SITE}/assets/models-<hash>.js (through index and leader-board chunks; acc.ALL)`,
   terms: 'Public project site; robots.txt is not set (the path returns the app page) and the site publishes no terms.',
+  parts: Object.fromEntries(FIELDS.map(([, k, name]) => [k, { name, unit: '%' as const }])),
+  stats: {
+    eed: { name: 'EED score', unit: 'score', better: 'higher', note: 'Expression edit distance score on a 0 to 100 scale.' },
+  },
   aliases: {
     'Gemini 2.5 pro 0325': 'gemini-2-5-pro-mar-2025',
     'Gemini 2.5 pro': 'gemini-2-5-pro-jun-2025',
@@ -56,7 +80,18 @@ const board: Leaderboard = {
     for (const e of list) {
       if (/human/i.test(e.id)) continue;
       const setting = /\((high|low|medium)\)/i.exec(e.name)?.[1]?.toLowerCase() ?? (/thinking/i.test(e.name) ? 'thinking' : undefined);
-      rows.push({ model: e.name.replace(/\s*\((high|low|medium)\)\s*$/i, ''), score: e.acc?.ALL, setting });
+      const metrics: Record<string, number> = {};
+      for (const [src, k] of FIELDS) {
+        const v = e.acc?.[src];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      }
+      if (typeof e.eed?.ALL === 'number' && Number.isFinite(e.eed.ALL)) metrics.eed = e.eed.ALL;
+      rows.push({
+        model: e.name.replace(/\s*\((high|low|medium)\)\s*$/i, ''),
+        score: e.acc?.ALL,
+        setting,
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     return rows;
   },

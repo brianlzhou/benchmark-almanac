@@ -8,11 +8,24 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = 'https://huggingface.co/spaces/Salesforce/CRMArena-Leaderboard/resolve/main/crmarena_results/all_results.csv';
 
+const TASKS: [string, string][] = [
+  ['NCR', 'New case routing'],
+  ['HTU', 'Handle time understanding'],
+  ['TCU', 'Transfer count understanding'],
+  ['NED', 'Name entity disambiguation'],
+  ['PVI', 'Policy violation identification'],
+  ['KQA', 'Knowledge question answering'],
+  ['TII', 'Top issue identification'],
+  ['MTA', 'Monthly trend analysis'],
+  ['BRI', 'Best region identification'],
+];
+
 const board: Leaderboard = {
   benchmark: 'crmarena',
   url: 'https://huggingface.co/spaces/Salesforce/CRMArena-Leaderboard',
   feed: `${FEED} (Overall)`,
   terms: 'CSV in the Salesforce/CRMArena-Leaderboard Hugging Face Space, licensed Apache-2.0.',
+  parts: Object.fromEntries(TASKS.map(([k, name]) => [k, { name, unit: '%' as const }])),
   aliases: {
     'llama3.1-405b': 'llama-3-1-405b',
     'llama3.1-70b': 'llama-3-1-70b',
@@ -26,7 +39,18 @@ const board: Leaderboard = {
       const overall = Object.keys(r).find((k) => /^Overall/.test(k));
       const score = overall ? Number(r[overall]) : NaN;
       if (!r.Model || !Number.isFinite(score)) continue;
-      rows.push({ model: r.Model.trim(), score, harness: r['Agentic Framework'] || undefined, date: '2025-01-01' });
+      const metrics: Record<string, number> = {};
+      for (const [k] of TASKS) {
+        const v = Number(r[k]);
+        if (Number.isFinite(v)) metrics[k] = v;
+      }
+      rows.push({
+        model: r.Model.trim(),
+        score,
+        harness: r['Agentic Framework'] || undefined,
+        date: '2025-01-01',
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     return rows;
   },

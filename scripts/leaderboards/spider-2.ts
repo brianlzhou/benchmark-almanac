@@ -26,7 +26,9 @@ const board: Leaderboard = {
       const score=num(r[2]?.text);if(score===undefined)continue;
       const name=text(r[1].html.split(/<p\b|<span\b[^>]*class=["']affiliation["']/i)[0]);const at=name.lastIndexOf(' + ');
       const submitter=text(r[1].html.match(/<span\b[^>]*class=["']affiliation["'][^>]*>([\s\S]*?)<\/span>/i)?.[1] ?? '') || undefined;
-      rows.push({date,submitter,model:at>=0?name.slice(at+3):name,harness:at>=0?name.slice(0,at):undefined,score});
+      const hrefs=[...r[1].html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["']/gi)].map(m => m[1]);
+      const link=hrefs.find(u => /arxiv\.org|github\.com/i.test(u)) ?? hrefs[0];
+      rows.push({date,submitter,link,model:at>=0?name.slice(at+3):name,harness:at>=0?name.slice(0,at):undefined,score});
     }
   }
   return rows;

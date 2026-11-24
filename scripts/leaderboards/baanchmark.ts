@@ -29,8 +29,7 @@ const board: Leaderboard = {
         harness: r.model.includes('+ Claude Code') ? 'Claude Code' : undefined,
         link: r.demo ?? undefined, date: r.provenance.testedAt ?? r.provenance.generatedAt ?? undefined,
         open: r.runtime.en === 'Unknown' ? undefined : r.runtime.en.startsWith('Open-weight'),
-        params: params ? Number(params[1]) * (params[2] === 'T' ? 1000 : 1) : undefined,
-        metrics: typeof r.followUpPromptCount === 'number' ? { followUpPrompts: r.followUpPromptCount } : undefined };
+        params: params ? Number(params[1]) * (params[2] === 'T' ? 1000 : 1) : undefined };
     });
   },
 };

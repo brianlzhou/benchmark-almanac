@@ -7,17 +7,48 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = 'https://neulab.github.io/VisualPuzzles/data.json';
 
+interface Split {
+  algorithmic?: number;
+  analogical?: number;
+  deductive?: number;
+  inductive?: number;
+  spatial?: number;
+  overall?: number;
+}
+
 interface Entry {
   model: string;
   model_type?: string;
-  overall?: { overall?: number };
+  size?: string;
+  easy?: Split;
+  medium?: Split;
+  hard?: Split;
+  overall?: Split;
 }
+
+const CATEGORIES: [keyof Split, string][] = [
+  ['algorithmic', 'Algorithmic'],
+  ['analogical', 'Analogical'],
+  ['deductive', 'Deductive'],
+  ['inductive', 'Inductive'],
+  ['spatial', 'Spatial'],
+];
+
+const DIFFICULTIES: [keyof Pick<Entry, 'easy' | 'medium' | 'hard'>, string][] = [
+  ['easy', 'Easy'],
+  ['medium', 'Medium'],
+  ['hard', 'Hard'],
+];
 
 const board: Leaderboard = {
   benchmark: 'visualpuzzles',
   url: 'https://neulab.github.io/VisualPuzzles/',
   feed: `${FEED} (overall.overall)`,
   terms: 'JSON file on the VisualPuzzles GitHub Pages site that the page loads; the page states no terms.',
+  parts: {
+    ...Object.fromEntries(CATEGORIES.map(([k, name]) => [k, { name, group: 'Category', unit: '%' as const }])),
+    ...Object.fromEntries(DIFFICULTIES.map(([k, name]) => [k, { name, group: 'Difficulty', unit: '%' as const }])),
+  },
   aliases: {
     'Gemini-3-pro-preview': 'gemini-3-pro',
     'Claude-4-Sonnet': 'claude-sonnet-4',
@@ -38,7 +69,27 @@ const board: Leaderboard = {
       // "Claude-3.7-Sonnet-thinking", "Gemini-2.0-flash-thinking": the mode becomes the setting
       const thinking = /-thinking$/i.test(model);
       if (thinking) model = model.replace(/-thinking$/i, '');
-      rows.push({ model, score, setting: thinking ? 'thinking' : undefined, date: stamp?.[1] });
+      const open = e.model_type === 'open' ? true : e.model_type === 'proprietary' ? false : undefined;
+      const sizeMatch = e.size?.match(/^(\d+(?:\.\d+)?)B$/i);
+      const params = sizeMatch ? Number(sizeMatch[1]) : undefined;
+      const metrics: Record<string, number> = {};
+      for (const [k] of CATEGORIES) {
+        const v = e.overall?.[k];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      }
+      for (const [k] of DIFFICULTIES) {
+        const v = e[k]?.overall;
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      }
+      rows.push({
+        model,
+        score,
+        setting: thinking ? 'thinking' : undefined,
+        date: stamp?.[1],
+        ...(open === undefined ? {} : { open }),
+        ...(params !== undefined ? { params } : {}),
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     return rows;
   },

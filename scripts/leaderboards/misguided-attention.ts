@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (mean average_total_score per model)`,
   terms: 'Static data script on the project GitHub Pages site (robots.txt allows all); the MisguidedAttention repository is CC0-1.0.',
+  stats: { promptsScored: { name: 'Prompts scored', unit: 'count' } },
   aliases: {
     'gpt-4o-2024-11-20': 'gpt-4o-nov-2024',
     'gpt-4o-20250129': 'gpt-4o-jan-2025',
@@ -63,7 +64,7 @@ const board: Leaderboard = {
       if (think) [model, setting] = [name.slice(0, think.index), 'thinking'];
       else if (/-nothink$/i.test(name)) [model, setting] = [name.replace(/-nothink$/i, ''), 'non-thinking'];
       if (name === 'grok-3-mini-beta-think') model = 'Grok 3 Mini beta (unlisted snapshot)';
-      rows.push({ model, setting, score: Number(((100 * a.s) / a.n).toFixed(1)) });
+      rows.push({ model, setting, score: Number(((100 * a.s) / a.n).toFixed(1)), metrics: { promptsScored: a.n } });
     }
     return rows;
   },

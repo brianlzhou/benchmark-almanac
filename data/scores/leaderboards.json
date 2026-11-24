@@ -5422,9 +5422,21 @@
       "url": "https://agentdojo.spylab.ai/results/",
       "feed": "https://agentdojo.spylab.ai/results/ (static HTML table, Targeted ASR)",
       "terms": "Static documentation page built from the AgentDojo repository, which is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "utility": {
+          "name": "Utility",
+          "unit": "%",
+          "better": "higher"
+        },
+        "utilityUnderAttack": {
+          "name": "Utility under attack",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "agentescapebench": {
       "url": "https://arxiv.org/html/2605.07926",
@@ -26894,7 +26906,7 @@
       "url": "https://dubovskylabs.com/baa-benchmark/",
       "feed": "https://dubovskylabs.com/data/baa-benchmark.json",
       "terms": "Dubovsky Labs allows this feed in robots.txt and offers it for download without a stated reuse license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": [
         "Big Pickle",
@@ -66231,9 +66243,10 @@
       "url": "https://hal.cs.princeton.edu/corebench_hard",
       "feed": "https://hal.cs.princeton.edu/corebench_hard (leaderboard table)",
       "terms": "Server-rendered public page of the Princeton HAL project; the site has no robots.txt restrictions or terms, and the HAL harness is open source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 49,
-      "unmatched": []
+      "unmatched": [],
+      "verified": "reproduced by the HAL team"
     },
     "corebench-conversational-reasoning": {
       "url": "https://crfm.stanford.edu/helm/audio/latest/#/groups/corebench",
@@ -73067,9 +73080,47 @@
       "url": "https://huggingface.co/spaces/Salesforce/CRMArena-Leaderboard",
       "feed": "https://huggingface.co/spaces/Salesforce/CRMArena-Leaderboard/resolve/main/crmarena_results/all_results.csv (Overall)",
       "terms": "CSV in the Salesforce/CRMArena-Leaderboard Hugging Face Space, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "NCR": {
+          "name": "New case routing",
+          "unit": "%"
+        },
+        "HTU": {
+          "name": "Handle time understanding",
+          "unit": "%"
+        },
+        "TCU": {
+          "name": "Transfer count understanding",
+          "unit": "%"
+        },
+        "NED": {
+          "name": "Name entity disambiguation",
+          "unit": "%"
+        },
+        "PVI": {
+          "name": "Policy violation identification",
+          "unit": "%"
+        },
+        "KQA": {
+          "name": "Knowledge question answering",
+          "unit": "%"
+        },
+        "TII": {
+          "name": "Top issue identification",
+          "unit": "%"
+        },
+        "MTA": {
+          "name": "Monthly trend analysis",
+          "unit": "%"
+        },
+        "BRI": {
+          "name": "Best region identification",
+          "unit": "%"
+        }
+      }
     },
     "crmarena-pro": {
       "url": "https://arxiv.org/html/2505.18878",
@@ -95280,9 +95331,75 @@
       "url": "https://eqbench.com/",
       "feed": "https://eqbench.com/eqbench4/eqbench4_data.js",
       "terms": "Generated data file on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "bond_and_rapport": {
+          "name": "Bond and rapport",
+          "group": "Ability",
+          "unit": "elo"
+        },
+        "authenticity": {
+          "name": "Authenticity",
+          "group": "Ability",
+          "unit": "elo"
+        },
+        "attunement": {
+          "name": "Attunement",
+          "group": "Ability",
+          "unit": "elo"
+        },
+        "meeting_prefs_and_needs": {
+          "name": "Meeting preferences and needs",
+          "group": "Ability",
+          "unit": "elo"
+        },
+        "emotion_sensemaking": {
+          "name": "Emotion sensemaking",
+          "group": "Ability",
+          "unit": "elo"
+        },
+        "emotion_management": {
+          "name": "Emotion management",
+          "group": "Ability",
+          "unit": "elo"
+        }
+      },
+      "stats": {
+        "analytical": {
+          "name": "Analytical",
+          "unit": "score"
+        },
+        "validation_propensity": {
+          "name": "Validating",
+          "unit": "score"
+        },
+        "challenge_propensity": {
+          "name": "Challenging",
+          "unit": "score"
+        },
+        "interpretive_boldness": {
+          "name": "Interpretive boldness",
+          "unit": "score"
+        },
+        "directive_advice_orientation": {
+          "name": "Directive advice",
+          "unit": "score"
+        },
+        "escalation_containment": {
+          "name": "Escalation containment",
+          "unit": "score"
+        },
+        "yielding": {
+          "name": "Yielding",
+          "unit": "score"
+        },
+        "naturalness_authenticity": {
+          "name": "Naturalness",
+          "unit": "score"
+        }
+      }
     },
     "eqbench-longform-writing": {
       "url": "https://eqbench.com/creative_writing_longform.html",
@@ -121588,7 +121705,7 @@
       "url": "https://waynechi.com/gamedevbench/#leaderboard",
       "feed": "https://waynechi.com/gamedevbench/ (static HTML bar chart, gdb-bar-row)",
       "terms": "Static page on the author’s GitHub Pages site (robots.txt allows it) with no terms of its own; the GameDevBench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": []
     },
@@ -122947,11 +123064,45 @@
       "url": "https://general365.github.io/#Leaderboard",
       "feed": "https://general365.github.io/ (leaderboard table, Overall)",
       "terms": "Static GitHub Pages project page with no robots.txt and no terms; the scores are cited to the General365 authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
         "LongCat-Flash-2512"
-      ]
+      ],
+      "parts": {
+        "complexConstraints": {
+          "name": "Complex constraints",
+          "unit": "%"
+        },
+        "branchingEnumeration": {
+          "name": "Branching and enumeration",
+          "unit": "%"
+        },
+        "spatialTemporal": {
+          "name": "Spatial and temporal",
+          "unit": "%"
+        },
+        "recursiveBacktracking": {
+          "name": "Recursive and backtracking",
+          "unit": "%"
+        },
+        "semanticInterference": {
+          "name": "Semantic interference",
+          "unit": "%"
+        },
+        "implicitInformation": {
+          "name": "Implicit information",
+          "unit": "%"
+        },
+        "optimalStrategy": {
+          "name": "Optimal strategy",
+          "unit": "%"
+        },
+        "probabilityUncertainty": {
+          "name": "Probability and uncertainty",
+          "unit": "%"
+        }
+      }
     },
     "geneval": {
       "url": "https://github.com/djghosh13/geneval",
@@ -135584,7 +135735,7 @@
       "url": "https://phyarena.github.io/",
       "feed": "https://phyarena.github.io/data/hipho.json (mean of score / full mark over the 13 olympiads)",
       "terms": "Static JSON on the PhyArena GitHub Pages site; GitHub Pages serves no robots.txt rules for it and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [
         "P1-235B-A22B",
@@ -135593,7 +135744,74 @@
         "P1-VL-235B-A22B",
         "P1-VL-235B-A22B + PhysicsMinions",
         "P1-VL-30B-A3B"
-      ]
+      ],
+      "parts": {
+        "IPhO 2025": {
+          "name": "IPhO 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "APhO 2025": {
+          "name": "APhO 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "EuPhO 2025": {
+          "name": "EuPhO 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "NBPhO 2025": {
+          "name": "NBPhO 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "PanPhO 2025": {
+          "name": "PanPhO 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "PanMechanics 2025": {
+          "name": "PanMechanics 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "F=MA 2025": {
+          "name": "F=MA 2025",
+          "group": "2025 Olympiads",
+          "unit": "%"
+        },
+        "IPhO 2024": {
+          "name": "IPhO 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        },
+        "EuPhO 2024": {
+          "name": "EuPhO 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        },
+        "NBPhO 2024": {
+          "name": "NBPhO 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        },
+        "PanPhO 2024": {
+          "name": "PanPhO 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        },
+        "PanMechanics 2024": {
+          "name": "PanMechanics 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        },
+        "F=MA 2024": {
+          "name": "F=MA 2024",
+          "group": "2024 Olympiads",
+          "unit": "%"
+        }
+      }
     },
     "hirewatch": {
       "url": "https://arxiv.org/html/2611.24970",
@@ -135667,9 +135885,40 @@
       "url": "https://lastexam.ai/blog/hle-diamond",
       "feed": "https://lastexam.ai/blog/hle-diamond (page chunk object \"b\" for reasoning high; flight-data ResultsView table for reasoning max)",
       "terms": "Public CAIS blog page; lastexam.ai serves no robots.txt (the path returns 404) and publishes no terms page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 50,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "reasoning": {
+          "name": "Reasoning",
+          "unit": "%"
+        },
+        "knowledge": {
+          "name": "Knowledge",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "tokenRequests": {
+          "name": "Token measurement requests",
+          "unit": "count"
+        },
+        "inputTokens": {
+          "name": "Average input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "reasoningOutputTokens": {
+          "name": "Average reasoning output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "knowledgeOutputTokens": {
+          "name": "Average knowledge output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "hle-extended-mercor": {
       "url": "https://www.mercor.com/apex/mercor-extended/ots-held-out-hle-leaderboard/",
@@ -160426,7 +160675,7 @@
       "url": "https://korabench.ai/leaderboard",
       "feed": "https://korabench.ai/leaderboard (server-rendered hydration payload, scorePercent)",
       "terms": "robots.txt allows / for all user agents except named AI crawlers (content signal use=reference, ai-train=no); the KORA benchmark repository is open source and the site terms do not restrict reading.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": []
     },
@@ -185504,11 +185753,49 @@
       "url": "https://tiger-ai-lab.github.io/MEGA-Bench/",
       "feed": "https://tiger-ai-lab.github.io/MEGA-Bench/static/data/all_summary.json (overall_score)",
       "terms": "JSON file on the MEGA-Bench GitHub Pages site that the page loads; the MEGA-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [
         "Mammoth_VL"
-      ]
+      ],
+      "parts": {
+        "core": {
+          "name": "Core",
+          "unit": "%",
+          "note": "Higher of the Core chain-of-thought and non-chain-of-thought macro mean scores, matching the leaderboard table."
+        },
+        "openEnded": {
+          "name": "Open-ended",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "coreCot": {
+          "name": "Core with CoT",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coreNonCot": {
+          "name": "Core without CoT",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coreCotMicro": {
+          "name": "Core with CoT micro mean",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coreNonCotMicro": {
+          "name": "Core without CoT micro mean",
+          "unit": "%",
+          "better": "higher"
+        },
+        "openMicro": {
+          "name": "Open-ended micro mean",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "mela": {
       "url": "https://aclanthology.org/2024.acl-long.146/",
@@ -191971,7 +192258,7 @@
       "url": "https://cpldcpu.github.io/MisguidedAttention/",
       "feed": "https://cpldcpu.github.io/MisguidedAttention/data.js (mean average_total_score per model)",
       "terms": "Static data script on the project GitHub Pages site (robots.txt allows all); the MisguidedAttention repository is CC0-1.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 53,
       "unmatched": [
         "DeepHermes-3-Mistral-24B-Pre",
@@ -191979,7 +192266,13 @@
         "gemini-exp-1206",
         "optimus-alpha",
         "quasar-alpha"
-      ]
+      ],
+      "stats": {
+        "promptsScored": {
+          "name": "Prompts scored",
+          "unit": "count"
+        }
+      }
     },
     "mishap-bench": {
       "url": "https://arxiv.org/html/2609.33893",
@@ -192240,7 +192533,7 @@
       "url": "https://mixeval.github.io/#leaderboard",
       "feed": "https://mixeval.github.io/ (static HTML table, MixEval column)",
       "terms": "Static GitHub Pages site; the page content is CC BY-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "DeepSeek-7B (base)",
@@ -192280,7 +192573,59 @@
         "Yi-34B-Chat",
         "Yi-6B (base)",
         "Zephyr-7B-β"
-      ]
+      ],
+      "parts": {
+        "triviaqa": {
+          "name": "TriviaQA",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "mmlu": {
+          "name": "MMLU",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "drop": {
+          "name": "DROP",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "hellaswag": {
+          "name": "HellaSwag",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "commonsenseqa": {
+          "name": "CommonsenseQA",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "boolq": {
+          "name": "BoolQ",
+          "group": "MixEval",
+          "unit": "%"
+        },
+        "triviaqaHard": {
+          "name": "TriviaQA-Hard",
+          "group": "MixEval-Hard",
+          "unit": "%"
+        },
+        "mmluHard": {
+          "name": "MMLU-Hard",
+          "group": "MixEval-Hard",
+          "unit": "%"
+        },
+        "dropHard": {
+          "name": "DROP-Hard",
+          "group": "MixEval-Hard",
+          "unit": "%"
+        },
+        "mixevalHard": {
+          "name": "MixEval-Hard",
+          "group": "MixEval-Hard",
+          "unit": "%"
+        }
+      }
     },
     "mizan-persian-llm-leaderboard": {
       "url": "https://mcinext-mizan-llm-leaderboard.hf.space/",
@@ -197647,7 +197992,7 @@
       "url": "https://github.com/OpenRobotLab/MMSI-Bench",
       "feed": "https://raw.githubusercontent.com/OpenRobotLab/MMSI-Bench/main/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -207066,10 +207411,75 @@
       "url": "https://frontisai.github.io/NatureBench/#leaderboard",
       "feed": "https://frontisai.github.io/NatureBench/naturebench-data.js (Full track, Surpass-SOTA computed as the page does)",
       "terms": "Static data file on the project site (GitHub Pages, no robots.txt rules); the FrontisAI/NatureBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [],
-      "harnesses": "system"
+      "harnesses": "system",
+      "parts": {
+        "proteinBiology": {
+          "name": "Protein biology",
+          "unit": "%"
+        },
+        "cellularOmics": {
+          "name": "Cellular omics",
+          "unit": "%"
+        },
+        "biomedicalModeling": {
+          "name": "Biomedical modeling",
+          "unit": "%"
+        },
+        "molecularDesign": {
+          "name": "Molecular design",
+          "unit": "%"
+        },
+        "physicalModeling": {
+          "name": "Physical modeling",
+          "unit": "%"
+        },
+        "relationalReasoning": {
+          "name": "Relational reasoning",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "matchSota": {
+          "name": "Match-SOTA",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of the 90 tasks with a valid non-negative score."
+        },
+        "medianAll": {
+          "name": "Median g (all)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Median SOTA-normalized gap across all 90 tasks, with invalid or unscored tasks set to -1."
+        },
+        "meanAll": {
+          "name": "Mean g (all)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "medianValid": {
+          "name": "Median g (valid)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "completionRate": {
+          "name": "Completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scoreRate": {
+          "name": "Score rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "invalid": {
+          "name": "Invalid runs",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "nautdata-test": {
       "url": "https://arxiv.org/html/2510.27481",
@@ -246417,9 +246827,43 @@
       "url": "https://www.phybench.cn/leaderboard",
       "feed": "https://www.phybench.cn/assets/models-<hash>.js (through index and leader-board chunks; acc.ALL)",
       "terms": "Public project site; robots.txt is not set (the path returns the app page) and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "mechanics": {
+          "name": "Mechanics",
+          "unit": "%"
+        },
+        "electricity": {
+          "name": "Electricity",
+          "unit": "%"
+        },
+        "thermodynamics": {
+          "name": "Thermodynamics",
+          "unit": "%"
+        },
+        "optics": {
+          "name": "Optics",
+          "unit": "%"
+        },
+        "modern": {
+          "name": "Modern physics",
+          "unit": "%"
+        },
+        "advanced": {
+          "name": "Advanced physics",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "eed": {
+          "name": "EED score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Expression edit distance score on a 0 to 100 scale."
+        }
+      }
     },
     "phyre": {
       "url": "https://arxiv.org/html/1908.05656",
@@ -251991,11 +252435,23 @@
       "url": "https://github.com/prinz-ai/prinzbench",
       "feed": "https://raw.githubusercontent.com/prinz-ai/prinzbench/b14e1521f3f03fc2a78d7ac8f81527111d6a1f80/README.md (prinzbench (full) score)",
       "terms": "README table in the prinz-ai/prinzbench GitHub repository, which states no license; scores are cited to the author.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "qwen-q3-max"
-      ]
+      ],
+      "parts": {
+        "legalResearch": {
+          "name": "Legal research",
+          "unit": "score",
+          "note": "Points out of 75."
+        },
+        "search": {
+          "name": "Search",
+          "unit": "score",
+          "note": "Points out of 24."
+        }
+      }
     },
     "prism-bench-audio-video": {
       "url": "https://huggingface.co/spaces/prismbench/prismbench-leaderboard",
@@ -262325,7 +262781,7 @@
       "url": "https://huggingface.co/spaces/allenai/reward-bench",
       "feed": "https://huggingface.co/api/datasets/allenai/reward-bench-2-results (eval-set/*.json, mean of six domains)",
       "terms": "Hugging Face dataset allenai/reward-bench-2-results, which carries no license tag, read as the Apache-2.0 leaderboard Space reads it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "CIR-AMS/BTRM_Qwen2_7b_0613",
@@ -262357,7 +262813,33 @@
         "weqweasdas/RM-Gemma-7B",
         "weqweasdas/RM-Mistral-7B",
         "weqweasdas/hh_rlhf_rm_open_llama_3b"
-      ]
+      ],
+      "parts": {
+        "Factuality": {
+          "name": "Factuality",
+          "unit": "%"
+        },
+        "Precise IF": {
+          "name": "Precise IF",
+          "unit": "%"
+        },
+        "Math": {
+          "name": "Math",
+          "unit": "%"
+        },
+        "Safety": {
+          "name": "Safety",
+          "unit": "%"
+        },
+        "Focus": {
+          "name": "Focus",
+          "unit": "%"
+        },
+        "Ties": {
+          "name": "Ties",
+          "unit": "%"
+        }
+      }
     },
     "rexbench": {
       "url": "https://rexbench.com/",
@@ -281529,7 +282011,7 @@
       "url": "https://wangst0181.github.io/SpatialViz-Bench/assets/main.js?v=4",
       "feed": "https://wangst0181.github.io/SpatialViz-Bench/assets/main.js?v=4",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [
         "Claude-3.5-sonnet (snapshot unspecified)",
@@ -282966,7 +283448,7 @@
       "url": "https://spider2-sql.github.io/",
       "feed": "https://spider2-sql.github.io/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
       "unmatched": [
         "APEX-SQL",
@@ -316628,7 +317110,7 @@
       "url": "https://neulab.github.io/VisualPuzzles/",
       "feed": "https://neulab.github.io/VisualPuzzles/data.json (overall.overall)",
       "terms": "JSON file on the VisualPuzzles GitHub Pages site that the page loads; the page states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [
         "LLaVA-1.5-7B",
@@ -316636,7 +317118,49 @@
         "Pangea-7B",
         "Qwen-VL",
         "Qwen2-VL-72B"
-      ]
+      ],
+      "parts": {
+        "algorithmic": {
+          "name": "Algorithmic",
+          "group": "Category",
+          "unit": "%"
+        },
+        "analogical": {
+          "name": "Analogical",
+          "group": "Category",
+          "unit": "%"
+        },
+        "deductive": {
+          "name": "Deductive",
+          "group": "Category",
+          "unit": "%"
+        },
+        "inductive": {
+          "name": "Inductive",
+          "group": "Category",
+          "unit": "%"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "group": "Category",
+          "unit": "%"
+        },
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty",
+          "unit": "%"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty",
+          "unit": "%"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty",
+          "unit": "%"
+        }
+      }
     },
     "visualtoolbench": {
       "url": "https://labs.scale.com/leaderboard/vtb",
@@ -322097,7 +322621,7 @@
       "url": "https://huggingface.co/spaces/allenai/WildBench",
       "feed": "https://huggingface.co/spaces/allenai/WildBench/resolve/main/data_dir/all_stat_wildbench.-1.json (WB_score)",
       "terms": "Results file in the allenai/WildBench Hugging Face Space; the WildBench code is Apache-2.0 and the Space states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 47,
       "unmatched": [
         "Hermes-2-Theta-Llama-3-8B",
@@ -322116,7 +322640,56 @@
         "neo_7b_instruct_v0.1-ExPO",
         "reka-edge (2024 release)",
         "yi-large-preview (unlisted preview)"
-      ]
+      ],
+      "parts": {
+        "creative": {
+          "name": "Creative tasks",
+          "unit": "score"
+        },
+        "planning": {
+          "name": "Planning and reasoning",
+          "unit": "score"
+        },
+        "math": {
+          "name": "Math and data analysis",
+          "unit": "score"
+        },
+        "advice": {
+          "name": "Information and advice seeking",
+          "unit": "score"
+        },
+        "coding": {
+          "name": "Coding and debugging",
+          "unit": "score"
+        }
+      },
+      "stats": {
+        "wbElo": {
+          "name": "WildBench Elo",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "wbEloLc": {
+          "name": "Length-controlled WildBench Elo",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "taskMacro": {
+          "name": "Task macro WB-Score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "rewardAvg": {
+          "name": "Average WB-Reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "responseLength": {
+          "name": "Average response length",
+          "unit": "count",
+          "note": "Mean response length in characters."
+        }
+      }
     },
     "wildchat": {
       "url": "https://cdn.openai.com/o1-system-card.pdf",

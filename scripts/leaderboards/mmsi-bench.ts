@@ -17,19 +17,21 @@ const board: Leaderboard = {
     const out: LeaderboardRow[] = [];
     for (const t of mdTables(await fetchText(FEED))) {
       if (!(t.head.includes('Avg. (%)'))) continue;
+      const iType = t.head.findIndex((h) => /^Type$/i.test(h));
       for (const r of t.rows) {
         const name = r[0]?.replace(/^[^A-Za-z0-9]+/, '').replace(/[*†‡]/g, '').trim();
         const score = num(r[1]);
         if (!name || /^(?:human|random|oracle)(?:\b|$)/i.test(name) || score === undefined) continue;
-        const metrics: Record<string, number> = {};
-        for (let i = 0; i < t.head.length; i++) {
-          if (i === (0) || i === (1)) continue;
-          const value = num(r[i]);
-          if (value !== undefined) metrics[t.head[i]] = value;
-        }
+        const type = iType >= 0 ? r[iType]?.trim() ?? '' : '';
+        const open = /^open/i.test(type) ? true : /^(?:proprietary|closed)/i.test(type) ? false : undefined;
         const thinking = /--Thinking$/i.test(name);
         const blind = /^Blind /.test(name);
-        out.push({ model: identity(name.replace(/--Thinking$/i, '').replace(/^Blind /, '')), score, setting: thinking ? 'thinking' : blind ? 'blind' : undefined, metrics });
+        out.push({
+          model: identity(name.replace(/--Thinking$/i, '').replace(/^Blind /, '')),
+          score,
+          setting: thinking ? 'thinking' : blind ? 'blind' : undefined,
+          ...(open === undefined ? {} : { open }),
+        });
       }
     }
     if (!out.length) throw new Error("mmsi-bench: no score rows in the expected tables");

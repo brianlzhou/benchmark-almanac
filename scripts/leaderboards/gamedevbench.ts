@@ -26,8 +26,10 @@ const board: Leaderboard = {
       const [value, ci] = text(m[2]).split('±');
       const score = num(value);
       const half = num(ci);
-      const metrics = score !== undefined && half ? { ciLow: Math.max(0, score - half), ciHigh: Math.min(100, score + half) } : undefined;
-      if (model && score !== undefined) rows.push({ model, score, harness: harness || undefined, metrics });
+      const low = score !== undefined && half ? Number(Math.max(0, score - half).toFixed(2)) : undefined;
+      const high = score !== undefined && half ? Number(Math.min(100, score + half).toFixed(2)) : undefined;
+      const metrics = low !== undefined && high !== undefined ? { ciLow: low, ciHigh: high } : undefined;
+      if (model && score !== undefined) rows.push({ model, score, harness: harness || undefined, ...(low !== undefined && high !== undefined ? { low, high } : {}), metrics });
     }
     if (!rows.length) throw new Error('no GameDevBench rows');
     return rows;

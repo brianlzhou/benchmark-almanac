@@ -27,10 +27,22 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     hits.forEach((m, i) => {
       const end = hits[i + 1]?.index ?? html.length;
-      const score = html.slice(m.index! + m[0].length, end).match(/scorePercent:([\d.]+)/)?.[1];
+      const chunk = html.slice(m.index! + m[0].length, end);
+      const score = chunk.match(/scorePercent:([\d.]+)/)?.[1];
       if (!score) return;
       const effort = /Reasoning \((\w+)\)/.exec(m[2])?.[1]?.toLowerCase();
-      rows.push({ model: m[1], score: Number(score), setting: effort });
+      const lic = chunk.match(/license:"([^"]+)"/)?.[1];
+      const open = lic ? lic !== 'proprietary' : undefined;
+      const license = lic && lic !== 'proprietary' ? lic : undefined;
+      const date = chunk.match(/completedAt:\$R\[\d+\]=new Date\("(\d{4}-\d{2}-\d{2})/)?.[1];
+      rows.push({
+        model: m[1],
+        score: Number(score),
+        setting: effort,
+        ...(date ? { date } : {}),
+        ...(open === undefined ? {} : { open }),
+        ...(license ? { license } : {}),
+      });
     });
     if (rows.length < 10) throw new Error(`only ${rows.length} KORA rows found`);
     return rows;
