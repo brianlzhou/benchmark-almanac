@@ -45122,6 +45122,13 @@
         "unit": "%",
         "as_written": "Protocol troubleshooting with bash and web search tools. Only the troubleshooting variant is reported (8.13.6)",
         "section": "capabilities"
+      },
+      {
+        "benchmark": "election-integrity-single-turn-2026-anthropic",
+        "score": 100,
+        "unit": "%",
+        "as_written": "Election integrity, single-turn violative requests, harmless rate, API without system prompt. Benign requests refusal rate 0.00%, and 100% and 0.67% in Claude.ai with the system prompt, thinking off (Table 4.5.3.A)",
+        "section": "safety"
       }
     ]
   },
@@ -70122,6 +70129,60 @@
         "unit": "score",
         "as_written": "HoneyBench v0.2, lower is better",
         "section": "safety"
+      }
+    ]
+  },
+  {
+    "id": "cohere-tiny-aya-global-technical-report-2026-03-12",
+    "lab": "cohere",
+    "model": "tiny-aya-global",
+    "date": "2026-03-12",
+    "doc": "technical report",
+    "title": "Tiny Aya: Bridging Scale and Multilingual Depth",
+    "url": "https://arxiv.org/abs/2603.11510",
+    "release": null,
+    "notes": "Table 5 gives the mean (and standard deviation) over languages for the generative benchmarks. Only Tiny Aya Global is recorded. mDolly and mArenaHard-v2.1 are the report’s own translated sets, scored by an LLM judge averaged over four rubrics.",
+    "results": [
+      {
+        "benchmark": "global-mgsm",
+        "score": 52.8,
+        "unit": "%",
+        "as_written": "GlobalMGSM (35 languages), mean accuracy, SD 11.7 (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "m-arenahard-v2-1",
+        "score": 67.4,
+        "unit": "score",
+        "as_written": "mArenaHard (66 languages), mean judge score in percent, SD 6.1 (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mdolly-v2",
+        "score": 86.9,
+        "unit": "score",
+        "as_written": "mDolly (66 languages), mean judge score in percent, SD 6.2 (Table 5)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-3-175b-davinci-technical-report-2020-05-28",
+    "lab": "openai",
+    "model": "gpt-3-175b-davinci",
+    "date": "2020-05-28",
+    "doc": "technical report",
+    "title": "Language Models are Few-Shot Learners",
+    "url": "https://arxiv.org/abs/2005.14165",
+    "release": null,
+    "notes": "Only the occupation bias result from Section 6.2.1 is recorded. The paper’s many benchmark tables are not.",
+    "results": [
+      {
+        "benchmark": "simple-cooccurrence-bias",
+        "score": 83,
+        "unit": "%",
+        "as_written": "83% of the 388 occupations tested were more likely to be followed by a male identifier, neutral variant (Section 6.2.1)",
+        "section": "bias"
       }
     ]
   }

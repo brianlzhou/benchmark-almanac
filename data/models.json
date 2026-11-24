@@ -6287,6 +6287,20 @@
     ]
   },
   {
+    "id": "medgemma-1-5-4b",
+    "name": "MedGemma 1.5 4B",
+    "lab": "google",
+    "family": "MedGemma",
+    "released": "2026-01-13",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
+    "aliases": [
+      "medgemma-1.5-4b-it",
+      "MedGemma 1.5 4B"
+    ]
+  },
+  {
     "id": "gemma-3-4b",
     "name": "Gemma 3 4B",
     "lab": "google",
@@ -7126,6 +7140,19 @@
     "aliases": [
       "palmyra-x5",
       "Palmyra X5"
+    ]
+  },
+  {
+    "id": "palmyra-x6",
+    "name": "Palmyra X6",
+    "lab": "writer",
+    "family": "Palmyra",
+    "released": "2026-08-14",
+    "tier": "flagship",
+    "card": "https://writer.com/blog/palmyra-x6-major-harness-release/",
+    "aliases": [
+      "palmyra-x6",
+      "Palmyra X6"
     ]
   },
   {
@@ -15130,6 +15157,20 @@
     "card": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/",
     "aliases": [
       "Hy4"
+    ]
+  },
+  {
+    "id": "tencent-hy4-flash",
+    "name": "Tencent Hy4 flash",
+    "lab": "tencent",
+    "family": "Hy4",
+    "released": "2026-11-15",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/tencent/Hy4-flash",
+    "aliases": [
+      "Hy4 flash",
+      "Hy4-flash"
     ]
   },
   {
