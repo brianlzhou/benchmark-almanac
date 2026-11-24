@@ -8,6 +8,7 @@ const FEED = 'https://raw.githubusercontent.com/mrlbenchmarks/global-piqa/main/e
 const board: Leaderboard = {
   benchmark: 'global-piqa', url: 'https://github.com/mrlbenchmarks/global-piqa', feed: FEED,
   terms: 'Public aggregate results in the authors’ repository, attributed to the Global PIQA authors.',
+  stats: { parallel: { name: 'Parallel split accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     const aggregates = parseCsv(await fetchText(FEED));

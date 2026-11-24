@@ -15,7 +15,16 @@ const board: Leaderboard = {
   '128K': { name: '128K', group: 'Length' },
 }, url: 'https://github.com/NVIDIA/RULER', feed: FEED,
   terms: 'Public NVIDIA RULER repository results, subject to the repository license and GitHub terms.',
-  stats: { 'Avg.': { name: 'Average accuracy', unit: '%', better: 'higher' }, 'wAvg. (inc)': { name: 'Weighted average accuracy increasing', unit: '%', better: 'higher' }, 'wAvg. (dec)': { name: 'Weighted average accuracy decreasing', unit: '%', better: 'higher' } },
+  stats: {
+    'Avg.': { name: 'Average accuracy', unit: '%', better: 'higher' },
+    'wAvg. (inc)': { name: 'Weighted average accuracy increasing', unit: '%', better: 'higher' },
+    'wAvg. (dec)': { name: 'Weighted average accuracy decreasing', unit: '%', better: 'higher' },
+    claimedLengthK: { name: 'Claimed context length', unit: 'thousands' },
+    effectiveLengthK: { name: 'Effective context length', unit: 'thousands', better: 'higher' },
+    effectiveLengthAboveK: { name: 'Effective context length lower bound', unit: 'thousands', better: 'higher', note: 'Published as a greater-than threshold in thousands of tokens.' },
+    effectiveLengthBelowK: { name: 'Effective context length upper bound', unit: 'thousands', better: 'higher', note: 'Published as a less-than threshold in thousands of tokens.' },
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const section = source.slice(source.indexOf('|Models|'), source.indexOf('## ✅ Updates'));
@@ -37,10 +46,6 @@ const board: Leaderboard = {
         if (!length) continue;
         const bound = length[1] === '<' ? 'Below' : length[1] === '>' ? 'Above' : '';
         metrics[key + bound + 'K'] = Number(length[2]) * (length[3].toUpperCase() === 'M' ? 1024 : 1);
-      }
-      for (const [i, key] of [[10, 'weightedIncreasingRank'], [11, 'weightedDecreasingRank']] as const) {
-        const rank = cells[i]?.match(/\((\d+)(?:st|nd|rd|th)\)/);
-        if (rank) metrics[key] = Number(rank[1]);
       }
       const size = cells[0].match(/\((?:(\d+(?:\.\d+)?)B\/)?(\d+(?:\.\d+)?)B\)\s*$/i);
       if (size?.[1]) metrics.activeParams = Number(size[1]);

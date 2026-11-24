@@ -15964,7 +15964,7 @@
       "url": "https://www.anthropic.com/research/political-even-handedness",
       "feed": "https://www-cdn.anthropic.com/images/4zrzovbb/website/09540fde286b6744a3baf3ef5ac8c5ff7768b07b-1100x619.png",
       "terms": "Anthropic website terms restrict automated access. The Almanac credits Anthropic and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -34363,7 +34363,7 @@
       "url": "https://bird-bench.github.io/",
       "feed": "https://bird-bench.github.io/ (main leaderboard table, Test %)",
       "terms": "Static GitHub Pages site of the BIRD project; there is no robots.txt and the site publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 41,
       "unmatched": [
         "Agentar-Scale-SQL",
@@ -34454,6 +34454,17 @@
         "developmentReported": {
           "name": "Development",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "rewardBasedEfficiency": {
+          "name": "Reward-based valid efficiency score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },
@@ -75392,7 +75403,7 @@
       "url": "https://www.cybergym.io/cybergym/",
       "feed": "https://www.cybergym.io/assets/data/cybergym.json (level1, single trial)",
       "terms": "Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 76,
       "unmatched": [
         "ASL-Cyber-Flash (finetuned from DeepSeek-V4-Flash)",
@@ -75423,7 +75434,14 @@
         "XekRung-1.5-27B-Preview (finetuned from Qwen3.8-27B)",
         "elliot-rdt-v1"
       ],
-      "harnesses": "system"
+      "harnesses": "system",
+      "stats": {
+        "scoreX1": {
+          "name": "Post-patch crash rate (score_x1)",
+          "unit": "%",
+          "note": "Alternate aggregate score_x1 published in the CyberGym level 1 JSON feed."
+        }
+      }
     },
     "cybergym-e2e": {
       "url": "https://www.cybergym.io/cybergym-e2e/",
@@ -88495,7 +88513,7 @@
       "url": "https://benchmarks.duellab.org/",
       "feed": "https://benchmarks.duellab.org/",
       "terms": "Public results published by the benchmark authors at benchmarks.duellab.org; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 106,
       "unmatched": [
         "Ernie Light Dt 1.0 Intl",
@@ -88560,6 +88578,42 @@
           "name": "Best score",
           "unit": "score",
           "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "draws": {
+          "name": "Draws",
+          "unit": "count"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "pricedRuns": {
+          "name": "Priced generation runs",
+          "unit": "count"
+        },
+        "firstTry": {
+          "name": "Programs working on first try",
+          "unit": "%",
+          "better": "higher"
+        },
+        "afterRepair": {
+          "name": "Programs working after repair",
+          "unit": "%"
+        },
+        "failed": {
+          "name": "Failed programs",
+          "unit": "%",
+          "better": "lower"
+        },
+        "testedPrograms": {
+          "name": "Tested programs",
+          "unit": "count"
         }
       }
     },
@@ -95961,7 +96015,7 @@
       "url": "https://euroeval.com/leaderboards/european",
       "feed": "https://euroeval.com/leaderboards-csv/european_all_models.csv",
       "terms": "The repository uses the MIT License for its software and documentation. The leaderboard does not specify separate data terms. https://github.com/EuroEval/EuroEval/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 99,
       "unmatched": [
         "AI-Sweden-Models/Llama-3-8B-instruct",
@@ -96205,134 +96259,6 @@
         "Vocabulary": {
           "name": "Vocabulary size",
           "unit": "tokens"
-        },
-        "AlbanianMargin": {
-          "name": "Albanian rank score margin",
-          "unit": "score"
-        },
-        "BelarusianMargin": {
-          "name": "Belarusian rank score margin",
-          "unit": "score"
-        },
-        "BosnianMargin": {
-          "name": "Bosnian rank score margin",
-          "unit": "score"
-        },
-        "BulgarianMargin": {
-          "name": "Bulgarian rank score margin",
-          "unit": "score"
-        },
-        "CatalanMargin": {
-          "name": "Catalan rank score margin",
-          "unit": "score"
-        },
-        "CroatianMargin": {
-          "name": "Croatian rank score margin",
-          "unit": "score"
-        },
-        "CzechMargin": {
-          "name": "Czech rank score margin",
-          "unit": "score"
-        },
-        "DanishMargin": {
-          "name": "Danish rank score margin",
-          "unit": "score"
-        },
-        "DutchMargin": {
-          "name": "Dutch rank score margin",
-          "unit": "score"
-        },
-        "EnglishMargin": {
-          "name": "English rank score margin",
-          "unit": "score"
-        },
-        "EstonianMargin": {
-          "name": "Estonian rank score margin",
-          "unit": "score"
-        },
-        "FaroeseMargin": {
-          "name": "Faroese rank score margin",
-          "unit": "score"
-        },
-        "FinnishMargin": {
-          "name": "Finnish rank score margin",
-          "unit": "score"
-        },
-        "FrenchMargin": {
-          "name": "French rank score margin",
-          "unit": "score"
-        },
-        "GermanMargin": {
-          "name": "German rank score margin",
-          "unit": "score"
-        },
-        "GreekMargin": {
-          "name": "Greek rank score margin",
-          "unit": "score"
-        },
-        "HungarianMargin": {
-          "name": "Hungarian rank score margin",
-          "unit": "score"
-        },
-        "IcelandicMargin": {
-          "name": "Icelandic rank score margin",
-          "unit": "score"
-        },
-        "ItalianMargin": {
-          "name": "Italian rank score margin",
-          "unit": "score"
-        },
-        "LatvianMargin": {
-          "name": "Latvian rank score margin",
-          "unit": "score"
-        },
-        "LithuanianMargin": {
-          "name": "Lithuanian rank score margin",
-          "unit": "score"
-        },
-        "LuxembourgishMargin": {
-          "name": "Luxembourgish rank score margin",
-          "unit": "score"
-        },
-        "NorwegianMargin": {
-          "name": "Norwegian rank score margin",
-          "unit": "score"
-        },
-        "PolishMargin": {
-          "name": "Polish rank score margin",
-          "unit": "score"
-        },
-        "PortugueseMargin": {
-          "name": "Portuguese rank score margin",
-          "unit": "score"
-        },
-        "RomanianMargin": {
-          "name": "Romanian rank score margin",
-          "unit": "score"
-        },
-        "SerbianMargin": {
-          "name": "Serbian rank score margin",
-          "unit": "score"
-        },
-        "SlovakMargin": {
-          "name": "Slovak rank score margin",
-          "unit": "score"
-        },
-        "SloveneMargin": {
-          "name": "Slovene rank score margin",
-          "unit": "score"
-        },
-        "SpanishMargin": {
-          "name": "Spanish rank score margin",
-          "unit": "score"
-        },
-        "SwedishMargin": {
-          "name": "Swedish rank score margin",
-          "unit": "score"
-        },
-        "UkrainianMargin": {
-          "name": "Ukrainian rank score margin",
-          "unit": "score"
         }
       }
     },
@@ -126324,7 +126250,7 @@
       "url": "https://github.com/mrlbenchmarks/global-piqa",
       "feed": "https://raw.githubusercontent.com/mrlbenchmarks/global-piqa/main/eval_results/aggregated_by_split.csv",
       "terms": "Public aggregate results in the authors’ repository, attributed to the Global PIQA authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 59,
       "unmatched": [
         "AI-Sweden-Models/gpt-sw3-1.3b (base)",
@@ -126978,6 +126904,13 @@
         "zul_latn": {
           "name": "zul_latn",
           "group": "Language"
+        }
+      },
+      "stats": {
+        "parallel": {
+          "name": "Parallel split accuracy",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -136329,7 +136262,23 @@
         "vesteinn/ScandiBERT-no-faroese",
         "vesteinn/XLMR-ENIS",
         "yulan-team/YuLan-Mini-Instruct"
-      ]
+      ],
+      "stats": {
+        "macroF1": {
+          "name": "Macro F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scored": {
+          "name": "Scored runs",
+          "unit": "count"
+        },
+        "failures": {
+          "name": "Failed runs",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "hourvideo": {
       "url": "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md",
@@ -174144,6 +174093,12 @@
           "name": "Long",
           "group": "Length"
         }
+      },
+      "stats": {
+        "contextTokens": {
+          "name": "Context window",
+          "unit": "tokens"
+        }
       }
     },
     "longcot": {
@@ -197349,6 +197304,566 @@
           "name": "Universal Basic Income (UBI)",
           "unit": "score",
           "better": "lower"
+        }
+      },
+      "stats": {
+        "SignedSlant": {
+          "name": "Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "PercentSlanted": {
+          "name": "Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "DemocratSlant": {
+          "name": "Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "RepublicanSlant": {
+          "name": "Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Affirmative_ActionSignedSlant": {
+          "name": "Affirmative Action: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Affirmative_ActionPercentSlanted": {
+          "name": "Affirmative Action: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Affirmative_ActionDemocratSlant": {
+          "name": "Affirmative Action: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Affirmative_ActionRepublicanSlant": {
+          "name": "Affirmative Action: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Authoritarian_ReformSignedSlant": {
+          "name": "Authoritarian Reform: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Authoritarian_ReformPercentSlanted": {
+          "name": "Authoritarian Reform: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Authoritarian_ReformDemocratSlant": {
+          "name": "Authoritarian Reform: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Authoritarian_ReformRepublicanSlant": {
+          "name": "Authoritarian Reform: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Birthright_CitizenshipSignedSlant": {
+          "name": "Birthright Citizenship: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Birthright_CitizenshipPercentSlanted": {
+          "name": "Birthright Citizenship: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Birthright_CitizenshipDemocratSlant": {
+          "name": "Birthright Citizenship: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Birthright_CitizenshipRepublicanSlant": {
+          "name": "Birthright Citizenship: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Campaign_FinanceSignedSlant": {
+          "name": "Campaign Finance: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Campaign_FinancePercentSlanted": {
+          "name": "Campaign Finance: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Campaign_FinanceDemocratSlant": {
+          "name": "Campaign Finance: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Campaign_FinanceRepublicanSlant": {
+          "name": "Campaign Finance: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Child_Labor_LawsSignedSlant": {
+          "name": "Child Labor Laws: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Child_Labor_LawsPercentSlanted": {
+          "name": "Child Labor Laws: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Child_Labor_LawsDemocratSlant": {
+          "name": "Child Labor Laws: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Child_Labor_LawsRepublicanSlant": {
+          "name": "Child Labor Laws: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Climate_PolicySignedSlant": {
+          "name": "Climate Policy: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Climate_PolicyPercentSlanted": {
+          "name": "Climate Policy: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Climate_PolicyDemocratSlant": {
+          "name": "Climate Policy: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Climate_PolicyRepublicanSlant": {
+          "name": "Climate Policy: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Death_PenaltySignedSlant": {
+          "name": "Death Penalty: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Death_PenaltyPercentSlanted": {
+          "name": "Death Penalty: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Death_PenaltyDemocratSlant": {
+          "name": "Death Penalty: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Death_PenaltyRepublicanSlant": {
+          "name": "Death Penalty: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Defund_the_PoliceSignedSlant": {
+          "name": "Defund the Police: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Defund_the_PolicePercentSlanted": {
+          "name": "Defund the Police: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Defund_the_PoliceDemocratSlant": {
+          "name": "Defund the Police: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Defund_the_PoliceRepublicanSlant": {
+          "name": "Defund the Police: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "DEI_ProgramsSignedSlant": {
+          "name": "DEI Programs: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "DEI_ProgramsPercentSlanted": {
+          "name": "DEI Programs: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "DEI_ProgramsDemocratSlant": {
+          "name": "DEI Programs: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "DEI_ProgramsRepublicanSlant": {
+          "name": "DEI Programs: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Electoral_CollegeSignedSlant": {
+          "name": "Electoral College: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Electoral_CollegePercentSlanted": {
+          "name": "Electoral College: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Electoral_CollegeDemocratSlant": {
+          "name": "Electoral College: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Electoral_CollegeRepublicanSlant": {
+          "name": "Electoral College: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Europe_AllySignedSlant": {
+          "name": "Europe Ally: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Europe_AllyPercentSlanted": {
+          "name": "Europe Ally: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Europe_AllyDemocratSlant": {
+          "name": "Europe Ally: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Europe_AllyRepublicanSlant": {
+          "name": "Europe Ally: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "ExpansionismSignedSlant": {
+          "name": "Expansionism: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "ExpansionismPercentSlanted": {
+          "name": "Expansionism: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ExpansionismDemocratSlant": {
+          "name": "Expansionism: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "ExpansionismRepublicanSlant": {
+          "name": "Expansionism: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Firing_Government_WorkersSignedSlant": {
+          "name": "Firing Government Workers: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Firing_Government_WorkersPercentSlanted": {
+          "name": "Firing Government Workers: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Firing_Government_WorkersDemocratSlant": {
+          "name": "Firing Government Workers: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Firing_Government_WorkersRepublicanSlant": {
+          "name": "Firing Government Workers: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Free_SpeechSignedSlant": {
+          "name": "Free Speech: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Free_SpeechPercentSlanted": {
+          "name": "Free Speech: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Free_SpeechDemocratSlant": {
+          "name": "Free Speech: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Free_SpeechRepublicanSlant": {
+          "name": "Free Speech: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Gay_ConversionSignedSlant": {
+          "name": "Gay Conversion: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Gay_ConversionPercentSlanted": {
+          "name": "Gay Conversion: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Gay_ConversionDemocratSlant": {
+          "name": "Gay Conversion: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Gay_ConversionRepublicanSlant": {
+          "name": "Gay Conversion: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Gov_Control_CollegesSignedSlant": {
+          "name": "Gov. Control Colleges: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Gov_Control_CollegesPercentSlanted": {
+          "name": "Gov. Control Colleges: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Gov_Control_CollegesDemocratSlant": {
+          "name": "Gov. Control Colleges: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Gov_Control_CollegesRepublicanSlant": {
+          "name": "Gov. Control Colleges: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Gun_ControlSignedSlant": {
+          "name": "Gun Control: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Gun_ControlPercentSlanted": {
+          "name": "Gun Control: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Gun_ControlDemocratSlant": {
+          "name": "Gun Control: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Gun_ControlRepublicanSlant": {
+          "name": "Gun Control: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Health_CareSignedSlant": {
+          "name": "Health Care: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Health_CarePercentSlanted": {
+          "name": "Health Care: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Health_CareDemocratSlant": {
+          "name": "Health Care: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Health_CareRepublicanSlant": {
+          "name": "Health Care: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Mass_DeportationsSignedSlant": {
+          "name": "Mass Deportations: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Mass_DeportationsPercentSlanted": {
+          "name": "Mass Deportations: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Mass_DeportationsDemocratSlant": {
+          "name": "Mass Deportations: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Mass_DeportationsRepublicanSlant": {
+          "name": "Mass Deportations: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Minimum_WageSignedSlant": {
+          "name": "Minimum Wage: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Minimum_WagePercentSlanted": {
+          "name": "Minimum Wage: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Minimum_WageDemocratSlant": {
+          "name": "Minimum Wage: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Minimum_WageRepublicanSlant": {
+          "name": "Minimum Wage: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "National_ReligionSignedSlant": {
+          "name": "National Religion: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "National_ReligionPercentSlanted": {
+          "name": "National Religion: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "National_ReligionDemocratSlant": {
+          "name": "National Religion: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "National_ReligionRepublicanSlant": {
+          "name": "National Religion: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "PC_LanguageSignedSlant": {
+          "name": "PC Language: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "PC_LanguagePercentSlanted": {
+          "name": "PC Language: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "PC_LanguageDemocratSlant": {
+          "name": "PC Language: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "PC_LanguageRepublicanSlant": {
+          "name": "PC Language: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Russia_AllySignedSlant": {
+          "name": "Russia Ally: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Russia_AllyPercentSlanted": {
+          "name": "Russia Ally: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Russia_AllyDemocratSlant": {
+          "name": "Russia Ally: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Russia_AllyRepublicanSlant": {
+          "name": "Russia Ally: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "School_VouchersSignedSlant": {
+          "name": "School Vouchers: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "School_VouchersPercentSlanted": {
+          "name": "School Vouchers: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "School_VouchersDemocratSlant": {
+          "name": "School Vouchers: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "School_VouchersRepublicanSlant": {
+          "name": "School Vouchers: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Student_Loan_DebtSignedSlant": {
+          "name": "Student Loan Debt: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Student_Loan_DebtPercentSlanted": {
+          "name": "Student Loan Debt: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Student_Loan_DebtDemocratSlant": {
+          "name": "Student Loan Debt: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Student_Loan_DebtRepublicanSlant": {
+          "name": "Student Loan Debt: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "TariffsSignedSlant": {
+          "name": "Tariffs: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "TariffsPercentSlanted": {
+          "name": "Tariffs: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "TariffsDemocratSlant": {
+          "name": "Tariffs: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "TariffsRepublicanSlant": {
+          "name": "Tariffs: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Taxes_on_WealthySignedSlant": {
+          "name": "Taxes on Wealthy: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Taxes_on_WealthyPercentSlanted": {
+          "name": "Taxes on Wealthy: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Taxes_on_WealthyDemocratSlant": {
+          "name": "Taxes on Wealthy: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Taxes_on_WealthyRepublicanSlant": {
+          "name": "Taxes on Wealthy: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Trans_RightsSignedSlant": {
+          "name": "Trans Rights: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Trans_RightsPercentSlanted": {
+          "name": "Trans Rights: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Trans_RightsDemocratSlant": {
+          "name": "Trans Rights: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Trans_RightsRepublicanSlant": {
+          "name": "Trans Rights: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "UnionsSignedSlant": {
+          "name": "Unions: Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "UnionsPercentSlanted": {
+          "name": "Unions: Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "UnionsDemocratSlant": {
+          "name": "Unions: Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "UnionsRepublicanSlant": {
+          "name": "Unions: Perceived slant among Republicans",
+          "unit": "score"
+        },
+        "Universal_Basic_Income_UBI_SignedSlant": {
+          "name": "Universal Basic Income (UBI): Signed slant",
+          "unit": "score",
+          "note": "Negative leans Democratic and positive leans Republican, with 0 neutral."
+        },
+        "Universal_Basic_Income_UBI_PercentSlanted": {
+          "name": "Universal Basic Income (UBI): Slanted responses",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Universal_Basic_Income_UBI_DemocratSlant": {
+          "name": "Universal Basic Income (UBI): Perceived slant among Democrats",
+          "unit": "score"
+        },
+        "Universal_Basic_Income_UBI_RepublicanSlant": {
+          "name": "Universal Basic Income (UBI): Perceived slant among Republicans",
+          "unit": "score"
         }
       }
     },
@@ -236826,14 +237341,54 @@
       "feed": "https://contextarena.ai/api/leaderboard?needles=8&mode=full (bin in_(131072,262144))",
       "terms": "Context Arena publishes this independently run leaderboard and its API feed. The almanac credits and links Context Arena.",
       "host": "Context Arena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 131,
       "unmatched": [
         "pokee/pokee-isaac"
       ],
+      "parts": {
+        "in_(4096,8192)": {
+          "name": "4K to 8K",
+          "group": "Context length"
+        },
+        "in_(8192,16384)": {
+          "name": "8K to 16K",
+          "group": "Context length"
+        },
+        "in_(16384,32768)": {
+          "name": "16K to 32K",
+          "group": "Context length"
+        },
+        "in_(32768,65536)": {
+          "name": "32K to 64K",
+          "group": "Context length"
+        },
+        "in_(65536,131072)": {
+          "name": "64K to 128K",
+          "group": "Context length"
+        },
+        "in_(262144,524288)": {
+          "name": "256K to 512K",
+          "group": "Context length"
+        },
+        "in_(524288,1048576)": {
+          "name": "512K to 1M",
+          "group": "Context length"
+        }
+      },
       "stats": {
         "samples": {
-          "name": "Bin samples",
+          "name": "128K to 256K bin samples",
+          "unit": "count"
+        },
+        "allBins": {
+          "name": "All bins mean score",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average across only the context bins evaluated for that model."
+        },
+        "allBinSamples": {
+          "name": "Total samples across bins",
           "unit": "count"
         }
       }
@@ -241654,7 +242209,7 @@
       "url": "https://parsebench.ai",
       "feed": "https://raw.githubusercontent.com/run-llama/ParseBench/main/leaderboard.csv (Overall)",
       "terms": "Repository file in run-llama/ParseBench, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 85,
       "unmatched": [
         "AWS Textract",
@@ -241696,6 +242251,7 @@
         "Mistral OCR 4",
         "Nemotron-3.5-Parse",
         "Nutrient DWS",
+        "OCRia-1",
         "OpenDataLoader",
         "OvisOCR2",
         "OvisOCR3",
@@ -241739,6 +242295,28 @@
         },
         "Visual_Grounding": {
           "name": "Visual Grounding"
+        }
+      },
+      "stats": {
+        "Cost_Charts_USD": {
+          "name": "Charts cost per page",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "Cost_Tables_USD": {
+          "name": "Tables cost per page",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "Cost_Text_USD": {
+          "name": "Text cost per page",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "Cost_Layout_USD": {
+          "name": "Layout cost per page",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -247199,7 +247777,7 @@
       "url": "https://plotlightstudios.com/plotpoints/leaderboard",
       "feed": "https://plotlightstudios.com/api/plotpoints/leaderboard?round=4",
       "terms": "PlotPoints labels its public results CC BY 4.0. The repository and Hugging Face dataset list CC BY-NC 4.0. https://plotlightstudios.com/plotpoints https://huggingface.co/datasets/lazyweasel/roleplay-bench The site disallows /api/ in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
       "unmatched": [
         "Aion 3.5",
@@ -247215,6 +247793,20 @@
         "Skyfall 36B",
         "UnslopNemo 12B"
       ],
+      "chart": {
+        "title": "Where each model sits",
+        "x": {
+          "key": "over_refusal_rate",
+          "label": "Over-refusal rate",
+          "better": "lower"
+        },
+        "y": {
+          "key": "held_first_rate",
+          "label": "Held at first ask rate",
+          "better": "higher"
+        },
+        "note": "PlotPoints plots how often each model holds hard limits at first ask against how often it over-refuses allowed L3 to L5 prompts."
+      },
       "stats": {
         "held_first_rate": {
           "name": "Held first rate",
@@ -247226,10 +247818,6 @@
           "name": "Held first count",
           "unit": "count"
         },
-        "held_first_n": {
-          "name": "Held first sessions",
-          "unit": "count"
-        },
         "held_under_pressure_rate": {
           "name": "Held under pressure rate",
           "unit": "score",
@@ -247238,10 +247826,6 @@
         },
         "held_under_pressure_kept": {
           "name": "Held under pressure count",
-          "unit": "count"
-        },
-        "held_under_pressure_n": {
-          "name": "Held under pressure sessions",
           "unit": "count"
         },
         "over_refusal_hard_rungs": {
@@ -247306,10 +247890,6 @@
           "name": "Sessions A",
           "unit": "count"
         },
-        "n_sessions_b": {
-          "name": "Sessions B",
-          "unit": "count"
-        },
         "usable_exchanges_a": {
           "name": "Usable exchanges A",
           "unit": "count"
@@ -247322,15 +247902,6 @@
           "name": "Old judge band mean",
           "unit": "score",
           "better": "higher"
-        },
-        "old_judge_band_n_sessions": {
-          "name": "Old judge band sessions",
-          "unit": "count"
-        },
-        "r3_nsfw_rank_of": {
-          "name": "Round 3 NSFW rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -251430,7 +252001,7 @@
       "url": "https://huggingface.co/spaces/nvidia/ProfBench",
       "feed": "https://huggingface.co/spaces/nvidia/ProfBench/resolve/main/report_generation.jsonl (Overall)",
       "terms": "JSON lines file in the nvidia/ProfBench Hugging Face Space, licensed MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 130,
       "unmatched": [],
       "costPer": "run",
@@ -251462,6 +252033,16 @@
         "Style": {
           "name": "Style",
           "group": "Rubric"
+        }
+      },
+      "stats": {
+        "Input Tokens": {
+          "name": "Input tokens per report",
+          "unit": "tokens"
+        },
+        "Response Characters": {
+          "name": "Response characters per report",
+          "unit": "count"
         }
       }
     },
@@ -267381,7 +267962,7 @@
       "url": "https://github.com/NVIDIA/RULER",
       "feed": "https://raw.githubusercontent.com/NVIDIA/RULER/main/README.md",
       "terms": "Public NVIDIA RULER repository results, subject to the repository license and GitHub terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "AI21-Jamba-1.5-Large",
@@ -267453,6 +268034,31 @@
           "name": "Weighted average accuracy decreasing",
           "unit": "%",
           "better": "higher"
+        },
+        "claimedLengthK": {
+          "name": "Claimed context length",
+          "unit": "thousands"
+        },
+        "effectiveLengthK": {
+          "name": "Effective context length",
+          "unit": "thousands",
+          "better": "higher"
+        },
+        "effectiveLengthAboveK": {
+          "name": "Effective context length lower bound",
+          "unit": "thousands",
+          "better": "higher",
+          "note": "Published as a greater-than threshold in thousands of tokens."
+        },
+        "effectiveLengthBelowK": {
+          "name": "Effective context length upper bound",
+          "unit": "thousands",
+          "better": "higher",
+          "note": "Published as a less-than threshold in thousands of tokens."
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       },
       "measures": {
@@ -288546,7 +289152,7 @@
       "url": "https://supergpqa.github.io/",
       "feed": "https://supergpqa.github.io/assets/index-<hash>.js (zero-shot and five-shot results in the bundle)",
       "terms": "Static GitHub Pages site with no stated terms or robots rules; the SuperGPQA repository publishes the evaluation code and results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [
         "DeepSeek-V3-Base (base)",
@@ -289733,6 +290339,39 @@
         "Science/Geophysics/Space physics": {
           "name": "Space physics",
           "group": "Science / Geophysics"
+        }
+      },
+      "stats": {
+        "errors": {
+          "name": "Error rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of questions graded as errors, stored from 0 to 1."
+        },
+        "miss": {
+          "name": "Miss rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of questions without an extracted answer, stored from 0 to 1."
+        },
+        "questions": {
+          "name": "Questions evaluated",
+          "unit": "count"
+        },
+        "correct": {
+          "name": "Correct answers",
+          "unit": "count",
+          "better": "higher"
+        },
+        "errorCount": {
+          "name": "Error answers",
+          "unit": "count",
+          "better": "lower"
+        },
+        "missingCount": {
+          "name": "Missing answers",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -308984,12 +309623,17 @@
       "url": "https://github.com/vectara/hallucination-leaderboard",
       "feed": "https://raw.githubusercontent.com/vectara/hallucination-leaderboard/main/README.md (table between the LEADERBOARD markers)",
       "terms": "README table in the vectara/hallucination-leaderboard repository, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 110,
       "unmatched": [
         "antgroup/finix_s1_32b"
       ],
       "stats": {
+        "factualConsistency": {
+          "name": "Factual consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "answerRate": {
           "name": "Answer rate",
           "unit": "%",
@@ -311625,7 +312269,7 @@
       "url": "https://video-mme.github.io/home_page.html#leaderboard",
       "feed": "https://video-mme.github.io/home_page.html (static HTML table, Overall without and with subtitles)",
       "terms": "Static GitHub Pages site that states no terms; the scores are cited to the Video-MME team.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 52,
       "unmatched": [
         "AdaReTaKe",
@@ -311666,6 +312310,29 @@
         "long": {
           "name": "Long",
           "group": "Length"
+        }
+      },
+      "stats": {
+        "languageModelParamsB": {
+          "name": "Language model parameters",
+          "unit": "billions"
+        },
+        "experts": {
+          "name": "MoE experts",
+          "unit": "count"
+        },
+        "paramsPerExpertB": {
+          "name": "Parameters per expert",
+          "unit": "billions"
+        },
+        "frames": {
+          "name": "Sampled frames",
+          "unit": "count"
+        },
+        "framesPerSecond": {
+          "name": "Frame sampling rate",
+          "unit": "score",
+          "note": "Frames sampled per second."
         }
       }
     },
@@ -316674,7 +317341,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/830/leaderboard/2278",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/2278/leaderboard/?page_size=500 (test-standard, overall)",
       "terms": "Public EvalAI challenge API (eval.ai serves no robots.txt rules); the VQA annotations are CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "0033 / Unnamed method",
@@ -325377,7 +326044,7 @@
       "url": "https://zerobench.github.io/",
       "feed": "https://zerobench.github.io/ (static HTML, official leaderboard table, pass@5)",
       "terms": "Static GitHub Pages site that states no license or terms; the ZeroBench repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 157,
       "unmatched": [
         "QVQ",
@@ -325413,10 +326080,36 @@
           "better": "higher",
           "note": "Share of questions solved correctly in all five samplings."
         },
+        "totalTokens": {
+          "name": "Mean total tokens per question",
+          "unit": "tokens",
+          "better": "lower"
+        },
         "subquestionPassAt1": {
           "name": "Subquestion pass@1 score",
           "unit": "%",
           "better": "higher"
+        },
+        "subquestionsCorrect": {
+          "name": "Subquestions answered correctly",
+          "unit": "count",
+          "better": "higher"
+        },
+        "passAt1Samples": {
+          "name": "pass@1 sampling count",
+          "unit": "count"
+        },
+        "previousPassAt5": {
+          "name": "Previous pass@5 score",
+          "unit": "%",
+          "better": "higher",
+          "note": "Earlier published pass@5 score before re-evaluation."
+        },
+        "previousPass5": {
+          "name": "Previous pass^5 score",
+          "unit": "%",
+          "better": "higher",
+          "note": "Earlier published pass^5 score before re-evaluation."
         }
       }
     },
