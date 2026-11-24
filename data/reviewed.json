@@ -1526,6 +1526,11 @@
       "via": "We traced a smartphone user study to the original publication and compared its nine app rows with the Mobile-Agent-E comparison."
     },
     {
+      "id": "appcif-bench",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found AppCIF-Bench (NeurIPS 2026) with live leaderboard scoring 12 frontier models."
+    },
+    {
       "id": "appendix-boundary",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
@@ -6866,6 +6871,11 @@
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
     },
     {
+      "id": "diagsafe",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found DiagSafe with live frontier safety and usefulness leaderboard."
+    },
+    {
       "id": "diagtrace",
       "date": "2026-11-19",
       "via": "A medicine benchmark search led to the authors’ paper."
@@ -11319,6 +11329,11 @@
       "id": "hype-trap",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "hyperlogic",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found HyperLogic with live three-rollout frontier reasoning leaderboard."
     },
     {
       "id": "i2b2-2006-smoking",
@@ -17476,6 +17491,11 @@
       "via": "The Nemotron 3.5 Super VL card lists LMArena v3 proxy, and Table 10 of the technical report names the same numbers NV Chat Benchmark."
     },
     {
+      "id": "nvidia-av-causal-scenario-retrieval",
+      "date": "2026-11-24",
+      "via": "NVIDIA Hugging Face org sweep found AV Causal Scenario Retrieval Challenge with live API leaderboard."
+    },
+    {
       "id": "nwpu-captions",
       "date": "2026-11-20",
       "via": "We followed the RS-CapRet comparison across four image collections to NWPU's original split labels and repository history."
@@ -17769,6 +17789,11 @@
       "id": "omnicap-if",
       "date": "2026-11-01",
       "via": "Qwen3.8-Omni-Flash launch post benchmark table."
+    },
+    {
+      "id": "omnicapbench",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found OmniCapBench (NeurIPS 2026) with published omnimodal captioning leaderboard."
     },
     {
       "id": "omnidocbench-1-5",
@@ -20486,6 +20511,11 @@
       "via": "The Hugging Face leaderboard links its results and evaluation method."
     },
     {
+      "id": "repoprobe",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found RepoProbe (ASE 2026) scoring 20 frontier models in arXiv:2608.04783."
+    },
+    {
       "id": "reportbench",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -21454,6 +21484,11 @@
       "id": "scifact",
       "date": "2026-11-19",
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
+    },
+    {
+      "id": "sciformabench-2k",
+      "date": "2026-11-24",
+      "via": "Microsoft Hugging Face org sweep found SciFormaBench-2K scoring 14 image generation models on scientific diagrams."
     },
     {
       "id": "sciknoweval",
@@ -23889,6 +23924,11 @@
       "id": "t2i-nsi",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "t2j-bench",
+      "date": "2026-11-24",
+      "via": "Google Research GitHub sweep found T2J-Bench with live HTML leaderboard scoring 21 agent-model configurations."
     },
     {
       "id": "t2lsc-bench",
@@ -26806,6 +26846,11 @@
       "via": "Hugging Face datasets tagged benchmark:official."
     },
     {
+      "id": "wearable-ai-challenge",
+      "date": "2026-11-24",
+      "via": "Meta FAIR Hugging Face org sweep found Wearable-AI Challenge held-out test leaderboard across 44 submissions."
+    },
+    {
       "id": "wearableqa",
       "date": "2026-11-15",
       "via": "Benchmark Radar. Clear-use test: 33 freshly retrieved Hugging Face paper upvotes. Opened the maker's paper and public benchmark README."
@@ -27479,6 +27524,11 @@
       "id": "xdev-bench-hard-moonshot",
       "date": "2026-11-01",
       "via": "Kimi K3.1 Pro tech blog cybersecurity section."
+    },
+    {
+      "id": "xl-docbench",
+      "date": "2026-11-24",
+      "via": "Microsoft Hugging Face org sweep found XL-DocBench (NeurIPS 2026) with per-item scores for 13 model configurations."
     },
     {
       "id": "xl-sum-english",

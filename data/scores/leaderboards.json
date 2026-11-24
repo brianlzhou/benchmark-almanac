@@ -17198,6 +17198,60 @@
       ],
       "harnesses": "system"
     },
+    "appcif-bench": {
+      "url": "https://ac2333.github.io/AppCIF/#leaderboard",
+      "feed": "https://ac2333.github.io/AppCIF/static/main.js",
+      "terms": "Public project leaderboard published by Tencent.",
+      "headline": "Hard Satisfaction Rate (HSR) average across L1 to L4 difficulty tiers, matching the default sort on the official leaderboard.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "parts": {
+        "l1": {
+          "name": "L1",
+          "group": "Difficulty"
+        },
+        "l2": {
+          "name": "L2",
+          "group": "Difficulty"
+        },
+        "l3": {
+          "name": "L3",
+          "group": "Difficulty"
+        },
+        "l4": {
+          "name": "L4",
+          "group": "Difficulty"
+        }
+      },
+      "stats": {
+        "ssrAvg": {
+          "name": "SSR average",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ssrL1": {
+          "name": "SSR L1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ssrL2": {
+          "name": "SSR L2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ssrL3": {
+          "name": "SSR L3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ssrL4": {
+          "name": "SSR L4",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "appendix-boundary": {
       "url": "https://www.kaggle.com/benchmarks/rudots/prompt-injection-score-audit",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/rudots/prompt-injection-score-audit/leaderboard",
@@ -84627,6 +84681,47 @@
         }
       }
     },
+    "diagsafe": {
+      "url": "https://github.com/Tencent-Hunyuan/DiagSafe",
+      "feed": "https://raw.githubusercontent.com/Tencent-Hunyuan/DiagSafe/main/README.md",
+      "terms": "Public repository README published by Tencent Hunyuan.",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [],
+      "chart": {
+        "title": "Safety vs Usefulness",
+        "x": {
+          "key": "usefulness",
+          "label": "Usefulness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall unsafe rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Lower overall unsafe rate and higher usefulness are better. Usefulness is scored on a 0 to 3 scale."
+      },
+      "parts": {
+        "diagBase": {
+          "name": "DiagBase",
+          "group": "Subset"
+        },
+        "diagAttack": {
+          "name": "DiagAttack",
+          "group": "Subset"
+        }
+      },
+      "stats": {
+        "usefulness": {
+          "name": "Usefulness",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "diagtrace": {
       "url": "https://github.com/Fanncg1229/DiagTrace-code",
       "feed": "https://raw.githubusercontent.com/Fanncg1229/DiagTrace-code/HEAD/results/canonical_matched225/table3_recomputed_canonical225.csv",
@@ -139414,6 +139509,36 @@
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
       ]
+    },
+    "hyperlogic": {
+      "url": "https://github.com/Tencent-Hunyuan/HyperLogic",
+      "feed": "https://raw.githubusercontent.com/Tencent-Hunyuan/HyperLogic/main/README.md",
+      "terms": "Public repository README published by Tencent Hunyuan.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "parts": {
+        "seed": {
+          "name": "Seed",
+          "group": "Tier"
+        },
+        "baseSubQ": {
+          "name": "Base Sub-Q",
+          "group": "Tier"
+        },
+        "hardDirect": {
+          "name": "Hard Direct",
+          "group": "Hard tier"
+        },
+        "hardSandbox": {
+          "name": "Hard Sandbox",
+          "group": "Hard tier"
+        },
+        "hardLibrary": {
+          "name": "Hard + Library",
+          "group": "Hard tier"
+        }
+      }
     },
     "iberobench": {
       "url": "https://aclanthology.org/2025.coling-main.699/",
@@ -214083,6 +214208,60 @@
         }
       }
     },
+    "nvidia-av-causal-scenario-retrieval": {
+      "url": "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge",
+      "feed": "https://nvidia-av-causal-scenario-retrieval-challenge.hf.space/api/leaderboard",
+      "terms": "Public Hugging Face Space API published by NVIDIA.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Alpha Omega",
+        "Auto Drivers",
+        "Cascade Baseline",
+        "Causalnova",
+        "ChansDriver",
+        "Crash Test Dummies",
+        "ERA_world",
+        "Kanonenbome",
+        "Nan-zero tensors",
+        "SIMFORGE (Michael)",
+        "Step by Steppe",
+        "TraVELers",
+        "Yameteshka",
+        "cambridgeXminimal"
+      ],
+      "parts": {
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        }
+      },
+      "stats": {
+        "map": {
+          "name": "Mean average precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "precisionAt10": {
+          "name": "Precision@10",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recallAt10": {
+          "name": "Recall@10",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "nwpu-resisc45": {
       "url": "https://huggingface.co/spaces/mteb/leaderboard",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/RESISC45/scores",
@@ -217790,6 +217969,120 @@
         },
         "contentISR": {
           "name": "Content instruction following score",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "omnicapbench": {
+      "url": "https://01yzzyu.github.io/OmniCapBench/",
+      "feed": "https://01yzzyu.github.io/OmniCapBench/",
+      "terms": "Public project leaderboard published by Tencent Hunyuan, NTU, and Northumbria University.",
+      "headline": "EVSA F1 measuring audio-visual event-to-shot association. Twelve additional structural metrics and localized semantic metrics are recorded as stats.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "Qwen3-Omni-Captioner",
+        "Seed2.0"
+      ],
+      "stats": {
+        "sgc": {
+          "name": "SGC",
+          "unit": "%",
+          "better": "higher"
+        },
+        "refUse": {
+          "name": "RefUse",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ccc": {
+          "name": "CCC",
+          "unit": "%",
+          "better": "higher"
+        },
+        "refSubjF1": {
+          "name": "Ref subject F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "refSceneF1": {
+          "name": "Ref scene F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shotF1": {
+          "name": "Shot F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shotTIoU": {
+          "name": "Shot tIoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "subshotF1": {
+          "name": "Subshot F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "subshotTIoU": {
+          "name": "Subshot tIoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "eventF1": {
+          "name": "Event F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "eventTIoU": {
+          "name": "Event tIoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "speakerF1": {
+          "name": "Speaker F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semShot": {
+          "name": "Semantic shot",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semSubjRecall": {
+          "name": "Subject recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semSubjPrec": {
+          "name": "Subject precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semSceneRecall": {
+          "name": "Scene recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semScenePrec": {
+          "name": "Scene precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semSubshotRecall": {
+          "name": "Subshot recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semSubshotPrec": {
+          "name": "Subshot precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "semNonDialogue": {
+          "name": "Non-dialogue semantic",
           "unit": "%",
           "better": "higher"
         }
@@ -263467,6 +263760,34 @@
         }
       }
     },
+    "repoprobe": {
+      "url": "https://github.com/Tencent-Hunyuan/RepoProbe",
+      "feed": "https://arxiv.org/html/2608.04783",
+      "terms": "Public arXiv paper published by Tencent Hunyuan.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 19,
+      "unmatched": [
+        "Doubao-Seed-2.0"
+      ],
+      "stats": {
+        "knowledge": {
+          "name": "Knowledge score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "clarity": {
+          "name": "Clarity score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "perfectSolve": {
+          "name": "Perfect solve rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "repoqa": {
       "url": "https://evalplus.github.io/repoqa.html",
       "feed": "https://evalplus.github.io/results/repoqa/COMBINED-RESULTS.json (all, threshold 0.8)",
@@ -274598,6 +274919,46 @@
         },
         "10-2": {
           "name": "Mendelian Genetics (unknown plants)"
+        }
+      }
+    },
+    "sciformabench-2k": {
+      "url": "https://microsoft.github.io/SciForma/",
+      "feed": "https://microsoft.github.io/SciForma/",
+      "terms": "Public project leaderboard published by Microsoft Research Asia, Peking University, and Zhejiang University.",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [
+        "SciForma-9B (M-DPO)",
+        "SciForma-9B + Edit",
+        "SciForma-Base (SFT)",
+        "SenseNova-U1-8B",
+        "Z-Image"
+      ],
+      "parts": {
+        "simple": {
+          "name": "Simple",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        },
+        "component": {
+          "name": "Component",
+          "group": "Dimension"
+        },
+        "arrow": {
+          "name": "Arrow",
+          "group": "Dimension"
+        },
+        "text": {
+          "name": "Text",
+          "group": "Dimension"
         }
       }
     },
@@ -297299,6 +297660,47 @@
           "name": "Weakly rendered failures",
           "unit": "%",
           "better": "lower"
+        }
+      }
+    },
+    "t2j-bench": {
+      "url": "https://ft2023.github.io/T2j-web/",
+      "feed": "https://ft2023.github.io/T2j-web/",
+      "terms": "Public project leaderboard published by Google Cloud AI Research, Google DeepMind, and UIUC.",
+      "retrieved": "2026-11-24",
+      "rows": 21,
+      "unmatched": [],
+      "reference": [
+        "OpenCode",
+        "OpenHands",
+        "Terminus-2"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "train": {
+          "name": "Train",
+          "group": "Subset"
+        },
+        "serve": {
+          "name": "Serve",
+          "group": "Subset"
+        }
+      },
+      "stats": {
+        "spec": {
+          "name": "Spec",
+          "unit": "score",
+          "better": "higher"
+        },
+        "numeric": {
+          "name": "Numeric",
+          "unit": "score",
+          "better": "higher"
+        },
+        "behavior": {
+          "name": "Behavior",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -323084,6 +323486,65 @@
         "URSA-8B-PS-GRPO"
       ]
     },
+    "wearable-ai-challenge": {
+      "url": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard",
+      "feed": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard/raw/main/final_rankings.py",
+      "terms": "Public Hugging Face Space published by Meta FAIR.",
+      "headline": "Primary held-out test score per track: LLM-as-Judge on EgoConv, Accuracy on EgoLongQA, and Macro F1 on EgoProactive.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
+      "unmatched": [
+        "EgoAssist-Conv-0.9B-SFT",
+        "EgoAssist-Conv-Qwen3.5-27B",
+        "EgoAssist-LongQA-0.8B-OptStacker",
+        "EgoAssist-LongQA-27B-OptStacker",
+        "EgoAssist-c16d-1B",
+        "GRU-only (icanfly)",
+        "Genesis-Cadence-RF-Fused",
+        "HIPPO-largev1",
+        "HIPPO-merge",
+        "InternVL3.5-1B-D9-Cadence-C2-Tree",
+        "JTPA-0.8B",
+        "JTPA-27B",
+        "LongShotV2",
+        "Proact-YJ-2B:v4",
+        "Proact-YJ-8B:v1",
+        "Qwen (kth_saar)",
+        "Qwen(28) (smartkaist)",
+        "Qwen-Atomic",
+        "Qwen3.5-2B-v139k-ConvQA-SFT",
+        "StreamShot",
+        "Test-Pipeline-V2",
+        "Test-Set-Pipeline-V1",
+        "TonyTie3107",
+        "TonyTie317",
+        "Vertex (deuxvoir)",
+        "ambient-agent-small-distill-v1",
+        "ambient-proactive-small-v1.2",
+        "ambient-proactive-v1.3",
+        "chronos1-large",
+        "chronos1-small",
+        "fp8-s3",
+        "hippo-1.3B",
+        "internvl1b (sololevelling)",
+        "internvl3 (sololevelling)",
+        "my_model (luludangwang)",
+        "my_model-v2 (luludawang)",
+        "mymodel (zoeyagent)",
+        "qwen3_convqa",
+        "qwen3vl (sololevelling)",
+        "shadow:v1",
+        "showee_qwen3vl_8",
+        "siglip-gbm-goldhist"
+      ],
+      "stats": {
+        "bleu": {
+          "name": "BLEU",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "wearableqa": {
       "url": "https://arxiv.org/html/2609.05405",
       "feed": "https://arxiv.org/html/2609.05405",
@@ -329661,6 +330122,37 @@
           "name": "Output tokens per success",
           "unit": "tokens",
           "better": "lower"
+        }
+      }
+    },
+    "xl-docbench": {
+      "url": "https://officeintelligence.github.io/xl-docbench/",
+      "feed": "https://huggingface.co/datasets/microsoft/XL-DocBench/raw/main/results/scores.jsonl",
+      "terms": "Public evaluation dataset published on Hugging Face by Microsoft Research Asia.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "singleDoc": {
+          "name": "Single-document",
+          "group": "Document scope"
+        },
+        "crossDoc": {
+          "name": "Cross-document",
+          "group": "Document scope"
+        }
+      },
+      "stats": {
+        "tokenF1": {
+          "name": "Token F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "anls": {
+          "name": "ANLS",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },

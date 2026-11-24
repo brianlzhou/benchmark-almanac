@@ -11851,6 +11851,34 @@
     "added": "2026-11-20"
   },
   {
+    "id": "appcif-bench",
+    "name": "AppCIF-Bench",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-instructions",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Bilingual Chinese and English application-level complex instruction following benchmark with deeply nested rules, multi-turn constraints, and code simulation engines.",
+    "org": "Tencent",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/Tencent-Hunyuan/AppCIF-Bench",
+      "site": "https://ac2333.github.io/AppCIF/",
+      "leaderboard": "https://ac2333.github.io/AppCIF/#leaderboard"
+    },
+    "access": "public",
+    "note": "Accepted to NeurIPS 2026. The official leaderboard ranks 12 frontier models by Hard Satisfaction Rate average across L1 to L4 difficulty tiers alongside Soft Satisfaction Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ac2333.github.io/AppCIF/",
+      "https://github.com/Tencent-Hunyuan/AppCIF-Bench",
+      "https://ac2333.github.io/AppCIF/static/main.js"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "appendix-boundary",
     "name": "Appendix Boundary",
     "category": "safety-alignment",
@@ -42837,6 +42865,257 @@
       "https://huggingface.co/api/datasets/HAERAE-HUB/csatqa"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "diagsafe",
+    "name": "DiagSafe",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Bilingual diagnostic LLM safety benchmark scoring unsafe rates and usefulness independently across 3,489 single-turn and multi-turn prompts covering an 84-label safety taxonomy.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.29225",
+      "repo": "https://github.com/Tencent-Hunyuan/DiagSafe",
+      "site": "https://tencent-hunyuan.github.io/DiagSafe/",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/DiagSafe"
+    },
+    "access": "public",
+    "note": "Lower overall unsafe rate is better across DiagBase and DiagAttack subsets. Usefulness is scored independently on a 0 to 3 scale.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://tencent-hunyuan.github.io/DiagSafe/",
+      "https://github.com/Tencent-Hunyuan/DiagSafe",
+      "https://arxiv.org/abs/2610.29225"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "hyperlogic",
+    "name": "HyperLogic",
+    "category": "science-reasoning",
+    "subcategory": "science-puzzles",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Forward-authored Chinese logical reasoning benchmark of 523 items with execution-verified answers across Seed, Base, and Hard tiers with and without code sandboxes.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.19597",
+      "repo": "https://github.com/Tencent-Hunyuan/HyperLogic",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/HyperLogic"
+    },
+    "access": "public",
+    "note": "Models are ranked by three-rollout Base item accuracy at their highest reasoning setting, alongside Seed, Base Sub-Q, Hard Direct, Hard Sandbox, and Hard + Library tiers.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Tencent-Hunyuan/HyperLogic",
+      "https://arxiv.org/abs/2605.19597"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "nvidia-av-causal-scenario-retrieval",
+    "name": "NVIDIA AV Causal Scenario Retrieval Challenge",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Autonomous-driving multimodal retrieval challenge evaluating models on retrieving driving video scenarios matching causal reasoning descriptions across easy, medium, and hard queries.",
+    "org": "NVIDIA",
+    "released": "2026-06",
+    "links": {
+      "site": "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge",
+      "leaderboard": "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge"
+    },
+    "access": "public+private-holdout",
+    "note": "Hosted by NVIDIA on Hugging Face Spaces. Submissions are ranked by Average R-Precision across 1,773 queries alongside mAP, Precision@10, and Recall@10.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge",
+      "https://nvidia-av-causal-scenario-retrieval-challenge.hf.space/api/leaderboard"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "omnicapbench",
+    "name": "OmniCapBench",
+    "category": "audio-video",
+    "subcategory": "video-captioning",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Structured audio-visual video captioning benchmark of 786 videos evaluating shot segmentation, entity tracking, temporal event grounding, speaker attribution, and cross-modal association.",
+    "org": "Tencent Hunyuan, NTU, and Northumbria University",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.12458",
+      "repo": "https://github.com/Tencent-Hunyuan/OmniCapBench",
+      "site": "https://01yzzyu.github.io/OmniCapBench/",
+      "leaderboard": "https://01yzzyu.github.io/OmniCapBench/"
+    },
+    "access": "public",
+    "note": "Accepted to NeurIPS 2026 Evaluations and Datasets Track. Scores 9 proprietary and open-source omnimodal models across structural and localized semantic metrics.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://01yzzyu.github.io/OmniCapBench/",
+      "https://github.com/Tencent-Hunyuan/OmniCapBench",
+      "https://arxiv.org/abs/2610.12458"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "repoprobe",
+    "name": "RepoProbe",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Repository-level code comprehension benchmark with 500 open-ended questions mined from real GitHub Discussions across 50 repositories in 15 programming languages, graded by tiered checklists.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.04783",
+      "repo": "https://github.com/Tencent-Hunyuan/RepoProbe",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/RepoProbe"
+    },
+    "access": "public",
+    "note": "Published at ASE 2026. Evaluates 20 closed-weight and open-weight models under Docker-isolated agent scaffolding on Overall, Knowledge, Clarity, and Perfect Solve Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Tencent-Hunyuan/RepoProbe",
+      "https://arxiv.org/abs/2608.04783"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sciformabench-2k",
+    "name": "SciFormaBench-2K",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Structure-faithful image generation benchmark evaluating 2,000 scientific methodology diagrams across simple, medium, and hard complexity tiers on component, arrow, and text fidelity.",
+    "org": "Microsoft Research Asia, Peking University, and Zhejiang University",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.18091",
+      "repo": "https://github.com/microsoft/SciForma",
+      "site": "https://microsoft.github.io/SciForma/",
+      "leaderboard": "https://microsoft.github.io/SciForma/"
+    },
+    "access": "public",
+    "note": "Evaluates 14 proprietary and open image generation models on diagram structure fidelity, topology arrows, and text legibility.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://microsoft.github.io/SciForma/",
+      "https://github.com/microsoft/SciForma",
+      "https://arxiv.org/abs/2607.18091"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "t2j-bench",
+    "name": "T2J-Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Execution-grounded coding agent benchmark testing whole-repository migration of 63 real PyTorch training and inference codebases to native JAX and Flax.",
+    "org": "Google Cloud AI Research, Google DeepMind, and UIUC",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.29054",
+      "repo": "https://github.com/google-research/t2j-bench",
+      "site": "https://ft2023.github.io/T2j-web/",
+      "leaderboard": "https://ft2023.github.io/T2j-web/"
+    },
+    "access": "public",
+    "note": "Reports three-seed mean reward with sample standard deviation across 21 model-harness configurations alongside Spec, Numeric, Behavior, Train, and Serve breakdowns.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ft2023.github.io/T2j-web/",
+      "https://github.com/google-research/t2j-bench",
+      "https://arxiv.org/abs/2605.29054"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "wearable-ai-challenge",
+    "name": "Wearable-AI Challenge",
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Multimodal wearable AI benchmark evaluating egocentric conversational QA (EgoConv), long-horizon video QA (EgoLongQA), and proactive assistant interventions (EgoProactive).",
+    "org": "Meta FAIR",
+    "released": "2026-06",
+    "links": {
+      "site": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "Final held-out test standings across 44 submissions split into Small (up to 2B parameters) and Large (2B+) divisions for each track.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard",
+      "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard/raw/main/final_rankings.py"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "xl-docbench",
+    "name": "XL-DocBench",
+    "category": "long-context",
+    "subcategory": "long-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evidence-grounded extra-long multimodal document understanding benchmark spanning hundreds to thousands of pages across 1,345 single-document and cross-document questions.",
+    "org": "Microsoft Research Asia and Wuhan University",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.00036",
+      "site": "https://officeintelligence.github.io/xl-docbench/",
+      "leaderboard": "https://officeintelligence.github.io/xl-docbench/",
+      "dataset": "https://huggingface.co/datasets/microsoft/XL-DocBench"
+    },
+    "access": "public",
+    "note": "Published at NeurIPS 2026. Per-item evaluation scores for 13 model and agent configurations are published on Hugging Face for exact accuracy, Token F1, and ANLS aggregation.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://officeintelligence.github.io/xl-docbench/",
+      "https://huggingface.co/datasets/microsoft/XL-DocBench",
+      "https://arxiv.org/abs/2608.00036"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "csfd-sentiment",
