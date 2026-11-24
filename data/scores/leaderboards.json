@@ -7736,7 +7736,7 @@
       "url": "https://baskargroup.github.io/Ag_reasoning/#leaderboard-section",
       "feed": "https://baskargroup.github.io/Ag_reasoning/",
       "terms": "The project page credits CC BY-SA 4.0 and embeds the score table in its HTML. https://baskargroup.github.io/Ag_reasoning/ Robots.txt allows the project page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "LLaMA-3 8B (Full SFT)",
@@ -19980,7 +19980,7 @@
       "url": "https://www.kaggle.com/competitions/asap-aes/leaderboard",
       "feed": "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard",
       "terms": "The publisher does not specify separate score reuse terms in the supplied source. The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "@ORGANIZATION",
@@ -24023,7 +24023,7 @@
       "url": "https://www.kaggle.com/competitions/astroclimb/leaderboard",
       "feed": "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard",
       "terms": "The organizers use Kaggle for team scoring. I could not verify separate terms for reusing scores. https://www.kaggle.com/competitions/astroclimb/rules The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AI Duo",
@@ -25842,7 +25842,7 @@
       "url": "https://www.autofactorybench.com/leaderboard",
       "feed": "https://www.autofactorybench.com/data/bench.json",
       "terms": "The maker offers research access and licensing for the full data. The public leaderboard does not specify score reuse terms. https://www.autofactorybench.com/ Robots.txt permits the public data path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
       "parts": {
@@ -55201,7 +55201,7 @@
       "url": "https://cnfinbench.opencompass.org.cn/home",
       "feed": "https://cnfinbench.opencompass.org.cn/api/v1/base/evaluation/list/v2",
       "terms": "The publisher links the board at https://cnfinbench.opencompass.org.cn/home. Separate results licensing remains unverified. The site serves the app shell at robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Dowsure-Fin-27B-V1",
@@ -55210,16 +55210,16 @@
       ],
       "parts": {
         "researchDueDiligenceDim": {
-          "name": "Research due diligence"
+          "name": "证据化投研与尽调"
         },
         "financialModelDim": {
-          "name": "Financial modeling"
+          "name": "财务分析与模型维护"
         },
         "bankComplianceDim": {
-          "name": "Bank compliance"
+          "name": "银行业务与合规管控"
         },
         "quantPortfolioDim": {
-          "name": "Quantitative portfolio"
+          "name": "量化投资与组合管理"
         },
         "finProKnowledgeDim": {
           "name": "金融专业知识问答"
@@ -65060,7 +65060,7 @@
       "url": "https://creg-bench.github.io/results/",
       "feed": "https://creg-bench.github.io/results/",
       "terms": "The CREG team publishes the leaderboard under the MIT license. https://creg-bench.github.io/results/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Mistral-7B-Instruct-v0.3",
@@ -66519,7 +66519,7 @@
       "url": "https://huggingface.co/datasets/revensi/CorpBench",
       "feed": "https://raw.githubusercontent.com/RevensiAI/CorpBench/main/results/work/1.3/report.json",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "ministral-3:8b"
@@ -66576,6 +66576,17 @@
         "avgDurationSeconds": {
           "name": "Average duration",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "providerFailureRate": {
+          "name": "Provider failure rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of runs with provider failures, from 0 to 1."
+        },
+        "providerFailures": {
+          "name": "Provider failures",
+          "unit": "count",
           "better": "lower"
         },
         "scoredRuns": {
@@ -70020,7 +70031,7 @@
       "url": "https://crab.camel-ai.org/",
       "feed": "https://crab.camel-ai.org/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Gemini 1.5 PRO (snapshot unspecified)",
@@ -75012,7 +75023,7 @@
       "feed": "https://raw.githubusercontent.com/SeanWu25/cusp-scientific-foresight/HEAD/results/A1_2_task_correlation/model_task_performance_table1panel.csv",
       "terms": "MIT license at https://github.com/SeanWu25/cusp-scientific-foresight/blob/HEAD/LICENSE.",
       "headline": "The authors report no overall score. The headline is binary balanced accuracy, the first metric in their results file.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -78597,7 +78608,7 @@
       "url": "https://dcase.community/challenge2024/task-language-queried-audio-source-separation-results",
       "feed": "https://dcase.community/challenge2024/task-language-queried-audio-source-separation-results",
       "terms": "The evaluation dataset lists CC BY 4.0. The results page gives no separate score license. The site's robots.txt allows the results page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Chung_KT_task9_1",
@@ -78709,7 +78720,7 @@
       "url": "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
       "feed": "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
       "terms": "The organizers publish the scores. The results page names no license for score reuse. https://dcase.community/challenge2023/task-foley-sound-synthesis-results DCASE robots.txt permits the results path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Chang_HYU_task7_trackB_1",
@@ -85882,7 +85893,7 @@
       "url": "https://github.com/lechmazur/divergent",
       "feed": "https://raw.githubusercontent.com/lechmazur/divergent/HEAD/README.md",
       "terms": "The publisher displays results at https://github.com/lechmazur/divergent. I could not verify reuse terms. The raw file host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Gemini 1.5 Pro (Sept)"
@@ -91553,7 +91564,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/1632/leaderboard/3930",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/3930/leaderboard/",
       "terms": "EvalAI gives entry and award terms. Ego4D requires a separate agreement for its recordings and annotations. https://eval.ai/api/challenges/challenge/1632 EvalAI serves no robots rules for the leaderboard.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "100DOH",
@@ -92336,7 +92347,7 @@
       "url": "https://xn--mdupuu-pxaa.eki.ee/benchmark/trivia_et_3",
       "feed": "https://raw.githubusercontent.com/keeleinstituut/leaderboard-data-ui/main/summary.csv",
       "terms": "EKI licenses the score data under CC BY 4.0. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 91,
       "unmatched": [
         "Command R+ (08-2024)",
@@ -100717,19 +100728,18 @@
       "url": "https://www.faintasy.football/standings",
       "feed": "https://www.faintasy.football/standings",
       "terms": "The league identifies third-party marks and photos. Its rules page gives no separate results license. https://www.faintasy.football/about The robots.txt path serves HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
-        "standingsRank": {
-          "name": "Standings rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "losses": {
           "name": "Losses",
           "unit": "count",
           "better": "lower"
+        },
+        "ties": {
+          "name": "Ties",
+          "unit": "count"
         },
         "pointsFor": {
           "name": "Points for",
@@ -100917,7 +100927,7 @@
       "url": "https://github.com/aryatschand/FantasyFootballBench/blob/main/data/simulations/simulation_20251020_174956/season_results/final_standings_2024.csv",
       "feed": "https://raw.githubusercontent.com/aryatschand/FantasyFootballBench/main/data/simulations/simulation_20251020_174956/season_results/final_standings_2024.csv",
       "terms": "The repository identifies SportsData.io as the source of proprietary NFL data. https://github.com/aryatschand/FantasyFootballBench GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "GPT OSS"
@@ -152276,7 +152286,7 @@
       "url": "https://ipibench.generalanalysis.com",
       "feed": "https://ipibench.generalanalysis.com (Figure 1, One query; clean-workflow table for diagnostics)",
       "terms": "General Analysis publishes this public research report; no separate reuse license or terms link appears on the report.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "chart": {
@@ -152311,6 +152321,15 @@
           "unit": "%",
           "better": "lower"
         },
+        "notMentioned": {
+          "name": "Not mentioned",
+          "unit": "%"
+        },
+        "misrepresented": {
+          "name": "Misrepresented",
+          "unit": "%",
+          "better": "lower"
+        },
         "asr11": {
           "name": "One-query attack success rate",
           "unit": "%",
@@ -152320,6 +152339,11 @@
           "name": "Iterative attack success rate",
           "unit": "%",
           "better": "lower"
+        },
+        "cleanObjective": {
+          "name": "Clean-run objective score",
+          "unit": "%",
+          "better": "higher"
         },
         "cleanCost": {
           "name": "Clean-run cost",

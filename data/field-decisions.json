@@ -91,6 +91,9 @@
     "agi-eval-community-voice-interaction": {
       "evalTime": "wired"
     },
+    "agreason": {
+      "Plant &amp; Seed Health Qs": "wired"
+    },
     "agrobench": {
       "Open-Source Vision Language Models (VLMs)": "ignore"
     },
@@ -115,6 +118,9 @@
     },
     "alphaeval": {
       "Details": "ignore"
+    },
+    "alphasense-financial-research-benchmark": {
+      "Event date": "ignore"
     },
     "alyah": {
       "Number of Samples": "ignore"
@@ -187,7 +193,8 @@
       "Team": "ignore"
     },
     "asap-essay-scoring": {
-      "submissionId": "ignore"
+      "submissionId": "ignore",
+      "submissionCount": "wired"
     },
     "ascend": {
       "Average duration (minutes)": "ignore",
@@ -216,7 +223,8 @@
       "AssemblyAI-STT-3.7-Realtime-Agent": "ignore"
     },
     "astroclimb": {
-      "submissionId": "ignore"
+      "submissionId": "ignore",
+      "submissionCount": "wired"
     },
     "astromlab-1": {
       "Step-1": "ignore",
@@ -230,6 +238,9 @@
     },
     "audio-reasoning-challenge-2026": {
       "Submission Limit": "ignore"
+    },
+    "autofactory-bench": {
+      "org": "ignore"
     },
     "autoresearchexam": {
       "Terminus 2 · 200 turns": "ignore"
@@ -474,6 +485,9 @@
     "cmi-bench": {
       "seed": "ignore"
     },
+    "cnfinbench": {
+      "scores.finReportParseDim": "wired"
+    },
     "cnmo-2024": {
       "in USD": "ignore",
       "# Training Tokens": "ignore"
@@ -510,6 +524,10 @@
       "Step": "ignore",
       "Steps": "ignore"
     },
+    "connected-robotics-evidence-graph-benchmark": {
+      "Trajectory score": "wired",
+      "Trajectory score ▼": "wired"
+    },
     "constructions-last-exam": {
       "Date": "ignore"
     },
@@ -535,7 +553,8 @@
       "difference95.lower": "ignore",
       "difference95.upper": "ignore",
       "passRate95.lower": "ignore",
-      "passRate95.upper": "ignore"
+      "passRate95.upper": "ignore",
+      "org": "ignore"
     },
     "corporatebench": {
       "raw.agent": "ignore",
@@ -597,7 +616,8 @@
       "Price": "ignore"
     },
     "crab-benchmark": {
-      "Release Date": "ignore"
+      "Release Date": "ignore",
+      "Organization": "ignore"
     },
     "cresta-bench": {
       "raw.runDetails": "ignore",
@@ -678,7 +698,8 @@
       "DeepL (SE, 2024)": "ignore"
     },
     "cusp-scientific-forecasting": {
-      "n_date": "ignore"
+      "n_date": "ignore",
+      "date_score": "wired"
     },
     "cvqa": {
       "submission__submission_metadata": "wired"
@@ -806,13 +827,18 @@
     "dcase-2024-language-queried-audio-source-separation": {
       "SubmissionCode": "ignore",
       "Submission Information": "ignore",
-      "TechnicalReport": "ignore"
+      "TechnicalReport": "ignore",
+      "Submission Code": "wired"
     },
     "dcase-foley-sound-synthesis-2023": {
       "SubmissionCode": "ignore",
       "Submission Information": "ignore",
       "TechnicalReport": "ignore",
-      "# Categories Rated by Team Members": "ignore"
+      "# Categories Rated by Team Members": "ignore",
+      "Submission Code": "wired",
+      "Audio Quality (MOS score w/ 10 steps)": "wired",
+      "Category Fit (MOS score w/ 10 steps)": "wired",
+      "Diversity (MOS score w/ 10 steps, weighted 0.5)": "wired"
     },
     "debate-lech-mazur": {
       "Own minus panel margin, 95% CI": "ignore"
@@ -864,6 +890,9 @@
     },
     "displace-m-2026": {
       "Open-source models": "ignore"
+    },
+    "divergent-lech-mazur": {
+      "% Repeats": "wired"
     },
     "doc2harness": {
       "Step 5 Preview": "ignore",
@@ -966,7 +995,8 @@
       "submission__submission_metadata": "ignore"
     },
     "ego4d-state-change-object-detection": {
-      "submission__id": "ignore"
+      "submission__id": "ignore",
+      "submission__method_name": "wired"
     },
     "egocentric-vqa-encord": {
       "Release date": "ignore"
@@ -988,7 +1018,8 @@
       "details.propaganda_resistance": "ignore",
       "details.term_bench": "ignore",
       "details.trivia_et_2": "ignore",
-      "release_date": "ignore"
+      "release_date": "ignore",
+      "details.trivia_et_3": "wired"
     },
     "eki-propaganda-resistance": {
       "release_date": "ignore"
@@ -1063,6 +1094,12 @@
     },
     "extract-bench-contextual": {
       "Tokens": "ignore"
+    },
+    "faintasy-football": {
+      "Team": "wired"
+    },
+    "fantasyfootballbench": {
+      "Team": "wired"
     },
     "faroese-semantic-textual-similarity": {
       "model.releaseDate": "ignore",
@@ -1412,6 +1449,10 @@
       "Revised: HLE-Verified Full": "ignore",
       "Revised: HLE-Verified Subset": "ignore"
     },
+    "hmdb51": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
     "honor-of-kings-bug-ai-root-cause-tencent": {
       "createdAt": "ignore",
       "createdUid": "ignore",
@@ -1450,6 +1491,9 @@
       "terminal_runs": "ignore",
       "requirement.lower": "ignore",
       "requirement.upper": "ignore"
+    },
+    "ideataste": {
+      "release_date": "ignore"
     },
     "ifbench": {
       "multi-turn": "wired",
@@ -1544,7 +1588,8 @@
       "USD millions": "ignore"
     },
     "ipi-bench": {
-      "Agent did": "ignore"
+      "Agent did": "ignore",
+      "Presented as verified or approved": "wired"
     },
     "italian-administrative-casehold": {
       "model.activeParamsB": "ignore",
