@@ -1027,5 +1027,65 @@
       "Datalab.to",
       "datalab-to"
     ]
+  },
+  {
+    "id": "opendrivelab",
+    "name": "OpenDriveLab",
+    "country": "HK",
+    "url": "https://opendrivelab.com",
+    "aliases": [
+      "OpenDriveLab",
+      "OpenDriveLab (HKU)"
+    ]
+  },
+  {
+    "id": "sutd",
+    "name": "Singapore University of Technology and Design (DeCLaRe Lab)",
+    "country": "SG",
+    "url": "https://www.sutd.edu.sg",
+    "aliases": [
+      "SUTD",
+      "declare-lab",
+      "DeCLaRe Lab"
+    ]
+  },
+  {
+    "id": "x-square-robot",
+    "name": "X Square Robot",
+    "country": "CN",
+    "url": "https://x2robot.com",
+    "aliases": [
+      "X Square Robot",
+      "x-square-robot",
+      "X2Robot"
+    ]
+  },
+  {
+    "id": "gigaai",
+    "name": "GigaAI",
+    "country": "CN",
+    "url": "https://gigaai.cc",
+    "aliases": [
+      "GigaAI",
+      "open-gigaai"
+    ]
+  },
+  {
+    "id": "dexmal",
+    "name": "Dexmal",
+    "country": "CN",
+    "url": "https://www.dexmal.com",
+    "aliases": [
+      "Dexmal"
+    ]
+  },
+  {
+    "id": "rlwrld",
+    "name": "RLWRLD",
+    "country": "KR",
+    "url": "https://www.rlwrld.ai",
+    "aliases": [
+      "RLWRLD"
+    ]
   }
 ]
