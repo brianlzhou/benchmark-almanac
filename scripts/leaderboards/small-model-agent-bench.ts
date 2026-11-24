@@ -8,6 +8,23 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/cacinie/smab-small-model-agent-bench',
   feed: kaggleFeed('cacinie', 'smab-small-model-agent-bench'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('cacinie', 'smab-small-model-agent-bench', "(Overall)", 100),
+  parts: {
+    arguments: 'Arguments',
+    overall: 'Overall task',
+    relevance: 'Relevance',
+    selection: 'Selection',
+    planning: 'Planning',
+    stateTracking: 'State tracking',
+    stopping: 'Stopping',
+  },
+  fetch: () => kaggleRowsWithBounds('cacinie', 'smab-small-model-agent-bench', "(Overall)", 100, {
+    arguments: { task: 'smab_arguments', scale: 100 },
+    overall: { task: 'smab_overall', scale: 100 },
+    relevance: { task: 'smab_relevance', scale: 100 },
+    selection: { task: 'smab_selection', scale: 100 },
+    planning: { task: 'smab_planning', scale: 100 },
+    stateTracking: { task: 'smab_state_tracking', scale: 100 },
+    stopping: { task: 'smab_stopping', scale: 100 },
+  }),
 };
 export default board;

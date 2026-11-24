@@ -258771,9 +258771,35 @@
       "url": "https://www.kaggle.com/benchmarks/benjaminbrumfield/randombench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/benjaminbrumfield/randombench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 37,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "edges": {
+          "name": "Edges"
+        },
+        "favoriteNumber": {
+          "name": "Favorite number"
+        },
+        "multiplesOf10": {
+          "name": "Multiples of 10"
+        },
+        "primes": {
+          "name": "Primes"
+        },
+        "multiplesOf5": {
+          "name": "Multiples of 5"
+        },
+        "repeatedDigits": {
+          "name": "Repeated digits"
+        },
+        "uniformity": {
+          "name": "Uniformity"
+        },
+        "validAnswers": {
+          "name": "Valid answers"
+        }
+      }
     },
     "rapidata-multi-step-image-edit": {
       "url": "https://www.benchmark.ai/multi-step-image-edit",
@@ -259229,11 +259255,25 @@
       "url": "https://www.kaggle.com/benchmarks/ashleyeromano/read-my-aura",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/ashleyeromano/read-my-aura/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
-      ]
+      ],
+      "parts": {
+        "nameSwap": {
+          "name": "Name swap"
+        },
+        "sycophancy": {
+          "name": "Sycophancy"
+        },
+        "highStakes": {
+          "name": "High stakes"
+        },
+        "tintTest": {
+          "name": "Tint test"
+        }
+      }
     },
     "real-bench": {
       "url": "https://www.realevals.ai",
@@ -259649,9 +259689,44 @@
       "url": "https://www.kaggle.com/benchmarks/neondev0/realitybench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/neondev0/realitybench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "checkout": {
+          "name": "Checkout"
+        },
+        "adminTable": {
+          "name": "Admin table"
+        },
+        "apiForm": {
+          "name": "API form"
+        },
+        "booking": {
+          "name": "Booking"
+        },
+        "chat": {
+          "name": "Chat"
+        },
+        "crudDashboard": {
+          "name": "CRUD dashboard"
+        },
+        "fileUpload": {
+          "name": "File upload"
+        },
+        "productPage": {
+          "name": "Product page"
+        },
+        "search": {
+          "name": "Search"
+        },
+        "settings": {
+          "name": "Settings"
+        },
+        "workflow": {
+          "name": "Workflow"
+        }
+      }
     },
     "realitytest-aisi": {
       "url": "https://arxiv.org/html/2606.00168",
@@ -259839,9 +259914,41 @@
       "url": "https://www.kaggle.com/benchmarks/gayathriarvind/reasoning-bias-reporting-quality",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/gayathriarvind/reasoning-bias-reporting-quality/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "overgeneralizationR1": {
+          "name": "Overgeneralization detection (R1)"
+        },
+        "badCausalChainR2": {
+          "name": "Bad causal chain (R2)"
+        },
+        "unpromptedCritiqueR3": {
+          "name": "Unprompted critique (R3)"
+        },
+        "unpromptedCritiqueR4": {
+          "name": "Unprompted critique (R4)"
+        },
+        "unpromptedCritiqueR5": {
+          "name": "Unprompted critique (R5)"
+        },
+        "unpromptedCritiqueR6": {
+          "name": "Unprompted critique (R6)"
+        },
+        "unpromptedCritiqueR7": {
+          "name": "Unprompted critique (R7)"
+        },
+        "unpromptedCritiqueR8": {
+          "name": "Unprompted critique (R8)"
+        },
+        "unpromptedCritiqueR9": {
+          "name": "Unprompted critique (R9)"
+        },
+        "unpromptedCritiqueR10": {
+          "name": "Unprompted critique (R10)"
+        }
+      }
     },
     "reasoning-dial": {
       "url": "https://www.kaggle.com/benchmarks/abeeralodhi/reasoning-dial",
@@ -263204,9 +263311,17 @@
       "url": "https://www.kaggle.com/benchmarks/starkhushi/right-answer-wrong-reason-ml-judgment-calls",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/starkhushi/right-answer-wrong-reason-ml-judgment-calls/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "dsJudgment": {
+          "name": "Data science judgment"
+        },
+        "dsJudgmentOpen": {
+          "name": "Open-ended data science judgment"
+        }
+      }
     },
     "riichi-orbit-mahjong-bot-open-practice": {
       "url": "https://note.com/doui_lab/n/n0eb198d80d28",
@@ -266565,11 +266680,22 @@
       "url": "https://www.kaggle.com/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "readRules": {
+          "name": "Read rules"
+        },
+        "readReal": {
+          "name": "Read real files"
+        },
+        "writePolicy": {
+          "name": "Write policy"
+        }
+      }
     },
     "robotwin-1-0": {
       "url": "https://arxiv.org/html/2504.13059",
@@ -268403,12 +268529,35 @@
       "url": "https://www.kaggle.com/benchmarks/kirderf/rsna-knee-llm-label-extraction-benchmark-auc10",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kirderf/rsna-knee-llm-label-extraction-benchmark-auc10/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506",
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "visionSmall": {
+          "name": "Vision small"
+        },
+        "visionMedium": {
+          "name": "Vision medium"
+        },
+        "visionLarge": {
+          "name": "Vision large"
+        },
+        "visionRawSmall": {
+          "name": "Vision and raw report small"
+        },
+        "visionRawMedium": {
+          "name": "Vision and raw report medium"
+        },
+        "visionRawLarge": {
+          "name": "Vision and raw report large"
+        },
+        "rawReport": {
+          "name": "Raw report"
+        }
+      }
     },
     "rsna-knee-llm-label-extraction": {
       "url": "https://www.kaggle.com/benchmarks/kirderf/rsna-knee-llm-label-extraction-benchmark",
@@ -270905,9 +271054,17 @@
       "url": "https://www.kaggle.com/benchmarks/clivinjohn/safety-scene-vision-benchmark",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/clivinjohn/safety-scene-vision-benchmark/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "hazardSpotting": {
+          "name": "Hazard spotting"
+        },
+        "hazardSpottingLeading": {
+          "name": "Hazard spotting (leading)"
+        }
+      }
     },
     "sahm": {
       "url": "https://mbzuai-nlp.github.io/SAHM/leaderboard.html",
@@ -278391,11 +278548,34 @@
       "url": "https://www.kaggle.com/benchmarks/cacinie/smab-small-model-agent-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/cacinie/smab-small-model-agent-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
-      ]
+      ],
+      "parts": {
+        "arguments": {
+          "name": "Arguments"
+        },
+        "overall": {
+          "name": "Overall task"
+        },
+        "relevance": {
+          "name": "Relevance"
+        },
+        "selection": {
+          "name": "Selection"
+        },
+        "planning": {
+          "name": "Planning"
+        },
+        "stateTracking": {
+          "name": "State tracking"
+        },
+        "stopping": {
+          "name": "Stopping"
+        }
+      }
     },
     "smart-cockpit-benchmark-qwen": {
       "url": "https://github.com/QwenAudio/qwen-audio-agent/blob/main/examples/smart-cockpit/bench/results/accuracy.md",
@@ -281872,9 +282052,20 @@
       "url": "https://www.kaggle.com/benchmarks/neglectfulpersimmon/spatial-reasoning-rotating-ascii-art",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/neglectfulpersimmon/spatial-reasoning-rotating-ascii-art/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "rotate16": {
+          "name": "Rotate 16x16"
+        },
+        "rotate32": {
+          "name": "Rotate 32x32"
+        },
+        "rotate64": {
+          "name": "Rotate 64x64"
+        }
+      }
     },
     "spatialbench-latchbio": {
       "url": "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md",
@@ -284301,9 +284492,17 @@
       "url": "https://www.kaggle.com/benchmarks/dhruvb2028/sql-reality-check",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/dhruvb2028/sql-reality-check/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "netRevenue": {
+          "name": "Net revenue"
+        },
+        "ticketState": {
+          "name": "Ticket state as of"
+        }
+      }
     },
     "squad": {
       "url": "https://rajpurkar.github.io/SQuAD-explorer/",
@@ -284995,11 +285194,19 @@
       "url": "https://www.kaggle.com/benchmarks/adriensales/stack-eol-audit-geol-cli-vs-api",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/adriensales/stack-eol-audit-geol-cli-vs-api/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
-      ]
+      ],
+      "parts": {
+        "api": {
+          "name": "API mode"
+        },
+        "memory": {
+          "name": "Memory mode"
+        }
+      }
     },
     "stage-cross-scene-narrative-evolution-reasoning": {
       "url": "https://arxiv.org/html/2601.08510",
@@ -301085,9 +301292,17 @@
       "url": "https://www.kaggle.com/benchmarks/mariofilho/tombo-full-transcript",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/mariofilho/tombo-full-transcript/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "diplomatic": {
+          "name": "Diplomatic transcription"
+        },
+        "lowEffort": {
+          "name": "Diplomatic transcription (low reasoning)"
+        }
+      }
     },
     "tomg-bench": {
       "url": "https://github.com/phenixace/S2-TOMG-Bench",
@@ -303775,11 +303990,19 @@
       "url": "https://www.kaggle.com/benchmarks/mikaelaldy/turn-based-benchmarks",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/mikaelaldy/turn-based-benchmarks/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "rpsProspective": {
+          "name": "Rock paper scissors"
+        },
+        "ticTacToe": {
+          "name": "Tic-tac-toe"
+        }
+      }
     },
     "turnbench": {
       "url": "https://turnbench.sesame.com/",
@@ -312014,9 +312237,20 @@
       "url": "https://www.kaggle.com/benchmarks/archie40004/verigap",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/archie40004/verigap/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "validity": {
+          "name": "Validity"
+        },
+        "mutation": {
+          "name": "Mutation"
+        },
+        "codegen": {
+          "name": "Code generation"
+        }
+      }
     },
     "verigen-design-problems": {
       "url": "https://huggingface.co/spaces/HPAI-BSC/TuRTLe-Leaderboard",
@@ -327881,9 +328115,29 @@
       "url": "https://www.kaggle.com/benchmarks/trexbytes/your-llm-doesnt-know-boundary",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/trexbytes/your-llm-doesnt-know-boundary/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "blockedRelease": {
+          "name": "Blocked release (v1)"
+        },
+        "monthEndTotal": {
+          "name": "Month-end total (v3)"
+        },
+        "escalationReport": {
+          "name": "Escalation report (v3)"
+        },
+        "issueFix": {
+          "name": "Issue fix (v3)"
+        },
+        "ticketCloseout": {
+          "name": "Ticket closeout (v3)"
+        },
+        "blockedReleaseV3": {
+          "name": "Blocked release (v3)"
+        }
+      }
     },
     "your-voice-your-device-your-language": {
       "url": "https://zindi.africa/competitions/your-voice-your-device-your-language-challenge/leaderboard",
