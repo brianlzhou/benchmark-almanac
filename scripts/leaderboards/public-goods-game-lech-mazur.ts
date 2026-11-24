@@ -17,7 +17,7 @@ const board: Leaderboard = {
       const match = line.match(/^\|\s*\d+\s*\|\s*([^|]+?)\s*\|\s*([\d.]+)%\s*\|\s*±([\d.]+)\s*\|\s*(\d+)\s*\|/);
       if (!match) continue;
       const score = Number(match[2]); const error = Number(match[3]);
-      rows.push({ model: match[1].trim(), score, trials: Number(match[4]), metrics: { standardError: error } });
+      rows.push({ model: match[1].trim(), score, trials: Number(match[4]), metrics: { stderr: error } });
     }
     if (rows.length < 15) throw new Error(`LLM Public Goods Game: ${rows.length} rows, expected at least 15`);
     return rows;

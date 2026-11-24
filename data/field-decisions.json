@@ -113,6 +113,12 @@
     "alignbench": {
       "#Samples": "ignore"
     },
+    "alpacaeval": {
+      "samples": "wired"
+    },
+    "alpacaeval-2-0": {
+      "samples": "wired"
+    },
     "alphaeval": {
       "Details": "ignore"
     },
@@ -133,6 +139,10 @@
       "#Token (Compressed)": "ignore",
       "#Token (Original)": "ignore"
     },
+    "androidbench": {
+      "Model - Agent": "ignore",
+      "Runs passed": "ignore"
+    },
     "androidcontrol": {
       "steps": "ignore"
     },
@@ -150,6 +160,12 @@
       "TimeRLM-text (GPT 5.5)": "wired",
       "TimeRLM-text (Qwen3.5 4B - RL)": "wired",
       "TimeRLM-text (Qwen3.5 4B)": "wired"
+    },
+    "ape-attempt-to-persuade": {
+      "turn1_attempt_conspiracy": "wired",
+      "turn1_attempt_controversial": "wired",
+      "turn1_attempt_noncontroversially_harmful": "wired",
+      "turn1_attempt_undermining_control": "wired"
     },
     "arabculture": {
       "#Samples": "ignore"
@@ -873,6 +889,9 @@
       "Practitioner time (author estimate)": "ignore",
       "Valid attempts": "wired"
     },
+    "dolphinbench": {
+      "runs_url": "wired"
+    },
     "dosimeter-german-election-day-2026": {
       "Most cited official sources": "ignore"
     },
@@ -1029,6 +1048,10 @@
     "eurosat": {
       "model.releaseDate": "ignore"
     },
+    "evalatro-2": {
+      "stdevAnte": "wired",
+      "stdevScore": "wired"
+    },
     "evf-bench": {
       "StepVideo [55]": "ignore",
       "Kling 2.1 Std [49]": "ignore"
@@ -1064,6 +1087,14 @@
     "extract-bench-contextual": {
       "Tokens": "ignore"
     },
+    "extractbench": {
+      "Confidence_AUGRC": "wired",
+      "Confidence_Coverage": "wired"
+    },
+    "extractbench-pro": {
+      "Confidence_AUGRC": "wired",
+      "Confidence_Coverage": "wired"
+    },
     "faroese-semantic-textual-similarity": {
       "model.releaseDate": "ignore",
       "model.maxTokens": "ignore"
@@ -1097,10 +1128,12 @@
       "model.releaseDate": "ignore"
     },
     "fineval": {
-      "Agent Application": "ignore"
+      "Agent Application": "ignore",
+      "Financial Agent": "wired"
     },
     "fineval-6": {
-      "Financial Agent": "ignore"
+      "Financial Agent": "ignore",
+      "Agent Application": "wired"
     },
     "fingreat": {
       "Total assets (USD)": "ignore",
@@ -1285,6 +1318,9 @@
     },
     "geode": {
       "STD": "ignore"
+    },
+    "geoguessbench-panoramic": {
+      "Confidence": "wired"
     },
     "geoguesser-bench-berkeley": {
       "steps.competition": "ignore",
@@ -1527,7 +1563,8 @@
       "Submission": "ignore"
     },
     "insurebench-broader-comparison": {
-      "official_source": "ignore"
+      "official_source": "ignore",
+      "unknown_charge_attempts": "ignore"
     },
     "into-the-unknown": {
       "Mean Somers' D [95% CI]": "ignore"
@@ -1860,6 +1897,9 @@
     "mantis-eval": {
       "# Tokens / I": "ignore"
     },
+    "marineevt": {
+      "SemR.": "wired"
+    },
     "marsretrieval": {
       "Seed": "ignore",
       "Audit Accept, % (95% CI)": "ignore",
@@ -1984,6 +2024,9 @@
       "dateTo": "ignore",
       "model.releaseDate": "ignore"
     },
+    "mind2act-world": {
+      "Agent": "wired"
+    },
     "mind2web-2": {
       "info.details": "ignore"
     },
@@ -2093,8 +2136,17 @@
     "naturalproofs": {
       "Tokens": "ignore"
     },
+    "ncp-bench": {
+      "Trajectory (%)": "wired"
+    },
     "ndm-bench": {
       "95% CI": "ignore"
+    },
+    "neuro-reasoning": {
+      "4 steps": "ignore",
+      "5 steps": "ignore",
+      "6 steps": "ignore",
+      "7 steps": "ignore"
     },
     "nfcorpus": {
       "model.activeParamsB": "ignore",
@@ -2303,6 +2355,11 @@
     "paperbench-code-dev": {
       "**HF Token Needed?**": "ignore"
     },
+    "parley-labs-negotiation": {
+      "Bargaining (passes of 48 runs)": "wired",
+      "Planning ahead (of 16, one attempt)": "wired",
+      "Restraint (passes of 12 runs, two attempts)": "wired"
+    },
     "partiprompts": {
       "createdAt": "ignore",
       "author": "ignore"
@@ -2315,6 +2372,10 @@
     },
     "patientagentbench-amazon": {
       "Agent": "wired"
+    },
+    "pawbench": {
+      "Agent": "wired",
+      "Kling 3 Std.": "ignore"
     },
     "pcbbench-protoflow": {
       "costPerSolvedUsd": "ignore",
@@ -2374,6 +2435,9 @@
       "row.trace": "ignore",
       "row.agent": "ignore",
       "row.harness": "ignore"
+    },
+    "pipecat-stt-benchmark": {
+      "Transcripts": "wired"
     },
     "pixmo-count": {
       "Steps": "ignore",
@@ -2476,6 +2540,9 @@
     "ptcg-bench": {
       "Agent": "wired"
     },
+    "public-goods-game-lech-mazur": {
+      "±SE (%)": "wired"
+    },
     "pulsebench-tab": {
       "Samples": "ignore"
     },
@@ -2557,7 +2624,8 @@
       "w/o RadioAgent": "ignore"
     },
     "rcm-bench-1": {
-      "cost.currency": "ignore"
+      "cost.currency": "ignore",
+      "agentErrors": "wired"
     },
     "realcompanion": {
       "trace": "ignore",
@@ -2641,7 +2709,8 @@
       "pillar_weights.reliability": "ignore",
       "pillar_weights.safety_societal": "ignore",
       "pillar_weights.security": "ignore",
-      "pillar_weights.transparency": "ignore"
+      "pillar_weights.transparency": "ignore",
+      "confidence": "wired"
     },
     "rivabench": {
       "Open-source baselines": "ignore",
@@ -2676,7 +2745,8 @@
       "Transcript": "ignore"
     },
     "robodojo-rc-tier-1": {
-      "Log": "ignore"
+      "Log": "ignore",
+      "log": "ignore"
     },
     "robodx": {
       "cost": "ignore"
@@ -2735,6 +2805,9 @@
     },
     "sac-bench": {
       "Step-Audio-2-mini": "ignore"
+    },
+    "sahm": {
+      "Islamic-Std": "wired"
     },
     "scadbench": {
       "createdAt": "ignore",

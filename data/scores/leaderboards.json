@@ -12370,7 +12370,7 @@
       "url": "https://tatsu-lab.github.io/alpaca_eval/",
       "feed": "https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/data_AlpacaEval/alpaca_eval_gpt4_leaderboard.csv",
       "terms": "CSV in the tatsu-lab/alpaca_eval GitHub repository, which is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Alpaca 7B",
@@ -12475,7 +12475,7 @@
       "url": "https://tatsu-lab.github.io/alpaca_eval/",
       "feed": "https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/data_AlpacaEval_2/weighted_alpaca_eval_gpt4_turbo_leaderboard.csv (length_controlled_winrate, all submission groups)",
       "terms": "CSV in the tatsu-lab/alpaca_eval repository, which is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 55,
       "unmatched": [
         "Alpaca 7B",
@@ -12632,7 +12632,19 @@
         "merlinite-7B-AOT"
       ],
       "harnesses": "system",
-      "verified": "listed in the verified submission group"
+      "verified": "listed in the verified submission group",
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "length": {
+          "name": "Average output length",
+          "unit": "count",
+          "note": "Average output length in characters."
+        }
+      }
     },
     "alphaeval": {
       "url": "https://alphaeval.ai",
@@ -14697,7 +14709,7 @@
       "url": "https://developer.android.com/bench",
       "feed": "https://developer.android.com/bench (server-rendered HTML table \"1.0 task results\", Score)",
       "terms": "Server-rendered page on developer.android.com; robots.txt allows /bench and page content is under the site’s Content License (CC BY 4.0).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
       "unmatched": [],
       "costPer": "run",
@@ -16161,7 +16173,7 @@
       "terms": "MIT License. https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/LICENSE",
       "host": "Inspect Evals",
       "headline": "Inspect measures first-turn persuasion attempts across two equally sized categories, NoncontroversiallyHarmful and UnderminingControl.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -86355,14 +86367,49 @@
       "url": "https://dolphinbench.ai/leaderboard/",
       "feed": "https://dolphinbench.ai/leaderboard/results.json",
       "terms": "DolphinBench publishes the official results JSON under its public benchmark terms. Results are credited to Mem0 and the DolphinBench authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "costPer": "run",
+      "parts": {
+        "morgan": {
+          "name": "Morgan",
+          "group": "Persona"
+        },
+        "alex": {
+          "name": "Alex",
+          "group": "Persona"
+        },
+        "riley": {
+          "name": "Riley",
+          "group": "Persona"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Median latency",
           "unit": "seconds",
           "better": "lower"
+        },
+        "p95Latency": {
+          "name": "95th percentile latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "testCallsCost": {
+          "name": "Test calls cost",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Token-priced agent inference cost for test calls, excluding ingestion and grading."
+        },
+        "passes": {
+          "name": "Passed tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "totalTasks": {
+          "name": "Total tasks",
+          "unit": "count"
         }
       }
     },
@@ -97756,6 +97803,16 @@
           "name": "Incomplete games",
           "unit": "count"
         },
+        "won": {
+          "name": "Games won",
+          "unit": "count",
+          "better": "higher"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "stdevScore": {
           "name": "Score standard deviation",
           "unit": "score"
@@ -99646,7 +99703,7 @@
       "url": "https://github.com/run-llama/ExtractBench",
       "feed": "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard.csv",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "Antigravity CLI (Gemini 4 Hydrogen)",
@@ -99794,15 +99851,26 @@
           "unit": "usd",
           "better": "lower"
         },
+        "Grounding_Added_Cost_Per_Page": {
+          "name": "Added cost per page for grounding",
+          "unit": "usd",
+          "better": "lower"
+        },
         "Confidence_Added_Cost_Per_Page": {
           "name": "Added cost per page for confidence",
           "unit": "usd",
           "better": "lower"
         },
+        "Confidence_Coverage": {
+          "name": "Confidence coverage",
+          "unit": "%",
+          "better": "higher",
+          "note": "Coverage of fields with confidence scores."
+        },
         "Confidence_AUGRC": {
           "name": "Confidence area under gain-risk curve",
           "unit": "score",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -99810,7 +99878,7 @@
       "url": "https://github.com/run-llama/ExtractBench",
       "feed": "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard-pro.csv",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Datalab Accurate",
@@ -99891,6 +99959,16 @@
           "unit": "usd",
           "better": "lower"
         },
+        "Grounding_Added_Cost_Per_Page": {
+          "name": "Added cost per page for grounding",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "Confidence_Added_Cost_Per_Page": {
+          "name": "Added cost per page for confidence",
+          "unit": "usd",
+          "better": "lower"
+        },
         "Documents": {
           "name": "Document count",
           "unit": "count"
@@ -99901,7 +99979,7 @@
         },
         "Confidence_Coverage": {
           "name": "Confidence coverage",
-          "unit": "score",
+          "unit": "%",
           "better": "higher",
           "note": "Coverage of fields with confidence scores."
         },
@@ -110079,7 +110157,7 @@
       "url": "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md",
       "feed": "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "CFGPT2-7B",
@@ -110114,131 +110192,131 @@
         },
         "finance": {
           "name": "Finance",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "economy": {
           "name": "Economy",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "accounting": {
           "name": "Accounting",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "certificate": {
           "name": "Certificate",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "ftc": {
-          "name": "Financial Text Classification",
-          "group": "Task"
+          "name": "FTC",
+          "group": "Industry Understanding"
         },
         "fsa": {
-          "name": "Financial Sentiment Analysis",
-          "group": "Task"
+          "name": "FSA",
+          "group": "Industry Understanding"
         },
         "re": {
-          "name": "Relation Extraction",
-          "group": "Task"
+          "name": "RE",
+          "group": "Industry Understanding"
         },
         "fee": {
-          "name": "Financial Event Extraction",
-          "group": "Task"
+          "name": "FEE",
+          "group": "Industry Understanding"
         },
         "nee": {
-          "name": "Negative Entity Extraction",
-          "group": "Task"
+          "name": "NEE",
+          "group": "Industry Understanding"
         },
         "cee": {
-          "name": "Causal Event Extraction",
-          "group": "Task"
+          "name": "CEE",
+          "group": "Industry Understanding"
         },
         "fts": {
-          "name": "Financial Text Summarization",
-          "group": "Task"
+          "name": "FTS",
+          "group": "Industry Generation"
         },
         "fcp": {
-          "name": "Financial Customer Portrait",
-          "group": "Task"
+          "name": "FCP",
+          "group": "Industry Generation"
         },
         "msr": {
-          "name": "Marketing Scripts Recommendation",
-          "group": "Task"
+          "name": "MSR",
+          "group": "Industry Generation"
         },
         "ia": {
-          "name": "Investment Advice",
-          "group": "Task"
+          "name": "IA",
+          "group": "Industry Generation"
         },
         "app": {
-          "name": "Application Security",
-          "group": "Task"
+          "name": "App",
+          "group": "Financial Security"
         },
         "cryp": {
-          "name": "Cryptography",
-          "group": "Task"
+          "name": "Cryp",
+          "group": "Financial Security"
         },
         "ma": {
-          "name": "Malware Analysis",
-          "group": "Task"
+          "name": "MA",
+          "group": "Financial Security"
         },
         "ms": {
-          "name": "Memory Security",
-          "group": "Task"
+          "name": "MS",
+          "group": "Financial Security"
         },
         "ns": {
-          "name": "Network Security",
-          "group": "Task"
+          "name": "NS",
+          "group": "Financial Security"
         },
         "pent": {
-          "name": "Penetration Testing",
-          "group": "Task"
+          "name": "Pent",
+          "group": "Financial Security"
         },
         "reve": {
-          "name": "Reverse Engineering",
-          "group": "Task"
+          "name": "Reve",
+          "group": "Financial Security"
         },
         "soft": {
-          "name": "Software Security",
-          "group": "Task"
+          "name": "Soft",
+          "group": "Financial Security"
         },
         "syst": {
-          "name": "System Security",
-          "group": "Task"
+          "name": "Syst",
+          "group": "Financial Security"
         },
         "vul": {
-          "name": "Vulnerability",
-          "group": "Task"
+          "name": "Vul",
+          "group": "Financial Security"
         },
         "ws": {
-          "name": "Web Security",
-          "group": "Task"
+          "name": "WS",
+          "group": "Financial Security"
         },
         "cot": {
-          "name": "Chain of Thought",
-          "group": "Task"
+          "name": "COT",
+          "group": "Financial Agent"
         },
         "rag": {
-          "name": "Retrieval Augmented Generation",
-          "group": "Task"
+          "name": "RAG",
+          "group": "Financial Agent"
         },
         "ft": {
-          "name": "Financial tasks",
-          "group": "Task"
+          "name": "FT",
+          "group": "Financial Agent"
         },
         "mc": {
-          "name": "Multi-turn conversation",
-          "group": "Task"
+          "name": "MC",
+          "group": "Financial Agent"
         },
         "md": {
-          "name": "Multi-document question and answer",
-          "group": "Task"
+          "name": "MD",
+          "group": "Financial Agent"
         },
         "apiI": {
-          "name": "API invocation",
-          "group": "Task"
+          "name": "API-I",
+          "group": "Financial Agent"
         },
         "apiR": {
-          "name": "API retrieval",
-          "group": "Task"
+          "name": "API-R",
+          "group": "Financial Agent"
         }
       }
     },
@@ -110246,7 +110324,7 @@
       "url": "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md",
       "feed": "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "DeepSeek-RI",
@@ -124563,7 +124641,7 @@
       "url": "https://geo-llm-three.vercel.app/#leaderboard",
       "feed": "https://geo-llm-three.vercel.app/#leaderboard",
       "terms": "The project page gives no score reuse terms. Its GitHub link opens the GitHub homepage. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
       "costPer": "run",
@@ -151290,7 +151368,7 @@
       "url": "https://insurebench.insure-thing.com/decision-models",
       "feed": "https://insurebench.insure-thing.com/decision-models/data.json",
       "terms": "InsureThing allows crawling in robots.txt. Its copyright notice gives no separate reuse license for the aggregate results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Clef",
@@ -178903,7 +178981,7 @@
       "url": "https://marineevt.hkustvgd.com/#results",
       "feed": "https://marineevt.hkustvgd.com/#results",
       "terms": "The site lists no separate score license. The dataset card specifies MIT. The table contains 18 distinct model or method labels across 21 configurations. https://huggingface.co/datasets/AnTo2209/MarineEVT The robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "AKS",
@@ -207416,7 +207494,7 @@
       "url": "https://github.com/yingpengma/NCP-Bench",
       "feed": "https://raw.githubusercontent.com/yingpengma/NCP-Bench/HEAD/README.md",
       "terms": "MIT repository; public README results. raw.githubusercontent.com has no robots.txt restriction.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "GPT-4o-mini (snapshot unspecified)"
@@ -207425,31 +207503,37 @@
         "turns": {
           "name": "Average turns",
           "unit": "count",
-          "better": "lower"
+          "better": "higher"
         },
         "trajectory": {
           "name": "Trajectory score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "commitments": {
-          "name": "Commitments",
-          "unit": "count"
+          "name": "Satisfied commitments",
+          "unit": "%",
+          "better": "higher"
         },
         "factConflicts": {
           "name": "Fact conflicts",
-          "unit": "count",
+          "unit": "%",
           "better": "lower"
         },
         "commitmentConflicts": {
           "name": "Commitment conflicts",
-          "unit": "count",
+          "unit": "%",
           "better": "lower"
         },
         "playerConflicts": {
-          "name": "Player conflicts",
-          "unit": "count",
+          "name": "Player-input conflicts",
+          "unit": "%",
           "better": "lower"
+        },
+        "conflictFreeRuns": {
+          "name": "Conflict-free runs",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -247738,7 +247822,7 @@
       "feed": "https://www.pipecat.ai/benchmarks/speech-to-text (the server-rendered results table)",
       "terms": "The benchmark repository uses BSD-2-Clause and its dataset uses CC BY 4.0. Results are credited to Pipecat.",
       "headline": "Pooled semantic word error rate from 1,000 realtime clips",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AWS",
@@ -254283,7 +254367,7 @@
       "url": "https://github.com/lechmazur/goods",
       "feed": "https://raw.githubusercontent.com/lechmazur/goods/HEAD/README.md",
       "terms": "The author publishes the results in the repository README. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "Gemini 1.5 Pro (Sept)"
@@ -258623,7 +258707,7 @@
       "url": "https://eng.commure.com/benchmarks/rcm-bench-1",
       "feed": "https://eng.commure.com/benchmarks/rcm-bench-1/results.json (weightedScore)",
       "terms": "Results JSON that Commure links for download from the benchmark page; eng.commure.com serves no robots.txt and states no terms for it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [],
       "parts": {
@@ -258698,6 +258782,11 @@
         "engineCompletedTrials": {
           "name": "Engine-completed trials",
           "unit": "count"
+        },
+        "agentErrors": {
+          "name": "Agent errors",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -263084,7 +263173,7 @@
       "url": "https://riskrubric.ai/",
       "feed": "https://riskrubric.ai/api/v1/services?page=1&page_size=50&service_type=ai_model",
       "terms": "No feed or reuse license verified. The publisher explains the outage at https://riskrubric.ai/post/announcing-riskrubric. The robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 40,
       "unmatched": [
         "DeekSeep v3.1",
@@ -265467,7 +265556,7 @@
       "url": "https://robocurve.org/all-runs/?leaderboard=capability&benchmark=robodojo-rc-tier-1",
       "feed": "https://robocurve.org/all-runs/runs.<hash>.json (trials on the capability and Pareto boards)",
       "terms": "Public run export of robocurve.org; robots.txt allows all paths (content signals: search yes, AI training no) and the site states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Dream-1",
@@ -265475,7 +265564,7 @@
       ],
       "chart": {
         "title": "Robotics Capabilities vs Time",
-        "note": "Mean score against wall-clock time per task attempt, 120 attempts per configuration; robot policies (VLAs) always run to their 3,600-step cap.",
+        "note": "Mean score against wall-clock time per task attempt, 120 attempts per configuration. Robot policies (VLAs) always run to their 3,600-step cap.",
         "x": {
           "key": "latency",
           "label": "Time per task attempt",
@@ -265517,6 +265606,11 @@
         }
       },
       "stats": {
+        "latency": {
+          "name": "Time per task attempt",
+          "unit": "seconds",
+          "better": "lower"
+        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -270454,7 +270548,7 @@
       "url": "https://mbzuai-nlp.github.io/SAHM/leaderboard.html",
       "feed": "https://mbzuai-nlp.github.io/SAHM/leaderboard.html",
       "terms": "The repository declares Apache License 2.0. https://github.com/mbzuai-nlp/SAHM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "ALLAM-7B",
