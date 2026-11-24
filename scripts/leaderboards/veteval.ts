@@ -6,6 +6,20 @@ import { nextFlight } from '../lib/html.ts';
 const feed = "https://veteval.ai/leaderboard";
 const board: Leaderboard = {
   stats: { index_raw: { name: 'Raw safety index', unit: 'index', better: 'higher' }, harm_per_1000: { name: 'Harmful outputs per 1,000', unit: 'count', better: 'lower' }, safety_coverage: { name: 'Safety coverage', unit: 'score', better: 'higher' }, safety_gate_multiplier: { name: 'Safety gate multiplier', unit: 'score', better: 'higher' }, consistency_multiplier: { name: 'Consistency multiplier', unit: 'score', better: 'higher' }, floor_multiplier: { name: 'Floor multiplier', unit: 'score', better: 'higher' }, rating: { name: 'Rating', unit: 'rating', better: 'higher' }, latency_seconds: { name: 'Latency', unit: 'seconds', better: 'lower' }, reliability: { name: 'Reliability', unit: 'score', better: 'higher' } },
+  parts: {
+    C1: 'Clinical Diagnosis & Differential',
+    C2: 'Pharmacology & Dosing',
+    C3: 'Species-Specific Knowledge',
+    C4: 'Triage & Emergency',
+    C5: 'Preventive / Public Health / Zoonoses',
+    C6: 'Communication & Professionalism',
+  },
+  chart: {
+    title: 'Score against cost',
+    note: 'VetEval score against cost per question, matching the Pareto scatter chart on the VetEval leaderboard.',
+    x: { key: 'cost', label: 'Cost per question', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'VetEval score', unit: 'index', better: 'higher' },
+  },
   benchmark: 'veteval',
   url: "https://veteval.ai/leaderboard",
   feed,
@@ -20,7 +34,6 @@ const board: Leaderboard = {
       categories: {key: string; label: string; value: number; ci_low: number; ci_high: number}[];
     })[];
     if (rows.length < 29) throw new Error('Missing VetEval models');
-    board.parts = {};
     return rows.map(r => {
       if (!r.display_name || !r.evaluated_at || !r.verification || ![r.index,r.ci_low,r.ci_high].every(Number.isFinite) || r.categories.length !== 6) throw new Error('Incomplete VetEval entry');
       const metrics: Record<string, number> = {};
@@ -34,7 +47,6 @@ const board: Leaderboard = {
         metrics[c.key] = c.value;
         metrics[c.key + '_low'] = c.ci_low;
         metrics[c.key + '_high'] = c.ci_high;
-        board.parts![c.key] = c.label;
       }
       return { model: r.display_name, score: r.index, low: r.ci_low, high: r.ci_high, metrics, cost: r.cost_per_case_usd ?? undefined,
         setting: r.verification, date: r.evaluated_at, submitter: r.run_by, open: r.is_open_weight, link: new URL('/' + r.model_slug, feed).href };

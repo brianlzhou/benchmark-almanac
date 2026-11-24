@@ -26,20 +26,43 @@ interface Model {
   mean_output_tokens?: number | null;
 }
 
+const WEIRDML_TASKS: [string, string][] = [
+  ['shapesGeneralize', 'Shapes generalize'],
+  ['splashGeneralize', 'Splash generalize'],
+  ['mysteryBox', 'Mystery box'],
+  ['mysteryBoxNohints', 'Mystery box (no hints)'],
+  ['shipDetect', 'Ship detect'],
+  ['shipTune', 'Ship tune'],
+  ['reactionRates', 'Reaction rates'],
+  ['reactionRatesNohints', 'Reaction rates (no hints)'],
+  ['scanStitch', 'Scan stitch'],
+  ['scanStitchNohints', 'Scan stitch (no hints)'],
+  ['shatteredPrior', 'Shattered prior'],
+  ['shatteredPriorNohints', 'Shattered prior (no hints)'],
+  ['nightSchool', 'Night school'],
+  ['todPipelineNohints', 'TOD pipeline (no hints)'],
+  ['weirdmlBonanza', 'WeirdML bonanza'],
+];
+
 const board: Leaderboard = {
   benchmark: 'weirdml-v3',
   url: 'https://htihle.github.io/weirdml.html',
   feed: FEED,
   terms: "Data file of the author's public GitHub Pages site, which states no license or terms.",
   aliases: {},
+  chart: {
+    title: 'Official score vs. cost per run',
+    note: 'Official score across all tasks against mean API cost per run, matching the cost view of the interactive WeirdML v3 plot.',
+    x: { key: 'cost', label: 'Cost per run', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Official score', unit: '%', better: 'higher' },
+  },
   stats: {
     meanFinalBest: { name: 'Mean final best score', unit: '%', better: 'higher' }, totalTokens: { name: 'Total tokens', unit: 'tokens' },
-    ...Object.fromEntries(['shapesGeneralize','splashGeneralize','mysteryBox','mysteryBoxNohints','shipDetect','shipTune','reactionRates','reactionRatesNohints','scanStitch','scanStitchNohints','shatteredPrior','shatteredPriorNohints','nightSchool','todPipelineNohints','weirdmlBonanza'].flatMap(key => [
-      [`${key}FinalBest`, { name: `${key} final best score`, unit: '%', better: 'higher' }],
-      [`${key}Trials`, { name: `${key} trials`, unit: 'count' }],
-      [`${key}Cost`, { name: `${key} mean API cost`, unit: 'usd', better: 'lower' }],
-      [`${key}OutputTokens`, { name: `${key} output tokens`, unit: 'tokens' }],
-      [`${key}TotalTokens`, { name: `${key} total tokens`, unit: 'tokens' }],
+    ...Object.fromEntries(WEIRDML_TASKS.flatMap(([key, label]) => [
+      [`${key}FinalBest`, { name: `${label} final best score`, unit: '%', better: 'higher' }],
+      [`${key}Cost`, { name: `${label} mean API cost`, unit: 'usd', better: 'lower' }],
+      [`${key}OutputTokens`, { name: `${label} output tokens`, unit: 'tokens' }],
+      [`${key}TotalTokens`, { name: `${label} total tokens`, unit: 'tokens' }],
     ])),
   },
   async fetch() {
@@ -63,7 +86,7 @@ const board: Leaderboard = {
           board.parts![key] = {name:config.name, group:config.hint_mode || 'Task'};
           metrics[key] = c.score * 100;
           if (typeof c.final_best === 'number') metrics[key+'FinalBest'] = c.final_best * 100;
-          for (const [suffix,value] of Object.entries({Trials:c.n, Cost:c.mean_api_cost_usd, OutputTokens:c.mean_output_tokens, TotalTokens:c.mean_tokens})) {
+          for (const [suffix,value] of Object.entries({Cost:c.mean_api_cost_usd, OutputTokens:c.mean_output_tokens, TotalTokens:c.mean_tokens})) {
             if (typeof value === 'number' && Number.isFinite(value)) metrics[key+suffix] = value;
           }
           if (typeof c.mean_tokens === 'number' && c.n > 0) {

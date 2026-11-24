@@ -51,6 +51,7 @@ const board: Leaderboard = {
   stats: {
     medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' },
     completion: { name: 'Completion rate', unit: 'score', better: 'higher', note: 'Completion fraction, stored from 0 to 1.' },
+    turns: { name: 'Average agent steps', unit: 'count', better: 'lower' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.some(c => c.text === 'Resolved %'));

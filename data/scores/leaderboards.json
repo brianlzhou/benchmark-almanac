@@ -216869,7 +216869,8 @@
       "url": "https://web.archive.org/web/20251212084646/https://getomni.ai/blog/ocr-benchmark",
       "feed": "https://framerusercontent.com/images/eDrtZeseTAW1PlgUnHGBmHHdNIc.png; https://framerusercontent.com/images/0r5y8c29WMw1j5xElh7cgaTRs3Q.png; https://framerusercontent.com/images/lx892NKgxgzFGf9FbXiV14eBTKg.png",
       "terms": "Official public comparison charts, credited to OmniAI with an archived source link.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AWS Textract (OCR service)",
@@ -216899,6 +216900,11 @@
         }
       },
       "stats": {
+        "costPerThousandPages": {
+          "name": "Cost per 1,000 pages",
+          "unit": "usd",
+          "better": "lower"
+        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -220365,7 +220371,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard-v1",
       "feed": "https://oall-open-arabic-llm-leaderboard-v1.hf.space/config",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 62,
       "unmatched": [
         "01-ai/Yi-1.5-34B-32K",
@@ -221100,6 +221106,12 @@
         "TOXIGEN": {
           "name": "ToxiGen",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "hubLikes": {
+          "name": "Hub likes",
+          "unit": "count"
         }
       }
     },
@@ -232163,7 +232175,7 @@
       "url": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
       "feed": "https://huggingface.co/datasets/open-llm-leaderboard/contents/resolve/main/data/train-00000-of-00001.parquet (all unflagged entries)",
       "terms": "Public results dataset published by the board on Hugging Face, read from its archived train split.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 107,
       "unmatched": [
         "0-hero Matter-0.2-7B-DPO",
@@ -236584,6 +236596,46 @@
         "MMLU-PRO": {
           "name": "MMLU-Pro",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "IFEval Raw": {
+          "name": "IFEval raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "BBH Raw": {
+          "name": "BBH raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MATH Lvl 5 Raw": {
+          "name": "MATH Level 5 raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "GPQA Raw": {
+          "name": "GPQA raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MUSR Raw": {
+          "name": "MuSR raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MMLU-PRO Raw": {
+          "name": "MMLU-Pro raw score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "co2Kg": {
+          "name": "CO2 emissions (kg)",
+          "better": "lower"
+        },
+        "hubLikes": {
+          "name": "Hub likes",
+          "unit": "count"
         }
       }
     },
@@ -243891,7 +243943,7 @@
       "url": "https://parsebench.ai",
       "feed": "https://raw.githubusercontent.com/run-llama/ParseBench/main/leaderboard-v2.csv",
       "terms": "LlamaIndex publishes this downloadable CSV in the public ParseBench repository; robots.txt permits the raw file path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
         "Azure Document Intelligence (layout)",
@@ -243911,6 +243963,7 @@
         "LandingAI",
         "LightOnOCR-3 0.8B",
         "LightOnOCR-3 4B",
+        "LiteParse + OCRia-nano-1",
         "LlamaParse (Agentic Plus)",
         "LlamaParse (Agentic)",
         "LlamaParse (Cost Effective)",
@@ -243918,6 +243971,7 @@
         "Mistral OCR 4.1",
         "Mistral OCR 4.1 (annotation)",
         "Nemotron Parse 3.5",
+        "OCRia-1",
         "PaddleOCR-VL 1.6",
         "Pulse (Ultra 2)",
         "Reducto",
@@ -243929,6 +243983,23 @@
         "jina-ocr-v1",
         "surya-ocr-2"
       ],
+      "chart": {
+        "title": "Score against cost per page",
+        "note": "Overall score against cost per page across reasoning efforts, matching the cost versus score chart on ParseBench.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per page",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "verified": "marked verified in the ParseBench 2 results CSV",
       "parts": {
         "Text": {
@@ -256465,7 +256536,7 @@
       "url": "https://huggingface.co/spaces/perplexity-ai/q2d-web-leaderboard",
       "feed": "https://perplexity-ai-q2d-web-leaderboard.hf.space/config",
       "terms": "The Space lists mit for its repository. https://huggingface.co/spaces/perplexity-ai/q2d-web-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "BM25-tantivy",
@@ -256523,155 +256594,155 @@
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · English": {
-          "name": "R@1000 Comb. · English",
+          "name": "R@1000 Comb. English",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Spanish": {
-          "name": "R@1000 Comb. · Spanish",
+          "name": "R@1000 Comb. Spanish",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Russian": {
-          "name": "R@1000 Comb. · Russian",
+          "name": "R@1000 Comb. Russian",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · German": {
-          "name": "R@1000 Comb. · German",
+          "name": "R@1000 Comb. German",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · French": {
-          "name": "R@1000 Comb. · French",
+          "name": "R@1000 Comb. French",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Portuguese": {
-          "name": "R@1000 Comb. · Portuguese",
+          "name": "R@1000 Comb. Portuguese",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Italian": {
-          "name": "R@1000 Comb. · Italian",
+          "name": "R@1000 Comb. Italian",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Korean": {
-          "name": "R@1000 Comb. · Korean",
+          "name": "R@1000 Comb. Korean",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Japanese": {
-          "name": "R@1000 Comb. · Japanese",
+          "name": "R@1000 Comb. Japanese",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Chinese": {
-          "name": "R@1000 Comb. · Chinese",
+          "name": "R@1000 Comb. Chinese",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Consumer Goods": {
-          "name": "R@1000 Comb. · Consumer Goods",
+          "name": "R@1000 Comb. Consumer Goods",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Programming": {
-          "name": "R@1000 Comb. · Programming",
+          "name": "R@1000 Comb. Programming",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Law": {
-          "name": "R@1000 Comb. · Law",
+          "name": "R@1000 Comb. Law",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Health": {
-          "name": "R@1000 Comb. · Health",
+          "name": "R@1000 Comb. Health",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Business": {
-          "name": "R@1000 Comb. · Business",
+          "name": "R@1000 Comb. Business",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Science": {
-          "name": "R@1000 Comb. · Science",
+          "name": "R@1000 Comb. Science",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Education": {
-          "name": "R@1000 Comb. · Education",
+          "name": "R@1000 Comb. Education",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Technology": {
-          "name": "R@1000 Comb. · Technology",
+          "name": "R@1000 Comb. Technology",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Finance": {
-          "name": "R@1000 Comb. · Finance",
+          "name": "R@1000 Comb. Finance",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Real Estate": {
-          "name": "R@1000 Comb. · Real Estate",
+          "name": "R@1000 Comb. Real Estate",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Writing": {
-          "name": "R@1000 Comb. · Writing",
+          "name": "R@1000 Comb. Writing",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Travel": {
-          "name": "R@1000 Comb. · Travel",
+          "name": "R@1000 Comb. Travel",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Entertainment": {
-          "name": "R@1000 Comb. · Entertainment",
+          "name": "R@1000 Comb. Entertainment",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Careers": {
-          "name": "R@1000 Comb. · Careers",
+          "name": "R@1000 Comb. Careers",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Politics": {
-          "name": "R@1000 Comb. · Politics",
+          "name": "R@1000 Comb. Politics",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Local": {
-          "name": "R@1000 Comb. · Local",
+          "name": "R@1000 Comb. Local",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Food": {
-          "name": "R@1000 Comb. · Food",
+          "name": "R@1000 Comb. Food",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Social Media": {
-          "name": "R@1000 Comb. · Social Media",
+          "name": "R@1000 Comb. Social Media",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Environment": {
-          "name": "R@1000 Comb. · Environment",
+          "name": "R@1000 Comb. Environment",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Art": {
-          "name": "R@1000 Comb. · Art",
+          "name": "R@1000 Comb. Art",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · News": {
-          "name": "R@1000 Comb. · News",
+          "name": "R@1000 Comb. News",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · History": {
-          "name": "R@1000 Comb. · History",
+          "name": "R@1000 Comb. History",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Other": {
-          "name": "R@1000 Comb. · Other",
+          "name": "R@1000 Comb. Other",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · People": {
-          "name": "R@1000 Comb. · People",
+          "name": "R@1000 Comb. People",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Role Play": {
-          "name": "R@1000 Comb. · Role Play",
+          "name": "R@1000 Comb. Role Play",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Translation": {
-          "name": "R@1000 Comb. · Translation",
+          "name": "R@1000 Comb. Translation",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Support": {
-          "name": "R@1000 Comb. · Support",
+          "name": "R@1000 Comb. Support",
           "group": "Full corpus"
         },
         "Full corpus · R@1000 Comb. · Primary": {
-          "name": "R@1000 Comb. · Primary",
+          "name": "R@1000 Comb. Primary",
           "group": "Full corpus"
         },
         "Subcorpus · R@1000 Citation": {
@@ -256711,155 +256782,155 @@
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · English": {
-          "name": "R@1000 Comb. · English",
+          "name": "R@1000 Comb. English",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Spanish": {
-          "name": "R@1000 Comb. · Spanish",
+          "name": "R@1000 Comb. Spanish",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Russian": {
-          "name": "R@1000 Comb. · Russian",
+          "name": "R@1000 Comb. Russian",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · German": {
-          "name": "R@1000 Comb. · German",
+          "name": "R@1000 Comb. German",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · French": {
-          "name": "R@1000 Comb. · French",
+          "name": "R@1000 Comb. French",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Portuguese": {
-          "name": "R@1000 Comb. · Portuguese",
+          "name": "R@1000 Comb. Portuguese",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Italian": {
-          "name": "R@1000 Comb. · Italian",
+          "name": "R@1000 Comb. Italian",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Korean": {
-          "name": "R@1000 Comb. · Korean",
+          "name": "R@1000 Comb. Korean",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Japanese": {
-          "name": "R@1000 Comb. · Japanese",
+          "name": "R@1000 Comb. Japanese",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Chinese": {
-          "name": "R@1000 Comb. · Chinese",
+          "name": "R@1000 Comb. Chinese",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Consumer Goods": {
-          "name": "R@1000 Comb. · Consumer Goods",
+          "name": "R@1000 Comb. Consumer Goods",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Programming": {
-          "name": "R@1000 Comb. · Programming",
+          "name": "R@1000 Comb. Programming",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Law": {
-          "name": "R@1000 Comb. · Law",
+          "name": "R@1000 Comb. Law",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Health": {
-          "name": "R@1000 Comb. · Health",
+          "name": "R@1000 Comb. Health",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Business": {
-          "name": "R@1000 Comb. · Business",
+          "name": "R@1000 Comb. Business",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Science": {
-          "name": "R@1000 Comb. · Science",
+          "name": "R@1000 Comb. Science",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Education": {
-          "name": "R@1000 Comb. · Education",
+          "name": "R@1000 Comb. Education",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Technology": {
-          "name": "R@1000 Comb. · Technology",
+          "name": "R@1000 Comb. Technology",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Finance": {
-          "name": "R@1000 Comb. · Finance",
+          "name": "R@1000 Comb. Finance",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Real Estate": {
-          "name": "R@1000 Comb. · Real Estate",
+          "name": "R@1000 Comb. Real Estate",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Writing": {
-          "name": "R@1000 Comb. · Writing",
+          "name": "R@1000 Comb. Writing",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Travel": {
-          "name": "R@1000 Comb. · Travel",
+          "name": "R@1000 Comb. Travel",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Entertainment": {
-          "name": "R@1000 Comb. · Entertainment",
+          "name": "R@1000 Comb. Entertainment",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Careers": {
-          "name": "R@1000 Comb. · Careers",
+          "name": "R@1000 Comb. Careers",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Politics": {
-          "name": "R@1000 Comb. · Politics",
+          "name": "R@1000 Comb. Politics",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Local": {
-          "name": "R@1000 Comb. · Local",
+          "name": "R@1000 Comb. Local",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Food": {
-          "name": "R@1000 Comb. · Food",
+          "name": "R@1000 Comb. Food",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Social Media": {
-          "name": "R@1000 Comb. · Social Media",
+          "name": "R@1000 Comb. Social Media",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Environment": {
-          "name": "R@1000 Comb. · Environment",
+          "name": "R@1000 Comb. Environment",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Art": {
-          "name": "R@1000 Comb. · Art",
+          "name": "R@1000 Comb. Art",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · News": {
-          "name": "R@1000 Comb. · News",
+          "name": "R@1000 Comb. News",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · History": {
-          "name": "R@1000 Comb. · History",
+          "name": "R@1000 Comb. History",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Other": {
-          "name": "R@1000 Comb. · Other",
+          "name": "R@1000 Comb. Other",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · People": {
-          "name": "R@1000 Comb. · People",
+          "name": "R@1000 Comb. People",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Role Play": {
-          "name": "R@1000 Comb. · Role Play",
+          "name": "R@1000 Comb. Role Play",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Translation": {
-          "name": "R@1000 Comb. · Translation",
+          "name": "R@1000 Comb. Translation",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Support": {
-          "name": "R@1000 Comb. · Support",
+          "name": "R@1000 Comb. Support",
           "group": "Subcorpus"
         },
         "Subcorpus · R@1000 Comb. · Primary": {
-          "name": "R@1000 Comb. · Primary",
+          "name": "R@1000 Comb. Primary",
           "group": "Subcorpus"
         }
       }
@@ -264055,7 +264126,7 @@
       "url": "https://unipat.ai/benchmarks/RoadmapBench",
       "feed": "https://unipat.ai/benchmarks/RoadmapBench",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -264083,6 +264154,11 @@
           "unit": "score",
           "better": "higher",
           "note": "Completion fraction, stored from 0 to 1."
+        },
+        "turns": {
+          "name": "Average agent steps",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -267457,7 +267533,7 @@
       "url": "https://rotomarena.org/benchmarks/rotom-champ-bench/",
       "feed": "https://rotomarena.org/benchmarks/rotom-champ-bench/",
       "terms": "RotomArena dedicates its ratings and match data to CC0. Smogon teams and Pokémon assets have separate rights. https://rotomarena.org/credits/ The host has no published robots directives at /robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [
         "Bonsai 2 27B",
@@ -267474,18 +267550,38 @@
         "Perplexity Decider V1.2",
         "Solar Decide Flash"
       ],
-      "parts": {
+      "chart": {
+        "title": "Rating against cost per game",
+        "note": "Anchored Elo rating against cost per game, matching Figure 2 and its Pareto frontier on the Rotom Champ Bench leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per game",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Rating",
+          "unit": "elo",
+          "better": "higher"
+        }
+      },
+      "stats": {
         "wins": {
           "name": "Wins",
-          "unit": "score"
+          "unit": "count",
+          "better": "higher"
         },
         "losses": {
           "name": "Losses",
-          "unit": "score"
+          "unit": "count",
+          "better": "lower"
         },
         "winRate": {
           "name": "Win rate",
-          "unit": "%"
+          "unit": "%",
+          "better": "higher"
         },
         "halluc": {
           "name": "Hallucination rate",
@@ -267494,7 +267590,7 @@
         },
         "tokensPerTurn": {
           "name": "Tokens per turn",
-          "unit": "score"
+          "unit": "tokens"
         }
       }
     },
@@ -283718,7 +283814,7 @@
       "url": "https://speko.com/benchmarks/s2s",
       "feed": "https://speko.com/benchmarks/data.json",
       "terms": "Speko publishes its benchmark JSON under CC BY 4.0. Credit Speko and identify changes. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "eleven_realtime_v1_max (cascade)",
@@ -283726,6 +283822,22 @@
         "gpt-live-1.1",
         "phonic-1-high"
       ],
+      "chart": {
+        "title": "Action against First sound",
+        "note": "Action score against end of speech to first sound median latency, matching the default Pareto scatter chart on Speko.",
+        "x": {
+          "key": "lat",
+          "label": "First sound latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "action",
+          "label": "Action score",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
       "stats": {
         "action": {
           "name": "Action score",
@@ -301181,7 +301293,7 @@
       "url": "https://toloka.ai/arena-enterprise",
       "feed": "https://prodtlkdeliverytechfiles.blob.core.windows.net/arena-public-prod/v3/leaderboard_data.json",
       "terms": "Toloka publishes the board and feed publicly. Its robots.txt allows the page. The page gives no separate score reuse license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
       "unmatched": [
         "Flint v1.0",
@@ -301207,6 +301319,11 @@
         "tolokaforge"
       ],
       "stats": {
+        "costPerTask": {
+          "name": "Average cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
         "totalCost": {
           "name": "Total cost",
           "unit": "usd",
@@ -312729,9 +312846,26 @@
       "url": "https://veteval.ai/leaderboard",
       "feed": "https://veteval.ai/leaderboard",
       "terms": "VetEval robots.txt allows reading. Its terms prohibit scraping and bulk extraction and require credit, verification tier and date when citing results. https://veteval.ai/legal/terms-of-service",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Score against cost",
+        "note": "VetEval score against cost per question, matching the Pareto scatter chart on the VetEval leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per question",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "VetEval score",
+          "unit": "index",
+          "better": "higher"
+        }
+      },
       "parts": {
         "C1": {
           "name": "Clinical Diagnosis & Differential"
@@ -320999,13 +321133,69 @@
       "url": "https://plato.so/research/web-clone-bench/",
       "feed": "https://plato.so/research/web-clone-bench/ (static HTML table \"All efforts\", full)",
       "terms": "Static research post; plato.so robots.txt allows /research/ (it disallows only /research/preview/ and /api/), and the Plato terms do not restrict reading public pages.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 40,
       "unmatched": [],
+      "chart": {
+        "title": "Full score vs. cost per run",
+        "note": "Full functionality score across all nine apps against average solver cost per run by reasoning effort, matching the results chart on the Web Clone Bench page.",
+        "x": {
+          "key": "cost",
+          "label": "Average solver cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Full score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "costPer": "run",
+      "parts": {
+        "gmail": {
+          "name": "Gmail",
+          "group": "App"
+        },
+        "figma": {
+          "name": "Figma",
+          "group": "App"
+        },
+        "sheets": {
+          "name": "Sheets",
+          "group": "App"
+        },
+        "slack": {
+          "name": "Slack",
+          "group": "App"
+        },
+        "docusign": {
+          "name": "DocuSign",
+          "group": "App"
+        },
+        "jira": {
+          "name": "Jira",
+          "group": "App"
+        },
+        "shopify": {
+          "name": "Shopify",
+          "group": "App"
+        },
+        "craigslist": {
+          "name": "Craigslist",
+          "group": "App"
+        },
+        "zendesk": {
+          "name": "Zendesk",
+          "group": "App"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
-          "unit": "ms",
+          "name": "Average time per run",
+          "unit": "seconds",
           "better": "lower"
         },
         "steps": {
@@ -322058,9 +322248,26 @@
       "url": "https://htihle.github.io/weirdml.html",
       "feed": "https://htihle.github.io/assets/data/weirdml_v3.json",
       "terms": "Data file of the author's public GitHub Pages site, which states no license or terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Official score vs. cost per run",
+        "note": "Official score across all tasks against mean API cost per run, matching the cost view of the interactive WeirdML v3 plot.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Official score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "shapesGeneralize": {
           "name": "Shapes Generalize",
@@ -322134,333 +322341,273 @@
           "unit": "tokens"
         },
         "shapesGeneralizeFinalBest": {
-          "name": "shapesGeneralize final best score",
+          "name": "Shapes generalize final best score",
           "unit": "%",
           "better": "higher"
         },
-        "shapesGeneralizeTrials": {
-          "name": "shapesGeneralize trials",
-          "unit": "count"
-        },
         "shapesGeneralizeCost": {
-          "name": "shapesGeneralize mean API cost",
+          "name": "Shapes generalize mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "shapesGeneralizeOutputTokens": {
-          "name": "shapesGeneralize output tokens",
+          "name": "Shapes generalize output tokens",
           "unit": "tokens"
         },
         "shapesGeneralizeTotalTokens": {
-          "name": "shapesGeneralize total tokens",
+          "name": "Shapes generalize total tokens",
           "unit": "tokens"
         },
         "splashGeneralizeFinalBest": {
-          "name": "splashGeneralize final best score",
+          "name": "Splash generalize final best score",
           "unit": "%",
           "better": "higher"
         },
-        "splashGeneralizeTrials": {
-          "name": "splashGeneralize trials",
-          "unit": "count"
-        },
         "splashGeneralizeCost": {
-          "name": "splashGeneralize mean API cost",
+          "name": "Splash generalize mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "splashGeneralizeOutputTokens": {
-          "name": "splashGeneralize output tokens",
+          "name": "Splash generalize output tokens",
           "unit": "tokens"
         },
         "splashGeneralizeTotalTokens": {
-          "name": "splashGeneralize total tokens",
+          "name": "Splash generalize total tokens",
           "unit": "tokens"
         },
         "mysteryBoxFinalBest": {
-          "name": "mysteryBox final best score",
+          "name": "Mystery box final best score",
           "unit": "%",
           "better": "higher"
         },
-        "mysteryBoxTrials": {
-          "name": "mysteryBox trials",
-          "unit": "count"
-        },
         "mysteryBoxCost": {
-          "name": "mysteryBox mean API cost",
+          "name": "Mystery box mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "mysteryBoxOutputTokens": {
-          "name": "mysteryBox output tokens",
+          "name": "Mystery box output tokens",
           "unit": "tokens"
         },
         "mysteryBoxTotalTokens": {
-          "name": "mysteryBox total tokens",
+          "name": "Mystery box total tokens",
           "unit": "tokens"
         },
         "mysteryBoxNohintsFinalBest": {
-          "name": "mysteryBoxNohints final best score",
+          "name": "Mystery box (no hints) final best score",
           "unit": "%",
           "better": "higher"
         },
-        "mysteryBoxNohintsTrials": {
-          "name": "mysteryBoxNohints trials",
-          "unit": "count"
-        },
         "mysteryBoxNohintsCost": {
-          "name": "mysteryBoxNohints mean API cost",
+          "name": "Mystery box (no hints) mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "mysteryBoxNohintsOutputTokens": {
-          "name": "mysteryBoxNohints output tokens",
+          "name": "Mystery box (no hints) output tokens",
           "unit": "tokens"
         },
         "mysteryBoxNohintsTotalTokens": {
-          "name": "mysteryBoxNohints total tokens",
+          "name": "Mystery box (no hints) total tokens",
           "unit": "tokens"
         },
         "shipDetectFinalBest": {
-          "name": "shipDetect final best score",
+          "name": "Ship detect final best score",
           "unit": "%",
           "better": "higher"
         },
-        "shipDetectTrials": {
-          "name": "shipDetect trials",
-          "unit": "count"
-        },
         "shipDetectCost": {
-          "name": "shipDetect mean API cost",
+          "name": "Ship detect mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "shipDetectOutputTokens": {
-          "name": "shipDetect output tokens",
+          "name": "Ship detect output tokens",
           "unit": "tokens"
         },
         "shipDetectTotalTokens": {
-          "name": "shipDetect total tokens",
+          "name": "Ship detect total tokens",
           "unit": "tokens"
         },
         "shipTuneFinalBest": {
-          "name": "shipTune final best score",
+          "name": "Ship tune final best score",
           "unit": "%",
           "better": "higher"
         },
-        "shipTuneTrials": {
-          "name": "shipTune trials",
-          "unit": "count"
-        },
         "shipTuneCost": {
-          "name": "shipTune mean API cost",
+          "name": "Ship tune mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "shipTuneOutputTokens": {
-          "name": "shipTune output tokens",
+          "name": "Ship tune output tokens",
           "unit": "tokens"
         },
         "shipTuneTotalTokens": {
-          "name": "shipTune total tokens",
+          "name": "Ship tune total tokens",
           "unit": "tokens"
         },
         "reactionRatesFinalBest": {
-          "name": "reactionRates final best score",
+          "name": "Reaction rates final best score",
           "unit": "%",
           "better": "higher"
         },
-        "reactionRatesTrials": {
-          "name": "reactionRates trials",
-          "unit": "count"
-        },
         "reactionRatesCost": {
-          "name": "reactionRates mean API cost",
+          "name": "Reaction rates mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "reactionRatesOutputTokens": {
-          "name": "reactionRates output tokens",
+          "name": "Reaction rates output tokens",
           "unit": "tokens"
         },
         "reactionRatesTotalTokens": {
-          "name": "reactionRates total tokens",
+          "name": "Reaction rates total tokens",
           "unit": "tokens"
         },
         "reactionRatesNohintsFinalBest": {
-          "name": "reactionRatesNohints final best score",
+          "name": "Reaction rates (no hints) final best score",
           "unit": "%",
           "better": "higher"
         },
-        "reactionRatesNohintsTrials": {
-          "name": "reactionRatesNohints trials",
-          "unit": "count"
-        },
         "reactionRatesNohintsCost": {
-          "name": "reactionRatesNohints mean API cost",
+          "name": "Reaction rates (no hints) mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "reactionRatesNohintsOutputTokens": {
-          "name": "reactionRatesNohints output tokens",
+          "name": "Reaction rates (no hints) output tokens",
           "unit": "tokens"
         },
         "reactionRatesNohintsTotalTokens": {
-          "name": "reactionRatesNohints total tokens",
+          "name": "Reaction rates (no hints) total tokens",
           "unit": "tokens"
         },
         "scanStitchFinalBest": {
-          "name": "scanStitch final best score",
+          "name": "Scan stitch final best score",
           "unit": "%",
           "better": "higher"
         },
-        "scanStitchTrials": {
-          "name": "scanStitch trials",
-          "unit": "count"
-        },
         "scanStitchCost": {
-          "name": "scanStitch mean API cost",
+          "name": "Scan stitch mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "scanStitchOutputTokens": {
-          "name": "scanStitch output tokens",
+          "name": "Scan stitch output tokens",
           "unit": "tokens"
         },
         "scanStitchTotalTokens": {
-          "name": "scanStitch total tokens",
+          "name": "Scan stitch total tokens",
           "unit": "tokens"
         },
         "scanStitchNohintsFinalBest": {
-          "name": "scanStitchNohints final best score",
+          "name": "Scan stitch (no hints) final best score",
           "unit": "%",
           "better": "higher"
         },
-        "scanStitchNohintsTrials": {
-          "name": "scanStitchNohints trials",
-          "unit": "count"
-        },
         "scanStitchNohintsCost": {
-          "name": "scanStitchNohints mean API cost",
+          "name": "Scan stitch (no hints) mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "scanStitchNohintsOutputTokens": {
-          "name": "scanStitchNohints output tokens",
+          "name": "Scan stitch (no hints) output tokens",
           "unit": "tokens"
         },
         "scanStitchNohintsTotalTokens": {
-          "name": "scanStitchNohints total tokens",
+          "name": "Scan stitch (no hints) total tokens",
           "unit": "tokens"
         },
         "shatteredPriorFinalBest": {
-          "name": "shatteredPrior final best score",
+          "name": "Shattered prior final best score",
           "unit": "%",
           "better": "higher"
         },
-        "shatteredPriorTrials": {
-          "name": "shatteredPrior trials",
-          "unit": "count"
-        },
         "shatteredPriorCost": {
-          "name": "shatteredPrior mean API cost",
+          "name": "Shattered prior mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "shatteredPriorOutputTokens": {
-          "name": "shatteredPrior output tokens",
+          "name": "Shattered prior output tokens",
           "unit": "tokens"
         },
         "shatteredPriorTotalTokens": {
-          "name": "shatteredPrior total tokens",
+          "name": "Shattered prior total tokens",
           "unit": "tokens"
         },
         "shatteredPriorNohintsFinalBest": {
-          "name": "shatteredPriorNohints final best score",
+          "name": "Shattered prior (no hints) final best score",
           "unit": "%",
           "better": "higher"
         },
-        "shatteredPriorNohintsTrials": {
-          "name": "shatteredPriorNohints trials",
-          "unit": "count"
-        },
         "shatteredPriorNohintsCost": {
-          "name": "shatteredPriorNohints mean API cost",
+          "name": "Shattered prior (no hints) mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "shatteredPriorNohintsOutputTokens": {
-          "name": "shatteredPriorNohints output tokens",
+          "name": "Shattered prior (no hints) output tokens",
           "unit": "tokens"
         },
         "shatteredPriorNohintsTotalTokens": {
-          "name": "shatteredPriorNohints total tokens",
+          "name": "Shattered prior (no hints) total tokens",
           "unit": "tokens"
         },
         "nightSchoolFinalBest": {
-          "name": "nightSchool final best score",
+          "name": "Night school final best score",
           "unit": "%",
           "better": "higher"
         },
-        "nightSchoolTrials": {
-          "name": "nightSchool trials",
-          "unit": "count"
-        },
         "nightSchoolCost": {
-          "name": "nightSchool mean API cost",
+          "name": "Night school mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "nightSchoolOutputTokens": {
-          "name": "nightSchool output tokens",
+          "name": "Night school output tokens",
           "unit": "tokens"
         },
         "nightSchoolTotalTokens": {
-          "name": "nightSchool total tokens",
+          "name": "Night school total tokens",
           "unit": "tokens"
         },
         "todPipelineNohintsFinalBest": {
-          "name": "todPipelineNohints final best score",
+          "name": "TOD pipeline (no hints) final best score",
           "unit": "%",
           "better": "higher"
         },
-        "todPipelineNohintsTrials": {
-          "name": "todPipelineNohints trials",
-          "unit": "count"
-        },
         "todPipelineNohintsCost": {
-          "name": "todPipelineNohints mean API cost",
+          "name": "TOD pipeline (no hints) mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "todPipelineNohintsOutputTokens": {
-          "name": "todPipelineNohints output tokens",
+          "name": "TOD pipeline (no hints) output tokens",
           "unit": "tokens"
         },
         "todPipelineNohintsTotalTokens": {
-          "name": "todPipelineNohints total tokens",
+          "name": "TOD pipeline (no hints) total tokens",
           "unit": "tokens"
         },
         "weirdmlBonanzaFinalBest": {
-          "name": "weirdmlBonanza final best score",
+          "name": "WeirdML bonanza final best score",
           "unit": "%",
           "better": "higher"
         },
-        "weirdmlBonanzaTrials": {
-          "name": "weirdmlBonanza trials",
-          "unit": "count"
-        },
         "weirdmlBonanzaCost": {
-          "name": "weirdmlBonanza mean API cost",
+          "name": "WeirdML bonanza mean API cost",
           "unit": "usd",
           "better": "lower"
         },
         "weirdmlBonanzaOutputTokens": {
-          "name": "weirdmlBonanza output tokens",
+          "name": "WeirdML bonanza output tokens",
           "unit": "tokens"
         },
         "weirdmlBonanzaTotalTokens": {
-          "name": "weirdmlBonanza total tokens",
+          "name": "WeirdML bonanza total tokens",
           "unit": "tokens"
         }
       }

@@ -9,7 +9,19 @@ const board: Leaderboard = {
   url: "https://rotomarena.org/benchmarks/rotom-champ-bench/",
   feed: FEED,
   terms: "RotomArena dedicates its ratings and match data to CC0. Smogon teams and Pokémon assets have separate rights. https://rotomarena.org/credits/ The host has no published robots directives at /robots.txt.",
-  parts: { wins: { name: 'Wins', unit: 'score' }, losses: { name: 'Losses', unit: 'score' }, winRate: { name: 'Win rate', unit: '%' }, halluc: { name: 'Hallucination rate', unit: '%', better: 'lower' }, tokensPerTurn: { name: 'Tokens per turn', unit: 'score' } },
+  stats: {
+    wins: { name: 'Wins', unit: 'count', better: 'higher' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    halluc: { name: 'Hallucination rate', unit: '%', better: 'lower' },
+    tokensPerTurn: { name: 'Tokens per turn', unit: 'tokens' },
+  },
+  chart: {
+    title: 'Rating against cost per game',
+    note: 'Anchored Elo rating against cost per game, matching Figure 2 and its Pareto frontier on the Rotom Champ Bench leaderboard.',
+    x: { key: 'cost', label: 'Cost per game', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Rating', unit: 'elo', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(FEED);
     const table = html.match(/<table\b[^>]*>[\s\S]*?<\/table>/i)?.[0];
