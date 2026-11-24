@@ -8,6 +8,7 @@ const board: Leaderboard = {
   feed: harborFeed, terms: harborTerms, reference: ['Klyrune'],
   stats: {
     passed: { name: 'Puzzles passed', unit: 'count', better: 'higher' },
+    errors: { name: 'Errors', unit: 'count', better: 'lower' },
   },
   async fetch() {
     const rows = await harborRows('polyvorlabs/revbench', 'revbench', 3);

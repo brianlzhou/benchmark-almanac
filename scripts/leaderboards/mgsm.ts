@@ -14,7 +14,8 @@ const board: Leaderboard = {
   host: 'Vals AI',
   aliases: { ...VALS_ALIASES, "GPT 4o (2024-08-06)": "gpt-4o-aug-2024", "GPT 4o (2024-11-20)": "gpt-4o-nov-2024", "Qwen 2.5 Instruct Turbo (72B)": "qwen2-5-72b", "together/mistralai/Mixtral-8x22B-Instruct-v0.1": "mixtral-8x22b", 'Llama 3.3 Nemotron Super (Thinking)': 'llama-3-3-nemotron-super-49b-v1', 'Llama 3.3 Nemotron Super (Nonthinking)': 'llama-3-3-nemotron-super-49b-v1' },
   parts,
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  chart: { title: 'Accuracy versus cost', x: { key: 'cost', label: 'Cost per test', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(this.url);
     const table = tables(html)[0];
@@ -34,8 +35,15 @@ const board: Leaderboard = {
         metrics[part] = score;
       }
       if (v.latency != null) metrics.latency = v.latency;
+      if (v.stderr != null) metrics.stderr = v.stderr;
+      const prices = r[3]?.text.match(/^\$([\d.,]+)\s*\/\s*\$([\d.,]+)$/);
+      if (prices) {
+        metrics.priceIn = Number(prices[1].replaceAll(',', ''));
+        metrics.priceOut = Number(prices[2].replaceAll(',', ''));
+      }
       const model = r[1].text.replace(/ \(\d{2}\/\d{2}\)$/, '');
       return { model, score: v.accuracy, setting: v.reasoning_effort || (key.endsWith('-thinking') ? 'thinking' : undefined), metrics,
+        link: slug ? new URL(`/models/${slug}`, this.url).href : undefined,
         low: v.stderr == null ? undefined : v.accuracy-1.96*v.stderr, high: v.stderr == null ? undefined : v.accuracy+1.96*v.stderr,
         cost: v.cost_per_test ?? undefined, tokens: v.avg_output_tokens ?? undefined };
     });

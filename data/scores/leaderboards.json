@@ -138475,7 +138475,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/capabilities/benchmark_output/releases/<newest>/groups/ifeval.json",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 62,
       "unmatched": [
         "marin-8b-instruct",
@@ -138489,6 +138489,23 @@
         "latency": {
           "name": "Observed inference time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "evalInstances": {
+          "name": "Evaluated instances",
+          "unit": "count"
+        },
+        "trainInstances": {
+          "name": "Training instances",
+          "unit": "count"
+        },
+        "truncated": {
+          "name": "Truncated responses",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -146526,12 +146543,26 @@
       "url": "https://improofbench.math.ethz.ch/questions/leaderboard/",
       "feed": "https://improofbench.math.ethz.ch/questions/leaderboard/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
       ],
       "stats": {
+        "noProgress": {
+          "name": "No progress rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "minorProgress": {
+          "name": "Minor progress rate",
+          "unit": "%"
+        },
+        "majorProgress": {
+          "name": "Major progress rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "totalQuestions": {
           "name": "Total questions",
           "unit": "count"
@@ -178818,7 +178849,7 @@
       "feed": "https://www.vals.ai/benchmarks/math500",
       "terms": "Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [
         "Command A",
@@ -178836,6 +178867,22 @@
         "Mistral Small (02/2024)",
         "Mistral Small 3.1 (03/2025)"
       ],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "priceIn": {
           "name": "Input price",
@@ -183999,11 +184046,27 @@
       "feed": "https://www.vals.ai/benchmarks/medqa",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI. The dataset is licensed CC BY 4.0.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 94,
       "unmatched": [
         "GPT 3.5"
       ],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "unbiased": {
           "name": "Unbiased"
@@ -187892,13 +187955,18 @@
       "url": "https://metr.org/time-horizons/",
       "feed": "https://metr.org/assets/benchmark_results_1_0.yaml",
       "terms": "Linked as \"Download data\" on the METR page; METR states no license, and robots.txt does not restrict /assets/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
       "stats": {
         "p80": {
           "name": "80% time horizon",
           "unit": "minutes",
+          "better": "higher"
+        },
+        "averageScore": {
+          "name": "Average task score",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -187907,13 +187975,18 @@
       "url": "https://metr.org/time-horizons/",
       "feed": "https://metr.org/assets/benchmark_results_1_1.yaml",
       "terms": "Linked as \"Download data\" on the METR page; METR states no license, and robots.txt does not restrict /assets/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "stats": {
         "p80": {
           "name": "80% time horizon",
           "unit": "minutes",
+          "better": "higher"
+        },
+        "averageScore": {
+          "name": "Average task score",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -188052,9 +188125,25 @@
       "feed": "https://www.vals.ai/benchmarks/mgsm",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI. The dataset is licensed CC BY 4.0.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 75,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "mgsm_en": {
           "name": "English"
@@ -188091,6 +188180,16 @@
         }
       },
       "stats": {
+        "priceIn": {
+          "name": "Input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceOut": {
+          "name": "Output price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -259081,7 +259180,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/2662/leaderboard/6908",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/6908/leaderboard/?page_size=1000&order_by=undefined",
       "terms": "EvalAI serves this public challenge leaderboard for the organizers.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DataClaw",
@@ -259116,6 +259215,11 @@
           "name": "Log boundary accuracy",
           "unit": "%",
           "better": "higher"
+        },
+        "baseline": {
+          "name": "Baseline flag",
+          "unit": "count",
+          "note": "1 when EvalAI marks the submission as a baseline, 0 otherwise."
         }
       }
     },
@@ -260561,7 +260665,7 @@
       "url": "https://hub.harborframework.com/datasets/polyvorlabs/revbench?tab=leaderboard",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read",
       "terms": "Public leaderboard under Harbor Hub’s Terms of Service and Acceptable Use Policy.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "reference": [
@@ -260572,6 +260676,11 @@
           "name": "Puzzles passed",
           "unit": "count",
           "better": "higher"
+        },
+        "errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -262836,7 +262945,7 @@
       "url": "https://roboarcade.org/",
       "feed": "https://roboarcade.org/",
       "terms": "RoboARCade publishes the leaderboard and its JSON assets without a separate score license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "parts": {
@@ -262912,6 +263021,11 @@
           "name": "Saturation",
           "unit": "%",
           "better": "higher"
+        },
+        "costLowerBoundUsd": {
+          "name": "Cost lower bound per trial",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -263151,7 +263265,7 @@
       "url": "https://robochallenge.ai/leaderboard",
       "feed": "https://robochallenge.ai/api/v2/leaderboard/leaderboard_table30_v2.json",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         " PAGER-press-ARX5",
@@ -263473,6 +263587,31 @@
         },
         "successPct_f5b4": {
           "name": "Water the flowers success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_6dcb": {
+          "name": "Fold the clothes success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_fea0": {
+          "name": "Put the pencil case into the schoolbag success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_6ccd": {
+          "name": "Pack the toothbrush holder success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_1c7d": {
+          "name": "Untie the shoelaces success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_671c": {
+          "name": "Pack the items success rate",
           "unit": "%",
           "better": "higher"
         }
@@ -264144,7 +264283,7 @@
       "url": "https://robocurve.org/roboharm/",
       "feed": "https://robocurve.org/roboharm/data/cells.csv",
       "terms": "Public Robocurve RoboHarm results, subject to the project license and website terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -264178,7 +264317,7 @@
         "complete_rate": {
           "name": "Completion rate",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "n_runs": {
           "name": "Runs",
@@ -264190,6 +264329,30 @@
         },
         "n_invalid": {
           "name": "Invalid runs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "refused": {
+          "name": "Explicit refusals",
+          "unit": "count",
+          "better": "higher"
+        },
+        "refused_any": {
+          "name": "Any refusals",
+          "unit": "count",
+          "better": "higher"
+        },
+        "refused_capability": {
+          "name": "Capability refusals",
+          "unit": "count"
+        },
+        "attempted_failed": {
+          "name": "Failed harmful attempts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "attempted_succeeded": {
+          "name": "Succeeded harmful attempts",
           "unit": "count",
           "better": "lower"
         }
@@ -284834,7 +284997,7 @@
       "url": "https://supabase.com/evals",
       "feed": "https://supabase.com/evals",
       "terms": "The Supabase Evals project publishes the data underlying its public benchmark page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -284855,6 +285018,26 @@
         "seconds": {
           "name": "Average run time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "activeCpuSeconds": {
+          "name": "Average active CPU time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "steps": {
+          "name": "Mean steps per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "toolCalls": {
+          "name": "Mean tool calls per task",
+          "unit": "count",
           "better": "lower"
         }
       }
