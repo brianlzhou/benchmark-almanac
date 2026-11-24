@@ -10,6 +10,14 @@ const board: Leaderboard = {
   benchmark: 'cozzo-ai-receptionist-round-4', url: 'https://cozzo.io/benchmarks/ai-receptionist-scenarios', feed: FEED,
   terms: 'The CSV is published under CC BY 4.0. https://cozzo.io/stats/ai-receptionist-accuracy',
   headline: 'The headline is each vendor’s passed calls divided by scored calls across the five scripts.',
+  parts: {
+    S1: 'Callback number captured and read back correctly',
+    S2: 'Reschedule',
+    S3: 'Unknown insurance',
+    S4: 'Interruption',
+    S5: 'Dental emergency',
+    Sat: 'Saturday hours answered after the cut-in',
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows = parseCsv(await fetchText(FEED));
     const totals = new Map<string, { passed: number; scored: number; metrics: Record<string, number> }>();

@@ -37,7 +37,10 @@ const harnessName = (k: string) => HARNESS[k] ?? k.split('_').map((w) => w.charA
 
 function totals(row: Row, prefix = '') {
   const metrics: Record<string, number> = {};
-  for (const key of ['runs', 'tasks', 'splitTasks', 'passes', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const) {
+  const keys = prefix
+    ? (['passes', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const)
+    : (['runs', 'tasks', 'passes', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const);
+  for (const key of keys) {
     const value = row[key];
     if (typeof value === 'number') metrics[prefix + key] = value;
   }
@@ -50,7 +53,22 @@ const board: Leaderboard = {
   url: 'https://agents-last-exam.org/leaderboard',
   feed: FEED,
   terms: 'Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.',
-  stats: { latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' } },
+  stats: {
+    latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' },
+    runs: { name: 'Overall runs', unit: 'count' },
+    tasks: { name: 'Overall tasks', unit: 'count' },
+    ...Object.fromEntries(([
+      ['', 'Overall'],
+      ['linux:', 'Linux'],
+      ['windows:', 'Windows'],
+    ] as const).flatMap(([p, label]) => [
+      [p + 'partial', { name: label + ' partial credit', unit: '%', better: 'higher' }],
+      [p + 'passes', { name: label + ' passes', unit: 'count', better: 'higher' }],
+      [p + 'totalDurationS', { name: label + ' total duration', unit: 'seconds', better: 'lower' }],
+      [p + 'totalOutputTokens', { name: label + ' total output tokens', unit: 'tokens' }],
+      [p + 'totalCostUsd', { name: label + ' total cost', unit: 'usd', better: 'lower' }],
+    ])),
+  },
   aliases: {
     'deepseek-deepseek-v4-1-flash-1017': 'deepseek-v4-1-flash-1017',
     'kimi-3.1-pro': 'kimi-k3-1-pro',
