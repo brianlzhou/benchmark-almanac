@@ -36,6 +36,11 @@ const board: Leaderboard = {
   parts: Object.fromEntries([...difficulties, ...sizes].map(name => [
     name.toLowerCase(), { name, group: difficulties.includes(name) ? 'Difficulty' : 'Size' },
   ])),
+  stats: {
+    cellAccuracy: { name: 'Cell accuracy', unit: '%', better: 'higher' },
+    noAnswer: { name: 'No-answer rate', unit: '%', better: 'lower' },
+    reasonLength: { name: 'Mean reasoning length', unit: 'count', note: 'Average reasoning length in characters.' },
+  },
   aliases: {
     'deepseek-R1': 'deepseek-r1',
     'deepseek-v3': 'deepseek-v3',
@@ -85,7 +90,7 @@ const board: Leaderboard = {
       }
       if (unlisted) model += " (unlisted snapshot)";
       const effort = model.match(/^(o\d-mini)-\d{4}-\d\d-\d\d-(low|medium|high)$/);
-      const metrics: Record<string, number> = { totalPuzzles: r['Total Puzzles'] };
+      const metrics: Record<string, number> = {};
       const columns = [
         ...[...difficulties, ...sizes].map(name => [name.toLowerCase(), name + ' Puzzle Acc']),
         ['cellAccuracy', 'Cell Acc'], ['noAnswer', 'No answer'], ['reasonLength', 'Reason Lens'],

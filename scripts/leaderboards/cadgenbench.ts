@@ -34,7 +34,17 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/HuggingAI4Engineering/cadgenbench-leaderboard',
   feed: `${FEED} (aggregate_score, all completed submissions)`,
   terms: 'Hugging Face dataset HuggingAI4Engineering/cadgenbench-submissions, licensed CC BY 4.0.',
-  stats: { validityRate: { name: 'Validity rate', unit: '%', better: 'higher' } },
+  stats: {
+    validityRate: { name: 'Validity rate', unit: '%', better: 'higher' },
+    generationValidityRate: { name: 'Generation validity rate', unit: '%', better: 'higher' },
+    generationValid: { name: 'Generation valid outputs', unit: 'count', better: 'higher' },
+    generationInvalid: { name: 'Generation invalid outputs', unit: 'count', better: 'lower' },
+    generationMissing: { name: 'Generation missing outputs', unit: 'count', better: 'lower' },
+    editingValidityRate: { name: 'Editing validity rate', unit: '%', better: 'higher' },
+    editingValid: { name: 'Editing valid outputs', unit: 'count', better: 'higher' },
+    editingInvalid: { name: 'Editing invalid outputs', unit: 'count', better: 'lower' },
+    editingMissing: { name: 'Editing missing outputs', unit: 'count', better: 'lower' },
+  },
   aliases: {},
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -48,7 +58,7 @@ const board: Leaderboard = {
       if (typeof s.validity_rate === 'number') metrics.validityRate = 100 * s.validity_rate;
       for (const [task, score] of Object.entries(s.score_by_task_type ?? {})) metrics[task] = 100 * score;
       for (const [task, detail] of Object.entries(s.per_task_scores ?? {})) {
-        const columns = { validity_rate: 'ValidityRate', n_samples: 'Samples', n_valid: 'Valid', n_invalid: 'Invalid', n_missing: 'Missing' };
+        const columns = { validity_rate: 'ValidityRate', n_valid: 'Valid', n_invalid: 'Invalid', n_missing: 'Missing' };
         for (const [key, suffix] of Object.entries(columns)) {
           if (typeof detail[key] === 'number') metrics[task + suffix] = detail[key] * (key === 'validity_rate' ? 100 : 1);
         }

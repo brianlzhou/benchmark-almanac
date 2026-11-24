@@ -31,6 +31,21 @@ const board: Leaderboard = {
   },
   stats: {
     latency: { name: 'Seconds per case', unit: 'seconds', better: 'lower' },
+    pass_rate_1: { name: 'First-attempt pass rate', unit: '%', better: 'higher' },
+    percent_cases_well_formed: { name: 'Well-formed edit rate', unit: '%', better: 'higher' },
+    test_cases: { name: 'Test cases', unit: 'count' },
+    pass_num_1: { name: 'First-attempt passes', unit: 'count', better: 'higher' },
+    pass_num_2: { name: 'Second-attempt passes', unit: 'count', better: 'higher' },
+    error_outputs: { name: 'Error outputs', unit: 'count', better: 'lower' },
+    num_malformed_responses: { name: 'Malformed responses', unit: 'count', better: 'lower' },
+    num_with_malformed_responses: { name: 'Exercises with malformed responses', unit: 'count', better: 'lower' },
+    user_asks: { name: 'User prompts', unit: 'count', better: 'lower' },
+    lazy_comments: { name: 'Lazy comments', unit: 'count', better: 'lower' },
+    syntax_errors: { name: 'Syntax errors', unit: 'count', better: 'lower' },
+    indentation_errors: { name: 'Indentation errors', unit: 'count', better: 'lower' },
+    exhausted_context_windows: { name: 'Exhausted context windows', unit: 'count', better: 'lower' },
+    test_timeouts: { name: 'Test timeouts', unit: 'count', better: 'lower' },
+    inputTokens: { name: 'Input tokens per exercise', unit: 'tokens' },
   },
   async fetch() {
     // a missing or zero value is unknown: the page leaves its cost cell blank for total_cost 0
@@ -44,15 +59,16 @@ const board: Leaderboard = {
       const architect = r.editor_model && r.model.includes(' + ') ? r.model.split(' + ')[0].trim() : undefined;
       const metrics: Record<string, number> = {};
       if (latency !== undefined) metrics.latency = latency;
-      for (const key of ['test_cases', 'total_tests', 'pass_rate_1', 'pass_num_1', 'pass_num_2', 'percent_cases_well_formed',
+      for (const key of ['test_cases', 'pass_rate_1', 'pass_num_1', 'pass_num_2', 'percent_cases_well_formed',
         'error_outputs', 'num_malformed_responses', 'num_with_malformed_responses', 'user_asks', 'lazy_comments',
-        'syntax_errors', 'indentation_errors', 'exhausted_context_windows', 'test_timeouts', 'thinking_tokens']) {
+        'syntax_errors', 'indentation_errors', 'exhausted_context_windows', 'test_timeouts']) {
         const value = r[key]?.split('#')[0].trim();
         if (value && Number.isFinite(Number(value))) metrics[key] = Number(value);
       }
       const input = num(r.prompt_tokens);
       if (cases && input !== undefined) metrics.inputTokens = input / cases;
-      const setting = r.reasoning_effort || (metrics.thinking_tokens !== undefined ? `thinking budget ${metrics.thinking_tokens}` : undefined);
+      const thinkingBudget = r.thinking_tokens?.split('#')[0].trim();
+      const setting = r.reasoning_effort || (thinkingBudget && Number.isFinite(Number(thinkingBudget)) ? `thinking budget ${Number(thinkingBudget)}` : undefined);
       return {
         setting,
         model: architect ?? r.model,

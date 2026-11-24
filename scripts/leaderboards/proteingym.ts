@@ -7,6 +7,8 @@ const feed = 'https://proteingym.org/data/Spearman/aggregate_zero_shot_DMS_subst
 const board: Leaderboard = {
   benchmark: 'proteingym', url: 'https://proteingym.org/', feed,
   terms: 'The ProteinGym project makes its aggregate leaderboard CSV publicly available.',
+  parts: Object.fromEntries(['Function_Activity','Function_Binding','Function_Expression','Function_OrganismalFitness','Function_Stability','Low_MSA_depth','Medium_MSA_depth','High_MSA_depth','Taxa_Human','Taxa_Other_Eukaryote','Taxa_Prokaryote','Taxa_Virus','Depth_1','Depth_2','Depth_3','Depth_4','Depth_5+'].map(k => [k, k.replace(/^(Function_|Taxa_)/, '').replaceAll('_', ' ')])),
+  stats: { Bootstrap_standard_error_Spearman: { name: 'Bootstrap standard error of difference to best Spearman', unit: 'score', note: 'Bootstrap standard error of the difference in average Spearman correlation to the top model.' } },
   async fetch() {
     const data = parseCsv(await fetchText(feed));
     if (data.length < 97 || !('Average_Spearman' in data[0])) throw new Error('Incomplete ProteinGym summary');
