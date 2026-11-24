@@ -6,7 +6,7 @@ const board: Leaderboard = {
   url: 'https://epoch.ai/frontiermath',
   feed: `${EPOCH_RUNS_FEED} (FrontierMath-2025-02-28-Private)`,
   terms: 'Epoch AI publishes its benchmark data under CC BY 4.0; the Almanac credits and links Epoch AI.',
-  stats: { meanScore: EPOCH_SCORE_STATS.meanScore, 'scorer:verification_code': EPOCH_SCORE_STATS['scorer:verification_code'], 'scorerSpread:verification_code': EPOCH_SCORE_STATS['scorerSpread:verification_code'], 'Training compute (FLOP)': EPOCH_SCORE_STATS['Training compute (FLOP)'], 'Training compute cost (2023 USD)': EPOCH_SCORE_STATS['Training compute cost (2023 USD)'], 'Training dataset size (datapoints)': EPOCH_SCORE_STATS['Training dataset size (datapoints)'], 'Hardware quantity': { ...EPOCH_SCORE_STATS['Hardware quantity'], name: 'Hardware count' }, activeParams: EPOCH_SCORE_STATS.activeParams },
+  stats: EPOCH_SCORE_STATS,
   fetch: () => epochRunRows('FrontierMath-2025-02-28-Private'),
 };
 export default board;
