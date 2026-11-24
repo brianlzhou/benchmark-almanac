@@ -36792,6 +36792,24 @@
     "access": "private",
     "note": "Lab-created in-house eval (Cohere).",
     "unit": "%",
+    "better": "higher",
+    "measures": [
+      {
+        "id": "agentic-qa",
+        "name": "Agentic Question Answering",
+        "kind": "part"
+      },
+      {
+        "id": "data-analysis",
+        "name": "Data Analysis",
+        "kind": "part"
+      },
+      {
+        "id": "memory-usage-quality",
+        "name": "Memory Usage Quality",
+        "kind": "part"
+      }
+    ],
     "confidence": "verified"
   },
   {
@@ -110571,6 +110589,26 @@
     "note": "Google labels the three collections EHR Dataset 2, EHR Dataset 3, and EHR Dataset 4.",
     "unit": "%",
     "better": "higher",
+    "measures": [
+      {
+        "id": "ehr-dataset-2",
+        "name": "EHR Dataset 2",
+        "kind": "part",
+        "note": "Macro F1 on de-identified clinical PDF lab reports converted to JSON."
+      },
+      {
+        "id": "ehr-dataset-3",
+        "name": "EHR Dataset 3",
+        "kind": "part",
+        "note": "Macro F1 on de-identified clinical PDF lab reports converted to JSON."
+      },
+      {
+        "id": "ehr-dataset-4",
+        "name": "EHR Dataset 4",
+        "kind": "part",
+        "note": "Macro F1 on synthetic laboratory reports converted to JSON."
+      }
+    ],
     "confidence": "verified",
     "evidence": [
       "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card"
@@ -147853,6 +147891,48 @@
     "access": "private",
     "unit": "%",
     "better": "lower",
+    "measures": [
+      {
+        "id": "dialog-accented-english",
+        "name": "Dialog-Accented English",
+        "kind": "part"
+      },
+      {
+        "id": "elders-kids",
+        "name": "Elders and Kids",
+        "kind": "part"
+      },
+      {
+        "id": "extreme-noise",
+        "name": "Extreme Noise",
+        "kind": "part"
+      },
+      {
+        "id": "tongue-twister",
+        "name": "Tongue Twister",
+        "kind": "part"
+      },
+      {
+        "id": "dialog-mandarin",
+        "name": "Dialog-Mandarin",
+        "kind": "part"
+      },
+      {
+        "id": "dialog-cantonese",
+        "name": "Dialog-Cantonese",
+        "kind": "part"
+      },
+      {
+        "id": "dialog-chinese-dialects",
+        "name": "Dialog-Chinese Dialects",
+        "kind": "part"
+      },
+      {
+        "id": "news-multilingual",
+        "name": "News-Multilingual",
+        "kind": "part"
+      }
+    ],
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/Qwen/Qwen3-ASR-1.7B",
@@ -173156,7 +173236,8 @@
     },
     "access": "private",
     "note": "Lab-commissioned human eval (Mistral with Surge AI). Tasks and rubric not public.",
-    "unit": "%",
+    "unit": "rating",
+    "better": "higher",
     "confidence": "verified"
   },
   {

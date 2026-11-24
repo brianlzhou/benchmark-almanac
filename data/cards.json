@@ -16818,6 +16818,12 @@
         "score": 42.0,
         "unit": "%",
         "as_written": "Grounding: Dense200 (bbox)"
+      },
+      {
+        "benchmark": "surge-ai-blind-coding-evaluation",
+        "score": 3.74,
+        "unit": "rating",
+        "as_written": "Blind human evaluation with Surge AI on coding quality, 1 to 5 scale (body text)"
       }
     ]
   },
@@ -35064,7 +35070,7 @@
     "title": "Introducing Command A+: Making sovereign agentic capabilities available to all (Cohere blog)",
     "url": "https://cohere.com/blog/command-a-plus",
     "tier": "flagship",
-    "notes": "A 218B total, 25B active MoE under Apache 2.0 that merges Command A, A Reasoning, A Vision and A Translate. Most numbers are printed on bar charts and rounded to whole percent. CharXiv descriptive 88% and three internal North evals (Agentic Question Answering 65%, Data Analysis 45%, Memory Usage Quality 54%) are not recorded.",
+    "notes": "A 218B total, 25B active MoE under Apache 2.0 that merges Command A, A Reasoning, A Vision and A Translate. Most numbers are printed on bar charts and rounded to whole percent. CharXiv descriptive 88% is not recorded. The three internal North evaluations are recorded per measure.",
     "results": [
       {
         "benchmark": "tau2-bench",
@@ -35137,6 +35143,27 @@
         "score": 37,
         "unit": "index",
         "as_written": "Artificial Analysis Intelligence Index (quoted by Cohere)"
+      },
+      {
+        "benchmark": "cohere-north-internal-evals",
+        "measure": "agentic-qa",
+        "score": 65,
+        "unit": "%",
+        "as_written": "North internal evaluation: Agentic Question Answering"
+      },
+      {
+        "benchmark": "cohere-north-internal-evals",
+        "measure": "data-analysis",
+        "score": 45,
+        "unit": "%",
+        "as_written": "North internal evaluation: Data Analysis"
+      },
+      {
+        "benchmark": "cohere-north-internal-evals",
+        "measure": "memory-usage-quality",
+        "score": 54,
+        "unit": "%",
+        "as_written": "North internal evaluation: Memory Usage Quality"
       }
     ]
   },
@@ -48995,7 +49022,7 @@
     "title": "Qwen3-ASR (Qwen blog and Hugging Face model card)",
     "url": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B",
     "tier": "small",
-    "notes": "The Qwen3-ASR model card reports public multilingual WER tables. The recorded rows use the 1.7B column and name the table setting.",
+    "notes": "The Qwen3-ASR model card reports public multilingual and internal ASR WER tables. The recorded rows use the 1.7B column and name the table setting, with internal transcription sets tagged per measure.",
     "results": [
       {
         "benchmark": "fleurs",
@@ -49020,6 +49047,62 @@
         "score": 3.08,
         "unit": "%",
         "as_written": "Opencpop singing transcription WER, Qwen3-ASR-1.7B (Singing Voice & Song Transcription table)"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-accented-english",
+        "score": 16.07,
+        "unit": "%",
+        "as_written": "Dialog-Accented English WER (16 accents), Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "elders-kids",
+        "score": 3.81,
+        "unit": "%",
+        "as_written": "Elders&Kids Mandarin WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "extreme-noise",
+        "score": 16.17,
+        "unit": "%",
+        "as_written": "ExtremeNoise Mandarin WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "tongue-twister",
+        "score": 2.44,
+        "unit": "%",
+        "as_written": "TongueTwister Mandarin WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-mandarin",
+        "score": 6.54,
+        "unit": "%",
+        "as_written": "Dialog-Mandarin WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-cantonese",
+        "score": 4.12,
+        "unit": "%",
+        "as_written": "Dialog-Cantonese WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-chinese-dialects",
+        "score": 15.94,
+        "unit": "%",
+        "as_written": "Dialog-Chinese Dialects WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "news-multilingual",
+        "score": 12.80,
+        "unit": "%",
+        "as_written": "News-Multilingual WER (Qwen-ASR Internal Benchmarks), Qwen3-ASR-1.7B"
       }
     ]
   },
@@ -53315,7 +53398,7 @@
     "title": "MedGemma 1.5 model card (Health AI Developer Foundations)",
     "url": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
     "tier": "small",
-    "notes": "The model card’s evaluation tables compare MedGemma 1.5 4B with Gemma 3 4B and the earlier MedGemma 1 4B and 27B. Only the MedGemma 1.5 4B column is recorded. CT Dataset 1, MRI Dataset 1, WSI-Path, EyePACS and EHRQA are Google’s internal datasets. The PDF-to-JSON lab report results are omitted because the card reports three datasets with no overall score.",
+    "notes": "The model card’s evaluation tables compare MedGemma 1.5 4B with Gemma 3 4B and the earlier MedGemma 1 4B and 27B. Only the MedGemma 1.5 4B column is recorded. CT Dataset 1, MRI Dataset 1, WSI-Path, EyePACS, PathMCQA, US-DermMCQA, EHRQA and the three EHR PDF-to-JSON datasets are Google’s internal datasets. The PDF-to-JSON lab report results are recorded per dataset measure.",
     "results": [
       {
         "benchmark": "ct-dataset-1-google",
@@ -53342,6 +53425,18 @@
         "as_written": "EyePACS (fundus), accuracy"
       },
       {
+        "benchmark": "pathmcqa-google",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "PathMCQA* (histopathology), accuracy"
+      },
+      {
+        "benchmark": "dermmcqa-google",
+        "score": 73.5,
+        "unit": "%",
+        "as_written": "US-DermMCQA*, accuracy"
+      },
+      {
         "benchmark": "chest-imagenome",
         "score": 38,
         "unit": "%",
@@ -53352,6 +53447,27 @@
         "score": 89.6,
         "unit": "%",
         "as_written": "EHRQA, accuracy"
+      },
+      {
+        "benchmark": "medgemma-lab-report-conversion-google",
+        "measure": "ehr-dataset-2",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "EHR Dataset 2* (raw PDF to JSON), Macro F1 (Micro F1 88.0%)"
+      },
+      {
+        "benchmark": "medgemma-lab-report-conversion-google",
+        "measure": "ehr-dataset-3",
+        "score": 71.0,
+        "unit": "%",
+        "as_written": "EHR Dataset 3* (raw PDF to JSON), Macro F1 (Micro F1 70.0%)"
+      },
+      {
+        "benchmark": "medgemma-lab-report-conversion-google",
+        "measure": "ehr-dataset-4",
+        "score": 64.0,
+        "unit": "%",
+        "as_written": "EHR Dataset 4*, Macro F1 (Micro F1 67.0%)"
       }
     ]
   },
@@ -53424,6 +53540,86 @@
         "score": 0.87,
         "unit": "score",
         "as_written": "Average of nine enterprise evaluations inside WRITER Agent, 0.87 out of 1.00"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-asr-0-6b-2026-01-29",
+    "lab": "qwen",
+    "model": "qwen3-asr-0-6b",
+    "date": "2026-01-29",
+    "title": "Qwen3-ASR (Qwen blog and Hugging Face model card)",
+    "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+    "tier": "small",
+    "notes": "The Qwen3-ASR model card reports public multilingual and internal ASR WER tables. The recorded rows use the 0.6B column and tag internal transcription sets per measure.",
+    "results": [
+      {
+        "benchmark": "fleurs",
+        "score": 7.57,
+        "unit": "%",
+        "as_written": "Fleurs multilingual WER, Qwen3-ASR-0.6B, 12 languages"
+      },
+      {
+        "benchmark": "common-voice",
+        "score": 12.75,
+        "unit": "%",
+        "as_written": "CommonVoice multilingual WER, Qwen3-ASR-0.6B, 13 languages"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-accented-english",
+        "score": 16.62,
+        "unit": "%",
+        "as_written": "Dialog-Accented English WER (16 accents), Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "elders-kids",
+        "score": 4.48,
+        "unit": "%",
+        "as_written": "Elders&Kids Mandarin WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "extreme-noise",
+        "score": 17.88,
+        "unit": "%",
+        "as_written": "ExtremeNoise Mandarin WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "tongue-twister",
+        "score": 4.06,
+        "unit": "%",
+        "as_written": "TongueTwister Mandarin WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-mandarin",
+        "score": 7.06,
+        "unit": "%",
+        "as_written": "Dialog-Mandarin WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-cantonese",
+        "score": 4.80,
+        "unit": "%",
+        "as_written": "Dialog-Cantonese WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "dialog-chinese-dialects",
+        "score": 18.24,
+        "unit": "%",
+        "as_written": "Dialog-Chinese Dialects WER, Qwen3-ASR-0.6B"
+      },
+      {
+        "benchmark": "asr-internal-transcription-qwen",
+        "measure": "news-multilingual",
+        "score": 17.39,
+        "unit": "%",
+        "as_written": "News-Multilingual WER (Qwen-ASR Internal Benchmarks), Qwen3-ASR-0.6B"
       }
     ]
   }
