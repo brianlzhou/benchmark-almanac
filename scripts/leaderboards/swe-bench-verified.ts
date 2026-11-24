@@ -96,7 +96,15 @@ export async function sweBenchRows(name: string, extraMetrics?: (details: NonNul
  * What every SWE-bench board shares: each entry is an agent and a model. mini-SWE-agent, the "Bash Only" view, is
  * the neutral one (data/harnesses.json). Other agents show as their own entries.
  */
-export const SWE_BENCH_BOARD = { harnesses: 'system', reference: ['mini-SWE-agent', 'RAG'], verified: 'checked by the SWE-bench team' } satisfies Pick<Leaderboard, 'harnesses' | 'reference' | 'verified'>;
+export const SWE_BENCH_BOARD = {
+  harnesses: 'system',
+  reference: ['mini-SWE-agent', 'RAG'],
+  verified: 'checked by the SWE-bench team',
+  stats: {
+    totalCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' as const },
+    callsPerInstance: { name: 'Calls per instance', unit: 'count', better: 'lower' as const },
+  },
+} satisfies Pick<Leaderboard, 'harnesses' | 'reference' | 'verified' | 'stats'>;
 
 export const SWE_BENCH_ALIASES: Record<string, string> = {
   'Claude 4 Opus': 'claude-opus-4',

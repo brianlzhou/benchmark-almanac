@@ -4,8 +4,24 @@ import { fetchText } from '../util.ts';
 import { jsLiteral } from '../html.ts';
 const PAGE='https://microsoft.github.io/STATE-Bench/leaderboard/';
 type Entry={track:string;benchmarkVersion:string;model:string;agent?:string;organization?:string;verificationStatus?:string;reasoningLabel?:string;submissionDate?:string;metrics:Record<string,unknown>};
+const STATE_STATS: NonNullable<Leaderboard['stats']> = {
+ ux: { name: 'User experience rating', unit: 'score', better: 'higher' },
+ passAt1: { name: 'Pass@1', unit: '%', better: 'higher' },
+ passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+ meanUxScore: { name: 'Mean user experience score', unit: 'score', better: 'higher' },
+ costPerTask: { name: 'Cost per task', unit: 'usd', better: 'lower' },
+ 'travel:passAt5': { name: 'Travel pass@5', unit: '%', better: 'higher' },
+ 'travel:meanUxScore': { name: 'Travel mean user experience score', unit: 'score', better: 'higher' },
+ 'travel:costPerTask': { name: 'Travel cost per task', unit: 'usd', better: 'lower' },
+ 'customerSupport:passAt5': { name: 'Customer support pass@5', unit: '%', better: 'higher' },
+ 'customerSupport:meanUxScore': { name: 'Customer support mean user experience score', unit: 'score', better: 'higher' },
+ 'customerSupport:costPerTask': { name: 'Customer support cost per task', unit: 'usd', better: 'lower' },
+ 'shoppingAssistant:passAt5': { name: 'Shopping assistant pass@5', unit: '%', better: 'higher' },
+ 'shoppingAssistant:meanUxScore': { name: 'Shopping assistant mean user experience score', unit: 'score', better: 'higher' },
+ 'shoppingAssistant:costPerTask': { name: 'Shopping assistant cost per task', unit: 'usd', better: 'lower' },
+};
 export function stateBoard(benchmark:string,track:string,version:string):Leaderboard{return {
- benchmark,url:PAGE,feed:PAGE+'leaderboard.js', verified:'marked verified by the STATE-Bench leaderboard',
+ benchmark,url:PAGE,feed:PAGE+'leaderboard.js', verified:'marked verified by the STATE-Bench leaderboard', stats: STATE_STATS,
  terms:'Official static leaderboard script from the MIT-licensed Microsoft STATE-Bench repository. The almanac credits and links the source.',
  async fetch(){const js=(await fetchText(PAGE+'leaderboard.js')).replace(/:\s*undefined\b/g,': null');
  const start=js.indexOf('[',js.indexOf('const entries'));if(start<0)throw new Error('STATE entries missing');

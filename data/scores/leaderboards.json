@@ -197229,17 +197229,24 @@
       "url": "https://benchmarks.finance/benchmarks/moneda-advicebench/",
       "feed": "https://benchmarks.finance/api/scores.json",
       "terms": "The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Numa 1"
-      ]
+      ],
+      "stats": {
+        "personalDirectiveRate": {
+          "name": "EU personal directive rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "moneda-bench-citebench": {
       "url": "https://benchmarks.finance/benchmarks/moneda-citebench/",
       "feed": "https://benchmarks.finance/api/scores.json",
       "terms": "The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Numa 1"
@@ -197249,7 +197256,7 @@
       "url": "https://benchmarks.finance/benchmarks/moneda-filingsbench/",
       "feed": "https://benchmarks.finance/api/scores.json",
       "terms": "The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Numa 1"
@@ -197259,17 +197266,24 @@
       "url": "https://benchmarks.finance/benchmarks/moneda-groundbench/",
       "feed": "https://benchmarks.finance/api/scores.json",
       "terms": "The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Numa 1"
-      ]
+      ],
+      "stats": {
+        "incorrectRate": {
+          "name": "Incorrect rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "moneda-bench-portfoliobench": {
       "url": "https://benchmarks.finance/benchmarks/moneda-portfoliobench/",
       "feed": "https://benchmarks.finance/api/scores.json",
       "terms": "The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Numa 1"
@@ -280750,7 +280764,7 @@
       "url": "https://microsoft.github.io/STATE-Bench/leaderboard/",
       "feed": "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js",
       "terms": "Official static leaderboard script from the MIT-licensed Microsoft STATE-Bench repository. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "verified": "marked verified by the STATE-Bench leaderboard",
@@ -280767,13 +280781,85 @@
           "name": "Shopping assistant",
           "group": "Domain"
         }
+      },
+      "stats": {
+        "ux": {
+          "name": "User experience rating",
+          "unit": "score",
+          "better": "higher"
+        },
+        "passAt1": {
+          "name": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt5": {
+          "name": "Pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "meanUxScore": {
+          "name": "Mean user experience score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "costPerTask": {
+          "name": "Cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "travel:passAt5": {
+          "name": "Travel pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "travel:meanUxScore": {
+          "name": "Travel mean user experience score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "travel:costPerTask": {
+          "name": "Travel cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "customerSupport:passAt5": {
+          "name": "Customer support pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "customerSupport:meanUxScore": {
+          "name": "Customer support mean user experience score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "customerSupport:costPerTask": {
+          "name": "Customer support cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "shoppingAssistant:passAt5": {
+          "name": "Shopping assistant pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shoppingAssistant:meanUxScore": {
+          "name": "Shopping assistant mean user experience score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "shoppingAssistant:costPerTask": {
+          "name": "Shopping assistant cost per task",
+          "unit": "usd",
+          "better": "lower"
+        }
       }
     },
     "state-bench-main-0-7-0": {
       "url": "https://microsoft.github.io/STATE-Bench/leaderboard/",
       "feed": "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js",
       "terms": "Official static leaderboard script from the MIT-licensed Microsoft STATE-Bench repository. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "verified": "marked verified by the STATE-Bench leaderboard",
@@ -281945,7 +282031,7 @@
       "url": "https://studyarena.com/leaderboard/audio",
       "feed": "https://studyarena.com/leaderboard/audio",
       "terms": "Public StudyArena leaderboard page. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Aura-2",
@@ -282005,7 +282091,7 @@
       "url": "https://studyarena.com/leaderboard/image",
       "feed": "https://studyarena.com/leaderboard/image",
       "terms": "Public StudyArena leaderboard page. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [
         "FLUX.3 Image",
@@ -282074,7 +282160,7 @@
       "url": "https://studyarena.com/leaderboard",
       "feed": "https://studyarena.com/leaderboard",
       "terms": "Public StudyArena leaderboard page. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 276,
       "unmatched": [
         "Aion 2.0",
@@ -282125,6 +282211,16 @@
           "name": "Thirty-day rating change",
           "unit": "rating"
         },
+        "priceIn": {
+          "name": "Input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceOut": {
+          "name": "Output price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
         "score": {
           "name": "Elo score",
           "unit": "rating",
@@ -282164,6 +282260,26 @@
         "medianFirstEventMs": {
           "name": "Median first-event time",
           "unit": "ms",
+          "better": "lower"
+        },
+        "medianDurationSeconds": {
+          "name": "Median response duration in seconds",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "p25DurationSeconds": {
+          "name": "25th percentile response duration in seconds",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "p75DurationSeconds": {
+          "name": "75th percentile response duration in seconds",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "medianFirstEventSeconds": {
+          "name": "Median first-event time in seconds",
+          "unit": "seconds",
           "better": "lower"
         },
         "medianAnswerChars": {
@@ -287907,7 +288023,7 @@
       "url": "https://www.swebench.com/",
       "feed": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json (board \"Test\")",
       "terms": "Repository file in SWE-bench/swe-bench.github.io, licensed CC BY-NC 4.0 (attribution, non-commercial use).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "CodeAct v2.1 (claude-3-5-sonnet-20241022)",
@@ -287960,7 +288076,7 @@
       "url": "https://www.swebench.com/lite.html",
       "feed": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json (board \"Lite\")",
       "terms": "Repository file in SWE-bench/swe-bench.github.io, licensed CC BY-NC 4.0 (attribution, non-commercial use).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 56,
       "unmatched": [
         "CodeAct v1.8",
@@ -288023,7 +288139,7 @@
       "url": "https://www.swebench.com/multilingual.html",
       "feed": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json (board \"Multilingual\")",
       "terms": "Repository file in SWE-bench/swe-bench.github.io, licensed CC BY-NC 4.0 (attribution, non-commercial use).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
       "reference": [
@@ -288229,13 +288345,25 @@
           "name": "astral-sh/ruff",
           "group": "Repository"
         }
+      },
+      "stats": {
+        "totalCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "callsPerInstance": {
+          "name": "Calls per instance",
+          "unit": "count",
+          "better": "lower"
+        }
       }
     },
     "swe-bench-multimodal": {
       "url": "https://www.swebench.com/multimodal.html",
       "feed": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json (board \"Multimodal\")",
       "terms": "Repository file in SWE-bench/swe-bench.github.io, licensed CC BY-NC 4.0 (attribution, non-commercial use).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "Undisclosed"
@@ -288434,7 +288562,7 @@
       "url": "https://www.swebench.com/",
       "feed": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json",
       "terms": "Repository file in SWE-bench/swe-bench.github.io, licensed CC BY-NC 4.0 (attribution, non-commercial use).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 135,
       "unmatched": [
         "4x Scaled",
@@ -288512,6 +288640,18 @@
         "sympy/sympy": {
           "name": "sympy/sympy",
           "group": "Repository"
+        }
+      },
+      "stats": {
+        "totalCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "callsPerInstance": {
+          "name": "Calls per instance",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
