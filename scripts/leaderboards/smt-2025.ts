@@ -1,6 +1,6 @@
 // SMT 2025 (53 final-answer problems) on MathArena, read through the helper in aime-2026.ts.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_STATS, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'smt--smt_2025';
 
@@ -11,10 +11,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_SPRING_2025_ALIASES,
-  stats: {
-    activeParams: { name: 'Active parameters', unit: 'billions' },
-    latency: { name: 'Average time per answer', unit: 'seconds', better: 'lower' },
-  },
+  stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
 export default board;

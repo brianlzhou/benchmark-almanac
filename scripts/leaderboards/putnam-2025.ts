@@ -2,7 +2,7 @@
 // record scores Putnam in points out of 120, so the percentage is converted (85.83% is 103 points). Read
 // through the helper in aime-2026.ts.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_ALIASES, MATHARENA_STATS, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'putnam--putnam_2025';
 
@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
+  stats: MATHARENA_STATS,
   fetch: async () => (await matharenaRows(COMP)).map((r) => ({
     ...r,
     score: Math.round(r.score * 1.2 * 10) / 10,

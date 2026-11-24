@@ -2,7 +2,7 @@
 // table, so this reads the September 2026 set, the one the almanac record links to. Read through the helper in
 // aime-2026.ts.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_ALIASES, MATHARENA_STATS, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'arxivlean--september';
 
@@ -12,7 +12,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
-  stats: { latency: { name: 'Time per answer', unit: 'seconds', better: 'lower' } },
+  stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
 export default board;

@@ -7,7 +7,7 @@
 import type { Leaderboard } from './types.ts';
 import { MATHARENA_STATS, matharenaFeed, matharenaRows } from '../lib/boards/matharena.ts';
 
-export { matharenaFeed, matharenaRows };
+export { MATHARENA_STATS, matharenaFeed, matharenaRows };
 export const matharenaPage = (comp: string) => `https://matharena.ai/?comp=${comp}`;
 export const MATHARENA_TERMS =
   'matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.';

@@ -1,6 +1,6 @@
 // BRUMO 2025 (30 final-answer problems) on MathArena, read through the helper in aime-2026.ts.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_STATS, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'brumo--brumo_2025';
 
@@ -10,7 +10,7 @@ const board: Leaderboard = {
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
-  stats: { activeParams: { name: 'Active parameters', unit: 'billions' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  stats: MATHARENA_STATS,
   aliases: MATHARENA_SPRING_2025_ALIASES,
   fetch: () => matharenaRows(COMP),
 };
