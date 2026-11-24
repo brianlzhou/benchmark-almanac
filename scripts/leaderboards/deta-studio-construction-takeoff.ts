@@ -6,7 +6,19 @@ import { nextFlight, jsonAfter } from '../lib/html.ts';
 const feed = "https://www.deta.studio/leaderboard";
 
 const board: Leaderboard = {
+  parts: {
+    Area_Complex_1: { name: 'Area_Complex_1', unit: '%' },
+    Area_Simple_1: { name: 'Area_Simple_1', unit: '%' },
+    Electrical_Simple_1: { name: 'Electrical_Simple_1', unit: '%' },
+    Opening_Simple_1: { name: 'Opening_Simple_1', unit: '%' },
+  },
   stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, credits: { name: 'Credits', unit: 'count', better: 'lower' } },
+  chart: {
+    title: 'Accuracy vs. cost',
+    x: { key: 'cost', label: 'Mean cost per drawing', unit: '$', better: 'lower', log: true },
+    y: { key: 'accuracy', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'Deta Studio plots drawing accuracy against mean cost (100 credits per US dollar) on a log scale.',
+  },
   benchmark: "deta-studio-construction-takeoff",
   url: "https://www.deta.studio/leaderboard",
   feed,
@@ -22,7 +34,6 @@ const board: Leaderboard = {
     const clamp = (v: number) => Math.max(0, Math.min(1, v));
     const saving = (baseline: number, actual: number) => clamp(Math.log(baseline / actual) / Math.log(100));
     const rows: LeaderboardRow[] = [];
-    board.parts = {};
     for (const group of Object.values(Object.groupBy(runs, r => JSON.stringify([r.model, r.reasoning_effort])))) {
       if (!group) continue;
       const first = group[0];
@@ -38,7 +49,6 @@ const board: Leaderboard = {
         const credits = mean(subset.map(r => r.credits));
         const seconds = mean(subset.map(r => r.duration_ms)) / 1000;
         const accuracy = mean(subset.map(r => r.score));
-        board.parts[name] = { name, unit: '%' };
         metrics[name] = accuracy;
         scores.push(accuracy); costs.push(credits); times.push(seconds);
         price.push(saving(minutes[name] * 3800 / 60, credits));

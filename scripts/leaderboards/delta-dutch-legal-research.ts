@@ -11,6 +11,12 @@ const board: Leaderboard = {
   url: "https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark",
   feed,
   terms: "The publisher displays results at https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark. I could not verify reuse terms. The site allows this path in robots.txt.",
+  chart: {
+    title: 'Substance task pass rate vs. form score',
+    x: { key: 'score', label: 'Task pass rate', unit: '%', better: 'higher' },
+    y: { key: 'form', label: 'Form score', better: 'higher' },
+    note: 'DELTA plots task pass rate on the horizontal axis against form score on the vertical axis.',
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.some(c => /Criteria pass\s*rate/i.test(c.text)));
     const expected = ['Rank', 'Model', 'Task pass rate', 'Criteria pass rate', 'Form', 'Cost per task', 'Response time'];

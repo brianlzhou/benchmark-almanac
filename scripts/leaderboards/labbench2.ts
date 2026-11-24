@@ -14,6 +14,12 @@ const board: Leaderboard = {
   feed: `${URL} (leaderboard table)`,
   terms: 'Static public page; the site has no robots.txt and no terms, and describes itself as hosting leaderboards and source data for LABBench2.',
   aliases: {},
+  chart: {
+    title: 'Average score vs. average output tokens',
+    x: { key: 'tokens', label: 'Average output tokens', unit: 'tokens', better: 'lower' },
+    y: { key: 'score', label: 'Average score', unit: '%', better: 'higher' },
+    note: 'Edison Scientific plots average score against average output tokens per task.',
+  },
   fetch: () =>
     tableRows(URL, {
       model: /^Model$/i,

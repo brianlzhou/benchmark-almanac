@@ -10,23 +10,36 @@ const board: Leaderboard = {
   url: "https://bench.turing.com/ekw/leaderboard/",
   feed,
   terms: "The publisher gives no reuse license on the benchmark page. https://bench.turing.com/ekw/leaderboard/ The robots.txt URL serves the site HTML.",
+  parts: {
+    'Finance and insurance': { name: 'Finance and insurance', group: 'Industry' },
+    'Retail trade': { name: 'Retail trade', group: 'Industry' },
+    Manufacturing: { name: 'Manufacturing', group: 'Industry' },
+    'Health care and social assistance': { name: 'Health care and social assistance', group: 'Industry' },
+    Information: { name: 'Information', group: 'Industry' },
+    'Real estate and rental and leasing': { name: 'Real estate and rental and leasing', group: 'Industry' },
+    Government: { name: 'Government', group: 'Industry' },
+    'Professional, scientific, and technical services': { name: 'Professional, scientific, and technical services', group: 'Industry' },
+  },
   stats: {
     allCore: { name: 'All-core reward', unit: '%', better: 'higher' },
     verifierPass: { name: 'Verifier pass rate', unit: '%', better: 'higher' },
     toolCalls: { name: 'Tool calls', unit: 'count' },
   },
+  chart: {
+    title: 'Reward vs. cost',
+    x: { key: 'cost', label: 'API cost', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Reward', unit: '%', better: 'higher' },
+    note: 'Turing plots soft-gated reward against API cost across trials.',
+  },
   async fetch() {
     const html = await fetchText(feed);
-    const parts: Record<string, string> = {};
     const categories = new Map<string, Record<string, number>>();
     for (const [, label, model, value] of html.matchAll(/class="cell"[^>]+data-tip="([^"]+?) — ([^"]+?) · [^":]+: ([\d.]+)%"/g)) {
       const key = text(label);
-      parts[key] = key;
       const metrics = categories.get(model) ?? {};
       metrics[key] = Number(value);
       categories.set(model, metrics);
     }
-    board.parts = parts;
     const rows = [...html.matchAll(/<li data-model="([^"]+)" data-board-rank="\d+" data-sort-score="([\d.]+)" data-sort-all_core="([\d.]+)" data-sort-cost="([\d.]+)" data-sort-output_tokens="(\d+)" data-sort-tool_calls="([\d.]+)"[^>]*>([\s\S]*?)<\/details>/g)]
       .map(([, model, reward, core, cost, tokens, calls, body]) => {
         const detail = text(body);

@@ -17,6 +17,12 @@ const board: Leaderboard = {
     // Claude Fable 5.1 run with a fallback model for refused calls, as the board labels it
     'claude-fable-5.1 (with fallback)': 'claude-fable-5-1',
   },
+  chart: {
+    title: 'Average score vs. average cost',
+    x: { key: 'cost', label: 'Average cost', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Average score', unit: '%', better: 'higher' },
+    note: 'Edison Scientific plots average score against average per-task cost in USD.',
+  },
   fetch: () =>
     tableRows(URL, { model: /^Model$/i, score: /^Average score$/i, scale: 100, cost: /^Average cost/i, tokens: /^Average output tokens/i, date: /^Published$/i }),
 };

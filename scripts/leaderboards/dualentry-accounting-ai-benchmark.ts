@@ -13,10 +13,29 @@ const board: Leaderboard = {
   url: "https://www.dualentry.com/benchmark",
   feed,
   terms: "DualEntry prohibits scraping and requires prior written permission for redistribution. Keep this link for reference. robots.txt allows the feed path.",
+  parts: {
+    'Transaction Classification': { name: 'Transaction Classification', group: 'Accounting area' },
+    'Journal Entries': { name: 'Journal Entries', group: 'Accounting area' },
+    'Accounts Payable': { name: 'Accounts Payable', group: 'Accounting area' },
+    'Accounts Receivable': { name: 'Accounts Receivable', group: 'Accounting area' },
+    'Bank Reconciliation': { name: 'Bank Reconciliation', group: 'Accounting area' },
+    'Financial Reporting': { name: 'Financial Reporting', group: 'Accounting area' },
+    'Month-End Close': { name: 'Month-End Close', group: 'Accounting area' },
+    Easy: { name: 'Easy', group: 'Difficulty' },
+    Medium: { name: 'Medium', group: 'Difficulty' },
+    Hard: { name: 'Hard', group: 'Difficulty' },
+  },
   stats: { consistency: { name: 'Consistency', unit: '%', better: 'higher' }, costPerRun: { name: 'Cost per run', unit: 'usd', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  chart: {
+    title: 'Accuracy vs. cost',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'DualEntry plots accounting accuracy against cost per task on a log scale.',
+  },
   async fetch() {
     const page = await fetchText(feed);
     const detail = new Map<string, { cost: number; metrics: Record<string, number> }>();
+    const seenParts = new Set<string>();
     for (const script of page.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)) {
       const source = script[1], marker = /const DATA\s*=\s*(?=\[)/.exec(source);
       if (!marker) continue;
@@ -26,7 +45,7 @@ const board: Leaderboard = {
         const parts = jsLiteral<Part[]>(source, group.index + group[0].length);
         parts.forEach((part, i) => {
           const name = part.name ?? part.key!;
-          (board.parts ??= {})[name] = { name, group: group[1] === 'AREAS' ? 'Accounting area' : 'Difficulty' };
+          seenParts.add(name);
           for (const p of data) {
             const entry = detail.get(p.model);
             if (entry && Number.isFinite(p.passed?.[i])) entry.metrics[name] = p.passed![i] * 100 / part.tasks;
@@ -44,7 +63,7 @@ const board: Leaderboard = {
       if (!model || !accuracy) throw new Error('Invalid DualEntry leaderboard row');
       return { model, score: Number(accuracy), trials: 3, open: license?.toLowerCase().startsWith('open'), ...detail.get(model) };
     });
-    if (rows.length < 29 || detail.size < 27 || Object.keys(board.parts ?? {}).length < 10) throw new Error('Incomplete DualEntry leaderboard');
+    if (rows.length < 29 || detail.size < 27 || seenParts.size < 10) throw new Error('Incomplete DualEntry leaderboard');
     return rows;
   },
 };

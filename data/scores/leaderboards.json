@@ -34985,9 +34985,25 @@
       "url": "https://advances.edisonscientific.com/benchmarks/bixbench3/",
       "feed": "https://advances.edisonscientific.com/benchmarks/bixbench3/ (leaderboard table)",
       "terms": "Static public page; the site has no robots.txt and no terms, and describes itself as hosting leaderboards and source data for its benchmarks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
-      "unmatched": []
+      "unmatched": [],
+      "chart": {
+        "title": "Average score vs. average cost",
+        "x": {
+          "key": "cost",
+          "label": "Average cost",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Average score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Edison Scientific plots average score against average per-task cost in USD."
+      }
     },
     "bizbench-ant": {
       "url": "https://arxiv.org/html/2610.20424",
@@ -39901,11 +39917,27 @@
       "url": "https://normalfactory.com/leaderboard/cad-arena",
       "feed": "https://normalfactory.com/leaderboard/cad-arena (server-rendered HTML table, Score)",
       "terms": "Server-rendered public page; robots.txt allows all paths (content signals: search yes, AI training no, use reference) and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Muse 1.3"
       ],
+      "chart": {
+        "title": "Score vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per scored trial",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "better": "higher"
+        },
+        "note": "Normal Factory plots CAD Arena score against mean cost per scored trial on a log scale with a Pareto frontier."
+      },
       "parts": {
         "geometry": {
           "name": "Geometry",
@@ -39950,10 +39982,6 @@
           "name": "Total tokens",
           "unit": "tokens"
         },
-        "scheduledTrials": {
-          "name": "Scheduled trials",
-          "unit": "count"
-        },
         "build123dGeometry": {
           "name": "Build123d geometry score",
           "unit": "score",
@@ -39975,10 +40003,6 @@
         },
         "build123dScored": {
           "name": "Build123d scored trials",
-          "unit": "count"
-        },
-        "build123dScheduled": {
-          "name": "Build123d scheduled trials",
           "unit": "count"
         },
         "nxOpenGeometry": {
@@ -40004,10 +40028,6 @@
           "name": "NX Open scored trials",
           "unit": "count"
         },
-        "nxOpenScheduled": {
-          "name": "NX Open scheduled trials",
-          "unit": "count"
-        },
         "solidworksGeometry": {
           "name": "SolidWorks geometry score",
           "unit": "score",
@@ -40029,10 +40049,6 @@
         },
         "solidworksScored": {
           "name": "SolidWorks scored trials",
-          "unit": "count"
-        },
-        "solidworksScheduled": {
-          "name": "SolidWorks scheduled trials",
           "unit": "count"
         },
         "featurescriptGeometry": {
@@ -40058,10 +40074,6 @@
           "name": "FeatureScript scored trials",
           "unit": "count"
         },
-        "featurescriptScheduled": {
-          "name": "FeatureScript scheduled trials",
-          "unit": "count"
-        },
         "fusionGeometry": {
           "name": "Fusion geometry score",
           "unit": "score",
@@ -40083,10 +40095,6 @@
         },
         "fusionScored": {
           "name": "Fusion scored trials",
-          "unit": "count"
-        },
-        "fusionScheduled": {
-          "name": "Fusion scheduled trials",
           "unit": "count"
         }
       }
@@ -44155,7 +44163,7 @@
       "url": "https://benchmarks.cekura.ai/experiments/production-voice-agents",
       "feed": "https://benchmarks.cekura.ai/experiments/production-voice-agents (voice quality leaderboard)",
       "terms": "Cekura publishes these benchmark results under CC BY 4.0. The Almanac credits and links the study.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Bland",
@@ -44175,6 +44183,21 @@
         "Talkdesk",
         "Vapi"
       ],
+      "chart": {
+        "title": "Quality score vs. mean response time",
+        "x": {
+          "key": "latency",
+          "label": "Mean response time",
+          "unit": "s",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Quality score",
+          "better": "higher"
+        },
+        "note": "Cekura plots overall quality score (out of 100) against mean response time in seconds."
+      },
       "parts": {
         "audio": {
           "name": "Audio quality",
@@ -44300,7 +44323,7 @@
       "url": "https://benchmarks.cekura.ai/stt",
       "feed": "https://benchmarks.cekura.ai/stt (embedded published results)",
       "terms": "Cekura publishes benchmark methods and results. The almanac credits Cekura and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AssemblyAI STT 3.7 Realtime Agent",
@@ -44327,6 +44350,22 @@
         "Speechmatics Linden",
         "Zoom Scribe Pro v2.1"
       ],
+      "chart": {
+        "title": "Overall WER vs. final-text delay",
+        "x": {
+          "key": "finalTextMedianMs",
+          "label": "Final-text delay P50",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall WER",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Cekura plots overall word error rate against median final-text delay in milliseconds."
+      },
       "parts": {
         "publicWerPercent": {
           "name": "Public",
@@ -44372,7 +44411,7 @@
       "url": "https://benchmarks.cekura.ai/text-to-speech",
       "feed": "https://benchmarks.cekura.ai/text-to-speech (embedded published results)",
       "terms": "Cekura publishes benchmark results under CC BY 4.0, per its governance page. Robots.txt permits this path. Source: Cekura.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Alibaba Qwen (via DeepInfra) Qwen3-TTS",
@@ -44400,6 +44439,22 @@
         "Smallest Lightning v3.1 Pro",
         "Soniox TTS RT v2"
       ],
+      "chart": {
+        "title": "Word error rate vs. streaming latency",
+        "x": {
+          "key": "firstAudioMedianMs",
+          "label": "Streaming latency (median)",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Cekura plots accuracy (100 minus word error rate) against median time to first audio in milliseconds."
+      },
       "stats": {
         "hardPartsPercent": {
           "name": "Hard parts word error rate",
@@ -62220,9 +62275,25 @@
       "url": "https://factory.com/news/code-review-benchmark",
       "feed": "https://factory.com/news/code-review-benchmark",
       "terms": "The publisher displays results at https://factory.com/news/code-review-benchmark. I could not verify reuse terms. Its robots.txt allows the article.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "chart": {
+        "title": "F1 score vs. cost per PR",
+        "x": {
+          "key": "cost",
+          "label": "Cost per PR",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean F1 score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Factory plots mean F1 score against average cost per pull request."
+      },
       "stats": {
         "precision": {
           "name": "Precision",
@@ -65270,9 +65341,26 @@
       "url": "https://research.composite.com/composite-bench",
       "feed": "https://research.composite.com/composite-bench",
       "terms": "Public maker results, robots.txt allows all agents; no additional reading restrictions stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "chart": {
+        "title": "Macro success vs. evaluation cost",
+        "x": {
+          "key": "cost",
+          "label": "Total evaluation cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Macro success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Composite plots macro success rate against total evaluation cost on a log scale."
+      },
       "costPer": "run",
       "parts": {
         "steward7d": {
@@ -65306,11 +65394,6 @@
           "name": "NPP ladder score",
           "unit": "score",
           "better": "higher"
-        },
-        "runCost": {
-          "name": "Run cost",
-          "unit": "usd",
-          "better": "lower"
         }
       }
     },
@@ -81671,9 +81754,24 @@
       "url": "https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark",
       "feed": "https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark",
       "terms": "The publisher displays results at https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark. I could not verify reuse terms. The site allows this path in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "chart": {
+        "title": "Substance task pass rate vs. form score",
+        "x": {
+          "key": "score",
+          "label": "Task pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "form",
+          "label": "Form score",
+          "better": "higher"
+        },
+        "note": "DELTA plots task pass rate on the horizontal axis against form score on the vertical axis."
+      },
       "stats": {
         "criteria": {
           "name": "Criteria score",
@@ -84144,9 +84242,26 @@
       "url": "https://www.deta.studio/leaderboard",
       "feed": "https://www.deta.studio/leaderboard",
       "terms": "Deta requires written permission for commercial republication of its content. https://www.deta.studio/terms-of-service The site allows the leaderboard in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 67,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per drawing",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "accuracy",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Deta Studio plots drawing accuracy against mean cost (100 credits per US dollar) on a log scale."
+      },
       "parts": {
         "Area_Complex_1": {
           "name": "Area_Complex_1",
@@ -88880,9 +88995,26 @@
       "url": "https://www.dualentry.com/benchmark",
       "feed": "https://www.dualentry.com/benchmark",
       "terms": "DualEntry prohibits scraping and requires prior written permission for redistribution. Keep this link for reference. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "DualEntry plots accounting accuracy against cost per task on a log scale."
+      },
       "parts": {
         "Transaction Classification": {
           "name": "Transaction Classification",
@@ -88947,8 +89079,8 @@
       "url": "https://dubesor.de/chess/chess-leaderboard",
       "feed": "https://dubesor.de/chess/chess-leaderboard-llm.txt",
       "terms": "The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/ The text snapshot is allowed by robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 713,
+      "retrieved": "2026-11-24",
+      "rows": 716,
       "unmatched": [
         "chatgpt-4o-latest",
         "codex-mini",
@@ -88963,7 +89095,6 @@
         "gemma-2-9b-it",
         "glm-4-32b",
         "granite-4.0-h-micro",
-        "hy4-flash",
         "inflection-3-pi",
         "inflection-3-productivity",
         "jamba-large-1.6",
@@ -89007,6 +89138,23 @@
         "rnj-1-instruct",
         "seed-1.6-flash"
       ],
+      "chart": {
+        "title": "Elo vs. cost per game",
+        "x": {
+          "key": "cost",
+          "label": "Cost per game",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Dubesor plots chess Elo rating against average cost per game on a log scale with a Pareto frontier."
+      },
       "stats": {
         "wins": {
           "name": "Wins",
@@ -92844,33 +92992,57 @@
       "url": "https://bench.turing.com/ekw/leaderboard/",
       "feed": "https://bench.turing.com/ekw/leaderboard/",
       "terms": "The publisher gives no reuse license on the benchmark page. https://bench.turing.com/ekw/leaderboard/ The robots.txt URL serves the site HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [],
+      "chart": {
+        "title": "Reward vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "API cost",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Reward",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Turing plots soft-gated reward against API cost across trials."
+      },
       "parts": {
         "Finance and insurance": {
-          "name": "Finance and insurance"
+          "name": "Finance and insurance",
+          "group": "Industry"
         },
         "Retail trade": {
-          "name": "Retail trade"
+          "name": "Retail trade",
+          "group": "Industry"
         },
         "Manufacturing": {
-          "name": "Manufacturing"
+          "name": "Manufacturing",
+          "group": "Industry"
         },
         "Health care and social assistance": {
-          "name": "Health care and social assistance"
+          "name": "Health care and social assistance",
+          "group": "Industry"
         },
         "Information": {
-          "name": "Information"
+          "name": "Information",
+          "group": "Industry"
         },
         "Real estate and rental and leasing": {
-          "name": "Real estate and rental and leasing"
+          "name": "Real estate and rental and leasing",
+          "group": "Industry"
         },
         "Government": {
-          "name": "Government"
+          "name": "Government",
+          "group": "Industry"
         },
         "Professional, scientific, and technical services": {
-          "name": "Professional, scientific, and technical services"
+          "name": "Professional, scientific, and technical services",
+          "group": "Industry"
         }
       },
       "stats": {
@@ -99589,7 +99761,7 @@
       "url": "https://exa.ai/evals",
       "feed": "https://exa.ai/evals",
       "terms": "Exa publishes its own evaluation. Its robots.txt allows AI input on public pages. The evaluation page gives no separate results license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Anthropic native search",
@@ -99603,7 +99775,23 @@
         "Parallel turbo",
         "Perplexity fast",
         "Perplexity web"
-      ]
+      ],
+      "chart": {
+        "title": "Row F1 vs. cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Median cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Row F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Exa plots ATLAS row F1 against median per-task cost (search plus agent model)."
+      }
     },
     "exact-words": {
       "url": "https://www.kaggle.com/benchmarks/saharshtibrewala/exact-words",
@@ -163783,9 +163971,25 @@
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/",
       "feed": "https://advances.edisonscientific.com/benchmarks/labbench2/ (leaderboard table)",
       "terms": "Static public page; the site has no robots.txt and no terms, and describes itself as hosting leaderboards and source data for LABBench2.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "chart": {
+        "title": "Average score vs. average output tokens",
+        "x": {
+          "key": "tokens",
+          "label": "Average output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Average score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Edison Scientific plots average score against average output tokens per task."
+      }
     },
     "labbench2-cloning": {
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/cloning/",
