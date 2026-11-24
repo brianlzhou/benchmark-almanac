@@ -1761,6 +1761,11 @@
       "via": "Searching for fantasy team managers led from Premier League assistants to an NFL league with published results."
     },
     {
+      "id": "artisan-3d",
+      "date": "2026-11-24",
+      "via": "GitHub repository physicalvision/artisan (141 stars), arXiv:2610.13947, and project page leaderboard."
+    },
+    {
       "id": "arxiv-papers-analytical-search-snowflake",
       "date": "2026-11-20",
       "via": "Snowflake reports the scores in its research or product release."
@@ -7376,6 +7381,11 @@
       "via": "Benchmark Radar. Clear-use test: 222 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
+      "id": "dyn-3d",
+      "date": "2026-11-24",
+      "via": "GitHub repository InkMind-AI/Dyn-3D (100 stars), arXiv:2609.01059, and project page quantitative tables."
+    },
+    {
       "id": "dynamic-programming-m8ngotree",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -9209,6 +9219,11 @@
       "id": "foqa",
       "date": "2026-11-19",
       "via": "EuroEval documents the evaluation in its Faroese dataset list."
+    },
+    {
+      "id": "for-t2i",
+      "date": "2026-11-24",
+      "via": "Baidu ERNIE Research release github.com/ernie-research/FoR-T2I (115 stars) and arXiv:2608.03357."
     },
     {
       "id": "forb",
@@ -15821,6 +15836,11 @@
       "via": "Harbor hub dataset meta/mlgym-bench."
     },
     {
+      "id": "mllm-jailbreak-bench",
+      "date": "2026-11-24",
+      "via": "GitHub repository ziyuwowo/mllm-jailbreak-bench (187 stars) with published attack evaluation table."
+    },
+    {
       "id": "mlqa",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folder mlqa."
@@ -17739,6 +17759,11 @@
       "id": "omni-interactscope-proactive",
       "date": "2026-11-08",
       "via": "Review of the Omni-InteractScope importer, which was on hold."
+    },
+    {
+      "id": "omni-worldbench",
+      "date": "2026-11-24",
+      "via": "Alibaba AMAP-ML repository AMAP-ML/Omni-WorldBench (108 GitHub stars) and arXiv:2603.22212."
     },
     {
       "id": "omni3d",
@@ -22356,6 +22381,11 @@
       "via": "A search for game evaluations identified this candidate."
     },
     {
+      "id": "societybench",
+      "date": "2026-11-24",
+      "via": "GitHub repository co-minder/SocietyBench-codebase (139 stars) and Hugging Face dataset Social-AI-2026/SocietyBench."
+    },
+    {
       "id": "sociohack",
       "date": "2026-11-01",
       "via": "Import AI 460 (2026-06-08)."
@@ -22369,6 +22399,11 @@
       "id": "sofc-exp",
       "date": "2026-11-20",
       "via": "We followed SEED’s fuel cell results to the original annotations and matched sentences from the LLaMat evaluation to the source papers."
+    },
+    {
+      "id": "softvtbench",
+      "date": "2026-11-24",
+      "via": "GitHub repository TuojingAI/SoftVTBench (248 stars) and arXiv:2607.04234."
     },
     {
       "id": "sokobench",
@@ -26951,6 +26986,11 @@
       "via": "We followed the WHAM project page to the reverberant extension and checked the authors’ paper and a separate test harness."
     },
     {
+      "id": "whatifibought",
+      "date": "2026-11-24",
+      "via": "GitHub repository mamawai/wtfibought (146 stars) and live paper-trading site intro.wtfibought.com."
+    },
+    {
       "id": "when2call",
       "date": "2026-11-01",
       "via": "The Nemotron 3.5 Bolt E4B model card reports When2Call Multi-Turn, and the almanac had no record."
@@ -27654,6 +27694,11 @@
       "id": "ziqi-eval",
       "date": "2026-11-20",
       "via": "Searching for the SSMR-Bench code led to MuTheoryEval and its published results for individual models."
+    },
+    {
+      "id": "zoombench",
+      "date": "2026-11-24",
+      "via": "ICML 2026 paper arXiv:2602.11858 and repository inclusionAI/Zooming-without-Zooming (202 GitHub stars)."
     },
     {
       "id": "zoomed-in-bvcc",

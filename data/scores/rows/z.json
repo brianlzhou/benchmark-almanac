@@ -245,7 +245,17 @@
     ["ziqi-eval","qwen-14b","Zero-shot",null,18.9,"2023-09-24",null,null,{"作曲理论":15.28,"世界民族音乐":24.04,"流行音乐":25.79,"西方音乐史":16.34,"中国音乐史":16.19,"中国传统音乐":17.67,"音乐美学":18.39,"音乐教育":20.32,"音乐表演":18.28,"女性音乐":20.9}],
     ["ziqi-eval","qwen-14b","Five-shot",null,17.68,"2023-09-24",null,null,{"作曲理论":13.13,"世界民族音乐":16.34,"流行音乐":15.34,"西方音乐史":17.79,"中国音乐史":24.73,"中国传统音乐":19.25,"音乐美学":17.02,"音乐教育":14.65,"音乐表演":14.04,"女性音乐":15.82}],
     ["ziqi-eval","qwen-7b","Zero-shot",null,20.36,"2023-09-28",null,null,{"作曲理论":18.97,"世界民族音乐":19.61,"流行音乐":24.71,"西方音乐史":19.28,"中国音乐史":19.83,"中国传统音乐":19.46,"音乐美学":17.78,"音乐教育":21.68,"音乐表演":22.4,"女性音乐":24.48}],
-    ["ziqi-eval","qwen-7b","Five-shot",null,5.48,"2023-09-28",null,null,{"作曲理论":5.41,"世界民族音乐":6.2,"流行音乐":5.89,"西方音乐史":5.57,"中国音乐史":5.05,"中国传统音乐":4.96,"音乐美学":6.53,"音乐教育":5.67,"音乐表演":4.96,"女性音乐":5.97}]
+    ["ziqi-eval","qwen-7b","Five-shot",null,5.48,"2023-09-28",null,null,{"作曲理论":5.41,"世界民族音乐":6.2,"流行音乐":5.89,"西方音乐史":5.57,"中国音乐史":5.05,"中国传统音乐":4.96,"音乐美学":6.53,"音乐教育":5.67,"音乐表演":4.96,"女性音乐":5.97}],
+    ["zoombench","qwen2-5-vl-7b",null,null,42.49,"2025-01-28",null,null],
+    ["zoombench","mimo-vl-7b-rl",null,null,45.09,"2025-05-30",null,null],
+    ["zoombench","glm-4-5v",null,null,49.23,"2025-08-11",null,null,{"counting":32.84,"ocr":63.41,"color":50.41,"structure":52.9,"material":47.54,"identification":63.33,"regionalAvg":73.61,"zoomingGap":24.38},{"params":108}],
+    ["zoombench","minicpm-v-4-5",null,null,42.6,"2025-08-24",null,null,{"counting":31.86,"ocr":47.97,"color":44.63,"structure":46.45,"material":49.18,"identification":43.33,"regionalAvg":65.33,"zoomingGap":22.73},{"params":9}],
+    ["zoombench","qwen3-vl-235b-a22b",null,null,49.11,"2025-09-23",null,null,{"counting":37.75,"ocr":61.79,"color":46.69,"structure":58.06,"material":42.62,"identification":55,"regionalAvg":72.07,"zoomingGap":22.96}],
+    ["zoombench","qwen3-vl-4b-instruct",null,null,40.24,"2025-10-15",null,null],
+    ["zoombench","qwen3-vl-8b-instruct",null,null,37.87,"2025-10-15",null,null,{"counting":29.9,"ocr":47.97,"color":38.02,"structure":37.42,"material":39.34,"identification":43.33,"regionalAvg":63.08,"zoomingGap":25.21}],
+    ["zoombench","gpt-5-1",null,null,47.22,"2025-11-13",null,null,{"counting":34.8,"ocr":54.47,"color":48.76,"structure":49.03,"material":57.38,"identification":53.33,"regionalAvg":70.06,"zoomingGap":22.84}],
+    ["zoombench","gemini-3-flash",null,null,59.29,"2025-12-17",null,null,{"counting":42.16,"ocr":80.49,"color":54.55,"structure":61.94,"material":72.13,"identification":73.33,"regionalAvg":78.34,"zoomingGap":19.05}],
+    ["zoombench","kimi-k2-5",null,null,56.33,"2026-01-27",null,null,{"counting":44.61,"ocr":67.48,"color":53.31,"structure":62.58,"material":65.57,"identification":60,"regionalAvg":73.25,"zoomingGap":16.92},{"params":1000}]
   ],
   "others": [
     ["zebralogic","gemini-1.5-pro-exp-0827 (unlisted snapshot)","greedy",null,30.5,null,null,null,{"easy":79.64,"hard":11.39,"small":75.31,"medium":20.71,"large":3,"xl":0,"cellAccuracy":50.84,"noAnswer":0.8,"reasonLength":1594.5},{"trials":1}],
@@ -785,6 +795,9 @@
     ["ziqi-eval","XVERSE-7B","Five-shot",null,10.14,null,null,null,{"作曲理论":16.39,"世界民族音乐":3.77,"流行音乐":8.91,"西方音乐史":15.19,"中国音乐史":2.77,"中国传统音乐":16.67,"音乐美学":17.02,"音乐教育":7.03,"音乐表演":14.16,"女性音乐":6.57}],
     ["ziqi-eval","ChatMusician","Five-shot",null,4.16,null,null,null,{"作曲理论":2.32,"世界民族音乐":4.88,"流行音乐":2.01,"西方音乐史":5.4,"中国音乐史":4.14,"中国传统音乐":4.85,"音乐美学":1.22,"音乐教育":6.52,"音乐表演":3.39,"女性音乐":4.48}],
     ["ziqi-eval","educhat-base-002-13B","Zero-shot",null,0,null,null,null,{"作曲理论":0,"世界民族音乐":0,"流行音乐":0,"西方音乐史":0,"中国音乐史":0,"中国传统音乐":0,"音乐美学":0,"音乐教育":0,"音乐表演":0,"女性音乐":0}],
-    ["ziqi-eval","educhat-base-002-13B","Five-shot",null,0,null,null,null,{"作曲理论":0,"世界民族音乐":0,"流行音乐":0,"西方音乐史":0,"中国音乐史":0,"中国传统音乐":0,"音乐美学":0,"音乐教育":0,"音乐表演":0,"女性音乐":0}]
+    ["ziqi-eval","educhat-base-002-13B","Five-shot",null,0,null,null,null,{"作曲理论":0,"世界民族音乐":0,"流行音乐":0,"西方音乐史":0,"中国音乐史":0,"中国传统音乐":0,"音乐美学":0,"音乐教育":0,"音乐表演":0,"女性音乐":0}],
+    ["zoombench","ZwZ-8B",null,null,58.11,null,null,null,{"counting":40.69,"ocr":67.48,"color":68.6,"structure":58.71,"material":57.38,"identification":55,"regionalAvg":73.37,"zoomingGap":15.26}],
+    ["zoombench","ZwZ-4B",null,null,55.74,null,null,null],
+    ["zoombench","ZwZ-7B",null,null,55.62,null,null,null]
   ]
 }

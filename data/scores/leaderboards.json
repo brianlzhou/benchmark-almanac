@@ -20593,6 +20593,35 @@
         }
       }
     },
+    "artisan-3d": {
+      "url": "https://physicalvision.github.io/artisan/",
+      "feed": "https://physicalvision.github.io/artisan/",
+      "terms": "Oxford VGG and ETH Zurich PhysicalVision publish the quantitative benchmark table on their project page and in arXiv:2610.13947.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [
+        "Articulate-Anything",
+        "Instruct-Particulate",
+        "PhysX-Anything",
+        "URDF-Anything+"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "doubleJointCollision": {
+          "name": "Double-joint collision",
+          "group": "Joint complexity",
+          "unit": "%",
+          "better": "lower"
+        },
+        "multiJointCollision": {
+          "name": "Multi-joint collision",
+          "group": "Joint complexity",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "arxivlean": {
       "url": "https://matharena.ai/?comp=arxivlean--september",
       "feed": "https://matharena.ai/competition_tables/arxivlean--september",
@@ -89889,6 +89918,34 @@
         }
       }
     },
+    "dyn-3d": {
+      "url": "https://inkmind-ai.github.io/Dyn-3D/",
+      "feed": "https://inkmind-ai.github.io/Dyn-3D/",
+      "terms": "InkMind-AI publishes the Dyn-3D quantitative table on the project page and in arXiv:2609.01059.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "InternVL-3.5-8B + TempoVista",
+        "LLaVA-NeXT-Video",
+        "LLaVA-OneVision",
+        "Qwen3-VL-8B-Instruct + TempoVista"
+      ],
+      "parts": {
+        "kinematic": {
+          "name": "Kinematic",
+          "group": "Category"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "group": "Category"
+        },
+        "trajectory": {
+          "name": "Trajectory",
+          "group": "Category"
+        }
+      }
+    },
     "dynamath": {
       "url": "https://arxiv.org/html/2411.00836",
       "feed": "https://arxiv.org/html/2411.00836",
@@ -113376,6 +113433,65 @@
         "scored": {
           "name": "Scored examples",
           "unit": "count"
+        }
+      }
+    },
+    "for-t2i": {
+      "url": "https://ernie-research.github.io/FoR-T2I/",
+      "feed": "https://arxiv.org/html/2608.03357",
+      "terms": "Baidu ERNIE Research publishes Table 1 on arXiv. https://arxiv.org/abs/2608.03357",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [
+        "ERNIE-Image",
+        "FLUX.1-Fill-dev",
+        "Infinity",
+        "OmniGen2",
+        "Qwen-Image 2.0",
+        "SD3.5 Medium",
+        "Seedream 5.0",
+        "Show-o",
+        "UniPic v2"
+      ],
+      "parts": {
+        "l1For": {
+          "name": "L1 (FoR)",
+          "group": "Difficulty",
+          "note": "Single-relation frame-of-reference prompts."
+        },
+        "l2For": {
+          "name": "L2 (FoR)",
+          "group": "Difficulty",
+          "note": "Two-relation frame-of-reference prompts."
+        },
+        "l3For": {
+          "name": "L3 (FoR)",
+          "group": "Difficulty",
+          "note": "Multi-step frame-of-reference prompts."
+        },
+        "l1Cam": {
+          "name": "L1 (Camera)",
+          "group": "Camera control",
+          "note": "Camera-view control prompts at level L1."
+        },
+        "l2Cam": {
+          "name": "L2 (Camera)",
+          "group": "Camera control",
+          "note": "Camera-view control prompts at level L2."
+        },
+        "l3Cam": {
+          "name": "L3 (Camera)",
+          "group": "Camera control",
+          "note": "Camera-view control prompts at level L3."
+        }
+      },
+      "stats": {
+        "camAvg": {
+          "name": "Camera-view control",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average accuracy on paired camera-frame control prompts."
         }
       }
     },
@@ -193934,6 +194050,29 @@
         "Mountain Car Continuous": {
           "name": "Mountain Car Continuous",
           "unit": "score"
+        }
+      }
+    },
+    "mllm-jailbreak-bench": {
+      "url": "https://github.com/ziyuwowo/mllm-jailbreak-bench",
+      "feed": "https://raw.githubusercontent.com/ziyuwowo/mllm-jailbreak-bench/main/README.md",
+      "terms": "Repository README in ziyuwowo/mllm-jailbreak-bench, licensed BSD-3-Clause.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [],
+      "stats": {
+        "refusalQuality": {
+          "name": "Refusal quality",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of refusals that gave a substantive refusal rather than a generic one."
+        },
+        "calibrationError": {
+          "name": "Calibration error",
+          "unit": "%",
+          "better": "lower",
+          "note": "Difference in attack success rate between adversarial and clean baseline prompts."
         }
       }
     },
@@ -331299,6 +331438,59 @@
         },
         "女性音乐": {
           "name": "女性音乐"
+        }
+      }
+    },
+    "zoombench": {
+      "url": "https://github.com/inclusionAI/Zooming-without-Zooming",
+      "feed": "https://arxiv.org/html/2602.11858",
+      "terms": "The authors publish Tables 2 and 7 on arXiv. https://arxiv.org/abs/2602.11858",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": [
+        "ZwZ-4B",
+        "ZwZ-7B",
+        "ZwZ-8B"
+      ],
+      "parts": {
+        "counting": {
+          "name": "Counting",
+          "group": "Dimension"
+        },
+        "ocr": {
+          "name": "OCR",
+          "group": "Dimension"
+        },
+        "color": {
+          "name": "Color",
+          "group": "Dimension"
+        },
+        "structure": {
+          "name": "Structure",
+          "group": "Dimension"
+        },
+        "material": {
+          "name": "Material",
+          "group": "Dimension"
+        },
+        "identification": {
+          "name": "Identification",
+          "group": "Dimension"
+        }
+      },
+      "stats": {
+        "regionalAvg": {
+          "name": "Regional accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average accuracy when given cropped target regions instead of the full image."
+        },
+        "zoomingGap": {
+          "name": "Zooming gap",
+          "unit": "%",
+          "better": "lower",
+          "note": "Difference between regional accuracy and global accuracy."
         }
       }
     }

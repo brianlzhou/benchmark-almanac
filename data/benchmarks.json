@@ -202803,5 +202803,250 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "softvtbench",
+    "name": "SoftVTBench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A safety-aware visuo-tactile robotics benchmark of 40 tasks across 4 suites evaluating deformable and rigid object manipulation in Isaac Sim under contact deformation limits.",
+    "org": "TuojingAI and collaborators",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.04234",
+      "repo": "https://github.com/TuojingAI/SoftVTBench",
+      "dataset": "https://huggingface.co/datasets/Arthur12137/SoftVTBench",
+      "site": "https://softvtbench.github.io/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Safety success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/TuojingAI/SoftVTBench",
+      "https://arxiv.org/abs/2607.04234",
+      "https://softvtbench.github.io/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "zoombench",
+    "name": "ZoomBench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "A dual-view fine-grained perception benchmark testing vision-language models on counting, OCR, color, structure, material, and identification across high-resolution images and cropped regions.",
+    "org": "Shanghai Jiao Tong University and Ant Group (inclusionAI)",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.11858",
+      "repo": "https://github.com/inclusionAI/Zooming-without-Zooming"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Global accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2602.11858",
+      "https://github.com/inclusionAI/Zooming-without-Zooming"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "mllm-jailbreak-bench",
+    "name": "MLLM-Jailbreak-Bench",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "A reproducible adversarial safety benchmark evaluating multimodal language models across image injection, text-image collusion, OCR jailbreaks, audio injection, and visual prompt leakage.",
+    "org": "Ziyu Wang",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/ziyuwowo/mllm-jailbreak-bench"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Average attack success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/ziyuwowo/mllm-jailbreak-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "whatifibought",
+    "name": "WhatIfIBought",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "A live paper-trading arena where language model agents trade real historical and live market data with virtual capital while logging every reasoning trace, tool call, thesis, and post-mortem.",
+    "org": "mamawai",
+    "released": "2026-02",
+    "links": {
+      "repo": "https://github.com/mamawai/wtfibought",
+      "site": "https://intro.wtfibought.com",
+      "leaderboard": "https://wtfibought.com"
+    },
+    "access": "public",
+    "note": "The live leaderboard API requires an authenticated user token, so scores are not imported automatically.",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Portfolio return",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/mamawai/wtfibought",
+      "https://intro.wtfibought.com",
+      "https://wtfibought.com"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "artisan-3d",
+    "name": "Artisan",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A benchmark for physically grounded articulated 3D asset generation measuring single-joint, double-joint, and multi-joint collision rates in physics simulation.",
+    "org": "Oxford VGG and ETH Zurich (PhysicalVision)",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.13947",
+      "repo": "https://github.com/physicalvision/artisan",
+      "site": "https://physicalvision.github.io/artisan/",
+      "leaderboard": "https://physicalvision.github.io/artisan/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Single-joint collision rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://physicalvision.github.io/artisan/",
+      "https://github.com/physicalvision/artisan",
+      "https://arxiv.org/abs/2610.13947"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "societybench",
+    "name": "SocietyBench",
+    "category": "forecasting",
+    "subcategory": "forecasting-events",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Bilingual Chinese and English forecasting benchmark of 125 anonymized cutoff points across 5 real-world events scoring probability calibration over 25,364 questions and temporal accuracy over 3,112 timeline events.",
+    "org": "co-minder",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/co-minder/SocietyBench-codebase",
+      "dataset": "https://huggingface.co/datasets/Social-AI-2026/SocietyBench"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/co-minder/SocietyBench-codebase",
+      "https://huggingface.co/datasets/Social-AI-2026/SocietyBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "for-t2i",
+    "name": "FoR-T2I",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Twelve hundred paired frame-of-reference and camera-view prompts across three difficulty levels testing whether text-to-image models render spatial relations from an oriented anchor object perspective.",
+    "org": "Baidu ERNIE Research",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.03357",
+      "repo": "https://github.com/ernie-research/FoR-T2I",
+      "dataset": "https://huggingface.co/datasets/ernie-research/FoR-T2I",
+      "site": "https://ernie-research.github.io/FoR-T2I/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Frame-of-reference accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2608.03357",
+      "https://github.com/ernie-research/FoR-T2I",
+      "https://ernie-research.github.io/FoR-T2I/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "omni-worldbench",
+    "name": "Omni-WorldBench",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "An interaction-centric benchmark for video-based world models measuring responsiveness to user control actions, physical plausibility, and temporal consistency across multi-step rollouts.",
+    "org": "Alibaba AMAP-ML",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.22212",
+      "repo": "https://github.com/AMAP-ML/Omni-WorldBench"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/AMAP-ML/Omni-WorldBench",
+      "https://arxiv.org/abs/2603.22212"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dyn-3d",
+    "name": "Dyn-3D",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Eight hundred thirty-five dynamic videos and 16,000 questions testing whether vision-language models resolve ego-motion ambiguity across spatial, kinematic, and trajectory reasoning.",
+    "org": "InkMind-AI",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.01059",
+      "repo": "https://github.com/InkMind-AI/Dyn-3D",
+      "site": "https://inkmind-ai.github.io/Dyn-3D/",
+      "leaderboard": "https://inkmind-ai.github.io/Dyn-3D/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Overall accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://inkmind-ai.github.io/Dyn-3D/",
+      "https://github.com/InkMind-AI/Dyn-3D",
+      "https://arxiv.org/abs/2609.01059"
+    ],
+    "added": "2026-11-24"
   }
 ]
