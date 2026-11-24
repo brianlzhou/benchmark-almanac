@@ -1836,6 +1836,10 @@
     "description": "Agents make choices in a simulated antibody optimization experiment under a fixed budget. Recorded assay results determine normalized improvement on 200 test episodes.",
     "org": "valenlabs",
     "released": "2026-11",
+    "links": {
+      "site": "https://valenlabs.com/blog/abmaze",
+      "leaderboard": "https://valenlabs.com/abmaze/results/index.html"
+    },
     "access": "public",
     "note": "Valen evaluated five models on 200 episodes each in November 2026. Gemini 4 had the highest mean normalized gain at 54.6%.",
     "unit": "score",
@@ -3802,6 +3806,9 @@
     "description": "Models choose an assistant’s next action from an evidence bundle. Twelve tasks check whether coding and general assistants verify their work before claiming success.",
     "org": "narcolepticchicken",
     "released": "2026-06",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/agent-behavior-loop-v0"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports Qwen3.5-2B peaked at 0.962 mean training reward. It references GPT-4.1 mini evaluation runs without an aggregate score.",
     "unit": "score",
@@ -3947,6 +3954,9 @@
     "description": "Agents review case files and write legal memos about decisions made by autonomous agents. The grader checks their findings, evidence, and unsupported claims.",
     "org": "narcolepticchicken",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/agent-liability-gym"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports Claude Sonnet 4.6 at 0.777 on five v0.3.1 cases. It also compares GPT-5.5 under another rubric.",
     "unit": "score",
@@ -6557,6 +6567,9 @@
     "description": "Agents review five synthetic export control matters and write risk memos. The grader checks the deliverable, seven findings per matter, and unsupported claims.",
     "org": "narcolepticchicken",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/ai-law-legal-agent-eval"
+    },
     "access": "public",
     "note": "The publisher tested GPT-5.4 mini with a Grok 4.5 judge in ten July 2026 runs. It reports judge checks but no overall model score.",
     "unit": "score",
@@ -7523,7 +7536,8 @@
       "paper": "https://arxiv.org/abs/2607.20498",
       "repo": "https://github.com/zai-org/AISE-Bench",
       "dataset": "https://huggingface.co/datasets/zai-org/AISE-Bench",
-      "site": "https://aise-bench.github.io/"
+      "site": "https://aise-bench.github.io/",
+      "leaderboard": "https://aise-bench.github.io/#leaderboard"
     },
     "access": "public",
     "note": "The benchmark contains 1,133 human-verified academic QA pairs from authentic AMiner queries and executable API trajectories.",
@@ -8123,6 +8137,9 @@
     "description": "Agents solve 87 capture-the-flag tasks in Alibaba’s collection of competition challenges from 2023 through 2026.",
     "org": "alibaba-aaig",
     "released": "2026-08",
+    "links": {
+      "repo": "https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf"
+    },
     "access": "public",
     "note": "The September 2026 chart lists six models, and the text reports a seventh, Claude Opus 5. GPT-5.6-Sol led with a 62.1% pass rate.",
     "unit": "%",
@@ -9575,7 +9592,7 @@
     },
     "access": "unknown",
     "note": "The benchmark measures speaker grounding, role tracking, event grounding and multimodal dialogue summarization. The paper reports results for current multimodal models and a 39.52 percent relative improvement from RAFT.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -10667,6 +10684,9 @@
     "format": "short-answer",
     "description": "Classifier recall on violative cyber exchanges, block rates on defensive vulnerability-finding and secure-coding work, and the rewind-attacker robustness test.",
     "org": "Anthropic",
+    "links": {
+      "paper": "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -10709,6 +10729,9 @@
     "format": "open-ended",
     "description": "Single-turn harmful and benign request sets, multi-turn tests, child safety, suicide/self-harm, disordered eating and election integrity.",
     "org": "Anthropic",
+    "links": {
+      "paper": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -10783,6 +10806,9 @@
     "format": "agent-task",
     "description": "Measures refusal of malicious tasks via Claude Code, computer use and agentic influence campaigns.",
     "org": "Anthropic",
+    "links": {
+      "paper": "https://assets.claude.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -10902,6 +10928,9 @@
     "format": "agent-task",
     "description": "Internal suite: reward hacking, impossible tasks, sandbox escape, destructive actions, pasted-instruction following, self-preference, answer copying, concealment, rare actions.",
     "org": "Anthropic",
+    "links": {
+      "paper": "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -12782,6 +12811,9 @@
     "description": "Models review code changes with planted architectural defects. The evaluator measures precision and recall separately on six complete diffs and 15 single-defect excerpts.",
     "org": "korck",
     "released": "2026-08",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/korck/arch-review-v1"
+    },
     "access": "public",
     "note": "In August 2026, Claude Haiku 4.5 led full diffs at 0.833 F1. Claude Fable 5 led excerpts at 0.610 F1. The comparison also included Claude Opus 5.",
     "unit": "score",
@@ -16481,6 +16513,9 @@
     "description": "Models reconcile a synthetic Australian goods and services tax ledger, correct a Business Activity Statement, and identify bookkeeping errors. The grader weighs totals and fault detection.",
     "org": "afzal0",
     "released": "2026-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/afzal0/au-bas-reconciliation-v1"
+    },
     "access": "public",
     "note": "GPT-5-mini scored about 0.538 on 30 tasks on September 11, 2026. DeepSeek V4 Flash scored 0.510 on 24 completed tasks the following day.",
     "unit": "score",
@@ -18310,6 +18345,9 @@
     "description": "Paid API that searches a frozen web archive as of a given date, for forecasting backtests and reproducible web-enabled evals. A tool, not a benchmark.",
     "org": "General Reasoning",
     "released": "2026-07",
+    "links": {
+      "site": "https://www.gr.inc/releases/introducing-backsearch"
+    },
     "access": "private",
     "note": "Results are deterministic for the same query and cutoff. Sources: news, SEC filings, arXiv, Wikipedia, web.",
     "unit": "%",
@@ -21546,6 +21584,9 @@
     "description": "Agents use search tools to compare abstracts from PubMedQA, including their sections, subject headings, and conclusions. Five task types require retrieving or combining evidence.",
     "org": "d42me",
     "released": "2026-02",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/d42me/bio-search-l2"
+    },
     "access": "public",
     "note": "The February 2026 release reports GPT-4.1-mini at 92% pass@1 on 50 examples with two rollouts each. Base Qwen3-30B-A3B scored 83% in a separate run.",
     "unit": "%",
@@ -22729,6 +22770,10 @@
     "description": "Safeguarded model configurations receive harmful and benign biology requests. Scored on refusing requests designated for refusal and allowing benign ones.",
     "org": "SecureBio",
     "released": "2026-03",
+    "links": {
+      "site": "https://securebio.org/biotier/",
+      "leaderboard": "https://securebio.org/benchmarks/details/?benchmark=biotier"
+    },
     "access": "private",
     "note": "Run by SecureBio. Counts full blocks and model-jury graded soft refusals.",
     "unit": "%",
@@ -23919,7 +23964,9 @@
     "links": {
       "paper": "https://arxiv.org/abs/2508.16402",
       "repo": "https://github.com/ByteDance-Seed/BM-code",
-      "dataset": "https://huggingface.co/datasets/ByteDance-Seed/BM-Bench"
+      "dataset": "https://huggingface.co/datasets/ByteDance-Seed/BM-Bench",
+      "leaderboard": "https://boese0601.github.io/bytemorph/#leaderboard",
+      "site": "https://boese0601.github.io/bytemorph/"
     },
     "access": "public",
     "note": "ByteDance Seed publishes the benchmark dataset and evaluation code for non-rigid image editing.",
@@ -24300,6 +24347,10 @@
     "description": "Models compare a numerical grader with a certified interval and determine whether the grader can accept an incorrect value. Exact certificates verify the answer.",
     "org": "carlos-toledo",
     "released": "2026-09",
+    "links": {
+      "site": "https://carlostoledo.co/reports/gym.html",
+      "repo": "https://github.com/carlostoledo1891/cert-machine"
+    },
     "access": "public",
     "note": "The README available on November 19, 2026, reports Claude Opus 5 at 0.950 mean reward on 120 cases. Sonnet 5 scored 0.670 and Haiku 4.5 scored 0.317.",
     "unit": "score",
@@ -27541,6 +27592,10 @@
     "description": "Agents navigate and explore simulated roads across 19 tasks using text or camera images. The simulator scores outcomes such as reaching destinations and avoiding collisions.",
     "org": "sinatras",
     "released": "2026-02",
+    "links": {
+      "site": "https://blog.sinatras.dev/Carla-Env",
+      "repo": "https://app.primeintellect.ai/dashboard/environments/sinatras/carla-env"
+    },
     "access": "public",
     "note": "The maze chart compares six GPT, Claude, and Qwen models over five episodes each. As of November 20, 2026, GPT-5.2 led at 62.7 meters toward the goal.",
     "unit": "score",
@@ -29577,10 +29632,13 @@
     "description": "Models respond to benign policy conflicts with and without monitoring cues. The evaluation measures how those cues affect behavior and stated reasoning.",
     "org": "anthone",
     "released": "2026-06",
+    "links": {
+      "repo": "https://github.com/AnthonE/unmask",
+      "site": "https://app.primeintellect.ai/dashboard/environments/anthone/channel-switching-eval"
+    },
     "access": "public",
     "note": "The November 2026 README reports behavioral dependence of 0.000 bits for GPT-4.1 and GPT-4.1 mini in the default setting, versus 0.010 for GPT-5.1.",
     "unit": "score",
-    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://app.primeintellect.ai/dashboard/environments/anthone/channel-switching-eval",
@@ -30569,6 +30627,11 @@
     "description": "Models read chess positions in Forsyth-Edwards Notation and describe the board in JSON. The scorer checks fields against the expected position.",
     "org": "apokryphosx",
     "released": "2025-09",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/apokryphosx/chess-notation-dataset",
+      "site": "https://app.primeintellect.ai/dashboard/environments/apokryphosx/vf_chess_notation_eval",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/apokryphosx/vf_chess_notation_eval/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0.9333 for gpt-4.1-mini on 5 examples on 2025-09-07.",
     "unit": "score",
@@ -33853,6 +33916,9 @@
     "description": "Models click a circle or a named word in generated screenshots. The evaluation checks accuracy across image sizes and coordinate formats.",
     "org": "Prime Intellect",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/prime/click-calibrate"
+    },
     "access": "public",
     "note": "In the May 2026 package, GPT-5.5 led with 0.910 reward using pixels. The comparison includes Claude Opus 4.7, Haiku 4.5, Qwen3.6, and Kimi K2.6.",
     "unit": "score",
@@ -34612,6 +34678,10 @@
     "description": "Agents complete a cloud network security exercise. The verifier checks the resulting cloud configuration and observed network behavior.",
     "org": "human-intuition",
     "released": "2026-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-ce80-10",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-ce80-10/evals"
+    },
     "access": "public",
     "note": "The public hub evaluation page lists no scored model runs.",
     "unit": "score",
@@ -34635,6 +34705,9 @@
     "description": "Agents complete a cloud security capstone. A verifier reads the environment after the task to assess the outcome.",
     "org": "human-intuition",
     "released": "2026-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-ceexfil-0"
+    },
     "access": "public",
     "note": "The public hub evaluation page lists no scored model runs.",
     "unit": "score",
@@ -34658,6 +34731,10 @@
     "description": "Agents complete a simulated cloud reconnaissance assessment. The verifier compares the submitted result with the recorded state of the exercise.",
     "org": "human-intuition",
     "released": "2026-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-rx00",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-rx00/evals"
+    },
     "access": "public",
     "note": "The public hub evaluation page lists no scored model runs.",
     "unit": "score",
@@ -36709,6 +36786,9 @@
     "description": "Cohere internal evals of its North agent platform: agentic question answering, spreadsheet data analysis and memory use. LLM-as-judge scoring.",
     "org": "Cohere",
     "released": "2026-05",
+    "links": {
+      "site": "https://cohere.com/blog/command-a-plus"
+    },
     "access": "private",
     "note": "Lab-created in-house eval (Cohere).",
     "unit": "%",
@@ -38278,6 +38358,10 @@
     "description": "Agents repair Python packages with asynchronous or threaded code. Hidden tests reproduce each bug deterministically across 15 repair tasks.",
     "org": "tanishgudise",
     "released": "2026-10",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/tanishgudise/concurrency-bugs",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/tanishgudise/concurrency-bugs/evals"
+    },
     "access": "public",
     "note": "The October 2026 baseline table gives Claude Sonnet 5 100% pass@1 across three rollouts per task. GPT-OSS-120B scored 76% and GPT-OSS-20B scored 62%.",
     "unit": "%",
@@ -38802,18 +38886,18 @@
     "level": "expert",
     "scoring": "verified",
     "format": "open-ended",
-    "description": "CRM agents answer enterprise questions against contextual business data and receive accuracy, cost, speed, trust and safety measurements.",
+    "description": "Models answer questions from supplied context across seven question answering tasks, among them TriviaQA, HotpotQA and Natural Questions. The average accuracy measures how well a model grounds its answers in retrieved evidence.",
     "org": "Salesforce AI Research",
     "released": "2024-09",
     "links": {
       "repo": "https://github.com/SalesforceAIResearch/SFR-RAG",
-      "site": "https://www.salesforceairesearch.com/crm-benchmark",
       "dataset": "https://huggingface.co/datasets/Salesforce/ContextualBench",
-      "leaderboard": "https://huggingface.co/spaces/Salesforce/ContextualBench-Leaderboard"
+      "leaderboard": "https://huggingface.co/spaces/Salesforce/ContextualBench-Leaderboard",
+      "paper": "https://arxiv.org/abs/2409.09916"
     },
     "access": "public+private-holdout",
-    "note": "Salesforce reports human evaluations from employees and external customers across real CRM use cases.",
-    "unit": "score",
+    "note": "Salesforce introduced ContextualBench with its SFR-RAG model. It is a separate benchmark from Salesforce's CRM benchmark, which an earlier version of this record described.",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -39301,6 +39385,10 @@
     "description": "Two models cooperate as cluegiver and guesser to identify target words on a hidden board. The default evaluation uses 200 separately generated boards.",
     "org": "maxbittker",
     "released": "2026-03",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/maxbittker/codenames",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/maxbittker/codenames/evals"
+    },
     "access": "public",
     "note": "Claude Opus 4.6 led public hub runs at 2.077 mean reward on 20 boards on March 29, 2026. The hub also lists Gemini and Qwen.",
     "unit": "score",
@@ -42749,7 +42837,8 @@
     "links": {
       "paper": "https://aclanthology.org/R13-1016/",
       "site": "https://euroeval.com/datasets/czech",
-      "dataset": "https://huggingface.co/datasets/EuroEval/csfd-sentiment-mini"
+      "dataset": "https://huggingface.co/datasets/EuroEval/csfd-sentiment-mini",
+      "leaderboard": "https://euroeval.com/leaderboards/czech"
     },
     "access": "public",
     "note": "EuroEval scores sentiment labels with the Matthews correlation coefficient.",
@@ -44083,7 +44172,8 @@
     "released": "2025-10",
     "links": {
       "paper": "https://arxiv.org/abs/2503.17332",
-      "repo": "https://github.com/uiuc-kang-lab/cve-bench"
+      "repo": "https://github.com/uiuc-kang-lab/cve-bench",
+      "leaderboard": "https://cvebench.com/"
     },
     "access": "public",
     "note": "v2.0.0 on 30 October 2025 reworked the harness along the Agentic Benchmark Checklist. v2.1.0 on 12 January 2026 removed arbitrary file upload as a criterion and added remote code execution, which the maker calls a breaking change. The run script reports 2.2.0. Apache 2.0, still 40 critical CVEs.",
@@ -45132,6 +45222,9 @@
     "description": "Agents write legal risk memos for five synthetic privacy and incident reporting matters. The grader checks the completed memo and its coverage of legal issues.",
     "org": "narcolepticchicken",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/cybersecurity-privacy-legal-agent-eval"
+    },
     "access": "public",
     "note": "The baseline table checked November 19, 2026 lists GPT-5.5 at 0.531 and Qwen3-30B at 0.434 across 15 runs each.",
     "unit": "score",
@@ -45403,7 +45496,7 @@
     },
     "access": "public",
     "note": "The repository includes reference implementations, per-task evaluators, packed task tables and expert design rubrics.",
-    "unit": "score",
+    "unit": "speedup",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -49002,6 +49095,9 @@
     "description": "Agents act as an employee’s assistant using 80 simulated workplace tools and anonymized company records. Four tasks grade the final state.",
     "org": "doe",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/doe/degennaro-workplace-sample"
+    },
     "access": "private",
     "note": "The November 2026 comparison reports 12 runs per model. Claude Opus 5.5 passed seven, GPT-6.1 Sol passed six, and Grok 4.7 passed five.",
     "unit": "%",
@@ -51384,6 +51480,10 @@
     "description": "Models decide whether corporate actions comply with Delaware law and provide supporting calculations. Fifty evaluation cases distinguish correct headline decisions from fully correct answers.",
     "org": "narcolepticchicken",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/dgcl-reward-hacking",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/dgcl-reward-hacking/evals"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports base Qwen3.5-4B led its trained variant on fully correct verdicts, 23.8% to 16.7%.",
     "unit": "score",
@@ -52760,6 +52860,10 @@
     "description": "Agents complete five simulated workplace assignments in law, private equity, and finance operations. Deterministic checks grade figures and application state, while model judges grade written work.",
     "org": "doe",
     "released": "2026-10",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/doe/sample-pack",
+      "leaderboard": "https://hub.harborframework.com/datasets/doe/sample-pack"
+    },
     "access": "public",
     "note": "The October 2026 table reports seven models. Claude Opus 5.5 led at 0.36 mean score across five tasks. No model met every critical criterion.",
     "unit": "score",
@@ -54983,6 +55087,10 @@
     "description": "Models solve generated optimization and counting problems, including knapsack, coin change, and edit distance. A problem-specific algorithm verifies each answer.",
     "org": "m8ngotree",
     "released": "2025-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/m8ngotree/dynamic-programming",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/m8ngotree/dynamic-programming/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0.946 for gpt-4.1-mini on 100 examples on 2025-09-07.",
     "unit": "score",
@@ -56019,6 +56127,9 @@
     "description": "Models decide whether video frames are consecutive or duplicated to simulate a higher capture rate. The evaluator checks each prediction against the construction of the clip.",
     "org": "referee-lab",
     "released": "2026-08",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/referee-lab/effective-fps"
+    },
     "access": "public",
     "note": "In August 2026, Gemma 3 27B led with 55% accuracy on 40 clips. Qwen2.5-VL 7B and the EgoSieve-S duplicate-frame classifier each scored 50%.",
     "unit": "%",
@@ -58079,6 +58190,10 @@
     "description": "Agents review employment case files and write risk memos. The grader checks whether the memos identify planted legal issues and avoid unsupported findings.",
     "org": "narcolepticchicken",
     "released": "2026-07",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/employment-law-legal-agent-eval",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/employment-law-legal-agent-eval/evals"
+    },
     "access": "public",
     "note": "Historical five-case results list GPT-5.5 at 0.594 and Qwen3-30B at 0.406. The November 2026 README warns that the scoring formula changed.",
     "unit": "score",
@@ -58627,6 +58742,9 @@
     "description": "Agents review vendor documents, question an internal IT team, and recommend whether to approve a purchase. The grader checks their decision and identified requirements.",
     "org": "musa8026",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/musa8026/enterprise-vendor-eval"
+    },
     "access": "public",
     "note": "The README reports DeepSeek v3.2 earned 1.000 across 60 runs on 20 scenarios. It also reports Llama and Mistral results, checked November 19, 2026.",
     "unit": "score",
@@ -58806,6 +58924,9 @@
     "description": "Agents complete 296 workflows across customer service, human resources, and IT service management. SQL checks grade the resulting database state.",
     "org": "ServiceNow AI Research",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/servicenow-ai-org/enterpriseops-gym-v1-1"
+    },
     "access": "public",
     "note": "The publisher provides no model scores on the Harbor page as of November 19, 2026.",
     "unit": "%",
@@ -59630,6 +59751,9 @@
     "description": "Models predict whether Qwen2.5-VL 7B correctly identifies visible hands or grippers in a clip. The reference label comes from two observed runs per clip.",
     "org": "referee-lab",
     "released": "2026-08",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/referee-lab/escalation-router"
+    },
     "access": "public",
     "note": "In August 2026, Gemma 3 27B scored 40.0% and Qwen2.5-VL 7B scored 33.3% on 45 clips. Always predicting a difficult clip scored 66.7%.",
     "unit": "%",
@@ -60831,7 +60955,7 @@
     },
     "access": "public",
     "note": "The benchmark measures both final task performance and learning efficiency across sequential problem solving.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -63608,6 +63732,10 @@
     "description": "Models implement FastAPI applications from written specifications. The grader issues HTTP requests and checks responses across 34 tasks.",
     "org": "toolshed",
     "released": "2026-07",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/toolshed/fastapi-competency",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/toolshed/fastapi-competency/evals"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports Claude Opus 4.5 leading with 0.971, followed by Claude Haiku 4.5 and GPT-4.1 nano.",
     "unit": "score",
@@ -64060,6 +64188,9 @@
     "description": "Agents handle 140 Chinese workplace requests in a simulated Feishu workspace. The grader checks the resulting calendars, documents, tables, and approvals.",
     "org": "emerge",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/emerge/feishu-office-v1"
+    },
     "access": "public",
     "note": "On November 19, 2026, GLM-5.2 had solved 130 of 140 tasks. GLM-4.6 and Claude Opus 4.8 ran on subsets.",
     "unit": "%",
@@ -64818,6 +64949,11 @@
     "description": "Models review eight sets of financial statements and flag inconsistencies in cash, retained earnings, or the balance sheet. Some sets contain no errors.",
     "org": "martian56",
     "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/martian56/fs-review",
+      "site": "https://app.primeintellect.ai/dashboard/environments/martian56/fs-review",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/martian56/fs-review/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 1.2 for o4-mini on 8 examples on 2026-07-15. The hub also lists deepseek-r1, deepseek-chat, gpt-4o-mini.",
     "unit": "score",
@@ -67256,6 +67392,10 @@
     "description": "Models write C functions that satisfy fixed ACSL contracts. Frama-C checks the proofs, and the Core-v1 dataset reserves 16 of 64 tasks for testing.",
     "org": "stanley-ngugi",
     "released": "2026-09",
+    "links": {
+      "site": "https://stanleyngugi.netlify.app/posts/formally-verified-c",
+      "repo": "https://github.com/stanleyngugi/formally-verified-code-rl"
+    },
     "access": "public",
     "note": "The September 2026 release reports that 64 reference solutions passed verification. The README and hub page give no scored model results.",
     "unit": "score",
@@ -72082,6 +72222,9 @@
     "format": "agent-task",
     "description": "Paired impossible and solvable tasks, ambiguous high-risk SWE tasks and fabrication checks measuring agents overstepping boundaries.",
     "org": "Google DeepMind",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_safety_report.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -72095,6 +72238,9 @@
     "format": "open-ended",
     "description": "Automated text-to-text, multilingual and image-to-text policy violation rates, refusal tone and unjustified refusals, reported as deltas.",
     "org": "Google DeepMind",
+    "links": {
+      "site": "https://deepmind.google/models/model-cards/gemini-4-argon/"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -72121,6 +72267,9 @@
     "format": "agent-task",
     "description": "Held-out adaptive prompt-injection suites for tool use, grounding/RAG, computer use and coding agents, plus arena replays.",
     "org": "Google DeepMind",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_carbon_safety_report.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -72692,7 +72841,12 @@
     "scoring": "expert-graded",
     "format": "open-ended",
     "description": "Image generation systems are evaluated on subject-focused educational tasks with expert ratings.",
-    "org": "Google DeepMind",
+    "org": "OpenGVLab",
+    "links": {
+      "repo": "https://github.com/OpenGVLab/GenExam",
+      "leaderboard": "https://github.com/OpenGVLab/GenExam#-leaderboard",
+      "paper": "https://arxiv.org/abs/2509.14232"
+    },
     "access": "public",
     "note": "Google DeepMind calls GenExam a public benchmark subset in the Gemini 3.1 Flash Image model card, but the page gives no numeric GenExam row.",
     "unit": "score",
@@ -72714,6 +72868,10 @@
     "description": "Models estimate whether a documented BRCA1 variant causes loss of function. The grader compares each probability with a hidden functional label.",
     "org": "alfaxad",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/alfaxad/genomegym-brca1",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/alfaxad/genomegym-brca1/evals"
+    },
     "access": "public",
     "note": "The November 2026 README distinguishes local fixture scores from Evo 2 results and gives no measured model score.",
     "unit": "score",
@@ -73807,7 +73965,7 @@
     },
     "access": "public",
     "note": "The repository provides 2,000 image URLs, benchmark JSON and evaluation scripts.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -74635,6 +74793,9 @@
     "format": "open-ended",
     "description": "Human-participant studies and simulated-user dialogues measuring belief and behavior change in civic and finance domains.",
     "org": "Google DeepMind",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/gemini/gemini_3-7_flash_fsf_report.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -74652,6 +74813,10 @@
     "format": "agent-task",
     "description": "Internal recall of recent confirmed vulnerabilities in open-source code, internal vulnerability research, and the Wiz Penetration Testing Benchmark.",
     "org": "Google DeepMind (with Wiz)",
+    "links": {
+      "site": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "paper": "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_argon_model_evaluation.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -75602,6 +75767,9 @@
     "format": "agent-task",
     "description": "Gray Swan's adaptive red-teaming agent trained on test scenarios to attack coding, computer-use and browser agents with prompt injections.",
     "org": "Gray Swan",
+    "links": {
+      "site": "https://docs.grayswan.ai/shade/how-shade-works"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -77614,7 +77782,7 @@
     "access": "public",
     "note": "The benchmark evaluates hallucination against a model’s training knowledge and the provided context.",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2504.17550",
@@ -77964,6 +78132,11 @@
     "description": "Models inspect 12 frames per clip and determine whether a human hand or robot gripper appears. The 45-clip evaluation uses provisional machine-generated labels.",
     "org": "referee-lab",
     "released": "2026-08",
+    "links": {
+      "repo": "https://github.com/publu/referee-lab",
+      "site": "https://app.primeintellect.ai/dashboard/environments/referee-lab/hands-visible",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/referee-lab/hands-visible/evals"
+    },
     "access": "public",
     "note": "The August 2026 baseline reports Gemma 3 27B at 97.8% accuracy and Qwen2.5-VL 72B at 83.3%, averaged across two attempts per clip.",
     "unit": "%",
@@ -79045,7 +79218,8 @@
     "links": {
       "paper": "https://arxiv.org/abs/2503.17354",
       "site": "https://metr.org/research",
-      "leaderboard": "https://metr.org/time-horizons/"
+      "leaderboard": "https://metr.org/time-horizons/",
+      "repo": "https://github.com/METR/hcast-public"
     },
     "access": "private",
     "note": "HCAST is the largest task source for the METR time horizon. Time Horizon 1.1 added 73 HCAST tasks. At release agents passed 70 to 80% of tasks under one human hour and under 20% of tasks over four hours.",
@@ -81071,6 +81245,9 @@
     "description": "Agents repair two historical C bugs in Linux and Unikraft. Hidden tests exercise the patched code, including driver behavior under emulated hardware.",
     "org": "morris-biotech",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/morris-biotech/historical-systems-bugs"
+    },
     "access": "public",
     "note": "As of November 19, 2026, Qwen3.8-27B with OpenCode passed three of 21 graded Linux attempts and two of 12 Unikraft attempts.",
     "unit": "%",
@@ -81421,7 +81598,8 @@
     "released": "2011-11",
     "links": {
       "dataset": "https://huggingface.co/datasets/mteb/HMDB51",
-      "site": "https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/"
+      "site": "https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/",
+      "leaderboard": "https://huggingface.co/spaces/mteb/leaderboard"
     },
     "access": "public",
     "note": "MTEB reports accuracy on its HMDB51Classification task.",
@@ -84090,7 +84268,7 @@
     },
     "access": "public",
     "note": "The eight question files contain 5,995 rows. Three original authors later tested a retrieval system with GPT-4o mini on 400 held-out textbook questions.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -89487,6 +89665,10 @@
     "description": "Agents process 60 supplier invoice work orders under a German company’s approval policy. The evaluator compares the resulting database with a reference state.",
     "org": "Ali Siala",
     "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/ali-siala/invoice-approval",
+      "site": "https://app.primeintellect.ai/dashboard/environments/ali-siala/invoice-approval"
+    },
     "access": "public",
     "note": "The November 2026 results show GPT-5.6-sol passed 174 of 180 attempts across four tiers. GPT-4.1-mini passed 16 of 50 attempts across three tiers.",
     "unit": "%",
@@ -89837,6 +90019,9 @@
     "description": "Agents repair security misconfigurations in Terraform repositories. The grader verifies that the repaired configuration satisfies policy and preserves the intended infrastructure.",
     "org": "vinay-k-rajith",
     "released": "2026-08",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/vinay-k-rajith/ironclad"
+    },
     "access": "public",
     "note": "The August 2026 release reports Gemini 3.6 Flash solved nine of the original ten tasks. Gemini 3.5 Flash and 2.5 Flash failed one shared comparison task.",
     "unit": "score",
@@ -92544,6 +92729,10 @@
     "description": "Agents play an 86-note rhythm game from browser pixels. They must finish the song with at most one miss and leave autoplay off.",
     "org": "jessicayjung",
     "released": "2026-11",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/jessicayjung/paprika3d-kaeru-flip",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/jessicayjung/paprika3d-kaeru-flip/evals"
+    },
     "access": "public",
     "note": "The results published by 2026-11-06 show zero completions in three runs each for Claude Opus, Sonnet, and Haiku. Haiku hit four notes in its best run.",
     "unit": "score",
@@ -93831,6 +94020,10 @@
     "format": "code",
     "description": "Moonshot in-house coding-agent tasks from internal engineering cases, production incidents and open-source projects across 10+ languages. 80 tasks.",
     "org": "Moonshot AI",
+    "links": {
+      "site": "https://huggingface.co/moonshotai/Kimi-K2.7-Code",
+      "repo": "https://github.com/MoonshotAI/Kimi-K3"
+    },
     "access": "private",
     "note": "Lab-created in-house eval (Moonshot AI). Only Moonshot reports scores. V1 and v2 scores are not comparable. Cyber tasks trigger refusals.",
     "unit": "%",
@@ -97585,16 +97778,19 @@
     "level": "expert",
     "scoring": "verified",
     "format": "open-ended",
-    "description": "Models answer expert questions in the LARYBench dataset released by Meituan LongCat.",
+    "description": "Latent action representations are scored on classifying human and robot actions and on regressing robot actions. The headline is average classification accuracy.",
     "org": "Meituan LongCat Team",
     "released": "2026-03",
     "links": {
       "repo": "https://github.com/meituan-longcat/LARYBench",
-      "dataset": "https://huggingface.co/datasets/meituan-longcat/LARYBench"
+      "dataset": "https://huggingface.co/datasets/meituan-longcat/LARYBench",
+      "site": "https://meituan-longcat.github.io/LARYBench/",
+      "leaderboard": "https://meituan-longcat.github.io/LARYBench/#leaderboard",
+      "paper": "https://arxiv.org/abs/2604.11689"
     },
     "access": "unknown",
     "note": "The repository and Hub dataset establish a named benchmark, but the checked sources did not expose a paper or public leaderboard.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -98401,6 +98597,9 @@
     "description": "Agents act as a legal assistant in an anonymized law practice. Four tasks grade the drafts, mail, calendar changes, and files they leave behind.",
     "org": "doe",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/doe/legal-world-sample"
+    },
     "access": "private",
     "note": "The November 2026 comparison reports 12 runs per model. Claude Opus 5.5 passed nine, GPT-6.1 Sol passed three, and Grok 4.7 passed one.",
     "unit": "%",
@@ -99779,6 +99978,10 @@
     "description": "Models solve 186 linear algebra tasks on 25 topics drawn from chapters one through nine of Axler’s textbook. Exact rational arithmetic checks their answers.",
     "org": "nair-akash",
     "released": "2026-08",
+    "links": {
+      "repo": "https://github.com/nair-akash/ladr-axler",
+      "site": "https://app.primeintellect.ai/dashboard/environments/nair-akash/ladr-axler"
+    },
     "access": "public",
     "note": "The August 2026 release reports GPT-4.1-mini at 79% accuracy on 186 tasks, with one attempt per task. The author reports 77% to 83% across six runs.",
     "unit": "score",
@@ -102414,7 +102617,7 @@
     },
     "access": "public",
     "note": "The Google DeepMind repository releases a unified benchmark and evaluation code for long multimodal demonstrations.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -105217,11 +105420,12 @@
     "links": {
       "paper": "https://arxiv.org/abs/2508.09736",
       "repo": "https://github.com/bytedance-seed/m3-agent",
-      "dataset": "https://huggingface.co/datasets/ByteDance-Seed/M3-Bench"
+      "dataset": "https://huggingface.co/datasets/ByteDance-Seed/M3-Bench",
+      "site": "https://m3-agent.github.io"
     },
     "access": "public",
     "note": "The benchmark evaluates long-video question answering with a released dataset and code.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -111022,6 +111226,10 @@
     "description": "Models answer board-style medical physics questions covering radiation oncology, dosimetry, imaging, and radiation protection. Version 0.2.0 contains 412 questions, including 115 test items.",
     "org": "omar",
     "released": "2026-01",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/omar/medphysbench-kq",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/omar/medphysbench-kq/evals"
+    },
     "access": "public",
     "note": "The January 2026 baseline table uses 90 test questions. Claude Opus 4.5 led at 98.9%, followed by GPT-4o at 91.1% and Qwen 2.5 72B at 87.8%.",
     "unit": "%",
@@ -111545,7 +111753,8 @@
     "links": {
       "paper": "https://trec.nist.gov/pubs/trec33/papers/Overview_medvidqa.pdf",
       "site": "https://medvidqa.github.io/",
-      "dataset": "https://trec.nist.gov/data/medvidqa/MedVidQA-QFISC.zip"
+      "dataset": "https://trec.nist.gov/data/medvidqa/MedVidQA-QFISC.zip",
+      "leaderboard": "https://trec.nist.gov/pubs/trec33/appendices/trec2024-medvidqa-qfisc.html"
     },
     "access": "public",
     "note": "Doshisha and its partners ran GPT-4o and Mistral Large 2. NIST released reference steps for 90 video segments drawn from the 2023 retrieval judgments.",
@@ -113552,6 +113761,10 @@
     "format": "agent-task",
     "description": "METR's long-horizon tasks for Anthropic pre-deployment tests: Train a Program, Gaming Bot, Sunlight open-ended research, plus Budget NanoGPT and LMCA.",
     "org": "METR",
+    "links": {
+      "site": "https://metr.org/blog/2026-09-22-claude-opus-5-5/",
+      "paper": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -114749,7 +114962,8 @@
     "org": "Asad Aali and colleagues",
     "released": "2024-12",
     "links": {
-      "paper": "https://doi.org/10.1093/jamia/ocae312"
+      "paper": "https://doi.org/10.1093/jamia/ocae312",
+      "repo": "https://github.com/StanfordMIMI/clin-bhc-summ"
     },
     "access": "unknown",
     "unit": "score",
@@ -114911,11 +115125,12 @@
     "released": "2026-11",
     "links": {
       "paper": "https://arxiv.org/abs/2611.26444",
-      "repo": "https://github.com/Mind2Act/Mind2Act_World"
+      "repo": "https://github.com/Mind2Act/Mind2Act_World",
+      "leaderboard": "https://mind2act-world.com/leaderboard.html"
     },
     "access": "public",
     "note": "The paper reports 180 task configurations across five application domains.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -122672,6 +122887,10 @@
     "description": "Models fill a nine-by-nine Sudoku board one move at a time. The generator checks for a unique solution, and the scorer rewards valid moves and completion.",
     "org": "m8ngotree",
     "released": "2025-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/m8ngotree/sudoku",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/m8ngotree/sudoku/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0.1 for gpt-4.1-mini on 1 example on 2025-09-08.",
     "unit": "score",
@@ -126313,6 +126532,10 @@
     "description": "Agents choose negotiation partners and remember prior encounters across games. The evaluator compares match scores with reference policies on the same seeds.",
     "org": "hanjinkim",
     "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/hanjin-kim/nego-eval",
+      "site": "https://app.primeintellect.ai/dashboard/environments/hanjinkim/nego-eval"
+    },
     "access": "public",
     "note": "The September 2026 model table lists GPT-5.6-terra first at 958 points across 12 matches. GPT-5.6-sol scored 897 across ten matches.",
     "unit": "score",
@@ -126742,6 +126965,11 @@
     "description": "Models answer generated questions about EEG experiment design and preprocessing. The evaluator computes a reference answer for each question.",
     "org": "dwin2",
     "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/Dwin2/neuro-reasoning",
+      "leaderboard": "https://github.com/Dwin2/neuro-reasoning/blob/HEAD/docs/RESULTS.md",
+      "site": "https://app.primeintellect.ai/dashboard/environments/dwin2/neuro-reasoning"
+    },
     "access": "public",
     "note": "The September 2026 baseline compared two Qwen2.5 models with Llama-3.2-3B-Instruct on 175 training items. Llama led the models at 18% accuracy.",
     "unit": "%",
@@ -127427,6 +127655,9 @@
     "description": "Agents repair the Nim compiler or standard library from linked issues. The current README lists 285 tasks graded with compile and regression tests.",
     "org": "josancamon19",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/josancamon19/nim"
+    },
     "access": "public",
     "note": "The November 2026 release records DeepSeek V4.1 Flash attempts and identifies 15 failures for the hard subset. The README gives no full-set score.",
     "unit": "%",
@@ -127448,6 +127679,9 @@
     "description": "Agents fix Nim compiler issues on Linux. Black-box tests grade changes to the C backend. The current README lists 15 tasks.",
     "org": "josancamon19",
     "released": "2026-11",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/josancamon19/nim-hard"
+    },
     "access": "public",
     "note": "The November 2026 release selected 15 tasks that DeepSeek V4.1 Flash with mini-swe-agent failed. Its recorded score was zero on each task.",
     "unit": "%",
@@ -131421,7 +131655,7 @@
     },
     "access": "public",
     "note": "The repository reports seven to 16 languages across its subsets, 5,038 long-audio QA pairs and 3,894 spoken conversations in AudioMC.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -132904,6 +133138,9 @@
     "format": "agent-task",
     "description": "Respecting auto-review and warnings, an ExploitGym honeypot, coding and blocker deception, broken search tool, realistic work environments, agent-to-agent messages.",
     "org": "OpenAI",
+    "links": {
+      "site": "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/blocker-deception"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -132979,6 +133216,10 @@
     "format": "open-ended",
     "description": "Static jailbreaks from attacker models (half from a held-out attacker), adaptive multi-turn attackers, and direct and indirect prompt-injection sets.",
     "org": "OpenAI",
+    "links": {
+      "site": "https://openai.com/index/unlocking-self-improvement-gpt-red/",
+      "paper": "https://deploymentsafety.openai.com/gpt-5-6/gpt-5-6.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -132993,6 +133234,9 @@
     "format": "agent-task",
     "description": "Internal Research Debugging (41 real research bugs plus alignment-auditing tasks) and KernelGen 1P (kernels for OpenAI first-party hardware).",
     "org": "OpenAI",
+    "links": {
+      "paper": "https://deploymentsafety.openai.com/gpt-6-2-chatgpt/gpt-6-2-chatgpt.pdf"
+    },
     "access": "private",
     "note": "Replaced saturated Monorepo-Bench and OPQA.",
     "unit": "%",
@@ -133011,6 +133255,10 @@
     "format": "agent-task",
     "description": "Internal suites: curated public CTF challenges, VulnLMP long-horizon vulnerability research on real software, and Sandbox Bench (22 mostly zero-day targets).",
     "org": "OpenAI",
+    "links": {
+      "paper": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+      "site": "https://deploymentsafety.openai.com/gpt-5-6"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -137269,6 +137517,10 @@
     "description": "Agents negotiate contracts and plan around market changes with scripted counterparties. An offline verifier grades outcomes. Ten public development tasks accompany private scored sets.",
     "org": "parley-labs",
     "released": "2026-11",
+    "links": {
+      "site": "https://anushaacharya.com/writing/how-agents-fail-to-plan",
+      "repo": "https://github.com/Parley-Labs/negotiation-sample"
+    },
     "access": "public+private-holdout",
     "note": "The November 2026 sample reports per-attempt outcomes for seven models, including GPT-6.1 Sol and Claude Opus 5.5. The publisher gives no aggregate winner.",
     "unit": "%",
@@ -140110,6 +140362,10 @@
     "description": "Models repair Gym simulators that must behave correctly under unseen physical parameters. The grader compares their simulations with hidden tests and reference trajectories.",
     "org": "kishanpb",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/kishanpb/physgym-arena-drhard-public",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/kishanpb/physgym-arena-drhard-public/evals"
+    },
     "access": "public",
     "note": "On May 26, 2026, GPT-5.5 and Claude Opus 4.7 tied at 0.4532 mean reward. Both passed zero of four tasks.",
     "unit": "score",
@@ -140544,6 +140800,10 @@
     "description": "Models execute a small string transformation language without tools. An interpreter checks the final string across 240 generated examples.",
     "org": "oso",
     "released": "2026-06",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/oso/pico-dsl-v0",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/oso/pico-dsl-v0/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0.1125 for llama-4-maverick on 50 examples on 2026-06-29. The hub also lists deepseek-v3.2, gemini-2.5-flash-lite, mistral-nemo.",
     "unit": "%",
@@ -145373,6 +145633,10 @@
     "description": "Models write Python functions from public test cases. The grader runs hidden tests to measure whether each solution generalizes beyond the visible examples.",
     "org": "summer-winter-98379",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/summer-winter-98379/public-tests-hidden-tests",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/summer-winter-98379/public-tests-hidden-tests/evals"
+    },
     "access": "public",
     "note": "The November 2026 README reports Llama 3.2 1B reached 0.6656 hidden-test reward at the final step of balanced training, the best reported variant.",
     "unit": "score",
@@ -146056,6 +146320,11 @@
     "description": "Models fix Python functions after inspecting examples that miss the defect. The grader runs a stricter hidden test suite.",
     "org": "neomatrix369",
     "released": "2026-06",
+    "links": {
+      "site": "https://neomatrix369.github.io/pages/laguna-py-bug-trace.html",
+      "leaderboard": "https://neomatrix369.github.io/demos/laguna-py-bug-trace/?view=explorer.html",
+      "repo": "https://huggingface.co/poolside-laguna-hackathon/laguna-eval-experiments"
+    },
     "access": "public",
     "note": "The hub reports GPT-5.5 reached 1.0 mean reward on five examples on June 4, 2026. It does not identify the task bank revision.",
     "unit": "%",
@@ -148573,6 +148842,10 @@
     "description": "Agents repair a Python function that merges touching ranges. The sole task earns one point if the edited function passes every held-out test.",
     "org": "akashdeepjassal",
     "released": "2026-10",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/akashdeepjassal/range-repair-agent",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/akashdeepjassal/range-repair-agent/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 1 for qwen3.8-flash-next on 1 example on 2026-10-12.",
     "unit": "score",
@@ -150184,11 +150457,12 @@
     "released": "2026-01",
     "links": {
       "repo": "https://github.com/SalesforceAIResearch/ReasoningJudgeBench",
-      "dataset": "https://huggingface.co/datasets/Salesforce/ReasoningJudgeBench"
+      "dataset": "https://huggingface.co/datasets/Salesforce/ReasoningJudgeBench",
+      "paper": "https://arxiv.org/abs/2505.13346"
     },
     "access": "public",
     "note": "The repository and Hub dataset provide a named benchmark for reasoning-judge evaluation.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -150735,6 +151009,10 @@
     "description": "Agents negotiate eight contract terms with a simulated vendor. The grader compares the agreement with the best deal both sides could accept.",
     "org": "fa1zvn",
     "released": "2026-06",
+    "links": {
+      "repo": "https://github.com/fa1zn/redline-v2",
+      "site": "https://app.primeintellect.ai/dashboard/environments/fa1zvn/redline-v2"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports GPT-4.1 mini and Claude Haiku 4.5 tied at 0.23 buyer reward among six models.",
     "unit": "score",
@@ -151025,12 +151303,12 @@
     "org": "Amazon Science",
     "released": "2024-01",
     "links": {
-      "paper": "https://arxiv.org/abs/2406.08055",
+      "paper": "https://arxiv.org/abs/2405.14486",
       "repo": "https://github.com/amazon-science/RefChecker"
     },
     "access": "public",
     "note": "Amazon's repository reports a benchmark dataset and an automatic checking pipeline. The repository has more than 400 stars.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -151077,11 +151355,12 @@
     "released": "2025-11",
     "links": {
       "paper": "https://research.nvidia.com/publication/2026-04_refinebench-evaluating-refinement-capability-language-models-checklists",
-      "site": "https://research.nvidia.com/labs/twn/publication/neuripsw_2025_refine/"
+      "site": "https://research.nvidia.com/labs/twn/publication/neuripsw_2025_refine/",
+      "repo": "https://github.com/RefineBench/refinebench-eval"
     },
     "access": "unknown",
     "note": "NVIDIA Research describes a checklist-based evaluation framework across 11 domains.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -154452,6 +154731,10 @@
     "description": "Models calculate total and annualized investment returns, decide whether to invest, and explain the decision. The evaluator checks each answer against a bundled reference.",
     "org": "dsm",
     "released": "2026-02",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/dsm/roi-calculator",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/dsm/roi-calculator/evals"
+    },
     "access": "public",
     "note": "On February 28, 2026, a Qwen3-4B-Thinking-2507 checkpoint averaged 1.0 reward across 50 hub examples. The hub also lists Qwen3-4B-Instruct-2507.",
     "unit": "score",
@@ -156983,6 +157266,12 @@
     "description": "Agents find insurance leads, quote plans, and schedule callbacks in a simulated sales pipeline. The evaluator rewards converted monthly premiums and checks compliance with calling restrictions.",
     "org": "SalesBench",
     "released": "2026-02",
+    "links": {
+      "site": "https://hamzamostafa.com/blog/salesbench",
+      "repo": "https://github.com/Hamza-Mos/salesbench-prime",
+      "paper": "https://github.com/Hamza-Mos/salesbench-prime/blob/main/paper/salesbench_wab.pdf",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/salesbench/salesbench/evals"
+    },
     "access": "public",
     "note": "The May 2026 report gives results for seven sellers in its model comparison and a separate untrained Qwen3.5-2B baseline. GLM-5.1 led with 0.525 reward on 100 leads.",
     "unit": "score",
@@ -158246,6 +158535,9 @@
     "description": "Agents clean hourly sensor readings and write daily means, record counts, and extremes to a JSON file. The grader checks the saved file.",
     "org": "afzal0",
     "released": "2026-09",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/afzal0/sci-pipeline-v1"
+    },
     "access": "public",
     "note": "The README available on November 19, 2026, reports GPT-5-mini at 1.000 on 30 examples. GPT-5-nano scored 0.875 on five examples.",
     "unit": "score",
@@ -158448,6 +158740,10 @@
     "description": "Models compare simulated compounds and choose whether to advance or reject them. The evaluator scores decisions against measured reaction outcomes and a budget.",
     "org": "allan",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/allan/science-gym-chem",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/allan/science-gym-chem/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0.8822 for Qwen3.5-4B on 4 examples on 2026-05-07. The hub also lists qwen3-30b-a3b-instruct-2507, gpt-4.1-mini, Qwen3.5-0.8B.",
     "unit": "score",
@@ -162112,6 +162408,9 @@
     "description": "Models fix four typos without changing correct lines. A held-out test measures whether models learned to quit early to avoid penalties.",
     "org": "dp-learning-rl",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/dp-learning-rl/silent-exit"
+    },
     "access": "public",
     "note": "The study checked November 19, 2026 reports Llama 3.2 1B reached 0.999 mean held-out reward with the lowest training penalty.",
     "unit": "score",
@@ -162573,6 +162872,10 @@
     "description": "Agents find and repair modeling errors in 3D OpenUSD assets for robot simulation, from 25 damaged objects in NVIDIA's SimReady collection, with partial credit from verifiers.",
     "org": "HCLTech",
     "released": "2026-10",
+    "links": {
+      "repo": "https://huggingface.co/datasets/hcltech-robotics/simrepairbench",
+      "site": "https://hub.harborframework.com/datasets/hcltech-robotics/simrepairbench"
+    },
     "access": "public",
     "note": "Release 0.4.13 on Harbor Hub holds the 25 CASTAIGNE25 tasks. Each task gives a damaged model, a repair brief and an image, and a separate verifier scores the repair from 0 to 1. Source objects are CC BY 4.0, the code is MIT.",
     "unit": "%",
@@ -163446,6 +163749,10 @@
     "description": "Models place edges to form a single loop on seven-by-seven Slitherlink boards. The evaluation uses ten boards disjoint from its 15 training examples.",
     "org": "savi",
     "released": "2026-05",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/savi/slitherlink-env",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/savi/slitherlink-env/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 5.272 for gpt-5.5 on 5 examples on 2026-05-08. The hub also lists Qwen3.5-397B-A17B.",
     "unit": "score",
@@ -165386,6 +165693,10 @@
     "description": "Models choose chemical transformations to improve predicted solubility. The package includes a benchmark runner that measures improvement on evaluation examples.",
     "org": "anindya",
     "released": "2025-12",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/anindya/sol-env",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/anindya/sol-env/evals"
+    },
     "access": "public",
     "note": "The package contains a benchmark runner. The public hub evaluation page lists no scored model runs.",
     "unit": "score",
@@ -165896,6 +166207,9 @@
     "format": "agent-task",
     "description": "Internal xAI model-development tasks (MTS Eval) and production inference-stack patches (InferenceEval).",
     "org": "xAI (SpaceXAI)",
+    "links": {
+      "paper": "https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -166466,7 +166780,7 @@
     },
     "access": "public",
     "note": "The released benchmark covers 25 real-world scenes and ten spatial question dimensions. The paper reports evaluations of 23 models, and the repository had 152 stars when checked.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -166708,6 +167022,10 @@
     "description": "Agents review 12 programs that pass their test suites and decide whether each meets its specification. Six programs exploit gaps in the tests.",
     "org": "fredrik-talent",
     "released": "2026-09",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/fredrik-talent/spec-gaming-review",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/fredrik-talent/spec-gaming-review/evals"
+    },
     "access": "public",
     "note": "The baseline available on November 19, 2026, reports Llama 3.1 8B at 0.150 mean verdict reward across eight examples. It submitted a verdict half the time.",
     "unit": "score",
@@ -168021,7 +168339,8 @@
     "org": "IBM Research",
     "released": "2025-10",
     "links": {
-      "dataset": "https://huggingface.co/datasets/ibm-research/SQL-API-Bench"
+      "dataset": "https://huggingface.co/datasets/ibm-research/SQL-API-Bench",
+      "paper": "https://aclanthology.org/2025.emnlp-industry.123.pdf"
     },
     "access": "public",
     "note": "IBM released two benchmark configurations that augment Spider with API-backed tables and mixed database and API questions.",
@@ -169230,12 +169549,13 @@
     "links": {
       "repo": "https://github.com/Giskard-AI/stereotales-pipeline",
       "site": "https://huggingface.co/datasets/giskardai/StereoTales",
-      "dataset": "https://huggingface.co/datasets/giskardai/StereoTales"
+      "dataset": "https://huggingface.co/datasets/giskardai/StereoTales",
+      "paper": "https://arxiv.org/abs/2605.10442"
     },
     "access": "public",
     "note": "The release covers ten languages, 28,677 prompts, about 650,000 generated stories and 23 evaluated LLMs. It includes human-study and model-evaluation tables for discovered associations.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://github.com/Giskard-AI/stereotales-pipeline",
@@ -172831,6 +173151,9 @@
     "description": "Surge AI raters blindly score model coding outputs on a 1-5 scale. Mistral reports five models.",
     "org": "Surge AI (commissioned by Mistral)",
     "released": "2026-10",
+    "links": {
+      "site": "https://mistral.ai/news/mistral-large-4/"
+    },
     "access": "private",
     "note": "Lab-commissioned human eval (Mistral with Surge AI). Tasks and rubric not public.",
     "unit": "%",
@@ -176746,6 +177069,9 @@
     "description": "Agents complete five support workflows in simulated IT systems. Task checks cover onboarding, offboarding, and cleanup of accounts and assets.",
     "org": "abhishek203",
     "released": "2026-07",
+    "links": {
+      "site": "https://hub.harborframework.com/datasets/abhishek203/task-aw"
+    },
     "access": "public",
     "note": "The task report available November 19, 2026 gives GPT-5.6 Sol 7 of 20 points on both attempts at task A-4. It gives no suite aggregate.",
     "unit": "score",
@@ -178716,6 +179042,10 @@
     "description": "Models choose which properties to sell from a portfolio of 12 office buildings. The evaluator checks whether the remaining portfolio meets five debt and valuation constraints.",
     "org": "Patrick Browne",
     "released": "2026-02",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/iceberg/terrafirm",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/iceberg/terrafirm/evals"
+    },
     "access": "public",
     "note": "The February 2026 results give o4-mini an 80% pass rate over ten attempts. The same table gives o3 50% and Claude Opus 4.6 20%.",
     "unit": "%",
@@ -182080,7 +182410,8 @@
     "released": "2026-08",
     "links": {
       "site": "https://transluce.org/announcing-mental-health-evaluation",
-      "dataset": "https://behaviors.transluce.org"
+      "dataset": "https://behaviors.transluce.org",
+      "leaderboard": "https://behaviors.transluce.org/mental-health#table-of-results"
     },
     "access": "public+private-holdout",
     "note": "Transluce tested 77 model variants with 157 simulated users, then added 352 production-derived simulators. A clinical working group validated the 14 behavior definitions.",
@@ -182107,12 +182438,12 @@
     "org": "Transluce",
     "released": "2026-08",
     "links": {
-      "site": "https://transluce.org/user-awareness"
+      "site": "https://transluce.org/user-awareness",
+      "repo": "https://github.com/TransluceAI/user-awareness"
     },
     "access": "public",
     "note": "Transluce tested 280 identities across four groups and compared 24 models from six model families. The study reports five behavioral outcomes and identity-level shifts.",
     "unit": "score",
-    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://transluce.org/user-awareness"
@@ -182255,7 +182586,8 @@
     "links": {
       "paper": "https://trec.nist.gov/pubs/trec32/papers/overview_32.pdf",
       "site": "https://www.trec-cds.org/2023.html",
-      "dataset": "https://trec.nist.gov/data/trials2023.html"
+      "dataset": "https://trec.nist.gov/data/trials2023.html",
+      "leaderboard": "https://pages.nist.gov/trec-browser/trec32/trials/runs/"
     },
     "access": "public",
     "note": "The organizers use questionnaires for eight disorders and a new registry snapshot containing 451,538 clinical trial descriptions.",
@@ -183457,7 +183789,8 @@
     "links": {
       "paper": "https://aclanthology.org/2020.lrec-1.567/",
       "site": "https://euroeval.com/datasets/finnish",
-      "dataset": "https://huggingface.co/datasets/EuroEval/turku-ner-fi-mini"
+      "dataset": "https://huggingface.co/datasets/EuroEval/turku-ner-fi-mini",
+      "repo": "https://github.com/TurkuNLP/turku-ner-corpus"
     },
     "access": "public",
     "note": "EuroEval scores entity spans with microaveraged F1 and excludes the miscellaneous class from its primary score.",
@@ -184194,6 +184527,9 @@
     "description": "Models manage simulated drone missions as weather and flight restrictions change. The simulator scores their decisions from logged aircraft and mission state.",
     "org": "jarrett",
     "released": "2026-07",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/jarrett/uav-operator"
+    },
     "access": "public",
     "note": "The calibration table available on November 19, 2026, reports Laguna at 0.998 and GPT-4.1-nano at 0.884 on tier T0. Both completed all 30 T0 episodes.",
     "unit": "score",
@@ -184217,6 +184553,10 @@
     "description": "Agents construct policies for a fictional civilian drone simulator. The benchmark evaluates policies on hidden scenarios and reports separate results under changed conditions.",
     "org": "andehit",
     "released": "2026-11",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/andehit/uav-robust-control-hub",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/andehit/uav-robust-control-hub/evals"
+    },
     "access": "public",
     "note": "On November 11, 2026, the author reported CPU policy-learning baselines. The author had not run an end-to-end language model evaluation.",
     "unit": "score",
@@ -185996,6 +186336,10 @@
     "description": "Models schedule generators to serve hourly demand at minimum cost. The grader checks whether schedules meet operating constraints and compares cost with the optimum.",
     "org": "jwilksbooth",
     "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/JWilksBooth/unit-commitment-lite",
+      "site": "https://app.primeintellect.ai/dashboard/environments/jwilksbooth/unit-commitment-lite"
+    },
     "access": "public",
     "note": "The README checked November 19, 2026 reports Claude Haiku 4.5 averaged 0.253 reward on 50 examples.",
     "unit": "score",
@@ -191431,6 +191775,10 @@
     "description": "Models predict cleaned two-dimensional trajectories from noisy or occluded landmark tracks. The evaluator compares predicted motion and hand grips with a hidden synthetic reference.",
     "org": "taylormino",
     "released": "2026-10",
+    "links": {
+      "repo": "https://app.primeintellect.ai/dashboard/environments/taylormino/video2robot-embodied",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/taylormino/video2robot-embodied/evals"
+    },
     "access": "public",
     "note": "The publisher reports a rule-based geometric baseline on synthetic clips. The README and public hub results give no language model scores.",
     "unit": "score",
@@ -194896,7 +195244,7 @@
     },
     "access": "unknown",
     "note": "The benchmark provides more than 18,000 temporally dense annotations and synchronous and asynchronous protocols. Apple reports comparisons across streaming and adapted video models.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -197508,7 +197856,9 @@
     "released": "2026-05",
     "links": {
       "repo": "https://github.com/basels/VLMEvalKit/tree/wiki-vqa-bench",
-      "dataset": "https://huggingface.co/datasets/ibm-research/WikiVQABench"
+      "dataset": "https://huggingface.co/datasets/ibm-research/WikiVQABench",
+      "leaderboard": "https://huggingface.co/datasets/ibm-research/WikiVQABench#leaderboard",
+      "paper": "https://arxiv.org/abs/2605.21479"
     },
     "access": "public",
     "note": "IBM describes a human-curated benchmark built from Wikipedia images, captions and Wikidata, with public evaluation code.",
@@ -200238,6 +200588,10 @@
     "description": "Models continue a story in the author’s style. A judge compares the generated continuation with the reference continuation and assesses whether the passages sound alike.",
     "org": "apaz",
     "released": "2025-11",
+    "links": {
+      "site": "https://app.primeintellect.ai/dashboard/environments/apaz/writing-style-matching",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/apaz/writing-style-matching/evals"
+    },
     "access": "public",
     "note": "The highest public hub mean reward was 0 for claude-haiku-4-5-20251001 on 5 examples on 2025-11-01.",
     "unit": "score",
@@ -200551,6 +200905,9 @@
     "format": "open-ended",
     "description": "Internal refusal suites (general, child safety, self-harm) in six languages plus single-turn, multi-turn and long-horizon jailbreaks.",
     "org": "xAI (SpaceXAI)",
+    "links": {
+      "paper": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf"
+    },
     "access": "private",
     "unit": "%",
     "confidence": "likely"
@@ -201969,6 +202326,11 @@
     "description": "Agents repair and refactor Zerolang programs through graph editing tools. The evaluation includes 67 held-out synthetic tasks.",
     "org": "pandelis",
     "released": "2026-05",
+    "links": {
+      "repo": "https://huggingface.co/poolside-laguna-hackathon/zerolang-editing",
+      "site": "https://app.primeintellect.ai/dashboard/environments/pandelis/zerolang-editing",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/pandelis/zerolang-editing/evals"
+    },
     "access": "public",
     "note": "Laguna XS.2 earned 0.21 mean reward on five hub examples on May 29, 2026. The separate training experiment peaked at 0.2357 evaluation Avg@1.",
     "unit": "score",
