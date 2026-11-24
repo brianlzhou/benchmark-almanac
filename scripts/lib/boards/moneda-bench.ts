@@ -3,7 +3,7 @@
 // AdviceBench currently means EU paired requests, and PortfolioBench means the 150 portfolio
 // tasks; their other planned parts have no combined result. Catalog descriptions state this scope.
 // Secondary metrics attach to the same model, setting and source date. Costs are USD per test item.
-// Experimental results retain a verification setting and sourceUnranked diagnostic. Numa 1 has no
+// Experimental results retain an experimental setting. Numa 1 has no
 // underlying-model alias: these are product results. The row type has no source ranking-status flag.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
@@ -37,7 +37,7 @@ export function monedaBoard(component: Component): Leaderboard {
     url: `https://benchmarks.finance/benchmarks/moneda-${component}/`,
     feed: FEED,
     terms: 'The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.',
-    stats: MONEDA_STATS,
+    ...(metric[2] ? { stats: { [metric[2]]: MONEDA_STATS[metric[2]] } } : {}),
     async fetch(): Promise<LeaderboardRow[]> {
       const data = await fetchJson<Feed>(FEED);
       if (data.licence?.name !== 'CC BY 4.0' || !Array.isArray(data.results)) throw new Error('Moneda score API schema or license changed');
@@ -57,9 +57,7 @@ export function monedaBoard(component: Component): Leaderboard {
           if (secondary.length > 1) throw new Error(`Moneda ${component} duplicate secondary metric`);
           if (secondary[0] && Number.isFinite(secondary[0].score)) metrics[metric[2]] = secondary[0].score;
         }
-        if (r.unranked) metrics.sourceUnranked = 1;
         const experimental = /experimental/i.test(r.setting);
-        if (experimental) metrics.experimental = 1;
         const setting = experimental ? 'experimental' : undefined;
         if (r.costPerTest != null && (!Number.isFinite(r.costPerTest) || r.costPerTest < 0)) throw new Error('Moneda invalid per-item cost');
         return {

@@ -223,11 +223,6 @@
           "name": "Combined games",
           "unit": "count"
         },
-        "bt_elo_combined": {
-          "name": "Combined BT Elo",
-          "unit": "elo",
-          "better": "higher"
-        },
         "ok_text": {
           "name": "Text executable prompts",
           "unit": "count",
@@ -1163,6 +1158,11 @@
         "samples": {
           "name": "Samples",
           "unit": "count"
+        },
+        "meanScore": {
+          "name": "Mean score",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -63999,23 +63999,6 @@
         "votes": {
           "name": "Votes",
           "unit": "count"
-        },
-        "upperBoundRank": {
-          "name": "Upper bound rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "rankChange": {
-          "name": "Rank change",
-          "unit": "count"
-        },
-        "poolModels": {
-          "name": "Models in pool",
-          "unit": "count"
-        },
-        "poolVotes": {
-          "name": "Votes in pool",
-          "unit": "count"
         }
       }
     },
@@ -64032,19 +64015,6 @@
       "stats": {
         "votes": {
           "name": "Votes",
-          "unit": "count"
-        },
-        "upperBoundRank": {
-          "name": "Upper bound rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "poolModels": {
-          "name": "Models in pool",
-          "unit": "count"
-        },
-        "poolVotes": {
-          "name": "Votes in pool",
           "unit": "count"
         }
       }
@@ -122740,6 +122710,11 @@
         "samples": {
           "name": "Samples",
           "unit": "count"
+        },
+        "meanScore": {
+          "name": "Mean score",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -311235,10 +311210,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311265,10 +311236,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311293,10 +311260,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311319,10 +311282,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311351,10 +311310,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311379,10 +311334,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -311401,10 +311352,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311431,10 +311378,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -311453,10 +311396,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311483,10 +311422,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311509,10 +311444,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311539,10 +311470,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -311561,10 +311488,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311589,10 +311512,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311621,10 +311540,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311647,10 +311562,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311677,10 +311588,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311703,10 +311610,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311735,10 +311638,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311761,10 +311660,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311791,10 +311686,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311819,10 +311710,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -311841,10 +311728,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311871,10 +311754,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311899,10 +311778,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311925,10 +311800,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -311957,10 +311828,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -311987,10 +311854,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312013,10 +311876,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312077,10 +311936,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312103,10 +311958,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312133,10 +311984,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312161,10 +312008,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -312185,10 +312028,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312215,10 +312054,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312241,10 +312076,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312271,10 +312102,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "minutes": {
           "name": "Duration",
           "unit": "minutes",
@@ -312293,10 +312120,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312325,10 +312148,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312351,10 +312170,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {
@@ -312383,10 +312198,6 @@
           "name": "Tests passed",
           "unit": "count"
         },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
@@ -312409,10 +312220,6 @@
       "stats": {
         "passed": {
           "name": "Tests passed",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
           "unit": "count"
         },
         "totalTokens": {

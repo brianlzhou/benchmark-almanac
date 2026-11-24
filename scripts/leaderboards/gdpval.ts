@@ -16,10 +16,13 @@ const board: Leaderboard = {
       const effort = model.match(/ (low|medium|high)$/);
       let name = effort ? model.slice(0, effort.index) : model;
       if (['GPT-4o', 'Gemini 2.5 Pro'].includes(name)) name += ' (snapshot unspecified)';
+      const low = typeof ties.ci_low === 'number' ? ties.ci_low : undefined;
+      const high = typeof ties.ci_high === 'number' ? ties.ci_high : undefined;
       rows.push({ model: name, setting: effort?.[1], score: wins.value + ties.value,
+        ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}),
         metrics: { wins: wins.value, ties: ties.value,
-          ...(typeof ties.ci_low === 'number' ? { ciLow: ties.ci_low } : {}),
-          ...(typeof ties.ci_high === 'number' ? { ciHigh: ties.ci_high } : {}),
+          ...(low !== undefined ? { ciLow: low } : {}),
+          ...(high !== undefined ? { ciHigh: high } : {}),
         },
       });
     }

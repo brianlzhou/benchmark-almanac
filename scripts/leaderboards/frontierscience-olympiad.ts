@@ -16,9 +16,11 @@ const board: Leaderboard = {
       let model = String(r.family ?? r.model).replace(/^OpenAI /, '');
       if (model === 'GPT-4o') model += ' (snapshot unspecified)';
       const metrics: Record<string, number> = {};
-      if (typeof r.ci95_low_pct === 'number') metrics.ciLow = r.ci95_low_pct;
-      if (typeof r.ci95_high_pct === 'number') metrics.ciHigh = r.ci95_high_pct;
-      rows.push({ model, score: r.accuracy_pct, setting: r.family ? r.model.toLowerCase() : undefined, metrics });
+      const low = typeof r.ci95_low_pct === 'number' ? r.ci95_low_pct : undefined;
+      const high = typeof r.ci95_high_pct === 'number' ? r.ci95_high_pct : undefined;
+      if (low !== undefined) metrics.ciLow = low;
+      if (high !== undefined) metrics.ciHigh = high;
+      rows.push({ model, score: r.accuracy_pct, setting: r.family ? r.model.toLowerCase() : undefined, ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}), metrics });
     }
     return rows;
   },

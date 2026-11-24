@@ -26,12 +26,16 @@ export async function musicRows(track: 'instrumental' | 'vocal'): Promise<Leader
       if (!model || score === undefined) continue;
       const metrics: Record<string,number> = {};
       const ci = num(String(at(r, '95% CI') ?? ''));
-      if (ci !== undefined) Object.assign(metrics, {ciLow:score-ci,ciHigh:score+ci});
+      const low = ci !== undefined && ci >= 0 ? score - ci : undefined;
+      const high = ci !== undefined && ci >= 0 ? score + ci : undefined;
+      if (low !== undefined && high !== undefined) Object.assign(metrics, {ciLow:low,ciHigh:high});
       const votes = num(String(at(r, '# Votes') ?? ''));
       const speed = num(String(at(r, 'Speed (RTF)') ?? ''));
+      const access = String(at(r, 'Access') ?? '').trim();
+      const open = access === 'Open weights' ? true : access === 'Proprietary' ? false : undefined;
       if (votes !== undefined) metrics.votes = votes;
       if (speed !== undefined) metrics.realTimeFactor = speed;
-      rows.push({model, score, metrics});
+      rows.push({model, score, ...(low !== undefined && high !== undefined ? {low, high} : {}), ...(open !== undefined ? {open} : {}), metrics});
     }
     if (!rows.length) throw new Error(`Music Arena ${track} table empty`);
     return rows;

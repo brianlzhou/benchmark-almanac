@@ -99,7 +99,8 @@ export function voiceArena(language:string,slug:string):Leaderboard{
         const metrics:Record<string,number>={};
         for(const [key,value] of Object.entries({ci:r.ci,votes:r.samples,winRate:Number(r.win_rate),rankLow:r.range_low,rankHigh:r.range_high}))if(Number.isFinite(value))metrics[key]=value;
         if(language==='US English')Object.assign(metrics,latencyMetrics(data.latency,r));
-        rows.push({model:r.model,score:r.elo,metrics});
+        const hasCi=Number.isFinite(r.ci)&&r.ci>=0;
+        rows.push({model:r.model,score:r.elo,...(hasCi?{low:r.elo-r.ci,high:r.elo+r.ci}:{}),metrics});
       }
       if(!rows.length)throw new Error('Voice Arena public language ratings missing: '+language);
       return rows;

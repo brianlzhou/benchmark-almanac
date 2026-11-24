@@ -10,6 +10,6 @@ const board = makeTerminalBench({
   name: '4-0-0',
   extras: true,
 });
-const { rewardHacks: _rewardHacks, ...terminalBench40Stats } = TERMINAL_BENCH_STATS;
+const { ci95: _ci95, rewardHacks: _rewardHacks, ...terminalBench40Stats } = TERMINAL_BENCH_STATS;
 board.stats = terminalBench40Stats;
 export default board;
