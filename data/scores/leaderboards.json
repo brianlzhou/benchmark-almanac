@@ -82177,9 +82177,26 @@
       "url": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=agentic-html-slides",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=agon_slides_html",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82215,7 +82232,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=image&section=image&board=image",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 56,
       "unmatched": [
         "Boogu-Image-0.1",
@@ -82258,6 +82275,23 @@
         "Wan 2.7 Pro",
         "p-image-ideogram"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82293,7 +82327,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=image&section=image-edit&board=image-to-image",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=imagetoimage",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "Boogu-Image-0.1",
@@ -82333,6 +82367,23 @@
         "Wan 2.7",
         "Wan 2.7 Pro"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82368,9 +82419,26 @@
       "url": "https://www.designarena.ai/leaderboard?section=website&board=image-to-webapp",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=agon_webapps&inputModality=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82406,11 +82474,28 @@
       "url": "https://www.designarena.ai/leaderboard?section=website&board=image-to-html",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
-      "rows": 59,
+      "retrieved": "2026-11-24",
+      "rows": 60,
       "unmatched": [
         "Nex N2 Pro"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82446,7 +82531,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=image-to-video",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=imagetovideo",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "Cosmos 3 Super",
@@ -82478,6 +82563,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82513,7 +82615,7 @@
       "url": "https://www.designarena.ai/leaderboard/image",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=logo",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
       "unmatched": [
         "Boogu-Image-0.1",
@@ -82547,6 +82649,23 @@
         "Wan 2.7 Pro",
         "p-image-ideogram"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82617,7 +82736,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=multi-to-video",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=multitovideo",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Grok Imagine",
@@ -82636,6 +82755,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82671,7 +82807,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=multimodal-to-video",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=multimodaltovideo",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Gen-4 Aleph",
@@ -82686,6 +82822,23 @@
         "Wan Vace",
         "Wan v2.6"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82721,9 +82874,26 @@
       "url": "https://www.designarena.ai/leaderboard?tab=office&section=pdf&board=agon_pdf",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=agon_pdf",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
-      "rows": 64,
+      "retrieved": "2026-11-24",
+      "rows": 65,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82759,9 +82929,26 @@
       "url": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=agentic-slides",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=agon_slides",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82797,9 +82984,26 @@
       "url": "https://www.designarena.ai/leaderboard?section=mobile-dev&board=mobileapps",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=mobileapps",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82835,7 +83039,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=slides",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=slides",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Alai",
@@ -82852,6 +83056,23 @@
         "Snapdeck",
         "Ultramarine"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82887,9 +83108,26 @@
       "url": "https://www.designarena.ai/leaderboard?tab=office&section=spreadsheet&board=spreadsheet",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=spreadsheet",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82925,7 +83163,7 @@
       "url": "https://www.designarena.ai/leaderboard?section=art&board=svgs",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=svg",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 131,
       "unmatched": [
         "AesCoder-4B",
@@ -82941,6 +83179,23 @@
         "Recraft V4.1 Vector Pro",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -82976,7 +83231,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=audio&section=tts&board=tts",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=tts",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Amazon Polly",
@@ -83005,6 +83260,23 @@
         "Speech 2.6",
         "Voxtral Mini TTS (2603)"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83036,7 +83308,7 @@
       "url": "https://www.designarena.ai/leaderboard/website",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=uicomponent",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 176,
       "unmatched": [
         "AGI-01 Swift",
@@ -83057,6 +83329,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83092,7 +83381,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=video",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=video",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "FLUX 3 Max",
@@ -83126,6 +83415,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83161,7 +83467,7 @@
       "url": "https://www.designarena.ai/leaderboard?tab=video&section=video-editing&board=video-to-video",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=videotovideo",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Aleph 2.0",
@@ -83180,6 +83486,23 @@
         "Wan Vace",
         "p-video-edit"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83215,9 +83538,26 @@
       "url": "https://www.designarena.ai/leaderboard?section=website&board=video-to-website",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=video",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83253,9 +83593,26 @@
       "url": "https://www.designarena.ai/leaderboard?section=website&board=webapps",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=agents&category=agon_webapps&inputModality=text",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -83291,7 +83648,7 @@
       "url": "https://www.designarena.ai/leaderboard?section=website&board=website",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=text",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 189,
       "unmatched": [
         "AesCoder-4B",
@@ -83313,6 +83670,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
