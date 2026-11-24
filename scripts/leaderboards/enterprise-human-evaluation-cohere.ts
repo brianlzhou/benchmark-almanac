@@ -29,6 +29,11 @@ const board: Leaderboard = {
   benchmark: "enterprise-human-evaluation-cohere",
   url: "https://cohere.com/blog/command-a",
   feed: FEED,
+  static: 'paper',
+  stats: {
+    tieRate: { name: 'Tie rate', unit: '%' },
+    lossRate: { name: 'Loss rate', unit: '%', better: 'lower' },
+  },
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
   aliases: { 'Command A': 'cohere-command-a' },
   async fetch(): Promise<LeaderboardRow[]> {
