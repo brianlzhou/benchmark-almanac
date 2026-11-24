@@ -16,6 +16,12 @@ const board: Leaderboard = {
     Total: { name: 'Total time', unit: 'seconds', better: 'lower' },
     Tokens: { name: 'Total tokens', unit: 'tokens' },
   },
+  chart: {
+    title: 'Total wall time versus OpenRouter cost',
+    x: { key: 'cost', label: 'OpenRouter cost', unit: '$', better: 'lower', log: true },
+    y: { key: 'Total', label: 'Total wall time', unit: 's', better: 'lower', log: true },
+    note: 'AOX plots total wall time against OpenRouter cost on log-log axes for cloud-priced models.',
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const table of tables(await fetchText(feed))) {

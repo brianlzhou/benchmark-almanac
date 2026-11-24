@@ -8,6 +8,7 @@ const board: Leaderboard = {
   feed: 'https://ai.onestruction.com/leaderboard/en/benchmarks/bim/',
   terms: constructionTerms,
   stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  chart: { title: 'Score versus cost', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Mean task score', unit: '%', better: 'higher' } },
   host: 'ONESTRUCTION',
   reference: ['pi'],
   fetch() { return constructionRows(this.url); },

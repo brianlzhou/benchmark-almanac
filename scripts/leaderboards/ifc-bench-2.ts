@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: "ONESTRUCTION claims copyright and gives no explicit results license. Cloudflare robots.txt restricts named crawlers. The importer excludes open-model pricing from Artificial Analysis.",
   host: 'ONESTRUCTION',
   stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens per task', unit: 'tokens' } },
+  chart: { title: 'Score versus cost', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Execution accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const models = jsonAfter<{ name: string; access: string; effort: string; scores: { ifc: {
       value: number; evaluatedOn: string; outputTokens: number; inputTokens: number; perTask: { seconds: number; cost: number } } } }[]>(

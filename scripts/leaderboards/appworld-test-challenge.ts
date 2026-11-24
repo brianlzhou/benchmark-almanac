@@ -6,4 +6,10 @@ board.parts = {
   level2: { name: 'Level 2', group: 'Difficulty' },
   level3: { name: 'Level 3', group: 'Difficulty' },
 };
+board.chart = {
+  title: 'Test-Challenge task goal completion versus interactions',
+  x: { key: 'interactions', label: 'Average interactions per task', better: 'lower' },
+  y: { key: 'score', label: 'Task goal completion', unit: '%', better: 'higher' },
+  note: 'The AppWorld leaderboard plots task goal completion against average code execution interactions per task.',
+};
 export default board;

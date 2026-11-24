@@ -31,6 +31,7 @@ const board: Leaderboard = {
   host: 'ONESTRUCTION',
   reference: ['pi'],
   stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' } },
+  chart: { title: 'Score versus cost', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Mean task score', unit: 'score', better: 'higher' } },
   fetch() { return constructionRows(this.url); },
 };
 export default board;

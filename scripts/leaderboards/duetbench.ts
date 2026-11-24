@@ -13,26 +13,30 @@ const board: Leaderboard = {
 }, url: 'https://fireworks.ai/specialized-intelligence-index/benchmarks/customer-support/duetbench-diagnosis', feed: FEED,
   terms: 'Fireworks terms restrict automated extraction. Benchmark Almanac credits Decagon and Fireworks and links the published source.',
   aliases: {'Claude 5 Sonnet':'claude-sonnet-5'},
+  chart: { title: 'DuetBench Diagnosis Elo versus cost', x: { key: 'cost', label: 'Model cost per task', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Diagnosis Elo', unit: 'elo', better: 'higher' } },
   async fetch() {
     const d = await fetchJson<{benchmarks:{id:string; results:{model:string; provider:string; raw?:{ci?:{lo:number;hi:number}}; metrics:Record<string,Metric>}[]}[]}>(FEED);
     const t = d.benchmarks.find(b => b.id === 'customer-support/duetbench-diagnosis');
     if (!t) throw new Error('DuetBench Diagnosis board missing');
+    const skip = new Set(['score', 'elo', 'cost_per_task', 'duration_per_task', 'outputTokens', 'cachedInput', 'stalenessDays']);
     const rows: LeaderboardRow[] = [];
     for (const r of t.results) {
       const score = r.metrics.elo?.value;
       if (typeof score !== 'number' || !Number.isFinite(score)) continue;
       const metrics: Record<string, number> = {};
-      for (const [k,v] of Object.entries(r.metrics)) if (k !== 'score' && typeof v.value === 'number') metrics[k] = v.value;
-      if (Number.isFinite(metrics.duration_per_task)) metrics.latency = metrics.duration_per_task;
-      if (Number.isFinite(metrics.cachedInput)) metrics.cachedTokens = metrics.cachedInput;
-      if (Number.isFinite(metrics.uncachedInput) && Number.isFinite(metrics.cachedInput)) metrics.inputTokens = metrics.uncachedInput + metrics.cachedInput;
+      for (const [k,v] of Object.entries(r.metrics)) if (!skip.has(k) && typeof v.value === 'number') metrics[k] = v.value;
+      const dur = r.metrics.duration_per_task?.value;
+      if (typeof dur === 'number' && Number.isFinite(dur)) metrics.latency = dur;
+      const cached = r.metrics.cachedInput?.value;
+      if (typeof cached === 'number' && Number.isFinite(cached)) metrics.cachedTokens = cached;
+      if (Number.isFinite(metrics.uncachedInput) && Number.isFinite(metrics.cachedTokens)) metrics.inputTokens = metrics.uncachedInput + metrics.cachedTokens;
       rows.push({model:r.model, score, low:r.raw?.ci?.lo, high:r.raw?.ci?.hi, setting:r.provider.split('·').slice(1).join('·').trim() || undefined, cost:r.metrics.cost_per_task?.value ?? undefined, tokens:r.metrics.outputTokens?.value ?? undefined, metrics});
     }
     if (!rows.length) throw new Error('DuetBench Diagnosis scores missing');
     return rows;
   },
   stats: {
-    cost_per_task: { name: 'Cost per task', unit: 'usd', better: 'lower' }, duration_per_task: { name: 'Duration per task', unit: 'seconds', better: 'lower' }, elo: { name: 'Elo rating', unit: 'elo', better: 'higher' }, completionRate: { name: 'Completion rate', unit: '%', better: 'higher' }, battles: { name: 'Battles', unit: 'count' }, distinctCases: { name: 'Distinct cases', unit: 'count' }, stalenessDays: { name: 'Staleness days', unit: 'count' }, uncachedInput: { name: 'Uncached input tokens', unit: 'tokens' }, cachedInput: { name: 'Cached input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, cachedTokens: { name: 'Cached tokens', unit: 'tokens' }, inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    completionRate: { name: 'Completion rate', unit: '%', better: 'higher' }, battles: { name: 'Battles', unit: 'count' }, distinctCases: { name: 'Distinct cases', unit: 'count' }, uncachedInput: { name: 'Uncached input tokens', unit: 'tokens', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, cachedTokens: { name: 'Cached tokens', unit: 'tokens', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' },
   },
 };
 export default board;

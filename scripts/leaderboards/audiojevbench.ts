@@ -15,13 +15,19 @@ const names: Record<string, string> = {
 const slices = { clean: 'Clean audio', noisy_le5db: 'Noisy (≤ 5 dB SNR)', snr_15db: '15 dB', snr_10db: '10 dB',
   snr_5db: '5 dB', snr_0db: '0 dB', english: 'English', non_english: 'Non-English', background_talker: 'Background talker',
   overlap: 'Overlapping talkers', speaker_verification: 'Speaker verification', sound_event: 'Sound events' };
-const numeric = ['Capability', 'Intelligence', 'I_public', 'I_sealed', 'Calibration', 'Speed', 'Cost', 'gap', 'penalty',
-  'p50_s', 'p95_s', 'p50_adj_s', 'p95_adj_s', 'n_latency', 'n_items_scored'] as const;
+const numeric = ['Capability', 'Intelligence', 'I_public', 'I_sealed', 'Calibration', 'Speed', 'Cost', 'gap',
+  'p50_s', 'p95_s', 'p50_adj_s', 'p95_adj_s'] as const;
 type System = Record<typeof numeric[number], number> & { key: string, table: string, composite: {B: number},
   cost: {usd_per_1000: number}, robustness: Record<string, {acc: number | null}> };
 const board: Leaderboard = {
   benchmark: 'audiojevbench', url, feed,
-  stats: { Capability:{name:'Capability score',unit:'%',better:'higher'}, Intelligence:{name:'Intelligence score',unit:'%',better:'higher'}, I_public:{name:'Public intelligence',unit:'score',better:'higher'}, I_sealed:{name:'Sealed intelligence',unit:'score',better:'higher'}, Calibration:{name:'Calibration score',unit:'%',better:'higher'}, Speed:{name:'Speed score',unit:'%',better:'higher'}, Cost:{name:'Cost score',unit:'%',better:'higher'}, gap:{name:'Robustness gap',unit:'score',better:'lower'}, p50_s:{name:'Median latency',unit:'seconds',better:'lower'}, p95_s:{name:'95th percentile latency',unit:'seconds',better:'lower'}, p50_adj_s:{name:'Adjusted median latency',unit:'seconds',better:'lower'}, p95_adj_s:{name:'Adjusted 95th percentile latency',unit:'seconds',better:'lower'}, n_latency:{name:'Latency samples',unit:'count'}, n_items_scored:{name:'Items scored',unit:'count'} },
+  stats: { Capability:{name:'Capability score',unit:'%',better:'higher'}, Intelligence:{name:'Intelligence score',unit:'%',better:'higher'}, I_public:{name:'Public intelligence',unit:'score',better:'higher'}, I_sealed:{name:'Sealed intelligence',unit:'score',better:'higher'}, Calibration:{name:'Calibration score',unit:'%',better:'higher'}, Speed:{name:'Speed score',unit:'%',better:'higher'}, Cost:{name:'Cost score',unit:'%',better:'higher'}, gap:{name:'Robustness gap',unit:'score',better:'lower'}, p50_s:{name:'Median latency',unit:'seconds',better:'lower'}, p95_s:{name:'95th percentile latency',unit:'seconds',better:'lower'}, p50_adj_s:{name:'Adjusted median latency',unit:'seconds',better:'lower'}, p95_adj_s:{name:'Adjusted 95th percentile latency',unit:'seconds',better:'lower'} },
+  chart: {
+    title: 'Capability versus cost',
+    x: { key: 'cost', label: 'Cost per decision', unit: '$', better: 'lower', log: true },
+    y: { key: 'Capability', label: 'Capability score', unit: '%', better: 'higher' },
+    note: 'Benchmark Heaven plots AudioJevBench capability score against decision cost on a logarithmic dollar scale.',
+  },
   terms: "Benchmark Heaven allows this path in robots.txt. Its code uses MIT and the page gives no separate audio score license. The raw file host publishes no robots.txt.",
   parts: Object.fromEntries(Object.entries(slices).map(([k, name]) => [k, { name, unit: '%' }])),
   async fetch() {
