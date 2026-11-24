@@ -4307,6 +4307,42 @@
     "added": "2026-11-19"
   },
   {
+    "id": "agentcibench",
+    "name": "AgentCIBench",
+    "aliases": [
+      "AgentCI-Bench",
+      "Agent CI Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Computer-use agents complete everyday personal-assistant tasks across six BrowserGym apps while keeping private context from the wrong recipient. A deterministic matcher and LLM judge score utility, refusal and privacy leakage.",
+    "org": "UKPLab, TU Darmstadt",
+    "released": "2026-06",
+    "links": {
+      "site": "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "leaderboard": "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "paper": "https://arxiv.org/abs/2606.23189",
+      "repo": "https://github.com/UKPLab/emnlp2026-agentcibench",
+      "dataset": "https://huggingface.co/datasets/UKPLab/agentcibench"
+    },
+    "access": "public",
+    "note": "EMNLP 2026 benchmark built from 28 hand-authored seeds expanded into 117 scenarios via MCTS over Messenger, Calendar, Maps, ToDo and sibling OpenApps. The headline is engagement-conditioned leakage L / (1 - R), where lower is better, alongside task utility, raw leakage with 95% bootstrap intervals and refusal rate. Includes 15 paper models and 6 post-submission temporal holdout models evaluated in July 2026.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "https://ukplab.github.io/emnlp2026-agentcibench/data.js",
+      "https://github.com/UKPLab/emnlp2026-agentcibench",
+      "https://huggingface.co/datasets/UKPLab/agentcibench",
+      "https://arxiv.org/abs/2606.23189"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "agentclinic",
     "name": "AgentClinic",
     "aliases": [
@@ -15744,7 +15780,8 @@
     "org": "Handshake AI Research",
     "released": "2026-09",
     "links": {
-      "paper": "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
+      "paper": "https://arxiv.org/abs/2611.22085",
+      "site": "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
       "repo": "https://github.com/Handshake-AI-Research/ATLAS-Finance",
       "dataset": "https://huggingface.co/datasets/handshake-ai-research/ATLAS-Finance/tree/v1.0.0",
       "leaderboard": "https://joinhandshake.com/research/benchmarks/atlas-finance/"
@@ -15759,7 +15796,8 @@
       "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
       "https://huggingface.co/datasets/handshake-ai-research/ATLAS-Finance/raw/main/CHANGELOG.md",
-      "https://app.primeintellect.ai/dashboard/environments/handshake-ai/atlas-finance"
+      "https://app.primeintellect.ai/dashboard/environments/handshake-ai/atlas-finance",
+      "https://arxiv.org/abs/2611.22085"
     ],
     "added": "2026-11-01"
   },
@@ -17430,6 +17468,39 @@
       "https://github.com/Luoji-zju/Agents4PLC_release/blob/master/readme.md"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "autoragbench",
+    "name": "AutoRAGBench",
+    "aliases": [
+      "Auto RAG Bench"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents build retrieval-augmented generation systems from scratch under a six-hour single-H800 budget across nine QA and fact-verification corpora. Each frozen system retrieves evidence for hidden test questions, and five held-out answering models score the retrieved evidence.",
+    "org": "Tsinghua University and Sina Weibo",
+    "released": "2026-11",
+    "links": {
+      "site": "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "leaderboard": "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "paper": "https://arxiv.org/abs/2611.25582",
+      "repo": "https://github.com/ZhanGHanG9991/AutoRAGBench"
+    },
+    "access": "public+private-holdout",
+    "note": "Nine tasks span NQ, HotpotQA, MuSiQue, MultiHop-RAG, PubMedQA, QASPER, FEVER, WebQSP and CWQ, graded with primary task metrics averaged across five answering models (Gemma 4 E4B, Gemma 3 4B, Phi-4-mini, SmolLM3 3B and Llama 3.2 3B). The November 2026 leaderboard compares 9 frontier agent configurations alongside Reference RAG, BM25, Closed-book and Human-SOTA baselines, and plots average score against mean retrieval latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "https://zhanghang9991.github.io/AutoRAGBench_Website/assets/data.js",
+      "https://github.com/ZhanGHanG9991/AutoRAGBench",
+      "https://arxiv.org/abs/2611.25582"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "autoresearch",
@@ -35904,6 +35975,7 @@
     "org": "Martian",
     "released": "2026-02",
     "links": {
+      "paper": "https://arxiv.org/abs/2611.26942",
       "repo": "https://github.com/withmartian/code-review-benchmark",
       "site": "https://codereview.withmartian.com",
       "leaderboard": "https://codereview.withmartian.com"
@@ -35914,7 +35986,8 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/withmartian/code-review-benchmark"
+      "https://github.com/withmartian/code-review-benchmark",
+      "https://arxiv.org/abs/2611.26942"
     ],
     "added": "2026-11-01"
   },
@@ -61255,6 +61328,36 @@
       "https://ai.meta.com/blog/meta-fair-updates-perception-localization-reasoning"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "everydaybench",
+    "name": "EverydayBench",
+    "aliases": [
+      "Everyday Bench"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Computer-use and coding agents complete 77 open-ended everyday digital work tasks on the live web across lookup, comparison, planning, analysis and build categories. Executable constraint checks, live source verification and per-task rubrics grade each deliverable.",
+    "org": "Stanford University and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://everydaybench.stanford.edu/",
+      "leaderboard": "https://everydaybench.stanford.edu/",
+      "paper": "https://arxiv.org/abs/2611.25146"
+    },
+    "access": "private",
+    "note": "Strict pass rate requires an overall rubric score of at least 85 and every rubric component at least 3 on a single attempt per task. The November 2026 Stanford leaderboard ranks 13 frontier model and agent pairs at high effort where configurable, led by Claude Opus 5.5 and Claude Fable 5.1 tied at 54.55%.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://everydaybench.stanford.edu/",
+      "https://arxiv.org/abs/2611.25146"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "evf-bench",
@@ -150948,6 +151051,35 @@
     "added": "2026-11-20"
   },
   {
+    "id": "redactionbench",
+    "name": "RedactionBench",
+    "aliases": [
+      "Redaction Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models identify and redact sensitive content and personal identifiers across 200 exhaustively annotated documents spanning forms, templates and structured files. Predictions are scored with mean R-Score on character-offset spans, with invalid outputs receiving zero.",
+    "org": "RedactionBench",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/RedactionBench/RedactionBench",
+      "leaderboard": "https://huggingface.co/datasets/RedactionBench/RedactionBench"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 dataset of 200 randomized synthetic and public-template documents containing no real personal data. The November 2026 leaderboard compares 44 models spanning frontier general-purpose agents and specialized token-level, span-level and generative PII detectors, led by Claude Opus 5.5 at 0.832 mean R-Score.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/RedactionBench/RedactionBench",
+      "https://huggingface.co/datasets/RedactionBench/RedactionBench/raw/main/README.md"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "redcode",
     "name": "RedCode",
     "aliases": [
@@ -151745,6 +151877,40 @@
     "evidence": [
       "https://cdn.openai.com/o1-system-card.pdf"
     ]
+  },
+  {
+    "id": "rehearsalbench",
+    "name": "RehearsalBench",
+    "aliases": [
+      "Rehearsal Bench",
+      "Afterflow RehearsalBench"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models analyze a simulated bank contact center built from real call records, propose an operational plan and forecast its financial effect. Each plan runs 600 times in the simulator to measure actual running cost saved and forecast accuracy.",
+    "org": "Afterflow",
+    "released": "2026-11",
+    "links": {
+      "site": "https://afterflow.dev/research/rehearsalbench",
+      "leaderboard": "https://afterflow.dev/research/rehearsalbench",
+      "paper": "https://arxiv.org/abs/2611.22480",
+      "repo": "https://github.com/afterflowinc/rehearsalbench"
+    },
+    "access": "public",
+    "note": "Round 3 results in November 2026 score 10 frontier models (9 complete plus partial Mistral Small 2603 at 11% valid runs) alongside two baselines, reporting simulated running cost saved (%) with 95% intervals, forecast accuracy (%), forecast error score, dollar value versus no change and API cost per run. GPT-6 Astra leads at 6.83% cost saved and 76.5% forecast accuracy.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://afterflow.dev/research/rehearsalbench",
+      "https://afterflow.dev/research/rehearsalbench/leaderboard.csv",
+      "https://github.com/afterflowinc/rehearsalbench",
+      "https://arxiv.org/abs/2611.22480"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "relate-audio-text",
@@ -153744,6 +153910,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "robo-swe",
+    "name": "ROBO-SWE",
+    "aliases": [
+      "Robo-SWE",
+      "RoboSWE"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents resolve 236 executable GitHub issues mined from 28 robotics repositories spanning ROS 2 systems, physics simulators, robotics algorithm libraries and robot-learning frameworks. Each Harbor task pairs a pre-fix container snapshot with developer regression tests.",
+    "org": "Vahid Haratian, Vahid Ansari, Mohammadhossein Malmir and Alois Knoll",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/vharatian/Robo-SWE",
+      "leaderboard": "https://huggingface.co/datasets/vharatian/Robo-SWE"
+    },
+    "access": "public",
+    "note": "Scores are mean resolution percentages across complete 236-task cycles (4,248 graded attempts across 7 frontier agent configurations and 6 unique models). In November 2026 results, Claude Opus 5.5 on Claude Code leads at 56.50% over 3 cycles ahead of GPT-6.1 Sol on Codex max (54.10%) and medium (52.54%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/vharatian/Robo-SWE",
+      "https://huggingface.co/datasets/vharatian/Robo-SWE/raw/main/results/summary.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "roboarcade",
     "name": "RoboARCade",
     "category": "robotics-embodied",
@@ -155689,6 +155885,71 @@
       "https://latent.space/p/ainews-qwen-38-max24t-and-27b-new/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "rsibench-infra",
+    "name": "RSIBench-Infra",
+    "aliases": [
+      "RSIBench Infra",
+      "RSI-Bench-Infra"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "rsibench-infra",
+    "version": "Full",
+    "description": "AI agents optimize real production-scale training and inference infrastructure across 20 tasks (16 inference serving workloads and 4 training pipelines), from kernels to the full software stack. Evaluations measure speedup against oracle and speed-of-light bounds.",
+    "org": "ByteDance Seed and Tsinghua AIR SIA-Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://rsibench-infra.github.io/",
+      "leaderboard": "https://rsibench-infra.github.io/",
+      "paper": "https://arxiv.org/abs/2611.24395"
+    },
+    "access": "private",
+    "note": "Headline Faster rate is the share of formally scored tasks exceeding 1.10x speedup, alongside median speedup and mean speed-of-light score across 7 frontier models. Claude Opus 5.5 was formally scored on 10 of 20 tasks due to API safety terminations on 10 tasks (80% faster rate on its 10 completed tasks), while GPT-6 Astra led full-coverage models at 80% faster rate and 0.667 mean SOL. Distinct from cataloged RSIBench-Data (Evolvent AI).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rsibench-infra.github.io/",
+      "https://arxiv.org/abs/2611.24395"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rsibench-infra-lite",
+    "name": "RSIBench-Infra-Lite",
+    "aliases": [
+      "RSIBench Infra Lite"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "rsibench-infra",
+    "version": "Lite",
+    "description": "Five-workload Lite subset of RSIBench-Infra evaluating AI agents optimizing model inference infrastructure across Qwen3.8-27B, Qwen3-VL-32B, Wan2.2-TI2V-5B, LLaDA 2.1 Mini and Muse Glimmer. Agents are ranked by mean normalized score anchored at Oracle equals 0.5 and speed-of-light equals 1.0.",
+    "org": "ByteDance Seed and Tsinghua AIR SIA-Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://rsibench-infra.github.io/",
+      "leaderboard": "https://rsibench-infra.github.io/",
+      "paper": "https://arxiv.org/abs/2611.24395"
+    },
+    "access": "private",
+    "note": "Separate 5-workload leaderboard and normalized Agent score metric from the 20-task full RSIBench-Infra suite. Claude Opus 5.5 averaged 0.798 across its 3 formally tested workloads (partial coverage flagged on the board), while Qwen3.8 Max led full-coverage models at 0.670 across all 5 workloads ahead of GLM-5.3 (0.643) and GPT-6 Astra (0.641).",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rsibench-infra.github.io/",
+      "https://arxiv.org/abs/2611.24395"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "rsicd",
@@ -190953,6 +191214,39 @@
     "added": "2026-11-20"
   },
   {
+    "id": "vg-gui-bench",
+    "name": "VG-GUI-Bench",
+    "aliases": [
+      "VG-GUI Bench",
+      "Video-Guided GUI Bench"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-mobile",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Multimodal mobile GUI agents watch short tutorial videos and execute multi-step Android actions (click, scroll, type, press, zoom and finish) across device screens. Step accuracy scores 0.3 for action type plus 0.7 for exact arguments, alongside episode completion and video improvement rate.",
+    "org": "Tsinghua University",
+    "released": "2026-06",
+    "links": {
+      "site": "https://vg-gui-tasker.github.io/",
+      "leaderboard": "https://vg-gui-tasker.github.io/",
+      "paper": "https://arxiv.org/abs/2606.29445",
+      "dataset": "https://huggingface.co/datasets/Aoraku/VG-GUI-Bench"
+    },
+    "access": "public",
+    "note": "ECCV 2026 benchmark comparing 7 frontier multimodal models under both No Video and 10 Uniform Frames settings. With 10 uniform tutorial frames, Gemini 3.1 Pro leads at 61.68% step accuracy (up from 58.51% without video), ahead of GPT-5-mini (58.40%) and Kimi K2.5 (58.22%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://vg-gui-tasker.github.io/",
+      "https://huggingface.co/datasets/Aoraku/VG-GUI-Bench",
+      "https://arxiv.org/abs/2606.29445"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "vggsound",
     "name": "VGGSound",
     "category": "audio-video",
@@ -197325,6 +197619,38 @@
       "https://raw.githubusercontent.com/speechbrain/speechbrain/develop/recipes/WHAMandWHAMR/separation/README.md"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "whatifbench",
+    "name": "WhatIfBench",
+    "aliases": [
+      "What If Bench",
+      "WhatIf-Bench"
+    ],
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Diagnostic benchmark of 220 open-domain, long-horizon counterfactual causal reasoning questions across STEM, humanities and social sciences, and hybrid scenarios. The PRISM evaluator converts each response into a semantic causal graph and averages graph-level Process Metric with rubric-level explanatory adequacy.",
+    "org": "Zhejiang University, Alibaba Group and City University of Hong Kong",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.27953",
+      "repo": "https://github.com/zju-gt/WhatIfBench",
+      "dataset": "https://huggingface.co/datasets/zju-gt/WhatIfBench"
+    },
+    "access": "public",
+    "note": "Published in Findings of EMNLP 2026, with code and Hugging Face dataset released in November 2026. Scores 6 frontier LLMs using GPT-5.4 as unified causal-graph parser and rubric judge (temperature 0.0), led by GPT-5.5 at 64.62% ahead of Claude Opus 4.7 (59.11%) and Gemini 3.1 Pro Preview (56.33%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/zju-gt/WhatIfBench",
+      "https://huggingface.co/datasets/zju-gt/WhatIfBench",
+      "https://arxiv.org/abs/2608.27953"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "when2call",

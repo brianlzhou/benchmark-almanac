@@ -5342,6 +5342,49 @@
       "rows": 10,
       "unmatched": []
     },
+    "agentcibench": {
+      "url": "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "feed": "https://ukplab.github.io/emnlp2026-agentcibench/data.js",
+      "terms": "UKPLab publishes the benchmark site and static data.js on GitHub Pages with no robots.txt restrictions, alongside a public dataset on Hugging Face.",
+      "retrieved": "2026-11-24",
+      "rows": 21,
+      "unmatched": [],
+      "chart": {
+        "title": "Utility vs disclosure restraint",
+        "x": {
+          "key": "utility",
+          "label": "Utility",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "score",
+          "label": "Engaged leakage",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Engaged leakage plotted against task utility across all evaluated agents, redrawn from the site analysis page."
+      },
+      "stats": {
+        "utility": {
+          "name": "Utility",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of tasks where the agent included all required information."
+        },
+        "rawLeakage": {
+          "name": "Raw leakage",
+          "unit": "%",
+          "better": "lower",
+          "note": "Unconditioned share of scenarios where private context was disclosed to the wrong recipient."
+        },
+        "refusal": {
+          "name": "Refusal rate",
+          "unit": "%",
+          "note": "Share of scenarios where the agent refused to complete the request."
+        }
+      }
+    },
     "agentclinic": {
       "url": "https://arxiv.org/html/2405.07960",
       "feed": "https://arxiv.org/html/2405.07960",
@@ -27204,6 +27247,78 @@
           "name": "Agents4PLC validation rate",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "autoragbench": {
+      "url": "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "feed": "https://zhanghang9991.github.io/AutoRAGBench_Website/assets/data.js",
+      "terms": "The authors publish the AutoRAGBench leaderboard and static assets/data.js on GitHub Pages with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [],
+      "chart": {
+        "title": "Score vs retrieval latency",
+        "x": {
+          "key": "latency",
+          "label": "Mean retrieval latency",
+          "unit": "s",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Average score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Average score across the nine tasks plotted against mean retrieval latency per question, redrawn from Figure B."
+      },
+      "costPer": "run",
+      "harnesses": "system",
+      "parts": {
+        "nq": {
+          "name": "NQ",
+          "group": "Task"
+        },
+        "hotpotqa": {
+          "name": "HotpotQA",
+          "group": "Task"
+        },
+        "musique": {
+          "name": "MuSiQue",
+          "group": "Task"
+        },
+        "multihopRag": {
+          "name": "MH-RAG",
+          "group": "Task"
+        },
+        "pubmedqa": {
+          "name": "PubMedQA",
+          "group": "Task"
+        },
+        "qasper": {
+          "name": "QASPER",
+          "group": "Task"
+        },
+        "fever": {
+          "name": "FEVER",
+          "group": "Task"
+        },
+        "webqsp": {
+          "name": "WebQSP",
+          "group": "Task"
+        },
+        "cwq": {
+          "name": "CWQ",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Mean retrieval latency",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Mean retrieval latency per hidden test question across the nine tasks, including generator calls."
         }
       }
     },
@@ -98809,6 +98924,15 @@
           "name": "Overall description accuracy"
         }
       }
+    },
+    "everydaybench": {
+      "url": "https://everydaybench.stanford.edu/",
+      "feed": "https://everydaybench.stanford.edu/",
+      "terms": "Stanford publishes the EverydayBench leaderboard on a public page with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [],
+      "harnesses": "system"
     },
     "evf-bench": {
       "url": "https://arxiv.org/html/2611.24116",
@@ -261872,6 +261996,51 @@
       "rows": 2,
       "unmatched": []
     },
+    "redactionbench": {
+      "url": "https://huggingface.co/datasets/RedactionBench/RedactionBench",
+      "feed": "https://huggingface.co/datasets/RedactionBench/RedactionBench/raw/main/README.md",
+      "terms": "RedactionBench is published under CC BY 4.0 on Hugging Face, and we read only the public README leaderboard table.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "B2NER InternLM2.5 7B",
+        "Bards PII v3",
+        "CobuildX 17M",
+        "CobuildX 32M",
+        "CobuildX 68M",
+        "DeepakSiloka PII v2.1",
+        "Distil-PII Gemma 270M",
+        "Distil-PII Llama 1B",
+        "Distil-PII Llama 3B",
+        "E3-JSI GLiNER PII",
+        "Eternis Anonymizer 4B",
+        "Fastino GLiNER2 PII",
+        "GLiNER multi v2.1",
+        "GLiNER multi-PII",
+        "Gretel GLiNER bi-large",
+        "HiveTrace GLiNER Guard bi",
+        "HiveTrace GLiNER Guard uni",
+        "HydroxAI PII Masker",
+        "Isotonic DistilBERT v2",
+        "Jakobhuss Gemma 270M",
+        "Knowledgator GLiNER PII",
+        "Lakshyakh93 DeBERTa PII †",
+        "LiquidAI LFM2.5 PII",
+        "NVIDIA GLiNER PII",
+        "NuExtract 1.5 tiny",
+        "NuExtract 2.0 2B",
+        "NuExtract 2.0 4B",
+        "OpenMed SuperClinical PII",
+        "OpenPipe PII-Redact",
+        "Perplexity PII-Tracer",
+        "Piiranha v1",
+        "Tanaos anonymizer",
+        "UniNER 7B all",
+        "ai4privacy English",
+        "ai4privacy multilingual",
+        "h2oai DeBERTa PII †"
+      ]
+    },
     "reddit-impacts": {
       "url": "https://codalab.lisn.upsaclay.fr/competitions/22203",
       "feed": "https://workshop-proceedings.icwsm.org/pdf/2025_55.pdf",
@@ -262654,6 +262823,64 @@
         "Pre-trained Phi-1.5",
         "Text-DaVinci-003"
       ]
+    },
+    "rehearsalbench": {
+      "url": "https://afterflow.dev/research/rehearsalbench",
+      "feed": "https://afterflow.dev/research/rehearsalbench/leaderboard.csv",
+      "terms": "Afterflow’s robots.txt allows all crawlers on its pages and publishes the Round 3 leaderboard CSV directly.",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": [],
+      "chart": {
+        "title": "Cost per run and running cost saved",
+        "x": {
+          "key": "cost",
+          "label": "Cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Cost saved",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Simulated running cost saved plotted against API cost per run on a log scale, redrawn from Afterflow."
+      },
+      "costPer": "run",
+      "stats": {
+        "forecastAccuracy": {
+          "name": "Forecast accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Percentage reduction in forecast error compared with always predicting no effect."
+        },
+        "forecastScore": {
+          "name": "Forecast error score",
+          "unit": "score",
+          "better": "lower",
+          "note": "Underlying forecast error score used to compute forecast accuracy."
+        },
+        "meanValueUsd": {
+          "name": "Mean value vs no change",
+          "unit": "usd",
+          "better": "higher",
+          "note": "Mean simulated dollar value gained per run relative to doing nothing."
+        },
+        "robustValueUsd": {
+          "name": "Robust value vs no change",
+          "unit": "usd",
+          "better": "higher",
+          "note": "Downside-weighted simulated dollar value gained per run relative to doing nothing."
+        },
+        "validRunsPct": {
+          "name": "Valid runs",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of simulated bank runs that produced a valid operational plan."
+        }
+      }
     },
     "relate-audio-text": {
       "url": "https://arxiv.org/html/2506.23582",
@@ -266195,6 +266422,15 @@
         }
       }
     },
+    "robo-swe": {
+      "url": "https://huggingface.co/datasets/vharatian/Robo-SWE",
+      "feed": "https://huggingface.co/datasets/vharatian/Robo-SWE/raw/main/results/summary.json",
+      "terms": "The authors publish results/summary.json directly inside the public vharatian/Robo-SWE dataset repository on Hugging Face.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "harnesses": "system"
+    },
     "roboarcade": {
       "url": "https://roboarcade.org/",
       "feed": "https://roboarcade.org/",
@@ -269616,6 +269852,186 @@
           "name": "Terminal-Bench 2.0 Tinker cost",
           "unit": "usd",
           "better": "lower"
+        }
+      }
+    },
+    "rsibench-infra": {
+      "url": "https://rsibench-infra.github.io/",
+      "feed": "https://rsibench-infra.github.io/",
+      "terms": "The authors publish the RSIBench-Infra leaderboard on GitHub Pages with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "Seed Evolving Auto"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "inferDeepseekV4Flash": {
+          "name": "DeepSeek V4 Flash",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferGlm52": {
+          "name": "GLM-5.2",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferGlm53": {
+          "name": "GLM-5.3",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferGlm53Flash": {
+          "name": "GLM-5.3 Flash",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferInkling": {
+          "name": "Inkling",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferKimiK3": {
+          "name": "Kimi K3",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferLingbotWorld2": {
+          "name": "LingBot World 2.0",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferLlada21Mini": {
+          "name": "LLaDA 2.1 Mini",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferMinimaxH3": {
+          "name": "MiniMax H3",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferMuseGlimmer": {
+          "name": "Muse Glimmer",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferNemotron3Ultra": {
+          "name": "Nemotron 3 Ultra",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferPi05Libero": {
+          "name": "Pi0.5 LIBERO",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferQwen38": {
+          "name": "Qwen3.8-27B",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferQwen3Tts": {
+          "name": "Qwen3 TTS",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferQwen3Vl": {
+          "name": "Qwen3-VL-32B",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inferWan22": {
+          "name": "Wan 2.2 TI2V",
+          "group": "Inference",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trainQwen3Grpo": {
+          "name": "Qwen3 GRPO",
+          "group": "Training",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trainQwen3Sft": {
+          "name": "Qwen3 SFT",
+          "group": "Training",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trainQwen3Opd": {
+          "name": "Qwen3 OPD",
+          "group": "Training",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trainQwen3VlGrpo": {
+          "name": "Qwen3-VL GRPO",
+          "group": "Training",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "medianSpeedup": {
+          "name": "Median speedup",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Median speedup across formally scored workloads."
+        },
+        "meanSolScore": {
+          "name": "Mean SOL score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean normalized speed-of-light score capped at 1.0 per task across formally scored workloads."
+        }
+      }
+    },
+    "rsibench-infra-lite": {
+      "url": "https://rsibench-infra.github.io/",
+      "feed": "https://rsibench-infra.github.io/",
+      "terms": "The authors publish the RSIBench-Infra-Lite leaderboard on GitHub Pages with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "Seed Evolving Auto"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "qwen38": {
+          "name": "Qwen3.8-27B",
+          "group": "Workload"
+        },
+        "museGlimmer": {
+          "name": "Muse-Glimmer-30B",
+          "group": "Workload"
+        },
+        "qwen3Vl": {
+          "name": "Qwen3-VL-32B",
+          "group": "Workload"
+        },
+        "llada21Mini": {
+          "name": "LLaDA2.1-mini-16B",
+          "group": "Workload"
+        },
+        "wan22": {
+          "name": "Wan2.2-TI2V-5B",
+          "group": "Workload"
         }
       }
     },
@@ -314848,6 +315264,37 @@
         }
       }
     },
+    "vg-gui-bench": {
+      "url": "https://vg-gui-tasker.github.io/",
+      "feed": "https://vg-gui-tasker.github.io/",
+      "terms": "The authors publish the VG-GUI-Bench leaderboard on GitHub Pages with no robots.txt restrictions.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [
+        "Gemini-3.1-Flash"
+      ],
+      "stats": {
+        "typeAccuracy": {
+          "name": "Type accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of steps predicting the correct action type."
+        },
+        "completion": {
+          "name": "Episode completion",
+          "unit": "%",
+          "better": "higher",
+          "note": "Proportion of correctly executed steps per episode, averaged across episodes."
+        },
+        "pir": {
+          "name": "Performance improvement rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Relative step accuracy gain from adding the tutorial video compared with No Video."
+        }
+      }
+    },
     "vggsound": {
       "url": "https://arxiv.org/html/2004.14368",
       "feed": "https://arxiv.org/html/2004.14368",
@@ -324888,6 +325335,55 @@
           "unit": "score",
           "better": "higher",
           "note": "Scale-invariant signal-to-distortion ratio in dB."
+        }
+      }
+    },
+    "whatifbench": {
+      "url": "https://github.com/zju-gt/WhatIfBench",
+      "feed": "https://raw.githubusercontent.com/zju-gt/WhatIfBench/main/README.md",
+      "terms": "The authors publish the WhatIfBench Main Results table in the public zju-gt/WhatIfBench GitHub repository.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [],
+      "parts": {
+        "stemPm": {
+          "name": "STEM (Process)",
+          "group": "Process metric"
+        },
+        "hssPm": {
+          "name": "HSS (Process)",
+          "group": "Process metric"
+        },
+        "hybridPm": {
+          "name": "Hybrid (Process)",
+          "group": "Process metric"
+        },
+        "stemRm": {
+          "name": "STEM (Rubric)",
+          "group": "Rubric metric"
+        },
+        "hssRm": {
+          "name": "HSS (Rubric)",
+          "group": "Rubric metric"
+        },
+        "hybridRm": {
+          "name": "Hybrid (Rubric)",
+          "group": "Rubric metric"
+        }
+      },
+      "stats": {
+        "overallPm": {
+          "name": "Overall process metric",
+          "unit": "%",
+          "better": "higher",
+          "note": "Graph-level causal validity across all 220 questions."
+        },
+        "overallRm": {
+          "name": "Overall rubric metric",
+          "unit": "%",
+          "better": "higher",
+          "note": "Answer-level explanatory adequacy across all 220 questions."
         }
       }
     },

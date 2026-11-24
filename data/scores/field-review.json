@@ -297,6 +297,8 @@
     "rollercoastertycoonbench": [{"field":"Keeps its pick at a higher price","kind":"cost","why":"new"}],
     "rsi-arena": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Weights","kind":"open weights, license or size","why":"not stored","share":1}],
     "rsi-control-arena": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Attack agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Transcript","kind":"link","why":"not stored","share":1},{"field":"Hidden reasoning step","kind":"time, latency or steps","why":"not stored","share":1}],
+    "rsibench-infra": [{"field":"Seed Evolving Auto","kind":"trials","why":"not stored","share":1}],
+    "rsibench-infra-lite": [{"field":"Seed Evolving Auto","kind":"trials","why":"not stored","share":1}],
     "rvg-bench": [{"field":"M-Step","kind":"time, latency or steps","why":"not stored","share":1},{"field":"S-Step","kind":"time, latency or steps","why":"not stored","share":1}],
     "rvms-bench": [{"field":"Open Source Models","kind":"open weights, license or size","why":"not stored","share":1}],
     "s-ember": [{"field":"Location trace","kind":"link","why":"not stored","share":1},{"field":"Location Trace","kind":"link","why":"not stored","share":1},{"field":"Time / duration","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Time Duration","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Interval Prediction","kind":"uncertainty","why":"not stored","share":1}],

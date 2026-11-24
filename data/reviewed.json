@@ -621,6 +621,11 @@
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
     },
     {
+      "id": "agentcibench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (Hugging Face UKPLab/agentcibench) confirmed a live EMNLP 2026 leaderboard at ukplab.github.io/emnlp2026-agentcibench scoring 21 computer-use agents with a utility versus leakage Pareto plot."
+    },
+    {
       "id": "agentclinic",
       "date": "2026-11-01",
       "via": "Prime Intellect Environments Hub (agentclinic environments)."
@@ -2229,6 +2234,11 @@
       "id": "autoplc",
       "date": "2026-11-20",
       "via": "Agents4PLC credits AutoPLC for its competition cases, leading to the original datasets and vendor compiler comparison."
+    },
+    {
+      "id": "autoragbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.25582) confirmed a live leaderboard at zhanghang9991.github.io/AutoRAGBench_Website scoring 9 frontier coding agents across 9 RAG tasks with a score versus latency Pareto chart."
     },
     {
       "id": "autoresearchbench",
@@ -8314,6 +8324,11 @@
       "id": "eventhallusion",
       "date": "2026-11-19",
       "via": "Meta Perception Encoder and Perception Language Model release reports this evaluation in its release results."
+    },
+    {
+      "id": "everydaybench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.25146) confirmed a live Stanford leaderboard at everydaybench.stanford.edu scoring 13 frontier model and agent configurations on 77 live-web tasks."
     },
     {
       "id": "evf-bench",
@@ -20346,6 +20361,11 @@
       "via": "The publisher's research and repository indexes led to this release."
     },
     {
+      "id": "redactionbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json confirmed a 44-model PII redaction leaderboard on Hugging Face (RedactionBench/RedactionBench) comparing frontier general-purpose agents and specialized detectors."
+    },
+    {
       "id": "reddit-impacts",
       "date": "2026-11-20",
       "via": "The 2026 opioid task cited its original corpus, which led to the 2024 announcement and the 2025 participant results."
@@ -20439,6 +20459,11 @@
       "id": "regexeval",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "rehearsalbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.22480) confirmed a live Round 3 leaderboard and CSV feed at afterflow.dev/research/rehearsalbench scoring 10 frontier models with 95% intervals and a cost-savings scatter plot."
     },
     {
       "id": "relate-audio-text",
@@ -20694,6 +20719,11 @@
       "id": "roark-live-bench-1-3",
       "date": "2026-11-20",
       "via": "We followed a customer support phone benchmark to Roark’s change log and checked which industry calls its current suite scores."
+    },
+    {
+      "id": "robo-swe",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json confirmed a 236-task Harbor robotics issue-resolution benchmark on Hugging Face (vharatian/Robo-SWE) with a JSON leaderboard comparing 7 frontier agent configurations across 6 models."
     },
     {
       "id": "roboarcade",
@@ -20964,6 +20994,16 @@
       "id": "rsibench-data",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-08-04 (Kimi K3 + Kimi Code at 27.317% weighted score)."
+    },
+    {
+      "id": "rsibench-infra",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.24395) confirmed a live ByteDance Seed and Tsinghua AIR leaderboard at rsibench-infra.github.io scoring 7 frontier models on 20 infrastructure optimization tasks."
+    },
+    {
+      "id": "rsibench-infra-lite",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.24395) confirmed a separate 5-workload Lite leaderboard with its own normalized Agent score metric on rsibench-infra.github.io across 7 frontier models."
     },
     {
       "id": "rsicd",
@@ -26076,6 +26116,11 @@
       "via": "A veterinary licensing exam search surfaced VetEval's item bank, which linked to its methodology and leaderboard."
     },
     {
+      "id": "vg-gui-bench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (Hugging Face Aoraku/VG-GUI-Bench) confirmed an ECCV 2026 project leaderboard at vg-gui-tasker.github.io comparing 7 frontier multimodal models on video-guided mobile GUI control."
+    },
+    {
       "id": "vggsound",
       "date": "2026-11-19",
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
@@ -26949,6 +26994,11 @@
       "id": "whamr",
       "date": "2026-11-20",
       "via": "We followed the WHAM project page to the reverberant extension and checked the authors’ paper and a separate test harness."
+    },
+    {
+      "id": "whatifbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (Hugging Face zju-gt/WhatIfBench) confirmed an EMNLP 2026 Findings counterfactual reasoning benchmark with 6 frontier LLMs scored under PRISM on GitHub."
     },
     {
       "id": "when2call",
