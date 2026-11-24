@@ -12,9 +12,10 @@ const board: Leaderboard = {
   verified: 'Marked official in the SimReady validation report.',
   parts: { explicit: { name: 'Explicit', group: 'Prompt phrasing' }, engineer: { name: 'Engineer', group: 'Prompt phrasing' }, intent: { name: 'Intent', group: 'Prompt phrasing' } },
   stats: {
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
     latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
-    inputTokens: { name: 'Prompt tokens', unit: 'tokens' },
-    outputTokens: { name: 'Completion tokens', unit: 'tokens' },
+    inputTokens: { name: 'Total prompt tokens', unit: 'tokens' },
+    outputTokens: { name: 'Total completion tokens', unit: 'tokens' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(feed);
@@ -45,16 +46,20 @@ const board: Leaderboard = {
       const setupRow = setup.get(cells[0]);
       const costRow = cost.get(cells[0]);
       const metrics: Record<string, number> = { passAt5: passK };
+      let tokens: number | undefined;
       if (costRow) {
+        const calls = Number(costRow[1].replace(/,/g, ''));
         const latency = Number(costRow[4]);
         const inputTokens = Number(costRow[2].replace(/,/g, ''));
         const outputTokens = Number(costRow[3].replace(/,/g, ''));
         if (Number.isFinite(latency)) metrics.latency = latency;
         if (Number.isFinite(inputTokens)) metrics.inputTokens = inputTokens;
         if (Number.isFinite(outputTokens)) metrics.outputTokens = outputTokens;
+        if (Number.isFinite(outputTokens) && Number.isFinite(calls) && calls > 0) tokens = Math.round(outputTokens / calls);
       }
       rows.push({ model: cells[0], score: pass1,
         ...(interval ? { low: Number(interval[1]), high: Number(interval[2]) } : {}),
+        ...(tokens !== undefined ? { tokens } : {}),
         ...(setupRow?.[7] === 'True' ? { verified: true } : {}), metrics });
     }
     const styleStart = text.indexOf('| model | explicit | engineer | intent |');
@@ -63,7 +68,7 @@ const board: Leaderboard = {
         const cells = line.split('|').map((v) => v.trim()).filter(Boolean);
         if (cells.length < 4 || !/^gpt-|^gemini-/i.test(cells[0])) break;
         const row = rows.find((candidate) => candidate.model === cells[0]);
-        if (row) row.metrics = { ...(row.metrics ?? {}), explicit: Number(cells[1]), engineer: Number(cells[2]), intent: Number(cells[3]) };
+        if (row) row.metrics = { ...(row.metrics ?? {}), explicit: Number(cells[1].replace('%', '')), engineer: Number(cells[2].replace('%', '')), intent: Number(cells[3].replace('%', '')) };
       }
     }
     if (rows.length < 2) throw new Error('SimReady rows missing');

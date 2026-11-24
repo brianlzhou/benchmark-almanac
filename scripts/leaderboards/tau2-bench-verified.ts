@@ -28,7 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md";
 const board: Leaderboard = {
   "benchmark": "tau2-bench-verified",
-  stats: { reportedCost: { name: 'Reported cost', unit: 'usd', better: 'lower' }, scorePerDollar: { name: 'Score per dollar', unit: 'score', better: 'higher' }, runInputTokens: { name: 'Run input tokens', unit: 'tokens' }, runOutputTokens: { name: 'Run output tokens', unit: 'tokens' }, runTotalTokens: { name: 'Run total tokens', unit: 'tokens' } },
+  stats: { scorePerDollar: { name: 'Score per dollar', unit: 'score', better: 'higher' }, runInputTokens: { name: 'Run input tokens', unit: 'tokens' }, runOutputTokens: { name: 'Run output tokens', unit: 'tokens' }, runTotalTokens: { name: 'Run total tokens', unit: 'tokens' } },
   costPer: 'run',
   "url": "https://github.com/amazon-agi/tau2-bench-verified",
   "feed": "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md",
@@ -51,7 +51,7 @@ const board: Leaderboard = {
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
         const row: LeaderboardRow = { model: identity(model), score: value * 1 };
         row.setting = r[1].match(/reasoning:\s*([^)]*)/)?.[1];
-        row.harness = "tau2-bench-verified; gpt-5.1 user simulator";
+        row.harness = "tau2-bench-verified, gpt-5.1 user simulator";
         row.metrics = {};
         { const n = numeric(r[2]); if (n !== undefined) row.metrics["airline"] = n; }
         { const n = numeric(r[3]); if (n !== undefined) row.metrics["retail"] = n; }
@@ -66,12 +66,13 @@ const board: Leaderboard = {
       const row = rows.find(x => x.model === model && x.setting === setting);
       if (!row) continue;
       row.metrics ??= {};
-      for (const [key, col] of [['reportedCost', 6], ['scorePerDollar', 7], ['runInputTokens', 3], ['runOutputTokens', 4], ['runTotalTokens', 5]] as const) {
+      const costVal = parseFloat(r[6].replace(/[$,]/g, ''));
+      if (Number.isFinite(costVal)) row.cost = costVal;
+      for (const [key, col] of [['scorePerDollar', 7], ['runInputTokens', 3], ['runOutputTokens', 4], ['runTotalTokens', 5]] as const) {
         const value = parseFloat(r[col].replace(/[$,]/g, '')) * (/M$/.test(r[col]) ? 1e6 : 1);
         if (Number.isFinite(value)) row.metrics[key] = value;
       }
     }
-    for (const row of rows) if (typeof row.metrics?.reportedCost === 'number') row.cost = row.metrics.reportedCost;
     if (!rows.length) throw new Error("No scored model rows in the published results");
     return rows;
   },

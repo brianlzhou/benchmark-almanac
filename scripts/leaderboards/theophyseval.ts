@@ -11,7 +11,7 @@ const agents = [
 const board: Leaderboard = {
   benchmark: 'theophyseval', url: feed, feed, static: 'paper', costPer: 'run',
   terms: 'The researchers publish the tables under the paper terms at https://arxiv.org/abs/2610.16733.',
-  stats: { solved: { name: 'Solved problems', unit: 'count', better: 'higher' }, inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' }, outputTokens: { name: 'Output tokens', unit: 'tokens', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens', better: 'lower' } },
+  stats: { solved: { name: 'Solved problems', unit: 'count', better: 'higher' }, inputTokens: { name: 'Input tokens per problem', unit: 'tokens', better: 'lower' }, totalTokens: { name: 'Total tokens per problem', unit: 'tokens', better: 'lower' } },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const grades = tables.find(t => t[0]?.[0] === 'Problem' && t.at(-1)?.[0] === 'Solved');
@@ -30,9 +30,10 @@ const board: Leaderboard = {
         if (grades[0][col] !== agent || grades[1][col] !== track[0]) throw new Error('Unexpected grade column');
         const solved = numberCell(grades.at(-1)![col]);
         const base = 1 + 4 * j;
+        const tokens = Math.round(numberCell(usage[base+2]) * 20000);
         const metrics: Record<string,number> = {
           solved, inputTokens: (numberCell(usage[base]) + numberCell(usage[base+1])) * 20000,
-          outputTokens: numberCell(usage[base+2]) * 20000, totalTokens: numberCell(usage[base+3]) * 20000,
+          totalTokens: numberCell(usage[base+3]) * 20000,
         };
         let offset = 2;
         for (const [k, [theme, count]] of themes.slice(1,-1).entries()) {
@@ -45,7 +46,7 @@ const board: Leaderboard = {
         }
         // GLM's subscription covers both tracks, so its cost cannot be assigned to either one.
         rows.push({ model, harness, setting: track + (agent === 'Gemini' ? ', high effort' : ', max effort'),
-          score: 2 * solved, metrics, cost: agent === 'GLM' ? undefined : numberCell(price[j + 1]) });
+          score: 2 * solved, metrics, cost: agent === 'GLM' ? undefined : numberCell(price[j + 1]), tokens });
       }
     }
     return checked(rows, 10);

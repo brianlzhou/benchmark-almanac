@@ -17,7 +17,15 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The benchmark repository is MIT licensed. The hosted page returned its HTML at robots.txt, so this importer reads the generated JSON index from GitHub.',
   costPer: 'run',
-  stats: { solved:{name:'Tasks solved',unit:'count'}, tasks:{name:'Tasks',unit:'count'}, timePerTask:{name:'Time per task',unit:'seconds',better:'lower'}, triesPerTask:{name:'Tries per task',unit:'count'}, outputTokens:{name:'Output tokens',unit:'tokens'} },
+  parts: {
+    door_2x2: { name: '2x2 piston door', group: 'Doors' }, door_3x3: { name: '3x3 piston door', group: 'Doors' }, door_4x4: { name: '4x4 piston door', group: 'Doors' },
+    mech_extender2: { name: 'Double piston extender', group: 'Piston extenders' }, mech_extender3: { name: 'Triple piston extender', group: 'Piston extenders' },
+    logic_not: { name: 'NOT gate', group: 'Logic' }, logic_xor: { name: 'XOR gate', group: 'Logic' }, logic_full_adder: { name: 'Full adder', group: 'Logic' },
+    logic_adder2: { name: '2-bit adder', group: 'Logic' }, logic_seg7: { name: 'Hex to seven-segment decoder', group: 'Logic' },
+    mem_tff: { name: 'T flip-flop', group: 'Memory' }, mem_rs_latch: { name: 'Set-reset latch', group: 'Memory' }, mem_counter2: { name: '2-bit counter', group: 'Memory' },
+    time_clock20: { name: '20-tick clock', group: 'Timing' }, time_clock120: { name: '120-tick clock', group: 'Timing' }, time_pulse30: { name: '30-tick pulse', group: 'Timing' },
+  },
+  stats: { solved:{name:'Tasks solved',unit:'count'}, timePerTask:{name:'Time per task',unit:'seconds',better:'lower'}, triesPerTask:{name:'Tries per task',unit:'count'}, outputTokens:{name:'Total output tokens',unit:'tokens'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<Index>(FEED);
     if (!data.tasks?.length || !data.configs?.length || !data.runs?.length) throw new Error('RedstoneBench index is incomplete');
@@ -26,8 +34,6 @@ const board: Leaderboard = {
       const volumes = [task.known?.[0], ...data.runs.filter((run) => run.task === task.id).map((run) => run.volume)].filter((value): value is number => typeof value === 'number' && value > 0);
       floor[task.id] = volumes.length ? Math.min(...volumes) : null;
     }
-    const parts: Record<string, BoardPart> = Object.fromEntries(data.tasks.map((task) => [task.id, { name: task.title, group: data.families[task.family] ?? task.family }]));
-    board.parts = parts;
     const rows: LeaderboardRow[] = [];
     for (const config of data.configs) {
       const runs = data.tasks.map((task) => data.runs.find((run) => run.task === task.id && run.config === config.id));
@@ -51,11 +57,12 @@ const board: Leaderboard = {
       }
       const score = data.tasks.reduce((sum, task) => sum + (metrics[task.id] ?? 0), 0) / data.tasks.length;
       metrics.solved = solved;
-      metrics.tasks = data.tasks.length;
-      metrics.timePerTask = seconds / runs.filter(Boolean).length;
-      metrics.triesPerTask = tries / runs.filter(Boolean).length;
+      const completed = runs.filter(Boolean).length;
+      metrics.timePerTask = seconds / completed;
+      metrics.triesPerTask = tries / completed;
       metrics.outputTokens = outputTokens;
-      rows.push({ model: config.model, setting: config.effort, score, metrics });
+      const tokens = outputTokens > 0 ? Math.round(outputTokens / completed) : undefined;
+      rows.push({ model: config.model, setting: config.effort, score, tokens, metrics });
     }
     if (rows.length < 40) throw new Error(`RedstoneBench: ${rows.length} configurations, expected at least 40`);
     return rows;

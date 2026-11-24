@@ -4625,7 +4625,7 @@
       "url": "https://league.jake-moses.com/benchmark",
       "feed": "https://league.jake-moses.com/benchmark",
       "terms": "The author's project page reserves all rights and gives no separate results license. https://www.jake-moses.com/ai-league.html Robots.txt allows the benchmark.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "costPer": "run",
@@ -4636,6 +4636,10 @@
         },
         "losses": {
           "name": "Losses",
+          "unit": "count"
+        },
+        "ties": {
+          "name": "Ties",
           "unit": "count"
         },
         "Against": {
@@ -4692,6 +4696,11 @@
         "Auto-picks": {
           "name": "Automatic picks",
           "unit": "count"
+        },
+        "Empty slots": {
+          "name": "Empty lineup slots",
+          "unit": "count",
+          "better": "lower"
         },
         "Tokens in": {
           "name": "Input tokens",
@@ -6692,7 +6701,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "Mean speedup weights the three published category means by their task counts across all 196 tasks.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -6744,10 +6753,6 @@
           "name": "HIP-to-HIP output tokens",
           "unit": "tokens"
         },
-        "HIP-to-HIPTask Std": {
-          "name": "HIP-to-HIP task standard deviation",
-          "unit": "speedup"
-        },
         "HIP-to-HIPP25": {
           "name": "HIP-to-HIP 25th percentile speedup",
           "unit": "speedup"
@@ -6793,10 +6798,6 @@
         "Triton-to-TritonOutputTokens": {
           "name": "Triton-to-Triton output tokens",
           "unit": "tokens"
-        },
-        "Triton-to-TritonTask Std": {
-          "name": "Triton-to-Triton task standard deviation",
-          "unit": "speedup"
         },
         "Triton-to-TritonP25": {
           "name": "Triton-to-Triton 25th percentile speedup",
@@ -6844,10 +6845,6 @@
           "name": "PyTorch-to-HIP output tokens",
           "unit": "tokens"
         },
-        "PyTorch-to-HIPTask Std": {
-          "name": "PyTorch-to-HIP task standard deviation",
-          "unit": "speedup"
-        },
         "PyTorch-to-HIPP25": {
           "name": "PyTorch-to-HIP 25th percentile speedup",
           "unit": "speedup"
@@ -6859,10 +6856,6 @@
         "PyTorch-to-HIPP90": {
           "name": "PyTorch-to-HIP 90th percentile speedup",
           "unit": "speedup"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens"
         }
       }
     },
@@ -41711,7 +41704,7 @@
       "url": "https://caliperbench.com/",
       "feed": "https://caliperbench.com/",
       "terms": "The scoreboard embeds its data in the page and gives no separate reuse license. https://caliperbench.com/ The robots URL returns the scoreboard HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 88,
       "unmatched": [
         "Agnes 3.0 Flash (Agnes AI)",
@@ -41745,6 +41738,7 @@
         "Artemis 31B v1.2 (TheDrummer)",
         "Artemis 31B v1.2 Heretic (sjorsb)",
         "Artemis 31B v1.2 Thinking (TheDrummer)",
+        "Artemis 31B v1.2 Thinking Heretic (sjorsb)",
         "AssGuard 31B (Ateron)",
         "Assistant Pepe 32B (SicariusSicariiStuff)",
         "Assistant Pepe 70B (SicariusSicariiStuff)",
@@ -41800,6 +41794,9 @@
         "Cydonia 24B v4.2.0 (TheDrummer)",
         "Cydonia 24B v4.3 (TheDrummer)",
         "Cydonia 24B v4.3 Absolute-Heresy (MuXodious)",
+        "Cyrogen Vesper 26B-A4B (Kainxkitsune)",
+        "Cyrogen Vesper 26B-A4B Thinking (Kainxkitsune)",
+        "Cyrogen Vesper 31B (Kainxkitsune)",
         "Dans-PersonalityEngine 12B v1.3.0 (PocketDoc)",
         "Dans-PersonalityEngine 24B v1.3 (PocketDoc)",
         "Dark Craving 26B-A4B (ReadyArt)",
@@ -42101,6 +42098,7 @@
         "Kitchoon 26B-A4B v5.1 Clean EXP Thinking (SubMaroon)",
         "L3.3-Loki 70B v2.0 (CrucibleLab)",
         "LFM2.5 2.6B (LiquidAI)",
+        "LFM2.5 24B-A2B Thinking (LiquidAI)",
         "Laguna M.1 (poolside)",
         "Laguna M.1 Thinking (poolside)",
         "Laguna S 2.1 (poolside)",
@@ -42122,6 +42120,8 @@
         "Ling 3.0 Tiny (inclusionAI)",
         "Ling 3.0 Tiny Abliterated APEX (SC117)",
         "Ling 3.1 Flash (inclusionAI)",
+        "Ling 3.1 Flash 1019 (inclusionAI)",
+        "Ling 3.1 Flash 1019 Thinking (inclusionAI)",
         "Ling 3.1 Flash Thinking (inclusionAI)",
         "Llama 4 Maverick 400B-A17B (Meta)",
         "Llama-3.3 70B Instruct Base (Meta)",
@@ -42493,10 +42493,12 @@
         "Tiger-Gemma 12B v3 (TheDrummer)",
         "Twisted Cyclone 31B (Cyclone-Labs)",
         "Twisted Cyclone 31B Thinking (Cyclone-Labs)",
+        "Ultimate 27B Thinking Heretic Uncensored (DavidAU)",
         "UnslopNemo 12B v4.1 (TheDrummer)",
         "Vain 26B-A4B (Ozili)",
         "Vain 26B-A4B Thinking (Ozili)",
         "Vain 31B (Ozili)",
+        "Vain 31B Thinking (Ozili)",
         "Valkyrie 49B v1 (TheDrummer)",
         "Velvet Eclipse 4x12B v0.2 (SuperbEmphasis)",
         "Versipellis 31B (Nimbz)",
@@ -42559,14 +42561,497 @@
         }
       },
       "stats": {
-        "rank": {
-          "name": "Published rank",
+        "nsfw_v3": {
+          "name": "Explicit content delivery",
+          "unit": "score",
+          "note": "Ratio relative to requested explicitness where 1 matches the prompt."
+        },
+        "darkness_v3": {
+          "name": "Dark content delivery",
+          "unit": "score",
+          "note": "Ratio relative to requested darkness where 1 matches the prompt."
+        },
+        "slop_combo_v3": {
+          "name": "Combined slop score",
+          "unit": "score",
+          "better": "lower",
+          "note": "Purple prose and template phrasing averaged across creative writing and roleplay."
+        },
+        "literal_combo_v3": {
+          "name": "Combined literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words."
+        },
+        "literal_cw_v3": {
+          "name": "Creative writing literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in creative writing."
+        },
+        "spatial_cw_v3": {
+          "name": "Creative writing spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "literal_rp_v3": {
+          "name": "Roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in sustained roleplay."
+        },
+        "literal_erp_v3": {
+          "name": "Explicit roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in explicit roleplay."
+        },
+        "literal_drp_v3": {
+          "name": "Dark roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in dark roleplay."
+        },
+        "craft_retention_v3": {
+          "name": "Roleplay craft retention",
+          "unit": "score",
+          "better": "higher",
+          "note": "Craft retained late in 50-turn roleplay sessions, where 100 means no decay."
+        },
+        "coherence_rp_v3": {
+          "name": "Roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_rp_v3": {
+          "name": "Roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_rp_v3": {
+          "name": "Roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_rp_v3": {
+          "name": "Roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_rp_v3": {
+          "name": "Roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_rp_v3": {
+          "name": "Roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_rp_v3": {
+          "name": "Roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slopfloor_rp_v3": {
+          "name": "Roleplay slop floor",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_rp_v3": {
+          "name": "Roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "incharacter_rp_v3": {
+          "name": "Roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_rp_v3": {
+          "name": "Roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_rp_v3": {
+          "name": "Roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_rp_v3": {
+          "name": "Roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_rp_v3": {
+          "name": "Roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_rp_v3": {
+          "name": "Roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "explicit_erp_v3": {
+          "name": "Explicit roleplay explicitness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "coherence_erp_v3": {
+          "name": "Explicit roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_erp_v3": {
+          "name": "Explicit roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_erp_v3": {
+          "name": "Explicit roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_erp_v3": {
+          "name": "Explicit roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_erp_v3": {
+          "name": "Explicit roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_erp_v3": {
+          "name": "Explicit roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_erp_v3": {
+          "name": "Explicit roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engage_erp_v3": {
+          "name": "Explicit roleplay engagement",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_erp_v3": {
+          "name": "Explicit roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "incharacter_erp_v3": {
+          "name": "Explicit roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_erp_v3": {
+          "name": "Explicit roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_erp_v3": {
+          "name": "Explicit roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_erp_v3": {
+          "name": "Explicit roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_erp_v3": {
+          "name": "Explicit roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_erp_v3": {
+          "name": "Explicit roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "empty_profundity_drp_v3": {
+          "name": "Dark roleplay empty profundity",
+          "unit": "score",
+          "better": "lower"
+        },
+        "incharacter_drp_v3": {
+          "name": "Dark roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "circular_restating_drp_v3": {
+          "name": "Dark roleplay circular restating",
+          "unit": "score",
+          "better": "lower"
+        },
+        "nonsense_metaphor_drp_v3": {
+          "name": "Dark roleplay nonsense metaphor",
+          "unit": "score",
+          "better": "lower"
+        },
+        "incoherence_drp_v3": {
+          "name": "Dark roleplay incoherence",
+          "unit": "score",
+          "better": "lower"
+        },
+        "comprehension_drp_v3": {
+          "name": "Dark roleplay misreads",
+          "unit": "score",
+          "better": "lower"
+        },
+        "purple_prose_drp_v3": {
+          "name": "Dark roleplay purple prose",
+          "unit": "score",
+          "better": "lower"
+        },
+        "coherence_drp_v3": {
+          "name": "Dark roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_drp_v3": {
+          "name": "Dark roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_drp_v3": {
+          "name": "Dark roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_drp_v3": {
+          "name": "Dark roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_drp_v3": {
+          "name": "Dark roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_drp_v3": {
+          "name": "Dark roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_drp_v3": {
+          "name": "Dark roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engage_drp_v3": {
+          "name": "Dark roleplay engagement",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_drp_v3": {
+          "name": "Dark roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_drp_v3": {
+          "name": "Dark roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_drp_v3": {
+          "name": "Dark roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_drp_v3": {
+          "name": "Dark roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_drp_v3": {
+          "name": "Dark roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_drp_v3": {
+          "name": "Dark roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "format_adherence_mean": {
+          "name": "Instruction adherence rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "willingness": {
+          "name": "Willingness on edgy prompts",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration_engagement_density": {
+          "name": "Engagement density",
+          "unit": "score"
+        },
+        "avg_writing_style_score": {
+          "name": "Writing style conformance",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttr_mean": {
+          "name": "Type-token ratio",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trigram_repeat_rate_mean": {
+          "name": "Trigram repeat rate",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lexical_stuckness_mean": {
+          "name": "Lexical stuckness",
+          "unit": "score",
+          "better": "lower",
+          "note": "Within-output 5-gram recurrence rate."
+        },
+        "internal_semantic_redundancy_mean": {
+          "name": "Internal semantic redundancy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "length_error_pct_mean": {
+          "name": "Length error",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean absolute deviation from target word count."
+        },
+        "wc_exceeded_mean": {
+          "name": "Word count exceeded rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "repetition_interrupts": {
+          "name": "Repetition interrupts",
           "unit": "count",
           "better": "lower"
         },
-        "context_length": {
-          "name": "Context length",
+        "verb_cw": {
+          "name": "Creative writing verbosity index",
+          "unit": "index"
+        },
+        "verb_rp": {
+          "name": "Roleplay verbosity index",
+          "unit": "index"
+        },
+        "calibration_refusal_normal": {
+          "name": "Calibration refusal rate (normal)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "calibration_refusal_extreme": {
+          "name": "Calibration refusal rate (extreme)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c0_refusal_rate": {
+          "name": "C0 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c1_refusal_rate": {
+          "name": "C1 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c2_engagement_rate": {
+          "name": "C2 engagement rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c3_refusal_rate": {
+          "name": "C3 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c4_engagement_rate": {
+          "name": "C4 engagement rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "sanitized_rate_v2": {
+          "name": "Sanitized response rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "positivity_lean_mean": {
+          "name": "Positivity lean",
+          "unit": "score"
+        },
+        "word_count_mean": {
+          "name": "Mean word count",
+          "unit": "count"
+        },
+        "verb_to_noun_ratio_mean": {
+          "name": "Verb to noun ratio",
+          "unit": "score"
+        },
+        "adjective_adverb_percentage_mean": {
+          "name": "Adjective and adverb share",
+          "unit": "%"
+        },
+        "dialogue_percentage_mean": {
+          "name": "Dialogue share",
+          "unit": "%"
+        },
+        "em_dash_density_mean": {
+          "name": "Em-dashes per 100 words",
+          "unit": "score"
+        },
+        "hedge_ratio_mean": {
+          "name": "Hedging density per 100 words",
+          "unit": "score"
+        },
+        "thinking_chars_mean": {
+          "name": "Mean leaked thinking characters",
+          "unit": "count"
+        },
+        "reasoning_tokens_mean": {
+          "name": "Mean reasoning tokens per call",
           "unit": "tokens"
+        },
+        "recognition_author_match_rate": {
+          "name": "Author recognition rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recognition_work_match_rate": {
+          "name": "Work recognition rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recognition_hallucination_rate": {
+          "name": "Recognition hallucination rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "collapse_rate_all": {
+          "name": "Overall collapse rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "long_rp_opener_echo_rate": {
+          "name": "Roleplay opener echo rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "long_rp_opener_run_max": {
+          "name": "Longest repeated opener run",
+          "unit": "count",
+          "better": "lower"
+        },
+        "terse_late_sessions": {
+          "name": "Terse late sessions",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -81799,7 +82284,8 @@
       "url": "https://arxiv.org/abs/2510.12798",
       "feed": "https://arxiv.org/html/2510.12798",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Grounding DINO-Swin-T",
@@ -81807,10 +82293,9 @@
         "Rex-Omni",
         "Rex-Omni-SFT"
       ],
-      "static": "paper",
       "stats": {
         "f1At95": {
-          "name": "F1 at 95% precision",
+          "name": "F1 at IoU 0.95",
           "unit": "%",
           "better": "higher"
         },
@@ -81818,6 +82303,20 @@
           "name": "Mean F1",
           "unit": "%",
           "better": "higher"
+        },
+        "outputTokensAt100": {
+          "name": "Output tokens per image (Dense200@100)",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "boxesPerImageAt100": {
+          "name": "Boxes per image (Dense200@100)",
+          "unit": "count"
+        },
+        "tokensPerBoxAt100": {
+          "name": "Output tokens per box (Dense200@100)",
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -92656,7 +93155,7 @@
       "url": "https://huggingface.co/datasets/GradientDynamics/EJBench#leaderboard",
       "feed": "https://huggingface.co/datasets/GradientDynamics/EJBench/resolve/main/leaderboard/leaderboard.csv",
       "terms": "The dataset uses CC BY-NC 4.0. Hugging Face robots.txt allows the feed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Qwen3.5-9B + RL (ours)"
@@ -92679,12 +93178,8 @@
           "better": "lower"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         },
         "totalCostUsd": {
           "name": "Total cost",
@@ -94613,7 +95108,7 @@
       "url": "https://engiworld.github.io/",
       "feed": "https://engiworld.github.io/assets/main_results.csv",
       "terms": "Public results published by the benchmark authors at engiworld.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "chart": {
@@ -111769,7 +112264,7 @@
       "terms": "The First Proof Foundation publishes the editorial decisions in its benchmark report. https://1stproof.org/second-batch.html",
       "headline": "The score counts how many of the ten problems received an essentially flawless or minor revisions decision.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "costPer": "run",
@@ -111811,6 +112306,10 @@
           "name": "Reject decisions",
           "unit": "count"
         },
+        "Major Revisions": {
+          "name": "Major revisions decisions",
+          "unit": "count"
+        },
         "Minor Revisions": {
           "name": "Minor revisions decisions",
           "unit": "count"
@@ -111820,11 +112319,11 @@
           "unit": "count"
         },
         "inputTokens": {
-          "name": "Input tokens",
+          "name": "Total input tokens",
           "unit": "tokens"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
         }
       }
@@ -128379,7 +128878,7 @@
       "feed": "https://arxiv.org/html/2611.18981",
       "terms": "The authors publish the scores and analysis files at https://github.com/wendli01/gpbam/blob/main/SUBMISSION.md.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 56,
       "unmatched": [
         "GaleneAI/Magistral-Small-2509-FP8-Dynamic",
@@ -128425,11 +128924,7 @@
           "better": "higher"
         },
         "inputTokens": {
-          "name": "Input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
+          "name": "Input tokens per case",
           "unit": "tokens"
         },
         "goldNormsCited": {
@@ -260845,7 +261340,7 @@
       "url": "https://redstone-bench.adamholter.chatgpt.site/",
       "feed": "https://raw.githubusercontent.com/adamholter/redstone-bench/main/site/data/index.json",
       "terms": "The benchmark repository is MIT licensed. The hosted page returned its HTML at robots.txt, so this importer reads the generated JSON index from GitHub.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 53,
       "unmatched": [],
       "costPer": "run",
@@ -260920,10 +261415,6 @@
           "name": "Tasks solved",
           "unit": "count"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "timePerTask": {
           "name": "Time per task",
           "unit": "seconds",
@@ -260934,7 +261425,7 @@
           "unit": "count"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
         }
       }
@@ -265856,7 +266347,7 @@
       "feed": "https://openai.robocurve.org/gpt-6-astra/",
       "terms": "Robocurve publishes its study and run records at https://openai.robocurve.org/gpt-6-astra/.",
       "headline": "The study reports no overall score, so this is the plain mean of its two task completion rates.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -265909,12 +266400,6 @@
           "group": "Puzzle into groove",
           "name": "Minutes per run",
           "unit": "minutes"
-        }
-      },
-      "stats": {
-        "outputTokens": {
-          "name": "Output tokens per run",
-          "unit": "tokens"
         }
       }
     },
@@ -267229,16 +267714,8 @@
         "Qwen/Qwen3-4B-Thinking-2507:alp95fjlgjezxambxacldy4q"
       ],
       "stats": {
-        "samples": {
-          "name": "Scored samples",
-          "unit": "count"
-        },
         "inputTokens": {
           "name": "Mean input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Mean output tokens",
           "unit": "tokens"
         },
         "min": {
@@ -277361,7 +277838,7 @@
       "url": "https://simple-bench.com/",
       "feed": "https://simple-bench.com/static/js/leaderboard-data.js",
       "terms": "Static data file of the public SimpleBench site; the site states no terms and its GitHub repo is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 113,
       "unmatched": [
         "GPT-6.2 Astra Pro",
@@ -277369,6 +277846,23 @@
         "Mistral Large v2",
         "Ox Alpha"
       ],
+      "chart": {
+        "title": "Score vs. cost per run",
+        "x": {
+          "key": "cost",
+          "label": "Cost per full benchmark run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "SimpleBench plots score against full-run cost on a log scale."
+      },
       "costPer": "run",
       "stats": {
         "openEnded": {
@@ -277577,22 +278071,41 @@
       "url": "https://github.com/Sumanthreddy-DE/simready",
       "feed": "https://raw.githubusercontent.com/Sumanthreddy-DE/simready/v0.5.1/docs/validation/bench_v1.md",
       "terms": "The SimReady repository publishes this validation report under its repository license. https://github.com/Sumanthreddy-DE/simready/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "verified": "Marked official in the SimReady validation report.",
+      "parts": {
+        "explicit": {
+          "name": "Explicit",
+          "group": "Prompt phrasing"
+        },
+        "engineer": {
+          "name": "Engineer",
+          "group": "Prompt phrasing"
+        },
+        "intent": {
+          "name": "Intent",
+          "group": "Prompt phrasing"
+        }
+      },
       "stats": {
+        "passAt5": {
+          "name": "Pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
         "latency": {
           "name": "Median latency",
           "unit": "seconds",
           "better": "lower"
         },
         "inputTokens": {
-          "name": "Prompt tokens",
+          "name": "Total prompt tokens",
           "unit": "tokens"
         },
         "outputTokens": {
-          "name": "Completion tokens",
+          "name": "Total completion tokens",
           "unit": "tokens"
         }
       }
@@ -297560,7 +298073,7 @@
       "url": "https://github.com/amazon-agi/tau2-bench-verified",
       "feed": "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Gemini Flash 2.5",
@@ -297583,11 +298096,6 @@
         }
       },
       "stats": {
-        "reportedCost": {
-          "name": "Reported cost",
-          "unit": "usd",
-          "better": "lower"
-        },
         "scorePerDollar": {
           "name": "Score per dollar",
           "unit": "score",
@@ -299944,7 +300452,7 @@
       "feed": "https://arxiv.org/html/2610.16733",
       "terms": "The researchers publish the tables under the paper terms at https://arxiv.org/abs/2610.16733.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "costPer": "run",
@@ -299990,17 +300498,12 @@
           "better": "higher"
         },
         "inputTokens": {
-          "name": "Input tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
+          "name": "Input tokens per problem",
           "unit": "tokens",
           "better": "lower"
         },
         "totalTokens": {
-          "name": "Total tokens",
+          "name": "Total tokens per problem",
           "unit": "tokens",
           "better": "lower"
         }
@@ -300521,7 +301024,7 @@
       "url": "https://timelinebench.tensortest.com/leaderboard",
       "feed": "https://timelinebench.tensortest.com/code/files/leaderboard/leaderboard.json",
       "terms": "TensorTest licenses results under Apache 2.0. The manifest links 19 submissions. Some submissions report cost and others leave it blank. https://timelinebench.tensortest.com/docs/license robots.txt disallows /code.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "DeepSeek Flash"
@@ -300532,16 +301035,6 @@
         "resolved": {
           "name": "Resolved tasks",
           "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "rate": {
-          "name": "Resolution rate",
-          "unit": "score",
-          "better": "higher",
-          "note": "Rate from 0 to 1."
         },
         "tests_passed": {
           "name": "Tests passed",
@@ -300619,6 +301112,26 @@
         },
         "tokens_reasoning_output_tokens": {
           "name": "Reasoning output tokens",
+          "unit": "tokens"
+        },
+        "tokens_input": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
+        },
+        "tokens_cache_creation_input": {
+          "name": "Cache creation input tokens",
+          "unit": "tokens"
+        },
+        "tokens_cache_read_input": {
+          "name": "Cache read input tokens",
+          "unit": "tokens"
+        },
+        "tokens_output": {
+          "name": "Total output tokens",
+          "unit": "tokens"
+        },
+        "tokens_thinking": {
+          "name": "Thinking tokens",
           "unit": "tokens"
         },
         "cost_usd_total": {
