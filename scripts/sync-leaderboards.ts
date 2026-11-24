@@ -249,9 +249,14 @@ for (const f of files) {
       if (Object.keys(parts).length) kept.parts = parts;
       else delete kept.parts;
     }
-    // and the other measures it labels, once the parts are settled
-    const stats = statsOf(board, storedRows(board.benchmark), kept.parts);
-    if (stats) kept.stats = stats;
+    // and the other measures it labels, once the parts are settled. Like parts, stats an importer sets inside
+    // fetch() aren't declared up front, so a refresh keeps the stored ones until its next read rewrites them all.
+    // (Until 2026-11-24 a refresh dropped them, so every --only run stripped other boards' stats, such as
+    // replibench-aisi's, until the next full sync.)
+    const declared = statsOf(board, storedRows(board.benchmark), kept.parts) ?? {};
+    const fromFetch = Object.entries(kept.stats ?? {}).filter(([k]) => !(board.stats && k in board.stats));
+    const stats = { ...Object.fromEntries(fromFetch), ...declared };
+    if (Object.keys(stats).length) kept.stats = stats;
     else delete kept.stats;
     if (board.measures) {
       const measures = measuresOf(board, storedRows(board.benchmark));
