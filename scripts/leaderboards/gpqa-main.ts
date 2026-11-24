@@ -2,7 +2,7 @@
 // core_scenarios.json, times 100. HELM's run specs name subset=gpqa_main, zero-shot with chain of thought.
 // Read through helmRows in helm-capabilities.ts.
 import type { Leaderboard } from './types.ts';
-import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
+import { HELM_ALIASES, HELM_DETAIL_STATS, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'capabilities', group: 'core_scenarios', table: 'Accuracy', column: 'GPQA - COT correct', scale: 100 };
 
@@ -13,7 +13,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
-  stats: { latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' } },
+  stats: HELM_DETAIL_STATS,
   fetch: () => helmRows(TABLE, true),
 };
 export default board;

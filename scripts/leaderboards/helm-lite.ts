@@ -7,10 +7,32 @@ import { HELM_BUCKET, helmNewest, HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, 
 
 const TABLE: HelmTable = { project: 'lite', group: 'core_scenarios', table: 'Accuracy', column: 'Mean win rate', scale: 100 };
 const SCENARIOS = ['NarrativeQA', 'NaturalQuestions (open-book)', 'NaturalQuestions (closed-book)', 'OpenbookQA', 'MMLU', 'MATH', 'GSM8K', 'LegalBench', 'MedQA', 'WMT 2014'];
-const stats = Object.fromEntries(SCENARIOS.flatMap((scenario) => [
-  [`${scenario} - # prompt tokens`, { name: scenario === 'WMT 2014' ? 'Workshop on Machine Translation 2014 prompt tokens' : `${scenario} prompt tokens`, unit: 'tokens' }],
-  [`${scenario} - # output tokens`, { name: scenario === 'WMT 2014' ? 'Workshop on Machine Translation 2014 output tokens' : `${scenario} output tokens`, unit: 'tokens' }],
-]));
+const labelOf = (s: string) => (s === 'WMT 2014' ? 'Workshop on Machine Translation 2014' : s);
+const parts: NonNullable<Leaderboard['parts']> = {
+  'NarrativeQA - F1': { name: 'NarrativeQA', group: 'Scenario', unit: 'score', note: 'Answer F1 from 0 to 1.' },
+  'NaturalQuestions (open-book) - F1': { name: 'NaturalQuestions (open-book)', group: 'Scenario', unit: 'score', note: 'Answer F1 from 0 to 1.' },
+  'NaturalQuestions (closed-book) - F1': { name: 'NaturalQuestions (closed-book)', group: 'Scenario', unit: 'score', note: 'Answer F1 from 0 to 1.' },
+  'OpenbookQA - EM': { name: 'OpenbookQA', group: 'Scenario', unit: 'score', note: 'Exact match from 0 to 1.' },
+  'MMLU - EM': { name: 'MMLU', group: 'Scenario', unit: 'score', note: 'Exact match from 0 to 1.' },
+  'MATH - Equivalent (CoT)': { name: 'MATH', group: 'Scenario', unit: 'score', note: 'Chain-of-thought equivalence from 0 to 1.' },
+  'GSM8K - EM': { name: 'GSM8K', group: 'Scenario', unit: 'score', note: 'Exact match from 0 to 1.' },
+  'LegalBench - EM': { name: 'LegalBench', group: 'Scenario', unit: 'score', note: 'Exact match from 0 to 1.' },
+  'MedQA - EM': { name: 'MedQA', group: 'Scenario', unit: 'score', note: 'Exact match from 0 to 1.' },
+  'WMT 2014 - BLEU-4': { name: 'Workshop on Machine Translation 2014', group: 'Scenario', unit: 'score', note: 'BLEU-4 from 0 to 1.' },
+};
+const stats: NonNullable<Leaderboard['stats']> = {
+  'Efficiency mean win rate': { name: 'Efficiency mean win rate', unit: 'score', better: 'higher', note: 'Share of models beaten on inference speed, from 0 to 1.' },
+  'General information mean win rate': { name: 'General information mean win rate', unit: 'score' },
+  ...Object.fromEntries(SCENARIOS.flatMap((scenario) => {
+    const label = labelOf(scenario);
+    return [
+      [`${scenario} - Observed inference time (s)`, { name: `${label} inference time`, unit: 'seconds', better: 'lower' as const }],
+      [`${scenario} - truncated`, { name: `${label} truncated fraction`, unit: 'score', better: 'lower' as const }],
+      [`${scenario} - # prompt tokens`, { name: `${label} prompt tokens`, unit: 'tokens' }],
+      [`${scenario} - # output tokens`, { name: `${label} output tokens`, unit: 'tokens' }],
+    ];
+  })),
+};
 
 const board: Leaderboard = {
   benchmark: 'helm-lite',
@@ -18,6 +40,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  parts,
   stats,
   async fetch() {
     const rows = await helmRows(TABLE);
@@ -35,7 +58,7 @@ const board: Leaderboard = {
         if (!record) continue;
         for (const [j, header] of table.header.entries()) {
           const key = header.value, value = record[j]?.value;
-          if (j === 0 || typeof value !== 'number' || (table === accuracy && j === scoreIndex)) continue;
+          if (j === 0 || typeof value !== 'number' || (table === accuracy && j === scoreIndex) || / - # (?:eval|train)$/.test(key)) continue;
           metrics[key === 'Mean win rate' ? table.title + ' mean win rate' : key] = value;
         }
       }
