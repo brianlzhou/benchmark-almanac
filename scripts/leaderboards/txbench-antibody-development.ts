@@ -10,6 +10,8 @@ interface Results {
 
 const board: Leaderboard = {
   benchmark: "txbench-antibody-development",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://benchmarks.bio/txbench-abdev",
   feed,
   terms: "The publisher supplies a citation and download on the board. https://benchmarks.bio/txbench-abdev The site permits crawling in robots.txt.",

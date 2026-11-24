@@ -35063,25 +35063,37 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.functionbench)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "biosecbench-refusal": {
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.biosecbench-refusal)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "biosecbench-surveillance": {
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.biosecbench-surveillance)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "biosimbench": {
       "url": "https://www.celltype.com/biosimbench",
@@ -95031,9 +95043,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.epibench)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "epic-kitchens-100-action-anticipation": {
       "url": "https://codalab.lisn.upsaclay.fr/competitions/702",
@@ -190019,9 +190035,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.metagenomics)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "metr-capability-index": {
       "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
@@ -209494,9 +209514,13 @@
       "url": "https://benchmarks.bio/neuroscience",
       "feed": "https://benchmarks.bio/benchmarks/neurosciencebench/latest.json",
       "terms": "The publisher supplies a citation and download on the board. https://benchmarks.bio/neuroscience The site permits crawling in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "nevir": {
       "url": "https://aclanthology.org/2024.eacl-long.139/",
@@ -219786,9 +219810,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.oncologybench)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 50,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "oncotriad-qa": {
       "url": "https://arxiv.org/html/2608.02615",
@@ -260092,9 +260120,13 @@
       "url": "https://benchmarks.bio/raredisease",
       "feed": "https://benchmarks.bio/benchmarks/rarediseasebench/latest.json",
       "terms": "The publisher supplies a citation and download on the board. https://benchmarks.bio/raredisease robots.txt allows this feed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "ravnursson-faroese-speech": {
       "url": "https://aclanthology.org/2023.nodalida-1.4.pdf",
@@ -273554,11 +273586,15 @@
       "url": "https://benchmarks.bio/scbench",
       "feed": "https://benchmarks.bio/benchmarks/scbench/latest.json",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 41,
       "unmatched": [
         "Nemotron 3 Ultra 550B A55B"
-      ]
+      ],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "scbench-latchbio-singlecellbench-original": {
       "url": "https://arxiv.org/html/2602.09063v1",
@@ -273582,9 +273618,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.scbench-long)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "scbench-long-original": {
       "url": "https://github.com/latchbio/scbench-long",
@@ -283406,11 +283446,15 @@
       "url": "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md",
       "feed": "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "gemini-2.5-pro (snapshot unspecified)"
-      ]
+      ],
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system"
     },
     "spatialbench-latchbio-original": {
       "url": "https://arxiv.org/html/2512.21907v1",
@@ -283443,9 +283487,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.spatialbench-long)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "spatialbench-long-original": {
       "url": "https://arxiv.org/abs/2605.28065v1",
@@ -302603,9 +302651,13 @@
       "url": "https://benchmarks.bio/tissuemicroscopy",
       "feed": "https://benchmarks.bio/benchmarks/tissuemicroscopybench/latest.json",
       "terms": "The publisher supplies a citation and download on the board. https://benchmarks.bio/tissuemicroscopy The site allows crawling.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 30,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "tmhint-qi": {
       "url": "https://arxiv.org/html/2111.02585",
@@ -306248,33 +306300,49 @@
       "url": "https://benchmarks.bio/txbench-abdev",
       "feed": "https://benchmarks.bio/benchmarks/txbench-abdev/latest.json",
       "terms": "The publisher supplies a citation and download on the board. https://benchmarks.bio/txbench-abdev The site permits crawling in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "txbench-antibody-discovery": {
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.txbench-ab)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "txbench-oligo-discovery": {
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.txbench-od)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "txbench-preclinical-pharmacology": {
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.txbench-pp)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "tydiqa": {
       "url": "https://arxiv.org/abs/2003.05002",
@@ -312908,9 +312976,13 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (benchmarkLeaderboards.variantbench)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system"
     },
     "vatex": {
       "url": "https://eric-xw.github.io/vatex-website/captioning.html",

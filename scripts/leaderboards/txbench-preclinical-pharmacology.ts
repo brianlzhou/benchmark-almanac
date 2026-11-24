@@ -5,6 +5,8 @@ import { BIO_ALIASES, BIO_PAGE, BIO_TERMS, bioFeed, bioRows } from './biosecbenc
 
 const board: Leaderboard = {
   benchmark: 'txbench-preclinical-pharmacology',
+  harnesses: 'system',
+  reference: ['Pi'],
   url: BIO_PAGE,
   feed: bioFeed('txbench-pp'),
   terms: BIO_TERMS,
