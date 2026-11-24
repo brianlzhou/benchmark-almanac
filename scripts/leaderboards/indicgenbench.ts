@@ -10,6 +10,17 @@ const board: Leaderboard = {
   feed: kaggleFeed('deepmind', 'indic-gen-bench'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('deepmind', 'indic-gen-bench', 'Average', 1),
+  parts: {
+    crossSumIn: 'CrossSum-In',
+    floresIn: 'Flores-In',
+    xorQaIn: 'XorQA-In',
+    xquadIn: 'XQuAD-In',
+  },
+  fetch: () => kaggleRows('deepmind', 'indic-gen-bench', 'Average', 1, {
+    crossSumIn: { task: 'CrossSum-In' },
+    floresIn: { task: 'Flores-In' },
+    xorQaIn: { task: 'XorQA-In' },
+    xquadIn: { task: 'XQuAD-In' },
+  }),
 };
 export default board;

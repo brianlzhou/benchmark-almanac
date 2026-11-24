@@ -10,6 +10,9 @@ const board: Leaderboard = {
   feed: kaggleFeed('google', 'eclektic'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    transferScore: { name: 'Transfer score', unit: '%', better: 'higher' },
+  },
   fetch: () => kaggleRowsWithBounds('google', 'eclektic', 'Score', 100, {
     transferScore: { task: 'Transfer Score', scale: 100, interval: true },
   }),

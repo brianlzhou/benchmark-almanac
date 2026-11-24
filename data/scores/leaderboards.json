@@ -61890,9 +61890,16 @@
       "url": "https://www.kaggle.com/benchmarks/heygen/code2video",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/heygen/code2video/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "rawScore": {
+          "name": "Raw score",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "code2video-compass": {
       "url": "https://code2video-compass.github.io/benchmark-data.js?v=55",
@@ -90408,9 +90415,16 @@
       "url": "https://www.kaggle.com/benchmarks/google/eclektic",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/eclektic/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 35,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "transferScore": {
+          "name": "Transfer score",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "economics-arena": {
       "url": "https://arxiv.org/html/2401.01735",
@@ -99864,47 +99878,137 @@
       "url": "https://www.kaggle.com/benchmarks/google/facts-grounding",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-grounding/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 26,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 27,
+      "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      }
     },
     "facts-multimodal": {
       "url": "https://www.kaggle.com/benchmarks/google/facts-multimodal",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-multimodal/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 23,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 24,
+      "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      },
+      "stats": {
+        "coverage": {
+          "name": "Coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "factuality": {
+          "name": "Factuality",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "facts-parametric": {
       "url": "https://www.kaggle.com/benchmarks/google/facts-parametric/versions/1",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-parametric/versions/1/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 47,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      },
+      "stats": {
+        "attempted": {
+          "name": "Attempted accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "f1": {
+          "name": "F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hedging": {
+          "name": "Hedging rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "facts-parametric-v2": {
       "url": "https://www.kaggle.com/benchmarks/google/facts-parametric",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-parametric/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 28,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 29,
+      "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      },
+      "stats": {
+        "attempted": {
+          "name": "Attempted accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "f1": {
+          "name": "F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hedging": {
+          "name": "Hedging rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "facts-search": {
       "url": "https://www.kaggle.com/benchmarks/google/facts-search/versions/1",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-search/versions/1/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      },
       "stats": {
         "searches": {
           "name": "Average searches",
@@ -99932,9 +100036,19 @@
       "url": "https://www.kaggle.com/benchmarks/google/facts-search",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/google/facts-search/versions/2/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      },
       "stats": {
         "searches": {
           "name": "Average searches",
@@ -100052,9 +100166,35 @@
       "url": "https://www.kaggle.com/benchmarks/ibm-research/asset-ops-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/ibm-research/asset-ops-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "selection": {
+          "name": "Selection accuracy"
+        },
+        "elimination": {
+          "name": "Elimination accuracy"
+        },
+        "pertSimple": {
+          "name": "Perturbed simple accuracy"
+        },
+        "pertComplex": {
+          "name": "Perturbed complex accuracy"
+        }
+      },
+      "stats": {
+        "consistency": {
+          "name": "Consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore": {
+          "name": "F-score",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "faintasy-football": {
       "url": "https://www.faintasy.football/standings",
@@ -148580,9 +148720,23 @@
       "url": "https://www.kaggle.com/benchmarks/deepmind/indic-gen-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/deepmind/indic-gen-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "crossSumIn": {
+          "name": "CrossSum-In"
+        },
+        "floresIn": {
+          "name": "Flores-In"
+        },
+        "xorQaIn": {
+          "name": "XorQA-In"
+        },
+        "xquadIn": {
+          "name": "XQuAD-In"
+        }
+      }
     },
     "indicifeval": {
       "url": "https://arxiv.org/html/2602.22125",
@@ -154806,11 +154960,15 @@
       "url": "https://www.kaggle.com/benchmarks/kaggle/ascii-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/ascii-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 19,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 20,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-chart-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/chart-arena",
@@ -154876,11 +155034,15 @@
       "url": "https://www.kaggle.com/benchmarks/kaggle/explode-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/explode-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 14,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 15,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-floorplan-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/floorplan-arena",
@@ -154902,9 +155064,19 @@
       "url": "https://www.kaggle.com/benchmarks/kaggle/game-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/game-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "matchesPlayed": {
+          "name": "Matches played",
+          "unit": "count"
+        },
+        "gamesCovered": {
+          "name": "Games covered",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-game-arena-bargaining": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/bargaining",
@@ -155502,11 +155674,15 @@
       "url": "https://www.kaggle.com/benchmarks/kaggle/landmark-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/landmark-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 15,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-neurips-2025": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/neurips-2025",
@@ -155581,29 +155757,43 @@
       "url": "https://www.kaggle.com/benchmarks/kaggle/pelican-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/pelican-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 61,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 62,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-sort-viz-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/sort-viz-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/sort-viz-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kaggle-svg-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/svg-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/svg-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
-      "rows": 25,
-      "unmatched": [
-        "Hydrogen"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 26,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
     },
     "kairosqa": {
       "url": "https://arxiv.org/html/2605.22769",
@@ -268981,10 +269171,22 @@
       "url": "https://www.kaggle.com/benchmarks/ibm-research/scarfbench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/ibm-research/scarfbench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
-      "harnesses": "system"
+      "harnesses": "system",
+      "stats": {
+        "compile": {
+          "name": "Compile pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "deploy": {
+          "name": "Deploy pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "scbench-latchbio-singlecellbench": {
       "url": "https://benchmarks.bio/scbench",

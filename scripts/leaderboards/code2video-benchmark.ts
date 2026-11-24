@@ -6,10 +6,15 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'code2video-benchmark',
+  stats: {
+    rawScore: { name: 'Raw score', unit: '%', better: 'higher' },
+  },
   url: 'https://www.kaggle.com/benchmarks/heygen/code2video',
   feed: kaggleFeed('heygen', 'code2video'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('heygen', 'code2video', 'ELO-Ranking', 1),
+  fetch: () => kaggleRows('heygen', 'code2video', 'ELO-Ranking', 1, {
+    rawScore: { task: 'Raw Score', scale: 100 },
+  }),
 };
 export default board;

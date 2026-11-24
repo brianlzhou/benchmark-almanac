@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/kaggle/svg-arena',
   feed: kaggleFeed('kaggle', 'svg-arena'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('kaggle', 'svg-arena', "Arena", 1),
+  stats: { votes: { name: 'Votes', unit: 'count' } },
+  fetch: () => kaggleRowsWithBounds('kaggle', 'svg-arena', "Arena", 1, { votes: { task: 'Votes' } }),
 };
 export default board;
