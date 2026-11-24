@@ -208,7 +208,7 @@ export async function arenaRowsByCategory(config: string, opts: { skip?: string[
     const name = r.model_name.trim();
     const m = cats.get(name) ?? {};
     m[`cat:${key}`] = Math.round(rating(r)! * 100) / 100;
-    for (const [label, value] of Object.entries({ votes: r.vote_count, low: r.rating_lower, high: r.rating_upper, rank: r.rank, variance: r.variance })) {
+    for (const [label, value] of Object.entries({ low: r.rating_lower, high: r.rating_upper, variance: r.variance })) {
       if (typeof value === 'number') m[`${label}:${key}`] = value;
     }
     cats.set(name, m);
@@ -259,8 +259,6 @@ const board: Leaderboard = {
   },
   stats: {
     votes: { name: 'Votes', unit: 'count' },
-    variance: { name: 'Rating variance', unit: 'score' },
-    ...Object.fromEntries(['coding','creative_writing','english','exclude_ties','hard_prompts','hard_prompts_english','industry_entertainment_and_sports_and_media','industry_life_and_physical_and_social_science','industry_mathematical','industry_software_and_it_services','industry_writing_and_literature_and_language','instruction_following','math','multi_turn','non_english','chinese','industry_business_and_management_and_financial_operations','industry_legal_and_government','industry_medicine_and_healthcare','expert','french','german','japanese','korean','longer_query','polish','russian','spanish','factuality'].flatMap(key => [[`votes:${key}`, { name: `${key.replaceAll('_', ' ')} votes`, unit: 'count' }], [`rank:${key}`, { name: `${key.replaceAll('_', ' ')} rank`, unit: 'rating', better: 'lower' }], [`variance:${key}`, { name: `${key.replaceAll('_', ' ')} rating variance`, unit: 'score' }]])),
   },
   url: 'https://arena.ai/leaderboard/text',
   feed: arenaFeed('text_style_control', '*'),

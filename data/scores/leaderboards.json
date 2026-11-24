@@ -4156,7 +4156,7 @@
       "url": "https://arena.ai/leaderboard/agent",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset agent, split latest, category overall)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 68,
       "unmatched": [
         "Spark-X2.6"
@@ -4217,21 +4217,66 @@
           "name": "Bash reliability observations",
           "unit": "count"
         },
+        "bash_reliability_sessions": {
+          "name": "Bash reliability sessions",
+          "unit": "count"
+        },
+        "bash_reliability_rank": {
+          "name": "Bash reliability rank",
+          "unit": "rating",
+          "better": "lower"
+        },
         "praise_complaint_observations": {
           "name": "Praise and complaint observations",
           "unit": "count"
+        },
+        "praise_complaint_sessions": {
+          "name": "Praise and complaint sessions",
+          "unit": "count"
+        },
+        "praise_complaint_rank": {
+          "name": "Praise and complaint rank",
+          "unit": "rating",
+          "better": "lower"
         },
         "steerability_observations": {
           "name": "Steerability observations",
           "unit": "count"
         },
+        "steerability_sessions": {
+          "name": "Steerability sessions",
+          "unit": "count"
+        },
+        "steerability_rank": {
+          "name": "Steerability rank",
+          "unit": "rating",
+          "better": "lower"
+        },
         "task_outcome_explicit_observations": {
           "name": "Explicit task outcome observations",
           "unit": "count"
         },
+        "task_outcome_explicit_sessions": {
+          "name": "Explicit task outcome sessions",
+          "unit": "count"
+        },
+        "task_outcome_explicit_rank": {
+          "name": "Explicit task outcome rank",
+          "unit": "rating",
+          "better": "lower"
+        },
         "tool_hallucination_observations": {
           "name": "Tool hallucination observations",
           "unit": "count"
+        },
+        "tool_hallucination_sessions": {
+          "name": "Tool hallucination sessions",
+          "unit": "count"
+        },
+        "tool_hallucination_rank": {
+          "name": "Tool hallucination rank",
+          "unit": "rating",
+          "better": "lower"
         }
       }
     },
@@ -9750,7 +9795,7 @@
       "feed": "https://matharena.ai/competition_tables/aime--aime_2026",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
       "stats": {
@@ -19742,13 +19787,26 @@
       "url": "https://matharena.ai/?comp=arxivlean--september",
       "feed": "https://matharena.ai/competition_tables/arxivlean--september",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        },
         "latency": {
-          "name": "Time per answer",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -19757,15 +19815,28 @@
       "url": "https://matharena.ai/?comp=overall--arxivmath",
       "feed": "https://matharena.ai/competition_tables/overall--arxivmath",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Inkling 2 Small (0.99)"
       ],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        },
         "latency": {
           "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -37472,15 +37543,28 @@
       "url": "https://matharena.ai/?comp=overall--brokenarxiv",
       "feed": "https://matharena.ai/competition_tables/overall--brokenarxiv",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Inkling 2 Small (0.99)"
       ],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        },
         "latency": {
-          "name": "Latency",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -37946,17 +38030,26 @@
       "feed": "https://matharena.ai/competition_tables/brumo--brumo_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
         },
         "latency": {
-          "name": "Latency",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -54838,17 +54931,26 @@
       "feed": "https://matharena.ai/competition_tables/cmimc--cmimc_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
         },
         "latency": {
-          "name": "Latency",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -61649,7 +61751,7 @@
       "url": "https://arena.ai/leaderboard/code/webdev",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset webdev, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 159,
       "unmatched": [
         "KAT-Coder-Pro V1",
@@ -135499,17 +135601,26 @@
       "feed": "https://matharena.ai/competition_tables/hmmt--hmmt_feb_2026",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
         },
         "latency": {
-          "name": "Time per answer",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -135518,17 +135629,26 @@
       "url": "https://matharena.ai/?comp=hmmt--hmmt_nov_2025",
       "feed": "https://matharena.ai/competition_tables/hmmt--hmmt_nov_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
         },
         "latency": {
-          "name": "Time per answer",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -146193,11 +146313,17 @@
       "feed": "https://matharena.ai/competition_tables/imc--imc_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Gemini IMO Deep Think"
-      ]
+      ],
+      "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        }
+      }
     },
     "imgedit-bench": {
       "url": "https://github.com/PKU-YuanGroup/ImgEdit",
@@ -146265,11 +146391,21 @@
       "feed": "https://matharena.ai/competition_tables/imo--imo_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Grok 4 (Specific Prompt)"
-      ]
+      ],
+      "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "imo-answerbench": {
       "url": "https://arxiv.org/html/2511.01846",
@@ -155798,17 +155934,26 @@
       "url": "https://matharena.ai/?comp=overall--visual_math",
       "feed": "https://matharena.ai/competition_tables/overall--visual_math",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
         },
         "latency": {
-          "name": "Latency",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -170472,7 +170617,7 @@
       "url": "https://arena.ai/leaderboard/text",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset text_style_control, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 382,
       "unmatched": [
         "Alpaca 13B",
@@ -170643,267 +170788,6 @@
         "votes": {
           "name": "Votes",
           "unit": "count"
-        },
-        "votes:coding": {
-          "name": "coding votes",
-          "unit": "count"
-        },
-        "rank:coding": {
-          "name": "coding rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:creative_writing": {
-          "name": "creative writing votes",
-          "unit": "count"
-        },
-        "rank:creative_writing": {
-          "name": "creative writing rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:english": {
-          "name": "english votes",
-          "unit": "count"
-        },
-        "rank:english": {
-          "name": "english rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:exclude_ties": {
-          "name": "exclude ties votes",
-          "unit": "count"
-        },
-        "rank:exclude_ties": {
-          "name": "exclude ties rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:hard_prompts": {
-          "name": "hard prompts votes",
-          "unit": "count"
-        },
-        "rank:hard_prompts": {
-          "name": "hard prompts rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:hard_prompts_english": {
-          "name": "hard prompts english votes",
-          "unit": "count"
-        },
-        "rank:hard_prompts_english": {
-          "name": "hard prompts english rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_entertainment_and_sports_and_media": {
-          "name": "industry entertainment and sports and media votes",
-          "unit": "count"
-        },
-        "rank:industry_entertainment_and_sports_and_media": {
-          "name": "industry entertainment and sports and media rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_life_and_physical_and_social_science": {
-          "name": "industry life and physical and social science votes",
-          "unit": "count"
-        },
-        "rank:industry_life_and_physical_and_social_science": {
-          "name": "industry life and physical and social science rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_mathematical": {
-          "name": "industry mathematical votes",
-          "unit": "count"
-        },
-        "rank:industry_mathematical": {
-          "name": "industry mathematical rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_software_and_it_services": {
-          "name": "industry software and it services votes",
-          "unit": "count"
-        },
-        "rank:industry_software_and_it_services": {
-          "name": "industry software and it services rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_writing_and_literature_and_language": {
-          "name": "industry writing and literature and language votes",
-          "unit": "count"
-        },
-        "rank:industry_writing_and_literature_and_language": {
-          "name": "industry writing and literature and language rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:instruction_following": {
-          "name": "instruction following votes",
-          "unit": "count"
-        },
-        "rank:instruction_following": {
-          "name": "instruction following rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:math": {
-          "name": "math votes",
-          "unit": "count"
-        },
-        "rank:math": {
-          "name": "math rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:multi_turn": {
-          "name": "multi turn votes",
-          "unit": "count"
-        },
-        "rank:multi_turn": {
-          "name": "multi turn rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:non_english": {
-          "name": "non english votes",
-          "unit": "count"
-        },
-        "rank:non_english": {
-          "name": "non english rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:chinese": {
-          "name": "chinese votes",
-          "unit": "count"
-        },
-        "rank:chinese": {
-          "name": "chinese rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_business_and_management_and_financial_operations": {
-          "name": "industry business and management and financial operations votes",
-          "unit": "count"
-        },
-        "rank:industry_business_and_management_and_financial_operations": {
-          "name": "industry business and management and financial operations rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_legal_and_government": {
-          "name": "industry legal and government votes",
-          "unit": "count"
-        },
-        "rank:industry_legal_and_government": {
-          "name": "industry legal and government rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:industry_medicine_and_healthcare": {
-          "name": "industry medicine and healthcare votes",
-          "unit": "count"
-        },
-        "rank:industry_medicine_and_healthcare": {
-          "name": "industry medicine and healthcare rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:expert": {
-          "name": "expert votes",
-          "unit": "count"
-        },
-        "rank:expert": {
-          "name": "expert rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:french": {
-          "name": "french votes",
-          "unit": "count"
-        },
-        "rank:french": {
-          "name": "french rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:german": {
-          "name": "german votes",
-          "unit": "count"
-        },
-        "rank:german": {
-          "name": "german rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:japanese": {
-          "name": "japanese votes",
-          "unit": "count"
-        },
-        "rank:japanese": {
-          "name": "japanese rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:korean": {
-          "name": "korean votes",
-          "unit": "count"
-        },
-        "rank:korean": {
-          "name": "korean rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:longer_query": {
-          "name": "longer query votes",
-          "unit": "count"
-        },
-        "rank:longer_query": {
-          "name": "longer query rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:polish": {
-          "name": "polish votes",
-          "unit": "count"
-        },
-        "rank:polish": {
-          "name": "polish rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:russian": {
-          "name": "russian votes",
-          "unit": "count"
-        },
-        "rank:russian": {
-          "name": "russian rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:spanish": {
-          "name": "spanish votes",
-          "unit": "count"
-        },
-        "rank:spanish": {
-          "name": "spanish rank",
-          "unit": "rating",
-          "better": "lower"
-        },
-        "votes:factuality": {
-          "name": "factuality votes",
-          "unit": "count"
-        },
-        "rank:factuality": {
-          "name": "factuality rank",
-          "unit": "rating",
-          "better": "lower"
         }
       }
     },
@@ -170911,7 +170795,7 @@
       "url": "https://arena.ai/leaderboard",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset image_edit, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 62,
       "unmatched": [
         "MAI-Image-2.7",
@@ -170956,7 +170840,7 @@
       "url": "https://arena.ai/leaderboard",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset search_style_control, split latest, category overall)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "Amazon-Web-Search-Agent",
@@ -170979,7 +170863,7 @@
       "url": "https://arena.ai/leaderboard",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset text_to_image, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 84,
       "unmatched": [
         "MAI-Image-2.7",
@@ -189734,9 +189618,15 @@
       "url": "https://matharena.ai/?comp=miklos--2025",
       "feed": "https://matharena.ai/competition_tables/miklos--2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        }
+      }
     },
     "millionaire-bench-de": {
       "url": "https://koray.at/millionaire-bench/",
@@ -251005,13 +250895,26 @@
       "url": "https://matharena.ai/?comp=euler--euler",
       "feed": "https://matharena.ai/competition_tables/euler--euler",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        },
         "latency": {
-          "name": "Latency",
+          "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -252872,11 +252775,21 @@
       "feed": "https://matharena.ai/competition_tables/putnam--putnam_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Gemini Deep Think 3 (12/25)"
-      ]
+      ],
+      "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "putnam-axiom": {
       "url": "https://arxiv.org/html/2508.08292",
@@ -276738,10 +276651,14 @@
       "feed": "https://matharena.ai/competition_tables/smt--smt_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -276749,6 +276666,11 @@
         "latency": {
           "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -302658,10 +302580,14 @@
       "url": "https://matharena.ai/?comp=usamo--usamo_2025",
       "feed": "https://matharena.ai/competition_tables/usamo--usamo_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -302673,10 +302599,14 @@
       "feed": "https://matharena.ai/competition_tables/usamo--usamo_2026",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -302684,6 +302614,11 @@
         "latency": {
           "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -312250,7 +312185,7 @@
       "url": "https://arena.ai/leaderboard/chat/vision",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset vision_style_control, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 153,
       "unmatched": [
         "ERNIE-5.0-Preview (1220)",

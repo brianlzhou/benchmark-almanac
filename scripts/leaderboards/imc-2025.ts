@@ -4,7 +4,7 @@
 // only public 2.5 Pro. "Gemini IMO Deep Think" is Google's unreleased IMO model and stays unmatched. Read
 // through the helper in aime-2026.ts.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_ALIASES, MATHARENA_STATS, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'imc--imc_2025';
 
@@ -15,6 +15,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: { ...MATHARENA_ALIASES, 'Gemini 2.5 Pro': 'gemini-2-5-pro-jun-2025' },
+  stats: MATHARENA_STATS,
   async fetch() {
     return (await matharenaRows(COMP)).map((r) => {
       const m = r.model.match(/^(.*?)\s*\((agent|best-of-\d+)\)$/);
