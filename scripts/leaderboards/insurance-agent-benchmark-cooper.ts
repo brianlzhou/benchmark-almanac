@@ -4,7 +4,26 @@ import { fetchText } from "../lib/util.ts";
 import { num, tables } from "../lib/html.ts";
 const board: Leaderboard = {
   benchmark: "insurance-agent-benchmark-cooper",
+  parts: {
+    track1: { name: 'ACORD field extraction', group: 'Track' },
+    track2: { name: 'SOV / loss-run reasoning', group: 'Track' },
+    track3: { name: 'Cross-doc reconciliation', group: 'Track' },
+    track4: { name: 'Long-policy clause retrieval', group: 'Track' },
+    track5: { name: 'Faithfulness and abstention', group: 'Track' },
+    track6: { name: 'Scanned / handwritten', group: 'Track' },
+    track7: { name: 'Grounding / citations', group: 'Track' },
+    track8: { name: 'Checkbox / selection reading', group: 'Track' },
+    track9: { name: 'Charts / graphs extraction', group: 'Track' },
+    track10: { name: 'Number / date normalization', group: 'Track' },
+    track11: { name: 'Prompt injection in doc', group: 'Track' },
+  },
   stats: { estimatedRunCost: { name: 'Estimated run cost', unit: 'usd', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, p95Seconds: { name: '95th percentile latency', unit: 'seconds', better: 'lower' }, fieldF1: { name: 'Field F1', unit: '%', better: 'higher' }, hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower' }, reliability: { name: 'Reliability', unit: '%', better: 'higher' }, failures: { name: 'Failures', unit: 'count', better: 'lower' } },
+  chart: {
+    title: 'Judge accuracy vs. estimated run cost',
+    x: { key: 'estimatedRunCost', label: 'Estimated run cost', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Judge accuracy', unit: '%', better: 'higher' },
+    note: 'Cooper plots judge accuracy against estimated full-run API cost with an efficiency frontier.',
+  },
   url: "https://www.askcooper.ai/labs/insurance-agent-benchmark",
   feed: "https://www.askcooper.ai/labs/insurance-agent-benchmark",
   terms: "Cooper limits use to personal, noncommercial purposes and prohibits scraping. https://www.askcooper.ai/terms Its robots.txt allows the report.",
@@ -14,7 +33,6 @@ const board: Leaderboard = {
     const find = (label:string) => tabs.find(t => t[0]?.some(c => c.text === label));
     const runs = find('Per doc'), tracks = find('What it tests'), split = find('11'), latency = find('With Cooper p95 (s)'), detail = find('Field F1');
     if (!runs || runs.length < 35 || !tracks || tracks.length !== 12 || !split || !latency || !detail) throw new Error('Missing IAB ranking or track tables');
-    this.parts = Object.fromEntries(tracks.slice(1).map(r => ['track'+r[0].text,r[1].text]));
     const value = (s:string) => {const n = num(s); if(n === undefined) throw new Error('Missing IAB score'); return n;};
     return runs.slice(1).map(r => {
       const model = r[0].text, mode = r[1].text, harness = mode === 'harness';

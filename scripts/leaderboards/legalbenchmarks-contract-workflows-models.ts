@@ -32,6 +32,12 @@ const board: Leaderboard = {
     form: { name: 'Form score', unit: '%', better: 'higher' },
     latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
   },
+  chart: {
+    title: 'Task pass rate vs. form score',
+    x: { key: 'score', label: 'Task pass rate', unit: '%', better: 'higher' },
+    y: { key: 'form', label: 'Form score', unit: '%', better: 'higher' },
+    note: 'LegalBenchmarks plots substance task pass rate on the horizontal axis against form score on the vertical axis.',
+  },
   async fetch() {
     return legalModels(FEED, 'draftingData', 27);
   },

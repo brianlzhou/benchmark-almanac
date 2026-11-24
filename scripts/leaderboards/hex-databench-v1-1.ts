@@ -9,7 +9,13 @@ const board: Leaderboard = {
   url: "https://hex.tech/databench/",
   feed,
   terms: "Hex's robots.txt allows the board. Hex's terms apply. Results are credited to Hex.",
-  stats: { latency: { name: 'Median latency', unit: 'ms', better: 'lower' } },
+  stats: { latency: { name: 'Median latency', unit: 'seconds', better: 'lower' } },
+  chart: {
+    title: 'Score vs. cost per task',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Score', unit: '%', better: 'higher' },
+    note: 'Hex DataBench plots blended score against per-task cost with a Pareto frontier.',
+  },
   async fetch() {
     const flight = nextFlight(await fetchText(feed));
     const rows = jsonAfter<{ model: string; score: string; costPerTaskValue: number; tokensPerTaskValue: number; medianLatencyValue: number }[]>(flight, '"rows":');

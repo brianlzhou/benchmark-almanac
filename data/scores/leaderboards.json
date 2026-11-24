@@ -128228,6 +128228,22 @@
         "Yuma",
         "Zendesk"
       ],
+      "chart": {
+        "title": "Shopping answer quality vs. automation rate",
+        "x": {
+          "key": "shopping_automation",
+          "label": "Shopping automation rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "shopping_quality",
+          "label": "Shopping quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Gorgias plots answer quality against automation rate for shopping conversations."
+      },
       "parts": {
         "shopping": {
           "name": "Shopping"
@@ -128591,6 +128607,22 @@
       "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Exact rubric match vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per answer",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Exact rubric match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "GradeBench plots exact rubric match against grading cost."
+      },
       "parts": {
         "subjects_Engineering": {
           "name": "Engineering",
@@ -128668,38 +128700,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "subjects_Engineering_answers": {
-          "name": "Engineering answer count",
-          "unit": "count"
-        },
-        "subjects_Chemistry_answers": {
-          "name": "Chemistry answer count",
-          "unit": "count"
-        },
-        "subjects_Mathematics_answers": {
-          "name": "Mathematics answer count",
-          "unit": "count"
-        },
-        "subjects_Physics_answers": {
-          "name": "Physics answer count",
-          "unit": "count"
-        },
-        "subjects_Statistics_answers": {
-          "name": "Statistics answer count",
-          "unit": "count"
-        },
-        "subjects_Computer Science_answers": {
-          "name": "Computer Science answer count",
-          "unit": "count"
-        },
-        "subjects_Drawings_answers": {
-          "name": "Drawings answer count",
-          "unit": "count"
-        },
-        "subjects_Written_answers": {
-          "name": "Written answer count",
-          "unit": "count"
-        },
         "subjects_Engineering_worstOf5": {
           "name": "Engineering worst of five score",
           "unit": "score",
@@ -128760,10 +128760,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "drawings_Graphs and plots_answers": {
-          "name": "Graphs and plots answer count",
-          "unit": "count"
-        },
         "drawings_Graphs and plots_worstOf5": {
           "name": "Graphs and plots worst of five score",
           "unit": "score",
@@ -128773,10 +128769,6 @@
           "name": "Graphs and plots best of five score",
           "unit": "score",
           "better": "higher"
-        },
-        "drawings_Chemical structures_answers": {
-          "name": "Chemical structures answer count",
-          "unit": "count"
         },
         "drawings_Chemical structures_worstOf5": {
           "name": "Chemical structures worst of five score",
@@ -128788,10 +128780,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "drawings_Circuits and timing_answers": {
-          "name": "Circuits and timing answer count",
-          "unit": "count"
-        },
         "drawings_Circuits and timing_worstOf5": {
           "name": "Circuits and timing worst of five score",
           "unit": "score",
@@ -128801,10 +128789,6 @@
           "name": "Circuits and timing best of five score",
           "unit": "score",
           "better": "higher"
-        },
-        "drawings_Orbital and energy levels_answers": {
-          "name": "Orbital and energy levels answer count",
-          "unit": "count"
         },
         "drawings_Orbital and energy levels_worstOf5": {
           "name": "Orbital and energy levels worst of five score",
@@ -128816,10 +128800,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "drawings_Trees and graphs_answers": {
-          "name": "Trees and graphs answer count",
-          "unit": "count"
-        },
         "drawings_Trees and graphs_worstOf5": {
           "name": "Trees and graphs worst of five score",
           "unit": "score",
@@ -128829,10 +128809,6 @@
           "name": "Trees and graphs best of five score",
           "unit": "score",
           "better": "higher"
-        },
-        "drawings_Free-body_answers": {
-          "name": "Free-body answer count",
-          "unit": "count"
         },
         "drawings_Free-body_worstOf5": {
           "name": "Free-body worst of five score",
@@ -128844,10 +128820,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "drawings_Ray diagrams_answers": {
-          "name": "Ray diagrams answer count",
-          "unit": "count"
-        },
         "drawings_Ray diagrams_worstOf5": {
           "name": "Ray diagrams worst of five score",
           "unit": "score",
@@ -128857,10 +128829,6 @@
           "name": "Ray diagrams best of five score",
           "unit": "score",
           "better": "higher"
-        },
-        "drawings_All drawings_answers": {
-          "name": "All drawings answer count",
-          "unit": "count"
         }
       }
     },
@@ -134379,6 +134347,22 @@
       "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
+      "chart": {
+        "title": "Clips correct vs. API cost",
+        "x": {
+          "key": "cost",
+          "label": "API run cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Clips correct",
+          "better": "higher"
+        },
+        "note": "HearingBench plots clips answered correctly out of 100 against API cost on a log scale with a Pareto frontier."
+      },
       "costPer": "run",
       "stats": {
         "everyday": {
@@ -134412,6 +134396,24 @@
           "name": "Words correct",
           "unit": "count",
           "better": "higher"
+        },
+        "wordsNearMisses": {
+          "name": "Words near misses",
+          "unit": "count"
+        },
+        "sentences": {
+          "name": "Sentences correct",
+          "unit": "count",
+          "better": "higher"
+        },
+        "sentencesNearMisses": {
+          "name": "Sentences near misses",
+          "unit": "count"
+        },
+        "latency": {
+          "name": "Total run time",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -135743,10 +135745,26 @@
       "unmatched": [
         "DeepSeek V4.1"
       ],
+      "chart": {
+        "title": "Score vs. cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Hex DataBench plots blended score against per-task cost with a Pareto frontier."
+      },
       "stats": {
         "latency": {
           "name": "Median latency",
-          "unit": "ms",
+          "unit": "seconds",
           "better": "lower"
         }
       }
@@ -137400,6 +137418,23 @@
       "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "chart": {
+        "title": "Score vs. cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Zavo plots Hospital-bench score against per-task cost on a log scale."
+      },
       "stats": {
         "passes": {
           "name": "Tasks passed",
@@ -139205,25 +139240,48 @@
       "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "chart": {
+        "title": "Resolved rate vs. run cost",
+        "x": {
+          "key": "cost",
+          "label": "Run cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Resolved rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "HWE-Bench plots resolved rate across all 417 tasks against full run cost on a log scale."
+      },
       "costPer": "run",
       "parts": {
         "opentitan": {
-          "name": "OpenTitan"
+          "name": "OpenTitan",
+          "group": "Repository"
         },
         "ibex": {
-          "name": "Ibex"
+          "name": "Ibex",
+          "group": "Repository"
         },
         "cva6": {
-          "name": "CVA6"
+          "name": "CVA6",
+          "group": "Repository"
         },
         "caliptra": {
-          "name": "Caliptra"
+          "name": "Caliptra",
+          "group": "Repository"
         },
         "xiangshan": {
-          "name": "XiangShan"
+          "name": "XiangShan",
+          "group": "Repository"
         },
         "rocketchip": {
-          "name": "Rocket Chip"
+          "name": "Rocket Chip",
+          "group": "Repository"
         }
       },
       "stats": {
@@ -150035,66 +150093,102 @@
       "unmatched": [
         "Gemini Carbon"
       ],
+      "chart": {
+        "title": "Pass@1 vs. execution time",
+        "x": {
+          "key": "latency",
+          "label": "Execution time per run",
+          "unit": "s",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Incident Arena plots pass@1 against agent execution time with a Pareto frontier."
+      },
       "parts": {
         "000--frappe--07-deletes-and-jobs-fail-194d9279": {
-          "name": "000--frappe--07-deletes-and-jobs-fail-194d9279"
+          "name": "Frappe 000 deletes and jobs fail",
+          "group": "Incident"
         },
         "001--frappe--07-desk-and-queue-oom-0669b8e8": {
-          "name": "001--frappe--07-desk-and-queue-oom-0669b8e8"
+          "name": "Frappe 001 desk and queue OOM",
+          "group": "Incident"
         },
         "002--frappe--07-desk-and-queue-outage-64526986": {
-          "name": "002--frappe--07-desk-and-queue-outage-64526986"
+          "name": "Frappe 002 desk and queue outage",
+          "group": "Incident"
         },
         "003--frappe--07-new-records-and-jobs-fail-f3320b4c": {
-          "name": "003--frappe--07-new-records-and-jobs-fail-f3320b4c"
+          "name": "Frappe 003 new records and jobs fail",
+          "group": "Incident"
         },
         "004--frappe--07-new-records-and-queue-oom-8ccfd9e7": {
-          "name": "004--frappe--07-new-records-and-queue-oom-8ccfd9e7"
+          "name": "Frappe 004 new records and queue OOM",
+          "group": "Incident"
         },
         "006--saleor-spine--10-T1-statement-timeout-canary-c7dcd6d4": {
-          "name": "006--saleor-spine--10-T1-statement-timeout-canary-c7dcd6d4"
+          "name": "Saleor 006 statement timeout canary",
+          "group": "Incident"
         },
         "007--slack-spine--06-F3-split-sequencer-eef5b438": {
-          "name": "007--slack-spine--06-F3-split-sequencer-eef5b438"
+          "name": "Slack 007 split sequencer",
+          "group": "Incident"
         },
         "008--slack-spine--06-F4-maintenance-collision-cc222870": {
-          "name": "008--slack-spine--06-F4-maintenance-collision-cc222870"
+          "name": "Slack 008 maintenance collision",
+          "group": "Incident"
         },
         "009--slack-spine--06-logins-unread-and-sends-all-slow-since-noon-16e3fd23": {
-          "name": "009--slack-spine--06-logins-unread-and-sends-all-slow-since-noon-16e3fd23"
+          "name": "Slack 009 logins unread and sends slow",
+          "group": "Incident"
         },
         "010--slack-spine--06-logins-unread-sends-slower-cccddfb2": {
-          "name": "010--slack-spine--06-logins-unread-sends-slower-cccddfb2"
+          "name": "Slack 010 logins unread sends slower",
+          "group": "Incident"
         },
         "011--slack-spine--06-sends-crawl-then-store-slows-3e65c480": {
-          "name": "011--slack-spine--06-sends-crawl-then-store-slows-3e65c480"
+          "name": "Slack 011 sends crawl then store slows",
+          "group": "Incident"
         },
         "012--slack-spine--06-sends-fail-after-strict-mode-plausible-pool-d18e8739": {
-          "name": "012--slack-spine--06-sends-fail-after-strict-mode-plausible-pool-d18e8739"
+          "name": "Slack 012 strict mode plausible pool",
+          "group": "Incident"
         },
         "013--slack-spine--06-sends-fail-after-strict-mode-turns-on-728f0739": {
-          "name": "013--slack-spine--06-sends-fail-after-strict-mode-turns-on-728f0739"
+          "name": "Slack 013 strict mode turns on",
+          "group": "Incident"
         },
         "014--slack-spine--06-sends-fail-during-compliance-window-1f4b1235": {
-          "name": "014--slack-spine--06-sends-fail-during-compliance-window-1f4b1235"
+          "name": "Slack 014 compliance window",
+          "group": "Incident"
         },
         "015--slack-spine--06-sends-fail-strict-pool-16-66fa1a7c": {
-          "name": "015--slack-spine--06-sends-fail-strict-pool-16-66fa1a7c"
+          "name": "Slack 015 strict pool 16",
+          "group": "Incident"
         },
         "016--slack-spine--06-sends-slow-and-stall-every-minute-83867383": {
-          "name": "016--slack-spine--06-sends-slow-and-stall-every-minute-83867383"
+          "name": "Slack 016 sends slow and stall",
+          "group": "Incident"
         },
         "017--slack-spine--06-stall-every-minute-and-later-every-send-crawls-bd50bae9": {
-          "name": "017--slack-spine--06-stall-every-minute-and-later-every-send-crawls-bd50bae9"
+          "name": "Slack 017 stall and sends crawl",
+          "group": "Incident"
         },
         "018--slack-spine--09-I1-seq-lock-leak-0b7c2973": {
-          "name": "018--slack-spine--09-I1-seq-lock-leak-0b7c2973"
+          "name": "Slack 018 seq lock leak",
+          "group": "Incident"
         },
         "019--slack-spine--13-P1-distractor-volume-shell-f73987d7": {
-          "name": "019--slack-spine--13-P1-distractor-volume-shell-f73987d7"
+          "name": "Slack 019 distractor volume shell",
+          "group": "Incident"
         },
         "07-writes-and-queue-oom-f1db8f42": {
-          "name": "07-writes-and-queue-oom-f1db8f42"
+          "name": "Writes and queue OOM",
+          "group": "Incident"
         }
       },
       "stats": {
@@ -151294,6 +151388,24 @@
       "retrieved": "2026-11-24",
       "rows": 53,
       "unmatched": [],
+      "chart": {
+        "title": "Speedup vs. 12-run API cost",
+        "x": {
+          "key": "cost",
+          "label": "12-run API cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Aggregate speedup",
+          "unit": "x",
+          "better": "higher"
+        },
+        "note": "InferenceBench plots aggregate geometric-mean speedup against total 12-run API cost on a log scale."
+      },
+      "costPer": "run",
       "harnesses": "system",
       "stats": {
         "prefill": {
@@ -151315,11 +151427,6 @@
           "name": "All-in-one speedup",
           "unit": "speedup",
           "better": "higher"
-        },
-        "sem": {
-          "name": "Speedup standard error",
-          "unit": "speedup",
-          "better": "lower"
         }
       }
     },
@@ -151995,40 +152102,67 @@
       "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
+      "chart": {
+        "title": "Judge accuracy vs. estimated run cost",
+        "x": {
+          "key": "estimatedRunCost",
+          "label": "Estimated run cost",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Judge accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Cooper plots judge accuracy against estimated full-run API cost with an efficiency frontier."
+      },
       "harnesses": "system",
       "parts": {
         "track1": {
-          "name": "ACORD field extraction"
+          "name": "ACORD field extraction",
+          "group": "Track"
         },
         "track2": {
-          "name": "SOV / loss-run reasoning"
+          "name": "SOV / loss-run reasoning",
+          "group": "Track"
         },
         "track3": {
-          "name": "Cross-doc reconciliation"
+          "name": "Cross-doc reconciliation",
+          "group": "Track"
         },
         "track4": {
-          "name": "Long-policy clause retrieval"
+          "name": "Long-policy clause retrieval",
+          "group": "Track"
         },
         "track5": {
-          "name": "Faithfulness & abstention"
+          "name": "Faithfulness and abstention",
+          "group": "Track"
         },
         "track6": {
-          "name": "Scanned / handwritten"
+          "name": "Scanned / handwritten",
+          "group": "Track"
         },
         "track7": {
-          "name": "Grounding / citations"
+          "name": "Grounding / citations",
+          "group": "Track"
         },
         "track8": {
-          "name": "Checkbox / selection reading"
+          "name": "Checkbox / selection reading",
+          "group": "Track"
         },
         "track9": {
-          "name": "Charts / graphs extraction"
+          "name": "Charts / graphs extraction",
+          "group": "Track"
         },
         "track10": {
-          "name": "Number / date normalization"
+          "name": "Number / date normalization",
+          "group": "Track"
         },
         "track11": {
-          "name": "Prompt injection in doc"
+          "name": "Prompt injection in doc",
+          "group": "Track"
         }
       },
       "stats": {
@@ -155207,6 +155341,23 @@
       "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
+      "chart": {
+        "title": "Overall score vs. cost per question",
+        "x": {
+          "key": "cost",
+          "label": "Cost per question",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "JFinBench plots overall exam score against average cost per question on a log scale."
+      },
       "parts": {
         "CPA": {
           "name": "CPA"
@@ -165513,6 +165664,22 @@
       "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Task pass rate vs. form score",
+        "x": {
+          "key": "score",
+          "label": "Task pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "form",
+          "label": "Form score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "LegalBenchmarks plots substance task pass rate on the horizontal axis against form score on the vertical axis."
+      },
       "stats": {
         "criteriaPassRate": {
           "name": "Criteria pass rate",
@@ -165567,6 +165734,22 @@
       "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Task pass rate vs. form score",
+        "x": {
+          "key": "score",
+          "label": "Task pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "form",
+          "label": "Form score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "LegalBenchmarks plots substance task pass rate on the horizontal axis against form score on the vertical axis."
+      },
       "stats": {
         "criteriaPassRate": {
           "name": "Criteria pass rate",
@@ -167690,6 +167873,22 @@
         "Llama 4 Maverick 17B-128E",
         "Moonshot Kimi K3.1"
       ],
+      "chart": {
+        "title": "Accounting accuracy vs. cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Cost per close task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Accounting accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "LevelBench plots zero-shot accounting accuracy against estimated cost per close task."
+      },
       "harnesses": "system",
       "parts": {
         "area1_bookkeeping_pct": {
@@ -167722,11 +167921,6 @@
         "criteria_evaluated": {
           "name": "Criteria evaluated",
           "unit": "count"
-        },
-        "zero_shot_raw_accuracy_pct": {
-          "name": "Zero shot raw accuracy",
-          "unit": "%",
-          "better": "higher"
         },
         "rule_guided_prompt_accuracy_pct": {
           "name": "Rule guided prompt accuracy",
@@ -176204,12 +176398,29 @@
     },
     "longmemeval-v2": {
       "url": "https://xiaowu0162.github.io/longmemeval-v2/",
-      "feed": "https://xiaowu0162.github.io/longmemeval-v2/static/js/index.js",
+      "feed": "https://xiaowu0162.github.io/longmemeval-v2/static/data/leaderboard.json",
       "terms": "The authors publish the leaderboard on GitHub Pages under https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.",
       "headline": "The leaderboard reports accuracy for each tier separately, so this is the plain mean of Small and Medium accuracy.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy vs. memory-query latency",
+        "x": {
+          "key": "smallLatency",
+          "label": "Small query latency",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "smallAccuracy",
+          "label": "Small accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "LongMemEval-V2 plots answer accuracy against memory-query latency on a log scale with a reference frontier."
+      },
       "harnesses": "system",
       "parts": {
         "smallAccuracy": {
@@ -176264,10 +176475,6 @@
           "unit": "seconds",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-24",
-        "error": "Missing leaderboard entries"
       }
     },
     "longproc": {
