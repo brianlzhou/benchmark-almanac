@@ -208530,7 +208530,7 @@
       "url": "https://markovic.com/swedish_benchmark_V1.1.html",
       "feed": "https://markovic.com/swedish_benchmark_V1.1.html",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "mistral-small-4-119b-2603",
@@ -208544,6 +208544,23 @@
         "qwen3.6-27b-mtp",
         "zai-org_glm-4.7-flash"
       ],
+      "chart": {
+        "title": "Accuracy vs. average latency",
+        "x": {
+          "key": "latency",
+          "label": "Average latency",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "accuracy",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Accuracy against average latency on a log scale, matching the New Synonym Benchmark scatter plot on the Swedish Benchmarks V1.1 dashboard."
+      },
       "stats": {
         "rawTaskScore": {
           "name": "Raw task score",
@@ -208561,17 +208578,15 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "examples": {
-          "name": "Examples",
-          "unit": "count"
-        },
         "correct": {
           "name": "Correct predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "validPredictions": {
           "name": "Valid predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "validRate": {
           "name": "Valid prediction rate",
@@ -248964,7 +248979,7 @@
       "url": "https://plotlightstudios.com/plotpoints/leaderboard?round=1&test=elo",
       "feed": "https://plotlightstudios.com/api/plotpoints/leaderboard?round=1&test=elo",
       "terms": "PlotPoints labels its public results CC BY 4.0. The repository and Hugging Face dataset list CC BY-NC 4.0. https://plotlightstudios.com/plotpoints https://huggingface.co/datasets/lazyweasel/roleplay-bench The site disallows /api/ in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Mistral Small Creative"
@@ -248975,17 +248990,53 @@
           "unit": "count"
         },
         "sfw": {
-          "name": "SFW votes",
-          "unit": "count"
+          "name": "SFW win rate",
+          "unit": "%",
+          "better": "higher"
         },
         "nsfw": {
-          "name": "NSFW votes",
-          "unit": "count"
+          "name": "NSFW win rate",
+          "unit": "%",
+          "better": "higher"
         },
         "latency": {
           "name": "Latency",
           "unit": "ms",
           "better": "lower"
+        },
+        "costPer1m": {
+          "name": "Blended price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "multiturnElo": {
+          "name": "Multi-turn Elo",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "rubric": {
+          "name": "Rubric score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean LLM-judge rubric score across 11 axes on a 1 to 5 scale."
+        },
+        "failureAvg": {
+          "name": "Mean failure score",
+          "unit": "score",
+          "better": "lower",
+          "note": "Average failure score across adversarial multi-turn probes."
+        },
+        "engagement": {
+          "name": "Engagement score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge engagement proxy on a 1 to 5 scale."
+        },
+        "compositeScore": {
+          "name": "Composite score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Weighted composite score on a 0 to 100 scale."
         }
       }
     },
@@ -253617,7 +253668,7 @@
       "url": "https://github.com/ATinyGreenCell/prompt-to-bench#65-larger-open-models-on-an-npu-box",
       "feed": "https://raw.githubusercontent.com/ATinyGreenCell/prompt-to-bench/HEAD/README.md",
       "terms": "The author licenses the paper under CC BY 4.0. Separate model licenses apply to third-party outputs. https://github.com/ATinyGreenCell/prompt-to-bench/blob/main/LICENSE The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "GLM-4.7-Flash 30B-A3B",
@@ -253625,6 +253676,23 @@
         "Qwen3-Coder-Next 80B-A3B",
         "Qwen3.5 9B (Tiiny)"
       ],
+      "chart": {
+        "title": "Tasks passed vs. model size",
+        "x": {
+          "key": "paramsB",
+          "label": "Total parameters",
+          "unit": "B",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Tasks passed",
+          "unit": "tasks",
+          "better": "higher"
+        },
+        "note": "Mean tasks passed within three tries against total parameter count on a log scale, matching Figure 7 on Prompt-to-Bench."
+      },
       "stats": {
         "minutesPerTask": {
           "name": "Minutes per task",
@@ -253647,6 +253715,38 @@
           "unit": "count",
           "better": "lower",
           "note": "Median number of reasoning characters in one reply."
+        },
+        "paramsB": {
+          "name": "Total parameters",
+          "unit": "billions",
+          "better": "lower"
+        },
+        "downloadGb": {
+          "name": "Model download size",
+          "unit": "gb",
+          "better": "lower"
+        },
+        "tasksPassedAnySample": {
+          "name": "Tasks passed in any sample",
+          "unit": "count",
+          "better": "higher",
+          "note": "Distinct tasks out of 16 passed in at least one sample."
+        },
+        "passFirstTryRate": {
+          "name": "Passed on first try",
+          "unit": "%",
+          "better": "higher"
+        },
+        "renderFirstTryRate": {
+          "name": "Renders on first try",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cutoffRate": {
+          "name": "Cutoff rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of attempts or replies cut off at the token limit."
         }
       }
     },
@@ -257563,9 +257663,25 @@
       "url": "https://next.questflow.ai/benchmark",
       "feed": "https://next.questflow.ai/benchmark",
       "terms": "The site allows crawling. Questflow limits platform use to personal, noncommercial, or qualifying internal business use. I found no separate public data license. https://docs.questflow.ai/terms-of-use",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "chart": {
+        "title": "Strict pass rate vs. efficiency",
+        "x": {
+          "key": "efficiency",
+          "label": "Efficiency score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "y": {
+          "key": "score",
+          "label": "Strict pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Strict pass rate against efficiency score (70% log cost score and 30% log speed score), matching the Score vs efficiency chart on Questflow."
+      },
       "parts": {
         "FINANCIAL": {
           "name": "Financial Analysis"
@@ -257589,9 +257705,11 @@
           "name": "Mean tool calls",
           "unit": "count"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
+        "efficiency": {
+          "name": "Efficiency score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Weighted score from 0 to 100 combining log cost per task (70%) and log median latency (30%)."
         }
       }
     },
@@ -268171,9 +268289,25 @@
       "feed": "https://rsibench.co/data/",
       "terms": "The project repository links CC BY-NC 4.0. https://creativecommons.org/licenses/by-nc/4.0/",
       "headline": "The official table reports no combined score, so this is the plain mean of six benchmark scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
+      "chart": {
+        "title": "Mean score vs. cumulative Tinker cost",
+        "x": {
+          "key": "cost",
+          "label": "Cumulative Tinker cost",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean official score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Mean official score across six benchmarks against cumulative Tinker cost, matching the Cost frontier chart on RSIBench-Data."
+      },
       "costPer": "run",
       "parts": {
         "SWE-bench Verified": {
@@ -274329,9 +274463,25 @@
       "url": "https://sfrcua.github.io/SCUBA/#leaderboard",
       "feed": "https://sfrcua.github.io/SCUBA/_astro/PerformanceTable.KJhwyB8y.js",
       "terms": "Salesforce lists nine agent configurations for each of two settings. The site repository uses Apache 2.0. https://github.com/sfrcua/SCUBA/blob/main/LICENSE GitHub Pages returns 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [],
+      "chart": {
+        "title": "Success rate vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Task success rate against cost per task across zero-shot and demonstration settings, matching the Costs vs. Success Rate Pareto chart on SCUBA."
+      },
       "reference": [
         "browser",
         "computer"
@@ -280797,9 +280947,26 @@
       "url": "https://www.markovstudios.com/research/solidworks-bench",
       "feed": "https://www.markovstudios.com/research/solidworks-bench.md (Mean reward, Where the reward comes from, Every graded component, Cost and efficiency) and https://www.markovstudios.com/research/solidworks-bench (full model names in the reward-against-cost chart)",
       "terms": "robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
+      "chart": {
+        "title": "Mean reward vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "API cost per machine",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Mean reward against API cost per machine on a log scale, matching the reward against cost chart on SolidWorks Bench."
+      },
       "parts": {
         "geometry": {
           "name": "Geometry",
@@ -280899,7 +281066,8 @@
         },
         "timeLimitHit": {
           "name": "Time-limit hits",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -292535,7 +292703,7 @@
       "url": "https://markovic.com/swedish_benchmark_V1.1.html",
       "feed": "https://markovic.com/swedish_benchmark_V1.1.html",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "mistral-small-4-119b-2603",
@@ -292549,6 +292717,23 @@
         "qwen3.6-27b-mtp",
         "zai-org_glm-4.7-flash"
       ],
+      "chart": {
+        "title": "Accuracy vs. average latency",
+        "x": {
+          "key": "latency",
+          "label": "Average latency",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "accuracy",
+          "label": "Exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Exact match accuracy against average latency on a log scale, matching the SveaKnow Culture scatter plot on the Swedish Benchmarks V1.1 dashboard."
+      },
       "stats": {
         "rawTaskScore": {
           "name": "Raw task score",
@@ -292565,17 +292750,15 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "examples": {
-          "name": "Examples",
-          "unit": "count"
-        },
         "correct": {
           "name": "Correct predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "validPredictions": {
           "name": "Valid predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "validRate": {
           "name": "Valid prediction rate",
@@ -294430,13 +294613,30 @@
       "url": "https://markovic.com/swedish_benchmark_V1.html",
       "feed": "https://markovic.com/swedish_benchmark_V1.html",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.html The feed host publishes robots.txt at https://markovic.com/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "mistralai_ministral-3-14b-reasoning",
         "nvidia_nemotron-3-nano",
         "qwen3.5-122b-a10b-halo"
       ],
+      "chart": {
+        "title": "Overall score vs. average latency",
+        "x": {
+          "key": "latency",
+          "label": "Average latency",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Overall task score against average latency on a log scale, matching the overall scatter plot on the Swedish Benchmarks V1 dashboard."
+      },
       "parts": {
         "new_synonym_benchmark": {
           "name": "New Synonym Benchmark"
@@ -294475,14 +294675,10 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "coverage": {
-          "name": "Coverage",
-          "unit": "%",
-          "better": "higher"
-        },
         "invalid": {
           "name": "Invalid predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -294490,7 +294686,7 @@
       "url": "https://markovic.com/swedish_benchmark_V1.1.html",
       "feed": "https://markovic.com/swedish_benchmark_V1.1.html",
       "terms": "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "mistral-small-4-119b-2603",
@@ -294504,6 +294700,23 @@
         "qwen3.6-27b-mtp",
         "zai-org_glm-4.7-flash"
       ],
+      "chart": {
+        "title": "Overall score vs. average latency",
+        "x": {
+          "key": "latencySeconds",
+          "label": "Average latency",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Overall task score against average latency on a log scale, matching the overall scatter plot on the Swedish Benchmarks V1.1 dashboard."
+      },
       "parts": {
         "new_synonym_benchmark": {
           "name": "New Synonym Benchmark",
@@ -294559,11 +294772,6 @@
         }
       },
       "stats": {
-        "coverage": {
-          "name": "Coverage",
-          "unit": "%",
-          "better": "higher"
-        },
         "accuracy": {
           "name": "Average accuracy",
           "unit": "%",
@@ -294576,7 +294784,8 @@
         },
         "invalidPredictions": {
           "name": "Invalid predictions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -306858,7 +307067,7 @@
       "url": "https://www.vals.ai/blogs/ai-detection-benchmark",
       "feed": "https://www.vals.ai/blogs/ai-detection-benchmark (chart data in the server-rendered Astro island props, tasks.overall)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "detector/copyleaks",
@@ -306867,6 +307076,23 @@
         "detector/pangram",
         "detector/sapling"
       ],
+      "chart": {
+        "title": "Balanced accuracy vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per document",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Balanced accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Balanced accuracy against cost per document on a log scale, matching the scatter chart on the Vals AI Detection Benchmark page."
+      },
       "parts": {
         "human": {
           "name": "Human",
@@ -306926,7 +307152,7 @@
       "url": "https://www.vals.ai/benchmarks/claimbench",
       "feed": "https://www.vals.ai/benchmarks/claimbench",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Bison 1",
@@ -306960,6 +307186,23 @@
         "d1.2",
         "d1.2-ultra"
       ],
+      "chart": {
+        "title": "Accuracy vs. cost per claim",
+        "x": {
+          "key": "cost",
+          "label": "Cost per claim",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Accuracy against cost per claim on a log scale, matching the scatter chart on Vals ClaimBench."
+      },
       "parts": {
         "Direct support": {
           "name": "Direct support",
@@ -327493,7 +327736,8 @@
       "url": "https://www.kimi.com/blog/kimi-k3-1-pro",
       "feed": "https://statics.kimi.ai/kimi-blogs/kimi-k3-1/20261023/xdev-bench-hard-results.webp (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Kimi model w/o cyber risk-reduction"

@@ -18,6 +18,12 @@ const board: Leaderboard = {
   headline: 'The official table reports no combined score, so this is the plain mean of six benchmark scores.',
   parts: Object.fromEntries(parts.map(p => [p, p])),
   stats,
+  chart: {
+    title: 'Mean score vs. cumulative Tinker cost',
+    x: { key: 'cost', label: 'Cumulative Tinker cost', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Mean official score', unit: '%', better: 'higher' },
+    note: 'Mean official score across six benchmarks against cumulative Tinker cost, matching the Cost frontier chart on RSIBench-Data.',
+  },
   aliases: { 'Opus-4.8': 'claude-opus-4-8', 'Sonnet-5': 'claude-sonnet-5' },
   costPer: 'run',
   async fetch() {

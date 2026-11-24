@@ -12,9 +12,15 @@ const board: Leaderboard = {
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
   stats: {
     rawTaskScore: { name: 'Raw task score', unit: 'score', better: 'higher' }, accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
-    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' }, examples: { name: 'Examples', unit: 'count' },
-    correct: { name: 'Correct predictions', unit: 'count' }, validPredictions: { name: 'Valid predictions', unit: 'count' },
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    correct: { name: 'Correct predictions', unit: 'count', better: 'higher' }, validPredictions: { name: 'Valid predictions', unit: 'count', better: 'higher' },
     validRate: { name: 'Valid prediction rate', unit: '%', better: 'higher' }, secondaryScore: { name: 'Secondary score', unit: 'score', better: 'higher' },
+  },
+  chart: {
+    title: 'Accuracy vs. average latency',
+    x: { key: 'latency', label: 'Average latency', unit: 's', better: 'lower', log: true },
+    y: { key: 'accuracy', label: 'Exact match', unit: '%', better: 'higher' },
+    note: 'Exact match accuracy against average latency on a log scale, matching the SveaKnow Culture scatter plot on the Swedish Benchmarks V1.1 dashboard.',
   },
   async fetch() {
     return swedishTask(feed, 'sveaknow_culture', 23);
