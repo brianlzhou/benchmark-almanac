@@ -10,6 +10,7 @@ const board: Leaderboard = {
  benchmark: "business-operation-moonshot",
  url: "https://www.kimi.com/en/blog/kimi-k3-1-pro",
  feed: FEED,
+ static: 'paper',
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {

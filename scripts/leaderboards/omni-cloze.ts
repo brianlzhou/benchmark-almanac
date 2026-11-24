@@ -10,7 +10,7 @@ const board: Leaderboard = {
  benchmark: "omni-cloze",
  url: "https://github.com/ddlBoJack/Omni-Captioner",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ terms: "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

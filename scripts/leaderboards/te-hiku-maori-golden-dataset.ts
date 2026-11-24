@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'te-hiku-maori-golden-dataset',
   url: feed,
   feed,
+  static: 'paper',
   terms: 'Papa Reo publishes the article and its comparison under the site terms. https://blog.papareo.nz/',
   async fetch() {
     const source = await fetchText(feed);

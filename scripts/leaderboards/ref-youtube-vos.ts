@@ -11,7 +11,7 @@ export default {benchmark:'ref-youtube-vos', parts: {
 }, stats: {
   entries: { name: 'Entries', unit: 'count', note: 'Number of entries submitted for the run.' },
 },url:PAGE,feed:FEED,
- terms:'Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.',
+ terms:'Public official competition results hosted by CodaLab. The almanac credits the Refer-YouTube-VOS organizers and links the source.',
  async fetch():Promise<LeaderboardRow[]> {
   const t=tables(await fetchText(FEED)).find(t=>t.some(r=>r.some(c=>c.text==='Overall')));
   if(!t)throw new Error('Refer-YouTube-VOS Testing results missing');

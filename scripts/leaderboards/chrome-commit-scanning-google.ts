@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: "chrome-commit-scanning-google",
   url: "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
   feed: FEED,
+  static: 'paper',
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {

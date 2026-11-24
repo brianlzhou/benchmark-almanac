@@ -8,6 +8,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://www.brennancenter.org/our-work/research-reports/appendix-does-ai-fight-or-fuel-election-disinformation';
 const board: Leaderboard = {
+  static: 'paper',
   headline: 'The headline averages the counts of correctly identified images in English and Spanish.',
   benchmark: 'brennan-election-image-identification',
   url: feed + '#position-35848',

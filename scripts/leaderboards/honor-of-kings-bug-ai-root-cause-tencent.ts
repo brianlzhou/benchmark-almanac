@@ -6,7 +6,7 @@ import {fetchText} from '../lib/util.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = 'https://api.hunyuan.tencent.com/api/blog/publicDetail';
-const board: Leaderboard = {benchmark: 'honor-of-kings-bug-ai-root-cause-tencent', url: 'https://hunyuan.tencent.com/research/hy4', feed: FEED, terms: 'Tencent Hy public research article. https://hunyuan.tencent.com/', async fetch() {
+const board: Leaderboard = {benchmark: 'honor-of-kings-bug-ai-root-cause-tencent', url: 'https://hunyuan.tencent.com/research/hy4', feed: FEED, static: 'paper', terms: 'Tencent Hy public research article. https://hunyuan.tencent.com/', async fetch() {
   const body = await fetchText(FEED, {method: 'POST', headers: {'content-type': 'application/json', 'accept-language': 'en'}, body: JSON.stringify({customUrl: 'hy4'})});
   const content = JSON.parse(body).data?.detail?.content;
   if (typeof content !== 'string') throw new Error('Tencent Hy4 article missing');

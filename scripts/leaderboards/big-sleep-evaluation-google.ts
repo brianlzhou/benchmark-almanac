@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: "big-sleep-evaluation-google",
   url: "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
   feed: FEED,
+  static: 'paper',
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {

@@ -5,7 +5,7 @@ import { fetchText } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://www.refresh.dev/blog/blenderbench';
 const board: Leaderboard = {
-  benchmark: 'blenderbench-refresh', url: FEED, feed: FEED,
+  benchmark: 'blenderbench-refresh', url: FEED, feed: FEED, static: 'paper',
   terms: 'The Refresh article is publicly readable. Link and attribute the source.',
   costPer: 'run',
   async fetch(): Promise<LeaderboardRow[]> {
