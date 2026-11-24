@@ -11,7 +11,6 @@ const parts = { radio:'MCQ Radio', check:'MCQ Check', trueFalse:'True/False', po
   closed:'Completion (Closed)', open:'Completion (Open)', errors:'Select Errors' };
 const board: Leaderboard = {
   benchmark: 'eduart', url, feed, parts, terms: 'The authors specify MIT for code and non-commercial research terms for the Italian materials. ' + url + '#-data--license',
-  stats: { questions: { name: 'Questions evaluated', unit: 'count' }, radioN: { name: 'MCQ Radio questions', unit: 'count' }, checkN: { name: 'MCQ Check questions', unit: 'count' }, trueFalseN: { name: 'True/False questions', unit: 'count' }, positioningN: { name: 'Positioning questions', unit: 'count' }, closedN: { name: 'Completion Closed questions', unit: 'count' }, openN: { name: 'Completion Open questions', unit: 'count' }, errorsN: { name: 'Select Errors questions', unit: 'count' } },
   aliases: { 'google_gemini-3.1-pro-preview':'gemini-3-1-pro','google_gemini-3.1-flash-lite-preview':'gemini-3-1-flash-lite',
     'google_gemini-3.5-flash':'gemini-3-5-flash','openai_gpt-5.5-2026-04-23':'gpt-5-5',
     'openai_gpt-5.4-mini-2026-03-17':'gpt-5-4-mini','openai_gpt-5.4-nano-2026-03-17':'gpt-5-4-nano',
@@ -22,7 +21,7 @@ const board: Leaderboard = {
     const summary = readme.split('## Leaderboard (Macro-Averaged Score)')[1]?.split('## Results by Question Type')[0];
     if (!summary?.includes('Macro Avg | MCQ Exact Match | N Evaluated')) throw Error('Missing overall columns');
     const rows = Array.from(summary.matchAll(/^\| \d+ \| \x60([^\x60]+)\x60 \| \*\*([\d.]+)%\*\* \| [\d.]+% \| (\d+) \|$/gm),
-      ([,model,score,n]) => ({ model, score: Number(score), setting:'Answer only', metrics: { questions: Number(n) } as Record<string,number> }));
+      ([,model,score]) => ({ model, score: Number(score), setting:'Answer only', metrics: {} as Record<string,number> }));
     for (const [key, name] of Object.entries(parts)) {
       const section = readme.split('**' + name + '** (Primary metric:')[1]?.split(/\n\n(?=\*\*|##)/)[0];
       if (!section?.includes('Model | Mean | 95% CI | N')) throw Error('Missing confidence intervals for ' + name);
@@ -31,7 +30,7 @@ const board: Leaderboard = {
       for (const row of rows) {
         const info = values.get(row.model);
         if (!info) throw Error('Missing format score for ' + row.model);
-        [row.metrics[key], row.metrics[key + 'Low'], row.metrics[key + 'High'], row.metrics[key + 'N']] = info;
+        [row.metrics[key], row.metrics[key + 'Low'], row.metrics[key + 'High']] = info;
       }
     }
     return checked(rows, 12);

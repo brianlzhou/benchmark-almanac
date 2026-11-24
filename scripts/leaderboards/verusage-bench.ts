@@ -15,19 +15,28 @@ interface Data {
   }[];
 }
 const board: Leaderboard = {
-  stats: { solved: { name: 'Solved tasks', unit: 'count' }, total: { name: 'Total tasks', unit: 'count' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, AL: { name: 'Alignment', unit: '%', better: 'higher' }, AC: { name: 'Accuracy', unit: '%', better: 'higher' }, IR: { name: 'Instruction following', unit: '%', better: 'higher' }, MA: { name: 'Memory accuracy', unit: '%', better: 'higher' }, NO: { name: 'No-op handling', unit: '%', better: 'higher' }, NR: { name: 'Noise robustness', unit: '%', better: 'higher' }, OS: { name: 'Outcome success', unit: '%', better: 'higher' }, ST: { name: 'State tracking', unit: '%', better: 'higher' }, VE: { name: 'Verification', unit: '%', better: 'higher' } },
+  stats: { solved: { name: 'Solved tasks', unit: 'count' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: 'verusage-bench',
   url: 'https://microsoft.github.io/verus-proof-synthesis/',
   feed: FEED,
   terms: 'The Microsoft Research leaderboard page publishes this JSON file. Results are credited to Microsoft Research and collaborators.',
   harnesses: 'system',
-  parts: {},
+  parts: {
+    AL: { name: 'Anvil', group: 'Project', unit: '%' },
+    AC: { name: 'Anvil Advanced', group: 'Project', unit: '%' },
+    IR: { name: 'IronKV', group: 'Project', unit: '%' },
+    MA: { name: 'Memory Allocator', group: 'Project', unit: '%' },
+    NO: { name: 'Node Replication', group: 'Project', unit: '%' },
+    NR: { name: 'NRKernel', group: 'Project', unit: '%' },
+    OS: { name: 'ATMO', group: 'Project', unit: '%' },
+    ST: { name: 'Storage', group: 'Project', unit: '%' },
+    VE: { name: 'Vest', group: 'Project', unit: '%' },
+  },
   async fetch() {
     const data = await fetchJson<Data>(FEED);
     if (data.total_tasks !== 849 || data.submissions.length !== 10) throw new Error(`VeruSAGE-Bench: expected 849 tasks and 10 submissions`);
-    for (const project of data.projects) board.parts![project.code] = { name: project.name, group: 'Project', unit: '%' };
     return data.submissions.map((submission) => {
-      const metrics: Record<string, number> = { solved: submission.results.solved, total: submission.results.total };
+      const metrics: Record<string, number> = { solved: submission.results.solved };
       if (submission.results.avg_time_minutes !== undefined) metrics.latency = submission.results.avg_time_minutes * 60;
       for (const item of submission.breakdown ?? []) metrics[item.category] = item.solved / item.total * 100;
       return {

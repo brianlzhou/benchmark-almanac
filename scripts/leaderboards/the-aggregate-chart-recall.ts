@@ -12,9 +12,6 @@ const board: Leaderboard = {
   stats: {
     shape: { name: 'Shape correlation', unit: 'score', better: 'higher' },
     valid: { name: 'Valid answers', unit: 'count' },
-    charts: { name: 'Charts scored', unit: 'count' },
-    monthsPerChart: { name: 'Months per chart', unit: 'count' },
-    outputTokenLimit: { name: 'Output token limit', unit: 'tokens' },
   },
   aliases: { "DeepSeek V4.1 Flash (1017)": "deepseek-v4-1-flash-1017" },
   async fetch() {
@@ -26,8 +23,7 @@ const board: Leaderboard = {
       const run = r.run_configuration;
       if (!r.name || !Number.isFinite(r.mean_log10_rmse)) throw new Error('Missing chart error');
       return { model: r.name, score: r.mean_log10_rmse, date: data.run_end, setting: run.reasoning,
-        metrics: { shape: r.mean_log10_pearson, valid: run.valid_answers, charts: run.scored_charts,
-          monthsPerChart: run.months_per_chart, outputTokenLimit: run.max_output_tokens } };
+        metrics: { shape: r.mean_log10_pearson, valid: run.valid_answers } };
     });
   },
 };

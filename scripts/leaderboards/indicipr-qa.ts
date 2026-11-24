@@ -19,7 +19,7 @@ type Encoder = Scores & { label: string; per_act: Record<string, Scores & {count
 const board: Leaderboard = {
   benchmark: 'indicipr-qa', url, feed, parts,
   terms: 'The authors describe research and educational use at ' + url + '#indicipr-qa.',
-  stats: { exactMatch:{name:'Exact match',unit:'%',better:'higher'}, charF1:{name:'Character F1',unit:'%',better:'higher'}, questions:{name:'Questions',unit:'count'}, ...Object.fromEntries(Object.entries(parts).flatMap(([key,name])=>[[key+'ExactMatch',{name:name+' exact match',unit:'%',better:'higher'}],[key+'CharF1',{name:name+' character F1',unit:'%',better:'higher'}],[key+'Count',{name:name+' questions',unit:'count'}]])) },
+  stats: { exactMatch:{name:'Exact match',unit:'%',better:'higher'}, charF1:{name:'Character F1',unit:'%',better:'higher'}, ...Object.fromEntries(Object.entries(parts).flatMap(([key,name])=>[[key+'ExactMatch',{name:name+' exact match',unit:'%',better:'higher'}],[key+'CharF1',{name:name+' character F1',unit:'%',better:'higher'}]])) },
   async fetch() {
     const [report, card] = await Promise.all([
       fetchJson<{test_records: number; results_summary: Encoder[]}>(feed), fetchText(url + '/raw/main/README.md'),
@@ -27,13 +27,12 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = report.results_summary.map(result => {
       const model = result.label.match(/^[A-Z] *: *(.+) direct$/)?.[1];
       if (!model) throw new Error('Unknown encoder label ' + result.label);
-      const metrics: Record<string, number> = { exactMatch: result.em, charF1: result.char_f1, questions: report.test_records };
+      const metrics: Record<string, number> = { exactMatch: result.em, charF1: result.char_f1 };
       for (const key of Object.keys(parts)) {
         const act = result.per_act[key];
         metrics[key] = act.f1;
         metrics[key + 'ExactMatch'] = act.em;
         metrics[key + 'CharF1'] = act.char_f1;
-        metrics[key + 'Count'] = act.count;
       }
       if (!Object.values(metrics).every(Number.isFinite)) throw new Error('Incomplete encoder scores for ' + model);
       return { model, setting: 'Fine-tuned', score: result.f1, metrics };
@@ -48,7 +47,7 @@ const board: Leaderboard = {
         const setting = header.includes('Setting') ? cells.shift() : undefined;
         if (cells.length !== 3) throw new Error('Missing dataset card metrics');
         const [exactMatch, score, charF1] = cells.map(v => numberCell(v));
-        rows.push({ model, setting, score, metrics: { exactMatch, charF1, questions: report.test_records } });
+        rows.push({ model, setting, score, metrics: { exactMatch, charF1 } });
       }
     }
     return checked(rows, 11);
