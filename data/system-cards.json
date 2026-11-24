@@ -24340,6 +24340,127 @@
     ]
   },
   {
+    "id": "mbzuai-atlas-chat-2b-technical-report-2024-11-11",
+    "lab": "mbzuai",
+    "model": "atlas-chat-2b",
+    "date": "2024-11-11",
+    "doc": "technical report",
+    "title": "Atlas-Chat: Adapting Large Language Models for Low-Resource Moroccan Arabic Dialect (v2)",
+    "url": "https://arxiv.org/abs/2409.17912",
+    "release": null,
+    "notes": "Table 2 of the v2 paper (November 11, 2024) compares Atlas-Chat with 15 other models on Darija prompts. Only the Atlas-Chat-2B row is recorded, at 0-shot. DarijaBench has no overall score in the table, so it is not recorded.",
+    "results": [
+      {
+        "benchmark": "darijammlu",
+        "score": 45.01,
+        "unit": "%",
+        "as_written": "DarijaMMLU, 0-shot. 3-shot 44.43 (Table 2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "darijahellaswag",
+        "score": 35.04,
+        "unit": "%",
+        "as_written": "DarijaHellaSwag, 0-shot. 10-shot 34.55 (Table 2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "mbzuai-atlas-chat-9b-technical-report-2024-11-11",
+    "lab": "mbzuai",
+    "model": "atlas-chat-9b",
+    "date": "2024-11-11",
+    "doc": "technical report",
+    "title": "Atlas-Chat: Adapting Large Language Models for Low-Resource Moroccan Arabic Dialect (v2)",
+    "url": "https://arxiv.org/abs/2409.17912",
+    "release": null,
+    "notes": "Table 2 of the v2 paper (November 11, 2024) compares Atlas-Chat with 15 other models on Darija prompts. Only the Atlas-Chat-9B row is recorded, at 0-shot. DarijaBench has no overall score in the table, so it is not recorded.",
+    "results": [
+      {
+        "benchmark": "darijammlu",
+        "score": 58.32,
+        "unit": "%",
+        "as_written": "DarijaMMLU, 0-shot. 3-shot 59.31 (Table 2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "darijahellaswag",
+        "score": 43.65,
+        "unit": "%",
+        "as_written": "DarijaHellaSwag, 0-shot. 10-shot 44.83 (Table 2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "mbzuai-atlas-chat-27b-technical-report-2024-11-11",
+    "lab": "mbzuai",
+    "model": "atlas-chat-27b",
+    "date": "2024-11-11",
+    "doc": "technical report",
+    "title": "Atlas-Chat: Adapting Large Language Models for Low-Resource Moroccan Arabic Dialect (v2)",
+    "url": "https://arxiv.org/abs/2409.17912",
+    "release": null,
+    "notes": "Table 2 of the v2 paper (November 11, 2024) compares Atlas-Chat with 15 other models on Darija prompts. Only the Atlas-Chat-27B row is recorded, at 0-shot. DarijaBench has no overall score in the table, so it is not recorded.",
+    "results": [
+      {
+        "benchmark": "darijammlu",
+        "score": 61.95,
+        "unit": "%",
+        "as_written": "DarijaMMLU, 0-shot. 3-shot 63.30 (Table 2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "darijahellaswag",
+        "score": 48.37,
+        "unit": "%",
+        "as_written": "DarijaHellaSwag, 0-shot. 10-shot 48.72 (Table 2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "ubc-nilechat-3b-technical-report-2025-09-22",
+    "lab": "ubc",
+    "model": "nilechat-3b",
+    "date": "2025-09-22",
+    "doc": "technical report",
+    "title": "NileChat: Towards Linguistically Diverse and Culturally Aware LLMs for Local Communities (v3)",
+    "url": "https://arxiv.org/abs/2505.18383",
+    "release": null,
+    "notes": "Table 1 of the v3 paper (September 22, 2025) compares NileChat with 15 other models at zero-shot. Only the NileChat (3B) row is recorded, for Egyptian MMLU.",
+    "results": [
+      {
+        "benchmark": "egymmlu",
+        "score": 57.56,
+        "unit": "%",
+        "as_written": "Egyptian MMLU (EGY), zero-shot accuracy. 3-shot 58.20 (Table D.1)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-omnisonar-technical-report-2026-06-18",
+    "lab": "meta",
+    "model": "omnisonar",
+    "date": "2026-06-18",
+    "doc": "technical report",
+    "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech (v3)",
+    "url": "https://arxiv.org/abs/2603.16606",
+    "release": null,
+    "notes": "Table 8 of the v3 paper (June 18, 2026) scores translation into English. Only the OmniSONAR row is recorded, for the BIBLE test set across 1,560 languages. The table’s other models are not recorded.",
+    "results": [
+      {
+        "benchmark": "bible-translation-meta",
+        "score": 41.3,
+        "unit": "score",
+        "as_written": "BIBLE, X to English, chrF++. xCOMET 0.702 (Table 8)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "tii-falcon-h1-34b-technical-report-2025-07-30",
     "lab": "tii",
     "model": "falcon-h1-34b",

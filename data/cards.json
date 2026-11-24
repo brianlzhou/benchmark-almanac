@@ -6903,6 +6903,42 @@
     ]
   },
   {
+    "id": "moonshot-kimi-k2-base-2025-07-11",
+    "lab": "moonshot",
+    "model": "kimi-k2-base",
+    "date": "2025-07-11",
+    "title": "Kimi K2 Base (Hugging Face model card, base model evaluation results)",
+    "url": "https://huggingface.co/moonshotai/Kimi-K2-Base",
+    "tier": "flagship",
+    "notes": "The card’s base model table compares Kimi K2 Base with DeepSeek-V3-Base, Qwen2.5-72B and Llama 4 Maverick. Only the Kimi K2 Base column is recorded, and only for MMLU-Redux 2.0, which the catalog had no score for. The card’s other base model rows are not recorded.",
+    "results": [
+      {
+        "benchmark": "mmlu-redux-2-0",
+        "score": 90.2,
+        "unit": "%",
+        "as_written": "MMLU-redux-2.0, EM, 5-shot"
+      }
+    ]
+  },
+  {
+    "id": "princeton-goedel-prover-v2-32b-2025-07-14",
+    "lab": "princeton",
+    "model": "goedel-prover-v2-32b",
+    "date": "2025-07-14",
+    "title": "Goedel-Prover-V2-32B (Hugging Face model card)",
+    "url": "https://huggingface.co/Goedel-LM/Goedel-Prover-V2-32B",
+    "tier": "mid",
+    "notes": "The card released the model and MathOlympiadBench before the paper (arXiv 2508.03613). The score comes from the value label in Figure 1, which also gives DeepSeek-Prover-V2-671B at 50 solved, not recorded. Only MathOlympiadBench is recorded.",
+    "results": [
+      {
+        "benchmark": "matholympiadbench",
+        "score": 60,
+        "unit": "score",
+        "as_written": "MathOlympiadBench, problems solved of 360 at Pass@32. 73 in self-correction mode (Figure 1)"
+      }
+    ]
+  },
+  {
     "id": "qwen-qwen3-235b-a22b-thinking-2507-2025-07-25",
     "lab": "qwen",
     "model": "qwen3-235b-a22b-thinking-jul-2025",

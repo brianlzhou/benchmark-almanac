@@ -872,6 +872,17 @@
     ]
   },
   {
+    "id": "ubc",
+    "name": "The University of British Columbia",
+    "country": "CA",
+    "url": "https://www.ubc.ca",
+    "aliases": [
+      "UBC",
+      "UBC-NLP",
+      "University of British Columbia"
+    ]
+  },
+  {
     "id": "stanford",
     "name": "Stanford University",
     "country": "US",
