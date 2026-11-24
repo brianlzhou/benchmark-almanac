@@ -7,7 +7,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dataPath, readJson, writeJson, key, slug, parseCsv, today } from './lib/util.ts';
-import { epochModelOverride, epochScoreColumn, epochSecondaryMetrics, epochBenchmarkOverride } from './lib/epoch-mapping.ts';
+import { epochModelOverride, epochScoreColumn, epochSecondaryMetrics, epochBenchmarkOverride, epochRecord } from './lib/epoch-mapping.ts';
 import { provenance, FROM_ARTIFICIAL_ANALYSIS, type Via } from './lib/epoch-provenance.ts';
 
 const ZIP_URL = 'https://epoch.ai/data/benchmark_data.zip';
@@ -162,8 +162,25 @@ function modelFor(group: string): Model {
 // ---- benchmarks -------------------------------------------------------------------------------------
 const byEpoch = new Map(benchmarks.filter((b) => b.epoch?.epoch_name).map((b) => [b.epoch!.epoch_name as string, b]));
 const benchByKey = new Map(benchmarks.map((b) => [key(b.name), b]));
+// an Epoch file that holds a later version (epochRecord) takes its name and metadata to that version's record, and
+// leaves the record it sat on before
+for (const [ename] of byEpoch) {
+  const id = epochRecord(ename);
+  if (!id) continue;
+  const target = benchmarks.find((b) => b.id === id);
+  if (!target) throw new Error(`Epoch's ${ename} belongs on ${id}, which isn't in data/benchmarks.json`);
+  for (const b of benchmarks)
+    if (b !== target && b.epoch?.epoch_name === ename) {
+      // Epoch's difficulty index (edi) is a number about Epoch's benchmark, so it moves too
+      delete b.epoch;
+      delete b.edi;
+    }
+  target.epoch = { ...(target.epoch ?? {}), epoch_name: ename };
+  byEpoch.set(ename, target);
+}
 function benchFor(ename: string, released?: string): Bench {
-  const hit = byEpoch.get(ename) ?? benchByKey.get(key(EPOCH_NAME[ename] ?? ename));
+  const pinned = epochRecord(ename);
+  const hit = (pinned ? benchmarks.find((b) => b.id === pinned) : undefined) ?? byEpoch.get(ename) ?? benchByKey.get(key(EPOCH_NAME[ename] ?? ename));
   if (hit) return hit;
   const name = EPOCH_NAME[ename] ?? ename;
   const b: Bench = { id: slug(name), name, released: released?.slice(0, 7), unit: '%', confidence: 'likely', epoch: { epoch_name: ename } };
@@ -230,7 +247,7 @@ for (const m of [...bmeta, ...Object.keys(FILE_GUESS).filter((n) => !bmeta.some(
       continue;
     }
     // Epoch's Terminal Bench file holds 1.0 runs from before Terminal-Bench 2.0 launched in November 2025
-    const targetId = epochBenchmarkOverride(ename, r.Notes ?? '');
+    const targetId = epochBenchmarkOverride(ename, r);
     const target = targetId ? benchmarks.find((x) => x.id === targetId)
       : tb1 && (r['Run date'] || r.Created || '9999') < '2025-11-01' ? tb1 : b;
     if (!target) throw new Error(`Epoch row requires missing benchmark ${targetId}; add its reviewed catalog record first`);
