@@ -23,6 +23,12 @@ const board: Leaderboard = {
     visionIntensiveWoutCotE: { name: 'Vision Intensive answer accuracy', group: 'Modality', unit: '%' },
     visionDominantWoutCotE: { name: 'Vision Dominant answer accuracy', group: 'Modality', unit: '%' },
     visionOnlyWoutCotE: { name: 'Vision Only answer accuracy', group: 'Modality', unit: '%' },
+    textDominantCotE: { name: 'Text Dominant CoT-E', group: 'Modality CoT-E', unit: '%' },
+    textLiteCotE: { name: 'Text Lite CoT-E', group: 'Modality CoT-E', unit: '%' },
+    textOnlyCotE: { name: 'Text Only CoT-E', group: 'Modality CoT-E', unit: '%' },
+    visionIntensiveCotE: { name: 'Vision Intensive CoT-E', group: 'Modality CoT-E', unit: '%' },
+    visionDominantCotE: { name: 'Vision Dominant CoT-E', group: 'Modality CoT-E', unit: '%' },
+    visionOnlyCotE: { name: 'Vision Only CoT-E', group: 'Modality CoT-E', unit: '%' },
   },
   aliases: {},
   async fetch() {
@@ -39,17 +45,19 @@ const board: Leaderboard = {
       const score = num(r[6]?.text);
       if (!model || /^(human|random)/i.test(model)) continue;
       const date = /^\d{4}-\d\d-\d\d$/.test(r[4].text) ? r[4].text : undefined;
+      const link = r[3]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1];
       const cot = num(r[5]?.text);
       const metrics: Record<string, number> = {};
       if (cot !== undefined) metrics.cotE = cot;
       for (const [key, index] of [
-        ['textDominantWoutCotE', 8], ['textLiteWoutCotE', 10], ['textOnlyWoutCotE', 12],
-        ['visionIntensiveWoutCotE', 14], ['visionDominantWoutCotE', 16], ['visionOnlyWoutCotE', 18],
+        ['textDominantCotE', 7], ['textDominantWoutCotE', 8], ['textLiteCotE', 9], ['textLiteWoutCotE', 10],
+        ['textOnlyCotE', 11], ['textOnlyWoutCotE', 12], ['visionIntensiveCotE', 13], ['visionIntensiveWoutCotE', 14],
+        ['visionDominantCotE', 15], ['visionDominantWoutCotE', 16], ['visionOnlyCotE', 17], ['visionOnlyWoutCotE', 18],
       ] as const) {
         const value = num(r[index]?.text);
         if (value !== undefined) metrics[key] = value;
       }
-      if (score !== undefined) rows.push({model, score, date, params: model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i) ? Number(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i)![1]) : undefined, metrics: Object.keys(metrics).length ? metrics : undefined});
+      if (score !== undefined) rows.push({model, score, date, link, params: model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i) ? Number(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i)![1]) : undefined, metrics: Object.keys(metrics).length ? metrics : undefined});
     }
     return rows;
   },

@@ -27,7 +27,7 @@ const board: Leaderboard = {
   terms: 'Static public page; robots.txt allows it with a search=yes, ai-input=yes content signal, and the page states no further terms.',
   stats: {
     taskScore: { name: 'Task score', unit: 'score', better: 'higher' },
-    eeSpeed: { name: 'End-effector speed', better: 'lower' },
+    eeSpeed: { name: 'End-effector speed', unit: 'score', better: 'lower', note: 'Mean end-effector speed in centimeters per second.' },
     simple_score: { name: 'Simple task score', unit: 'score', better: 'higher' },
     moderate_score: { name: 'Moderate task score', unit: 'score', better: 'higher' },
     complex_score: { name: 'Complex task score', unit: 'score', better: 'higher' },
@@ -37,7 +37,10 @@ const board: Leaderboard = {
     episodes: { name: 'Episodes', unit: 'count' },
     successes: { name: 'Successful episodes', unit: 'count', better: 'higher' },
     actionHorizonSteps: { name: 'Action horizon steps', unit: 'count' },
-    eeSparc: { name: 'End-effector path efficiency' },
+    eeSparc: { name: 'End-effector path efficiency', unit: 'score', note: 'Spectral arc length smoothness metric for end-effector motion.' },
+    vramGb: { name: 'VRAM', unit: 'gb', better: 'lower' },
+    latency: { name: 'Action-generation latency', unit: 'seconds', better: 'lower' },
+    replanningDelay: { name: 'Replanning delay', unit: 'seconds', better: 'lower' },
   },
   aliases: {},
   async fetch() {
@@ -67,22 +70,25 @@ const board: Leaderboard = {
       }
     }
     // The official JSON also exposes vague/specific instructions, absent from the static default table.
-    interface Result { successes?:number; episodes_per_task?:number; ee_speed_sd_cm_s?:number; ee_sparc?:number; sr: number; score?: number; ee_speed_cm_s?: number; episodes?: number; sr_ci_cp?: number[]; by_difficulty?: Record<string, Result>; by_axis?: Record<string, Result> }
-    const data = await fetchJson<{entries: {display_name: string; organization?:string; source?:string; policy?:{size?:string,action_horizon_steps?:string};
-      provenance?:{display_date?:string}; open_sourcing?:{status?:string}; results: Record<string, Result>}[]}>('https://research.nvidia.com/labs/srl/projects/robolab/static/data/leaderboard.json');
+    interface Result { successes?:number; episodes_per_task?:number; ee_speed_sd_cm_s?:number; ee_sparc?:number; sr: number; score?: number; score_ci_bootstrap?: number[]; ee_speed_cm_s?: number; episodes?: number; sr_ci_cp?: number[]; by_difficulty?: Record<string, Result>; by_axis?: Record<string, Result> }
+    const data = await fetchJson<{entries: {display_name: string; organization?:string; source?:string; policy?:{size?:string,action_horizon_steps?:string,vram?:string};
+      provenance?:{display_date?:string}; open_sourcing?:{status?:string}; links?:{url?:string}[]; results: Record<string, Result>}[]}>('https://research.nvidia.com/labs/srl/projects/robolab/static/data/leaderboard.json');
     for (const entry of data.entries) {
       const original = rows.find(r => r.model === entry.display_name);
       if (!original) continue;
       const stamp = Date.parse((entry.provenance?.display_date ?? '').replace(/^(Submitted|Evaluated) /,'') + ' UTC');
       const size = entry.policy?.size?.match(/^~?([\d.]+)([BM])(?: parameters)?$/i);
+      const vram = entry.policy?.vram?.match(/(?:(\d+)\s*x\s*)?([\d.]+)\s*Gi?B/i);
+      const vramGb = vram ? (vram[1] ? Number(vram[1]) : 1) * Number(vram[2]) : undefined;
       const status = entry.open_sourcing?.status;
+      const link = entry.links?.find(l => l.url && /^https?:\/\/\S+$/.test(l.url))?.url;
       const metadata = {agentOrg:entry.organization,submitter:entry.source==='external-submission'?entry.organization:undefined,
         open:status==='open'?true:status==='closed'?false:undefined,params:size?Number(size[1])/(size[2]==='M'?1000:1):undefined,
-        date:Number.isFinite(stamp)?new Date(stamp).toISOString().slice(0,10):undefined};
+        link, date:Number.isFinite(stamp)?new Date(stamp).toISOString().slice(0,10):undefined};
       for (const [variant, r] of Object.entries(entry.results)) {
         if (!Number.isFinite(r.sr)) continue;
         const metrics: Record<string, number> = variant === 'default' ? {...original.metrics} : {};
-        for (const [key, n] of Object.entries({taskScore:r.score, eeSpeed:r.ee_speed_cm_s, episodes:r.episodes, successes:r.successes, actionHorizonSteps:num(entry.policy?.action_horizon_steps), eeSpeedSd:r.ee_speed_sd_cm_s, eeSparc:r.ee_sparc})) if (Number.isFinite(n)) metrics[key] = n!;
+        for (const [key, n] of Object.entries({taskScore:r.score, taskScoreLow:r.score_ci_bootstrap?.[0], taskScoreHigh:r.score_ci_bootstrap?.[1], eeSpeed:r.ee_speed_cm_s, episodes:r.episodes, successes:r.successes, actionHorizonSteps:num(entry.policy?.action_horizon_steps), eeSpeedSd:r.ee_speed_sd_cm_s, eeSparc:r.ee_sparc, vramGb})) if (Number.isFinite(n)) metrics[key] = n!;
         for (const [key, value] of Object.entries({...r.by_difficulty, ...r.by_axis})) {
           if (Number.isFinite(value.sr)) metrics[key] = value.sr;
           if (Number.isFinite(value.score)) metrics[key+'_score'] = value.score!;
