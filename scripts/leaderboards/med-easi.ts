@@ -8,6 +8,13 @@ const feed = 'https://arxiv.org/html/2302.09155';
 const board: Leaderboard = {
   benchmark: 'med-easi', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2302.09155.',
+  stats: {
+    add: { name: 'SARI add score', unit: 'score', better: 'higher' },
+    del: { name: 'SARI delete score', unit: 'score', better: 'higher' },
+    keep: { name: 'SARI keep score', unit: 'score', better: 'higher' },
+    fkgl: { name: 'Flesch-Kincaid grade level', unit: 'score', better: 'lower' },
+    rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === 'models|base|angle|SARI|ADD|DEL|KEEP|FKGL|ROUGE-l' && t === tables.at(-1));

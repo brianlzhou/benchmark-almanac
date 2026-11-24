@@ -159,6 +159,7 @@
     "hedge-gym": [{"field":"Trained, 5 seeds pooled","kind":"trials","why":"not stored","share":1},{"field":"Difference (95% CI)","kind":"uncertainty","why":"not stored","share":1},{"field":"Difference in mean loss (95% CI)","kind":"uncertainty","why":"not stored","share":1}],
     "hexmachina": [{"field":"Artifacts","kind":"link","why":"not stored","share":1}],
     "hle-verified": [{"field":"Revised: HLE-Verified Full","kind":"verified","why":"not stored","share":1},{"field":"Revised: HLE-Verified Subset","kind":"verified","why":"not stored","share":1}],
+    "hm3dsem-walks": [{"field":"# Trials","kind":"trials","why":"not stored","share":1},{"field":"Trials","kind":"trials","why":"not stored","share":1}],
     "hmdb51": [{"field":"model.releaseDate","kind":"run date","why":"not stored","share":1,"sample":"2026-07-12"},{"field":"model.maxTokens","kind":"tokens","why":"not stored","share":0.77,"sample":"512"}],
     "hrm8k-ksm": [{"field":"Token Consum.","kind":"tokens","why":"not stored","share":1}],
     "hx2dx-arena": [{"field":"Parameters","kind":"open weights, license or size","why":"not stored","share":1}],
