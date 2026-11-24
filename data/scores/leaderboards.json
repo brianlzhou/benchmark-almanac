@@ -2119,13 +2119,8 @@
       "feed": "https://tttonyalpha.github.io/act2answer/",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 8,
       "unmatched": [
-        "InternVLA-M1",
-        "Magma",
-        "RLDX-1",
-        "SpatialVLA",
-        "X-VLA",
         "Xiaomi-Robotics-R0"
       ],
       "parts": {
@@ -19963,11 +19958,10 @@
       "feed": "https://armnet-dev.github.io/armnetbench-v0.1/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
       "retrieved": "2026-11-23",
-      "rows": 4,
+      "rows": 5,
       "unmatched": [
         "ACT",
-        "Diffusion Policy",
-        "SmolVLA"
+        "Diffusion Policy"
       ],
       "parts": {
         "block_stack": {
@@ -25314,12 +25308,8 @@
       "feed": "https://flageval-baai.github.io/AtomBenchPage/",
       "terms": "BAAI FlagEval publishes these results at https://flageval-baai.github.io/AtomBenchPage/. The authors retain their rights.",
       "retrieved": "2026-11-23",
-      "rows": 2,
-      "unmatched": [
-        "LingBot-VLA",
-        "Motus",
-        "SmolVLA"
-      ],
+      "rows": 5,
+      "unmatched": [],
       "parts": {
         "franka_motor": {
           "name": "Franka Panda: Motor Set",
@@ -26560,9 +26550,8 @@
       "headline": "The headline averages success rates across the five Bridge-AutoEval tasks.",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 4,
+      "rows": 6,
       "unmatched": [
-        "MiniVLA",
         "Open π₀",
         "SuSIE",
         "SuSIE-LL"
@@ -37789,7 +37778,7 @@
       "feed": "https://huggingface.co/spaces/YLab-Open/BRIDGE-Medical-Leaderboard/raw/main/leaderboards/Zero-Shot_leaderboard.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "retrieved": "2026-11-23",
-      "rows": 171,
+      "rows": 174,
       "unmatched": [
         "AntAngelMed",
         "AxonMed-32B-Thinking",
@@ -37844,7 +37833,6 @@
         "gemma-2-27b-it",
         "gemma-2-9b-it",
         "gpt-4o-0806",
-        "medgemma-1.5-4b-it",
         "medgemma-27b-it",
         "medgemma-27b-text-it",
         "medgemma-4b-it",
@@ -39344,14 +39332,13 @@
       "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
       "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
       "retrieved": "2026-11-23",
-      "rows": 255,
+      "rows": 257,
       "unmatched": [
         "baidu/ernie-4.5-vl-424b-a47b",
         "deepseek/deepseek-chat",
         "openrouter/healer-alpha",
         "openrouter/hunter-alpha",
-        "stealth/ox-alpha",
-        "tencent/hy4-flash"
+        "stealth/ox-alpha"
       ],
       "parts": {
         "authoritative_framing": {
@@ -43154,7 +43141,7 @@
       "feed": "http://calvin.cs.uni-freiburg.de/",
       "terms": "The CALVIN authors publish this public HTML leaderboard, with attribution retained and no separate score reuse license stated.",
       "retrieved": "2026-11-23",
-      "rows": 0,
+      "rows": 1,
       "unmatched": [
         "3D Diffuser Actor",
         "Baseline",
@@ -43171,8 +43158,7 @@
         "RoboUniView",
         "SPIL",
         "SeeR-Large",
-        "SuSIE",
-        "UniVLA"
+        "SuSIE"
       ],
       "parts": {
         "chain1": {
@@ -53336,10 +53322,9 @@
       "feed": "https://aclanthology.org/2025.sdp-1.24.pdf",
       "terms": "ACL Anthology copyright and licensing terms apply. https://aclanthology.org/faq/copyright/",
       "retrieved": "2026-11-20",
-      "rows": 2,
+      "rows": 3,
       "unmatched": [
-        "Gemini 2.5 Pro (snapshot unspecified)",
-        "Yi-1.5-9B-Chat-16K"
+        "Gemini 2.5 Pro (snapshot unspecified)"
       ],
       "harnesses": "system",
       "parts": {
@@ -72738,10 +72723,8 @@
       "terms": "The authors publish this results table at https://embodiedai-ntu.github.io/cronos/.",
       "headline": "For spatial generalization, the authors report no overall score. This is the plain mean of the two out-of-domain layout success rates.",
       "retrieved": "2026-11-23",
-      "rows": 2,
-      "unmatched": [
-        "SpatialVLA"
-      ],
+      "rows": 4,
+      "unmatched": [],
       "parts": {
         "overlap": {
           "name": "Overlap"
@@ -73046,12 +73029,11 @@
       "terms": "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2512.04686",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 14,
+      "rows": 16,
       "unmatched": [
         "CroPond-3B",
         "CroPond-7B",
         "Gemini-2.5-Pro (snapshot unspecified)",
-        "RoboBrain2.0-7B",
         "RoboPoint-v1-Vicuna-13B",
         "RoboRefer-8B-SFT"
       ],
@@ -81184,7 +81166,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=allcategories",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 182,
+      "rows": 183,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -81196,7 +81178,6 @@
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
         "GPT-5.4 (Design Skill, Medium)",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -81244,7 +81225,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=3d",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 171,
+      "rows": 172,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -81253,7 +81234,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
-        "Hy4 Flash",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
         "Magistral Small 1.2 (2509)",
@@ -81760,7 +81740,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=gamedev",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 182,
+      "rows": 184,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -81772,7 +81752,6 @@
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
         "ERNIE 5.5 Flash Preview",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -82156,9 +82135,8 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 58,
+      "rows": 59,
       "unmatched": [
-        "Hy4 Flash",
         "Nex N2 Pro"
       ],
       "stats": {
@@ -82787,7 +82765,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=uicomponent",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 175,
+      "rows": 176,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -82798,7 +82776,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
-        "Hy4 Flash",
         "Magistral Medium 1.2 (2509)",
         "Magistral Small 1.2 (2509)",
         "Mistral Large 2.1 (2411)",
@@ -83043,7 +83020,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=text",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 188,
+      "rows": 189,
       "unmatched": [
         "AesCoder-4B",
         "Codestral 2 (2501)",
@@ -83053,7 +83030,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Ultra",
         "GPT-5.4 (Design Skill, Medium)",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -88603,10 +88579,9 @@
       "terms": "The authors publish these simulation results at https://duobench.github.io/.",
       "headline": "The project reports no overall score, so the headline averages the success rates on its 11 simulation tasks.",
       "retrieved": "2026-11-23",
-      "rows": 1,
+      "rows": 2,
       "unmatched": [
-        "ACT",
-        "X-VLA"
+        "ACT"
       ],
       "parts": {
         "Hinge-Chest": {
@@ -90362,10 +90337,8 @@
       "feed": "https://arxiv.org/html/2606.18239",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "retrieved": "2026-11-19",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
-        "InternVLA-A1",
-        "XVLA",
         "π 0 \\pi_{0}",
         "π 0.5 \\pi_{0.5}"
       ],
@@ -91555,15 +91528,12 @@
       "terms": "Paper and license at https://arxiv.org/abs/2505.18383",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 10,
+      "rows": 16,
       "unmatched": [
         "ALLaM-7B-Instruct",
         "AceGPT-13B-chat",
         "AceGPT-7B-chat",
-        "Atlas-Chat-2B",
-        "Atlas-Chat-9B",
         "Llama-3.2-3B-Instruct",
-        "NileChat (3B)",
         "Qwen2.5-3B-Instruct",
         "Qwen2.5-7B-Instruct",
         "ar-stablelm-2-chat",
@@ -92945,14 +92915,10 @@
       "feed": "https://www.superclueai.com/data/embodied_list/VLA_brain/2026%E5%B9%B49%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
       "retrieved": "2026-11-23",
-      "rows": 4,
+      "rows": 8,
       "unmatched": [
         "Cosmos3-Nano-Reasoner",
-        "HY-Embodied-0.5",
-        "MiMo-Embodied-7B",
-        "Nebula-EmbodiedBrain",
-        "RoboBrain2.5-8B-NV",
-        "RynnBrain1.1-9B"
+        "Nebula-EmbodiedBrain"
       ],
       "parts": {
         "part1": {
@@ -93022,7 +92988,7 @@
       "feed": "https://www.superclueai.com/data/embodied_list/VLA_desk2/2026%E5%B9%B411%E6%9C%88.xlsx",
       "terms": "SuperCLUE publishes the XLSX score table on its public page. The site gives no separate score reuse license. Results are credited to SuperCLUE.",
       "retrieved": "2026-11-23",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
         "ABot-M0-RoboTwin2",
         "Fast-VLA",
@@ -93032,14 +92998,12 @@
         "InternW0-Delta-RoboTwin",
         "LingBot-VLA-V2-6B-RoboTwin",
         "ME-Dex-1.0-RoboTwin (VAE)",
-        "Motus",
         "OpenWAM-Alpha-Sim-RoboTwin",
         "PICA-WAM",
         "PrismWAM",
         "StarVLA Qwen3-VL-OFT",
         "UniWAM-robotwin",
         "WorldScape Policy 2.0",
-        "X-VLA-0.9B",
         "π0.5-RoboTwin2"
       ]
     },
@@ -93240,12 +93204,9 @@
       "terms": "The results dataset is published under Apache License 2.0. https://huggingface.co/datasets/open-cn-llm-leaderboard/EmbodiedVerse_results",
       "headline": "The leaderboard's Average is the arithmetic mean of its ten dataset overall scores.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 20,
       "unmatched": [
-        "Cosmos-Reason1-7B",
-        "Magma-8B",
         "Mistral-Small-3.1-24B-Instruct-2503",
-        "VeBrain",
         "claude-sonnet-4-20250514-official",
         "gemini-2.5-flash_0918"
       ],
@@ -95141,11 +95102,10 @@
       "feed": "https://www.embodied-arena.com/assets/data-<hash>.js (model score.benchmark legacy arrays, ERQA Total column)",
       "terms": "The site ships its data in its own public JS bundle; it publishes no robots.txt (the path serves the app) and no terms of use.",
       "retrieved": "2026-11-23",
-      "rows": 18,
+      "rows": 26,
       "unmatched": [
         "ABot-ER-Preview",
         "Cambrian-S-7B",
-        "Cosmos-Reason-1-7B",
         "Embodied-R1-3B",
         "Embodied-R1.5",
         "EmbodiedBrain-7B",
@@ -95153,18 +95113,11 @@
         "IflyBot-VLM-8B",
         "KnowinBrain",
         "KnowinBrain-1.5",
-        "Magma",
-        "Mimo-Embodied-7B",
         "PelicanVL-7B",
         "RoboBrain1.0-7B",
-        "RoboBrain2.0-32B",
-        "RoboBrain2.0-7B",
-        "RynnBrain-8B",
         "Space-R",
         "SpatialVLM",
-        "VeBrain",
-        "Wall-Brain-Preview",
-        "wall-oss-fast"
+        "Wall-Brain-Preview"
       ],
       "parts": {
         "ActionReasoning": {
@@ -99020,10 +98973,8 @@
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png",
       "terms": "Tencent Hy License. https://huggingface.co/tencent/Hy4-flash/blob/main/LICENSE",
       "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 7,
+      "unmatched": []
     },
     "exfuntube": {
       "url": "https://aclanthology.org/2023.emnlp-main.176/",
@@ -101310,9 +101261,8 @@
       "feed": "https://arxiv.org/html/2511.02872",
       "terms": "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://creativecommons.org/licenses/by/4.0/.",
       "retrieved": "2026-11-20",
-      "rows": 6,
+      "rows": 7,
       "unmatched": [
-        "Goedel-Prover-V2-32B",
         "Kimina-Prover-72B"
       ],
       "static": "paper",
@@ -101366,9 +101316,8 @@
       "feed": "https://arxiv.org/html/2511.02872",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "retrieved": "2026-11-20",
-      "rows": 6,
+      "rows": 7,
       "unmatched": [
-        "Goedel-Prover-V2-32B",
         "Kimina-Prover-72B"
       ],
       "static": "paper"
@@ -124538,12 +124487,10 @@
       "terms": "The authors publish these tables under the terms linked at https://arxiv.org/abs/2611.12175.",
       "static": "paper",
       "retrieved": "2026-11-23",
-      "rows": 7,
+      "rows": 9,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
-        "InternVLA-M1",
-        "Spatial-Forcing",
-        "SpatialVLA"
+        "Spatial-Forcing"
       ],
       "harnesses": "system",
       "parts": {
@@ -132781,11 +132728,10 @@
       "feed": "https://harp-bench.vercel.app/",
       "terms": "Public author results at https://harp-bench.vercel.app/. The page lists no separate license for the tables.",
       "retrieved": "2026-11-23",
-      "rows": 1,
+      "rows": 2,
       "unmatched": [
         "ACT",
-        "DP",
-        "SmolVLA"
+        "DP"
       ],
       "parts": {
         "task_cueing_deliver_to_human": {
@@ -133043,10 +132989,8 @@
       "feed": "https://www.vals.ai/benchmarks/hlab (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 43,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 44,
+      "unmatched": [],
       "stats": {
         "latency": {
           "name": "Mean latency per test",
@@ -161566,7 +161510,7 @@
       "feed": "https://kormedmcqa-v.github.io/results.json",
       "terms": "The leaderboard code uses MIT and the dataset uses CC BY-NC-SA 4.0. https://kormedmcqa-v.github.io/",
       "retrieved": "2026-11-23",
-      "rows": 33,
+      "rows": 34,
       "unmatched": [
         "A.X-4.0-VL-Light",
         "Hulu-Med-14B",
@@ -161579,7 +161523,6 @@
         "Kanana-1.5-V-3B-Instruct",
         "Lingshu-32B",
         "Lingshu-7B",
-        "MedGemma-1.5-4B-IT",
         "MedGemma-27B-IT",
         "MedGemma-4B-IT",
         "Ministral-3-14B-Instruct-2512",
@@ -161619,7 +161562,7 @@
       "feed": "https://kormedmcqa-v.github.io/results.json",
       "terms": "The leaderboard repository uses the MIT license. https://github.com/kormedmcqa-v/kormedmcqa-v.github.io/blob/main/LICENSE The robots URL returns HTML.",
       "retrieved": "2026-11-23",
-      "rows": 33,
+      "rows": 34,
       "unmatched": [
         "A.X-4.0-VL-Light",
         "Hulu-Med-14B",
@@ -161632,7 +161575,6 @@
         "Kanana-1.5-V-3B-Instruct",
         "Lingshu-32B",
         "Lingshu-7B",
-        "MedGemma-1.5-4B-IT",
         "MedGemma-27B-IT",
         "MedGemma-4B-IT",
         "Ministral-3-14B-Instruct-2512",
@@ -163788,7 +163730,7 @@
       "terms": "The repository uses the MIT license at https://github.com/meituan-longcat/LARYBench/blob/main/LICENSE.",
       "headline": "The headline is average classification accuracy. The board scores action regression separately with mean squared error.",
       "retrieved": "2026-11-24",
-      "rows": 2,
+      "rows": 3,
       "unmatched": [
         "DINOv3",
         "LAPA",
@@ -163796,7 +163738,6 @@
         "LAPA-DINOv3",
         "LAPA-MAGVIT2",
         "LAPA-SigLIP2",
-        "UniVLA",
         "Wan2.2",
         "villa-X"
       ],
@@ -168048,18 +167989,14 @@
       "feed": "https://arxiv.org/html/2609.36518",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
       "retrieved": "2026-11-18",
-      "rows": 4,
+      "rows": 8,
       "unmatched": [
         "Cosmos-Policy",
-        "DM0.5",
         "DiT4DiT",
         "Fast-WAM",
         "HiMem-WAM",
         "Light-WAM",
-        "SmolVLA",
-        "VLA-JEPA",
-        "X-VLA",
-        "Xiaomi-Robotics-0"
+        "VLA-JEPA"
       ],
       "parts": {
         "liteDynamic": {
@@ -168079,13 +168016,11 @@
       "feed": "https://cau-hai-lab.github.io/LIBERO-Para/",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-23",
-      "rows": 1,
+      "rows": 3,
       "unmatched": [
         "OpenVLA-OFT goal",
         "OpenVLA-OFT mixed",
         "VLA-Adapter",
-        "X-VLA",
-        "Xiaomi-Robotics-0",
         "π0.5 (expert-only)"
       ],
       "stats": {
@@ -168131,15 +168066,12 @@
       "feed": "https://raw.githubusercontent.com/sylvestf/LIBERO-plus/main/README.md (LIBERO-Plus Benchmark Leaderboard, Total)",
       "terms": "README table in the sylvestf/LIBERO-plus GitHub repository, which states no license; scores are cited to the LIBERO-Plus authors.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 6,
       "unmatched": [
-        "NORA",
         "OpenVLA-OFT+ (Ours)",
         "OpenVLA-OFT_m",
         "OpenVLA-OFT_w",
         "RIPT-VLA",
-        "UniVLA",
-        "WorldVLA",
         "π₀"
       ]
     },
@@ -168148,11 +168080,9 @@
       "feed": "https://raw.githubusercontent.com/Zxy-MLlab/LIBERO-PRO/master/README.md (LIBERO-Pro Model Leaderboard, Total)",
       "terms": "README table in the Zxy-MLlab/LIBERO-PRO GitHub repository, which is MIT-licensed.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 5,
       "unmatched": [
-        "Molmoact",
-        "NORA",
-        "x-VLA"
+        "Molmoact"
       ],
       "parts": {
         "LIBERO-Goal-Obj": {
@@ -179233,10 +179163,9 @@
       "terms": "Paper and license at https://arxiv.org/abs/2509.13414",
       "static": "paper",
       "retrieved": "2026-11-21",
-      "rows": 0,
+      "rows": 1,
       "unmatched": [
         "AnyCalib",
-        "MapAnything",
         "MoGe-2",
         "VGGT"
       ],
@@ -187202,10 +187131,8 @@
       "headline": "The headline averages full-benchmark accuracy at 32K, 64K and 128K context lengths.",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 24,
-      "unmatched": [
-        "Cosmos-Reason2-8B"
-      ],
+      "rows": 25,
+      "unmatched": [],
       "parts": {
         "32KIE": {
           "name": "Information Extraction",
@@ -191692,15 +191619,14 @@
       "terms": "The Mind2Act World team publishes these results at https://mind2act-world.com/leaderboard.html.",
       "headline": "The board averages Clean and Random task scores on a 0 to 100 scale, with partial credit.",
       "retrieved": "2026-11-24",
-      "rows": 4,
+      "rows": 5,
       "unmatched": [
         "FastWAM",
         "G0.5",
         "InternW0-Δ",
         "KinRT",
         "Liber-0 Lite",
-        "OpenWAM",
-        "X-VLA"
+        "OpenWAM"
       ],
       "parts": {
         "clean_mind_score": {
@@ -200727,11 +200653,10 @@
       "headline": "The headline is maneuver anticipation accuracy after observing the first 20% of the maneuver.",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 5,
+      "rows": 6,
       "unmatched": [
         "Alpamayo-1.5-10B",
         "C2D",
-        "Cosmos-Reason2-8B",
         "DriveLMM-o1",
         "I3D",
         "SlowFast",
@@ -206734,13 +206659,10 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 30,
+      "rows": 36,
       "unmatched": [
-        "Cosmos-Reason1-7B",
-        "Cosmos-Reason2-8B",
         "GPT-4o (snapshot unspecified)",
         "Gemini-2.5-Pro (snapshot unspecified)",
-        "MiMoEmbodied-7B",
         "ReCogDrive-VLM-8B",
         "VGLM-QA-VGGT-8B",
         "Video-R1-7B"
@@ -242619,11 +242541,10 @@
       "feed": "https://internlm.github.io/OVO-S-Bench/",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-23",
-      "rows": 16,
+      "rows": 18,
       "unmatched": [
         "Cambrian-S-7B",
         "Cambrian-S-LFP-7B",
-        "Cosmos-Reason1-7B",
         "Flash-VStream-7B",
         "FluxMem-7B",
         "Gemma-4",
@@ -242633,7 +242554,6 @@
         "Qwen3-VL-4B",
         "RoboBrain2.5-4B",
         "RoboBrain2.5-NV-8B",
-        "RynnBrain-8B",
         "SenseNova-SI-1.5-8B",
         "Spatial-MLLM-7B",
         "Spatial-TTT-2B",
@@ -247284,10 +247204,9 @@
       "feed": "https://phail.ai/ (server-rendered table, \"Pick and Place\" Reliability)",
       "terms": "Server-rendered public page; phail.ai robots.txt (Cloudflare content-signal preamble) sets no signals and disallows nothing, and the site publishes no terms.",
       "retrieved": "2026-11-23",
-      "rows": 2,
+      "rows": 3,
       "unmatched": [
-        "ACT",
-        "SmolVLA"
+        "ACT"
       ]
     },
     "phail-droid-everyday": {
@@ -250171,9 +250090,8 @@
       "feed": "https://pokebench.tv/runs.json",
       "terms": "The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE The host has no published robots directives at /robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 19,
+      "rows": 20,
       "unmatched": [
-        "Hy4 Flash",
         "Qwen3-VL 30B"
       ],
       "costPer": "run",
@@ -250261,10 +250179,9 @@
       "feed": "https://pokebench.tv/runs.json",
       "terms": "The site's robots file publishes content signals. The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE",
       "retrieved": "2026-11-23",
-      "rows": 37,
+      "rows": 38,
       "unmatched": [
         "Crouton Alpha",
-        "Hy4 Flash",
         "Qwen3-VL 30B",
         "Space Bunny Alpha"
       ],
@@ -257774,7 +257691,7 @@
       "feed": "https://qimma-leaderboard.hf.space/api/leaderboard",
       "terms": "Public results published by the benchmark authors at qimma-leaderboard.hf.space; retain source attribution and follow the upstream terms.",
       "retrieved": "2026-11-23",
-      "rows": 50,
+      "rows": 54,
       "unmatched": [
         "Applied-Innovation-Center/AIC-1",
         "Applied-Innovation-Center/Karnak-40B-v1.0",
@@ -257790,9 +257707,6 @@
         "LiquidAI LFM2-24B-A2B",
         "LiquidAI LFM2-8B-A1B",
         "LiquidAI LFM2.5-1.2B-Instruct",
-        "MBZUAI-Paris Atlas-Chat-27B",
-        "MBZUAI-Paris Atlas-Chat-2B",
-        "MBZUAI-Paris Atlas-Chat-9B",
         "MBZUAI-Paris Nile-Chat-4B",
         "MiniMaxAI MiniMax-M2",
         "Navid-AI Yehia-7B-preview",
@@ -257804,7 +257718,6 @@
         "Qwen/Qwen2.5-3B-Instruct",
         "Qwen/Qwen2.5-7B-Instruct",
         "Sakalti Ultiima-72B",
-        "UBC-NLP NileChat-3B",
         "UBC-NLP NileChat-3B-Base",
         "airev-ai emirati-14b-v2",
         "hammh0a Hala-9B",
@@ -258783,10 +258696,9 @@
       "feed": "https://crashlab.in/radle/2/leaderboard (static HTML table, RadLE-C score)",
       "terms": "Static CRASH Lab page; crashlab.in robots.txt allows all agents with content signals search yes, AI training no, use reference.",
       "retrieved": "2026-11-23",
-      "rows": 12,
+      "rows": 13,
       "unmatched": [
         "Lingshu 32B",
-        "MedGemma 1.5 4B",
         "Nemotron 3 Omni",
         "OctoMed 7B"
       ]
@@ -263085,7 +262997,7 @@
       "terms": "The paper license is linked at https://arxiv.org/abs/2611.21485.",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 18,
+      "rows": 19,
       "unmatched": [
         "Cambrian-P-7B",
         "Cambrian-S-7B",
@@ -263097,7 +263009,6 @@
         "Qwen3-VL-32B",
         "Qwen3-VL-4B",
         "Qwen3-VL-8B-SFT",
-        "RoboBrain2.5-8B",
         "SenseNova-SI-1.5-8B",
         "Spatial-TTT-3B",
         "VST-7B-RL",
@@ -264323,15 +264234,14 @@
       "feed": "https://arxiv.org/html/2603.01229",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
       "retrieved": "2026-11-18",
-      "rows": 1,
+      "rows": 2,
       "unmatched": [
         "ACT",
         "DP",
         "Mem-0",
         "MemER",
         "MemoryVLA",
-        "QwenOFT",
-        "X-VLA"
+        "QwenOFT"
       ],
       "parts": {
         "singleMemory": {
@@ -265833,7 +265743,7 @@
       "feed": "https://robocasa.ai/leaderboard (static HTML table, Overall)",
       "terms": "Static leaderboard page on GitHub Pages (no robots.txt rules); the submissions repository states no license and the site states no terms.",
       "retrieved": "2026-11-23",
-      "rows": 4,
+      "rows": 7,
       "unmatched": [
         "ABot-M0.5",
         "Awomo-0.5I",
@@ -265845,16 +265755,13 @@
         "HexaShell",
         "LY-GWM-RoboCasa",
         "LoopWAM",
-        "Meituan-Robotics-0",
         "PRTS",
         "Paimon-0",
         "PatchWAM",
         "Phasor-m7",
         "ProWAM",
-        "RLDX-1",
         "WorldDreamer",
         "WorldDreamer v5",
-        "Xiaomi-Robotics-1",
         "minionx"
       ],
       "parts": {
@@ -265877,7 +265784,7 @@
       "feed": "https://robochallenge.ai/api/v1/leaderboard/leaderboard_all.json (success_ratio)",
       "terms": "Static JSON the public leaderboard page loads; robochallenge.ai serves no robots.txt rules (the path returns the app) and states no terms for the board.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 7,
       "unmatched": [
         "Atlas_generalist",
         "DM0",
@@ -265885,16 +265792,12 @@
         "Era0",
         "GR00T",
         "GR00T-MULTI",
-        "GigaBrain-0.1",
         "Lira_generalist",
-        "RDT-1B",
         "Spirit-v1.5",
         "VLA_test_0119",
         "VLA_test_0204",
         "VLO",
-        "X-VLA",
         "ZR-0_generalist",
-        "cogact",
         "pi05_generalist",
         "pi0_generalist",
         "wall-oss-v0.1"
@@ -266243,20 +266146,16 @@
       "feed": "https://robocoliseum.ai/api/challenge/leaderboard/overall?page=N&per-page=100&model_type=all (overall score)",
       "terms": "Public JSON the leaderboard page reads; robocoliseum.ai serves no robots.txt rules (the path returns the app) and publishes no terms for the board.",
       "retrieved": "2026-11-23",
-      "rows": 9,
+      "rows": 15,
       "unmatched": [
         "ACoT-VLA",
-        "DM0.5",
         "Dream-1 SFT 500 steps",
         "Dream-1 zero-shot",
         "FF Omnimind",
         "GO-3 Nano Preview",
-        "GigaBrain-0.7",
         "HexaShell",
         "HiDream-O1-Embodied",
-        "InternVLA-A1.5",
         "KaneRSI",
-        "LingBot-VLA-2.0",
         "MXI SimWorld v0 Preview",
         "NexusBrain",
         "OpenWAM-Alpha",
@@ -266264,8 +266163,6 @@
         "PyRUA-Lean",
         "RoboMan-Pi05",
         "WNDFC",
-        "Xiaomi-Robotics-0",
-        "Xiaomi-Robotics-1",
         "kp-robot",
         "pi0.5_refine"
       ],
@@ -266457,7 +266354,7 @@
       "feed": "https://robodojo-benchmark.com/data/leaderboard.generated.json (sim, average score)",
       "terms": "Static JSON the board itself loads; robots.txt allows it (disallows only /internal/ and /login) and the RoboDojo repository is MIT-licensed.",
       "retrieved": "2026-11-23",
-      "rows": 6,
+      "rows": 15,
       "unmatched": [
         "A1",
         "ABot-M0",
@@ -266467,7 +266364,6 @@
         "Awomo-0.5",
         "Bagel-Robotics-1",
         "DM0",
-        "DM0.5",
         "DeepSeek-Flash",
         "Dexora-1B",
         "EWAM",
@@ -266486,24 +266382,19 @@
         "HWM-CogWAM",
         "HexaShell-Preview",
         "Hy-Embodied-0.5-VLA",
-        "InternVLA-A1",
-        "InternVLA-A1.5",
         "InternW0-Δ",
         "JoyAI-VL",
         "KinRT",
         "LDA-1B",
         "Liber-0 Lite",
         "Liber-0 Preview",
-        "LingBot-VLA",
         "ME-Brain-1.0",
         "MachEmbodied-U0",
-        "Meituan-Robotics-0",
         "Motubrain 2.0",
         "OpenWAM-α",
         "PhysicalRSI",
         "PyRUA-Lean",
         "Q0-Preview",
-        "RDT",
         "Rex-M1 Preview",
         "SANA-Robot",
         "SOLVE",
@@ -266523,10 +266414,7 @@
         "VPP2-Preview",
         "WALL-OSS-1.0-lite",
         "WorldScape-R²SI",
-        "X-VLA",
-        "X-WAM",
-        "Xiaomi-Robotics-0",
-        "Xiaomi-Robotics-1"
+        "X-WAM"
       ],
       "parts": {
         "generalizationScore": {
@@ -266743,13 +266631,12 @@
       "feed": "https://robo-eval.github.io/static/data/leaderboard_global.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "retrieved": "2026-11-23",
-      "rows": 1,
+      "rows": 2,
       "unmatched": [
         "ACT",
         "Diffusion",
         "GR00T",
-        "Pi_0.5 (LoRA)",
-        "xVLA"
+        "Pi_0.5 (LoRA)"
       ],
       "stats": {
         "tp": {
@@ -266866,7 +266753,7 @@
       "feed": "https://raw.githubusercontent.com/liveplex-cpu/robogate-leaderboard/main/leaderboard.json",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
       "retrieved": "2026-11-23",
-      "rows": 2,
+      "rows": 3,
       "unmatched": [
         "cosmos-policy-2b",
         "groot-n1.7-libero10",
@@ -266879,8 +266766,7 @@
         "openvla-oft-liberogoal",
         "openvla-oft-liberoobject",
         "openvla-oft-liberospatial",
-        "pi0-base",
-        "smolvla-base"
+        "pi0-base"
       ],
       "stats": {
         "scenariosTotal": {
@@ -266959,7 +266845,7 @@
       "feed": "https://research.nvidia.com/labs/srl/projects/robolab/leaderboard.html (leaderboard table, SR%)",
       "terms": "Static public page; robots.txt allows it with a search=yes, ai-input=yes content signal, and the page states no further terms.",
       "retrieved": "2026-11-24",
-      "rows": 14,
+      "rows": 17,
       "unmatched": [
         "AMP1",
         "Atomic-WAM",
@@ -266968,7 +266854,6 @@
         "Cosmic",
         "Cosmos3-Edge-Policy",
         "Cosmos3-Nano-Policy",
-        "DreamZero",
         "HiDream-O1-Embodied",
         "Lakeside",
         "OASIS WAM",
@@ -267239,14 +267124,12 @@
       "feed": "https://raw.githubusercontent.com/chanhee-luke/RoboSpatial-Eval/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
       "retrieved": "2026-11-23",
-      "rows": 4,
+      "rows": 6,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
         "Gemini 1.5 ER",
         "Gemini 2.5 Flash (snapshot unspecified)",
         "Gemini 2.5 Pro (snapshot unspecified)",
-        "RoboBrain2.0-7B",
-        "RoboBrain2.5-8B",
         "RoboPoint-13B",
         "RoboRefer-8B-SFT",
         "SpaceTools-3B"
@@ -267440,7 +267323,7 @@
       "feed": "https://robotwin-platform.github.io/data/robotwin_leaderboard.json (default ranking avg = (easy_mean + hard_mean) / 2)",
       "terms": "JSON file on the RoboTwin GitHub Pages site that the leaderboard page loads (no robots.txt); the page states no other terms.",
       "retrieved": "2026-11-23",
-      "rows": 2,
+      "rows": 6,
       "unmatched": [
         "4D-WAM",
         "ACT",
@@ -267457,7 +267340,6 @@
         "FastWAM",
         "GO-3 Nano Preview",
         "GalaxeaVLA",
-        "GigaBrain-0.7",
         "HumanWAM-Goal",
         "ME-Dex-1.0",
         "MWA-Phoenix",
@@ -267466,16 +267348,13 @@
         "PatchWAM",
         "PrismWAM",
         "PrismWAM*",
-        "RDT",
         "SLA",
         "Spatial Forcing",
         "UniWAM",
         "ViGAR",
         "WorldLA",
         "WorldScape Policy 2.0",
-        "X-VLA",
         "X-WAM",
-        "Xiaomi Robotics-0",
         "starVLA"
       ],
       "parts": {
@@ -269126,23 +269005,17 @@
       "feed": "https://rslivebench.space/api/v1/tracks/uav-main-results/releases/main-results-v1/leaderboard",
       "terms": "The benchmark team publishes the leaderboard and its data terms at https://rslivebench.space/.",
       "retrieved": "2026-11-20",
-      "rows": 10,
+      "rows": 16,
       "unmatched": [
         "ACE-Brain-0-8B",
         "ACE-Brain-0.5-8B",
         "ACE-Brain-0.6-9B",
-        "Cosmos-Reason2-2B",
-        "Cosmos-Reason2-8B",
         "GeoChat-7B",
         "GeoLLaVA-8K",
-        "MiMo-Embodied-7B",
         "Pelican1.0-VL-7B",
         "PhysBrain1.5-8B",
-        "RoboBrain2.5-8B-NV",
         "RynnBrain-2B",
-        "RynnBrain-8B",
         "RynnBrain1.1-2B",
-        "RynnBrain1.1-9B",
         "SenseNova-SI-1.1-InternVL3-2B",
         "SenseNova-SI-1.1-InternVL3-8B",
         "SenseNova-SI-1.4-InternVL3-8B",
@@ -282591,11 +282464,10 @@
       "feed": "https://arxiv.org/html/2605.22536",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "retrieved": "2026-11-18",
-      "rows": 22,
+      "rows": 23,
       "unmatched": [
         "ACE-Brain-0-8B",
         "Cambrian-S-7B",
-        "RynnBrain-8B",
         "SenseNova-SI-InternVL3-8B",
         "SpaceDG-SFT-InternVL-3.5-8B",
         "SpaceDG-SFT-Qwen3-VL-8B-Instruct",
@@ -299376,10 +299248,8 @@
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"4-1-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
       "retrieved": "2026-11-23",
-      "rows": 66,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 67,
+      "unmatched": [],
       "chart": {
         "title": "Pareto: accuracy against time",
         "note": "Each point is one agent, model and effort. The board plots total run time; this plots the mean time per trial, the same frontier at a fixed trial count.",
@@ -304093,7 +303963,7 @@
       "feed": "https://triworldbench-triworldbench-space.hf.space/api/leaderboard",
       "terms": "The makers publish this leaderboard on Hugging Face under the platform terms at https://huggingface.co/terms-of-service.",
       "retrieved": "2026-11-23",
-      "rows": 0,
+      "rows": 1,
       "unmatched": [
         "Act-Cosmos",
         "ActoVision-X",
@@ -304160,7 +304030,6 @@
         "digger",
         "dream4act",
         "genie-envisioner",
-        "motus",
         "salad",
         "t640_mix50",
         "xiao-world"
@@ -308338,10 +308207,8 @@
       "feed": "https://www.vals.ai/benchmarks/emb-v1-1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 47,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 48,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -308667,10 +308534,8 @@
       "feed": "https://www.vals.ai/benchmarks/finance_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 45,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 46,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -311725,11 +311590,9 @@
       "feed": "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard/raw/main/data/results.json",
       "terms": "Apache-2.0 project; Hugging Face robots.txt permits this public raw results path.",
       "retrieved": "2026-11-23",
-      "rows": 14,
+      "rows": 16,
       "unmatched": [
-        "Cosmos-Reason2-2B",
         "Cosmos-Reason2-32B",
-        "Cosmos-Reason2-8B",
         "Cosmos3-Super"
       ],
       "verified": "Marked verified by VANTAGE-Bench.",
@@ -318924,16 +318787,11 @@
       "feed": "https://vla-arena.github.io/data/results/models.json and https://vla-arena.github.io/data/results/<model>.json (sr, Average L0+L1+L2)",
       "terms": "Static JSON on GitHub Pages; robots.txt allows every path and the VLA-Arena repository is Apache-2.0.",
       "retrieved": "2026-11-23",
-      "rows": 10,
+      "rows": 17,
       "unmatched": [
         "ACoT-VLA",
-        "DM0.5",
-        "DreamZero",
         "Evo-Depth",
         "LangForce",
-        "LingBot-VLA",
-        "LingBot-VLA 2.0",
-        "Motus",
         "Prime",
         "Qwen2.5-VL-GR00T",
         "Qwen2.5-VL-OFT",
@@ -318942,9 +318800,7 @@
         "Qwen3-VL-GR00T",
         "Qwen3-VL-OFT",
         "Qwen3-VL-PI",
-        "SmolVLA",
         "StellaVLA",
-        "UniVLA",
         "X-Policy"
       ],
       "stats": {
@@ -318963,10 +318819,8 @@
       "headline": "The paper reports seen and unseen averages, so this is their plain mean.",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 4,
-      "unmatched": [
-        "RDT-1B"
-      ],
+      "rows": 6,
+      "unmatched": [],
       "parts": {
         "seenAverage": {
           "name": "Seen objects average",
@@ -325347,10 +325201,8 @@
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png (transcribed 2026-11-20)",
       "terms": "Public results in the Tencent Hugging Face model card. Attribution and source licensing apply.",
       "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 7,
+      "unmatched": []
     },
     "wordlearenas": {
       "url": "https://drchangliu.github.io/WordleArenas/experiment_results.html",
@@ -325628,10 +325480,8 @@
       "terms": "Tencent Hy public research article. https://hunyuan.tencent.com/",
       "static": "paper",
       "retrieved": "2026-11-21",
-      "rows": 3,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 4,
+      "unmatched": []
     },
     "workflowarena": {
       "url": "https://lab.einsia.ai/workflowarena/home.html#leaderboard",
@@ -325933,7 +325783,7 @@
       "feed": "https://worldarena-worldarena.hf.space/config",
       "terms": "Public results published by the benchmark authors at worldarena-worldarena.hf.space; retain source attribution and follow the upstream terms.",
       "retrieved": "2026-11-24",
-      "rows": 3,
+      "rows": 4,
       "unmatched": [
         "AAA0",
         "AAA1",
@@ -326001,7 +325851,6 @@
         "MBW",
         "MWM",
         "MotuBrain",
-        "Motus",
         "N-World",
         "NEWTON_WoW",
         "NoxWM",
