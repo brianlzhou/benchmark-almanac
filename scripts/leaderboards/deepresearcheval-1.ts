@@ -30,8 +30,10 @@ const board: Leaderboard = {
   "benchmark": "deepresearcheval-1",
   "url": "https://infinity-ailab.github.io/deep_research_eval/",
   "feed": "https://infinity-ailab.github.io/deep_research_eval/",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
+  "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
+  aliases: {
+    'OpenAI Deep Research research agent': 'deep-research',
+  },
   stats: {
     statements: { name: 'Statements', unit: 'count' },
     right: { name: 'Correct statements', unit: 'count' },

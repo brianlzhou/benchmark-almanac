@@ -12,8 +12,10 @@ const board: Leaderboard = {
   benchmark: "do-not-answer",
   url: "https://github.com/Libr-AI/do-not-answer",
   feed: FEED,
-  terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-  aliases: {},
+  terms: "Public results published by the benchmark authors at raw.githubusercontent.com. Retain source attribution and follow the upstream terms.",
+  aliases: {
+    ChatGLM2: 'chatglm2-6b',
+  },
   
   async fetch() {
     const out: LeaderboardRow[] = [];

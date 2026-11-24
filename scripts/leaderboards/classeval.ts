@@ -7,7 +7,10 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://fudanselab-classeval.github.io/pass_at_k_result_H.json";
 const board: Leaderboard = {
  benchmark: "classeval", url: "https://fudanselab-classeval.github.io/leaderboard.html", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+ aliases: {
+  'deepseek-coder-6.7b-instruct': 'deepseek-coder-6-7b',
+ },
  stats: { class_partial_success: { name: 'Class partial success', unit: '%', better: 'higher' }, fun_partial_success: { name: 'Function partial success', unit: '%', better: 'higher' }, fun_success: { name: 'Function success', unit: '%', better: 'higher' }, passAt3: { name: 'Class pass at 3', unit: '%', better: 'higher' }, passAt5: { name: 'Class pass at 5', unit: '%', better: 'higher' } },
 
  async fetch() {

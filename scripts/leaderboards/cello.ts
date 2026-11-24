@@ -25,7 +25,15 @@ const board: Leaderboard = {
   task_score: { name: 'Task', group: 'Dimension' },
   Ave_complex_ins: { name: 'Complex instruction', group: 'Category', note: 'Average across extraction, planning, meta prompt, single-round brainstorming, and single-round writing.' },
 }, url: "https://github.com/Abbey4799/CELLO", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+ aliases: {
+  'Llama2-chat-70B': 'llama-2-70b',
+  'Llama2-chat-13B': 'llama-2-13b',
+  'Llama2-chat-7B': 'llama-2-7b',
+  'Vicuna-V1.3-13B': 'vicuna-13b-v1-3',
+  ChatGLM: 'chatglm-6b',
+  ChatGLM2: 'chatglm2-6b',
+ },
  stats: { count_limit_score: { name: 'Count limit score', unit: '%' , better: 'higher' } },
 
  async fetch() {

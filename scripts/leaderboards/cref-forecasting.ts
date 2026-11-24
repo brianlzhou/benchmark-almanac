@@ -7,6 +7,9 @@ const feed = "https://d2i4i33c3shekq.cloudfront.net/v1/leaderboard/latest.json";
 
 const board: Leaderboard = {
   benchmark: 'cref-forecasting', url, feed,
+  harnesses: 'system',
+  reference: ['Direct Prompt'],
+  notModels: /^Seasonal naive$/i,
   stats: {
     coverageSamples: { name: 'Coverage samples', unit: '%', better: 'higher' },
     coverageWeight: { name: 'Coverage weight', unit: '%', better: 'higher' },
@@ -51,8 +54,27 @@ const board: Leaderboard = {
         if (part != null) { const [category,name] = key.split('/'); parts[key] = {name,group:category}; metrics[key] = 100*part; }
       }
       const label = names.get(r.model_id);
-      return {model:r.model_id === '__baseline__' ? 'Seasonal naive' : label?.name ?? r.model_id, link:label?.link,
-        date:data.timestamp.slice(0,10), score:100*score, metrics};
+      const llm = ({
+        'direct-prompt-opus-4-6': { model: 'Claude Opus 4.6', harness: 'Direct Prompt' },
+        'direct-prompt-opus-4-8': { model: 'Claude Opus 4.8', harness: 'Direct Prompt' },
+        'direct-prompt-sonnet-4-6': { model: 'Claude Sonnet 4.6', harness: 'Direct Prompt' },
+        'direct-prompt-opus-5': { model: 'Claude Opus 5', harness: 'Direct Prompt' },
+        'direct-prompt-sonnet-5': { model: 'Claude Sonnet 5', harness: 'Direct Prompt' },
+        'direct-prompt-gpt-5-6-sol': { model: 'GPT-5.6 Sol', harness: 'Direct Prompt' },
+        'agentic-kiro-cli-opus-5': { model: 'Claude Opus 5', harness: 'Kiro CLI' },
+        'dp-chronos2-sonnet-4-6': { model: 'DP + Chronos2 (Sonnet 4.6)', models: ['Chronos 2', 'Claude Sonnet 4.6'] },
+        'dp-chronos2-opus-5': { model: 'DP + Chronos2 (Opus 5)', models: ['Chronos 2', 'Claude Opus 5'] },
+        'dp-chronos2-gpt-5-6-sol': { model: 'DP + Chronos2 (GPT-5.6 Sol)', models: ['Chronos 2', 'GPT-5.6 Sol'] },
+      } as Record<string, { model: string; harness?: string; models?: string[] }>)[r.model_id];
+      return {
+        model: llm?.model ?? (r.model_id === '__baseline__' ? 'Seasonal naive' : label?.name ?? r.model_id),
+        ...(llm?.harness ? { harness: llm.harness } : {}),
+        ...(llm?.models ? { models: llm.models } : {}),
+        link: label?.link,
+        date: data.timestamp.slice(0, 10),
+        score: 100 * score,
+        metrics,
+      };
     });
   },
 };

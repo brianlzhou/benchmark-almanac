@@ -9,6 +9,14 @@ const board: Leaderboard = {
   url: "https://benchmarks.roark.ai/benchmarks",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://benchmarks.roark.ai/robots.txt.",
+  aliases: {
+    'xAI Grok Voice 3.0': 'grok-voice-3',
+    'OpenAI GPT Realtime 2.1': 'gpt-realtime-2-1',
+    'OpenAI GPT Realtime 2.1 mini': 'gpt-realtime-2-1-mini',
+    'OpenAI GPT Realtime 2': 'gpt-realtime-2',
+    'Google Gemini 3.8 Live': 'gemini-3-8-live',
+    'Google Gemini 3.1 Flash Live (preview)': 'gemini-3-1-flash-live',
+  },
   stats: {
     value: { name: 'Value score', unit: 'score', better: 'higher' },
     task: { name: 'Task completion', unit: '%', better: 'higher' },
@@ -35,8 +43,10 @@ const board: Leaderboard = {
         if (name !== 'performance' && measurement) metrics[name] = measurement.value;
       }
       const calls = measures.get('task')?.get(stack)?.sample.match(/over (\d+) calls/);
+      const isS2s = entry.key.startsWith('s2s-') || /\s*\(speech-to-speech\)$/i.test(entry.name);
+      const model = isS2s ? entry.name.replace(/\s*\(speech-to-speech\)$/i, '').trim() : entry.name;
       const row: LeaderboardRow = {
-        model: entry.name, score: value, metrics, cost: metrics.cost_task,
+        model, ...(isS2s ? { setting: 'speech-to-speech' } : {}), score: value, metrics, cost: metrics.cost_task,
         low: interval?.[0], high: interval?.[1], trials: calls ? Number(calls[1]) : undefined,
         link: board.url + '/' + encodeURIComponent(entry.key),
       };

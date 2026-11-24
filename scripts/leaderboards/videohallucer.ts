@@ -26,12 +26,13 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 const FEED = "https://raw.githubusercontent.com/patrick-tssn/VideoHallucer/main/README.md";
 const board: Leaderboard = {
- stats: { semanticDetail: { name: 'Semantic detail', unit: '%', better: 'higher' } },
   "benchmark": "videohallucer",
   "url": "https://github.com/patrick-tssn/VideoHallucer",
   "feed": "https://raw.githubusercontent.com/patrick-tssn/VideoHallucer/main/README.md",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
+  "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
+  aliases: {
+    VideoLLaVA: 'video-llava-7b',
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const data = markdownTables(source);
@@ -65,6 +66,7 @@ const board: Leaderboard = {
 board.parts = {
   objectRelation: { name: 'Object relation', group: 'Category' },
   temporal: { name: 'Temporal', group: 'Category' },
+  semanticDetail: { name: 'Semantic detail', group: 'Category' },
   extrinsicFact: { name: 'Extrinsic factual', group: 'Category' },
   extrinsicNonfact: { name: 'Extrinsic nonfactual', group: 'Category' },
 };
