@@ -483,6 +483,30 @@ if (existsSync(arenaPath)) {
   }
 }
 
+// Epoch AI's Benchmark Reviews (data/epoch-reviews.json, scripts/sync-epoch-reviews.ts): known benchmarks, one review
+// per Epoch slug, a known verdict, and for a review with a page, its address, date and summary
+{
+  const er = readJson<{ retrieved?: string; reviews?: Record<string, Record<string, unknown>>; unmatched?: unknown[] }>(dataPath('epoch-reviews.json'));
+  const ids = new Set(benchmarks.map((b) => b.id as string));
+  const date = (v: unknown) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v));
+  if (!date(er.retrieved)) fail('epoch-reviews.json: needs the day it was read');
+  if (!Array.isArray(er.unmatched)) fail('epoch-reviews.json: needs an unmatched list');
+  else if (er.unmatched.length) warn.push(`epoch-reviews.json: Epoch AI reviews with no record: ${er.unmatched.join(', ')}`);
+  const slugs = new Set<string>();
+  for (const [id, r] of Object.entries(er.reviews ?? {})) {
+    if (!ids.has(id)) fail(`epoch-reviews.json: unknown benchmark ${id}`);
+    if (typeof r.epoch !== 'string' || !/^[a-z0-9-]+$/.test(r.epoch)) fail(`epoch-reviews.json: ${id} needs Epoch's slug`);
+    else if (slugs.has(r.epoch)) fail(`epoch-reviews.json: Epoch's ${r.epoch} review is on two records`);
+    else slugs.add(r.epoch);
+    if (!['verified', 'flawed', 'not-enough-info'].includes(r.verdict as string)) fail(`epoch-reviews.json: ${id} has an unknown verdict ${String(r.verdict)}`);
+    if (r.url !== undefined) {
+      if (!/^https:\/\/epoch\.ai\/benchmarks\/[a-z0-9-]+\/review$/.test(String(r.url))) fail(`epoch-reviews.json: ${id} has an odd review address`);
+      if (!date(r.reviewed)) fail(`epoch-reviews.json: ${id} needs the review's date`);
+      if (typeof r.summary !== 'string' || r.summary.length < 40) fail(`epoch-reviews.json: ${id} needs Epoch's summary`);
+    } else if (r.verdict !== 'not-enough-info') fail(`epoch-reviews.json: ${id} is ${String(r.verdict)} but links no review`);
+  }
+}
+
 if (warn.length) console.log(`${warn.length} warnings, for example:\n  ${warn.slice(0, 5).join('\n  ')}`);
 if (errors.length) {
   console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);

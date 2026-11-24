@@ -7,11 +7,13 @@ import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import AreaMark from '../../components/AreaMark.astro';
+import ReviewMark from '../../components/ReviewMark.astro';
 import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions, cards, systemCards } from '../../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
 import { familyOf, nextVersion } from '../../lib/reigns.ts';
 import { issuesByBenchmark, unresolved, PROBLEMS } from '../../lib/audits.ts';
+import { epochReviewOf, epochReviews, VERDICTS as EPOCH_VERDICTS, type EpochVerdict } from '../../lib/epoch-reviews.ts';
 import reviewedJson from '../../../data/reviewed.json';
 import { familySize, isArena, benchmarkCount } from '../../lib/counts.ts';
 
@@ -88,6 +90,19 @@ const earlier = (id: string) =>
     .filter((s): s is NonNullable<typeof s> => !!s)
     .reverse();
 const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
+// Epoch AI's verdicts: a row matches a verdict when it, or one of the earlier versions folded under it, has it, and
+// those versions show under it while the filter is on (data-kid-keys)
+const reviewTokens = (ids: string[]) => {
+  const vs = [...new Set(ids.map((id) => epochReviewOf(id)?.verdict).filter((v): v is EpochVerdict => !!v))];
+  return vs.length ? ['reviewed', ...vs].join(' ') : undefined;
+};
+// each count is the reviewed records themselves, as Epoch AI counts them, not every version of their families
+const reviewCount = (v?: EpochVerdict) => [...epochReviews].filter(([id, r]) => byId.has(id) && (!v || r.verdict === v)).length;
+const reviewOptions: Option[] = [
+  { value: '', label: 'Reviewed or not' },
+  { value: 'reviewed', label: 'Any verdict', count: reviewCount() },
+  ...(Object.keys(EPOCH_VERDICTS) as EpochVerdict[]).map((v) => ({ value: v, label: EPOCH_VERDICTS[v].name, count: reviewCount(v) })),
+];
 // The longest text of each column that cannot wrap, over every row and earlier version. A hidden row
 // holds it under the header, so the table has its final column widths from the first paint (see filter.ts).
 const everyRow = rows.flatMap((s) => [s, ...(s.b.family ? earlier(s.b.id) : [])]);
@@ -203,6 +218,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
           <Dropdown filterKey="status" label="Status" options={statusOptions} />
           <Dropdown filterKey="added" label="Last added" options={addedOptions(rows)} />
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
+          <Dropdown filterKey="review" label="Epoch AI review" options={reviewOptions} />
           <Dropdown filterKey="counted" label="Cited in launch posts and system cards" options={countedOptions} viewOnly />
         </div>
         <FacetFilters items={rows.map((s) => ({ id: s.b.id, n: familySize(s.b) }))} />
@@ -210,7 +226,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
       </div>
 
     <div class="table-wrap wide">
-      <table class="t bt" data-rows data-sort data-keep="counted">
+      <table class="t bt" data-rows data-sort data-keep="counted" data-kid-keys="review">
         <thead>
           <tr>
             <SortHead>Benchmark</SortHead>
@@ -273,6 +289,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                     data-status={s.status.replace(/ /g, '-')}
                     data-added={addedWindows(s)}
                     data-code={s.b.links?.repo ? 'yes' : ''}
+                    data-review={reviewTokens([s.b.id, ...prev.map((p) => p.b.id)])}
                     data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name), facetWords(s.b.id)].join(' ').trim().toLowerCase() || undefined}
                   >
                     <td class="nm">
@@ -294,6 +311,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                           </a>
                         );
                       })()}
+                      <ReviewMark id={s.b.id} />
                       {s.b.description && <span class="desc">{s.b.description}</span>}
                       {group && (
                         <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
@@ -331,11 +349,12 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                     const next = nextVersion(p.b.id);
                     const pkind = (p.b.subcategory ? SUB_BY_ID.get(p.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[p.b.category ?? 'other'] ?? 'Other';
                     return (
-                      <tr {...evalAttrs(p.b)} class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} hidden>
+                      <tr {...evalAttrs(p.b)} class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} data-review={reviewTokens([p.b.id])} hidden>
                         <td class="nm">
                           <span class="tree" aria-hidden="true" />
                           <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
                           {p.b.version && !p.b.name.includes(p.b.version) && <span class="vtag">{vlabel(p.b.version)}</span>}
+                          <ReviewMark id={p.b.id} />
                           {next && <span class="desc">Replaced in {monthYear(next.date)}</span>}
                         </td>
                         <td class="org">{p.b.org !== s.b.org ? p.b.org : ''}</td>

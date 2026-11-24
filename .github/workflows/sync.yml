@@ -35,6 +35,10 @@ jobs:
       # publishes its results only as an R data file, which scripts/leaderboards/metabench.ts reads with Rscript
       - run: sudo apt-get install -y --no-install-recommends poppler-utils r-base-core
       - run: node scripts/sync-epoch.ts | tee sync.log
+      # Epoch AI's Benchmark Reviews (verdicts and summaries, CC BY 4.0). A changed page or a new review that maps to no
+      # record fails this step only, so the rest of the sync still runs, and the run shows the failure
+      - run: node scripts/sync-epoch-reviews.ts | tee -a sync.log
+        continue-on-error: true
       # Artificial Analysis's API needs a key; its index numbers come in with AA's permission (November 2026)
       - run: node scripts/sync-leaderboards.ts | tee -a sync.log
         env:

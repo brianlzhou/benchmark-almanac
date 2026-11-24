@@ -1,0 +1,213 @@
+{
+  "about": "Epoch AI's Benchmark Reviews: audits of benchmarks, each with a verdict (verified, flawed, or not-enough-info), keyed by our benchmark id. Summaries are Epoch AI's own words, quoted from each review. Written by scripts/sync-epoch-reviews.ts.",
+  "source": "https://epoch.ai/benchmarks/search?reviewed=verified&reviewed=flawed&reviewed=not-enough-info",
+  "license": "CC BY 4.0, Epoch AI",
+  "retrieved": "2026-11-24",
+  "reviews": {
+    "agents-last-exam-1-1": {
+      "epoch": "agents-last-exam",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/agents-last-exam/review",
+      "reviewed": "2026-10-18",
+      "creator": "UC Berkeley Center for Responsible, Decentralized Intelligence (RDI) and the RDI Foundation",
+      "summary": "Agents’ Last Exam (ALE) is a benchmark designed to measure agents’ ability to perform long-horizon, economically valuable tasks with verifiable outcomes. In a stratified sample of 50 of its 122 public tasks, an agent can score 100% on 22 (44%) without doing the intended work, leading us to designate the benchmark as Flawed."
+    },
+    "arc-agi-3": {
+      "epoch": "arc-agi-3",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/arc-agi-3/review",
+      "reviewed": "2026-10-30",
+      "creator": "ARC Prize Foundation",
+      "summary": "ARC-AGI-3 is an interactive reasoning benchmark designed to measure AI agents' ability to explore new environments and adapt their strategy across increasingly difficult levels of multiple games. It is scored via action efficiency relative to a variable human baseline, and has problems with scoring, version consistency, model elicitation, and bias in evaluation setup."
+    },
+    "bfcl-v4": {
+      "epoch": "berkeley-function-calling-leaderboard",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/berkeley-function-calling-leaderboard/review",
+      "reviewed": "2026-09-10",
+      "creator": "Huanzhi Mao, Raymond Tsao, Jingzhuo Zhou, Shishir G. Patil, Joseph E. Gonzalez",
+      "summary": "BFCL v4 is a function-calling benchmark that tests whether a model can call the right tool with correct arguments in single-call, multi-turn and agentic tasks. In a random sample of 50 tasks, we found defects that could affect accuracy in 24 (48%) of them."
+    },
+    "chartography": {
+      "epoch": "chartography",
+      "verdict": "not-enough-info"
+    },
+    "cmt-benchmark": {
+      "epoch": "cmt-benchmark",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/cmt-benchmark/review",
+      "reviewed": "2026-10-14",
+      "creator": "Haining Pan et al.",
+      "summary": "CMT-Benchmark is designed to test AI models’ understanding of condensed matter theory at the level of an expert researcher, with 50 original problems across 8 problem types. An audit by physics researchers found scoring defects in 60% of the problems, leading us to designate the benchmark as Flawed."
+    },
+    "critpt": {
+      "epoch": "critpt",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/critpt/review",
+      "reviewed": "2026-10-13",
+      "creator": "Minhui Zhu, Minyang Tian, and others",
+      "summary": "CritPt is meant to test research-level reasoning in modern physics research areas, with 71 research challenges split into 190 checkpoint tasks. Two separate audits found scoring defects in at least 20% of the challenges, leading us to designate the benchmark as Flawed."
+    },
+    "critpt-v2": {
+      "epoch": "critpt-v2",
+      "verdict": "not-enough-info"
+    },
+    "cursorbench-4-0": {
+      "epoch": "cursorbench",
+      "verdict": "not-enough-info"
+    },
+    "deeprsi": {
+      "epoch": "deeprsi",
+      "verdict": "not-enough-info"
+    },
+    "deepswe": {
+      "epoch": "deepswe",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/deepswe/review",
+      "reviewed": "2026-09-07",
+      "creator": "Datacurve",
+      "summary": "DeepSWE is a software engineering benchmark. Its tasks were written from scratch and span 91 repositories. We found issues in at least 23 out of 113 tasks (over 20.3%), leading us to designate the benchmark as Flawed."
+    },
+    "exploitbench": {
+      "epoch": "exploitbench",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/exploitbench/review",
+      "reviewed": "2026-09-12",
+      "creator": "Seunghyun Lee & Prof. David Brumley · Carnegie Mellon University",
+      "summary": "ExploitBench does a good job of measuring how far a model can take a known V8 vulnerability toward a working exploit. The tasks are 41 real public CVEs scored on a ladder of 16 verifiable capabilities in 5 tiers, but only 2 of the exploits are published."
+    },
+    "frontiercode-1-1": {
+      "epoch": "frontiercode",
+      "verdict": "not-enough-info"
+    },
+    "frontiercode-2-0": {
+      "epoch": "frontiercode-2",
+      "verdict": "not-enough-info"
+    },
+    "graphwalks": {
+      "epoch": "graphwalks",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/graphwalks/review",
+      "reviewed": "2026-09-29",
+      "creator": "OpenAI",
+      "summary": "GraphWalks tests a model’s ability to find and combine information across very long contexts. The tasks were all well constructed and an independent solver reproduced the stated answer for all 1,150 tasks."
+    },
+    "healthbench-professional": {
+      "epoch": "healthbench-professional",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/healthbench-professional/review",
+      "reviewed": "2026-09-10",
+      "creator": "OpenAI",
+      "summary": "HealthBench Professional aims to evaluate whether LLMs give useful and accurate answers on real healthcare-related tasks that clinicians brought to ChatGPT. We randomly sampled 50 tasks and found that 25 (50%) presented clear errors, resulting in a Flawed verdict."
+    },
+    "humanitys-last-exam": {
+      "epoch": "hle",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/hle/review",
+      "reviewed": "2026-08-11",
+      "creator": "Center for AI Safety, Scale AI, Independent Contributors",
+      "summary": "Humanity's Last Exam is a knowledge-based benchmark compiled through submissions from the public. After auditing a random sample of 48 questions, we found that 22 (46%) had substantial accuracy-altering errors, leading us to designate the benchmark as Flawed."
+    },
+    "lech-mazur-creative-writing": {
+      "epoch": "lech-mazur-writing",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/lech-mazur-writing/review",
+      "reviewed": "2026-08-10",
+      "creator": "Lech Mazur (independent developer)",
+      "summary": "Lech Mazur Writing tests a model's ability to generate short stories that incorporate mandatory story elements. Since the adoption of pairwise scoring in April 2026, the benchmark has not maintained proper versioning, and its scores and rankings have changed over time without documentation of the changes."
+    },
+    "maze-bench": {
+      "epoch": "mazebench",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/mazebench/review",
+      "reviewed": "2026-10-27",
+      "creator": "Jonathan Pappas and David Pappas",
+      "summary": "MazeBench measures how well AI agents can learn an unfamiliar 3D puzzle game by playing it. Agents need to collect 100 gems in an environment made of 256 rooms, a task that tests spatial and long-horizon reasoning."
+    },
+    "osworld-2-1": {
+      "epoch": "osworld-2-1",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/osworld-2-1/review",
+      "reviewed": "2026-09-28",
+      "creator": "XLANG Lab",
+      "summary": "OSWorld v2.1 is a multimodal benchmark that evaluates agents’ performance on realistic long-context computer-use tasks, from everyday work such as fixing a PowerPoint presentation to professional work such as financial research. We audited 50 of its 108 tasks and found errors in 36."
+    },
+    "posttrainbench-1-1": {
+      "epoch": "post-train-bench",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/post-train-bench/review",
+      "reviewed": "2026-09-09",
+      "creator": "Ben Rank, Hardik Bhatnagar, Ameya Prabhu, Shira Eisenberg, Karina Nguyen, Matthias Bethge, Maksym Andriushchenko",
+      "summary": "PostTrainBench aims to measure how well LLMs can autonomously post-train small base models. It provides useful signals of models’ autonomous post-training capabilities in a lightly constraining setting, but restrictions on permitted techniques and its narrow scope limit how broadly its results generalize."
+    },
+    "remote-labor-index": {
+      "epoch": "rli",
+      "verdict": "not-enough-info"
+    },
+    "simpleqa-verified": {
+      "epoch": "simple-qa-verified",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/simple-qa-verified/review",
+      "reviewed": "2026-09-10",
+      "creator": "Google DeepMind and Google Research (Lukas Haas, Gal Yona, Giovanni D’Antonio, Sasha Goldshtein, Dipanjan Das)",
+      "summary": "SimpleQA Verified successfully measures whether a model can recall obscure facts with no tool usage. In a random, topic-stratified sample of 50 questions, we found 5 (10%) with score-affecting defects, well below our 20% threshold for declaring a benchmark flawed."
+    },
+    "surface-evolver-bench": {
+      "epoch": "surface-evolver-bench",
+      "verdict": "not-enough-info"
+    },
+    "swe-bench-pro": {
+      "epoch": "swe-bench-pro",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/swe-bench-pro/review",
+      "reviewed": "2026-09-01",
+      "creator": "Scale AI",
+      "summary": "SWE-Bench Pro was meant to be a more challenging and contamination-resistant successor to SWE-Bench Verified. However, audits of SWE-Bench Pro have estimated that 30% or more of tasks are broken, leading us to designate this benchmark as Flawed."
+    },
+    "swe-bench-verified": {
+      "epoch": "swe-bench-verified",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/swe-bench-verified/review",
+      "reviewed": "2026-09-03",
+      "creator": "Carlos Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan in collaboration with OpenAI",
+      "summary": "SWE-bench Verified evaluates large language models on real-world software issues collected from public GitHub repos. Given a codebase and an issue, a language model is tasked with generating a patch that resolves the described problem."
+    },
+    "tasteval": {
+      "epoch": "tasteval",
+      "verdict": "not-enough-info"
+    },
+    "terminal-bench-4-0": {
+      "epoch": "terminal-bench-4",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/terminal-bench-4/review",
+      "reviewed": "2026-09-04",
+      "creator": "Ryan Marten, Alex Shaw, Andy Konwinski, Ludwig Schmidt",
+      "summary": "Terminal-Bench is an agentic benchmark that consists of software, science, ML, operations, security, hardware, and media tasks. Terminal-Bench 4.0.0 removes 8 tasks, updates 20, and adjusts resource limits compared to 3.0."
+    },
+    "textquests": {
+      "epoch": "textquests",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/textquests/review",
+      "reviewed": "2026-08-10",
+      "creator": "Center for AI Safety (Long Phan, Mantas Mazeika, Andy Zou, Dan Hendrycks)",
+      "summary": "TextQuests is a long-horizon, tool-free benchmark where agents play through the Infocom suite of interactive fiction games. The leaderboard’s primary metric, “game progress”, is flawed because it does not correctly account for the nonlinear nature of these games, so the leaderboard may not consistently reflect overall progress toward completing the game."
+    },
+    "vending-bench-2": {
+      "epoch": "vending-bench-2",
+      "verdict": "flawed",
+      "url": "https://epoch.ai/benchmarks/vending-bench-2/review",
+      "reviewed": "2026-10-21",
+      "creator": "Andon Labs",
+      "summary": "Vending-Bench 2 is designed to test whether AI agents can profitably run a vending machine over a one-year period in a simulated environment. Agents can exploit flaws in the simulated environment, and agents from different providers are not evaluated under the same conditions, leading us to designate the benchmark as Flawed."
+    },
+    "weirdml": {
+      "epoch": "weirdml",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/weirdml/review",
+      "reviewed": "2026-08-10",
+      "creator": "Håvard Tveit Ihle",
+      "summary": "WeirdML v2 does a good job of measuring whether a model can write PyTorch code to solve an unfamiliar, well-specified ML problem under a fixed compute budget in a non-agentic setting. The tasks were designed to be novel and require careful thinking."
+    }
+  },
+  "unmatched": []
+}

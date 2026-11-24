@@ -1,0 +1,116 @@
+---
+// Epoch AI's review of a benchmark, from data/epoch-reviews.json: the verdict, the review date, Epoch's own summary as
+// a credited quote, and a link to the review. Scores elsewhere on the page stay as their sources report them.
+import { epochReviewOf, VERDICTS, EPOCH_REVIEWS_URL, EPOCH_REVIEWS_DOC } from '../lib/epoch-reviews.ts';
+import { humanDate } from '../lib/format.ts';
+
+interface Props {
+  id: string;
+  name: string;
+}
+const { id, name } = Astro.props;
+const r = epochReviewOf(id);
+const v = r ? VERDICTS[r.verdict] : undefined;
+---
+
+{
+  r && v && (
+    <section class="er" id="epoch-review" aria-labelledby="er-h">
+      <div class="sh">
+        <h2 id="er-h">Epoch AI’s review</h2>
+        <p>
+          {r.verdict === 'not-enough-info'
+            ? `Epoch AI found too little public information about ${name} to review it.`
+            : `Epoch AI audited ${name}${r.reviewed ? ` on ${humanDate(r.reviewed)}` : ''} and rated it ${v.name}. We quote its summary and link the review.`}{' '}
+          <a href={EPOCH_REVIEWS_DOC}>How Epoch AI reviews benchmarks</a>
+        </p>
+      </div>
+      <div class:list={['er-card', v.tone]}>
+        <div class="er-top">
+          <span class:list={['er-v', 'hint', v.tone]} tabindex="0" data-tn={v.name} data-ts={`Epoch AI: “${v.what}”`}>
+            <span class="dot" />
+            {v.name}
+          </span>
+          {r.creator && <span class="er-by muted">Benchmark by {r.creator}</span>}
+        </div>
+        {r.summary && (
+          <blockquote class="er-q" cite={r.url}>
+            <p>{r.summary}</p>
+          </blockquote>
+        )}
+        <p class="er-src">
+          {r.url ? <a href={r.url}>Benchmark review</a> : <a href={EPOCH_REVIEWS_URL}>Epoch AI’s reviewed benchmarks</a>}
+          <span class="muted">
+            {' '}
+            by Epoch AI{r.reviewed ? `, ${humanDate(r.reviewed)}` : ''}, CC BY 4.0
+          </span>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .er {
+    margin-bottom: 64px;
+  }
+  .er-card {
+    max-width: 80ch;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink-4);
+    border-radius: 10px;
+    background: var(--bg);
+    min-width: 0;
+  }
+  .er-card.good {
+    border-left-color: var(--status-good);
+  }
+  .er-card.bad {
+    border-left-color: var(--status-bad);
+  }
+  .er-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .er-v {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--panel);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .er-v .dot {
+    background: var(--ink-4);
+  }
+  .er-v.good .dot {
+    background: var(--status-good);
+  }
+  .er-v.bad .dot {
+    background: var(--status-bad);
+  }
+  .er-by {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+  .er-q {
+    margin: 12px 0 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--line);
+    font: italic 400 15px/1.5 var(--serif);
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+  .er-src {
+    margin-top: 12px;
+    font-size: 13.5px;
+    overflow-wrap: anywhere;
+  }
+</style>
