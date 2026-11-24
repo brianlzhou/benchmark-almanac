@@ -73712,11 +73712,11 @@
       }
     },
     "cursorbench-4-0": {
-      "url": "https://cursor.com/cursorbench",
-      "feed": "https://cursor.com/cursorbench (current chart data chunk)",
-      "terms": "Cursor terms prohibit automated extraction; Benchmark Almanac credits and links Cursor as the source of these benchmark results.",
-      "retrieved": "2026-11-23",
-      "rows": 53,
+      "url": "https://web.archive.org/web/20261117220402/https://cursor.com/cursorbench",
+      "feed": "https://web.archive.org/web/20261117220413id_/https://cursor.com/marketing-static/_next/static/immutable/chunks/0j8zueg4l4cnv.js (the chart data of the archived 2026-11-17 page)",
+      "terms": "Cursor's robots.txt allows the leaderboard. Cursor's terms restrict automated extraction. The Internet Archive preserves this public Cursor chart, and Benchmark Almanac credits and links Cursor as the source.",
+      "retrieved": "2026-11-24",
+      "rows": 91,
       "unmatched": [],
       "chart": {
         "title": "CursorBench score by average cost per task",
@@ -73745,7 +73745,7 @@
       "url": "https://cursor.com/cursorbench",
       "feed": "https://cursor.com/cursorbench (current chart data chunk)",
       "terms": "Cursor permits the public chart path in robots.txt. Its terms prohibit automated extraction. Benchmark Almanac credits and links Cursor as the source of these benchmark results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 53,
       "unmatched": [],
       "chart": {
