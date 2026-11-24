@@ -67660,18 +67660,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        },
         "priceIn": {
           "name": "Input price",
           "unit": "usd-per-mtok",
@@ -122850,481 +122838,265 @@
           "name": "Run output tokens",
           "unit": "tokens"
         },
-        "max_tokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
-        },
-        "country:Argentina:locations": {
-          "name": "Argentina locations",
-          "unit": "count"
-        },
         "country:Argentina:points": {
           "name": "Argentina points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Australia:locations": {
-          "name": "Australia locations",
-          "unit": "count"
         },
         "country:Australia:points": {
           "name": "Australia points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Bangladesh:locations": {
-          "name": "Bangladesh locations",
-          "unit": "count"
-        },
         "country:Bangladesh:points": {
           "name": "Bangladesh points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Bhutan:locations": {
-          "name": "Bhutan locations",
-          "unit": "count"
         },
         "country:Bhutan:points": {
           "name": "Bhutan points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Brazil:locations": {
-          "name": "Brazil locations",
-          "unit": "count"
-        },
         "country:Brazil:points": {
           "name": "Brazil points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Bulgaria:locations": {
-          "name": "Bulgaria locations",
-          "unit": "count"
         },
         "country:Bulgaria:points": {
           "name": "Bulgaria points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Cambodia:locations": {
-          "name": "Cambodia locations",
-          "unit": "count"
-        },
         "country:Cambodia:points": {
           "name": "Cambodia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Canada:locations": {
-          "name": "Canada locations",
-          "unit": "count"
         },
         "country:Canada:points": {
           "name": "Canada points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Colombia:locations": {
-          "name": "Colombia locations",
-          "unit": "count"
-        },
         "country:Colombia:points": {
           "name": "Colombia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Croatia:locations": {
-          "name": "Croatia locations",
-          "unit": "count"
         },
         "country:Croatia:points": {
           "name": "Croatia points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Denmark:locations": {
-          "name": "Denmark locations",
-          "unit": "count"
-        },
         "country:Denmark:points": {
           "name": "Denmark points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Ecuador:locations": {
-          "name": "Ecuador locations",
-          "unit": "count"
         },
         "country:Ecuador:points": {
           "name": "Ecuador points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Eswatini:locations": {
-          "name": "Eswatini locations",
-          "unit": "count"
-        },
         "country:Eswatini:points": {
           "name": "Eswatini points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Finland:locations": {
-          "name": "Finland locations",
-          "unit": "count"
         },
         "country:Finland:points": {
           "name": "Finland points",
           "unit": "score",
           "better": "higher"
         },
-        "country:France:locations": {
-          "name": "France locations",
-          "unit": "count"
-        },
         "country:France:points": {
           "name": "France points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Germany:locations": {
-          "name": "Germany locations",
-          "unit": "count"
         },
         "country:Germany:points": {
           "name": "Germany points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Greece:locations": {
-          "name": "Greece locations",
-          "unit": "count"
-        },
         "country:Greece:points": {
           "name": "Greece points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Guatemala:locations": {
-          "name": "Guatemala locations",
-          "unit": "count"
         },
         "country:Guatemala:points": {
           "name": "Guatemala points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Hungary:locations": {
-          "name": "Hungary locations",
-          "unit": "count"
-        },
         "country:Hungary:points": {
           "name": "Hungary points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:India:locations": {
-          "name": "India locations",
-          "unit": "count"
         },
         "country:India:points": {
           "name": "India points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Indonesia:locations": {
-          "name": "Indonesia locations",
-          "unit": "count"
-        },
         "country:Indonesia:points": {
           "name": "Indonesia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Ireland:locations": {
-          "name": "Ireland locations",
-          "unit": "count"
         },
         "country:Ireland:points": {
           "name": "Ireland points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Israel:locations": {
-          "name": "Israel locations",
-          "unit": "count"
-        },
         "country:Israel:points": {
           "name": "Israel points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Italy:locations": {
-          "name": "Italy locations",
-          "unit": "count"
         },
         "country:Italy:points": {
           "name": "Italy points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Japan:locations": {
-          "name": "Japan locations",
-          "unit": "count"
-        },
         "country:Japan:points": {
           "name": "Japan points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Kazakhstan:locations": {
-          "name": "Kazakhstan locations",
-          "unit": "count"
         },
         "country:Kazakhstan:points": {
           "name": "Kazakhstan points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Kenya:locations": {
-          "name": "Kenya locations",
-          "unit": "count"
-        },
         "country:Kenya:points": {
           "name": "Kenya points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Kyrgyzstan:locations": {
-          "name": "Kyrgyzstan locations",
-          "unit": "count"
         },
         "country:Kyrgyzstan:points": {
           "name": "Kyrgyzstan points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Latvia:locations": {
-          "name": "Latvia locations",
-          "unit": "count"
-        },
         "country:Latvia:points": {
           "name": "Latvia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Lithuania:locations": {
-          "name": "Lithuania locations",
-          "unit": "count"
         },
         "country:Lithuania:points": {
           "name": "Lithuania points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Malaysia:locations": {
-          "name": "Malaysia locations",
-          "unit": "count"
-        },
         "country:Malaysia:points": {
           "name": "Malaysia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Mexico:locations": {
-          "name": "Mexico locations",
-          "unit": "count"
         },
         "country:Mexico:points": {
           "name": "Mexico points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Mongolia:locations": {
-          "name": "Mongolia locations",
-          "unit": "count"
-        },
         "country:Mongolia:points": {
           "name": "Mongolia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Montenegro:locations": {
-          "name": "Montenegro locations",
-          "unit": "count"
         },
         "country:Montenegro:points": {
           "name": "Montenegro points",
           "unit": "score",
           "better": "higher"
         },
-        "country:New Zealand:locations": {
-          "name": "New Zealand locations",
-          "unit": "count"
-        },
         "country:New Zealand:points": {
           "name": "New Zealand points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Peru:locations": {
-          "name": "Peru locations",
-          "unit": "count"
         },
         "country:Peru:points": {
           "name": "Peru points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Philippines:locations": {
-          "name": "Philippines locations",
-          "unit": "count"
-        },
         "country:Philippines:points": {
           "name": "Philippines points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Puerto Rico:locations": {
-          "name": "Puerto Rico locations",
-          "unit": "count"
         },
         "country:Puerto Rico:points": {
           "name": "Puerto Rico points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Qatar:locations": {
-          "name": "Qatar locations",
-          "unit": "count"
-        },
         "country:Qatar:points": {
           "name": "Qatar points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Russia:locations": {
-          "name": "Russia locations",
-          "unit": "count"
         },
         "country:Russia:points": {
           "name": "Russia points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Réunion:locations": {
-          "name": "Réunion locations",
-          "unit": "count"
-        },
         "country:Réunion:points": {
           "name": "Réunion points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Senegal:locations": {
-          "name": "Senegal locations",
-          "unit": "count"
         },
         "country:Senegal:points": {
           "name": "Senegal points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Slovakia:locations": {
-          "name": "Slovakia locations",
-          "unit": "count"
-        },
         "country:Slovakia:points": {
           "name": "Slovakia points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:South Africa:locations": {
-          "name": "South Africa locations",
-          "unit": "count"
         },
         "country:South Africa:points": {
           "name": "South Africa points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Spain:locations": {
-          "name": "Spain locations",
-          "unit": "count"
-        },
         "country:Spain:points": {
           "name": "Spain points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Sweden:locations": {
-          "name": "Sweden locations",
-          "unit": "count"
         },
         "country:Sweden:points": {
           "name": "Sweden points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Thailand:locations": {
-          "name": "Thailand locations",
-          "unit": "count"
-        },
         "country:Thailand:points": {
           "name": "Thailand points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Tunisia:locations": {
-          "name": "Tunisia locations",
-          "unit": "count"
         },
         "country:Tunisia:points": {
           "name": "Tunisia points",
           "unit": "score",
           "better": "higher"
         },
-        "country:Türkiye:locations": {
-          "name": "Türkiye locations",
-          "unit": "count"
-        },
         "country:Türkiye:points": {
           "name": "Türkiye points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:Ukraine:locations": {
-          "name": "Ukraine locations",
-          "unit": "count"
         },
         "country:Ukraine:points": {
           "name": "Ukraine points",
           "unit": "score",
           "better": "higher"
         },
-        "country:United Arab Emirates:locations": {
-          "name": "United Arab Emirates locations",
-          "unit": "count"
-        },
         "country:United Arab Emirates:points": {
           "name": "United Arab Emirates points",
           "unit": "score",
           "better": "higher"
         },
-        "country:United Kingdom:locations": {
-          "name": "United Kingdom locations",
-          "unit": "count"
-        },
         "country:United Kingdom:points": {
           "name": "United Kingdom points",
           "unit": "score",
           "better": "higher"
-        },
-        "country:United States:locations": {
-          "name": "United States locations",
-          "unit": "count"
         },
         "country:United States:points": {
           "name": "United States points",
@@ -163209,18 +162981,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -163366,18 +163126,6 @@
           "name": "Median query latency",
           "unit": "seconds",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
         },
         "priceIn": {
           "name": "Input price",
@@ -303417,18 +303165,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -303818,20 +303554,6 @@
           "name": "Vals Index Subset",
           "group": "Task"
         }
-      },
-      "stats": {
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        }
       }
     },
     "vals-finance-agent-v1": {
@@ -304119,18 +303841,6 @@
           "name": "Total cache write tokens",
           "unit": "tokens",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
         },
         "latency": {
           "name": "Latency",
@@ -304893,18 +304603,6 @@
         }
       },
       "stats": {
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -306294,18 +305992,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
-        },
         "turns": {
           "name": "Turns per test",
           "unit": "count",
@@ -306396,18 +306082,6 @@
           "name": "Median query latency",
           "unit": "seconds",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
         },
         "latency": {
           "name": "Latency",
@@ -308985,18 +308659,6 @@
           "name": "Mean time to first token",
           "unit": "seconds",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Sampling temperature",
-          "unit": "score"
-        },
-        "max_output_tokens": {
-          "name": "Max output token limit",
-          "unit": "tokens"
-        },
-        "top_p": {
-          "name": "Top-p sampling threshold",
-          "unit": "score"
         },
         "turns": {
           "name": "Turns per test",

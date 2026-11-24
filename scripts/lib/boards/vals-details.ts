@@ -44,9 +44,6 @@ export const VALS_DETAILS_STATS: NonNullable<Leaderboard['stats']> = {
   'turn_metrics:avg_query_seconds': { name: 'Mean query latency', unit: 'seconds', better: 'lower' },
   'turn_metrics:median_query_seconds': { name: 'Median query latency', unit: 'seconds', better: 'lower' },
   'turn_metrics:avg_ttft_seconds': { name: 'Mean time to first token', unit: 'seconds', better: 'lower' },
-  temperature: { name: 'Sampling temperature', unit: 'score' },
-  max_output_tokens: { name: 'Max output token limit', unit: 'tokens' },
-  top_p: { name: 'Top-p sampling threshold', unit: 'score' },
 };
 
 export async function valsDetails(board: Leaderboard, slug: string, columns: ValsColumns = {}) {
@@ -88,7 +85,7 @@ export async function valsDetails(board: Leaderboard, slug: string, columns: Val
     const metrics = row.metrics ??= {};
     if (row.tokens === undefined && typeof run.avg_output_tokens === 'number' && run.avg_output_tokens > 0) row.tokens = run.avg_output_tokens;
     for (const [field, value] of Object.entries(run)) {
-      if (typeof value === 'number' && Number.isFinite(value) && !['accuracy', 'latency', 'cost_per_test'].includes(field)) metrics[field] = value;
+      if (typeof value === 'number' && Number.isFinite(value) && !['accuracy', 'latency', 'cost_per_test', 'temperature', 'top_p', 'max_output_tokens'].includes(field)) metrics[field] = value;
     }
     for (const group of ['turn_metrics', 'token_totals'] as const) {
       for (const [field, value] of Object.entries(run[group] ?? {})) {
