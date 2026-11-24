@@ -4392,10 +4392,6 @@
           "name": "False flags",
           "unit": "score",
           "better": "lower"
-        },
-        "cases": {
-          "name": "Cases",
-          "unit": "count"
         }
       }
     },
@@ -30564,50 +30560,50 @@
       "url": "https://huggingface.co/spaces/bengaliAI/ben10-asr-leaderboard",
       "feed": "https://huggingface.co/datasets/bengaliAI/ben10-asr-results/raw/main/results.csv",
       "terms": "The maintainer publishes corpus word error as a fraction and retains the test audio and transcripts. The results table uses CC BY 4.0. Hugging Face robots.txt permits the results file.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "bengaliAI/tugstugi_bengaliai-regional-asr_whisper-medium"
       ],
       "parts": {
         "barishal": {
-          "name": "barishal",
+          "name": "Barishal",
           "group": "Region"
         },
         "chittagong": {
-          "name": "chittagong",
+          "name": "Chittagong",
           "group": "Region"
         },
         "habiganj": {
-          "name": "habiganj",
+          "name": "Habiganj",
           "group": "Region"
         },
         "kishoreganj": {
-          "name": "kishoreganj",
+          "name": "Kishoreganj",
           "group": "Region"
         },
         "narail": {
-          "name": "narail",
+          "name": "Narail",
           "group": "Region"
         },
         "narsingdi": {
-          "name": "narsingdi",
+          "name": "Narsingdi",
           "group": "Region"
         },
         "rangpur": {
-          "name": "rangpur",
+          "name": "Rangpur",
           "group": "Region"
         },
         "sandwip": {
-          "name": "sandwip",
+          "name": "Sandwip",
           "group": "Region"
         },
         "sylhet": {
-          "name": "sylhet",
+          "name": "Sylhet",
           "group": "Region"
         },
         "tangail": {
-          "name": "tangail",
+          "name": "Tangail",
           "group": "Region"
         }
       }
@@ -42595,13 +42591,43 @@
     },
     "captionsmith": {
       "url": "https://github.com/theSatvik/captionsmith",
-      "feed": "https://raw.githubusercontent.com/theSatvik/captionsmith/main/README.md",
+      "feed": "https://raw.githubusercontent.com/theSatvik/captionsmith/main/BENCHMARKS.md",
       "terms": "The repository is licensed under MIT. https://github.com/theSatvik/captionsmith",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Gemma 4 8B"
-      ]
+      ],
+      "parts": {
+        "coverage": {
+          "name": "Coverage",
+          "unit": "score",
+          "group": "Reward component"
+        },
+        "timing": {
+          "name": "Timing",
+          "unit": "score",
+          "group": "Reward component"
+        },
+        "constraints": {
+          "name": "Constraints",
+          "unit": "score",
+          "group": "Reward component"
+        },
+        "segmentation": {
+          "name": "Segmentation",
+          "unit": "score",
+          "group": "Reward component"
+        }
+      },
+      "stats": {
+        "parseRate": {
+          "name": "Parse rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of valid SRT outputs from 0 to 1."
+        }
+      }
     },
     "car-bench": {
       "url": "https://car-bench.github.io/car-bench/leaderboard.html",
@@ -44924,8 +44950,9 @@
     "charades-sta": {
       "url": "https://github.com/jiyanggao/TALL",
       "feed": "https://raw.githubusercontent.com/jiyanggao/TALL/HEAD/README.md",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CTRL (aln)",
@@ -54495,7 +54522,7 @@
       "url": "https://github.com/CLUEbenchmark/CLUENER2020",
       "feed": "https://raw.githubusercontent.com/CLUEbenchmark/CLUENER2020/HEAD/README.md",
       "terms": "The publisher displays results at https://github.com/CLUEbenchmark/CLUENER2020. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Bert-base",
@@ -54504,34 +54531,44 @@
       ],
       "parts": {
         "Person Name": {
-          "name": "Person Name"
+          "name": "Person name",
+          "group": "Entity type"
         },
         "Organization": {
-          "name": "Organization"
+          "name": "Organization",
+          "group": "Entity type"
         },
         "Position": {
-          "name": "Position"
+          "name": "Position",
+          "group": "Entity type"
         },
         "Company": {
-          "name": "Company"
+          "name": "Company",
+          "group": "Entity type"
         },
         "Address": {
-          "name": "Address"
+          "name": "Address",
+          "group": "Entity type"
         },
         "Game": {
-          "name": "Game"
+          "name": "Game",
+          "group": "Entity type"
         },
         "Government": {
-          "name": "Government"
+          "name": "Government",
+          "group": "Entity type"
         },
         "Scene": {
-          "name": "Scene"
+          "name": "Scene",
+          "group": "Entity type"
         },
         "Book": {
-          "name": "Book"
+          "name": "Book",
+          "group": "Entity type"
         },
         "Movie": {
-          "name": "Movie"
+          "name": "Movie",
+          "group": "Entity type"
         }
       }
     },
@@ -147025,7 +147062,7 @@
       "url": "https://imobench.github.io/",
       "feed": "https://imobench.github.io/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "LEAP (Agentic Prover)"
@@ -168433,7 +168470,7 @@
       "url": "https://www.linuxarena.ai/",
       "feed": "https://www.linuxarena.ai/_next/static/chunks/*.js (successful-sabotage chart)",
       "terms": "Public LinuxArena chart data. Benchmark Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "stats": {
@@ -203380,47 +203417,59 @@
       "url": "https://spraakbanken.github.io/multigec-2025/results/test_results_minimal.html",
       "feed": "https://spraakbanken.github.io/multigec-2025/results/test_results_minimal.html",
       "terms": "The organizers publish terms for MultiGEC. https://spraakbanken.github.io/multigec-2025/terms_of_use.html",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "LLaMA 3"
       ],
       "parts": {
         "czech": {
-          "name": "Czech"
+          "name": "Czech",
+          "group": "Language"
         },
         "english": {
-          "name": "English"
+          "name": "English",
+          "group": "Language"
         },
         "estonian": {
-          "name": "Estonian"
+          "name": "Estonian",
+          "group": "Language"
         },
         "german": {
-          "name": "German"
+          "name": "German",
+          "group": "Language"
         },
         "greek": {
-          "name": "Greek"
+          "name": "Greek",
+          "group": "Language"
         },
         "icelandic": {
-          "name": "Icelandic"
+          "name": "Icelandic",
+          "group": "Language"
         },
         "italian": {
-          "name": "Italian"
+          "name": "Italian",
+          "group": "Language"
         },
         "latvian": {
-          "name": "Latvian"
+          "name": "Latvian",
+          "group": "Language"
         },
         "russian": {
-          "name": "Russian"
+          "name": "Russian",
+          "group": "Language"
         },
         "slovene": {
-          "name": "Slovene"
+          "name": "Slovene",
+          "group": "Language"
         },
         "swedish": {
-          "name": "Swedish"
+          "name": "Swedish",
+          "group": "Language"
         },
         "ukrainian": {
-          "name": "Ukrainian"
+          "name": "Ukrainian",
+          "group": "Language"
         }
       },
       "stats": {
@@ -218244,28 +218293,60 @@
       }
     },
     "omnispatial": {
-      "url": "https://github.com/qizekun/OmniSpatial",
-      "feed": "https://raw.githubusercontent.com/qizekun/OmniSpatial/HEAD/README.md",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
-      "rows": 3,
-      "unmatched": [],
+      "url": "https://qizekun.github.io/omnispatial/",
+      "feed": "https://qizekun.github.io/omnispatial/",
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
+      "rows": 31,
+      "unmatched": [
+        "RoboPoint-vicuna-13B",
+        "RoboPoint-vicuna-7B",
+        "SoFar-Qwen2.5-3B",
+        "SpaceMantis-13B",
+        "SpaceQwen2.5-VL-3B",
+        "SpaceThinker-Qwen2.5-3B",
+        "SpatialBot-3B"
+      ],
       "parts": {
-        "Dyn.": {
-          "name": "Dynamic reasoning",
-          "group": "Category"
+        "Manip": {
+          "name": "Manipulation",
+          "group": "Dynamic reasoning"
         },
-        "Interact": {
-          "name": "Spatial interaction",
-          "group": "Category"
+        "Motion": {
+          "name": "Motion",
+          "group": "Dynamic reasoning"
         },
-        "Logic": {
-          "name": "Complex spatial logic",
-          "group": "Category"
+        "Traffic": {
+          "name": "Traffic",
+          "group": "Spatial interaction"
         },
-        "Persp.": {
-          "name": "Perspective taking",
-          "group": "Category"
+        "Locate": {
+          "name": "Localization",
+          "group": "Spatial interaction"
+        },
+        "Geospatial": {
+          "name": "Geospatial",
+          "group": "Spatial interaction"
+        },
+        "Pattern": {
+          "name": "Pattern",
+          "group": "Complex spatial logic"
+        },
+        "Geometric": {
+          "name": "Geometric",
+          "group": "Complex spatial logic"
+        },
+        "Ego": {
+          "name": "Egocentric",
+          "group": "Perspective taking"
+        },
+        "Allo": {
+          "name": "Allocentric",
+          "group": "Perspective taking"
+        },
+        "Hypo": {
+          "name": "Hypothetical",
+          "group": "Perspective taking"
         }
       }
     },
@@ -260058,13 +260139,41 @@
       "url": "https://github.com/JakPot42/redtape",
       "feed": "https://raw.githubusercontent.com/JakPot42/redtape/main/README.md",
       "terms": "The authors publish the repository under its stated license. Cite the repository and follow its terms. https://github.com/JakPot42/redtape",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "stats": {
         "correct": {
           "name": "Correct abstention decisions",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "exactMatch": {
+          "name": "Exact-match accuracy (determinate)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction correct on determinate cases from 0 to 1."
+        },
+        "pairConsistency": {
+          "name": "Pair consistency",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of matched pairs answered consistently from 0 to 1."
+        },
+        "exactFactRate": {
+          "name": "Named withheld fact in exact form",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hallucinatedFactRate": {
+          "name": "Named a fact never withheld",
+          "unit": "%",
+          "better": "lower"
+        },
+        "truncatedResponses": {
+          "name": "Truncated responses",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -271723,23 +271832,23 @@
       "stats": {
         "dailyMeans": {
           "name": "Daily means reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "extremes": {
           "name": "Extremes reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "recordCounts": {
           "name": "Record counts reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "producedOutput": {
           "name": "Produced output",
-          "unit": "score"
-        },
-        "tasks": {
-          "name": "Completed tasks",
-          "unit": "count"
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -282661,11 +282770,23 @@
       "url": "https://speko.com/blog/gpt-realtime-2-1-mini-best-value",
       "feed": "https://speko.com/blog/gpt-realtime-2-1-mini-best-value",
       "terms": "Speko public benchmark article. https://speko.com/terms",
-      "retrieved": "2026-11-23",
-      "rows": 2,
-      "unmatched": [
-        "grok-voice-think-fast"
-      ]
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [],
+      "stats": {
+        "latency": {
+          "name": "End-of-turn latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "brevity": {
+          "name": "Brevity score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Deterministic brevity score from 0 to 1."
+        }
+      }
     },
     "speko-s2s-six-scenarios": {
       "url": "https://speko.com/benchmarks/s2s",
@@ -284681,14 +284802,53 @@
       "url": "https://openai.robocurve.org/stationerybench/",
       "feed": "https://openai.robocurve.org/stationerybench/",
       "terms": "Robocurve publishes this report and its benchmark results. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "parts": {
+        "uncapMarker": {
+          "name": "Uncap the marker",
+          "group": "Task",
+          "unit": "score"
+        },
+        "pourPaperClips": {
+          "name": "Pour paper clips into a lifted bowl",
+          "group": "Task",
+          "unit": "score"
+        },
+        "handRuler": {
+          "name": "Hand a ruler between arms, cup to cup",
+          "group": "Task",
+          "unit": "score"
+        },
+        "pullStickyNote": {
+          "name": "Pull the middle sticky note from a stack",
+          "group": "Task",
+          "unit": "score"
+        },
+        "openBoxEraser": {
+          "name": "Open the box, take out an eraser, close the lid",
+          "group": "Task",
+          "unit": "score"
+        }
+      },
+      "stats": {
         "completion": {
           "name": "Completion rate",
-          "group": "Outcome",
+          "unit": "%",
+          "better": "higher",
           "note": "Share of trials that reached the 100-point task completion score."
+        },
+        "neverLeftStart": {
+          "name": "Never left start pose",
+          "unit": "%",
+          "better": "lower"
+        },
+        "callsPerRun": {
+          "name": "Mean calls per run",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -293114,9 +293274,25 @@
       "url": "https://labs.evaligo.com/swe-race",
       "feed": "https://labs.evaligo.com/swe-race/data/results.json",
       "terms": "Evaligo links the public results JSON from its benchmark page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
+      "chart": {
+        "title": "Pass@1 vs. cost per solved task",
+        "x": {
+          "key": "costPerSolved",
+          "label": "Cost per solved task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Evaligo SWE-Race scatter chart comparing pass@1 against cost per solved task."
+      },
       "reference": [
         "BenchGen"
       ],
@@ -311417,10 +311593,11 @@
       "url": "https://microsoft.github.io/verus-proof-synthesis/",
       "feed": "https://microsoft.github.io/verus-proof-synthesis/data/verus-bench-results.json",
       "terms": "The Verus Proof Synthesis repository is MIT licensed and publishes this leaderboard JSON.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "harnesses": "system",
+      "verified": "verified by the Verus-Bench maintainers",
       "parts": {
         "cloverbench": {
           "name": "CloverBench",
@@ -311437,6 +311614,28 @@
         "misc": {
           "name": "Misc",
           "group": "Source"
+        }
+      },
+      "stats": {
+        "solved": {
+          "name": "Tasks solved",
+          "unit": "count",
+          "better": "higher"
+        },
+        "avgTimeSeconds": {
+          "name": "Average time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "avgLlmCalls": {
+          "name": "Average LLM calls per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "totalCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },

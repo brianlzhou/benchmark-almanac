@@ -16,7 +16,6 @@ const board: Leaderboard = {
     findingRecall: { name: 'Finding recall', unit: 'score', better: 'higher' },
     judge: { name: 'Judge score', unit: 'score', better: 'higher' },
     falseFlags: { name: 'False flags', unit: 'score', better: 'lower' },
-    cases: { name: 'Cases', unit: 'count' },
   },
   async fetch() {
     const readme = execFileSync('tar', ['-xzOf', '-', 'README.md'], { input: Buffer.from(await fetchBytes(feed)), encoding: 'utf8' });
@@ -25,9 +24,9 @@ const board: Leaderboard = {
     const rows = table[1].trim().split('\n').map(line => {
       const [model, judge, runs, ...cells] = line.split('|').slice(1, -1).map(c => c.trim().replace(/\*/g, ''));
       if (!/^\d+×\d+$/.test(runs) || cells.length !== 5 || !cells.every(v => /^\d+(?:\.\d+)?$/.test(v))) throw new Error('Invalid hybrid baseline');
-      const [cases, trials] = runs.split('×').map(Number);
+      const [, trials] = runs.split('×').map(Number);
       const [delivery, findingRecall, judgeScore, falseFlags, score] = cells.map(Number);
-      return { model, score, trials, setting: 'v0.4.0 hybrid, judge ' + judge, metrics: { cases, delivery, findingRecall, judge: judgeScore, falseFlags } };
+      return { model, score, trials, setting: 'v0.4.0 hybrid, judge ' + judge, metrics: { delivery, findingRecall, judge: judgeScore, falseFlags } };
     });
     return checked(rows, 2);
   },

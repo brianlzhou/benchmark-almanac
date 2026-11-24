@@ -10,6 +10,12 @@ const parts = { hard: 'Hard', public: 'Public', private: 'Private', composite: '
 const board: Leaderboard = {
   benchmark: 'swe-race', url: 'https://labs.evaligo.com/swe-race', feed, parts, reference: ['BenchGen'],
   terms: 'Evaligo links the public results JSON from its benchmark page.',
+  chart: {
+    title: 'Pass@1 vs. cost per solved task',
+    x: { key: 'costPerSolved', label: 'Cost per solved task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' },
+    note: 'Evaligo SWE-Race scatter chart comparing pass@1 against cost per solved task.',
+  },
   stats: {
     costPerSolved: { name: 'Cost per solved task', unit: 'usd', better: 'lower' },
     steps: { name: 'Steps', unit: 'count', better: 'lower' },

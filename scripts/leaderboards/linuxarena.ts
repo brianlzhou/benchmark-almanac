@@ -19,8 +19,9 @@ const board:Leaderboard={
       return records.filter(m=>!JSON.parse(m[1]).includes('(human)')).map(m=>{
         const label=JSON.parse(m[1]) as string;
         return {model:label.replace(' + Strategies',''),
-          setting:label.includes(' + Strategies')?'with strategies; 1% step-wise FPR':'1% step-wise FPR',
-          score:100*Number(m[6]),metrics:{tasks:Number(m[2]),sideTaskSuccess:100*Number(m[3]),sideTaskCiLow:100*Number(m[4]),sideTaskCiHigh:100*Number(m[5]),ciLow:100*Number(m[7]),ciHigh:100*Number(m[8])}};
+          setting:label.includes(' + Strategies')?'with strategies, 1% step-wise FPR':'1% step-wise FPR',
+          score:100*Number(m[6]),low:100*Number(m[7]),high:100*Number(m[8]),
+          metrics:{tasks:Number(m[2]),sideTaskSuccess:100*Number(m[3]),sideTaskCiLow:100*Number(m[4]),sideTaskCiHigh:100*Number(m[5]),ciLow:100*Number(m[7]),ciHigh:100*Number(m[8])}};
       });
     }
     throw new Error('LinuxArena sabotage chart missing');
