@@ -256760,6 +256760,258 @@
         "Command & Control": {
           "name": "Command & Control"
         }
+      },
+      "stats": {
+        "Provision Compute: Worst variant Pass@10": {
+          "name": "Provision Compute: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Covert Weight Exfil.: Worst variant Pass@10": {
+          "name": "Covert Weight Exfil.: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Weight Exfiltration: Worst variant Pass@10": {
+          "name": "Weight Exfiltration: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Make Me Pay: Worst variant Pass@10": {
+          "name": "Make Me Pay: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Copycat LLM API: Worst variant Pass@10": {
+          "name": "Copycat LLM API: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replicate via Worm: Worst variant Pass@10": {
+          "name": "Replicate via Worm: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spear Phishing: Worst variant Pass@10": {
+          "name": "Spear Phishing: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Fake Business Transact.: Worst variant Pass@10": {
+          "name": "Fake Business Transact.: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Inference Server: Worst variant Pass@10": {
+          "name": "Inference Server: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Recursive Replication: Worst variant Pass@10": {
+          "name": "Recursive Replication: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Start Subagent: Worst variant Pass@10": {
+          "name": "Start Subagent: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Explore & Exploit: Worst variant Pass@10": {
+          "name": "Explore & Exploit: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Rate of Infection: Worst variant Pass@10": {
+          "name": "Rate of Infection: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Software Signature: Worst variant Pass@10": {
+          "name": "Software Signature: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Command & Control: Worst variant Pass@10": {
+          "name": "Command & Control: Worst variant Pass@10",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Online Compute Acquis.: Pass@1": {
+          "name": "Online Compute Acquis.: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Provision Compute: Pass@1": {
+          "name": "Provision Compute: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Provision Compute: Worst variant Pass@1": {
+          "name": "Provision Compute: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AWS Signup: Pass@1": {
+          "name": "AWS Signup: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Covert Weight Exfil.: Pass@1": {
+          "name": "Covert Weight Exfil.: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Covert Weight Exfil.: Worst variant Pass@1": {
+          "name": "Covert Weight Exfil.: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Weight Exfiltration: Pass@1": {
+          "name": "Weight Exfiltration: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Weight Exfiltration: Worst variant Pass@1": {
+          "name": "Weight Exfiltration: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Create Bitcoin Wallet: Pass@1": {
+          "name": "Create Bitcoin Wallet: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Make Me Pay: Pass@1": {
+          "name": "Make Me Pay: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Make Me Pay: Worst variant Pass@1": {
+          "name": "Make Me Pay: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Copycat LLM API: Pass@1": {
+          "name": "Copycat LLM API: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Copycat LLM API: Worst variant Pass@1": {
+          "name": "Copycat LLM API: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replicate via Worm: Pass@1": {
+          "name": "Replicate via Worm: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replicate via Worm: Worst variant Pass@1": {
+          "name": "Replicate via Worm: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spear Phishing: Pass@1": {
+          "name": "Spear Phishing: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spear Phishing: Worst variant Pass@1": {
+          "name": "Spear Phishing: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Pass KYC Check: Pass@1": {
+          "name": "Pass KYC Check: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Fake Business Trans.: Pass@1": {
+          "name": "Fake Business Trans.: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Fake Business Trans.: Worst variant Pass@1": {
+          "name": "Fake Business Trans.: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Inference Server: Pass@1": {
+          "name": "Inference Server: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Inference Server: Worst variant Pass@1": {
+          "name": "Inference Server: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Serve Multi-GPU Model: Pass@1": {
+          "name": "Serve Multi-GPU Model: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Recursive Replication: Pass@1": {
+          "name": "Recursive Replication: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Recursive Replication: Worst variant Pass@1": {
+          "name": "Recursive Replication: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Start Subagent: Pass@1": {
+          "name": "Start Subagent: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Start Subagent: Worst variant Pass@1": {
+          "name": "Start Subagent: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Explore & Exploit: Pass@1": {
+          "name": "Explore & Exploit: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Explore & Exploit: Worst variant Pass@1": {
+          "name": "Explore & Exploit: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Rate of Infection: Pass@1": {
+          "name": "Rate of Infection: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Rate of Infection: Worst variant Pass@1": {
+          "name": "Rate of Infection: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Software Signature: Pass@1": {
+          "name": "Software Signature: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Software Signature: Worst variant Pass@1": {
+          "name": "Software Signature: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Command & Control: Pass@1": {
+          "name": "Command & Control: Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Command & Control: Worst variant Pass@1": {
+          "name": "Command & Control: Worst variant Pass@1",
+          "unit": "%",
+          "better": "higher"
+        }
       }
     },
     "replicationbench": {
@@ -267097,6 +267349,62 @@
         "outputTokens": {
           "name": "Mean output tokens",
           "unit": "tokens"
+        },
+        "final_answer_accuracy": {
+          "name": "Final answer accuracy",
+          "unit": "score"
+        },
+        "field_accuracy": {
+          "name": "Field accuracy",
+          "unit": "score"
+        },
+        "regret_score": {
+          "name": "Regret score",
+          "unit": "score"
+        },
+        "required_tools_used": {
+          "name": "Required tools used",
+          "unit": "score"
+        },
+        "workflow_efficiency": {
+          "name": "Workflow efficiency",
+          "unit": "score"
+        },
+        "screened_selected": {
+          "name": "Screened selected",
+          "unit": "score"
+        },
+        "campaign_budget_respected": {
+          "name": "Campaign budget respected",
+          "unit": "score"
+        },
+        "total_tool_calls": {
+          "name": "Total tool calls",
+          "unit": "count"
+        },
+        "inspect_problem_calls": {
+          "name": "Inspect problem calls",
+          "unit": "count"
+        },
+        "list_candidate_compounds_calls": {
+          "name": "List candidate compounds calls",
+          "unit": "count"
+        },
+        "rank_compounds_calls": {
+          "name": "Rank compounds calls",
+          "unit": "count"
+        },
+        "run_reaction_screen_calls": {
+          "name": "Run reaction screen calls",
+          "unit": "count"
+        },
+        "compare_compounds_calls": {
+          "name": "Compare compounds calls",
+          "unit": "count"
+        },
+        "submit_decision_calls": {
+          "name": "Submit decision calls",
+          "unit": "count"
         }
       }
     },

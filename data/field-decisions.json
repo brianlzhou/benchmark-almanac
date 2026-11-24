@@ -371,7 +371,8 @@
     },
     "ceo-bench": {
       "Log-normal": "ignore",
-      "Estimated final cash upper bound": "ignore"
+      "Estimated final cash upper bound": "ignore",
+      "Mean ± std. cash": "wired"
     },
     "chainworld": {
       "Runtime": "ignore"
