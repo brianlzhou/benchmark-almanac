@@ -7,7 +7,7 @@ const feed = 'https://arxiv.org/html/2106.10776';
 const board: Leaderboard = {
   benchmark: 'bva-case-citation', static: 'paper', url: feed, feed,
   terms: 'The authors publish the aggregate table on arXiv. https://arxiv.org/abs/2106.10776',
-  stats:{recallAt5:{name:'Recall at 5',unit:'%',better:'higher'},recallAt20:{name:'Recall at 20',unit:'%',better:'higher'},testFolds:{name:'Test folds',unit:'count'}},
+  stats:{recallAt5:{name:'Recall at 5',unit:'%',better:'higher'},recallAt20:{name:'Recall at 20',unit:'%',better:'higher'}},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0].join('|') === 'Model|Setting|Recall@1|Recall@1|Recall@5|Recall@5|Recall@20|Recall@20');
     if (!table) throw new Error('Missing Table 2 recall columns');
@@ -18,7 +18,7 @@ const board: Leaderboard = {
         return Number(m[1]);
       });
       const [score, stderr, recallAt5, recallAt5Stderr, recallAt20, recallAt20Stderr] = values;
-      return { model, setting, score, metrics: { stderr, recallAt5, recallAt5Stderr, recallAt20, recallAt20Stderr, testFolds: 6 } };
+      return { model, setting, score, metrics: { stderr, recallAt5, recallAt5Stderr, recallAt20, recallAt20Stderr } };
     });
     return checked(rows, 12);
   },

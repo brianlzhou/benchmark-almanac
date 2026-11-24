@@ -13,7 +13,6 @@ const board: Leaderboard = {
     incorrect: { name: 'Incorrect answers', unit: 'count' },
     noAnswer: { name: 'No answer', unit: 'count' },
     partial: { name: 'Partially correct answers', unit: 'count' },
-    questions: { name: 'Questions assessed', unit: 'count' },
   },
   async fetch() {
     const section = (await pdfText(feed)).split('Accuracy of Answers by Chatbot')[1]?.split('Number of Questions')[0];
@@ -22,7 +21,7 @@ const board: Leaderboard = {
     const rows = [...section.matchAll(/^(Copilot|Gemini|ChatGPT3\.5|ChatGPT4)\s*\n[ \t]*(\d+)[ \t]+(\d+)[ \t]+(\d+)(?:[ \t]+(\d+))?[ \t]*$/gm)].map(m => {
       const [incorrect, partial, acceptable, noAnswer] = [m[2], m[3], m[4], m[5] ?? '0'].map(Number);
       if (incorrect + partial + acceptable + noAnswer !== 100) throw new Error('Incomplete chatbot counts');
-      return { model: m[1], score: acceptable, metrics: { incorrect, partial, noAnswer, questions: 100 } };
+      return { model: m[1], score: acceptable, metrics: { incorrect, partial, noAnswer } };
     });
     if (rows.length !== 4) throw new Error('Expected four chatbot products');
     return rows;

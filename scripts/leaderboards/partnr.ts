@@ -8,7 +8,7 @@ const board: Leaderboard = {
   benchmark:'partnr',static:'paper',url,feed:url,harnesses:'system',
   terms:'The authors publish the paper under the license linked at https://arxiv.org/abs/2411.00081.',
   stats:{steps:{name:'Simulation steps',unit:'count',better:'lower'},stepSE:{name:'Simulation steps standard error',unit:'count'},
-    stderr:{name:'Success rate standard error',unit:'%'},complete:{name:'Completion rate',unit:'%',better:'higher'},
+    complete:{name:'Completion rate',unit:'%',better:'higher'},
     completeSE:{name:'Completion rate standard error',unit:'%'},cycles:{name:'Planning cycles',unit:'count',better:'lower'},
     cycleSE:{name:'Planning cycles standard error',unit:'count'}},
   async fetch() {
