@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: feed + '#Sx4.T2',
   feed,
   terms: 'The authors publish their results on arXiv under the terms listed at https://arxiv.org/abs/2302.06301.',
+  stats: { mIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0][0] === 'Terms' && t[2]?.[0] === 'ESD');
     if (!table || table[1].join('|') !== '|Acc|mIoU|Acc|mIoU') throw new Error('Missing ESD accuracy or mIoU columns');

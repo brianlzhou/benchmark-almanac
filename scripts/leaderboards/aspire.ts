@@ -19,6 +19,15 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2608.31111",
   feed: FEED,
   parts: Object.fromEntries(Object.entries(goals).map(([key,name]) => [key,{name,group:'Vague goal'}])),
+  stats: {
+    baseMacro: { name: 'Base macro average', unit: '%', better: 'higher' },
+    ...Object.fromEntries(Object.entries(goals).flatMap(([key, name]) => [
+      [key + 'Base', { name: name + ' base score', unit: '%' as const, better: 'higher' as const }],
+      [key + 'RunA', { name: name + ' run A', unit: '%' as const, better: 'higher' as const }],
+      [key + 'RunB', { name: name + ' run B', unit: '%' as const, better: 'higher' as const }],
+      [key + 'Delta', { name: name + ' change from base', unit: 'score' as const, better: 'higher' as const, note: 'Change from base score in percentage points.' }],
+    ])),
+  },
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
