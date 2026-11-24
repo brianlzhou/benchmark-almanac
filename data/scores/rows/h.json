@@ -2973,7 +2973,14 @@
     ["hype-trap","grok-4-20","non-reasoning",null,-0.0246,"2026-02-17",null,null,null,{"run":"2026-10-11"}],
     ["hype-trap","gpt-5-4",null,null,-0.0256,"2026-03-05",null,null,null,{"run":"2026-10-11"}],
     ["hype-trap","gpt-5-4-mini",null,null,-0.1896,"2026-03-17",null,null,null,{"run":"2026-10-11"}],
-    ["hype-trap","claude-opus-5-5",null,null,-0.0078,"2026-09-22",null,null,null,{"run":"2026-10-11"}]
+    ["hype-trap","claude-opus-5-5",null,null,-0.0078,"2026-09-22",null,null,null,{"run":"2026-10-11"}],
+    ["hyper-intervention","deepseek-v4-1-flash","high reasoning",null,1.25,"2026-09-09",1.34,null,{"std":1.77,"validationGain":1.7,"totalTokens":1051500,"correctionsKept":11,"actions":302.5},{"trials":2}],
+    ["hyper-intervention","claude-opus-5-5","high reasoning",null,4.95,"2026-09-22",18.93,null,{"std":0.64,"validationGain":6.39,"totalTokens":978150,"correctionsKept":33,"actions":322.3},{"trials":3}],
+    ["hyper-intervention","kimi-k3-1-pro","high reasoning",null,4.16,"2026-10-23",8.13,null,{"std":1.42,"validationGain":5.58,"totalTokens":1457000,"correctionsKept":46.5,"actions":557},{"trials":2}],
+    ["hyper-intervention","gemini-4-carbon","high reasoning",null,4.8,"2026-10-28",15.75,null,{"std":0.54,"validationGain":5.63,"totalTokens":1854200,"correctionsKept":58,"actions":519.5},{"trials":2}],
+    ["hyper-intervention","claude-fable-5-2","high reasoning",null,5.58,"2026-11-09",59.38,null,{"std":0.65,"validationGain":6.2,"totalTokens":1538100,"correctionsKept":67.3,"actions":479.3},{"trials":3}],
+    ["hyper-intervention","gpt-6-2-astra","high reasoning",null,3.8,"2026-11-17",21.34,null,{"std":0.77,"validationGain":4.17,"totalTokens":980980,"correctionsKept":84.3,"actions":401},{"trials":3}],
+    ["hyper-intervention","gemini-4-neon","medium reasoning",null,4.39,"2026-11-18",15.91,null,{"std":0.16,"validationGain":5.36,"totalTokens":1396700,"correctionsKept":50.3,"actions":359.3},{"trials":3}]
   ],
   "others": [
     ["h2r-bench","Wan2.7","Video-conditioned generation",null,79.8,null,null,null,{"e0m0":0.706,"e0m1":0.791,"e0m2":0.766,"e0m3":0.772,"e0m4":0.796,"e0m5":76.5,"e1m0":0.718,"e1m1":0.804,"e1m2":0.835,"e1m3":0.91,"e1m4":0.795,"e1m5":83.1}],

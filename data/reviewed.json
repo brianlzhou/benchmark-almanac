@@ -496,6 +496,11 @@
       "via": "Seed2.0 and Seed2.1 model cards report AetherCode, and the almanac had no record."
     },
     {
+      "id": "afk-bench-uiuc",
+      "date": "2026-11-24",
+      "via": "Launched on X on 2026-11-24 with arXiv 2611.28202 and a live leaderboard at autopilot-harness.github.io scoring eight frontier models across 120 games."
+    },
+    {
       "id": "afribed",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -5951,6 +5956,11 @@
       "via": "Qwen's authenticated repository list exposed D2K-Bench and its README links the paper."
     },
     {
+      "id": "da7em-bench-v2",
+      "date": "2026-11-24",
+      "via": "Launched on X by Da7em on 2026-11-19 with a live bilingual leaderboard scoring 11 frontier models across four pillars and 12 axes."
+    },
+    {
       "id": "dabstep",
       "date": "2026-11-01",
       "via": "Harbor hub dataset adyen/dabstep."
@@ -9826,6 +9836,11 @@
       "via": "Meituan LongCat's GitHub org, checked while reviewing AMO-Bench."
     },
     {
+      "id": "generalist-gaming-agents-kaggle",
+      "date": "2026-11-24",
+      "via": "Launched on X by Kaggle on 2026-11-23 in partnership with GARC and Princeton CS and PLI."
+    },
+    {
       "id": "geneval",
       "date": "2026-11-01",
       "via": "ERNIE 5.0 tech report Table 5 reports GenEval."
@@ -11319,6 +11334,11 @@
       "id": "hype-trap",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "hyper-intervention",
+      "date": "2026-11-24",
+      "via": "Launched on X by Hyperstition on 2026-11-20 with an MIT-licensed repository and replicated session scores for seven frontier models."
     },
     {
       "id": "i2b2-2006-smoking",
@@ -18201,6 +18221,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "openresearch-intelligence-index",
+      "date": "2026-11-24",
+      "via": "Launched on X by alphaXiv on 2026-11-20 with a public blog leaderboard scoring eight frontier models across six providers and backed by the alphaXiv/OpenResearch repository."
+    },
+    {
       "id": "openrsi-index",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-09-24."
@@ -22034,6 +22059,11 @@
       "id": "singmos",
       "date": "2026-11-20",
       "via": "We followed the VoiceMOS singing track to the original paper and compared its two test splits."
+    },
+    {
+      "id": "singularity-bench",
+      "date": "2026-11-24",
+      "via": "Launched on X by InfiniAI Lab on 2026-11-20 with arXiv 2611.16591 and a public leaderboard scoring nine frontier models across 13 agent runs."
     },
     {
       "id": "sinhala-language-proficiency-linguistic-mastery",
@@ -26399,6 +26429,11 @@
       "id": "visual-aesthetic-benchmark",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "visual-cipher-bench",
+      "date": "2026-11-24",
+      "via": "Launched on X by Einsia AI on 2026-11-17 with arXiv 2611.16861 and a live leaderboard scoring eight frontier models across 29 effort settings."
     },
     {
       "id": "visual-spatial-reasoning",

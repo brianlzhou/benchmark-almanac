@@ -3647,6 +3647,55 @@
         }
       }
     },
+    "afk-bench-uiuc": {
+      "url": "https://autopilot-harness.github.io/",
+      "feed": "https://autopilot-harness.github.io/data.js",
+      "terms": "Published openly on GitHub Pages by the AutoPILOT authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 32,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "hostile": {
+          "name": "Hostile",
+          "group": "Success rate"
+        },
+        "benign": {
+          "name": "Benign",
+          "group": "Success rate"
+        },
+        "turnBased": {
+          "name": "Turn-based",
+          "group": "Success rate"
+        },
+        "hostileProgress": {
+          "name": "Hostile",
+          "group": "Mean progress",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benignProgress": {
+          "name": "Benign",
+          "group": "Mean progress",
+          "unit": "score",
+          "better": "higher"
+        },
+        "turnBasedProgress": {
+          "name": "Turn-based",
+          "group": "Mean progress",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "meanProgress": {
+          "name": "Mean progress",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean normalized game progress from 0 to 1 across all 120 games."
+        }
+      }
+    },
     "afribed": {
       "url": "https://arxiv.org/html/2610.26821",
       "feed": "https://arxiv.org/html/2610.26821",
@@ -76292,6 +76341,80 @@
         }
       }
     },
+    "da7em-bench-v2": {
+      "url": "https://da7tech.com/da7em-bench/?lang=en",
+      "feed": "https://da7tech.com/da7em-bench/?lang=en",
+      "terms": "Published openly on da7tech.com. Robots.txt allows crawling of /da7em-bench/.",
+      "retrieved": "2026-11-24",
+      "rows": 11,
+      "unmatched": [],
+      "parts": {
+        "mind": {
+          "name": "Mind",
+          "group": "Pillar"
+        },
+        "execution": {
+          "name": "Execution",
+          "group": "Pillar"
+        },
+        "reliability": {
+          "name": "Reliability",
+          "group": "Pillar"
+        },
+        "output": {
+          "name": "Output",
+          "group": "Pillar"
+        },
+        "reasoning": {
+          "name": "Reasoning and judgment",
+          "group": "Axis"
+        },
+        "research": {
+          "name": "Research and exploration",
+          "group": "Axis"
+        },
+        "planning": {
+          "name": "Planning",
+          "group": "Axis"
+        },
+        "delivery": {
+          "name": "Delivery",
+          "group": "Axis"
+        },
+        "grit": {
+          "name": "Determination to fix",
+          "group": "Axis"
+        },
+        "honesty": {
+          "name": "Accuracy and context retention",
+          "group": "Axis"
+        },
+        "discipline": {
+          "name": "Honesty and neutrality",
+          "group": "Axis"
+        },
+        "acceptance": {
+          "name": "Acceptance vs refusal",
+          "group": "Axis"
+        },
+        "designing": {
+          "name": "Engineering",
+          "group": "Axis"
+        },
+        "taste": {
+          "name": "Taste",
+          "group": "Axis"
+        },
+        "writing": {
+          "name": "Writing",
+          "group": "Axis"
+        },
+        "style": {
+          "name": "Communication and style",
+          "group": "Axis"
+        }
+      }
+    },
     "dabstep": {
       "url": "https://huggingface.co/spaces/adyen/DABstep",
       "feed": "https://adyen-dabstep.hf.space/config",
@@ -139414,6 +139537,39 @@
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
       ]
+    },
+    "hyper-intervention": {
+      "url": "https://github.com/Hyperstitioncc/HyperIntervention",
+      "feed": "https://raw.githubusercontent.com/Hyperstitioncc/HyperIntervention/main/reports/sessions.csv",
+      "terms": "Published under the MIT license in the Hyperstitioncc/HyperIntervention GitHub repository.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "costPer": "run",
+      "stats": {
+        "validationGain": {
+          "name": "Validation gain",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean percentage-point gain on the 500-problem validation split across sessions."
+        },
+        "totalTokens": {
+          "name": "Judge tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Mean judge tokens consumed per 3-hour post-training session."
+        },
+        "correctionsKept": {
+          "name": "Corrections kept",
+          "unit": "count",
+          "note": "Mean number of token-level corrections kept per session."
+        },
+        "actions": {
+          "name": "Actions",
+          "unit": "count",
+          "note": "Mean editor actions taken per session."
+        }
+      }
     },
     "iberobench": {
       "url": "https://aclanthology.org/2025.coling-main.699/",
@@ -240871,6 +241027,69 @@
         }
       }
     },
+    "openresearch-intelligence-index": {
+      "url": "https://www.alphaxiv.org/blog/introducing-openresearch-intelligence-index#results",
+      "feed": "https://www.alphaxiv.org/blog/introducing-openresearch-intelligence-index (ResultsTable and CostScoreChart bundles)",
+      "terms": "Published openly on the alphaXiv blog. Robots.txt at alphaxiv.org permits crawling of blog pages and assets.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [],
+      "chart": {
+        "title": "Score vs. API cost",
+        "note": "OpenResearch Intelligence Index against API token cost for one full benchmark pass, matching the Pareto chart in the launch post.",
+        "x": {
+          "key": "fullRunCost",
+          "label": "Cost of one full benchmark pass",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "OpenResearch Intelligence Index",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "harnesses": "system",
+      "parts": {
+        "science": {
+          "name": "Science",
+          "group": "Track",
+          "note": "Weighted 40% in the composite index across 20 Terminal-Bench-Science tasks."
+        },
+        "postTraining": {
+          "name": "Post-training",
+          "group": "Track",
+          "note": "Weighted 40% in the composite index across six fine-tuning tasks."
+        },
+        "literature": {
+          "name": "Literature relevancy",
+          "group": "Track",
+          "note": "Weighted 20% in the composite index across 45 PaperFindingBench queries."
+        }
+      },
+      "stats": {
+        "fullRunCost": {
+          "name": "Full run cost",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Estimated API token cost for one full benchmark pass across all three tracks."
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Mean input tokens per task attempt."
+        },
+        "minutes": {
+          "name": "Wall-clock time",
+          "unit": "minutes",
+          "better": "lower",
+          "note": "Mean wall-clock minutes per task attempt."
+        }
+      }
+    },
     "openrsi-index-ace-playbook-repair": {
       "url": "https://index.openrsi.foundation/tasks/ace-playbook-repair.html",
       "feed": "https://index.openrsi.foundation/tasks/ace-playbook-repair.html",
@@ -279080,6 +279299,76 @@
           "name": "Test-other1: System KTRCC",
           "unit": "score",
           "better": "higher"
+        }
+      }
+    },
+    "singularity-bench": {
+      "url": "https://infini-ai-lab.github.io/singularity-bench/#leaderboard",
+      "feed": "https://infini-ai-lab.github.io/singularity-bench/assets/js/data.js",
+      "terms": "Published openly by InfiniAI Lab on GitHub Pages with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [],
+      "chart": {
+        "title": "Performance vs. cost",
+        "note": "Singularity-Index against total agent API spend across all six tasks, matching the Pareto chart on the Singularity-Bench site.",
+        "x": {
+          "key": "cost",
+          "label": "Total agent API cost (all six tasks)",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Singularity-Index",
+          "better": "higher"
+        }
+      },
+      "costPer": "run",
+      "harnesses": "system",
+      "parts": {
+        "pre": {
+          "name": "Pre-training",
+          "group": "Task",
+          "unit": "score",
+          "better": "lower",
+          "note": "Validation perplexity of the LLM trained from scratch, where lower is better and the human baseline is 14.17."
+        },
+        "mid": {
+          "name": "Mid-training",
+          "group": "Task",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean post-RL accuracy on AMC, HumanEval+, and GPQA-Diamond, where the human baseline is 0.175."
+        },
+        "post": {
+          "name": "Post-training",
+          "group": "Task",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean resolve rate on held-out terminal tasks and SWE-bench Verified, where the human baseline is 0.539."
+        },
+        "inf": {
+          "name": "Inference",
+          "group": "Task",
+          "unit": "usd",
+          "better": "higher",
+          "note": "Simulated FP8 serving income in USD per GPU-hour, where the SGLang baseline is 8.18."
+        },
+        "har": {
+          "name": "Harness",
+          "group": "Task",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean downstream score on three kernel-generation and two vLLM bug-fixing tasks, where Claude Code scores 0.438."
+        },
+        "clu": {
+          "name": "Cluster",
+          "group": "Task",
+          "unit": "score",
+          "better": "higher",
+          "note": "Combined request SLO attainment and model completion score, where NVIDIA Dynamo scores 0.460."
         }
       }
     },
@@ -319545,6 +319834,32 @@
           "unit": "%",
           "better": "higher",
           "note": "Accuracy when the model selects the top-ranked or bottom-ranked item."
+        }
+      }
+    },
+    "visual-cipher-bench": {
+      "url": "https://lab.einsia.ai/visual-cipher-bench/",
+      "feed": "https://lab.einsia.ai/visual-cipher-bench/",
+      "terms": "Published openly on Einsia AI Lab with robots.txt Allow: /.",
+      "retrieved": "2026-11-24",
+      "rows": 29,
+      "unmatched": [],
+      "parts": {
+        "spatial": {
+          "name": "Spatial",
+          "group": "Category"
+        },
+        "logic": {
+          "name": "Logic",
+          "group": "Category"
+        },
+        "ruleInduction": {
+          "name": "Rule induction",
+          "group": "Category"
+        },
+        "decoding": {
+          "name": "Decoding",
+          "group": "Category"
         }
       }
     },
