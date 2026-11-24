@@ -39,7 +39,7 @@ const board: Leaderboard = {
         };
         const score = val('score'), cost = val('avgCost'), tokens = val('outputTokens'), steps = val('avgSteps');
         if (score === undefined) throw new Error(`CursorBench score missing for ${model}`);
-        rows.push({ model, score, cost, tokens, setting: r[1].match(/effort:"([^"]+)"/)?.[1], harness: 'Cursor', metrics: { ...(steps === undefined ? {} : { steps }), ...(/isDefaultEffort:!0/.test(r[1]) ? { defaultEffort: 1 } : {}) } });
+        rows.push({ model, score, cost, tokens, setting: r[1].match(/effort:"([^"]+)"/)?.[1], harness: 'Cursor', ...(steps === undefined ? {} : { metrics: { steps } }) });
       }
     }
     if (rows.length !== RUNS) throw new Error(`Archived CursorBench 4.0 chunk changed: ${rows.length} runs, expected ${RUNS}`);

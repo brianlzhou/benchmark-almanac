@@ -11,17 +11,17 @@ const board: Leaderboard = {
   url: "https://ludobench.com/games/hokm/history",
   feed,
   terms: "The terms allow Ludobench to publish anonymized match records. They give no third-party license for standings. robots.txt allows the feed path.",
-  stats: { rank:{name:'Rank',unit:'count'}, won:{name:'Games won',unit:'count'}, lost:{name:'Games lost',unit:'count'}, points:{name:'Points',unit:'count',better:'higher'} },
+  stats: { won:{name:'Games won',unit:'count',better:'higher'}, lost:{name:'Games lost',unit:'count',better:'lower'}, points:{name:'Points',unit:'count',better:'higher'} },
   async fetch() {
     const header = ["#", "Player", "Played", "Won", "Drawn", "Lost", "Win %", "Points"];
     const table = tables(await fetchText(feed)).map(table => table.map(row => row.map(cell => cell.text))).find(t => header.every((label, i) => t[0]?.[i] === label));
     if (!table || table.length <= 12) throw new Error('Missing leaderboard columns or rows');
     return table.slice(1).map(cells => {
-      const [rank, label, played, won, drawn, lost, rate, points] = cells;
+      const [, label, played, won, drawn, lost, rate, points] = cells;
       const score = parseFloat(rate);
       if (!label || !Number.isFinite(score) || Number(played) !== Number(won) + Number(drawn) + Number(lost)) throw new Error('Invalid Hokm standing');
       return { model: label.replace(/ AI model$/, ''), score, trials: Number(played),
-        metrics: { rank: Number(rank), won: Number(won), drawn: Number(drawn), lost: Number(lost), points: Number(points) } };
+        metrics: { won: Number(won), lost: Number(lost), points: Number(points) } };
     });
   },
 };

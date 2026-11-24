@@ -1512,6 +1512,7 @@
     ["encyclo-k","qwen3-32b","no-thinking",null,"2026-11-10"],
     ["encyclo-k","qwen3-4b","no-thinking",null,"2026-11-10"],
     ["encyclo-k","qwen3-8b","no-thinking",null,"2026-11-10"],
+    ["enterprise-bench-l1-l2-v2","glm-5-3",null,"Claude Code","2026-11-24"],
     ["enterprise-human-evaluation-cohere","cohere-command-a",null,null,"2026-11-10"],
     ["enterprisebench-corecraft","claude-fable-5-2","adaptive/max",null,"2026-11-23"],
     ["enterprisebench-corecraft","gemini-4-carbon","high",null,"2026-11-23"],

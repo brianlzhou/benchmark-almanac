@@ -37,7 +37,7 @@ const board: Leaderboard = {
       if (!values || !label) throw new Error('Malformed ERRNews entry: ' + record[key]);
       const score = Number(values[1]), width = Number(values[2]);
       rows.push({ model: setting ? label.slice(0, setting.index) : label, setting: setting?.[1], score, low: score - width, high: score + width,
-        link: record.Model.match(/href=['"]([^'"]+)/)?.[1], open: record.Open === '✓', metrics: { chrf4: Number(values[3]), scored: Number(record.err_news_scored), failures: Number(record.err_news_failures) } });
+        link: record.Model.match(/href=['"]([^'"]+)/)?.[1], open: record.Open === '✓', metrics: { chrf4: Number(values[3]), scored: Number(record.err_news_scored) } });
     }
     if (rows.length < 225) throw new Error('Incomplete ERRNews results');
     return rows;

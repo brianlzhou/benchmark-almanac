@@ -20562,18 +20562,14 @@
       "url": "https://www.artificialturfwar.com/",
       "feed": "https://www.artificialturfwar.com/",
       "terms": "The terms identify third-party data and trademarks. They give no explicit license for reusing standings. https://www.artificialturfwar.com/terms The site permits the home page and disallows /api/ in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "stats": {
-        "standing": {
-          "name": "Standing",
-          "unit": "count",
-          "better": "lower"
-        },
         "losses": {
           "name": "Losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "pointsFor": {
           "name": "Points for",
@@ -20582,11 +20578,13 @@
         },
         "allPlayWins": {
           "name": "All-play wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "allPlayLosses": {
           "name": "All-play losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -33573,7 +33571,7 @@
       "url": "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard",
       "feed": "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard/resolve/main/index.html",
       "terms": "The repository lists MIT for code and CC BY 3.0 for reference transcriptions. https://github.com/finebooks/bhl-ocr-eval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Chandra-OCR-2",
@@ -33603,19 +33601,19 @@
           "name": "Sparse CER"
         },
         "de": {
-          "name": "de",
+          "name": "German",
           "group": "Language"
         },
         "en": {
-          "name": "en",
+          "name": "English",
           "group": "Language"
         },
         "fr": {
-          "name": "fr",
+          "name": "French",
           "group": "Language"
         },
         "la": {
-          "name": "la",
+          "name": "Latin",
           "group": "Language"
         }
       },
@@ -37450,28 +37448,31 @@
       "url": "https://github.com/homerquan/BoardGameBench#benchmark-results",
       "feed": "https://raw.githubusercontent.com/homerquan/BoardGameBench/HEAD/README.md",
       "terms": "The repository uses the MIT License. https://github.com/homerquan/BoardGameBench/blob/main/LICENSE The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Gemma 4 8B (Ollama)",
         "Nemotron 3 33B (Ollama)"
       ],
       "stats": {
-        "games": {
-          "name": "Games played",
-          "unit": "count"
-        },
         "wins": {
           "name": "Wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "losses": {
           "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "draws": {
+          "name": "Draws",
           "unit": "count"
         },
         "forfeits": {
           "name": "Forfeits",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "raw": {
           "name": "Raw score",
@@ -43970,7 +43971,7 @@
       "url": "https://github.com/felladrin/cat-goric-game-benchmark",
       "feed": "https://raw.githubusercontent.com/felladrin/cat-goric-game-benchmark/main/readme.md",
       "terms": "The repository is licensed under MIT. https://github.com/felladrin/cat-goric-game-benchmark/blob/main/license.txt",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Darwin-27B-ZTC",
@@ -73905,10 +73906,6 @@
           "name": "Macro F1",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -89207,7 +89204,7 @@
       "terms": "EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval",
       "host": "EuroEval",
       "headline": "EuroEval reports Matthews correlation on its DBRD-mini test split, scaled by 100.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 118,
       "unmatched": [
         "01-ai/Yi-1.5-6B",
@@ -89463,10 +89460,6 @@
           "name": "Macro F1",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -94333,32 +94326,65 @@
       "url": "https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench?tab=leaderboard",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read",
       "terms": "Public leaderboard under Harbor Hub’s Terms of Service and Acceptable Use Policy.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
       "costPer": "run",
       "harnesses": "system",
       "stats": {
-        "accuracy": {
-          "name": "Accuracy",
-          "unit": "%",
-          "better": "higher"
+        "passAt2": {
+          "name": "pass@2",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
         },
-        "n_trials": {
-          "name": "Trials",
-          "unit": "count"
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
         },
-        "total_cost_usd": {
-          "name": "Total run cost",
-          "unit": "usd",
-          "better": "lower"
+        "passAt4": {
+          "name": "pass@4",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt5": {
+          "name": "pass@5",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt8": {
+          "name": "pass@8",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt10": {
+          "name": "pass@10",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "runTotalTokens": {
+          "name": "Total run tokens",
+          "unit": "tokens"
+        },
+        "runOutputTokens": {
+          "name": "Total run output tokens",
+          "unit": "tokens"
+        },
+        "runCachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "runUncachedInputTokens": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
         },
         "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "avg_trial_duration_sec": {
           "name": "Average trial duration",
           "unit": "seconds",
           "better": "lower"
@@ -94369,10 +94395,58 @@
       "url": "https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench-v2?tab=leaderboard",
       "feed": "https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench-v2?tab=leaderboard",
       "terms": "Public leaderboard on Harbor Hub, subject to Harbor’s terms.",
-      "retrieved": "2026-11-23",
-      "rows": 2,
+      "retrieved": "2026-11-24",
+      "rows": 3,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "harnesses": "system",
+      "stats": {
+        "passAt2": {
+          "name": "pass@2",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt4": {
+          "name": "pass@4",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt5": {
+          "name": "pass@5",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "runTotalTokens": {
+          "name": "Total run tokens",
+          "unit": "tokens"
+        },
+        "runOutputTokens": {
+          "name": "Total run output tokens",
+          "unit": "tokens"
+        },
+        "runCachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "runUncachedInputTokens": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
+        },
+        "latency": {
+          "name": "Average trial duration",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "enterprise-human-evaluation-cohere": {
       "url": "https://cohere.com/blog/command-a",
@@ -96730,7 +96804,7 @@
       "url": "https://euroeval.com/leaderboards/estonian",
       "feed": "https://euroeval.com/leaderboards/estonian",
       "terms": "EuroEval publishes its code under MIT. TalTech lists CC BY 4.0 for the source dataset. The scoreboard gives no separate score license. https://github.com/EuroEval/EuroEval https://huggingface.co/datasets/TalTechNLP/ERRnews The feed host publishes robots.txt at https://euroeval.com/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 89,
       "unmatched": [
         "AI-Sweden-Models/Llama-3-8B-instruct",
@@ -113054,7 +113128,7 @@
       "terms": "EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval",
       "host": "EuroEval",
       "headline": "EuroEval reports character-level F1 on the FoQA test split, scaled by 100.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 103,
       "unmatched": [
         "01-ai/Yi-1.5-9B",
@@ -113307,10 +113381,6 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -125388,7 +125458,7 @@
       "terms": "EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval",
       "host": "EuroEval",
       "headline": "EuroEval reports character-level F1 on the GermanQuAD-mini test split, scaled by 100.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 101,
       "unmatched": [
         "01-ai/Yi-1.5-9B",
@@ -125580,10 +125650,6 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -128073,7 +128139,7 @@
       "url": "https://github.com/homerquan/GomokuBench#current-leaderboard",
       "feed": "https://raw.githubusercontent.com/homerquan/GomokuBench/main/README.md",
       "terms": "The repository includes an Apache 2.0 license. The PyPI listing declares MIT. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Bonsai 2 27B",
@@ -153916,23 +153982,23 @@
       "url": "https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/blob/main/results/v1.3/RESULTS_v1.3.md",
       "feed": "https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/raw/main/results/v1.3/benchmark_v1.3.json",
       "terms": "RelayForge licenses the results under CC BY 4.0. https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/blob/main/LICENSE Hugging Face allows crawling.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "accounts/fireworks/models/kimi-k2p6"
       ],
       "parts": {
         "Block 1 - Loop Math": {
-          "name": "Block 1 - Loop Math"
+          "name": "Block 1: Loop Math"
         },
         "Block 2 - ISA Symbols": {
-          "name": "Block 2 - ISA Symbols"
+          "name": "Block 2: ISA Symbols"
         },
         "Block 3 - Electronics": {
-          "name": "Block 3 - Electronics"
+          "name": "Block 3: Electronics"
         },
         "Block 4 - Networking": {
-          "name": "Block 4 - Networking"
+          "name": "Block 4: Networking"
         },
         "t1_expansion_120q": {
           "name": "Tier 1 expansion"
@@ -153950,9 +154016,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
+        "apiErrors": {
+          "name": "API errors",
+          "unit": "count",
+          "better": "lower"
         },
         "meanScore": {
           "name": "Mean question score",
@@ -153965,7 +154032,7 @@
       "url": "https://www.relayforge.tools/dawes/#v15-archive",
       "feed": "https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/resolve/main/results/v1.5/benchmark_v1.5.json",
       "terms": "RelayForge licenses its aggregate results under CC BY 4.0 with attribution. https://www.relayforge.tools/dawes/ Hugging Face allows the archive feed in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Qwen 2.5 32B Instruct"
@@ -153990,8 +154057,18 @@
           "unit": "count",
           "better": "higher"
         },
+        "t1SafetyFailures": {
+          "name": "Tier 1 safety failures",
+          "unit": "count",
+          "better": "lower"
+        },
         "t1ApiErrors": {
           "name": "Tier 1 API errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "t2SafetyFailures": {
+          "name": "Tier 2 safety failures",
           "unit": "count",
           "better": "lower"
         },
@@ -164019,18 +164096,13 @@
       "url": "https://modelfootball.com/standings",
       "feed": "https://modelfootball.com/standings",
       "terms": "The terms permit browsing, linking, and discussion. Recreation Instruments retains rights in original content. https://modelfootball.com/terms The robots file permits reference use and bars AI training.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "harnesses": "system",
       "stats": {
         "losses": {
           "name": "Losses",
-          "unit": "count",
-          "better": "lower"
-        },
-        "standingsRank": {
-          "name": "Standings rank",
           "unit": "count",
           "better": "lower"
         },
@@ -171159,15 +171231,10 @@
       "url": "https://arena.wildcardlabs.tech/",
       "feed": "https://fantasy-platform-staging.wildcardlabs.tech/v1/public/arena/leagues/classic-trades/summary",
       "terms": "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The robots file permits reference use and bars AI training.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
       "stats": {
-        "leagueRank": {
-          "name": "League rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "wins": {
           "name": "Wins",
           "unit": "count",
@@ -177121,7 +177188,7 @@
       "url": "https://ludobench.com/leaderboards",
       "feed": "https://ludobench.com/leaderboards",
       "terms": "The terms allow Ludobench to publish anonymized match records. They give no third-party license for standings. https://ludobench.com/terms The feed host publishes robots.txt at https://ludobench.com/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [],
       "stats": {
@@ -177136,7 +177203,7 @@
       "url": "https://ludobench.com/games/hokm/history",
       "feed": "https://ludobench.com/games/hokm/history",
       "terms": "The terms allow Ludobench to publish anonymized match records. They give no third-party license for standings. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Practice Bot",
@@ -177145,17 +177212,15 @@
         "s7b"
       ],
       "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count"
-        },
         "won": {
           "name": "Games won",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "lost": {
           "name": "Games lost",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "points": {
           "name": "Points",
