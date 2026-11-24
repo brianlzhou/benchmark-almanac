@@ -4736,6 +4736,40 @@
         }
       }
     },
+    "agent-money-bench": {
+      "url": "https://agentmoneybench.com",
+      "feed": "https://agentmoneybench.com",
+      "terms": "Public benchmark website published by BlockRunAI.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "stats": {
+        "scamIncidence": {
+          "name": "Scam incidence",
+          "unit": "%",
+          "better": "lower",
+          "note": "Rate at which the agent fell for spending or seller traps."
+        },
+        "moneyErrors": {
+          "name": "Money errors",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of tasks with overpayments, double payments, or unapproved sellers."
+        },
+        "taskSuccess": {
+          "name": "Task success",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of 76 real spending tasks completed successfully."
+        },
+        "answerQuality": {
+          "name": "Answer quality",
+          "unit": "score",
+          "better": "higher",
+          "note": "Rubric-graded answer quality out of 100."
+        }
+      }
+    },
     "agent-only-fantasy-football-league": {
       "url": "https://league.jake-moses.com/benchmark",
       "feed": "https://league.jake-moses.com/benchmark",
@@ -8753,6 +8787,107 @@
           "name": "Relevance",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "ai-all-round-bench": {
+      "url": "https://octathlon.wendystars.com/decathlon/",
+      "feed": "https://octathlon.wendystars.com/decathlon/data/scores.json",
+      "terms": "Public benchmark website and JSON feeds published by AI All-Round Bench.",
+      "retrieved": "2026-11-24",
+      "rows": 25,
+      "unmatched": [
+        "ERNIE 5.5 Flash",
+        "dots3-note preview"
+      ],
+      "costPer": "run",
+      "harnesses": "system",
+      "parts": {
+        "standardTrack": {
+          "name": "Standard Track",
+          "group": "Track",
+          "unit": "score",
+          "better": "higher"
+        },
+        "designTrack": {
+          "name": "Design Track",
+          "group": "Track",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mathReasoning": {
+          "name": "Math Reasoning",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "perfOptimization": {
+          "name": "Performance Optimization",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "algoBattle": {
+          "name": "Algorithm Battle",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatialReasoning": {
+          "name": "Spatial Reasoning",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "geometricModeling": {
+          "name": "Geometric Modeling",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "interactiveApps": {
+          "name": "Complex Interactive Apps",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "gameDev": {
+          "name": "Game Design and Development",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "physicsSim": {
+          "name": "Physics Simulation",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "visualRendering": {
+          "name": "Visual Design and Rendering",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        },
+        "systemArch": {
+          "name": "System Architecture",
+          "group": "Category",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Total tokens consumed across the 13 Decathlon tasks."
+        },
+        "tokensPerSec": {
+          "name": "Generation speed",
+          "unit": "tokens/s",
+          "better": "higher",
+          "note": "Average output generation speed in tokens per second."
         }
       }
     },
@@ -26640,6 +26775,94 @@
       ],
       "static": "paper"
     },
+    "autocontrol-arena": {
+      "url": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "feed": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "terms": "Public ICML 2026 research benchmark website published by the AutoControl Arena authors.",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [],
+      "parts": {
+        "specGaming": {
+          "name": "Specification Gaming",
+          "unit": "%",
+          "better": "lower"
+        },
+        "covertWhistle": {
+          "name": "Covert Action",
+          "unit": "%",
+          "better": "lower"
+        },
+        "capMisuse": {
+          "name": "Capability Misuse",
+          "unit": "%",
+          "better": "lower"
+        },
+        "instrConv": {
+          "name": "Instrumental Convergence",
+          "unit": "%",
+          "better": "lower"
+        },
+        "evalAware": {
+          "name": "Evaluation Awareness",
+          "unit": "%",
+          "better": "lower"
+        },
+        "oversightEv": {
+          "name": "Oversight Evasion",
+          "unit": "%",
+          "better": "lower"
+        },
+        "stratMisalign": {
+          "name": "Strategic Misalignment",
+          "unit": "%",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "avgCotRisk": {
+          "name": "Average CoT risk rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Average chain-of-thought risk rate across all seven dimensions."
+        },
+        "specGamingCot": {
+          "name": "Specification Gaming CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "covertWhistleCot": {
+          "name": "Covert Action CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "capMisuseCot": {
+          "name": "Capability Misuse CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "instrConvCot": {
+          "name": "Instrumental Convergence CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "evalAwareCot": {
+          "name": "Evaluation Awareness CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "oversightEvCot": {
+          "name": "Oversight Evasion CoT",
+          "unit": "%",
+          "better": "lower"
+        },
+        "stratMisalignCot": {
+          "name": "Strategic Misalignment CoT",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "autoelicit": {
       "url": "https://osu-nlp-group.github.io/AutoElicit/",
       "feed": "https://osu-nlp-group.github.io/AutoElicit/",
@@ -39217,6 +39440,83 @@
           "name": "Median minutes on different runners",
           "unit": "minutes",
           "better": "lower"
+        }
+      }
+    },
+    "bug-hunt-bench": {
+      "url": "https://bughunt.productcompass.pm",
+      "feed": "https://bughunt.productcompass.pm/data/benchmark.json",
+      "terms": "Public benchmark website and JSON feed published by Pawel Huryn (Product Compass).",
+      "retrieved": "2026-11-24",
+      "rows": 145,
+      "unmatched": [
+        "Gemma 4 31B 4-bit",
+        "Muse Wonder Full 1.0",
+        "Ox Alpha (stealth)",
+        "Pareto (ex-Union Alpha)",
+        "Qwen3.8-27B 8-bit"
+      ],
+      "chart": {
+        "title": "Bugs fixed versus run cost",
+        "x": {
+          "key": "cost",
+          "label": "Total run cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Planted bugs fixed (of 105)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Matches the default log-scale cost versus fixed-bugs scatter map on bughunt.productcompass.pm."
+      },
+      "costPer": "run",
+      "harnesses": "system",
+      "parts": {
+        "repo1Fixed": {
+          "name": "VS Code Extension (of 45)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repo2Fixed": {
+          "name": "React and Supabase LMS (of 60)",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "partial": {
+          "name": "Partial fixes",
+          "unit": "count",
+          "better": "higher",
+          "note": "Planted bugs addressed partially but not fully closed."
+        },
+        "claimedOnly": {
+          "name": "Claimed only",
+          "unit": "count",
+          "better": "lower",
+          "note": "Planted bugs named in the report but not fixed in the diff."
+        },
+        "extras": {
+          "name": "Extra fixes",
+          "unit": "count",
+          "better": "higher",
+          "note": "Real non-planted defects found and fixed outside the 105-bug key."
+        },
+        "wallMinutes": {
+          "name": "Wall time",
+          "unit": "minutes",
+          "better": "lower",
+          "note": "Active agent runtime across both repositories in minutes."
+        },
+        "turns": {
+          "name": "Turns",
+          "unit": "count",
+          "better": "lower",
+          "note": "Total agent turns across both repositories."
         }
       }
     },
@@ -54304,6 +54604,33 @@
           "name": "ROUGE-L",
           "unit": "score",
           "better": "higher"
+        }
+      }
+    },
+    "cloudopsbench": {
+      "url": "https://cloudopsbench.ai",
+      "feed": "https://cloudopsbench.ai",
+      "terms": "Public open-source benchmark leaderboard published by CloudOpsBench.",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [],
+      "costPer": "run",
+      "reference": [
+        "terminus-2"
+      ],
+      "harnesses": "system",
+      "stats": {
+        "wallHours": {
+          "name": "Wall time",
+          "unit": "hours",
+          "better": "lower",
+          "note": "Total wall-clock runtime across the 45 AWS cloud operations tasks."
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Total tokens consumed across the full benchmark run."
         }
       }
     },
@@ -242218,6 +242545,72 @@
         }
       }
     },
+    "orbia": {
+      "url": "https://orbia-bench.github.io",
+      "feed": "https://orbia-bench.github.io",
+      "terms": "Public research benchmark website published by the Orbia authors.",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "ABot-World",
+        "AlayaWorld",
+        "Astra",
+        "Cosmos3-Super",
+        "DreamX-World",
+        "EVOKE",
+        "Echo-WM",
+        "FantasyWorld",
+        "Gen3C",
+        "Genie3",
+        "HY-WorldPlay",
+        "HappyOyster",
+        "Hy-Nomas",
+        "Kling3.0",
+        "LingBot-World v1",
+        "LingBot-World v2",
+        "LongCat",
+        "Lyra2",
+        "Matrix game 3.5",
+        "SANA-WM",
+        "Seedance2.5",
+        "SolarWM-H3",
+        "Voyager",
+        "Wan2.7",
+        "WorldCrafter-Fast"
+      ],
+      "parts": {
+        "control": {
+          "name": "Control",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quality": {
+          "name": "Quality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "inputPreservation": {
+          "name": "Input preservation",
+          "unit": "score",
+          "better": "higher"
+        },
+        "persistence": {
+          "name": "Persistence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "consistency3d": {
+          "name": "3D consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stability": {
+          "name": "Stability",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "orca-bench-oncall": {
       "url": "https://github.com/ORCA-bench/ORCA-bench#submitting-to-the-leaderboard",
       "feed": "https://api.github.com/repos/ORCA-bench/ORCA-bench/contents/leaderboard/submissions",
@@ -264837,6 +265230,85 @@
         "UniWorld-V2"
       ]
     },
+    "risk-aware-trading-agents": {
+      "url": "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "feed": "https://jackson-cmd.github.io/risk-aware-trading-agents/assets/data/leaderboard.json",
+      "terms": "Public research benchmark website and JSON feed published by jackson-cmd.",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [
+        "llama3.2"
+      ],
+      "parts": {
+        "sharpe2020": {
+          "name": "2020 Regime (Sharpe)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "sharpe2022": {
+          "name": "2022 Regime (Sharpe)",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "afterCutoffSharpe": {
+          "name": "Post-cutoff Sharpe",
+          "unit": "score",
+          "better": "higher",
+          "note": "Sharpe ratio restricted strictly to trading days after each model knowledge cutoff."
+        },
+        "totalReturnPct": {
+          "name": "Total return",
+          "unit": "%",
+          "better": "higher"
+        },
+        "excessVsEqPct": {
+          "name": "Excess vs equal weight",
+          "unit": "%",
+          "better": "higher",
+          "note": "Return minus the equal-weight universe baseline."
+        },
+        "excessVsSpyPct": {
+          "name": "Excess vs SPY",
+          "unit": "%",
+          "better": "higher",
+          "note": "Return minus SPY buy and hold."
+        },
+        "maxDrawdownPct": {
+          "name": "Max drawdown",
+          "unit": "%",
+          "better": "higher",
+          "note": "Worst peak-to-trough percentage drawdown (closer to zero is better)."
+        },
+        "alphaAnnualPct": {
+          "name": "Annualized alpha",
+          "unit": "%",
+          "better": "higher"
+        },
+        "beta": {
+          "name": "Market beta",
+          "unit": "score"
+        },
+        "turnover": {
+          "name": "Portfolio turnover",
+          "unit": "score",
+          "better": "lower"
+        },
+        "avgExposurePct": {
+          "name": "Average exposure",
+          "unit": "%"
+        },
+        "avgHoldingDays": {
+          "name": "Average holding days",
+          "unit": "score"
+        },
+        "roundTrips": {
+          "name": "Round-trip trades",
+          "unit": "count"
+        }
+      }
+    },
     "riskrubric": {
       "url": "https://riskrubric.ai/",
       "feed": "https://riskrubric.ai/api/v1/services?page=1&page_size=50&service_type=ai_model",
@@ -272134,6 +272606,246 @@
         }
       }
     },
+    "s1mb": {
+      "url": "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "feed": "https://huggingface.co/datasets/hotchpotch/s1mb-result/resolve/main/viewer-summary.json",
+      "terms": "Public Hugging Face dataset and leaderboard published by hotchpotch.",
+      "headline": "Mean baseline-adjusted skill score (0 to 100) across all 137 English v1 tasks for models with complete English v1 coverage.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "/root/autodl-tmp/jevforge-v2/runs/curated-v3-evaluation-checkpoint",
+        "5ak3t/scm-max-14b-v0",
+        "5ak3t/scm-max-14b-v1",
+        "5ak3t/scm-mid-4b-v1",
+        "Airavat-ai/Jalebi-E",
+        "AlexWortega/openjev/qwen3.5-0.8b-nli-v2s-long",
+        "AlexWortega/openjev/qwen3.5-2b-nli-v5",
+        "AlexWortega/openjev/qwen3.5-4b-nli-v5",
+        "Alibaba-NLP/gte-reranker-modernbert-base",
+        "AmirBraham/jevstral-8b",
+        "AnkitAI/TinyJev-4B",
+        "AnkitAI/tinyjev-0.6b",
+        "Cactus-Compute/needle3",
+        "Cloudflare/clef",
+        "Cloudflare/clef-flash",
+        "Contrastive-LM/CLM-v0.1-8B",
+        "CountingSheep/vev-4b",
+        "CountingSheep/vev-9b",
+        "DangerLabs/DM-JEPA",
+        "EldanRing/Winnow-12B",
+        "EldanRing/Winnow-E4B",
+        "FINAL-Bench/Darwin-27B-ZTC-v2",
+        "FINAL-Bench/Darwin-27B-ZTC-v5",
+        "FINAL-Bench/Darwin-27B-ZTC-v9",
+        "FrontiersMind/Lumma-fev-0.6b",
+        "GestaltLabs/Jeff-1",
+        "Hanno-Labs/bosun-v3.1-0.6b",
+        "Hanno-Labs/bosun-v3.1-1.7b",
+        "HopitAI/hopper",
+        "LMDHQ-0420/vision-jev",
+        "LibertAIDAI/deem-0.8-v1",
+        "LiquidAI/d1-2B",
+        "Lukitaduarte/dinah-0",
+        "Maincode/matilda-jev-v1.5",
+        "Manav2op/verdict-small",
+        "Mapika/decider-0.8b",
+        "Mapika/decider-2b",
+        "Mapika/decider-2b-vision",
+        "Mapika/decider-35b-a3b",
+        "Mapika/decider-4b",
+        "MoritzLaurer/ModernBERT-large-zeroshot-v2.0",
+        "OmniJev/OneJev-0.8B",
+        "OmniJev/OneJev1.5-0.8B",
+        "OmniJev/OneJev1.5-27B",
+        "OmniJev/OneJev1.5-9B",
+        "OmniJev/OneJev1.6-0.8B",
+        "OmniJev/OneJev1.6-27B",
+        "OmniJev/OneJev1.6-4B",
+        "OmniJev/OneJev1.6-9B",
+        "PIXELZX/XERON-0.1",
+        "PelaAI/KnowLine-0.8B-Gen1",
+        "PelaAI/KnowLine-26B-A4B-Gen1",
+        "PelaAI/KnowLine-26B-A4B-Gen2.5",
+        "PelaAI/KnowLine-2B-Gen1",
+        "PelaAI/KnowLine-31B-Gen1",
+        "PelaAI/KnowLine-35B-A3B-Gen1.5",
+        "PelaAI/KnowLine-4B-Gen2",
+        "PelaAI/KnowLine-4B-Gen3",
+        "PelaAI/KnowLine-4B-Gen4",
+        "PelaAI/KnowLine-4B-Gen5.5",
+        "PelaAI/KnowLine-9B-Gen1",
+        "Phocinae/Phocinae-Largha-150M-v1",
+        "PixilabAI/Blink-v0.3-26B-A4B-NVFP4",
+        "StandardThinking/StandardOne-8B",
+        "Superwheat/Gimbal-27B",
+        "TokenRhythm/NeoHorse-Jev-4B",
+        "UserMoonlight/intelif-qwen3-4b",
+        "ZefanCai/Open-Jev-27B-v1.1",
+        "ZefanCai/Open-Jev-2B",
+        "ZefanCai/Open-Jev-9B",
+        "abhishek085/spark-s1-4b-v6",
+        "akhilaaa3/Jev-Omni",
+        "alibiserikbay/JevK5",
+        "alibiserikbay/JevK5-9B",
+        "alibiserikbay/JevK5-Lite",
+        "altslate/certo-decision-model",
+        "andyzhang232/ajev-gemma4-12b-lora5",
+        "apus-ailab/APUS-OpenJev-v1-4B",
+        "apus-ailab/APUS-OpenJev-v1-9B",
+        "autotrust/GEV-26B-Decide",
+        "autotrust/JEV-27B",
+        "bespokelabs/Bespoke-Nimble-9B",
+        "bespokelabs/Bespoke-Nimble-9B-v2",
+        "bespokelabs/Bespoke-Nimble-9B-v3",
+        "caiovicentino1/Eikos-27B",
+        "caiovicentino1/Eikos-4B",
+        "carrtesy/EXAONE-4.0-1.2B-JEV",
+        "chaoliangUNSW/Jev-Style-0.8B-Decision-v3",
+        "chaoliangUNSW/Jev-Style-2B-Decision-v3",
+        "com-kotobalabs/open-jev-deberta-v3-large",
+        "convaiinnovations/laya",
+        "convaiinnovations/laya-multilingual",
+        "convaiinnovations/laya-typed-decisions",
+        "crh225/plumb-4b",
+        "cribl-decision-27b",
+        "davidburhans/gevva-e2b",
+        "davidburhans/gevva-e4b",
+        "denis-pplx/AutoJev-27B",
+        "dhtocks/malkuth-2b",
+        "dhtocks/malkuth-4b",
+        "divyanshx11/JEVision",
+        "e12ex2/jev-vision-27b",
+        "eljiwo/jiwo-0.8b",
+        "eljiwo/jiwo-4b",
+        "empiriolabsai/aplomb-1",
+        "empiriolabsai/aplomb-2",
+        "empiriolabsai/aplomb-2-large",
+        "evalengine/decision-4b",
+        "everettjf/ezjev-4b-s2",
+        "facebook/meta-encoder",
+        "fastino/GLiNER2.5-Decide",
+        "fastino/glide",
+        "fastino/gliner2-large-v1",
+        "fastino/gliner2.5-base-v1",
+        "fastino/gliner2.5-multi-v1",
+        "fastino/gliner2.5-small-v1",
+        "flock-io/this-that-model-1.2",
+        "flymy-ai/decision-2b-preview",
+        "flymy-ai/decision-4b-v1.1",
+        "flymy-ai/decision-4b-v1.2",
+        "flymy-ai/decision-fast-preview",
+        "franckverrot/lev-350m",
+        "frontier-infra/jebadiah-27b",
+        "frontier-infra/jebadiah-4b-v2",
+        "frontier-infra/jebadiah-9b-v0",
+        "frontier-infra/jebadiah-9b-v2",
+        "gemini-decision-1",
+        "heman10x/rlcd-modernbert-151m",
+        "hotchpotch/bekko-system-one-v0-17m",
+        "hotchpotch/bekko-system-one-v0-400m",
+        "hotchpotch/bekko-system-one-v0-68m",
+        "hotchpotch/saihai-v1-310m",
+        "hotchpotch/saihai-v1-8b",
+        "iapp/OpenThai-SystemOne",
+        "interfaze-ai/lev",
+        "isHeSatoshi/smalljev-semantic-v9",
+        "jaredpalmer/kev-0.5b",
+        "jaredpalmer/kev-0.6b",
+        "jaredpalmer/kev-0.8b",
+        "jaredpalmer/kev-27b",
+        "jaredpalmer/kev-4b",
+        "jaredpalmer/kev-8b",
+        "jaredpalmer/kev-9b",
+        "jerichosiahaya/Naluri-308M-encoder",
+        "jev-1.13.0",
+        "jev-1.14.0",
+        "jsaurabh/qwen3.5-9b-jev-data-mix-v2",
+        "juspay/Xor-26B-A4B",
+        "juspay/jev-one",
+        "kettei-chub",
+        "kettei-fat",
+        "kirp/jpt-0.8b",
+        "kirp/jpt-4b",
+        "kirp/jpt-9b",
+        "knowledgator/gliformer-large-v1",
+        "kpiya/kas-4b",
+        "kshetrajna12/reflex-qwen3.5-4b-lora",
+        "lihe07/span-02",
+        "logic65/Whittle-Reflex-25B-A3B-GGUF",
+        "mghafiri/qwen3.5-0.8B-decision-model",
+        "michaljach/jet",
+        "mixedbread-ai/mxbai-rerank-base-v2",
+        "moganai/lavoir",
+        "mohamedlotfy50/sifr-0.8b-v3",
+        "mohit67890/imajev-2b",
+        "mohit67890/imajev-4b",
+        "mohit67890/imajev-9b",
+        "monotykamary/LFM2.5-2.6B-RLCD",
+        "mstrasser/Jeff-Gemma4-E2B",
+        "mstrasser/Jeff-Qwen3.5-0.8B",
+        "mstrasser/Jeff-Qwen3.5-0.8B-Chess",
+        "mstrasser/Jeff-Qwen3.5-2B",
+        "mukaddamzaid/amos-1-large",
+        "notnotsamuel/LFM2.5-350M-RLCD",
+        "openjev/openjev",
+        "oraculumai/Manchego",
+        "perplexity-ai/pplx-decider-flash-v1.2",
+        "perplexity-ai/pplx-decider-flash-v1.3",
+        "perplexity-ai/pplx-decider-v1.1-27b",
+        "perplexity-ai/pplx-decider-v1.2",
+        "perplexity-ai/pplx-decider-v1.3",
+        "pngwn/system-one-qwen3.5-4b-scorer",
+        "pngwn/system-one-qwen3.5-4b-scorer-v2b",
+        "samatv256/mini-Jev",
+        "shgao/rsi-jev-v5.0-vl-3b",
+        "shgao/rsi-jev-v6.1-vl-27b",
+        "shgao/rsi-jev-v6.1-vl-4b",
+        "startlux-models/StartLux-Decision-v1.1-27B-Instant",
+        "sthanika-ai/Sieve-9B",
+        "sthanika-ai/sieve-2b",
+        "superion-s1-v6-int4e-vllm-kv1@sha256:e6dc49dc",
+        "surogate/rune-26b-a4b-GGUF",
+        "theaviv/Lev1-3.7B",
+        "theunnecessarythings/JADE",
+        "togethercomputer/Tev1-0.8B-experimental",
+        "togethercomputer/Tev1-4B-experimental",
+        "torchcast-ai/torchcast-decision-27b",
+        "unee-0.8b",
+        "unee-2b",
+        "vllm-sr/Decision-2.0-Eos-0.8B",
+        "vllm-sr/Decision-2.0-Kai-0.6B",
+        "vllm-sr/Decision-2.0-Lux-9B",
+        "vllm-sr/Decision-2.0-Nox-4B",
+        "vllm-sr/Decision-2.0-Sol-2B",
+        "vllm-sr/Decision-2.0-Vega-27B",
+        "vllm-sr/d3",
+        "vllm-sr/d3-edge",
+        "vllm-sr/d3-flash",
+        "vllm-sr/d3-lite",
+        "vllm-sr/d3-mini",
+        "vllm-sr/d3-nano",
+        "wayfind/metask-jev-4b-policy-mix",
+        "wfzyx/von",
+        "zeredy879/minojev",
+        "zeroentropy/zerank-2-reranker"
+      ],
+      "parts": {
+        "japaneseV1": {
+          "name": "Japanese v1",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "englishRawAcc": {
+          "name": "English v1 mean accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Unweighted mean raw accuracy across completed English v1 tasks."
+        }
+      }
+    },
     "sa-37-interactive-segmentation": {
       "url": "https://arxiv.org/abs/2408.00714",
       "feed": "https://arxiv.org/pdf/2408.00714",
@@ -276159,6 +276871,57 @@
         "scenarios": {
           "name": "Scenarios",
           "unit": "count"
+        }
+      }
+    },
+    "seclens": {
+      "url": "https://mattersec-labs.github.io/seclens/",
+      "feed": "https://mattersec-labs.github.io/seclens/",
+      "terms": "Public research benchmark website published by MatterSec Labs.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "chart": {
+        "title": "Aggregate score versus cost per case",
+        "x": {
+          "key": "cost",
+          "label": "Cost per case",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Aggregate score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Matches the Chart.js cost-versus-score scatter plot on the SecLens leaderboard."
+      },
+      "parts": {
+        "ciso": {
+          "name": "CISO lens",
+          "unit": "score",
+          "better": "higher"
+        },
+        "caio": {
+          "name": "CAIO lens",
+          "unit": "score",
+          "better": "higher"
+        },
+        "researcher": {
+          "name": "Security Researcher lens",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engineering": {
+          "name": "Engineering lens",
+          "unit": "score",
+          "better": "higher"
+        },
+        "aiActor": {
+          "name": "AI Actor lens",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -308033,6 +308796,133 @@
       },
       "measures": {
         "omniMC": "omni-mc"
+      }
+    },
+    "unsafe-eval-leaderboard": {
+      "url": "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "feed": "https://principled-intelligence-unsafe-eval-leaderboard.hf.space/api/leaderboard",
+      "terms": "Public open-source safety benchmark Space published by Principled Intelligence.",
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [
+        "Clef",
+        "Clef-Flash",
+        "GLiNER2.5-Decide",
+        "Gemini Decision 1",
+        "Gliguard-LLMGuardrails-300M",
+        "Jev",
+        "Kev 0.8B",
+        "Kev 27B",
+        "Kev 4B",
+        "Kev 9B",
+        "Laya",
+        "Nemotron-3.5-Content-Safety",
+        "Parakh 4B",
+        "ScopeGuard 4B-g",
+        "ScopeGuard 4B-q",
+        "ScopeGuard-1 Pro",
+        "ScopeGuard-2 4B",
+        "ScopeGuard-2 Pro",
+        "Shieldstral-1.0-3B",
+        "d1-3B"
+      ],
+      "parts": {
+        "aegis2Ba": {
+          "name": "Aegis 2.0 (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "openaiModBa": {
+          "name": "OpenAI Mod (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "toxicChatBa": {
+          "name": "ToxicChat (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "wildGuardMixBa": {
+          "name": "WildGuardMix (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coSapienBa": {
+          "name": "CoSApien (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "dynaGuardrailBa": {
+          "name": "DynaGuardrail (Balanced Acc)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "sstUnsafeRecall": {
+          "name": "SST (Unsafe Recall)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "harmBenchUnsafeRecall": {
+          "name": "HarmBench (Unsafe Recall)",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "avgF1": {
+          "name": "Average F1",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average unsafe-class F1 across the six mixed benchmarks."
+        },
+        "avgUnsafeRecall": {
+          "name": "Average unsafe recall",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average recall on unsafe prompts across SST and HarmBench."
+        },
+        "aegis2F1": {
+          "name": "Aegis 2.0 F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "openaiModF1": {
+          "name": "OpenAI Mod F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "toxicChatF1": {
+          "name": "ToxicChat F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "wildGuardMixF1": {
+          "name": "WildGuardMix F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coSapienF1": {
+          "name": "CoSApien F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "dynaGuardrailF1": {
+          "name": "DynaGuardrail F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "refusalRate": {
+          "name": "Refusal rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of evaluation prompts the model refused to classify."
+        },
+        "latencySeconds": {
+          "name": "Average latency",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Average classification latency per prompt in seconds."
+        }
       }
     },
     "unsatz": {

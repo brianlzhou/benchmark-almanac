@@ -4001,6 +4001,33 @@
     "added": "2026-11-01"
   },
   {
+    "id": "agent-money-bench",
+    "name": "Agent Money Benchmark",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates frontier models operating with real spending tasks across 76 questions and seller traps, measuring wasted spend per $100, scam incidence, money errors, task success, cost per task, and rubric-graded answer quality.",
+    "org": "BlockRunAI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://agentmoneybench.com",
+      "leaderboard": "https://agentmoneybench.com",
+      "repo": "https://github.com/BlockRunAI/agent-money-bench"
+    },
+    "access": "public",
+    "note": "Scores 12 frontier models including Claude Fable 5.2, GPT-6.1 Sol, Claude Opus 5.5, GPT-6 Astra, and Gemini 4 Argon. Headline is wasted spend in US dollars per $100 (lower is better).",
+    "unit": "usd",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://agentmoneybench.com",
+      "https://github.com/BlockRunAI/agent-money-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "vals-poker-agent",
     "name": "Agent Poker Bench",
     "aliases": [
@@ -6241,6 +6268,35 @@
       "https://aiagribench.org/api/leaderboard?variant=smallholders"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "ai-all-round-bench",
+    "name": "AI All-Round Bench (AI Decathlon)",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Timed 10-category, 13-task coding and engineering suite testing agents in isolated sandboxes across formal proofs, performance optimization, algorithm battles, spatial reasoning, geometric modeling, interactive apps, game dev, physics, visuals, and systems.",
+    "org": "Wendystar0628",
+    "released": "2026-10",
+    "links": {
+      "site": "https://octathlon.wendystars.com/",
+      "leaderboard": "https://octathlon.wendystars.com/decathlon/",
+      "repo": "https://github.com/Wendystar0628/AI-All-Round-Bench"
+    },
+    "access": "public",
+    "note": "Scores 27 frontier models including GPT-6.2 Astra, Gemini 4 Neon, Claude Fable 5.2, and Claude Opus 5.5 across Standard and Design tracks with total run cost, tokens, and wall time.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://octathlon.wendystars.com/",
+      "https://octathlon.wendystars.com/decathlon/",
+      "https://octathlon.wendystars.com/decathlon/data/scores.json",
+      "https://github.com/Wendystar0628/AI-All-Round-Bench"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "ai-battle-arena",
@@ -16799,6 +16855,35 @@
     "added": "2026-11-01"
   },
   {
+    "id": "autocontrol-arena",
+    "name": "AutoControl Arena",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Synthesizes executable test environments to measure frontier AI safety risks across seven dimensions: specification gaming, covert action, capability misuse, instrumental convergence, evaluation awareness, oversight evasion, and strategic misalignment.",
+    "org": "AutoControl Arena Authors",
+    "released": "2026-03",
+    "links": {
+      "site": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "leaderboard": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "paper": "https://arxiv.org/abs/2603.07427",
+      "repo": "https://github.com/CosmosYi/AutoControl-Arena"
+    },
+    "access": "public",
+    "note": "Accepted at ICML 2026. Evaluates nine models across Google, OpenAI, and Alibaba on action and chain-of-thought risk rates (lower is safer).",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://cosmosyi.github.io/AutoControl-Arena/",
+      "https://github.com/CosmosYi/AutoControl-Arena",
+      "https://arxiv.org/abs/2603.07427"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "autods-scientific-cases",
     "name": "AutoDS scientific machine learning cases",
     "category": "ai-rnd-rsi",
@@ -25441,6 +25526,34 @@
       "https://huggingface.co/datasets/mteb/bucc-bitext-mining"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "bug-hunt-bench",
+    "name": "Bug Hunt Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates coding models and CLI harnesses on finding and fixing 105 real planted bugs across two production repositories (a TypeScript VS Code extension with 45 bugs and a React and Supabase LMS with 60 bugs), graded blind against withheld fix commits.",
+    "org": "Pawel Huryn (Product Compass)",
+    "released": "2026-08",
+    "links": {
+      "site": "https://bughunt.productcompass.pm",
+      "leaderboard": "https://bughunt.productcompass.pm",
+      "repo": "https://github.com/phuryn/bug-hunt-bench"
+    },
+    "access": "public",
+    "note": "Scores 56 frontier and open coding models across 151 active configurations (341 total runs), reporting planted bugs fixed out of 105 alongside partial fixes, false positives, turns, wall time, and log-scale cost scatter maps.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bughunt.productcompass.pm",
+      "https://bughunt.productcompass.pm/data/benchmark.json",
+      "https://github.com/phuryn/bug-hunt-bench"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "bug-in-the-code-stack",
@@ -34746,6 +34859,33 @@
       "https://app.primeintellect.ai/dashboard/environments/human-intuition/cloudexp-rx00/evals"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "cloudopsbench",
+    "name": "CloudOpsBench",
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Open-source benchmark of 45 real-world AWS cloud operations tasks for AI agents, tracking resolution rate, wall-clock hours, token consumption, and total run dollar cost across coding agent harnesses.",
+    "org": "CloudOpsBench",
+    "released": "2026-09",
+    "links": {
+      "site": "https://cloudopsbench.ai",
+      "leaderboard": "https://cloudopsbench.ai",
+      "repo": "https://github.com/CloudOpsBench/CloudOpsBench"
+    },
+    "access": "public",
+    "note": "Reports 18 model-harness configurations across frontier models including Claude Fable 5.1, GPT-6 Astra, Gemini 4 Argon, Grok 4.7, and Claude Opus 5.5.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://cloudopsbench.ai",
+      "https://github.com/CloudOpsBench/CloudOpsBench"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "clue",
@@ -100046,6 +100186,34 @@
     "added": "2026-11-19"
   },
   {
+    "id": "lingee-bench",
+    "name": "Lingee Bench",
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Enterprise AI agent benchmark built on Harbor with an offline ERP mock service and MCP proxies to evaluate verifiable business workflow execution across finance, manufacturing, supply chain, and general professional tasks.",
+    "org": "Kingdee",
+    "released": "2026-10",
+    "links": {
+      "site": "https://bench.lingee.com/",
+      "repo": "https://github.com/kingdee/lingee-bench",
+      "dataset": "https://huggingface.co/datasets/KD-Lingee/lingee-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "Publishes open task datasets on Hugging Face and GitHub alongside a private evaluation split. Initial whitepaper compares three harnesses on one execution model (GLM-5.3-Flash) while multi-model leaderboard submissions are open.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bench.lingee.com/",
+      "https://github.com/kingdee/lingee-bench",
+      "https://huggingface.co/datasets/KD-Lingee/lingee-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "lingoly",
     "name": "LingOly",
     "category": "multilingual",
@@ -135349,6 +135517,35 @@
     "added": "2026-11-19"
   },
   {
+    "id": "orbia",
+    "name": "Orbia",
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates generative video world models on whether generated videos form a consistent 3D world across six dimensions: camera control, visual quality, input preservation, persistence, 3D consistency, and stability.",
+    "org": "Orbia Authors",
+    "released": "2026-10",
+    "links": {
+      "site": "https://orbia-bench.github.io",
+      "leaderboard": "https://orbia-bench.github.io",
+      "paper": "https://arxiv.org/abs/2610.20693",
+      "repo": "https://github.com/worldbench/Orbia"
+    },
+    "access": "public",
+    "note": "Ranks 29 camera-, text-, and action-conditioned video world models including WorldCrafter-Fast, Genie3, Cosmos3, Seedance2.5, Kling3.0, and Wan2.7.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://orbia-bench.github.io",
+      "https://github.com/worldbench/Orbia",
+      "https://arxiv.org/abs/2610.20693"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "orca-bench-oncall",
     "name": "ORCA-bench",
     "category": "agentic-terminal",
@@ -153419,6 +153616,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "risk-aware-trading-agents",
+    "name": "Risk-Aware Trading Agents (rta-bench-1)",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Look-ahead-free US stock trading agent benchmark that replays financial news by exact publication minute to test whether language model trading agents earn risk-adjusted alpha over equal-weight and SPY baselines.",
+    "org": "jackson-cmd",
+    "released": "2026-11",
+    "links": {
+      "site": "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "leaderboard": "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "paper": "https://arxiv.org/abs/2611.19530",
+      "repo": "https://github.com/jackson-cmd/risk-aware-trading-agents"
+    },
+    "access": "public",
+    "note": "Headline score is the clean 2026 out-of-sample blind Sharpe ratio across six evaluated models, with 2020 and 2022 period Sharpe ratios, total return, excess returns, max drawdown, and post-cutoff Sharpe.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "https://jackson-cmd.github.io/risk-aware-trading-agents/assets/data/leaderboard.json",
+      "https://github.com/jackson-cmd/risk-aware-trading-agents",
+      "https://arxiv.org/abs/2611.19530"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "riskrubric",
     "name": "RiskRubric",
     "category": "safety-alignment",
@@ -156714,6 +156941,33 @@
       "https://github.com/IS2Lab/S-Eval"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "s1mb",
+    "name": "S1MB (System One Mosaic Benchmark)",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-instructions",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Benchmarks System One decision models across English, Japanese, and vision tasks unified into choice, yes-no judgment, and numeric scoring formats with baseline-adjusted skill scoring.",
+    "org": "hotchpotch",
+    "released": "2026-09",
+    "links": {
+      "site": "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "dataset": "https://huggingface.co/datasets/hotchpotch/s1mb-result"
+    },
+    "access": "public",
+    "note": "Scores over 215 decision models on complete 137-task English v1 coverage (mean baseline-adjusted skill scaled to 100), alongside Japanese v1 (27 tasks) and Vision v1 (26 tasks) suites.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "https://huggingface.co/datasets/hotchpotch/s1mb-result"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "s3gym",
@@ -160287,6 +160541,35 @@
       "https://fireworks.ai/specialized-intelligence-index/api/index.json"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "seclens",
+    "name": "SecLens",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates large language models on real-world CVE security vulnerability detection across 35 dimensions and five security stakeholder lenses (CISO, CAIO, Security Researcher, Engineering, and AI Actor) alongside cost per case.",
+    "org": "MatterSec Labs",
+    "released": "2026-04",
+    "links": {
+      "site": "https://mattersec-labs.github.io/seclens/",
+      "leaderboard": "https://mattersec-labs.github.io/seclens/",
+      "paper": "https://arxiv.org/abs/2604.01637",
+      "repo": "https://github.com/mattersec-labs/seclens"
+    },
+    "access": "public",
+    "note": "Scores 12 frontier coding models including Gemini 3 Flash, Gemini 3.1 Pro, Claude Sonnet 4.6, Kimi K2.5, Claude Opus 4.6, and GPT-5.4 with a live cost-versus-score scatter plot.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mattersec-labs.github.io/seclens/",
+      "https://github.com/mattersec-labs/seclens",
+      "https://arxiv.org/abs/2604.01637"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "secqa",
@@ -186583,6 +186866,35 @@
       }
     ],
     "metric": "Omni average"
+  },
+  {
+    "id": "unsafe-eval-leaderboard",
+    "name": "unsafe-eval Leaderboard",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Reproducible evaluation leaderboard for AI safety guard classifiers and moderation APIs across eight prompt-safety benchmarks (Aegis 2.0, OpenAI Mod, ToxicChat, WildGuardMix, CoSApien, DynaGuardrail, SST, and HarmBench).",
+    "org": "Principled Intelligence",
+    "released": "2026-10",
+    "links": {
+      "site": "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "repo": "https://github.com/Principled-Intelligence/unsafe-eval",
+      "dataset": "https://huggingface.co/datasets/principled-intelligence/unsafe-eval-leaderboard"
+    },
+    "access": "public",
+    "note": "Evaluates 40 open-weight and hosted safety guard models, ranking by average balanced accuracy (%) alongside unsafe F1, unsafe recall, refusal rate, cost, output tokens, and latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "https://github.com/Principled-Intelligence/unsafe-eval",
+      "https://huggingface.co/datasets/principled-intelligence/unsafe-eval-leaderboard"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "unsatz",

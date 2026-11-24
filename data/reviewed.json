@@ -571,6 +571,11 @@
       "via": "GitHub keyword search for benchmark repos since 2025-07."
     },
     {
+      "id": "agent-money-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: BlockRunAI Agent Money Benchmark with 153 stars and live frontier-model leaderboard."
+    },
+    {
       "id": "agent-only-fantasy-football-league",
       "date": "2026-11-20",
       "via": "A search for leagues run by language models surfaced Jake Moses's project page and its public comparison table."
@@ -879,6 +884,11 @@
       "id": "ai-agribench-smallholders",
       "date": "2026-11-20",
       "via": "The main AI AgriBench leaderboard links to a preliminary comparison using farmer questions collected by three advisory organizations."
+    },
+    {
+      "id": "ai-all-round-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: AI All-Round Bench (AI Decathlon) with 112 stars and 27 ranked models."
     },
     {
       "id": "ai-battle-arena",
@@ -2171,6 +2181,11 @@
       "via": "Harbor hub dataset tencent/autocodebench."
     },
     {
+      "id": "autocontrol-arena",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: ICML 2026 AutoControl Arena with 105 stars and live 9-model safety table."
+    },
+    {
       "id": "autods-scientific-cases",
       "date": "2026-11-19",
       "via": "The publisher lists this evaluation on Harbor Hub."
@@ -3279,6 +3294,11 @@
       "id": "bucc-2018-bitext-mining-shared-task",
       "date": "2026-11-19",
       "via": "Gemini Embedding 2 technical report reports results for this evaluation."
+    },
+    {
+      "id": "bug-hunt-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: verified official maker site bughunt.productcompass.pm (224 stars, 56 models, live JSON), superseding the 2026-11-01 benchlm.ai missing-maker-page bucket."
     },
     {
       "id": "bug-in-the-code-stack",
@@ -4499,6 +4519,11 @@
       "id": "cloudexp-rx00",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "cloudopsbench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: CloudOpsBench with 86 stars and live 18-run AWS cloud operations leaderboard."
     },
     {
       "id": "clue",
@@ -13636,6 +13661,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "lingee-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Kingdee Harbor-based Lingee Bench ERP agent suite with 190 stars and public HF dataset."
+    },
+    {
       "id": "lingoly",
       "date": "2026-11-19",
       "via": "The UK AISI Inspect Evals register lists the evaluation."
@@ -18351,6 +18381,11 @@
       "via": "An arXiv search led to the authors' paper."
     },
     {
+      "id": "orbia",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Orbia video world model benchmark with 67 stars and 29 ranked models."
+    },
+    {
       "id": "orca-bench-oncall",
       "date": "2026-11-19",
       "via": "The publisher lists this evaluation on Harbor Hub."
@@ -20651,6 +20686,11 @@
       "via": "RISEBench repository README, which now lists RISEBench++."
     },
     {
+      "id": "risk-aware-trading-agents",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Risk-Aware Trading Agents (rta-bench-1) with 476 stars and live JSON leaderboard."
+    },
+    {
       "id": "riskrubric",
       "date": "2026-11-20",
       "via": "The publisher's research and repository indexes led to this release."
@@ -21124,6 +21164,11 @@
       "id": "s-eval",
       "date": "2026-11-15",
       "via": "Benchmark Radar. 123 GitHub stars. Opened maker sources in the second run."
+    },
+    {
+      "id": "s1mb",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: hotchpotch S1MB-leaderboard with 89 likes and 219 complete English v1 models."
     },
     {
       "id": "s3gym",
@@ -21619,6 +21664,11 @@
       "id": "secit-bench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, SRE domain."
+    },
+    {
+      "id": "seclens",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: MatterSec Labs SecLens CVE benchmark with 42 stars and live 12-model leaderboard."
     },
     {
       "id": "secqa",
@@ -25259,6 +25309,11 @@
       "id": "uno-bench",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card omni-modality table."
+    },
+    {
+      "id": "unsafe-eval-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: Principled Intelligence unsafe-eval Leaderboard scoring 40 safety classifiers."
     },
     {
       "id": "unsatz",
@@ -28977,7 +29032,7 @@
       "date": "2026-11-01"
     },
     {
-      "name": "benchlm.ai entries without a maker page found (Ramp Accounting Bench, Gert Labs, MazeBench, VulcanBench v3, OpenHarmony Bench, IDE-Bench, App-Bench, Bug Hunt Bench, React Native Evals, STEMBench, AI-Needle, FinanceArena, KindBench, AutoCAD-Bench, MCP-Tasks, Kimi Financial Modeling, SOB Value Acc, MStar, ChatCVQA, ImageMining, MMSearch, Facts-VLM, MMAnswerBench, VWT2k-lite)",
+      "name": "benchlm.ai entries without a maker page found (Ramp Accounting Bench, Gert Labs, MazeBench, VulcanBench v3, OpenHarmony Bench, IDE-Bench, App-Bench, React Native Evals, STEMBench, AI-Needle, FinanceArena, KindBench, AutoCAD-Bench, MCP-Tasks, Kimi Financial Modeling, SOB Value Acc, MStar, ChatCVQA, ImageMining, MMSearch, Facts-VLM, MMAnswerBench, VWT2k-lite)",
       "url": "https://benchlm.ai/benchmarks",
       "reason": "Aggregator listings used as leads only. Their maker pages were not found, so they are not cataloged. Ramp Accounting Bench relates to APEX-Accounting, which the almanac has.",
       "date": "2026-11-01"
