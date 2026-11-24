@@ -7349,6 +7349,20 @@
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-Prover-V2-671B"
   },
   {
+    "id": "goedel-prover-v2-32b",
+    "name": "Goedel-Prover-V2-32B",
+    "lab": "princeton",
+    "family": "Goedel-Prover",
+    "released": "2025-07-14",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Goedel-LM/Goedel-Prover-V2-32B",
+    "aliases": [
+      "Goedel-Prover-V2-32B",
+      "Goedel-LM/Goedel-Prover-V2-32B"
+    ]
+  },
+  {
     "id": "phi-4-mini-reasoning",
     "name": "Phi-4-mini-reasoning",
     "lab": "microsoft",
@@ -8494,6 +8508,20 @@
     "epoch": "Kimi K2 (Jul 2025)"
   },
   {
+    "id": "kimi-k2-base",
+    "name": "Kimi K2 Base",
+    "lab": "moonshot",
+    "family": "Kimi K2",
+    "released": "2025-07-12",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/moonshotai/Kimi-K2-Base",
+    "aliases": [
+      "Kimi-K2-Base",
+      "moonshotai/Kimi-K2-Base"
+    ]
+  },
+  {
     "id": "exaone-4-0-32b",
     "name": "EXAONE 4.0 32B",
     "lab": "lg-ai-research",
@@ -9474,6 +9502,63 @@
     "card": "https://huggingface.co/IFM/K2-Think",
     "aliases": [
       "K2-Think"
+    ]
+  },
+  {
+    "id": "atlas-chat-2b",
+    "name": "Atlas-Chat-2B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B",
+    "aliases": [
+      "Atlas-Chat-2B",
+      "MBZUAI-Paris/Atlas-Chat-2B"
+    ]
+  },
+  {
+    "id": "atlas-chat-9b",
+    "name": "Atlas-Chat-9B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B",
+    "aliases": [
+      "Atlas-Chat-9B",
+      "MBZUAI-Paris/Atlas-Chat-9B"
+    ]
+  },
+  {
+    "id": "atlas-chat-27b",
+    "name": "Atlas-Chat-27B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B",
+    "aliases": [
+      "Atlas-Chat-27B",
+      "MBZUAI-Paris/Atlas-Chat-27B"
+    ]
+  },
+  {
+    "id": "nilechat-3b",
+    "name": "NileChat 3B",
+    "lab": "ubc",
+    "family": "NileChat",
+    "released": "2025-05-23",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/UBC-NLP/NileChat-3B",
+    "aliases": [
+      "NileChat (3B)",
+      "NileChat-3B",
+      "UBC-NLP/NileChat-3B"
     ]
   },
   {
@@ -14804,6 +14889,16 @@
     "epoch": "Muse Spark Open",
     "aliases": [
       "Muse-Spark-Open-816B-A42B"
+    ]
+  },
+  {
+    "id": "omnisonar",
+    "name": "OmniSONAR",
+    "lab": "meta",
+    "family": "SONAR",
+    "released": "2026-03-17",
+    "aliases": [
+      "Omnilingual SONAR"
     ]
   },
   {
