@@ -1,5 +1,6 @@
 // MathArena Apex (the 2025 Apex set; Apex Shortlist is a separate MathArena board) on MathArena, read through the helper in aime-2026.ts.
 import type { Leaderboard } from './types.ts';
+import { MATHARENA_STATS } from '../lib/boards/matharena.ts';
 import { MATHARENA_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'apex--apex_2025';
@@ -10,7 +11,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
-  stats: { activeParams: { name: 'Active parameters', unit: 'billions' }, latency: { name: 'Average time per answer', unit: 'seconds', better: 'lower' } },
+  stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
 export default board;

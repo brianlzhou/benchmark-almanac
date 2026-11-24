@@ -22935,16 +22935,42 @@
       "url": "https://slai-aitp.github.io/AscendGYM/",
       "feed": "https://slai-aitp.github.io/AscendGYM/assets/supplement_bundle-DAUAV8gb.js",
       "terms": "The project repository is Apache 2.0 licensed. The dashboard has no robots.txt, and the results are credited to SLAI-AITP.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [],
       "reference": [
         "Default"
       ],
       "stats": {
+        "stsBase": {
+          "name": "STS base",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stsDeduction": {
+          "name": "STS deduction",
+          "unit": "score",
+          "better": "lower"
+        },
         "ebgs": {
           "name": "Geometric mean speedup",
           "unit": "speedup",
+          "better": "higher"
+        },
+        "budgetGm": {
+          "name": "Geometric mean speedup at 50M tokens",
+          "unit": "speedup",
+          "better": "higher"
+        },
+        "fast1": {
+          "name": "FAST1",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of tasks both correct and faster than the baseline."
+        },
+        "vlrMean": {
+          "name": "Valid-to-LLM-round ratio",
+          "unit": "%",
           "better": "higher"
         },
         "taskPassRate": {
@@ -22969,7 +22995,13 @@
         },
         "tokensTotalK": {
           "name": "Cumulative tokens",
-          "unit": "thousands"
+          "unit": "thousands",
+          "better": "lower"
+        },
+        "tokensMeanK": {
+          "name": "Mean tokens per task",
+          "unit": "thousands",
+          "better": "lower"
         },
         "roundsMedian": {
           "name": "LLM rounds",
@@ -22982,6 +23014,17 @@
           "unit": "seconds",
           "better": "lower",
           "note": "Median wall-clock time."
+        },
+        "wallTimeTotalS": {
+          "name": "Total wall time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "bestDurationUs": {
+          "name": "Best latency",
+          "unit": "score",
+          "better": "lower",
+          "note": "Best kernel execution duration in microseconds."
         }
       }
     },
@@ -176948,7 +176991,7 @@
       "url": "https://mana.land/docs/rp-bench",
       "feed": "https://mana.land/docs/rp-bench",
       "terms": "Mana requires express authorization to scrape, copy, or distribute service content. The site's robots.txt permits the public page and disallows /api/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 33,
       "unmatched": [
         "Aion 2",
@@ -176979,7 +177022,8 @@
         },
         "refusals": {
           "name": "Refusals",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -178981,7 +179025,7 @@
       "url": "https://math-vr.github.io/#leaderboard",
       "feed": "https://math-vr.github.io/ (static HTML table, Overall (AC))",
       "terms": "Static project page on GitHub Pages (no robots.txt rules); the HKU-MMLab/Math-VR-CodePlot-CoT repository states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "Bagel-Zebra-CoT",
@@ -179027,10 +179071,14 @@
       "url": "https://matharena.ai/?comp=apex--apex_2025",
       "feed": "https://matharena.ai/competition_tables/apex--apex_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -179039,6 +179087,11 @@
           "name": "Average time per answer",
           "unit": "seconds",
           "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -179046,10 +179099,14 @@
       "url": "https://matharena.ai/?comp=apex--shortlist_2025",
       "feed": "https://matharena.ai/competition_tables/apex--shortlist_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [],
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens per answer",
+          "unit": "tokens"
+        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -179057,6 +179114,11 @@
         "latency": {
           "name": "Average time per answer",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "averageRetries": {
+          "name": "Average retries",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -179293,7 +179355,7 @@
       "url": "https://mathverse-cuhk.github.io/#leaderboard",
       "feed": "https://mathverse-cuhk.github.io/ (results table, ALL accuracy and CoT-E)",
       "terms": "Static GitHub Pages project page with no stated terms; the MathVerse repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "G-LLaVA-13B",
@@ -179336,6 +179398,36 @@
         "visionOnlyWoutCotE": {
           "name": "Vision Only answer accuracy",
           "group": "Modality",
+          "unit": "%"
+        },
+        "textDominantCotE": {
+          "name": "Text Dominant CoT-E",
+          "group": "Modality CoT-E",
+          "unit": "%"
+        },
+        "textLiteCotE": {
+          "name": "Text Lite CoT-E",
+          "group": "Modality CoT-E",
+          "unit": "%"
+        },
+        "textOnlyCotE": {
+          "name": "Text Only CoT-E",
+          "group": "Modality CoT-E",
+          "unit": "%"
+        },
+        "visionIntensiveCotE": {
+          "name": "Vision Intensive CoT-E",
+          "group": "Modality CoT-E",
+          "unit": "%"
+        },
+        "visionDominantCotE": {
+          "name": "Vision Dominant CoT-E",
+          "group": "Modality CoT-E",
+          "unit": "%"
+        },
+        "visionOnlyCotE": {
+          "name": "Vision Only CoT-E",
+          "group": "Modality CoT-E",
           "unit": "%"
         }
       },
@@ -179976,21 +180068,29 @@
       "url": "https://maxxbench.unlap.ai/",
       "feed": "https://maxxbench.unlap.ai/",
       "terms": "The makers publish this public results table; robots.txt has no restrictions and no separate extraction terms are stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [],
       "stats": {
+        "deepsweScore": {
+          "name": "DeepSWE score",
+          "unit": "%",
+          "better": "higher",
+          "note": "Reference DeepSWE score shown beside MaxxBench."
+        },
         "estimatedBenchMaxxing": {
           "name": "Estimated benchmark maxxing",
           "unit": "score"
         },
         "steps": {
           "name": "Steps",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "reportedTokens": {
           "name": "Reported tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -179998,7 +180098,7 @@
       "url": "https://mazebench.com/leaderboard/ai",
       "feed": "https://mazebench.com/data/ai-leaderboards.json",
       "terms": "Public Maze Bench leaderboard manifest and score checkpoints published by the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 192,
       "unmatched": [],
       "costPer": "run",
@@ -180009,14 +180109,44 @@
         },
         "rooms": {
           "name": "Rooms",
+          "unit": "count",
+          "better": "higher"
+        },
+        "roomsAvailable": {
+          "name": "Rooms available",
           "unit": "count"
+        },
+        "uniqueTiles": {
+          "name": "Unique tiles visited",
+          "unit": "count",
+          "better": "higher"
         },
         "moves": {
           "name": "Moves",
           "unit": "count"
         },
+        "actions": {
+          "name": "Actions",
+          "unit": "count"
+        },
+        "responses": {
+          "name": "Model responses",
+          "unit": "count"
+        },
         "totalTokens": {
           "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "cachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "uncachedInputTokens": {
+          "name": "Uncached input tokens",
           "unit": "tokens"
         },
         "latency": {
@@ -181114,13 +181244,50 @@
       "url": "https://mcpmark.ai/leaderboard/verified",
       "feed": "https://mcpmark.ai/leaderboard/verified (Next.js page payload, Verified overall table)",
       "terms": "Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "parts": {
+        "filesystem": {
+          "name": "Filesystem",
+          "group": "Server"
+        },
+        "github": {
+          "name": "GitHub",
+          "group": "Server"
+        },
+        "notion": {
+          "name": "Notion",
+          "group": "Server"
+        },
+        "playwright": {
+          "name": "Playwright",
+          "group": "Server"
+        },
+        "postgres": {
+          "name": "PostgreSQL",
+          "group": "Server"
+        }
+      },
       "stats": {
         "time": {
           "name": "Average execution time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Total tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "turns": {
+          "name": "Mean turns per task",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -264199,7 +264366,7 @@
       "url": "https://research.nvidia.com/labs/srl/projects/robolab/leaderboard.html",
       "feed": "https://research.nvidia.com/labs/srl/projects/robolab/leaderboard.html (leaderboard table, SR%)",
       "terms": "Static public page; robots.txt allows it with a search=yes, ai-input=yes content signal, and the page states no further terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "AMP1",
@@ -264252,7 +264419,9 @@
         },
         "eeSpeed": {
           "name": "End-effector speed",
-          "better": "lower"
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean end-effector speed in centimeters per second."
         },
         "simple_score": {
           "name": "Simple task score",
@@ -264298,7 +264467,14 @@
           "unit": "count"
         },
         "eeSparc": {
-          "name": "End-effector path efficiency"
+          "name": "End-effector path efficiency",
+          "unit": "score",
+          "note": "Spectral arc length smoothness metric for end-effector motion."
+        },
+        "vramGb": {
+          "name": "VRAM",
+          "unit": "gb",
+          "better": "lower"
         }
       }
     },

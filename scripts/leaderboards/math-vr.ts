@@ -43,6 +43,7 @@ const board: Leaderboard = {
       const ps = iPs >= 0 ? num(r[iPs]?.text) : undefined;
       const flag = r[head.indexOf('Thinking')]?.text;
       const size = r[head.indexOf('#Params')]?.text.match(/^([\d.]+)B$/i);
+      const link = r[head.indexOf('Link')]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1];
       const metrics: Record<string, number> = {};
       if (ps !== undefined) metrics.ps = ps;
       for (const [key, column] of Object.entries({textAc: 'Text (AC)', textPs: 'Text (PS)', multimodalAc: 'Multimodal (AC)', multimodalPs: 'Multimodal (PS)'})) {
@@ -52,6 +53,7 @@ const board: Leaderboard = {
       rows.push({
         model: off ? name.replace(/-No-Thinking$/i, '') : name, score, metrics,
         setting: off || flag === 'X' ? 'non-thinking' : flag === '✓' ? 'thinking' : undefined,
+        link,
         params: size ? Number(size[1]) : undefined,
       });
     }

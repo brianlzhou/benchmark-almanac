@@ -2,6 +2,7 @@
 // MathArena, read through the helper in aime-2026.ts. The Apex set itself has its own importer,
 // matharena-apex-imo-usamo.ts.
 import type { Leaderboard } from './types.ts';
+import { MATHARENA_STATS } from '../lib/boards/matharena.ts';
 import { MATHARENA_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
 
 const COMP = 'apex--shortlist_2025';
@@ -12,7 +13,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
-  stats: { activeParams: { name: 'Active parameters', unit: 'billions' }, latency: { name: 'Average time per answer', unit: 'seconds', better: 'lower' } },
+  stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
 export default board;
