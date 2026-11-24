@@ -6097,8 +6097,8 @@
     "agentick": {
       "url": "https://roger-creus.github.io/agentick/board/",
       "feed": "https://roger-creus.github.io/agentick/board/",
-      "terms": "MIT repository; the project site has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "terms": "MIT repository. The project site has no robots.txt.",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [
         "PPO Dense (2M)",
@@ -6178,6 +6178,22 @@
         },
         "CooperativeTransport-v0 Expert": {
           "name": "CooperativeTransport-v0 Expert",
+          "group": "Task"
+        },
+        "CuriosityMaze-v0 Easy": {
+          "name": "CuriosityMaze-v0 Easy",
+          "group": "Task"
+        },
+        "CuriosityMaze-v0 Medium": {
+          "name": "CuriosityMaze-v0 Medium",
+          "group": "Task"
+        },
+        "CuriosityMaze-v0 Hard": {
+          "name": "CuriosityMaze-v0 Hard",
+          "group": "Task"
+        },
+        "CuriosityMaze-v0 Expert": {
+          "name": "CuriosityMaze-v0 Expert",
           "group": "Task"
         },
         "DeceptiveReward-v0 Easy": {
@@ -51251,12 +51267,24 @@
     "clawbench-v2": {
       "url": "https://claw-bench.com/leaderboard",
       "feed": "https://claw-bench.com/leaderboard",
-      "terms": "Public results published by the benchmark authors at claw-bench.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "terms": "Public results published by the benchmark authors at claw-bench.com. Retain source attribution and follow the upstream terms.",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "openrouter-owl-alpha"
-      ]
+      ],
+      "stats": {
+        "intercepted": {
+          "name": "Intercepted rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "strictReward": {
+          "name": "Strict reward",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "clawprobench": {
       "url": "https://suyoumo.github.io/bench/",
@@ -66094,7 +66122,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/audio/benchmark_output/runs/<newest>/groups/corebench.json (PEM)",
       "terms": "The Stanford HELM project publishes the results under the terms at https://github.com/stanford-crfm/helm/blob/main/LICENSE.",
       "host": "AHELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "gpt-4o-audio-preview-2024-10-01",
@@ -66102,24 +66130,8 @@
         "gpt-4o-mini-audio-preview-2024-12-17"
       ],
       "stats": {
-        "# eval": {
-          "name": "Evaluation examples",
-          "unit": "count"
-        },
-        "# prompt tokens": {
-          "name": "Prompt tokens (reported)",
-          "unit": "tokens"
-        },
-        "# output tokens": {
-          "name": "Output tokens (reported)",
-          "unit": "tokens"
-        },
         "inputTokens": {
           "name": "Input tokens per request",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Output tokens per request",
           "unit": "tokens"
         }
       }
@@ -77103,13 +77115,13 @@
     "datacenterbench-tier-1": {
       "url": "https://robocurve.org/datacenterbench/",
       "feed": "https://robocurve.org/datacenterbench/data/model_summary.csv (avg_at_3)",
-      "terms": "CSV published next to the robocurve.org page; robots.txt allows all paths (content signals: search yes, AI training no) and the site states no other terms.",
-      "retrieved": "2026-11-23",
+      "terms": "CSV published next to the robocurve.org page. Robots.txt allows all paths (content signals: search yes, AI training no) and the site states no other terms.",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "chart": {
         "title": "Score vs. minutes per task",
-        "note": "Each point is one model and serving mode; the page plots minutes, redrawn here in seconds.",
+        "note": "Each point is one model and serving mode. The page plots minutes, redrawn here in seconds.",
         "x": {
           "key": "latency",
           "label": "Mean time per task",
@@ -77125,14 +77137,6 @@
         }
       },
       "stats": {
-        "trialsCounted": {
-          "name": "Trials counted",
-          "unit": "count"
-        },
-        "trialsExpected": {
-          "name": "Trials expected",
-          "unit": "count"
-        },
         "medianLatency": {
           "name": "Median time per task",
           "unit": "seconds",
@@ -77224,31 +77228,15 @@
           "unit": "%",
           "better": "higher"
         },
-        "run1Scored": {
-          "name": "Run 1 tasks scored",
-          "unit": "count"
-        },
         "run2Score": {
           "name": "Run 2 score",
           "unit": "%",
           "better": "higher"
         },
-        "run2Scored": {
-          "name": "Run 2 tasks scored",
-          "unit": "count"
-        },
         "run3Score": {
           "name": "Run 3 score",
           "unit": "%",
           "better": "higher"
-        },
-        "run3Scored": {
-          "name": "Run 3 tasks scored",
-          "unit": "count"
-        },
-        "runStandardError": {
-          "name": "Standard error across runs",
-          "unit": "score"
         }
       }
     },
@@ -83699,7 +83687,7 @@
       "feed": "https://raw.githubusercontent.com/open-compass/DevEval/HEAD/README.md",
       "terms": "The authors license the data under CC BY 4.0. https://github.com/open-compass/DevEval#-license",
       "headline": "The authors report several different measures, so the headline is the first, the environment setup pass rate.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "CodeLlama-13B-Instruct",
@@ -91169,7 +91157,7 @@
       "url": "https://anonymous.4open.science/r/EduVideoBench-anonymous-D5F2/",
       "feed": "https://anonymous.4open.science/api/repo/EduVideoBench-anonymous-D5F2/file/results/human_eval/leaderboard_ksa.csv",
       "terms": "The authors plan to release scores under CC BY 4.0. https://anonymous.4open.science/r/EduVideoBench-anonymous-D5F2/README.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Kling 3.0",
@@ -94984,8 +94972,8 @@
     "envsimbench": {
       "url": "https://github.com/cookieApril/EnvSimBench",
       "feed": "https://raw.githubusercontent.com/cookieApril/EnvSimBench/HEAD/README.md",
-      "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "terms": "Public results published by the benchmark authors at raw.githubusercontent.com. Retain source attribution and follow the upstream terms.",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Ours (Full-Balance2, 4B)"
@@ -94998,6 +94986,12 @@
         "State-Change CM": {
           "name": "State change",
           "group": "Category"
+        }
+      },
+      "stats": {
+        "activeParamsB": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },
@@ -97189,7 +97183,7 @@
       "url": "https://github.com/hitz-zentroa/latxa/tree/main/evaluation/results",
       "feed": "https://api.github.com/repos/hitz-zentroa/latxa/git/trees/main?recursive=1",
       "terms": "The results repository uses MIT. https://github.com/hitz-zentroa/latxa/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "bloom-7b1",
@@ -97880,7 +97874,7 @@
       "url": "https://evalcrafter.github.io/",
       "feed": "https://evalcrafter.github.io/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Gen2 (2023.09)",
@@ -100094,7 +100088,7 @@
       "url": "https://www.fab-ai.org/benchmarks?benchmark=DA-sw&benchmarkType=foundational-literacy&cost=10&dataset=&modelMode=default&models=%5B%5D&pageView=table",
       "feed": "https://www.fab-ai.org/benchmarks?benchmark=DA-sw&benchmarkType=foundational-literacy&cost=10&dataset=&modelMode=default&models=%5B%5D&pageView=table",
       "terms": "Fab AI marks the leaderboard as all rights reserved. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [
         "Ministral 3 3B",
@@ -115742,7 +115736,7 @@
       "url": "https://cognition.com/frontiercode",
       "feed": "https://cognition.com/data/frontier-code-2.0/data.json",
       "terms": "Static JSON on cognition.com that the page's chart loads; Cognition's website terms set no rule against automated reading.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 139,
       "unmatched": [],
       "harnesses": "system",
@@ -115751,6 +115745,11 @@
           "name": "Pass rate",
           "unit": "%",
           "better": "higher"
+        },
+        "flaggedRate": {
+          "name": "Flagged rate",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -123111,7 +123110,7 @@
       "url": "https://generalist.top/leaderboard-scope-a",
       "feed": "https://generalist.top/leaderboard-scope-a",
       "terms": "General-Level reserves copyright on its full Scope-A leaderboard. https://generalist.top/leaderboard-scope-a",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "3D-LLM-2.1B",
@@ -123197,6 +123196,11 @@
         },
         "level4": {
           "name": "Level 4 synergy score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "level5": {
+          "name": "Level 5 synergy score",
           "unit": "score",
           "better": "higher"
         }
@@ -128414,7 +128418,14 @@
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
       "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "gqa": {
       "url": "https://arxiv.org/html/1902.09506",
@@ -133852,7 +133863,7 @@
       "url": "https://openai.com/index/healthbench/",
       "feed": "https://openai.com/index/healthbench/ (HealthBench scores by theme, overall values)",
       "terms": "OpenAI terms restrict automated extraction; Benchmark Almanac credits OpenAI and links the official source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "GPT-3.5 Turbo (snapshot unspecified)"
@@ -133860,31 +133871,31 @@
       "parts": {
         "emergency_referrals": {
           "name": "Emergency referrals",
-          "group": "Category"
+          "group": "Theme"
         },
         "expertise_tailored_communication": {
-          "name": "Expertise tailored communication",
-          "group": "Category"
+          "name": "Expertise-tailored communication",
+          "group": "Theme"
         },
         "responding_under_uncertainty": {
           "name": "Responding under uncertainty",
-          "group": "Category"
+          "group": "Theme"
         },
         "response_depth": {
           "name": "Response depth",
-          "group": "Category"
+          "group": "Theme"
         },
         "health_data_tasks": {
           "name": "Health data tasks",
-          "group": "Category"
+          "group": "Theme"
         },
         "global_health": {
           "name": "Global health",
-          "group": "Category"
+          "group": "Theme"
         },
         "context_seeking": {
           "name": "Context seeking",
-          "group": "Category"
+          "group": "Theme"
         },
         "Axis:communication_quality": {
           "name": "Communication quality",
@@ -133929,6 +133940,128 @@
         "Hard subset:overall": {
           "name": "Overall",
           "group": "Hard subset"
+        }
+      },
+      "stats": {
+        "Consensus error rate:emergency_referrals": {
+          "name": "Consensus error rate: Emergency referrals",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:expertise_tailored_communication": {
+          "name": "Consensus error rate: Expertise-tailored communication",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:responding_under_uncertainty": {
+          "name": "Consensus error rate: Responding under uncertainty",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:response_depth": {
+          "name": "Consensus error rate: Response depth",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:health_data_tasks": {
+          "name": "Consensus error rate: Health data tasks",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:global_health": {
+          "name": "Consensus error rate: Global health",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:context_seeking": {
+          "name": "Consensus error rate: Context seeking",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Consensus error rate:overall": {
+          "name": "Consensus error rate: Overall",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:1": {
+          "name": "Worst-case failure rate at 1 sample",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:2": {
+          "name": "Worst-case failure rate at 2 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:3": {
+          "name": "Worst-case failure rate at 3 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:4": {
+          "name": "Worst-case failure rate at 4 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:5": {
+          "name": "Worst-case failure rate at 5 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:6": {
+          "name": "Worst-case failure rate at 6 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:7": {
+          "name": "Worst-case failure rate at 7 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:8": {
+          "name": "Worst-case failure rate at 8 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:9": {
+          "name": "Worst-case failure rate at 9 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:10": {
+          "name": "Worst-case failure rate at 10 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:11": {
+          "name": "Worst-case failure rate at 11 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:12": {
+          "name": "Worst-case failure rate at 12 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:13": {
+          "name": "Worst-case failure rate at 13 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:14": {
+          "name": "Worst-case failure rate at 14 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:15": {
+          "name": "Worst-case failure rate at 15 samples",
+          "unit": "%",
+          "better": "lower"
+        },
+        "anyFailRate:16": {
+          "name": "Worst-case failure rate at 16 samples",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -158455,7 +158588,7 @@
       "url": "https://www.piiarena.com/datasets/kiji-en",
       "feed": "https://www.piiarena.com/data/all-results.csv",
       "terms": "PII Arena licenses its original publication material under MIT. Dataiku licenses the source under Apache 2.0. https://github.com/Quakeer444/pii-arena/blob/main/README.md PII Arena robots.txt allows the feed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "apararti",
@@ -158501,10 +158634,6 @@
         "traciora"
       ],
       "stats": {
-        "gold": {
-          "name": "Gold annotations",
-          "unit": "count"
-        },
         "hit": {
           "name": "Detected annotations",
           "unit": "count",
@@ -158534,10 +158663,6 @@
           "name": "False-negative characters",
           "unit": "count",
           "better": "lower"
-        },
-        "positiveRows": {
-          "name": "Rows with annotations",
-          "unit": "count"
         },
         "residualRows": {
           "name": "Rows with residual personally identifiable information",
@@ -164802,8 +164927,8 @@
     "learn2play-bench": {
       "url": "https://liushiliushi.github.io/learn2play-bench-website/",
       "feed": "https://liushiliushi.github.io/learn2play-bench-website/assets/performance-cost.json?v=astra-billed-150-20261008",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
       "chart": {
@@ -168895,8 +169020,8 @@
     "lifesci-diamond": {
       "url": "https://github.com/arcainc/lifesci-diamond",
       "feed": "https://raw.githubusercontent.com/arcainc/lifesci-diamond/main/leaderboard.csv",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [
         "Arca Auto"
@@ -168906,14 +169031,6 @@
       ],
       "harnesses": "system",
       "stats": {
-        "graded": {
-          "name": "Graded tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "passes": {
           "name": "Passes",
           "unit": "count",
@@ -179597,9 +179714,27 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/salty-duck/MAPP/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22bsgg4e7fsa4pwytqs63os6ww%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "collision_penalty": {
+          "name": "Collision penalty",
+          "unit": "score",
+          "better": "higher",
+          "note": "Negative reward penalty for collisions, where values closer to 0 are better."
+        },
+        "progress_reward": {
+          "name": "Progress reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "success_reward": {
+          "name": "Success reward",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "marathondocbench": {
       "url": "https://arxiv.org/abs/2610.39308",
@@ -185542,8 +185677,8 @@
     "medical-chronology-llm-benchmark": {
       "url": "https://github.com/superinsight/superinsight-ai-benchmark",
       "feed": "https://raw.githubusercontent.com/superinsight/superinsight-ai-benchmark/HEAD/benchmark_presentation_v2.md",
-      "terms": "Apache-2.0 repository; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "terms": "Apache-2.0 repository. raw.githubusercontent.com has no robots.txt.",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "qwen3-235b"
@@ -185623,6 +185758,11 @@
         },
         "goldenCFalsePositive": {
           "name": "Golden C false positives",
+          "unit": "count",
+          "better": "lower"
+        },
+        "goldenCFalseNegative": {
+          "name": "Golden C false negatives",
           "unit": "count",
           "better": "lower"
         },
@@ -195851,7 +195991,7 @@
       "url": "https://mmdm-benchmark.github.io/#leaderboard",
       "feed": "https://mmdm-benchmark.github.io/",
       "terms": "The authors publish the MMDM leaderboard and protocol at https://mmdm-benchmark.github.io/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Autotrust JEV 27B-VL",
@@ -196078,116 +196218,8 @@
           "name": "Hard single-select items",
           "unit": "count"
         },
-        "setCount": {
-          "name": "Hard multi-select items",
-          "unit": "count"
-        },
         "softCount": {
           "name": "Soft Brier items",
-          "unit": "count"
-        },
-        "world_knowledge_singleCount": {
-          "name": "World knowledge single-select items",
-          "unit": "count"
-        },
-        "reading_comprehension_singleCount": {
-          "name": "Reading comprehension single-select items",
-          "unit": "count"
-        },
-        "reading_comprehension_setCount": {
-          "name": "Reading comprehension multi-select items",
-          "unit": "count"
-        },
-        "deductive_reasoning_singleCount": {
-          "name": "Deductive reasoning single-select items",
-          "unit": "count"
-        },
-        "option_logic_singleCount": {
-          "name": "Option logic single-select items",
-          "unit": "count"
-        },
-        "option_logic_setCount": {
-          "name": "Option logic multi-select items",
-          "unit": "count"
-        },
-        "constraint_planning_singleCount": {
-          "name": "Constraint planning single-select items",
-          "unit": "count"
-        },
-        "constraint_planning_setCount": {
-          "name": "Constraint planning multi-select items",
-          "unit": "count"
-        },
-        "quantitative_temporal_reasoning_singleCount": {
-          "name": "Quantitative temporal reasoning single-select items",
-          "unit": "count"
-        },
-        "quantitative_temporal_reasoning_softCount": {
-          "name": "Quantitative temporal reasoning Brier items",
-          "unit": "count"
-        },
-        "workflow_decision_singleCount": {
-          "name": "Workflow decision single-select items",
-          "unit": "count"
-        },
-        "workflow_decision_setCount": {
-          "name": "Workflow decision multi-select items",
-          "unit": "count"
-        },
-        "agent_state_tracking_singleCount": {
-          "name": "Agent state tracking single-select items",
-          "unit": "count"
-        },
-        "policy_exception_singleCount": {
-          "name": "Policy exception single-select items",
-          "unit": "count"
-        },
-        "policy_exception_softCount": {
-          "name": "Policy exception Brier items",
-          "unit": "count"
-        },
-        "evidence_validation_singleCount": {
-          "name": "Evidence validation single-select items",
-          "unit": "count"
-        },
-        "evidence_validation_softCount": {
-          "name": "Evidence validation Brier items",
-          "unit": "count"
-        },
-        "code_database_singleCount": {
-          "name": "Code database single-select items",
-          "unit": "count"
-        },
-        "intent_routing_singleCount": {
-          "name": "Intent routing single-select items",
-          "unit": "count"
-        },
-        "tool_skill_selection_singleCount": {
-          "name": "Tool skill selection single-select items",
-          "unit": "count"
-        },
-        "tool_skill_selection_setCount": {
-          "name": "Tool skill selection multi-select items",
-          "unit": "count"
-        },
-        "tool_skill_selection_softCount": {
-          "name": "Tool skill selection Brier items",
-          "unit": "count"
-        },
-        "answer_preference_singleCount": {
-          "name": "Answer preference single-select items",
-          "unit": "count"
-        },
-        "score_rubric_singleCount": {
-          "name": "Score rubric single-select items",
-          "unit": "count"
-        },
-        "score_rubric_softCount": {
-          "name": "Score rubric Brier items",
-          "unit": "count"
-        },
-        "emotion_recognition_singleCount": {
-          "name": "Emotion recognition single-select items",
           "unit": "count"
         }
       }
@@ -197943,7 +197975,7 @@
       "url": "https://github.com/microsoft/MMLU-CF",
       "feed": "https://raw.githubusercontent.com/microsoft/MMLU-CF/main/README.md (Leaderboard table, MMLU-CF 5-shot Test)",
       "terms": "README table in the microsoft/MMLU-CF GitHub repository, which is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 74,
       "unmatched": [
         "Baichuan-2-7B-chat",
@@ -197958,6 +197990,17 @@
         "validation": {
           "name": "Validation",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "originalMmlu5Shot": {
+          "name": "Original MMLU 5-shot",
+          "unit": "%",
+          "better": "higher"
+        },
+        "testMinusValidation": {
+          "name": "Test minus validation gap",
+          "unit": "%"
         }
       }
     },

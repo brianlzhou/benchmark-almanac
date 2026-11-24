@@ -39,7 +39,7 @@ const board: Leaderboard = {
         }
         if (ids.size !== 5169) throw new Error('Incomplete EusProficiency test split');
         rows.push({ model, setting, link, score: 100 * correct / ids.size, cost: priced === ids.size ? cost / ids.size : undefined, tokens: output / ids.size,
-          metrics: { inputTokens: input / ids.size, outputTokens: output / ids.size, totalTokens: (input + output) / ids.size } });
+          metrics: { inputTokens: input / ids.size, totalTokens: (input + output) / ids.size } });
       } else {
         const data = await fetchJson<{ results: { eus_proficiency: Record<string, number> } }>(link);
         const result = data.results?.eus_proficiency;
