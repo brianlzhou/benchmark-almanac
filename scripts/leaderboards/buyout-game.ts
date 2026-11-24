@@ -16,13 +16,13 @@ const board: Leaderboard = {
     rating_units: { name: 'Rating units', unit: 'count' },
     bt_matches: { name: 'Bradley Terry matches', unit: 'count' },
     bt_opponent_count: { name: 'Bradley Terry opponents', unit: 'count' },
+    wealth_partial_points_sum: { name: 'Wealth partial points sum', unit: 'score', better: 'higher' },
     wealth_partial_score: { name: 'Wealth partial score', unit: 'score', better: 'higher' },
-    wealth_winner_count: { name: 'Wealth wins', unit: 'count' },
+    wealth_winner_count: { name: 'Wealth wins', unit: 'count', better: 'higher' },
     wealth_winner_rate: { name: 'Wealth win rate', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
     pairwise_win_rate: { name: 'Pairwise win rate', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
     ts_mu: { name: 'TrueSkill mean', unit: 'rating', better: 'higher' },
     ts_sigma: { name: 'TrueSkill rating uncertainty', unit: 'rating', better: 'lower' },
-    trueSkillRank: { name: 'TrueSkill rank', unit: 'count', better: 'lower' },
   },
   aliases: { 'Grok 4.20 0309': 'grok-4-20', 'Xiaomi MiMo V2.5 Pro': 'mimo-v2-5-pro', 'Xiaomi MiMo V2 Pro': 'mimo-v2-pro',
     'ByteDance Seed2.0 Pro': 'seed-2-0-pro', 'Baidu Ernie 5.1': 'ernie-5-1', 'Baidu Ernie 5.0': 'ernie-5-0' },
@@ -37,10 +37,10 @@ const board: Leaderboard = {
       if (!label || !r.bt_rating || Math.abs(Number(label[2]) - Number(r.bt_rating)) > 0.051 ||
           Number(label[3]) !== Number(r.games) || Number(label[4]) !== Number(r.rating_units)) throw new Error('Buyout rank mismatch');
       const metrics: Record<string, number> = {};
-      for (const key of ['games','rating_units','bt_se','bt_matches','bt_opponent_count','wealth_partial_score','wealth_winner_count',
-          'wealth_winner_rate','pairwise_win_rate','ts_mu','ts_sigma','ts_rank']) {
+      for (const key of ['games','rating_units','bt_se','bt_matches','bt_opponent_count','wealth_partial_points_sum','wealth_partial_score','wealth_winner_count',
+          'wealth_winner_rate','pairwise_win_rate','ts_mu','ts_sigma']) {
         if (!r[key] || !Number.isFinite(Number(r[key]))) throw new Error('Missing Buyout ' + key);
-        metrics[key === 'bt_se' ? 'stderr' : key === 'ts_rank' ? 'trueSkillRank' : key] = +r[key];
+        metrics[key === 'bt_se' ? 'stderr' : key] = +r[key];
       }
       const m = label[1].match(/^(.+?)\s+(?:\(([^)]+)\)|(Thinking|Reasoning))$/);
       if (!r.bt_ci95_low || !r.bt_ci95_high) throw new Error('Missing Buyout interval');

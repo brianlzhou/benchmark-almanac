@@ -39372,7 +39372,7 @@
       "url": "https://github.com/adamholter/buttonbench/blob/main/README.md",
       "feed": "https://raw.githubusercontent.com/adamholter/buttonbench/main/bench/visualizer/data/benchmark-results.json",
       "terms": "The repository is MIT licensed. Results are credited to Adam Holter with a link to the repository.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 41,
       "unmatched": [
         "claude-4.5-opus-thinking-high",
@@ -39397,15 +39397,36 @@
       "stats": {
         "correct": {
           "name": "Correct tests",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "incorrect": {
           "name": "Incorrect tests",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
+        },
+        "errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "errorRate": {
+          "name": "Error rate",
+          "unit": "%",
+          "better": "lower"
         },
         "totalTests": {
           "name": "Total tests",
           "unit": "count"
+        },
+        "totalCost": {
+          "name": "Total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "totalCompletionTokens": {
+          "name": "Total completion tokens",
+          "unit": "tokens"
         },
         "latency": {
           "name": "Average test duration",
@@ -39423,7 +39444,7 @@
       "url": "https://github.com/lechmazur/buyout_game",
       "feed": "https://raw.githubusercontent.com/lechmazur/buyout_game/HEAD/reference/current/scoreboard_bt.csv",
       "terms": "The author publishes the README and rating data. The raw GitHub host returns 404 for robots.txt. No separate score license is stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [],
       "stats": {
@@ -39443,6 +39464,11 @@
           "name": "Bradley Terry opponents",
           "unit": "count"
         },
+        "wealth_partial_points_sum": {
+          "name": "Wealth partial points sum",
+          "unit": "score",
+          "better": "higher"
+        },
         "wealth_partial_score": {
           "name": "Wealth partial score",
           "unit": "score",
@@ -39450,7 +39476,8 @@
         },
         "wealth_winner_count": {
           "name": "Wealth wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "wealth_winner_rate": {
           "name": "Wealth win rate",
@@ -39472,11 +39499,6 @@
         "ts_sigma": {
           "name": "TrueSkill rating uncertainty",
           "unit": "rating",
-          "better": "lower"
-        },
-        "trueSkillRank": {
-          "name": "TrueSkill rank",
-          "unit": "count",
           "better": "lower"
         }
       }
@@ -44964,7 +44986,7 @@
       "feed": "https://raw.githubusercontent.com/aliyun/cflue/HEAD/README.md",
       "terms": "The project uses MIT and licenses the dataset under CC BY-NC-SA 4.0. https://github.com/aliyun/cflue#licenses",
       "headline": "The leaderboard gives no combined score, so the headline uses accuracy on its first assessment, financial knowledge.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "ChatGLM3-6B-sft",
@@ -55199,7 +55221,7 @@
       "feed": "https://thevertexlab.github.io/MuTheoryEval/data.json",
       "terms": "The host returns a missing page for robots.txt. The runner repository uses the MIT License. https://raw.githubusercontent.com/thevertexlab/MuTheoryEval/main/LICENSE",
       "host": "MuTheoryEval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "gemini-3.1-flash",
@@ -55209,10 +55231,6 @@
       "stats": {
         "questions": {
           "name": "Questions",
-          "unit": "count"
-        },
-        "seed": {
-          "name": "Random seed",
           "unit": "count"
         },
         "elapsedSeconds": {
@@ -122151,7 +122169,7 @@
       "url": "https://github.com/tongxuluo/gamecraft-bench",
       "feed": "https://raw.githubusercontent.com/tongxuluo/gamecraft-bench/main/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "Seele02-pro"
@@ -122177,11 +122195,20 @@
       },
       "stats": {
         "inputTokens": {
-          "name": "Input tokens",
+          "name": "Average input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "inputTokensTotal": {
+          "name": "Input tokens total",
           "unit": "tokens"
         },
         "cacheTokensTotal": {
           "name": "Cache tokens total",
+          "unit": "tokens"
+        },
+        "outputTokensTotal": {
+          "name": "Output tokens total",
           "unit": "tokens"
         }
       }
@@ -138223,7 +138250,7 @@
       "url": "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard",
       "feed": "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard/resolve/main/leaderboard-app/public/btd_frontend_data.json",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 51,
       "unmatched": [
         "gemini-2.5-flash (snapshot unspecified)",
@@ -138255,14 +138282,18 @@
           "better": "higher",
           "note": "Probability that the model ranks first in the fitted comparison model."
         },
-        "expected_rank": {
-          "name": "Expected rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "total_comparisons": {
           "name": "Total comparisons",
           "unit": "count"
+        },
+        "ess": {
+          "name": "Effective sample size",
+          "unit": "count"
+        },
+        "tier": {
+          "name": "Tier",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -179073,7 +179104,7 @@
       "url": "https://huggingface.co/datasets/relayforge-ai/mandos/blob/main/leaderboard_session2.md",
       "feed": "https://huggingface.co/datasets/relayforge-ai/mandos/raw/main/leaderboard_session2.json",
       "terms": "Hugging Face allows crawling. RelayForge licenses published runs under CC BY 4.0. https://huggingface.co/datasets/relayforge-ai/mandos",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "openrouter-deepseek-chat"
@@ -179081,11 +179112,13 @@
       "stats": {
         "passed": {
           "name": "Passed scenarios",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "fail": {
           "name": "Failed scenarios",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "minimum_pass": {
           "name": "Minimum pass",
@@ -179093,11 +179126,23 @@
         },
         "full_pass": {
           "name": "Full pass",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "exceptional": {
           "name": "Exceptional",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "slotOk": {
+          "name": "Completed slots",
+          "unit": "count",
+          "better": "higher"
+        },
+        "slotFail": {
+          "name": "Failed slots",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -183304,7 +183349,7 @@
       "url": "https://github.com/ljding94/NeutronGym/blob/main/benchmark/RESULTS.md",
       "feed": "https://raw.githubusercontent.com/ljding94/NeutronGym/main/benchmark/results/m6_results.json",
       "terms": "No repository license was listed when checked on 2026-11-20. The JSON includes one incomplete GPT run that the published table excludes. https://github.com/ljding94/NeutronGym GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
       "stats": {
@@ -183342,9 +183387,24 @@
           "name": "Valid episodes",
           "unit": "count"
         },
+        "infraExcluded": {
+          "name": "Infrastructure-excluded episodes",
+          "unit": "count",
+          "better": "lower"
+        },
+        "leakInvalid": {
+          "name": "Leak-invalidated episodes",
+          "unit": "count",
+          "better": "lower"
+        },
         "heldOutPassRate": {
           "name": "Held-out pass rate",
           "unit": "%",
+          "better": "higher"
+        },
+        "heldOutPasses": {
+          "name": "Held-out passes",
+          "unit": "count",
           "better": "higher"
         }
       }
@@ -183711,7 +183771,7 @@
       "url": "https://github.com/jgerstmayr/MecEng/blob/main/misc/paperTableData/overallResults50models_2026-06-25_mergedLLMs.xlsx",
       "feed": "https://raw.githubusercontent.com/jgerstmayr/MecEng/main/misc/paperTableData/overallResults50models_2026-06-25_mergedLLMs.xlsx",
       "terms": "The repository uses BSD 3-Clause. https://github.com/jgerstmayr/MecEng/blob/main/LICENSE The raw file host serves no robots.txt rules.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "codegemma:7b",
@@ -183850,18 +183910,6 @@
           "name": "Maximum context overflow tokens",
           "unit": "count",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Temperature",
-          "unit": "score"
-        },
-        "default temperature": {
-          "name": "Default temperature",
-          "unit": "score"
-        },
-        "batch": {
-          "name": "Batch size",
-          "unit": "count"
         },
         "LLM ctxSize (k)": {
           "name": "LLM context size",
@@ -186395,12 +186443,34 @@
       "url": "https://github.com/cortico-health/MedSafe-Dx",
       "feed": "https://raw.githubusercontent.com/cortico-health/MedSafe-Dx/HEAD/results/v03_full/scores.json",
       "terms": "CC BY-NC-ND 4.0 repository; factual headline results are attributed in their published units; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "llama-3.1-8b-instruct"
       ],
+      "chart": {
+        "title": "Misses versus over-escalations",
+        "x": {
+          "key": "overEscalation",
+          "label": "Over-escalation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "y": {
+          "key": "underEscalation",
+          "label": "Under-escalation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Lower-left is better. On the source site, the vertical axis also adds one seventh of the partial credit rate."
+      },
+      "costPer": "run",
       "stats": {
+        "scoreMix": {
+          "name": "Mixed-prevalence score",
+          "unit": "score",
+          "better": "higher"
+        },
         "underEscalation": {
           "name": "Under-escalation rate",
           "unit": "%",
@@ -186409,6 +186479,46 @@
         "overEscalation": {
           "name": "Over-escalation rate",
           "unit": "%",
+          "better": "lower"
+        },
+        "partial": {
+          "name": "Partial credit rate",
+          "unit": "%"
+        },
+        "partialInlist": {
+          "name": "In-list partial rate",
+          "unit": "%"
+        },
+        "partialOfflist": {
+          "name": "Off-list partial rate",
+          "unit": "%"
+        },
+        "partialTruth": {
+          "name": "Ground-truth partial rate",
+          "unit": "%"
+        },
+        "passRate": {
+          "name": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "escalationRate": {
+          "name": "Escalation rate",
+          "unit": "%"
+        },
+        "unreadable": {
+          "name": "Unreadable answers",
+          "unit": "count",
+          "better": "lower"
+        },
+        "errored": {
+          "name": "Errored cases",
+          "unit": "count",
+          "better": "lower"
+        },
+        "noJustification": {
+          "name": "Answers without justification",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -187481,7 +187591,7 @@
       "url": "https://memgui-bench.github.io/",
       "feed": "https://memgui-bench.github.io/data/index.json",
       "terms": "The index lists 22 end-to-end agents and seven workflows. Some rows include cost per step. The benchmark repository uses MIT. Separate leaderboard terms were not stated. https://github.com/lgy0404/MemGUI-Bench/blob/master/LICENSE The robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [
         "GUI-Owl-1.5-32B-Instruct",
@@ -255605,17 +255715,19 @@
       "url": "https://ddhua.tech/ptcg-bench/",
       "feed": "https://ddhua.tech/ptcg-bench/",
       "terms": "The authors license the project under MIT and reserve third party rights in Pokémon assets. The page gives no separate standings license. https://github.com/zjunet/PTCG-Bench The site returns 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
         "wins": {
           "name": "Wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "losses": {
           "name": "Losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "winRate": {
           "name": "Win rate",
@@ -324538,7 +324650,7 @@
       "feed": "https://thevertexlab.github.io/MuTheoryEval/data.json",
       "terms": "The host has no robots file. The runner repository uses the MIT License. https://raw.githubusercontent.com/thevertexlab/MuTheoryEval/main/LICENSE",
       "host": "MuTheoryEval",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "gemini-3.1-flash",
@@ -324550,9 +324662,20 @@
           "name": "Questions",
           "unit": "count"
         },
-        "seed": {
-          "name": "Seed",
-          "unit": "count"
+        "correct": {
+          "name": "Correct answers",
+          "unit": "count",
+          "better": "higher"
+        },
+        "wrong": {
+          "name": "Wrong answers",
+          "unit": "count",
+          "better": "lower"
+        },
+        "format_error": {
+          "name": "Format errors",
+          "unit": "count",
+          "better": "lower"
         },
         "total_prompt_tokens": {
           "name": "Total prompt tokens",
@@ -324573,7 +324696,8 @@
         },
         "avg_thinking_tokens_per_q": {
           "name": "Average thinking tokens per question",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
