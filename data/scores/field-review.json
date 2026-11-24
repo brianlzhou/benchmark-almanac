@@ -244,6 +244,7 @@
     "npcbench": [{"field":"Difference [95% CI]","kind":"uncertainty","why":"not stored","share":1}],
     "nusax": [{"field":"seed","kind":"trials","why":"not stored","share":1}],
     "ocbench": [{"field":"Gradient steps","kind":"time, latency or steps","why":"not stored","share":1}],
+    "omnidocbench": [{"field":"ResearchReport","kind":"link","why":"not stored","share":1},{"field":"Official Website","kind":"verified","why":"not stored","share":1}],
     "omnilingua-audiomc": [{"field":"Reference Transcript","kind":"link","why":"not stored","share":1},{"field":"Reference Transcript / speech conditions","kind":"link","why":"not stored","share":1},{"field":"User turns","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Doubao Seed Lite","kind":"trials","why":"not stored","share":1}],
     "omniphys": [{"field":"Open-source MLLMs","kind":"open weights, license or size","why":"not stored","share":1},{"field":"Doubao-seed-1.6","kind":"trials","why":"not stored","share":1},{"field":"Doubao-Seed-1.6","kind":"trials","why":"not stored","share":1}],
     "omniscore-bench": [{"field":"95% CI","kind":"uncertainty","why":"not stored","share":1},{"field":"95% interval","kind":"uncertainty","why":"not stored","share":1}],

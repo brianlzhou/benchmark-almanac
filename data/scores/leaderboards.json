@@ -89672,6 +89672,133 @@
         }
       }
     },
+    "dynamic-superb-phase-2": {
+      "url": "https://huggingface.co/spaces/DynamicSuperb/leaderboard",
+      "feed": "https://huggingface.co/spaces/DynamicSuperb/leaderboard/raw/main/data.csv",
+      "terms": "The Dynamic-SUPERB team publishes the leaderboard CSV at https://huggingface.co/spaces/DynamicSuperb/leaderboard and the benchmark repository under the MIT license at https://github.com/dynamic-superb/dynamic-superb.",
+      "headline": "Dynamic-SUPERB Phase-2 mixes incompatible metrics across its tasks, so this is the plain mean of its 129 LLM-C percentage tasks.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
+      "unmatched": [
+        "DeSTA2.5-Audio",
+        "GAMA-IT",
+        "LTU-AS",
+        "MU-LLaMA",
+        "Qwen-Audio-Chat",
+        "SALMONN-13B",
+        "SALMONN-7B",
+        "WavLLM",
+        "Whisper-LLaMA"
+      ],
+      "parts": {
+        "audioLlmc": {
+          "name": "Audio overall (LLM-C)",
+          "group": "Domain (LLM-C)",
+          "unit": "%"
+        },
+        "speechLlmc": {
+          "name": "Speech overall (LLM-C)",
+          "group": "Domain (LLM-C)",
+          "unit": "%"
+        },
+        "audioHarmonyPitch": {
+          "name": "Harmony and Pitch",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioMusicClassification": {
+          "name": "Music Classification",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioSafety": {
+          "name": "Audio Safety",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioSignalCharacteristics": {
+          "name": "Signal Characteristics Analysis",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioSingingAnalysis": {
+          "name": "Singing Analysis",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioSoundEvent": {
+          "name": "Sound Event",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "audioSpatialAudio": {
+          "name": "Spatial Audio",
+          "group": "Audio (LLM-C)",
+          "unit": "%"
+        },
+        "speechParalinguistics": {
+          "name": "Paralinguistics",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechPhoneticsProsody": {
+          "name": "Phonetics, Phonology, Prosody",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechSafetySecurity": {
+          "name": "Safety and Security",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechSpeakerLanguage": {
+          "name": "Speaker and Language",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechEnhancement": {
+          "name": "Speech Enhancement",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechRecognition": {
+          "name": "Speech Recognition",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechDisorder": {
+          "name": "Speech, Voice, Hearing Disorder",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "speechSpokenLanguageUnderstanding": {
+          "name": "Spoken Language Understanding",
+          "group": "Speech (LLM-C)",
+          "unit": "%"
+        },
+        "wer": {
+          "name": "WER tasks",
+          "group": "Other metrics",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean word error rate across 17 WER tasks."
+        },
+        "nar": {
+          "name": "NAR tasks",
+          "group": "Other metrics",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean non-answer rate across 18 NAR tasks."
+        },
+        "sacreBleu": {
+          "name": "Sacre BLEU tasks",
+          "group": "Other metrics",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean Sacre BLEU across 2 translation tasks."
+        }
+      }
+    },
     "e-bench-code-tencent": {
       "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg",
       "feed": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg (transcribed 2026-11-08)",
@@ -108374,6 +108501,48 @@
         "CamemBERT unfrozen warmup",
         "bi-LSTM"
       ]
+    },
+    "filbench": {
+      "url": "https://arxiv.org/abs/2508.03523",
+      "feed": "https://arxiv.org/html/2508.03523",
+      "terms": "arXiv permits these HTML paths under robots.txt, the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 17,
+      "unmatched": [
+        "SeaLLMs/SeaLLMs-v3-1.5B-Chat",
+        "SeaLLMs/SeaLLMs-v3-7B-Chat",
+        "Tower-Babel/Babel-83B-Chat",
+        "Tower-Babel/Babel-9B-Chat",
+        "aisingapore/Gemma-SEA-LION-v3-9B-IT",
+        "aisingapore/Llama-SEA-LION-v3-70B-IT",
+        "aisingapore/Llama-SEA-LION-v3-8B-IT",
+        "neulab/Pangea-7B",
+        "sail/Sailor2-20B-Chat",
+        "sail/Sailor2-8B-Chat"
+      ],
+      "parts": {
+        "culturalKnowledge": {
+          "name": "Cultural Knowledge",
+          "group": "Category",
+          "unit": "%"
+        },
+        "classicalNlp": {
+          "name": "Classical NLP",
+          "group": "Category",
+          "unit": "%"
+        },
+        "readingComp": {
+          "name": "Reading Comprehension",
+          "group": "Category",
+          "unit": "%"
+        },
+        "generation": {
+          "name": "Generation",
+          "group": "Category",
+          "unit": "%"
+        }
+      }
     },
     "fin-fact": {
       "url": "https://arxiv.org/html/2309.08793",
@@ -152325,6 +152494,109 @@
         "finops": {
           "name": "FinOps",
           "group": "Domain"
+        }
+      }
+    },
+    "itbench-aa": {
+      "url": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard",
+      "feed": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/resolve/main/results.csv",
+      "terms": "The Space lists MIT for its repository. https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/blob/main/README.md",
+      "host": "Red Hat Emerging Technologies",
+      "headline": "Red Hat evaluates coding agents on the 40 public SRE scenarios from ArtificialAnalysis/ITBench-AA (the full release also includes 19 private holdout scenarios).",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": [],
+      "chart": {
+        "title": "Efficiency (Score vs Total Tokens)",
+        "x": {
+          "key": "totalTokens",
+          "label": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Red Hat Coding Agent Leaderboard Trade-offs Efficiency plot with its log-scale total tokens axis and Pareto frontier."
+      },
+      "stats": {
+        "n_tasks": {
+          "name": "Tasks",
+          "unit": "count"
+        },
+        "n_errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "n_input_tokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "n_cache_tokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "n_output_tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "n_total_tokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "agent_time_seconds": {
+          "name": "Agent time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "total_time_seconds": {
+          "name": "Total time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "cost_usd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "cachedTokens": {
+          "name": "Mean cached tokens per task",
+          "unit": "tokens"
+        },
+        "outputTokens": {
+          "name": "Mean output tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "mean_cost_usd_per_task": {
+          "name": "Mean cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "mean_total_time_seconds_per_task": {
+          "name": "Mean total time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mean_agent_time_seconds_per_task": {
+          "name": "Mean agent time per task",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -206449,6 +206721,171 @@
         }
       }
     },
+    "nejumi-llm-leaderboard-4": {
+      "url": "https://wandb.ai/wandb-japan/llm-leaderboard4/reports/Nejumi-LLM-4--Vmlldzo5NTI0MDI0",
+      "feed": "https://api.wandb.ai/graphql",
+      "terms": "Public Weights & Biases evaluation runs referenced by wandb/llm-leaderboard v4.0.0. https://github.com/wandb/llm-leaderboard/tree/v4.0.0",
+      "retrieved": "2026-11-24",
+      "rows": 120,
+      "unmatched": [
+        "Rakuten/RakutenAI-3.0",
+        "XiaomiMiMo/MiMo-V2.6-Flash-MOPD",
+        "XiaomiMiMo/MiMo-V2.6-Pro-MOPD",
+        "abeja/ABEJA-Qwen2.5-32b-Japanese-v1.0",
+        "cyberagent/DeepSeek-R1-Distill-Qwen-32B-Japanese",
+        "deepseek-reasoner",
+        "elyza/ELYZA-Shortcut-1.0-Qwen-32B",
+        "gemini-2.5-pro (snapshot unspecified)",
+        "global.amazon.nova-2-lite-v1:0",
+        "inclusionAI/Ling-3.0-flash-VL",
+        "internlm/Sage-S2.1",
+        "internlm/Sage-S2.1-Flash",
+        "llm-jp/llm-jp-4-32b-a3b-thinking",
+        "llm-jp/llm-jp-4-33b-thinking",
+        "llm-jp/llm-jp-4.1-32b-a3b-thinking",
+        "llm-jp/llm-jp-4.1-33b-thinking",
+        "llm-jp/llm-jp-4.1-8b-thinking",
+        "meta-llama/Llama-3.1-405B-Instruct-FP8",
+        "mistralai/Mistral-Large-4-1T-A52B",
+        "mistralai/Mistral-Small-4-119B-2603",
+        "nex-agi/Nex-N2-Pro",
+        "nex-agi/Nex-N2.5-Max",
+        "nex-agi/Nex-N2.5-Pro",
+        "nex-agi/Nex-N2.5-mini",
+        "nvidia/NVIDIA-Nemotron-Nano-9B-v2-Japanese",
+        "ornith-ai/Ornith-1.5-35B-A3B",
+        "ornith-ai/Ornith-1.5-397B",
+        "ornith-ai/Ornith-1.5-9B",
+        "rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b",
+        "rinna/qwen2.5-bakeneko-32b-instruct-v2",
+        "rinna/qwq-bakeneko-32b",
+        "skt/A.X-K2",
+        "syn-pro",
+        "tokyotech-llm/GPT-OSS-Swallow-120B-RL-v0.1",
+        "tokyotech-llm/GPT-OSS-Swallow-20B-RL-v0.1",
+        "tokyotech-llm/Llama-3.3-Swallow-70B-Instruct-v0.4",
+        "tokyotech-llm/Qwen3-Swallow-32B-RL-v0.2",
+        "tokyotech-llm/Qwen3-Swallow-8B-RL-v0.2"
+      ],
+      "parts": {
+        "glp_avg": {
+          "name": "General Language Performance",
+          "group": "Main category"
+        },
+        "alt_avg": {
+          "name": "Alignment",
+          "group": "Main category"
+        },
+        "glp_applied": {
+          "name": "Applied Language Skills",
+          "group": "GLP category"
+        },
+        "glp_reasoning": {
+          "name": "Reasoning",
+          "group": "GLP category"
+        },
+        "glp_knowledge": {
+          "name": "Knowledge and QA",
+          "group": "GLP category"
+        },
+        "glp_foundational": {
+          "name": "Foundational Language Skills",
+          "group": "GLP category"
+        },
+        "glp_appdev": {
+          "name": "Application Development",
+          "group": "GLP category"
+        },
+        "glp_expression": {
+          "name": "Expression",
+          "group": "GLP subcategory"
+        },
+        "glp_translation": {
+          "name": "Translation",
+          "group": "GLP subcategory"
+        },
+        "glp_retrieval": {
+          "name": "Information Retrieval",
+          "group": "GLP subcategory"
+        },
+        "glp_abstract": {
+          "name": "Abstract Reasoning",
+          "group": "GLP subcategory"
+        },
+        "glp_logical": {
+          "name": "Logical Reasoning",
+          "group": "GLP subcategory"
+        },
+        "glp_math": {
+          "name": "Mathematical Reasoning",
+          "group": "GLP subcategory"
+        },
+        "glp_general_knowledge": {
+          "name": "General Knowledge",
+          "group": "GLP subcategory"
+        },
+        "glp_specialized_knowledge": {
+          "name": "Specialized Knowledge",
+          "group": "GLP subcategory"
+        },
+        "glp_semantic": {
+          "name": "Semantic Analysis",
+          "group": "GLP subcategory"
+        },
+        "glp_syntactic": {
+          "name": "Syntactic Analysis",
+          "group": "GLP subcategory"
+        },
+        "glp_coding": {
+          "name": "Coding",
+          "group": "GLP subcategory"
+        },
+        "glp_function_calling": {
+          "name": "Function Calling",
+          "group": "GLP subcategory"
+        },
+        "alt_controllability": {
+          "name": "Controllability",
+          "group": "Alignment"
+        },
+        "alt_ethics": {
+          "name": "Ethics and Morality",
+          "group": "Alignment"
+        },
+        "alt_toxicity": {
+          "name": "Toxicity",
+          "group": "Alignment"
+        },
+        "alt_bias": {
+          "name": "Bias",
+          "group": "Alignment"
+        },
+        "alt_truthfulness": {
+          "name": "Truthfulness",
+          "group": "Alignment"
+        },
+        "alt_robustness": {
+          "name": "Robustness",
+          "group": "Alignment"
+        },
+        "avg_jaster_0shot": {
+          "name": "Jaster 0-shot",
+          "group": "Suite"
+        },
+        "avg_jaster_2shots": {
+          "name": "Jaster 2-shot",
+          "group": "Suite"
+        },
+        "avg_mtbench": {
+          "name": "MT-bench",
+          "group": "Suite"
+        },
+        "avg_swebench": {
+          "name": "SWE-bench",
+          "group": "Suite"
+        }
+      }
+    },
     "nepaquad": {
       "url": "https://arxiv.org/html/2407.07321",
       "feed": "https://arxiv.org/html/2407.07321",
@@ -214842,6 +215279,109 @@
         },
         "contentISR": {
           "name": "Content instruction following score",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "omnidocbench": {
+      "url": "https://github.com/opendatalab/OmniDocBench/tree/v1_0",
+      "feed": "https://raw.githubusercontent.com/opendatalab/OmniDocBench/v1_0/README.md",
+      "terms": "README on the v1_0 branch of opendatalab/OmniDocBench, released under Apache-2.0.",
+      "headline": "The v1.0 table reports English and Chinese overall edit distance separately, so this is the plain mean of both scaled to percent (lower is better).",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "Docling-2.14.0",
+        "Dolphin",
+        "GOT-OCR",
+        "Marker-1.2.3",
+        "Marker-1.7.1",
+        "Mathpix",
+        "MinerU-pipeline-2.1.1",
+        "MinerU2.0-2505-0.9B",
+        "Mistral OCR",
+        "MonkeyOCR-pro-1.2B",
+        "Nanonets-OCR-s",
+        "Nougat",
+        "OCRFlux-3B",
+        "OLMOCR-sglang",
+        "OpenParse-0.7.0",
+        "PaddleOCR PP-StructureV3",
+        "Pix2Text-1.1.2.3",
+        "SmolDocling-256M_transformer",
+        "Unstructured-0.17.2"
+      ],
+      "parts": {
+        "overall_en": {
+          "name": "Overall edit distance: English",
+          "group": "Language",
+          "better": "lower"
+        },
+        "overall_zh": {
+          "name": "Overall edit distance: Chinese",
+          "group": "Language",
+          "better": "lower"
+        },
+        "text_en": {
+          "name": "Text edit distance: English",
+          "group": "Element",
+          "better": "lower"
+        },
+        "text_zh": {
+          "name": "Text edit distance: Chinese",
+          "group": "Element",
+          "better": "lower"
+        },
+        "formula_edit_en": {
+          "name": "Formula edit distance: English",
+          "group": "Element",
+          "better": "lower"
+        },
+        "formula_edit_zh": {
+          "name": "Formula edit distance: Chinese",
+          "group": "Element",
+          "better": "lower"
+        },
+        "table_edit_en": {
+          "name": "Table edit distance: English",
+          "group": "Element",
+          "better": "lower"
+        },
+        "table_edit_zh": {
+          "name": "Table edit distance: Chinese",
+          "group": "Element",
+          "better": "lower"
+        },
+        "read_order_en": {
+          "name": "Reading order edit distance: English",
+          "group": "Element",
+          "better": "lower"
+        },
+        "read_order_zh": {
+          "name": "Reading order edit distance: Chinese",
+          "group": "Element",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "formula_cdm_en": {
+          "name": "Formula CDM: English",
+          "unit": "%",
+          "better": "higher"
+        },
+        "formula_cdm_zh": {
+          "name": "Formula CDM: Chinese",
+          "unit": "%",
+          "better": "higher"
+        },
+        "table_teds_en": {
+          "name": "Table TEDS: English",
+          "unit": "%",
+          "better": "higher"
+        },
+        "table_teds_zh": {
+          "name": "Table TEDS: Chinese",
           "unit": "%",
           "better": "higher"
         }
@@ -244848,6 +245388,89 @@
         }
       }
     },
+    "physcapbench": {
+      "url": "https://hfwang2001.github.io/PhysCapBench/",
+      "feed": "https://hfwang2001.github.io/PhysCapBench/results.json",
+      "terms": "Public report-snapshot leaderboard JSON in hfwang2001/PhysCapBench. https://github.com/hfwang2001/PhysCapBench",
+      "headline": "The leaderboard scores Third-person and Egocentric domains separately, so this is the Third-person overall score (the largest split), with Egocentric and all seven physical dimensions in parts.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CogVideoX",
+        "Cosmos Curator General",
+        "Cosmos Robot-action",
+        "Cosmos3 Narrative",
+        "EgoVid Action",
+        "EgoVid Dense",
+        "LingBot Narrative",
+        "LingBot Static",
+        "LingBot Temporal",
+        "Meta caption",
+        "Open-Sora v1.3"
+      ],
+      "parts": {
+        "event_coverage": {
+          "name": "Event coverage",
+          "group": "Third-person dimensions"
+        },
+        "object_role": {
+          "name": "Objects and roles",
+          "group": "Third-person dimensions"
+        },
+        "action_motion": {
+          "name": "Actions and motion",
+          "group": "Third-person dimensions"
+        },
+        "contact_interaction": {
+          "name": "Contact and interaction",
+          "group": "Third-person dimensions"
+        },
+        "state_spatial_outcome": {
+          "name": "States and outcomes",
+          "group": "Third-person dimensions"
+        },
+        "mechanism_causality": {
+          "name": "Physical mechanisms and causality",
+          "group": "Third-person dimensions"
+        },
+        "temporal_order": {
+          "name": "Temporal order",
+          "group": "Third-person dimensions"
+        },
+        "ego_overall": {
+          "name": "Egocentric overall",
+          "group": "Egocentric"
+        },
+        "ego_event_coverage": {
+          "name": "Egocentric: Event coverage",
+          "group": "Egocentric"
+        },
+        "ego_object_role": {
+          "name": "Egocentric: Objects and roles",
+          "group": "Egocentric"
+        },
+        "ego_action_motion": {
+          "name": "Egocentric: Actions and motion",
+          "group": "Egocentric"
+        },
+        "ego_contact_interaction": {
+          "name": "Egocentric: Contact and interaction",
+          "group": "Egocentric"
+        },
+        "ego_state_spatial_outcome": {
+          "name": "Egocentric: States and outcomes",
+          "group": "Egocentric"
+        },
+        "ego_mechanism_causality": {
+          "name": "Egocentric: Physical mechanisms and causality",
+          "group": "Egocentric"
+        },
+        "ego_temporal_order": {
+          "name": "Egocentric: Temporal order",
+          "group": "Egocentric"
+        }
+      }
+    },
     "physclosurebench": {
       "url": "https://uncertainty2019.github.io/PhysClosureBench/site-data.js",
       "feed": "https://uncertainty2019.github.io/PhysClosureBench/site-data.js",
@@ -245598,6 +246221,76 @@
           "name": "Physical consistency",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "pico-dsl-v0": {
+      "url": "https://app.primeintellect.ai/dashboard/environments/oso/pico-dsl-v0/evals",
+      "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22t18ay6kgi1tqxembua50e4i5%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
+      "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
+      "headline": "Public Prime Intellect evaluations span tiny, easy and hard difficulty splits. Only the common tiny split is kept here so all models are compared on the same tasks.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "stats": {
+        "formatValid": {
+          "name": "Format valid rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt1": {
+          "name": "pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt2": {
+          "name": "pass@2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt4": {
+          "name": "pass@4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt8": {
+          "name": "pass@8",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass1": {
+          "name": "pass^1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass2": {
+          "name": "pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass4": {
+          "name": "pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass8": {
+          "name": "pass^8",
+          "unit": "%",
+          "better": "higher"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "steps": {
+          "name": "Mean turns",
+          "unit": "count"
         }
       }
     },
@@ -247447,6 +248140,295 @@
           "group": "Layout",
           "note": "Accuracy on the Polar layout.",
           "unit": "%"
+        }
+      }
+    },
+    "polaris-healthcare-safety-hippocratic": {
+      "url": "https://hippocraticai.com/benchmarks/",
+      "feed": "https://hippocraticai.com/benchmarks/",
+      "terms": "Public healthcare voice safety benchmark table published at hippocraticai.com/benchmarks/.",
+      "headline": "Hippocratic AI reports 11 separate category averages without a grand average, so this is the plain mean of those 11 percentage category averages.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Polaris 4.0",
+        "Polaris 5.0"
+      ],
+      "parts": {
+        "cat_drug": {
+          "name": "Drug Safety",
+          "group": "Category average"
+        },
+        "drug_drug_name_disambiguation": {
+          "name": "Drug Name Disambiguation",
+          "group": "Drug Safety"
+        },
+        "drug_brand_generic_map": {
+          "name": "Brand-Generic Map",
+          "group": "Drug Safety"
+        },
+        "drug_toxicity_limits": {
+          "name": "Toxicity Limits",
+          "group": "Drug Safety"
+        },
+        "drug_otc_contraindication": {
+          "name": "OTC Contraindication",
+          "group": "Drug Safety"
+        },
+        "drug_drug_interaction_alert": {
+          "name": "Drug Interaction Alert",
+          "group": "Drug Safety"
+        },
+        "drug_contraindication_check": {
+          "name": "Contraindication Check",
+          "group": "Drug Safety"
+        },
+        "drug_dosage_verify_prescription_adherence": {
+          "name": "Dosage Verify / Prescription Adherence",
+          "group": "Drug Safety"
+        },
+        "cat_lab": {
+          "name": "Lab Safety",
+          "group": "Category average"
+        },
+        "lab_lab_range_check": {
+          "name": "Lab Range Check",
+          "group": "Lab Safety"
+        },
+        "lab_lab_trend_analysis": {
+          "name": "Lab Trend Analysis",
+          "group": "Lab Safety"
+        },
+        "lab_clarify_vague_value": {
+          "name": "Clarify Vague Value",
+          "group": "Lab Safety"
+        },
+        "lab_need_number_confirm": {
+          "name": "Need Number Confirm",
+          "group": "Lab Safety"
+        },
+        "lab_lab_protocol_adherence": {
+          "name": "Lab Protocol Adherence",
+          "group": "Lab Safety"
+        },
+        "cat_escalation": {
+          "name": "Escalation Safety",
+          "group": "Category average"
+        },
+        "escalation_mental_health": {
+          "name": "Mental Health",
+          "group": "Escalation Safety"
+        },
+        "escalation_musculoskeletal": {
+          "name": "Musculoskeletal",
+          "group": "Escalation Safety"
+        },
+        "escalation_neurological": {
+          "name": "Neurological",
+          "group": "Escalation Safety"
+        },
+        "escalation_wound_skin": {
+          "name": "Wound and Skin",
+          "group": "Escalation Safety"
+        },
+        "escalation_gastrointestinal": {
+          "name": "Gastrointestinal",
+          "group": "Escalation Safety"
+        },
+        "escalation_cardiovascular_respiratory": {
+          "name": "Cardiovascular and Respiratory",
+          "group": "Escalation Safety"
+        },
+        "escalation_genitourinary_reproductive": {
+          "name": "Genitourinary and Reproductive",
+          "group": "Escalation Safety"
+        },
+        "escalation_kickout_evaluator_clinical_escalation": {
+          "name": "Kickout Evaluator and Clinical Escalation",
+          "group": "Escalation Safety"
+        },
+        "cat_payer": {
+          "name": "Payor",
+          "group": "Category average"
+        },
+        "payer_payor_benefits_verification": {
+          "name": "Payor Benefits Verification",
+          "group": "Payor"
+        },
+        "payer_eob_explanation": {
+          "name": "EOB Explanation",
+          "group": "Payor"
+        },
+        "payer_procedure_deductible_balance_calculation": {
+          "name": "Procedure Deductible and Balance Calculation",
+          "group": "Payor"
+        },
+        "payer_co_pay_determination": {
+          "name": "Co-pay Determination",
+          "group": "Payor"
+        },
+        "payer_in_network_provider_verification": {
+          "name": "In-Network Provider Verification",
+          "group": "Payor"
+        },
+        "payer_oop_maximum_progress_tracking": {
+          "name": "OOP Maximum Progress Tracking",
+          "group": "Payor"
+        },
+        "payer_insurance_plan_comparison": {
+          "name": "Insurance Plan Comparison",
+          "group": "Payor"
+        },
+        "payer_prior_auth_pre_cert_distinction": {
+          "name": "Prior Auth and Pre-Cert Distinction",
+          "group": "Payor"
+        },
+        "cat_compliance": {
+          "name": "Compliance and Regulatory",
+          "group": "Category average"
+        },
+        "compliance_hipaa_compliant_authentication_incl_birthday": {
+          "name": "HIPAA Compliant Authentication (Incl. Birthday)",
+          "group": "Compliance and Regulatory"
+        },
+        "compliance_cms_guidelines_adherence": {
+          "name": "CMS Guidelines Adherence",
+          "group": "Compliance and Regulatory"
+        },
+        "compliance_anti_kickback_compliance_pharma": {
+          "name": "Anti-Kickback Compliance (Pharma)",
+          "group": "Compliance and Regulatory"
+        },
+        "cat_hra": {
+          "name": "Health Risk Assessment / Medical Intake Questionnaire",
+          "group": "Category average"
+        },
+        "hra_non_linear_intake_adherence": {
+          "name": "Non-Linear Intake Adherence",
+          "group": "Health Risk Assessment / Medical Intake Questionnaire"
+        },
+        "hra_ambiguous_answer_clarification": {
+          "name": "Ambiguous Answer Clarification",
+          "group": "Health Risk Assessment / Medical Intake Questionnaire"
+        },
+        "hra_question_rephrasing": {
+          "name": "Question Rephrasing",
+          "group": "Health Risk Assessment / Medical Intake Questionnaire"
+        },
+        "cat_scheduling": {
+          "name": "Clinical Scheduling",
+          "group": "Category average"
+        },
+        "scheduling_appointment_booking": {
+          "name": "Appointment Booking",
+          "group": "Clinical Scheduling"
+        },
+        "scheduling_appropriate_visit_type_selection": {
+          "name": "Appropriate Visit Type Selection",
+          "group": "Clinical Scheduling"
+        },
+        "scheduling_waitlist_alternative_scheduling": {
+          "name": "Waitlist and Alternative Scheduling",
+          "group": "Clinical Scheduling"
+        },
+        "scheduling_scheduling_escalation_to_human": {
+          "name": "Scheduling Escalation to Human",
+          "group": "Clinical Scheduling"
+        },
+        "scheduling_external_ivr_navigation": {
+          "name": "External IVR Navigation",
+          "group": "Clinical Scheduling"
+        },
+        "cat_eq": {
+          "name": "Clinical Conversational EQ",
+          "group": "Category average"
+        },
+        "eq_natural_phrasing": {
+          "name": "Natural Phrasing",
+          "group": "Clinical Conversational EQ"
+        },
+        "eq_empathic_response": {
+          "name": "Empathic Response",
+          "group": "Clinical Conversational EQ"
+        },
+        "eq_emotional_adaptation": {
+          "name": "Emotional Adaptation",
+          "group": "Clinical Conversational EQ"
+        },
+        "eq_keeping_on_track": {
+          "name": "Keeping on Track",
+          "group": "Clinical Conversational EQ"
+        },
+        "eq_task_goal_adherence": {
+          "name": "Task/Goal Adherence",
+          "group": "Clinical Conversational EQ"
+        },
+        "cat_flow": {
+          "name": "Conversation Flow",
+          "group": "Category average"
+        },
+        "flow_repetition_avoidance": {
+          "name": "Repetition Avoidance",
+          "group": "Conversation Flow"
+        },
+        "flow_appropriate_call_conclusion": {
+          "name": "Appropriate Call Conclusion",
+          "group": "Conversation Flow"
+        },
+        "flow_follow_up_call_scheduling": {
+          "name": "Follow-Up Call Scheduling",
+          "group": "Conversation Flow"
+        },
+        "flow_ai_skepticism_handling_trust_building": {
+          "name": "AI Skepticism Handling and Trust Building",
+          "group": "Conversation Flow"
+        },
+        "flow_end_of_call_summarization": {
+          "name": "End-of-Call Summarization",
+          "group": "Conversation Flow"
+        },
+        "cat_language": {
+          "name": "Language Switching",
+          "group": "Category average"
+        },
+        "language_language_switch_intent": {
+          "name": "Language Switch Intent",
+          "group": "Language Switching"
+        },
+        "language_real_time_language_switching": {
+          "name": "Real-Time Language Switching",
+          "group": "Language Switching"
+        },
+        "cat_speech": {
+          "name": "Speech Recognition and Pronunciation",
+          "group": "Category average"
+        },
+        "speech_general_asr": {
+          "name": "General ASR",
+          "group": "Speech Recognition and Pronunciation"
+        },
+        "speech_brief_clinical_response_asr": {
+          "name": "Brief Clinical Response ASR",
+          "group": "Speech Recognition and Pronunciation"
+        },
+        "speech_standalone_word_accuracy": {
+          "name": "Standalone Word Accuracy",
+          "group": "Speech Recognition and Pronunciation"
+        },
+        "speech_spelled_word_recognition_accuracy": {
+          "name": "Spelled Word Recognition Accuracy",
+          "group": "Speech Recognition and Pronunciation"
+        },
+        "speech_drug_name_pronunciation_coverage": {
+          "name": "Drug Name Pronunciation Coverage",
+          "group": "Speech Recognition and Pronunciation"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Time to first audio",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -260230,6 +261212,112 @@
         },
         "trajectory": {
           "name": "3D path shape"
+        }
+      }
+    },
+    "rh-swe-bench": {
+      "url": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard",
+      "feed": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/resolve/main/results.csv",
+      "terms": "The Space lists MIT for its repository. https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/blob/main/README.md",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [],
+      "chart": {
+        "title": "Efficiency (Score vs Total Tokens)",
+        "x": {
+          "key": "totalTokens",
+          "label": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Red Hat Coding Agent Leaderboard Trade-offs Efficiency plot with its log-scale total tokens axis and Pareto frontier."
+      },
+      "stats": {
+        "n_tasks": {
+          "name": "Tasks",
+          "unit": "count"
+        },
+        "n_errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "n_input_tokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "n_cache_tokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "n_output_tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "n_total_tokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "agent_time_seconds": {
+          "name": "Agent time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "total_time_seconds": {
+          "name": "Total time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "cost_usd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "cachedTokens": {
+          "name": "Mean cached tokens per task",
+          "unit": "tokens"
+        },
+        "outputTokens": {
+          "name": "Mean output tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "mean_cost_usd_per_task": {
+          "name": "Mean cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "mean_total_time_seconds_per_task": {
+          "name": "Mean total time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mean_agent_time_seconds_per_task": {
+          "name": "Mean agent time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "cache_hit_rate": {
+          "name": "Cache hit rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -282971,6 +284059,73 @@
         }
       }
     },
+    "streameval": {
+      "url": "https://streameval.ai/",
+      "feed": "https://streameval.ai/",
+      "terms": "Public leaderboard data published at streameval.ai by the StreamEval authors.",
+      "headline": "StreamEval publishes five separate task tables without a single cross-task average. This board tracks the default Avatar dialogue leaderboard, where Overall adds five points for custom-portrait support to the five-metric quality mean.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AVTR-1",
+        "AptAvatar 14B",
+        "Avatar-Forever 22B",
+        "AvatarForcing 1.3B",
+        "LiveAvatar FULL",
+        "LiveTalk 1.3B",
+        "MuseTalk 1.5",
+        "Quark Live Avatar 14B",
+        "Runway Characters",
+        "SoulX-FlashHead (Lite)",
+        "SoulX-FlashTalk 14B",
+        "SoulX-LiveAct 18B",
+        "Tavus CVI Full",
+        "Vidu S2 Avatar",
+        "Vivix A1"
+      ],
+      "parts": {
+        "visual_quality": {
+          "name": "Quality",
+          "group": "Avatar dialogue"
+        },
+        "av_sync": {
+          "name": "Audio-visual sync",
+          "group": "Avatar dialogue"
+        },
+        "stability": {
+          "name": "Stability",
+          "group": "Avatar dialogue"
+        },
+        "dialogue": {
+          "name": "Dialogue",
+          "group": "Avatar dialogue"
+        },
+        "identity": {
+          "name": "Identity",
+          "group": "Avatar dialogue"
+        }
+      },
+      "stats": {
+        "quality_overall": {
+          "name": "Quality overall",
+          "unit": "score",
+          "better": "higher",
+          "note": "Equal-weight mean of the five Avatar dialogue metrics before the custom-portrait bonus."
+        },
+        "custom_bonus": {
+          "name": "Custom portrait bonus",
+          "unit": "score",
+          "better": "higher",
+          "note": "Five points for systems that accept a custom portrait, zero for fixed provider-stock avatars."
+        },
+        "session_cap_s": {
+          "name": "Session cap",
+          "unit": "seconds",
+          "better": "higher",
+          "note": "Maximum single-session duration when capped by the provider."
+        }
+      }
+    },
     "streamingbench": {
       "url": "https://github.com/THUNLP-MT/StreamingBench",
       "feed": "https://raw.githubusercontent.com/THUNLP-MT/StreamingBench/main/figs/result_1.png (transcribed 2026-11-08)",
@@ -302951,6 +304106,24 @@
           "name": "Pick and Place Box"
         }
       }
+    },
+    "vaani-benchmark-v1": {
+      "url": "https://huggingface.co/datasets/ARTPARK-IISc/Vaani-Benchmark-V1.0",
+      "feed": "https://huggingface.co/api/datasets/ARTPARK-IISc/Vaani-Benchmark-V1.0/leaderboard",
+      "terms": "Public Hugging Face dataset leaderboard for ARTPARK-IISc/Vaani-Benchmark-V1.0 (CC BY 4.0).",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "SPRINGLab/data2vec_aqc",
+        "bharatgenai/Shrutam-2",
+        "bharatgenai/Shrutam-HindiASR-1.0",
+        "facebook/omniASR-LLM-1B",
+        "fonada/kapture-v3",
+        "gnani/gnani",
+        "mistralai/Voxtral-Mini-3B-2507",
+        "shunyalabs/pingala-v1-universal"
+      ],
+      "verified": "verified by Hugging Face"
     },
     "vaguebench": {
       "url": "https://arxiv.org/html/2611.03765",
