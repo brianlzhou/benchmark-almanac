@@ -8,10 +8,21 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2610.27581';
 const interaction = ['RCR', 'cFD', 'Early', 'Pre-end', 'Win-Intr.', 'Stop@0.8', 'Stop (s)'];
 const memory = ['Resp.', 'Latest', 'Stale', 'D-Adopt', 'D-Rej.', 'Final'];
-const parts: Record<string,BoardPart> = {};
-for (const name of [...interaction.slice(1, 6), ...memory]) parts[name] = { name, group: name === 'Resp.' || name === 'Latest' || name === 'Stale' || name === 'D-Adopt' || name === 'D-Rej.' || name === 'Final' ? 'Memory fidelity' : 'Full-duplex interaction' };
+const lowerParts = new Set(['Early', 'Pre-end', 'Win-Intr.', 'Stale', 'D-Adopt']);
+const parts: Record<string, BoardPart> = {};
+for (const name of [...interaction.slice(1, 6), ...memory]) {
+  parts[name] = {
+    name,
+    group: memory.includes(name) ? 'Memory fidelity' : 'Full-duplex interaction',
+    better: lowerParts.has(name) ? 'lower' : 'higher',
+  };
+}
 const board: Leaderboard = {
   benchmark: 'duplexledger', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/', parts,
+  stats: {
+    RCR: { name: 'Challenge realization rate', unit: '%', better: 'higher' },
+    'Stop (s)': { name: 'Stop latency', unit: 'seconds', better: 'lower' },
+  },
   headline: 'The paper reports no overall score, so the headline is conditional full-duplex success on realized challenges.',
   aliases: { 'MiniCPM -o 4.5': 'minicpm-o-4-5' },
   async fetch() {
@@ -26,8 +37,6 @@ const board: Leaderboard = {
         if (cells.length !== labels.length || cells.some(c => !c || !Number.isFinite(Number(c)))) throw Error('Invalid metrics for ' + model);
         labels.forEach((label,i) => {
           metrics[label] = Number(cells[i]);
-          if (label !== 'RCR' && label !== 'Stop (s)') parts[label] = { name: label, group: section.slice(4),
-            better: headers[i].includes('downarrow') ? 'lower' : 'higher' };
         });
         results.set(model, metrics);
       }

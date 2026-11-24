@@ -3584,7 +3584,7 @@
       "terms": "The authors publish Table 2 on arXiv. https://arxiv.org/abs/2604.27375",
       "headline": "The paper reports separate metrics for three tasks. The headline is Auto Hist-M, the first metric.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Flux.1 Kontext",
@@ -3594,7 +3594,135 @@
         "RSFNet",
         "VeraRetouch-DAPO-AE",
         "VeraRetouch-SFT"
-      ]
+      ],
+      "parts": {
+        "autoHistM": {
+          "name": "Hist-M",
+          "group": "Auto",
+          "unit": "%",
+          "better": "higher"
+        },
+        "autoLAION": {
+          "name": "LAION",
+          "group": "Auto",
+          "unit": "score",
+          "better": "higher"
+        },
+        "autoQAlign": {
+          "name": "Q-Align",
+          "group": "Auto",
+          "unit": "score",
+          "better": "higher"
+        },
+        "autoLIQE": {
+          "name": "LIQE",
+          "group": "Auto",
+          "unit": "score",
+          "better": "higher"
+        },
+        "autoDISTS": {
+          "name": "DISTS",
+          "group": "Auto",
+          "unit": "score",
+          "better": "lower"
+        },
+        "autoGMSD": {
+          "name": "GMSD",
+          "group": "Auto",
+          "unit": "score",
+          "better": "lower"
+        },
+        "autoTD": {
+          "name": "TD",
+          "group": "Auto",
+          "unit": "score",
+          "better": "lower"
+        },
+        "styleL1": {
+          "name": "L1",
+          "group": "Style",
+          "unit": "score",
+          "better": "lower"
+        },
+        "stylePSNR": {
+          "name": "PSNR",
+          "group": "Style",
+          "unit": "score",
+          "better": "higher"
+        },
+        "styleSSIM": {
+          "name": "SSIM",
+          "group": "Style",
+          "unit": "score",
+          "better": "higher"
+        },
+        "styleLPIPS": {
+          "name": "LPIPS",
+          "group": "Style",
+          "unit": "score",
+          "better": "lower"
+        },
+        "styleDISTS": {
+          "name": "DISTS",
+          "group": "Style",
+          "unit": "score",
+          "better": "lower"
+        },
+        "styleGMSD": {
+          "name": "GMSD",
+          "group": "Style",
+          "unit": "score",
+          "better": "lower"
+        },
+        "styleTD": {
+          "name": "TD",
+          "group": "Style",
+          "unit": "score",
+          "better": "lower"
+        },
+        "paramL1": {
+          "name": "L1",
+          "group": "Param",
+          "unit": "score",
+          "better": "lower"
+        },
+        "paramPSNR": {
+          "name": "PSNR",
+          "group": "Param",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paramSSIM": {
+          "name": "SSIM",
+          "group": "Param",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paramLPIPS": {
+          "name": "LPIPS",
+          "group": "Param",
+          "unit": "score",
+          "better": "lower"
+        },
+        "paramDISTS": {
+          "name": "DISTS",
+          "group": "Param",
+          "unit": "score",
+          "better": "lower"
+        },
+        "paramGMSD": {
+          "name": "GMSD",
+          "group": "Param",
+          "unit": "score",
+          "better": "lower"
+        },
+        "paramTD": {
+          "name": "TD",
+          "group": "Param",
+          "unit": "score",
+          "better": "lower"
+        }
+      }
     },
     "aethercode": {
       "url": "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md",
@@ -14564,199 +14692,263 @@
       "feed": "https://www.repository.cam.ac.uk/bitstreams/346885c7-a7f7-4560-8f77-9ade6e923408/download",
       "terms": "The University of Cambridge hosts the authors’ manuscript. https://www.repository.cam.ac.uk/handle/1810/400930",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "DeepSeek-V3 (snapshot unspecified)"
       ],
       "parts": {
         "task1": {
-          "name": "Task 1: Amplifier"
-        },
-        "task2": {
-          "name": "Task 2: Amplifier"
-        },
-        "task3": {
-          "name": "Task 3: Amplifier"
-        },
-        "task4": {
-          "name": "Task 4: Amplifier"
-        },
-        "task5": {
-          "name": "Task 5: Amplifier"
-        },
-        "task6": {
-          "name": "Task 6: Inverter"
-        },
-        "task7": {
-          "name": "Task 7: Inverter"
-        },
-        "task8": {
-          "name": "Task 8: Current Mirror"
-        },
-        "task9": {
-          "name": "Task 9: Comparator"
-        },
-        "task10": {
-          "name": "Task 10: Filter"
-        },
-        "task11": {
-          "name": "Task 11: Filter"
-        },
-        "task12": {
-          "name": "Task 12: Filter"
-        },
-        "task13": {
-          "name": "Task 13: Filter"
-        },
-        "task14": {
-          "name": "Task 14: Amplifier"
-        },
-        "task15": {
-          "name": "Task 15: Amplifier"
-        },
-        "task16": {
-          "name": "Task 16: Opamp"
-        },
-        "task17": {
-          "name": "Task 17: Current Mirror"
-        },
-        "task18": {
-          "name": "Task 18: Opamp"
-        },
-        "task19": {
-          "name": "Task 19: Mixer"
-        },
-        "task20": {
-          "name": "Task 20: Opamp"
-        },
-        "task21": {
-          "name": "Task 21: Opamp"
-        },
-        "task22": {
-          "name": "Task 22: Oscillator"
-        },
-        "task23": {
-          "name": "Task 23: Oscillator"
-        },
-        "task24": {
-          "name": "Task 24: Integrator"
-        },
-        "task25": {
-          "name": "Task 25: Differentiator"
-        },
-        "task26": {
-          "name": "Task 26: Adder"
-        },
-        "task27": {
-          "name": "Task 27: Subtractor"
-        },
-        "task28": {
-          "name": "Task 28: Schmitt trigger"
-        },
-        "task29": {
-          "name": "Task 29: VCO"
-        },
-        "task30": {
-          "name": "Task 30: PLL"
+          "name": "Task 1: Amplifier",
+          "group": "pass@1"
         },
         "task1PassAt5": {
-          "name": "Task 1 pass@5"
+          "name": "Task 1: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task2": {
+          "name": "Task 2: Amplifier",
+          "group": "pass@1"
         },
         "task2PassAt5": {
-          "name": "Task 2 pass@5"
+          "name": "Task 2: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task3": {
+          "name": "Task 3: Amplifier",
+          "group": "pass@1"
         },
         "task3PassAt5": {
-          "name": "Task 3 pass@5"
+          "name": "Task 3: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task4": {
+          "name": "Task 4: Amplifier",
+          "group": "pass@1"
         },
         "task4PassAt5": {
-          "name": "Task 4 pass@5"
+          "name": "Task 4: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task5": {
+          "name": "Task 5: Amplifier",
+          "group": "pass@1"
         },
         "task5PassAt5": {
-          "name": "Task 5 pass@5"
+          "name": "Task 5: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task6": {
+          "name": "Task 6: Inverter",
+          "group": "pass@1"
         },
         "task6PassAt5": {
-          "name": "Task 6 pass@5"
+          "name": "Task 6: Inverter pass@5",
+          "group": "pass@5"
+        },
+        "task7": {
+          "name": "Task 7: Inverter",
+          "group": "pass@1"
         },
         "task7PassAt5": {
-          "name": "Task 7 pass@5"
+          "name": "Task 7: Inverter pass@5",
+          "group": "pass@5"
+        },
+        "task8": {
+          "name": "Task 8: Current Mirror",
+          "group": "pass@1"
         },
         "task8PassAt5": {
-          "name": "Task 8 pass@5"
+          "name": "Task 8: Current Mirror pass@5",
+          "group": "pass@5"
+        },
+        "task9": {
+          "name": "Task 9: Comparator",
+          "group": "pass@1"
         },
         "task9PassAt5": {
-          "name": "Task 9 pass@5"
+          "name": "Task 9: Comparator pass@5",
+          "group": "pass@5"
+        },
+        "task10": {
+          "name": "Task 10: Filter",
+          "group": "pass@1"
         },
         "task10PassAt5": {
-          "name": "Task 10 pass@5"
+          "name": "Task 10: Filter pass@5",
+          "group": "pass@5"
+        },
+        "task11": {
+          "name": "Task 11: Filter",
+          "group": "pass@1"
         },
         "task11PassAt5": {
-          "name": "Task 11 pass@5"
+          "name": "Task 11: Filter pass@5",
+          "group": "pass@5"
+        },
+        "task12": {
+          "name": "Task 12: Filter",
+          "group": "pass@1"
         },
         "task12PassAt5": {
-          "name": "Task 12 pass@5"
+          "name": "Task 12: Filter pass@5",
+          "group": "pass@5"
+        },
+        "task13": {
+          "name": "Task 13: Filter",
+          "group": "pass@1"
         },
         "task13PassAt5": {
-          "name": "Task 13 pass@5"
+          "name": "Task 13: Filter pass@5",
+          "group": "pass@5"
+        },
+        "task14": {
+          "name": "Task 14: Amplifier",
+          "group": "pass@1"
         },
         "task14PassAt5": {
-          "name": "Task 14 pass@5"
+          "name": "Task 14: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task15": {
+          "name": "Task 15: Amplifier",
+          "group": "pass@1"
         },
         "task15PassAt5": {
-          "name": "Task 15 pass@5"
+          "name": "Task 15: Amplifier pass@5",
+          "group": "pass@5"
+        },
+        "task16": {
+          "name": "Task 16: Opamp",
+          "group": "pass@1"
         },
         "task16PassAt5": {
-          "name": "Task 16 pass@5"
+          "name": "Task 16: Opamp pass@5",
+          "group": "pass@5"
+        },
+        "task17": {
+          "name": "Task 17: Current Mirror",
+          "group": "pass@1"
         },
         "task17PassAt5": {
-          "name": "Task 17 pass@5"
+          "name": "Task 17: Current Mirror pass@5",
+          "group": "pass@5"
+        },
+        "task18": {
+          "name": "Task 18: Opamp",
+          "group": "pass@1"
         },
         "task18PassAt5": {
-          "name": "Task 18 pass@5"
+          "name": "Task 18: Opamp pass@5",
+          "group": "pass@5"
+        },
+        "task19": {
+          "name": "Task 19: Mixer",
+          "group": "pass@1"
         },
         "task19PassAt5": {
-          "name": "Task 19 pass@5"
+          "name": "Task 19: Mixer pass@5",
+          "group": "pass@5"
+        },
+        "task20": {
+          "name": "Task 20: Opamp",
+          "group": "pass@1"
         },
         "task20PassAt5": {
-          "name": "Task 20 pass@5"
+          "name": "Task 20: Opamp pass@5",
+          "group": "pass@5"
+        },
+        "task21": {
+          "name": "Task 21: Opamp",
+          "group": "pass@1"
         },
         "task21PassAt5": {
-          "name": "Task 21 pass@5"
+          "name": "Task 21: Opamp pass@5",
+          "group": "pass@5"
+        },
+        "task22": {
+          "name": "Task 22: Oscillator",
+          "group": "pass@1"
         },
         "task22PassAt5": {
-          "name": "Task 22 pass@5"
+          "name": "Task 22: Oscillator pass@5",
+          "group": "pass@5"
+        },
+        "task23": {
+          "name": "Task 23: Oscillator",
+          "group": "pass@1"
         },
         "task23PassAt5": {
-          "name": "Task 23 pass@5"
+          "name": "Task 23: Oscillator pass@5",
+          "group": "pass@5"
+        },
+        "task24": {
+          "name": "Task 24: Integrator",
+          "group": "pass@1"
         },
         "task24PassAt5": {
-          "name": "Task 24 pass@5"
+          "name": "Task 24: Integrator pass@5",
+          "group": "pass@5"
+        },
+        "task25": {
+          "name": "Task 25: Differentiator",
+          "group": "pass@1"
         },
         "task25PassAt5": {
-          "name": "Task 25 pass@5"
+          "name": "Task 25: Differentiator pass@5",
+          "group": "pass@5"
+        },
+        "task26": {
+          "name": "Task 26: Adder",
+          "group": "pass@1"
         },
         "task26PassAt5": {
-          "name": "Task 26 pass@5"
+          "name": "Task 26: Adder pass@5",
+          "group": "pass@5"
+        },
+        "task27": {
+          "name": "Task 27: Subtractor",
+          "group": "pass@1"
         },
         "task27PassAt5": {
-          "name": "Task 27 pass@5"
+          "name": "Task 27: Subtractor pass@5",
+          "group": "pass@5"
+        },
+        "task28": {
+          "name": "Task 28: Schmitt trigger",
+          "group": "pass@1"
         },
         "task28PassAt5": {
-          "name": "Task 28 pass@5"
+          "name": "Task 28: Schmitt trigger pass@5",
+          "group": "pass@5"
+        },
+        "task29": {
+          "name": "Task 29: VCO",
+          "group": "pass@1"
         },
         "task29PassAt5": {
-          "name": "Task 29 pass@5"
+          "name": "Task 29: VCO pass@5",
+          "group": "pass@5"
+        },
+        "task30": {
+          "name": "Task 30: PLL",
+          "group": "pass@1"
+        },
+        "task30PassAt5": {
+          "name": "Task 30: PLL pass@5",
+          "group": "pass@5"
         }
       },
       "stats": {
         "passAt5": {
-          "name": "Pass at 5",
+          "name": "pass@5",
           "unit": "%",
           "better": "higher"
         },
         "solved": {
           "name": "Solved tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -31033,6 +31225,12 @@
         "besls": {
           "name": "BeSLS"
         },
+        "belacolaIdAccuracy": {
+          "name": "BelaCoLA in domain"
+        },
+        "belacolaOodAccuracy": {
+          "name": "BelaCoLA out of domain"
+        },
         "bewic": {
           "name": "BeWiC"
         },
@@ -31041,6 +31239,18 @@
         },
         "berteWd": {
           "name": "BeRTE-WD"
+        }
+      },
+      "stats": {
+        "belacolaIdMcc": {
+          "name": "BelaCoLA in-domain MCC",
+          "unit": "score",
+          "better": "higher"
+        },
+        "belacolaOodMcc": {
+          "name": "BelaCoLA out-of-domain MCC",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -48371,7 +48581,7 @@
       "feed": "https://arxiv.org/html/2401.06431",
       "terms": "Results credited to Changrong Xiao and colleagues. https://doi.org/10.1145/3706468.3706507",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BERT Classifier",
@@ -48665,7 +48875,7 @@
       "feed": "https://arxiv.org/html/2407.08473",
       "terms": "The authors publish these tables under the license at https://arxiv.org/abs/2407.08473.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "GPT4 (snapshot unspecified)",
@@ -48746,6 +48956,21 @@
           "group": "Arithmetic benchmark",
           "unit": "%"
         },
+        "Arithmetic: adder_32bit": {
+          "name": "32 bit adder",
+          "group": "Arithmetic benchmark",
+          "unit": "%"
+        },
+        "Arithmetic: adder_64_bit": {
+          "name": "64 bit adder",
+          "group": "Arithmetic benchmark",
+          "unit": "%"
+        },
+        "Arithmetic: div_16bit": {
+          "name": "16 bit divider",
+          "group": "Arithmetic benchmark",
+          "unit": "%"
+        },
         "Arithmetic: multi_booth": {
           "name": "Booth multiplier",
           "group": "Arithmetic benchmark",
@@ -48773,6 +48998,21 @@
         },
         "Advanced: 2x2systolic": {
           "name": "2x2 systolic",
+          "group": "Advanced benchmark",
+          "unit": "%"
+        },
+        "Advanced: 3stagepipe": {
+          "name": "3 stage pipeline",
+          "group": "Advanced benchmark",
+          "unit": "%"
+        },
+        "Advanced: 4x4spatialacc": {
+          "name": "4x4 spatial accelerator",
+          "group": "Advanced benchmark",
+          "unit": "%"
+        },
+        "Advanced: 5stagepipe": {
+          "name": "5 stage pipeline",
           "group": "Advanced benchmark",
           "unit": "%"
         },
@@ -80309,7 +80549,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The headline averages success rates across the six environments at their published attempt limits.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)"
@@ -86039,7 +86279,7 @@
       "feed": "https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1 + https://arxiv.org/html/2007.00398",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "0713ap +gpt4o(no v)",
@@ -86089,6 +86329,7 @@
         "LATIN-Prompt + Claude (Zero shot)",
         "LATIN-Tuning-Prompt + Alpaca (Zero-shot)",
         "LLaVA-One-Vision-1.5-8B-Instruct",
+        "LaViDa Full Base — Independent Evaluation",
         "LayoutLM 2.0 (single model)",
         "LayoutLM-base+GNN",
         "LayoutLMV2-large on Textract",
@@ -86255,6 +86496,16 @@
       "stats": {
         "accuracy": {
           "name": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "valAnls": {
+          "name": "Validation ANLS",
+          "unit": "%",
+          "better": "higher"
+        },
+        "valAccuracy": {
+          "name": "Validation accuracy",
           "unit": "%",
           "better": "higher"
         }
@@ -89177,7 +89428,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The paper reports no overall score, so the headline is conditional full-duplex success on realized challenges.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Freeze-Omni",
@@ -89187,47 +89438,70 @@
       "parts": {
         "cFD": {
           "name": "cFD",
-          "group": "Full-duplex interaction"
+          "group": "Full-duplex interaction",
+          "better": "higher"
         },
         "Early": {
           "name": "Early",
-          "group": "Full-duplex interaction"
+          "group": "Full-duplex interaction",
+          "better": "lower"
         },
         "Pre-end": {
           "name": "Pre-end",
-          "group": "Full-duplex interaction"
+          "group": "Full-duplex interaction",
+          "better": "lower"
         },
         "Win-Intr.": {
           "name": "Win-Intr.",
-          "group": "Full-duplex interaction"
+          "group": "Full-duplex interaction",
+          "better": "lower"
         },
         "Stop@0.8": {
           "name": "Stop@0.8",
-          "group": "Full-duplex interaction"
+          "group": "Full-duplex interaction",
+          "better": "higher"
         },
         "Resp.": {
           "name": "Resp.",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "higher"
         },
         "Latest": {
           "name": "Latest",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "higher"
         },
         "Stale": {
           "name": "Stale",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "lower"
         },
         "D-Adopt": {
           "name": "D-Adopt",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "lower"
         },
         "D-Rej.": {
           "name": "D-Rej.",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "higher"
         },
         "Final": {
           "name": "Final",
-          "group": "Memory fidelity"
+          "group": "Memory fidelity",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "RCR": {
+          "name": "Challenge realization rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Stop (s)": {
+          "name": "Stop latency",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -90908,7 +91182,7 @@
       "terms": "The authors publish Table 6 under the terms at https://arxiv.org/abs/2506.08762.",
       "headline": "The paper gives no overall score, so the headline is its first metric, accounting fraud detection ROC-AUC.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -99743,7 +100017,7 @@
       "feed": "https://arxiv.org/html/2602.12247",
       "terms": "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2602.12247",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -99766,81 +100040,48 @@
       "stats": {
         "validDocuments": {
           "name": "Valid documents",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "validAccuracy": {
           "name": "Valid document accuracy",
           "unit": "score",
           "better": "higher"
         },
-        "Credit fields passed": {
-          "name": "Credit fields passed",
-          "unit": "count"
-        },
-        "Credit fields evaluated": {
-          "name": "Credit fields evaluated",
-          "unit": "count"
-        },
-        "Research fields passed": {
-          "name": "Research fields passed",
-          "unit": "count"
-        },
-        "Research fields evaluated": {
-          "name": "Research fields evaluated",
-          "unit": "count"
-        },
-        "Resumes fields passed": {
-          "name": "Resumes fields passed",
-          "unit": "count"
-        },
-        "Resumes fields evaluated": {
-          "name": "Resumes fields evaluated",
-          "unit": "count"
-        },
-        "Sports fields passed": {
-          "name": "Sports fields passed",
-          "unit": "count"
-        },
-        "Sports fields evaluated": {
-          "name": "Sports fields evaluated",
-          "unit": "count"
-        },
-        "SEC 10-K/Q fields evaluated": {
-          "name": "SEC 10-K/Q fields evaluated",
-          "unit": "count"
-        },
-        "Overall": {
-          "name": "Overall failure rate",
-          "unit": "score",
-          "better": "lower"
-        },
         "Overall fields passed": {
           "name": "Overall fields passed",
-          "unit": "count"
-        },
-        "Overall fields evaluated": {
-          "name": "Overall fields evaluated",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "Empty response": {
           "name": "Empty response failures",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "Trailing comma": {
           "name": "Trailing comma failures",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "PDF page limit": {
           "name": "PDF page limit failures",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "Truncated JSON": {
           "name": "Truncated JSON failures",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
+        },
+        "Context length": {
+          "name": "Context length failures",
+          "unit": "count",
+          "better": "lower"
         },
         "Total failures": {
           "name": "Total failures",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -122877,14 +123118,41 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "The paper reports no overall score, so this is the Gecko(R) word-level score, the first score column.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Imagen",
         "Muse",
         "SD1.5",
         "SDXL"
-      ]
+      ],
+      "stats": {
+        "geckoRLikert": {
+          "name": "Gecko(R) Likert",
+          "unit": "%",
+          "better": "higher"
+        },
+        "geckoRDSGH": {
+          "name": "Gecko(R) DSG(H)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "geckoSWL": {
+          "name": "Gecko(S) word-level",
+          "unit": "%",
+          "better": "higher"
+        },
+        "geckoSLikert": {
+          "name": "Gecko(S) Likert",
+          "unit": "%",
+          "better": "higher"
+        },
+        "geckoSDSGH": {
+          "name": "Gecko(S) DSG(H)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "geckonum": {
       "url": "https://arxiv.org/html/2406.14774",
@@ -134231,9 +134499,32 @@
       "feed": "https://arxiv.org/html/2505.08775",
       "terms": "Paper and license at https://arxiv.org/abs/2505.08775",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "emergencyreferrals": {
+          "name": "Emergency referrals"
+        },
+        "expertisetailoredcommunication": {
+          "name": "Expertise-tailored communication"
+        },
+        "respondingunderuncertainty": {
+          "name": "Responding under uncertainty"
+        },
+        "responsedepth": {
+          "name": "Response depth"
+        },
+        "healthdatatasks": {
+          "name": "Health data tasks"
+        },
+        "globalhealth": {
+          "name": "Global health"
+        },
+        "contextseeking": {
+          "name": "Context seeking"
+        }
+      }
     },
     "healthbench-professional": {
       "url": "https://openai.com/index/making-chatgpt-better-for-clinicians/",
@@ -193714,7 +194005,7 @@
       "feed": "https://arxiv.org/html/2502.00964",
       "terms": "The authors publish this table under the terms listed at https://arxiv.org/abs/2502.00964.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -193736,16 +194027,16 @@
         },
         "ModelImplementation": {
           "name": "Model Implementation"
+        },
+        "ModelPerformance": {
+          "name": "Model Performance"
         }
       },
       "stats": {
         "tasksSolved": {
           "name": "Tasks solved",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks evaluated",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -202975,7 +203266,51 @@
       "unmatched": [
         "BART-large",
         "BART-xsum-samsum"
-      ]
+      ],
+      "stats": {
+        "rouge2": {
+          "name": "ROUGE-2 F1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "rougeL": {
+          "name": "ROUGE-L F1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "factCore": {
+          "name": "MedCon core factuality",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "factFull": {
+          "name": "MedCon full factuality",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "bertScoreM1": {
+          "name": "BERTScore M1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "bertScoreM2": {
+          "name": "BERTScore M2",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "bleurt20": {
+          "name": "BLEURT-20",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        }
+      }
     },
     "mtsamples-clinical-entity-recognition": {
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11339492/",
@@ -262660,7 +262995,7 @@
       "feed": "https://arxiv.org/html/2506.23582",
       "terms": "The ISCA Archive publishes the authors’ paper at https://www.isca-archive.org/interspeech_2025/kanamori25_interspeech.html.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "LAION-CLAP",
@@ -262690,6 +263025,23 @@
         },
         "Speech": {
           "name": "Speech"
+        }
+      },
+      "stats": {
+        "mse": {
+          "name": "Mean squared error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lcc": {
+          "name": "Linear correlation coefficient",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ktau": {
+          "name": "Kendall rank correlation",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -263534,7 +263886,7 @@
       "feed": "https://arxiv.org/html/2611.00774",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "DCRM (question-only)",
@@ -263542,34 +263894,91 @@
       ],
       "parts": {
         "Research stage": {
-          "name": "Research stage"
+          "name": "Research stage",
+          "group": "Top-1"
+        },
+        "Research stage: Top-3": {
+          "name": "Research stage",
+          "group": "Top-3"
         },
         "State completeness": {
-          "name": "State completeness"
+          "name": "State completeness",
+          "group": "Top-1"
+        },
+        "State completeness: Top-3": {
+          "name": "State completeness",
+          "group": "Top-3"
         },
         "Evidence sufficiency": {
-          "name": "Evidence sufficiency"
+          "name": "Evidence sufficiency",
+          "group": "Top-1"
+        },
+        "Evidence sufficiency: Top-3": {
+          "name": "Evidence sufficiency",
+          "group": "Top-3"
         },
         "Claim-evidence consistency": {
-          "name": "Claim-evidence consistency"
+          "name": "Claim-evidence consistency",
+          "group": "Top-1"
+        },
+        "Claim-evidence consistency: Top-3": {
+          "name": "Claim-evidence consistency",
+          "group": "Top-3"
         },
         "Next action": {
-          "name": "Next action"
+          "name": "Next action",
+          "group": "Top-1"
+        },
+        "Next action: Top-3": {
+          "name": "Next action",
+          "group": "Top-3"
         },
         "Stopping condition": {
-          "name": "Stopping condition"
+          "name": "Stopping condition",
+          "group": "Top-1"
+        },
+        "Stopping condition: Top-3": {
+          "name": "Stopping condition",
+          "group": "Top-3"
         },
         "Direction decision": {
-          "name": "Direction decision"
+          "name": "Direction decision",
+          "group": "Top-1"
+        },
+        "Direction decision: Top-3": {
+          "name": "Direction decision",
+          "group": "Top-3"
         },
         "Model routing": {
-          "name": "Model routing"
+          "name": "Model routing",
+          "group": "Top-1"
+        },
+        "Model routing: Top-3": {
+          "name": "Model routing",
+          "group": "Top-3"
         },
         "Advisor review need": {
-          "name": "Advisor review need"
+          "name": "Advisor review need",
+          "group": "Top-1"
+        },
+        "Advisor review need: Top-3": {
+          "name": "Advisor review need",
+          "group": "Top-3"
         },
         "User confirmation need": {
-          "name": "User confirmation need"
+          "name": "User confirmation need",
+          "group": "Top-1"
+        },
+        "User confirmation need: Top-3": {
+          "name": "User confirmation need",
+          "group": "Top-3"
+        }
+      },
+      "stats": {
+        "top3": {
+          "name": "Top-3 accuracy",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -285041,6 +285450,16 @@
           "name": "Audio price per minute",
           "unit": "usd",
           "better": "lower"
+        },
+        "audioInputUsdPerMinute": {
+          "name": "Audio input price per minute",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "audioOutputUsdPerMinute": {
+          "name": "Audio output price per minute",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -304315,7 +304734,8 @@
       "url": "https://arxiv.org/html/2402.01622",
       "feed": "https://arxiv.org/html/2402.01622",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT-3.5-Turbo (snapshot unspecified)",
@@ -304339,7 +304759,6 @@
           "group": "Difficulty"
         }
       },
-      "static": "paper",
       "stats": {
         "validationDelivery": {
           "name": "Validation delivery",
@@ -304393,6 +304812,176 @@
         },
         "hardMacro": {
           "name": "Hard macro pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyWithinSandbox": {
+          "name": "Easy: Within sandbox",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumWithinSandbox": {
+          "name": "Medium: Within sandbox",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardWithinSandbox": {
+          "name": "Hard: Within sandbox",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyCompleteInformation": {
+          "name": "Easy: Complete information",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumCompleteInformation": {
+          "name": "Medium: Complete information",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardCompleteInformation": {
+          "name": "Hard: Complete information",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyWithinCurrentCity": {
+          "name": "Easy: Within current city",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumWithinCurrentCity": {
+          "name": "Medium: Within current city",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardWithinCurrentCity": {
+          "name": "Hard: Within current city",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyReasonableCityRoute": {
+          "name": "Easy: Reasonable city route",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumReasonableCityRoute": {
+          "name": "Medium: Reasonable city route",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardReasonableCityRoute": {
+          "name": "Hard: Reasonable city route",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyDiverseRestaurants": {
+          "name": "Easy: Diverse restaurants",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumDiverseRestaurants": {
+          "name": "Medium: Diverse restaurants",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardDiverseRestaurants": {
+          "name": "Hard: Diverse restaurants",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyDiverseAttractions": {
+          "name": "Easy: Diverse attractions",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumDiverseAttractions": {
+          "name": "Medium: Diverse attractions",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardDiverseAttractions": {
+          "name": "Hard: Diverse attractions",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyNonconfTransportation": {
+          "name": "Easy: Non-conflicting transportation",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumNonconfTransportation": {
+          "name": "Medium: Non-conflicting transportation",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardNonconfTransportation": {
+          "name": "Hard: Non-conflicting transportation",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyMinimumNightsStay": {
+          "name": "Easy: Minimum nights stay",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumMinimumNightsStay": {
+          "name": "Medium: Minimum nights stay",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardMinimumNightsStay": {
+          "name": "Hard: Minimum nights stay",
+          "unit": "%",
+          "better": "higher"
+        },
+        "easyBudget": {
+          "name": "Easy: Budget",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumBudget": {
+          "name": "Medium: Budget",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardBudget": {
+          "name": "Hard: Budget",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumRoomRule": {
+          "name": "Medium: Room rule",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardRoomRule": {
+          "name": "Hard: Room rule",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumCuisine": {
+          "name": "Medium: Cuisine",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardCuisine": {
+          "name": "Hard: Cuisine",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mediumRoomType": {
+          "name": "Medium: Room type",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardRoomType": {
+          "name": "Hard: Room type",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hardTransportation": {
+          "name": "Hard: Transportation",
           "unit": "%",
           "better": "higher"
         }
@@ -306017,12 +306606,29 @@
       "feed": "https://arxiv.org/html/2407.15850",
       "terms": "The authors publish Table 3 under the terms linked at https://arxiv.org/abs/2407.15850.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AutoAD-III",
         "AutoAD-Zero"
-      ]
+      ],
+      "stats": {
+        "critic": {
+          "name": "CRITIC score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "llama2Eval": {
+          "name": "LLM-AD-eval (Llama 2)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "llama3Eval": {
+          "name": "LLM-AD-eval (Llama 3)",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "tvbench": {
       "url": "https://arxiv.org/html/2410.07752",
@@ -325935,7 +326541,7 @@
     "wise-verified": {
       "url": "https://github.com/PKU-YuanGroup/WISE",
       "feed": "https://raw.githubusercontent.com/PKU-YuanGroup/WISE/main/leadboard.md",
-      "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+      "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
       "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [

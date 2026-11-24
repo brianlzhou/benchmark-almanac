@@ -7,6 +7,11 @@ const feed = 'https://arxiv.org/html/2407.15850';
 const board: Leaderboard = {
   benchmark: 'tv-ad', url: feed, feed, static: 'paper',
   terms: 'The authors publish Table 3 under the terms linked at https://arxiv.org/abs/2407.15850.',
+  stats: {
+    critic: { name: 'CRITIC score', unit: 'score', better: 'higher' },
+    llama2Eval: { name: 'LLM-AD-eval (Llama 2)', unit: 'score', better: 'higher' },
+    llama3Eval: { name: 'LLM-AD-eval (Llama 3)', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const t = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.slice(6).join('|') === 'TV-AD|TV-AD|TV-AD' && t[1]?.slice(6).join('|') === 'CIDEr|CRITIC|LLM-AD-eval');
     if (!t) throw new Error('TV-AD results missing');

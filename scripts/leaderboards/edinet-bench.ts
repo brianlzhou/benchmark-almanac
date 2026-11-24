@@ -1,5 +1,7 @@
 // EDINET-Bench tests financial reasoning on Japanese annual reports.
 // Table 6 reports ROC-AUC and MCC for two tasks and accuracy for industry prediction.
+// Per Table 6 ("For LLMs, the scores represent the mean ± standard deviation over three runs"), keep the
+// headline standard deviation in metrics.std and drop per-part standard deviations.
 import type { Leaderboard } from './types.ts';
 import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
@@ -26,7 +28,7 @@ const board: Leaderboard = {
         const match = cell.match(/^(-?[\d.]+)(?: \\pm ([\d.]+))?$/);
         if (!match) throw new Error('Invalid EDINET-Bench result: ' + cell);
         metrics[names[i]] = Number(match[1]);
-        if (match[2]) metrics[i === 0 ? 'std' : names[i] + ' SD'] = Number(match[2]);
+        if (match[2] && i === 0) metrics.std = Number(match[2]);
       }
       return {model: label.replace(/ †$/, ''), setting, score: metrics[names[0]], metrics,
         ...(metrics.std !== undefined ? {trials: 3} : {})};

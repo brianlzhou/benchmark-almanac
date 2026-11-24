@@ -28,7 +28,7 @@ const board: Leaderboard = {
       for (const s of headline) {
         const value = s.score_dict.multiple_choice_grade;
         if (s.preferred_score !== 'multiple_choice_grade' || !Number.isFinite(value)) throw new Error('Missing preferred score in ' + file);
-        const { multiple_choice_grade, ...metrics } = s.score_dict;
+        const { multiple_choice_grade, macro_f1, ...metrics } = s.score_dict;
         const name = model.model_name.startsWith(model.model_family) ? model.model_name : model.model_family + ' ' + model.model_name;
         const temperature = model.decoding_params?.temperature;
         rows.push({ model: name, score: 100 * value, link, metrics,

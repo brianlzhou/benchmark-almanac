@@ -8,8 +8,8 @@ const feed = 'https://arxiv.org/html/2502.00964';
 const board: Leaderboard = {
   benchmark: 'ml-dev-bench', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2502.00964.',
-  stats: { tasksSolved: {name:'Tasks solved',unit:'count'}, tasks: {name:'Tasks evaluated',unit:'count'} },
-  parts: { DatasetHandling: 'Dataset Handling', APIIntegration: 'API Integration', ModelTraining: 'Model Training', Debugging: 'Debugging', ModelImplementation: 'Model Implementation' },
+  stats: { tasksSolved: {name:'Tasks solved',unit:'count',better:'higher'} },
+  parts: { DatasetHandling: 'Dataset Handling', APIIntegration: 'API Integration', ModelTraining: 'Model Training', Debugging: 'Debugging', ModelImplementation: 'Model Implementation', ModelPerformance: 'Model Performance' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === 'Category|ReAct-Sonnet|OH-Sonnet|OH-Gemini|Aide-4o|ReAct-4o');
@@ -26,10 +26,8 @@ const board: Leaderboard = {
         if (r[0] === 'Overall') {
           score = value;
           metrics.tasksSolved = Number(match[2]);
-          metrics.tasks = Number(match[3]);
         } else {
           const key = r[0].replaceAll(' ', '');
-          board.parts![key] = r[0];
           metrics[key] = value;
         }
       }
