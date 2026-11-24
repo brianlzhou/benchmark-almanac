@@ -9221,9 +9221,78 @@
       "url": "https://aiprofessions.ai/models/ai-model-test-results/",
       "feed": "https://raw.githubusercontent.com/aiprofessions/prompt-benchmark/main/data/results.csv (per-prompt scores)",
       "terms": "Per-prompt scores the makers publish in their GitHub repository under CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "accountants": {
+          "name": "Accountants",
+          "group": "Profession"
+        },
+        "constructionManagers": {
+          "name": "Construction managers",
+          "group": "Profession"
+        },
+        "engineers": {
+          "name": "Engineers",
+          "group": "Profession"
+        },
+        "eventPlanners": {
+          "name": "Event planners",
+          "group": "Profession"
+        },
+        "healthcare": {
+          "name": "Healthcare",
+          "group": "Profession"
+        },
+        "interiorDesigners": {
+          "name": "Interior designers",
+          "group": "Profession"
+        },
+        "lawyers": {
+          "name": "Lawyers",
+          "group": "Profession"
+        },
+        "general": {
+          "name": "General",
+          "group": "Profession"
+        },
+        "realEstateAgents": {
+          "name": "Real estate agents",
+          "group": "Profession"
+        },
+        "salesManagers": {
+          "name": "Sales managers",
+          "group": "Profession"
+        },
+        "travelAgents": {
+          "name": "Travel agents",
+          "group": "Profession"
+        },
+        "en": {
+          "name": "English",
+          "group": "Language"
+        },
+        "es": {
+          "name": "Spanish",
+          "group": "Language"
+        },
+        "fr": {
+          "name": "French",
+          "group": "Language"
+        },
+        "pt": {
+          "name": "Portuguese",
+          "group": "Language"
+        }
+      },
+      "stats": {
+        "allCriteriaRate": {
+          "name": "All-criteria pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ai-security-leaderboard-far-ai": {
       "url": "https://leaderboard.far.ai/",
@@ -62802,9 +62871,44 @@
       "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/c2d3d5e1335c07fb8032bcfc7869e9437e635c4c/src/inspect_evals/ipi_coding_agent",
       "feed": "https://raw.githubusercontent.com/UKGovernmentBEIS/inspect_evals/c2d3d5e1335c07fb8032bcfc7869e9437e635c4c/src/inspect_evals/ipi_coding_agent/README.md",
       "terms": "The repository is licensed under Apache 2.0. https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "codeComment": {
+          "name": "Code comments",
+          "group": "Attack vector"
+        },
+        "configFile": {
+          "name": "Config file",
+          "group": "Attack vector"
+        },
+        "issueText": {
+          "name": "Issue text",
+          "group": "Attack vector"
+        },
+        "readme": {
+          "name": "README",
+          "group": "Attack vector"
+        }
+      },
+      "stats": {
+        "irr": {
+          "name": "Injection resistance rate (IRR)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tcr": {
+          "name": "Task completion rate (TCR)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "detection": {
+          "name": "Injection detection rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "codepde": {
       "url": "https://github.com/harbor-framework/harbor/tree/main/adapters/codepde",
@@ -86048,12 +86152,9 @@
       "url": "https://github.com/buildok/dirty-integration",
       "feed": "https://raw.githubusercontent.com/buildok/dirty-integration/main/README.md",
       "terms": "The repository is licensed under MIT. https://github.com/buildok/dirty-integration/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "`anthropic/claude-sonnet-5`",
-        "`deepseek/deepseek-v3.2`"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": []
     },
     "disbench": {
       "url": "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard",
@@ -102335,7 +102436,7 @@
       "url": "https://github.com/HazyResearch/based#running-evaluations",
       "feed": "https://raw.githubusercontent.com/HazyResearch/based/HEAD/README.md",
       "terms": "Apache License 2.0 at https://github.com/HazyResearch/based/blob/main/LICENSE.md.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Attention 1.4b",
@@ -133830,9 +133931,26 @@
       "url": "https://github.com/CompassionML/harvest-rush-train",
       "feed": "https://raw.githubusercontent.com/CompassionML/harvest-rush-train/main/README.md",
       "terms": "MIT License. https://github.com/CompassionML/harvest-rush-train/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "animalsDrivenOver": {
+          "name": "Animals driven over",
+          "unit": "%",
+          "better": "lower"
+        },
+        "propsDrivenOver": {
+          "name": "Props driven over",
+          "unit": "%",
+          "better": "higher"
+        },
+        "rocksStruck": {
+          "name": "Rocks struck",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "harvestbench": {
       "url": "https://compassionbench.com/harvestbench",
@@ -154572,7 +154690,7 @@
       "url": "https://github.com/SakanaAI/evolutionary-model-merge",
       "feed": "https://raw.githubusercontent.com/SakanaAI/evolutionary-model-merge/HEAD/README.md",
       "terms": "The repository uses Apache 2.0 at https://github.com/SakanaAI/evolutionary-model-merge/blob/HEAD/LICENSE.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "EvoVLM-JP-v1-7B",
@@ -162649,14 +162767,84 @@
       "url": "https://github.com/tabtoyou/KRETA",
       "feed": "https://raw.githubusercontent.com/tabtoyou/KRETA/main/README.md (Full Leaderboard, Overall)",
       "terms": "README table in the tabtoyou/KRETA GitHub repository, which states no license; scores are cited to the KRETA authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "A.X-4.0-VL-LIGHT",
         "KANANA-1.5-V 3B",
         "VARCO-VISION 14B",
         "VARCO-VISION-2.0 14B"
-      ]
+      ],
+      "parts": {
+        "system1": {
+          "name": "System 1",
+          "group": "Reasoning"
+        },
+        "system2": {
+          "name": "System 2",
+          "group": "Reasoning"
+        },
+        "gov": {
+          "name": "Government",
+          "group": "Domain"
+        },
+        "econ": {
+          "name": "Economy",
+          "group": "Domain"
+        },
+        "mktg": {
+          "name": "Marketing",
+          "group": "Domain"
+        },
+        "comm": {
+          "name": "Communication",
+          "group": "Domain"
+        },
+        "edu": {
+          "name": "Education",
+          "group": "Domain"
+        },
+        "med": {
+          "name": "Medicine",
+          "group": "Domain"
+        },
+        "tech": {
+          "name": "Technology",
+          "group": "Domain"
+        },
+        "arts": {
+          "name": "Arts",
+          "group": "Domain"
+        },
+        "transp": {
+          "name": "Transportation",
+          "group": "Domain"
+        },
+        "tour": {
+          "name": "Tourism",
+          "group": "Domain"
+        },
+        "fnb": {
+          "name": "Food and beverage",
+          "group": "Domain"
+        },
+        "ent": {
+          "name": "Entertainment",
+          "group": "Domain"
+        },
+        "life": {
+          "name": "Lifestyle",
+          "group": "Domain"
+        },
+        "sci": {
+          "name": "Science",
+          "group": "Domain"
+        },
+        "hist": {
+          "name": "History",
+          "group": "Domain"
+        }
+      }
     },
     "kris-bench": {
       "url": "https://yongliang-wu.github.io/kris_bench_project_page/",
@@ -168944,7 +169132,7 @@
       "url": "https://github.com/sylvestf/LIBERO-plus#-libero-plus-benchmark-leaderboard",
       "feed": "https://raw.githubusercontent.com/sylvestf/LIBERO-plus/main/README.md (LIBERO-Plus Benchmark Leaderboard, Total)",
       "terms": "README table in the sylvestf/LIBERO-plus GitHub repository, which states no license; scores are cited to the LIBERO-Plus authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "NORA",
@@ -168955,7 +169143,37 @@
         "UniVLA",
         "WorldVLA",
         "π₀"
-      ]
+      ],
+      "parts": {
+        "camera": {
+          "name": "Camera",
+          "group": "Perturbation"
+        },
+        "robot": {
+          "name": "Robot",
+          "group": "Perturbation"
+        },
+        "language": {
+          "name": "Language",
+          "group": "Perturbation"
+        },
+        "light": {
+          "name": "Light",
+          "group": "Perturbation"
+        },
+        "background": {
+          "name": "Background",
+          "group": "Perturbation"
+        },
+        "noise": {
+          "name": "Noise",
+          "group": "Perturbation"
+        },
+        "layout": {
+          "name": "Layout",
+          "group": "Perturbation"
+        }
+      }
     },
     "libero-pro": {
       "url": "https://github.com/Zxy-MLlab/LIBERO-PRO#-libero-pro-model-leaderboard",
@@ -175602,9 +175820,19 @@
       "url": "https://github.com/zli12321/LHTB#lhtb-20-results-october-2026",
       "feed": "https://raw.githubusercontent.com/zli12321/LHTB/main/assets/lhtb2_results.csv",
       "terms": "CSV in the zli12321/LHTB repository, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "original": {
+          "name": "Original tasks",
+          "group": "Task set"
+        },
+        "newTasks": {
+          "name": "New tasks",
+          "group": "Task set"
+        }
+      }
     },
     "long-horizon-terminal-bench-lhtb": {
       "url": "https://huggingface.co/datasets/IntelligenceLab/LHTB-leaderboard",
@@ -199562,7 +199790,7 @@
       "url": "https://github.com/MMTU-benchmark/MMTU",
       "feed": "https://raw.githubusercontent.com/MMTU-benchmark/MMTU/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Deepseek-R1 [snapshot unspecified]",
@@ -203320,7 +203548,7 @@
       "url": "https://github.com/bytedance/MTVQA#-leaderboard",
       "feed": "https://raw.githubusercontent.com/bytedance/MTVQA/main/README.md (LeaderBoard table, AVG.)",
       "terms": "README table in the bytedance/MTVQA GitHub repository, which states no license; scores are cited to the MTVQA authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "BlueLM-V-3B",
@@ -203331,7 +203559,45 @@
         "TextMonkey",
         "TextSquare",
         "mPLUG-DocOwl 1.5"
-      ]
+      ],
+      "parts": {
+        "ar": {
+          "name": "Arabic",
+          "group": "Language"
+        },
+        "de": {
+          "name": "German",
+          "group": "Language"
+        },
+        "fr": {
+          "name": "French",
+          "group": "Language"
+        },
+        "it": {
+          "name": "Italian",
+          "group": "Language"
+        },
+        "ja": {
+          "name": "Japanese",
+          "group": "Language"
+        },
+        "ko": {
+          "name": "Korean",
+          "group": "Language"
+        },
+        "ru": {
+          "name": "Russian",
+          "group": "Language"
+        },
+        "th": {
+          "name": "Thai",
+          "group": "Language"
+        },
+        "vi": {
+          "name": "Vietnamese",
+          "group": "Language"
+        }
+      }
     },
     "mu-bench": {
       "url": "https://research.sierra.ai/mubench/",
@@ -205498,9 +205764,31 @@
       "url": "https://github.com/facebookresearch/multiloko#leaderboard",
       "feed": "https://raw.githubusercontent.com/facebookresearch/multiloko/main/README.md (Leaderboard table, Average EM)",
       "terms": "README table in the facebookresearch/multiloko GitHub repository, which is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "gap": {
+          "name": "Cross-lingual gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mte": {
+          "name": "Mother tongue effect (MTE)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "minEm": {
+          "name": "Minimum language EM",
+          "unit": "%",
+          "better": "higher"
+        },
+        "maxEm": {
+          "name": "Maximum language EM",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "multimedia-terminalbench": {
       "url": "https://arxiv.org/html/2605.10966",

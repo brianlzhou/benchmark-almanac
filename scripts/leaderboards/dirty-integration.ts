@@ -23,7 +23,7 @@ const board: Leaderboard = {
       const hostile = Number.parseFloat(cells[4]);
       if (!Number.isFinite(hostile)) continue;
       if (![clean, realistic].every(Number.isFinite)) throw new Error('Invalid Dirty Integration row');
-      rows.push({ model: cells[1], score: hostile, setting: 'hostile', metrics: { clean, realistic } });
+      rows.push({ model: cells[1].replace(/`/g, ''), score: hostile, setting: 'hostile' });
     }
     if (rows.length < 2) throw new Error('Dirty Integration table has too few model rows');
     return rows;

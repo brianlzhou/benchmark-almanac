@@ -10,8 +10,21 @@ import { ghRaw } from './big-bench-extra-hard.ts';
 const REPO = 'bytedance/MTVQA';
 const FEED = ghRaw(REPO, 'README.md');
 
+const MTVQA_LANGS = [
+  ['ar', 'AR', 'Arabic'],
+  ['de', 'DE', 'German'],
+  ['fr', 'FR', 'French'],
+  ['it', 'IT', 'Italian'],
+  ['ja', 'JA', 'Japanese'],
+  ['ko', 'KO', 'Korean'],
+  ['ru', 'RU', 'Russian'],
+  ['th', 'TH', 'Thai'],
+  ['vi', 'VI', 'Vietnamese'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'mtvqa-test',
+  parts: Object.fromEntries(MTVQA_LANGS.map(([k, , name]) => [k, { name, group: 'Language' }])),
   url: `https://github.com/${REPO}#-leaderboard`,
   feed: `${FEED} (LeaderBoard table, AVG.)`,
   terms: 'README table in the bytedance/MTVQA GitHub repository, which states no license; scores are cited to the MTVQA authors.',
@@ -25,12 +38,29 @@ const board: Leaderboard = {
   async fetch() {
     const t = tables(await fetchText(FEED)).find((x) => x[0]?.some((c) => /^AVG\.?$/i.test(c.text)));
     if (!t) throw new Error('MTVQA table not found');
-    const iAvg = t[0].findIndex((c) => /^AVG\.?$/i.test(c.text));
+    const head = t[0].map((c) => c.text);
+    const iOpen = head.indexOf('Open-Source');
+    const iAvg = head.findIndex((c) => /^AVG\.?$/i.test(c));
+    const langIdx = MTVQA_LANGS.map(([k, col]) => [k, head.indexOf(col)] as const).filter(([, i]) => i >= 0);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const model = r[0]?.text.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu, '').trim();
       const score = num(r[iAvg]?.text);
-      if (model && score !== undefined) rows.push({ model, score, date: '2024-06-01' });
+      if (!model || score === undefined) continue;
+      const openCell = iOpen >= 0 ? r[iOpen]?.text ?? '' : '';
+      const open = openCell.includes('✅') ? true : openCell.includes('✘') ? false : undefined;
+      const metrics: Record<string, number> = {};
+      for (const [k, i] of langIdx) {
+        const v = num(r[i]?.text);
+        if (v !== undefined) metrics[k] = v;
+      }
+      rows.push({
+        model,
+        score,
+        date: '2024-06-01',
+        open,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },
