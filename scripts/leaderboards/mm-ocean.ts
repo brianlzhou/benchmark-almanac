@@ -13,6 +13,13 @@ const board: Leaderboard = {
     t2: { name: 'Open-Ended Reasoning', unit: 'score', note: 'AI judge composite from 1 to 10.' },
     t3: { name: 'Grounding MCQs', unit: '%' },
   },
+  stats: {
+    mae: { name: 'Personality rating MAE', unit: 'score', better: 'lower', note: 'Mean absolute error on ordinal personality ratings.' },
+    pr: { name: 'Prejudice rate', unit: '%', better: 'lower' },
+    cr: { name: 'Confabulation rate', unit: '%', better: 'lower' },
+    ir: { name: 'Integration failure rate', unit: '%', better: 'lower' },
+    rgm: { name: 'Rating-grounding misalignment', unit: 'score', note: 'Average Task 2 and Task 3 rank minus Task 1 rank. Positive values indicate stronger rating than grounding.' },
+  },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const table = paperTables(html).map(grid).find(t => t[1]?.[6]?.startsWith('HR '));
