@@ -2947,6 +2947,7 @@
     ["terminal-bench-4-1","gpt-6-2-astra","max","Codex","2026-11-18"],
     ["terminal-bench-4-1","gpt-6-2-sol","max","Codex","2026-11-18"],
     ["terminal-bench-4-1","muse-wonder","xhigh","Muse Code","2026-11-14"],
+    ["terminal-bench-4-1","tencent-hy4-flash","none","mini-swe-agent","2026-11-24"],
     ["textquests","claude-3-5-haiku","no clues",null,"2026-11-18"],
     ["textquests","claude-3-5-haiku","with clues",null,"2026-11-18"],
     ["textquests","claude-fable-5-2","no clues",null,"2026-11-18"],

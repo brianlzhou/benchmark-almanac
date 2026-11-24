@@ -212942,11 +212942,28 @@
       "url": "https://github.com/lechmazur/nyt-connections",
       "feed": "https://raw.githubusercontent.com/lechmazur/nyt-connections/master/README.md (Leaderboard: Extended Version, Score %)",
       "terms": "README table in the lechmazur/nyt-connections GitHub repository, which states no license; scores are cited to Lech Mazur.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 143,
       "unmatched": [
         "ByteDance Seed2.1 Pro"
       ],
+      "chart": {
+        "title": "Cost vs. performance",
+        "note": "Estimated average cost per puzzle at standard list prices against full extended score, matching the cost versus performance chart in the repository.",
+        "x": {
+          "key": "cost",
+          "label": "Estimated cost per puzzle",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "newest100": {
           "name": "Newest 100 puzzles",
@@ -212954,17 +212971,20 @@
         }
       },
       "stats": {
-        "puzzles": {
-          "name": "Puzzles",
-          "unit": "count"
-        },
         "fullySolved": {
           "name": "Fully solved puzzles",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "newest100Solved": {
           "name": "Newest 100 puzzles solved",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "estimatedTotalCost": {
+          "name": "Estimated total cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -244789,7 +244809,7 @@
       "url": "https://ppbench.com/",
       "feed": "https://ppbench.com/ (leaderboard table, Agentic)",
       "terms": "Server-rendered public page; robots.txt allows all paths for generic agents with a search=yes, ai-train=no content signal, and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 139,
       "unmatched": [],
       "parts": {
@@ -244872,6 +244892,26 @@
         "heyawake": {
           "name": "heyawake",
           "group": "Puzzle type"
+        }
+      },
+      "stats": {
+        "attempts": {
+          "name": "Attempts",
+          "unit": "count"
+        },
+        "latency": {
+          "name": "Mean attempt duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "averageTurns": {
+          "name": "Mean turns per attempt",
+          "unit": "count"
+        },
+        "meanAttemptCost": {
+          "name": "Mean attempt cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -247642,7 +247682,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/adamlucek/pii-masking/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22a6syvt960o5cd2o69a5ygc8r%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AdamLucek/Qwen3-4B-Instruct-2507-PII-RL",
@@ -247664,6 +247704,15 @@
           "name": "PII count reward",
           "unit": "score",
           "better": "higher"
+        },
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -247671,7 +247720,7 @@
       "url": "https://pinchbench.com/?version=1.2.1",
       "feed": "https://pinchbench.com/?version=1.2.1 (Next.js flight data, \"entries\")",
       "terms": "Server-rendered public page; robots.txt allows all paths for every agent with a search=yes, ai-train=no content signal, and the site publishes no terms (the harness repository pinchbench/skill is MIT).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 48,
       "unmatched": [
         "deepseek-chat"
@@ -247693,13 +247742,40 @@
           "better": "higher"
         }
       },
-      "costPer": "run"
+      "costPer": "run",
+      "stats": {
+        "time": {
+          "name": "Execution time per run",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "percentage": {
+          "name": "Best run score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "best_execution_time_seconds": {
+          "name": "Best run execution time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "best_cost_usd": {
+          "name": "Best run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "value_score": {
+          "name": "Value score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "pinchbench-2": {
       "url": "https://pinchbench.com/",
       "feed": "https://pinchbench.com/?version=2.0.0 (Next.js flight data, \"entries\")",
       "terms": "Server-rendered public page; robots.txt allows all paths for every agent with a search=yes, ai-train=no content signal, and the site publishes no terms (the harness repository pinchbench/skill is MIT).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 58,
       "unmatched": [
         "aion-3.0",
@@ -247723,7 +247799,34 @@
           "better": "higher"
         }
       },
-      "costPer": "run"
+      "costPer": "run",
+      "stats": {
+        "time": {
+          "name": "Execution time per run",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "percentage": {
+          "name": "Best run score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "best_execution_time_seconds": {
+          "name": "Best run execution time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "best_cost_usd": {
+          "name": "Best run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "value_score": {
+          "name": "Value score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "ping-or-peek-snorkel": {
       "url": "https://huggingface.co/datasets/snorkelai/ping-or-peek",
@@ -258501,7 +258604,7 @@
       "url": "https://razavi-bench.tokenzhang.com/",
       "feed": "https://razavi-bench.tokenzhang.com/data/direct_qa/index.json",
       "terms": "The authors allow citation and publication of separately produced aggregate results. Redistributing their published scores requires prior written permission. The host returned no readable robots.txt rules.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": [
         "DeepSeek V4.1 Flash 0910",
@@ -258515,6 +258618,23 @@
         "Muse Wonder Full 1.0",
         "Nova Pro"
       ],
+      "chart": {
+        "title": "Overall Active Score vs Resource Usage",
+        "note": "Active overall score against total answer model tokens across all 50 tasks and 3 rollouts, matching the default scatter chart on the Razavi-Bench dashboard.",
+        "x": {
+          "key": "totalTokens",
+          "label": "Total answer model tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Active score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "costPer": "run",
       "parts": {
         "part1": {
@@ -258527,11 +258647,22 @@
       "stats": {
         "totalTokens": {
           "name": "Total tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "cachedInputTokens": {
+          "name": "Cached input tokens",
           "unit": "tokens"
         },
         "outputTokens": {
           "name": "Output tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -272238,42 +272369,45 @@
       "stats": {
         "final_answer_accuracy": {
           "name": "Final answer accuracy",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "field_accuracy": {
           "name": "Field accuracy",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "regret_score": {
           "name": "Regret score",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "required_tools_used": {
           "name": "Required tools used",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "workflow_efficiency": {
           "name": "Workflow efficiency",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "screened_selected": {
           "name": "Screened selected",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "campaign_budget_respected": {
           "name": "Campaign budget respected",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
+        },
+        "steps": {
+          "name": "Mean turns",
+          "unit": "count"
         },
         "total_tool_calls": {
           "name": "Total tool calls",
-          "unit": "count"
-        },
-        "inspect_problem_calls": {
-          "name": "Inspect problem calls",
-          "unit": "count"
-        },
-        "list_candidate_compounds_calls": {
-          "name": "List candidate compounds calls",
           "unit": "count"
         },
         "rank_compounds_calls": {
@@ -272290,10 +272424,6 @@
         },
         "submit_decision_calls": {
           "name": "Submit decision calls",
-          "unit": "count"
-        },
-        "steps": {
-          "name": "Mean turns",
           "unit": "count"
         },
         "inputTokens": {
@@ -277675,7 +277805,8 @@
         },
         "runSeconds": {
           "name": "Run time",
-          "unit": "seconds"
+          "unit": "seconds",
+          "better": "lower"
         },
         "inputTokens": {
           "name": "Mean input tokens",
@@ -281888,7 +282019,7 @@
       "url": "https://labelbox.com/leaderboards/speech-generation/",
       "feed": "https://labelbox.com/leaderboards/speech-generation/",
       "terms": "Labelbox links its terms of service and provides no separate leaderboard license. https://docs.labelbox.com/page/terms-of-service Robots.txt permits the leaderboard.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AWS Polly",
@@ -282010,22 +282141,87 @@
         "word_deletion_errors_1": {
           "name": "One word deletion error",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "word_deletion_errors_2": {
           "name": "Two word deletion errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
+        },
+        "word_deletion_errors_3": {
+          "name": "Three word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_4": {
+          "name": "Four word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_5": {
+          "name": "Five word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_6": {
+          "name": "Six word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_9": {
+          "name": "Nine word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_10": {
+          "name": "Ten word deletion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_deletion_errors_11": {
+          "name": "Eleven word deletion errors",
+          "unit": "%",
+          "better": "lower"
         },
         "word_insertion_errors_0": {
           "name": "Zero word insertion errors",
           "unit": "%",
           "better": "higher"
         },
+        "word_insertion_errors_1": {
+          "name": "One word insertion error",
+          "unit": "%",
+          "better": "lower"
+        },
         "word_insertion_errors_2": {
           "name": "Two word insertion errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
+        },
+        "word_insertion_errors_3": {
+          "name": "Three word insertion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_insertion_errors_4": {
+          "name": "Four word insertion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_insertion_errors_5": {
+          "name": "Five word insertion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_insertion_errors_9": {
+          "name": "Nine word insertion errors",
+          "unit": "%",
+          "better": "lower"
+        },
+        "word_insertion_errors_12": {
+          "name": "Twelve word insertion errors",
+          "unit": "%",
+          "better": "lower"
         },
         "word_substitution_errors_0": {
           "name": "Zero word substitution errors",
@@ -282035,52 +282231,42 @@
         "word_substitution_errors_1": {
           "name": "One word substitution error",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "word_substitution_errors_2": {
           "name": "Two word substitution errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "word_substitution_errors_3": {
           "name": "Three word substitution errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
+        },
+        "word_substitution_errors_4": {
+          "name": "Four word substitution errors",
+          "unit": "%",
+          "better": "lower"
         },
         "word_substitution_errors_5": {
           "name": "Five word substitution errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
-        "word_deletion_errors_4": {
-          "name": "Four word deletion errors",
+        "word_substitution_errors_6": {
+          "name": "Six word substitution errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
-        "word_deletion_errors_9": {
-          "name": "Nine word deletion errors",
+        "word_substitution_errors_8": {
+          "name": "Eight word substitution errors",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
-        "word_insertion_errors_1": {
-          "name": "One word insertion error",
+        "word_substitution_errors_9": {
+          "name": "Nine word substitution errors",
           "unit": "%",
-          "better": "higher"
-        },
-        "word_insertion_errors_3": {
-          "name": "Three word insertion errors",
-          "unit": "%",
-          "better": "higher"
-        },
-        "word_insertion_errors_4": {
-          "name": "Four word insertion errors",
-          "unit": "%",
-          "better": "higher"
-        },
-        "word_insertion_errors_9": {
-          "name": "Nine word insertion errors",
-          "unit": "%",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -296598,7 +296784,7 @@
       "url": "https://taubench.com/leaderboard?benchmark=core",
       "feed": "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (legacy_submissions)",
       "terms": "Public S3 bucket that taubench.com reads (sierra-tau-bench-public); the tau2-bench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
       "verified": "marked verified or unverified in the submission methodology",
@@ -296618,19 +296804,79 @@
       },
       "stats": {
         "pass2": {
-          "name": "Pass@2",
+          "name": "Pass^2",
           "unit": "%",
           "better": "higher"
         },
         "pass3": {
-          "name": "Pass@3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
         "pass4": {
-          "name": "Pass@4",
+          "name": "Pass^4",
           "unit": "%",
           "better": "higher"
+        },
+        "retailPass2": {
+          "name": "Retail Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailPass3": {
+          "name": "Retail Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailPass4": {
+          "name": "Retail Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass2": {
+          "name": "Airline Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass3": {
+          "name": "Airline Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass4": {
+          "name": "Airline Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass2": {
+          "name": "Telecom Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass3": {
+          "name": "Telecom Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass4": {
+          "name": "Telecom Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailCostUsd": {
+          "name": "Retail cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "airlineCostUsd": {
+          "name": "Airline cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "telecomCostUsd": {
+          "name": "Telecom cost per task",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -296715,25 +296961,99 @@
       "url": "https://taubench.com/leaderboard?benchmark=core",
       "feed": "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (submissions)",
       "terms": "Public S3 bucket that taubench.com reads (sierra-tau-bench-public); the tau2-bench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "verified": "marked verified or unverified in the submission methodology",
+      "parts": {
+        "retail": {
+          "name": "Retail",
+          "group": "Domain"
+        },
+        "airline": {
+          "name": "Airline",
+          "group": "Domain"
+        },
+        "telecom": {
+          "name": "Telecom",
+          "group": "Domain"
+        }
+      },
       "stats": {
         "pass2": {
-          "name": "Pass@2",
+          "name": "Pass^2",
           "unit": "%",
           "better": "higher"
         },
         "pass3": {
-          "name": "Pass@3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
         "pass4": {
-          "name": "Pass@4",
+          "name": "Pass^4",
           "unit": "%",
           "better": "higher"
+        },
+        "retailPass2": {
+          "name": "Retail Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailPass3": {
+          "name": "Retail Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailPass4": {
+          "name": "Retail Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass2": {
+          "name": "Airline Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass3": {
+          "name": "Airline Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "airlinePass4": {
+          "name": "Airline Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass2": {
+          "name": "Telecom Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass3": {
+          "name": "Telecom Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "telecomPass4": {
+          "name": "Telecom Pass^4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "retailCostUsd": {
+          "name": "Retail cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "airlineCostUsd": {
+          "name": "Airline cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "telecomCostUsd": {
+          "name": "Telecom cost per task",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -296863,12 +297183,31 @@
       "url": "https://taxcalcbench.ai/",
       "feed": "https://taxcalcbench.ai/data/leaderboard.js (edition v2, strict)",
       "terms": "Generated data file the public board loads (robots.txt is not set); the tax-calc-bench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 291,
       "unmatched": [
         "Ultramarine 1 Flash"
       ],
       "stats": {
+        "lenient": {
+          "name": "Correct returns lenient",
+          "unit": "%",
+          "better": "higher"
+        },
+        "byLine": {
+          "name": "Correct by line",
+          "unit": "%",
+          "better": "higher"
+        },
+        "byLineLenient": {
+          "name": "Correct by line lenient",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cases": {
+          "name": "Returns evaluated",
+          "unit": "count"
+        },
         "runtime": {
           "name": "Runtime",
           "unit": "seconds",
@@ -297579,7 +297918,7 @@
       "url": "https://www.tbench.ai/?version=3.0",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"3-0-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "SWE-1.7 Lightning"
@@ -297589,7 +297928,18 @@
         "Terminus 2"
       ],
       "harnesses": "system",
-      "verified": "marked verified on the Terminal-Bench board"
+      "verified": "marked verified on the Terminal-Bench board",
+      "stats": {
+        "runCostUsd": {
+          "name": "Run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "runTotalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        }
+      }
     },
     "terminal-bench-4-0": {
       "url": "https://www.tbench.ai/?version=4.0",
@@ -297672,11 +298022,9 @@
       "url": "https://www.tbench.ai/?version=4.1",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"4-1-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
-      "rows": 66,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 67,
+      "unmatched": [],
       "chart": {
         "title": "Pareto: accuracy against time",
         "note": "Each point is one agent, model and effort. The board plots total run time; this plots the mean time per trial, the same frontier at a fixed trial count.",
@@ -297719,6 +298067,36 @@
           "name": "Pass@5",
           "unit": "%",
           "better": "higher"
+        },
+        "successes": {
+          "name": "Successes",
+          "unit": "count"
+        },
+        "runCachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "runUncachedInputTokens": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
+        },
+        "runOutputTokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "runTotalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "runCostUsd": {
+          "name": "Run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "time": {
+          "name": "Mean time per trial",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -300442,7 +300820,7 @@
       "url": "https://toolathlon.xyz/docs/leaderboard",
       "feed": "https://toolathlon.xyz/docs/leaderboard.md (archived pre-Verified table)",
       "terms": "Static markdown export of the toolathlon.xyz leaderboard page (listed in its llms.txt; robots.txt allows it and publishes no terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 51,
       "unmatched": [],
       "stats": {
@@ -300452,7 +300830,7 @@
           "better": "higher"
         },
         "pass3": {
-          "name": "Pass@3 score",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher"
         },
@@ -300466,12 +300844,32 @@
       "url": "https://toolathlon.xyz/docs/leaderboard",
       "feed": "https://toolathlon.xyz/docs/leaderboard.md (current table)",
       "terms": "Static markdown export of the toolathlon.xyz leaderboard page (listed in its llms.txt; robots.txt allows it and publishes no terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [],
       "reference": [
         "Default"
-      ]
+      ],
+      "stats": {
+        "passAt3": {
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass3": {
+          "name": "Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "turns": {
+          "name": "Turns",
+          "unit": "count"
+        },
+        "toolCalls": {
+          "name": "Tool calls",
+          "unit": "count"
+        }
+      }
     },
     "toolbench": {
       "url": "https://github.com/OpenBMB/ToolBench",
@@ -310531,7 +310929,7 @@
       "url": "https://vcbench.com/",
       "feed": "https://vcbench.com/",
       "terms": "Vela Research publishes and maintains the public leaderboard. https://vcbench.com/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "DeepSeek-Chat",
@@ -310572,6 +310970,11 @@
         "note": "The chart uses the cost per 1,000 founders shown by VCBench, including its estimates."
       },
       "stats": {
+        "costPerThousand": {
+          "name": "Cost per 1,000 founders",
+          "unit": "usd",
+          "better": "lower"
+        },
         "inputTokens": {
           "name": "Input tokens per founder",
           "unit": "tokens"
@@ -326141,7 +326544,7 @@
       "url": "https://xbench.org/agi/aisearch",
       "feed": "https://admin.xbench-ai.com/api/deepsearch2510?populate[Leaderboard][populate]=company",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Doubao (Deep Research) (product; model unspecified)",
@@ -326160,6 +326563,12 @@
           "unit": "usd",
           "better": "lower",
           "note": "Dollar amount shown in the source cost column."
+        },
+        "latency": {
+          "name": "Query time",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Single reported query time, converted from minutes."
         },
         "latencyMin": {
           "name": "Minimum query time",

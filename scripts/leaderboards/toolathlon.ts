@@ -82,7 +82,7 @@ export const TERMS =
 
 const board: Leaderboard = {
   benchmark: 'toolathlon',
-  stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3 score', unit: '%', better: 'higher' }, turns: { name: 'Turns', unit: 'count' } },
+  stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass3: { name: 'Pass^3', unit: '%', better: 'higher' }, turns: { name: 'Turns', unit: 'count' } },
   url: 'https://toolathlon.xyz/docs/leaderboard',
   feed: `${FEED} (archived pre-Verified table)`,
   terms: TERMS,

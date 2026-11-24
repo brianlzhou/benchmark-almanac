@@ -11,7 +11,13 @@ interface Item { name: string; description: string }
 interface List { '@id': string; numberOfItems: number; itemListElement: Item[] }
 const board: Leaderboard = {
   benchmark: 'vcbench', url: feed, feed,
-  stats: {inputTokens:{name:'Input tokens per founder',unit:'tokens'},outputTokens:{name:'Output tokens per founder',unit:'tokens'},precision:{name:'Precision',unit:'%',better:'higher'},recall:{name:'Recall',unit:'%',better:'higher'}},
+  stats: {
+    costPerThousand: { name: 'Cost per 1,000 founders', unit: 'usd', better: 'lower' },
+    inputTokens: { name: 'Input tokens per founder', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens per founder', unit: 'tokens' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' },
+    recall: { name: 'Recall', unit: '%', better: 'higher' },
+  },
   terms: 'Vela Research publishes and maintains the public leaderboard. https://vcbench.com/',
   chart: { title: 'Accuracy versus cost', x: { key: 'costPerThousand', label: 'Cost per 1,000 founders', unit: '$', better: 'lower' },
     y: { key: 'score', label: 'F0.5', unit: '%' }, note: 'The chart uses the cost per 1,000 founders shown by VCBench, including its estimates.' },
@@ -38,7 +44,6 @@ const board: Leaderboard = {
       if (counts) {
         metrics.inputTokens = Number(counts[1].replaceAll(',', ''));
         metrics.outputTokens = Number(counts[2].replaceAll(',', ''));
-        if (label.includes('(estimated)')) metrics.estimatedTokens = 1;
       }
       const link = links.get(model);
       return [{ model, submitter, score: Number(stats[3]), metrics, link,
