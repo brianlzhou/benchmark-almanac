@@ -1165,6 +1165,8 @@
     ["investors-last-exam","deepseek-v4-1-flash",null,null,63,"2026-09-09",null,null,{"Forecast & Model":45.8,"Realized forecast outcomes":40.3,"Cumulative return":7.98,"Excess vs. always long (pp)":6.8,"Maximum drawdown":3.65}],
     ["investors-last-exam","step-5-preview",null,null,55.1,"2026-09-18",null,null,{"Forecast & Model":43.9,"Realized forecast outcomes":31.2}],
     ["investors-last-exam","claude-opus-5-5",null,null,66.9,"2026-09-22",null,null,{"Forecast & Model":52.6,"Realized forecast outcomes":37.6,"Cumulative return":6.39,"Excess vs. always long (pp)":5.21,"Maximum drawdown":2.94}],
+    ["invoice-approval","gpt-4-1-mini","Original 50 tasks",null,32,"2025-04-14",null,null,{"single":70,"batch":10,"long":0,"passes":16,"attempts":50},{"trials":1}],
+    ["invoice-approval","gpt-5-6-sol","Original 50 tasks",null,96,"2026-07-09",null,null,{"single":100,"batch":93.333,"long":93.333,"hard":100,"passes":144,"attempts":150},{"trials":3}],
     ["iosworld","gemini-3-flash",null,"vision-only",27.8,"2025-12-17",null,null,{"steps":21.2,"single":70.4,"single_steps":11,"multi":13.3,"multi_steps":23.9,"memory":21.7,"memory_steps":23.5}],
     ["iosworld","gemini-3-flash",null,"vision+xml",28.6,"2025-12-17",null,null,{"steps":31,"single":70.4,"single_steps":11.5,"multi":18.3,"multi_steps":38,"memory":17.4,"memory_steps":33.3}],
     ["iosworld","claude-opus-4-6",null,"vision-only",26.3,"2026-02-05",null,null,{"steps":42.3,"single":70.4,"single_steps":23.1,"multi":20,"multi_steps":45.5,"memory":8.7,"memory_steps":49.4}],
