@@ -12,6 +12,11 @@ const board: Leaderboard = {
  url: "https://microsoft.github.io/WindowsAgentArena/static/images/results.png",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ aliases: {
+  'GPT-4V-1106': 'gpt-4v',
+  'GPT-4o-mini (snapshot unspecified)': 'gpt-4o-mini',
+  'Phi3-V': 'phi-3-vision-128k-instruct',
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 return checked(await chartRows("https://microsoft.github.io/WindowsAgentArena/static/images/results.png", "b494ceec30c4285b8da217d7c720206bbed104587a97a420fd9e009395d589fc", [

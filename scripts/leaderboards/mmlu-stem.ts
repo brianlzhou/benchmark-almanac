@@ -7,7 +7,15 @@ import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/hendrycks/test/master/README.md";
 const board: Leaderboard = {
  benchmark: "mmlu-stem", url: "https://github.com/hendrycks/test", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+ aliases: {
+  'Chinchilla (70B, few-shot)': 'chinchilla',
+  'Gopher (280B, few-shot)': 'gopher-280b',
+  'GPT-3 (175B, few-shot)': 'gpt-3-175b-davinci',
+  'GPT-3 (175B, fine-tuned)': 'gpt-3-175b-davinci',
+  'GPT-3 (6.7B, fine-tuned)': 'gpt-3-6-7b',
+  'GPT-2': 'gpt-2-1-5b',
+ },
 
  async fetch() {
 

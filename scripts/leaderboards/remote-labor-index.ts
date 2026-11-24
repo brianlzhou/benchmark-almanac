@@ -8,6 +8,7 @@ const PAGE = scaleUrl('rli');
 
 const board: Leaderboard = {
   benchmark: 'remote-labor-index',
+  harnesses: 'system',
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS + " The Almanac credits Scale and links the source leaderboard.",

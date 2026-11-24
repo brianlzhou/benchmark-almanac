@@ -6,6 +6,7 @@ const FEED = 'https://huggingface.co/datasets/google/frames-benchmark/raw/main/R
 const board: Leaderboard = {
   benchmark: 'frames', url: 'https://huggingface.co/datasets/google/frames-benchmark', feed: FEED,
   terms: 'Google publishes the dataset card under Apache-2.0. Benchmark Almanac credits and links the source.',
+  aliases: { 'Gemini-Pro-1.5-0514': 'gemini-1-5-pro-may-2024' },
   async fetch() {
     const md = await fetchText(FEED);
     const section = md.split('## Baseline Results')[1]?.split('\n## ')[0];

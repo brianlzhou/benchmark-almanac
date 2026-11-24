@@ -9,7 +9,12 @@ const board: Leaderboard = {
  benchmark: "komt-bench",
  url: "https://huggingface.co/datasets/LGAI-EXAONE/KoMT-Bench",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ terms: "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+ aliases: {
+  'Gemma 2 9B Inst.': 'gemma-2-9b',
+  'Llama 3.1 8B Inst.': 'llama-3-1-8b',
+  'QWEN 2 7B Inst.': 'qwen2-7b-instruct',
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

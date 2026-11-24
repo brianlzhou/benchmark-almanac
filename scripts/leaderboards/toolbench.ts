@@ -14,7 +14,8 @@ const board: Leaderboard = {
   'I2-Cate.': { name: 'Intra-category multi-tool unseen categories', group: 'Split' },
   'I3-Inst.': { name: 'Intra-collection multi-tool unseen instructions', group: 'Split' },
 }, url: "https://github.com/OpenBMB/ToolBench", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+ aliases: { 'Text-Davinci-003': 'davinci-003' },
  // the README's second table: each run's win rate against ChatGPT with ReACT, overall and on each split
  stats: {
   winRate: { name: 'Win rate against ChatGPT ReACT', unit: '%', better: 'higher' },

@@ -24442,23 +24442,11 @@
       "url": "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "feed": "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "terms": "Handshake terms restrict automated extraction. Benchmark Almanac credits Handshake and links the original source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "1 Claude Opus 5 High",
-        "10 DeepSeek V4 Pro High",
-        "11 Gemini 3.1 Pro Preview High",
-        "2 Claude Fable 5.1 High",
-        "3 GPT-6 Astra High",
-        "4 Grok 4.6 High",
-        "5 GPT-5.6 Sol High",
-        "6 Kimi K3 High",
-        "7 Gemini 3.8 Flash High",
-        "8 Gemini 3.7 Flash High",
-        "9 GLM 5.3 High"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 25,
+      "unmatched": [],
       "chart": {
-        "title": "Pass rate versus task cost",
+        "title": "Performance vs. cost",
         "x": {
           "key": "cost",
           "label": "Cost per task",
@@ -24470,13 +24458,10 @@
           "label": "Pass rate",
           "unit": "%",
           "better": "higher"
-        }
+        },
+        "note": "Handshake ATLAS-Finance Performance vs. cost scatter plot."
       },
       "stats": {
-        "ciMargin": {
-          "name": "95% confidence interval margin",
-          "unit": "score"
-        },
         "passAt3": {
           "name": "Pass@3",
           "unit": "%",
@@ -24486,6 +24471,16 @@
           "name": "Rubric score",
           "unit": "%",
           "better": "higher"
+        },
+        "minutes": {
+          "name": "Average rollout time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -25020,40 +25015,19 @@
       "url": "https://labs.scale.com/leaderboard/audiomc",
       "feed": "https://labs.scale.com/leaderboard/audiomc (the text and audio variants in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 28,
       "unmatched": [
-        "Gemini 2.5 Flash (one-pass-agent)",
-        "Gemini 2.5 Flash (one-pass-agent) max",
-        "Gemini 2.5 Flash Native Audio (one-pass-agent)",
-        "Gemini 2.5 Flash Native Audio (one-pass-agent) max",
-        "Gemini 2.5 Pro (one-pass-agent) max",
-        "Gemini 3 Pro (one-pass-agent) high",
-        "Gemini 3.1 Flash Live (one-pass-agent)",
-        "Gemini 3.1 Flash Live (one-pass-agent) max",
-        "Gemini 3.8 Flash (one-pass-agent) high",
-        "Gemini 4 Argon (one-pass-agent) high",
-        "Inkling (one-pass-agent) max",
-        "Inkling-small (one-pass-agent)",
-        "Kimi-Audio-7B-Instruct (one-pass-agent)",
-        "LFM2-Audio-1.5B (one-pass-agent)",
-        "MiMo-Audio-7B-Instruct (one-pass-agent)",
-        "MiMo-Audio-7B-Instruct (one-pass-agent) max",
-        "Phi-4-multimodal-instruct (one-pass-agent)",
-        "Qwen2.5-Omni-7B (one-pass-agent)",
-        "Qwen3-Omni-30B-A3B-Instruct (one-pass-agent)",
-        "Voxtral-Small-24B-2507 (one-pass-agent)",
-        "gemma-3n-E4B-it (one-pass-agent)",
-        "gpt-4o-audio-preview (one-pass-agent)",
-        "gpt-4o-mini-audio-preview (one-pass-agent)",
-        "gpt-realtime (one-pass-agent)",
-        "gpt-realtime-1.5 (one-pass-agent)",
-        "gpt-realtime-2 (one-pass-agent)",
-        "gpt-realtime-2 (one-pass-agent) xhigh",
-        "gpt-realtime-mini (one-pass-agent)",
-        "salesforce-sov-omni-1 (one-pass-agent)",
-        "tml-interaction-small (one-pass-agent)"
+        "Gemini 2.5 Flash Native Audio",
+        "LFM2-Audio-1.5B",
+        "gpt-4o-audio-preview",
+        "gpt-4o-mini-audio-preview",
+        "salesforce-sov-omni-1"
       ],
+      "reference": [
+        "one-pass-agent"
+      ],
+      "harnesses": "system",
       "stats": {
         "outputModeRank": {
           "name": "Output mode rank",
@@ -78811,7 +78785,7 @@
       "url": "https://decbench.com/leaderboard/?dataset=sample-set&norm=1",
       "feed": "https://decbench.com/data/aggregates.json",
       "terms": "The dataset card lists BSD-2-Clause. The scoreboard gives no separate reuse license. https://huggingface.co/datasets/noelo-lab/decbench-dataset The site publishes crawler content signals in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "parts": {
@@ -78823,6 +78797,23 @@
         },
         "byte_match": {
           "name": "Recompilation Bytematch"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Mean time per function",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "medianLatency": {
+          "name": "Median time per function",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "totalCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -85523,53 +85514,13 @@
       "url": "https://labs.scale.com/leaderboard/distressbench",
       "feed": "https://labs.scale.com/leaderboard/distressbench (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Claude Fable 5 (one-pass-agent)",
-        "Claude Fable 5.1 (one-pass-agent)",
-        "Claude Haiku 5.5 (one-pass-agent)",
-        "Claude Opus 4.8 (one-pass-agent)",
-        "Claude Opus 5 (one-pass-agent)",
-        "Claude Opus 5.5 (one-pass-agent)",
-        "Claude Sonnet 5 (one-pass-agent)",
-        "Claude Sonnet 5.5 (one-pass-agent)",
-        "DeepSeek V4.1 Flash (one-pass-agent)",
-        "GLM 5 (one-pass-agent)",
-        "GLM 5.3 (one-pass-agent)",
-        "GLM 5.3 Flash (one-pass-agent)",
-        "GPT 5.6 Luna (one-pass-agent)",
-        "GPT 5.6 Sol (one-pass-agent)",
-        "GPT 5.6 Terra (one-pass-agent)",
-        "GPT 6 Astra (one-pass-agent)",
-        "GPT 6 Luna (one-pass-agent)",
-        "GPT 6 Sol (one-pass-agent)",
-        "GPT 6.1 Sol (one-pass-agent)",
-        "GPT 6.1 Terra (one-pass-agent)",
-        "Gemini 3.1 Pro (one-pass-agent)",
-        "Gemini 3.5 Flash (one-pass-agent)",
-        "Gemini 3.7 Flash (one-pass-agent)",
-        "Gemini 3.8 Flash (one-pass-agent)",
-        "Gemini 4 Argon (one-pass-agent)",
-        "Grok 4.7 (one-pass-agent)",
-        "Inkling (one-pass-agent)",
-        "Inkling 2 Small (one-pass-agent) xhigh",
-        "Kimi K3 (one-pass-agent)",
-        "Llama 4 Maverick (one-pass-agent)",
-        "MiniMax M3 (one-pass-agent)",
-        "Mistral Large 3 (one-pass-agent)",
-        "Mistral Large 4 (one-pass-agent)",
-        "Muse Spark 1.2 (one-pass-agent)",
-        "Muse Spark 1.3 (one-pass-agent)",
-        "Muse Spark Open (one-pass-agent)",
-        "Muse Wonder 1.0 (one-pass-agent)",
-        "Nemotron 3 Ultra (one-pass-agent)",
-        "Nemotron 3.5 Lightning 30B-A3B (one-pass-agent)",
-        "Qwen 3.8 Max (one-pass-agent)",
-        "Qwen3.8-2.4T-A95B (one-pass-agent)",
-        "gpt-oss-120b (one-pass-agent)",
-        "mistral-large (one-pass-agent)"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 43,
+      "unmatched": [],
+      "reference": [
+        "one-pass-agent"
+      ],
+      "harnesses": "system"
     },
     "divergent-lech-mazur": {
       "url": "https://github.com/lechmazur/divergent",
@@ -87618,8 +87569,8 @@
       "url": "https://labs.scale.com/leaderboard/drugdiscoverybench",
       "feed": "https://labs.scale.com/leaderboard/drugdiscoverybench (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 33,
+      "retrieved": "2026-11-24",
+      "rows": 36,
       "unmatched": [],
       "reference": [
         "mini-SWE-agent"
@@ -93993,7 +93944,7 @@
       "url": "https://labs.scale.com/leaderboard/enigma_eval",
       "feed": "https://labs.scale.com/leaderboard/enigma_eval (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -113191,101 +113142,13 @@
       "url": "https://labs.scale.com/leaderboard/fortress",
       "feed": "https://labs.scale.com/leaderboard/fortress (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Beam 1.0 (one-pass-agent)",
-        "Claude 3.5 Haiku (one-pass-agent)",
-        "Claude 3.5 Sonnet (one-pass-agent)",
-        "Claude 3.7 Sonnet (one-pass-agent)",
-        "Claude Fable 5.1 (one-pass-agent)",
-        "Claude Fable 5.2 (one-pass-agent)",
-        "Claude Haiku 5.5 (one-pass-agent)",
-        "Claude Opus 4 (one-pass-agent)",
-        "Claude Opus 4 (one-pass-agent) high",
-        "Claude Opus 4.1 (one-pass-agent)",
-        "Claude Opus 4.1 (one-pass-agent) max",
-        "Claude Opus 4.5 (one-pass-agent)",
-        "Claude Opus 4.5 (one-pass-agent) max",
-        "Claude Opus 4.6 (one-pass-agent)",
-        "Claude Opus 4.6 (one-pass-agent) max",
-        "Claude Opus 4.8 (one-pass-agent) max",
-        "Claude Opus 5 (one-pass-agent)",
-        "Claude Opus 5.5 (one-pass-agent)",
-        "Claude Opus 5.5 (one-pass-agent) max",
-        "Claude Sonnet 4 (one-pass-agent)",
-        "Claude Sonnet 4 (one-pass-agent) high",
-        "Claude Sonnet 4.5 (one-pass-agent)",
-        "Claude Sonnet 4.5 (one-pass-agent) max",
-        "Claude Sonnet 5.5 (one-pass-agent)",
-        "DeepSeek R1 (one-pass-agent)",
-        "DeepSeek V3.1 (one-pass-agent)",
-        "DeepSeek V4.1 Flash (one-pass-agent) high",
-        "GLM 4.5 (one-pass-agent)",
-        "GLM 4.5 Air (one-pass-agent)",
-        "GLM 5.2 (one-pass-agent)",
-        "GLM 5.3 (one-pass-agent) max",
-        "GLM 5.3 Flash (one-pass-agent)",
-        "GPT 5 (one-pass-agent)",
-        "GPT 5 Pro (one-pass-agent) high",
-        "GPT 5 mini (one-pass-agent)",
-        "GPT 5.1 (one-pass-agent)",
-        "GPT 5.1 (one-pass-agent) max",
-        "GPT 5.2 (one-pass-agent)",
-        "GPT 5.4 Pro (one-pass-agent)",
-        "GPT 5.5 (one-pass-agent) xhigh",
-        "GPT 5.6 Sol (one-pass-agent)",
-        "GPT 6 Astra (one-pass-agent) max",
-        "GPT 6 Luna (one-pass-agent)",
-        "GPT 6 Sol (one-pass-agent)",
-        "GPT 6.1 Sol (one-pass-agent)",
-        "GPT 6.1 Terra (one-pass-agent)",
-        "GPT-4.1 (one-pass-agent)",
-        "GPT-4.1 mini (one-pass-agent)",
-        "GPT-4o (one-pass-agent)",
-        "GPT-4o mini (one-pass-agent)",
-        "Gemini 1.5 Flash (one-pass-agent)",
-        "Gemini 1.5 Pro (one-pass-agent)",
-        "Gemini 2.5 Pro 03-25 (one-pass-agent)",
-        "Gemini 2.5 Pro 06-05 (one-pass-agent)",
-        "Gemini 3 Pro (one-pass-agent)",
-        "Gemini 3.1 Flash-Lite (one-pass-agent)",
-        "Gemini 3.1 Pro (one-pass-agent)",
-        "Gemini 3.8 Flash (one-pass-agent)",
-        "Gemini 4 Carbon (one-pass-agent) medium",
-        "Gemini 4 Hydrogen (one-pass-agent) high",
-        "Grok 4.7 (one-pass-agent)",
-        "Inkling (one-pass-agent) xhigh",
-        "Inkling 2 Small (one-pass-agent) xhigh",
-        "Kimi K2 (one-pass-agent)",
-        "Kimi K2.5 (one-pass-agent)",
-        "Kimi K3 (one-pass-agent)",
-        "Kimi K3 (one-pass-agent) max",
-        "Kimi K3.1 Pro (one-pass-agent) max",
-        "Llama 3.1 405B (one-pass-agent)",
-        "Llama 3.1 70B (one-pass-agent)",
-        "Llama 3.3 70B (one-pass-agent)",
-        "Llama 4 Maverick (one-pass-agent)",
-        "MiniMax M3.1 Flash (one-pass-agent)",
-        "Mistral Large 4 (one-pass-agent) high",
-        "Mixtral 8x22B (one-pass-agent)",
-        "Muse Ember 1.0 (one-pass-agent)",
-        "Muse Spark (one-pass-agent)",
-        "Muse Spark 1.1 (one-pass-agent)",
-        "Muse Spark Open (one-pass-agent) xhigh",
-        "Muse Wonder 1.0 (one-pass-agent)",
-        "Nemotron 3 Ultra (one-pass-agent) high",
-        "Nemotron 3.5 Super VL (one-pass-agent) max",
-        "Qwen 2.5 72B (one-pass-agent)",
-        "Qwen3-235B-A22B (one-pass-agent)",
-        "Qwen3.8-2.4T-A95B (one-pass-agent) xhigh",
-        "gpt-oss-120b (one-pass-agent)",
-        "gpt-oss-20b (one-pass-agent)",
-        "o1 (one-pass-agent)",
-        "o3 (one-pass-agent)",
-        "o3-mini (one-pass-agent)",
-        "o4-mini (one-pass-agent)"
+      "retrieved": "2026-11-24",
+      "rows": 91,
+      "unmatched": [],
+      "reference": [
+        "one-pass-agent"
       ],
+      "harnesses": "system",
       "stats": {
         "ors": {
           "name": "Over-refusal score",
@@ -114046,11 +113909,9 @@
       "url": "https://huggingface.co/datasets/google/frames-benchmark",
       "feed": "https://huggingface.co/datasets/google/frames-benchmark/raw/main/README.md",
       "terms": "Google publishes the dataset card under Apache-2.0. Benchmark Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Gemini-Pro-1.5-0514"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": []
     },
     "fraudbench-goal-lab": {
       "url": "https://arxiv.org/html/2611.12167",
@@ -127506,12 +127367,10 @@
       "url": "https://github.com/idavidrein/gpqa",
       "feed": "https://raw.githubusercontent.com/idavidrein/gpqa/main/GPQA_Analysis.ipynb (saved full-set baseline table)",
       "terms": "The GPQA repository publishes this analysis notebook under its MIT license. Benchmark Almanac credits and links the authors.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 8,
       "unmatched": [
-        "GPT-4 (snapshot unspecified)",
-        "Llama-2-70B-chat",
-        "gpt-3.5-turbo-16k-0613"
+        "GPT-4 (snapshot unspecified)"
       ],
       "parts": {
         "main": {
@@ -129143,7 +129002,7 @@
       "url": "https://labs.scale.com/leaderboard/math",
       "feed": "https://labs.scale.com/leaderboard/math (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "Gemini 1.5 Pro (August 2024)"
@@ -130788,16 +130647,15 @@
     "hallusionbench": {
       "url": "https://github.com/tianyi-lab/HallusionBench",
       "feed": "https://raw.githubusercontent.com/tianyi-lab/HallusionBench/HEAD/README.md",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "BLIP2",
         "BLIP2-T5",
         "Claude 3",
         "GPT4V Sep 25, 2023 Version",
         "GUA_VL",
-        "Gemini Pro Vision Dec, 2023 Version",
         "GiT",
         "InstructBLIP",
         "LLaVA-1.5",
@@ -130828,6 +130686,31 @@
         },
         "Figure Acc": {
           "name": "Figure accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "humanAccuracy": {
+          "name": "Human-evaluated question accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Human: Question Pair Acc": {
+          "name": "Human-evaluated question pair accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Human: Figure Acc": {
+          "name": "Human-evaluated figure accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Human: Easy Question Acc": {
+          "name": "Human-evaluated easy question accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Human: Hard Question Acc": {
+          "name": "Human-evaluated hard question accuracy",
           "unit": "%",
           "better": "higher"
         }
@@ -134961,11 +134844,13 @@
       "url": "https://labs.scale.com/leaderboard/hil",
       "feed": "https://labs.scale.com/leaderboard/hil",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 37,
-      "unmatched": [
-        "SWE-2 (Devin)"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 38,
+      "unmatched": [],
+      "reference": [
+        "SWE-agent"
+      ],
+      "harnesses": "system"
     },
     "hipe-ocrepair-2026": {
       "url": "https://hipe-eval.github.io/HIPE-OCRepair-2026/results",
@@ -137210,7 +137095,7 @@
       "url": "https://labs.scale.com/leaderboard/humanitys_last_exam",
       "feed": "https://labs.scale.com/leaderboard/humanitys_last_exam (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 55,
       "unmatched": [],
       "stats": {
@@ -137225,48 +137110,13 @@
       "url": "https://labs.scale.com/leaderboard/hss",
       "feed": "https://labs.scale.com/leaderboard/hss (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Claude Fable 5 (one-pass-agent) max",
-        "Claude Fable 5.1 (one-pass-agent) xhigh",
-        "Claude Fable 5.2 (one-pass-agent) max",
-        "Claude Opus 4.8 (one-pass-agent) max",
-        "Claude Opus 5 (one-pass-agent) max",
-        "Claude Opus 5.5 (one-pass-agent) xhigh",
-        "Claude Sonnet 5 (one-pass-agent) max",
-        "DeepSeek V4.1 Flash (one-pass-agent) max",
-        "GLM 5.3 Flash (one-pass-agent) max",
-        "GPT 5.6 Luna (one-pass-agent) max",
-        "GPT 5.6 Sol (one-pass-agent) max",
-        "GPT 5.6 Terra (one-pass-agent) max",
-        "GPT 6 Astra (one-pass-agent) max",
-        "GPT 6 Luna (one-pass-agent) max",
-        "GPT 6 Sol (one-pass-agent) max",
-        "GPT 6.1 Sol (one-pass-agent) max",
-        "GPT 6.2 Astra (one-pass-agent) xhigh",
-        "GPT 6.2 Sol (one-pass-agent) xhigh",
-        "Gemini 3.5 Flash (one-pass-agent) high",
-        "Gemini 3.6 Flash (one-pass-agent) high",
-        "Gemini 3.7 Flash (one-pass-agent) high",
-        "Gemini 3.8 Flash (one-pass-agent) high",
-        "Gemini 4 Argon (one-pass-agent) high",
-        "Gemini 4 Carbon (one-pass-agent) high",
-        "Gemini 4 Hydrogen (one-pass-agent) xhigh",
-        "Gemini 4 Neon (one-pass-agent) xhigh",
-        "Inkling 2 Small (one-pass-agent) xhigh",
-        "Kimi K3 (one-pass-agent) max",
-        "Kimi K3.1 Pro (one-pass-agent) max",
-        "MiMo-v2.6-Flash (one-pass-agent) high",
-        "MiMo-v2.6-Pro (one-pass-agent) high",
-        "Muse Spark 1.2 (one-pass-agent) xhigh",
-        "Muse Spark 1.3 (one-pass-agent) max",
-        "Muse Spark Open (one-pass-agent) max",
-        "Muse Wonder 1.0 (one-pass-agent) max",
-        "Nemotron 3.5 Super VL (one-pass-agent) max",
-        "Qwen 3.8 Flash (one-pass-agent) max",
-        "Qwen 3.8 Max (one-pass-agent) max"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 38,
+      "unmatched": [],
+      "reference": [
+        "one-pass-agent"
+      ],
+      "harnesses": "system"
     },
     "humanoidbench": {
       "url": "https://arxiv.org/html/2403.10506",
@@ -159557,16 +159407,13 @@
     "komt-bench": {
       "url": "https://huggingface.co/datasets/LGAI-EXAONE/KoMT-Bench",
       "feed": "https://huggingface.co/datasets/LGAI-EXAONE/KoMT-Bench/raw/main/README.md",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
       "unmatched": [
         "EXAONE 3.0 7.8B Inst.",
-        "Gemma 2 9B Inst.",
-        "Llama 3.1 8B Inst.",
         "Mistral 7B Inst.",
-        "Phi 3 7B Inst.",
-        "QWEN 2 7B Inst."
+        "Phi 3 7B Inst."
       ]
     },
     "kor-bench": {
@@ -180503,47 +180350,13 @@
       "url": "https://labs.scale.com/leaderboard/mcp_atlas",
       "feed": "https://labs.scale.com/leaderboard/mcp_atlas (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Claude Fable 5 (mcp-atlas)",
-        "Claude Fable 5.1 (mcp-atlas)",
-        "Claude Haiku 4.5 (mcp-atlas)",
-        "Claude Opus 4.5 (mcp-atlas) high",
-        "Claude Opus 4.6 (mcp-atlas) max",
-        "Claude Opus 4.7 (mcp-atlas) max",
-        "Claude Opus 4.8 (mcp-atlas) max",
-        "Claude Opus 5 (mcp-atlas) xhigh",
-        "Claude Opus 5.5 (mcp-atlas)",
-        "Claude Sonnet 4.5 (mcp-atlas) high",
-        "Claude Sonnet 4.6 (mcp-atlas) high",
-        "GLM 4.7 (mcp-atlas)",
-        "GLM 5.1 (mcp-atlas)",
-        "GLM 5.2 (mcp-atlas)",
-        "GLM 5.3 (mcp-atlas)",
-        "GPT 5.1 (mcp-atlas) high",
-        "GPT 5.2 (mcp-atlas) xhigh",
-        "GPT 5.4 (mcp-atlas) xhigh",
-        "GPT 5.4 mini (mcp-atlas) xhigh",
-        "GPT 5.5 (mcp-atlas) xhigh",
-        "GPT 5.6 Sol (mcp-atlas)",
-        "Gemini 3 Flash (mcp-atlas) high",
-        "Gemini 3 Pro (mcp-atlas) high",
-        "Gemini 3.1 Flash-Lite (mcp-atlas) high",
-        "Gemini 3.1 Pro (mcp-atlas) high",
-        "Gemini 3.5 Flash (mcp-atlas) high",
-        "Gemini 4 Argon (mcp-atlas)",
-        "Inkling (mcp-atlas) xhigh",
-        "Inkling 2 Small (mcp-atlas) xhigh",
-        "Inkling-small (mcp-atlas)",
-        "Kimi K2.5 (mcp-atlas)",
-        "Kimi K3 (mcp-atlas) max",
-        "Muse Spark (mcp-atlas) max",
-        "Muse Spark 1.1 (mcp-atlas)",
-        "Nemotron 3 Ultra (mcp-atlas) max",
-        "Qwen3.8-2.4T-A95B (mcp-atlas) xhigh",
-        "o3-pro (mcp-atlas)"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 37,
+      "unmatched": [],
+      "reference": [
+        "mcp-atlas"
+      ],
+      "harnesses": "system"
     },
     "mcp-bench": {
       "url": "https://github.com/Accenture/mcp-bench",
@@ -187879,12 +187692,10 @@
       "url": "https://metr.org/evaluations/openai-o1-preview-report/",
       "feed": "https://metr.org/assets/images/evaluations/openai_o1_preview_report/sep2024_o1_preview_report_general_heatmap.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 3,
       "unmatched": [
         "gpt-4o (METR 2024 snapshot)",
-        "o1-mini (METR 2024 snapshot)",
-        "o1-preview (METR 2024 snapshot)",
         "o1-preview-early (METR 2024 snapshot)"
       ]
     },
@@ -196391,16 +196202,10 @@
     "mmlu-stem": {
       "url": "https://github.com/hendrycks/test",
       "feed": "https://raw.githubusercontent.com/hendrycks/test/master/README.md",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
       "unmatched": [
-        "Chinchilla (70B, few-shot)",
-        "GPT-2",
-        "GPT-3 (175B, few-shot)",
-        "GPT-3 (175B, fine-tuned)",
-        "GPT-3 (6.7B, fine-tuned)",
-        "Gopher (280B, few-shot)",
         "UnifiedQA",
         "flan-T5-base",
         "flan-T5-large",
@@ -201863,60 +201668,16 @@
       "url": "https://labs.scale.com/leaderboard/multichallenge",
       "feed": "https://labs.scale.com/leaderboard/multichallenge (large and small model tabs in Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The almanac credits and links Scale's source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 48,
       "unmatched": [
-        "Claude 3.7 Sonnet (one-pass-agent) max",
-        "Claude Fable 5.2 (one-pass-agent) high",
-        "Claude Haiku 4.5 (one-pass-agent) max",
-        "Claude Haiku 5.5 (one-pass-agent) high",
-        "Claude Opus 4 (one-pass-agent) max",
-        "Claude Opus 4.1 (one-pass-agent) max",
-        "Claude Opus 4.5 (one-pass-agent) max",
-        "Claude Opus 4.6 (one-pass-agent)",
-        "Claude Opus 4.6 (one-pass-agent) max",
-        "Claude Sonnet 4 (one-pass-agent) max",
-        "Claude Sonnet 4.5 (one-pass-agent) max",
-        "DeepSeek V3.1 (one-pass-agent)",
-        "DeepSeek V4.1 Flash (one-pass-agent) high",
-        "GPT 5 (one-pass-agent) max",
-        "GPT 5 mini (one-pass-agent) max",
-        "GPT 5.1 (one-pass-agent)",
-        "GPT 5.1 (one-pass-agent) max",
-        "GPT 5.4 Pro (one-pass-agent)",
-        "GPT 6.1 Sol (one-pass-agent) high",
-        "GPT 6.1 Terra (one-pass-agent) high",
-        "GPT 6.2 Astra (one-pass-agent) high",
-        "GPT 6.2 Sol (one-pass-agent) high",
-        "GPT-4.1 (one-pass-agent)",
-        "Gemini 2.0 Flash (one-pass-agent)",
-        "Gemini 2.5 Pro (one-pass-agent)",
-        "Gemini 3 Pro (one-pass-agent)",
-        "Gemini 3.1 Flash-Lite (one-pass-agent)",
-        "Gemini 3.1 Pro (one-pass-agent)",
-        "Gemini 4 Argon (one-pass-agent) high",
-        "Gemini 4 Carbon (one-pass-agent) high",
-        "Gemini 4 Hydrogen (one-pass-agent) high",
-        "Gemma 3 4B (one-pass-agent)",
-        "Gemma 4 E2B (one-pass-agent)",
-        "Gemma 4 E4B (one-pass-agent)",
-        "Kimi K2 Thinking (one-pass-agent)",
-        "Kimi K2.5 (one-pass-agent)",
-        "Llama 3.1 8B (one-pass-agent)",
-        "Ministral 3 3B (one-pass-agent) max",
-        "Ministral 3 8B (one-pass-agent) max",
-        "Muse Spark (one-pass-agent)",
-        "Muse Spark 1.1 (one-pass-agent)",
-        "Muse Spark Open (one-pass-agent) high",
-        "Nemotron 3 Nano 4B (one-pass-agent) max",
-        "Nemotron 3.5 Bolt E4B (one-pass-agent)",
-        "Qwen3-235B-A22B (one-pass-agent)",
-        "Qwen3.5-4B (one-pass-agent) max",
-        "gpt-oss-120b (one-pass-agent)",
-        "o3 (one-pass-agent) high",
-        "o3-pro (one-pass-agent) high",
-        "o4-mini (one-pass-agent) high"
-      ]
+        "Ministral 3 3B",
+        "Ministral 3 8B"
+      ],
+      "reference": [
+        "one-pass-agent"
+      ],
+      "harnesses": "system"
     },
     "multiclinsum": {
       "url": "https://ceur-ws.org/Vol-4038/paper_2.pdf",
@@ -203354,7 +203115,7 @@
       "url": "https://labs.scale.com/leaderboard/multinrc",
       "feed": "https://labs.scale.com/leaderboard/multinrc (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": []
     },
@@ -250204,62 +249965,13 @@
       "url": "https://labs.scale.com/leaderboard/prbench",
       "feed": "https://labs.scale.com/leaderboard/prbench (the \"legal\" tab's \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
-      "unmatched": [
-        "Claude Fable 5 (one-pass-agent)",
-        "Claude Fable 5.1 (one-pass-agent) xhigh",
-        "Claude Fable 5.2 (one-pass-agent) high",
-        "Claude Opus 4.1 (one-pass-agent) high",
-        "Claude Opus 4.5 (one-pass-agent) max",
-        "Claude Opus 4.6 (one-pass-agent)",
-        "Claude Opus 5.5 (one-pass-agent) xhigh",
-        "Claude Sonnet 4.5 (one-pass-agent) high",
-        "DeepSeek R1 0528 (one-pass-agent)",
-        "DeepSeek V3.1 (one-pass-agent)",
-        "DeepSeek V4.1 Flash (one-pass-agent) xhigh",
-        "GPT 5 (one-pass-agent) high",
-        "GPT 5 Pro (one-pass-agent) high",
-        "GPT 5.1 (one-pass-agent) max",
-        "GPT 5.2 Pro (one-pass-agent)",
-        "GPT 5.4 (one-pass-agent) high",
-        "GPT 5.6 Sol (one-pass-agent) max",
-        "GPT 6 Astra (one-pass-agent) xhigh",
-        "GPT 6 Luna (one-pass-agent) xhigh",
-        "GPT 6 Sol (one-pass-agent) xhigh",
-        "GPT 6.1 Sol (one-pass-agent) xhigh",
-        "GPT 6.2 Astra (one-pass-agent) xhigh",
-        "GPT 6.2 Sol (one-pass-agent) xhigh",
-        "GPT-4.1 (one-pass-agent)",
-        "GPT-4.1 mini (one-pass-agent)",
-        "Gemini 2.5 Flash (one-pass-agent)",
-        "Gemini 2.5 Pro (one-pass-agent)",
-        "Gemini 3 Pro (one-pass-agent)",
-        "Gemini 3.1 Pro (one-pass-agent)",
-        "Gemini 3.8 Flash (one-pass-agent) high",
-        "Gemini 4 Argon (one-pass-agent) high",
-        "Gemini 4 Carbon (one-pass-agent) high",
-        "Gemini 4 Hydrogen (one-pass-agent) high",
-        "Grok 4.7 (one-pass-agent) xhigh",
-        "Kimi K2 (one-pass-agent)",
-        "Kimi K2 Thinking (one-pass-agent)",
-        "Kimi K2.5 (one-pass-agent)",
-        "Kimi K3.1 Pro (one-pass-agent) xhigh",
-        "Llama 4 Maverick (one-pass-agent)",
-        "MiniMax M3.1 Flash (one-pass-agent) xhigh",
-        "Mistral Medium (one-pass-agent)",
-        "Muse Ember 1.0 (one-pass-agent) xhigh",
-        "Muse Spark (one-pass-agent)",
-        "Muse Spark 1.1 (one-pass-agent)",
-        "Muse Spark 1.3 (one-pass-agent) xhigh",
-        "Muse Spark Open (one-pass-agent) xhigh",
-        "Muse Wonder 1.0 (one-pass-agent) xhigh",
-        "Qwen3-235B-A22B-Instruct-2507 (one-pass-agent)",
-        "gpt-oss-120b (one-pass-agent) high",
-        "o3 (one-pass-agent) high",
-        "o3-pro (one-pass-agent)",
-        "o4-mini (one-pass-agent) high"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 57,
+      "unmatched": [],
+      "reference": [
+        "one-pass-agent"
+      ],
+      "harnesses": "system"
     },
     "prdbench": {
       "url": "https://github.com/AGI-Eval-Official/PRDBench",
@@ -251995,7 +251707,7 @@
       "url": "https://labs.scale.com/leaderboard/propensitybench",
       "feed": "https://labs.scale.com/leaderboard/propensitybench",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": []
     },
@@ -259622,16 +259334,15 @@
       "url": "https://labs.scale.com/leaderboard/rli",
       "feed": "https://labs.scale.com/leaderboard/rli (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The Almanac credits Scale and links the source leaderboard.",
-      "retrieved": "2026-11-23",
-      "rows": 18,
+      "retrieved": "2026-11-24",
+      "rows": 20,
       "unmatched": [
         "ChatGPT agent (ChatGPT)",
-        "GPT 5 (OpenHands)",
-        "Gemini 2.5 Pro 06-05 (OpenHands)",
         "Manus 1.0 (Manus)",
         "Manus 1.5 (Manus)",
         "Manus 1.6 Max (Manus)"
-      ]
+      ],
+      "harnesses": "system"
     },
     "remuq": {
       "url": "https://arxiv.org/html/2306.00424",
@@ -265767,9 +265478,13 @@
       "url": "https://rsi-benchmark.com/tasks",
       "feed": "https://rsi-benchmark.com/tasks (the leaderboard table in the static HTML)",
       "terms": "robots.txt on rsi-benchmark.com allows /tasks; the site links Scale's website terms (August 2021), which limit use to supported browsers for internal purposes. The almanac imports Scale's boards with credit and a link.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "reference": [
+        "terminus-2"
+      ],
+      "harnesses": "system",
       "stats": {
         "best": {
           "name": "Best run score",
@@ -271204,7 +270919,7 @@
       "url": "https://labs.scale.com/leaderboard/scipredict",
       "feed": "https://labs.scale.com/leaderboard/scipredict (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Scale terms prohibit automated extraction; the almanac credits Scale AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "DeepSeek-V3 (snapshot unspecified)",
@@ -272374,7 +272089,7 @@
       "url": "https://labs.scale.com/leaderboard/adversarial_robustness",
       "feed": "https://labs.scale.com/leaderboard/adversarial_robustness (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": []
     },
@@ -272382,7 +272097,7 @@
       "url": "https://labs.scale.com/leaderboard/coding",
       "feed": "https://labs.scale.com/leaderboard/coding (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [
         "Gemini 1.5 Pro (August 27, 2024)",
@@ -272393,7 +272108,7 @@
       "url": "https://labs.scale.com/leaderboard/spanish",
       "feed": "https://labs.scale.com/leaderboard/spanish (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The Almanac credits and links Scale as the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Gemini 1.5 Pro (August 27, 2024)",
@@ -272405,7 +272120,7 @@
       "url": "https://labs.scale.com/leaderboard/instruction_following",
       "feed": "https://labs.scale.com/leaderboard/instruction_following (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. Scale restricts automated access. The Almanac credits Scale AI and links its source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Gemini 1.5 Pro (August 27, 2024)"
@@ -272415,17 +272130,10 @@
       "url": "https://scale.com/showdown",
       "feed": "https://static.scale.com/uploads/654197dc94d34f66c0f5184e/SEAL_Showdown_Tech_Report.pdf",
       "terms": "Scale grants access through supported browsers for internal use. https://scale.com/legal/terms The old Showdown URL redirects to Scale Labs. Scale allows the page in robots.txt. Its report host returned 403 for robots.txt.",
-      "retrieved": "2026-11-20",
-      "rows": 13,
-      "unmatched": [],
       "static": "paper",
-      "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": []
     },
     "sec-bench": {
       "url": "https://sec-bench.github.io/",
@@ -273123,42 +272831,100 @@
       "url": "https://github.com/InternScience/SeedBench",
       "feed": "https://raw.githubusercontent.com/InternScience/SeedBench/main/README.md",
       "terms": "The authors publish this README publicly under the repository terms. Source attribution applies.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "parts": {
         "QA-1": {
-          "name": "QA-1"
+          "name": "QA-1",
+          "group": "Task type"
         },
         "QA-2": {
-          "name": "QA-2"
+          "name": "QA-2",
+          "group": "Task type"
         },
         "QA-3": {
-          "name": "QA-3"
+          "name": "QA-3",
+          "group": "Task type"
         },
         "QA-4": {
-          "name": "QA-4"
+          "name": "QA-4",
+          "group": "Task type"
         },
         "SUM-1": {
-          "name": "SUM-1"
+          "name": "SUM-1",
+          "group": "Task type"
         },
         "SUM-2": {
-          "name": "SUM-2"
+          "name": "SUM-2",
+          "group": "Task type"
         },
         "RC-1": {
-          "name": "RC-1"
+          "name": "RC-1",
+          "group": "Task type"
         },
         "RC-2": {
-          "name": "RC-2"
+          "name": "RC-2",
+          "group": "Task type"
         },
         "RC-3": {
-          "name": "RC-3"
+          "name": "RC-3",
+          "group": "Task type"
         },
         "RC-4": {
-          "name": "RC-4"
+          "name": "RC-4",
+          "group": "Task type"
         },
         "RC-5": {
-          "name": "RC-5"
+          "name": "RC-5",
+          "group": "Task type"
+        },
+        "C1": {
+          "name": "C1",
+          "group": "Subcategory"
+        },
+        "C2": {
+          "name": "C2",
+          "group": "Subcategory"
+        },
+        "C3": {
+          "name": "C3",
+          "group": "Subcategory"
+        },
+        "C4": {
+          "name": "C4",
+          "group": "Subcategory"
+        },
+        "C5": {
+          "name": "C5",
+          "group": "Subcategory"
+        },
+        "C6": {
+          "name": "C6",
+          "group": "Subcategory"
+        },
+        "C7": {
+          "name": "C7",
+          "group": "Subcategory"
+        },
+        "C8": {
+          "name": "C8",
+          "group": "Subcategory"
+        },
+        "C9": {
+          "name": "C9",
+          "group": "Subcategory"
+        },
+        "C10": {
+          "name": "C10",
+          "group": "Subcategory"
+        }
+      },
+      "stats": {
+        "subcategoryAvg": {
+          "name": "Subcategory average",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -282420,10 +282186,63 @@
     "sregym-lite": {
       "url": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard",
       "feed": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/resolve/main/results.csv",
-      "terms": "The Space lists mit for its repository. https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
+      "terms": "The Space lists MIT for its repository. https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/blob/main/README.md",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "chart": {
+        "title": "Efficiency (Score vs Total Tokens)",
+        "x": {
+          "key": "totalTokens",
+          "label": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Red Hat Coding Agent Leaderboard Trade-offs Efficiency plot with its log-scale total tokens axis and Pareto frontier."
+      },
+      "stats": {
+        "latency": {
+          "name": "Mean total time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "agentSeconds": {
+          "name": "Mean agent time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "cacheTokens": {
+          "name": "Mean cached tokens per task",
+          "unit": "tokens"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "ssmr-bench": {
       "url": "https://thevertexlab.github.io/MuTheoryEval/",
@@ -290102,7 +289921,7 @@
       "url": "https://labs.scale.com/leaderboard/sweatlas-qna",
       "feed": "https://labs.scale.com/leaderboard/sweatlas-qna (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
       "reference": [
@@ -290114,22 +289933,13 @@
       "url": "https://labs.scale.com/leaderboard/swe-atlas",
       "feed": "https://labs.scale.com/leaderboard/swe-atlas (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.",
-      "retrieved": "2026-11-23",
-      "rows": 19,
-      "unmatched": [
-        "Beam 1.0 (OpenCode) max",
-        "DeepSeek V4.1 Flash (DeepSeek Harness) max",
-        "Gemini 3.8 Flash (Antigravity CLI) high",
-        "Gemini 4 Argon (Antigravity CLI) high",
-        "Gemini 4 Carbon (Antigravity CLI) high",
-        "Grok 4.7 (Grok Build) xhigh",
-        "Kimi K3 (Kimi Code CLI) max",
-        "Kimi K3.1 Pro (Kimi Code CLI) max",
-        "Mistral Large 4 (Mistral Vibe) high",
-        "Muse Ember 1.0 (Muse Code) max",
-        "Muse Spark Open (Muse Code) xhigh",
-        "Muse Wonder 1.0 (Muse Code) max"
-      ]
+      "retrieved": "2026-11-24",
+      "rows": 33,
+      "unmatched": [],
+      "reference": [
+        "mini-SWE-agent"
+      ],
+      "harnesses": "system"
     },
     "swe-atlas-codebase-qna-extended-mercor": {
       "url": "https://www.mercor.com/apex/mercor-extended/ots-held-out-swe-atlas-leaderboard/",
@@ -290149,7 +289959,7 @@
       "url": "https://labs.scale.com/leaderboard/sweatlas-refactoring",
       "feed": "https://labs.scale.com/leaderboard/sweatlas-refactoring (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
       "reference": [
@@ -290161,7 +289971,7 @@
       "url": "https://labs.scale.com/leaderboard/sweatlas-tw",
       "feed": "https://labs.scale.com/leaderboard/sweatlas-tw (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
       "reference": [
@@ -290544,25 +290354,35 @@
       "url": "https://labs.scale.com/leaderboard/swe_bench_pro",
       "feed": "https://labs.scale.com/leaderboard/swe_bench_pro (the \"public\" tab's \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "codestral-2405"
-      ]
+      ],
+      "reference": [
+        "mini-SWE-agent",
+        "SWE-agent"
+      ],
+      "harnesses": "system"
     },
     "swe-bench-pro-private": {
       "url": "https://labs.scale.com/leaderboard/swe_bench_pro",
       "feed": "https://labs.scale.com/leaderboard/swe_bench_pro (the \"private\" tab's \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The almanac credits and links Scale's source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "mini-SWE-agent",
+        "SWE-agent"
+      ],
+      "harnesses": "system"
     },
     "swe-bench-pro-v2": {
       "url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2",
       "feed": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2 (the \"full\" tab's \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [],
       "reference": [
@@ -290580,7 +290400,7 @@
       "url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2",
       "feed": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2 (the \"hard\" tab's \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [],
       "reference": [
@@ -298713,14 +298533,13 @@
     "toolbench": {
       "url": "https://github.com/OpenBMB/ToolBench",
       "feed": "https://raw.githubusercontent.com/OpenBMB/ToolBench/master/README.md",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
       "unmatched": [
         "ChatGPT [snapshot unspecified]",
         "Claude-2 [snapshot unspecified]",
         "GPT4 [snapshot unspecified]",
-        "Text-Davinci-003",
         "ToolLLaMA",
         "ToolLLaMA-Retreiver"
       ],
@@ -298800,7 +298619,7 @@
       "url": "https://labs.scale.com/leaderboard/tool_use_enterprise",
       "feed": "https://labs.scale.com/leaderboard/tool_use_enterprise (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "Gemini 1.5 Pro (August 27, 2024)"
@@ -301330,7 +301149,7 @@
       "url": "https://labs.scale.com/leaderboard/tutorbench",
       "feed": "https://labs.scale.com/leaderboard/tutorbench (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Scale terms restrict automated access and license supported-browser use for internal purposes. The Almanac credits Scale AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [
         "GPT-4o (snapshot unspecified)"
@@ -314027,7 +313846,7 @@
       "url": "https://labs.scale.com/leaderboard/visual_language_understanding",
       "feed": "https://labs.scale.com/leaderboard/visual_language_understanding (the \"entries\" JSON in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": []
     },
@@ -314680,7 +314499,7 @@
       "url": "https://labs.scale.com/leaderboard/vtb",
       "feed": "https://labs.scale.com/leaderboard/vtb",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": []
     },
@@ -320527,13 +320346,10 @@
       "url": "https://microsoft.github.io/WindowsAgentArena/static/images/results.png",
       "feed": "https://microsoft.github.io/WindowsAgentArena/static/images/results.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 18,
       "unmatched": [
-        "GPT-4V-1106",
-        "GPT-4o (snapshot unspecified)",
-        "GPT-4o-mini (snapshot unspecified)",
-        "Phi3-V"
+        "GPT-4o (snapshot unspecified)"
       ]
     },
     "windsurf-arena-mode": {

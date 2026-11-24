@@ -12,6 +12,11 @@ const board: Leaderboard = {
  stats: {
   'Question Pair Acc': { name: 'Question pair accuracy', unit: '%', better: 'higher' },
   'Figure Acc': { name: 'Figure accuracy', unit: '%', better: 'higher' },
+  humanAccuracy: { name: 'Human-evaluated question accuracy', unit: '%', better: 'higher' },
+  'Human: Question Pair Acc': { name: 'Human-evaluated question pair accuracy', unit: '%', better: 'higher' },
+  'Human: Figure Acc': { name: 'Human-evaluated figure accuracy', unit: '%', better: 'higher' },
+  'Human: Easy Question Acc': { name: 'Human-evaluated easy question accuracy', unit: '%', better: 'higher' },
+  'Human: Hard Question Acc': { name: 'Human-evaluated hard question accuracy', unit: '%', better: 'higher' },
  },
  parts: {
    'Easy Question Acc': { name: 'Easy', group: 'Difficulty' },
@@ -19,7 +24,10 @@ const board: Leaderboard = {
  },
  url: "https://github.com/tianyi-lab/HallusionBench",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ terms: "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+ aliases: {
+  'Gemini Pro Vision Dec, 2023 Version': 'gemini-1-0-pro-vision',
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const source = await fetchText(FEED);

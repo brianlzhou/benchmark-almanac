@@ -4,7 +4,7 @@ import { fetchScaleEntries, SCALE_ALIASES, SCALE_TERMS } from '../lib/scale.ts';
 import { scaleRowsWithInterval } from './swe-bench-pro.ts';
 
 const board: Leaderboard = {
-  benchmark: 'hil-bench-scale', url: 'https://labs.scale.com/leaderboard/hil', feed: 'https://labs.scale.com/leaderboard/hil',
+  benchmark: 'hil-bench-scale', harnesses: 'system', reference: ['SWE-agent'], url: 'https://labs.scale.com/leaderboard/hil', feed: 'https://labs.scale.com/leaderboard/hil',
   terms: SCALE_TERMS, aliases: SCALE_ALIASES,
   stats: { rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
   async fetch() {

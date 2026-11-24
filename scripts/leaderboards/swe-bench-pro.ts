@@ -29,6 +29,8 @@ const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | nu
 
 const board: Leaderboard = {
   benchmark: 'swe-bench-pro',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent', 'SWE-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE, TAB),
   terms: SCALE_TERMS,
