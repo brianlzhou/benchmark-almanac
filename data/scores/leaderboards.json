@@ -32043,6 +32043,28 @@
         }
       }
     },
+    "biglaw-bench-arena": {
+      "url": "https://www.harvey.ai/blog/introducing-biglaw-bench-arena",
+      "feed": "https://cdn.sanity.io/images/07s0r5r6/production/31a39773554ff98efdc1d50e6b81b24231b281ba-1200x675.svg",
+      "terms": "Harvey retains copyright. https://www.harvey.ai/blog/introducing-biglaw-bench-arena",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "litigation": {
+          "name": "Litigation",
+          "unit": "elo"
+        },
+        "transactional": {
+          "name": "Transactional",
+          "unit": "elo"
+        }
+      }
+    },
     "biglaw-bench-spa-deal-points": {
       "url": "https://www.harvey.ai/blog/biglaw-bench-workflows-spa-deal-points",
       "feed": "https://www.harvey.ai/blog/biglaw-bench-workflows-spa-deal-points",
@@ -41177,6 +41199,23 @@
         "Gemini Cli [base model unspecified]",
         "Qwen Code [base model unspecified]"
       ]
+    },
+    "cattle-trade": {
+      "url": "https://arxiv.org/html/2605.14537",
+      "feed": "https://arxiv.org/html/2605.14537",
+      "terms": "Paper and license at https://arxiv.org/abs/2605.14537",
+      "headline": "The authors rank agents by their TrueSkill mean across the 98 canonical games.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "stats": {
+        "median": {
+          "name": "Median game score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "caugym": {
       "url": "https://arxiv.org/html/2602.06337",
@@ -60531,6 +60570,17 @@
         }
       }
     },
+    "coffeebench-sakana": {
+      "url": "https://arxiv.org/html/2606.16613",
+      "feed": "https://pub.sakana.ai/coffeebench/data/replay/summary.json and https://arxiv.org/html/2606.16613",
+      "terms": "The authors publish the replay at https://pub.sakana.ai/coffeebench/trajectories.html and list the paper license at https://arxiv.org/abs/2606.16613.",
+      "headline": "The score is Roaster A’s mean 90-day net income in simulated dollars.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 30,
+      "unmatched": [],
+      "costPer": "run"
+    },
     "cognition-codesearch-eval": {
       "url": "https://cognition.com/blog/swe-grep",
       "feed": "https://cdn.sanity.io/images/2mc9cv2v/production/0669704135323f614fd0149646d55e882126f87d-1902x1284.png?w=1600&fit=max (transcribed 2026-11-20)",
@@ -62702,6 +62752,16 @@
           "note": "Rate stored from 0 to 1."
         }
       }
+    },
+    "contextual-invoice-ocr-ramp": {
+      "url": "https://builders.ramp.com/post/financial-benchmarks",
+      "feed": "https://builders.ramp.com/post/financial-benchmarks",
+      "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp. https://builders.ramp.com/post/financial-benchmarks",
+      "retrieved": "2026-11-24",
+      "rows": 32,
+      "unmatched": [
+        "gemini-2.5-pro (snapshot unspecified)"
+      ]
     },
     "continual-learning-bench": {
       "url": "https://snorkel.ai/leaderboard/continual-learning-bench/",
@@ -66553,6 +66613,42 @@
         }
       }
     },
+    "coval-voice-benchmarks": {
+      "url": "https://benchmarks.coval.ai/stt",
+      "feed": "https://benchmarks.coval.ai/stt",
+      "terms": "Coval publishes its methodology under Apache 2.0. https://github.com/coval-ai/benchmarks/blob/main/LICENSE",
+      "headline": "Coval ranks speech-to-text services by mean time to the final segment over the last 24 hours, so this is that latency in milliseconds. Lower is better.",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "chirp_2",
+        "chirp_3",
+        "daytona-stt",
+        "default",
+        "flux-general-en",
+        "flux-general-multi",
+        "grok-stt",
+        "ink-2",
+        "inworld-stt-1",
+        "linden-1",
+        "nova-2",
+        "nova-3",
+        "pulse",
+        "qwen3-asr-fast",
+        "realtime",
+        "realtime-global",
+        "saidwire-en-2026-10-30",
+        "scribe",
+        "scribe-pro-v2.1",
+        "scribe_v2_realtime",
+        "scribe_v3_live",
+        "solaria-1",
+        "stt-3.7-realtime-agent",
+        "stt-rt-v6",
+        "universal-3.5-pro",
+        "universal-3.6-pro"
+      ]
+    },
     "covebench": {
       "url": "https://nju-link.github.io/CoVEBench/",
       "feed": "https://nju-link.github.io/CoVEBench/",
@@ -66762,6 +66858,24 @@
       "retrieved": "2026-11-23",
       "rows": 5,
       "unmatched": []
+    },
+    "cozzo-ai-receptionist-round-4": {
+      "url": "https://cozzo.io/benchmarks/ai-receptionist-scenarios",
+      "feed": "https://cozzo.io/stats/ai-receptionist-accuracy/data.csv",
+      "terms": "The CSV is published under CC BY 4.0. https://cozzo.io/stats/ai-receptionist-accuracy",
+      "headline": "The headline is each vendor’s passed calls divided by scored calls across the five scripts.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Bland AI",
+        "ElevenLabs Agents",
+        "LiveKit Agents (self-hosted)",
+        "Millis AI",
+        "OpenAI Realtime API",
+        "Retell AI",
+        "Ultravox",
+        "Vapi"
+      ]
     },
     "cozzo-ai-receptionist-round-5": {
       "url": "https://cozzo.io/benchmarks/round-5",
@@ -72926,6 +73040,20 @@
         }
       }
     },
+    "d-rex-gray-swan": {
+      "url": "https://arxiv.org/html/2509.17938",
+      "feed": "https://arxiv.org/html/2509.17938",
+      "terms": "The authors publish these aggregate results under the terms listed at https://arxiv.org/abs/2509.17938.",
+      "headline": "The paper reports overall vulnerability as the percentage of prompts that succeed. Lower values are better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "deepseek/deepseek-r1 (snapshot unspecified)",
+        "google/gemini-2.5-flash (snapshot unspecified)",
+        "google/gemini-2.5-pro (snapshot unspecified)"
+      ]
+    },
     "dabstep": {
       "url": "https://huggingface.co/spaces/adyen/DABstep",
       "feed": "https://adyen-dabstep.hf.space/config",
@@ -75670,6 +75798,33 @@
         },
         "byte_match": {
           "name": "Recompilation Bytematch"
+        }
+      }
+    },
+    "decepeval": {
+      "url": "https://arxiv.org/html/2610.07967",
+      "feed": "https://arxiv.org/html/2610.07967",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "The paper reports no overall deception rate. The headline averages its three task-family rates. Lower values indicate less deception.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [],
+      "parts": {
+        "Tool-use": {
+          "name": "Tool-use",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Coding": {
+          "name": "Coding",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Long-horizon": {
+          "name": "Long-horizon",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -84356,6 +84511,15 @@
       "rows": 15,
       "unmatched": []
     },
+    "dual-exam": {
+      "url": "https://arxiv.org/html/2610.31066",
+      "feed": "https://arxiv.org/html/2610.31066",
+      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2610.31066.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": []
+    },
     "dualchem": {
       "url": "https://scale.com/blog/dualchem-evaluating-ai-models-dual-use-chemistry-risks",
       "feed": "https://cdn.sanity.io/files/50zba0eo/production/740e74ec297aa119d37b87d4706540e322551ba0.pdf",
@@ -86893,6 +87057,35 @@
         }
       }
     },
+    "educlaw-bench": {
+      "url": "https://arxiv.org/html/2608.03206",
+      "feed": "https://arxiv.org/html/2608.03206",
+      "terms": "The paper and its terms are available at https://arxiv.org/abs/2608.03206.",
+      "headline": "The paper reports five separate axes. The headline is the change in learner solve rate, in percentage points.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 32,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "responsiveness": {
+          "name": "Responsiveness",
+          "unit": "%"
+        },
+        "helpfulness": {
+          "name": "Helpfulness",
+          "unit": "score"
+        },
+        "gagne": {
+          "name": "Gagné",
+          "unit": "score"
+        },
+        "rosenshine": {
+          "name": "Rosenshine",
+          "unit": "score"
+        }
+      }
+    },
     "eduexplain": {
       "url": "https://arxiv.org/html/2611.00802",
       "feed": "https://arxiv.org/html/2611.00802",
@@ -86914,6 +87107,80 @@
         },
         "coreCC": {
           "name": "Core Concept Coverage"
+        }
+      }
+    },
+    "edufair-bench": {
+      "url": "https://arxiv.org/html/2609.12949",
+      "feed": "https://arxiv.org/html/2609.12949",
+      "terms": "Paper and license at https://arxiv.org/abs/2609.12949",
+      "headline": "The headline averages 12 explicit-condition bias scores across three subjects and four demographic dimensions. Lower scores indicate less bias.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "TutorRL-7B"
+      ],
+      "parts": {
+        "mathGender": {
+          "name": "Math: Gender",
+          "unit": "score",
+          "better": "lower"
+        },
+        "mathSocioeconomicstatus": {
+          "name": "Math: Socioeconomic status",
+          "unit": "score",
+          "better": "lower"
+        },
+        "mathFirstlanguage": {
+          "name": "Math: First language",
+          "unit": "score",
+          "better": "lower"
+        },
+        "mathImmigration": {
+          "name": "Math: Immigration",
+          "unit": "score",
+          "better": "lower"
+        },
+        "chemistryGender": {
+          "name": "Chemistry: Gender",
+          "unit": "score",
+          "better": "lower"
+        },
+        "chemistrySocioeconomicstatus": {
+          "name": "Chemistry: Socioeconomic status",
+          "unit": "score",
+          "better": "lower"
+        },
+        "chemistryFirstlanguage": {
+          "name": "Chemistry: First language",
+          "unit": "score",
+          "better": "lower"
+        },
+        "chemistryImmigration": {
+          "name": "Chemistry: Immigration",
+          "unit": "score",
+          "better": "lower"
+        },
+        "physicsGender": {
+          "name": "Physics: Gender",
+          "unit": "score",
+          "better": "lower"
+        },
+        "physicsSocioeconomicstatus": {
+          "name": "Physics: Socioeconomic status",
+          "unit": "score",
+          "better": "lower"
+        },
+        "physicsFirstlanguage": {
+          "name": "Physics: First language",
+          "unit": "score",
+          "better": "lower"
+        },
+        "physicsImmigration": {
+          "name": "Physics: Immigration",
+          "unit": "score",
+          "better": "lower"
         }
       }
     },
@@ -88364,6 +88631,181 @@
         },
         "D3": {
           "name": "D3"
+        }
+      }
+    },
+    "embodied-agent-arena": {
+      "url": "https://embodied-agent-arena.github.io/embodied-agent-arena/#results",
+      "feed": "https://raw.githubusercontent.com/embodied-agent-arena/embodied-agent-arena/HEAD/public/data/model-comparison.csv",
+      "terms": "The results repository uses MIT. https://github.com/embodied-agent-arena/embodied-agent-arena/blob/HEAD/LICENSE",
+      "headline": "The authors report no overall score. Their first metric is rotation error in degrees, where lower is better.",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": [],
+      "parts": {
+        "Geometry: Rotation error": {
+          "name": "Rotation error",
+          "group": "Geometry",
+          "unit": "score",
+          "better": "lower",
+          "note": "Reported unit: degrees."
+        },
+        "Geometry: Translation error": {
+          "name": "Translation error",
+          "group": "Geometry",
+          "unit": "score",
+          "better": "lower",
+          "note": "Reported unit: cm."
+        },
+        "Spatial Reasoning: Pass@1": {
+          "name": "Pass@1",
+          "group": "Spatial Reasoning",
+          "unit": "%",
+          "better": "higher",
+          "note": "Reported unit: %."
+        },
+        "Spatial Reasoning: AbsRel": {
+          "name": "AbsRel",
+          "group": "Spatial Reasoning",
+          "unit": "score",
+          "better": "lower",
+          "note": "Reported unit: relative error."
+        },
+        "Affordance: Box-mask IoU": {
+          "name": "Box-mask IoU",
+          "group": "Affordance",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported unit: overlap."
+        },
+        "Affordance: Polygon IoU": {
+          "name": "Polygon IoU",
+          "group": "Affordance",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported unit: overlap."
+        },
+        "Task Planning: Pass@1": {
+          "name": "Pass@1",
+          "group": "Task Planning",
+          "unit": "%",
+          "better": "higher",
+          "note": "Reported unit: %."
+        },
+        "Manipulation: Task success": {
+          "name": "Task success",
+          "group": "Manipulation",
+          "unit": "%",
+          "better": "higher",
+          "note": "Reported unit: %."
+        },
+        "w2_3dsrbench: native": {
+          "name": "3dsrbench: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w2_bop_ask: native": {
+          "name": "bop_ask: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w2_mindcube: native": {
+          "name": "mindcube: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w2_mmsi_bench: native": {
+          "name": "mmsi_bench: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w2_robospatial: native": {
+          "name": "robospatial: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w2_vsi_bench: native": {
+          "name": "vsi_bench: native",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_ragnet: bbox_iou": {
+          "name": "ragnet: bbox iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_ragnet: mask_iou": {
+          "name": "ragnet: mask iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_ragnet: point_hit": {
+          "name": "ragnet: point hit",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_ragnet: bbox_success_iou50": {
+          "name": "ragnet: bbox success iou50",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_reasonaff: bbox_iou": {
+          "name": "reasonaff: bbox iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_reasonaff: mask_iou": {
+          "name": "reasonaff: mask iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_reasonaff: point_hit": {
+          "name": "reasonaff: point hit",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_reasonaff: bbox_success_iou50": {
+          "name": "reasonaff: bbox success iou50",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_umd: bbox_iou": {
+          "name": "umd: bbox iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_umd: mask_iou": {
+          "name": "umd: mask iou",
+          "group": "Source-level results",
+          "unit": "score",
+          "better": "higher"
+        },
+        "w5_umd: point_hit": {
+          "name": "umd: point hit",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
+        },
+        "w5_umd: bbox_success_iou50": {
+          "name": "umd: bbox success iou50",
+          "group": "Source-level results",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -94027,6 +94469,76 @@
         "MMV+CTE"
       ]
     },
+    "ewmbench": {
+      "url": "https://arxiv.org/html/2505.09694",
+      "feed": "https://arxiv.org/html/2505.09694",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "Table 2 ranks models by its overall composite score on the original scale.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "COSMOS",
+        "EnerVerse_FT",
+        "Hailuo",
+        "Kling",
+        "LTX",
+        "LTX_FT",
+        "OpenSora"
+      ],
+      "parts": {
+        "SceneC": {
+          "name": "SceneC",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "HSD": {
+          "name": "HSD",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "Dyn": {
+          "name": "Dyn",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "nDTW": {
+          "name": "nDTW",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "Motion Avg.": {
+          "name": "Motion Avg.",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "Diversity": {
+          "name": "Diversity",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "BLEU": {
+          "name": "BLEU",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "CLIP": {
+          "name": "CLIP",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "Logics": {
+          "name": "Logics",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        },
+        "Semantics Avg.": {
+          "name": "Semantics Avg.",
+          "unit": "score",
+          "note": "Original Table 2 score."
+        }
+      }
+    },
     "ewok": {
       "url": "https://arxiv.org/html/2405.09605",
       "feed": "https://arxiv.org/html/2405.09605",
@@ -94875,6 +95387,44 @@
         }
       }
     },
+    "extremedrive": {
+      "url": "https://arxiv.org/html/2611.20574",
+      "feed": "https://arxiv.org/html/2611.20574",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "S+ is the published upper bound on the composite planning score, on a scale from 0 to 100.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "DiffusionDrive",
+        "HyperDiffusion",
+        "Latent TransFuser",
+        "SimLingo",
+        "TransFuser"
+      ],
+      "parts": {
+        "collision": {
+          "name": "Collision",
+          "unit": "%",
+          "better": "lower"
+        },
+        "road": {
+          "name": "Road compliance"
+        },
+        "ttc": {
+          "name": "Time-to-collision compliance"
+        },
+        "progress": {
+          "name": "Progress"
+        },
+        "comfort": {
+          "name": "Noncritical comfort"
+        },
+        "critical": {
+          "name": "Critical success rate"
+        }
+      }
+    },
     "fab-decodability-assessment": {
       "url": "https://www.fab-ai.org/benchmarks?benchmark=DA-sw&benchmarkType=foundational-literacy&cost=10&dataset=&modelMode=default&models=%5B%5D&pageView=table",
       "feed": "https://www.fab-ai.org/benchmarks?benchmark=DA-sw&benchmarkType=foundational-literacy&cost=10&dataset=&modelMode=default&models=%5B%5D&pageView=table",
@@ -95617,6 +96167,24 @@
       "retrieved": "2026-11-23",
       "rows": 4,
       "unmatched": []
+    },
+    "faithdial": {
+      "url": "https://arxiv.org/html/2204.10757",
+      "feed": "https://arxiv.org/html/2204.10757",
+      "terms": "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2204.10757",
+      "headline": "The headline is the Critic hallucination rate in Table 5, where a lower percentage is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "DialoGPT",
+        "DoHA",
+        "GPT2",
+        "T5",
+        "T5-CTRL",
+        "T5-InfoNCE",
+        "T5-LossTruncation"
+      ]
     },
     "faithjudge": {
       "url": "https://github.com/vectara/FaithJudge#leaderboard",
@@ -103767,6 +104335,20 @@
         }
       }
     },
+    "fijo-insurance-soft-skills": {
+      "url": "https://arxiv.org/html/2204.05208",
+      "feed": "https://arxiv.org/html/2204.05208",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CamemBERT frozen",
+        "CamemBERT unfrozen",
+        "CamemBERT unfrozen warmup",
+        "bi-LSTM"
+      ]
+    },
     "fin-fact": {
       "url": "https://arxiv.org/html/2309.08793",
       "feed": "https://arxiv.org/html/2309.08793",
@@ -104103,6 +104685,16 @@
           "note": "Memory usage in megabytes."
         }
       }
+    },
+    "financial-statement-ocr-ramp": {
+      "url": "https://builders.ramp.com/post/financial-benchmarks",
+      "feed": "https://builders.ramp.com/post/financial-benchmarks",
+      "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp. https://builders.ramp.com/post/financial-benchmarks",
+      "retrieved": "2026-11-24",
+      "rows": 14,
+      "unmatched": [
+        "Gemini 2.5 Pro (snapshot unspecified)"
+      ]
     },
     "finben": {
       "url": "https://arxiv.org/html/2402.12659",
@@ -108825,6 +109417,107 @@
           "name": "Ad spend",
           "unit": "usd",
           "better": "lower"
+        }
+      }
+    },
+    "fox-document-benchmark": {
+      "url": "https://arxiv.org/html/2405.14295",
+      "feed": "https://arxiv.org/html/2405.14295",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "The paper gives no overall score. The headline is English single-page OCR edit distance, where lower is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "Fox",
+        "Nougat",
+        "Vary",
+        "Vary-toy"
+      ],
+      "parts": {
+        "EnglishEdit Distance": {
+          "name": "English Edit Distance",
+          "group": "English",
+          "unit": "score",
+          "better": "lower",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "EnglishF1-score": {
+          "name": "English F1-score",
+          "group": "English",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "EnglishPrecision": {
+          "name": "English Precision",
+          "group": "English",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "EnglishRecall": {
+          "name": "English Recall",
+          "group": "English",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "EnglishBLEU": {
+          "name": "English BLEU",
+          "group": "English",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "EnglishMETEOR": {
+          "name": "English METEOR",
+          "group": "English",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChineseEdit Distance": {
+          "name": "Chinese Edit Distance",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "lower",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChineseF1-score": {
+          "name": "Chinese F1-score",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChinesePrecision": {
+          "name": "Chinese Precision",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChineseRecall": {
+          "name": "Chinese Recall",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChineseBLEU": {
+          "name": "Chinese BLEU",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
+        },
+        "ChineseMETEOR": {
+          "name": "Chinese METEOR",
+          "group": "Chinese",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported on a 0 to 1 scale."
         }
       }
     },
@@ -117487,6 +118180,32 @@
         "Math Visual Proof count": {
           "name": "Math Visual Proof puzzles",
           "unit": "count"
+        }
+      }
+    },
+    "genscale": {
+      "url": "https://lingxiao-li.github.io/genscale/",
+      "feed": "https://lingxiao-li.github.io/genscale/",
+      "terms": "GenScale project results and CC BY 4.0 dataset: https://huggingface.co/datasets/lingxiao2049/GenScale/blob/main/LICENSE",
+      "headline": "The project reports no overall score. The headline is the plain mean of scale error across three tasks, where lower is better.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [],
+      "parts": {
+        "Task 1": {
+          "name": "Task 1 scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Task 2": {
+          "name": "Task 2 scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Task 3": {
+          "name": "Task 3 scale error",
+          "unit": "score",
+          "better": "lower"
         }
       }
     },
@@ -126570,6 +127289,33 @@
         }
       }
     },
+    "harness-leaderboard": {
+      "url": "https://huggingface.co/spaces/joelniklaus/harness-leaderboard",
+      "feed": "https://joelniklaus-harness-leaderboard.hf.space/api/index",
+      "terms": "The Hugging Face Space declares Apache 2.0. https://huggingface.co/spaces/joelniklaus/harness-leaderboard/blob/main/README.md",
+      "retrieved": "2026-11-24",
+      "rows": 84,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "terminal-bench-2.1": {
+          "name": "Terminal-Bench 2.1",
+          "unit": "%"
+        },
+        "deep-swe": {
+          "name": "DeepSWE v1.1",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "overallIndex": {
+          "name": "Overall index",
+          "unit": "index",
+          "better": "higher",
+          "note": "The board’s default ranking, which combines the resolve rate with cost."
+        }
+      }
+    },
     "harnessaudit-bench": {
       "url": "https://harnessaudit.github.io/",
       "feed": "https://harnessaudit.github.io/",
@@ -130179,6 +130925,267 @@
         }
       }
     },
+    "hotter-and-colder": {
+      "url": "https://euroeval.com/leaderboards/icelandic",
+      "feed": "https://euroeval.com/leaderboards/icelandic",
+      "terms": "EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval",
+      "host": "EuroEval",
+      "headline": "EuroEval reports Matthews correlation on its Hotter and Colder sentiment test split, scaled by 100.",
+      "retrieved": "2026-11-24",
+      "rows": 102,
+      "unmatched": [
+        "01-ai/Yi-1.5-9B",
+        "152334H/miqu-1-70b-sf",
+        "AI-Sweden-Models/ModernBERT-large",
+        "AI-Sweden-Models/bert-large-nordic-pile-1M-steps",
+        "AI-Sweden-Models/gpt-sw3-126m",
+        "AI-Sweden-Models/gpt-sw3-126m-instruct",
+        "AI-Sweden-Models/gpt-sw3-20b",
+        "AI-Sweden-Models/gpt-sw3-356m",
+        "AI-Sweden-Models/gpt-sw3-356m-instruct",
+        "AI-Sweden-Models/roberta-large-1160k",
+        "BSC-LT/ALIA-40b",
+        "BSC-LT/salamandra-7b",
+        "BSC-LT/salamandra-7b-instruct",
+        "CohereForAI/aya-23-35B",
+        "DDSC/roberta-base-danish",
+        "DDSC/roberta-base-scandinavian",
+        "DGurgurov/xlm-r_dan-latn",
+        "DiscoResearch/DiscoLM-70b",
+        "EuroBERT/EuroBERT-210m",
+        "EuroBERT/EuroBERT-610m",
+        "EuropeanParliament/EUBERT",
+        "FacebookAI/xlm-roberta-large",
+        "Geotrend/distilbert-base-25lang-cased",
+        "HPLT/gpt-13b-nordic-prerelease",
+        "HPLT/hplt2c_dan_checkpoints",
+        "HPLT/hplt2c_isl_checkpoints",
+        "HPLT/hplt2c_nno_checkpoints",
+        "HPLT/hplt2c_nob_checkpoints",
+        "HPLT/hplt2c_swe_checkpoints",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "HuggingFaceTB/SmolLM3-3B",
+        "HuggingFaceTB/SmolLM3-3B-Base",
+        "KBLab/bert-base-swedish-cased",
+        "KBLab/bert-base-swedish-cased-alpha",
+        "KBLab/bert-base-swedish-cased-new",
+        "KBLab/megatron-bert-base-swedish-cased-125k",
+        "KBLab/megatron-bert-base-swedish-cased-600k",
+        "KBLab/megatron-bert-large-swedish-cased-165k",
+        "KBLab/roberta-base-swedish-cased",
+        "KBLab/sentence-bert-swedish-cased",
+        "LiquidAI/LFM2-2.6B",
+        "LiquidAI/LFM2-350M",
+        "LiquidAI/LFM2-700M",
+        "LiquidAI/LFM2.5-1.2B-Base",
+        "LumiOpen/Llama-Poro-2-70B-Instruct",
+        "LumiOpen/Llama-Poro-2-70B-SFT",
+        "LumiOpen/Viking-13B",
+        "LumiOpen/Viking-33B",
+        "MaLA-LM/emma-500-llama2-7b",
+        "Maltehb/aelaectra-danish-electra-small-cased",
+        "Maltehb/aelaectra-danish-electra-small-uncased",
+        "Maltehb/danish-bert-botxo",
+        "NbAiLab/borealis-4b-instruct-preview",
+        "NbAiLab/nb-bert-base",
+        "NbAiLab/nb-bert-large",
+        "NbAiLab/nb-bert-ncc-male2female",
+        "NbAiLab/nb-roberta-base-ncc",
+        "NbAiLab/nb-roberta-base-ncc-plus-scandi-1e4",
+        "NbAiLab/nb-roberta-base-ncc-plus-scandi-2e4",
+        "NbAiLab/nb-roberta-base-scandi",
+        "NbAiLab/nb-roberta-base-scandi-1e4",
+        "NbAiLab/notram-bert-norwegian-cased-080321",
+        "NbAiLab/roberta_jan_128_ncc",
+        "NousResearch/DeepHermes-3-Llama-3-8B-Preview",
+        "NovaSky-AI/Sky-T1-32B-Preview",
+        "OmniJev/OneJev1.6-0.8B",
+        "PleIAs/Baguettotron@refs/pr/6",
+        "PleIAs/Monad",
+        "PleIAs/Pleias-1.2b-Preview",
+        "PleIAs/Pleias-350m-Preview",
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-Math-1.5B",
+        "Qwen/Qwen2.5-Math-7B",
+        "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "Qwen/Qwen3-235B-A22B-Thinking-2507-FP8",
+        "Shekswess/trlm-135m",
+        "ThatsGroes/gemma-2-27b-it-FP8-Dynamic",
+        "TildeAI/TildeOpen-30b",
+        "TrustLLMeu/baseline-7-8b_1t-tokens_llama",
+        "TrustLLMeu/baseline-7-8b_2-3t-tokens_llama",
+        "TrustLLMeu/trustllm-v2-8b-midtrain@3c7af30bc43bb3c8607e0fab6e7f2a23dd64af49",
+        "TrustLLMeu/trustllm-v2-8b-sft-8k@2aadff8653393e41abf583222164e279461a619f",
+        "TrustLLMeu/trustllm-v2-8b-sft-mixb2-exp@f33c260efa853437a55d780ce5b910944b1395f6",
+        "TrustLLMeu/trustllm-v2-8b-sft@f442f651172c1a97143738fc30c3a6342d1e8660",
+        "TrustLLMeu/trustllm-v2-8b@d8cc924fa550fbf9474f5251e8e2f92d1c1bf894",
+        "TurkuNLP/finnish-modernbert-base",
+        "TurkuNLP/finnish-modernbert-large",
+        "TurkuNLP/finnish-modernbert-tiny",
+        "ai21labs/Jamba-v0.1",
+        "allenai/Llama-3.1-Tulu-3-8B-DPO",
+        "allenai/Llama-3.1-Tulu-3-8B-SFT",
+        "allenai/Llama-3.1-Tulu-3.1-8B",
+        "allenai/OLMo-2-0325-32B",
+        "allenai/OLMo-2-1124-13B",
+        "allenai/OLMo-2-1124-13B-Instruct",
+        "allenai/OLMo-2-1124-7B",
+        "allenai/OLMo-2-1124-7B-Instruct",
+        "allenai/Olmo-3-1025-7B",
+        "allenai/Olmo-3-1125-32B",
+        "allenai/Olmo-3-7B-Instruct",
+        "allenai/Olmo-3-7B-Instruct-DPO",
+        "allenai/Olmo-3-7B-Instruct-SFT",
+        "allenai/Olmo-3-7B-Think",
+        "allenai/Olmo-3.1-32B-Instruct-DPO",
+        "allenai/Olmo-3.1-32B-Instruct-SFT",
+        "answerdotai/ModernBERT-base",
+        "answerdotai/ModernBERT-large",
+        "arcee-ai/AFM-4.5B-Base",
+        "arcee-ai/Trinity-Mini-Base",
+        "arcee-ai/Trinity-Nano-Base",
+        "arcee-ai/Trinity-Nano-Preview",
+        "baidu/ERNIE-4.5-0.3B-PT",
+        "baidu/ERNIE-4.5-21B-A3B-PT",
+        "bineric/lynx-instruct-30b",
+        "bullerwins/Magistral-Small-2506-fp8",
+        "common-pile/comma-v0.1-1t",
+        "common-pile/comma-v0.1-2t",
+        "convaiinnovations/laya",
+        "convaiinnovations/laya-multilingual",
+        "danish-foundation-models/encoder-small-v1",
+        "deepcogito/cogito-v1-preview-llama-3B",
+        "deepcogito/cogito-v1-preview-llama-8B",
+        "deepcogito/cogito-v1-preview-qwen-14B",
+        "deepcogito/cogito-v1-preview-qwen-32B",
+        "deepcogito/cogito-v2-preview-llama-70B",
+        "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+        "distilbert/distilbert-base-multilingual-cased",
+        "facebook/MobileLLM-R1-140M",
+        "facebook/MobileLLM-R1-140M-base",
+        "facebook/MobileLLM-R1-360M",
+        "facebook/MobileLLM-R1-360M-base",
+        "facebook/MobileLLM-R1-950M",
+        "facebook/MobileLLM-R1-950M-base",
+        "fastino/GLiNER2.5-Decide",
+        "fresh-electra-small",
+        "fresh-xlm-roberta-base",
+        "google/gemma-2-27b-it",
+        "google/gemma-2-2b",
+        "google/gemma-2-9b-it",
+        "google/gemma-2b-it",
+        "google/gemma-7b-it",
+        "ibm-granite/granite-20b-code-base",
+        "ibm-granite/granite-20b-code-instruct",
+        "ibm-granite/granite-3.0-3b-a800m-base",
+        "ibm-granite/granite-3.0-3b-a800m-instruct",
+        "ibm-granite/granite-34b-code-base",
+        "ibm-granite/granite-34b-code-instruct",
+        "ibm-granite/granite-3b-code-base-2k",
+        "ibm-granite/granite-3b-code-instruct-2k",
+        "ibm-granite/granite-4.0-h-micro",
+        "ibm-granite/granite-4.0-h-tiny",
+        "ibm-granite/granite-8b-code-base-4k",
+        "ibm-granite/granite-8b-code-instruct-4k",
+        "infly/OpenCoder-1.5B-Base",
+        "infly/OpenCoder-1.5B-Instruct",
+        "infly/OpenCoder-8B-Base",
+        "infly/OpenCoder-8B-Instruct",
+        "intfloat/multilingual-e5-base",
+        "intfloat/multilingual-e5-large",
+        "jaredpalmer/kev-0.5b",
+        "jhu-clsp/mmBERT-base",
+        "jhu-clsp/mmBERT-small",
+        "kyutai/helium-1-2b",
+        "ltg/norbert",
+        "ltg/norbert2",
+        "ltg/norbert3-base",
+        "ltg/norbert3-large",
+        "ltg/norbert3-small",
+        "ltg/norbert3-xs",
+        "marksverdhei/modern-norbert3-base",
+        "marksverdhei/modern-norbert3-large",
+        "marksverdhei/modern-norbert3-small",
+        "marksverdhei/modern-norbert3-xs",
+        "meta-llama/Llama-2-13b-chat-hf",
+        "meta-llama/Llama-2-13b-hf",
+        "meta-llama/Llama-2-70b-chat-hf",
+        "meta-llama/Llama-2-7b-chat-hf",
+        "meta-llama/Llama-3.1-405B-Instruct-FP8",
+        "meta-llama/Llama-3.1-70B-Instruct",
+        "meta-llama/Llama-3.1-8B-Instruct",
+        "meta-llama/Llama-3.2-1B-Instruct",
+        "meta-llama/Llama-3.2-3B-Instruct",
+        "meta-llama/Llama-4-Scout-17B-16E",
+        "microsoft/mdeberta-v3-base",
+        "mideind/IceBERT",
+        "mideind/IceBERT-ic3",
+        "mideind/IceBERT-igc",
+        "mideind/IceBERT-large",
+        "mideind/IceBERT-mC4-is",
+        "mideind/IceBERT-xlmr-ic3",
+        "mii-llm/nesso-4B",
+        "mistralai/Magistral-Small-2509",
+        "mistralai/Ministral-3-3B-Base-2512",
+        "mistralai/Ministral-3-8B-Reasoning-2512",
+        "mistralai/Ministral-8B-Instruct-2410",
+        "mistralai/Mistral-Nemo-Instruct-2407",
+        "mistralai/Mistral-Small-24B-Instruct-2501",
+        "mistralai/Mistral-Small-3.1-24B-Base-2503",
+        "mistralai/Voxtral-Mini-3B-2507",
+        "neurocode/IsRoBERTa",
+        "norallm/normistral-11b-long",
+        "norallm/normistral-11b-thinking",
+        "norallm/normistral-11b-warm",
+        "occiglot/occiglot-7b-eu5",
+        "occiglot/occiglot-7b-eu5-instruct",
+        "ollama_chat/gemma3:27b-it-fp16",
+        "ollama_chat/gemma3:4b-it-q4_K_M",
+        "ollama_chat/hf.co/google/gemma-3-4b-it-qat-q4_0-gguf",
+        "openGPT-X/Teuken-7B-instruct-commercial-v0.4",
+        "openai-community/gpt2",
+        "openai-community/gpt2-large",
+        "openai-community/gpt2-medium",
+        "senseable/WestLake-7B-v2",
+        "speakleash/Bielik-1.5B-v3.0-Instruct",
+        "speakleash/Bielik-11B-v2.3-Instruct",
+        "speakleash/Bielik-11B-v2.6-Instruct",
+        "speakleash/Bielik-11B-v3-Base-20250730",
+        "speakleash/Bielik-4.5B-v3.0-Instruct",
+        "speakleash/Bielik-One-11B-v3.1-r1@75a2d83890e3c68bf7fac2fe5bbe2bff6372036c",
+        "speakleash/Bielik-One-4B-r1@567d29b0f15df28794acf0f6187f9216860d4551",
+        "swiss-ai/Apertus-8B-2509",
+        "syvai/claes-preview",
+        "syvai/claes-v1",
+        "tencent/Hunyuan-1.8B-Instruct",
+        "tencent/Hunyuan-7B-Instruct",
+        "tiiuae/Falcon-H1-Tiny-Multilingual-100M-Base",
+        "tiiuae/Falcon-H1-Tiny-Multilingual-100M-Instruct",
+        "tiiuae/Falcon3-10B-Base",
+        "tiiuae/Falcon3-3B-Base",
+        "tiiuae/Falcon3-7B-Base",
+        "tiiuae/falcon-11B",
+        "timpal0l/Mistral-7B-v0.1-flashback-v2",
+        "typesafe/jev-1.13.0",
+        "upstage/SOLAR-10.7B-v1.0",
+        "utter-project/EuroLLM-22B-2512",
+        "utter-project/EuroLLM-22B-Instruct-2512",
+        "utter-project/EuroLLM-22B-Instruct-Preview",
+        "utter-project/EuroLLM-22B-Preview",
+        "utter-project/EuroLLM-9B",
+        "utter-project/EuroLLM-9B-Instruct",
+        "utter-project/EuroMoE-2.6B-A0.6B-Instruct-Preview",
+        "utter-project/EuroMoE-2.6B-A0.6B-Preview",
+        "utter-project/EuroVLM-1.7B-Preview",
+        "vesteinn/DanskBERT",
+        "vesteinn/FoBERT",
+        "vesteinn/ScandiBERT",
+        "vesteinn/ScandiBERT-no-faroese",
+        "vesteinn/XLMR-ENIS",
+        "yulan-team/YuLan-Mini-Instruct"
+      ]
+    },
     "hourvideo": {
       "url": "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md",
       "feed": "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md",
@@ -131928,6 +132935,99 @@
         "privateTokens": {
           "name": "Private output tokens",
           "unit": "tokens"
+        }
+      }
+    },
+    "ideataste": {
+      "url": "https://cxcscmu.github.io/IdeaTaste/#leaderboard",
+      "feed": "https://cxcscmu.github.io/IdeaTaste/assets/data/leaderboard.json",
+      "terms": "The project uses MIT. https://github.com/cxcscmu/IdeaTaste/blob/main/LICENSE",
+      "headline": "The headline is Match-Cite, the first metric in the board’s all-areas view.",
+      "retrieved": "2026-11-24",
+      "rows": 20,
+      "unmatched": [
+        "K2 Horizon 375B A23B"
+      ],
+      "parts": {
+        "match_cite": {
+          "name": "Match-Cite",
+          "unit": "%"
+        },
+        "ml_systems_match_cite": {
+          "name": "Machine learning systems: Match-Cite",
+          "unit": "%"
+        },
+        "code_generation_match_cite": {
+          "name": "Code generation: Match-Cite",
+          "unit": "%"
+        },
+        "world_models_match_cite": {
+          "name": "World models: Match-Cite",
+          "unit": "%"
+        },
+        "automated_research_match_cite": {
+          "name": "Automated research: Match-Cite",
+          "unit": "%"
+        },
+        "match_idea": {
+          "name": "Match-Idea",
+          "unit": "%"
+        },
+        "ml_systems_match_idea": {
+          "name": "Machine learning systems: Match-Idea",
+          "unit": "%"
+        },
+        "code_generation_match_idea": {
+          "name": "Code generation: Match-Idea",
+          "unit": "%"
+        },
+        "world_models_match_idea": {
+          "name": "World models: Match-Idea",
+          "unit": "%"
+        },
+        "automated_research_match_idea": {
+          "name": "Automated research: Match-Idea",
+          "unit": "%"
+        },
+        "diversity_cite": {
+          "name": "Diversity-Cite",
+          "unit": "%"
+        },
+        "ml_systems_diversity_cite": {
+          "name": "Machine learning systems: Diversity-Cite",
+          "unit": "%"
+        },
+        "code_generation_diversity_cite": {
+          "name": "Code generation: Diversity-Cite",
+          "unit": "%"
+        },
+        "world_models_diversity_cite": {
+          "name": "World models: Diversity-Cite",
+          "unit": "%"
+        },
+        "automated_research_diversity_cite": {
+          "name": "Automated research: Diversity-Cite",
+          "unit": "%"
+        },
+        "diversity_idea": {
+          "name": "Diversity-Idea",
+          "unit": "%"
+        },
+        "ml_systems_diversity_idea": {
+          "name": "Machine learning systems: Diversity-Idea",
+          "unit": "%"
+        },
+        "code_generation_diversity_idea": {
+          "name": "Code generation: Diversity-Idea",
+          "unit": "%"
+        },
+        "world_models_diversity_idea": {
+          "name": "World models: Diversity-Idea",
+          "unit": "%"
+        },
+        "automated_research_diversity_idea": {
+          "name": "Automated research: Diversity-Idea",
+          "unit": "%"
         }
       }
     },
@@ -145374,6 +146474,82 @@
         }
       }
     },
+    "isd-talking-points-russian-state-media": {
+      "url": "https://www.isdglobal.org/digital-dispatch/investigation-talking-points-when-chatbots-surface-russian-state-media/",
+      "feed": "https://www.isdglobal.org/wp-content/uploads/2026/02/image005.jpg",
+      "terms": "Public charts published by the Institute for Strategic Dialogue. https://www.isdglobal.org/digital-dispatch/investigation-talking-points-when-chatbots-surface-russian-state-media/",
+      "headline": "The headline counts Russian state-attributed sources cited by each chatbot across the five topics.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "ChatGPT",
+        "Deepseek",
+        "Gemini",
+        "Grok"
+      ],
+      "parts": {
+        "Recruitment": {
+          "name": "Recruitment",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "NATO perception": {
+          "name": "NATO perception",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "Peace talks": {
+          "name": "Peace talks",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "War crimes": {
+          "name": "War crimes",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "Refugees": {
+          "name": "Refugees",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "Spanish": {
+          "name": "Spanish",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "Italian": {
+          "name": "Italian",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "English": {
+          "name": "English",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "German": {
+          "name": "German",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        },
+        "French": {
+          "name": "French",
+          "unit": "score",
+          "better": "lower",
+          "note": "Number of cited sources."
+        }
+      }
+    },
     "ishigaki-ids-bench": {
       "url": "https://ai.onestruction.com/leaderboard/en/benchmarks/ids/",
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/ids/",
@@ -146278,6 +147454,24 @@
         }
       }
     },
+    "jawaher": {
+      "url": "https://aclanthology.org/2025.naacl-long.613/",
+      "feed": "https://aclanthology.org/2025.naacl-long.613.pdf",
+      "terms": "ACL Anthology papers are available under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
+      "headline": "The headline is BERTScore F1 for the English-equivalent translation task, the first column of Table 6.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Claude 3.5 Sonnet (snapshot unspecified)",
+        "Cohere Command R+",
+        "GPT-4o (snapshot unspecified)",
+        "Gemini 1.5 Pro (snapshot unspecified)",
+        "Gemma9B-instruct",
+        "Llama 3.1",
+        "Llama-3.2"
+      ]
+    },
     "jblimp": {
       "url": "https://aclanthology.org/2023.findings-eacl.117/",
       "feed": "https://aclanthology.org/2023.findings-eacl.117.pdf",
@@ -147120,6 +148314,143 @@
         },
         "Micro Recall@10": {
           "name": "Micro Recall@10"
+        }
+      }
+    },
+    "joi-bench-task": {
+      "url": "https://arxiv.org/html/2611.12118",
+      "feed": "https://arxiv.org/html/2611.12118",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "The paper lists single-tool start latency first. The score is in seconds, and lower is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [],
+      "parts": {
+        "startSingle": {
+          "name": "Tool start latency (single tool)",
+          "unit": "score",
+          "better": "lower",
+          "note": "Seconds."
+        },
+        "startMulti": {
+          "name": "Tool start latency (multiple tools)",
+          "unit": "score",
+          "better": "lower",
+          "note": "Seconds."
+        },
+        "announceSingle": {
+          "name": "Announcement latency (single tool)",
+          "unit": "score",
+          "better": "lower",
+          "note": "Seconds."
+        },
+        "announceMulti": {
+          "name": "Announcement latency (multiple tools)",
+          "unit": "score",
+          "better": "lower",
+          "note": "Seconds."
+        },
+        "interruptLatency": {
+          "name": "Interruption latency",
+          "unit": "score",
+          "better": "lower",
+          "note": "Seconds."
+        },
+        "inquiry": {
+          "name": "Status inquiry response",
+          "unit": "%",
+          "better": "higher"
+        },
+        "change": {
+          "name": "Request change success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "completion": {
+          "name": "Result completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "omission": {
+          "name": "Information omission",
+          "unit": "%",
+          "better": "lower"
+        },
+        "resume": {
+          "name": "Resumption",
+          "unit": "%",
+          "better": "higher"
+        },
+        "concurrency": {
+          "name": "Concurrency met",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passSingle": {
+          "name": "Pass@1 (single tool)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passMulti": {
+          "name": "Pass@1 (multiple tools)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "baseline": {
+          "name": "Result completion (baseline)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "priority": {
+          "name": "Result completion (priority change)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "withdraw": {
+          "name": "Result completion (task withdraw)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "addition": {
+          "name": "Result completion (task addition)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "changePriority": {
+          "name": "Request change success (priority change)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "changeWithdraw": {
+          "name": "Request change success (task withdraw)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "changeAddition": {
+          "name": "Request change success (task addition)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pauseResume": {
+          "name": "Resumption (pause)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "inquiryResume": {
+          "name": "Resumption (inquiry)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pauseOmission": {
+          "name": "Information omission (pause)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "inquiryOmission": {
+          "name": "Information omission (inquiry)",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -153503,6 +154834,25 @@
         },
         "Malicious Use": {
           "name": "Malicious Use"
+        }
+      }
+    },
+    "kpi-edgar": {
+      "url": "https://github.com/tobideusser/kpi-edgar#test-set-performances",
+      "feed": "https://raw.githubusercontent.com/tobideusser/kpi-edgar/HEAD/README.md",
+      "terms": "The authors request citation at https://github.com/tobideusser/kpi-edgar#citation",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "EDGAR–W2V",
+        "GloVe",
+        "KPI-BERT",
+        "SpERT"
+      ],
+      "parts": {
+        "adjustedF1": {
+          "name": "Adjusted relation F1",
+          "unit": "%"
         }
       }
     },
@@ -161136,6 +162486,16 @@
         }
       }
     },
+    "livemace": {
+      "url": "https://arxiv.org/html/2610.09872",
+      "feed": "https://arxiv.org/html/2610.09872",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "The headline is cumulative portfolio return (%) over the full evaluation period for each agent configuration.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 23,
+      "unmatched": []
+    },
     "livemathbench": {
       "url": "https://github.com/open-compass/GPassK",
       "feed": "https://raw.githubusercontent.com/open-compass/GPassK/main/README.md",
@@ -162991,6 +164351,44 @@
         "GPT 3.5 [snapshot unspecified]",
         "Mistral 7B Instruct [snapshot unspecified]"
       ]
+    },
+    "llmeval-med": {
+      "url": "https://llmeval.com/leaderboard",
+      "feed": "https://llmeval.com/leaderboard",
+      "terms": "The benchmark uses CC BY 4.0 at https://huggingface.co/datasets/llmeval-fdu/LLMEval-Med",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "Baichuan-M1",
+        "Baichuan-M1-14B",
+        "DISC-MedLLM",
+        "DeepSeek-R1 (snapshot unspecified)",
+        "DeepSeek-V3 (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)",
+        "HuatuoGPT-o1-72B"
+      ],
+      "parts": {
+        "mk": {
+          "name": "Medical Knowledge",
+          "unit": "%"
+        },
+        "mlu": {
+          "name": "Medical Language Understanding",
+          "unit": "%"
+        },
+        "mr": {
+          "name": "Medical Reasoning",
+          "unit": "%"
+        },
+        "mse": {
+          "name": "Medical Safety and Ethics",
+          "unit": "%"
+        },
+        "mtg": {
+          "name": "Medical Text Generation",
+          "unit": "%"
+        }
+      }
     },
     "llmzsz": {
       "url": "https://huggingface.co/spaces/amu-cai/LLMZSZL_Leaderboard",
@@ -169353,6 +170751,32 @@
         "hFT-Transformer"
       ]
     },
+    "mafand-mt": {
+      "url": "https://aclanthology.org/2022.naacl-main.223/",
+      "feed": "https://aclanthology.org/2022.naacl-main.223.pdf",
+      "terms": "ACL Anthology papers are available under ACL terms. https://aclanthology.org/info/license/",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AfriByT5",
+        "AfriMBART",
+        "AfriMT5",
+        "ByT5",
+        "M2M-100",
+        "M2M-100-EN/FR",
+        "MT5",
+        "mBART50"
+      ],
+      "stats": {
+        "median": {
+          "name": "Median BLEU",
+          "unit": "score",
+          "better": "higher",
+          "note": "The median over the 16 translation directions."
+        }
+      }
+    },
     "mafiabench": {
       "url": "https://www.mafiabench.org/",
       "feed": "https://www.mafiabench.org/",
@@ -169721,6 +171145,578 @@
         "exceptional": {
           "name": "Exceptional",
           "unit": "count"
+        }
+      }
+    },
+    "maniladder": {
+      "url": "https://maniladder-benchmark.github.io/#leaderboard",
+      "feed": "https://maniladder-benchmark.github.io/data/leaderboard.js",
+      "terms": "The authors publish the leaderboard and its scoring protocol at https://maniladder-benchmark.github.io/#leaderboard.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Small Flow-Matching"
+      ],
+      "parts": {
+        "OpenDoor_v1": {
+          "name": "OpenDoor-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "PickPlacePen_v1": {
+          "name": "PickPlacePen-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "PushSoccer_v1": {
+          "name": "PushSoccer-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "StackBlock_v1": {
+          "name": "StackBlock-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "GraspCylinder_v1": {
+          "name": "GraspCylinder-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "LiftBucket_v1": {
+          "name": "LiftBucket-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "ReorientCube_v1": {
+          "name": "ReorientCube-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "TurnOnFaucet_v1": {
+          "name": "TurnOnFaucet-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmButtonPress_v1": {
+          "name": "DualArmButtonPress-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmDoubleDoorBox_v1": {
+          "name": "DualArmDoubleDoorBox-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmHammerHandover_v1": {
+          "name": "DualArmHammerHandover-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmPushBox_v1": {
+          "name": "DualArmPushBox-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmOpenPen_v1": {
+          "name": "DualArmOpenPen-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmOpenScissor_v1": {
+          "name": "DualArmOpenScissor-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmPressButton_v1": {
+          "name": "DualArmPressButton-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmSwingCup_v1": {
+          "name": "DualArmSwingCup-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "ShapeTToI_v1": {
+          "name": "ShapeTToI-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "StraightenRope_v1": {
+          "name": "StraightenRope-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "UnfoldShirt_v1": {
+          "name": "UnfoldShirt-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DrapeCloth_v1": {
+          "name": "DrapeCloth-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "RopePalmCageHoldDex_v1": {
+          "name": "RopePalmCageHoldDex-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "SqueezeClay_v1": {
+          "name": "SqueezeClay-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmFoldHandKerchief_v1": {
+          "name": "DualArmFoldHandKerchief-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmPouringWater_v1": {
+          "name": "DualArmPouringWater-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmRopeCylinderWarpping_v1": {
+          "name": "DualArmRopeCylinderWarpping-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmCoverCloth_v1": {
+          "name": "DualArmCoverCloth-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmLiftSoftDex_v1": {
+          "name": "DualArmLiftSoftDex-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "DualArmRopeStretch_v1": {
+          "name": "DualArmRopeStretch-v1",
+          "group": "Level 1",
+          "unit": "%"
+        },
+        "HangMug_v1": {
+          "name": "HangMug-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "KitAssembly_v1": {
+          "name": "KitAssembly-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "OpenBoxRetrieval_v1": {
+          "name": "OpenBoxRetrieval-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "PivotBook_v1": {
+          "name": "PivotBook-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DexOpenDoor_v1": {
+          "name": "DexOpenDoor-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "GraspTwoBlocks_v1": {
+          "name": "GraspTwoBlocks-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "HammerNailOut_v1": {
+          "name": "HammerNailOut-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "ReorientPen_v1": {
+          "name": "ReorientPen-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmBookPickPlace_v1": {
+          "name": "DualArmBookPickPlace-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmCleanupPotEnv_v1": {
+          "name": "DualArmCleanupPotEnv-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmLiftBall_v1": {
+          "name": "DualArmLiftBall-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmPegInHole_v1": {
+          "name": "DualArmPegInHole-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmJugglingBall_v1": {
+          "name": "DualArmJugglingBall-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmOpenBottle_v1": {
+          "name": "DualArmOpenBottle-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmOpenLaptop_v1": {
+          "name": "DualArmOpenLaptop-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmThrowBlock_v1": {
+          "name": "DualArmThrowBlock-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "FoldShirt_v1": {
+          "name": "FoldShirt-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "ScoopWater_v1": {
+          "name": "ScoopWater-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "StraightenTwoRopesSequential_v1": {
+          "name": "StraightenTwoRopesSequential-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "ClothWipe_v1": {
+          "name": "ClothWipe-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "RollingPin_v1": {
+          "name": "RollingPin-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "RopeBridgeDex_v1": {
+          "name": "RopeBridgeDex-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmClothAlign_v1": {
+          "name": "DualArmClothAlign-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmPushObject_v1": {
+          "name": "DualArmPushObject-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmStraightenRope_v1": {
+          "name": "DualArmStraightenRope-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmPlaceRopeOverRod_v1": {
+          "name": "DualArmPlaceRopeOverRod-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmPouringTwoCups_v1": {
+          "name": "DualArmPouringTwoCups-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "DualArmStuffCloth_v1": {
+          "name": "DualArmStuffCloth-v1",
+          "group": "Level 2",
+          "unit": "%"
+        },
+        "GroceryPrepare_v1": {
+          "name": "GroceryPrepare-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "MazeBlockPush_v1": {
+          "name": "MazeBlockPush-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "PushTargetPose_v1": {
+          "name": "PushTargetPose-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "Stack6Blocks_v1": {
+          "name": "Stack6Blocks-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "ClutterGrasp_v1": {
+          "name": "ClutterGrasp-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "HammerNail_v1": {
+          "name": "HammerNail-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "MobilePickPlace_v1": {
+          "name": "MobilePickPlace-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "TweezersPickPlace_v1": {
+          "name": "TweezersPickPlace-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmFoldCarton_v1": {
+          "name": "DualArmFoldCarton-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmAssembleBracket_v1": {
+          "name": "DualArmAssembleBracket-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmOpenFridge_v1": {
+          "name": "DualArmOpenFridge-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmOrganizeCabinet_v1": {
+          "name": "DualArmOrganizeCabinet-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmMakeLine_v1": {
+          "name": "DualArmMakeLine-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmPingpongBalance_v1": {
+          "name": "DualArmPingpongBalance-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmPlugCharger_v1": {
+          "name": "DualArmPlugCharger-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmSetupTable_v1": {
+          "name": "DualArmSetupTable-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "BagHanging_v1": {
+          "name": "BagHanging-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "LiquidMeasuring_v1": {
+          "name": "LiquidMeasuring-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "SeparateTwoRopesEnv_v1": {
+          "name": "SeparateTwoRopesEnv-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "BagDropIn_v1": {
+          "name": "BagDropIn-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "HitBox_v1": {
+          "name": "HitBox-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "PressFitSoftPeg_v1": {
+          "name": "PressFitSoftPeg-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmShapeDoll_v1": {
+          "name": "DualArmShapeDoll-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmThreadRopeThroughTube_v1": {
+          "name": "DualArmThreadRopeThroughTube-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmWeaveCloth_v1": {
+          "name": "DualArmWeaveCloth-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmLayerClayInDish_v1": {
+          "name": "DualArmLayerClayInDish-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmThreadCloth_v1": {
+          "name": "DualArmThreadCloth-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "DualArmThreading_v1": {
+          "name": "DualArmThreading-v1",
+          "group": "Level 3",
+          "unit": "%"
+        },
+        "FlipPan_v1": {
+          "name": "FlipPan-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "HitBilliard_v1": {
+          "name": "HitBilliard-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "PingPongBallTransport_v1": {
+          "name": "PingPongBallTransport-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "RingTossing_v1": {
+          "name": "RingTossing-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "FitnessBall_v1": {
+          "name": "FitnessBall-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "RodThroughHoles_v1": {
+          "name": "RodThroughHoles-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "SpinPenHora_v1": {
+          "name": "SpinPenHora-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "TennisRally_v1": {
+          "name": "TennisRally-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmBallClassify_v1": {
+          "name": "DualArmBallClassify-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmBilliardBridge_v1": {
+          "name": "DualArmBilliardBridge-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmMahjongSetup_v1": {
+          "name": "DualArmMahjongSetup-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmRubikCube_v1": {
+          "name": "DualArmRubikCube-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmFlipTable_v1": {
+          "name": "DualArmFlipTable-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmKeyboardType_v1": {
+          "name": "DualArmKeyboardType-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmSendPingpong_v1": {
+          "name": "DualArmSendPingpong-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmShootBasketball_v1": {
+          "name": "DualArmShootBasketball-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "BuildTent_v1": {
+          "name": "BuildTent-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "StampRoll_v1": {
+          "name": "StampRoll-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "WrapRope_v1": {
+          "name": "WrapRope-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "ClaySealStamp_v1": {
+          "name": "ClaySealStamp-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "CoverPattern_v1": {
+          "name": "CoverPattern-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "SwingRing_v1": {
+          "name": "SwingRing-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmClothHanger_v1": {
+          "name": "DualArmClothHanger-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmSandShovel_v1": {
+          "name": "DualArmSandShovel-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmWallRings_v1": {
+          "name": "DualArmWallRings-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmClothCylinderWipe_v1": {
+          "name": "DualArmClothCylinderWipe-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmJumpRope_v1": {
+          "name": "DualArmJumpRope-v1",
+          "group": "Level 4",
+          "unit": "%"
+        },
+        "DualArmLiquidMixing_v1": {
+          "name": "DualArmLiquidMixing-v1",
+          "group": "Level 4",
+          "unit": "%"
         }
       }
     },
@@ -170464,6 +172460,82 @@
         },
         "zul": {
           "name": "isiZulu"
+        }
+      }
+    },
+    "masakhanews": {
+      "url": "https://aclanthology.org/2023.ijcnlp-main.10/",
+      "feed": "https://aclanthology.org/2023.ijcnlp-main.10.pdf",
+      "terms": "ACL Anthology publishes this paper under its copyright policy at https://aclanthology.org/faq/copyright/.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AfriBERTa",
+        "AfriMT5-base",
+        "AfriTeVa-base",
+        "AfroLM",
+        "AfroXLMR-base",
+        "AfroXLMR-large",
+        "Flan-T5-base",
+        "LABSE",
+        "MLP",
+        "NaiveBayes",
+        "RemBERT",
+        "XGBoost",
+        "XLM-R-base",
+        "XLM-R-large",
+        "mDeBERTa",
+        "mT5-base"
+      ],
+      "parts": {
+        "amh": {
+          "name": "Amharic"
+        },
+        "eng": {
+          "name": "English"
+        },
+        "fra": {
+          "name": "French"
+        },
+        "hau": {
+          "name": "Hausa"
+        },
+        "ibo": {
+          "name": "Igbo"
+        },
+        "lin": {
+          "name": "Lingala"
+        },
+        "lug": {
+          "name": "Luganda"
+        },
+        "orm": {
+          "name": "Oromo"
+        },
+        "pcm": {
+          "name": "Nigerian Pidgin"
+        },
+        "run": {
+          "name": "Rundi"
+        },
+        "sna": {
+          "name": "chiShona"
+        },
+        "som": {
+          "name": "Somali"
+        },
+        "swa": {
+          "name": "Kiswahili"
+        },
+        "tir": {
+          "name": "Tigrinya"
+        },
+        "xho": {
+          "name": "isiXhosa"
+        },
+        "yor": {
+          "name": "Yorùbá"
         }
       }
     },
@@ -176293,6 +178365,75 @@
         "Mammoth_VL"
       ]
     },
+    "mela": {
+      "url": "https://aclanthology.org/2024.acl-long.146/",
+      "feed": "https://aclanthology.org/2024.acl-long.146.pdf",
+      "terms": "ACL Anthology copyright and licensing terms. https://aclanthology.org/faq/copyright/",
+      "headline": "Table 3 reports the mean Matthews correlation coefficient across ten languages, multiplied by 100.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "BLOOMZ 7.1B",
+        "GPT-3.5 (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)",
+        "XLM-R 550M",
+        "mT0 13B",
+        "mTk 13B"
+      ],
+      "parts": {
+        "en": {
+          "name": "English",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "zh": {
+          "name": "Chinese",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "it": {
+          "name": "Italian",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "ru": {
+          "name": "Russian",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "de": {
+          "name": "German",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "fr": {
+          "name": "French",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "es": {
+          "name": "Spanish",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "ja": {
+          "name": "Japanese",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "ar": {
+          "name": "Arabic",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        },
+        "is": {
+          "name": "Icelandic",
+          "unit": "score",
+          "note": "Matthews correlation coefficient times 100."
+        }
+      }
+    },
     "meld": {
       "url": "https://github.com/declare-lab/conv-emotion",
       "feed": "https://raw.githubusercontent.com/declare-lab/conv-emotion/master/README.md",
@@ -180293,6 +182434,46 @@
         }
       }
     },
+    "midnight-index": {
+      "url": "https://secondstrike.io/midnight",
+      "feed": "https://secondstrike.io/midnight/board.json",
+      "terms": "The authors license their dataset under CC BY-NC 4.0. https://huggingface.co/datasets/Rapscallion123/midnight-index",
+      "headline": "The board reports the percentage of runs in which the model triggered midnight.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
+      "unmatched": [
+        "deepseek-chat",
+        "grok-4.20-0309-non-reasoning",
+        "mistral-large-latest (snapshot unspecified)"
+      ],
+      "parts": {
+        "ffa": {
+          "name": "Free-for-all",
+          "unit": "%",
+          "better": "lower"
+        },
+        "cornered": {
+          "name": "Cornered",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hegemon": {
+          "name": "Hegemon",
+          "unit": "%",
+          "better": "lower"
+        },
+        "laststand": {
+          "name": "Last stand",
+          "unit": "%",
+          "better": "lower"
+        },
+        "treaty": {
+          "name": "Treaty",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "mieb": {
       "url": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores",
@@ -183836,6 +186017,38 @@
         }
       },
       "static": "paper"
+    },
+    "mm-ocean": {
+      "url": "https://arxiv.org/html/2605.22109v1",
+      "feed": "https://arxiv.org/html/2605.22109v1",
+      "terms": "The benchmark authors publish their licensing terms at https://github.com/kkkcx/MM-OCEAN/blob/main/LICENSE.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 20,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "GPT-4o-mini (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)",
+        "LLaVA-NeXT-Video-7B",
+        "Llama-4-Maverick-FP8",
+        "Qwen3-VL-30B-A3B",
+        "Qwen3-VL-8B"
+      ],
+      "parts": {
+        "t1": {
+          "name": "Personality Rating",
+          "unit": "%"
+        },
+        "t2": {
+          "name": "Open-Ended Reasoning",
+          "unit": "score",
+          "note": "AI judge composite from 1 to 10."
+        },
+        "t3": {
+          "name": "Grounding MCQs",
+          "unit": "%"
+        }
+      }
     },
     "mm-vet": {
       "url": "https://rank.opencompass.org.cn/leaderboard-multimodal",
@@ -188648,6 +190861,169 @@
         "historyImages": {
           "name": "History images",
           "unit": "count"
+        }
+      }
+    },
+    "model-slant": {
+      "url": "https://modelslant.com/",
+      "feed": "https://modelslant.com/output_models.json",
+      "terms": "The Polarization Research Lab publishes the data and terms at https://modelslant.com/data.html",
+      "retrieved": "2026-11-24",
+      "rows": 22,
+      "unmatched": [
+        "gpt-4o (snapshot unspecified)",
+        "llama3-2-3b-instruct"
+      ],
+      "parts": {
+        "Affirmative_Action": {
+          "name": "Affirmative Action",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Authoritarian_Reform": {
+          "name": "Authoritarian Reform",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Birthright_Citizenship": {
+          "name": "Birthright Citizenship",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Campaign_Finance": {
+          "name": "Campaign Finance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Child_Labor_Laws": {
+          "name": "Child Labor Laws",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Climate_Policy": {
+          "name": "Climate Policy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Death_Penalty": {
+          "name": "Death Penalty",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Defund_the_Police": {
+          "name": "Defund the Police",
+          "unit": "score",
+          "better": "lower"
+        },
+        "DEI_Programs": {
+          "name": "DEI Programs",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Electoral_College": {
+          "name": "Electoral College",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Europe_Ally": {
+          "name": "Europe Ally",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Expansionism": {
+          "name": "Expansionism",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Firing_Government_Workers": {
+          "name": "Firing Government Workers",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Free_Speech": {
+          "name": "Free Speech",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Gay_Conversion": {
+          "name": "Gay Conversion",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Gov_Control_Colleges": {
+          "name": "Gov. Control Colleges",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Gun_Control": {
+          "name": "Gun Control",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Health_Care": {
+          "name": "Health Care",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Mass_Deportations": {
+          "name": "Mass Deportations",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Minimum_Wage": {
+          "name": "Minimum Wage",
+          "unit": "score",
+          "better": "lower"
+        },
+        "National_Religion": {
+          "name": "National Religion",
+          "unit": "score",
+          "better": "lower"
+        },
+        "PC_Language": {
+          "name": "PC Language",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Russia_Ally": {
+          "name": "Russia Ally",
+          "unit": "score",
+          "better": "lower"
+        },
+        "School_Vouchers": {
+          "name": "School Vouchers",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Student_Loan_Debt": {
+          "name": "Student Loan Debt",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Tariffs": {
+          "name": "Tariffs",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Taxes_on_Wealthy": {
+          "name": "Taxes on Wealthy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Trans_Rights": {
+          "name": "Trans Rights",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Unions": {
+          "name": "Unions",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Universal_Basic_Income_UBI_": {
+          "name": "Universal Basic Income (UBI)",
+          "unit": "score",
+          "better": "lower"
         }
       }
     },
@@ -226337,6 +228713,271 @@
         }
       }
     },
+    "open-prompt-injection": {
+      "url": "https://arxiv.org/html/2310.12815",
+      "feed": "https://arxiv.org/html/2310.12815",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "The headline is mean attack success value across 49 task pairs, expressed as a percentage. Lower values indicate better resistance.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Bard",
+        "Flan-UL2",
+        "GPT-3.5-Turbo (snapshot unspecified)",
+        "GPT-4 (snapshot unspecified)",
+        "InternLM-chat-7b",
+        "PaLM 2 text-bison-001",
+        "Vicuna-33b-v1.3"
+      ],
+      "parts": {
+        "target1Injected1": {
+          "name": "Dup. sentence detection / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected2": {
+          "name": "Dup. sentence detection / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected3": {
+          "name": "Dup. sentence detection / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected4": {
+          "name": "Dup. sentence detection / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected5": {
+          "name": "Dup. sentence detection / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected6": {
+          "name": "Dup. sentence detection / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target1Injected7": {
+          "name": "Dup. sentence detection / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected1": {
+          "name": "Grammar correction / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected2": {
+          "name": "Grammar correction / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected3": {
+          "name": "Grammar correction / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected4": {
+          "name": "Grammar correction / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected5": {
+          "name": "Grammar correction / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected6": {
+          "name": "Grammar correction / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target2Injected7": {
+          "name": "Grammar correction / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected1": {
+          "name": "Hate detection / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected2": {
+          "name": "Hate detection / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected3": {
+          "name": "Hate detection / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected4": {
+          "name": "Hate detection / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected5": {
+          "name": "Hate detection / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected6": {
+          "name": "Hate detection / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target3Injected7": {
+          "name": "Hate detection / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected1": {
+          "name": "Nat. lang. inference / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected2": {
+          "name": "Nat. lang. inference / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected3": {
+          "name": "Nat. lang. inference / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected4": {
+          "name": "Nat. lang. inference / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected5": {
+          "name": "Nat. lang. inference / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected6": {
+          "name": "Nat. lang. inference / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target4Injected7": {
+          "name": "Nat. lang. inference / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected1": {
+          "name": "Sentiment analysis / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected2": {
+          "name": "Sentiment analysis / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected3": {
+          "name": "Sentiment analysis / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected4": {
+          "name": "Sentiment analysis / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected5": {
+          "name": "Sentiment analysis / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected6": {
+          "name": "Sentiment analysis / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target5Injected7": {
+          "name": "Sentiment analysis / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected1": {
+          "name": "Spam detection / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected2": {
+          "name": "Spam detection / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected3": {
+          "name": "Spam detection / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected4": {
+          "name": "Spam detection / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected5": {
+          "name": "Spam detection / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected6": {
+          "name": "Spam detection / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target6Injected7": {
+          "name": "Spam detection / Summarization",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected1": {
+          "name": "Summarization / Dup. sentence detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected2": {
+          "name": "Summarization / Grammar correction",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected3": {
+          "name": "Summarization / Hate detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected4": {
+          "name": "Summarization / Nat. lang. inference",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected5": {
+          "name": "Summarization / Sentiment analysis",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected6": {
+          "name": "Summarization / Spam detection",
+          "unit": "%",
+          "better": "lower"
+        },
+        "target7Injected7": {
+          "name": "Summarization / Summarization",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "open-tabletop-gm-narrative-probe": {
       "url": "https://www.reddit.com/r/LocalLLaMA/comments/1spfz31/i_tested_8_llms_as_tabletop_gms_a_27b_model_beat/",
       "feed": "https://api.github.com/repos/Bobby-Gray/open-tabletop-gm/contents/probe/results/narrative?ref=ac5579736dae04cca65d7cdbe76273fde8c0bd86",
@@ -227885,6 +230526,56 @@
           "label": "Average score",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "openhueval": {
+      "url": "https://opendatalab.github.io/OpenHuEval/leaderboard.html",
+      "feed": "https://opendatalab.github.io/OpenHuEval/leaderboard.html",
+      "terms": "The authors publish these results at https://opendatalab.github.io/OpenHuEval/leaderboard.html.",
+      "headline": "OpenHuEval reports no overall score, so the headline is HuWildBench WBScore, the first measure on its leaderboard.",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "Deepseek-R1 (snapshot unspecified)",
+        "Deepseek-V3 (snapshot unspecified)",
+        "Llama-3.1-Instruct-70B",
+        "Llama-3.1-Instruct-8B",
+        "Qwen2.5-Instruct-72B",
+        "Qwen2.5-Instruct-7B"
+      ],
+      "parts": {
+        "HuWildBenchWBScore": {
+          "name": "HuWildBench WBScore",
+          "unit": "score"
+        },
+        "HuSimpleQAAcc": {
+          "name": "HuSimpleQA Acc",
+          "unit": "%"
+        },
+        "HuProverbReaAccOE": {
+          "name": "HuProverbRea Acc. (OE)",
+          "unit": "%"
+        },
+        "HuProverbReaAcc2CQ": {
+          "name": "HuProverbRea Acc. (2CQ)",
+          "unit": "%"
+        },
+        "HuMatchingFIBBacc": {
+          "name": "HuMatchingFIB B acc.",
+          "unit": "%"
+        },
+        "HuMatchingFIBQacc": {
+          "name": "HuMatchingFIB Q acc.",
+          "unit": "%"
+        },
+        "HuStandardFIBBacc": {
+          "name": "HuStandardFIB B acc.",
+          "unit": "%"
+        },
+        "HuStandardFIBQacc": {
+          "name": "HuStandardFIB Q acc.",
+          "unit": "%"
         }
       }
     },
@@ -232167,6 +234858,30 @@
         }
       }
     },
+    "partner-restrictions-compliance-ramp": {
+      "url": "https://builders.ramp.com/post/financial-benchmarks",
+      "feed": "https://builders.ramp.com/post/financial-benchmarks",
+      "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp.",
+      "headline": "Ramp omits the combined score. The headline is the false negative rate as a multiple of the lowest rate. Lower is better.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "chart": {
+        "title": "Detection Error Tradeoff",
+        "x": {
+          "key": "falsePositive",
+          "label": "False positive rate",
+          "unit": "multiple",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "False negative rate",
+          "unit": "multiple",
+          "better": "lower"
+        }
+      }
+    },
     "passport-control": {
       "url": "https://www.kaggle.com/benchmarks/thetraveller/passport-control",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/thetraveller/passport-control/leaderboard",
@@ -232419,6 +235134,95 @@
           "name": "Premature refusal rate",
           "unit": "%",
           "better": "lower"
+        }
+      }
+    },
+    "pawbench": {
+      "url": "https://pawbench.github.io/",
+      "feed": "https://pawbench.github.io/",
+      "terms": "The authors publish the benchmark terms at https://github.com/Andrew0613/PAWBench.",
+      "headline": "The headline is PAW-Calibration, the first track. Lower total variation distance indicates better calibration.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "Cosmos 3 Super I2V",
+        "HappyHorse",
+        "Kling 3 Std.",
+        "Wan2.2",
+        "Wan2.7"
+      ],
+      "parts": {
+        "calibration": {
+          "name": "PAW-Calibration",
+          "group": "PAW-Calibration",
+          "better": "lower",
+          "unit": "score"
+        },
+        "calibrationSPR": {
+          "name": "Calibration scene pass rate",
+          "group": "PAW-Calibration",
+          "better": "higher",
+          "unit": "%"
+        },
+        "toss": {
+          "name": "Toss",
+          "group": "PAW-Calibration",
+          "better": "lower",
+          "unit": "score"
+        },
+        "rotation": {
+          "name": "Rot.",
+          "group": "PAW-Calibration",
+          "better": "lower",
+          "unit": "score"
+        },
+        "routing": {
+          "name": "Rout.",
+          "group": "PAW-Calibration",
+          "better": "lower",
+          "unit": "score"
+        },
+        "draw": {
+          "name": "Draw",
+          "group": "PAW-Calibration",
+          "better": "lower",
+          "unit": "score"
+        },
+        "coverage": {
+          "name": "PAW-Coverage",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
+        },
+        "coverageSPR": {
+          "name": "Coverage scene pass rate",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
+        },
+        "collision": {
+          "name": "Coll.",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
+        },
+        "stability": {
+          "name": "Stab.",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
+        },
+        "agent": {
+          "name": "Agent",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
+        },
+        "material": {
+          "name": "Mat.",
+          "group": "PAW-Coverage",
+          "better": "higher",
+          "unit": "%"
         }
       }
     },
@@ -234314,6 +237118,30 @@
         }
       }
     },
+    "persistbench": {
+      "url": "https://arxiv.org/abs/2602.01146",
+      "feed": "https://arxiv.org/pdf/2602.01146",
+      "terms": "The authors publish the results in the arXiv paper. https://arxiv.org/abs/2602.01146",
+      "headline": "The paper reports no overall score, so this is the plain mean of its three failure-rate parts.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "Qwen3-235B-A22B-Think"
+      ],
+      "parts": {
+        "crossDomain": {
+          "name": "Cross-domain leakage"
+        },
+        "sycophancy": {
+          "name": "Sycophancy"
+        },
+        "beneficial": {
+          "name": "Beneficial memory use"
+        }
+      }
+    },
     "personal-agent-bench-micro1": {
       "url": "https://www.micro1.ai/personal-agent-bench",
       "feed": "https://www.micro1.ai/personal-agent-bench",
@@ -235078,6 +237906,278 @@
         "Pixtral-12B-2409",
         "Qwen2-VL-72B-Instruct-AWQ"
       ]
+    },
+    "physiome-ode": {
+      "url": "https://kloetergensc.github.io/Physiome-ODE/",
+      "feed": "https://kloetergensc.github.io/Physiome-ODE/data/results.json",
+      "terms": "The project uses Apache-2.0 at https://github.com/kloetergensc/Physiome-ODE/blob/main/LICENSE.",
+      "headline": "The leaderboard ranks all IMTS models by Elo from pairwise comparisons of forecast error. Higher Elo is better.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CRU",
+        "GRU-ODE-Bayes",
+        "GraFITi",
+        "GraFITi-C",
+        "IMTS-Mixer",
+        "LinODENet",
+        "Neural Flows",
+        "TIDES",
+        "TimeCHEAT",
+        "tPatchGNN"
+      ],
+      "parts": {
+        "DUP01": {
+          "name": "DUP01 (dupont_1991a)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "JEL01": {
+          "name": "JEL01 (jelic_cupic_kolaranic_2005_Fig4)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "DOK01": {
+          "name": "DOK01 (dokos_celler_lovell_1996)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "INA01": {
+          "name": "INA01 (inada_N_2009)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "WOL01": {
+          "name": "WOL01 (wolf_passarge_somsen_snoep_heinrich_westerhoff_2000)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "BOR01": {
+          "name": "BOR01 (borghans_dupont_goldbeter_1997a)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "HYN01": {
+          "name": "HYN01 (hynne_dano_sorensen_2001)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "JEL02": {
+          "name": "JEL02 (jelic_cupic_kolaranic_2005_Fig5)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "DUP02": {
+          "name": "DUP02 (dupont_1992b)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "WOL02": {
+          "name": "WOL02 (wolf_heinrich_2000)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "DIF01": {
+          "name": "DIF01 (difrancesco_noble_1985)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "VAN01": {
+          "name": "VAN01 (vanbeek_2007)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "DUP03": {
+          "name": "DUP03 (dupont_1991b)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "BER01": {
+          "name": "BER01 (bertram_arnot_zamponi_2002)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "LEN01": {
+          "name": "LEN01 (lenbury_pacheenburawana_1991)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "LI01": {
+          "name": "LI01 (li_1996_simple)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "LI02": {
+          "name": "LI02 (li_1996_simple_from_paper)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "REV01": {
+          "name": "REV01 (revilla_garcia-ramos_2003)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "PUR01": {
+          "name": "PUR01 (purvis_smith_koizumi_butera_2007)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "NYG01": {
+          "name": "NYG01 (nygren_fiset_firek_clark_lindblad_clark_giles_1998)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "PUR02": {
+          "name": "PUR02 (purvis_smith_koizumi_butera_2007_npc)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "HOD01": {
+          "name": "HOD01 (hodgkin_huxley_1952_variant01)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "REE01": {
+          "name": "REE01 (reed_nijhout_sparks_ulrich_2004)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "VIL01": {
+          "name": "VIL01 (vilar_kueh_barkai_leibler_2002)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "KAR01": {
+          "name": "KAR01 (karagiannis_popel_2006)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "SHO01": {
+          "name": "SHO01 (shorten_ocallaghan_davidson_soboleva_2007_variant01)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "BUT01": {
+          "name": "BUT01 (butera_rinzel_smith_1999)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "MAL01": {
+          "name": "MAL01 (maldonado_2006)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "ASL01": {
+          "name": "ASL01 (aslanidi_2009)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "BUT02": {
+          "name": "BUT02 (butera_rinzel_smith_1999_model2)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "MIT01": {
+          "name": "MIT01 (mittler_sulzer_neumann_perelson_1998)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "GUP01": {
+          "name": "GUP01 (gupta_aslakson_gurbaxani_vernon_2007_a)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "GUY01": {
+          "name": "GUY01 (guyton_muscle_blood_flow_control_2008)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "PHI01": {
+          "name": "PHI01 (phillips_2007)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "GUY02": {
+          "name": "GUY02 (guyton_pulmonary_oxygen_uptake_2008)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "PUL01": {
+          "name": "PUL01 (pulmonary_O2_parent)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "CAL01": {
+          "name": "CAL01 (calzone_thieffry_tyson_novak_2007)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "WOD01": {
+          "name": "WOD01 (wodarz_hamer_2007_b)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "GUP02": {
+          "name": "GUP02 (gupta_aslakson_gurbaxani_vernon_2007_b)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "M01": {
+          "name": "M01 (M_blood_flow_parent)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "LEN02": {
+          "name": "LEN02 (lenbury_ruktamatakul_amornsamarnkul_2001_a)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "KAR02": {
+          "name": "KAR02 (karagiannis_popel_2004)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "SHO02": {
+          "name": "SHO02 (shorten_ocallaghan_davidson_soboleva_2007)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "MAC01": {
+          "name": "MAC01 (mackenzie_1996)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "IRI01": {
+          "name": "IRI01 (iribe_kohl_noble_2006)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "BAG01": {
+          "name": "BAG01 (bagci_2008a)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "WOL03": {
+          "name": "WOL03 (wolf_sohn_heinrich_kuriyama_2001)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "WAN01": {
+          "name": "WAN01 (wang_2006)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "NEL01": {
+          "name": "NEL01 (nelson_murray_perelson_2000_general)",
+          "better": "lower",
+          "unit": "score"
+        },
+        "HUA01": {
+          "name": "HUA01 (huang_ferrell_1996)",
+          "better": "lower",
+          "unit": "score"
+        }
+      }
     },
     "physvista": {
       "url": "https://arxiv.org/html/2610.00559",
@@ -244612,6 +247712,17 @@
           "unit": "count"
         }
       }
+    },
+    "questflow-traders-arena": {
+      "url": "https://next.questflow.ai/leaderboard",
+      "feed": "https://next.questflow.ai/leaderboard",
+      "terms": "Questflow publishes the standings on its public trader leaderboard. https://next.questflow.ai/leaderboard",
+      "headline": "Questflow ranks accounts by weekly profit in USDC.",
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [
+        "Gemini 3.5 Pro"
+      ]
     },
     "quran-qa-2023-passage-retrieval": {
       "url": "https://aclanthology.org/2023.arabicnlp-1.76.pdf#page=4",
@@ -255069,6 +258180,23 @@
         }
       }
     },
+    "rtp-lx": {
+      "url": "https://arxiv.org/html/2404.14397",
+      "feed": "https://arxiv.org/html/2404.14397",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "This is the absolute difference in weighted Cohen’s kappa between model and human agreement, in kappa points.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "Llama-2-70b-chat",
+        "Llama-2-7b-chat",
+        "Llama-3-70b-Instruct",
+        "Mistral-7B-Instruct-v0.3",
+        "gemma-2b-it",
+        "gemma-7b-it"
+      ]
+    },
     "rtvlm": {
       "url": "https://arxiv.org/abs/2401.12915",
       "feed": "https://arxiv.org/html/2401.12915",
@@ -260692,6 +263820,22 @@
           "name": "Bio pmF1"
         }
       }
+    },
+    "self-instruct-user-oriented-instructions": {
+      "url": "https://aclanthology.org/2023.acl-long.754/",
+      "feed": "https://aclanthology.org/2023.acl-long.754.pdf",
+      "terms": "ACL Anthology copyright and licensing terms apply. https://aclanthology.org/info/copyright/",
+      "headline": "The score is the percentage of 252 instructions that received an acceptable response (rating A or B).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "GPT3 Self-Inst",
+        "GPT3 Self-Inst+SuperNI",
+        "GPT3+SuperNI Training",
+        "GPT3+T0 Training",
+        "InstructGPT 001"
+      ]
     },
     "semantic-dlp-catch-the-data-leak": {
       "url": "https://www.kaggle.com/benchmarks/karthiksethuraman6/semantic-dlp-catch-the-data-leak",
@@ -266974,6 +270118,117 @@
         }
       }
     },
+    "spatialbench-ropedia": {
+      "url": "https://github.com/Ropedia/SpatialBench/blob/HEAD/leaderboard.md",
+      "feed": "https://raw.githubusercontent.com/Ropedia/SpatialBench/HEAD/leaderboard.md",
+      "terms": "The SpatialBench repository uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
+      "headline": "The board lists average absolute relative depth error first. Lower is better. The score includes the dense regime.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CUT3R",
+        "DA3-Base",
+        "DA3-Small",
+        "DA3-Streaming",
+        "Fast3R",
+        "FastVGGT",
+        "InfiniteVGGT",
+        "LingbotMap*-S",
+        "LingbotMap*-W",
+        "LoGeR",
+        "LoGeR*",
+        "LongStream-B",
+        "LongStream-S",
+        "MASt3R-SLAM",
+        "Point3R",
+        "Scal3R",
+        "Spann3r 224",
+        "StreamVGGT",
+        "TTT3R",
+        "VGGT-Long",
+        "VGGT-SLAM",
+        "Wint3R",
+        "π³",
+        "π³-Long"
+      ],
+      "parts": {
+        "Single Frame: AbsRel": {
+          "name": "Single Frame: AbsRel",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Sparse: AbsRel": {
+          "name": "Sparse: AbsRel",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Sparse: AUC@30": {
+          "name": "Sparse: AUC@30",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Medium: AbsRel": {
+          "name": "Medium: AbsRel",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Medium: AUC@30": {
+          "name": "Medium: AUC@30",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Medium: ATE": {
+          "name": "Medium: ATE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Medium: F-Score": {
+          "name": "Medium: F-Score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Dense: AbsRel": {
+          "name": "Dense: AbsRel",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Dense: AUC@30": {
+          "name": "Dense: AUC@30",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Dense: ATE": {
+          "name": "Dense: ATE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Dense: F-Score": {
+          "name": "Dense: F-Score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Average: AbsRel": {
+          "name": "Average: AbsRel",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Average: AUC@30": {
+          "name": "Average: AUC@30",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Average: ATE": {
+          "name": "Average: ATE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Average: F-Score": {
+          "name": "Average: F-Score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "spatialeval-maze-nav": {
       "url": "https://arxiv.org/abs/2406.14852",
       "feed": "https://arxiv.org/html/2406.14852",
@@ -267967,6 +271222,16 @@
         }
       },
       "static": "paper"
+    },
+    "speedrunbench": {
+      "url": "https://arxiv.org/html/2610.08076",
+      "feed": "https://arxiv.org/html/2610.08076v1/table1_bymodel.png",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "Mean completion time as a percentage of the human world record across six games. Lower is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": []
     },
     "speko-llm-benchmark-v3": {
       "url": "https://speko.com/benchmarks/llm",
@@ -269454,6 +272719,31 @@
         }
       }
     },
+    "st-vqa": {
+      "url": "https://www.sota2.com/research/sota/scene-text-visual-question-answering-on-st-vqa-test",
+      "feed": "https://www.sota2.com/research/sota/scene-text-visual-question-answering-on-st-vqa-test",
+      "terms": "SOTA2 publishes this leaderboard at https://www.sota2.com/research/sota/scene-text-visual-question-answering-on-st-vqa-test.",
+      "host": "SOTA2",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "CRN",
+        "GIT",
+        "GIT2",
+        "LOGOS",
+        "LaAP-Net",
+        "M4C",
+        "M4C⁺ + TAG",
+        "PaLI-15B",
+        "PaLI-17B",
+        "PaLI-3B",
+        "SA-M4C",
+        "SMA",
+        "SSBaseline",
+        "TAP",
+        "TAP + TAG"
+      ]
+    },
     "stabletoolbench": {
       "url": "https://github.com/THUNLP-MT/StableToolBench",
       "feed": "https://raw.githubusercontent.com/THUNLP-MT/StableToolBench/master/README.md",
@@ -270440,6 +273730,72 @@
       "retrieved": "2026-11-23",
       "rows": 20,
       "unmatched": []
+    },
+    "strategy-bench": {
+      "url": "https://strategy.freysa.ai/leaderboard",
+      "feed": "https://strategy.freysa.ai/leaderboard",
+      "terms": "Public standings credited to Freysa, https://strategy.freysa.ai/leaderboard.",
+      "headline": "The board publishes the Deception Index as a percentage. It ranks by normalized Elo but does not show the Elo values.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "gemini-2.5-pro (snapshot unspecified)",
+        "qwen3-235b"
+      ],
+      "parts": {
+        "Deception": {
+          "name": "Deception",
+          "unit": "%"
+        },
+        "Detection": {
+          "name": "Detection",
+          "unit": "%"
+        },
+        "SHLiberal": {
+          "name": "SH Liberal",
+          "unit": "%"
+        },
+        "SHFascist": {
+          "name": "SH Fascist",
+          "unit": "%"
+        },
+        "AUImpostor": {
+          "name": "AU Impostor",
+          "unit": "%"
+        },
+        "AUCrewmate": {
+          "name": "AU Crewmate",
+          "unit": "%"
+        },
+        "AvalonGood": {
+          "name": "Avalon Good",
+          "unit": "%"
+        },
+        "AvalonEvil": {
+          "name": "Avalon Evil",
+          "unit": "%"
+        },
+        "SpyfallSpy": {
+          "name": "Spyfall Spy",
+          "unit": "%"
+        },
+        "WWVillager": {
+          "name": "WW Villager",
+          "unit": "%"
+        },
+        "WWWerewolf": {
+          "name": "WW Werewolf",
+          "unit": "%"
+        },
+        "SheriffTruth": {
+          "name": "Sheriff Truth",
+          "unit": "%"
+        },
+        "SheriffAccuracy": {
+          "name": "Sheriff Accuracy",
+          "unit": "%"
+        }
+      }
     },
     "strategyqa": {
       "url": "https://github.com/eladsegal/strategyqa",
@@ -278968,6 +282324,112 @@
         "Wav2Vec-BERT 2.0"
       ]
     },
+    "swm-bench-social-world-models": {
+      "url": "https://arxiv.org/html/2606.11482",
+      "feed": "https://arxiv.org/html/2606.11482",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
+      "headline": "This is the plain mean of the full Polymarket and Kalshi test sets’ MASE, the first reported metric. Lower is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "Autoformer",
+        "ChatTime",
+        "DLinear",
+        "FNF",
+        "Informer",
+        "LLMForecasting",
+        "PatchTST",
+        "SWM (prior)",
+        "Time-LLM",
+        "TimeCAP",
+        "TimeMixer",
+        "TimesNet",
+        "iTransformer"
+      ],
+      "parts": {
+        "Polymarket: MASE (All)": {
+          "name": "Polymarket: MASE (All)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Polymarket: MASE (Attr)": {
+          "name": "Polymarket: MASE (Attr)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Polymarket: MAE (All)": {
+          "name": "Polymarket: MAE (All)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Polymarket: MAE (Attr)": {
+          "name": "Polymarket: MAE (Attr)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Polymarket: DA (All)": {
+          "name": "Polymarket: DA (All)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Polymarket: DA (Attr)": {
+          "name": "Polymarket: DA (Attr)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Polymarket: Corr (All)": {
+          "name": "Polymarket: Corr (All)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Polymarket: Corr (Attr)": {
+          "name": "Polymarket: Corr (Attr)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Kalshi: MASE (All)": {
+          "name": "Kalshi: MASE (All)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Kalshi: MASE (Attr)": {
+          "name": "Kalshi: MASE (Attr)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Kalshi: MAE (All)": {
+          "name": "Kalshi: MAE (All)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Kalshi: MAE (Attr)": {
+          "name": "Kalshi: MAE (Attr)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "Kalshi: DA (All)": {
+          "name": "Kalshi: DA (All)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Kalshi: DA (Attr)": {
+          "name": "Kalshi: DA (Attr)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Kalshi: Corr (All)": {
+          "name": "Kalshi: Corr (All)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Kalshi: Corr (Attr)": {
+          "name": "Kalshi: Corr (Attr)",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "swt-bench": {
       "url": "https://swtbench.com/",
       "feed": "https://swtbench.com/ (default Lite table, Unit Test and Script modes, S)",
@@ -279770,6 +283232,67 @@
         },
         "Avg InD": {
           "name": "Avg InD"
+        }
+      }
+    },
+    "tailor-bench": {
+      "url": "https://tailor-bench.github.io/",
+      "feed": "https://tailor-bench.github.io/",
+      "terms": "The authors publish results on their GitHub Pages site. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+      "headline": "The score is the plain mean instruction adherence percentage across regular, unconventional and impossible interactions.",
+      "retrieved": "2026-11-24",
+      "rows": 28,
+      "unmatched": [
+        "Z-Image"
+      ],
+      "parts": {
+        "Regular: Instruction Adherence": {
+          "name": "Regular: Instruction Adherence",
+          "unit": "%"
+        },
+        "Regular: Interaction Accuracy": {
+          "name": "Regular: Interaction Accuracy",
+          "unit": "%"
+        },
+        "Regular: Physical Realism": {
+          "name": "Regular: Physical Realism",
+          "unit": "score"
+        },
+        "Regular: Perceptual Quality": {
+          "name": "Regular: Perceptual Quality",
+          "unit": "score"
+        },
+        "Unconventional: Instruction Adherence": {
+          "name": "Unconventional: Instruction Adherence",
+          "unit": "%"
+        },
+        "Unconventional: Interaction Accuracy": {
+          "name": "Unconventional: Interaction Accuracy",
+          "unit": "%"
+        },
+        "Unconventional: Physical Realism": {
+          "name": "Unconventional: Physical Realism",
+          "unit": "score"
+        },
+        "Unconventional: Perceptual Quality": {
+          "name": "Unconventional: Perceptual Quality",
+          "unit": "score"
+        },
+        "Impossible: Instruction Adherence": {
+          "name": "Impossible: Instruction Adherence",
+          "unit": "%"
+        },
+        "Impossible: Interaction Accuracy": {
+          "name": "Impossible: Interaction Accuracy",
+          "unit": "%"
+        },
+        "Impossible: Physical Realism": {
+          "name": "Impossible: Physical Realism",
+          "unit": "score"
+        },
+        "Impossible: Perceptual Quality": {
+          "name": "Impossible: Perceptual Quality",
+          "unit": "score"
         }
       }
     },
@@ -281481,6 +285004,24 @@
           "better": "lower"
         }
       }
+    },
+    "taxobench": {
+      "url": "https://arxiv.org/html/2601.12369",
+      "feed": "https://arxiv.org/html/2601.12369",
+      "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2601.12369",
+      "headline": "The score is the paper’s adjusted Rand index for leaf-level clustering, expressed on its percentage scale.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 28,
+      "unmatched": [
+        "DeepSeek",
+        "Doubao",
+        "Gemini",
+        "Grok",
+        "Perplexity",
+        "Qwen"
+      ],
+      "harnesses": "system"
     },
     "tb-mathmodel": {
       "url": "https://wxj630.github.io/terminal-bench-math-modeling/",
@@ -284637,6 +288178,97 @@
           "name": "Short-time objective intelligibility",
           "unit": "score",
           "better": "higher"
+        }
+      }
+    },
+    "toksuite": {
+      "url": "https://arxiv.org/html/2512.20757",
+      "feed": "https://arxiv.org/html/2512.20757",
+      "terms": "The authors publish the tables under the terms linked at https://arxiv.org/abs/2512.20757.",
+      "headline": "The paper reports the average relative drop in accuracy across perturbations. Smaller percentages indicate greater robustness.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 11,
+      "unmatched": [
+        "BLT-1B",
+        "Llama-3.1-8B-Instruct",
+        "Llama-3.2-1B-Instruct",
+        "Llama-3.2-3B-Instruct",
+        "Qwen3-0.6B-Base",
+        "Qwen3-1.7B-Base",
+        "TokSuite-Aya",
+        "TokSuite-BLOOM",
+        "TokSuite-ByT5",
+        "TokSuite-Comma",
+        "TokSuite-GPT-2",
+        "TokSuite-GPT-4o",
+        "TokSuite-Gemma-2",
+        "TokSuite-Llama-3.2",
+        "TokSuite-Phi-3",
+        "TokSuite-Qwen-3",
+        "TokSuite-Tekken",
+        "TokSuite-TokenMonster",
+        "TokSuite-XGLM",
+        "TokSuite-mBERT",
+        "babbage-002",
+        "gemma-2-2b",
+        "xglm-564M"
+      ],
+      "parts": {
+        "perturbation1": {
+          "name": "Input (NEN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation2": {
+          "name": "Diacr. (NEN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation3": {
+          "name": "Orth. Gram. (EN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation4": {
+          "name": "Orth. Gram. (NEN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation5": {
+          "name": "Morph (EN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation6": {
+          "name": "Morph (NEN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation7": {
+          "name": "Noise (EN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation8": {
+          "name": "Noise (NEN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation9": {
+          "name": "LaTeX (EN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation10": {
+          "name": "STEM (EN)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "perturbation11": {
+          "name": "Unic (EN)",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -289547,6 +293179,65 @@
       "unmatched": [
         "U0 (Ours)"
       ]
+    },
+    "uwbench": {
+      "url": "https://arxiv.org/html/2510.18262",
+      "feed": "https://arxiv.org/html/2510.18262",
+      "terms": "The authors publish the benchmark paper on arXiv. https://arxiv.org/abs/2510.18262",
+      "headline": "The paper reports no overall score across tasks, so the headline is image captioning BLEU-1, its first metric.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "InternVL-3.5-1B"
+      ],
+      "parts": {
+        "objectIdentification": {
+          "name": "Object Identification",
+          "unit": "%"
+        },
+        "quantityExistence": {
+          "name": "Quantity & Existence",
+          "unit": "%"
+        },
+        "positionSpatial": {
+          "name": "Position & Spatial Relations",
+          "unit": "%"
+        },
+        "shapeSizeForm": {
+          "name": "Shape, Size & Form",
+          "unit": "%"
+        },
+        "colorTexturePattern": {
+          "name": "Color, Texture & Pattern",
+          "unit": "%"
+        },
+        "objectAttributes": {
+          "name": "Object Attributes & Features",
+          "unit": "%"
+        },
+        "sceneEnvironment": {
+          "name": "Scene & Environment",
+          "unit": "%"
+        },
+        "substrateMaterials": {
+          "name": "Substrate & Materials",
+          "unit": "%"
+        },
+        "waterQuality": {
+          "name": "Water Quality & Visibility",
+          "unit": "%"
+        },
+        "reasoningComparison": {
+          "name": "Reasoning & Comparison",
+          "unit": "%"
+        },
+        "vqaAccuracy": {
+          "name": "All VQA questions",
+          "unit": "%"
+        }
+      }
     },
     "uzbek-open-asr-leaderboard": {
       "url": "https://github.com/NavAI-pro/uzbek-text-norm/blob/main/LEADERBOARD_ALL.md",
@@ -305665,6 +309356,37 @@
         "ru": {
           "name": "Zh-Ru d-BLEU",
           "unit": "score"
+        }
+      }
+    },
+    "wmt-mist-2025": {
+      "url": "https://aclanthology.org/2025.wmt-1.23/",
+      "feed": "https://aclanthology.org/2025.wmt-1.23.pdf",
+      "terms": "ACL Anthology publishes the organizers’ paper at https://aclanthology.org/2025.wmt-1.23/",
+      "headline": "The paper reports no overall score. This is the plain mean of its four subtask percentile ranks, with 100 for first place.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [
+        "DeepSeek V3 (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)"
+      ],
+      "parts": {
+        "LR": {
+          "name": "LR",
+          "unit": "%"
+        },
+        "MT": {
+          "name": "MT",
+          "unit": "%"
+        },
+        "OEG": {
+          "name": "OEG",
+          "unit": "%"
+        },
+        "XLSum": {
+          "name": "XLSum",
+          "unit": "%"
         }
       }
     },

@@ -21137,7 +21137,7 @@
     "level": "expert",
     "scoring": "head-to-head",
     "format": "open-ended",
-    "description": "Legal experts compare two answers to a legal task. The benchmark reports pairwise win percentages.",
+    "description": "Legal experts compare two answers to a legal task. Harvey ranks models and its own system variants by Elo from these pairwise votes.",
     "org": "Harvey",
     "released": "2025-11",
     "links": {
@@ -21146,7 +21146,7 @@
     },
     "access": "unknown",
     "note": "Harvey reports results in its launch article.",
-    "unit": "%",
+    "unit": "elo",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -28114,7 +28114,7 @@
     },
     "access": "public",
     "note": "The May 2026 paper reports a multi-agent benchmark with model comparisons. The abstract does not state the model count or best score.",
-    "unit": "score",
+    "unit": "rating",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -36601,7 +36601,7 @@
     },
     "access": "public",
     "note": "The paper compares eight models by net income.",
-    "unit": "score",
+    "unit": "usd",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -38685,7 +38685,7 @@
     "level": "university",
     "scoring": "verified",
     "format": "short-answer",
-    "description": "Models extract invoice fields using a business’s past bills. Ramp counts invoices where every field matches the submitted bill.",
+    "description": "Models extract invoice fields using a business’s past bills. Ramp counts invoices where every field matches the submitted bill, and reports each model’s rate as a multiple of the lowest model’s rate.",
     "org": "Ramp Labs",
     "released": "2026-03",
     "links": {
@@ -38693,7 +38693,7 @@
       "leaderboard": "https://builders.ramp.com/post/financial-benchmarks"
     },
     "access": "private",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -40709,8 +40709,8 @@
     },
     "access": "public",
     "note": "Reports latency and accuracy. Every number on the site comes from the open repo.",
-    "unit": "%",
-    "better": "higher",
+    "unit": "score",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://github.com/coval-ai/benchmarks"
@@ -47431,7 +47431,7 @@
     "access": "public",
     "note": "47 upvotes on Hugging Face papers.",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "likely",
     "evidence": [
       "https://huggingface.co/papers/2610.07967"
@@ -47551,7 +47551,7 @@
     "level": "expert",
     "scoring": "verified",
     "format": "multiple-choice",
-    "description": "Monitors inspect model reasoning and answers to detect cases where a harmless looking response conceals deceptive reasoning.",
+    "description": "Red-teamers write system prompts that make a model reason deceptively behind a harmless-looking answer. The paper reports how often each model’s reasoning turns deceptive on a random sample of the attacks.",
     "org": "Gray Swan and collaborators",
     "released": "2025-09",
     "links": {
@@ -47561,7 +47561,7 @@
     "access": "unknown",
     "note": "The authors compare safety monitors on examples collected in a competitive evaluation.",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://www.grayswan.ai/research",
@@ -54309,7 +54309,7 @@
     },
     "access": "public",
     "note": "It had 34 Hugging Face paper upvotes.",
-    "unit": "%",
+    "unit": "index",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -55956,7 +55956,7 @@
     },
     "access": "public",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2609.12949"
@@ -57365,7 +57365,7 @@
     "access": "public",
     "note": "GeoProbe contributes 168 cases within the suite. The evaluation covers 10 models. Domain-specific metrics do not define one interchangeable aggregate.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2610.00854",
@@ -61515,8 +61515,9 @@
       "paper": "https://arxiv.org/abs/2505.09694"
     },
     "access": "public",
-    "unit": "%",
-    "confidence": "verified"
+    "unit": "score",
+    "confidence": "verified",
+    "better": "higher"
   },
   {
     "id": "ewok",
@@ -62378,7 +62379,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Driving models plan trajectories from road recordings. A simulator executes the plans and measures success during emergency maneuvers and ordinary driving.",
+    "description": "Driving models plan trajectories from road recordings. A simulator executes the plans, and the paper ranks planners by S+, a 0 to 100 composite of safety, progress and comfort.",
     "org": "Tsinghua University and collaborators",
     "released": "2026-11",
     "links": {
@@ -62388,7 +62389,7 @@
       "dataset": "https://huggingface.co/datasets/Stary108/Extreme_Driving_Conditions_Dataset"
     },
     "access": "public",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -63143,8 +63144,8 @@
     },
     "access": "public",
     "note": "Human editors revised responses that introduced unsupported claims.",
-    "unit": "score",
-    "better": "higher",
+    "unit": "%",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://mcgill-nlp.github.io/FaithDial",
@@ -64789,7 +64790,7 @@
     "level": "university",
     "scoring": "verified",
     "format": "short-answer",
-    "description": "Models extract financial figures from profit and loss statements. Ramp counts values within one percent of a risk operator’s transcription.",
+    "description": "Models extract financial figures from profit and loss statements. Ramp counts values within one percent of a risk operator’s transcription, and reports each model’s rate as a multiple of the lowest model’s rate.",
     "org": "Ramp Labs",
     "released": "2026-03",
     "links": {
@@ -64797,7 +64798,7 @@
       "leaderboard": "https://builders.ramp.com/post/financial-benchmarks"
     },
     "access": "private",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -67563,7 +67564,7 @@
     "access": "public",
     "note": "On May 23, 2024, the authors reported the lowest OCR edit distance, 0.046, for Fox 1.8B with foreground focus. The hub also lists Qwen3-VL runs.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://app.primeintellect.ai/dashboard/environments/ob1/fox",
@@ -72794,7 +72795,7 @@
     },
     "access": "public",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2609.00525"
@@ -91159,7 +91160,7 @@
     },
     "access": "public",
     "note": "An EACL study ran models on 198 test proverbs. Its multiple-choice scores use new distractors. The original also reports automatic and model-judged scores.",
-    "unit": "rating",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -91740,8 +91741,8 @@
       "paper": "https://arxiv.org/abs/2611.12118"
     },
     "access": "unknown",
-    "unit": "%",
-    "better": "higher",
+    "unit": "score",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2611.12118"
@@ -95604,7 +95605,7 @@
       "repo": "https://github.com/tobideusser/kpi-edgar"
     },
     "access": "public",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -100491,7 +100492,7 @@
     },
     "access": "public",
     "note": "57 upvotes on Hugging Face papers.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -102327,7 +102328,7 @@
       "dataset": "https://huggingface.co/datasets/llmeval-fdu/LLMEval-Med"
     },
     "access": "public",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -105823,7 +105824,7 @@
     },
     "access": "public",
     "note": "AfroBench uses character n-gram overlap to score translations.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -106666,7 +106667,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Robot policies manipulate rigid and deformable objects in simulation. The authors report success across 112 tasks grouped into four difficulty levels.",
+    "description": "Robot policies manipulate rigid and deformable objects in simulation across 112 tasks grouped into four difficulty levels. The board ranks policies by the highest level they attain together with every level below it.",
     "org": "Chongkai Gao and colleagues",
     "released": "2026-11",
     "links": {
@@ -106677,7 +106678,7 @@
       "leaderboard": "https://maniladder-benchmark.github.io/#leaderboard"
     },
     "access": "public",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -117251,7 +117252,7 @@
     },
     "access": "public",
     "note": "The benchmark contains 1,104 videos and 5,320 cue-grounding questions. Targets are crowd-sourced apparent-personality ratings, not clinical diagnoses or verified personality traits. The metrics separately test agreement with ratings and grounding in video evidence.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -119579,8 +119580,8 @@
       "leaderboard": "https://modelslant.com/"
     },
     "access": "public",
-    "note": "The researchers publish ratings for 24 models from 180,126 paired judgments. The percentage measures how often respondents perceived slant in either direction.",
-    "unit": "%",
+    "note": "The researchers publish ratings for 24 models from 180,126 paired judgments. The board ranks models by the size of their average perceived slant, and also reports how often respondents saw slant in either direction.",
+    "unit": "score",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
@@ -132542,7 +132543,7 @@
     "level": "university",
     "scoring": "model-judged",
     "format": "short-answer",
-    "description": "Models perform seven language tasks with conflicting instructions embedded in their inputs. The port measures whether models follow the original task and separately tracks accuracy.",
+    "description": "Models perform seven language tasks with conflicting instructions embedded in their inputs. The paper’s attack success value counts how often the injected task wins over the original one.",
     "org": "hubert-marek",
     "released": "2023-10",
     "links": {
@@ -132552,7 +132553,7 @@
     "access": "public",
     "note": "The 2023 paper reports GPT-4 results across 49 task pairs, including 0.62 average attack success for its simplest condition. Scores depend on the condition.",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://app.primeintellect.ai/dashboard/environments/hubert-marek/open-prompt-injection",
@@ -133883,7 +133884,7 @@
     },
     "access": "public",
     "note": "The five task sets contain 3,953 questions in total. They use different scoring methods and should not be treated as one raw accuracy scale.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -137527,7 +137528,7 @@
     },
     "access": "private",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://builders.ramp.com/post/financial-benchmarks",
@@ -137985,7 +137986,7 @@
     "access": "public",
     "note": "50 scenarios and eleven systems in the paper. No system matched the reference probabilities while covering the valid range. 38 HF upvotes.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "likely",
     "evidence": [
       "https://arxiv.org/abs/2608.27345",
@@ -140391,8 +140392,8 @@
       "repo": "https://github.com/kloetergensc/Physiome-ODE"
     },
     "access": "public",
-    "unit": "score",
-    "better": "lower",
+    "unit": "elo",
+    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2502.07489"
@@ -147148,7 +147149,7 @@
     },
     "access": "public",
     "note": "Questflow reports agents from seven model providers in the original contest. Its Season 4 weekly standings label 26 of 31 accounts as models.",
-    "unit": "%",
+    "unit": "usd",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -155758,7 +155759,7 @@
     },
     "access": "public",
     "note": "AAAI 2025. The paper covers 28 languages and the repo now lists 38. Microsoft reported Phi-3.5 results on it in its Phi-3 safety post-training paper.",
-    "unit": "%",
+    "unit": "score",
     "better": "lower",
     "confidence": "likely",
     "evidence": [
@@ -160509,7 +160510,7 @@
       "repo": "https://github.com/yizhongw/self-instruct"
     },
     "access": "public",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -166295,7 +166296,7 @@
     "access": "public",
     "note": "NeurIPS 2026. 69 HF paper upvotes. Not the LatchBio SpatialBench for biology.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/papers/2605.27367",
@@ -167039,7 +167040,8 @@
     "access": "public",
     "note": "Agent writes an input tape and scoring runs in a separate container. Public repo covers the three open-source games. HF dataset is gated.",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "better": "lower"
   },
   {
     "id": "speko-llm-benchmark-v3",
@@ -169523,7 +169525,7 @@
     },
     "access": "public",
     "note": "The public leaderboard reports normalized Elo across six game environments. GPT-5 is listed at 83.9% on the checked page.",
-    "unit": "elo",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -175317,8 +175319,9 @@
     },
     "access": "public",
     "note": "Chronological train / Polymarket-test / Kalshi-test split limits leakage. Baselines are time-series foundation models. ICML 2026.",
-    "unit": "%",
-    "confidence": "verified"
+    "unit": "score",
+    "confidence": "verified",
+    "better": "lower"
   },
   {
     "id": "swt-bench",
@@ -176229,7 +176232,7 @@
     },
     "access": "public",
     "note": "The benchmark also provides a Gemini judge with the same rubrics. Checklist percentages and zero-to-five ratings measure different dimensions.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -176555,7 +176558,7 @@
     },
     "access": "public",
     "note": "WIRED covered the four-chatbot study. Dosimeter later collected 221 responses to ten of its English prompts. The original study covered 300 responses.",
-    "unit": "%",
+    "unit": "score",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
@@ -179870,8 +179873,8 @@
     },
     "access": "public",
     "note": "Grok 4.7 recorded the highest listed hub mean reward, 0.7666 on three examples on October 19, 2026. Other runs include Gemini 3.8 Flash and GPT-6 Luna.",
-    "unit": "score",
-    "better": "higher",
+    "unit": "%",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://app.primeintellect.ai/dashboard/environments/clouthier-labs/second-strike",
@@ -180862,7 +180865,7 @@
     },
     "access": "public",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://github.com/EleutherAI/lm-evaluation-harness/tree/d6de81643928d653435c431bae19945d41d32520/lm_eval/tasks/toksuite",
@@ -186811,7 +186814,7 @@
     },
     "access": "public",
     "note": "Passes test 4. The USI-Brain team tested eight question categories and object localization on the official split. The authors use rules and a model judge for question accuracy.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -198965,7 +198968,7 @@
     "access": "public",
     "note": "The organizers publish human scores for 16 models across ten languages on open-ended generation. Other tasks use their own metrics.",
     "successor": "wmt-mist-2026",
-    "unit": "rating",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
