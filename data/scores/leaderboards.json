@@ -33975,6 +33975,50 @@
         }
       }
     },
+    "biomedarena-datatecnica": {
+      "url": "https://biomedarena.ai/leaderboard",
+      "feed": "https://api.biomedarena.ai/api/v1/leaderboard/?limit=100",
+      "terms": "Public unauthenticated leaderboard API of BiomedArena.AI (DataTecnica and Arena), credited and linked by Benchmark Almanac.",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [
+        "gemini-2.5-flash (snapshot unspecified)",
+        "gemini-2.5-pro (snapshot unspecified)",
+        "gpt-4o (snapshot unspecified)",
+        "sonar-reasoning-pro"
+      ],
+      "harnesses": "system",
+      "stats": {
+        "matches": {
+          "name": "Matches played",
+          "unit": "count"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "ties": {
+          "name": "Ties",
+          "unit": "count"
+        },
+        "bothBad": {
+          "name": "Both bad votes",
+          "unit": "count",
+          "better": "lower"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "biomnibench": {
       "url": "https://xbench.org/profession/biomnibench",
       "feed": "https://xbench.org/<build>/index-*.js (results array with score, perTaskSd, time, cost, turns)",
@@ -64148,6 +64192,257 @@
         }
       }
     },
+    "compassbench-1-3": {
+      "url": "https://rank.opencompass.org.cn/leaderboard-llm",
+      "feed": "https://cdn.opencompass.org.cn/assets/llm-rank/llm-data-v2.24-07.20240805.json",
+      "terms": "OpenCompass robots restrictions include leaderboard data paths. The Almanac credits OpenCompass and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 20,
+      "unmatched": [
+        "Baichuan4",
+        "DeepSeek-V2-Chat-0628",
+        "DeepSeek-V2-Lite-Chat",
+        "Doubao-pro-32k/240615",
+        "Ernie-4.0-8K-Preview-0518",
+        "GLM-4-0520",
+        "Hunyuan-Standard-256k",
+        "InternLM2-Chat-20B",
+        "InternLM2.5-Chat-7B",
+        "Mistral-7B-Instruct-v0.3",
+        "Moonshot-v1-8K",
+        "Nanbeige2-16B-Chat",
+        "Qwen-Max-0428",
+        "Spark-v4-Ultra",
+        "Step-1-8K",
+        "abab6.5-chat"
+      ],
+      "parts": {
+        "Average_CN": {
+          "name": "Chinese average",
+          "group": "Language split"
+        },
+        "Average_EN": {
+          "name": "English average",
+          "group": "Language split"
+        },
+        "Language": {
+          "name": "Language",
+          "group": "Domain"
+        },
+        "Language_CN": {
+          "name": "Language (Chinese)",
+          "group": "Domain"
+        },
+        "Language_EN": {
+          "name": "Language (English)",
+          "group": "Domain"
+        },
+        "Knowledge": {
+          "name": "Knowledge",
+          "group": "Domain"
+        },
+        "Knowledge_CN": {
+          "name": "Knowledge (Chinese)",
+          "group": "Domain"
+        },
+        "Knowledge_EN": {
+          "name": "Knowledge (English)",
+          "group": "Domain"
+        },
+        "Reasoning": {
+          "name": "Reasoning",
+          "group": "Domain"
+        },
+        "Reasoning_CN": {
+          "name": "Reasoning (Chinese)",
+          "group": "Domain"
+        },
+        "Reasoning_EN": {
+          "name": "Reasoning (English)",
+          "group": "Domain"
+        },
+        "Math": {
+          "name": "Math",
+          "group": "Domain"
+        },
+        "Math_CN": {
+          "name": "Math (Chinese)",
+          "group": "Domain"
+        },
+        "Math_EN": {
+          "name": "Math (English)",
+          "group": "Domain"
+        },
+        "Code": {
+          "name": "Code",
+          "group": "Domain"
+        },
+        "Code_CN": {
+          "name": "Code (Chinese)",
+          "group": "Domain"
+        },
+        "Code_EN": {
+          "name": "Code (English)",
+          "group": "Domain"
+        },
+        "Instruct": {
+          "name": "Instruction following",
+          "group": "Domain"
+        },
+        "Instruct_CN": {
+          "name": "Instruction following (Chinese)",
+          "group": "Domain"
+        },
+        "Instruct_EN": {
+          "name": "Instruction following (English)",
+          "group": "Domain"
+        },
+        "Agent": {
+          "name": "Agent",
+          "group": "Domain"
+        },
+        "Agent_CN": {
+          "name": "Agent (Chinese)",
+          "group": "Domain"
+        },
+        "Agent_EN": {
+          "name": "Agent (English)",
+          "group": "Domain"
+        },
+        "NLP_CN_CE": {
+          "name": "NLP (Chinese)",
+          "group": "Subtask"
+        },
+        "Creation_CN_CE": {
+          "name": "Creation (Chinese)",
+          "group": "Subtask"
+        },
+        "Dialogue_CN_CE": {
+          "name": "Dialogue (Chinese)",
+          "group": "Subtask"
+        },
+        "NLP_EN_CE": {
+          "name": "NLP (English)",
+          "group": "Subtask"
+        },
+        "Creation_EN_CE": {
+          "name": "Creation (English)",
+          "group": "Subtask"
+        },
+        "Dialogue_EN_CE": {
+          "name": "Dialogue (English)",
+          "group": "Subtask"
+        },
+        "Knowledge_Humanity_EN_CE": {
+          "name": "Humanities knowledge (English)",
+          "group": "Subtask"
+        },
+        "Knowledge_Social_Science_EN_CE": {
+          "name": "Social science knowledge (English)",
+          "group": "Subtask"
+        },
+        "Knowledge_Engineering_EN_CE": {
+          "name": "Engineering knowledge (English)",
+          "group": "Subtask"
+        },
+        "Knowledge_Science_EN_CE": {
+          "name": "Science knowledge (English)",
+          "group": "Subtask"
+        },
+        "Knowledge_Humanity_CN_CE": {
+          "name": "Humanities knowledge (Chinese)",
+          "group": "Subtask"
+        },
+        "Knowledge_Social_Science_CN_CE": {
+          "name": "Social science knowledge (Chinese)",
+          "group": "Subtask"
+        },
+        "Knowledge_Engineering_CN_CE": {
+          "name": "Engineering knowledge (Chinese)",
+          "group": "Subtask"
+        },
+        "Knowledge_Science_CN_CE": {
+          "name": "Science knowledge (Chinese)",
+          "group": "Subtask"
+        },
+        "Reason_Common_Sense_CN_CE": {
+          "name": "Commonsense reasoning (Chinese)",
+          "group": "Subtask"
+        },
+        "Reason_Social_CN_CE": {
+          "name": "Social reasoning (Chinese)",
+          "group": "Subtask"
+        },
+        "Reason_Humanities_CN_CE": {
+          "name": "Humanities reasoning (Chinese)",
+          "group": "Subtask"
+        },
+        "Reason_Science_Engineering_CN_CE": {
+          "name": "Science and engineering reasoning (Chinese)",
+          "group": "Subtask"
+        },
+        "Reason_Common_Sense_EN_CE": {
+          "name": "Commonsense reasoning (English)",
+          "group": "Subtask"
+        },
+        "Reason_Social_EN_CE": {
+          "name": "Social reasoning (English)",
+          "group": "Subtask"
+        },
+        "Reason_Humanities_EN_CE": {
+          "name": "Humanities reasoning (English)",
+          "group": "Subtask"
+        },
+        "Reason_Science_Engineering_EN_CE": {
+          "name": "Science and engineering reasoning (English)",
+          "group": "Subtask"
+        },
+        "Math_College_CN": {
+          "name": "College math (Chinese)",
+          "group": "Subtask"
+        },
+        "Math_College_EN": {
+          "name": "College math (English)",
+          "group": "Subtask"
+        },
+        "Math_Arith": {
+          "name": "Arithmetic",
+          "group": "Subtask"
+        },
+        "HumanEval_CN": {
+          "name": "HumanEval (Chinese)",
+          "group": "Subtask"
+        },
+        "HumanEval_Plus_EN": {
+          "name": "HumanEval+ (English)",
+          "group": "Subtask"
+        },
+        "LCBench_CN": {
+          "name": "LiveCodeBench (Chinese)",
+          "group": "Subtask"
+        },
+        "LCBench_EN": {
+          "name": "LiveCodeBench (English)",
+          "group": "Subtask"
+        },
+        "Code_QA_CN": {
+          "name": "Code QA (Chinese)",
+          "group": "Subtask"
+        },
+        "Code_QA_EN": {
+          "name": "Code QA (English)",
+          "group": "Subtask"
+        },
+        "TEval_CN": {
+          "name": "T-Eval (Chinese)",
+          "group": "Subtask"
+        },
+        "TEval_EN": {
+          "name": "T-Eval (English)",
+          "group": "Subtask"
+        }
+      }
+    },
     "compassrank": {
       "url": "https://rank.opencompass.org.cn/leaderboard-llm",
       "feed": "https://rank.opencompass.org.cn/gw/opencompass-be/api/v1/rank/listRankTableAvailableMonths (current CompassBench month and CDN data)",
@@ -74649,6 +74944,39 @@
         }
       }
     },
+    "cursorbench-3-2": {
+      "url": "https://web.archive.org/web/20260909171121/https://cursor.com/cursorbench",
+      "feed": "https://web.archive.org/web/20260909171121id_/https://cursor.com/cursorbench",
+      "terms": "Cursor's robots.txt allows the leaderboard. Cursor's terms restrict automated extraction. The Internet Archive preserves this public Cursor table and chart, and Benchmark Almanac credits and links Cursor as the source.",
+      "retrieved": "2026-11-24",
+      "rows": 66,
+      "unmatched": [],
+      "chart": {
+        "title": "CursorBench 3.2 score by average cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Average cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "CursorBench 3.2 score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "reference": [
+        "Cursor"
+      ],
+      "stats": {
+        "steps": {
+          "name": "Steps per task",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
+    },
     "cursorbench-4-0": {
       "url": "https://web.archive.org/web/20261117220402/https://cursor.com/cursorbench",
       "feed": "https://web.archive.org/web/20261117220413id_/https://cursor.com/marketing-static/_next/static/immutable/chunks/0j8zueg4l4cnv.js (the chart data of the archived 2026-11-17 page)",
@@ -75952,6 +76280,16 @@
           "name": "Executable percentage"
         }
       }
+    },
+    "cyscenariobench": {
+      "url": "https://www.irregular.com/research/assessing-gpt-6.2-astra-against-offensive-security-benchmarks",
+      "feed": "https://www.irregular.com/research/assessing-gpt-6.2-astra-against-offensive-security-benchmarks",
+      "terms": "Public Irregular evaluation report. https://www.irregular.com/research/assessing-gpt-6.2-astra-against-offensive-security-benchmarks",
+      "headline": "Average success rate across 11 private multi-stage offensive security scenarios, with both evaluated models solving 9 of 11 scenarios at least once.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": []
     },
     "d-rex-gray-swan": {
       "url": "https://arxiv.org/html/2509.17938",
@@ -97919,6 +98257,97 @@
         }
       }
     },
+    "evalplus": {
+      "url": "https://evalplus.github.io/leaderboard.html",
+      "feed": "https://evalplus.github.io/results.json (pass@1 average+, humaneval+, mbpp+, humaneval, mbpp)",
+      "terms": "Static JSON on the EvalPlus GitHub Pages site; the EvalPlus repository is Apache-2.0.",
+      "retrieved": "2026-11-24",
+      "rows": 35,
+      "unmatched": [
+        "Artigenz-Coder-DS-6.7B",
+        "CodeGen-16B",
+        "CodeGen-2B",
+        "CodeGen-6B",
+        "CodeLlama-13B",
+        "CodeLlama-34B",
+        "CodeLlama-7B",
+        "CodeQwen1.5-7B-Chat",
+        "CodeT5+-16B",
+        "CodeT5+-2B",
+        "CodeT5+-6B",
+        "Codestral-22B-v0.1",
+        "Command-R+ (April 2024)",
+        "DeepSeek-Coder-1.3B-base",
+        "DeepSeek-Coder-1.3B-instruct",
+        "DeepSeek-Coder-33B-instruct",
+        "DeepSeek-Coder-6.7B-base",
+        "DeepSeek-Coder-6.7B-instruct",
+        "DeepSeek-Coder-7B-instruct-v1.5",
+        "Grok Beta",
+        "Llama3-8B-base",
+        "Magicoder-S-CL-7B",
+        "Magicoder-S-DS-6.7B",
+        "MistralHermes-CodePro-7B-v1",
+        "OpenChat-3.5-7B-0106",
+        "OpenCodeInterpreter-DS-33B",
+        "OpenCodeInterpreter-DS-6.7B",
+        "OpenCoder-8B-Instruct",
+        "OpenHermes-2.5-Code-290k-13B",
+        "StarCoder-15B",
+        "WaveCoder-Ultra-6.7B",
+        "WhiteRabbitNeo-33B-v1",
+        "WizardCoder-15B-V1.0",
+        "WizardCoder-Python-34B-V1.0",
+        "WizardCoder-Python-7B-V1.0",
+        "XwinCoder-34B",
+        "Zephyr β-7B",
+        "code-millenials-34B",
+        "codegemma-2b",
+        "codegemma-7b",
+        "codegemma-7b-it",
+        "dolphin-2.6-mixtral-8x7b",
+        "gemma-7b-it",
+        "speechless-code-mistral-7B-v1.0",
+        "speechless-codellama-34B-v2.0",
+        "speechless-coder-ds-6.7B",
+        "speechless-coding-7B-16k-tora",
+        "speechless-starcoder2-15b",
+        "speechless-starcoder2-7b",
+        "stable-code-3B",
+        "starchat2-15b-v0.1",
+        "starcoder2-15b-instruct-v0.1",
+        "xDAN-L1-Chat-RL-v1-7B",
+        "zyte-1B"
+      ],
+      "parts": {
+        "humanevalPlus": {
+          "name": "HumanEval+",
+          "group": "EvalPlus tests"
+        },
+        "mbppPlus": {
+          "name": "MBPP+",
+          "group": "EvalPlus tests"
+        },
+        "humaneval": {
+          "name": "HumanEval",
+          "group": "Base tests"
+        },
+        "mbpp": {
+          "name": "MBPP",
+          "group": "Base tests"
+        },
+        "baseAverage": {
+          "name": "Base average",
+          "group": "Base tests"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
+    },
     "evaluating-user-simulators-arena": {
       "url": "https://arxiv.org/html/2611.24892",
       "feed": "https://arxiv.org/html/2611.24892",
@@ -108423,6 +108852,77 @@
           "name": "Human win rate",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "fiction-livebench": {
+      "url": "https://fiction.live/stories/Fiction-liveBench-Feb-21-2025/oQdzQvKHw8JyXbN87",
+      "feed": "https://cdn6.fiction.live/file/fictionlive/a7be0188-9a0a-4b19-a4b3-97e7deecf52e.png and https://cdn6.fiction.live/file/fictionlive/5aa21fca-ff97-4483-9dd6-ae141dfe0a9e.png (transcribed 2026-11-24)",
+      "terms": "Public Fiction.liveBench results page. https://fiction.live/stories/Fiction-liveBench-Feb-21-2025/oQdzQvKHw8JyXbN87",
+      "headline": "Accuracy at 16k context length (matching Epoch AI), with all eleven context lengths from 0 to 192k tokens kept in parts.",
+      "retrieved": "2026-11-24",
+      "rows": 57,
+      "unmatched": [
+        "chatgpt-4o-latest (snapshot unspecified)",
+        "gemini-2.5-flash (snapshot unspecified)",
+        "gemini-2.5-flash-preview (snapshot unspecified)",
+        "sonoma-sky-alpha"
+      ],
+      "parts": {
+        "c0": {
+          "name": "0 tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c400": {
+          "name": "400 tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c1k": {
+          "name": "1k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c2k": {
+          "name": "2k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c4k": {
+          "name": "4k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c8k": {
+          "name": "8k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c16k": {
+          "name": "16k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c32k": {
+          "name": "32k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c60k": {
+          "name": "60k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c120k": {
+          "name": "120k tokens",
+          "group": "Context length",
+          "unit": "%"
+        },
+        "c192k": {
+          "name": "192k tokens",
+          "group": "Context length",
+          "unit": "%"
         }
       }
     },
@@ -139012,6 +139512,111 @@
         }
       }
     },
+    "image-generation-labelbox": {
+      "url": "https://web.archive.org/web/20241013063144/https://labelbox.com/leaderboards/image-generation/",
+      "feed": "https://web.archive.org/web/20241013063144id_/https://labelbox.com/leaderboards/image-generation/",
+      "terms": "Labelbox links its terms of service at https://docs.labelbox.com/page/terms-of-service. The Internet Archive preserves this public multiway leaderboard, and Benchmark Almanac credits and links Labelbox as the source.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "Flux 1.5",
+        "Google Imagen 3",
+        "Stablediffusion 3"
+      ],
+      "stats": {
+        "trueSkill": {
+          "name": "TrueSkill rating",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "averageRating": {
+          "name": "Average rank",
+          "unit": "count",
+          "better": "lower"
+        },
+        "first": {
+          "name": "Ranked first share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "second": {
+          "name": "Ranked second share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "third": {
+          "name": "Ranked third share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fourth": {
+          "name": "Ranked fourth share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "fifth": {
+          "name": "Ranked fifth share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "visualAppeal1": {
+          "name": "Visual appeal rating 1 share",
+          "unit": "%"
+        },
+        "visualAppeal2": {
+          "name": "Visual appeal rating 2 share",
+          "unit": "%"
+        },
+        "visualAppeal3": {
+          "name": "Visual appeal rating 3 share",
+          "unit": "%"
+        },
+        "visualAppeal4": {
+          "name": "Visual appeal rating 4 share",
+          "unit": "%"
+        },
+        "visualAppeal5": {
+          "name": "Visual appeal rating 5 share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "promptAlignment1": {
+          "name": "Prompt alignment rating 1 share",
+          "unit": "%"
+        },
+        "promptAlignment2": {
+          "name": "Prompt alignment rating 2 share",
+          "unit": "%"
+        },
+        "promptAlignment3": {
+          "name": "Prompt alignment rating 3 share",
+          "unit": "%"
+        },
+        "promptAlignment4": {
+          "name": "Prompt alignment rating 4 share",
+          "unit": "%"
+        },
+        "promptAlignment5": {
+          "name": "Prompt alignment rating 5 share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "overallPreferenceLowShare": {
+          "name": "Overall preference low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "overallPreferenceMediumShare": {
+          "name": "Overall preference medium share",
+          "unit": "%"
+        },
+        "overallPreferenceHighShare": {
+          "name": "Overall preference high share",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "image-generation-labelbox-2": {
       "url": "https://labelbox.com/leaderboards/image-generation/",
       "feed": "https://labelbox.com/leaderboards/image-generation/",
@@ -152850,6 +153455,62 @@
         "Multilingual BERT"
       ]
     },
+    "japanese-llm-leaderboard-lm-evaluation-harness": {
+      "url": "https://github.com/Stability-AI/lm-evaluation-harness/tree/jp-stable#leaderboard",
+      "feed": "https://raw.githubusercontent.com/Stability-AI/lm-evaluation-harness/jp-stable/README.md",
+      "terms": "Public Stability AI lm-evaluation-harness repository on GitHub (MIT license). https://github.com/Stability-AI/lm-evaluation-harness/tree/jp-stable",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "cyberagent-open-calm-3b",
+        "cyberagent-open-calm-7b",
+        "rinna-bilingual-gpt-neox-4b",
+        "rinna-bilingual-gpt-neox-4b-instruction-ppo",
+        "rinna-bilingual-gpt-neox-4b-instruction-sft",
+        "rinna-japanese-gpt-1b",
+        "rinna-japanese-gpt-neox-3.6b",
+        "rinna-japanese-gpt-neox-3.6b-instruction-ppo",
+        "rinna-japanese-gpt-neox-3.6b-instruction-sft",
+        "rinna-japanese-gpt-neox-3.6b-instruction-sft-v2",
+        "rinna-japanese-gpt-neox-small",
+        "stabilityai-japanese-stablelm-base-alpha-7b",
+        "stabilityai-japanese-stablelm-instruct-alpha-7b"
+      ],
+      "parts": {
+        "jcommonsenseqa": {
+          "name": "JCommonsenseQA",
+          "unit": "score"
+        },
+        "jnli": {
+          "name": "JNLI",
+          "unit": "score"
+        },
+        "marc_ja": {
+          "name": "MARC-ja",
+          "unit": "score"
+        },
+        "jsquad": {
+          "name": "JSQuAD",
+          "unit": "score"
+        },
+        "jaqket_v2": {
+          "name": "JAQKET v2",
+          "unit": "score"
+        },
+        "xlsum_ja": {
+          "name": "XL-Sum (ja)",
+          "unit": "score"
+        },
+        "xwinograd_ja": {
+          "name": "XWinograd (ja)",
+          "unit": "score"
+        },
+        "mgsm": {
+          "name": "MGSM (ja)",
+          "unit": "score"
+        }
+      }
+    },
     "jarvis-bench-voicearena": {
       "url": "https://voicearena.com/jarvis-bench",
       "feed": "https://voicearena.com/jarvis-bench",
@@ -156106,6 +156767,47 @@
         "averageBets": {
           "name": "Average bets",
           "unit": "count"
+        }
+      }
+    },
+    "kernelbench": {
+      "url": "https://arxiv.org/abs/2502.10517",
+      "feed": "https://arxiv.org/html/2502.10517",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/abs/2502.10517",
+      "headline": "The paper reports no overall score, so this is the plain mean of fast_1 over PyTorch Eager across Levels 1, 2 and 3.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Claude 3.5 Sonnet (snapshot unspecified)",
+        "DeepSeek R1 (snapshot unspecified)",
+        "DeepSeek V3 (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)"
+      ],
+      "parts": {
+        "level1": {
+          "name": "Level 1 (PyTorch Eager)",
+          "group": "PyTorch Eager"
+        },
+        "level2": {
+          "name": "Level 2 (PyTorch Eager)",
+          "group": "PyTorch Eager"
+        },
+        "level3": {
+          "name": "Level 3 (PyTorch Eager)",
+          "group": "PyTorch Eager"
+        },
+        "level1Compile": {
+          "name": "Level 1 (torch.compile)",
+          "group": "torch.compile"
+        },
+        "level2Compile": {
+          "name": "Level 2 (torch.compile)",
+          "group": "torch.compile"
+        },
+        "level3Compile": {
+          "name": "Level 3 (torch.compile)",
+          "group": "torch.compile"
         }
       }
     },
@@ -182271,6 +182973,258 @@
         "素灵智医大模型"
       ]
     },
+    "medbench-opencompass-4": {
+      "url": "https://medbench.opencompass.org.cn/home",
+      "feed": "https://medbench.opencompass.org.cn/api/v1/base/evaluation/list/v4 (periodVersion v4, official LLM, VLM and Agent leaderboards)",
+      "terms": "MedBench public leaderboard operated by Shanghai AI Laboratory and OpenCompass. https://medbench.opencompass.org.cn/",
+      "headline": "LLM track overall score across five clinical capability dimensions, with matched multimodal and agent track overall scores and all 36 LLM subtasks kept in parts.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "AntAngelMed",
+        "GPT-4o (snapshot unspecified)",
+        "Han_April_Model",
+        "HuatuoGPT-Vision",
+        "ME-base",
+        "Med-Go 0528",
+        "MedGemma",
+        "TCM_DIFF",
+        "U2-Med",
+        "UniGPT-Med-U1",
+        "WiseDiag v2",
+        "中医辨证大模型",
+        "京医千询",
+        "元识医疗大模型",
+        "千问健康大模型",
+        "华为云健康管理大模型",
+        "卓睦鸟医疗大模型",
+        "微医医疗大模型",
+        "惠每医疗大模型"
+      ],
+      "parts": {
+        "vlmOverall": {
+          "name": "Multimodal overall",
+          "group": "Track",
+          "unit": "score"
+        },
+        "agentOverall": {
+          "name": "Agent overall",
+          "group": "Track",
+          "unit": "score"
+        },
+        "medKnowledgeDim": {
+          "name": "Medical knowledge QA",
+          "group": "Capability dimension",
+          "unit": "score"
+        },
+        "medLangGenDim": {
+          "name": "Medical language generation",
+          "group": "Capability dimension",
+          "unit": "score"
+        },
+        "medComplexInferDim": {
+          "name": "Complex medical reasoning",
+          "group": "Capability dimension",
+          "unit": "score"
+        },
+        "medSeeDim": {
+          "name": "Medical language understanding",
+          "group": "Capability dimension",
+          "unit": "score"
+        },
+        "medSafetyEthicsDim": {
+          "name": "Medical safety and ethics",
+          "group": "Capability dimension",
+          "unit": "score"
+        },
+        "medExamDim": {
+          "name": "MedExam",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medHcDim": {
+          "name": "MedHC",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medMcDim": {
+          "name": "MedMC",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medSpeQaDim": {
+          "name": "MedSpeQA",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medHgDim": {
+          "name": "MedHG",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medLitQaDim": {
+          "name": "MedLitQA",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medRehabDim": {
+          "name": "MedRehab",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medRxPlanDim": {
+          "name": "MedRxPlan",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medPsychCareDim": {
+          "name": "MedPsychCare",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medPsychQaDim": {
+          "name": "MedPsychQA",
+          "group": "Medical knowledge QA",
+          "unit": "score"
+        },
+        "medRecordGenDim": {
+          "name": "MedRecordGen",
+          "group": "Medical language generation",
+          "unit": "score"
+        },
+        "medPopularDim": {
+          "name": "MedPopular",
+          "group": "Medical language generation",
+          "unit": "score"
+        },
+        "medSummaryDim": {
+          "name": "MedSummary",
+          "group": "Medical language generation",
+          "unit": "score"
+        },
+        "medExplainDim": {
+          "name": "MedExplain",
+          "group": "Medical language generation",
+          "unit": "score"
+        },
+        "medTeachDim": {
+          "name": "MedTeach",
+          "group": "Medical language generation",
+          "unit": "score"
+        },
+        "cmbClinExtendedDim": {
+          "name": "CMB-Clin-extended",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "ddxAdvancedDim": {
+          "name": "DDx-advanced",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medTreatDim": {
+          "name": "MedTreat",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medOutcomeDim": {
+          "name": "MedOutcome",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medAnalysisDim": {
+          "name": "MedAnalysis",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medDiagDim": {
+          "name": "MedDiag",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medDifferDim": {
+          "name": "MedDiffer",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medCareDim": {
+          "name": "MedCare",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medPrimaryDim": {
+          "name": "MedPrimary",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "medPhmDim": {
+          "name": "MedPHM",
+          "group": "Complex medical reasoning",
+          "unit": "score"
+        },
+        "smdocDim": {
+          "name": "SMDoc",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medRxCheckDim": {
+          "name": "MedRxCheck",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medInsureCheckDim": {
+          "name": "MedInsureCheck",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medInsureCalcDim": {
+          "name": "MedInsureCalc",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medChartQcDim": {
+          "name": "MedChartQC",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medReportQcDim": {
+          "name": "MedReportQC",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medPathQcDim": {
+          "name": "MedPathQC",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medTermDim": {
+          "name": "MedTerm",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medSynonymDim": {
+          "name": "MedSynonym",
+          "group": "Medical language understanding",
+          "unit": "score"
+        },
+        "medSafetyDim": {
+          "name": "MedSafety",
+          "group": "Medical safety and ethics",
+          "unit": "score"
+        },
+        "medEthicsDim": {
+          "name": "MedEthics",
+          "group": "Medical safety and ethics",
+          "unit": "score"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
+    },
     "medbench-opencompass-5": {
       "url": "https://medbench.opencompass.org.cn/home",
       "feed": "https://arxiv.org/html/2606.24155",
@@ -204942,6 +205896,71 @@
         }
       }
     },
+    "mvpbench": {
+      "url": "https://arxiv.org/abs/2506.09987",
+      "feed": "https://arxiv.org/html/2506.09987 (Table 4)",
+      "terms": "arXiv permits automated reading of HTML papers under robots.txt. Paper tables are attributed to their authors. https://arxiv.org/abs/2506.09987",
+      "headline": "Closed-source models in Table 4 are evaluated only on MVP-mini, so this uses the MVP-mini macro-average, with full MVP scores and all four category breakdowns kept in parts.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "Gemini-1.5 Pro (snapshot unspecified)",
+        "LongVU (LLaMA3-3B)",
+        "LongVU (Qwen2-7B)",
+        "Tarsier-34B",
+        "Tarsier-7B",
+        "VideoChat2 (Mistral-7B)"
+      ],
+      "parts": {
+        "miniHumanObject": {
+          "name": "Human-object interactions (mini)",
+          "group": "MVP-mini",
+          "unit": "%"
+        },
+        "miniRobotObject": {
+          "name": "Robot-object interactions (mini)",
+          "group": "MVP-mini",
+          "unit": "%"
+        },
+        "miniIntuitivePhysics": {
+          "name": "Intuitive physics and collisions (mini)",
+          "group": "MVP-mini",
+          "unit": "%"
+        },
+        "miniTemporal": {
+          "name": "Coarse-grained temporal reasoning (mini)",
+          "group": "MVP-mini",
+          "unit": "%"
+        },
+        "fullMacroAvg": {
+          "name": "Full MVP macro-average",
+          "group": "Full MVP",
+          "unit": "%"
+        },
+        "fullHumanObject": {
+          "name": "Human-object interactions (full)",
+          "group": "Full MVP",
+          "unit": "%"
+        },
+        "fullRobotObject": {
+          "name": "Robot-object interactions (full)",
+          "group": "Full MVP",
+          "unit": "%"
+        },
+        "fullIntuitivePhysics": {
+          "name": "Intuitive physics and collisions (full)",
+          "group": "Full MVP",
+          "unit": "%"
+        },
+        "fullTemporal": {
+          "name": "Coarse-grained temporal reasoning (full)",
+          "group": "Full MVP",
+          "unit": "%"
+        }
+      }
+    },
     "mwahaha": {
       "url": "https://pln-fing-udelar.github.io/semeval-2026-humor-gen/results.html",
       "feed": "https://pln-fing-udelar.github.io/semeval-2026-humor-gen/scores/a-en.json",
@@ -205768,6 +206787,78 @@
         }
       }
     },
+    "natural-questions": {
+      "url": "https://aclanthology.org/Q19-1026/",
+      "feed": "https://aclanthology.org/Q19-1026.pdf (Table 3)",
+      "terms": "ACL Anthology papers are published under CC BY 4.0. https://aclanthology.org/Q19-1026/",
+      "headline": "Long answer test F1 from Table 3 of the original Natural Questions paper, with dev F1, short answer F1, and precision and recall kept in parts and stats.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "DecAtt + DocReader",
+        "DocumentQA"
+      ],
+      "parts": {
+        "longDevF1": {
+          "name": "Long answer dev F1",
+          "group": "Long answer",
+          "unit": "%"
+        },
+        "shortTestF1": {
+          "name": "Short answer test F1",
+          "group": "Short answer",
+          "unit": "%"
+        },
+        "shortDevF1": {
+          "name": "Short answer dev F1",
+          "group": "Short answer",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "longTestP": {
+          "name": "Long answer test precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "longTestR": {
+          "name": "Long answer test recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "longDevP": {
+          "name": "Long answer dev precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "longDevR": {
+          "name": "Long answer dev recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shortTestP": {
+          "name": "Short answer test precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shortTestR": {
+          "name": "Short answer test recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shortDevP": {
+          "name": "Short answer dev precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "shortDevR": {
+          "name": "Short answer dev recall",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "naturalbench": {
       "url": "https://linzhiqiu.github.io/papers/naturalbench",
       "feed": "https://arxiv.org/html/2410.14669",
@@ -206361,6 +207452,215 @@
         },
         "JCommonsenseQA": {
           "name": "JCommonsenseQA",
+          "unit": "score"
+        }
+      }
+    },
+    "nejumi-llm-leaderboard-2": {
+      "url": "https://wandb.ai/wandb-japan/llm-leaderboard",
+      "feed": "https://api.wandb.ai/graphql (wandb-japan/llm-leaderboard, leaderboard-tagged runs)",
+      "terms": "The tagged repository identifies this public W&B project and states no separate terms for its scores. https://github.com/wandb/llm-leaderboard/tree/v2.0.0",
+      "headline": "The board reports jaster (0 to 1) and MT-Bench (0 to 10) on separate scales, so this is the AVG_jaster column, with AVG_mtbench and all category scores kept in parts.",
+      "retrieved": "2026-11-24",
+      "rows": 29,
+      "unmatched": [
+        "Cohere",
+        "Open-Orca/Mistral-7B-OpenOrca",
+        "SakanaAI/EvoLLM-JP-A-v1-7B",
+        "SakanaAI/EvoLLM-JP-v1-10B",
+        "SakanaAI/EvoLLM-JP-v1-7B",
+        "anthropic.claude-v1",
+        "augmxnt/shisa-gamma-7b-v1",
+        "cyberagent/calm2-7b-chat",
+        "elyza/ELYZA-japanese-Llama-2-13b-fast-instruct",
+        "elyza/ELYZA-japanese-Llama-2-13b-instruct",
+        "elyza/ELYZA-japanese-Llama-2-7b-fast-instruct",
+        "elyza/ELYZA-japanese-Llama-2-7b-instruct",
+        "karakuri-ai/karakuri-lm-70b-chat-v0.1",
+        "karakuri-ai/karakuri-lm-8x7b-chat-v0.1",
+        "karakuri-ai/karakuri-lm-8x7b-instruct-v0.1",
+        "lightblue/qarasu-14B-chat-plus-unleashed",
+        "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0",
+        "llm-jp/llm-jp-13b-instruct-full-jaster-v1.0",
+        "llm-jp/llm-jp-13b-instruct-lora-jaster-v1.0",
+        "matsuo-lab/weblab-10b-instruction-sft",
+        "nitky/Superswallow-70b-v0.1",
+        "rinna/nekomata-14b-instruction",
+        "rinna/nekomata-7b-instruction",
+        "rinna/youri-7b-chat",
+        "rinna/youri-7b-instruction",
+        "solar-1-mini-chat-ja",
+        "stabilityai/StableBeluga-13B",
+        "stabilityai/StableBeluga-7B",
+        "stabilityai/japanese-stablelm-instruct-beta-70b",
+        "stabilityai/japanese-stablelm-instruct-gamma-7b",
+        "stockmark/stockmark-13b-instruct",
+        "tokyotech-llm/Swallow-13b-instruct-hf",
+        "tokyotech-llm/Swallow-70b-instruct-hf",
+        "tokyotech-llm/Swallow-7b-instruct-hf",
+        "tokyotech-llm/Swallow-MS-7b-v0.1",
+        "your modelname"
+      ],
+      "parts": {
+        "EL": {
+          "name": "Entity linking (EL)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "FA": {
+          "name": "Fundamental analysis (FA)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "MC": {
+          "name": "Multiple choice (MC)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "MR": {
+          "name": "Mathematical reasoning (MR)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "NLI": {
+          "name": "Natural language inference (NLI)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "QA": {
+          "name": "Question answering (QA)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "RC": {
+          "name": "Reading comprehension (RC)",
+          "group": "jaster category",
+          "unit": "score"
+        },
+        "chabsa_set_f1": {
+          "name": "chABSA (set F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jamp_exact_match": {
+          "name": "JAMP (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "janli_exact_match": {
+          "name": "JaNLI (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jcommonsenseqa_exact_match": {
+          "name": "JCommonsenseQA (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jemhopqa_char_f1": {
+          "name": "JEMHopQA (char F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jnli_exact_match": {
+          "name": "JNLI (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jsem_exact_match": {
+          "name": "JSeM (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jsick_exact_match": {
+          "name": "JSICK (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "jsquad_char_f1": {
+          "name": "JSQuAD (char F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "mawps_exact_match": {
+          "name": "MAWPS (exact match)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "niilc_char_f1": {
+          "name": "NIILC (char F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "wiki_coreference_set_f1": {
+          "name": "Wiki Coreference (set F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "wiki_dependency_set_f1": {
+          "name": "Wiki Dependency (set F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "wiki_ner_set_f1": {
+          "name": "Wiki NER (set F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "wiki_pas_set_f1": {
+          "name": "Wiki PAS (set F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "wiki_reading_char_f1": {
+          "name": "Wiki Reading (char F1)",
+          "group": "jaster task",
+          "unit": "score"
+        },
+        "AVG_mtbench": {
+          "name": "MT-Bench average",
+          "group": "MT-Bench",
+          "unit": "score",
+          "note": "Scored on a 0 to 10 scale."
+        },
+        "coding": {
+          "name": "MT-Bench coding",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "extraction": {
+          "name": "MT-Bench extraction",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "humanities": {
+          "name": "MT-Bench humanities",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "math": {
+          "name": "MT-Bench math",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "reasoning": {
+          "name": "MT-Bench reasoning",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "roleplay": {
+          "name": "MT-Bench roleplay",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "stem": {
+          "name": "MT-Bench STEM",
+          "group": "MT-Bench",
+          "unit": "score"
+        },
+        "writing": {
+          "name": "MT-Bench writing",
+          "group": "MT-Bench",
           "unit": "score"
         }
       }
@@ -259460,6 +260760,86 @@
         }
       }
     },
+    "relbench": {
+      "url": "https://star-project.stanford.edu/relbench/",
+      "feed": "https://arxiv.org/html/2407.20060 (Table 3, Entity Classification AUROC)",
+      "terms": "arXiv permits automated reading of HTML papers under robots.txt. Paper tables are attributed to their authors. https://arxiv.org/abs/2407.20060",
+      "headline": "Test average AUROC across all twelve RelBench entity classification tasks from Table 3, with per-task test AUROCs and validation average kept in parts.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "LightGBM",
+        "RDL"
+      ],
+      "parts": {
+        "valAverage": {
+          "name": "Validation average AUROC",
+          "group": "Split",
+          "unit": "%"
+        },
+        "amazonUserChurn": {
+          "name": "rel-amazon: user-churn",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "amazonItemChurn": {
+          "name": "rel-amazon: item-churn",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "avitoUserVisits": {
+          "name": "rel-avito: user-visits",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "avitoUserClicks": {
+          "name": "rel-avito: user-clicks",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "eventUserRepeat": {
+          "name": "rel-event: user-repeat",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "eventUserIgnore": {
+          "name": "rel-event: user-ignore",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "f1DriverDnf": {
+          "name": "rel-f1: driver-dnf",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "f1DriverTop3": {
+          "name": "rel-f1: driver-top3",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "hmUserChurn": {
+          "name": "rel-hm: user-churn",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "stackUserEngagement": {
+          "name": "rel-stack: user-engagement",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "stackUserBadge": {
+          "name": "rel-stack: user-badge",
+          "group": "Entity classification task",
+          "unit": "%"
+        },
+        "trialStudyOutcome": {
+          "name": "rel-trial: study-outcome",
+          "group": "Entity classification task",
+          "unit": "%"
+        }
+      }
+    },
     "relytoolbench": {
       "url": "https://arxiv.org/abs/2412.04141",
       "feed": "https://arxiv.org/html/2412.04141",
@@ -260039,6 +261419,35 @@
           "name": "Median runtime",
           "unit": "minutes",
           "better": "lower"
+        }
+      }
+    },
+    "repochat-arena": {
+      "url": "https://news.lmarena.ai/repochat-arena/",
+      "feed": "https://news.lmarena.ai/repochat-arena/ (embedded RSC Tables 2, 4, 5 and 6)",
+      "terms": "Public Arena.ai blog post. LMArena leaderboard data is CC BY 4.0.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "styleControlled": {
+          "name": "Style-controlled Arena score",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "retrieverControlled": {
+          "name": "Retriever-controlled Arena score",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "styleAndRetrieverControlled": {
+          "name": "Style-and-retriever-controlled Arena score",
+          "unit": "elo",
+          "better": "higher"
         }
       }
     },
@@ -280137,6 +281546,140 @@
         }
       }
     },
+    "speech-generation-labelbox": {
+      "url": "https://web.archive.org/web/20241110133206/https://labelbox.com/leaderboards/speech-generation/",
+      "feed": "https://web.archive.org/web/20241110133206id_/https://labelbox.com/leaderboards/speech-generation/",
+      "terms": "Labelbox links its terms of service at https://docs.labelbox.com/page/terms-of-service. The Internet Archive preserves this public multiway leaderboard, and Benchmark Almanac credits and links Labelbox as the source.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AWS Polly",
+        "Cartesia",
+        "Deepgram",
+        "Elevenlabs",
+        "Google",
+        "OpenAI TTS"
+      ],
+      "stats": {
+        "trueSkill": {
+          "name": "TrueSkill rating",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "averageRank": {
+          "name": "Average rank",
+          "unit": "count",
+          "better": "lower"
+        },
+        "wer": {
+          "name": "Word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "first": {
+          "name": "Ranked first share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "second": {
+          "name": "Ranked second share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "third": {
+          "name": "Ranked third share",
+          "unit": "%"
+        },
+        "fourth": {
+          "name": "Ranked fourth share",
+          "unit": "%"
+        },
+        "fifth": {
+          "name": "Ranked fifth share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "sixth": {
+          "name": "Ranked sixth share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "noiseNoneShare": {
+          "name": "No noise share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "noiseLowShare": {
+          "name": "Low noise share",
+          "unit": "%"
+        },
+        "noiseMediumShare": {
+          "name": "Medium noise share",
+          "unit": "%"
+        },
+        "noiseHighShare": {
+          "name": "High noise share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "prosodyLowShare": {
+          "name": "Prosody accuracy low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "prosodyMediumShare": {
+          "name": "Prosody accuracy medium share",
+          "unit": "%"
+        },
+        "prosodyHighShare": {
+          "name": "Prosody accuracy high share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "contextLowShare": {
+          "name": "Context awareness low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "contextMediumShare": {
+          "name": "Context awareness medium share",
+          "unit": "%"
+        },
+        "contextHighShare": {
+          "name": "Context awareness high share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "naturalnessLowShare": {
+          "name": "Speech naturalness low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "naturalnessMediumShare": {
+          "name": "Speech naturalness medium share",
+          "unit": "%"
+        },
+        "naturalnessHighShare": {
+          "name": "Speech naturalness high share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pronunciationLowShare": {
+          "name": "Pronunciation accuracy low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "pronunciationMediumShare": {
+          "name": "Pronunciation accuracy medium share",
+          "unit": "%"
+        },
+        "pronunciationHighShare": {
+          "name": "Pronunciation accuracy high share",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "speech-generation-labelbox-2": {
       "url": "https://labelbox.com/leaderboards/speech-generation/",
       "feed": "https://labelbox.com/leaderboards/speech-generation/",
@@ -295692,6 +297235,22 @@
       "rows": 2,
       "unmatched": []
     },
+    "terminal-bench": {
+      "url": "https://www.tbench.ai/",
+      "feed": "https://web.archive.org/web/20251105134649id_/https://www.tbench.ai/leaderboard (embedded RSC rows, terminal-bench-core==0.1.1)",
+      "terms": "Public Terminal-Bench 1.0 leaderboard preserved by the Internet Archive. The Terminal-Bench repository is Apache-2.0.",
+      "retrieved": "2026-11-24",
+      "rows": 57,
+      "unmatched": [
+        "glaive-swe-v1"
+      ],
+      "reference": [
+        "Terminus 1",
+        "Terminus 2"
+      ],
+      "harnesses": "system",
+      "verified": "marked verified on the Terminal-Bench board"
+    },
     "terminal-bench-2-0": {
       "url": "https://www.tbench.ai/?version=2.0",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench-2\",\"name\":\"2-0\"})",
@@ -301740,6 +303299,97 @@
       "retrieved": "2026-11-23",
       "rows": 48,
       "unmatched": []
+    },
+    "tydiqa": {
+      "url": "https://arxiv.org/abs/2003.05002",
+      "feed": "https://arxiv.org/pdf/2003.05002 (Tables 5 and 7)",
+      "terms": "arXiv permits automated reading of papers under robots.txt. Paper tables are attributed to their authors. https://arxiv.org/abs/2003.05002",
+      "headline": "GoldP v1.1 overall F1 across non-English languages from Table 7 of the TyDi QA paper, with per-language GoldP F1 in parts and Table 5 primary Passage Answer and Minimal Answer scores in stats.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "mBERT"
+      ],
+      "parts": {
+        "english": {
+          "name": "English",
+          "group": "Language",
+          "unit": "%"
+        },
+        "arabic": {
+          "name": "Arabic",
+          "group": "Language",
+          "unit": "%"
+        },
+        "bengali": {
+          "name": "Bengali",
+          "group": "Language",
+          "unit": "%"
+        },
+        "finnish": {
+          "name": "Finnish",
+          "group": "Language",
+          "unit": "%"
+        },
+        "indonesian": {
+          "name": "Indonesian",
+          "group": "Language",
+          "unit": "%"
+        },
+        "kiswahili": {
+          "name": "Kiswahili",
+          "group": "Language",
+          "unit": "%"
+        },
+        "korean": {
+          "name": "Korean",
+          "group": "Language",
+          "unit": "%"
+        },
+        "russian": {
+          "name": "Russian",
+          "group": "Language",
+          "unit": "%"
+        },
+        "telugu": {
+          "name": "Telugu",
+          "group": "Language",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "primaryPassageF1": {
+          "name": "Primary passage answer F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "primaryPassagePrecision": {
+          "name": "Primary passage answer precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "primaryPassageRecall": {
+          "name": "Primary passage answer recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "minimalAnswerF1": {
+          "name": "Primary minimal answer F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "minimalPrecision": {
+          "name": "Primary minimal answer precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "minimalRecall": {
+          "name": "Primary minimal answer recall",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "typed-decision-bench-blobfish": {
       "url": "https://blobfish.ai/leaderboard/typed-decision-bench",
@@ -311474,6 +313124,100 @@
         }
       }
     },
+    "video-generation-labelbox": {
+      "url": "https://web.archive.org/web/20241013081758/https://labelbox.com/leaderboards/video-generation/",
+      "feed": "https://web.archive.org/web/20241013081758id_/https://labelbox.com/leaderboards/video-generation/",
+      "terms": "Labelbox links its terms of service at https://docs.labelbox.com/page/terms-of-service. The Internet Archive preserves this public multiway leaderboard, and Benchmark Almanac credits and links Labelbox as the source.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Luma Labs",
+        "Pika",
+        "Runway ML"
+      ],
+      "stats": {
+        "trueSkill": {
+          "name": "TrueSkill rating",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "averageRank": {
+          "name": "Average rank",
+          "unit": "count",
+          "better": "lower"
+        },
+        "first": {
+          "name": "Ranked first share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "second": {
+          "name": "Ranked second share",
+          "unit": "%"
+        },
+        "third": {
+          "name": "Ranked third share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "realismLowShare": {
+          "name": "Realism low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "realismMediumShare": {
+          "name": "Realism medium share",
+          "unit": "%"
+        },
+        "realismHighShare": {
+          "name": "Realism high share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "resolutionLowShare": {
+          "name": "Video resolution low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "resolutionMediumShare": {
+          "name": "Video resolution medium share",
+          "unit": "%"
+        },
+        "resolutionHighShare": {
+          "name": "Video resolution high share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "artifactsLowShare": {
+          "name": "Artifacts and errors low share",
+          "unit": "%",
+          "better": "higher"
+        },
+        "artifactsMediumShare": {
+          "name": "Artifacts and errors medium share",
+          "unit": "%"
+        },
+        "artifactsHighShare": {
+          "name": "Artifacts and errors high share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "consistencyLowShare": {
+          "name": "Prompt consistency low share",
+          "unit": "%",
+          "better": "lower"
+        },
+        "consistencyMediumShare": {
+          "name": "Prompt consistency medium share",
+          "unit": "%"
+        },
+        "consistencyHighShare": {
+          "name": "Prompt consistency high share",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "video-generation-labelbox-2": {
       "url": "https://labelbox.com/leaderboards/video-generation/",
       "feed": "https://labelbox.com/leaderboards/video-generation/",
@@ -318149,6 +319893,20 @@
           "name": "Efficiency score",
           "unit": "score",
           "better": "higher"
+        }
+      }
+    },
+    "webdev-arena": {
+      "url": "https://arena.ai/leaderboard/code/webdev",
+      "feed": "https://web.archive.org/web/20251110135151id_/https://webdev.lmarena.ai/leaderboard",
+      "terms": "Public WebDev Arena leaderboard preserved by the Internet Archive. LMArena leaderboard data is CC BY 4.0.",
+      "retrieved": "2026-11-24",
+      "rows": 53,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
         }
       }
     },
