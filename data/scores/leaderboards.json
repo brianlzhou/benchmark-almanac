@@ -2535,6 +2535,16 @@
         }
       }
     },
+    "adaptive-reasoning-vellum": {
+      "url": "https://www.vellum.ai/blog/evaluation-claude-4-sonnet-vs-openai-o4-mini-vs-gemini-2-5-pro",
+      "feed": "https://cdn.sanity.io/images/ghjnhoi4/production/e1445ca9fc8728cc17c97096bc6bb61ea8a1c250-2017x1101.webp (transcribed 2026-11-24)",
+      "terms": "Vellum publishes this chart on its public blog. Results are credited to Vellum.",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "Gemini 2.5 Pro (snapshot unspecified)"
+      ]
+    },
     "addis-ai-amharic-tts-benchmark": {
       "url": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
       "feed": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
@@ -2995,6 +3005,49 @@
         }
       },
       "static": "paper"
+    },
+    "advbench": {
+      "url": "https://arxiv.org/abs/2307.15043",
+      "feed": "https://arxiv.org/html/2307.15043",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [
+        "LLaMA-2-7B-Chat",
+        "PaLM-2",
+        "Vicuna-7B",
+        "claude-instant-1",
+        "gpt-3.5-turbo (snapshot unspecified)"
+      ],
+      "parts": {
+        "harmfulStringAsr": {
+          "name": "Harmful Strings",
+          "group": "White-box subset",
+          "unit": "%",
+          "better": "lower"
+        },
+        "individualBehaviorAsr": {
+          "name": "Individual Harmful Behavior",
+          "group": "White-box subset",
+          "unit": "%",
+          "better": "lower"
+        },
+        "multipleTrainAsr": {
+          "name": "Multiple Harmful Behaviors (train)",
+          "group": "White-box subset",
+          "unit": "%",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "harmfulStringLoss": {
+          "name": "Harmful String cross-entropy loss",
+          "unit": "score",
+          "better": "higher",
+          "note": "Cross-entropy loss between output logits and the target harmful string, where higher loss means stronger resistance."
+        }
+      }
     },
     "adversarial-humanities-benchmark": {
       "url": "https://arxiv.org/html/2604.18487",
@@ -9976,6 +10029,174 @@
         "Music emotion detection": {
           "name": "Music emotion detection",
           "group": "Task type"
+        }
+      }
+    },
+    "air-bench-retrieval-24-04": {
+      "url": "https://huggingface.co/spaces/AIR-Bench/leaderboard",
+      "feed": "https://air-bench-leaderboard.hf.space/call/update_qa_df_ret_rerank",
+      "terms": "AIR-Bench publishes its official retrieval leaderboard and evaluation results under the MIT license at https://github.com/AIR-Bench/AIR-Bench and https://huggingface.co/spaces/AIR-Bench/leaderboard.",
+      "headline": "The board reports QA nDCG@10 and Long-Doc Recall@10 separately, so this is the QA nDCG@10 average across all 13 QA domains.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "BM25",
+        "bge-m3",
+        "bge-multilingual-gemma2",
+        "e5-mistral-7b-instruct",
+        "gte-Qwen1.5-7B-instruct",
+        "gte-Qwen2-7B-instruct",
+        "inf-retriever-v1",
+        "inf-retriever-v1-1.5b",
+        "multilingual-e5-base",
+        "multilingual-e5-large",
+        "multilingual-e5-small"
+      ],
+      "parts": {
+        "wiki_en": {
+          "name": "Wikipedia (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "wiki_zh": {
+          "name": "Wikipedia (ZH)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "web_en": {
+          "name": "Web (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "web_zh": {
+          "name": "Web (ZH)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "healthcare_en": {
+          "name": "Healthcare (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "healthcare_zh": {
+          "name": "Healthcare (ZH)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "law_en": {
+          "name": "Law (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "arxiv_en": {
+          "name": "arXiv (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "news_en": {
+          "name": "News (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "news_zh": {
+          "name": "News (ZH)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "finance_en": {
+          "name": "Finance (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "finance_zh": {
+          "name": "Finance (ZH)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "msmarco_en": {
+          "name": "MS MARCO (EN)",
+          "group": "QA (nDCG@10)",
+          "unit": "score"
+        },
+        "longDoc": {
+          "name": "Long-Doc overall",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "healthcare_en_pubmed_100k_200k_1": {
+          "name": "PubMed 100k to 200k (1)",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "healthcare_en_pubmed_100k_200k_2": {
+          "name": "PubMed 100k to 200k (2)",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "healthcare_en_pubmed_100k_200k_3": {
+          "name": "PubMed 100k to 200k (3)",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "healthcare_en_pubmed_40k_50k_5_merged": {
+          "name": "PubMed 40k to 50k merged",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "healthcare_en_pubmed_30k_40k_10_merged": {
+          "name": "PubMed 30k to 40k merged",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "arxiv_en_gpt3": {
+          "name": "arXiv GPT-3",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "arxiv_en_llama2": {
+          "name": "arXiv Llama 2",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "arxiv_en_gemini": {
+          "name": "arXiv Gemini",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "arxiv_en_llm_survey": {
+          "name": "arXiv LLM Survey",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "law_en_lex_files_300k_400k": {
+          "name": "LexFiles 300k to 400k",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "law_en_lex_files_400k_500k": {
+          "name": "LexFiles 400k to 500k",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "law_en_lex_files_500k_600k": {
+          "name": "LexFiles 500k to 600k",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "law_en_lex_files_600k_700k": {
+          "name": "LexFiles 600k to 700k",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "book_en_origin_of_species_darwin": {
+          "name": "Origin of Species",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
+        },
+        "book_en_a_brief_history_of_time_stephen_hawking": {
+          "name": "A Brief History of Time",
+          "group": "Long-Doc (Recall@10)",
+          "unit": "score"
         }
       }
     },
@@ -24838,6 +25059,118 @@
         "V-att"
       ]
     },
+    "audiobench": {
+      "url": "https://huggingface.co/spaces/AudioLLMs/AudioBench-Leaderboard-Extend",
+      "feed": "https://huggingface.co/spaces/AudioLLMs/AudioBench-Leaderboard-Extend/raw/main/organize_model_results.json",
+      "terms": "AudioBench publishes its leaderboard data under the Apache 2.0 license at https://huggingface.co/spaces/AudioLLMs/AudioBench-Leaderboard-Extend.",
+      "headline": "AudioBench mixes incompatible metrics across tasks, so this is the MMAU-mini Llama-3-70B judge score from the first evaluation tab of the official leaderboard.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "GPT-4o Audio (snapshot unspecified)",
+        "Gemini 1.5 Flash (snapshot unspecified)",
+        "MERaLiON-AudioLLM-Whisper-SEA-LION",
+        "Qwen-Audio-Chat",
+        "SALMONN-7B",
+        "SeaLLMs-Audio-7B",
+        "Whisper-Large-v2 + SEA-LIONv3",
+        "Whisper-Large-v3 + Llama-3-8B-Instruct"
+      ],
+      "parts": {
+        "mmauMusic": {
+          "name": "MMAU Music",
+          "group": "MMAU",
+          "unit": "score"
+        },
+        "mmauSound": {
+          "name": "MMAU Sound",
+          "group": "MMAU",
+          "unit": "score"
+        },
+        "mmauSpeech": {
+          "name": "MMAU Speech",
+          "group": "MMAU",
+          "unit": "score"
+        },
+        "sqaEn": {
+          "name": "SQA English",
+          "group": "Speech understanding",
+          "unit": "score"
+        },
+        "sqaSinglish": {
+          "name": "SQA Singlish",
+          "group": "Speech understanding",
+          "unit": "score"
+        },
+        "sdsSinglish": {
+          "name": "SDS Singlish",
+          "group": "Speech understanding",
+          "unit": "score"
+        },
+        "speechInstruction": {
+          "name": "Speech Instruction",
+          "group": "Speech understanding",
+          "unit": "score"
+        },
+        "audioCaptioning": {
+          "name": "Audio Captioning",
+          "group": "Audio scenes",
+          "unit": "score"
+        },
+        "audioSceneQa": {
+          "name": "Audio-Scene QA",
+          "group": "Audio scenes",
+          "unit": "score"
+        },
+        "accentRecognition": {
+          "name": "Accent Recognition",
+          "group": "Voice traits",
+          "unit": "score"
+        },
+        "genderRecognition": {
+          "name": "Gender Recognition",
+          "group": "Voice traits",
+          "unit": "score"
+        },
+        "emotionRecognition": {
+          "name": "Emotion Recognition",
+          "group": "Voice traits",
+          "unit": "score"
+        },
+        "musicUnderstanding": {
+          "name": "Music Understanding",
+          "group": "Audio scenes",
+          "unit": "score"
+        },
+        "asrEnWer": {
+          "name": "ASR English WER",
+          "group": "Speech recognition",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean word error rate across nine English ASR datasets."
+        },
+        "asrMandarinWer": {
+          "name": "ASR Mandarin WER",
+          "group": "Speech recognition",
+          "unit": "%",
+          "better": "lower",
+          "note": "Word error rate on AISHELL Mandarin ASR."
+        },
+        "asrSinglishWer": {
+          "name": "ASR Singlish WER",
+          "group": "Speech recognition",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean word error rate across eight Singlish and code-switching ASR datasets."
+        },
+        "speechTranslationBleu": {
+          "name": "Speech Translation BLEU",
+          "group": "Speech translation",
+          "unit": "score",
+          "note": "Mean BLEU score across six CoVoST2 translation directions."
+        }
+      }
+    },
     "audiocaps": {
       "url": "https://audiocaps.github.io/",
       "feed": "https://aclanthology.org/N19-1011.pdf",
@@ -33824,6 +34157,48 @@
         "crispri": {
           "name": "CRISPRi",
           "group": "Task type"
+        }
+      }
+    },
+    "biotier-securebio": {
+      "url": "https://securebio.org/benchmarks/details/?benchmark=biotier",
+      "feed": "https://securebio.org/benchmarks/details/ (plotly-spec \"biotier-refuse-permit\")",
+      "terms": "Static SecureBio dashboard page, securebio.org robots.txt allows all agents (content signals: search yes, AI training no) and SecureBio asks that results be cited.",
+      "headline": "SecureBio reports BioTIER-refuse and BioTIER-permit separately, so this is the plain mean of both percentages.",
+      "retrieved": "2026-11-24",
+      "rows": 75,
+      "unmatched": [
+        "GPT-4o mini (snapshot unspecified)",
+        "Gemini 2.5 Flash (snapshot unspecified)"
+      ],
+      "chart": {
+        "title": "Refusal vs. permission on biology requests",
+        "x": {
+          "key": "permit",
+          "label": "BioTIER-permit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "refuse",
+          "label": "BioTIER-refuse",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Refusal rate on 398 harmful biology prompts plotted against permission rate on 144 benign biology prompts."
+      },
+      "parts": {
+        "refuse": {
+          "name": "BioTIER-refuse",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of 398 harmful biology prompts correctly refused."
+        },
+        "permit": {
+          "name": "BioTIER-permit",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of 144 benign biology prompts correctly answered."
         }
       }
     },
@@ -45184,6 +45559,221 @@
         "temperature": {
           "name": "Temperature",
           "unit": "score"
+        }
+      }
+    },
+    "chemcotbench": {
+      "url": "https://howardli1984.github.io/ChemCoTBench.github.io/#leaderboard",
+      "feed": "https://howardli1984.github.io/ChemCoTBench.github.io/",
+      "terms": "The ChemCoTBench authors publish the benchmark and project leaderboard under the MIT license at https://github.com/IDEA-XL/ChemCoTBench.",
+      "headline": "ChemCoTBench reports 31 metrics across three tables without an overall score, so this is the SMILES Equivalence (Eq.) score from its first table.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [
+        "BioMedGPT-7B",
+        "BioMistral-7B",
+        "DeepSeek-R1 (snapshot unspecified)",
+        "DeepSeek-V3 (snapshot unspecified)",
+        "Gemini 2.0 Flash (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)",
+        "Gemma-2-27b-it",
+        "Llama-3.1-70B-Instruct",
+        "Qwen2.5-32B-Instruct"
+      ],
+      "parts": {
+        "fg": {
+          "name": "Functional Group MAE",
+          "group": "Molecule Understanding",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean absolute error on functional group counting."
+        },
+        "ring": {
+          "name": "Ring Count MAE",
+          "group": "Molecule Understanding",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean absolute error on ring counting."
+        },
+        "murcko": {
+          "name": "Murcko Scaffold",
+          "group": "Molecule Understanding",
+          "unit": "score",
+          "better": "higher",
+          "note": "Tanimoto similarity on Murcko scaffold extraction from 0 to 1."
+        },
+        "ringSys": {
+          "name": "Ring System",
+          "group": "Molecule Understanding",
+          "unit": "%",
+          "better": "higher"
+        },
+        "editAdd": {
+          "name": "Add",
+          "group": "Molecule Editing",
+          "unit": "%",
+          "better": "higher"
+        },
+        "editDelete": {
+          "name": "Delete",
+          "group": "Molecule Editing",
+          "unit": "%",
+          "better": "higher"
+        },
+        "editSub": {
+          "name": "Substitute",
+          "group": "Molecule Editing",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optLogPDelta": {
+          "name": "LogP delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optLogPSr": {
+          "name": "LogP success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optSolDelta": {
+          "name": "Solubility delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optSolSr": {
+          "name": "Solubility success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optQedDelta": {
+          "name": "QED delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optQedSr": {
+          "name": "QED success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optDrd2Delta": {
+          "name": "DRD2 delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optDrd2Sr": {
+          "name": "DRD2 success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optJnk3Delta": {
+          "name": "JNK3 delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optJnk3Sr": {
+          "name": "JNK3 success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "optGsk3bDelta": {
+          "name": "GSK3-beta delta",
+          "group": "Molecule Optimization",
+          "unit": "score",
+          "better": "higher"
+        },
+        "optGsk3bSr": {
+          "name": "GSK3-beta success rate",
+          "group": "Molecule Optimization",
+          "unit": "%",
+          "better": "higher"
+        },
+        "rxnFwdMajorTop1": {
+          "name": "Forward major Top-1",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Top-1 exact match rate from 0 to 1."
+        },
+        "rxnFwdMajorFts": {
+          "name": "Forward major FTS",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fingerprint Tanimoto similarity from 0 to 1."
+        },
+        "rxnFwdByTop1": {
+          "name": "Forward byproduct Top-1",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Top-1 exact match rate from 0 to 1."
+        },
+        "rxnFwdByFts": {
+          "name": "Forward byproduct FTS",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fingerprint Tanimoto similarity from 0 to 1."
+        },
+        "rxnRetroTop1": {
+          "name": "Retrosynthesis Top-1",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Top-1 exact match rate from 0 to 1."
+        },
+        "rxnRetroFts": {
+          "name": "Retrosynthesis FTS",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fingerprint Tanimoto similarity from 0 to 1."
+        },
+        "rxnCondTop1": {
+          "name": "Condition Top-1",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Top-1 exact match rate from 0 to 1."
+        },
+        "rxnCondFts": {
+          "name": "Condition FTS",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fingerprint Tanimoto similarity from 0 to 1."
+        },
+        "rxnNeppTop1": {
+          "name": "NEPP Top-1",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Top-1 exact match rate from 0 to 1."
+        },
+        "rxnNeppFts": {
+          "name": "NEPP FTS",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fingerprint Tanimoto similarity from 0 to 1."
+        },
+        "rxnMechSel": {
+          "name": "Mechanism Selection",
+          "group": "Reaction Prediction",
+          "unit": "score",
+          "better": "higher",
+          "note": "Accuracy from 0 to 1."
         }
       }
     },
@@ -74391,6 +74981,18 @@
           "better": "lower"
         }
       }
+    },
+    "cve-bench-2": {
+      "url": "https://cvebench.com/",
+      "feed": "https://cvebench.com/ (entries array in the page's hashed index-*.js bundle)",
+      "terms": "The UIUC Kang Lab publishes the CVE-Bench leaderboard at cvebench.com and the benchmark repository under the Apache 2.0 license at https://github.com/uiuc-kang-lab/cve-bench.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [],
+      "reference": [
+        "cvebench-default"
+      ],
+      "harnesses": "system"
     },
     "cvqa": {
       "url": "https://eval.ai/web/challenges/challenge-page/2305/leaderboard/5695",
@@ -131955,6 +132557,67 @@
         "voyage-3-large"
       ]
     },
+    "hcast": {
+      "url": "https://metr.org/time-horizons/",
+      "feed": "https://raw.githubusercontent.com/METR/eval-analysis-public/main/reports/time-horizon-1-1/data/raw/runs.jsonl",
+      "terms": "METR publishes the Time Horizon 1.1 run logs under the MIT license in METR/eval-analysis-public. https://github.com/METR/eval-analysis-public",
+      "headline": "METR publishes run-level HCAST outcomes in Time Horizon 1.1, so this is the unweighted mean task success rate across evaluated HCAST tasks.",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [
+        "GPT-4 Turbo (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)"
+      ],
+      "parts": {
+        "under15m": {
+          "name": "Under 15 minutes",
+          "group": "Human duration"
+        },
+        "min15To1h": {
+          "name": "15 minutes to 1 hour",
+          "group": "Human duration"
+        },
+        "hour1To4h": {
+          "name": "1 to 4 hours",
+          "group": "Human duration"
+        },
+        "over4h": {
+          "name": "Over 4 hours",
+          "group": "Human duration"
+        }
+      },
+      "stats": {
+        "familyWeighted": {
+          "name": "Family-weighted success rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Task success rate weighted by the inverse square root of tasks in each family."
+        },
+        "continuousScore": {
+          "name": "Mean continuous score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens per run",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "wallMinutes": {
+          "name": "Mean run time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "tasks": {
+          "name": "Evaluated tasks",
+          "unit": "count"
+        },
+        "runs": {
+          "name": "Total runs",
+          "unit": "count"
+        }
+      }
+    },
     "hcsu-bench": {
       "url": "https://github.com/209-Tongji/HCSU/blob/main/Benchmark/README.md",
       "feed": "https://raw.githubusercontent.com/209-Tongji/HCSU/HEAD/Benchmark/README.md",
@@ -133811,6 +134474,243 @@
           "name": "Frames per second",
           "unit": "count",
           "better": "higher"
+        }
+      }
+    },
+    "hf-speech-bench": {
+      "url": "https://huggingface.co/spaces/huggingface/hf-speech-bench",
+      "feed": "https://huggingface.co/api/models?filter=hf-asr-leaderboard&cardData=true&limit=1000",
+      "terms": "Public Hugging Face Hub model-card evaluation metadata tagged hf-asr-leaderboard under Hugging Face Terms of Service.",
+      "headline": "The Space filters by language and dataset with no overall score, so this is the plain mean of LibriSpeech test-clean and test-other WER on its first recommended dataset.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "0x3/s2t-small-librispeech-asr",
+        "499216456qc/wav2vec2-base-960h",
+        "Aditya02/stt_en_citrinet_1024",
+        "Akshat-exe/whisper-base",
+        "Allinsama/facebook__wav2vec2-base-960h",
+        "Binarybardakshat/SWRA",
+        "Classroom-workshop/assignment1-francesco",
+        "Classroom-workshop/assignment1-jack",
+        "Classroom-workshop/assignment1-jane",
+        "Classroom-workshop/assignment1-joane",
+        "Classroom-workshop/assignment1-maria",
+        "Classroom-workshop/assignment1-omar",
+        "CollectionStudio/whisper-base",
+        "CollectionStudio/whisper-large",
+        "CollectionStudio/whisper-medium",
+        "CollectionStudio/whisper-medium.en",
+        "CollectionStudio/whisper-small",
+        "CollectionStudio/whisper-tiny",
+        "CollectionStudio/whisper-tiny.en",
+        "Colossus-1/whisper-tiny",
+        "Dragon444/whisper-tiny",
+        "Evan-Lin/whisper-large-v1-tw",
+        "Hagwell/whisper-base",
+        "HashNuke/wav2vec2-base-960h-mlx",
+        "HashNuke/wav2vec2-large-960h-lv60-self-mlx",
+        "MisterCD/whisper-small",
+        "Mukhil06/my-stt-model",
+        "NeuralNovel/whisper-small-hi",
+        "Open4bits/whisper-base-f16",
+        "Open4bits/whisper-tiny-f16",
+        "Pinatpong/whisper-tiny",
+        "Pranjal12345/pranjal_whisper_medium",
+        "PraveenJesu/openai-whisper-small-zoomrx-colab-1",
+        "PraveenJesu/openai-whisper-small-zoomrx-colab-2",
+        "PraveenJesu/openai-whisper-small-zoomrx-v2",
+        "QueenFi/whisper-tiny",
+        "RedHatAI/whisper-tiny",
+        "RedbeardNZ/wav2vec2-base-960h",
+        "Sangramsing/whisper-base",
+        "Sangramsing/whisper-large",
+        "Sangramsing/whisper-medium",
+        "Sangramsing/whisper-small",
+        "Sangramsing/whisper-tiny",
+        "Surapat27/whisper-tiny",
+        "Tu43/whisper-tiny",
+        "Varosa/whisper-medium",
+        "Vikasbhandari/wav2vec2-train",
+        "YULIYA1987/whisper-medium.en",
+        "Zhaaa01/whisper-small",
+        "abhiramk6/whisper-tiny.en",
+        "acrkaan/livenova-stt-whisper-small-onnx",
+        "aditii09/whisper_eng_asr",
+        "ahmadali-038/transcription-model",
+        "algorithco/whisper-small",
+        "anubhav200/openai-whisper-small-openvino-int4",
+        "anubhav200/openai-whisper-tiny-openvino-int4",
+        "asapp/sew-d-base-plus-400k-ft-ls100h",
+        "asapp/sew-d-mid-400k-ft-ls100h",
+        "asapp/sew-d-mid-k127-400k-ft-ls100h",
+        "asapp/sew-d-tiny-100k-ft-ls100h",
+        "asapp/sew-tiny-100k-ft-ls100h",
+        "bendero/benderr",
+        "binant/whisper-small",
+        "binaya-s/xls-r-300m-en",
+        "bleach12138/wav2vec2-base-960h",
+        "bosonai/higgs-audio-v3-8b-stt",
+        "bosonai/higgs-audio-v3-8b-stt-v2",
+        "chaanks/asr-whisper-tiny-sb",
+        "chalanzi/whisper-medium",
+        "ctranslate2-4you/whisper-medium-ct2-bfloat16",
+        "ctranslate2-4you/whisper-medium-ct2-float16",
+        "ctranslate2-4you/whisper-medium-ct2-float32",
+        "danieleV9H/hubert-base-libri-clean-ft100h-v3",
+        "devendradhakad/autodroid-openai-whisper-tiny",
+        "discounter/whisper-base",
+        "dziaineka/whisper-small",
+        "facebook/data2vec-audio-base-960h",
+        "facebook/data2vec-audio-large-960h",
+        "facebook/s2t-large-librispeech-asr",
+        "facebook/s2t-small-librispeech-asr",
+        "facebook/wav2vec2-base-960h",
+        "facebook/wav2vec2-conformer-rel-pos-large-960h-ft",
+        "facebook/wav2vec2-conformer-rope-large-960h-ft",
+        "facebook/wav2vec2-large-960h-lv60-self",
+        "fxmarty/whisper-tiny-working",
+        "geexmmo/whisper-tiny.en-ONNX",
+        "ggfox00000/onnx-whispermedium",
+        "golferjacky/whisper-small",
+        "gpy-424/whisper-small",
+        "hiyanachnani/wav2vec2-base-960h",
+        "hrm-labs/saying-base",
+        "hrm-labs/saying-large",
+        "hrm-labs/saying-medium",
+        "hrm-labs/saying-small",
+        "hrm-labs/saying-tiny",
+        "huggingworld/whisper-base",
+        "huhe-2024/test-model2",
+        "jackzczhou/whisper-tiny",
+        "keess/whisper-model-internal",
+        "kickjack/whisper-medium",
+        "loscrossos/whisper-small",
+        "ltopaiman4/whisper-small",
+        "memescreamer/wav2vec2-base-960h",
+        "michaellee8/wisper-base-jwt",
+        "microsoft/whisper-base-webnn",
+        "mlx-community/whisper-base-asr-4bit",
+        "mlx-community/whisper-base-asr-5bit",
+        "mlx-community/whisper-base-asr-6bit",
+        "mlx-community/whisper-base-asr-8bit",
+        "mlx-community/whisper-base-asr-fp16",
+        "mlx-community/whisper-large-asr-4bit",
+        "mlx-community/whisper-large-asr-5bit",
+        "mlx-community/whisper-large-asr-6bit",
+        "mlx-community/whisper-large-asr-8bit",
+        "mlx-community/whisper-large-asr-fp16",
+        "mlx-community/whisper-medium-asr-4bit",
+        "mlx-community/whisper-medium-asr-5bit",
+        "mlx-community/whisper-medium-asr-6bit",
+        "mlx-community/whisper-medium-asr-8bit",
+        "mlx-community/whisper-medium-asr-fp16",
+        "mlx-community/whisper-medium.en-asr-4bit",
+        "mlx-community/whisper-medium.en-asr-5bit",
+        "mlx-community/whisper-medium.en-asr-6bit",
+        "mlx-community/whisper-medium.en-asr-8bit",
+        "mlx-community/whisper-medium.en-asr-fp16",
+        "mlx-community/whisper-small-asr-4bit",
+        "mlx-community/whisper-small-asr-5bit",
+        "mlx-community/whisper-small-asr-6bit",
+        "mlx-community/whisper-small-asr-8bit",
+        "mlx-community/whisper-small-asr-fp16",
+        "mlx-community/whisper-tiny-asr-4bit",
+        "mlx-community/whisper-tiny-asr-5bit",
+        "mlx-community/whisper-tiny-asr-6bit",
+        "mlx-community/whisper-tiny-asr-8bit",
+        "mlx-community/whisper-tiny-asr-fp16",
+        "mlx-community/whisper-tiny.en-asr-4bit",
+        "mlx-community/whisper-tiny.en-asr-5bit",
+        "mlx-community/whisper-tiny.en-asr-6bit",
+        "mlx-community/whisper-tiny.en-asr-8bit",
+        "mlx-community/whisper-tiny.en-asr-fp16",
+        "moueen/modelrepo",
+        "nopesadly/higgs-audio-v3-8b-stt-v2-Q4_K_M-GGUF",
+        "ns167/whisper-tiny",
+        "nvidia/nemotron-speech-streaming-en-0.6b",
+        "nvidia/stt_en_citrinet_1024_gamma_0_25",
+        "nvidia/stt_en_citrinet_1024_ls",
+        "nvidia/stt_en_citrinet_256_ls",
+        "nvidia/stt_en_citrinet_384_ls",
+        "nvidia/stt_en_citrinet_512_ls",
+        "nvidia/stt_en_citrinet_768_ls",
+        "nvidia/stt_en_conformer_ctc_large",
+        "nvidia/stt_en_conformer_ctc_small",
+        "nvidia/stt_en_conformer_transducer_large",
+        "nvidia/stt_en_conformer_transducer_xlarge",
+        "nvidia/stt_en_fastconformer_ctc_large",
+        "nvidia/stt_en_fastconformer_ctc_xlarge",
+        "nvidia/stt_en_fastconformer_ctc_xxlarge",
+        "nvidia/stt_en_fastconformer_hybrid_large_pc",
+        "nvidia/stt_en_fastconformer_tdt_large",
+        "nvidia/stt_en_fastconformer_transducer_large",
+        "nvidia/stt_en_fastconformer_transducer_xlarge",
+        "nvidia/stt_en_fastconformer_transducer_xxlarge",
+        "omartariq612/whisper-small-with-tajweed-tokens",
+        "openai/whisper-base",
+        "openai/whisper-large",
+        "openai/whisper-medium",
+        "openai/whisper-medium.en",
+        "openai/whisper-small",
+        "openai/whisper-tiny",
+        "openai/whisper-tiny.en",
+        "optimum-intel-internal-testing/sew-d-tiny-100k-ft-ls100h",
+        "patrickvonplaten/data2vec-audio-base-960h-4-gram",
+        "patrickvonplaten/hubert-xlarge-ls960-ft-4-gram",
+        "patrickvonplaten/wav2vec2-base-960h-4-gram",
+        "patrickvonplaten/wav2vec2-conformer-rel-pos-large-960h-ft-4-gram",
+        "patrickvonplaten/wav2vec2-conformer-rope-large-960h-ft-4-gram",
+        "patrickvonplaten/wav2vec2-large-960h-lv60-self-4-gram",
+        "pgajo/whisper-medium.en-nick",
+        "priyammmmm/whisper_base",
+        "racheltong/whisper-tiny",
+        "rishabhjain16/whisper-base",
+        "rishabhjain16/whisper-large",
+        "rishabhjain16/whisper-medium",
+        "rishabhjain16/whisper-small",
+        "rishabhjain16/whisper-tiny",
+        "safestack/wav2vec2-base-960h",
+        "scikit-plots/whisper-base",
+        "shawn-nyk/wav2vec2-base-960h-with-lm",
+        "speechbrain/asr-conformer-transformerlm-librispeech",
+        "speechbrain/asr-conformersmall-transformerlm-librispeech",
+        "speechbrain/asr-transformer-transformerlm-librispeech",
+        "speechbrain/asr-wav2vec2-librispeech",
+        "strangevil/whisper-small",
+        "tamilnlpSLIIT/whisper-tiny-ta-v3",
+        "unsloth/whisper-base",
+        "unsloth/whisper-small",
+        "unsloth/whisper-tiny",
+        "vasista22/ccc-wav2vec2-360h-base-ft-100h",
+        "vasista22/ccc-wav2vec2-base-100h",
+        "vasista22/wav2vec2-360h-base-ft-100h",
+        "victorg-kv2/whisper-tiny",
+        "webnn/whisper-base-webnn",
+        "willopcbeta/unsloth-whisper-small-ONNX",
+        "woponi/whisper-medium",
+        "ystsai/whisper-tiny-bnb-4bit"
+      ],
+      "parts": {
+        "clean": {
+          "name": "LibriSpeech test-clean",
+          "group": "LibriSpeech"
+        },
+        "other": {
+          "name": "LibriSpeech test-other",
+          "group": "LibriSpeech"
+        },
+        "cv11": {
+          "name": "Common Voice 11.0 English",
+          "group": "Other datasets"
+        },
+        "cv8": {
+          "name": "Common Voice 8.0 English",
+          "group": "Other datasets"
+        },
+        "mls": {
+          "name": "Multilingual LibriSpeech English",
+          "group": "Other datasets"
         }
       }
     },
@@ -137146,6 +138046,74 @@
         },
         "t4f2": {
           "name": "Phrase Detection and Recognition: IGN (French)"
+        }
+      }
+    },
+    "icdar-maptext-2025": {
+      "url": "https://rrc.cvc.uab.es/?ch=32&com=evaluation&task=1",
+      "feed": "https://rrc.cvc.uab.es/?ch=32&com=evaluation&task=1",
+      "terms": "Public competition leaderboard on the Robust Reading Competition portal at rrc.cvc.uab.es.",
+      "headline": "The RRC portal ranks each task separately, so this is Task 1 word detection H-mean on the default Rumsey collection, with other collections and tasks in parts.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Baseline TESTR Finetuned",
+        "CREPE + BezierCurve",
+        "MapText Strong Pipeline",
+        "MapTextSpotter",
+        "PolyTextTR",
+        "Self-Sequencer",
+        "Word-Level Text Detection on Historical Maps Using Multi-Stage Preprocessing and PaddleOCR",
+        "YOLOv8-ViTAE-Polygon",
+        "[MapText'24 Baseline] MapText Detection Strong Pipeline"
+      ],
+      "parts": {
+        "t1_ign": {
+          "name": "Task 1 Detection: IGN (French)",
+          "group": "Collection"
+        },
+        "t1_twh": {
+          "name": "Task 1 Detection: TWH (Chinese)",
+          "group": "Collection"
+        },
+        "t2_rumsey": {
+          "name": "Task 2 Detection and Linking: Rumsey",
+          "group": "Task"
+        },
+        "t3_rumsey": {
+          "name": "Task 3 Detection and Recognition: Rumsey",
+          "group": "Task"
+        },
+        "t4_rumsey": {
+          "name": "Task 4 End-to-End Phrase: Rumsey",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "precision": {
+          "name": "Word precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recall": {
+          "name": "Word recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tightness": {
+          "name": "Polygon tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "quality": {
+          "name": "Detection quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fscore": {
+          "name": "Word F-score",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -267774,6 +268742,193 @@
         },
         "Spatial Reasoning": {
           "name": "Spatial Reasoning"
+        }
+      }
+    },
+    "saxena-knowledge-cutoff": {
+      "url": "https://apoorvumang.github.io/knowledge-cutoff/",
+      "feed": "https://raw.githubusercontent.com/apoorvumang/knowledge-cutoff/main/docs/index.html",
+      "terms": "Published under CC BY 4.0 in apoorvumang/knowledge-cutoff. https://github.com/apoorvumang/knowledge-cutoff",
+      "headline": "The source reports no overall score. This is the plain unweighted mean of the 30 monthly direct-probe accuracies.",
+      "retrieved": "2026-11-24",
+      "rows": 32,
+      "unmatched": [
+        "GPT-4o (snapshot unspecified)",
+        "Ox Alpha (stealth)"
+      ],
+      "parts": {
+        "y2024": {
+          "name": "2024 events",
+          "group": "Year"
+        },
+        "y2025": {
+          "name": "2025 events",
+          "group": "Year"
+        },
+        "y2026": {
+          "name": "2026 events",
+          "group": "Year"
+        },
+        "m_2024_01": {
+          "name": "Jan 2024",
+          "group": "Month"
+        },
+        "m_2024_02": {
+          "name": "Feb 2024",
+          "group": "Month"
+        },
+        "m_2024_03": {
+          "name": "Mar 2024",
+          "group": "Month"
+        },
+        "m_2024_04": {
+          "name": "Apr 2024",
+          "group": "Month"
+        },
+        "m_2024_05": {
+          "name": "May 2024",
+          "group": "Month"
+        },
+        "m_2024_06": {
+          "name": "Jun 2024",
+          "group": "Month"
+        },
+        "m_2024_07": {
+          "name": "Jul 2024",
+          "group": "Month"
+        },
+        "m_2024_08": {
+          "name": "Aug 2024",
+          "group": "Month"
+        },
+        "m_2024_09": {
+          "name": "Sep 2024",
+          "group": "Month"
+        },
+        "m_2024_10": {
+          "name": "Oct 2024",
+          "group": "Month"
+        },
+        "m_2024_11": {
+          "name": "Nov 2024",
+          "group": "Month"
+        },
+        "m_2024_12": {
+          "name": "Dec 2024",
+          "group": "Month"
+        },
+        "m_2025_01": {
+          "name": "Jan 2025",
+          "group": "Month"
+        },
+        "m_2025_02": {
+          "name": "Feb 2025",
+          "group": "Month"
+        },
+        "m_2025_03": {
+          "name": "Mar 2025",
+          "group": "Month"
+        },
+        "m_2025_04": {
+          "name": "Apr 2025",
+          "group": "Month"
+        },
+        "m_2025_05": {
+          "name": "May 2025",
+          "group": "Month"
+        },
+        "m_2025_06": {
+          "name": "Jun 2025",
+          "group": "Month"
+        },
+        "m_2025_07": {
+          "name": "Jul 2025",
+          "group": "Month"
+        },
+        "m_2025_08": {
+          "name": "Aug 2025",
+          "group": "Month"
+        },
+        "m_2025_09": {
+          "name": "Sep 2025",
+          "group": "Month"
+        },
+        "m_2025_10": {
+          "name": "Oct 2025",
+          "group": "Month"
+        },
+        "m_2025_11": {
+          "name": "Nov 2025",
+          "group": "Month"
+        },
+        "m_2025_12": {
+          "name": "Dec 2025",
+          "group": "Month"
+        },
+        "m_2026_01": {
+          "name": "Jan 2026",
+          "group": "Month"
+        },
+        "m_2026_02": {
+          "name": "Feb 2026",
+          "group": "Month"
+        },
+        "m_2026_03": {
+          "name": "Mar 2026",
+          "group": "Month"
+        },
+        "m_2026_04": {
+          "name": "Apr 2026",
+          "group": "Month"
+        },
+        "m_2026_05": {
+          "name": "May 2026",
+          "group": "Month"
+        },
+        "m_2026_06": {
+          "name": "Jun 2026",
+          "group": "Month"
+        }
+      },
+      "stats": {
+        "wrongRate": {
+          "name": "Confidently wrong rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Plain mean share of events answered confidently incorrectly across the 30 months on the direct probe."
+        },
+        "abstainRate": {
+          "name": "Abstain rate",
+          "unit": "%",
+          "note": "Plain mean share of events where the model hedged or abstained across the 30 months on the direct probe."
+        },
+        "mcqAccuracy": {
+          "name": "Multiple-choice accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Plain mean monthly accuracy on the multiple-choice probe across all 30 months."
+        },
+        "aliveControl": {
+          "name": "Living-person control accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Accuracy on famous living-person control prompts."
+        },
+        "fakeControl": {
+          "name": "Fake-event confabulation rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of fabricated control events the model falsely confirmed."
+        },
+        "monthsAbove50": {
+          "name": "Months at or above 50% accuracy",
+          "unit": "count",
+          "better": "higher"
+        },
+        "cutoffGapMonths": {
+          "name": "Advertised minus effective cutoff gap",
+          "unit": "count",
+          "note": "Months by which the measured effective cutoff trails the advertised cutoff date."
         }
       }
     },
