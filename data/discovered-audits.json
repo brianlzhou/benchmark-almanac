@@ -1,6 +1,24 @@
 {
   "updated": "2026-11-24",
-  "items": [],
+  "items": [
+    {
+      "key": "https://arxiv.org/abs/2611.29744",
+      "title": "Who Sent It or How It Moved? Sender Shortcuts in Cryptocurrency Anti-Money-Laundering Benchmarks, Audited on Elliptic2 and Elliptic++",
+      "url": "https://arxiv.org/abs/2611.29744",
+      "source": "arXiv",
+      "date": "2026-11-22",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "benchmarks": [
+        "agent-memory-leaderboard"
+      ],
+      "problems": [
+        "contamination",
+        "reward-hacking"
+      ],
+      "score": 5
+    }
+  ],
   "dismissed": [
     {
       "key": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/#claudeappearstohavememorizeddetailsoflinuxarenacontrolevalkarvonen",
