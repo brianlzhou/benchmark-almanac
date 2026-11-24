@@ -10320,7 +10320,7 @@
       "url": "https://crfm.stanford.edu/helm/air-bench/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/air-bench/benchmark_output/releases/<newest>/groups/air_bench_2024.json (Refusal Rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 85,
       "unmatched": [
         "palmyra-fin",
@@ -10328,27 +10328,27 @@
       ],
       "parts": {
         "Security Risks": {
-          "name": "Security Risks",
+          "name": "Security risks",
           "group": "Risk category"
         },
         "Operational Misuses": {
-          "name": "Operational Misuses",
+          "name": "Operational misuses",
           "group": "Risk category"
         },
         "Violence & Extremism": {
-          "name": "Violence & Extremism",
+          "name": "Violence & extremism",
           "group": "Risk category"
         },
         "Hate/Toxicity": {
-          "name": "Hate/Toxicity",
+          "name": "Hate/toxicity",
           "group": "Risk category"
         },
         "Sexual Content": {
-          "name": "Sexual Content",
+          "name": "Sexual content",
           "group": "Risk category"
         },
         "Child Harm": {
-          "name": "Child Harm",
+          "name": "Child harm",
           "group": "Risk category"
         },
         "Self-harm": {
@@ -10356,11 +10356,11 @@
           "group": "Risk category"
         },
         "Political Usage": {
-          "name": "Political Usage",
+          "name": "Political usage",
           "group": "Risk category"
         },
         "Economic Harm": {
-          "name": "Economic Harm",
+          "name": "Economic harm",
           "group": "Risk category"
         },
         "Deception": {
@@ -10376,11 +10376,11 @@
           "group": "Risk category"
         },
         "Fundamental Rights": {
-          "name": "Fundamental Rights",
+          "name": "Fundamental rights",
           "group": "Risk category"
         },
         "Discrimination/Bias": {
-          "name": "Discrimination/Bias",
+          "name": "Discrimination/bias",
           "group": "Risk category"
         },
         "Privacy": {
@@ -10388,7 +10388,7 @@
           "group": "Risk category"
         },
         "Criminal Activities": {
-          "name": "Criminal Activities",
+          "name": "Criminal activities",
           "group": "Risk category"
         }
       }
@@ -46165,7 +46165,7 @@
       "url": "https://chartmuseum-leaderboard.github.io",
       "feed": "https://chartmuseum-leaderboard.github.io/",
       "terms": "Public results published by the benchmark authors at chartmuseum-leaderboard.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)"
@@ -94475,7 +94475,7 @@
       "url": "https://github.com/ServiceNow/EnterpriseOps-Gym",
       "feed": "https://raw.githubusercontent.com/ServiceNow/EnterpriseOps-Gym/main/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)",
@@ -136419,7 +136419,7 @@
       "url": "https://scale.com/blog/o3-o4-mini-calibration",
       "feed": "https://scale.com/blog/o3-o4-mini-calibration",
       "terms": "Scale terms restrict automated extraction. Benchmark Almanac credits Scale AI and links the official source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "stats": {
@@ -161099,7 +161099,7 @@
       "url": "https://huggingface.co/datasets/snunlp/KoBALT-700",
       "feed": "https://huggingface.co/datasets/snunlp/KoBALT-700/resolve/main/README.md",
       "terms": "KoBALT dataset card is licensed CC BY-NC 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "C4ai-command-a-03",
@@ -161114,6 +161114,10 @@
           "name": "Syntax",
           "group": "Category"
         },
+        "Semantics": {
+          "name": "Semantics",
+          "group": "Category"
+        },
         "Pragmatics": {
           "name": "Pragmatics",
           "group": "Category"
@@ -161125,13 +161129,6 @@
         "Phonetics": {
           "name": "Phonetics",
           "group": "Category"
-        }
-      },
-      "stats": {
-        "Semantics": {
-          "name": "Semantics accuracy",
-          "unit": "%",
-          "better": "higher"
         }
       }
     },
@@ -161230,7 +161227,7 @@
       "url": "https://kor-bench.github.io/",
       "feed": "https://kor-bench.github.io/static/data/kor_leaderboard_data.json (chat and base models)",
       "terms": "Static JSON on a GitHub Pages project site with no robots.txt and no terms; the KOR-Bench repository is public and the scores are cited to the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 33,
       "unmatched": [
         "Doubao-Pro-128k",
@@ -196749,7 +196746,7 @@
       "url": "https://mme-realworld.github.io/home_page.html",
       "feed": "https://mme-realworld.github.io/home_page.html",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Awaker2.5-VL",
@@ -242421,7 +242418,7 @@
       "url": "https://osworld-v2.xlang.ai/",
       "feed": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json (releaseVersion v2.1, offline set)",
       "terms": "Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "harnesses": "system",
@@ -242431,10 +242428,6 @@
           "name": "Partial score",
           "unit": "%",
           "better": "higher"
-        },
-        "stepBudget": {
-          "name": "Step budget",
-          "unit": "count"
         }
       }
     },
@@ -248882,7 +248875,7 @@
       "url": "https://killthefullmoon.github.io/projects/PhyX/index.html",
       "feed": "https://killthefullmoon.github.io/projects/PhyX/leaderboard_data.json",
       "terms": "Public results published by the benchmark authors at killthefullmoon.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Claude3.5-Sonnet (snapshot unspecified)",
@@ -248921,12 +248914,12 @@
       "stats": {
         "fullText": {
           "name": "Full text score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "textMinimal": {
           "name": "Minimal text score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "mc": {
@@ -259038,7 +259031,7 @@
       "url": "https://skylenage-ai.github.io/QwenClawBench-Leaderboard/",
       "feed": "https://skylenage-ai.github.io/QwenClawBench-Leaderboard/",
       "terms": "Public project leaderboard on GitHub Pages, subject to the project repository license and GitHub terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -259051,12 +259044,6 @@
           "name": "LLM judge",
           "group": "Dimension",
           "note": "Rubric score used directly or as a gated component of hybrid grading."
-        }
-      },
-      "stats": {
-        "runsPerTask": {
-          "name": "Runs per task",
-          "unit": "count"
         }
       }
     },
@@ -276201,7 +276188,7 @@
       "url": "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard",
       "feed": "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard/resolve/main/file/result.csv",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "BLIP-2",
@@ -285851,7 +285838,7 @@
       "url": "https://rajpurkar.github.io/SQuAD-explorer/",
       "feed": "https://rajpurkar.github.io/SQuAD-explorer/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ARSG-BERT",
@@ -289049,7 +289036,7 @@
       "url": "https://superchem.pku.edu.cn/leaderboard",
       "feed": "https://superchem.pku.edu.cn/llm_overall_metrics.json",
       "terms": "Official SUPERChem public leaderboard JSON; the dataset is MIT licensed. Benchmark Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "gemini-2.5-pro (snapshot unspecified)",
@@ -289058,7 +289045,7 @@
       "stats": {
         "rpf": {
           "name": "Reasoning path fidelity",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -312916,7 +312903,7 @@
       "url": "https://eric-xw.github.io/vatex-website/captioning.html",
       "feed": "https://eric-xw.github.io/vatex-website/captioning.html",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Baseline Shared Encoder (Wang et al., ICCV 2019)",
@@ -316850,7 +316837,7 @@
       "url": "https://videosimpleqa.github.io/",
       "feed": "https://videosimpleqa.github.io/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -316884,10 +316871,6 @@
         }
       },
       "stats": {
-        "llmParamsB": {
-          "name": "LLM parameters",
-          "unit": "billions"
-        },
         "correct": {
           "name": "Correct answers",
           "unit": "%",
@@ -316905,11 +316888,6 @@
         },
         "correctGivenAttempted": {
           "name": "Correct given attempted",
-          "unit": "%",
-          "better": "higher"
-        },
-        "fScore": {
-          "name": "F score",
           "unit": "%",
           "better": "higher"
         }

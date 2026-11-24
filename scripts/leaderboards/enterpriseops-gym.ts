@@ -39,12 +39,12 @@ const board: Leaderboard = {
           if (value !== undefined) metrics[t.head[i]] = value;
         }
         const effort = name.match(/\s*\((High|Low|Think|Inst\.)\)$/i);
-        out.push({ model: identity(effort ? name.slice(0, effort.index) : name), score, setting: `Oracle; ${/Public/.test(t.heading) ? 'public split' : 'full benchmark'}${effort ? '; ' + effort[1] : ''}`, metrics });
+        out.push({ model: identity(effort ? name.slice(0, effort.index) : name), score, setting: `Oracle, ${/Public/.test(t.heading) ? 'public split' : 'full benchmark'}${effort ? ', ' + effort[1] : ''}`, metrics });
       }
     }
     if (!out.length) throw new Error("enterpriseops-gym: no score rows in the expected tables");
-    return out.filter(r => r.setting!.includes('; full benchmark')).map(r => ({...r,
-      setting:r.setting!.replace('; full benchmark','')}));
+    return out.filter(r => r.setting!.includes(', full benchmark')).map(r => ({...r,
+      setting:r.setting!.replace(', full benchmark','')}));
   },
 };
 export default board;

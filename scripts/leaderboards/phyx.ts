@@ -23,7 +23,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at killthefullmoon.github.io; retain source attribution and follow the upstream terms.",
   aliases: {"GPT-o4-mini": "o4-mini", "GPT-o3-mini": "o3-mini", "Kimi-VL-A3B-Instruct-2.8B": "kimi-vl-a3b-instruct"},
-  stats: { fullText: { name: 'Full text score', unit: 'score', better: 'higher' }, textMinimal: { name: 'Minimal text score', unit: 'score', better: 'higher' }, mc: { name: 'Multiple-choice score', unit: '%', better: 'higher' }, mc_fullText: { name: 'Multiple-choice full text score', unit: '%', better: 'higher' }, mc_textMinimal: { name: 'Multiple-choice minimal text score', unit: '%', better: 'higher' } },
+  stats: { fullText: { name: 'Full text score', unit: '%', better: 'higher' }, textMinimal: { name: 'Minimal text score', unit: '%', better: 'higher' }, mc: { name: 'Multiple-choice score', unit: '%', better: 'higher' }, mc_fullText: { name: 'Multiple-choice full text score', unit: '%', better: 'higher' }, mc_textMinimal: { name: 'Multiple-choice minimal text score', unit: '%', better: 'higher' } },
   
   async fetch() {
     type Entry = { info: { name: string; type: string; size?: string; link?: string; date?: string }; pro: Record<string, string>; validation: Record<string, string>; test: Record<string, string> };
@@ -41,17 +41,17 @@ const board: Leaderboard = {
         rows.push({
           model: identity(name),
           score,
-          setting: `testmini; ${label}; Text-DeRedundancy`,
+          setting: `testmini, ${label}, Text-DeRedundancy`,
           params: size ? Number(size[0]) : undefined,
           open: /open[_ -]?source/i.test(r.info.type) ? true : /proprietary/i.test(r.info.type) ? false : undefined,
-          link: /^https:\/\//.test(r.info.link ?? '') ? r.info.link : undefined,
+          link: /^https?:\/\/\S+$/.test(r.info.link ?? '') ? r.info.link : undefined,
           metrics,
         });
       }
     }
     if (!rows.length) throw new Error('PhyX score entries missing');
-    return rows.filter(r=>r.setting==='testmini; OE; Text-DeRedundancy').map(r=>{
-      const mc=rows.find(x=>x.model===r.model&&x.setting==='testmini; MC; Text-DeRedundancy');
+    return rows.filter(r=>r.setting==='testmini, OE, Text-DeRedundancy').map(r=>{
+      const mc=rows.find(x=>x.model===r.model&&x.setting==='testmini, MC, Text-DeRedundancy');
       return {...r,metrics:{...r.metrics,...(mc?{mc:mc.score,...Object.fromEntries(Object.entries(mc.metrics??{}).map(([k,v])=>['mc_'+k,v]))}:{})}};
     });
   },

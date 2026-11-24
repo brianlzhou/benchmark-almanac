@@ -12,7 +12,7 @@ const board: Leaderboard={
     if(!t)throw new Error('HLE calibration table missing');
     return t.slice(1).filter(r=>num(r[3]?.text)!==undefined).map(r=>({
       model:r[0].text.replace(/ \(.+\)$/,''),score:num(r[3].text)!,
-      setting:r[0].text.includes('text only')?'text only; high':r[0].text.includes('high')?'high':undefined,
+      setting:r[0].text.includes('text only')?'text only, high':r[0].text.includes('high')?'high':undefined,
       date:r[0].text.includes('December 2024')?'2024-12-17':undefined,
       metrics:{accuracy:num(r[1].text)!,confidence:num(r[2].text)!},
     }));

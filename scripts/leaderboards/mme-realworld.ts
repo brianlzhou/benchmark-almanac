@@ -30,10 +30,15 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Overall') && t[0]?.some(c=>c.text==='Perception'));
   if(!t)throw new Error('MME-RealWorld table missing');
-  return t.slice(3).filter(r=>num(r[4]?.text)!==undefined).map(r=>({
-    model:text(r[1].html.split(/<p\b/)[0]),score:num(r[4].text)!,date:/^\d{4}-\d\d-\d\d$/.test(r[3].text)?r[3].text:undefined,
-    metrics:Object.fromEntries(['perceptionOCR','perceptionRS','perceptionDT','perceptionMO','perceptionAD','perception','perceptionClassAverage','reasoningOCR','reasoningDT','reasoningMO','reasoningAD','reasoning','reasoningClassAverage'].map((h,i)=>[h,num(r[i+5]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))
-  }));
+  return t.slice(3).filter(r=>num(r[4]?.text)!==undefined).map(r=>{
+    const link = r[1]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+    const sz = r[2]?.text.trim().match(/^(\d+(?:\.\d+)?)B$/i);
+    return {
+      model:text(r[1].html.split(/<p\b/)[0]),score:num(r[4].text)!,date:/^\d{4}-\d\d-\d\d$/.test(r[3].text)?r[3].text:undefined,
+      link, params: sz ? Number(sz[1]) : undefined,
+      metrics:Object.fromEntries(['perceptionOCR','perceptionRS','perceptionDT','perceptionMO','perceptionAD','perception','perceptionClassAverage','reasoningOCR','reasoningDT','reasoningMO','reasoningAD','reasoning','reasoningClassAverage'].map((h,i)=>[h,num(r[i+5]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))
+    };
+  });
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, model: /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?(?:pro|flash)|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

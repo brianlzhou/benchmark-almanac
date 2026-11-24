@@ -1711,7 +1711,7 @@
     ["histoires-morales","mistral-7b-instruct-v0-1","Multiple-choice likelihood",null,54.73,"2023-09-27",null,null,{"normalizedAccuracy":55.9}],
     ["histoires-morales","mistral-7b-v0-1","Multiple-choice likelihood",null,52.8,"2023-09-27",null,null,{"normalizedAccuracy":53.4}],
     ["hle-calibration","o1",null,null,83,"2024-12-17",null,null,{"accuracy":8,"confidence":93},{"run":"2024-12-17"}],
-    ["hle-calibration","o3-mini","text only; high",null,80,"2025-01-31",null,null,{"accuracy":13.4,"confidence":96}],
+    ["hle-calibration","o3-mini","text only, high",null,80,"2025-01-31",null,null,{"accuracy":13.4,"confidence":96}],
     ["hle-calibration","o3","high",null,34,"2025-04-16",null,null,{"accuracy":20.3,"confidence":55}],
     ["hle-calibration","o4-mini","high",null,57,"2025-04-16",null,null,{"accuracy":18.1,"confidence":77}],
     ["hle-diamond","deepseek-v4-pro","high",null,13.4,"2026-04-24",null,34683,{"reasoning":14.4,"knowledge":12.4,"tokenRequests":728,"inputTokens":304}],
