@@ -18,6 +18,11 @@ const board: Leaderboard = {
   terms: 'Static page with no terms or robots.txt; the ProgramBench repository (facebookresearch/ProgramBench) is MIT.',
   // the board's other two scores, which labs quote as their own measures (data/benchmarks.json)
   measures: { almost: 'almost', testsPassed: 'tests-passed' },
+  stats: {
+    almost: { name: 'Almost resolved', unit: '%', better: 'higher', note: 'Share of tasks passing at least 95% of tests.' },
+    testsPassed: { name: 'Hidden tests passed', unit: '%', better: 'higher' },
+    turns: { name: 'Turns per task', unit: 'count', better: 'lower' },
+  },
   aliases: {
     'GPT 6 Astra': 'gpt-6-astra',
     'GPT 5.5': 'gpt-5-5',

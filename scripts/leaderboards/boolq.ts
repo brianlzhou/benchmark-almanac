@@ -7,6 +7,12 @@ import { SUPERGLUE_ALIASES, SUPERGLUE_FEED, SUPERGLUE_PAGE, SUPERGLUE_TERMS, sup
 const board: Leaderboard = {
   verified: 'approved for publication by SuperGLUE administrators',
   benchmark: 'boolq',
+  stats: {
+    correct: { name: 'Correct answers', unit: 'count', better: 'higher' },
+    fineTunedParameters: { name: 'Fine-tuned parameters', unit: 'count' },
+    taskSpecificParameters: { name: 'Task-specific parameters', unit: 'count' },
+    woFineTuningParameters: { name: 'Parameters without fine-tuning', unit: 'count' },
+  },
   url: SUPERGLUE_PAGE,
   feed: `${SUPERGLUE_FEED}, task BoolQ`,
   terms: SUPERGLUE_TERMS,
@@ -19,7 +25,7 @@ const board: Leaderboard = {
       if (!result || !info?.name) return undefined;
       const metrics: Record<string, number> = {};
       for (const [key, value] of [...Object.entries(info), ...Object.entries(result)]) {
-        if (['correct', 'total', 'fineTunedParameters', 'woFineTuningParameters', 'taskSpecificParameters'].includes(key)
+        if (['correct', 'fineTunedParameters', 'woFineTuningParameters', 'taskSpecificParameters'].includes(key)
           && typeof value === 'number' && value >= 0) metrics[key] = value;
       }
       const date = new Date(r.createdOn).toISOString().slice(0, 10);

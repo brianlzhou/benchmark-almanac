@@ -35898,7 +35898,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/5658/leaderboard/?page_size=100 and https://raw.githubusercontent.com/zeyofu/BLINK_Benchmark/main/README.md (test split)",
       "terms": "EvalAI's public leaderboard API, the endpoint its challenge pages read; eval.ai has no robots.txt rules and EvalAI's code is open source (Cloud-CV/EvalAI).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "BLINK submission 1011166: PAELLM",
@@ -35986,6 +35986,10 @@
         "IQ_Test": {
           "name": "IQ Test",
           "group": "Task type"
+        },
+        "validation": {
+          "name": "Validation split",
+          "group": "Split"
         }
       }
     },
@@ -37444,7 +37448,26 @@
         "Vega v2",
         "iPET (ALBERT) - Few-Shot (32 Examples)"
       ],
-      "verified": "approved for publication by SuperGLUE administrators"
+      "verified": "approved for publication by SuperGLUE administrators",
+      "stats": {
+        "correct": {
+          "name": "Correct answers",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fineTunedParameters": {
+          "name": "Fine-tuned parameters",
+          "unit": "count"
+        },
+        "taskSpecificParameters": {
+          "name": "Task-specific parameters",
+          "unit": "count"
+        },
+        "woFineTuningParameters": {
+          "name": "Parameters without fine-tuning",
+          "unit": "count"
+        }
+      }
     },
     "bornholm-bitext-mining": {
       "url": "https://datawrapper.dwcdn.net/us1YK/12/",
@@ -40060,7 +40083,7 @@
       "url": "https://github.com/hkust-nlp/ceval",
       "feed": "https://raw.githubusercontent.com/hkust-nlp/ceval/main/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Bloomz-mt-176B",
@@ -40078,6 +40101,10 @@
         "hard": {
           "name": "C-Eval Hard",
           "group": "Difficulty"
+        },
+        "validation": {
+          "name": "Validation split",
+          "group": "Split"
         },
         "Social Science": {
           "name": "Social science",
@@ -99268,13 +99295,32 @@
       "url": "https://www.cybergym.io/exploitgym/",
       "feed": "https://www.cybergym.io/assets/data/exploitgym.json",
       "terms": "Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [
         "VDM-Dawn"
       ],
       "harnesses": "system",
+      "parts": {
+        "userspace": {
+          "name": "Userspace",
+          "group": "Domain"
+        },
+        "v8": {
+          "name": "V8",
+          "group": "Domain"
+        },
+        "kernel": {
+          "name": "Linux kernel",
+          "group": "Domain"
+        }
+      },
       "stats": {
+        "mitigatedRate": {
+          "name": "Mitigated exploit rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "latency": {
           "name": "Average time per task",
           "unit": "seconds",
@@ -99282,6 +99328,26 @@
         },
         "steps": {
           "name": "LLM calls per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "successCost": {
+          "name": "Average cost per solved task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "successTokens": {
+          "name": "Average output tokens per solved task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "successLatency": {
+          "name": "Average time per solved task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "successSteps": {
+          "name": "LLM calls per solved task",
           "unit": "count",
           "better": "lower"
         }
@@ -154878,114 +154944,149 @@
       "url": "https://job-bench.github.io/",
       "feed": "https://job-bench.github.io/ (column header titles of the results heatmap)",
       "terms": "Static GitHub Pages site with no robots.txt and no terms; the evaluation code is public at github.com/Job-Bench/job-bench-eval.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
         "Bookkeeping Accounting And Auditing Clerks": {
-          "name": "Bookkeeping & Accounting Clerks"
+          "name": "Bookkeeping and Accounting Clerks",
+          "group": "Occupation"
         },
         "Human Resources Specialists": {
-          "name": "HR Specialists"
+          "name": "HR Specialists",
+          "group": "Occupation"
         },
         "Licensing Examiners And Inspectors": {
-          "name": "Licensing Examiners / Inspectors"
+          "name": "Licensing Examiners and Inspectors",
+          "group": "Occupation"
         },
         "Management Analysts": {
-          "name": "Management Analysts"
+          "name": "Management Analysts",
+          "group": "Occupation"
         },
         "Personal Financial Advisors": {
-          "name": "Personal Financial Advisors"
+          "name": "Personal Financial Advisors",
+          "group": "Occupation"
         },
         "Purchasing Agents Except Wholesale Retail And Farm Products": {
-          "name": "Purchasing Agents"
+          "name": "Purchasing Agents",
+          "group": "Occupation"
         },
         "Training And Development Specialists": {
-          "name": "Training & Development Specialists"
+          "name": "Training and Development Specialists",
+          "group": "Occupation"
         },
         "Court Clerks": {
-          "name": "Court Clerks"
+          "name": "Court Clerks",
+          "group": "Occupation"
         },
         "Customer Service Representatives": {
-          "name": "Customer Service Reps"
+          "name": "Customer Service Reps",
+          "group": "Occupation"
         },
         "Data Entry Keyers": {
-          "name": "Data Entry Keyers"
+          "name": "Data Entry Keyers",
+          "group": "Occupation"
         },
         "Medical Secretaries": {
-          "name": "Medical Secretaries"
+          "name": "Medical Secretaries",
+          "group": "Occupation"
         },
         "Police Fire And Ambulance Dispatchers": {
-          "name": "Police / Fire Dispatchers"
+          "name": "Police and Fire Dispatchers",
+          "group": "Occupation"
         },
         "Secretaries And Administrative Assistants Except Legal Medical And Executive": {
-          "name": "Secretaries & Admin Assistants"
+          "name": "Secretaries and Admin Assistants",
+          "group": "Occupation"
         },
         "Biostatisticians": {
-          "name": "Biostatisticians"
+          "name": "Biostatisticians",
+          "group": "Occupation"
         },
         "Computer And Information Research Scientists": {
-          "name": "CS Researchers"
+          "name": "CS Researchers",
+          "group": "Occupation"
         },
         "Statisticians": {
-          "name": "Statisticians"
+          "name": "Statisticians",
+          "group": "Occupation"
         },
         "Computer User Support Specialists": {
-          "name": "User Support Specialists"
+          "name": "User Support Specialists",
+          "group": "Occupation"
         },
         "Web Administrators": {
-          "name": "Web Administrators"
+          "name": "Web Administrators",
+          "group": "Occupation"
         },
         "Civil Engineers": {
-          "name": "Civil Engineers"
+          "name": "Civil Engineers",
+          "group": "Occupation"
         },
         "Mechanical Engineering Technicians": {
-          "name": "Mechanical Eng. Technicians"
+          "name": "Mechanical Eng. Technicians",
+          "group": "Occupation"
         },
         "Mechanical Engineers": {
-          "name": "Mechanical Engineers"
+          "name": "Mechanical Engineers",
+          "group": "Occupation"
         },
         "Petroleum Engineers": {
-          "name": "Petroleum Engineers"
+          "name": "Petroleum Engineers",
+          "group": "Occupation"
         },
         "Financial Managers Branch Or Department": {
-          "name": "Financial Managers"
+          "name": "Financial Managers",
+          "group": "Occupation"
         },
         "Medical And Health Services Managers": {
-          "name": "Health Services Managers"
+          "name": "Health Services Managers",
+          "group": "Occupation"
         },
         "Computer And Information Systems Managers": {
-          "name": "IT / IS Managers"
+          "name": "IT and IS Managers",
+          "group": "Occupation"
         },
         "Supply Chain Managers": {
-          "name": "Supply Chain Managers"
+          "name": "Supply Chain Managers",
+          "group": "Occupation"
         },
         "Producers": {
-          "name": "Producers"
+          "name": "Producers",
+          "group": "Occupation"
         },
         "Reporters And Correspondents": {
-          "name": "Reporters & Correspondents"
+          "name": "Reporters and Correspondents",
+          "group": "Occupation"
         },
         "Technical Writers": {
-          "name": "Technical Writers"
+          "name": "Technical Writers",
+          "group": "Occupation"
         },
         "Lawyers": {
-          "name": "Lawyers"
+          "name": "Lawyers",
+          "group": "Occupation"
         },
         "Online Merchants": {
-          "name": "Online Merchants"
+          "name": "Online Merchants",
+          "group": "Occupation"
         },
         "Sales Agents Securities And Commodities": {
-          "name": "Securities Sales Agents"
+          "name": "Securities Sales Agents",
+          "group": "Occupation"
         },
         "Social Science Research Assistants": {
-          "name": "Soc. Sci. Research Assistants"
+          "name": "Soc. Sci. Research Assistants",
+          "group": "Occupation"
         },
         "Sociology Teachers Postsecondary": {
-          "name": "Sociology Teachers (Postsec.)"
+          "name": "Sociology Teachers (Postsec.)",
+          "group": "Occupation"
         },
         "Sales Representatives Wholesale And Manufacturing Technical And Scientific Products": {
-          "name": "Tech & Sci. Sales Reps"
+          "name": "Tech and Sci. Sales Reps",
+          "group": "Occupation"
         }
       }
     },
@@ -176183,7 +176284,7 @@
       "url": "https://longvideobench.github.io",
       "feed": "https://longvideobench.github.io/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "InternVL-Chat-V1-5-26B",
@@ -176219,12 +176320,6 @@
         "Val Total (1337)": {
           "name": "Validation",
           "group": "Split"
-        }
-      },
-      "stats": {
-        "maxFrames": {
-          "name": "Maximum frames",
-          "unit": "count"
         }
       }
     },
@@ -182103,28 +182198,28 @@
       "url": "https://mcpmark.ai/leaderboard",
       "feed": "https://mcpmark.ai/leaderboard (Next.js page payload, legacy overall table)",
       "terms": "Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
       "parts": {
         "filesystem": {
-          "name": "filesystem",
+          "name": "Filesystem",
           "group": "Server"
         },
         "github": {
-          "name": "github",
+          "name": "GitHub",
           "group": "Server"
         },
         "notion": {
-          "name": "notion",
+          "name": "Notion",
           "group": "Server"
         },
         "playwright": {
-          "name": "playwright",
+          "name": "Playwright",
           "group": "Server"
         },
         "postgres": {
-          "name": "postgres",
+          "name": "Postgres",
           "group": "Server"
         }
       },
@@ -182148,10 +182243,6 @@
           "name": "Average time per task",
           "unit": "seconds",
           "better": "lower"
-        },
-        "filesystem: total_tasks": {
-          "name": "Filesystem total tasks",
-          "unit": "count"
         },
         "filesystem: total_agent_execution_time": {
           "name": "Filesystem total agent execution time",
@@ -182208,11 +182299,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "filesystem: pass@1": {
-          "name": "Filesystem Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
         "filesystem: pass@4": {
           "name": "Filesystem Pass@4",
           "unit": "%",
@@ -182223,101 +182309,70 @@
           "unit": "%",
           "better": "higher"
         },
-        "filesystem: pass@1std": {
-          "name": "Filesystem Pass@1 standard deviation",
-          "unit": "%"
-        },
-        "filesystem: rank": {
-          "name": "Filesystem rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "github: total_tasks": {
-          "name": "Github total tasks",
-          "unit": "count"
-        },
         "github: total_agent_execution_time": {
-          "name": "Github total agent execution time",
+          "name": "GitHub total agent execution time",
           "unit": "seconds",
           "better": "lower"
         },
         "github: total_input_tokens": {
-          "name": "Github total input tokens",
+          "name": "GitHub total input tokens",
           "unit": "tokens"
         },
         "github: total_output_tokens": {
-          "name": "Github total output tokens",
+          "name": "GitHub total output tokens",
           "unit": "tokens"
         },
         "github: total_tokens": {
-          "name": "Github total tokens",
+          "name": "GitHub total tokens",
           "unit": "tokens"
         },
         "github: total_turns": {
-          "name": "Github total turns",
+          "name": "GitHub total turns",
           "unit": "count"
         },
         "github: avg_agent_execution_time": {
-          "name": "Github average agent execution time",
+          "name": "GitHub average agent execution time",
           "unit": "seconds",
           "better": "lower"
         },
         "github: avg_input_tokens": {
-          "name": "Github average input tokens",
+          "name": "GitHub average input tokens",
           "unit": "tokens"
         },
         "github: avg_output_tokens": {
-          "name": "Github average output tokens",
+          "name": "GitHub average output tokens",
           "unit": "tokens"
         },
         "github: avg_total_tokens": {
-          "name": "Github average total tokens",
+          "name": "GitHub average total tokens",
           "unit": "tokens"
         },
         "github: avg_turns": {
-          "name": "Github average turns",
+          "name": "GitHub average turns",
           "unit": "count"
         },
         "github: per_run_input_tokens": {
-          "name": "Github input tokens per run",
+          "name": "GitHub input tokens per run",
           "unit": "tokens"
         },
         "github: per_run_output_tokens": {
-          "name": "Github output tokens per run",
+          "name": "GitHub output tokens per run",
           "unit": "tokens"
         },
         "github: per_run_cost": {
-          "name": "Github cost per run",
+          "name": "GitHub cost per run",
           "unit": "usd",
           "better": "lower"
         },
-        "github: pass@1": {
-          "name": "Github Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
         "github: pass@4": {
-          "name": "Github Pass@4",
+          "name": "GitHub Pass@4",
           "unit": "%",
           "better": "higher"
         },
         "github: pass^4": {
-          "name": "Github Pass^4",
+          "name": "GitHub Pass^4",
           "unit": "%",
           "better": "higher"
-        },
-        "github: pass@1std": {
-          "name": "Github Pass@1 standard deviation",
-          "unit": "%"
-        },
-        "github: rank": {
-          "name": "Github rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "notion: total_tasks": {
-          "name": "Notion total tasks",
-          "unit": "count"
         },
         "notion: total_agent_execution_time": {
           "name": "Notion total agent execution time",
@@ -182374,11 +182429,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "notion: pass@1": {
-          "name": "Notion Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
         "notion: pass@4": {
           "name": "Notion Pass@4",
           "unit": "%",
@@ -182388,19 +182438,6 @@
           "name": "Notion Pass^4",
           "unit": "%",
           "better": "higher"
-        },
-        "notion: pass@1std": {
-          "name": "Notion Pass@1 standard deviation",
-          "unit": "%"
-        },
-        "notion: rank": {
-          "name": "Notion rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "playwright: total_tasks": {
-          "name": "Playwright total tasks",
-          "unit": "count"
         },
         "playwright: total_agent_execution_time": {
           "name": "Playwright total agent execution time",
@@ -182457,11 +182494,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "playwright: pass@1": {
-          "name": "Playwright Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
         "playwright: pass@4": {
           "name": "Playwright Pass@4",
           "unit": "%",
@@ -182471,19 +182503,6 @@
           "name": "Playwright Pass^4",
           "unit": "%",
           "better": "higher"
-        },
-        "playwright: pass@1std": {
-          "name": "Playwright Pass@1 standard deviation",
-          "unit": "%"
-        },
-        "playwright: rank": {
-          "name": "Playwright rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "postgres: total_tasks": {
-          "name": "Postgres total tasks",
-          "unit": "count"
         },
         "postgres: total_agent_execution_time": {
           "name": "Postgres total agent execution time",
@@ -182540,11 +182559,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "postgres: pass@1": {
-          "name": "Postgres Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
         "postgres: pass@4": {
           "name": "Postgres Pass@4",
           "unit": "%",
@@ -182554,15 +182568,6 @@
           "name": "Postgres Pass^4",
           "unit": "%",
           "better": "higher"
-        },
-        "postgres: pass@1std": {
-          "name": "Postgres Pass@1 standard deviation",
-          "unit": "%"
-        },
-        "postgres: rank": {
-          "name": "Postgres rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -186203,7 +186208,7 @@
       "url": "https://medxpertqa.github.io/",
       "feed": "https://medxpertqa.github.io/ (static HTML table, MM subset, Avg)",
       "terms": "Static GitHub Pages site; the MedXpertQA repository is MIT-licensed and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "parts": {
@@ -186212,12 +186217,6 @@
         },
         "Understanding": {
           "name": "Understanding"
-        }
-      },
-      "stats": {
-        "publishedTableRank": {
-          "name": "Published table rank",
-          "unit": "count"
         }
       }
     },
@@ -194637,7 +194636,7 @@
       "url": "https://sakshi113.github.io/mmau_homepage/",
       "feed": "https://sakshi113.github.io/mmau_homepage/leaderboard_data.json (Avg, test-mini)",
       "terms": "JSON files on the MMAU GitHub Pages site that the page loads; the page states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Audio Flamingo 2",
@@ -194663,13 +194662,32 @@
       ],
       "parts": {
         "Sound_Test-mini": {
-          "name": "Sound"
+          "name": "Sound",
+          "group": "Test-mini split"
         },
         "Music_Test-mini": {
-          "name": "Music"
+          "name": "Music",
+          "group": "Test-mini split"
         },
         "Speech_Test-mini": {
-          "name": "Speech"
+          "name": "Speech",
+          "group": "Test-mini split"
+        },
+        "Avg_Test": {
+          "name": "Average",
+          "group": "Test split"
+        },
+        "Sound_Test": {
+          "name": "Sound",
+          "group": "Test split"
+        },
+        "Music_Test": {
+          "name": "Music",
+          "group": "Test split"
+        },
+        "Speech_Test": {
+          "name": "Speech",
+          "group": "Test split"
         }
       }
     },
@@ -194755,7 +194773,7 @@
       "url": "https://sakshi113.github.io/mmau_homepage/",
       "feed": "https://sakshi113.github.io/mmau_homepage/leaderboard_data_v15_parsed.json (Avg, test-mini)",
       "terms": "JSON files on the MMAU GitHub Pages site that the page loads; the page states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Audio Flamingo 2",
@@ -197525,7 +197543,7 @@
       "url": "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc",
       "feed": "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc/resolve/main/leaderboard_data.json",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "MiniMax-VL-01",
@@ -197533,12 +197551,8 @@
         "TeleMM-2.0"
       ],
       "stats": {
-        "activeParametersBillions": {
-          "name": "Active parameters from parameter field",
-          "unit": "billions"
-        },
         "activeParams": {
-          "name": "Active parameters from params_b",
+          "name": "Active parameters",
           "unit": "billions"
         }
       }
@@ -201537,7 +201551,7 @@
       "url": "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge",
       "feed": "https://huggingface.co/spaces/lmsys/mt-bench/resolve/main/data/mt_bench/model_judgment/gpt-4_single.jsonl",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Llama-2-13b-chat",
@@ -201580,35 +201594,35 @@
           "group": "Split"
         },
         "category:writing": {
-          "name": "writing",
+          "name": "Writing",
           "group": "Category"
         },
         "category:roleplay": {
-          "name": "roleplay",
+          "name": "Roleplay",
           "group": "Category"
         },
         "category:reasoning": {
-          "name": "reasoning",
+          "name": "Reasoning",
           "group": "Category"
         },
         "category:math": {
-          "name": "math",
+          "name": "Math",
           "group": "Category"
         },
         "category:coding": {
-          "name": "coding",
+          "name": "Coding",
           "group": "Category"
         },
         "category:extraction": {
-          "name": "extraction",
+          "name": "Extraction",
           "group": "Category"
         },
         "category:stem": {
-          "name": "stem",
+          "name": "STEM",
           "group": "Category"
         },
         "category:humanities": {
-          "name": "humanities",
+          "name": "Humanities",
           "group": "Category"
         }
       },
@@ -206630,7 +206644,7 @@
       "url": "https://huggingface.co/spaces/OpenGVLab/MVBench_Leaderboard",
       "feed": "https://opengvlab-mvbench-leaderboard.hf.space/config",
       "terms": "The authors publish this public Hugging Face Space; upstream terms apply and the Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "BLIP2",
@@ -206667,64 +206681,84 @@
       ],
       "parts": {
         "Action Antonym": {
-          "name": "Action Antonym"
+          "name": "Action Antonym",
+          "group": "Task"
         },
         "Action Count": {
-          "name": "Action Count"
+          "name": "Action Count",
+          "group": "Task"
         },
         "Action Localization": {
-          "name": "Action Localization"
+          "name": "Action Localization",
+          "group": "Task"
         },
         "Action Prediction": {
-          "name": "Action Prediction"
+          "name": "Action Prediction",
+          "group": "Task"
         },
         "Action Sequence": {
-          "name": "Action Sequence"
+          "name": "Action Sequence",
+          "group": "Task"
         },
         "Character Order": {
-          "name": "Character Order"
+          "name": "Character Order",
+          "group": "Task"
         },
         "Counterfactual Inference": {
-          "name": "Counterfactual Inference"
+          "name": "Counterfactual Inference",
+          "group": "Task"
         },
         "Egocentric Navigation": {
-          "name": "Egocentric Navigation"
+          "name": "Egocentric Navigation",
+          "group": "Task"
         },
         "Episodic Reasoning": {
-          "name": "Episodic Reasoning"
+          "name": "Episodic Reasoning",
+          "group": "Task"
         },
         "Fine-grained Action": {
-          "name": "Fine-grained Action"
+          "name": "Fine-grained Action",
+          "group": "Task"
         },
         "Fine-grained Pose": {
-          "name": "Fine-grained Pose"
+          "name": "Fine-grained Pose",
+          "group": "Task"
         },
         "Moving Attribute": {
-          "name": "Moving Attribute"
+          "name": "Moving Attribute",
+          "group": "Task"
         },
         "Moving Count": {
-          "name": "Moving Count"
+          "name": "Moving Count",
+          "group": "Task"
         },
         "Moving Direction": {
-          "name": "Moving Direction"
+          "name": "Moving Direction",
+          "group": "Task"
         },
         "Object Existence": {
-          "name": "Object Existence"
+          "name": "Object Existence",
+          "group": "Task"
         },
         "Object Interaction": {
-          "name": "Object Interaction"
+          "name": "Object Interaction",
+          "group": "Task"
         },
         "Object Shuffle": {
-          "name": "Object Shuffle"
+          "name": "Object Shuffle",
+          "group": "Task"
         },
         "Scene Transition": {
-          "name": "Scene Transition"
+          "name": "Scene Transition",
+          "group": "Task"
         },
         "State Change": {
-          "name": "State Change"
+          "name": "State Change",
+          "group": "Task"
         },
         "Unexpected Action": {
-          "name": "Unexpected Action"
+          "name": "Unexpected Action",
+          "group": "Task"
         }
       }
     },
@@ -251482,7 +251516,7 @@
       "url": "https://qwen-polymath.github.io/",
       "feed": "https://qwen-polymath.github.io/ (static HTML table, Overall)",
       "terms": "Static GitHub Pages site that states no license or terms; the PolyMath dataset card on Hugging Face is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [],
       "parts": {
@@ -253999,7 +254033,7 @@
       "url": "https://programbench.com/",
       "feed": "https://programbench.com/ (static HTML table, Resolved, and the chart's results array)",
       "terms": "Static page with no terms or robots.txt; the ProgramBench repository (facebookresearch/ProgramBench) is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [],
       "chart": {
@@ -254015,6 +254049,24 @@
           "label": "% Test Passed",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "almost": {
+          "name": "Almost resolved",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of tasks passing at least 95% of tests."
+        },
+        "testsPassed": {
+          "name": "Hidden tests passed",
+          "unit": "%",
+          "better": "higher"
+        },
+        "turns": {
+          "name": "Turns per task",
+          "unit": "count",
+          "better": "lower"
         }
       },
       "measures": {
@@ -299485,7 +299537,7 @@
       "url": "https://www.terminal-bench-science.ai/",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench-science/terminal-bench-science\",\"name\":\"v0-1-eval\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint behind the site, under the Harbor Hub Terms of Service; the site robots.txt disallows only its own /api/ proxy, and the repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
       "harnesses": "system",
@@ -299498,10 +299550,6 @@
           "name": "Run cost",
           "unit": "usd",
           "better": "lower"
-        },
-        "trials": {
-          "name": "Trials",
-          "unit": "count"
         },
         "runTotalTokens": {
           "name": "Run total tokens",
@@ -318670,7 +318718,7 @@
       "url": "https://vitabench.github.io/#Leaderboard",
       "feed": "https://vitabench.github.io/ (static HTML table, Cross-Scenarios Avg@4)",
       "terms": "Static GitHub Pages site; the VitaBench repository (meituan-longcat/vitabench) is MIT-licensed and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "stats": {
@@ -318683,10 +318731,6 @@
           "name": "Cross-scenarios pass^4",
           "unit": "%",
           "better": "higher"
-        },
-        "reasoningGroupRank": {
-          "name": "Reasoning group rank",
-          "unit": "count"
         },
         "Delivery Avg@4": {
           "name": "Delivery average at 4",
@@ -319984,7 +320028,7 @@
       "url": "https://matthewcym.github.io/VoiceBench/",
       "feed": "https://matthewcym.github.io/VoiceBench/ (static HTML table, data-overall)",
       "terms": "Static GitHub Pages site that states no terms; the VoiceBench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "BR-Voice-Reasoner",

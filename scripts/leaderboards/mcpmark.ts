@@ -30,12 +30,19 @@ interface Server {
   models: { [key: string]: unknown; is_open_source_model?: boolean; model: string; total_tasks: number; per_run_output_tokens?: number }[];
 }
 
-const serverNames = ['filesystem', 'github', 'notion', 'playwright', 'postgres'];
+const SERVER_LABELS: Record<string, string> = {
+  filesystem: 'Filesystem',
+  github: 'GitHub',
+  notion: 'Notion',
+  playwright: 'Playwright',
+  postgres: 'Postgres',
+};
+const serverNames = Object.keys(SERVER_LABELS);
+const SKIP_SERVER_KEYS = new Set(['total_tasks', 'rank', 'pass@1']);
 const serverStats: Record<string, { name: string; unit: string; better?: 'higher' | 'lower' }> = {};
 for (const server of serverNames) {
-  const label = server[0].toUpperCase() + server.slice(1);
+  const label = SERVER_LABELS[server];
   Object.assign(serverStats, {
-    [`${server}: total_tasks`]: { name: `${label} total tasks`, unit: 'count' },
     [`${server}: total_agent_execution_time`]: { name: `${label} total agent execution time`, unit: 'seconds', better: 'lower' },
     [`${server}: total_input_tokens`]: { name: `${label} total input tokens`, unit: 'tokens' },
     [`${server}: total_output_tokens`]: { name: `${label} total output tokens`, unit: 'tokens' },
@@ -49,11 +56,8 @@ for (const server of serverNames) {
     [`${server}: per_run_input_tokens`]: { name: `${label} input tokens per run`, unit: 'tokens' },
     [`${server}: per_run_output_tokens`]: { name: `${label} output tokens per run`, unit: 'tokens' },
     [`${server}: per_run_cost`]: { name: `${label} cost per run`, unit: 'usd', better: 'lower' },
-    [`${server}: pass@1`]: { name: `${label} Pass@1`, unit: '%', better: 'higher' },
     [`${server}: pass@4`]: { name: `${label} Pass@4`, unit: '%', better: 'higher' },
     [`${server}: pass^4`]: { name: `${label} Pass^4`, unit: '%', better: 'higher' },
-    [`${server}: pass@1std`]: { name: `${label} Pass@1 standard deviation`, unit: '%' },
-    [`${server}: rank`]: { name: `${label} rank`, unit: 'count', better: 'lower' },
   });
 }
 
@@ -67,6 +71,7 @@ function arrayBefore<T>(flight: string, marker: string): T {
 
 const board: Leaderboard = {
   benchmark: 'mcpmark',
+  parts: Object.fromEntries(Object.entries(SERVER_LABELS).map(([k, name]) => [k, { name, group: 'Server' }])),
   url: PAGE,
   feed: `${PAGE} (Next.js page payload, legacy overall table)`,
   terms: 'Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.',
@@ -90,8 +95,9 @@ const board: Leaderboard = {
       for (const m of s.models) {
         const stats = details.get(m.model) ?? {};
         for (const [key, value] of Object.entries(m)) {
-          if (typeof value !== 'number') continue;
-          stats[s.serverName + ': ' + key] = key.startsWith('pass') ? value * 100 : value;
+          if (typeof value !== 'number' || SKIP_SERVER_KEYS.has(key)) continue;
+          const outKey = key === 'pass@1std' ? `${s.serverName}: pass1Std` : `${s.serverName}: ${key}`;
+          stats[outKey] = key.startsWith('pass') ? value * 100 : value;
         }
         details.set(m.model, stats);
         if (typeof m.is_open_source_model === 'boolean') openness.set(m.model, m.is_open_source_model);
@@ -111,7 +117,6 @@ const board: Leaderboard = {
       for (const [server, result] of Object.entries(r.servicesSuccessRate ?? {})) {
         if (typeof result.avgSuccessRate !== 'number') continue;
         metrics[server] = result.avgSuccessRate * 100;
-        (board.parts ??= {})[server] = { name: server, group: 'Server' };
       }
       if (typeof r.passAtFour === 'number') metrics.passAt4 = r.passAtFour * 100;
       if (typeof r.passHatFour === 'number') metrics.pass4 = r.passHatFour * 100;

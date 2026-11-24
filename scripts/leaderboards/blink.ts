@@ -57,6 +57,7 @@ const board: Leaderboard = {
     Relative_Reflectance: { name: 'Relative Reflectance', group: 'Task type' },
     Forensic_Detection: { name: 'Forensic Detection', group: 'Task type' },
     IQ_Test: { name: 'IQ Test', group: 'Task type' },
+    validation: { name: 'Validation split', group: 'Split' },
   },
   verified: 'verified by the BLINK host on EvalAI',
   url: 'https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658',
@@ -96,7 +97,6 @@ const board: Leaderboard = {
           const value = e.result?.[i];
           if (i > 0 && typeof value === 'number' && Number.isFinite(value)) metrics[label] = value * 100;
         }
-        if (typeof e.submission__id === 'number') metrics.submissionId = e.submission__id;
         if (host) {
           const model = e.submission__method_name!.trim().toLowerCase();
           const val = t.rows.find(cells => cells[0].replace(/^[^A-Za-z]+/, '').trim().toLowerCase() === model);
