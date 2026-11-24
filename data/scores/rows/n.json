@@ -1,12 +1,12 @@
 {
   "rows": [
     ["n2c2-2022-social-determinants-of-health","t5-large",null,"MS",0.8547,null,null,null,{"A":0.901,"APrecision":0.909,"ARecall":0.893,"B":0.774,"BPrecision":0.811,"BRecall":0.74,"C":0.889,"CPrecision":0.891,"CRecall":0.887},{"submitter":"MS"}],
-    ["nafd-e1-financial-reporting","claude-sonnet-5",null,null,0.8532,"2026-06-30",null,null,null,{"run":"2026-11-18"}],
-    ["nafd-e1-financial-reporting","gpt-5-6-luna",null,null,0.8368,"2026-07-09",null,null,null,{"run":"2026-11-16"}],
-    ["nafd-e1-financial-reporting","gpt-5-6-sol",null,null,0.908,"2026-07-09",null,null,null,{"run":"2026-11-16"}],
-    ["nafd-e1-financial-reporting","gpt-5-6-terra",null,null,0.8794,"2026-07-09",null,null,null,{"run":"2026-11-16"}],
-    ["nafd-e1-financial-reporting","claude-opus-5",null,null,0.9275,"2026-07-24",null,null,null,{"run":"2026-11-18"}],
-    ["nafd-e1-financial-reporting","gemini-3-8-flash",null,null,0.8899,"2026-09-02",null,null,null,{"run":"2026-11-16"}],
+    ["nafd-e1-financial-reporting","claude-sonnet-5",null,null,0.8532,"2026-06-30",null,null,{"financialReporting":0.7209,"performanceManagement":0.915,"businessPlanning":0.855,"taxation":0.68,"corporateLaw":0.945,"riskManagement":0.98,"investmentManagement":0.905,"technologyData":0.825},{"run":"2026-11-18"}],
+    ["nafd-e1-financial-reporting","gpt-5-6-luna",null,null,0.8368,"2026-07-09",null,null,{"financialReporting":0.7493,"performanceManagement":0.915,"businessPlanning":0.915,"taxation":0.53,"corporateLaw":0.96,"riskManagement":0.97,"investmentManagement":0.87,"technologyData":0.785},{"run":"2026-11-16"}],
+    ["nafd-e1-financial-reporting","gpt-5-6-sol",null,null,0.908,"2026-07-09",null,null,{"financialReporting":0.7936,"performanceManagement":0.96,"businessPlanning":0.98,"taxation":0.8,"corporateLaw":0.96,"riskManagement":0.97,"investmentManagement":0.94,"technologyData":0.86},{"run":"2026-11-16"}],
+    ["nafd-e1-financial-reporting","gpt-5-6-terra",null,null,0.8794,"2026-07-09",null,null,{"financialReporting":0.795,"performanceManagement":0.92,"businessPlanning":0.905,"taxation":0.68,"corporateLaw":0.96,"riskManagement":0.975,"investmentManagement":0.93,"technologyData":0.87},{"run":"2026-11-16"}],
+    ["nafd-e1-financial-reporting","claude-opus-5",null,null,0.9275,"2026-07-24",null,null,{"financialReporting":0.86,"performanceManagement":0.98,"businessPlanning":0.98,"taxation":0.855,"corporateLaw":0.95,"riskManagement":0.98,"investmentManagement":0.955,"technologyData":0.86},{"run":"2026-11-18"}],
+    ["nafd-e1-financial-reporting","gemini-3-8-flash",null,null,0.8899,"2026-09-02",null,null,{"financialReporting":0.8191,"performanceManagement":0.96,"businessPlanning":0.97,"taxation":0.645,"corporateLaw":0.95,"riskManagement":0.97,"investmentManagement":0.965,"technologyData":0.84},{"run":"2026-11-16"}],
     ["naijaproverb-bench","gemma-3-27b",null,null,35.06,"2025-03-11",null,null,{"english":35.366,"bilingual":34.756},{"run":"2026-04-16"}],
     ["naijaproverb-bench","gemma-3-12b",null,null,28.35,"2025-03-12",null,null,{"english":26.829,"bilingual":29.878},{"run":"2026-04-16"}],
     ["naijaproverb-bench","gemma-3-1b",null,null,16.16,"2025-03-12",null,null,{"english":12.805,"bilingual":19.512},{"run":"2026-04-16"}],

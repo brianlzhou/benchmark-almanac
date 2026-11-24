@@ -6511,9 +6511,41 @@
       "url": "https://www.kaggle.com/benchmarks/eigent/agenticrl-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/eigent/agenticrl-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "verlUpgradeGate": {
+          "name": "Verl Upgrade Gate"
+        },
+        "inferenceRegimeNontransfer": {
+          "name": "Inference Regime Nontransfer"
+        },
+        "repoEnvAnswerLeakScrub": {
+          "name": "Repo Env Answer Leak Scrub"
+        },
+        "harborUpgradeRowParity": {
+          "name": "Harbor Upgrade Row Parity"
+        },
+        "stalePrefixRescueIncident": {
+          "name": "Stale Prefix Rescue Incident"
+        },
+        "sqlPartialCreditExploits": {
+          "name": "SQL Partial Credit Exploits"
+        },
+        "slimeTitoSession": {
+          "name": "Slime TITO Session"
+        },
+        "toolCallParseFidelity": {
+          "name": "Tool Call Parse Fidelity"
+        },
+        "scoreCenteringAgentRollouts": {
+          "name": "Score Centering Agent Rollouts"
+        },
+        "crossVocabTeacherScoring": {
+          "name": "Cross Vocab Teacher Scoring"
+        }
+      }
     },
     "agenticsts": {
       "url": "https://github.com/AlayaLab/AgenticSTS",
@@ -15987,9 +16019,35 @@
       "url": "https://www.kaggle.com/benchmarks/vikramtiwari/anvilbench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/vikramtiwari/anvilbench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "quantizationGemv": {
+          "name": "LLM quantization and GEMV"
+        },
+        "attentionKv": {
+          "name": "Attention, KV, and speculative decoding"
+        },
+        "trainingRl": {
+          "name": "Training, RL, and alignment"
+        },
+        "vision3d": {
+          "name": "Vision, video, 3D, and ISP"
+        },
+        "audioDsp": {
+          "name": "Audio, speech, and DSP"
+        },
+        "tabularGnnRag": {
+          "name": "Tabular, GNN, and RAG"
+        },
+        "databasesCrypto": {
+          "name": "Databases, crypto, and coding"
+        },
+        "scienceFinance": {
+          "name": "Science, finance, and physics"
+        }
+      }
     },
     "anyappbench": {
       "url": "https://anyappbench.github.io/#leaderboard",
@@ -36882,9 +36940,56 @@
       "url": "https://www.kaggle.com/benchmarks/pedroschoen/brainfk-coding-benchmark",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/pedroschoen/brainfk-coding-benchmark/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "copyStdin": {
+          "name": "Copy stdin to stdout"
+        },
+        "addTwoDigits": {
+          "name": "Add two digits"
+        },
+        "helloWorld": {
+          "name": "Hello, World!"
+        },
+        "printOk": {
+          "name": "Print OK"
+        },
+        "echoOneByte": {
+          "name": "Echo one byte"
+        },
+        "print1To9": {
+          "name": "Print 1 to 9"
+        },
+        "uppercase": {
+          "name": "Uppercase"
+        },
+        "reverseString": {
+          "name": "Reverse a string"
+        },
+        "countChars": {
+          "name": "Count characters"
+        },
+        "primalityTest": {
+          "name": "Primality test"
+        },
+        "countdown": {
+          "name": "Countdown"
+        },
+        "sumOfDigits": {
+          "name": "Sum of digits"
+        },
+        "decimalToBinary": {
+          "name": "Decimal to binary"
+        },
+        "sortThreeDigits": {
+          "name": "Sort three digits"
+        },
+        "fizzBuzz": {
+          "name": "FizzBuzz"
+        }
+      }
     },
     "break-the-grader": {
       "url": "https://carlostoledo.co/reports/gym.html",
@@ -70223,9 +70328,20 @@
       "url": "https://www.kaggle.com/benchmarks/chenlufried/creative-control-llms-as-a-film-crew",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/chenlufried/creative-control-llms-as-a-film-crew/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "creativeControlA": {
+          "name": "Creative control A"
+        },
+        "creativeControlB": {
+          "name": "Creative control B"
+        },
+        "cameraStorytelling": {
+          "name": "Camera storytelling"
+        }
+      }
     },
     "creative-writing-v3": {
       "url": "https://eqbench.com/creative_writing.html",
@@ -100804,9 +100920,23 @@
       "url": "https://www.kaggle.com/benchmarks/maksimsilchenko/fairscreen-testing-llm-hiring-decisions",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/maksimsilchenko/fairscreen-testing-llm-hiring-decisions/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "direct": {
+          "name": "Direct"
+        },
+        "fairnessInstruction": {
+          "name": "Fairness instruction"
+        },
+        "structured": {
+          "name": "Structured"
+        },
+        "evidenceSufficiency": {
+          "name": "Evidence sufficiency"
+        }
+      }
     },
     "faithdial": {
       "url": "https://arxiv.org/html/2204.10757",
@@ -128208,11 +128338,37 @@
       "url": "https://www.kaggle.com/benchmarks/anish23101/grade-your-own-homework-can-llms-judge-each-other",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/anish23101/grade-your-own-homework-can-llms-judge-each-other/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
-      ]
+      ],
+      "parts": {
+        "homework": {
+          "name": "Homework"
+        },
+        "gradingAccuracy": {
+          "name": "Grading accuracy"
+        },
+        "ownMistakes": {
+          "name": "Own mistakes"
+        },
+        "positionSwap": {
+          "name": "Position swap"
+        },
+        "confidenceBait": {
+          "name": "Confidence bait"
+        },
+        "nameOnAnswer": {
+          "name": "Name on answer"
+        },
+        "whichIsMine": {
+          "name": "Which is mine"
+        },
+        "solveFirst": {
+          "name": "Solve first"
+        }
+      }
     },
     "gradebench": {
       "url": "https://gradebench.com/",
@@ -129202,11 +129358,22 @@
       "url": "https://www.kaggle.com/benchmarks/flamki/grid-perception-reliability",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/flamki/grid-perception-reliability/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "clicks": {
+          "name": "Clicks"
+        },
+        "objects": {
+          "name": "Objects"
+        },
+        "translation": {
+          "name": "Translation"
+        }
+      }
     },
     "groundcocoa": {
       "url": "https://arxiv.org/html/2404.04237",
@@ -137156,9 +137323,19 @@
       "url": "https://www.kaggle.com/benchmarks/rehearsals/human-behavior-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/rehearsals/human-behavior-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "public": {
+          "name": "Public",
+          "group": "Split"
+        },
+        "private": {
+          "name": "Private",
+          "group": "Split"
+        }
+      }
     },
     "human-chatgpt-comparison-corpus": {
       "url": "https://arxiv.org/html/2301.07597",
@@ -151826,11 +152003,19 @@
       "url": "https://www.kaggle.com/benchmarks/maddiebrooks208/invented-oclock",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/maddiebrooks208/invented-oclock/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506"
-      ]
+      ],
+      "parts": {
+        "solve": {
+          "name": "Solve"
+        },
+        "abstain": {
+          "name": "Abstain"
+        }
+      }
     },
     "inverse-ifeval": {
       "url": "https://arxiv.org/abs/2509.04292",
@@ -155057,12 +155242,29 @@
       "url": "https://www.kaggle.com/benchmarks/kelechukwuagbo/judge-bait",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kelechukwuagbo/judge-bait/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506",
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "baseline": {
+          "name": "Baseline"
+        },
+        "verbosity": {
+          "name": "Verbosity"
+        },
+        "pressure": {
+          "name": "Pressure"
+        },
+        "authority": {
+          "name": "Authority"
+        },
+        "injection": {
+          "name": "Injection"
+        }
+      }
     },
     "judgebench": {
       "url": "https://huggingface.co/spaces/ScalerLab/JudgeBench",
@@ -156842,9 +157044,17 @@
       "url": "https://www.kaggle.com/benchmarks/vinimabreu/keep-the-number-you-wrote",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/vinimabreu/keep-the-number-you-wrote/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "digits": {
+          "name": "Numeric format"
+        },
+        "unitsSpelledOut": {
+          "name": "Units spelled out"
+        }
+      }
     },
     "kellybench": {
       "url": "https://arxiv.org/html/2604.27865",
@@ -164038,11 +164248,25 @@
       "url": "https://www.kaggle.com/benchmarks/iseoluwaolowogoke/legacyshop-can-an-ai-maintain-a-real-codebase",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/iseoluwaolowogoke/legacyshop-can-an-ai-maintain-a-real-codebase/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "repoBugfix": {
+          "name": "Repository bugfix"
+        },
+        "memoryReasoning": {
+          "name": "Memory reasoning"
+        },
+        "knowingWhenToAsk": {
+          "name": "Knowing when to ask"
+        },
+        "complexityAnalysis": {
+          "name": "Complexity analysis"
+        }
+      }
     },
     "legal-consent-sweep": {
       "url": "https://hub.harborframework.com/datasets/doe/legal-consent-sweep?tab=leaderboard",
@@ -186499,12 +186723,20 @@
       "url": "https://www.kaggle.com/benchmarks/giulioder/memory-discipline",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/giulioder/memory-discipline/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506",
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "trust": {
+          "name": "Trust"
+        },
+        "restraint": {
+          "name": "Restraint"
+        }
+      }
     },
     "memoryagentbench": {
       "url": "https://arxiv.org/html/2507.05257",
@@ -186567,9 +186799,20 @@
       "url": "https://www.kaggle.com/benchmarks/nb9300/memorytrap-bench-php-arrays-go-maps",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/nb9300/memorytrap-bench-php-arrays-go-maps/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "cold": {
+          "name": "Cold"
+        },
+        "versioned": {
+          "name": "Versioned"
+        },
+        "evidence": {
+          "name": "Evidence"
+        }
+      }
     },
     "memtrack": {
       "url": "https://arxiv.org/html/2510.01353",
@@ -206189,9 +206432,35 @@
       "url": "https://www.kaggle.com/benchmarks/nelsonvikou/nafd-e1-financial-reporting",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/nelsonvikou/nafd-e1-financial-reporting/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "financialReporting": {
+          "name": "Financial reporting"
+        },
+        "performanceManagement": {
+          "name": "Performance management"
+        },
+        "businessPlanning": {
+          "name": "Business planning"
+        },
+        "taxation": {
+          "name": "Taxation"
+        },
+        "corporateLaw": {
+          "name": "Corporate law"
+        },
+        "riskManagement": {
+          "name": "Risk management"
+        },
+        "investmentManagement": {
+          "name": "Investment management"
+        },
+        "technologyData": {
+          "name": "Technology and data"
+        }
+      }
     },
     "naijaproverb-bench": {
       "url": "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/naijaproverb-bench-measuring-social-cognition-bey",
@@ -242524,9 +242793,23 @@
       "url": "https://www.kaggle.com/benchmarks/lwolwo/paragraph-instruction-following",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/lwolwo/paragraph-instruction-following/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "split0": {
+          "name": "Split 0"
+        },
+        "split1": {
+          "name": "Split 1"
+        },
+        "split2": {
+          "name": "Split 2"
+        },
+        "split3": {
+          "name": "Split 3"
+        }
+      }
     },
     "parallel-search-capability-leaderboard": {
       "url": "https://parallel.ai/leaderboard",
@@ -253132,12 +253415,23 @@
       "url": "https://www.kaggle.com/benchmarks/shashcoder/prompt-to-product",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/shashcoder/prompt-to-product/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506",
         "Qwen 3 Next 80B Instruct"
-      ]
+      ],
+      "parts": {
+        "studySprint": {
+          "name": "StudySprint"
+        },
+        "shopFront": {
+          "name": "ShopFront"
+        },
+        "dataDash": {
+          "name": "DataDash"
+        }
+      }
     },
     "proof-news-arizona-bilingual-voter-questions": {
       "url": "https://datawrapper.dwcdn.net/e89q8/4/",
@@ -255221,9 +255515,17 @@
       "url": "https://www.kaggle.com/benchmarks/nikshenoy/pyats-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/nikshenoy/pyats-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "wireless": {
+          "name": "Wireless scenarios"
+        },
+        "switching": {
+          "name": "Switching scenarios"
+        }
+      }
     },
     "q-bench": {
       "url": "https://huggingface.co/spaces/q-future/Q-Bench-Leaderboard",

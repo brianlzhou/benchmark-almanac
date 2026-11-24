@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/vinimabreu/keep-the-number-you-wrote',
   feed: kaggleFeed('vinimabreu', 'keep-the-number-you-wrote'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('vinimabreu', 'keep-the-number-you-wrote', "(Overall)", 1),
+  parts: {
+    digits: 'Numeric format',
+    unitsSpelledOut: 'Units spelled out',
+  },
+  fetch: () => kaggleRowsWithBounds('vinimabreu', 'keep-the-number-you-wrote', "(Overall)", 1, {
+    digits: { task: 'keep_the_number_you_wrote', interval: true },
+    unitsSpelledOut: { task: 'keep_the_number_units_spelled_out', interval: true },
+  }),
 };
 export default board;

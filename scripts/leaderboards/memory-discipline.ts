@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/giulioder/memory-discipline',
   feed: kaggleFeed('giulioder', 'memory-discipline'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('giulioder', 'memory-discipline', "(Overall)", 100),
+  parts: {
+    trust: 'Trust',
+    restraint: 'Restraint',
+  },
+  fetch: () => kaggleRowsWithBounds('giulioder', 'memory-discipline', "(Overall)", 100, {
+    trust: { task: 'memory-discipline-trust', scale: 100 },
+    restraint: { task: 'memory-discipline-restraint', scale: 100 },
+  }),
 };
 export default board;

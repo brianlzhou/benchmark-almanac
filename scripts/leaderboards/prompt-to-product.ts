@@ -8,6 +8,15 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/shashcoder/prompt-to-product',
   feed: kaggleFeed('shashcoder', 'prompt-to-product'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('shashcoder', 'prompt-to-product', "(Overall)", 1),
+  parts: {
+    studySprint: 'StudySprint',
+    shopFront: 'ShopFront',
+    dataDash: 'DataDash',
+  },
+  fetch: () => kaggleRowsWithBounds('shashcoder', 'prompt-to-product', "(Overall)", 1, {
+    studySprint: { task: 'Prompt to Product: StudySprint' },
+    shopFront: { task: 'Prompt to Product: ShopFront' },
+    dataDash: { task: 'Prompt to Product: DataDash' },
+  }),
 };
 export default board;
