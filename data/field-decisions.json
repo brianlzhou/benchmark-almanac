@@ -897,7 +897,8 @@
       "Token Mutation": "ignore"
     },
     "earth-bench-2": {
-      "Release date": "ignore"
+      "Release date": "ignore",
+      "Developer": "ignore"
     },
     "echo-prediction-leaderboard-unipat": {
       "firstPredictionDate": "ignore"
@@ -1224,7 +1225,8 @@
       "raw.taskAgent": "ignore"
     },
     "geobenchx-2": {
-      "Release date": "ignore"
+      "Release date": "ignore",
+      "Developer": "ignore"
     },
     "geode": {
       "STD": "ignore"
@@ -1373,7 +1375,8 @@
     },
     "icelandic-wikiqa": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "iclayout-bench": {
       "pending_runs": "ignore",
@@ -1451,7 +1454,8 @@
       "tokens": "ignore"
     },
     "insar-snow-axis-spatial": {
-      "Release date": "ignore"
+      "Release date": "ignore",
+      "Developer": "ignore"
     },
     "insurance-agent-benchmark-cooper": {
       "Submission": "ignore"
@@ -1861,27 +1865,33 @@
     },
     "mideind-icelandic-case-government": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mideind-icelandic-gec": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mideind-icelandic-generative-quality": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mideind-icelandic-idioms": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mideind-icelandic-popular-culture": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mideind-icelandic-terminology": {
       "gen_kwargs.max_tokens": "ignore",
-      "output_tokens": "ignore"
+      "output_tokens": "ignore",
+      "gen_kwargs.temperature": "ignore"
     },
     "mieb": {
       "dateFrom": "ignore",
@@ -1962,6 +1972,15 @@
       "dateFrom": "ignore",
       "dateTo": "ignore",
       "model.releaseDate": "ignore"
+    },
+    "multi-swe-bench": {
+      "orgIcon": "ignore"
+    },
+    "multi-swe-bench-flash": {
+      "orgIcon": "ignore"
+    },
+    "multi-swe-bench-mini": {
+      "orgIcon": "ignore"
     },
     "multieurlex": {
       "model.releaseDate": "ignore",
@@ -2755,6 +2774,11 @@
     "skillsbench": {
       "recomputed_date": "ignore"
     },
+    "smart-cockpit-benchmark-qwen": {
+      "No-tool turn correctness": "wired",
+      "Overall turn accuracy": "wired",
+      "Tool-required turn pass": "wired"
+    },
     "smartplay": {
       "Trials": "ignore"
     },
@@ -2786,6 +2810,9 @@
       "Gemma3-12B Team et al. (2025a)": "ignore",
       "Gemma3-27B Team et al. (2025a)": "ignore",
       "GLM-4.5V Team et al. (2025b)": "ignore"
+    },
+    "spatial-agent-index-2": {
+      "Developer": "ignore"
     },
     "spatialbench-latchbio-original": {
       "Model / Harness": "ignore",
@@ -2897,6 +2924,9 @@
       "Cutoff Date": "ignore",
       "Resolution Time": "ignore"
     },
+    "swe-polybench": {
+      "Logs": "wired"
+    },
     "swe-smith": {
       "Number of Runs": "ignore"
     },
@@ -2910,6 +2940,9 @@
     },
     "taxabench-8k": {
       "#samples": "ignore"
+    },
+    "tb-mathmodel": {
+      "Artifacts": "wired"
     },
     "tcsexam": {
       "open": "ignore"
@@ -2963,13 +2996,15 @@
       "release_date": "ignore"
     },
     "the-aggregate-lichess-pairwise-strength-25-pairs": {
-      "confidence_valid": "ignore"
+      "confidence_valid": "ignore",
+      "invalid_confidence": "wired"
     },
     "the-met-dataset": {
       "R50SemArt (author) [13]": "ignore"
     },
     "thinkgeo": {
-      "Release date": "ignore"
+      "Release date": "ignore",
+      "Developer": "ignore"
     },
     "thinkingbox-bench": {
       "Artifact": "ignore"
@@ -3249,6 +3284,12 @@
     "worksurface-bench": {
       "Agent performance": "ignore",
       "Artifact / check": "ignore"
+    },
+    "worldarena": {
+      "Trajectory Accuracy": "wired"
+    },
+    "worldarena-2-0": {
+      "Trajectory Accuracy": "wired"
     },
     "worldcoder-bench": {
       "Cost": "ignore",

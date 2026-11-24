@@ -22,7 +22,7 @@ const board: Leaderboard = {
       if(!all)throw new Error('Flash All view missing');
       const seen=new Set<string>();const out:LeaderboardRow[]=[];
       for(const group of all.data)for(const r of group.results){if(seen.has(r.path))continue;seen.add(r.path);
-        const p=r.name.split(' + ');out.push({model:p.pop(),harness:p.join(' + ')||undefined,verified:typeof r.verified === 'boolean' ? r.verified : undefined,setting:r.verified?'verified':'unverified',score:r.resolvedRate*100,date:r.date,metrics:{resolved:r.resolved,resolvedEasy:r.resolvedEasy,resolvedMedium:r.resolvedMedium,resolvedHard:r.resolvedHard,easy:r.resolvedEasyRate*100,medium:r.resolvedMediumRate*100,hard:r.resolvedHardRate*100}});
+        const p=r.name.split(' + ');const link=r.path?new URL(r.path,'https://github.com/multi-swe-bench/experiments/tree/main/evaluation/').href:undefined;out.push({model:p.pop(),harness:p.join(' + ')||undefined,verified:typeof r.verified === 'boolean' ? r.verified : undefined,setting:r.verified?'verified':'unverified',score:r.resolvedRate*100,date:r.date,link,metrics:{resolved:r.resolved,resolvedEasy:r.resolvedEasy,resolvedMedium:r.resolvedMedium,resolvedHard:r.resolvedHard,easy:r.resolvedEasyRate*100,medium:r.resolvedMediumRate*100,hard:r.resolvedHardRate*100}});
       }return out;
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
