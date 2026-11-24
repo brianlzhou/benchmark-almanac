@@ -24,7 +24,7 @@ const board: Leaderboard = {
       if (!entry.name || !Number.isFinite(score)) throw new Error('AGI-Eval text to video: ranking row missing score');
       const metrics: Record<string, number> = {};
       for (const [source, key] of [['主观准确率', 'subjectiveAccuracy'], ['客观准确率', 'objectiveAccuracy']] as const) { const value = Number(projects.find((p: any) => p.project === source)?.score) * 100; if (Number.isFinite(value)) metrics[key] = value; }
-      return { model: entry.name, score, date: entry.evalTime, metrics } satisfies LeaderboardRow;
+      return { model: entry.name, score, date: entry.evalTime, ...(entry.openStatus !== undefined ? { open: entry.openStatus === 1 } : {}), metrics } satisfies LeaderboardRow;
     });
   },
 };

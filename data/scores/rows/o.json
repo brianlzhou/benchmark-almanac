@@ -2918,7 +2918,7 @@
     ["openrsi-index-molmoweb-context-allocation","claude-opus-5","max","Claude Code",0.6057,"2026-07-24",null,null,{"submissions":39,"latency":86436}],
     ["openrsi-index-reasonir-curriculum","gpt-5-6-sol","xhigh","Codex",0.2181,"2026-07-09",null,null,{"submissions":8,"latency":86400}],
     ["openrsi-index-reasonir-curriculum","claude-opus-5","max","Claude Code",0.2234,"2026-07-24",null,null,{"submissions":10,"latency":86436}],
-    ["openrsi-index-sglang-omni-tts-runtime","gpt-6-astra","xhigh; Continuation; archived continuation protocol, not v5","Codex",1.5389,"2026-09-03",null,null,{"requestsPerSecond":14.207,"submissions":5},{"run":"2026-10-05"}],
+    ["openrsi-index-sglang-omni-tts-runtime","gpt-6-astra","xhigh; Continuation; archived continuation protocol, not v5","Codex",1.5389,"2026-09-03",null,null,{"requestsPerSecond":14.207,"submissions":5,"latency":250470},{"run":"2026-10-05"}],
     ["openstudio-mcp-1-2-1","claude-haiku-4-5","Full assistance, 600 s",null,72.9,"2025-10-15",null,null,{"routing":89.6,"gap":16.7,"medianSubstitutedSeconds":57},{"trials":3}],
     ["openstudio-mcp-1-2-1","claude-opus-4-6","Full assistance, 600 s",null,100,"2026-02-05",null,null,{"routing":100,"gap":0,"medianSubstitutedSeconds":133},{"trials":3}],
     ["openstudio-mcp-1-2-1","claude-sonnet-4-6","Full assistance, 600 s",null,91.7,"2026-02-17",null,null,{"routing":100,"gap":8.3,"medianSubstitutedSeconds":139},{"trials":3}],
