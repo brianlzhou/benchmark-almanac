@@ -3400,7 +3400,8 @@
       "url": "https://nahidalam.github.io/posts/aerialsim-env/",
       "feed": "https://nahidalam.github.io/posts/aerialsim-env/",
       "terms": "The AerialSim project publishes these benchmark results on its project site. https://nahidalam.github.io/posts/aerialsim-env/",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": []
     },
@@ -33156,7 +33157,8 @@
       "url": "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
       "feed": "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": []
     },
@@ -33592,7 +33594,8 @@
       "url": "https://www.harvey.ai/blog/biglaw-bench-workflows-spa-deal-points",
       "feed": "https://www.harvey.ai/blog/biglaw-bench-workflows-spa-deal-points",
       "terms": "Harvey publishes these benchmark results in its article. https://www.harvey.ai/blog/biglaw-bench-workflows-spa-deal-points",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -34747,7 +34750,8 @@
       "url": "https://www.refresh.dev/blog/blenderbench",
       "feed": "https://www.refresh.dev/blog/blenderbench",
       "terms": "The Refresh article is publicly readable. Link and attribute the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "costPer": "run"
@@ -36971,7 +36975,8 @@
       "feed": "https://www.brennancenter.org/our-work/research-reports/appendix-does-ai-fight-or-fuel-election-disinformation",
       "terms": "Brennan Center for Justice, copyright and attribution apply. https://www.brennancenter.org/our-work/research-reports/appendix-does-ai-fight-or-fuel-election-disinformation",
       "headline": "The headline averages the counts of correctly identified images in English and Spanish.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ChatGPT",
@@ -38957,7 +38962,8 @@
       "url": "https://www.kimi.com/en/blog/kimi-k3-1-pro",
       "feed": "https://www.kimi.com/en/blog/kimi-k3-1-pro",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
     },
@@ -47726,7 +47732,8 @@
       "url": "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
       "feed": "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": []
     },
@@ -68554,7 +68561,8 @@
       "url": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
       "feed": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
       "terms": "Anthropic website terms restrict automated access. The Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "DeepSeek R1 (snapshot unspecified)"
@@ -74624,7 +74632,8 @@
       "url": "https://cursor.com/blog/composer-2",
       "feed": "https://cursor.com/blog/composer-2",
       "terms": "Cursor's robots.txt allows the blog. Cursor's terms restrict automated extraction. Results are credited to Cursor.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "reference": [
@@ -135912,7 +135921,8 @@
       "url": "https://hunyuan.tencent.com/research/hy4",
       "feed": "https://api.hunyuan.tencent.com/api/blog/publicDetail",
       "terms": "Tencent Hy public research article. https://hunyuan.tencent.com/",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
     },
@@ -154021,18 +154031,12 @@
       "url": "https://zenodo.org/records/18981627",
       "feed": "https://zenodo.org/api/records/18981627/files/dataset_en.csv/content",
       "terms": "Zenodo publishes this dataset under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
-      "retrieved": "2026-11-23",
-      "rows": 1,
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 2,
       "unmatched": [
-        "DeepSeek chat V3.2",
         "Qwen flash 2025-07-28"
-      ],
-      "stats": {
-        "responses": {
-          "name": "Responses",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "jsick": {
       "url": "https://mteb-leaderboard-backend.hf.space/v1/tasks/JSICK/scores",
@@ -207068,7 +207072,8 @@
       "url": "https://www.newsguardtech.com/special-reports/chatgpt-and-gemini-readily-produce-false-audio-claims-while-alexa-declines/",
       "feed": "https://www.newsguardtech.com/special-reports/chatgpt-and-gemini-readily-produce-false-audio-claims-while-alexa-declines/",
       "terms": "NewsGuard publishes the chart and keeps the underlying False Claim Fingerprints database proprietary. The report gives no score reuse license. https://www.newsguardtech.com/special-reports/chatgpt-and-gemini-readily-produce-false-audio-claims-while-alexa-declines/ The feed host publishes robots.txt at https://www.newsguardtech.com/robots.txt.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Alexa+",
@@ -207080,10 +207085,6 @@
           "name": "Repeated false claims",
           "unit": "count",
           "better": "lower"
-        },
-        "prompts": {
-          "name": "Prompts tested",
-          "unit": "count"
         }
       }
     },
@@ -207231,8 +207232,9 @@
     "nexus": {
       "url": "https://huggingface.co/spaces/Nexusflow/Nexus_Function_Calling_Leaderboard",
       "feed": "https://huggingface.co/spaces/Nexusflow/Nexus_Function_Calling_Leaderboard/raw/main/app.py (RESULTS, mean over the nine tasks)",
-      "terms": "Public Hugging Face Space, Apache-2.0 (README front matter); huggingface.co robots.txt allows Space files.",
-      "retrieved": "2026-11-23",
+      "terms": "Public Hugging Face Space, Apache-2.0 (README front matter). huggingface.co robots.txt allows Space files.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "GPT3.5",
@@ -214570,8 +214572,8 @@
     "omni-cloze": {
       "url": "https://github.com/ddlBoJack/Omni-Captioner",
       "feed": "https://raw.githubusercontent.com/ddlBoJack/Omni-Captioner/HEAD/README.md",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": []
     },
@@ -242063,7 +242065,8 @@
       "url": "https://github.com/ByteDance-Seed/Seed-Prover/tree/main/SeedProver",
       "feed": "https://raw.githubusercontent.com/ByteDance-Seed/Seed-Prover/main/SeedProver/README.md",
       "terms": "Public official repository results. The Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": []
     },
@@ -258974,7 +258977,7 @@
     "ref-youtube-vos": {
       "url": "https://competitions.codalab.org/competitions/29139",
       "feed": "https://competitions.codalab.org/competitions/29139/results/47908",
-      "terms": "Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.",
+      "terms": "Public official competition results hosted by CodaLab. The almanac credits the Refer-YouTube-VOS organizers and links the source.",
       "local": true,
       "retrieved": "2026-11-24",
       "rows": 0,
@@ -295315,7 +295318,8 @@
       "url": "https://blog.papareo.nz/whisper-is-another-case-study-in-colonisation/",
       "feed": "https://blog.papareo.nz/whisper-is-another-case-study-in-colonisation/",
       "terms": "Papa Reo publishes the article and its comparison under the site terms. https://blog.papareo.nz/",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Te Hiku current ASR (Mozilla DeepSpeech)",
@@ -323866,7 +323870,8 @@
       "url": "https://x.ai/news/grok-4-1",
       "feed": "https://x.ai/news/grok-4-1",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
     },

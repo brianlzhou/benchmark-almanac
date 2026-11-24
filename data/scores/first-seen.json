@@ -1951,6 +1951,7 @@
     ["jailbreakbench","gpt-3-5-turbo-nov-2023","Defense: Synonym Substitution; Logprob access","Prompt with Random Search","2026-11-18"],
     ["jailbreakbench","gpt-3-5-turbo-nov-2023","Defense: Synonym Substitution; White-box access","Greedy Coordinate Gradient (GCG)","2026-11-18"],
     ["jobbench","claude-fable-5","Claude Opus 4.8 fallback on refusals","OpenCode","2026-11-10"],
+    ["jorgpt-student-answer-grading","deepseek-v3-2",null,null,"2026-11-24"],
     ["jsick","~minishlab/blink-multilingual-64M",null,null,"2026-11-24"],
     ["judgebench","gemini-1-5-flash-may-2024","Prompted Judge","Arena-Hard","2026-11-18"],
     ["judgebench","gemini-1-5-pro-may-2024","Prompted Judge","Arena-Hard","2026-11-18"],

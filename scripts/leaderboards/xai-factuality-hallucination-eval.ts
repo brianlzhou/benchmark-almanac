@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: "xai-factuality-hallucination-eval",
   url: "https://x.ai/news/grok-4-1",
   feed: FEED,
+  static: 'paper',
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {

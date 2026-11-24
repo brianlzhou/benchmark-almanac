@@ -26,7 +26,8 @@ const board: Leaderboard = {
   },
   url: SPACE,
   feed: `${FEED} (RESULTS, mean over the nine tasks)`,
-  terms: 'Public Hugging Face Space, Apache-2.0 (README front matter); huggingface.co robots.txt allows Space files.',
+  static: 'paper',
+  terms: 'Public Hugging Face Space, Apache-2.0 (README front matter). huggingface.co robots.txt allows Space files.',
   aliases: {
     'GPT4-1106': 'gpt-4-turbo-nov-2023',
   },

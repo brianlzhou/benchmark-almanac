@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: 'cursorbench',
   url: "https://cursor.com/blog/composer-2",
   feed,
+  static: 'paper',
   terms: "Cursor's robots.txt allows the blog. Cursor's terms restrict automated extraction. Results are credited to Cursor.",
   reference: ['Cursor'],
   async fetch() {
