@@ -202803,5 +202803,222 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "evident-gui",
+    "name": "EVIDENT",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Two hundred twenty live web agent tasks (150 Korean and 70 English) paired with human-authored evidence checks that separate surface task completion from evidence-grounded answers.",
+    "org": "KAIST (KORMo-VL)",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.20488",
+      "repo": "https://github.com/yerinNam/EVIDENT",
+      "dataset": "https://huggingface.co/datasets/KORMo-VL/EVIDENT"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Grounded Success Rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/KORMo-VL/EVIDENT",
+      "https://arxiv.org/abs/2611.20488",
+      "https://github.com/yerinNam/EVIDENT"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ko-online-mind2web",
+    "name": "Ko-Online-Mind2Web",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "A live Korean web agent benchmark of 312 manually authored tasks across 104 Korean websites following the Online-Mind2Web evaluation protocol.",
+    "org": "KAIST (KORMo-VL)",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/KORMo-VL/Ko-Online-Mind2Web"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/KORMo-VL/Ko-Online-Mind2Web"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "yanami",
+    "name": "YANAMI",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Four hundred multi-turn dialogues across multi-image fusion, image editing, world modeling, and visual reasoning where later turns depend on tracking visual state across earlier turns.",
+    "org": "HKUST and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.05280",
+      "site": "https://rowletqwq.github.io/YANAMI/"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Overall score",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.05280",
+      "https://rowletqwq.github.io/YANAMI/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "paperwritingbench",
+    "name": "PaperWritingBench",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Two hundred CVPR 2025 and ICLR 2025 research packages evaluating whether autonomous paper writing systems can turn experimental logs, ideas, and literature into submission-ready LaTeX manuscripts.",
+    "org": "Google Cloud AI Research",
+    "released": "2026-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2604.05018",
+      "repo": "https://github.com/google-research/paper-orchestra",
+      "dataset": "https://huggingface.co/datasets/yiwen-song/PaperWritingBench",
+      "site": "https://yiwen-song.github.io/paper_orchestra/"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2604.05018",
+      "https://github.com/google-research/paper-orchestra",
+      "https://huggingface.co/datasets/yiwen-song/PaperWritingBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "moonworks-lunara-art-eval",
+    "name": "Moonworks Lunara Art Eval",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "One thousand art prompts (500 across 14 artistic styles and 500 open-ended) scoring text-to-image models on aesthetic quality, emotional resonance, and content integrity.",
+    "org": "Moonworks",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.22272",
+      "dataset": "https://huggingface.co/datasets/moonworks/lunara-art-eval"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Aesthetic Quality",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/moonworks/lunara-art-eval",
+      "https://arxiv.org/abs/2609.22272"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "multilangbench-openai",
+    "name": "MultiLangBench",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "An OpenAI coding evaluation where models implement SQLite 3.40.1 from its documentation across programming languages and are graded against tests derived from the official SQLite TCL test suite.",
+    "org": "OpenAI",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/openai/MultiLangBench"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Test pass rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/openai/MultiLangBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "loco-mujoco",
+    "name": "LocoMuJoCo",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A MuJoCo imitation learning benchmark for humanoid and quadruped whole-body locomotion and motion-capture tracking across simulated and sim-to-real robot embodiments.",
+    "org": "TU Darmstadt IAS",
+    "released": "2023-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.26293",
+      "repo": "https://github.com/robfiras/loco-mujoco",
+      "site": "https://loco-mujoco.readthedocs.io/"
+    },
+    "access": "public",
+    "note": "Original v0.1.0 paper is arXiv:2311.02496 (NeurIPS 2023 Robot Learning Workshop).",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Mean return",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/robfiras/loco-mujoco",
+      "https://arxiv.org/abs/2611.26293",
+      "https://arxiv.org/abs/2311.02496"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "openart-ai45lab",
+    "name": "OpenART",
+    "aliases": [
+      "Open Agent Red Teaming"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "An executable red-teaming benchmark measuring strict attack success rate for tool-using agents operating in long-horizon workspaces with evolving state and multi-step tool dependencies.",
+    "org": "Shanghai AI Lab (AI45Lab)",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.00677",
+      "repo": "https://github.com/AI45Lab/OpenART",
+      "site": "https://ai45lab.github.io/OpenART/",
+      "leaderboard": "https://ai45lab.github.io/OpenART/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Strict Attack Success Rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://ai45lab.github.io/OpenART/",
+      "https://github.com/AI45Lab/OpenART",
+      "https://arxiv.org/abs/2608.00677"
+    ],
+    "added": "2026-11-24"
   }
 ]

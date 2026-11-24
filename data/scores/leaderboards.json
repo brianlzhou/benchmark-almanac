@@ -98881,6 +98881,54 @@
         }
       }
     },
+    "evident-gui": {
+      "url": "https://huggingface.co/datasets/KORMo-VL/EVIDENT",
+      "feed": "https://huggingface.co/datasets/KORMo-VL/EVIDENT/raw/main/README.md",
+      "terms": "Dataset card in KORMo-VL/EVIDENT on Hugging Face reproducing Table 2 of arXiv:2611.20488.",
+      "headline": "The paper reports English and Korean Grounded Success Rate side by side without pooling. The headline is the plain mean of English GSR and Korean GSR.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [],
+      "parts": {
+        "enGsr": {
+          "name": "English GSR",
+          "group": "Language",
+          "note": "Grounded Success Rate on the 70 English web agent tasks."
+        },
+        "koGsr": {
+          "name": "Korean GSR",
+          "group": "Language",
+          "note": "Grounded Success Rate on the 150 Korean web agent tasks."
+        }
+      },
+      "stats": {
+        "enTsr": {
+          "name": "English TSR",
+          "unit": "%",
+          "better": "higher",
+          "note": "Task Success Rate on English tasks before checking evidence grounding."
+        },
+        "enEsr": {
+          "name": "English ESR",
+          "unit": "%",
+          "better": "higher",
+          "note": "Evidence Success Rate on English tasks."
+        },
+        "koTsr": {
+          "name": "Korean TSR",
+          "unit": "%",
+          "better": "higher",
+          "note": "Task Success Rate on Korean tasks before checking evidence grounding."
+        },
+        "koEsr": {
+          "name": "Korean ESR",
+          "unit": "%",
+          "better": "higher",
+          "note": "Evidence Success Rate on Korean tasks."
+        }
+      }
+    },
     "evmbench": {
       "url": "https://openai.com/index/introducing-evmbench/",
       "feed": "https://cdn.openai.com/evmbench/evmbench.pdf",
@@ -200783,6 +200831,59 @@
         }
       }
     },
+    "moonworks-lunara-art-eval": {
+      "url": "https://huggingface.co/datasets/moonworks/lunara-art-eval",
+      "feed": "https://huggingface.co/datasets/moonworks/lunara-art-eval/raw/main/README.md",
+      "terms": "Dataset card in moonworks/lunara-art-eval on Hugging Face, licensed Apache 2.0, reporting Table results from arXiv:2609.22272.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "AuraFlow",
+        "HiDream-I1 Fast",
+        "Moonworks Lunara",
+        "SD 3.5 Turbo"
+      ],
+      "stats": {
+        "aestheticWinRate": {
+          "name": "Aesthetic win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "emotionalResonance": {
+          "name": "Emotional Resonance",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge score for affective impression and expressive impact."
+        },
+        "emotionalWinRate": {
+          "name": "Emotional win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "contentIntegrity": {
+          "name": "Content Integrity",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge score for structural coherence and requested subject completeness."
+        },
+        "contentWinRate": {
+          "name": "Content win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "clipScore": {
+          "name": "CLIPScore",
+          "unit": "score",
+          "better": "higher"
+        },
+        "laionAesthetic": {
+          "name": "LAION Aesthetic",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "moosebench": {
       "url": "https://github.com/HaningZS/moose-ifs/blob/main/results/derived/main_tables.json",
       "feed": "https://raw.githubusercontent.com/HaningZS/moose-ifs/0592e1134fce7e3577c85e99e62c674acccc4cfd/results/derived/main_tables.json",
@@ -239666,6 +239767,16 @@
           "unit": "count"
         }
       }
+    },
+    "openart-ai45lab": {
+      "url": "https://ai45lab.github.io/OpenART/",
+      "feed": "https://ai45lab.github.io/OpenART/",
+      "terms": "The Shanghai AI Lab AI45Lab authors publish the 15-agent by 5-model evaluation matrix on their project page and in arXiv:2608.00677.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 80,
+      "unmatched": [],
+      "harnesses": "system"
     },
     "openaudiobench-alpacaeval": {
       "url": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
@@ -330209,6 +330320,43 @@
           "unit": "%",
           "better": "lower",
           "note": "Excludes kernels the model left unmodified."
+        }
+      }
+    },
+    "yanami": {
+      "url": "https://rowletqwq.github.io/YANAMI/",
+      "feed": "https://arxiv.org/html/2611.05280",
+      "terms": "The authors publish Table 1 on arXiv. https://arxiv.org/abs/2611.05280",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "BAGEL + YANAMI-400K",
+        "Emu3.5",
+        "InternVL-U",
+        "OmniGen",
+        "OmniGen2",
+        "Ovis-U1",
+        "Show-o2",
+        "UniAR",
+        "UniPic 3.0"
+      ],
+      "parts": {
+        "fusion": {
+          "name": "Multi-Image Fusion",
+          "group": "Scenario"
+        },
+        "editing": {
+          "name": "Image Editing",
+          "group": "Scenario"
+        },
+        "modeling": {
+          "name": "World Modeling",
+          "group": "Scenario"
+        },
+        "reasoning": {
+          "name": "Visual Reasoning",
+          "group": "Scenario"
         }
       }
     },

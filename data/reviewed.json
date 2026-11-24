@@ -8331,6 +8331,11 @@
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
     },
     {
+      "id": "evident-gui",
+      "date": "2026-11-24",
+      "via": "Hugging Face dataset KORMo-VL/EVIDENT (104 likes) paired with arXiv:2611.20488."
+    },
+    {
       "id": "evmbench",
       "date": "2026-11-01",
       "via": "Listing OpenAI frontier-evals projects while checking PaperBench showed an evmbench folder the almanac lacks."
@@ -12976,6 +12981,11 @@
       "via": "LG K-EXAONE 2.0 model card reports Ko-LongBench."
     },
     {
+      "id": "ko-online-mind2web",
+      "date": "2026-11-24",
+      "via": "Hugging Face dataset KORMo-VL/Ko-Online-Mind2Web (98 likes), released November 2026."
+    },
+    {
       "id": "koala-test-set",
       "date": "2026-11-19",
       "via": "Stanford HELM includes a configuration for this evaluation."
@@ -14004,6 +14014,11 @@
       "id": "local-search-bench-meituan",
       "date": "2026-11-20",
       "via": "We followed an in-car ordering lead to Meituan’s Xiaotuan team and found its separate evaluation of local merchant search."
+    },
+    {
+      "id": "loco-mujoco",
+      "date": "2026-11-24",
+      "via": "GitHub repository robfiras/loco-mujoco (1,494 stars) and arXiv:2611.26293."
     },
     {
       "id": "locomo",
@@ -16296,6 +16311,11 @@
       "via": "The UniPat AI benchmarks page lists Monthly-SWEBench, and the almanac lacks it."
     },
     {
+      "id": "moonworks-lunara-art-eval",
+      "date": "2026-11-24",
+      "via": "Hugging Face dataset moonworks/lunara-art-eval (45 likes) paired with arXiv:2609.22272."
+    },
+    {
       "id": "moosebench",
       "date": "2026-11-20",
       "via": "The scientific software workflow index listed this MOOSE evaluation beside PDEAgent-Bench, leading to its case records and grading code."
@@ -16614,6 +16634,11 @@
       "id": "multihop-rag",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "multilangbench-openai",
+      "date": "2026-11-24",
+      "via": "OpenAI official repository github.com/openai/MultiLangBench released October 2026."
     },
     {
       "id": "multilingual-conversational-speech-language-model-challenge",
@@ -18076,6 +18101,11 @@
       "via": "The openai/mrcr dataset changelog and the GPT-5.2 launch footnote, which says Version 2 of the eval fixes about 5% of tasks."
     },
     {
+      "id": "openart-ai45lab",
+      "date": "2026-11-24",
+      "via": "Shanghai AI Lab repository AI45Lab/OpenART (277 GitHub stars), arXiv:2608.00677, and project page."
+    },
+    {
       "id": "openaudiobench",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card audio-to-text chat table."
@@ -18549,6 +18579,11 @@
       "id": "paperscope",
       "date": "2026-11-19",
       "via": "A research benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "paperwritingbench",
+      "date": "2026-11-24",
+      "via": "Google Cloud AI Research PaperOrchestra release (6,191 GitHub stars) and Hugging Face dataset yiwen-song/PaperWritingBench (61 likes)."
     },
     {
       "id": "paprika3d-kaeru-flip",
@@ -27559,6 +27594,11 @@
       "id": "yakk",
       "date": "2026-11-20",
       "via": "HUD's November 2026 research index exposed its new GPU kernel benchmark."
+    },
+    {
+      "id": "yanami",
+      "date": "2026-11-24",
+      "via": "Hugging Face Daily Papers entry for arXiv:2611.05280 (33 upvotes) and project page."
     },
     {
       "id": "yocausal",
