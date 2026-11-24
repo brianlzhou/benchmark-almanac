@@ -23,12 +23,12 @@ const board: Leaderboard = {
   benchmark: 'multigec-2025', url: feed, feed,
   terms: 'The organizers publish terms for MultiGEC. https://spraakbanken.github.io/multigec-2025/terms_of_use.html',
   aliases: { 'Llama 3.1 8B Instruct': 'llama-3-1-8b', 'Gemma 2 9B': 'gemma-2-9b' },
+  parts: Object.fromEntries(Object.entries(languageNames).map(([key, name]) => [key, { name, group: 'Language' }])),
   stats: metricStats,
   async fetch() {
     const html = await fetchText(feed);
     const languages = [...html.matchAll(/<h2 id="([^"]+)">([^<]+)<\/h2>([\s\S]*?)(?=<h2 |\s*<\/article>)/g)];
     if (languages.length !== 12) throw new Error('Expected all twelve language groups');
-    board.parts = Object.fromEntries(languages.map(([, key, name]) => [key, text(name)]));
     return checked(systems.map(({ team, ...identity }) => {
       const metrics: Record<string, number> = {};
       let sum = 0;

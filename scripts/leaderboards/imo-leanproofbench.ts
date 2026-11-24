@@ -9,6 +9,14 @@ const board: Leaderboard = {
   benchmark: "imo-leanproofbench", parts: {
   basic: { name: 'Basic', group: 'Difficulty' },
   advanced: { name: 'Advanced', group: 'Difficulty' },
+  basicAlgebra: { name: 'Algebra', group: 'Basic' },
+  basicCombinatorics: { name: 'Combinatorics', group: 'Basic' },
+  basicNumberTheory: { name: 'Number Theory', group: 'Basic' },
+  basicGeometry: { name: 'Geometry', group: 'Basic' },
+  advancedAlgebra: { name: 'Algebra', group: 'Advanced' },
+  advancedCombinatorics: { name: 'Combinatorics', group: 'Advanced' },
+  advancedNumberTheory: { name: 'Number Theory', group: 'Advanced' },
+  advancedGeometry: { name: 'Geometry', group: 'Advanced' },
 }, url: "https://imobench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
@@ -26,7 +34,6 @@ const board: Leaderboard = {
         if (!subject || !solved || !/^\d+$/.test(solved)) return;
         const key = difficulty.toLowerCase() + subject[1].replaceAll(' ', '');
         subjectRates[key] = Number(solved) * 100 / Number(subject[2]);
-        board.parts![key] = { name: subject[1], group: difficulty };
       });
     }
     const rows: LeaderboardRow[] = [];

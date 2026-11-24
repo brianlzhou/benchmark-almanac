@@ -11,9 +11,12 @@ const board: Leaderboard = {
   benchmark: 'sci-pipeline-v1', feed,
   url: 'https://app.primeintellect.ai/dashboard/environments/' + slug,
   terms: 'Prime Intellect hosts the author’s results under its platform terms. https://www.primeintellect.ai/terms-of-service',
-  stats: { dailyMeans: { name: 'Daily means reward', unit: 'score' }, extremes: { name: 'Extremes reward', unit: 'score' },
-    recordCounts: { name: 'Record counts reward', unit: 'score' }, producedOutput: { name: 'Produced output', unit: 'score' },
-    tasks: { name: 'Completed tasks', unit: 'count' } },
+  stats: {
+    dailyMeans: { name: 'Daily means reward', unit: 'score', better: 'higher' },
+    extremes: { name: 'Extremes reward', unit: 'score', better: 'higher' },
+    recordCounts: { name: 'Record counts reward', unit: 'score', better: 'higher' },
+    producedOutput: { name: 'Produced output', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const { data } = await fetchJson<{ data: { package_url: string } }>(feed);
     const archive = Buffer.from(await fetchBytes(data.package_url));
@@ -25,7 +28,7 @@ const board: Leaderboard = {
       if (!/^\d+$/.test(days) || cells.length !== 5 || !cells.every(c => /^\d+\.\d+$/.test(c))) throw new Error('Invalid pipeline result');
       const [score, dailyMeans, extremes, recordCounts, producedOutput] = cells.map(Number);
       return { model, date: run[1], harness: 'bash', setting: days + ' days, temperature ' + run[2], score,
-        metrics: { dailyMeans, extremes, recordCounts, producedOutput, tasks: Number(run[3]) } };
+        metrics: { dailyMeans, extremes, recordCounts, producedOutput } };
     }), 3);
   },
 };

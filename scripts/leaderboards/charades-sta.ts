@@ -10,7 +10,8 @@ const board: Leaderboard = {
  benchmark: "charades-sta",
  url: "https://github.com/jiyanggao/TALL",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ static: 'paper',
+ terms: "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
  stats: {
   'R@1,IoU=0.7': { name: 'Recall at 1, IoU 0.7', unit: '%', better: 'higher' },
   'R@5,IoU=0.5': { name: 'Recall at 5, IoU 0.5', unit: '%', better: 'higher' },

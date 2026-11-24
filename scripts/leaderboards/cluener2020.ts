@@ -10,6 +10,18 @@ const board: Leaderboard = {
   url: "https://github.com/CLUEbenchmark/CLUENER2020",
   feed: FEED,
   terms: "The publisher displays results at https://github.com/CLUEbenchmark/CLUENER2020. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
+  parts: {
+    'Person Name': { name: 'Person name', group: 'Entity type' },
+    Organization: { name: 'Organization', group: 'Entity type' },
+    Position: { name: 'Position', group: 'Entity type' },
+    Company: { name: 'Company', group: 'Entity type' },
+    Address: { name: 'Address', group: 'Entity type' },
+    Game: { name: 'Game', group: 'Entity type' },
+    Government: { name: 'Government', group: 'Entity type' },
+    Scene: { name: 'Scene', group: 'Entity type' },
+    Book: { name: 'Book', group: 'Entity type' },
+    Movie: { name: 'Movie', group: 'Entity type' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(FEED));
     const head = tables.find((t) => t[0][1] === '线上效果f1');
@@ -17,7 +29,6 @@ const board: Leaderboard = {
     if (!head || head.length < 4 || !parts || parts.length < 12) throw new Error('Incomplete CLUENER tables');
     const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
     const categories = parts.slice(1).filter(([name]) => name !== 'Overall@Macro');
-    board.parts = Object.fromEntries(categories.map(([name]) => [name, name]));
     return head.slice(1).map(([model, value]) => {
       const index = parts[0].findIndex((name) => normalize(name) === normalize(model));
       if (index < 1 || !value || !Number.isFinite(Number(value))) throw new Error(`Incomplete score for ${model}`);
