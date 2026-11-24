@@ -29776,6 +29776,35 @@
         }
       }
     },
+    "belarusianglue": {
+      "url": "https://aclanthology.org/2025.acl-long.25/",
+      "feed": "https://aclanthology.org/2025.acl-long.25.pdf",
+      "terms": "ACL Anthology paper, available under its published license: https://aclanthology.org/info/license/",
+      "headline": "The paper reports no overall score, so this is the plain mean of its six accuracy columns.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "HPLT BERT be",
+        "XLM-R",
+        "mBERT",
+        "mDeBERTa-v3"
+      ],
+      "parts": {
+        "besls": {
+          "name": "BeSLS"
+        },
+        "bewic": {
+          "name": "BeWiC"
+        },
+        "bewsc": {
+          "name": "BeWSC"
+        },
+        "berteWd": {
+          "name": "BeRTE-WD"
+        }
+      }
+    },
     "belebele": {
       "url": "https://arxiv.org/html/2308.16884#S3.T2",
       "feed": "https://arxiv.org/html/2308.16884",
@@ -132751,6 +132780,27 @@
         }
       }
     },
+    "hedge-gym": {
+      "url": "https://github.com/giack-hack/synthetic-markets-transfer",
+      "feed": "https://raw.githubusercontent.com/giack-hack/synthetic-markets-transfer/main/README.md",
+      "terms": "The project README is public under the MIT license. https://github.com/giack-hack/synthetic-markets-transfer/blob/main/LICENSE",
+      "headline": "The paper reports no overall score, so this is the plain mean of its 2020 and 2022 crisis losses.",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [],
+      "parts": {
+        "crisis2020": {
+          "name": "2020 crisis",
+          "group": "Real crisis",
+          "better": "lower"
+        },
+        "crisis2022": {
+          "name": "2022 crisis",
+          "group": "Real crisis",
+          "better": "lower"
+        }
+      }
+    },
     "heim": {
       "url": "https://crfm.stanford.edu/helm/heim/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/heim/benchmark_output/runs/v1.1.0/groups/core_scenarios.json",
@@ -199450,6 +199500,14 @@
         }
       }
     },
+    "mtgbench": {
+      "url": "https://github.com/skyberg11/MTGBench",
+      "feed": "https://raw.githubusercontent.com/skyberg11/MTGBench/main/analysis/outputs/tables/summary.csv",
+      "terms": "Public repository results under the repository license. https://github.com/skyberg11/MTGBench",
+      "retrieved": "2026-11-24",
+      "rows": 56,
+      "unmatched": []
+    },
     "mth-v2": {
       "url": "https://arxiv.org/pdf/2608.07917#page=12",
       "feed": "https://arxiv.org/pdf/2608.07917",
@@ -199621,6 +199679,18 @@
           "better": "higher"
         }
       }
+    },
+    "mts-dialog": {
+      "url": "https://aclanthology.org/2023.eacl-main.168/",
+      "feed": "https://aclanthology.org/2023.eacl-main.168.pdf",
+      "terms": "ACL Anthology paper, available under its published license: https://aclanthology.org/info/license/",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "BART-large",
+        "BART-xsum-samsum"
+      ]
     },
     "mtsamples-clinical-entity-recognition": {
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11339492/",
@@ -254836,6 +254906,14 @@
         }
       }
     },
+    "railhead": {
+      "url": "https://github.com/rachittshah/railhead",
+      "feed": "https://raw.githubusercontent.com/rachittshah/railhead/main/README.md",
+      "terms": "Public repository results under the repository license. https://github.com/rachittshah/railhead",
+      "retrieved": "2026-11-24",
+      "rows": 11,
+      "unmatched": []
+    },
     "ramen-bench": {
       "url": "https://bitbin.de/ramen-bench/",
       "feed": "https://ramen-bench-api.stephen-dda.workers.dev/votes",
@@ -301031,6 +301109,19 @@
         }
       }
     },
+    "uq-unsolved-questions": {
+      "url": "https://arxiv.org/html/2508.17580",
+      "feed": "https://arxiv.org/html/2508.17580",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [
+        "Claude Sonnet 3.7 (16K)",
+        "GPT-4o (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)"
+      ]
+    },
     "urdu-language-speech-emotional-corpus": {
       "url": "https://aaivu.github.io/KuralHub/languages/urdu.html",
       "feed": "https://aaivu.github.io/KuralHub/data/runs.csv",
@@ -307132,6 +307223,19 @@
         }
       }
     },
+    "vggsound": {
+      "url": "https://arxiv.org/html/2004.14368",
+      "feed": "https://arxiv.org/html/2004.14368",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "ResNet18",
+        "ResNet34",
+        "ResNet50"
+      ]
+    },
     "vgi-bench": {
       "url": "https://hexuan21.github.io/VGI-Bench/",
       "feed": "https://hexuan21.github.io/VGI-Bench/ (static HTML, video model table, Overall)",
@@ -309217,6 +309321,23 @@
         }
       }
     },
+    "videocon": {
+      "url": "https://arxiv.org/html/2311.10111",
+      "feed": "https://arxiv.org/html/2311.10111",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "The paper reports no combined score, so this is VideoCon LLM Test entailment accuracy, the primary test.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "End-to-End VNLI",
+        "ImageBind (Video-Text)",
+        "Owl-Base",
+        "Owl-Con ( Ours )",
+        "Owl-Rand",
+        "VideoCLIP"
+      ]
+    },
     "videodr-with-search": {
       "url": "https://videodr-benchmark.github.io/#/home",
       "feed": "https://raw.githubusercontent.com/videodr-benchmark/videodr-benchmark.github.io/main/leaderboard-config.json",
@@ -310425,6 +310546,28 @@
           "better": "higher"
         }
       }
+    },
+    "vipbench": {
+      "url": "https://arxiv.org/html/2611.05638",
+      "feed": "https://arxiv.org/html/2611.05638",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "headline": "The headline is Task 1 Pearson correlation across all pairs.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "ECAPA-TDNN",
+        "HuBERT",
+        "RawNet3",
+        "TitaNet",
+        "WavLM",
+        "WeSpeaker",
+        "Whisper",
+        "XLS-R",
+        "resemblyzer",
+        "wav2vec 2.0",
+        "x-vector"
+      ]
     },
     "virology-capabilities-test-vct": {
       "url": "https://securebio.org/virologytest/",
@@ -312560,6 +312703,25 @@
           "better": "higher"
         }
       }
+    },
+    "vm14k": {
+      "url": "https://arxiv.org/html/2506.01305",
+      "feed": "https://arxiv.org/html/2506.01305",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "Claude 3.5 Sonnet (snapshot unspecified)",
+        "Deepseek-R1 (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)",
+        "Gemma3-27B-Instruct",
+        "Llama-3-70B-UltraMedical",
+        "Llama-3.1-8B-Instruct",
+        "Llama-3.1-8B-UltraMedical",
+        "Meditron3-70B",
+        "Meditron3-8B"
+      ]
     },
     "vocalgrad": {
       "url": "https://arxiv.org/html/2610.23745",

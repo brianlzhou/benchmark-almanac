@@ -3470,6 +3470,47 @@
       "niche": false,
       "score": 5,
       "decision": "watch"
+    },
+    {
+      "key": "hyperintervention",
+      "name": "Hyper-Intervention",
+      "title": "Today we're releasing Hyper-Intervention, a benchmark of how much a language model acting as a judge can improve a student by reading the student's own rollouts",
+      "url": "https://x.com/hyperstition_cc/status/2123877109907288098",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 9,
+      "decision": "catalog",
+      "org": "Hyperstition",
+      "repo": "https://github.com/Hyperstitioncc/HyperIntervention",
+      "upvotes": 48
+    },
+    {
+      "key": "steam",
+      "name": "STEAM",
+      "title": "Midcentury introduced STEAM, a real-time 3D puzzle benchmark of spatiotemporal reasoning for frontier language-model agents.",
+      "url": "https://www.midcentury.xyz/blog/steam",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "Midcentury",
+      "upvotes": 48
     }
   ],
   "seen": {
