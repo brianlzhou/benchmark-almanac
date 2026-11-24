@@ -88789,7 +88789,7 @@
       "feed": "https://www.axisspatial.com/arena/evaluations/earth-bench",
       "terms": "Axis Spatial excludes picture questions from this agent ranking. Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
       "host": "Axis Spatial",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 91,
       "unmatched": [
         "Nemotron 3.5 Super 120B"
@@ -122276,7 +122276,7 @@
       "feed": "https://www.axisspatial.com/arena/evaluations/geobenchx",
       "terms": "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
       "host": "Axis Spatial",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 95,
       "unmatched": [
         "Nemotron 3.5 Super 120B"
@@ -136390,8 +136390,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "Miðeind publishes the leaderboard under CC BY 4.0. Both hosts allow the feed in robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 104,
+      "retrieved": "2026-11-24",
+      "rows": 106,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "Llama 3.1 70B Instruct",
@@ -148483,7 +148483,7 @@
       "feed": "https://www.axisspatial.com/arena/evaluations/insar-snow",
       "terms": "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
       "host": "Axis Spatial",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "Nemotron 3.5 Super 120B"
@@ -186545,8 +186545,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "Miðeind publishes the leaderboard under CC BY 4.0. Both hosts allow the feed in robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 106,
+      "retrieved": "2026-11-24",
+      "rows": 108,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "TrustLLM v2 8B midtrain-SFT"
@@ -186564,8 +186564,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "Both hosts allow crawling. icelandic_gec@v1 uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
-      "rows": 106,
+      "retrieved": "2026-11-24",
+      "rows": 108,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "TrustLLM v2 8B midtrain-SFT"
@@ -186605,8 +186605,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "generative_quality@v1 uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md The robots file allows this feed for the importer.",
-      "retrieved": "2026-11-23",
-      "rows": 104,
+      "retrieved": "2026-11-24",
+      "rows": 106,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "Llama 3.1 70B Instruct",
@@ -186626,8 +186626,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "family:Idioms uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md The robots file allows this feed for the importer.",
-      "retrieved": "2026-11-23",
-      "rows": 106,
+      "retrieved": "2026-11-24",
+      "rows": 108,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "TrustLLM v2 8B midtrain-SFT"
@@ -186666,8 +186666,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "Both hosts allow crawling. family:recall uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
-      "rows": 106,
+      "retrieved": "2026-11-24",
+      "rows": 108,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "TrustLLM v2 8B midtrain-SFT"
@@ -186677,49 +186677,49 @@
           "name": "Song Lyrics"
         },
         "Song Lyrics: Barnalög": {
-          "name": "Song Lyrics: Children’s Songs"
+          "name": "Song Lyrics: Barnalög"
         },
         "Song Lyrics: Dægurlög": {
-          "name": "Song Lyrics: Popular Songs"
+          "name": "Song Lyrics: Dægurlög"
         },
         "Song Lyrics: Eurovision": {
           "name": "Song Lyrics: Eurovision"
         },
         "Song Lyrics: Jólalög": {
-          "name": "Song Lyrics: Christmas Songs"
+          "name": "Song Lyrics: Jólalög"
         },
         "Song Lyrics: Leikhús": {
-          "name": "Song Lyrics: Theater"
+          "name": "Song Lyrics: Leikhús"
         },
         "Song Lyrics: Popplög": {
-          "name": "Song Lyrics: Pop"
+          "name": "Song Lyrics: Popplög"
         },
         "Song Lyrics: Rapp": {
-          "name": "Song Lyrics: Rap"
+          "name": "Song Lyrics: Rapp"
         },
         "Song Lyrics: Sjómannalög": {
-          "name": "Song Lyrics: Sailor Songs"
+          "name": "Song Lyrics: Sjómannalög"
         },
         "Song Lyrics: Trúarleg lög": {
-          "name": "Song Lyrics: Religious Songs"
+          "name": "Song Lyrics: Trúarleg lög"
         },
         "Song Lyrics: Ættjarðarlög/þjóðvísur": {
-          "name": "Song Lyrics: National Songs and Ballads"
+          "name": "Song Lyrics: Ættjarðarlög/þjóðvísur"
         },
         "Song Lyrics: Þungarokk": {
-          "name": "Song Lyrics: Heavy Metal"
+          "name": "Song Lyrics: Þungarokk"
         },
         "Famous Phrases": {
           "name": "Famous Phrases"
         },
         "Famous Phrases: Almennt": {
-          "name": "Famous Phrases: General"
+          "name": "Famous Phrases: Almennt"
         },
         "Famous Phrases: Kvikmyndir": {
-          "name": "Famous Phrases: Films"
+          "name": "Famous Phrases: Kvikmyndir"
         },
         "Famous Phrases: Þættir": {
-          "name": "Famous Phrases: Television"
+          "name": "Famous Phrases: Þættir"
         }
       }
     },
@@ -186727,8 +186727,8 @@
       "url": "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
       "feed": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
       "terms": "Both hosts allow crawling. family:terminology uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
-      "rows": 106,
+      "retrieved": "2026-11-24",
+      "rows": 108,
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "TrustLLM v2 8B midtrain-SFT"
@@ -186738,25 +186738,25 @@
           "name": "Textile Terms"
         },
         "Textile Terms: abbreviation": {
-          "name": "Textile Terms: Abbreviation"
+          "name": "Textile Terms: abbreviation"
         },
         "Textile Terms: meaning": {
-          "name": "Textile Terms: Meaning"
+          "name": "Textile Terms: meaning"
         },
         "Flora & Fauna": {
-          "name": "Flora and Fauna"
+          "name": "Flora & Fauna"
         },
         "Flora & Fauna: Fuglar": {
-          "name": "Flora and Fauna: Birds"
+          "name": "Flora & Fauna: Fuglar"
         },
         "Flora & Fauna: Gróður": {
-          "name": "Flora and Fauna: Plants"
+          "name": "Flora & Fauna: Gróður"
         },
         "Flora & Fauna: Sjávardýr": {
-          "name": "Flora and Fauna: Marine Animals"
+          "name": "Flora & Fauna: Sjávardýr"
         },
         "Flora & Fauna: Smádýr": {
-          "name": "Flora and Fauna: Small Animals"
+          "name": "Flora & Fauna: Smádýr"
         }
       }
     },
@@ -199274,7 +199274,7 @@
       "url": "https://multi-swe-bench.github.io/",
       "feed": "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard.json (non-Python aggregate)",
       "terms": "Repository file in multi-swe-bench/experiments (Apache-2.0) that the project site loads.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 33,
       "unmatched": [
         "Doubao-1.5-thinking"
@@ -199406,13 +199406,39 @@
           "name": "Hard",
           "group": "Difficulty"
         }
+      },
+      "stats": {
+        "solved": {
+          "name": "Resolved tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "tasks": {
+          "name": "Total tasks",
+          "unit": "count"
+        },
+        "solvedEasy": {
+          "name": "Resolved easy tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "solvedMedium": {
+          "name": "Resolved medium tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "solvedHard": {
+          "name": "Resolved hard tasks",
+          "unit": "count",
+          "better": "higher"
+        }
       }
     },
     "multi-swe-bench-flash": {
       "url": "https://multi-swe-bench.github.io/",
       "feed": "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-flash.json",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Doubao-1.6-pro",
@@ -199457,7 +199483,7 @@
       "url": "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json",
       "feed": "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Claude-3.5-Sonnet(Oct)",
@@ -273097,7 +273123,7 @@
       "feed": "https://raw.githubusercontent.com/QwenAudio/qwen-audio-agent/main/examples/smart-cockpit/bench/results/accuracy.md",
       "terms": "Apache License 2.0. https://github.com/QwenAudio/qwen-audio-agent/blob/main/LICENSE",
       "headline": "The headline is the percentage of short cases that passed all checks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "qwen-audio-3.0-realtime-plus"
@@ -276452,7 +276478,7 @@
       "url": "https://www.axisspatial.com/arena/agent-index",
       "feed": "https://www.axisspatial.com/arena/agent-index",
       "terms": "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy Its robots.txt allows the ranking page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 91,
       "unmatched": [
         "Nemotron 3.5 Super 120B"
@@ -287950,7 +287976,7 @@
       "url": "https://amazon-science.github.io/SWE-PolyBench/",
       "feed": "https://amazon-science.github.io/SWE-PolyBench/ (static HTML, Full table, Overall)",
       "terms": "Static page on GitHub Pages; robots.txt allows it and the SWE-PolyBench repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Amazon Q Developer Agent (v20250402)"
@@ -287973,27 +287999,27 @@
           "group": "Language"
         },
         "resolvedClassOnly": {
-          "name": "Single class",
+          "name": "class only",
           "group": "Patch complexity"
         },
         "resolvedFuncOnly": {
-          "name": "Single function",
+          "name": "function only",
           "group": "Patch complexity"
         },
         "resolvedMixed": {
-          "name": "Mixed class and function",
+          "name": "mixed",
           "group": "Patch complexity"
         },
         "resolvedNone": {
-          "name": "No class or function",
+          "name": "none",
           "group": "Patch complexity"
         },
         "resolvedSingleClass": {
-          "name": "Single class",
+          "name": "single class",
           "group": "Patch complexity"
         },
         "resolvedSingleFunc": {
-          "name": "Single function",
+          "name": "single function",
           "group": "Patch complexity"
         }
       },
@@ -291717,7 +291743,7 @@
       "url": "https://wxj630.github.io/terminal-bench-math-modeling/",
       "feed": "https://wxj630.github.io/terminal-bench-math-modeling/",
       "terms": "The benchmark authors publish their scores and costs on the project page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "GLM-5.3-Flash (ox-alpha)",
@@ -293488,7 +293514,7 @@
       "url": "https://theaggregate.ai/benchmark?slug=the-aggregate-lichess-pairwise-strength-25-pairs",
       "feed": "https://theaggregate.ai/benchmarks/lichess-pairwise.json",
       "terms": "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [],
       "stats": {
@@ -293960,7 +293986,7 @@
       "feed": "https://www.axisspatial.com/arena/evaluations/thinkgeo",
       "terms": "The agent can use code. Axis Spatial restricts the tasks to outputs its checks can verify. Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
       "host": "Axis Spatial",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
       "stats": {
@@ -317281,7 +317307,7 @@
       "url": "https://huggingface.co/spaces/WorldArena/WorldArena",
       "feed": "https://worldarena-worldarena.hf.space/config",
       "terms": "Public results published by the benchmark authors at worldarena-worldarena.hf.space; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AAA0",
@@ -317498,7 +317524,7 @@
       "url": "https://huggingface.co/spaces/WorldArena/WorldArena2.0",
       "feed": "https://worldarena-worldarena2-0.hf.space/gradio_api/call/reload_data",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "ActiFlow",

@@ -38,6 +38,13 @@ const board: Leaderboard = {
   },
   harnesses: 'system',
   verified: 'verified by the Multi-SWE-bench board on every language',
+  stats: {
+    solved: { name: 'Resolved tasks', unit: 'count', better: 'higher' },
+    tasks: { name: 'Total tasks', unit: 'count' },
+    solvedEasy: { name: 'Resolved easy tasks', unit: 'count', better: 'higher' },
+    solvedMedium: { name: 'Resolved medium tasks', unit: 'count', better: 'higher' },
+    solvedHard: { name: 'Resolved hard tasks', unit: 'count', better: 'higher' },
+  },
   url: 'https://multi-swe-bench.github.io/',
   feed: `${FEED} (non-Python aggregate)`,
   terms: 'Repository file in multi-swe-bench/experiments (Apache-2.0) that the project site loads.',

@@ -109,6 +109,8 @@
     ["icelandic-wikiqa","gpt-6-2-sol","low",null,60.42,"2026-11-17",null,null,null,{"run":"2026-11-20","link":"https://developers.openai.com/api/docs/models/gpt-6.2-sol","license":"proprietary"}],
     ["icelandic-wikiqa","gemini-4-neon","high",null,70,"2026-11-18",null,null,null,{"run":"2026-11-20","link":"https://ai.google.dev/gemini-api/docs/models/gemini-4-neon","license":"proprietary"}],
     ["icelandic-wikiqa","gemini-4-neon","low",null,68.13,"2026-11-18",null,null,null,{"run":"2026-11-20","link":"https://ai.google.dev/gemini-api/docs/models/gemini-4-neon","license":"proprietary"}],
+    ["icelandic-wikiqa","inkling-2-mini","minimal",null,13.13,"2026-11-20",null,null,null,{"run":"2026-11-23","link":"https://huggingface.co/thinkingmachines/Inkling-2-Mini","license":"apache-2.0","params":26.4}],
+    ["icelandic-wikiqa","inkling-2-mini","high",null,12.42,"2026-11-20",null,null,null,{"run":"2026-11-23","link":"https://huggingface.co/thinkingmachines/Inkling-2-Mini","license":"apache-2.0","params":26.4}],
     ["icelandic-winogrande","gpt-4-mar-2023","3-shot",null,81.16,"2023-03-14",null,null,null,{"link":"https://huggingface.co/gpt-4-0314"}],
     ["icelandic-winogrande","gpt-4-jun-2023","3-shot",null,83.55,"2023-06-13",null,null,null,{"link":"https://huggingface.co/gpt-4-0613"}],
     ["icelandic-winogrande","claude-2-1","3-shot",null,55.06,"2023-11-21",null,null,null,{"link":"https://huggingface.co/claude-2.1"}],
