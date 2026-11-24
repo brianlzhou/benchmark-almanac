@@ -11,7 +11,7 @@ const board: Leaderboard = {
   feed: helmFeed(table), aliases: corebench.aliases,
   terms: 'Stanford publishes HELM under Apache 2.0. https://github.com/stanford-crfm/helm/blob/main/LICENSE',
   stats: {
-    '# eval': { name: 'Evaluation examples', unit: 'count' },
+    truncated: { name: 'Truncated fraction', unit: 'score', better: 'lower', note: 'Fraction of inputs truncated before evaluation, from 0 to 1.' },
     '# prompt tokens': { name: 'Prompt tokens', unit: 'tokens' },
     '# output tokens': { name: 'Generated tokens', unit: 'tokens' },
     inputTokens: { name: 'Input tokens', unit: 'tokens' },

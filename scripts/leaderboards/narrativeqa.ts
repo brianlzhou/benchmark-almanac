@@ -9,7 +9,7 @@ const board: Leaderboard = {
   benchmark: 'narrativeqa', host: 'HELM Lite', url: 'https://crfm.stanford.edu/helm/lite/latest/#/groups/narrative_qa',
   feed: helmFeed(table), aliases: HELM_ALIASES,
   terms: 'Stanford publishes HELM under the license at https://github.com/stanford-crfm/helm/blob/main/LICENSE.',
-  stats: { 'Observed inference time (s)': { name: 'Observed inference time', unit: 'seconds', better: 'lower' }, '# eval': { name: 'Evaluation examples', unit: 'count' }, '# train': { name: 'Training examples', unit: 'count' }, '# prompt tokens': { name: 'Prompt tokens', unit: 'tokens' }, '# output tokens': { name: 'Output tokens', unit: 'tokens' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens copied to row', unit: 'tokens' } },
+  stats: { 'Observed inference time (s)': { name: 'Observed inference time', unit: 'seconds', better: 'lower' }, truncated: { name: 'Truncated fraction', unit: 'score', better: 'lower', note: 'Fraction of inputs truncated before evaluation, from 0 to 1.' }, '# prompt tokens': { name: 'Prompt tokens', unit: 'tokens' }, '# output tokens': { name: 'Output tokens', unit: 'tokens' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens copied to row', unit: 'tokens' } },
   async fetch() {
     const rows = await helmRows(table, true);
     for (const row of rows) {

@@ -8161,7 +8161,7 @@
       "url": "https://crfm.stanford.edu/helm/audio/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/audio/benchmark_output/runs/<newest>/groups/audio_scenarios.json (Accuracy: Mean win rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "gpt-4o-audio-preview-2024-10-01",
@@ -8170,7 +8170,129 @@
         "gpt-4o-mini-transcribe_gpt-4o-2024-11-20",
         "gpt-4o-transcribe_gpt-4o-2024-11-20",
         "whisper-1_gpt-4o-2024-11-20"
-      ]
+      ],
+      "parts": {
+        "AudioCaps - GPT-4o Judge Critique": {
+          "name": "AudioCaps",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "GPT-4o judge score."
+        },
+        "VoxCeleb2 - EM": {
+          "name": "VoxCeleb2",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "VocalSound - PEM": {
+          "name": "VocalSound",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Prefix exact match from 0 to 1."
+        },
+        "LibriSpeech - WER": {
+          "name": "LibriSpeech",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "Multimodal EmotionLines Dataset (MELD) Audio - PEM": {
+          "name": "MELD Audio",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Prefix exact match from 0 to 1."
+        },
+        "MUStARD - EM": {
+          "name": "MUStARD",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "Air-Bench Chat (reasoning subsets) - GPT-4o Judge Critique": {
+          "name": "AIR-Bench Chat reasoning",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "GPT-4o judge score."
+        },
+        "COREBench - PEM": {
+          "name": "COREBench",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Prefix exact match from 0 to 1."
+        },
+        "Air-Bench Chat (knowledge subsets) - GPT-4o Judge Critique": {
+          "name": "AIR-Bench Chat knowledge",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "GPT-4o judge score."
+        },
+        "Air-Bench Foundation - EM": {
+          "name": "AIR-Bench Foundation",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "Robust Speech Bench - WER": {
+          "name": "Robust Speech Bench",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "CoVost-2 - BLEU": {
+          "name": "CoVoST-2",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "BLEU translation score."
+        },
+        "FLEURS - WER": {
+          "name": "FLEURS",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "Multilingual Librispeech - WER": {
+          "name": "Multilingual LibriSpeech",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "MuTox - EM": {
+          "name": "MuTox",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "Voice Jailbreak Attacks Against GPT-4o - Refusal rate for safety": {
+          "name": "Voice Jailbreak refusal",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Safety refusal rate from 0 to 1."
+        },
+        "FLEURS Fairness - WER": {
+          "name": "FLEURS Fairness",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "LibriSpeech Fairness - WER": {
+          "name": "LibriSpeech Fairness",
+          "group": "Scenario",
+          "unit": "score",
+          "better": "lower",
+          "note": "Word error rate, lower is better."
+        },
+        "PARADE - EM": {
+          "name": "PARADE",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        }
+      }
     },
     "ai-agent-privacy": {
       "url": "https://arxiv.org/html/2503.09780",
@@ -15957,7 +16079,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/safety/benchmark_output/releases/<newest>/groups/anthropic_red_team.json (LM Evaluated Safety score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 81,
       "unmatched": [
         "marin-8b-instruct",
@@ -15966,7 +16088,35 @@
         "olmoe-1b-7b-0125-instruct",
         "palmyra-fin",
         "palmyra-med"
-      ]
+      ],
+      "stats": {
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
+        },
+        "# prompt tokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "# output tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "Llama Annotator Success Rate": {
+          "name": "Llama annotator success rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of responses successfully judged by the Llama evaluator, from 0 to 1."
+        },
+        "GPT Annotator Success Rate": {
+          "name": "GPT annotator success rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of responses successfully judged by the GPT evaluator, from 0 to 1."
+        }
+      }
     },
     "antidote-surge": {
       "url": "https://surgehq.ai/benchmarks/antidote",
@@ -128085,7 +128235,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/capabilities/benchmark_output/releases/<newest>/groups/core_scenarios.json (Accuracy: GPQA - COT correct)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 62,
       "unmatched": [
         "marin-8b-instruct",
@@ -128100,6 +128250,20 @@
           "name": "Observed inference time",
           "unit": "seconds",
           "better": "lower"
+        },
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
+        },
+        "# prompt tokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "# output tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -134319,7 +134483,7 @@
       "url": "https://crfm.stanford.edu/helm/arabic/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/arabic/benchmark_output/releases/<newest>/groups/arabic_scenarios.json (Accuracy: Mean score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "acegpt-v2-32b-chat",
@@ -134336,6 +134500,36 @@
         "llm_x",
         "silma-9b-instruct-v1.0"
       ],
+      "parts": {
+        "AlGhafa - EM": {
+          "name": "AlGhafa",
+          "group": "Scenario"
+        },
+        "ArabicMMLU - EM": {
+          "name": "ArabicMMLU",
+          "group": "Scenario"
+        },
+        "Arabic EXAMS - EM": {
+          "name": "Arabic EXAMS",
+          "group": "Scenario"
+        },
+        "MadinahQA - EM": {
+          "name": "MadinahQA",
+          "group": "Scenario"
+        },
+        "AraTrust - EM": {
+          "name": "AraTrust",
+          "group": "Scenario"
+        },
+        "ALRAGE - Score": {
+          "name": "ALRAGE",
+          "group": "Scenario"
+        },
+        "Translated MMLU - EM": {
+          "name": "Translated MMLU",
+          "group": "Scenario"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Observed inference time",
@@ -134348,7 +134542,7 @@
       "url": "https://crfm.stanford.edu/helm/arabic-enterprise/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/arabic-enterprise/benchmark_output/releases/<newest>/groups/arabic_scenarios.json (Accuracy: Mean score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "acegpt-v2-32b-chat",
@@ -134364,6 +134558,32 @@
         "llm-x-2026-06-07",
         "silma-9b-instruct-v1.0"
       ],
+      "parts": {
+        "Article Generation - Score": {
+          "name": "Article Generation",
+          "group": "Scenario"
+        },
+        "Finance MCQA - EM": {
+          "name": "Finance MCQA",
+          "group": "Scenario"
+        },
+        "Finance Bool - EM": {
+          "name": "Finance Bool",
+          "group": "Scenario"
+        },
+        "Finance Calculation - Accuracy": {
+          "name": "Finance Calculation",
+          "group": "Scenario"
+        },
+        "Legal Openbook QA - Score": {
+          "name": "Legal Openbook QA",
+          "group": "Scenario"
+        },
+        "Legal Closedbook QA - Score": {
+          "name": "Legal Closedbook QA",
+          "group": "Scenario"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Observed inference time",
@@ -134376,7 +134596,7 @@
       "url": "https://crfm.stanford.edu/helm/capabilities/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/capabilities/benchmark_output/releases/<newest>/groups/core_scenarios.json (Accuracy: Mean score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 62,
       "unmatched": [
         "marin-8b-instruct",
@@ -134386,6 +134606,28 @@
         "palmyra-fin",
         "palmyra-med"
       ],
+      "parts": {
+        "MMLU-Pro - COT correct": {
+          "name": "MMLU-Pro",
+          "group": "Scenario"
+        },
+        "GPQA - COT correct": {
+          "name": "GPQA",
+          "group": "Scenario"
+        },
+        "IFEval - IFEval Strict Acc": {
+          "name": "IFEval",
+          "group": "Scenario"
+        },
+        "WildBench - WB Score": {
+          "name": "WildBench",
+          "group": "Scenario"
+        },
+        "Omni-MATH - Acc": {
+          "name": "Omni-MATH",
+          "group": "Scenario"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Observed inference time",
@@ -134523,7 +134765,7 @@
       "url": "https://crfm.stanford.edu/helm/lite/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/lite/benchmark_output/releases/<newest>/groups/core_scenarios.json (Accuracy: Mean win rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 72,
       "unmatched": [
         "command",
@@ -134546,7 +134788,85 @@
         "text-davinci-003",
         "text-unicorn@001"
       ],
+      "parts": {
+        "NarrativeQA - F1": {
+          "name": "NarrativeQA",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Answer F1 from 0 to 1."
+        },
+        "NaturalQuestions (open-book) - F1": {
+          "name": "NaturalQuestions (open-book)",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Answer F1 from 0 to 1."
+        },
+        "NaturalQuestions (closed-book) - F1": {
+          "name": "NaturalQuestions (closed-book)",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Answer F1 from 0 to 1."
+        },
+        "OpenbookQA - EM": {
+          "name": "OpenbookQA",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "MMLU - EM": {
+          "name": "MMLU",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "MATH - Equivalent (CoT)": {
+          "name": "MATH",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Chain-of-thought equivalence from 0 to 1."
+        },
+        "GSM8K - EM": {
+          "name": "GSM8K",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "LegalBench - EM": {
+          "name": "LegalBench",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "MedQA - EM": {
+          "name": "MedQA",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "Exact match from 0 to 1."
+        },
+        "WMT 2014 - BLEU-4": {
+          "name": "Workshop on Machine Translation 2014",
+          "group": "Scenario",
+          "unit": "score",
+          "note": "BLEU-4 from 0 to 1."
+        }
+      },
       "stats": {
+        "Efficiency mean win rate": {
+          "name": "Efficiency mean win rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Share of models beaten on inference speed, from 0 to 1."
+        },
+        "NarrativeQA - Observed inference time (s)": {
+          "name": "NarrativeQA inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "NarrativeQA - truncated": {
+          "name": "NarrativeQA truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
         "NarrativeQA - # prompt tokens": {
           "name": "NarrativeQA prompt tokens",
           "unit": "tokens"
@@ -134554,6 +134874,16 @@
         "NarrativeQA - # output tokens": {
           "name": "NarrativeQA output tokens",
           "unit": "tokens"
+        },
+        "NaturalQuestions (open-book) - Observed inference time (s)": {
+          "name": "NaturalQuestions (open-book) inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "NaturalQuestions (open-book) - truncated": {
+          "name": "NaturalQuestions (open-book) truncated fraction",
+          "unit": "score",
+          "better": "lower"
         },
         "NaturalQuestions (open-book) - # prompt tokens": {
           "name": "NaturalQuestions (open-book) prompt tokens",
@@ -134563,6 +134893,16 @@
           "name": "NaturalQuestions (open-book) output tokens",
           "unit": "tokens"
         },
+        "NaturalQuestions (closed-book) - Observed inference time (s)": {
+          "name": "NaturalQuestions (closed-book) inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "NaturalQuestions (closed-book) - truncated": {
+          "name": "NaturalQuestions (closed-book) truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
         "NaturalQuestions (closed-book) - # prompt tokens": {
           "name": "NaturalQuestions (closed-book) prompt tokens",
           "unit": "tokens"
@@ -134570,6 +134910,16 @@
         "NaturalQuestions (closed-book) - # output tokens": {
           "name": "NaturalQuestions (closed-book) output tokens",
           "unit": "tokens"
+        },
+        "OpenbookQA - Observed inference time (s)": {
+          "name": "OpenbookQA inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "OpenbookQA - truncated": {
+          "name": "OpenbookQA truncated fraction",
+          "unit": "score",
+          "better": "lower"
         },
         "OpenbookQA - # prompt tokens": {
           "name": "OpenbookQA prompt tokens",
@@ -134579,6 +134929,16 @@
           "name": "OpenbookQA output tokens",
           "unit": "tokens"
         },
+        "MMLU - Observed inference time (s)": {
+          "name": "MMLU inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "MMLU - truncated": {
+          "name": "MMLU truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
         "MMLU - # prompt tokens": {
           "name": "MMLU prompt tokens",
           "unit": "tokens"
@@ -134586,6 +134946,16 @@
         "MMLU - # output tokens": {
           "name": "MMLU output tokens",
           "unit": "tokens"
+        },
+        "MATH - Observed inference time (s)": {
+          "name": "MATH inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "MATH - truncated": {
+          "name": "MATH truncated fraction",
+          "unit": "score",
+          "better": "lower"
         },
         "MATH - # prompt tokens": {
           "name": "MATH prompt tokens",
@@ -134595,6 +134965,16 @@
           "name": "MATH output tokens",
           "unit": "tokens"
         },
+        "GSM8K - Observed inference time (s)": {
+          "name": "GSM8K inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "GSM8K - truncated": {
+          "name": "GSM8K truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
         "GSM8K - # prompt tokens": {
           "name": "GSM8K prompt tokens",
           "unit": "tokens"
@@ -134602,6 +134982,16 @@
         "GSM8K - # output tokens": {
           "name": "GSM8K output tokens",
           "unit": "tokens"
+        },
+        "LegalBench - Observed inference time (s)": {
+          "name": "LegalBench inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "LegalBench - truncated": {
+          "name": "LegalBench truncated fraction",
+          "unit": "score",
+          "better": "lower"
         },
         "LegalBench - # prompt tokens": {
           "name": "LegalBench prompt tokens",
@@ -134611,6 +135001,16 @@
           "name": "LegalBench output tokens",
           "unit": "tokens"
         },
+        "MedQA - Observed inference time (s)": {
+          "name": "MedQA inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "MedQA - truncated": {
+          "name": "MedQA truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
         "MedQA - # prompt tokens": {
           "name": "MedQA prompt tokens",
           "unit": "tokens"
@@ -134618,6 +135018,16 @@
         "MedQA - # output tokens": {
           "name": "MedQA output tokens",
           "unit": "tokens"
+        },
+        "WMT 2014 - Observed inference time (s)": {
+          "name": "Workshop on Machine Translation 2014 inference time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "WMT 2014 - truncated": {
+          "name": "Workshop on Machine Translation 2014 truncated fraction",
+          "unit": "score",
+          "better": "lower"
         },
         "WMT 2014 - # prompt tokens": {
           "name": "Workshop on Machine Translation 2014 prompt tokens",
@@ -134633,7 +135043,7 @@
       "url": "https://crfm.stanford.edu/helm/safety/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/safety/benchmark_output/releases/<newest>/groups/safety_scenarios.json (Accuracy: Mean score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 81,
       "unmatched": [
         "marin-8b-instruct",
@@ -134645,24 +135055,143 @@
       ],
       "parts": {
         "HarmBench - LM Evaluated Safety score": {
-          "name": "HarmBench - LM Evaluated Safety score",
+          "name": "HarmBench",
           "group": "Scenario"
         },
         "SimpleSafetyTests - LM Evaluated Safety score": {
-          "name": "SimpleSafetyTests - LM Evaluated Safety score",
+          "name": "SimpleSafetyTests",
           "group": "Scenario"
         },
         "BBQ - BBQ accuracy": {
-          "name": "BBQ - BBQ accuracy",
+          "name": "BBQ",
           "group": "Scenario"
         },
         "Anthropic Red Team - LM Evaluated Safety score": {
-          "name": "Anthropic Red Team - LM Evaluated Safety score",
+          "name": "Anthropic Red Team",
           "group": "Scenario"
         },
         "XSTest - LM Evaluated Safety score": {
-          "name": "XSTest - LM Evaluated Safety score",
+          "name": "XSTest",
           "group": "Scenario"
+        }
+      },
+      "stats": {
+        "BBQ metrics: BBQ - BBQ (ambiguous)": {
+          "name": "BBQ ambiguous accuracy",
+          "unit": "score",
+          "better": "higher",
+          "note": "Accuracy on ambiguous BBQ prompts from 0 to 1."
+        },
+        "BBQ metrics: BBQ - BBQ (unambiguous)": {
+          "name": "BBQ unambiguous accuracy",
+          "unit": "score",
+          "better": "higher",
+          "note": "Accuracy on unambiguous BBQ prompts from 0 to 1."
+        },
+        "General information: HarmBench - truncated": {
+          "name": "HarmBench truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
+        "General information: HarmBench - # prompt tokens": {
+          "name": "HarmBench prompt tokens",
+          "unit": "tokens"
+        },
+        "General information: HarmBench - # output tokens": {
+          "name": "HarmBench output tokens",
+          "unit": "tokens"
+        },
+        "Annotation: HarmBench - Llama Annotator Success Rate": {
+          "name": "HarmBench Llama annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Annotation: HarmBench - GPT Annotator Success Rate": {
+          "name": "HarmBench GPT annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "General information: SimpleSafetyTests - truncated": {
+          "name": "SimpleSafetyTests truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
+        "General information: SimpleSafetyTests - # prompt tokens": {
+          "name": "SimpleSafetyTests prompt tokens",
+          "unit": "tokens"
+        },
+        "General information: SimpleSafetyTests - # output tokens": {
+          "name": "SimpleSafetyTests output tokens",
+          "unit": "tokens"
+        },
+        "Annotation: SimpleSafetyTests - Llama Annotator Success Rate": {
+          "name": "SimpleSafetyTests Llama annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Annotation: SimpleSafetyTests - GPT Annotator Success Rate": {
+          "name": "SimpleSafetyTests GPT annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "General information: BBQ - truncated": {
+          "name": "BBQ truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
+        "General information: BBQ - # prompt tokens": {
+          "name": "BBQ prompt tokens",
+          "unit": "tokens"
+        },
+        "General information: BBQ - # output tokens": {
+          "name": "BBQ output tokens",
+          "unit": "tokens"
+        },
+        "General information: Anthropic Red Team - truncated": {
+          "name": "Anthropic Red Team truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
+        "General information: Anthropic Red Team - # prompt tokens": {
+          "name": "Anthropic Red Team prompt tokens",
+          "unit": "tokens"
+        },
+        "General information: Anthropic Red Team - # output tokens": {
+          "name": "Anthropic Red Team output tokens",
+          "unit": "tokens"
+        },
+        "Annotation: Anthropic Red Team - Llama Annotator Success Rate": {
+          "name": "Anthropic Red Team Llama annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Annotation: Anthropic Red Team - GPT Annotator Success Rate": {
+          "name": "Anthropic Red Team GPT annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "General information: XSTest - truncated": {
+          "name": "XSTest truncated fraction",
+          "unit": "score",
+          "better": "lower"
+        },
+        "General information: XSTest - # prompt tokens": {
+          "name": "XSTest prompt tokens",
+          "unit": "tokens"
+        },
+        "General information: XSTest - # output tokens": {
+          "name": "XSTest output tokens",
+          "unit": "tokens"
+        },
+        "Annotation: XSTest - Llama Annotator Success Rate": {
+          "name": "XSTest Llama annotator success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Annotation: XSTest - GPT Annotator Success Rate": {
+          "name": "XSTest GPT annotator success rate",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -184974,7 +185503,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/lite/benchmark_output/releases/<newest>/groups/core_scenarios.json (Accuracy: MedQA - EM)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 72,
       "unmatched": [
         "command",
@@ -184999,9 +185528,23 @@
       ],
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Observed inference time",
           "unit": "seconds",
           "better": "lower"
+        },
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
+        },
+        "# prompt tokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "# output tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -206511,7 +207054,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/lite/benchmark_output/releases/<newest>/groups/narrative_qa.json (F1)",
       "terms": "Stanford publishes HELM under the license at https://github.com/stanford-crfm/helm/blob/main/LICENSE.",
       "host": "HELM Lite",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 71,
       "unmatched": [
         "command",
@@ -206541,13 +207084,11 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "# eval": {
-          "name": "Evaluation examples",
-          "unit": "count"
-        },
-        "# train": {
-          "name": "Training examples",
-          "unit": "count"
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
         },
         "# prompt tokens": {
           "name": "Prompt tokens",
@@ -265786,12 +266327,106 @@
       "url": "https://crfm.stanford.edu/helm/robo-reward-bench/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/robo-reward-bench/benchmark_output/runs/<newest>/groups/core_scenarios.json (Accuracy: Mean Abs. Error (↓ better))",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "qwen3-vl-4b-instruct-robo-reward",
         "qwen3-vl-8b-instruct-robo-reward"
-      ]
+      ],
+      "parts": {
+        "RoboArena - Absolute Error": {
+          "name": "RoboArena",
+          "group": "Dataset"
+        },
+        "Austin Sirius - Absolute Error": {
+          "name": "Austin Sirius",
+          "group": "Dataset"
+        },
+        "Berkeley Autolab UR5 - Absolute Error": {
+          "name": "Berkeley Autolab UR5",
+          "group": "Dataset"
+        },
+        "Berkeley Fanuc Manipulation - Absolute Error": {
+          "name": "Berkeley Fanuc Manipulation",
+          "group": "Dataset"
+        },
+        "Berkeley MVP - Absolute Error": {
+          "name": "Berkeley MVP",
+          "group": "Dataset"
+        },
+        "Berkeley RPT - Absolute Error": {
+          "name": "Berkeley RPT",
+          "group": "Dataset"
+        },
+        "Berkeley Bridge - Absolute Error": {
+          "name": "Berkeley Bridge",
+          "group": "Dataset"
+        },
+        "CMU Play Fusion - Absolute Error": {
+          "name": "CMU Play Fusion",
+          "group": "Dataset"
+        },
+        "DLR Wheelchair Shared Control - Absolute Error": {
+          "name": "DLR Wheelchair Shared Control",
+          "group": "Dataset"
+        },
+        "DROID - Absolute Error": {
+          "name": "DROID",
+          "group": "Dataset"
+        },
+        "RT-1 Robot Action - Absolute Error": {
+          "name": "RT-1 Robot Action",
+          "group": "Dataset"
+        },
+        "CMU Franka Pick-Insert - Absolute Error": {
+          "name": "CMU Franka Pick-Insert",
+          "group": "Dataset"
+        },
+        "USC Jaco Play - Absolute Error": {
+          "name": "USC Jaco Play",
+          "group": "Dataset"
+        },
+        "KAIST Nonprehensile Objects - Absolute Error": {
+          "name": "KAIST Nonprehensile Objects",
+          "group": "Dataset"
+        },
+        "Roboturk - Absolute Error": {
+          "name": "RoboTurk",
+          "group": "Dataset"
+        },
+        "Stanford HYDRA - Absolute Error": {
+          "name": "Stanford HYDRA",
+          "group": "Dataset"
+        },
+        "Freiburg Franka Play - Absolute Error": {
+          "name": "Freiburg Franka Play",
+          "group": "Dataset"
+        },
+        "LSMO - Absolute Error": {
+          "name": "LSMO",
+          "group": "Dataset"
+        },
+        "UCSD Kitchen - Absolute Error": {
+          "name": "UCSD Kitchen",
+          "group": "Dataset"
+        },
+        "UCSD Pick Place - Absolute Error": {
+          "name": "UCSD Pick Place",
+          "group": "Dataset"
+        },
+        "Tokyo PR2 Tabletop Manipulation - Absolute Error": {
+          "name": "Tokyo PR2 Tabletop Manipulation",
+          "group": "Dataset"
+        },
+        "UTokyo xArm Bimanual - Absolute Error": {
+          "name": "UTokyo xArm Bimanual",
+          "group": "Dataset"
+        },
+        "Austin VIOLA - Absolute Error": {
+          "name": "Austin VIOLA",
+          "group": "Dataset"
+        }
+      }
     },
     "robospatial-home": {
       "url": "https://github.com/chanhee-luke/RoboSpatial-Eval",
@@ -276551,7 +277186,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/safety/benchmark_output/releases/<newest>/groups/simple_safety_tests.json (LM Evaluated Safety score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 81,
       "unmatched": [
         "marin-8b-instruct",
@@ -276560,7 +277195,35 @@
         "olmoe-1b-7b-0125-instruct",
         "palmyra-fin",
         "palmyra-med"
-      ]
+      ],
+      "stats": {
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
+        },
+        "# prompt tokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "# output tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "Llama Annotator Success Rate": {
+          "name": "Llama annotator success rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of responses successfully judged by the Llama evaluator, from 0 to 1."
+        },
+        "GPT Annotator Success Rate": {
+          "name": "GPT annotator success rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of responses successfully judged by the GPT evaluator, from 0 to 1."
+        }
+      }
     },
     "simplevqa": {
       "url": "https://arxiv.org/html/2502.13059",
@@ -298493,7 +299156,7 @@
       "url": "https://crfm.stanford.edu/helm/thaiexam/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/thaiexam/benchmark_output/releases/<newest>/groups/thai_scenarios.json (Accuracy: ThaiExam - EM)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "OpenThaiLLM-Prebuilt-7B",
@@ -298514,7 +299177,45 @@
         "typhoon-7b",
         "typhoon-v1.5-72b-instruct",
         "typhoon-v1.5-8b-instruct"
-      ]
+      ],
+      "parts": {
+        "ONET - EM": {
+          "name": "ONET",
+          "group": "Exam"
+        },
+        "IC - EM": {
+          "name": "IC",
+          "group": "Exam"
+        },
+        "TGAT - EM": {
+          "name": "TGAT",
+          "group": "Exam"
+        },
+        "TPAT-1 - EM": {
+          "name": "TPAT-1",
+          "group": "Exam"
+        },
+        "A-Level - EM": {
+          "name": "A-Level",
+          "group": "Exam"
+        }
+      },
+      "stats": {
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
+        },
+        "# prompt tokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "# output tokens": {
+          "name": "Output tokens",
+          "unit": "tokens"
+        }
+      }
     },
     "the-aggregate-asteroid-numbers": {
       "url": "https://theaggregate.ai/benchmark?slug=the-aggregate-asteroid-numbers",
@@ -300831,9 +301532,51 @@
       "url": "https://crfm.stanford.edu/helm/torr/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/torr/benchmark_output/releases/<newest>/groups/table_scenarios.json (Performance: Mean score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "FinQA - Program Accuracy": {
+          "name": "FinQA",
+          "group": "Scenario"
+        },
+        "NumericNLG - ROUGE-L": {
+          "name": "NumericNLG",
+          "group": "Scenario"
+        },
+        "QTSumm - ROUGE-L": {
+          "name": "QTSumm",
+          "group": "Scenario"
+        },
+        "SciGen - ROUGE-L": {
+          "name": "SciGen",
+          "group": "Scenario"
+        },
+        "TabFact - Accuracy": {
+          "name": "TabFact",
+          "group": "Scenario"
+        },
+        "Tablebench Data Analysis - ROUGE-L": {
+          "name": "TableBench data analysis",
+          "group": "Scenario"
+        },
+        "Tablebench Fact Checking - ROUGE-L": {
+          "name": "TableBench fact checking",
+          "group": "Scenario"
+        },
+        "Tablebench Numerical Reasoning - ROUGE-L": {
+          "name": "TableBench numerical reasoning",
+          "group": "Scenario"
+        },
+        "Turl Col Type - Micro F1": {
+          "name": "TURL column type",
+          "group": "Scenario"
+        },
+        "WikiTableQuestions - F1 Strings": {
+          "name": "WikiTableQuestions",
+          "group": "Scenario"
+        }
+      }
     },
     "toxicchat": {
       "url": "https://arxiv.org/html/2310.17389",
@@ -318346,7 +319089,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/audio/benchmark_output/runs/<newest>/groups/voxceleb2.json (EM)",
       "terms": "Stanford publishes HELM under Apache 2.0. https://github.com/stanford-crfm/helm/blob/main/LICENSE",
       "host": "AHELM",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "gpt-4o-audio-preview-2024-10-01",
@@ -318354,9 +319097,11 @@
         "gpt-4o-mini-audio-preview-2024-12-17"
       ],
       "stats": {
-        "# eval": {
-          "name": "Evaluation examples",
-          "unit": "count"
+        "truncated": {
+          "name": "Truncated fraction",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of inputs truncated before evaluation, from 0 to 1."
         },
         "# prompt tokens": {
           "name": "Prompt tokens",

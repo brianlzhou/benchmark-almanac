@@ -1,7 +1,7 @@
 // MedQA on HELM Lite (Stanford CRFM). The score is "MedQA - EM" in the Accuracy table of core_scenarios.json,
 // exact-match accuracy on the English USMLE questions, times 100. Read through helmRows in helm-capabilities.ts.
 import type { Leaderboard } from './types.ts';
-import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
+import { HELM_ALIASES, HELM_DETAIL_STATS, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'lite', group: 'core_scenarios', table: 'Accuracy', column: 'MedQA - EM', scale: 100 };
 
@@ -12,7 +12,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  stats: HELM_DETAIL_STATS,
   fetch: () => helmRows(TABLE, true),
 };
 export default board;

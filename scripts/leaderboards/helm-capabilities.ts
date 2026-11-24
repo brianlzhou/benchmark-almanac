@@ -18,6 +18,14 @@ import airBench from './air-bench-2024.ts';
 
 export const HELM_BUCKET = 'https://storage.googleapis.com/crfm-helm-public';
 export const HELM_TERMS = 'Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.';
+export const HELM_DETAIL_STATS: NonNullable<Leaderboard['stats']> = {
+  latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' },
+  truncated: { name: 'Truncated fraction', unit: 'score', better: 'lower', note: 'Fraction of inputs truncated before evaluation, from 0 to 1.' },
+  '# prompt tokens': { name: 'Prompt tokens', unit: 'tokens' },
+  '# output tokens': { name: 'Output tokens', unit: 'tokens' },
+  'Llama Annotator Success Rate': { name: 'Llama annotator success rate', unit: 'score', better: 'higher', note: 'Fraction of responses successfully judged by the Llama evaluator, from 0 to 1.' },
+  'GPT Annotator Success Rate': { name: 'GPT annotator success rate', unit: 'score', better: 'higher', note: 'Fraction of responses successfully judged by the GPT evaluator, from 0 to 1.' },
+};
 /** HELM run-spec model ids the shared resolver cannot place (the AIR-Bench importer's list). */
 export const HELM_ALIASES: Record<string, string> = {
   ...(airBench.aliases ?? {}),
@@ -78,6 +86,8 @@ export interface HelmTable {
   column: string;
   /** Multiplier for the stored value, 100 for fractions. */
   scale?: number;
+  /** Also read all other numeric columns in the primary score table as parts ('scaled' multiplies by scale, 'raw' keeps source values). */
+  scenarioParts?: 'scaled' | 'raw';
 }
 
 const version = (p: string) => (p.match(/v(\d+)\.(\d+)\.(\d+)\/$/)?.slice(1) ?? []).map(Number);
@@ -148,6 +158,7 @@ export async function helmRows(t: HelmTable, details = false, aggregate?: Leader
   const costs = helmCosts(tables, t.column);
   const scenario = t.column.split(' - ')[0];
   const general = tables.find(table => table.title === 'General information');
+  const isExampleCount = (k: string) => /(?:^| - )# (?:eval|train)$/.test(k);
   const extra = new Map<string, Record<string, number>>();
   if (aggregate) {
     for (const source of tables) {
@@ -156,10 +167,10 @@ export async function helmRows(t: HelmTable, details = false, aggregate?: Leader
         const metrics = extra.get(model) ?? {};
         for (const [j, h] of source.header.entries()) {
           const value = row[j]?.value;
-          if (j === 0 || h.value === t.column || typeof value !== 'number') continue;
+          if (j === 0 || h.value === t.column || typeof value !== 'number' || isExampleCount(h.value)) continue;
           if (source === table) {
             metrics[h.value] = value * (t.scale ?? 1);
-            (aggregate.parts ??= {})[h.value] = { name: h.value, group: 'Scenario' };
+            if (!aggregate.parts?.[h.value]) (aggregate.parts ??= {})[h.value] = { name: h.value.split(' - ')[0], group: 'Scenario' };
           } else {
             metrics[(source.title ?? '') + ': ' + h.value] = value;
           }
@@ -172,7 +183,7 @@ export async function helmRows(t: HelmTable, details = false, aggregate?: Leader
       const metrics: Record<string, number> = {};
       for (const [j, h] of general.header.entries()) {
         const value = r[j]?.value;
-        if (h.value.startsWith(scenario + ' - ') && typeof value === 'number') metrics[h.value.slice(scenario.length + 3)] = value;
+        if (h.value.startsWith(scenario + ' - ') && typeof value === 'number' && !isExampleCount(h.value)) metrics[h.value.slice(scenario.length + 3)] = value;
       }
       extra.set(String(r[0]?.value).trim(), metrics);
     }
@@ -194,10 +205,17 @@ export async function helmRows(t: HelmTable, details = false, aggregate?: Leader
     const stamp = model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
     const c = costs.get(String(r[0]?.value ?? '').trim());
     const metrics = { ...extra.get(String(r[0]?.value).trim()), ...(c?.latency ? { latency: c.latency } : {}) } as Record<string, number>;
+    if (!aggregate && t.scenarioParts) {
+      const mul = t.scenarioParts === 'scaled' ? (t.scale ?? 1) : 1;
+      for (const [j, header] of table.header.entries()) {
+        const value = r[j]?.value;
+        if (j !== 0 && j !== col && typeof value === 'number' && Number.isFinite(value)) metrics[header.value] = value * mul;
+      }
+    }
     if (details && !t.table) {
       for (const [j, header] of table.header.entries()) {
         const value = r[j]?.value;
-        if (j !== col && typeof value === 'number') metrics[header.value] = value;
+        if (j !== col && typeof value === 'number' && !isExampleCount(header.value)) metrics[header.value] = value;
       }
     }
     const tokens = c?.tokens ?? metrics['# output tokens'];
@@ -214,7 +232,7 @@ export async function helmRows(t: HelmTable, details = false, aggregate?: Leader
   return rows;
 }
 
-const TABLE: HelmTable = { project: 'capabilities', group: 'core_scenarios', table: 'Accuracy', column: 'Mean score', scale: 100 };
+const TABLE: HelmTable = { project: 'capabilities', group: 'core_scenarios', table: 'Accuracy', column: 'Mean score', scale: 100, scenarioParts: 'scaled' };
 
 const board: Leaderboard = {
   benchmark: 'helm-capabilities',
@@ -222,6 +240,13 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  parts: {
+    'MMLU-Pro - COT correct': { name: 'MMLU-Pro', group: 'Scenario' },
+    'GPQA - COT correct': { name: 'GPQA', group: 'Scenario' },
+    'IFEval - IFEval Strict Acc': { name: 'IFEval', group: 'Scenario' },
+    'WildBench - WB Score': { name: 'WildBench', group: 'Scenario' },
+    'Omni-MATH - Acc': { name: 'Omni-MATH', group: 'Scenario' },
+  },
   stats: { latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' } },
   fetch: () => helmRows(TABLE),
 };
