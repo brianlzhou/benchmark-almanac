@@ -12,8 +12,8 @@ const PAGE = 'https://oss-crs.openssf.org/crsbench/results';
 
 const board: Leaderboard = {
   benchmark: 'crsbench',
+  harnesses: 'system',
   stats: {
-    cases: { name: 'Cases', unit: 'count' },
     endToEndPassed: { name: 'End-to-end passed cases', unit: 'count' },
     findRate: { name: 'Find rate', unit: '%', better: 'higher' },
     fixRate: { name: 'Fix rate', unit: '%', better: 'higher' },
@@ -36,7 +36,7 @@ const board: Leaderboard = {
       const model = text(r[0]?.html.match(/class="lb__model">([\s\S]*?)<\/span>/)?.[1] ?? '');
       const counts = r[iE2E]?.text.match(/\(\s*(\d+)\s*\/\s*(\d+)\s*\)/);
       if (!model || !counts) continue;
-      const metrics:Record<string,number>={cases:Number(counts[2]),endToEndPassed:Number(counts[1])};
+      const metrics:Record<string,number>={endToEndPassed:Number(counts[1])};
       for (const stage of ['find','fix']) {
         const i=head.findIndex(h=>h===stage);
         const fraction=r[i]?.text.match(/\(\s*(\d+)\s*\/\s*(\d+)\s*\)/);

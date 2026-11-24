@@ -96,17 +96,13 @@
       "url": "https://110.238.108.113/",
       "feed": "https://110.238.108.113/api/ratings",
       "terms": "The live arena gives no reuse terms. Eleven scored configurations represent ten distinct model names on 2026-11-20. https://baibizhe.github.io/gamearena/ The arena serves no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Qwen 3.8"
       ],
+      "harnesses": "system",
       "stats": {
-        "generationSuccess": {
-          "name": "Generation success rate",
-          "unit": "%",
-          "better": "higher"
-        },
         "priceRmb": {
           "name": "Average price",
           "unit": "cny",
@@ -6049,11 +6045,15 @@
       "url": "https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
       "feed": "https://nashnovaresearch.github.io/AgenticFinBench/paper-results.30d929f4706ec459.json",
       "terms": "The authors do not specify separate terms for leaderboard scores on https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "DuMate"
       ],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Time per run",
@@ -6070,16 +6070,8 @@
           "unit": "%",
           "better": "higher"
         },
-        "baselineRank": {
-          "name": "Baseline rank",
-          "unit": "count"
-        },
         "claims": {
           "name": "Claims",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Questions",
           "unit": "count"
         },
         "responseHallucination": {
@@ -65662,9 +65654,13 @@
       "url": "https://www.contractoros.build/benchmarks/takeoff/",
       "feed": "https://www.contractoros.build/benchmarks/takeoff/",
       "terms": "The terms restrict redistribution of ContractorOS material. They give no explicit license for benchmark scores. https://www.contractoros.build/terms/ Robots.txt permits public benchmark pages.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 101,
       "unmatched": [],
+      "reference": [
+        "Raw API"
+      ],
+      "harnesses": "system",
       "parts": {
         "counts": {
           "name": "Counts"
@@ -65680,10 +65676,6 @@
         }
       },
       "stats": {
-        "lines": {
-          "name": "Lines",
-          "unit": "count"
-        },
         "countsLines": {
           "name": "Counted lines",
           "unit": "count"
@@ -65802,16 +65794,16 @@
       "url": "https://cooperbench.com/leaderboard",
       "feed": "https://cooperbench.com/static/data/coop/index.json and https://cooperbench.com/static/data/coop_git/index.json (stats.rate)",
       "terms": "Static JSON behind the leaderboard page; the cooperbench.com robots.txt (Cloudflare content signals only) sets no rules and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Qwen3-30B"
       ],
+      "reference": [
+        "mini-SWE-agent"
+      ],
+      "harnesses": "system",
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "passed": {
           "name": "Tasks passed",
           "unit": "count"
@@ -73574,11 +73566,8 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
-        "cases": {
-          "name": "Cases",
-          "unit": "count"
-        },
         "endToEndPassed": {
           "name": "End-to-end passed cases",
           "unit": "count"
@@ -80727,12 +80716,12 @@
       "url": "https://vercel.com/ai-gateway/leaderboards/deepsecbench",
       "feed": "https://vercel.com/ai-gateway/leaderboards/deepsecbench (server-rendered HTML table, Score)",
       "terms": "Server-rendered public page; robots.txt allows /ai-gateway/leaderboards and the Vercel terms do not restrict reading it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 60,
       "unmatched": [],
       "chart": {
         "title": "Score vs. total time",
-        "note": "Each point is one model configuration; the Pareto frontier joins configurations that no other beats on both score and total time.",
+        "note": "Each point is one model configuration, and the Pareto frontier joins configurations that no other beats on both score and total time.",
         "x": {
           "key": "runHours",
           "label": "Total time",
@@ -80746,6 +80735,10 @@
         }
       },
       "costPer": "run",
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "recall": {
           "name": "Recall",
@@ -80767,9 +80760,9 @@
           "unit": "thousands",
           "better": "lower"
         },
-        "time": {
+        "runHours": {
           "name": "Total time",
-          "unit": "seconds",
+          "unit": "hours",
           "better": "lower"
         }
       }
@@ -92975,9 +92968,10 @@
       "url": "https://www.embodied-first-exam.ai/",
       "feed": "https://www.embodied-first-exam.ai/data/exam.json (leaderboard.shared.views.standard; default view)",
       "terms": "Static JSON the site itself loads; robots.txt allows all paths and the site states no other terms.",
-      "retrieved": "2026-11-23",
-      "rows": 10,
+      "retrieved": "2026-11-24",
+      "rows": 11,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "overall": {
           "name": "Overall solve rate",
@@ -92996,14 +92990,6 @@
         },
         "solved": {
           "name": "Tests solved",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
-        "attempted": {
-          "name": "Tests attempted",
           "unit": "count"
         },
         "minutes": {
@@ -115196,9 +115182,10 @@
       "url": "https://www.frontierml.org/",
       "feed": "https://www.frontierml.org/",
       "terms": "Public scores published by Induction Labs on FrontierML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "walletSpend": {
           "name": "Compute spend",
@@ -115217,14 +115204,6 @@
         },
         "steps": {
           "name": "Training steps",
-          "unit": "count"
-        },
-        "graded": {
-          "name": "Tasks graded",
-          "unit": "count"
-        },
-        "total": {
-          "name": "Total tasks",
           "unit": "count"
         },
         "zeros": {
@@ -115425,7 +115404,7 @@
       "url": "https://www.frontierbioml.com/",
       "feed": "https://www.frontierbioml.com/data/data.js (window.FBML_DATA, every run)",
       "terms": "The site states no terms of use and has no robots.txt. It names data/data.js as the source of its raw scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
       "chart": {
@@ -115443,6 +115422,7 @@
         },
         "note": "The board plots each agent’s mean score against its median minutes per run."
       },
+      "harnesses": "system",
       "stats": {
         "failed": {
           "name": "Failed runs",
@@ -115451,6 +115431,11 @@
         "refused": {
           "name": "Refused runs",
           "unit": "count"
+        },
+        "minutes": {
+          "name": "Median agent minutes per run",
+          "unit": "minutes",
+          "better": "lower"
         },
         "medianCost": {
           "name": "Median run cost",
@@ -116290,9 +116275,10 @@
       "url": "https://www.frontierswe.com/v1",
       "feed": "https://www.frontierswe.com/v1",
       "terms": "FrontierSWE allows the exact public /v1 page under robots.txt, with results credited to the publisher under its site terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "avgRank": {
           "name": "Average rank",
@@ -164306,65 +164292,65 @@
       "url": "https://benchmarks.bio/results/v1/",
       "feed": "https://benchmarks.bio/results/v1/latest.json (capabilitiesLeaderboard)",
       "terms": "JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "parts": {
         "spatialbench": {
           "name": "SpatialBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "spatialbench-long": {
           "name": "SpatialBench-Long",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "scbench": {
           "name": "scBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "scbench-long": {
           "name": "scBench-Long",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "epibench": {
           "name": "EpiBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "variantbench": {
           "name": "VariantBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "metagenomics": {
           "name": "MetagenomicsBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "txbench-ab": {
           "name": "TxBench-Antibody-Discovery",
-          "group": "therapeutics"
+          "group": "Therapeutics"
         },
         "txbench-pp": {
           "name": "TxBench-Preclinical-Pharmacology",
-          "group": "therapeutics"
+          "group": "Therapeutics"
         },
         "txbench-od": {
           "name": "TxBench-Oligo-Discovery",
-          "group": "therapeutics"
-        },
-        "biosecbench-surveillance": {
-          "name": "BioSecBench-Surveillance",
-          "group": "biosecurity"
-        },
-        "functionbench": {
-          "name": "BioSecBench-Function",
-          "group": "biosecurity"
-        },
-        "oncologybench": {
-          "name": "OncologyBench",
-          "group": "applications"
+          "group": "Therapeutics"
         },
         "txbench-abdev": {
           "name": "TxBench-Antibody-Development",
           "group": "Therapeutics"
+        },
+        "biosecbench-surveillance": {
+          "name": "BioSecBench-Surveillance",
+          "group": "Biosecurity"
+        },
+        "functionbench": {
+          "name": "BioSecBench-Function",
+          "group": "Biosecurity"
         },
         "biosecbench-respvirus-surveillance": {
           "name": "BioSecBench-RespiratoryVirus-Surveillance",
@@ -164374,6 +164360,18 @@
           "name": "BioSecBench-RespiratoryVirus-Countermeasures",
           "group": "Biosecurity"
         },
+        "biosecbench-refusal": {
+          "name": "BioSecBench-Refusal",
+          "group": "Biosecurity"
+        },
+        "biosecbench-structure": {
+          "name": "BioSecBench-Structure",
+          "group": "Biosecurity"
+        },
+        "oncologybench": {
+          "name": "OncologyBench",
+          "group": "Applications"
+        },
         "rarediseasebench": {
           "name": "RareDiseaseBench",
           "group": "Applications"
@@ -164382,26 +164380,18 @@
           "name": "TissueMicroscopyBench",
           "group": "Bioscience"
         },
+        "cellmicroscopybench": {
+          "name": "CellMicroscopyBench",
+          "group": "Bioscience"
+        },
         "neurosciencebench": {
           "name": "NeuroscienceBench",
           "group": "Bioscience"
-        },
-        "biosecbench-refusal": {
-          "name": "BioSecBench-Refusal",
-          "group": "Biosecurity"
-        },
-        "biosecbench-structure": {
-          "name": "BioSecBench-Structure",
-          "group": "Biosecurity"
         }
       },
       "stats": {
         "benchmarksCovered": {
           "name": "Benchmarks covered",
-          "unit": "count"
-        },
-        "benchmarksPossible": {
-          "name": "Benchmarks possible",
           "unit": "count"
         }
       }
@@ -263835,7 +263825,7 @@
       "url": "https://review-bench.ai/",
       "feed": "https://review-bench.ai/api/leaderboard/metrics?severities=High&preference=balanced&rankingMetric=grounded (grounded F1 from precision and recall)",
       "terms": "JSON endpoint behind the ReviewBench page; robots.txt allows all, and the site terms put its content under CC BY-NC 4.0 and allow automated access that does not degrade the service.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Copilot code review",
@@ -263854,7 +263844,7 @@
       ],
       "chart": {
         "title": "Grounded F1 / duration",
-        "note": "Each point is one reviewer configuration; highlighted points are not outperformed on both axes by another.",
+        "note": "Each point is one reviewer configuration, and highlighted points are not outperformed on both axes by another.",
         "x": {
           "key": "duration",
           "label": "Duration",
@@ -263868,6 +263858,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "stats": {
         "precision": {
           "name": "Grounded precision",
@@ -263878,6 +263869,11 @@
           "name": "Grounded recall",
           "unit": "%",
           "better": "higher"
+        },
+        "duration": {
+          "name": "Mean review duration",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -269189,7 +269185,7 @@
       "url": "https://rsi-exam.ai/",
       "feed": "https://rsi-exam.ai/ (inline SVG leaderboard, all 88 tasks; effdata JSON for cost)",
       "terms": "Static page; rsi-exam.ai robots.txt sets no rules or content signals, and the page states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "Seed Evolving-0909"
@@ -269207,6 +269203,14 @@
           "key": "score",
           "label": "Mean held-out normalized score",
           "better": "higher"
+        }
+      },
+      "harnesses": "system",
+      "stats": {
+        "minutes": {
+          "name": "Average run time per task",
+          "unit": "minutes",
+          "better": "lower"
         }
       }
     },
@@ -283297,6 +283301,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "parts": {
         "Earth-Bench V2": {
           "name": "Earth-Bench V2"
@@ -294358,18 +294366,15 @@
       "url": "https://swe-bench-live.github.io/",
       "feed": "https://swe-bench-live.github.io/reports-0605.jsonl (set \"lite\")",
       "terms": "Static file on GitHub Pages that the page loads; robots.txt allows it and the SWE-bench-Live repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "Seed-OSS-36B"
       ],
+      "harnesses": "system",
       "stats": {
         "resolved": {
           "name": "Resolved tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -294378,16 +294383,13 @@
       "url": "https://swe-bench-live.github.io/",
       "feed": "https://swe-bench-live.github.io/reports-0605.jsonl (set verified)",
       "terms": "Static file on GitHub Pages that the page loads; robots.txt allows it and the SWE-bench-Live repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "resolved": {
           "name": "Resolved tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -295794,9 +295796,10 @@
       "url": "https://lab.einsia.ai/swe-refactor-bench/leaderboard/",
       "feed": "https://lab.einsia.ai/swe-refactor-bench/leaderboard/ (ranking tables, Score)",
       "terms": "Static public page; robots.txt allows all paths and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "accepted": {
           "name": "Accepted runs",
@@ -295808,10 +295811,6 @@
         },
         "broken": {
           "name": "Broken runs",
-          "unit": "count"
-        },
-        "runs": {
-          "name": "Runs",
           "unit": "count"
         }
       }
@@ -303751,7 +303750,7 @@
       "url": "https://tracelite.ai/leaderboard.html",
       "feed": "https://tracelite.ai/data/leaderboard.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [],
       "chart": {
@@ -303770,6 +303769,7 @@
         },
         "note": "Costs exclude judge calls and discarded runs."
       },
+      "harnesses": "system",
       "parts": {
         "agentScore": {
           "name": "Agent score",
@@ -314211,9 +314211,10 @@
       "url": "https://ape.socialcatalystlab.org/verify",
       "feed": "https://ape.socialcatalystlab.org/verify (Next.js flight data, figure 4 points: single-error detection recall)",
       "terms": "Public report page; ape.socialcatalystlab.org robots.txt allows all paths and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "verigap": {
       "url": "https://www.kaggle.com/benchmarks/archie40004/verigap",

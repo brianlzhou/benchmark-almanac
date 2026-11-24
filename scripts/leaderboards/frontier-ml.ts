@@ -11,8 +11,8 @@ interface Entry {
   compute: number; api: number; hours: number; steps: number; outputTokens: number;
 }
 const board: Leaderboard = {
-  benchmark: 'frontier-ml', url, feed: url, terms: 'Public scores published by Induction Labs on FrontierML.',
-  stats: { walletSpend: { name: 'Compute spend', unit: 'usd', better: 'lower' }, modelCost: { name: 'API cost', unit: 'usd', better: 'lower' }, seconds: { name: 'Training time', unit: 'seconds', better: 'lower' }, steps: { name: 'Training steps', unit: 'count' }, graded: { name: 'Tasks graded', unit: 'count' }, total: { name: 'Total tasks', unit: 'count' }, zeros: { name: 'Zero scores', unit: 'count' } },
+  benchmark: 'frontier-ml', harnesses: 'system', url, feed: url, terms: 'Public scores published by Induction Labs on FrontierML.',
+  stats: { walletSpend: { name: 'Compute spend', unit: 'usd', better: 'lower' }, modelCost: { name: 'API cost', unit: 'usd', better: 'lower' }, seconds: { name: 'Training time', unit: 'seconds', better: 'lower' }, steps: { name: 'Training steps', unit: 'count' }, zeros: { name: 'Zero scores', unit: 'count' } },
   async fetch() {
     const entries = jsonAfter<Entry[]>(nextFlight(await fetchText(url)), '"entries":');
     if (entries.length < 57) throw new Error('Missing FrontierML wallet results');
@@ -21,8 +21,8 @@ const board: Leaderboard = {
       const m = ref ? entries[Number(ref[1])]?.model : e.model;
       if (!m || typeof m === 'string' || !m.name || ![e.score, e.api, e.compute, e.budget, e.outputTokens].every(Number.isFinite)) throw new Error('Invalid FrontierML entry');
       return { model: m.version ? `${m.name} (${m.version})` : m.name, harness: m.harness,
-        setting: `$${e.budget} wallet · ${m.effort}`, score: e.score * 100, cost: e.api + e.compute, tokens: e.outputTokens,
-        metrics: { walletSpend: e.compute, modelCost: e.api, seconds: e.hours * 3600, steps: e.steps, graded: e.graded, total: e.total, zeros: e.zeros } };
+        setting: `$${e.budget} wallet, ${m.effort}`, score: e.score * 100, cost: e.api + e.compute, tokens: e.outputTokens,
+        metrics: { walletSpend: e.compute, modelCost: e.api, seconds: e.hours * 3600, steps: e.steps, zeros: e.zeros } };
     });
   },
 };

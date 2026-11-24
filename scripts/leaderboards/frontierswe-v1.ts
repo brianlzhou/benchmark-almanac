@@ -8,7 +8,7 @@ import { nextFlight, jsonAfter } from '../lib/html.ts';
 const PAGE = 'https://www.frontierswe.com/v1';
 interface Entry { model: string; harness: string; overall: number; dominance: number; implementation: number; performance: number; research: number }
 const board: Leaderboard = {
-  benchmark: 'frontierswe-v1', url: PAGE, feed: PAGE,
+  benchmark: 'frontierswe-v1', harnesses: 'system', url: PAGE, feed: PAGE,
   terms: 'FrontierSWE allows the exact public /v1 page under robots.txt, with results credited to the publisher under its site terms.',
   stats: { avgRank: { name: 'Average rank', unit: 'rating', better: 'lower' }, implementationRank: { name: 'Implementation rank', unit: 'rating', better: 'lower' }, performanceRank: { name: 'Performance rank', unit: 'rating', better: 'lower' }, researchRank: { name: 'Research rank', unit: 'rating', better: 'lower' } },
   async fetch() {
