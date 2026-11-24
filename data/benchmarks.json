@@ -202803,5 +202803,358 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "copy-bench",
+    "name": "Copy Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Coding agents rebuild 50 animated web components (WebGL, shaders, 3D, and interactive animations) from screen recordings in a one-shot pass and a browser self-verified pass, scored from 0 to 100 by a two-judge panel.",
+    "org": "21st Labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://21st.dev/benchmarks/copy",
+      "leaderboard": "https://21st.dev/benchmarks/copy",
+      "repo": "https://github.com/21st-dev/copy-bench"
+    },
+    "access": "public",
+    "note": "Scores 16 frontier models in their native coding agents across five component categories, reporting both one-shot and browser self-verified scores alongside cost and time per copy.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://21st.dev/benchmarks/copy",
+      "https://github.com/21st-dev/copy-bench",
+      "https://hub.harborframework.com/datasets/21st/copy-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sciresearch-eval",
+    "name": "SciResearch-Eval",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous agents measure a material’s thermal properties by designing heating experiments and fitting a supplied simulator that may be under-resolved or missing real physics, reporting 95% confidence intervals scored against exact ground truth.",
+    "org": "Lawrence Livermore National Laboratory",
+    "released": "2026-11",
+    "links": {
+      "site": "https://btwestyo.github.io/sciresearch-eval/",
+      "leaderboard": "https://btwestyo.github.io/sciresearch-eval/",
+      "paper": "https://arxiv.org/abs/2611.21541",
+      "repo": "https://github.com/Btwestyo/sciresearch-eval"
+    },
+    "access": "public",
+    "note": "Headline leaderboard scores 9 models across 21 reasoning settings on 38 held-out physics-trap tasks by geometric-mean interval score (lower is better), with 95% interval coverage, output tokens, and API cost per episode.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://btwestyo.github.io/sciresearch-eval/",
+      "https://arxiv.org/abs/2611.21541",
+      "https://github.com/Btwestyo/sciresearch-eval",
+      "https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robotrack-bench",
+    "name": "RoboTrack-Bench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Point trackers estimate 2D trajectories and frame-by-frame occlusion visibility for 2,522 hand-annotated point tracks across 307 real-world robotic and human manipulation videos, scored by Average Jaccard.",
+    "org": "Allen Institute for AI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robotrack.allen.ai",
+      "paper": "https://allenai.org/papers/robotrack",
+      "repo": "https://github.com/allenai/robotrack",
+      "leaderboard": "https://github.com/allenai/robotrack"
+    },
+    "access": "public",
+    "note": "Evaluates 10 point-tracking checkpoints across six model families under one uniform protocol, with per-source Average Jaccard breakdowns across DROID Franka, MolmoAct2, EgoVerse, and Ego-Exo4D clips.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://allenai.org/blog/robotrack",
+      "https://github.com/allenai/robotrack",
+      "https://huggingface.co/datasets/allenai/RoboTrack-Bench",
+      "https://huggingface.co/allenai/RoboTracker-Warp"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "nopebench",
+    "name": "NoPeBench",
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Interactive video world models generate camera trajectories toward walls and obstacles across three tasks evaluated on Unreal Engine geometry and open-domain scenes, measuring physical obstacle penetration and safe intent compliance.",
+    "org": "The Hong Kong Polytechnic University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://nopeworld.github.io/",
+      "paper": "https://arxiv.org/abs/2611.27963",
+      "repo": "https://github.com/yuhangdai427/NoPeWorld",
+      "leaderboard": "https://github.com/yuhangdai427/NoPeWorld"
+    },
+    "access": "public",
+    "note": "Benchmarks six open-source video world models in raw, collision-aware, and prediction-guided modes on obstacle violation rate and overall safe-intent compliance.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/papers/2611.27963",
+      "https://arxiv.org/abs/2611.27963",
+      "https://nopeworld.github.io/",
+      "https://github.com/yuhangdai427/NoPeWorld"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dii-v1-muscle",
+    "name": "Data Intelligence Index (DII) v1.0 Muscle",
+    "aliases": [
+      "DII v1.0 Muscle",
+      "Data Intelligence Index v1.0"
+    ],
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous data agents solve 500 sandboxed Harbor tasks across nine data benchmarks covering SQL querying, BI analysis, app debugging, data science, query optimization, and computer use.",
+    "org": "HKU BIRD Team",
+    "released": "2026-11",
+    "links": {
+      "site": "https://livesqlbench.ai/data-intelligence-index/",
+      "leaderboard": "https://livesqlbench.ai/data-intelligence-index/dashboard",
+      "repo": "https://github.com/bird-bench/Data-Intelligence-Index"
+    },
+    "access": "public",
+    "note": "Composite index over 200 public and 300 hidden tasks across nine data benchmarks, reporting category splits, sub-benchmark scores, and average API cost per task.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://livesqlbench.ai/data-intelligence-index/dashboard",
+      "https://huggingface.co/datasets/birdsql/dii-v1-muscle/raw/main/results/leaderboard.jsonl",
+      "https://github.com/bird-bench/Data-Intelligence-Index"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "bioxarena-pro",
+    "name": "BioXArena-Pro",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous biomedical machine learning agents build and submit models for 64 end-to-end research tasks across eight domains including genomics, single-cell, protein structure, drug discovery, and medical imaging under a two-hour budget.",
+    "org": "Mohamed Bin Zayed University of Artificial Intelligence",
+    "released": "2026-11",
+    "links": {
+      "site": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "leaderboard": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "paper": "https://arxiv.org/abs/2611.13994",
+      "repo": "https://github.com/mbzuai-ai4bio/BioXArena-Pro"
+    },
+    "access": "public",
+    "note": "Evaluates 22 agent and frontier-backbone configurations across seven coding and scientific scaffolds, reporting mean normalized task score (x100, failures as 0), completed tasks, and eight domain scores.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "https://arxiv.org/abs/2611.13994",
+      "https://github.com/mbzuai-ai4bio/BioXArena-Pro",
+      "https://huggingface.co/datasets/mbzuai-ai4bio/BioXArena-Pro-Public"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "waterfallbench",
+    "name": "WaterfallBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models read asset-backed securitization legal documents and compute exact monthly cash-flow waterfall distributions to the cent, deterministically verified against SEC trustee filings.",
+    "org": "Ritik",
+    "released": "2026-11",
+    "links": {
+      "site": "https://ritik-12.github.io/WaterfallBench/",
+      "leaderboard": "https://ritik-12.github.io/WaterfallBench/",
+      "repo": "https://github.com/RITIK-12/WaterfallBench"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 benchmark of 20 auto-loan and equipment-lease securitization tasks. Reports fully resolved task rate with standard error, field and line-item accuracy, latency, token counts, and API cost per task.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ritik-12.github.io/WaterfallBench/",
+      "https://ritik-12.github.io/WaterfallBench/data.json",
+      "https://github.com/RITIK-12/WaterfallBench",
+      "https://huggingface.co/datasets/ritik12/WaterfallBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "noisebench",
+    "name": "NoiseBench",
+    "category": "forecasting",
+    "subcategory": "forecasting-events",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models repeatedly forecast probabilities for 100 live Polymarket events under Yes and No wordings and pairwise comparisons to measure internal judgment inconsistency (noise).",
+    "org": "Luis Fominaya",
+    "released": "2026-07",
+    "links": {
+      "site": "https://noisebench.com/",
+      "leaderboard": "https://noisebench.com/",
+      "repo": "https://github.com/fpluis"
+    },
+    "access": "public",
+    "note": "MIT-licensed benchmark measuring five consistency components across 20 frontier models, alongside cost per answer and output token usage. Lower noise is better.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://noisebench.com/",
+      "https://noisebench.com/data/metrics.json",
+      "https://huggingface.co/datasets/fpluis/noisebench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "jup-eval",
+    "name": "JUP-Eval",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Evaluates whether AI assistants maintain sound judgment across 156 multi-turn scenarios when users dispute correct answers, ask beyond the evidence, or withdraw permission to act.",
+    "org": "Ortelan Research",
+    "released": "2026-11",
+    "links": {
+      "site": "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "leaderboard": "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "paper": "https://ortelan.com/journal/jup-eval/",
+      "repo": "https://github.com/ortelan-lab/jup-eval-benchmark"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 benchmark scoring 10 systems over three trials per case across six judgment dimensions (honesty, agency, pluralism, care, integrity, and action) with 95% bootstrap confidence intervals.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "https://ortelan-lab.github.io/jup-eval-benchmark/scores.csv",
+      "https://github.com/ortelan-lab/jup-eval-benchmark",
+      "https://huggingface.co/datasets/Ortelan-PrausAI/jup-eval"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sk-llm-eval",
+    "name": "sk-llm-eval",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates Slovak language quality across 207 original tasks written in Slovak covering grammar, declension, formal address, formatting, local facts, long-form coherence, and English-to-Slovak translation.",
+    "org": "Lubomir Tchurik",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "leaderboard": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "paper": "https://doi.org/10.5281/zenodo.24091954",
+      "repo": "https://github.com/ltchurik/sk-llm-eval"
+    },
+    "access": "public",
+    "note": "MIT-licensed benchmark with mostly deterministic checks and 23 model-judged tasks, scoring 26 frontier and open-weight models across six Slovak language categories.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "https://github.com/ltchurik/sk-llm-eval",
+      "https://doi.org/10.5281/zenodo.24091954"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rtr-bench",
+    "name": "RTR-bench",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models predict how a real human audience distributes its interpretations of ambiguous prompts on a four-quadrant grid, both zero-shot (Predict) and after choosing historical crowd examples (Learn).",
+    "org": "1999labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://github.com/1999labs/RTR-bench",
+      "repo": "https://github.com/1999labs/RTR-bench",
+      "leaderboard": "https://github.com/1999labs/RTR-bench/blob/main/results/final-8000/README.md"
+    },
+    "access": "public",
+    "note": "CC0-1.0 dataset built from 39,828 Mixed Messages crowd responses across 165 closed windows, reporting verified Predict and Learn distribution agreement scores (out of 100), 95% exploratory intervals, and track costs for 11 models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/1999labs/RTR-bench/blob/main/results/final-8000/README.md",
+      "https://huggingface.co/datasets/noahmclaughlin/RTR-Bench",
+      "https://mixedmessages.fyi"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dailysafe",
+    "name": "DailySafe",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Tests whether multimodal assistants connect earlier visual and textual evidence across three or four turns to avoid unsafe everyday advice while remaining helpful on legitimate requests.",
+    "org": "Wuhan University, Ant Group, Tsinghua University, and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://dailysafe-bench.github.io/",
+      "leaderboard": "https://dailysafe-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.26298",
+      "repo": "https://github.com/XuankunRong/DailySafe"
+    },
+    "access": "public",
+    "note": "Scores 16 proprietary and open-weight multimodal models across 195 multi-turn everyday cases over three runs on Safety Rate (headline) and Helpfulness Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://dailysafe-bench.github.io/",
+      "https://arxiv.org/abs/2611.26298",
+      "https://github.com/XuankunRong/DailySafe"
+    ],
+    "added": "2026-11-24"
   }
 ]

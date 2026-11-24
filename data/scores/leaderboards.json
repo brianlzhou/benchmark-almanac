@@ -35202,6 +35202,63 @@
         "ImageBind"
       ]
     },
+    "bioxarena-pro": {
+      "url": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "feed": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "terms": "Public leaderboard published on GitHub Pages by MBZUAI AI4Bio.",
+      "retrieved": "2026-11-24",
+      "rows": 22,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "chemicalBiology": {
+          "name": "Chemical biology",
+          "group": "Domain"
+        },
+        "imaging": {
+          "name": "Medical imaging",
+          "group": "Domain"
+        },
+        "networkBiology": {
+          "name": "Network biology",
+          "group": "Domain"
+        },
+        "perturbation": {
+          "name": "Perturbation",
+          "group": "Domain"
+        },
+        "phenotypeDisease": {
+          "name": "Phenotype and disease",
+          "group": "Domain"
+        },
+        "sequenceGenomics": {
+          "name": "Sequence genomics",
+          "group": "Domain"
+        },
+        "singleCellSpatial": {
+          "name": "Single-cell and spatial",
+          "group": "Domain"
+        },
+        "structure": {
+          "name": "Protein structure",
+          "group": "Domain"
+        }
+      },
+      "stats": {
+        "succeeded": {
+          "name": "Succeeded tasks",
+          "unit": "count",
+          "better": "higher",
+          "note": "Tasks completed with a valid submission out of 64."
+        },
+        "meanSucc": {
+          "name": "Success-only average",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean normalized score (x100) over completed tasks only."
+        }
+      }
+    },
     "bird-critic": {
       "url": "https://bird-critic.github.io/",
       "feed": "https://bird-critic.github.io/ (static HTML table, SR)",
@@ -65956,6 +66013,110 @@
         "Qwen2.5-Coder-32B-Instruct (07/18)"
       ]
     },
+    "copy-bench": {
+      "url": "https://21st.dev/benchmarks/copy",
+      "feed": "https://21st.dev/benchmarks/copy",
+      "terms": "Public leaderboard at 21st.dev/benchmarks/copy (MIT-licensed benchmark repo, robots.txt allows /benchmarks/copy).",
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [],
+      "chart": {
+        "title": "Score vs cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per copy",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Self-verified score",
+          "better": "higher"
+        },
+        "note": "Two-judge mean self-verified score out of 100 against average USD cost per copy across 50 tasks."
+      },
+      "harnesses": "system",
+      "parts": {
+        "pages": {
+          "name": "Pages",
+          "group": "Category"
+        },
+        "anim2d": {
+          "name": "2D animation",
+          "group": "Category"
+        },
+        "games": {
+          "name": "Games",
+          "group": "Category"
+        },
+        "shaders": {
+          "name": "Shaders",
+          "group": "Category"
+        },
+        "scene3d": {
+          "name": "3D",
+          "group": "Category"
+        }
+      },
+      "stats": {
+        "oneShot": {
+          "name": "One-shot score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "gptJudge": {
+          "name": "GPT judge (self-verified)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "claudeJudge": {
+          "name": "Claude judge (self-verified)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "minutes": {
+          "name": "Time per copy",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "costFirst": {
+          "name": "One-shot cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "costFix": {
+          "name": "Self-verify cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "minutesFirst": {
+          "name": "One-shot time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "minutesFix": {
+          "name": "Self-verify time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "timeouts": {
+          "name": "Timeouts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "noFile": {
+          "name": "Missing output files",
+          "unit": "count",
+          "better": "lower"
+        },
+        "copied": {
+          "name": "Copied reference files",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
+    },
     "coqa": {
       "url": "https://stanfordnlp.github.io/coqa/",
       "feed": "https://stanfordnlp.github.io/coqa/",
@@ -76595,6 +76756,23 @@
         }
       }
     },
+    "dailysafe": {
+      "url": "https://dailysafe-bench.github.io/",
+      "feed": "https://dailysafe-bench.github.io/",
+      "terms": "Public project leaderboard table on GitHub Pages (Table 1 of arXiv:2611.26298).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 16,
+      "unmatched": [],
+      "stats": {
+        "helpfulnessRate": {
+          "name": "Helpfulness rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Mean helpfulness rate across three runs on 195 multi-turn everyday cases."
+        }
+      }
+    },
     "dala": {
       "url": "https://euroeval.com/leaderboards/danish",
       "feed": "https://euroeval.com/leaderboards/danish",
@@ -85244,6 +85422,105 @@
           "unit": "%",
           "better": "lower",
           "note": "Jaccard error rate on the full evaluation set."
+        }
+      }
+    },
+    "dii-v1-muscle": {
+      "url": "https://livesqlbench.ai/data-intelligence-index/dashboard",
+      "feed": "https://huggingface.co/datasets/birdsql/dii-v1-muscle/raw/main/results/leaderboard.jsonl",
+      "terms": "Public Hugging Face dataset and live dashboard published by the HKU BIRD team.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "chart": {
+        "title": "Cost vs Performance",
+        "x": {
+          "key": "cost",
+          "label": "Average cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Data Intelligence Index",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Overall Data Intelligence Index across all 500 tasks against average API cost per task."
+      },
+      "parts": {
+        "public200": {
+          "name": "Public 200",
+          "group": "Split"
+        },
+        "hidden300": {
+          "name": "Hidden 300",
+          "group": "Split"
+        },
+        "dbQa": {
+          "name": "Database QA",
+          "group": "Category"
+        },
+        "dbAnalysisOps": {
+          "name": "Database analysis and ops",
+          "group": "Category"
+        },
+        "appDebug": {
+          "name": "App debugging",
+          "group": "Category"
+        },
+        "humanCentric": {
+          "name": "Human-centric interaction",
+          "group": "Category"
+        },
+        "dataScience": {
+          "name": "Data science",
+          "group": "Category"
+        },
+        "queryOpt": {
+          "name": "Query optimization",
+          "group": "Category"
+        },
+        "computerUse": {
+          "name": "Computer use",
+          "group": "Category"
+        },
+        "miniDev": {
+          "name": "BIRD Mini-Dev",
+          "group": "Benchmark"
+        },
+        "liveSqlBench": {
+          "name": "LiveSQLBench",
+          "group": "Benchmark"
+        },
+        "birdCritic": {
+          "name": "BIRD-Critic",
+          "group": "Benchmark"
+        },
+        "birdCritic15": {
+          "name": "BIRD-Critic 1.5",
+          "group": "Benchmark"
+        },
+        "birdInteract": {
+          "name": "BIRD-Interact",
+          "group": "Benchmark"
+        },
+        "dsCodeTrans": {
+          "name": "DS-CodeTrans",
+          "group": "Benchmark"
+        },
+        "dareBench": {
+          "name": "DARE-Bench",
+          "group": "Benchmark"
+        },
+        "effiSql": {
+          "name": "EffiSQL",
+          "group": "Benchmark"
+        },
+        "workspaceBench": {
+          "name": "WorkspaceBench",
+          "group": "Benchmark"
         }
       }
     },
@@ -156146,6 +156423,42 @@
         }
       }
     },
+    "jup-eval": {
+      "url": "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "feed": "https://ortelan-lab.github.io/jup-eval-benchmark/scores.csv",
+      "terms": "Public CC BY 4.0 leaderboard CSV published on GitHub Pages by Ortelan Research.",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [
+        "Praus"
+      ],
+      "parts": {
+        "honesty": {
+          "name": "Honesty",
+          "group": "Dimension"
+        },
+        "agency": {
+          "name": "Agency",
+          "group": "Dimension"
+        },
+        "pluralism": {
+          "name": "Pluralism",
+          "group": "Dimension"
+        },
+        "care": {
+          "name": "Care",
+          "group": "Dimension"
+        },
+        "integrity": {
+          "name": "Integrity",
+          "group": "Dimension"
+        },
+        "action": {
+          "name": "Action",
+          "group": "Dimension"
+        }
+      }
+    },
     "justiceaxis": {
       "url": "https://arxiv.org/html/2610.00353",
       "feed": "https://arxiv.org/html/2610.00353",
@@ -211711,6 +212024,126 @@
         }
       }
     },
+    "noisebench": {
+      "url": "https://noisebench.com/",
+      "feed": "https://noisebench.com/data/metrics.json",
+      "terms": "Public MIT-licensed JSON endpoints published at noisebench.com/data/.",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [
+        "nvidia/nemotron-3-ultra-550b-a55b",
+        "openai/gpt-5.6-terra-pro"
+      ],
+      "chart": {
+        "title": "Noise vs cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per answer",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Judgment noise",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Overall judgment noise across 100 Polymarket questions against API cost per answer."
+      },
+      "parts": {
+        "averageError": {
+          "name": "Odds spread",
+          "group": "Component",
+          "better": "lower"
+        },
+        "negationError": {
+          "name": "Negated spread",
+          "group": "Component",
+          "better": "lower"
+        },
+        "pairwiseDisagreement": {
+          "name": "Pairwise disagreement",
+          "group": "Component",
+          "better": "lower"
+        },
+        "negationDisagreement": {
+          "name": "Negation disagreement",
+          "group": "Component",
+          "better": "lower"
+        },
+        "individualPairDisagreement": {
+          "name": "Individual-pair disagreement",
+          "group": "Component",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "drift": {
+          "name": "Negation drift",
+          "unit": "%",
+          "note": "Signed average difference between Yes and 1 minus No probabilities."
+        },
+        "yesMean": {
+          "name": "Mean Yes forecast",
+          "unit": "%"
+        },
+        "firstOptionRate": {
+          "name": "First-option pick rate",
+          "unit": "%",
+          "note": "Share of pairwise comparisons picking the first-listed market."
+        },
+        "rankCouple": {
+          "name": "Rank-couple violation",
+          "unit": "%",
+          "better": "lower"
+        },
+        "sumCouple": {
+          "name": "Sum-couple violation",
+          "unit": "%",
+          "better": "lower"
+        },
+        "reasoningTokens": {
+          "name": "Reasoning tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "costPerForecast": {
+          "name": "Cost per forecast",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "costPerJudgment": {
+          "name": "Cost per pairwise judgment",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "consistencyPerDollar": {
+          "name": "Consistency per dollar",
+          "unit": "score",
+          "better": "higher"
+        },
+        "markets": {
+          "name": "Markets completed",
+          "unit": "count",
+          "better": "higher"
+        },
+        "forecasts": {
+          "name": "Forecasts completed",
+          "unit": "count",
+          "better": "higher"
+        },
+        "judgments": {
+          "name": "Pairwise judgments completed",
+          "unit": "count",
+          "better": "higher"
+        },
+        "ties": {
+          "name": "Pairwise ties",
+          "unit": "count"
+        }
+      }
+    },
     "noisybench": {
       "url": "https://arxiv.org/html/2601.07226",
       "feed": "https://arxiv.org/html/2601.07226",
@@ -211908,6 +212341,30 @@
           "name": "Average excluding English",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "nopebench": {
+      "url": "https://github.com/yuhangdai427/NoPeWorld",
+      "feed": "https://raw.githubusercontent.com/yuhangdai427/NoPeWorld/main/README.md",
+      "terms": "Public Apache-2.0 repository and paper Table 4 published by the NoPeWorld authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Echo-WM",
+        "Evoke-Turbo",
+        "HY-WorldPlay",
+        "Hy-Nomas",
+        "LingBot-World 2.0",
+        "WorldPlay2"
+      ],
+      "stats": {
+        "task2Violations": {
+          "name": "Task 2 obstacle violations",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of obstacle-facing camera trajectories that penetrate walls or obstacles."
         }
       }
     },
@@ -267938,6 +268395,62 @@
         }
       }
     },
+    "robotrack-bench": {
+      "url": "https://github.com/allenai/robotrack",
+      "feed": "https://raw.githubusercontent.com/allenai/robotrack/main/README.md",
+      "terms": "Public Apache-2.0 repository and evaluation tables published by the Allen Institute for AI.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AllTracker",
+        "BootsTAPNext",
+        "CoTracker3 (offline)",
+        "CoTracker3 (online)",
+        "CoWTracker",
+        "RoboTracker",
+        "RoboTracker-Warp",
+        "TAPNext"
+      ],
+      "parts": {
+        "droidFranka": {
+          "name": "DROID Franka",
+          "group": "Source"
+        },
+        "molmoact2Yam": {
+          "name": "MolmoAct2 YAM",
+          "group": "Source"
+        },
+        "molmoact2So100": {
+          "name": "MolmoAct2 SO-100",
+          "group": "Source"
+        },
+        "egoverseEva": {
+          "name": "EgoVerse EVA",
+          "group": "Source"
+        },
+        "egoverseHuman": {
+          "name": "EgoVerse human",
+          "group": "Source"
+        },
+        "egoExo4dHuman": {
+          "name": "Ego-Exo4D human",
+          "group": "Source"
+        }
+      },
+      "stats": {
+        "deltaAvg": {
+          "name": "Position accuracy (<δavg)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "oa": {
+          "name": "Occlusion accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "robots-txt-benchmark": {
       "url": "https://www.kaggle.com/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo/leaderboard",
@@ -270696,6 +271209,94 @@
         "gemma-2b-it",
         "gemma-7b-it"
       ]
+    },
+    "rtr-bench": {
+      "url": "https://github.com/1999labs/RTR-bench/blob/main/results/final-8000/README.md",
+      "feed": "https://raw.githubusercontent.com/1999labs/RTR-bench/main/results/final-8000/verified-results.json",
+      "terms": "Public CC0-1.0 dataset and independently verified JSON results in the 1999labs/RTR-bench GitHub repository.",
+      "retrieved": "2026-11-24",
+      "rows": 11,
+      "unmatched": [],
+      "chart": {
+        "title": "Predict score vs cost",
+        "x": {
+          "key": "cost",
+          "label": "Predict track cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Predict score",
+          "better": "higher"
+        },
+        "note": "Zero-shot Predict distribution agreement score out of 100 against known USD subtotal across 45 evaluation targets."
+      },
+      "costPer": "run",
+      "parts": {
+        "learn": {
+          "name": "Learn",
+          "group": "Strategy",
+          "note": "Agent chooses up to 3 historical crowd examples across 8 actions."
+        },
+        "randomExamples": {
+          "name": "Random examples",
+          "group": "Strategy",
+          "note": "Control condition with 3 random historical crowd examples."
+        },
+        "similarExamples": {
+          "name": "Similar examples",
+          "group": "Strategy",
+          "note": "Control condition with 3 text-similar historical crowd examples."
+        }
+      },
+      "stats": {
+        "learnGain": {
+          "name": "Learn gain",
+          "unit": "score",
+          "better": "higher",
+          "note": "Difference between Learn and Predict scores."
+        },
+        "learnCost": {
+          "name": "Learn track cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "totalCost": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Reported USD spend across all four conditions."
+        },
+        "predictValid": {
+          "name": "Valid Predict answers",
+          "unit": "count",
+          "better": "higher",
+          "note": "Valid outputs out of 45 evaluation targets."
+        },
+        "learnValid": {
+          "name": "Valid Learn answers",
+          "unit": "count",
+          "better": "higher",
+          "note": "Valid outputs out of 45 evaluation targets."
+        },
+        "learnApiCalls": {
+          "name": "Learn API calls",
+          "unit": "count",
+          "better": "lower"
+        },
+        "elapsedMinutes": {
+          "name": "Elapsed time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "maxCompletionTokens": {
+          "name": "Max completion tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "rtvlm": {
       "url": "https://arxiv.org/abs/2401.12915",
@@ -274772,6 +275373,38 @@
         "GA Reader",
         "TableILP"
       ]
+    },
+    "sciresearch-eval": {
+      "url": "https://btwestyo.github.io/sciresearch-eval/",
+      "feed": "https://btwestyo.github.io/sciresearch-eval/",
+      "terms": "Public CC-BY-4.0 benchmark and static GitHub Pages leaderboard published by Lawrence Livermore National Laboratory.",
+      "retrieved": "2026-11-24",
+      "rows": 21,
+      "unmatched": [],
+      "chart": {
+        "title": "Coverage vs tokens",
+        "x": {
+          "key": "tokens",
+          "label": "Median output tokens per episode",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "coverage",
+          "label": "95% interval coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Share of true parameter values inside reported 95% confidence intervals against median output tokens per episode across reasoning settings."
+      },
+      "stats": {
+        "coverage": {
+          "name": "95% interval coverage",
+          "unit": "%",
+          "note": "Share of true parameter values inside the model’s reported 95% confidence intervals. Target is 95%, so higher above 95% is not necessarily better."
+        }
+      }
     },
     "scitaste-bench": {
       "url": "https://huggingface.co/datasets/skylenage/SciTaste-benchmark",
@@ -279210,6 +279843,51 @@
           "name": "Upper baseline",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "sk-llm-eval": {
+      "url": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "feed": "https://datasets-server.huggingface.co/rows?dataset=lubomirtchurik/sk-llm-eval&config=leaderboard&split=train&offset=0&length=100",
+      "terms": "Public MIT-licensed Hugging Face dataset (lubomirtchurik/sk-llm-eval) read via Hugging Face datasets-server.",
+      "retrieved": "2026-11-24",
+      "rows": 22,
+      "unmatched": [
+        "Claude Haiku",
+        "Claude Opus",
+        "Claude Sonnet",
+        "ornith-1.5:35b"
+      ],
+      "parts": {
+        "gramatika": {
+          "name": "Grammar",
+          "group": "Category",
+          "note": "Slovak declension, conjugation, and diacritics (69 tasks)."
+        },
+        "realie": {
+          "name": "Slovak facts",
+          "group": "Category",
+          "note": "Slovak history, geography, and institutional facts (47 tasks)."
+        },
+        "format": {
+          "name": "Format",
+          "group": "Category",
+          "note": "Slovak dates, numbers, and currency conventions (38 tasks)."
+        },
+        "register": {
+          "name": "Register",
+          "group": "Category",
+          "note": "Formal and informal address and tone (26 tasks)."
+        },
+        "preklad": {
+          "name": "Translation",
+          "group": "Category",
+          "note": "English to Slovak translation without anglicisms or Czech interference (14 tasks)."
+        },
+        "longText": {
+          "name": "Long text",
+          "group": "Category",
+          "note": "Coherent longer-form Slovak writing (13 tasks)."
         }
       }
     },
@@ -322991,6 +323669,68 @@
         },
         "both": {
           "name": "Both sides"
+        }
+      }
+    },
+    "waterfallbench": {
+      "url": "https://ritik-12.github.io/WaterfallBench/",
+      "feed": "https://ritik-12.github.io/WaterfallBench/data.json",
+      "terms": "Public CC BY 4.0 leaderboard JSON published on GitHub Pages.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [],
+      "chart": {
+        "title": "Fully resolved vs cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Fully resolved",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Share of 20 ABS securitization waterfalls solved to the cent against API cost per task."
+      },
+      "stats": {
+        "nontrivial": {
+          "name": "Field accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "lineItem": {
+          "name": "Line-item accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tolerance": {
+          "name": "Tolerance accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "costTotal": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "seconds": {
+          "name": "Time per task",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },

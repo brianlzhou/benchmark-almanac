@@ -2951,6 +2951,11 @@
       "via": "A biology benchmark search led to the authors’ paper."
     },
     {
+      "id": "bioxarena-pro",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard from MBZUAI scoring 22 agent and frontier-backbone pairs across 64 biomedical machine learning tasks."
+    },
+    {
       "id": "bird-critic",
       "date": "2026-11-01",
       "via": "The BIRD team news page lists BIRD-Critic and SWE-SQL, and the repo has about 1,100 stars."
@@ -5156,6 +5161,11 @@
       "via": "We followed the biodiversity text mining literature cited by the INAS authors to the COPIOUS release and two later evaluations."
     },
     {
+      "id": "copy-bench",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 16 frontier models across 50 moving web-component tasks with cost and time breakdowns."
+    },
+    {
       "id": "coqa",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folder coqa."
@@ -5979,6 +5989,11 @@
       "id": "dailyreport-meituan",
       "date": "2026-11-20",
       "via": "The publisher's research and repository indexes led to this release."
+    },
+    {
+      "id": "dailysafe",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 16 proprietary and open-weight multimodal models on multi-turn everyday safety and helpfulness."
     },
     {
       "id": "dala",
@@ -6914,6 +6929,11 @@
       "id": "dihard-iii",
       "date": "2026-11-19",
       "via": "NVIDIA Nemotron 3 Diarization reports this evaluation in its release results."
+    },
+    {
+      "id": "dii-v1-muscle",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard by the HKU BIRD team scoring 12 frontier models across 500 sandboxed data tasks."
     },
     {
       "id": "diligencebench",
@@ -12451,6 +12471,11 @@
       "via": "The organization's publication index or project repository identifies this evaluation."
     },
     {
+      "id": "jup-eval",
+      "date": "2026-11-24",
+      "via": "Independent CC BY 4.0 leaderboard by Ortelan Research scoring 10 frontier systems across 156 multi-turn judgment scenarios with 95% intervals."
+    },
+    {
       "id": "justiceaxis",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -17286,6 +17311,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "noisebench",
+      "date": "2026-11-24",
+      "via": "Independent MIT-licensed leaderboard scoring 20 frontier models on Polymarket probability consistency across five noise components."
+    },
+    {
       "id": "noisybench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -17309,6 +17339,11 @@
       "id": "noor-mmlu-var",
       "date": "2026-11-19",
       "via": "EleutherAI publishes a task configuration for this evaluation."
+    },
+    {
+      "id": "nopebench",
+      "date": "2026-11-24",
+      "via": "Hugging Face paper with 55 upvotes and public GitHub evaluator scoring six open-source video world models."
     },
     {
       "id": "noreval",
@@ -20776,6 +20811,11 @@
       "via": "Gemini Robotics On-Device 2 model card reports results for this evaluation."
     },
     {
+      "id": "robotrack-bench",
+      "date": "2026-11-24",
+      "via": "Published and reported by Allen Institute for AI on its launch blog and RoboTracker model cards across 10 point-tracking checkpoints."
+    },
+    {
       "id": "robots-evolved-gui-lessons",
       "date": "2026-11-19",
       "via": "The publisher lists this evaluation on Harbor Hub."
@@ -21034,6 +21074,11 @@
       "id": "rtp-lx",
       "date": "2026-11-01",
       "via": "A successor check on RealToxicityPrompts found the Microsoft multilingual version."
+    },
+    {
+      "id": "rtr-bench",
+      "date": "2026-11-24",
+      "via": "Independent CC0-1.0 leaderboard scoring 11 frontier and open models on verified human audience distribution prediction and learning."
     },
     {
       "id": "rtsgamebench",
@@ -21479,6 +21524,11 @@
       "id": "scireasoner-bench",
       "date": "2026-11-01",
       "via": "Intern-S2-397B model card scientific table."
+    },
+    {
+      "id": "sciresearch-eval",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard from Lawrence Livermore National Laboratory scoring 9 models across 21 reasoning settings, also covered in Import AI #482."
     },
     {
       "id": "scitaste-bench",
@@ -22044,6 +22094,11 @@
       "id": "site-bench",
       "date": "2026-11-01",
       "via": "SenseNova-SI model card spatial benchmark table."
+    },
+    {
+      "id": "sk-llm-eval",
+      "date": "2026-11-24",
+      "via": "Independent MIT-licensed Slovak language leaderboard on Hugging Face scoring 26 frontier and open-weight models across 207 tasks."
     },
     {
       "id": "skatebench-2",
@@ -26789,6 +26844,11 @@
       "id": "wassce-benchmark-for-open-language-models",
       "date": "2026-11-19",
       "via": "A GitHub repository search led to the authors’ evaluation harness."
+    },
+    {
+      "id": "waterfallbench",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 7 frontier models on 20 deterministic SEC securitization waterfall tasks with cost and token metrics."
     },
     {
       "id": "waxal-asr-test",
