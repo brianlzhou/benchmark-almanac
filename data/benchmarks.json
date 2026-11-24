@@ -43672,13 +43672,6 @@
     "successor": "cursorbench-3-1",
     "unit": "%",
     "confidence": "likely",
-    "epoch": {
-      "epoch_name": "CursorBench",
-      "random": 0,
-      "ceiling": 100,
-      "runs": "external",
-      "in_eci": false
-    },
     "evidence": [
       "https://cursor.com/cursorbench",
       "https://cursor.com/blog/cursorbench"
@@ -43798,7 +43791,14 @@
     "evidence": [
       "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
     ],
-    "added": "2026-11-18"
+    "added": "2026-11-18",
+    "epoch": {
+      "epoch_name": "CursorBench",
+      "random": 0,
+      "ceiling": 100,
+      "runs": "external",
+      "in_eci": false
+    }
   },
   {
     "id": "cusp-scientific-forecasting",
@@ -68285,15 +68285,7 @@
     "note": "Tasks written by 20+ open-source maintainers, 40+ hours each. Only sample tasks are public.",
     "successor": "frontiercode-1-1",
     "unit": "%",
-    "confidence": "likely",
-    "edi": 163.9,
-    "epoch": {
-      "epoch_name": "FrontierCode",
-      "random": 0,
-      "ceiling": 100,
-      "runs": "external",
-      "in_eci": true
-    }
+    "confidence": "likely"
   },
   {
     "id": "frontiercode-1-1",
@@ -68319,7 +68311,15 @@
     "confidence": "verified",
     "evidence": [
       "https://cognition.com/blog/frontier-code-1.1"
-    ]
+    ],
+    "epoch": {
+      "epoch_name": "FrontierCode",
+      "random": 0,
+      "ceiling": 100,
+      "runs": "external",
+      "in_eci": true
+    },
+    "edi": 163.9
   },
   {
     "id": "frontiercode-2-0",
@@ -142742,14 +142742,6 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 174.6,
-    "epoch": {
-      "epoch_name": "PostTrainBench",
-      "random": 0,
-      "ceiling": 100,
-      "runs": "external",
-      "in_eci": true
-    },
     "evidence": [
       "https://arxiv.org/abs/2603.08640",
       "https://thoughtfullab.com/posttrainbench.html",
@@ -142818,7 +142810,15 @@
       "https://arxiv.org/abs/2603.08640",
       "https://thoughtfullab.com/posttrainbench.html",
       "https://posttrainbench.com/blog/posttrainbench-1-2/"
-    ]
+    ],
+    "epoch": {
+      "epoch_name": "PostTrainBench",
+      "random": 0,
+      "ceiling": 100,
+      "runs": "external",
+      "in_eci": true
+    },
+    "edi": 174.6
   },
   {
     "id": "powerbench",
@@ -164944,6 +164944,37 @@
       "https://www.snowflake.com/en/blog/engineering/enterprise-text-to-sql-arctic-r2/"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "snyderbench",
+    "name": "SnyderBench",
+    "aliases": [
+      "Snyder Bench",
+      "Benchmarking AI’s Research Taste in Empirical Political Economy",
+      "Can AI Out-Research My PhD Advisor?"
+    ],
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models propose causal studies of American politics, each pairing a question with a research design. Graders compare each proposal blind with a condensed paper by the political economist Jim Snyder, judging the design and the question separately.",
+    "org": "Free Systems (Andy Hall and Andy Myers)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in",
+      "leaderboard": "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in"
+    },
+    "access": "private",
+    "note": "19 OpenAI and Anthropic models, from GPT-3.5 to Claude Fable 5.2, each wrote 15 proposals after reading summaries of 22 Snyder papers. The headline is the share of matchups where the model’s design won. Two AI graders, GPT-6 Astra and Claude Fable 5.1, judged every matchup, and six PhD candidates in American politics judged a sample. The human graders agreed on 80% of design matchups but only 57% of question matchups. In the November 23, 2026 results, GPT-6.2 Astra’s designs won 93% of matchups, while only Claude Fable 5.1 clearly beat Snyder on the question. The charts name only some of the 19 models, so the almanac lists only those.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in",
+      "https://x.com/ahall_research/status/2124889867968741878"
+    ],
+    "added": "2026-11-23"
   },
   {
     "id": "so-arena",
@@ -202329,36 +202360,5 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
-  },
-  {
-    "id": "snyderbench",
-    "name": "SnyderBench",
-    "aliases": [
-      "Snyder Bench",
-      "Benchmarking AI’s Research Taste in Empirical Political Economy",
-      "Can AI Out-Research My PhD Advisor?"
-    ],
-    "category": "science-reasoning",
-    "subcategory": "science-research",
-    "level": "expert",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Models propose causal studies of American politics, each pairing a question with a research design. Graders compare each proposal blind with a condensed paper by the political economist Jim Snyder, judging the design and the question separately.",
-    "org": "Free Systems (Andy Hall and Andy Myers)",
-    "released": "2026-11",
-    "links": {
-      "site": "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in",
-      "leaderboard": "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in"
-    },
-    "access": "private",
-    "note": "19 OpenAI and Anthropic models, from GPT-3.5 to Claude Fable 5.2, each wrote 15 proposals after reading summaries of 22 Snyder papers. The headline is the share of matchups where the model’s design won. Two AI graders, GPT-6 Astra and Claude Fable 5.1, judged every matchup, and six PhD candidates in American politics judged a sample. The human graders agreed on 80% of design matchups but only 57% of question matchups. In the November 23, 2026 results, GPT-6.2 Astra’s designs won 93% of matchups, while only Claude Fable 5.1 clearly beat Snyder on the question. The charts name only some of the 19 models, so the almanac lists only those.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in",
-      "https://x.com/ahall_research/status/2124889867968741878"
-    ],
-    "added": "2026-11-23"
   }
 ]

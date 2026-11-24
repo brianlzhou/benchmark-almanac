@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { epochModelOverride, epochScoreColumn, epochSecondaryMetrics, epochBenchmarkOverride } from './epoch-mapping.ts';
+import { epochModelOverride, epochScoreColumn, epochSecondaryMetrics, epochBenchmarkOverride, epochRecord } from './epoch-mapping.ts';
 
 test('Aider experimental Gemini stays unmatched without changing other sources', () => {
   assert.deepEqual(epochModelOverride('Aider polyglot', 'gemini-exp-1206'), { unmatched: 'gemini-exp-1206' });
@@ -30,9 +30,30 @@ test('WeirdML v3 preserves final performance as a percentage and rejects invalid
 });
 
 test('ProofBench remaps only explicitly identified v1.1 regrades', () => {
-  assert.equal(epochBenchmarkOverride('ProofBench', 'ProofBench v1.1 re-grade: corrected formalizations. Not comparable to v1.0-era values.'), 'proofbench-1-1');
-  assert.equal(epochBenchmarkOverride('ProofBench', 'ProofBench v1.1 regrade'), 'proofbench-1-1');
-  assert.equal(epochBenchmarkOverride('ProofBench', 'ProofBench v1.0 original'), undefined);
-  assert.equal(epochBenchmarkOverride('ProofBench', 'Plans mention v1.1'), undefined);
-  assert.equal(epochBenchmarkOverride('Other board', 'ProofBench v1.1 re-grade'), undefined);
+  const notes = (Notes: string) => ({ Notes });
+  assert.equal(epochBenchmarkOverride('ProofBench', notes('ProofBench v1.1 re-grade: corrected formalizations. Not comparable to v1.0-era values.')), 'proofbench-1-1');
+  assert.equal(epochBenchmarkOverride('ProofBench', notes('ProofBench v1.1 regrade')), 'proofbench-1-1');
+  assert.equal(epochBenchmarkOverride('ProofBench', notes('ProofBench v1.0 original')), undefined);
+  assert.equal(epochBenchmarkOverride('ProofBench', notes('Plans mention v1.1')), undefined);
+  assert.equal(epochBenchmarkOverride('Other board', notes('ProofBench v1.1 re-grade')), undefined);
+});
+
+test('METR rows follow Epoch\'s METR version column, and only v1.1 moves', () => {
+  assert.equal(epochBenchmarkOverride('METR Time Horizons', { 'METR version': 'METR-Horizon-v1.1' }), 'metr-time-horizon-1-1');
+  assert.equal(epochBenchmarkOverride('METR Time Horizons', { 'METR version': 'METR-Horizon-v1.0' }), undefined);
+  assert.equal(epochBenchmarkOverride('METR Time Horizons', { 'METR version': '' }), undefined);
+  assert.equal(epochBenchmarkOverride('Other board', { 'METR version': 'METR-Horizon-v1.1' }), undefined);
+});
+
+test('OSWorld 2.0 rows for models from July 2026 go to the August patch release', () => {
+  assert.equal(epochBenchmarkOverride('OSWorld 2.0', { 'Release date': '2026-07-24' }), 'osworld-2-0-2026-08-08');
+  assert.equal(epochBenchmarkOverride('OSWorld 2.0', { 'Release date': '2026-05-28' }), undefined);
+  assert.equal(epochBenchmarkOverride('OSWorld 2.0', {}), undefined);
+});
+
+test('whole Epoch files pinned to the version they hold', () => {
+  assert.equal(epochRecord('FrontierCode'), 'frontiercode-1-1');
+  assert.equal(epochRecord('CursorBench'), 'cursorbench-4-1');
+  assert.equal(epochRecord('PostTrainBench'), 'posttrainbench-1-2');
+  assert.equal(epochRecord('GPQA diamond'), undefined);
 });

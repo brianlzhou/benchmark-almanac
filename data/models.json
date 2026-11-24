@@ -15388,7 +15388,8 @@
       "Qwen 4 Max",
       "Qwen4 Max",
       "qwen4-max"
-    ]
+    ],
+    "epoch": "Qwen4-Max"
   },
   {
     "id": "gpt-6-2-astra",
