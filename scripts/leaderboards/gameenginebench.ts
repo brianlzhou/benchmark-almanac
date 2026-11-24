@@ -10,7 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "Nitrode reserves all rights. Its chart lists 12 configurations for nine models and reports average cost per task. https://www.nitrode.com/research The robots.txt allows all paths.",
   aliases: { 'deepseek-4-pro': 'deepseek-v4-pro' },
-  stats: { totalTokens: { name: 'Total tokens', unit: 'thousands' }, steps: { name: 'Steps', unit: 'count' } },
+  stats: { totalTokens: { name: 'Total tokens', unit: 'tokens', better: 'lower' }, steps: { name: 'Steps', unit: 'count', better: 'lower' } },
   async fetch() {
     const data = (await fetchText(feed)).split('const MODELS = [')[1]?.split('];')[0];
     if (!data) throw new Error('Missing GameEngineBench chart');

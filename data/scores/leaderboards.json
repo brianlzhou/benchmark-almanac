@@ -42224,7 +42224,7 @@
       "url": "https://opencausalab.github.io/CaLM/calm_website/pages/leaderboard.html",
       "feed": "https://opencausalab.github.io/CaLM/calm_website/tables/model_overview.js",
       "terms": "Public maker results on GitHub Pages; robots.txt has no restriction on this path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Baichuan1-chat (13B)",
@@ -51345,7 +51345,7 @@
       "url": "https://claw-swe-bench.github.io/",
       "feed": "https://claw-swe-bench.github.io/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [
         "Hunyuan Hy3"
@@ -51405,6 +51405,25 @@
         }
       },
       "stats": {
+        "resolved": {
+          "name": "Resolved instances",
+          "unit": "count",
+          "better": "higher"
+        },
+        "instances": {
+          "name": "Instances evaluated",
+          "unit": "count"
+        },
+        "cost_usd": {
+          "name": "Total API cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
         "avg_duration_s": {
           "name": "Average duration per task",
           "unit": "seconds",
@@ -62056,7 +62075,7 @@
       "url": "https://codeclash.ai/",
       "feed": "https://codeclash.ai/ (leaderboard table)",
       "terms": "Static public page; the site has no robots.txt and no terms, and the CodeClash code is public on GitHub.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "stats": {
@@ -63154,7 +63173,7 @@
       "url": "https://zou-group.github.io/collaborative-intelligence/",
       "feed": "https://zou-group.github.io/collaborative-intelligence/data/leaderboard_v4.json",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
       "verified": "Marked verified by the Collaborative Intelligence benchmark",
@@ -114463,11 +114482,12 @@
       "url": "https://contralabs.com/frontierdesign",
       "feed": "https://contralabs.com/frontierdesign/data/fdb.js (window.FDB_OURS.models)",
       "terms": "robots.txt allows the site. Contra Labs states no data license. Results are credited to Contra Labs and BenchFlow.",
-      "retrieved": "2026-11-23",
-      "rows": 15,
+      "retrieved": "2026-11-24",
+      "rows": 19,
       "unmatched": [
         "Gestalt"
       ],
+      "costPer": "run",
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -114492,13 +114512,31 @@
       "url": "https://evidentmachines.com/frontier-ee-bench/",
       "feed": "https://evidentmachines.com/frontier-ee-bench/ (the results table and the cost chart's point titles in the page HTML)",
       "terms": "Evident Machines’ terms (November 2026) allow automated collection as its robots.txt permits, and robots.txt allows this page. Results are credited to Evident Machines.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "chart": {
+        "title": "Performance vs. cost",
+        "note": "Cost per run in US dollars on a log scale against Pass@1 on all 10 tasks.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "passed": {
           "name": "Runs passed",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "runs": {
           "name": "Runs",
@@ -114778,14 +114816,14 @@
       "feed": "https://www.promptarmor.com/frontier-breach (leaderboard model rows)",
       "terms": "PromptArmor publishes the public leaderboard and its robots.txt allows the page. No separate score-reuse license is stated.",
       "host": "PromptArmor",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
       "stats": {
         "attackSuccessRate": {
           "name": "Attack success rate",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -115410,12 +115448,12 @@
       "url": "https://www.benchflow.ai/frontierphysics",
       "feed": "https://www.benchflow.ai/frontierphysics (agents JSON in the page's script chunks: overall.avg3, costs and times per rollout)",
       "terms": "Server-rendered public page; the site has no robots.txt restrictions and no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "chart": {
         "title": "Agent Performance",
-        "note": "Overall pass rate against the average agent wall-clock time per rollout, on a log scale; the board marks the Pareto frontier.",
+        "note": "Overall pass rate against the average agent wall-clock time per rollout, on a log scale. The board marks the Pareto frontier.",
         "x": {
           "key": "minutes",
           "label": "Wall-clock per rollout",
@@ -115438,11 +115476,41 @@
         },
         "steps": {
           "name": "Steps per rollout",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "passAt3": {
           "name": "Pass@3",
           "unit": "%",
+          "better": "higher"
+        },
+        "verifierAvg3": {
+          "name": "Verifier pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "verifierPassAt3": {
+          "name": "Verifier Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "partialScore": {
+          "name": "Partial credit score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passes": {
+          "name": "Passed rollouts",
+          "unit": "count",
+          "better": "higher"
+        },
+        "rollouts": {
+          "name": "Rollouts",
+          "unit": "count"
+        },
+        "tasksSolved": {
+          "name": "Tasks solved",
+          "unit": "count",
           "better": "higher"
         }
       }
@@ -120918,7 +120986,7 @@
       "url": "https://video-arena.com/gameadsbench/leaderboard",
       "feed": "https://video-arena.com/gameadsbench/api/leaderboard",
       "terms": "Video Arena’s Terms of Use describes abuse controls and third-party processing. It gives no explicit reuse license for leaderboard scores. https://video-arena.com/gameadsbench/leaderboard The publisher allows crawlers in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Gampex",
@@ -121038,7 +121106,7 @@
       "url": "https://www.nitrode.com/research",
       "feed": "https://www.nitrode.com/js/nitrode-bench-charts.js",
       "terms": "Nitrode reserves all rights. Its chart lists 12 configurations for nine models and reports average cost per task. https://www.nitrode.com/research The robots.txt allows all paths.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "kimi-for-coding"
@@ -121046,11 +121114,13 @@
       "stats": {
         "totalTokens": {
           "name": "Total tokens",
-          "unit": "thousands"
+          "unit": "tokens",
+          "better": "lower"
         },
         "steps": {
           "name": "Steps",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -284767,7 +284837,7 @@
       "terms": "SOTA2 publishes and credits each source on its comparison page. https://www.sota2.com/research/sota/document-summarization-on-summscreenfd-test",
       "host": "SOTA2 Research",
       "headline": "The score is ROUGE-1 on the ForeverDreaming test set.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CachED",

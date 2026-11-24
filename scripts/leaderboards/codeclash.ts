@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const value=r[header.indexOf('ELO')]?.text.match(/^([\d.]+)\s*±\s*([\d.]+)/);
       if(!model||!value)return [];
       const score=Number(value[1]),margin=Number(value[2]);
-      return [{model,score,metrics:{ratingMargin:margin}}];
+      return [{model,score,low:score-margin,high:score+margin,metrics:{ratingMargin:margin}}];
     });
     if(!rows.length)throw new Error('CodeClash ratings missing');
     return rows;

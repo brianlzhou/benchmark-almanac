@@ -14,7 +14,10 @@ const board: Leaderboard = {
   feed,
   terms: "Video Arena’s Terms of Use describes abuse controls and third-party processing. It gives no explicit reuse license for leaderboard scores. https://video-arena.com/gameadsbench/leaderboard The publisher allows crawlers in robots.txt.",
   aliases: { 'Seedance 2.0': 'dreamina-seedance-2-0', 'Seedance 2.5': 'dreamina-seedance-2-5' },
-  stats: { votes: { name: 'Votes', unit: 'count' } },
+  stats: {
+    votes: { name: 'Votes', unit: 'count' },
+    pricePerSecond: { name: 'Price per second of video', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const {snapshot} = await fetchJson<{ snapshot: { rows: Entry[] } }>(feed);
     if (snapshot.rows.length < 7) throw new Error('Expected at least seven GameAdsBench models');
