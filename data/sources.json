@@ -352,6 +352,31 @@
     "automated": true
   },
   {
+    "id": "catalog-sites",
+    "name": "Sites of cataloged makers",
+    "by": "The labs, companies and research groups whose benchmarks the almanac catalogs",
+    "url": "https://github.com/brianlzhou/benchmark-almanac/blob/main/scripts/lib/discover/sites.ts",
+    "kind": "leaderboard",
+    "cadence": "Whenever a maker publishes",
+    "signal": "high",
+    "why": "Makers often launch their next benchmark on their own site, where no feed or registry lists it. We read the sitemap or feed of every site that two or more cataloged benchmarks link to, following each site’s robots.txt, and open new pages that look like launches.",
+    "feed": null,
+    "automated": true
+  },
+  {
+    "id": "kaggle-benchmarks",
+    "name": "Kaggle Benchmarks",
+    "by": "Kaggle and its community",
+    "url": "https://www.kaggle.com/benchmarks",
+    "kind": "leaderboard",
+    "cadence": "Several new benchmarks a day",
+    "signal": "medium",
+    "why": "Anyone can publish a benchmark on Kaggle and run models on it, and some of these become widely used.",
+    "feed": "https://www.kaggle.com/api/v1/benchmarks/{owner}/{slug}/leaderboard",
+    "automated": false,
+    "manual": "Kaggle’s public API reads a benchmark’s leaderboard but has no way to list benchmarks, and its terms forbid crawling the site. So we add new Kaggle benchmarks by hand, and the daily sync then reads each leaderboard through the API."
+  },
+  {
     "id": "x",
     "name": "Benchmark launches on X",
     "by": "Researchers and labs, searched by Grok",

@@ -14,7 +14,7 @@
 // usage: node scripts/discover.ts [--days 3] [--only <source id>] [--dry]
 //   --only runs one reader, even for a source not yet marked automated. --dry writes nothing and lists the finds.
 import { readJson, writeJson, dataPath, daysAgo, githubHeaders } from './lib/util.ts';
-import { FROM, TODAY, knownFind, byKey, seen, storePath, stageB, makeReader, papersForCatalog, type Candidate, type Reader, type Store, type Tally } from './lib/discover/core.ts';
+import { FROM, TODAY, knownFind, byKey, touched, seen, storePath, stageB, makeReader, papersForCatalog, type Candidate, type Reader, type Store, type Tally } from './lib/discover/core.ts';
 import { hfDailyPapers, arxiv, openreview } from './lib/discover/papers.ts';
 import { ainews, zvi, importAi, epochSubstack, interconnects, semianalysis, dwarkesh, primeBlog } from './lib/discover/newsletters.ts';
 import { saveAudits } from './lib/discover/audits.ts';
@@ -23,6 +23,7 @@ import { xGrok, X_SECONDS } from './lib/discover/x.ts';
 import { epochHub, inspectEvals, hfOfficial, harbor, harborRegistry, primeHub, everyEvalEver, vlmevalkit, awesomeAiLeaderboard, awesomeCua, benchmarkList, hfBenchmarkResults } from './lib/discover/registries.ts';
 import { vals, arena } from './lib/discover/leaderboards.ts';
 import { labs } from './lib/discover/labs.ts';
+import { sites } from './lib/discover/sites.ts';
 
 // source id in data/sources.json -> its reader and time limit
 const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: number }> = {
@@ -37,7 +38,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   bluesky: { run: bluesky, seconds: 120 },
   x: { run: xGrok, seconds: X_SECONDS },
   'hf-daily-papers': { run: hfDailyPapers },
-  arxiv: { run: arxiv, seconds: 150 },
+  arxiv: { run: arxiv, seconds: 240 },
   'openreview-eval-track': { run: openreview, seconds: 120 },
   'epoch-hub': { run: epochHub, seconds: 150 },
   'inspect-evals': { run: inspectEvals },
@@ -54,6 +55,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   'awesome-ai-leaderboard': { run: awesomeAiLeaderboard },
   'awesome-cua': { run: awesomeCua },
   benchmarklist: { run: benchmarkList },
+  'catalog-sites': { run: sites, seconds: Number(process.env.SITES_SECONDS ?? 240) },
 };
 const DEFAULT_SECONDS = 90;
 
@@ -147,9 +149,11 @@ const papers = papersForCatalog();
 if (papers.length) log(`\n${papers.length} papers for benchmarks the almanac catalogs without one:\n${papers.map((p) => `  ${p.benchmark}: ${p.title.slice(0, 80)} ${p.url}`).join('\n')}`);
 const out: Store = { updated: TODAY, items, seen, ...(papers.length ? { papers } : {}) };
 if (DRY) {
-  const touched = items.filter((c) => before.get(c) !== JSON.stringify(c));
-  for (const c of touched)
-    log(`  ${c.decision === 'catalog' ? '*' : ' '} ${String(c.score).padStart(2)}  ${c.name}  [${[...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds].join(', ')}]  ${c.url}`);
+  // every find a reader made in this run, including ones the queue already held unchanged
+  const found = items.filter((c) => touched.has(c));
+  for (const c of found)
+    log(`  ${c.decision === 'catalog' ? '*' : ' '} ${String(c.score).padStart(2)}  ${c.name}  [${[...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds].join(', ')}]  ${c.url}${before.get(c) === JSON.stringify(c) ? '  (unchanged)' : ''}`);
+  log(`\n${found.length} finds in this run, ${found.filter((c) => c.decision === 'catalog').length} of them to catalog.`);
 } else writeJson(storePath, out);
 
 // one line per source: items read, finds that are new to the almanac, and finds already cataloged

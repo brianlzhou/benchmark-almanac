@@ -326,6 +326,8 @@ const store: Store = existsSync(storePath) ? readJson<Store>(storePath) : { upda
 /** Lists from the last run of each registry, for telling a new entry from one already seen. */
 export const seen: Record<string, string[]> = store.seen ?? {};
 export const byKey = new Map<string, Candidate>();
+/** The finds a reader added or confirmed in this run, so a dry run can list every one, unchanged or not. */
+export const touched = new Set<Candidate>();
 for (const c of store.items) {
   byKey.set(c.key, c);
   if (!byKey.has(key(c.name))) byKey.set(key(c.name), c);
@@ -359,6 +361,7 @@ function upsert(c: Find, how: How): { known: string } | { candidate: Candidate }
   if (how.registry && !cur.registries.some((s) => s.source === how.registry!.source)) cur.registries.push(how.registry);
   byKey.set(cur.key, cur);
   if (key(cur.name) !== cur.key) byKey.set(key(cur.name), cur);
+  touched.add(cur);
   return { candidate: cur };
 }
 
