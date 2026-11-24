@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "items": [
     {
       "key": "ifbenchtest",
@@ -29,7 +29,7 @@
       "title": "Copy Bench public subset (13 of 50 tasks): rebuild a moving web component from a screen recording, one-shot, then self-verified in a browser.",
       "url": "https://hub.harborframework.com/datasets/21st/copy-bench",
       "first": "2026-11-22",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [],
       "curated": [],
       "registries": [
@@ -52,7 +52,7 @@
       "title": "Kitaru Bench v0.1: 37 Harbor tasks where coding agents check, diagnose, import, replay and set up agents with real Kitaru 0.27.7; graded on what Kitaru recorded",
       "url": "https://hub.harborframework.com/datasets/zenml/kitaru-bench",
       "first": "2026-11-23",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [],
       "curated": [],
       "registries": [
@@ -68,6 +68,264 @@
       "decision": "catalog",
       "org": "zenml",
       "repo": "https://hub.harborframework.com/datasets/zenml/kitaru-bench"
+    },
+    {
+      "key": "councilofaigspccardcorpus",
+      "name": "councilof-ai__gspc-card-corpus",
+      "title": "councilof-ai__gspc-card-corpus in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/councilof-ai__gspc-card-corpus",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/councilof-ai__gspc-card-corpus"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "ec2benchedgeonly",
+      "name": "ec2-bench-edge-only",
+      "title": "ec2-bench-edge-only in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/ec2-bench-edge-only",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/ec2-bench-edge-only"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "expandrbeir",
+      "name": "expandr-beir",
+      "title": "expandr-beir in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/expandr-beir",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/expandr-beir"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "longmabmultihop",
+      "name": "longmab-multihop",
+      "title": "longmab-multihop in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/longmab-multihop",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/longmab-multihop"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "orukasrevaluations",
+      "name": "oruk-asr-evaluations",
+      "title": "oruk-asr-evaluations in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/oruk-asr-evaluations",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/oruk-asr-evaluations"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "parammutecofaithfulqa",
+      "name": "parammute-cofaithfulqa",
+      "title": "parammute-cofaithfulqa in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/parammute-cofaithfulqa",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/parammute-cofaithfulqa"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "polistemics",
+      "name": "polistemics",
+      "title": "polistemics in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/polistemics",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/polistemics"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "sparkmrqa",
+      "name": "spark-mrqa",
+      "title": "spark-mrqa in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/spark-mrqa",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/spark-mrqa"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "toolmasterood",
+      "name": "toolmaster-ood",
+      "title": "toolmaster-ood in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/toolmaster-ood",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/toolmaster-ood"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "translateandrevise",
+      "name": "translate-and-revise",
+      "title": "translate-and-revise in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/translate-and-revise",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/translate-and-revise"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "uncodemathdecoding",
+      "name": "uncode-math-decoding",
+      "title": "uncode-math-decoding in Every Eval Ever",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/uncode-math-decoding",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Every Eval Ever",
+          "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/uncode-math-decoding"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog"
+    },
+    {
+      "key": "robotrack",
+      "name": "RoboTrack",
+      "title": "RoboTrack: Point tracking for real-world robotic manipulation",
+      "url": "https://allenai.org/blog/robotrack",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [
+        "bluesky"
+      ],
+      "curated": [
+        {
+          "source": "Ai2",
+          "url": "https://allenai.org/blog/robotrack"
+        }
+      ],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog",
+      "org": "Researchers",
+      "repo": "https://github.com/allenai/robotrack",
+      "upvotes": 0,
+      "stars": 5
     },
     {
       "key": "safeteenteenmentalhealthandsafety",
@@ -97,12 +355,149 @@
       "title": "Agent Arena Index",
       "url": "https://x.com/arena/status/2123894102496555446",
       "first": "2026-11-21",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [],
       "curated": [
         {
           "source": "AINews",
           "url": "https://latent.space/p/ainews-riemann-hypothesis-proved-twice-independently/"
+        }
+      ],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog"
+    },
+    {
+      "key": "2611.21541",
+      "name": "SciResearch-Eval",
+      "title": "SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents",
+      "url": "https://arxiv.org/abs/2611.21541",
+      "first": "2026-11-17",
+      "last": "2026-11-24",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [
+        {
+          "source": "Import AI",
+          "url": "https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/"
+        }
+      ],
+      "registries": [],
+      "stageA": 8,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog",
+      "arxiv": "2611.21541"
+    },
+    {
+      "key": "luminabench",
+      "name": "LuminaBench",
+      "title": "LuminaBench",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-hydrogen-builders/",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [
+        {
+          "source": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-hydrogen-builders/"
+        }
+      ],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog"
+    },
+    {
+      "key": "robotrackbench",
+      "name": "RoboTrack-Bench",
+      "title": "RoboTrack-Bench",
+      "url": "https://allenai.org/blog/robotrack",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [
+        {
+          "source": "Ai2",
+          "url": "https://allenai.org/blog/robotrack"
+        }
+      ],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog"
+    },
+    {
+      "key": "codeprojectpage",
+      "name": "Code Project Page Benchmark",
+      "title": "Code Project Page Benchmark",
+      "url": "https://allenai.org/blog/robotrack",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [
+        {
+          "source": "Ai2",
+          "url": "https://allenai.org/blog/robotrack"
+        }
+      ],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog"
+    },
+    {
+      "key": "robotrackbenchaj",
+      "name": "RoboTrack-Bench AJ",
+      "title": "RoboTrack-Bench AJ",
+      "url": "https://huggingface.co/allenai/RoboTracker-Warp",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [
+        {
+          "source": "RoboTracker-Warp model card",
+          "url": "https://huggingface.co/allenai/RoboTracker-Warp"
+        },
+        {
+          "source": "RoboTracker model card",
+          "url": "https://huggingface.co/allenai/RoboTracker"
+        }
+      ],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 11,
+      "decision": "catalog"
+    },
+    {
+      "key": "robotrackbenchoa",
+      "name": "RoboTrack-Bench OA",
+      "title": "RoboTrack-Bench OA",
+      "url": "https://huggingface.co/allenai/RoboTracker-Warp",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [],
+      "curated": [
+        {
+          "source": "RoboTracker-Warp model card",
+          "url": "https://huggingface.co/allenai/RoboTracker-Warp"
+        },
+        {
+          "source": "RoboTracker model card",
+          "url": "https://huggingface.co/allenai/RoboTracker"
         }
       ],
       "registries": [],
@@ -160,7 +555,7 @@
       "title": "Non-penetrating World Models",
       "url": "https://huggingface.co/papers/2611.27963",
       "first": "2026-11-23",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [
         "hf",
         "arxiv"
@@ -175,8 +570,8 @@
       "org": "The Hong Kong Polytechnic University",
       "repo": "https://github.com/yuhangdai427/NoPeWorld",
       "arxiv": "2611.27963",
-      "upvotes": 38,
-      "stars": 3
+      "upvotes": 54,
+      "stars": 20
     },
     {
       "key": "2611.22343",
@@ -184,7 +579,7 @@
       "title": "PURE: A Diagnostic Benchmark for Multi-Granularity Multimodal Identity Matching",
       "url": "https://huggingface.co/papers/2611.22343",
       "first": "2026-11-23",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [
         "hf"
       ],
@@ -198,8 +593,105 @@
       "org": "Alibaba multimodal & industrial AI",
       "repo": "https://github.com/alibaba-multimodal-industrial-ai/PURE",
       "arxiv": "2611.22343",
-      "upvotes": 3,
+      "upvotes": 5,
       "stars": 3
+    },
+    {
+      "key": "kitarubench",
+      "name": "kitaru-bench",
+      "title": "Coding agents check, diagnose, import, replay and set up agents with real Kitaru: 37 Harbor tasks graded on what Kitaru recorded, wrapped as a veri...",
+      "url": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
+      "first": "2026-11-23",
+      "last": "2026-11-24",
+      "feeds": [
+        "Prime Intellect hub"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "zenml",
+      "repo": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
+      "stars": 1
+    },
+    {
+      "key": "nobodybench",
+      "name": "NOBODY-Bench",
+      "title": "pmadinei/NOBODY-Bench",
+      "url": "https://huggingface.co/datasets/pmadinei/NOBODY-Bench",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [
+        "Hugging Face datasets with results"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "pmadinei"
+    },
+    {
+      "key": "polishwritingeval",
+      "name": "Polish writing eval",
+      "title": "shefowl/polish-writing-eval",
+      "url": "https://huggingface.co/datasets/shefowl/polish-writing-eval",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [
+        "Hugging Face datasets with results"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "shefowl"
+    },
+    {
+      "key": "whatifbench",
+      "name": "WhatIfBench",
+      "title": "zju-gt/WhatIfBench",
+      "url": "https://huggingface.co/datasets/zju-gt/WhatIfBench",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [
+        "Hugging Face datasets with results"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "zju-gt"
+    },
+    {
+      "key": "skllmeval",
+      "name": "sk-llm-eval",
+      "title": "lubomirtchurik/sk-llm-eval",
+      "url": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "first": "2026-11-24",
+      "last": "2026-11-24",
+      "feeds": [
+        "Hugging Face datasets with results"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "lubomirtchurik"
     },
     {
       "key": "2611.21383",
@@ -289,27 +781,6 @@
       "arxiv": "2611.00911",
       "upvotes": 4,
       "stars": 0
-    },
-    {
-      "key": "kitarubench",
-      "name": "kitaru-bench",
-      "title": "Coding agents check, diagnose, import, replay and set up agents with real Kitaru: 37 Harbor tasks graded on what Kitaru recorded, wrapped as a veri...",
-      "url": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
-      "first": "2026-11-23",
-      "last": "2026-11-23",
-      "feeds": [
-        "Prime Intellect hub"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "org": "zenml",
-      "repo": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
-      "stars": 1
     },
     {
       "key": "2611.27734",
@@ -544,28 +1015,6 @@
       "repo": "https://github.com/arnodjiang/MInfoVisQA",
       "arxiv": "2611.21644",
       "upvotes": 5,
-      "stars": 2
-    },
-    {
-      "key": "2611.18553",
-      "name": "WeightBench",
-      "title": "WeightBench: Evaluating Language Models as Weight-Space Programmers",
-      "url": "https://huggingface.co/papers/2611.18553",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/Aayush-Marasini/WeightBench",
-      "arxiv": "2611.18553",
-      "upvotes": 3,
       "stars": 2
     },
     {
@@ -1438,7 +1887,7 @@
       "title": "Replit finds a 32-agent Claude Opus 5.5 swarm sped NumPy workloads 18.9x versus 3.7x for one agent, releasing Optimization-Bench",
       "url": "https://bsky.app/profile/druce.ai/post/3n2s7cox6nx27",
       "first": "2026-11-21",
-      "last": "2026-11-23",
+      "last": "2026-11-24",
       "feeds": [
         "bluesky"
       ],
@@ -2070,25 +2519,6 @@
       "arxiv": "2611.15640",
       "upvotes": 4,
       "stars": 12
-    },
-    {
-      "key": "2611.21541",
-      "name": "SciResearch-Eval",
-      "title": "SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents",
-      "url": "https://arxiv.org/abs/2611.21541",
-      "first": "2026-11-17",
-      "last": "2026-11-19",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.21541"
     },
     {
       "key": "2611.21300",
@@ -3647,13 +4077,16 @@
       "chatbot_arena",
       "cocoabench",
       "commonsense_qa",
+      "councilof-ai__gspc-card-corpus",
       "cvebench",
       "cybench",
       "cyse2_interpreter_abuse",
       "cyse2_prompt_injection",
       "cyse2_vulnerability_exploit",
       "delta_nc",
+      "ec2-bench-edge-only",
       "exgentic",
+      "expandr-beir",
       "facts-grounding",
       "fibble1_arena",
       "fibble2_arena",
@@ -3699,6 +4132,7 @@
       "livebench",
       "livecodebenchpro",
       "llm-stats",
+      "longmab-multihop",
       "math-mc",
       "mbpp",
       "mmlu-pro",
@@ -3709,12 +4143,16 @@
       "openai-mrcr-v2",
       "openai_humaneval",
       "openeval",
+      "oruk-asr-evaluations",
       "paperswithcode",
+      "parammute-cofaithfulqa",
       "piqa",
+      "polistemics",
       "researchgym",
       "reward-bench-2",
       "reward-bench",
       "sciarena",
+      "spark-mrqa",
       "swe-bench-verified-leaderboard",
       "swe-bench-verified-mini",
       "swe-bench",
@@ -3732,6 +4170,10 @@
       "terminal-bench-science",
       "terminalbench",
       "theory_of_mind",
+      "toolmaster-ood",
+      "translate-and-revise",
+      "typed-decisions",
+      "uncode-math-decoding",
       "vals-ai",
       "vectara-hallucination-leaderboard",
       "weatherbench2",
@@ -7221,6 +7663,53 @@
       "zonos2_technical_report"
     ],
     "hfBenchmarkResults": [
+      "TianhangCheng7/Anchor4D-Eval",
+      "MOTIF-Lab/BATON-Sample",
+      "counterlure-research/cultivation-holdout",
+      "gdugdu2026/CritFault",
+      "wincon-research/personality-bench",
+      "atahandokme/secondchance",
+      "pmadinei/NOBODY-Bench",
+      "szyszy/GIFI-Gender-Bias-Pronoun-Benchmark",
+      "ferreslabs/krunbench-v1",
+      "ferreslabs/kruntechbench",
+      "trykubi/CuaDriverBench-Kubi",
+      "shivpratapsingh/mirage-humanoid-perception-benchmark",
+      "enver/turath-bench-classical-arabic-en",
+      "aauthors/label-age-benchmark",
+      "rimelabs/PhonBench",
+      "Feeng/base-m4-huihui-qwen36-abliterated-splash-benchmark",
+      "pratikgx/kolibri-1.1-m5-pro-mac-mini-bench",
+      "OpenAdapt/openadapt-veto-50-trap",
+      "YaoyunHug/realdrug_benchmark",
+      "Francesco/aspect-retrieval-5k",
+      "shefowl/polish-writing-eval",
+      "roskosmos19/DE-ToolCall-Bench",
+      "VettoAI/terminal-tasks-open",
+      "songping/hpaa-three-gate-advbench300",
+      "Allmightdd/rsi-experiment-reports",
+      "jameszhu97/agentabstain-harbor-parity",
+      "BH-Language-AI/cua-bench-2026-11",
+      "zju-gt/WhatIfBench",
+      "dazenta/epee",
+      "saxenan3/mncri",
+      "lubomirtchurik/sk-llm-eval",
+      "cuierfei/EmbodiSafety",
+      "sovannpanhaseng/KhmerBench",
+      "BDRC/Bo-Yigchung-Benchmark",
+      "BDRC/Bo-Quotation-Benchmark",
+      "BDRC/Bo-Sabche-Benchmark",
+      "drylab-bench/benchmark",
+      "LukasKunhardt/multilingual-clinical-deid-benchmark",
+      "BDRC/Bo-Author-Benchmark",
+      "BDRC/Bo-Title-Benchmark",
+      "BDRC/Bo-Yigchung-Classified-Benchmark",
+      "BDRC/Bo-Chapter-Benchmark",
+      "BDRC/Bo-Tsawa-Benchmark",
+      "Hebrish/Bamba-Bench",
+      "zbbwww23/uav-agent-mixed120-benchmark",
+      "henry-raomusic/same-brief-text-to-music-eval",
+      "danielrosehill/ASR-Eval-Bench",
       "tangyinhao/SciExplore",
       "pratikgx/daisyrose-27b-m5-pro-mac-mini-bench",
       "sladyn/JEE-Main-2024-Math",
@@ -7236,6 +7725,7 @@
       "RoboARC/RoboARC-ikea-assets",
       "eduzrh/LNPBench",
       "AtharvaT/DeclineCraft",
+      "vveicao/RetakeBench",
       "wuff-mann/Sub-loop-Heterocoding-VRAM",
       "wilkertyl/hyperdime-qwen3-benchmarks",
       "dhruvmali345/bol-bench",
@@ -7263,6 +7753,7 @@
       "kurbanintelligencelab/CivicBench",
       "atharvgaur18/actionproof-proc-splits",
       "msaleme/mcp-tool-poisoning-fixtures",
+      "Belmont111/ActSpace-Bench",
       "mathieu123/SWE-rebench-leaderboard-surgeon",
       "Einsia/RoboUniverse-10K",
       "punyajain/robodojo-ipi",
@@ -7272,6 +7763,8 @@
       "maren-lindner/dex-execution-fee-benchmarks-2026",
       "totalhuang/MSBench",
       "matthew-sudo2/filbench-wsp-experiments",
+      "tailot/struc-stratum",
+      "tailot/physics-stratum",
       "gutoportelaa/segjusticidadania-benchmarks",
       "tailot/geometry-stratum",
       "tailot/lingologos-struc",
@@ -7296,7 +7789,9 @@
       "agentfieldai/deepswe-coding-agent-comparison",
       "rubenrekhi/studio3d-bench",
       "LexDye/definition-benchmark",
+      "julyanghar/MedSceneBench-Annotations",
       "sjkim1127/freshbench",
+      "allenai/RoboTrack-Bench",
       "kenantabak/evren-yolo26-yolo11-83-models-benchmark",
       "pratikgx/bison-1-m5-pro-mac-mini-bench",
       "pratikgx/groundhog-1-m5-pro-mac-mini-bench",
@@ -7332,57 +7827,7 @@
       "youkijiudai/healthcare-escalation-bench",
       "swedishembedded/vim-headless-mastery",
       "mkschreder123/vim-headless-mastery",
-      "pratikgx/inkling-2-mini-m5-pro-mac-mini-bench",
-      "Frederic-S/GiftEvalCTX",
-      "betterup/candor-full-duplex-bench",
-      "rare-disease-atlas/MyelofibrosisBench",
-      "NSV241006/CredDetX",
-      "Ivanich/duma-bench-episodes",
-      "renyimen/JevNavAgent",
-      "lance-format/truthful-qa-lance",
-      "lance-format/ifeval-lance",
-      "FolatheDuckofDuckingburg/ai-benchmark-observatory",
-      "kleinbem/layerstream-orin-nano-benchmarks",
-      "tianyixian/echostreambench-canonical657",
-      "renyimen/PathNav-Bench",
-      "VanWang/GoldiBench",
-      "iulio/plc-llm-bench",
-      "glasp/phd-research-tasks",
-      "lance-format/spreadsheetbench-v2-lance",
-      "udoy55/flash-next-ada-workstation-benchmarks",
-      "lance-format/winogrande-lance",
-      "codesentineldata/capr-combat-amputation-prosthetic-rehabilitation",
-      "trl-lib/asyncgrpo-stable-bench-runs",
-      "ma-pmo/jira-release-readiness",
-      "ma-pmo/jira-release-slip",
-      "raybell-md/maryland-bill-hearings",
-      "Januka2009/INVESTIGA-ES",
-      "oceansky12/OceanCoder-Benchmark",
-      "convergent-robotics/saydo-results",
-      "convergent-robotics/saydo",
-      "SirGrokkius/verimath-reason-v1-sample",
-      "KCB1/SoftBench",
-      "donatas-t/impossible-lcb-verified",
-      "danielrosehill/Microphone-Benchmarks",
-      "avantium-app/european-trades-field-service-software-2026",
-      "kairosmaterial/Magbench",
-      "w3joe/hypercast-tslib15-multi-benchmark",
-      "PeterDAI/NoPeBench",
-      "pratikgx/depth-pro-2-m5-pro-mac-mini-bench",
-      "lance-format/openai-humaneval-lance",
-      "lance-format/mbpp-lance",
-      "lance-format/3dcodebench-lance",
-      "Jasonnn13/aura-ocr-benchmark",
-      "lance-format/t2i-corebench-images-lance",
-      "hzn666/DS-NL2SQL",
-      "noodcon/Sampling-Config-Benchmark",
-      "AdnanElAssadi/openfoam-rebuild-tests",
-      "l3lab/KernelShift",
-      "daudaudinang/vn-enterprise-rag-bench300",
-      "narawit16/thai-govern-test-ocr",
-      "SaiMahadasa/visa-rules-bench",
-      "btobgogo/btob-gogo-freight-sample-10",
-      "sc3484/macbench"
+      "pratikgx/inkling-2-mini-m5-pro-mac-mini-bench"
     ],
     "harborRegistry": [
       "aider-polyglot",
