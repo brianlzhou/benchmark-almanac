@@ -36,8 +36,9 @@ const board: Leaderboard = {
         for (let j = summary ? 5 : 6; j < table.headers.length; j++) {
           const value = cells[j];
           if (typeof value !== 'number') continue;
-          const name = (summary ? '' : 'R@1000 Comb. · ') + table.headers[j];
-          const key = corpus + ' · ' + name;
+          const rawName = (summary ? '' : 'R@1000 Comb. · ') + table.headers[j];
+          const key = corpus + ' · ' + rawName;
+          const name = (summary ? '' : 'R@1000 Comb. ') + table.headers[j];
           row.metrics![key] = value;
           this.parts[key] = {name, group: corpus};
         }

@@ -14,6 +14,12 @@ const board: Leaderboard = {
   stats: {
     action: { name: 'Action score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, early: { name: 'Early-call rate', unit: '%', better: 'lower' }, reliab: { name: 'Reliability', unit: '%', better: 'higher' }, cap: { name: 'Capability score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, lat: { name: 'Latency', unit: 'ms', better: 'lower' }, answer: { name: 'Answer latency', unit: 'ms', better: 'lower' }, inputPricePerMillion: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, outputPricePerMillion: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, costPerMinute: { name: 'Cost per minute', unit: 'usd', better: 'lower' },
   },
+  chart: {
+    title: 'Action against First sound',
+    note: 'Action score against end of speech to first sound median latency, matching the default Pareto scatter chart on Speko.',
+    x: { key: 'lat', label: 'First sound latency', unit: 'ms', better: 'lower' },
+    y: { key: 'action', label: 'Action score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ boards: { id: string; meta: string; rows: Entry[] }[] }>(feed);
     const board = data.boards.find(b => b.id === 's2s');

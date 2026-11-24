@@ -22,6 +22,9 @@ const board: Leaderboard = {
    SCIQ: { name: 'SciQ', group: 'Split' },
    TOXIGEN: { name: 'ToxiGen', group: 'Split' },
  },
+ stats: {
+   hubLikes: { name: 'Hub likes', unit: 'count' },
+ },
  url: "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard-v1",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
@@ -39,9 +42,8 @@ return t.data.filter(r => typeof r[2] === 'number' && Number.isFinite(r[2])).map
     const value = cell(key);
     if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
   }
-  const likes = cell('Hub ❤️'), available = cell('Available on the hub');
+  const likes = cell('Hub ❤️');
   if (typeof likes === 'number') metrics.hubLikes = likes;
-  if (typeof available === 'boolean') metrics.availableOnHub = Number(available);
   const license = cell('Hub License'), params = cell('#Params (B)');
   return {
     model: makers.has(repo.split('/')[0]) ? repo : repo.replace('/', ' '), score: r[2] as number,

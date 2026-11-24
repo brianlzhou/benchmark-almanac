@@ -2492,6 +2492,8 @@
     ["parsebench","~Reducto","r-1-mini",null,"2026-11-09"],
     ["parsebench","deepseek-ocr-2",null,null,"2026-11-12"],
     ["parsebench","tencent-hy4","high",null,"2026-11-14"],
+    ["parsebench-2","~LiteParse + OCRia-nano-1",null,null,"2026-11-24"],
+    ["parsebench-2","~OCRia-1",null,null,"2026-11-24"],
     ["parsebench-2","gemini-4-neon","low",null,"2026-11-23"],
     ["parsebench-2","gpt-6-2-sol","low",null,"2026-11-23"],
     ["parsebench-2","gpt-6-2-sol","medium",null,"2026-11-23"],
