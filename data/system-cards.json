@@ -24340,6 +24340,233 @@
     ]
   },
   {
+    "id": "meta-sam-3d-body-vit-h-technical-report-2026-02-17",
+    "lab": "meta",
+    "model": "sam-3d-body-vit-h",
+    "date": "2026-02-17",
+    "doc": "technical report",
+    "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+    "url": "https://arxiv.org/abs/2602.15989",
+    "release": null,
+    "notes": "Table 3 gives 3DB-H, the ViT-H checkpoint, trained two ways: leave-one-out, without the evaluated dataset, and on the full dataset, which the paper calls an in-domain upper bound. The full-dataset numbers are recorded as the released checkpoint’s, with the leave-one-out numbers beside them. The other methods in the table are not recorded.",
+    "results": [
+      {
+        "benchmark": "sa-1b-hard-human-pose-evaluation-meta",
+        "score": 76.6,
+        "unit": "%",
+        "as_written": "SA1B-Hard Avg-PCK, 3DB-H trained on the full dataset. Leave-one-out 73.1 (Table 3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "sam-3d-body-synthetic-pose-evaluation-meta",
+        "score": 55.2,
+        "unit": "score",
+        "as_written": "Synthetic PVE, 3DB-H trained on the full dataset. MPJPE 47.2. Leave-one-out PVE 85.6, MPJPE 75.5 (Table 3)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-sam-3d-body-dinov3-technical-report-2026-02-17",
+    "lab": "meta",
+    "model": "sam-3d-body-dinov3",
+    "date": "2026-02-17",
+    "doc": "technical report",
+    "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+    "url": "https://arxiv.org/abs/2602.15989",
+    "release": null,
+    "notes": "Table 8 tests mask-conditioned inference with 3DB-DINOv3, the DINOv3 checkpoint, on multi-person datasets. The result without mask prompts is recorded.",
+    "results": [
+      {
+        "benchmark": "sa-1b-hard-human-pose-evaluation-meta",
+        "score": 75.4,
+        "unit": "%",
+        "as_written": "SA1B-Hard Avg-PCK, 3DB-DINOv3 without mask prompts. 76.3 with masks (Table 8)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-sam-3d-objects-technical-report-2026-06-02",
+    "lab": "meta",
+    "model": "sam-3d-objects",
+    "date": "2026-06-02",
+    "doc": "technical report",
+    "title": "SAM 3D: 3Dfy Anything in Images (v2)",
+    "url": "https://arxiv.org/abs/2511.16624",
+    "release": null,
+    "notes": "Table 2 of the v2 paper (June 2, 2026) compares SAM 3D’s shapes with six other image-to-3D methods on SA-3DAO. Only the SAM 3D row is recorded. Table 3 gives its joint layout scores, 3D IoU 0.4254.",
+    "results": [
+      {
+        "benchmark": "sam-3d-artist-objects",
+        "score": 0.2344,
+        "unit": "score",
+        "as_written": "SA-3DAO shape F1@0.01. vIoU 0.2311, Chamfer 0.0400, EMD 0.1211 (Table 2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-dinov3-vit-7b-technical-report-2025-08-13",
+    "lab": "meta",
+    "model": "dinov3-vit-7b",
+    "date": "2025-08-13",
+    "doc": "technical report",
+    "title": "DINOv3",
+    "url": "https://arxiv.org/abs/2508.10104",
+    "release": null,
+    "notes": "Table 17 compares backbones for canopy height prediction, each with a DPT decoder trained on SatLidar. The SatLidar Test column, held-out regions, is recorded.",
+    "results": [
+      {
+        "benchmark": "satlidar-canopy-height-meta",
+        "score": 3.6,
+        "unit": "score",
+        "as_written": "SatLidar Test MAE, DINOv3 Web ViT-7B with a DPT decoder. R² 0.74 (Table 17)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-dinov3-vit-7b-sat-technical-report-2025-08-13",
+    "lab": "meta",
+    "model": "dinov3-vit-7b-sat",
+    "date": "2025-08-13",
+    "doc": "technical report",
+    "title": "DINOv3",
+    "url": "https://arxiv.org/abs/2508.10104",
+    "release": null,
+    "notes": "Table 17 compares backbones for canopy height prediction, each with a DPT decoder trained on SatLidar. The SatLidar Test column, held-out regions, is recorded. DINOv3 Sat ViT-L also scores 3.2 but has no record.",
+    "results": [
+      {
+        "benchmark": "satlidar-canopy-height-meta",
+        "score": 3.2,
+        "unit": "score",
+        "as_written": "SatLidar Test MAE, DINOv3 Sat ViT-7B with a DPT decoder. R² 0.82 (Table 17)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "chandar-lab-cadmium-1-5b-technical-report-2026-01-08",
+    "lab": "chandar-lab",
+    "model": "cadmium-1-5b",
+    "date": "2026-01-08",
+    "doc": "technical report",
+    "title": "CADmium: Fine-Tuning Code Language Models for Text-Driven Sequential CAD Design (v3)",
+    "url": "https://arxiv.org/abs/2507.09792",
+    "release": null,
+    "notes": "Table 3 of the v3 paper (January 8, 2026) scores each CADmium size on the Fusion360 test set. Metrics are computed on each model’s valid meshes only, so the invalid rate is given beside the distance.",
+    "results": [
+      {
+        "benchmark": "cadmium-fusion360",
+        "score": 226.46,
+        "unit": "score",
+        "as_written": "Fusion360 test set, mean Chamfer distance on valid meshes, CADmium-1.5B. Invalid rate 22.62% (Table 3)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "chandar-lab-cadmium-3b-technical-report-2026-01-08",
+    "lab": "chandar-lab",
+    "model": "cadmium-3b",
+    "date": "2026-01-08",
+    "doc": "technical report",
+    "title": "CADmium: Fine-Tuning Code Language Models for Text-Driven Sequential CAD Design (v3)",
+    "url": "https://arxiv.org/abs/2507.09792",
+    "release": null,
+    "notes": "Table 3 of the v3 paper (January 8, 2026) scores each CADmium size on the Fusion360 test set. Metrics are computed on each model’s valid meshes only, so the invalid rate is given beside the distance.",
+    "results": [
+      {
+        "benchmark": "cadmium-fusion360",
+        "score": 191.94,
+        "unit": "score",
+        "as_written": "Fusion360 test set, mean Chamfer distance on valid meshes, CADmium-3B. Invalid rate 23.38% (Table 3)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "chandar-lab-cadmium-7b-technical-report-2026-01-08",
+    "lab": "chandar-lab",
+    "model": "cadmium-7b",
+    "date": "2026-01-08",
+    "doc": "technical report",
+    "title": "CADmium: Fine-Tuning Code Language Models for Text-Driven Sequential CAD Design (v3)",
+    "url": "https://arxiv.org/abs/2507.09792",
+    "release": null,
+    "notes": "Table 3 of the v3 paper (January 8, 2026) scores each CADmium size on the Fusion360 test set. Metrics are computed on each model’s valid meshes only, so the invalid rate is given beside the distance.",
+    "results": [
+      {
+        "benchmark": "cadmium-fusion360",
+        "score": 206.39,
+        "unit": "score",
+        "as_written": "Fusion360 test set, mean Chamfer distance on valid meshes, CADmium-7B. Invalid rate 16.79% (Table 3)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "chandar-lab-cadmium-14b-technical-report-2026-01-08",
+    "lab": "chandar-lab",
+    "model": "cadmium-14b",
+    "date": "2026-01-08",
+    "doc": "technical report",
+    "title": "CADmium: Fine-Tuning Code Language Models for Text-Driven Sequential CAD Design (v3)",
+    "url": "https://arxiv.org/abs/2507.09792",
+    "release": null,
+    "notes": "Table 3 of the v3 paper (January 8, 2026) scores each CADmium size on the Fusion360 test set. Metrics are computed on each model’s valid meshes only, so the invalid rate is given beside the distance.",
+    "results": [
+      {
+        "benchmark": "cadmium-fusion360",
+        "score": 202,
+        "unit": "score",
+        "as_written": "Fusion360 test set, mean Chamfer distance on valid meshes, CADmium-14B. Invalid rate 12.58% (Table 3)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "shanghai-ai-lab-fundusexpert-technical-report-2025-07-23",
+    "lab": "shanghai-ai-lab",
+    "model": "fundusexpert",
+    "date": "2025-07-23",
+    "doc": "technical report",
+    "title": "Constructing Ophthalmic MLLM for Positioning-diagnosis Collaboration Through Clinical Cognitive Chain Reasoning",
+    "url": "https://arxiv.org/abs/2507.17539",
+    "release": null,
+    "notes": "Table 1 compares FundusExpert with 13 other models on Fundus-MMBench and GMAI-MMBench. Only the FundusExpert (8B) row is recorded. FundusExpert-mini (1B) scores 63.5% and has no record.",
+    "results": [
+      {
+        "benchmark": "fundus-mmbench",
+        "score": 69.7,
+        "unit": "%",
+        "as_written": "Fundus-MMBench accuracy, FundusExpert 8B (Table 1)",
+        "section": "health"
+      }
+    ]
+  },
+  {
+    "id": "openai-openai-privacy-filter-model-card-2026-08-18",
+    "lab": "openai",
+    "model": "openai-privacy-filter",
+    "date": "2026-08-18",
+    "doc": "model card",
+    "title": "Model Card for OpenAI Privacy Filter",
+    "url": "https://arxiv.org/abs/2608.18274",
+    "release": null,
+    "notes": "OpenAI released Privacy Filter on April 22, 2026, and posted its model card on arXiv on August 18, 2026. Table 1 scores it on PII-Masking-300k with the dataset’s labels and with OpenAI’s corrected labels. The baseline-label token F1 is recorded.",
+    "results": [
+      {
+        "benchmark": "pii-masking-300k",
+        "score": 0.96,
+        "unit": "score",
+        "as_written": "PII-Masking-300k (baseline labels), all labels, token F1 0.960. Span F1 0.926. With corrected labels, token F1 0.974 and span F1 0.942 (Table 1)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "mbzuai-atlas-chat-2b-technical-report-2024-11-11",
     "lab": "mbzuai",
     "model": "atlas-chat-2b",

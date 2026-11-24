@@ -883,6 +883,28 @@
     ]
   },
   {
+    "id": "chandar-lab",
+    "name": "Chandar Research Lab",
+    "country": "CA",
+    "url": "https://chandar-lab.github.io",
+    "aliases": [
+      "Chandar Lab",
+      "chandar-lab",
+      "Chandar Research Lab (Mila)"
+    ]
+  },
+  {
+    "id": "ict-cas",
+    "name": "Institute of Computing Technology, Chinese Academy of Sciences",
+    "country": "CN",
+    "url": "https://www.ict.ac.cn",
+    "aliases": [
+      "ICT, CAS",
+      "ICT CAS",
+      "QiMeng"
+    ]
+  },
+  {
     "id": "stanford",
     "name": "Stanford University",
     "country": "US",
@@ -1026,6 +1048,66 @@
     "aliases": [
       "Datalab.to",
       "datalab-to"
+    ]
+  },
+  {
+    "id": "opendrivelab",
+    "name": "OpenDriveLab",
+    "country": "HK",
+    "url": "https://opendrivelab.com",
+    "aliases": [
+      "OpenDriveLab",
+      "OpenDriveLab (HKU)"
+    ]
+  },
+  {
+    "id": "sutd",
+    "name": "Singapore University of Technology and Design (DeCLaRe Lab)",
+    "country": "SG",
+    "url": "https://www.sutd.edu.sg",
+    "aliases": [
+      "SUTD",
+      "declare-lab",
+      "DeCLaRe Lab"
+    ]
+  },
+  {
+    "id": "x-square-robot",
+    "name": "X Square Robot",
+    "country": "CN",
+    "url": "https://x2robot.com",
+    "aliases": [
+      "X Square Robot",
+      "x-square-robot",
+      "X2Robot"
+    ]
+  },
+  {
+    "id": "gigaai",
+    "name": "GigaAI",
+    "country": "CN",
+    "url": "https://gigaai.cc",
+    "aliases": [
+      "GigaAI",
+      "open-gigaai"
+    ]
+  },
+  {
+    "id": "dexmal",
+    "name": "Dexmal",
+    "country": "CN",
+    "url": "https://www.dexmal.com",
+    "aliases": [
+      "Dexmal"
+    ]
+  },
+  {
+    "id": "rlwrld",
+    "name": "RLWRLD",
+    "country": "KR",
+    "url": "https://www.rlwrld.ai",
+    "aliases": [
+      "RLWRLD"
     ]
   }
 ]
