@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Safety_Performance_light_-_Chart.width-1200.format-webp.webp (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "human-proximity-google",
+ static: 'paper',
  url: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Safety_Performance_light_-_Chart.width-1200.format-webp.webp",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

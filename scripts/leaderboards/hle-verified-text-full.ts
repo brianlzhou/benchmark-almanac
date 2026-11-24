@@ -43,6 +43,7 @@ const ROWS: [string, number][] = [
 ];
 const board: Leaderboard = {
   benchmark: 'hle-verified-text-full',
+  static: 'paper',
   url: 'https://github.com/SKYLENAGE-AI/HLE-Verified',
   feed: `${IMAGE} (transcribed 2026-11-08)`, terms: CHART_TERMS,
   async fetch() {

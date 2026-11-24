@@ -1472,7 +1472,8 @@
       "url": "https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png",
       "feed": "https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)",
@@ -9387,7 +9388,8 @@
       "url": "https://github.com/aidanmclaughlin/AidanBench",
       "feed": "https://raw.githubusercontent.com/aidanmclaughlin/AidanBench/main/assets/results.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "chatgpt-4o-latest (snapshot unspecified)",
@@ -12020,6 +12022,7 @@
       "url": "https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf",
       "feed": "https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf/resolve/main/assets/leaderboard.png",
       "terms": "Alibaba licenses the dataset under Apache 2.0 at https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf#license.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
@@ -16101,7 +16104,8 @@
       "url": "https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format",
       "feed": "https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -35133,7 +35137,8 @@
       "url": "https://hithink-research.github.io/BizFinBench.v2/",
       "feed": "https://hithink-research.github.io/BizFinBench.v2/static/images/score_sequence.png",
       "terms": "Public author result chart. The Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Dianjin-R1",
@@ -63384,7 +63389,8 @@
       "url": "https://cdn.sanity.io/images/2mc9cv2v/production/af90acf737d652594185fdc30b8e7ffe0c80a0a1-1600x1061.png?w=1600&fit=max",
       "feed": "https://cdn.sanity.io/images/2mc9cv2v/production/af90acf737d652594185fdc30b8e7ffe0c80a0a1-1600x1061.png?w=1600&fit=max (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Devin production (model unspecified)",
@@ -70817,7 +70823,8 @@
       "url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4w8x3.png",
       "feed": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4w8x3.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Seed2.1 Turbo"
@@ -87223,7 +87230,8 @@
       "url": "https://seed.bytedance.com/en/blog/seed2-1-officially-released-advancing-ai-productivity",
       "feed": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4ujsp.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Seed2.1 Turbo"
@@ -90721,7 +90729,8 @@
       "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg",
       "feed": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": []
     },
@@ -90729,7 +90738,8 @@
       "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg",
       "feed": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": []
     },
@@ -99973,11 +99983,10 @@
       "url": "https://huggingface.co/tencent/Hy4-flash#appendix-benchmark-results",
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png",
       "terms": "Tencent Hy License. https://huggingface.co/tencent/Hy4-flash/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": []
     },
     "exfuntube": {
       "url": "https://aclanthology.org/2023.emnlp-main.176/",
@@ -110557,9 +110566,17 @@
       "url": "https://github.com/FinWorkBench/Finch",
       "feed": "https://huggingface.co/datasets/FinWorkBench/Finch/resolve/main/figs/exp_results.jpg (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 8,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "humanPassRate": {
+          "name": "Human-evaluated pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "fincrime-agent-benchmark-castellum": {
       "url": "https://www.castellum.ai/financial-crime-agent-benchmark",
@@ -113136,7 +113153,8 @@
       "url": "https://research.meta.ai/blog/muse-wonder",
       "feed": "https://research.meta.ai/articles/introducing-muse-wonder/images/focusbench-light-v1.webp (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -123207,7 +123225,8 @@
       "url": "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png",
       "feed": "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
     },
@@ -133277,7 +133296,8 @@
       "url": "https://www.vellum.ai/blog/evaluation-claude-4-sonnet-vs-openai-o4-mini-vs-gemini-2-5-pro",
       "feed": "https://cdn.sanity.io/images/ghjnhoi4/production/ab06b6658b2dfe904c47a75396ec56a2e7fdee83-2017x1101.webp (transcribed 2026-11-20)",
       "terms": "Vellum publishes this chart on its public blog. Results are credited to Vellum.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Qwen"
@@ -134128,7 +134148,8 @@
       "url": "https://www.codabench.org/competitions/13645/",
       "feed": "https://hd-epic.github.io/site/",
       "terms": "The organizers publish the benchmarks under CC BY-NC 4.0. https://hd-epic.github.io/site/#-copyright Codabench serves a challenge page. The organizer links the reports publicly.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Huawei Noah’s Ark Lab (ShaunYoung)",
@@ -134588,7 +134609,8 @@
       "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "feed": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "terms": "OpenAI publishes the system card on its CDN. The CDN returned 404 for robots.txt. OpenAI terms apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": []
     },
@@ -134596,7 +134618,8 @@
       "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "feed": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "terms": "OpenAI publishes this system card on its public CDN, which serves no robots.txt.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": []
     },
@@ -134604,7 +134627,8 @@
       "url": "https://github.com/baichuan-inc/Baichuan-M3-235B",
       "feed": "https://raw.githubusercontent.com/baichuan-inc/Baichuan-M3-235B/main/images/hb_metrics.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AntAngelMed",
@@ -134649,7 +134673,8 @@
       "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "feed": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "terms": "OpenAI publishes this system card on its public CDN, which serves no robots.txt.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": []
     },
@@ -137045,7 +137070,8 @@
       "url": "https://github.com/SKYLENAGE-AI/HLE-Verified",
       "feed": "https://raw.githubusercontent.com/SKYLENAGE-AI/HLE-Verified/main/figure/leaderboard_HLE_Verified.png (transcribed 2026-11-08)",
       "terms": "GitHub permits public non-personal research use; raw.githubusercontent.com does not disallow these image paths.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Gemini 3 Pro (snapshot unspecified)",
@@ -138559,7 +138585,8 @@
       "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Safety_Performance_light_-_Chart.width-1200.format-webp.webp",
       "feed": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Safety_Performance_light_-_Chart.width-1200.format-webp.webp (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": []
     },
@@ -141165,7 +141192,8 @@
       "url": "https://seed.bytedance.com/en/blog/seed2-1-officially-released-advancing-ai-productivity",
       "feed": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4v1ol.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Seed2.1 Turbo"
@@ -148241,7 +148269,8 @@
       "url": "https://github.com/PKU-YuanGroup/ImgEdit",
       "feed": "https://raw.githubusercontent.com/PKU-YuanGroup/ImgEdit/main/assets/leaderboard.png (transcribed 2026-11-08)",
       "terms": "GitHub permits public non-personal research use; raw.githubusercontent.com does not disallow these image paths.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AnyEdit",

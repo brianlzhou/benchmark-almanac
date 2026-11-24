@@ -11,6 +11,7 @@ const IMAGE = 'https://cdn.sanity.io/images/ghjnhoi4/production/ab06b6658b2dfe90
 
 const board: Leaderboard = {
   benchmark: 'hardest-sat-problems-vellum',
+  static: 'paper',
   url: 'https://www.vellum.ai/blog/evaluation-claude-4-sonnet-vs-openai-o4-mini-vs-gemini-2-5-pro',
   feed: `${IMAGE} (transcribed 2026-11-20)`,
   terms: 'Vellum publishes this chart on its public blog. Results are credited to Vellum.',
