@@ -15,11 +15,14 @@ const board: Leaderboard = {
    'Nested Squares': { name: 'Nested squares', group: 'Task type' },
    Grid: { name: 'Grid', group: 'Task type' },
    'Path Following': { name: 'Path following', group: 'Task type' },
+   'Circled Letter': { name: 'Circled letter', group: 'Task type' },
  },
  url: "https://vlmsareblind.github.io/",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { 'Circled Letter': {name: 'Circled letter accuracy', unit: '%', better: 'higher'} },
+ terms: "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+ aliases: {
+   'Sonnet-3': 'claude-3-sonnet',
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

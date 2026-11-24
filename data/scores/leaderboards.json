@@ -4221,11 +4221,6 @@
           "name": "Bash reliability sessions",
           "unit": "count"
         },
-        "bash_reliability_rank": {
-          "name": "Bash reliability rank",
-          "unit": "rating",
-          "better": "lower"
-        },
         "praise_complaint_observations": {
           "name": "Praise and complaint observations",
           "unit": "count"
@@ -4233,11 +4228,6 @@
         "praise_complaint_sessions": {
           "name": "Praise and complaint sessions",
           "unit": "count"
-        },
-        "praise_complaint_rank": {
-          "name": "Praise and complaint rank",
-          "unit": "rating",
-          "better": "lower"
         },
         "steerability_observations": {
           "name": "Steerability observations",
@@ -4247,11 +4237,6 @@
           "name": "Steerability sessions",
           "unit": "count"
         },
-        "steerability_rank": {
-          "name": "Steerability rank",
-          "unit": "rating",
-          "better": "lower"
-        },
         "task_outcome_explicit_observations": {
           "name": "Explicit task outcome observations",
           "unit": "count"
@@ -4260,11 +4245,6 @@
           "name": "Explicit task outcome sessions",
           "unit": "count"
         },
-        "task_outcome_explicit_rank": {
-          "name": "Explicit task outcome rank",
-          "unit": "rating",
-          "better": "lower"
-        },
         "tool_hallucination_observations": {
           "name": "Tool hallucination observations",
           "unit": "count"
@@ -4272,11 +4252,6 @@
         "tool_hallucination_sessions": {
           "name": "Tool hallucination sessions",
           "unit": "count"
-        },
-        "tool_hallucination_rank": {
-          "name": "Tool hallucination rank",
-          "unit": "rating",
-          "better": "lower"
         }
       }
     },
@@ -15423,14 +15398,13 @@
       "url": "https://github.com/PRIS-CV/Animal-Bench#evaluation-results",
       "feed": "https://github.com/user-attachments/assets/2057de50-19d2-43bf-9b4a-ff6dfd11d394",
       "terms": "The repository lists no license for its results files. FlagEval describes the source dataset as limited to research and noncommercial use. https://github.com/PRIS-CV/Animal-Bench GitHub publishes crawl rules in robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "Chat-UniVi",
         "Valley",
         "Video-ChatGPT",
         "Video-LLaMA",
-        "Video-LLaVA",
         "VideoChat",
         "VideoChat2",
         "mPLUG-Owl"
@@ -44144,17 +44118,15 @@
     "cello": {
       "url": "https://github.com/Abbey4799/CELLO",
       "feed": "https://raw.githubusercontent.com/Abbey4799/CELLO/main/scores/",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
       "unmatched": [
         "BELLE",
         "Baichuan-chat",
         "Baize-V2-13b",
         "Baize-V2-7b",
         "BatGPT-sirius",
-        "ChatGLM",
-        "ChatGLM2",
         "ChatGLM2-32k",
         "Chinese-Alpaca-V1-13b",
         "Chinese-Alpaca-V1-33b",
@@ -44167,16 +44139,12 @@
         "Llama2-LinkSoul",
         "Llama2-Linly",
         "Llama2-OpenBuddy",
-        "Llama2-chat-13B",
-        "Llama2-chat-70B",
-        "Llama2-chat-7B",
         "LongChat-V1-13B",
         "LongChat-V1-7B",
         "LongChat-V1.5-7B",
         "MOSS",
         "OpenChat-V3.2",
         "Qwen",
-        "Vicuna-V1.3-13B",
         "Vicuna-V1.3-33B",
         "Vicuna-V1.3-7B",
         "Vicuna-V1.5-13B",
@@ -49559,9 +49527,9 @@
     "classeval": {
       "url": "https://fudanselab-classeval.github.io/leaderboard.html",
       "feed": "https://fudanselab-classeval.github.io/pass_at_k_result_H.json",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
       "unmatched": [
         "CodeLlama-13b-Instruct-hf",
         "GPT-3.5-Turbo [snapshot unspecified]",
@@ -49571,7 +49539,6 @@
         "PolyCoder-2.7B",
         "WizardCoder-15B-V1.0",
         "codegeex2-6b",
-        "deepseek-coder-6.7b-instruct",
         "instruct-codegen-16B",
         "santacoder-1.1B",
         "starcoder-gpteacher-code-instruct-15B"
@@ -70029,11 +69996,10 @@
       "url": "https://autogluon-fev-bench.hf.space/cref",
       "feed": "https://d2i4i33c3shekq.cloudfront.net/v1/leaderboard/latest.json",
       "terms": "The Space lists Apache 2.0 for code. The archived dataset has custom terms. https://doi.org/10.7910/DVN/B4OOJK",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 7,
       "unmatched": [
         "Agentic (Opus 4.x)",
-        "Agentic (Opus 5)",
         "AutoETS",
         "AutoTheta",
         "Chronos 2",
@@ -70041,16 +70007,9 @@
         "DP + Chronos2 (GPT-5.6 Sol)",
         "DP + Chronos2 (Opus 5)",
         "DP + Chronos2 (Sonnet 4.6)",
-        "Direct Prompt (GPT-5.6 Sol)",
-        "Direct Prompt (Opus 4.6)",
-        "Direct Prompt (Opus 4.8)",
-        "Direct Prompt (Opus 5)",
-        "Direct Prompt (Sonnet 4.6)",
-        "Direct Prompt (Sonnet 5)",
         "FlowState r1.1",
         "Moirai 2",
         "Naive",
-        "Seasonal naive",
         "TabPFN-TS 3",
         "TiRex",
         "TiRex 2",
@@ -70059,6 +70018,10 @@
         "Toto 2 (1B)",
         "t0-gamma"
       ],
+      "reference": [
+        "Direct Prompt"
+      ],
+      "harnesses": "system",
       "parts": {
         "domain/agriculture": {
           "name": "agriculture",
@@ -80365,9 +80328,9 @@
     "deepresearcheval-1": {
       "url": "https://infinity-ailab.github.io/deep_research_eval/",
       "feed": "https://infinity-ailab.github.io/deep_research_eval/",
-      "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "Claude-Sonnet-4.5 DR research agent",
         "DeepSeek DR research agent",
@@ -80375,7 +80338,6 @@
         "Gemini-2.5-Pro DR research agent",
         "Grok4 DR research agent",
         "Manus research agent",
-        "OpenAI Deep Research research agent",
         "Perplexity DR research agent",
         "Qwen-3-235B DR research agent"
       ],
@@ -85608,11 +85570,10 @@
     "do-not-answer": {
       "url": "https://github.com/Libr-AI/do-not-answer",
       "feed": "https://raw.githubusercontent.com/Libr-AI/do-not-answer/main/README.md",
-      "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "Public results published by the benchmark authors at raw.githubusercontent.com. Retain source attribution and follow the upstream terms.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
-        "ChatGLM2",
         "ChatGPT (snapshot unspecified)",
         "Claude",
         "GPT-4 (snapshot unspecified)",
@@ -115672,17 +115633,66 @@
     "full-duplex-bench-3": {
       "url": "https://daniellin94144.github.io/FDB-v3-demo/",
       "feed": "https://daniellin94144.github.io/FDB-v3-demo/",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "Cascaded [voice system]",
         "GPT-Realtime [voice system]",
         "Gemini 2.5 Live [voice system]",
-        "Gemini 3.1 Live [voice system]",
         "Grok [voice system]",
         "Ultravox [voice system]"
       ],
+      "parts": {
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        },
+        "disfluencyFiller": {
+          "name": "Filler",
+          "group": "Disfluency"
+        },
+        "disfluencyPause": {
+          "name": "Pause",
+          "group": "Disfluency"
+        },
+        "disfluencyHesitation": {
+          "name": "Hesitation",
+          "group": "Disfluency"
+        },
+        "disfluencyFalseStart": {
+          "name": "False start",
+          "group": "Disfluency"
+        },
+        "disfluencySelfCorr": {
+          "name": "Self-correction",
+          "group": "Disfluency"
+        },
+        "ecommerce": {
+          "name": "Ecommerce",
+          "group": "Domain"
+        },
+        "finance": {
+          "name": "Finance",
+          "group": "Domain"
+        },
+        "housing": {
+          "name": "Housing",
+          "group": "Domain"
+        },
+        "travel": {
+          "name": "Travel",
+          "group": "Domain"
+        }
+      },
       "stats": {
         "argumentAccuracy": {
           "name": "Argument accuracy",
@@ -115700,8 +115710,8 @@
           "better": "lower"
         },
         "latency": {
-          "name": "Latency",
-          "unit": "ms",
+          "name": "Task completion latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "responseQuality": {
@@ -115716,8 +115726,18 @@
         },
         "turnTaking": {
           "name": "Turn-taking score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
+        },
+        "firstWordLatency": {
+          "name": "First word latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "toolCallLatency": {
+          "name": "Tool call latency",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -136726,8 +136746,8 @@
       "url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md",
       "feed": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 3,
       "unmatched": [
         "CodeGeeX2 6B",
         "CodeLLama 13B",
@@ -136738,9 +136758,6 @@
         "DeepSeek-Coder-Base 33B",
         "DeepSeek-Coder-Base 5.7B",
         "DeepSeek-Coder-Base 6.7B",
-        "DeepSeek-Coder-Instruct 1.3B",
-        "DeepSeek-Coder-Instruct 33B",
-        "DeepSeek-Coder-Instruct 6.7B",
         "GPT-3.5-Turbo (snapshot unspecified)",
         "GPT-4 (snapshot unspecified)",
         "StarCoderBase 16B"
@@ -197682,8 +197699,8 @@
       "url": "https://molmospaces.allen.ai/leaderboard/ms",
       "feed": "https://molmospaces.allen.ai/benchmark/data/index.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 5,
       "unmatched": [
         "AsterPick",
         "Awomo-0.5I",
@@ -197692,16 +197709,14 @@
         "CAP<sub>open</sub> + Gemini-ER",
         "CAP<sub>pick</sub> + Gemini-ER",
         "Cosmic + Gemini-ER",
-        "Cosmos3-Nano-Policy",
         "EchoPolicy-0 + Gemini-3.8-Flash",
         "LAP-VLA",
         "Magic-Policy",
         "MagicBrain + Qwen3.7-Plus",
-        "MolmoAct2 DROID",
         "MolmoBot",
         "MolmoBot-Img",
         "MolmoBot-f3",
-        "MolmoBot-π₀",
+        "MolmoBot-pi0",
         "PAT + Qwen3.8-27B",
         "PAT-RoboLab + Qwen3.8-27B",
         "PRTS-Droid",
@@ -197714,10 +197729,7 @@
         "Vana-Policy",
         "WALL-OSS-0.5",
         "ZoeInside-VLA",
-        "π₀ DROID",
-        "π₀-FAST DROID",
-        "π₀.₅ DROID",
-        "π₀.₅-MolmoSpaces"
+        "pi0.5-MolmoSpaces"
       ],
       "parts": {
         "ms_pick": {
@@ -215896,9 +215908,9 @@
     "omnimmi": {
       "url": "https://omnimmi.github.io/",
       "feed": "https://omnimmi.github.io/ (avg. w/o P, video and audio-input tables)",
-      "terms": "The public OmniMMI project page publishes these results; the Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The public OmniMMI project page publishes these results. The Almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
       "unmatched": [
         "GPT-4o [snapshot unspecified]",
         "Gemini-1.5-Pro [snapshot unspecified]",
@@ -215918,8 +215930,6 @@
         "PLLaVA-13B (Vicuna-13B)",
         "PLLaVA-34B (Yi-34B)",
         "ShareGPT4Video (Llama3-8B)",
-        "VITA (Mistrl-8×7B)",
-        "Video-LLaVA (Vicuna-7B)",
         "VideoChat2 (Vicuna-7B)",
         "VideoChatGPT (LLaMA-7B)",
         "VideoLLM-online (Llama3-8B)",
@@ -260759,10 +260769,10 @@
       "url": "https://benchmarks.roark.ai/benchmarks",
       "feed": "https://benchmarks.roark.ai/benchmarks/api/stacks-table/v1.3/all",
       "terms": "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://benchmarks.roark.ai/robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 7,
       "unmatched": [
-        "Amazon Nova 2 Sonic (speech-to-speech)",
+        "Amazon Nova 2 Sonic",
         "AssemblyAI Universal-3.5 Pro + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3",
         "AssemblyAI Universal-3.5 Pro + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3.5",
         "AssemblyAI Universal-3.5 Pro + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3.6",
@@ -261160,8 +261170,8 @@
         "Deepgram Nova-3 + OpenAI GPT-6.1 Terra + ElevenLabs v4 Turbo",
         "Deepgram Nova-3 + OpenAI GPT-6.1 Terra + OpenAI TTS-1",
         "Deepgram Nova-3 + OpenAI GPT-6.2 Sol + ElevenLabs Flash v2.5",
-        "ElevenLabs Realtime v1 Max (speech-to-speech)",
-        "ElevenLabs Realtime v1 Mini (speech-to-speech)",
+        "ElevenLabs Realtime v1 Max",
+        "ElevenLabs Realtime v1 Mini",
         "ElevenLabs Scribe v3 Live + Anthropic Claude Haiku 5.5 + AssemblyAI TTS-1",
         "ElevenLabs Scribe v3 Live + Anthropic Claude Haiku 5.5 + Cartesia Sonic-3.5",
         "ElevenLabs Scribe v3 Live + Anthropic Claude Haiku 5.5 + ElevenLabs Flash v2.5",
@@ -261184,14 +261194,9 @@
         "ElevenLabs Scribe v3 Live + OpenAI GPT-6.1 Terra + Cartesia Sonic-3.5",
         "ElevenLabs Scribe v3 Live + OpenAI GPT-6.1 Terra + Cartesia Sonic-3.6",
         "ElevenLabs Scribe v3 Live + OpenAI GPT-6.1 Terra + Rime Coda",
-        "Google Gemini 2.5 Flash native audio (speech-to-speech)",
-        "Google Gemini 3.1 Flash Live (preview) (speech-to-speech)",
-        "Google Gemini 3.8 Live (speech-to-speech)",
-        "OpenAI GPT Live 1 (Luna) (speech-to-speech)",
-        "OpenAI GPT Live 1 (Sol) (speech-to-speech)",
-        "OpenAI GPT Realtime 2 (speech-to-speech)",
-        "OpenAI GPT Realtime 2.1 (speech-to-speech)",
-        "OpenAI GPT Realtime 2.1 mini (speech-to-speech)",
+        "Google Gemini 2.5 Flash native audio",
+        "OpenAI GPT Live 1 (Luna)",
+        "OpenAI GPT Live 1 (Sol)",
         "OpenAI GPT Transcribe + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3",
         "OpenAI GPT Transcribe + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3.5",
         "OpenAI GPT Transcribe + Anthropic Claude Haiku 4.5 + ElevenLabs Flash v2.5",
@@ -261223,7 +261228,7 @@
         "OpenAI GPT Transcribe + OpenAI GPT-6.1 Terra + Cartesia Sonic-3",
         "OpenAI GPT Transcribe + OpenAI GPT-6.1 Terra + ElevenLabs Flash v2.5",
         "OpenAI GPT Transcribe + OpenAI GPT-6.1 Terra + Rime Coda",
-        "OpenAI GPT-Live 1.1 (Luna) (speech-to-speech)",
+        "OpenAI GPT-Live 1.1 (Luna)",
         "OpenAI Whisper-1 + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3",
         "OpenAI Whisper-1 + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3.5",
         "OpenAI Whisper-1 + Anthropic Claude Haiku 4.5 + Cartesia Sonic-3.6",
@@ -261296,7 +261301,7 @@
         "OpenAI Whisper-1 + OpenAI GPT-6.1 Sol + OpenAI TTS-1",
         "OpenAI Whisper-1 + OpenAI GPT-6.1 Sol + OpenAI TTS-1 HD",
         "OpenAI Whisper-1 + OpenAI GPT-6.1 Sol + Rime Coda",
-        "Phonic 1 (speech-to-speech)",
+        "Phonic 1",
         "Soniox v6 + Anthropic Claude Haiku 4.5 + ElevenLabs Flash v2.5",
         "Soniox v6 + Anthropic Claude Haiku 4.5 + Rime Coda",
         "Soniox v6 + Anthropic Claude Haiku 5.5 + AssemblyAI TTS-1",
@@ -261688,9 +261693,7 @@
         "Speechmatics Standard (realtime) + OpenAI GPT-6.1 Sol + OpenAI TTS-1",
         "Speechmatics Standard (realtime) + OpenAI GPT-6.1 Sol + OpenAI TTS-1 HD",
         "Speechmatics Standard (realtime) + OpenAI GPT-6.1 Sol + Rime Coda",
-        "Ultravox v0.7 (speech-to-speech)",
-        "xAI Grok Voice 3.0 (speech-to-speech)",
-        "xAI Grok Voice Think Fast 2.0 (speech-to-speech)"
+        "Ultravox v0.7"
       ],
       "stats": {
         "value": {
@@ -262442,19 +262445,13 @@
       "feed": "https://robocolosseum.ai/api/leaderboard?track=open",
       "terms": "Public results from the RoboColosseum leaderboard, https://robocolosseum.ai/.",
       "headline": "The board ranks policies separately for each robot. The headline is the Franka Open track rating, which the board shows first.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 7,
       "unmatched": [
+        "FLUX3",
         "LAP",
-        "claude-fable-5-2-droid",
-        "claude-opus-5-5-droid",
         "g05-droid",
-        "gpt-6-astra-droid",
-        "gr00t-n17-droid",
-        "grok-4.7-droid",
-        "lingbot-vla-v2-6b-droid",
-        "molmoact2-droid",
-        "pi05-droid"
+        "lingbot-vla-v2-6b-droid"
       ],
       "parts": {
         "frankaOpen": {
@@ -262482,9 +262479,14 @@
           "name": "Ties",
           "unit": "count"
         },
-        "fineTrials": {
-          "name": "Fine-tune trials",
+        "successes": {
+          "name": "Task successes",
           "unit": "count"
+        },
+        "successRate": {
+          "name": "Task success rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -281675,12 +281677,10 @@
       "url": "https://huggingface.co/spaces/snap-stanford/stark-leaderboard",
       "feed": "https://huggingface.co/spaces/snap-stanford/stark-leaderboard/resolve/main/app.py",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "ANCE (roberta)",
-        "AvaTaR(claude-3-opus)",
-        "AvaTaR(gpt-4-turbo)",
         "BM25",
         "ColBERTv2",
         "DPR (roberta)",
@@ -281688,9 +281688,11 @@
         "LLM2Vec",
         "QAGNN (roberta)",
         "ada-002",
+        "gpt-4-turbo (snapshot unspecified)",
         "multi-ada-002",
         "voyage-l2-instruct"
       ],
+      "harnesses": "system",
       "stats": {
         "hit5": {
           "name": "Hit at 5",
@@ -310628,9 +310630,9 @@
     "videohallucer": {
       "url": "https://github.com/patrick-tssn/VideoHallucer",
       "feed": "https://raw.githubusercontent.com/patrick-tssn/VideoHallucer/main/README.md",
-      "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
         "Gemini-1.5-pro (snapshot unspecified)",
@@ -310646,7 +310648,6 @@
         "Video-LLaMA-2",
         "VideoChat2",
         "VideoChatGPT",
-        "VideoLLaVA",
         "VideoLaVIT"
       ],
       "parts": {
@@ -310658,6 +310659,10 @@
           "name": "Temporal",
           "group": "Category"
         },
+        "semanticDetail": {
+          "name": "Semantic detail",
+          "group": "Category"
+        },
         "extrinsicFact": {
           "name": "Extrinsic factual",
           "group": "Category"
@@ -310665,13 +310670,6 @@
         "extrinsicNonfact": {
           "name": "Extrinsic nonfactual",
           "group": "Category"
-        }
-      },
-      "stats": {
-        "semanticDetail": {
-          "name": "Semantic detail",
-          "unit": "%",
-          "better": "higher"
         }
       }
     },
@@ -313564,13 +313562,12 @@
     "vlms-are-blind": {
       "url": "https://vlmsareblind.github.io/",
       "feed": "https://vlmsareblind.github.io/",
-      "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "terms": "Public source published by the benchmark authors. Source licensing and attribution requirements apply.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
         "Gemini-1.5",
-        "Sonnet-3",
         "Sonnet-3.5"
       ],
       "parts": {
@@ -313601,13 +313598,10 @@
         "Path Following": {
           "name": "Path following",
           "group": "Task type"
-        }
-      },
-      "stats": {
+        },
         "Circled Letter": {
-          "name": "Circled letter accuracy",
-          "unit": "%",
-          "better": "higher"
+          "name": "Circled letter",
+          "group": "Task type"
         }
       }
     },

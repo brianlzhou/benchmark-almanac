@@ -17,7 +17,11 @@ const board: Leaderboard = {
   AP: { name: 'Action prediction', group: 'Task type' },
   SI: { name: 'Speaker identification', group: 'Task type' },
 }, url: PAGE, feed: `${PAGE} (avg. w/o P, video and audio-input tables)`,
-  terms: 'The public OmniMMI project page publishes these results; the Almanac credits and links the source.',
+  terms: 'The public OmniMMI project page publishes these results. The Almanac credits and links the source.',
+  aliases: {
+    'VITA (Mistrl-8×7B)': 'vita',
+    'Video-LLaVA (Vicuna-7B)': 'video-llava-7b',
+  },
   stats: { PT: { name: 'Proactivity task score', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(PAGE)).map(t => t.map(r => r.map(c => c.text))).filter(t => t[0]?.at(-1) === 'avg. w/o P');
@@ -26,7 +30,7 @@ const board: Leaderboard = {
       let model = r[1];
       if (/^GPT-4o$|^Gemini-1\.5/.test(model)) model += ' [snapshot unspecified]';
       else if (r[2] && r[2] !== '-') model += ` (${r[2]})`;
-      return { model, score: num(r.at(-1))!, setting: `${k ? 'audio input' : 'video input'}; ${r[3]} frames`,
+      return { model, score: num(r.at(-1))!, setting: `${k ? 'audio input' : 'video input'}, ${r[3]} frames`,
         metrics: Object.fromEntries(t[0].slice(4,-1).flatMap((key,i) => num(r[i+4]) === undefined ? [] : [[key,num(r[i+4])!]])) };
     }));
   },

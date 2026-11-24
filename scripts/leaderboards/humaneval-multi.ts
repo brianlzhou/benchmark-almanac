@@ -28,6 +28,11 @@ const board: Leaderboard = {
   js: { name: 'JS', group: 'Language' },
 }, url: "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  aliases: {
+    'DeepSeek-Coder-Instruct 33B': 'deepseek-coder-33b',
+    'DeepSeek-Coder-Instruct 6.7B': 'deepseek-coder-6-7b',
+    'DeepSeek-Coder-Instruct 1.3B': 'deepseek-coder-1-3b',
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

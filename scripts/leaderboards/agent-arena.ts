@@ -48,19 +48,14 @@ const board: Leaderboard = {
     outputTokensPerTaskMedian: { name: 'Median output tokens per task', unit: 'tokens' },
     bash_reliability_observations: { name: 'Bash reliability observations', unit: 'count' },
     bash_reliability_sessions: { name: 'Bash reliability sessions', unit: 'count' },
-    bash_reliability_rank: { name: 'Bash reliability rank', unit: 'rating', better: 'lower' },
     praise_complaint_observations: { name: 'Praise and complaint observations', unit: 'count' },
     praise_complaint_sessions: { name: 'Praise and complaint sessions', unit: 'count' },
-    praise_complaint_rank: { name: 'Praise and complaint rank', unit: 'rating', better: 'lower' },
     steerability_observations: { name: 'Steerability observations', unit: 'count' },
     steerability_sessions: { name: 'Steerability sessions', unit: 'count' },
-    steerability_rank: { name: 'Steerability rank', unit: 'rating', better: 'lower' },
     task_outcome_explicit_observations: { name: 'Explicit task outcome observations', unit: 'count' },
     task_outcome_explicit_sessions: { name: 'Explicit task outcome sessions', unit: 'count' },
-    task_outcome_explicit_rank: { name: 'Explicit task outcome rank', unit: 'rating', better: 'lower' },
     tool_hallucination_observations: { name: 'Tool hallucination observations', unit: 'count' },
     tool_hallucination_sessions: { name: 'Tool hallucination sessions', unit: 'count' },
-    tool_hallucination_rank: { name: 'Tool hallucination rank', unit: 'rating', better: 'lower' },
   },
   // Arena's own Pareto view plots the score against cost per task, with the median (p50) as its default cost
   chart: {
@@ -97,7 +92,6 @@ const board: Leaderboard = {
         if(fin(signal.score_ci_lower))metrics[name+'_ciLow']=pct(signal.score_ci_lower);
         if(fin(signal.score_ci_upper))metrics[name+'_ciHigh']=pct(signal.score_ci_upper);
         if (fin(signal.session_count)) metrics[name + '_sessions'] = signal.session_count;
-        if (fin(signal.rank)) metrics[name + '_rank'] = signal.rank;
         if(fin(signal.observation_count))metrics[name+'_observations']=signal.observation_count;
       }
       return {

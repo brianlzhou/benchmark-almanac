@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: "https://github.com/PRIS-CV/Animal-Bench#evaluation-results",
   feed: FEED,
   terms: "The repository lists no license for its results files. FlagEval describes the source dataset as limited to research and noncommercial use. https://github.com/PRIS-CV/Animal-Bench GitHub publishes crawl rules in robots.txt.",
+  aliases: {
+    'Video-LLaVA': 'video-llava-7b',
+  },
   parts: {"OE": "OE", "OR": "OR", "AR": "AR", "AS": "AS", "AP": "AP", "AL": "AL", "OC": "OC", "AC": "AC", "RS": "RS", "PM": "PM", "BM": "BM", "SA": "SA", "PD": "PD"},
   async fetch() {
     return checkedImageRows(FEED, '2b9bf2274841848fbbfc1fba88d5f1250472b3802fe3bf1e916d44e2afe67628', [
