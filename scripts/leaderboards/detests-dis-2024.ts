@@ -16,7 +16,7 @@ const board: Leaderboard = {
   benchmark: 'detests-dis-2024', url: feed, feed,
   terms: 'Copyright 2024 DETESTS-Dis IberLEF. https://detests-dis.github.io/evaluation/',
   parts: { soft: { name: 'Task 1 with Soft Labels', unit: 'score', better: 'lower', note: 'Cross entropy.' },
-    hardICM: { name: 'Task 2 with Hard Labels', note: 'ICM.' }, hardICMNorm: { name: 'Task 2 with Hard Labels normalized', unit: 'score', better: 'lower', note: 'Normalized ICM.' }, softICM: { name: 'Task 2 with Soft Labels', note: 'ICM Soft.' } },
+    hardICM: { name: 'Task 2 with Hard Labels', unit: 'score', better: 'higher', note: 'ICM.' }, hardICMNorm: { name: 'Task 2 with Hard Labels normalized', unit: 'score', better: 'higher', note: 'Normalized ICM.' }, softICM: { name: 'Task 2 with Soft Labels', unit: 'score', better: 'higher', note: 'ICM Soft.' }, softICMNorm: { name: 'Task 2 with Soft Labels normalized', unit: 'score', better: 'higher', note: 'Normalized ICM Soft.' } },
   async fetch() {
     const result = tables(await fetchText(feed)).map(t => t.map(row => row.filter(c => c.text)));
     const byRun = new Map<string, LeaderboardRow>();

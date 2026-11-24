@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'Papers with Code archive, modified by Syntology, CC BY-SA 4.0. https://codewithpapers.app/attribution',
   stats: {
     strictF1: { name: 'Strict relation extraction F1', unit: 'score', better: 'higher', note: 'Macro-F1 for exact relation extraction, from 0 to 1.' },
+    relationF1: { name: 'Relation extraction F1', unit: 'score', better: 'higher', note: 'Macro-F1 for relation extraction, from 0 to 1.' },
     entityF1: { name: 'Entity recognition F1', unit: 'score', better: 'higher', note: 'Macro-F1 for named entity recognition, from 0 to 1.' },
   },
   async fetch() {

@@ -2657,7 +2657,7 @@
       "feed": "https://www.codewithpapers.app/sota/relation-extraction-on-ade-corpus.json",
       "terms": "Papers with Code archive, modified by Syntology, CC BY-SA 4.0. https://codewithpapers.app/attribution",
       "host": "Code with Papers",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLDR + CLNER",
@@ -2679,6 +2679,12 @@
           "unit": "score",
           "better": "higher",
           "note": "Macro-F1 for exact relation extraction, from 0 to 1."
+        },
+        "relationF1": {
+          "name": "Relation extraction F1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Macro-F1 for relation extraction, from 0 to 1."
         },
         "entityF1": {
           "name": "Entity recognition F1",
@@ -6519,7 +6525,7 @@
       "url": "https://github.com/AlayaLab/AgenticSTS",
       "feed": "https://raw.githubusercontent.com/AlayaLab/AgenticSTS/HEAD/README.md",
       "terms": "The agent code uses Apache 2.0. https://github.com/AlayaLab/AgenticSTS/blob/HEAD/AgenticSTS/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
       "stats": {
@@ -6527,6 +6533,25 @@
           "name": "Mean score",
           "unit": "score",
           "better": "higher"
+        },
+        "meanFloor": {
+          "name": "Mean floor",
+          "unit": "score",
+          "better": "higher"
+        },
+        "medianFloor": {
+          "name": "Median floor",
+          "unit": "score",
+          "better": "higher"
+        },
+        "bosses": {
+          "name": "Bosses defeated",
+          "unit": "count",
+          "better": "higher"
+        },
+        "meanDecisions": {
+          "name": "Mean decisions per run",
+          "unit": "count"
         }
       }
     },
@@ -9283,7 +9308,7 @@
       "url": "https://aider.chat/docs/leaderboards/refactor.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/refactor_leaderboard.yml",
       "terms": "Aider's repository uses Apache 2.0. The raw GitHub host returns 404 for robots.txt, and aider.chat lists its sitemap.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "DeepSeek Coder V2 0724 (deprecated)"
@@ -10557,7 +10582,7 @@
       "feed": "https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "terms": "SOTA2 Research publishes and credits the originating papers on its public benchmark page. https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "host": "SOTA2 Research",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DM-ASR (DiariZen) (CN 1300h)",
@@ -10586,6 +10611,11 @@
         },
         "DER": {
           "name": "Diarization error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "DER (0.5s-collar)": {
+          "name": "Diarization error rate (0.5s collar)",
           "unit": "%",
           "better": "lower"
         },
@@ -14127,7 +14157,7 @@
       "feed": "https://anchorbenchmark.github.io/app.js",
       "terms": "CC BY-NC-ND 4.0. https://github.com/anchorbenchmark/ANCHORBenchmark/blob/main/LICENSE.txt",
       "headline": "The authors report four separate scores from 1 to 5. The headline is their plain mean on the main evaluation.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "InternVL3.5",
@@ -14151,6 +14181,34 @@
       "stats": {
         "outputTokens": {
           "name": "Output tokens",
+          "unit": "tokens"
+        },
+        "humanAnswer": {
+          "name": "Human subset answer score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Answer score on the human-evaluated subset, from 1 to 5."
+        },
+        "humanHallucination": {
+          "name": "Human subset hallucination score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Hallucination score on the human-evaluated subset, from 1 to 5."
+        },
+        "humanConciseness": {
+          "name": "Human subset conciseness score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Conciseness score on the human-evaluated subset, from 1 to 5."
+        },
+        "humanDivergence": {
+          "name": "Human subset divergence score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reasoning divergence score on the human-evaluated subset, from 1 to 5."
+        },
+        "humanOutputTokens": {
+          "name": "Human subset output tokens",
           "unit": "tokens"
         }
       }
@@ -14757,7 +14815,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo/edit?gid=0",
       "feed": "https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo/export?format=csv&gid=0",
       "terms": "Public Google Sheet read through its CSV export; docs.google.com robots.txt allows /spreadsheet paths and the sheet states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "-",
@@ -14795,7 +14853,19 @@
         "gpt-4o / gpt-5.4",
         "gpt-4o / gpt-5.6-sol",
         "o3 + holo1.5-72b"
-      ]
+      ],
+      "stats": {
+        "passAt2": {
+          "name": "Pass@2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt3": {
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "androidworld-knowledge": {
       "url": "https://arxiv.org/html/2502.17110",
@@ -26086,7 +26156,7 @@
       "url": "https://zapier.com/benchmarks",
       "feed": "https://zapier.com/benchmarks (current Framer page module, all ranked leaderboard rows)",
       "terms": "Static page on zapier.com; Zapier's terms of service and acceptable use policy do not restrict automated reading.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 150,
       "unmatched": [
         "Claude Fable 5.1 (with Opus 5 Fallback)"
@@ -26118,12 +26188,18 @@
         }
       },
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "promotionalCostUsd": {
           "name": "Promotional cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "uncachedCostUsd": {
+          "name": "Uncached cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cachedCostUsd": {
+          "name": "Cached cost per task",
           "unit": "usd",
           "better": "lower"
         }
@@ -39155,7 +39231,7 @@
       "url": "https://yoloytang.me/BVB/",
       "feed": "https://yoloytang.me/BVB/data.js",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [
         "Glimpse"
@@ -39243,6 +39319,18 @@
           "name": "Runtime in seconds",
           "unit": "seconds",
           "better": "lower"
+        },
+        "sceneCount": {
+          "name": "Evaluated scenes",
+          "unit": "count"
+        },
+        "renderedScenes": {
+          "name": "Rendered scenes",
+          "unit": "count"
+        },
+        "costScenes": {
+          "name": "Costed scenes",
+          "unit": "count"
         }
       }
     },
@@ -80509,7 +80597,7 @@
       "url": "https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard",
       "feed": "https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard/resolve/main/data_gpt55/leaderboard.csv (overall_score; GPT-5.5 judge)",
       "terms": "CSV in the muset-ai/DeepResearch-Bench-Leaderboard Hugging Face Space, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "ATH-Voicepica-DeepResearch",
@@ -80547,6 +80635,18 @@
         "readability": {
           "name": "Readability",
           "group": "Dimension"
+        }
+      },
+      "stats": {
+        "citation_accuracy": {
+          "name": "Citation accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "effective_citations": {
+          "name": "Effective citations",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -83760,7 +83860,7 @@
       "url": "https://detests-dis.github.io/evaluation/",
       "feed": "https://detests-dis.github.io/evaluation/",
       "terms": "Copyright 2024 DETESTS-Dis IberLEF. https://detests-dis.github.io/evaluation/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BETO",
@@ -83779,17 +83879,27 @@
         },
         "hardICM": {
           "name": "Task 2 with Hard Labels",
+          "unit": "score",
+          "better": "higher",
           "note": "ICM."
         },
         "hardICMNorm": {
           "name": "Task 2 with Hard Labels normalized",
           "unit": "score",
-          "better": "lower",
+          "better": "higher",
           "note": "Normalized ICM."
         },
         "softICM": {
           "name": "Task 2 with Soft Labels",
+          "unit": "score",
+          "better": "higher",
           "note": "ICM Soft."
+        },
+        "softICMNorm": {
+          "name": "Task 2 with Soft Labels normalized",
+          "unit": "score",
+          "better": "higher",
+          "note": "Normalized ICM Soft."
         }
       }
     },
@@ -129825,7 +129935,7 @@
       "url": "https://gso-bench.github.io/",
       "feed": "https://gso-bench.github.io/assets/leaderboard.json",
       "terms": "Static JSON on the GSO project site; the GSO repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
       "unmatched": [],
       "stats": {
@@ -129834,6 +129944,18 @@
           "unit": "%",
           "better": "higher",
           "note": "Score after the reward-hacking penalty."
+        },
+        "optAt10": {
+          "name": "Opt@10",
+          "unit": "%",
+          "better": "higher",
+          "note": "Tasks matching expert speedup within 10 attempts."
+        },
+        "hackAdjustedAt10": {
+          "name": "Hack-adjusted Opt@10",
+          "unit": "%",
+          "better": "higher",
+          "note": "Opt@10 score after the reward-hacking penalty."
         }
       }
     },
@@ -152120,7 +152242,7 @@
       "url": "https://iosworld.io/leaderboard/",
       "feed": "https://iosworld.io/leaderboard/",
       "terms": "Public results published by the benchmark authors at iosworld.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "GPT-6 Luna (high, 98 tasks) + GPT-6 Astra (medium, 35 tasks)"
@@ -152137,18 +152259,6 @@
         "memory": {
           "name": "Memory",
           "group": "Environment"
-        },
-        "single_steps": {
-          "name": "Single app steps",
-          "group": "Environment"
-        },
-        "multi_steps": {
-          "name": "Multi app steps",
-          "group": "Environment"
-        },
-        "memory_steps": {
-          "name": "Memory steps",
-          "group": "Environment"
         }
       },
       "stats": {
@@ -152156,6 +152266,31 @@
           "name": "Steps",
           "unit": "count",
           "better": "lower"
+        },
+        "single_steps": {
+          "name": "Single app steps",
+          "unit": "count",
+          "better": "lower"
+        },
+        "multi_steps": {
+          "name": "Multi app steps",
+          "unit": "count",
+          "better": "lower"
+        },
+        "memory_steps": {
+          "name": "Memory steps",
+          "unit": "count",
+          "better": "lower"
+        },
+        "meanScore": {
+          "name": "Mean score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "solved": {
+          "name": "Tasks solved",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -170281,7 +170416,7 @@
       "url": "https://arena.wildcardlabs.tech/leagues/guillotine-2026/",
       "feed": "https://fantasy-platform-staging.wildcardlabs.tech/v1/public/arena/leagues/guillotine-2026/summary",
       "terms": "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The hosts disallow named crawlers and allow the general user agent.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
@@ -170331,6 +170466,16 @@
         },
         "week8": {
           "name": "Week 8 points",
+          "unit": "score",
+          "better": "higher"
+        },
+        "week9": {
+          "name": "Week 9 points",
+          "unit": "score",
+          "better": "higher"
+        },
+        "week10": {
+          "name": "Week 10 points",
           "unit": "score",
           "better": "higher"
         }
@@ -171974,7 +172119,7 @@
       "url": "https://huggingface.co/spaces/lmgame/lmgame_bench",
       "feed": "https://huggingface.co/spaces/lmgame/lmgame_bench/raw/main/rank_data_03_25_2025.json",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
       "parts": {
@@ -172014,10 +172159,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "superMarioBrosTrials": {
-          "name": "Super Mario Bros. trials",
-          "unit": "count"
-        },
         "superMarioBrosScore1": {
           "name": "Super Mario Bros. score 1",
           "unit": "score",
@@ -172037,10 +172178,6 @@
           "name": "Sokoban score",
           "unit": "score",
           "better": "higher"
-        },
-        "sokobanTrials": {
-          "name": "Sokoban trials",
-          "unit": "count"
         },
         "sokobanBoxesOnTarget1": {
           "name": "Sokoban boxes on target 1",
@@ -172072,10 +172209,6 @@
           "unit": "count",
           "better": "higher"
         },
-        "2048Trials": {
-          "name": "2048 trials",
-          "unit": "count"
-        },
         "highestTile": {
           "name": "Highest 2048 tile",
           "unit": "count",
@@ -172101,10 +172234,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "candyCrushTrials": {
-          "name": "Candy Crush trials",
-          "unit": "count"
-        },
         "candyCrushScore1": {
           "name": "Candy Crush score 1",
           "unit": "score",
@@ -172124,10 +172253,6 @@
           "name": "Tetris score",
           "unit": "score",
           "better": "higher"
-        },
-        "tetrisTrials": {
-          "name": "Tetris trials",
-          "unit": "count"
         },
         "tetrisScore1": {
           "name": "Tetris score 1",
@@ -172151,6 +172276,16 @@
         },
         "aceAttorneyScore1": {
           "name": "Ace Attorney score 1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "aceAttorneyScore2": {
+          "name": "Ace Attorney score 2",
+          "unit": "score",
+          "better": "higher"
+        },
+        "aceAttorneyScore3": {
+          "name": "Ace Attorney score 3",
           "unit": "score",
           "better": "higher"
         }
@@ -176248,7 +176383,7 @@
       "url": "https://lvbench.github.io/#leaderboard",
       "feed": "https://lvbench.github.io/ (results table, Overall)",
       "terms": "Static GitHub Pages project page with no stated terms; the LVBench repository is MIT-licensed, as is the Space.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "AdaReTaKe",
@@ -176282,6 +176417,12 @@
         },
         "Sum": {
           "name": "Summarization"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },
@@ -192143,7 +192284,7 @@
       "url": "https://research.getbluejay.ai/benchmarks/mivas/leaderboard",
       "feed": "https://research.getbluejay.ai/benchmarks/mivas/leaderboard",
       "terms": "Bluejay Labs publishes the leaderboard on its research site. No separate score license is stated. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Amazon Nova Sonic 2",
@@ -192159,27 +192300,27 @@
       ],
       "parts": {
         "healthcare": {
-          "name": "healthcare",
+          "name": "Healthcare",
           "group": "Industry"
         },
         "legal": {
-          "name": "legal",
+          "name": "Legal",
           "group": "Industry"
         },
         "customer-support": {
-          "name": "customer-support",
+          "name": "Customer support",
           "group": "Industry"
         },
         "easy": {
-          "name": "easy",
+          "name": "Easy",
           "group": "Difficulty"
         },
         "medium": {
-          "name": "medium",
+          "name": "Medium",
           "group": "Difficulty"
         },
         "hard": {
-          "name": "hard",
+          "name": "Hard",
           "group": "Difficulty"
         }
       },
@@ -192208,6 +192349,24 @@
           "name": "Hang-up quality",
           "unit": "score",
           "better": "higher"
+        },
+        "prompt_adherence": {
+          "name": "Prompt adherence",
+          "unit": "score",
+          "better": "higher",
+          "note": "Auxiliary judge score on a 1 to 5 scale."
+        },
+        "task_completion": {
+          "name": "Task completion",
+          "unit": "score",
+          "better": "higher",
+          "note": "Auxiliary judge score on a 1 to 5 scale."
+        },
+        "premature_end": {
+          "name": "Premature end rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Share of conversations flagged as ending prematurely by the auxiliary judge."
         },
         "latency_ms": {
           "name": "Latency",
@@ -199789,7 +199948,7 @@
       "url": "https://motion-bench.github.io",
       "feed": "https://motion-bench.github.io/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "CogVLM2-Video",
@@ -199832,6 +199991,12 @@
         "dev": {
           "name": "Development accuracy",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
         }
       }
     },

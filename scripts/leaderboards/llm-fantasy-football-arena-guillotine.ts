@@ -14,7 +14,7 @@ const board: Leaderboard = {
   benchmark: "llm-fantasy-football-arena-guillotine",
   url: "https://arena.wildcardlabs.tech/leagues/guillotine-2026/",
   feed,
-  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The hosts disallow named crawlers and allow the general user agent.", stats:{eliminationWeek:{name:'Elimination week',unit:'count'},cumulativePoints:{name:'Cumulative points',unit:'score',better:'higher'},week1:{name:'Week 1 points',unit:'score',better:'higher'},week2:{name:'Week 2 points',unit:'score',better:'higher'},week3:{name:'Week 3 points',unit:'score',better:'higher'},week4:{name:'Week 4 points',unit:'score',better:'higher'},week5:{name:'Week 5 points',unit:'score',better:'higher'},week6:{name:'Week 6 points',unit:'score',better:'higher'},week7:{name:'Week 7 points',unit:'score',better:'higher'},week8:{name:'Week 8 points',unit:'score',better:'higher'}},
+  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The hosts disallow named crawlers and allow the general user agent.", stats:{eliminationWeek:{name:'Elimination week',unit:'count'},cumulativePoints:{name:'Cumulative points',unit:'score',better:'higher'},...Object.fromEntries(Array.from({length:10},(_,i)=>[`week${i+1}`,{name:`Week ${i+1} points`,unit:'score',better:'higher'}]))},
   async fetch() {
     const d = await fetchJson<Summary>(feed);
     if (d.teams.length !== 18 || d.projection.teams.length !== 18) throw new Error('Incomplete league roster');
