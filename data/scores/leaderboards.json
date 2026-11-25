@@ -21497,14 +21497,10 @@
       "rows": 8,
       "unmatched": [],
       "stats": {
-        "standing": {
-          "name": "Standing",
-          "unit": "count",
-          "better": "lower"
-        },
         "losses": {
           "name": "Losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "pointsFor": {
           "name": "Points for",
@@ -21513,11 +21509,13 @@
         },
         "allPlayWins": {
           "name": "All-play wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "allPlayLosses": {
           "name": "All-play losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -34912,8 +34910,7 @@
       "rows": 8,
       "unmatched": [
         "Chandra-OCR-2",
-        "Falcon-OCR (v1)",
-        "Falcon-OCR 1.5",
+        "Falcon-OCR",
         "Indra OCR",
         "LightOnOCR-2",
         "LightOnOCR-3-0.8B",
@@ -34939,19 +34936,19 @@
           "name": "Sparse CER"
         },
         "de": {
-          "name": "de",
+          "name": "German",
           "group": "Language"
         },
         "en": {
-          "name": "en",
+          "name": "English",
           "group": "Language"
         },
         "fr": {
-          "name": "fr",
+          "name": "French",
           "group": "Language"
         },
         "la": {
-          "name": "la",
+          "name": "Latin",
           "group": "Language"
         }
       },
@@ -39282,21 +39279,24 @@
         "Nemotron 3 33B (Ollama)"
       ],
       "stats": {
-        "games": {
-          "name": "Games played",
-          "unit": "count"
-        },
         "wins": {
           "name": "Wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "losses": {
           "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "draws": {
+          "name": "Draws",
           "unit": "count"
         },
         "forfeits": {
           "name": "Forfeits",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "raw": {
           "name": "Raw score",
@@ -76538,10 +76538,6 @@
           "name": "Macro F1",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -94689,10 +94685,6 @@
           "name": "Macro F1",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -99791,26 +99783,59 @@
       "costPer": "run",
       "harnesses": "system",
       "stats": {
-        "accuracy": {
-          "name": "Accuracy",
-          "unit": "%",
-          "better": "higher"
+        "passAt2": {
+          "name": "pass@2",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
         },
-        "n_trials": {
-          "name": "Trials",
-          "unit": "count"
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
         },
-        "total_cost_usd": {
-          "name": "Total run cost",
-          "unit": "usd",
-          "better": "lower"
+        "passAt4": {
+          "name": "pass@4",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt5": {
+          "name": "pass@5",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt8": {
+          "name": "pass@8",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt10": {
+          "name": "pass@10",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "runTotalTokens": {
+          "name": "Total run tokens",
+          "unit": "tokens"
+        },
+        "runOutputTokens": {
+          "name": "Total run output tokens",
+          "unit": "tokens"
+        },
+        "runCachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "runUncachedInputTokens": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
         },
         "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "avg_trial_duration_sec": {
           "name": "Average trial duration",
           "unit": "seconds",
           "better": "lower"
@@ -99824,7 +99849,55 @@
       "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "harnesses": "system",
+      "stats": {
+        "passAt2": {
+          "name": "pass@2",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt4": {
+          "name": "pass@4",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "passAt5": {
+          "name": "pass@5",
+          "unit": "score",
+          "better": "higher",
+          "note": "Pass rate from 0 to 1."
+        },
+        "runTotalTokens": {
+          "name": "Total run tokens",
+          "unit": "tokens"
+        },
+        "runOutputTokens": {
+          "name": "Total run output tokens",
+          "unit": "tokens"
+        },
+        "runCachedInputTokens": {
+          "name": "Cached input tokens",
+          "unit": "tokens"
+        },
+        "runUncachedInputTokens": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
+        },
+        "latency": {
+          "name": "Average trial duration",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "enterprise-human-evaluation-cohere": {
       "url": "https://cohere.com/blog/command-a",
@@ -119626,10 +119699,6 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -132089,10 +132158,6 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -161238,16 +161303,16 @@
       ],
       "parts": {
         "Block 1 - Loop Math": {
-          "name": "Block 1 - Loop Math"
+          "name": "Block 1: Loop Math"
         },
         "Block 2 - ISA Symbols": {
-          "name": "Block 2 - ISA Symbols"
+          "name": "Block 2: ISA Symbols"
         },
         "Block 3 - Electronics": {
-          "name": "Block 3 - Electronics"
+          "name": "Block 3: Electronics"
         },
         "Block 4 - Networking": {
-          "name": "Block 4 - Networking"
+          "name": "Block 4: Networking"
         },
         "t1_expansion_120q": {
           "name": "Tier 1 expansion"
@@ -161265,9 +161330,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
+        "apiErrors": {
+          "name": "API errors",
+          "unit": "count",
+          "better": "lower"
         },
         "meanScore": {
           "name": "Mean question score",
@@ -161305,8 +161371,18 @@
           "unit": "count",
           "better": "higher"
         },
+        "t1SafetyFailures": {
+          "name": "Tier 1 safety failures",
+          "unit": "count",
+          "better": "lower"
+        },
         "t1ApiErrors": {
           "name": "Tier 1 API errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "t2SafetyFailures": {
+          "name": "Tier 2 safety failures",
           "unit": "count",
           "better": "lower"
         },
@@ -171634,11 +171710,6 @@
           "unit": "count",
           "better": "lower"
         },
-        "standingsRank": {
-          "name": "Standings rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "headToHeadWins": {
           "name": "Head to head wins",
           "unit": "count",
@@ -179095,11 +179166,6 @@
       "rows": 24,
       "unmatched": [],
       "stats": {
-        "leagueRank": {
-          "name": "League rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "wins": {
           "name": "Wins",
           "unit": "count",
@@ -185309,17 +185375,15 @@
         "s7b"
       ],
       "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count"
-        },
         "won": {
           "name": "Games won",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "lost": {
           "name": "Games lost",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "points": {
           "name": "Points",

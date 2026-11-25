@@ -8,7 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/faroese';
 export default {
   benchmark:'foqa',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
-  stats:{exactMatch:{name:'Exact match',unit:'%',better:'higher'},scored:{name:'Scored examples',unit:'count'}},
+  stats:{exactMatch:{name:'Exact match',unit:'%',better:'higher'}},
   aliases: {
   "google/gemma-3-27b-pt": "gemma-3-27b-pt",
   "Qwen/Qwen3-Next-80B-A3B-Instruct": "qwen3-next-80b-a3b-instruct",
@@ -75,7 +75,7 @@ export default {
       const [model,mode] = label.replace(/ \([^()]+\)$/,'').split('#');
       return {model,setting:[mode,settings?.[1]].filter(Boolean).join(', ') || undefined,
         score,low:score-margin,high:score+margin,link:r.Model.match(/href='([^']+)'/)?.[1],open:r.Open === '✓',
-        metrics:{exactMatch:em,exactMatchLow:em-emMargin,exactMatchHigh:em+emMargin,scored:Number(r.foqa_scored),failures:Number(r.foqa_failures)}};
+        metrics:{exactMatch:em,exactMatchLow:em-emMargin,exactMatchHigh:em+emMargin}};
     });
     // EuroEval drops a model now and then (TurkuNLP's Finnish ModernBERT on 2026-11-21, leaving 352), so the floor
     // only catches a broken parse, not a source that removed a row

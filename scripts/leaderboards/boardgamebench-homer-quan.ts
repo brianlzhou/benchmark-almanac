@@ -11,10 +11,10 @@ const board: Leaderboard = {
   feed,
   terms: "The repository uses the MIT License. https://github.com/homerquan/BoardGameBench/blob/main/LICENSE The feed host returns no robots.txt.",
   stats: {
-    games: { name: 'Games played', unit: 'count' },
-    wins: { name: 'Wins', unit: 'count' },
-    losses: { name: 'Losses', unit: 'count' },
-    forfeits: { name: 'Forfeits', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count', better: 'higher' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    draws: { name: 'Draws', unit: 'count' },
+    forfeits: { name: 'Forfeits', unit: 'count', better: 'lower' },
     raw: { name: 'Raw score', unit: 'score', better: 'higher' },
     normalized: { name: 'Normalized score', unit: 'score', better: 'higher' },
   },
@@ -28,9 +28,9 @@ const board: Leaderboard = {
       const [table] = markdownTables(section);
       if (table?.[0]?.join('|') !== 'Model|Games|Wins|Losses|Draws|Forfeits|Raw Score|Normalized|BRI') throw new Error('Unexpected results columns');
       for (const [model, games, wins, losses, draws, forfeits, raw, normalized, bri] of table.slice(1)) {
-        const metrics = { games: +games, wins: +wins, losses: +losses, draws: +draws, forfeits: +forfeits, raw: parseFloat(raw), normalized: +normalized };
-        if (!model || !bri || ![+bri, ...Object.values(metrics)].every(Number.isFinite)) throw new Error('Invalid board game result');
-        rows.push({ model, score: +bri, setting: i ? 'OpenRouter free tier' : 'Ollama', date: i ? section.match(/\d{4}\.\d{2}\.\d{2}/)?.[0].replaceAll('.', '-') : undefined, metrics });
+        const metrics = { wins: +wins, losses: +losses, draws: +draws, forfeits: +forfeits, raw: parseFloat(raw), normalized: +normalized };
+        if (!model || !bri || ![+games, +bri, ...Object.values(metrics)].every(Number.isFinite)) throw new Error('Invalid board game result');
+        rows.push({ model, score: +bri, trials: +games, setting: i ? 'OpenRouter free tier' : 'Ollama', date: i ? section.match(/\d{4}\.\d{2}\.\d{2}/)?.[0].replaceAll('.', '-') : undefined, metrics });
       }
     }
     if (rows.length < 6) throw new Error('Missing board game models');

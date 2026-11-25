@@ -11,9 +11,9 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The terms identify third-party data and trademarks. They give no explicit license for reusing standings. https://www.artificialturfwar.com/terms The site permits the home page and disallows /api/ in robots.txt.",
   stats: {
-    standing: { name: 'Standing', unit: 'count', better: 'lower' }, losses: { name: 'Losses', unit: 'count' },
-    pointsFor: { name: 'Points for', unit: 'score', better: 'higher' }, allPlayWins: { name: 'All-play wins', unit: 'count' },
-    allPlayLosses: { name: 'All-play losses', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    pointsFor: { name: 'Points for', unit: 'score', better: 'higher' }, allPlayWins: { name: 'All-play wins', unit: 'count', better: 'higher' },
+    allPlayLosses: { name: 'All-play losses', unit: 'count', better: 'lower' },
   },
   async fetch() {
     const table = tables(await fetchText(FEED)).find((rows) =>
@@ -26,12 +26,12 @@ const board: Leaderboard = {
     };
     return table.slice(1).map((cells) => {
       const [rank, model, result, allPlay, points] = cells.map((c) => c.text);
-      const [wins, losses, ties] = record(result);
-      const [allPlayWins, allPlayLosses, allPlayTies] = record(allPlay);
+      const [wins, losses] = record(result);
+      const [allPlayWins, allPlayLosses] = record(allPlay);
       const pointsFor = num(points);
       const standing = num(rank);
       if (!model || pointsFor == null || standing == null) throw new Error('Incomplete fantasy standings');
-      return { model, score: wins, metrics: { standing, losses, ties, pointsFor, allPlayWins, allPlayLosses, allPlayTies } };
+      return { model, score: wins, metrics: { losses, pointsFor, allPlayWins, allPlayLosses } };
     });
   },
 };

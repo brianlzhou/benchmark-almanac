@@ -15,7 +15,19 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'enterprise-bench-l1-l2-v2', url, feed: url,
   terms: 'Public leaderboard on Harbor Hub, subject to Harbor’s terms.',
+  harnesses: 'system',
   costPer: 'run',
+  stats: {
+    passAt2: { name: 'pass@2', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    passAt3: { name: 'pass@3', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    passAt4: { name: 'pass@4', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    passAt5: { name: 'pass@5', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    runTotalTokens: { name: 'Total run tokens', unit: 'tokens' },
+    runOutputTokens: { name: 'Total run output tokens', unit: 'tokens' },
+    runCachedInputTokens: { name: 'Cached input tokens', unit: 'tokens' },
+    runUncachedInputTokens: { name: 'Uncached input tokens', unit: 'tokens' },
+    latency: { name: 'Average trial duration', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const response = await fetchText(url, {
       method: 'POST',
@@ -29,8 +41,10 @@ const board: Leaderboard = {
     return (data.rows as Entry[]).map(row => {
       const { accuracy, n_trials, total_cost_usd, ...other } = row.metrics;
       if (!row.metadata.model_display_name || !Number.isFinite(accuracy) || !Number.isFinite(n_trials)) throw new Error('Incomplete Enterprise-Bench row');
+      const outTok = typeof other.output_tokens === 'number' && Number.isFinite(other.output_tokens) ? other.output_tokens : undefined;
       return { model: row.metadata.model_display_name, score: accuracy, harness: row.metadata.agent_display_name,
         agentOrg: row.metadata.agent_org_display_name, trials: n_trials, cost: total_cost_usd,
+        tokens: n_trials > 0 && outTok !== undefined ? outTok / n_trials : undefined,
         date: row.created_at.slice(0, 10), link: url.split('?')[0] + '/latest/leaderboards/main/rows/' + row.id,
         metrics: Object.fromEntries(Object.entries(other).filter((e): e is [string, number] => typeof e[1] === 'number').map(([key, value]) => [harborMetricKey(key), value])) };
     });

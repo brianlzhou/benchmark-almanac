@@ -18,7 +18,6 @@ export default {
   headline:'EuroEval reports Matthews correlation on its DBRD-mini test split, scaled by 100.',
   stats: {
     macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
-    scored: { name: 'Scored examples', unit: 'count' },
   },
   async fetch() {
     const page = await fetchText(feed);
@@ -45,7 +44,7 @@ export default {
       const [model,mode] = label.replace(/ \([^()]+\)$/,'').split('#');
       return {model,setting:[mode,settings?.[1]].filter(Boolean).join(', ') || undefined,
         score,low:score-margin,high:score+margin,link:r.Model.match(/href='([^']+)'/)?.[1],open:r.Open === '✓',
-        metrics:{macroF1:f1,macroF1Low:f1-f1Margin,macroF1High:f1+f1Margin,scored:Number(r.dbrd_scored),failures:Number(r.dbrd_failures)}};
+        metrics:{macroF1:f1,macroF1Low:f1-f1Margin,macroF1High:f1+f1Margin}};
     });
     return checked(rows,369);
   },
