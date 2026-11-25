@@ -11,9 +11,9 @@ const board: Leaderboard = {
   terms: "See the dataset license at https://huggingface.co/datasets/daloopa/financial-retrieval The publisher displays the chart publicly and its robots.txt is linked at https://daloopa.com/robots.txt.",
   aliases: { 'GPT-5 Thinking': 'gpt-5', 'Claude (Opus 4.1)': 'claude-opus-4-1' },
   stats: {
-    tolerance1: { name: 'Accuracy within ±1%', unit: '%', better: 'higher' },
-    tolerance5: { name: 'Accuracy within ±5%', unit: '%', better: 'higher' },
-    tolerance20: { name: 'Accuracy within ±20%', unit: '%', better: 'higher' },
+    tolerance1: { name: 'Within 1% tolerance', unit: '%', better: 'higher', note: 'Share of answers within 1% of the ground-truth figure.' },
+    tolerance5: { name: 'Within 5% tolerance', unit: '%', better: 'higher', note: 'Share of answers within 5% of the ground-truth figure.' },
+    tolerance20: { name: 'Within 20% tolerance', unit: '%', better: 'higher', note: 'Share of answers within 20% of the ground-truth figure.' },
   },
   async fetch() {
     const row = (model: string, harness: string, score: number, one: number, five: number, twenty: number): LeaderboardRow => ({

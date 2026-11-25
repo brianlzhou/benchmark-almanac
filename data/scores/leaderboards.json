@@ -37650,7 +37650,7 @@
     "bouquet": {
       "url": "https://huggingface.co/spaces/facebook/bouquet",
       "feed": "https://huggingface.co/api/spaces/facebook/bouquet",
-      "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+      "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
       "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
@@ -37678,20 +37678,16 @@
         "salamandraTA-7b-instruct"
       ],
       "stats": {
-        "chrfpp": {
-          "name": "chrF++",
-          "unit": "score",
-          "better": "higher"
-        },
-        "glotlid_score": {
+        "glotlidScore": {
           "name": "GlotLID score",
           "unit": "score",
           "better": "higher"
         },
-        "glotlid_x_metricx": {
-          "name": "GlotLID × MetricX",
+        "glotlidMetricx": {
+          "name": "GlotLID times MetricX",
           "unit": "score",
-          "better": "higher"
+          "better": "higher",
+          "note": "Product of GlotLID language identification score and MetricX quality score."
         },
         "metricx": {
           "name": "MetricX",
@@ -48922,22 +48918,22 @@
         "ZeroScope"
       ],
       "stats": {
-        "UMT-FVD↓": {
+        "umtFvd": {
           "name": "Unmasked Teacher Fréchet video distance",
           "unit": "score",
           "better": "lower"
         },
-        "UMTScore↑": {
+        "umtScore": {
           "name": "Unmasked Teacher score",
           "unit": "score",
           "better": "higher"
         },
-        "GPT4o-MTScore↑": {
+        "gpt4oMtScore": {
           "name": "GPT-4o metamorphic score",
           "unit": "score",
           "better": "higher"
         },
-        "CHScore↑": {
+        "chScore": {
           "name": "ChronoMagic score",
           "unit": "score",
           "better": "higher"
@@ -65001,7 +64997,7 @@
       "terms": "Table credited to He Wang and colleagues. https://arxiv.org/abs/2507.05727",
       "headline": "The headline averages word error rate across the four language and speech-format combinations.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "FireredASR-AED-L",
@@ -65691,25 +65687,30 @@
           "name": "Mean input tokens",
           "unit": "tokens"
         },
-        "outputTokens": {
-          "name": "Mean output tokens",
-          "unit": "tokens"
-        },
         "game_reward": {
           "name": "Game reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "cluegiver_format_reward": {
           "name": "Cluegiver format reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         },
         "guesser_format_reward": {
           "name": "Guesser format reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
+        },
+        "format_reward_func": {
+          "name": "Format reward",
+          "unit": "score",
+          "better": "higher"
         },
         "shot_calling_reward": {
           "name": "Shot calling reward",
-          "unit": "score"
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -70788,18 +70789,9 @@
           "name": "Match played",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected matches",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted games",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "won": {
           "name": "Games won",
@@ -70909,19 +70901,14 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
           "unit": "usd",
           "better": "lower"
         },
-        "cost_per_match": {
-          "name": "Cost per match",
-          "unit": "usd",
+        "setup_defaults": {
+          "name": "Default setups",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -70959,10 +70946,6 @@
           "name": "Game played",
           "unit": "count"
         },
-        "base_quota": {
-          "name": "Base quota",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted games",
           "unit": "count"
@@ -70973,11 +70956,6 @@
         },
         "solve_rate": {
           "name": "Solve rate",
-          "unit": "score",
-          "better": "higher"
-        },
-        "score": {
-          "name": "Score",
           "unit": "score",
           "better": "higher"
         },
@@ -71035,11 +71013,6 @@
           "unit": "tokens",
           "better": "lower"
         },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
         "reasoningTokens": {
           "name": "Reasoning tokens",
           "unit": "tokens",
@@ -71047,11 +71020,6 @@
         },
         "seconds_per_game": {
           "name": "Seconds per game",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "latency": {
-          "name": "Latency",
           "unit": "seconds",
           "better": "lower"
         },
@@ -71065,19 +71033,9 @@
           "unit": "usd",
           "better": "lower"
         },
-        "cost_per_game": {
-          "name": "Cost per game",
-          "unit": "usd",
-          "better": "lower"
-        },
         "cost_per_solve": {
           "name": "Cost per solve",
           "unit": "usd",
-          "better": "lower"
-        },
-        "qualifiedRank": {
-          "name": "Qualified rank",
-          "unit": "count",
           "better": "lower"
         }
       }
@@ -71109,18 +71067,9 @@
           "name": "Games played",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected games",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted games",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "reached": {
           "name": "Games reaching the target",
@@ -71212,18 +71161,8 @@
           "unit": "minutes",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_game": {
-          "name": "Cost per game",
           "unit": "usd",
           "better": "lower"
         }
@@ -71262,18 +71201,9 @@
           "name": "Runs",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected runs",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted runs",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "campaign_score": {
           "name": "Campaign score",
@@ -71295,7 +71225,13 @@
         },
         "beat_bot": {
           "name": "Runs beating the bot",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "beat_median": {
+          "name": "Runs beating human median",
+          "unit": "count",
+          "better": "higher"
         },
         "progress": {
           "name": "Progress",
@@ -71380,18 +71316,8 @@
           "unit": "minutes",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_run": {
-          "name": "Cost per run",
           "unit": "usd",
           "better": "lower"
         },
@@ -71455,15 +71381,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "base_per_tier": {
-          "name": "Base boards per tier",
-          "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
-        },
         "progress": {
           "name": "Progress",
           "unit": "score",
@@ -71472,6 +71389,11 @@
         "turn_capped": {
           "name": "Turn-capped games",
           "unit": "count"
+        },
+        "stalled": {
+          "name": "Stalled games",
+          "unit": "count",
+          "better": "lower"
         },
         "wrong_flags": {
           "name": "Wrong flags",
@@ -71536,11 +71458,6 @@
           "unit": "tokens",
           "better": "lower"
         },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
         "reasoningTokens": {
           "name": "Reasoning tokens",
           "unit": "tokens",
@@ -71551,29 +71468,14 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_game": {
-          "name": "Cost per game",
           "unit": "usd",
           "better": "lower"
         },
         "cost_per_win": {
           "name": "Cost per win",
           "unit": "usd",
-          "better": "lower"
-        },
-        "qualifiedRank": {
-          "name": "Qualified rank",
-          "unit": "count",
           "better": "lower"
         }
       }
@@ -71608,18 +71510,9 @@
           "name": "Wars played",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected wars",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted wars",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "won": {
           "name": "Wars won",
@@ -71718,18 +71611,8 @@
           "unit": "minutes",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_war": {
-          "name": "Cost per war",
           "unit": "usd",
           "better": "lower"
         }
@@ -71771,10 +71654,6 @@
           "name": "Attempts",
           "unit": "count"
         },
-        "base_quota": {
-          "name": "Base quota",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted attempts",
           "unit": "count"
@@ -71786,11 +71665,6 @@
         },
         "solve_rate": {
           "name": "Solve rate",
-          "unit": "score",
-          "better": "higher"
-        },
-        "score": {
-          "name": "Score",
           "unit": "score",
           "better": "higher"
         },
@@ -71853,11 +71727,6 @@
           "unit": "tokens",
           "better": "lower"
         },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
         "reasoningTokens": {
           "name": "Reasoning tokens",
           "unit": "tokens",
@@ -71868,18 +71737,8 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_puzzle": {
-          "name": "Cost per puzzle",
           "unit": "usd",
           "better": "lower"
         },
@@ -71917,18 +71776,9 @@
           "name": "Games played",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected games",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted games",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "won": {
           "name": "Games won",
@@ -72028,11 +71878,6 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "vs_par": {
           "name": "Score relative to par",
           "unit": "score",
@@ -72040,11 +71885,6 @@
         },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_game": {
-          "name": "Cost per game",
           "unit": "usd",
           "better": "lower"
         },
@@ -72082,18 +71922,9 @@
           "name": "Games played",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected games",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted games",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "points_per_game": {
           "name": "Points per game",
@@ -72102,7 +71933,13 @@
         },
         "beat_bot": {
           "name": "Games beating the bot",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "black_holes": {
+          "name": "Black holes triggered",
+          "unit": "count",
+          "better": "higher"
         },
         "drops": {
           "name": "Drops",
@@ -72162,18 +71999,8 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_game": {
-          "name": "Cost per game",
           "unit": "usd",
           "better": "lower"
         },
@@ -72222,10 +72049,6 @@
           "name": "Attempts",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected attempts",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted attempts",
           "unit": "count"
@@ -72237,11 +72060,6 @@
         },
         "solve_rate": {
           "name": "Solve rate",
-          "unit": "score",
-          "better": "higher"
-        },
-        "score": {
-          "name": "Score",
           "unit": "score",
           "better": "higher"
         },
@@ -72304,11 +72122,6 @@
           "unit": "tokens",
           "better": "lower"
         },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
         "reasoningTokens": {
           "name": "Reasoning tokens",
           "unit": "tokens",
@@ -72319,18 +72132,8 @@
           "unit": "seconds",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_puzzle": {
-          "name": "Cost per puzzle",
           "unit": "usd",
           "better": "lower"
         },
@@ -72367,18 +72170,9 @@
           "name": "Raids",
           "unit": "count"
         },
-        "expected": {
-          "name": "Expected raids",
-          "unit": "count"
-        },
         "aborted": {
           "name": "Aborted raids",
           "unit": "count"
-        },
-        "score": {
-          "name": "Score",
-          "unit": "score",
-          "better": "higher"
         },
         "stars_per_raid": {
           "name": "Stars per raid",
@@ -72489,18 +72283,8 @@
           "unit": "minutes",
           "better": "lower"
         },
-        "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
         "cost_total": {
           "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost_per_raid": {
-          "name": "Cost per raid",
           "unit": "usd",
           "better": "lower"
         }
@@ -76660,19 +76444,22 @@
       ],
       "stats": {
         "tolerance1": {
-          "name": "Accuracy within ±1%",
+          "name": "Within 1% tolerance",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "Share of answers within 1% of the ground-truth figure."
         },
         "tolerance5": {
-          "name": "Accuracy within ±5%",
+          "name": "Within 5% tolerance",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "Share of answers within 5% of the ground-truth figure."
         },
         "tolerance20": {
-          "name": "Accuracy within ±20%",
+          "name": "Within 20% tolerance",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "Share of answers within 20% of the ground-truth figure."
         }
       }
     },
@@ -116261,19 +116048,16 @@
           "name": "Mean input tokens",
           "unit": "tokens"
         },
-        "outputTokens": {
-          "name": "Mean output tokens",
-          "unit": "tokens"
-        },
         "passAt2": {
-          "name": "Pass@2",
+          "name": "pass@2",
           "unit": "%",
           "better": "higher"
         },
         "pass2": {
-          "name": "Pass^2",
+          "name": "pass^2",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "both attempts pass"
         }
       }
     },
@@ -286727,19 +286511,20 @@
       },
       "stats": {
         "passAt1": {
-          "name": "Pass at 1",
+          "name": "pass@1",
           "unit": "%",
           "better": "higher"
         },
         "passAt5": {
-          "name": "Pass at 5",
+          "name": "pass@5",
           "unit": "%",
           "better": "higher"
         },
         "pass5": {
-          "name": "Pass to the fifth power",
+          "name": "pass^5",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "all five attempts pass"
         }
       }
     },
