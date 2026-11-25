@@ -41786,15 +41786,36 @@
       "stats": {
         "correct": {
           "name": "Correct tests",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "incorrect": {
           "name": "Incorrect tests",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
+        },
+        "errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "errorRate": {
+          "name": "Error rate",
+          "unit": "%",
+          "better": "lower"
         },
         "totalTests": {
           "name": "Total tests",
           "unit": "count"
+        },
+        "totalCost": {
+          "name": "Total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "totalCompletionTokens": {
+          "name": "Total completion tokens",
+          "unit": "tokens"
         },
         "latency": {
           "name": "Average test duration",
@@ -41832,6 +41853,11 @@
           "name": "Bradley Terry opponents",
           "unit": "count"
         },
+        "wealth_partial_points_sum": {
+          "name": "Wealth partial points sum",
+          "unit": "score",
+          "better": "higher"
+        },
         "wealth_partial_score": {
           "name": "Wealth partial score",
           "unit": "score",
@@ -41839,7 +41865,8 @@
         },
         "wealth_winner_count": {
           "name": "Wealth wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "wealth_winner_rate": {
           "name": "Wealth win rate",
@@ -41861,11 +41888,6 @@
         "ts_sigma": {
           "name": "TrueSkill rating uncertainty",
           "unit": "rating",
-          "better": "lower"
-        },
-        "trueSkillRank": {
-          "name": "TrueSkill rank",
-          "unit": "count",
           "better": "lower"
         }
       }
@@ -57107,10 +57129,6 @@
       "stats": {
         "questions": {
           "name": "Questions",
-          "unit": "count"
-        },
-        "seed": {
-          "name": "Random seed",
           "unit": "count"
         },
         "elapsedSeconds": {
@@ -127664,11 +127682,20 @@
       },
       "stats": {
         "inputTokens": {
-          "name": "Input tokens",
+          "name": "Average input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "inputTokensTotal": {
+          "name": "Input tokens total",
           "unit": "tokens"
         },
         "cacheTokensTotal": {
           "name": "Cache tokens total",
+          "unit": "tokens"
+        },
+        "outputTokensTotal": {
+          "name": "Output tokens total",
           "unit": "tokens"
         }
       }
@@ -144090,14 +144117,18 @@
           "better": "higher",
           "note": "Probability that the model ranks first in the fitted comparison model."
         },
-        "expected_rank": {
-          "name": "Expected rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "total_comparisons": {
           "name": "Total comparisons",
           "unit": "count"
+        },
+        "ess": {
+          "name": "Effective sample size",
+          "unit": "count"
+        },
+        "tier": {
+          "name": "Tier",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -186028,11 +186059,13 @@
       "stats": {
         "passed": {
           "name": "Passed scenarios",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "fail": {
           "name": "Failed scenarios",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "minimum_pass": {
           "name": "Minimum pass",
@@ -186040,11 +186073,23 @@
         },
         "full_pass": {
           "name": "Full pass",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "exceptional": {
           "name": "Exceptional",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "slotOk": {
+          "name": "Completed slots",
+          "unit": "count",
+          "better": "higher"
+        },
+        "slotFail": {
+          "name": "Failed slots",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -190483,9 +190528,24 @@
           "name": "Valid episodes",
           "unit": "count"
         },
+        "infraExcluded": {
+          "name": "Infrastructure-excluded episodes",
+          "unit": "count",
+          "better": "lower"
+        },
+        "leakInvalid": {
+          "name": "Leak-invalidated episodes",
+          "unit": "count",
+          "better": "lower"
+        },
         "heldOutPassRate": {
           "name": "Held-out pass rate",
           "unit": "%",
+          "better": "higher"
+        },
+        "heldOutPasses": {
+          "name": "Held-out passes",
+          "unit": "count",
           "better": "higher"
         }
       }
@@ -190991,18 +191051,6 @@
           "name": "Maximum context overflow tokens",
           "unit": "count",
           "better": "lower"
-        },
-        "temperature": {
-          "name": "Temperature",
-          "unit": "score"
-        },
-        "default temperature": {
-          "name": "Default temperature",
-          "unit": "score"
-        },
-        "batch": {
-          "name": "Batch size",
-          "unit": "count"
         },
         "LLM ctxSize (k)": {
           "name": "LLM context size",
@@ -193644,7 +193692,29 @@
       "unmatched": [
         "llama-3.1-8b-instruct"
       ],
+      "chart": {
+        "title": "Misses versus over-escalations",
+        "x": {
+          "key": "overEscalation",
+          "label": "Over-escalation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "y": {
+          "key": "underEscalation",
+          "label": "Under-escalation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "Lower-left is better. On the source site, the vertical axis also adds one seventh of the partial credit rate."
+      },
+      "costPer": "run",
       "stats": {
+        "scoreMix": {
+          "name": "Mixed-prevalence score",
+          "unit": "score",
+          "better": "higher"
+        },
         "underEscalation": {
           "name": "Under-escalation rate",
           "unit": "%",
@@ -193653,6 +193723,46 @@
         "overEscalation": {
           "name": "Over-escalation rate",
           "unit": "%",
+          "better": "lower"
+        },
+        "partial": {
+          "name": "Partial credit rate",
+          "unit": "%"
+        },
+        "partialInlist": {
+          "name": "In-list partial rate",
+          "unit": "%"
+        },
+        "partialOfflist": {
+          "name": "Off-list partial rate",
+          "unit": "%"
+        },
+        "partialTruth": {
+          "name": "Ground-truth partial rate",
+          "unit": "%"
+        },
+        "passRate": {
+          "name": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "escalationRate": {
+          "name": "Escalation rate",
+          "unit": "%"
+        },
+        "unreadable": {
+          "name": "Unreadable answers",
+          "unit": "count",
+          "better": "lower"
+        },
+        "errored": {
+          "name": "Errored cases",
+          "unit": "count",
+          "better": "lower"
+        },
+        "noJustification": {
+          "name": "Answers without justification",
+          "unit": "count",
           "better": "lower"
         }
       }
@@ -265951,11 +266061,13 @@
       "stats": {
         "wins": {
           "name": "Wins",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "losses": {
           "name": "Losses",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "winRate": {
           "name": "Win rate",
@@ -338797,9 +338909,20 @@
           "name": "Questions",
           "unit": "count"
         },
-        "seed": {
-          "name": "Seed",
-          "unit": "count"
+        "correct": {
+          "name": "Correct answers",
+          "unit": "count",
+          "better": "higher"
+        },
+        "wrong": {
+          "name": "Wrong answers",
+          "unit": "count",
+          "better": "lower"
+        },
+        "format_error": {
+          "name": "Format errors",
+          "unit": "count",
+          "better": "lower"
         },
         "total_prompt_tokens": {
           "name": "Total prompt tokens",
@@ -338820,7 +338943,8 @@
         },
         "avg_thinking_tokens_per_q": {
           "name": "Average thinking tokens per question",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },

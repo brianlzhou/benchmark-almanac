@@ -37,8 +37,9 @@ const board: Leaderboard = {
         }
       }
       const agent = r.type === 'Agentic Workflow' && r.backbone && r.backbone !== '-';
+      const link = r.paperLink?.startsWith('https:') ? r.paperLink : r.codeLink?.startsWith('https:') ? r.codeLink : undefined;
       rows.push({ model: agent ? r.backbone : r.name, harness: agent ? r.name : undefined, agentOrg: r.institution,
-        score: r.avg.p1, date: r.date, link: r.paperLink?.startsWith('https:') ? r.paperLink : undefined, metrics });
+        score: r.avg.p1, date: r.date, link, metrics });
     }
     board.parts = parts;
     return rows;
