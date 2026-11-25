@@ -46523,6 +46523,36 @@
           "name": "Median game score",
           "unit": "score",
           "better": "higher"
+        },
+        "bidAggression": {
+          "name": "Bid aggression",
+          "unit": "score"
+        },
+        "buyRight": {
+          "name": "Buy-right rate",
+          "unit": "%"
+        },
+        "tcAccept": {
+          "name": "Trade acceptance rate",
+          "unit": "%"
+        },
+        "bluff": {
+          "name": "Bluff rate",
+          "unit": "%"
+        },
+        "selfBid": {
+          "name": "Self-bid rate",
+          "unit": "%"
+        },
+        "spendingEfficiency": {
+          "name": "Spending efficiency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "overbid": {
+          "name": "Overbid rate",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -137923,6 +137953,21 @@
           "name": "Retrieved reference correctness",
           "unit": "%",
           "better": "higher"
+        },
+        "ttfat": {
+          "name": "Time to first audio token",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "kd": {
+          "name": "Knowledge delay",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "e2ekd": {
+          "name": "End-to-end knowledge delay",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -187388,7 +187433,7 @@
       "feed": "https://arxiv.org/html/2210.12391",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AfriBERTa",
@@ -187460,6 +187505,12 @@
         },
         "zul": {
           "name": "isiZulu"
+        }
+      },
+      "stats": {
+        "spread": {
+          "name": "Five-run standard deviation",
+          "unit": "score"
         }
       }
     },
@@ -264418,12 +264469,27 @@
       "terms": "Augment publishes these results in its article. The page does not state separate score reuse terms.",
       "headline": "Average overall score in Augment Prism multi-turn coding evaluation.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Prism (Claude + Gemini)",
         "Prism (GPT + Kimi)"
       ],
+      "chart": {
+        "title": "Quality against cost per task",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Average overall score",
+          "better": "higher"
+        },
+        "note": "Average overall score against cost per task on Augment multi-turn coding tasks."
+      },
       "stats": {
         "costPerTask": {
           "name": "Cost per task",
@@ -308066,7 +308132,7 @@
       "feed": "https://arxiv.org/html/2606.30573",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "stats": {
@@ -311929,7 +311995,7 @@
       "feed": "https://arxiv.org/html/2606.10156",
       "terms": "arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "stats": {
@@ -311942,6 +312008,46 @@
           "name": "Pass@4",
           "unit": "%",
           "better": "higher"
+        },
+        "constraints": {
+          "name": "Constraint satisfaction",
+          "unit": "%",
+          "better": "higher"
+        },
+        "policy": {
+          "name": "Policy compliance",
+          "unit": "%",
+          "better": "higher"
+        },
+        "availabilityViolation": {
+          "name": "Availability violation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "watchHistoryViolation": {
+          "name": "Watch history violation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "transparencyViolation": {
+          "name": "Transparency violation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "noRecommendation": {
+          "name": "No-recommendation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "turns": {
+          "name": "Mean turns to recommendation",
+          "unit": "count",
+          "better": "lower"
+        },
+        "toolCalls": {
+          "name": "Tool calls",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -321167,13 +321273,29 @@
       "feed": "https://arxiv.org/html/2611.03713",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
+      "costPer": "run",
+      "parts": {
+        "dynamic": {
+          "name": "Dynamic systems"
+        },
+        "spatial": {
+          "name": "Spatial systems"
+        },
+        "static": {
+          "name": "Static systems"
+        },
+        "stochastic": {
+          "name": "Stochastic systems"
+        }
+      },
       "stats": {
         "solved": {
           "name": "Solved worlds",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "median": {
           "name": "Median worst-group error",
@@ -321184,7 +321306,33 @@
         "invalid": {
           "name": "Invalid episodes",
           "unit": "count",
+          "better": "lower",
           "note": "Divergent, missing, or incomplete predictions."
+        },
+        "truncated": {
+          "name": "Truncated episodes",
+          "unit": "count",
+          "better": "lower"
+        },
+        "budgetUsed": {
+          "name": "Budget used",
+          "unit": "%",
+          "better": "lower"
+        },
+        "noSubmission": {
+          "name": "No submission episodes",
+          "unit": "count",
+          "better": "lower"
+        },
+        "finalWorse": {
+          "name": "Final worse than best",
+          "unit": "count",
+          "better": "lower"
+        },
+        "solveLost": {
+          "name": "Solved then lost",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
