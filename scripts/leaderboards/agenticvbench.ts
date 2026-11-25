@@ -8,6 +8,7 @@ const FEED = "https://agenticvbench.com/leaderboard";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "agenticvbench",
+  harnesses: 'system',
   parts: {
     repurpose: { name: 'Repurpose', group: 'Task type' },
     sequence: { name: 'Sequence', group: 'Task type' },

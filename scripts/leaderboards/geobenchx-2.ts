@@ -8,6 +8,8 @@ const feed = "https://www.axisspatial.com/arena/evaluations/geobenchx";
 
 const board: Leaderboard = {
   benchmark: "geobenchx-2",
+  harnesses: 'system',
+  reference: ['Terminus-2'],
   url: "https://www.axisspatial.com/arena/evaluations/geobenchx",
   feed,
   terms: "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",

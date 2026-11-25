@@ -6980,6 +6980,7 @@
       "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "repurpose": {
           "name": "Repurpose",
@@ -8529,6 +8530,10 @@
       "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [],
+      "reference": [
+        "OpenRouter API"
+      ],
+      "harnesses": "system",
       "parts": {
         "doneRate": {
           "name": "Done forecast rate",
@@ -95773,6 +95778,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Mean time per task",
@@ -122145,6 +122154,7 @@
       "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "avg5": {
           "name": "Average score over five attempts",
@@ -130933,6 +130943,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "parts": {
         "solvable": {
           "name": "Solvable tasks"
@@ -139347,7 +139361,11 @@
       "terms": "Public launch post on tbench.ai, which serves no robots.txt and states no terms for its posts; the Terminal-Bench repository is Apache-2.0.",
       "retrieved": "2026-11-24",
       "rows": 18,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Terminus 2"
+      ],
+      "harnesses": "system"
     },
     "hard12": {
       "url": "https://ibragim.dev/leaderboard-v2/",
@@ -184661,6 +184679,7 @@
       "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "baseResolved": {
           "name": "Base resolved rate",
@@ -213343,6 +213362,7 @@
         "GPT-4o-1120",
         "Gemini-2.5-Pro (snapshot unspecified)"
       ],
+      "harnesses": "system",
       "verified": "Marked verified by Multi-SWE-bench",
       "parts": {
         "easy": {
@@ -217504,13 +217524,14 @@
     },
     "nanogpt-speedrun-frontier-prime-intellect": {
       "url": "https://www.primeintellect.ai/research/nanogpt-speedrun",
-      "feed": "https://www.primeintellect.ai/_next/static/chunks/5603-1d6345060838223f.js?dpl=dpl_F2kJTypVLVWR1hUMegKoLwxv1VLq",
+      "feed": "https://www.primeintellect.ai/research/nanogpt-speedrun (Next.js chunk with embedded runs JSON)",
       "terms": "Prime Intellect publishes these experiment results in the public research page bundle. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 109,
       "unmatched": [
         "Kimi K3 · prime-agent"
       ],
+      "harnesses": "system",
       "stats": {
         "calls": {
           "name": "Optimization calls",
@@ -261683,6 +261704,7 @@
       "unmatched": [
         "Nemotron Ultra"
       ],
+      "harnesses": "system",
       "stats": {
         "passed": {
           "name": "Tests passed",
@@ -271312,6 +271334,7 @@
       "retrieved": "2026-11-24",
       "rows": 92,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "votes": {
           "name": "Votes",
@@ -276684,6 +276707,7 @@
       "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "executionSuccess": {
           "name": "Execution success",
@@ -285505,6 +285529,10 @@
       "unmatched": [
         "Pine Computer"
       ],
+      "reference": [
+        "Browser-Use (Open-Source)"
+      ],
+      "harnesses": "system",
       "stats": {
         "steps": {
           "name": "Steps per task",
@@ -308317,6 +308345,10 @@
         "Gemini 2.5 Pro (snapshot unspecified)",
         "MAI Code 1 Flash Internal"
       ],
+      "reference": [
+        "mini-SWE-agent"
+      ],
+      "harnesses": "system",
       "verified": "Marked Official Submission by the benchmark team.",
       "stats": {
         "functionalPass1": {
@@ -309415,6 +309447,10 @@
       "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "reference": [
+        "OpenHands"
+      ],
+      "harnesses": "system",
       "stats": {
         "correctness": {
           "name": "Patch correctness",
@@ -310990,6 +311026,7 @@
         "GPT-4o [snapshot unspecified]",
         "v20250405-dev"
       ],
+      "harnesses": "system",
       "stats": {
         "coverageDelta": {
           "name": "Coverage delta",
@@ -316476,6 +316513,7 @@
       "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "uncachedInput": {
           "name": "Uncached input tokens",
@@ -322583,6 +322621,7 @@
       "unmatched": [
         "Hunyuan 3"
       ],
+      "harnesses": "system",
       "parts": {
         "ui": {
           "name": "User interface"
