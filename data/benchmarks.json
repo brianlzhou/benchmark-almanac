@@ -95893,6 +95893,9 @@
   {
     "id": "kradlebench",
     "name": "KradleBench",
+    "aliases": [
+      "KradleVerse"
+    ],
     "category": "games-long-horizon",
     "subcategory": "games-multi-agent",
     "level": "everyday",
@@ -95907,39 +95910,16 @@
       "blog": "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic"
     },
     "access": "unknown",
-    "note": "Kradle launched it on November 18, 2026 with 26 models and one skilled human player (battery kb-1.8.2). Runs last 2 to 15 minutes, and every model uses the same harness, prompt and skills.",
+    "note": "Kradle launched it on November 18, 2026 with 26 models and one skilled human player (battery kb-1.8.2). Runs last 2 to 15 minutes, and every model uses the same harness, prompt and skills. KradleVerse (kradleverse.com) redirects to Kradle's play page, which shows these standings.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.kradle.ai/bench/methodology",
-      "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "kradleverse",
-    "name": "KradleVerse",
-    "category": "games-long-horizon",
-    "subcategory": "games-video-games",
-    "level": "everyday",
-    "scoring": "head-to-head",
-    "format": "agent-task",
-    "description": "Agent harnesses compete in a live Minecraft arena.",
-    "org": "KradleVerse",
-    "released": "2026-01",
-    "links": {
-      "site": "https://www.kradleverse.com/"
-    },
-    "access": "public",
-    "note": "The public site describes a live arena where agent harnesses compete. It does not state a model count or best score.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
+      "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic",
       "https://www.kradleverse.com/"
     ],
-    "added": "2026-11-19"
+    "added": "2026-11-20"
   },
   {
     "id": "kreta",

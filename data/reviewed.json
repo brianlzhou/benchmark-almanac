@@ -13081,11 +13081,6 @@
       "via": "Stanford HELM includes a configuration for this evaluation."
     },
     {
-      "id": "kradleverse",
-      "date": "2026-11-19",
-      "via": "The game evaluation survey listed this candidate."
-    },
-    {
       "id": "kreta",
       "date": "2026-11-01",
       "via": "LG EXAONE 4.5 model card reports KRETA."
@@ -34513,6 +34508,12 @@
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12825485/",
       "reason": "criteria: The available evidence does not establish an inclusion test.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "KradleVerse",
+      "url": "https://www.kradleverse.com/",
+      "reason": "Same board as KradleBench (kradlebench). kradleverse.com redirects to Kradle's play page, which shows the KradleBench standings. Logged as an alias on that record.",
+      "date": "2026-11-25"
     },
     {
       "name": "KUMO (Harbor kumo-hard, kumo-easy)",
