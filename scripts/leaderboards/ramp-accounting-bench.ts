@@ -17,10 +17,9 @@ const board: Leaderboard = {
   terms: "Ramp links its terms at https://ramp.com/legal/ramp-labs-terms. I could not verify a data reuse license. Ramp Labs serves its application HTML at /robots.txt.",
   reference: ["Mercor Archipelago"],
   stats: {
-    taskCount: { name: 'Tasks', unit: 'count' }, episodeCount: { name: 'Episodes', unit: 'count' },
     passAt1: { name: 'Pass@1', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
     passAt3: { name: 'Pass@3', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
-    passPower3: { name: 'Pass^3', unit: 'score', better: 'higher', note: 'Probability that all three attempts pass, from 0 to 1.' },
+    pass3: { name: 'Pass^3', unit: 'score', better: 'higher', note: 'Probability that all three attempts pass, from 0 to 1.' },
     retryUplift: { name: 'Retry uplift', unit: 'score', better: 'higher', note: 'Improvement from retries, from 0 to 1.' },
     inconsistencyRate: { name: 'Inconsistency rate', unit: 'score', better: 'lower', note: 'Rate of inconsistent outcomes, from 0 to 1.' },
     meanCriteriaAt3: { name: 'Mean criteria score at 3', unit: 'score', better: 'higher', note: 'Mean rubric reward after three attempts, from 0 to 1.' },
@@ -29,7 +28,7 @@ const board: Leaderboard = {
     meanDurationMinutes: { name: 'Mean duration', unit: 'minutes', better: 'lower' }, medianDurationMinutes: { name: 'Median duration', unit: 'minutes', better: 'lower' }, p90DurationMinutes: { name: 'P90 duration', unit: 'minutes', better: 'lower' },
     meanToolCalls: { name: 'Mean tool calls', unit: 'count' }, medianToolCalls: { name: 'Median tool calls', unit: 'count' }, p90ToolCalls: { name: 'P90 tool calls', unit: 'count' },
     meanTurns: { name: 'Mean turns', unit: 'count' }, medianTurns: { name: 'Median turns', unit: 'count' }, p90Turns: { name: 'P90 turns', unit: 'count' },
-    meanInputTokens: { name: 'Mean input tokens', unit: 'tokens' }, medianInputTokens: { name: 'Median input tokens', unit: 'tokens' }, meanOutputTokens: { name: 'Mean output tokens', unit: 'tokens' }, medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' }, meanTotalTokens: { name: 'Mean total tokens', unit: 'tokens' }, medianTotalTokens: { name: 'Median total tokens', unit: 'tokens' },
+    inputTokens: { name: 'Mean input tokens', unit: 'tokens' }, medianInputTokens: { name: 'Median input tokens', unit: 'tokens' }, outputTokens: { name: 'Mean output tokens', unit: 'tokens' }, medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' }, totalTokens: { name: 'Mean total tokens', unit: 'tokens' }, medianTotalTokens: { name: 'Median total tokens', unit: 'tokens' },
     latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
   },
   async fetch() {
@@ -49,7 +48,7 @@ const board: Leaderboard = {
     return data.map(r=>{
       const m = r.metrics;
       if (![m.meanCriteriaAt3,m.passAt3,m.meanCost,m.meanOutputTokens,m.meanDurationMinutes].every(Number.isFinite)) throw new Error('Missing accounting measures');
-      const metrics = Object.fromEntries(Object.entries(m).filter(([,v])=>typeof v==='number').map(([key, value]) => [measureKeys[key] ?? key, value]));
+      const metrics = Object.fromEntries(Object.entries(m).filter(([key,v])=>typeof v==='number' && key !== 'taskCount' && key !== 'episodeCount').map(([key, value]) => [measureKeys[key] ?? key, value]));
       metrics.latency = 60*m.meanDurationMinutes;
       return {model:r.displayName,score:100*m.meanCriteriaAt3,date:r.completedAt.slice(0,10),trials:3,harness:'Mercor Archipelago',cost:m.meanCost,tokens:m.meanOutputTokens,metrics};
     });

@@ -53,7 +53,7 @@ for(const f of files.filter(x=>x.type==='file'&&x.path.endsWith('.zip'))) {
  if(usage){const u=JSON.parse(await entry(url,usage));tokens=u[0]?.usage_completion?.mean;}
  const effort=c.match(/['"]reasoning_effort['"]\s*:\s*['"]([^'"]+)/)?.[1];
  const budget=c.match(/['"]thinking_budget['"]\s*:\s*(\d+)/)?.[1];
- rows.push({model,score:result.mean*100,tokens:Number.isFinite(tokens)?tokens:undefined,setting:['mean across runs',effort,budget?'thinking budget '+budget:undefined,root].filter(Boolean).join('; '),metrics:{'standard deviation (%)':result.std*100}});
+ rows.push({model,score:result.mean*100,tokens:Number.isFinite(tokens)?tokens:undefined,setting:['mean across runs',effort,budget?'thinking budget '+budget:undefined,root].filter(Boolean).join('; '),metrics:{std:result.std*100}});
  }
 }if(!rows.length)throw new Error('No TSP summaries');return rows;
  },
