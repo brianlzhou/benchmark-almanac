@@ -19,7 +19,7 @@
           "url": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview"
         },
         {
-          "source": "Hugging Face trending (#27)",
+          "source": "Hugging Face trending (#25)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview"
         }
@@ -30,7 +30,7 @@
       "params": 299.6,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 271,
+      "likes": 301,
       "lab": "baidu"
     },
     {
@@ -46,7 +46,7 @@
           "url": "https://huggingface.co/inclusionAI/Ling-3.2-air"
         },
         {
-          "source": "Hugging Face trending (#12)",
+          "source": "Hugging Face trending (#11)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/inclusionAI/Ling-3.2-air"
         },
@@ -62,7 +62,7 @@
       "params": 127.9,
       "weights": "open",
       "license": "mit",
-      "likes": 191,
+      "likes": 232,
       "lab": "ant-group"
     },
     {
@@ -293,7 +293,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#146)",
+          "source": "Hugging Face trending (#140)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
         },
@@ -432,7 +432,7 @@
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         },
         {
-          "source": "Hugging Face trending (#54)",
+          "source": "Hugging Face trending (#51)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         }
@@ -443,7 +443,7 @@
       "params": 2.3,
       "weights": "open",
       "license": "mit",
-      "likes": 298,
+      "likes": 336,
       "lab": "microsoft"
     },
     {
@@ -481,7 +481,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#112)",
+          "source": "Hugging Face trending (#148)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
         },
@@ -523,27 +523,6 @@
       "weights": "open",
       "license": "apache-2.0",
       "likes": 44
-    },
-    {
-      "key": "geminidecision1",
-      "name": "Gemini Decision 1",
-      "url": "https://latent.space/p/ainews-d-day-decision-models-day/",
-      "first": "2026-11-12",
-      "last": "2026-11-25",
-      "sources": [
-        {
-          "source": "AINews",
-          "kind": "ainews",
-          "url": "https://latent.space/p/ainews-d-day-decision-models-day/"
-        },
-        {
-          "source": "Leaderboards (7: decide, insurebench-broader-comparison, jevbench, ...)",
-          "kind": "boards",
-          "url": "/benchmarks/decide/"
-        }
-      ],
-      "score": 8,
-      "created": "2026-11-12"
     },
     {
       "key": "gpt6",
@@ -642,7 +621,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#11)",
+          "source": "Hugging Face trending (#9)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/llamaindex/OCRia-nano-1"
         },
@@ -657,7 +636,7 @@
       "created": "2026-11-03",
       "weights": "open",
       "license": "ocria-nano-1-license",
-      "likes": 186
+      "likes": 225
     },
     {
       "key": "sensenovaloop9b",
@@ -667,7 +646,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#21)",
+          "source": "Hugging Face trending (#30)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
         }
@@ -678,7 +657,7 @@
       "params": 9.4,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 693,
+      "likes": 741,
       "lab": "sensetime"
     },
     {
@@ -689,7 +668,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#137)",
+          "source": "Hugging Face trending (#83)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Comfy-Org/SenseNova-U1"
         },
@@ -704,7 +683,7 @@
       "created": "2026-11-18",
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 28
+      "likes": 35
     },
     {
       "key": "swe21",
@@ -723,6 +702,27 @@
       "org": "Cognition",
       "created": "2026-11-25",
       "lab": "cognition"
+    },
+    {
+      "key": "longcatvideoavatar16",
+      "name": "LongCat-Video-Avatar-1.6",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+      "first": "2026-11-17",
+      "last": "2026-11-25",
+      "sources": [
+        {
+          "source": "Hugging Face trending (#37)",
+          "kind": "hf-trending",
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+        }
+      ],
+      "score": 6,
+      "org": "meituan-longcat",
+      "created": "2026-11-13",
+      "weights": "open",
+      "license": "mit",
+      "likes": 530,
+      "lab": "meituan"
     },
     {
       "key": "lfm3omni2b",
@@ -908,7 +908,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#72)",
+          "source": "Hugging Face trending (#57)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/tencent/Hy-MT3-30B-A3B"
         }
@@ -919,7 +919,7 @@
       "params": 30.1,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 43,
+      "likes": 68,
       "lab": "tencent"
     },
     {
@@ -930,7 +930,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#30)",
+          "source": "Hugging Face trending (#61)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL"
         }
@@ -941,7 +941,7 @@
       "params": 124.8,
       "weights": "open",
       "license": "mit",
-      "likes": 117,
+      "likes": 149,
       "lab": "ant-group"
     },
     {
@@ -952,7 +952,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#99)",
+          "source": "Hugging Face trending (#64)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/sensenova/SenseNova-U1.6-8B-MoT"
         }
@@ -963,7 +963,7 @@
       "params": 17.5,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 35,
+      "likes": 54,
       "lab": "sensetime"
     },
     {
@@ -974,7 +974,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#32)",
+          "source": "Hugging Face trending (#59)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/thinkingmachines/TML-d24-varloop-research"
         }
@@ -985,7 +985,7 @@
       "params": 26.4,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 114,
+      "likes": 154,
       "lab": "thinking-machines"
     },
     {
@@ -1418,7 +1418,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#7)",
+          "source": "Hugging Face trending (#10)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/higurashi-ai/Haru-4B"
         }
@@ -1439,7 +1439,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#113)",
+          "source": "Hugging Face trending (#75)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/tencent/Hy-MT3-1.8B"
         }
@@ -1450,29 +1450,8 @@
       "params": 1.8,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 32,
+      "likes": 39,
       "lab": "tencent"
-    },
-    {
-      "key": "longcatvideoavatar16",
-      "name": "LongCat-Video-Avatar-1.6",
-      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
-      "first": "2026-11-17",
-      "last": "2026-11-25",
-      "sources": [
-        {
-          "source": "Hugging Face trending (#35)",
-          "kind": "hf-trending",
-          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
-        }
-      ],
-      "score": 4,
-      "org": "meituan-longcat",
-      "created": "2026-11-13",
-      "weights": "open",
-      "license": "mit",
-      "likes": 496,
-      "lab": "meituan"
     },
     {
       "key": "mossimagesft",
@@ -1482,7 +1461,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#98)",
+          "source": "Hugging Face trending (#94)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT"
         }
@@ -1493,7 +1472,7 @@
       "params": 5.1,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 1024
+      "likes": 1027
     },
     {
       "key": "voiceisolator",
@@ -1513,7 +1492,7 @@
       "created": "2026-11-14",
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 840
+      "likes": 890
     },
     {
       "key": "idol",
@@ -40443,21 +40422,6 @@
       "score": 3
     },
     {
-      "key": "jev114",
-      "name": "Jev 1.14.0",
-      "url": "/benchmarks/jevbench/",
-      "first": "2026-11-12",
-      "last": "2026-11-25",
-      "sources": [
-        {
-          "source": "Leaderboards (6: crazyrouter-ai-trading-arena, insurebench-broader-comparison, jevbench, ...)",
-          "kind": "boards",
-          "url": "/benchmarks/crazyrouter-ai-trading-arena/"
-        }
-      ],
-      "score": 3
-    },
-    {
       "key": "jevspatial",
       "name": "jev-spatial",
       "url": "/benchmarks/imagejevbench-0-1-5/",
@@ -44080,7 +44044,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#24)",
+          "source": "Hugging Face trending (#20)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1"
         }
@@ -44091,7 +44055,7 @@
       "params": 75.1,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 120
+      "likes": 154
     },
     {
       "key": "kolors",
@@ -50957,7 +50921,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#64)",
+          "source": "Hugging Face trending (#69)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash"
         }
@@ -50968,7 +50932,7 @@
       "params": 36.8,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 415
+      "likes": 443
     },
     {
       "key": "maxxvitrmlpnanorw256swin1k",
@@ -69504,7 +69468,7 @@
       "last": "2026-11-25",
       "sources": [
         {
-          "source": "Hugging Face trending (#49)",
+          "source": "Hugging Face trending (#28)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/KRAFTON/Raon-1-mini"
         }
@@ -69515,7 +69479,7 @@
       "params": 28.8,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 63
+      "likes": 112
     },
     {
       "key": "rap",
@@ -112944,7 +112908,6 @@
       "perplexityai",
       "chatgptplus",
       "flant5xxl11b",
-      "jev114",
       "llama4scout17b16einstructquantizedw4a16",
       "internvl358bhf",
       "doubaovl",
@@ -113291,7 +113254,6 @@
       "llama318br1distll",
       "selfmonitor8b",
       "selfmonitor7b",
-      "geminidecision1",
       "tazo",
       "sttplusjev",
       "sttplusperplexitydeciderflash",
@@ -124348,6 +124310,8 @@
       "pixversec1",
       "hunyuan3",
       "seele02pro",
+      "gamescaling9bs3",
+      "gamer35ba3b",
       "kimiforcoding",
       "sensenovau18bmot",
       "ovisu13b",
@@ -132812,7 +132776,6 @@
       "llasmol",
       "echopolicy0plusgemini38flash",
       "awomo05v",
-      "awomo05i",
       "magicbrainplusqwen37plus",
       "cosmicplusgeminier",
       "primer0",
@@ -148028,7 +147991,6 @@
       "hidreamo1embodied",
       "kanersi",
       "wndfc",
-      "openwamalpha",
       "nexusbrain",
       "pi05refine",
       "acotvla",
@@ -148994,7 +148956,6 @@
       "glide",
       "knowline31b",
       "decider27b",
-      "jevapi114",
       "startluxinstant",
       "startluxauto",
       "jevany27b",
@@ -153123,9 +153084,11 @@
       "https://reflection.ai/blog/beam-is-available",
       "https://reflection.ai/blog/introducing-beam",
       "https://reflection.ai/blog/launching-trusted-access-program",
+      "https://reflection.ai/blog/mr-beam-partnering-with-andon-labs",
       "https://reflection.ai/blog/building-frontier-open-intelligencence"
     ],
     "site:https://deepmind.google/blog/rss.xml": [
+      "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
       "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
       "https://deepmind.google/blog/introducing-gemini-4-neon/",
       "https://deepmind.google/blog/genie-4-is-now-available/",
@@ -153224,8 +153187,7 @@
       "https://deepmind.google/blog/project-genie-experimenting-with-infinite-interactive-worlds/",
       "https://deepmind.google/blog/d4rt-teaching-ai-to-see-the-world-in-four-dimensions/",
       "https://deepmind.google/blog/veo-3-1-ingredients-to-video-more-consistency-creativity-and-control/",
-      "https://deepmind.google/blog/googles-year-in-review-8-areas-with-research-breakthroughs-in-2025/",
-      "https://deepmind.google/blog/gemini-3-flash-frontier-intelligence-built-for-speed/"
+      "https://deepmind.google/blog/googles-year-in-review-8-areas-with-research-breakthroughs-in-2025/"
     ],
     "site:https://blog.google/innovation-and-ai/models-and-research/gemini-models/rss/": [
       "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-neon-builders/",
@@ -153346,6 +153308,7 @@
       "https://mistral.ai/news/about-mistral-ai/"
     ],
     "site:https://allenai.org/rss.xml": [
+      "https://allenai.org/blog/where-scientists-draw-the-line-on-ai-agents",
       "https://allenai.org/blog/robotrack",
       "https://allenai.org/blog/theorizer-in-asta",
       "https://allenai.org/blog/taylor-geospatial-partnership",
@@ -153369,8 +153332,7 @@
       "https://allenai.org/blog/olmocore3",
       "https://allenai.org/blog/olmo-arena",
       "https://allenai.org/blog/autodiscovery-student-challenge",
-      "https://allenai.org/blog/goodfire-olmo",
-      "https://allenai.org/blog/benchmirt"
+      "https://allenai.org/blog/goodfire-olmo"
     ]
   },
   "dismissed": [
