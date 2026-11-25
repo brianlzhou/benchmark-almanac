@@ -41,7 +41,7 @@ const board:Leaderboard={
       const metrics:Record<string,number>={};
       [...conditions,...utility].forEach((k,i)=>{
         const cell=readCell(i<6?values[i]:utilityCells[i-6]);metrics[k]=cell.value;
-        if(cell.margin!==undefined) metrics[k+'Margin']=cell.margin;
+        if(cell.margin!==undefined) metrics[k+'Ci']=cell.margin;
       });
       rows.push({model,setting,metrics,score:conditions.reduce((s,k)=>s+metrics[k],0)/6});
     }
@@ -67,7 +67,7 @@ const board:Leaderboard={
       if(setting!=='No defense') add(model,setting,values,ur.slice(2));
       else {
         const row=rows.find(r=>r.model===model)!;
-        [...values,...ur.slice(2)].forEach((v,i)=>{ row.metrics![[...conditions,...utility][i]+'Margin']=readCell(v).margin!; });
+        [...values,...ur.slice(2)].forEach((v,i)=>{ row.metrics![[...conditions,...utility][i]+'Ci']=readCell(v).margin!; });
       }
     }
     return checked(rows,14);

@@ -15,8 +15,8 @@ const board: Leaderboard = {
   benchmark: 'autoresearchexam',
   url: PAGE,
   feed: `${PAGE} (static efficiency chart plus live script aggregate objects)`,
-  terms: 'Public Bespoke Labs page; benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.',
-  stats: { submissions:{name:'Mean submissions per task',unit:'count'}, validation:{name:'Validation area under AutoResearch curve',unit:'score',better:'higher'}, final:{name:'Final area under AutoResearch curve',unit:'score',better:'higher'}, gap:{name:'Validation to test gap',unit:'score',better:'lower'}, elo:{name:'Elo',unit:'elo',better:'higher'}, tasks:{name:'Tasks',unit:'count'} },
+  terms: 'Public Bespoke Labs page. benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.',
+  stats: { submissions:{name:'Mean submissions per task',unit:'count'}, validation:{name:'Validation area under AutoResearch curve',unit:'score',better:'higher'}, final:{name:'Final area under AutoResearch curve',unit:'score',better:'higher'}, gap:{name:'Validation to test gap',unit:'score',better:'lower'}, elo:{name:'Elo',unit:'elo',better:'higher'} },
   chart: {
     title: 'API cost vs. test AUARC',
     note: 'Mean API cost and mean test AUARC across the evaluated tasks.',
@@ -47,7 +47,7 @@ const board: Leaderboard = {
         if (!row || Math.abs(row.score - a.test) > 0.00051) continue;
         row.cost = a.cost;
         [row.low, row.high] = a.test_ci;
-        row.metrics = {...row.metrics, validation: a.validation, final: a.final, gap: a.gap, elo: a.elo, tasks: a.taskCount};
+        row.metrics = {...row.metrics, validation: a.validation, final: a.final, gap: a.gap, elo: a.elo};
         const runs = data.tasks.flatMap(t => t.models.filter(m => m.model === a.key));
         if (!runs.length || runs.length !== a.taskCount) continue;
         const mean = (key: 'outputTokens' | 'requests' | 'workHours') => {
@@ -69,7 +69,7 @@ const board: Leaderboard = {
         const value=jsonAfter<{aggregate:{name:string;test:number;test_ci:number[];cost:number;costEstimated?:boolean}}>(script,match[0]);
         const a=value.aggregate;if(!a||!Number.isFinite(a.test)||!Number.isFinite(a.cost))throw new Error('Invalid live aggregate');
         const model=a.name==='Argon'?'Gemini 4 Argon':a.name==='Opus 5.5'?'Claude Opus 5.5':a.name;
-        rows.set(model,{model,score:a.test,cost:a.cost,low:a.test_ci[0],high:a.test_ci[1],metrics:{costEstimated:a.costEstimated?1:0}});
+        rows.set(model,{model,score:a.test,cost:a.cost,low:a.test_ci[0],high:a.test_ci[1]});
       }
     }
     return [...rows.values()];
