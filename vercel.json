@@ -21,6 +21,11 @@
       "permanent": true
     },
     {
+      "source": "/benchmarks/kradleverse/",
+      "destination": "/benchmarks/kradlebench/",
+      "permanent": true
+    },
+    {
       "source": "/reporting/",
       "destination": "/insights/reporting/",
       "permanent": true
