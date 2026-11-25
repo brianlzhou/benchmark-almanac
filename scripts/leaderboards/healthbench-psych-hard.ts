@@ -12,8 +12,7 @@ const board: Leaderboard = {
   stats: {
     'claude-haiku-4-5-20251001': { name: 'Claude Haiku judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
     'gemini-2.5-flash': { name: 'Gemini judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
-    'gpt-4.1-2025-04-14': { name: 'Generative pre-trained transformer 4.1 judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
-    prompts: { name: 'Prompts', unit: 'count' },
+    'gpt-4.1-2025-04-14': { name: 'GPT-4.1 judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
   },
   async fetch() {
     const records = parseCsv(await fetchText(FEED));
@@ -29,7 +28,7 @@ const board: Leaderboard = {
     return [...byModel].map(([model, metrics]) => {
       const values = Object.values(metrics);
       if (values.length !== 3) throw new Error('Incomplete panel for ' + model);
-      return { model, score: values.reduce((a,b) => a + b, 0) / 3, metrics: { ...metrics, prompts: 119 } };
+      return { model, score: values.reduce((a,b) => a + b, 0) / 3, metrics };
     });
   },
 };

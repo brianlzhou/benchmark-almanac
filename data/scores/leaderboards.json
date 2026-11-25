@@ -26929,12 +26929,6 @@
           "name": "Product",
           "group": "Task type"
         }
-      },
-      "stats": {
-        "turns": {
-          "name": "Turns scored",
-          "unit": "count"
-        }
       }
     },
     "audio-arithmetic-24-music-workflow-checks": {
@@ -53449,10 +53443,6 @@
         "openTrades": {
           "name": "Open trades",
           "unit": "count"
-        },
-        "startingBalance": {
-          "name": "Starting balance",
-          "unit": "usd"
         }
       }
     },
@@ -66963,10 +66953,6 @@
       },
       "costPer": "run",
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "tasksPassed": {
           "name": "Tasks passed",
           "unit": "count"
@@ -66997,7 +66983,7 @@
           "better": "lower"
         },
         "passAt1": {
-          "name": "Pass@1",
+          "name": "pass@1",
           "unit": "%",
           "better": "higher"
         }
@@ -89994,10 +89980,6 @@
           "name": "Scenarios passed",
           "unit": "count",
           "better": "higher"
-        },
-        "scenarios": {
-          "name": "Scenarios",
-          "unit": "count"
         }
       }
     },
@@ -114844,10 +114826,6 @@
         }
       },
       "stats": {
-        "stories": {
-          "name": "Completed stories",
-          "unit": "count"
-        },
         "human_rating": {
           "name": "Human rating",
           "unit": "rating",
@@ -127630,16 +127608,8 @@
           "name": "Insertions",
           "unit": "count"
         },
-        "referenceWords": {
-          "name": "Reference words",
-          "unit": "count"
-        },
         "emptyTranscripts": {
           "name": "Empty transcripts",
-          "unit": "count"
-        },
-        "utterances": {
-          "name": "Utterances",
           "unit": "count"
         },
         "latency": {
@@ -127691,16 +127661,8 @@
           "name": "Insertions",
           "unit": "count"
         },
-        "referenceWords": {
-          "name": "Reference words",
-          "unit": "count"
-        },
         "emptyTranscripts": {
           "name": "Empty transcripts",
-          "unit": "count"
-        },
-        "utterances": {
-          "name": "Utterances",
           "unit": "count"
         },
         "latency": {
@@ -141093,14 +141055,10 @@
           "note": "Clipped mean score from 0 to 1."
         },
         "gpt41": {
-          "name": "Generative pre-trained transformer 4.1 judge score",
+          "name": "GPT-4.1 judge score",
           "unit": "score",
           "better": "higher",
           "note": "Clipped mean score from 0 to 1."
-        },
-        "prompts": {
-          "name": "Prompts",
-          "unit": "count"
         }
       }
     },
@@ -141127,14 +141085,10 @@
           "note": "Clipped mean score from 0 to 1."
         },
         "gpt41": {
-          "name": "Generative pre-trained transformer 4.1 judge score",
+          "name": "GPT-4.1 judge score",
           "unit": "score",
           "better": "higher",
           "note": "Clipped mean score from 0 to 1."
-        },
-        "prompts": {
-          "name": "Prompts",
-          "unit": "count"
         }
       }
     },
@@ -141161,14 +141115,10 @@
           "note": "Clipped mean score from 0 to 1."
         },
         "gpt-4.1-2025-04-14": {
-          "name": "Generative pre-trained transformer 4.1 judge score",
+          "name": "GPT-4.1 judge score",
           "unit": "score",
           "better": "higher",
           "note": "Clipped mean score from 0 to 1."
-        },
-        "prompts": {
-          "name": "Prompts",
-          "unit": "count"
         }
       }
     },
@@ -142440,10 +142390,6 @@
       "stats": {
         "passes": {
           "name": "Tasks passed",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks evaluated",
           "unit": "count"
         },
         "meanScore": {
@@ -178430,10 +178376,6 @@
           "name": "Correct answers",
           "unit": "count",
           "better": "higher"
-        },
-        "total": {
-          "name": "Total questions",
-          "unit": "count"
         }
       }
     },
@@ -218034,26 +217976,6 @@
           "name": "Language violations",
           "unit": "count",
           "better": "lower"
-        },
-        "NICases": {
-          "name": "Narrative inclusion cases",
-          "unit": "count"
-        },
-        "NECases": {
-          "name": "Narrative exclusion cases",
-          "unit": "count"
-        },
-        "MNICases": {
-          "name": "Multilingual narrative inclusion cases",
-          "unit": "count"
-        },
-        "BPCases": {
-          "name": "Background passage cases",
-          "unit": "count"
-        },
-        "DPCases": {
-          "name": "Document passage cases",
-          "unit": "count"
         }
       }
     },
@@ -258893,24 +258815,12 @@
           "name": "Combined passed cases",
           "unit": "count"
         },
-        "combined_total": {
-          "name": "Combined total cases",
-          "unit": "count"
-        },
         "role_assignment_pass": {
           "name": "Role-assignment passed cases",
           "unit": "count"
         },
-        "role_assignment_total": {
-          "name": "Role-assignment total cases",
-          "unit": "count"
-        },
         "prompt_writing_pass": {
           "name": "Prompt-writing passed cases",
-          "unit": "count"
-        },
-        "prompt_writing_total": {
-          "name": "Prompt-writing total cases",
           "unit": "count"
         }
       }
@@ -263583,10 +263493,6 @@
         }
       },
       "stats": {
-        "texts": {
-          "name": "Texts",
-          "unit": "count"
-        },
         "inputTokens": {
           "name": "Input tokens",
           "unit": "tokens"
@@ -289924,10 +289830,6 @@
           "name": "Latency",
           "unit": "seconds",
           "better": "lower"
-        },
-        "scenarios": {
-          "name": "Scenarios",
-          "unit": "count"
         }
       }
     },
@@ -299914,18 +299816,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "overall.terms_total": {
-          "name": "Overall terms total",
-          "unit": "count"
-        },
         "overall.sentences_all_correct": {
           "name": "Overall fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "overall.multi_terms": {
-          "name": "Overall multi-term sentences",
-          "unit": "count"
         },
         "overall.multi_terms_always_correct": {
           "name": "Overall fully correct multi-term sentences",
@@ -299942,18 +299836,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "domain.chess.terms_total": {
-          "name": "Chess terms total",
-          "unit": "count"
-        },
         "domain.chess.sentences_all_correct": {
           "name": "Chess fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "domain.chess.multi_terms": {
-          "name": "Chess multi-term sentences",
-          "unit": "count"
         },
         "domain.chess.multi_terms_always_correct": {
           "name": "Chess fully correct multi-term sentences",
@@ -299965,18 +299851,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "domain.basketball.terms_total": {
-          "name": "Basketball terms total",
-          "unit": "count"
-        },
         "domain.basketball.sentences_all_correct": {
           "name": "Basketball fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "domain.basketball.multi_terms": {
-          "name": "Basketball multi-term sentences",
-          "unit": "count"
         },
         "domain.basketball.multi_terms_always_correct": {
           "name": "Basketball fully correct multi-term sentences",
@@ -299988,18 +299866,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "domain.golf.terms_total": {
-          "name": "Golf terms total",
-          "unit": "count"
-        },
         "domain.golf.sentences_all_correct": {
           "name": "Golf fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "domain.golf.multi_terms": {
-          "name": "Golf multi-term sentences",
-          "unit": "count"
         },
         "domain.golf.multi_terms_always_correct": {
           "name": "Golf fully correct multi-term sentences",
@@ -300011,18 +299881,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "domain.gymnastics.terms_total": {
-          "name": "Gymnastics terms total",
-          "unit": "count"
-        },
         "domain.gymnastics.sentences_all_correct": {
           "name": "Gymnastics fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "domain.gymnastics.multi_terms": {
-          "name": "Gymnastics multi-term sentences",
-          "unit": "count"
         },
         "domain.gymnastics.multi_terms_always_correct": {
           "name": "Gymnastics fully correct multi-term sentences",
@@ -300034,18 +299896,10 @@
           "unit": "count",
           "better": "higher"
         },
-        "domain.football.terms_total": {
-          "name": "Football terms total",
-          "unit": "count"
-        },
         "domain.football.sentences_all_correct": {
           "name": "Football fully correct sentences",
           "unit": "count",
           "better": "higher"
-        },
-        "domain.football.multi_terms": {
-          "name": "Football multi-term sentences",
-          "unit": "count"
         },
         "domain.football.multi_terms_always_correct": {
           "name": "Football fully correct multi-term sentences",
@@ -308649,10 +308503,6 @@
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
-        },
-        "runs": {
-          "name": "Runs",
-          "unit": "count"
         }
       }
     },
@@ -316285,10 +316135,6 @@
       ],
       "costPer": "run",
       "stats": {
-        "predictions": {
-          "name": "Predictions",
-          "unit": "count"
-        },
         "answered": {
           "name": "Answered predictions",
           "unit": "count"
@@ -337027,14 +336873,6 @@
           "unit": "score",
           "better": "higher"
         },
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "observations": {
-          "name": "Observations",
-          "unit": "count"
-        },
         "bothRight": {
           "name": "Both right rate",
           "unit": "score",
@@ -341578,12 +341416,6 @@
           "name": "Chemistry",
           "group": "Domain"
         }
-      },
-      "stats": {
-        "samples": {
-          "name": "Samples",
-          "unit": "count"
-        }
       }
     },
     "wise-verified": {
@@ -342186,16 +342018,8 @@
           "name": "Terms correct",
           "unit": "count"
         },
-        "termsTotal": {
-          "name": "Terms tested",
-          "unit": "count"
-        },
         "sentencesCorrect": {
           "name": "Sentences correct",
-          "unit": "count"
-        },
-        "sentencesTotal": {
-          "name": "Sentences tested",
           "unit": "count"
         }
       }
