@@ -17407,6 +17407,18 @@
     ]
   },
   {
+    "id": "gemini-decision-1",
+    "name": "Gemini Decision 1",
+    "lab": "google",
+    "released": "2026-11-11",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+    "aliases": [
+      "gemini-decision-1",
+      "Gemini-Decision-1"
+    ]
+  },
+  {
     "id": "vidu-q2-pro",
     "name": "Vidu Q2 Pro",
     "lab": "shengshu",
@@ -17574,6 +17586,44 @@
     "aliases": [
       "Marin-Mochi-535B-A23B",
       "Marin Mochi 535B"
+    ]
+  },
+  {
+    "id": "jev-1-14-0",
+    "name": "Jev 1.14.0",
+    "lab": "typesafe-ai",
+    "family": "Jev",
+    "released": "2026-10-14",
+    "weights": "closed",
+    "card": "https://typesafe.ai/blog/jev-1-14",
+    "aliases": [
+      "Jev 1.14",
+      "Jev-1.14.0",
+      "jev-1.14.0"
+    ]
+  },
+  {
+    "id": "awomo-0-5i",
+    "name": "Awomo-0.5I",
+    "lab": "awomo",
+    "family": "Awomo",
+    "released": "2026-10-03",
+    "weights": "open",
+    "card": "https://github.com/Awomo-WestlakeDI/Awomo-0.5",
+    "aliases": [
+      "Awomo-0.5-Image",
+      "Awomo 0.5I"
+    ]
+  },
+  {
+    "id": "openwam-alpha",
+    "name": "OpenWAM-Alpha",
+    "lab": "openwam",
+    "released": "2026-09-04",
+    "weights": "open",
+    "card": "https://openwam-official.github.io/",
+    "aliases": [
+      "OpenWAM Alpha"
     ]
   }
 ]

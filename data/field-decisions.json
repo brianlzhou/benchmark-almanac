@@ -1277,6 +1277,11 @@
       "$/M input token": "wired",
       "$/M output token": "wired"
     },
+    "game-autoresearch-bench": {
+      "budgetUsd": "ignore",
+      "seedMultipliers": "ignore",
+      "spentUsd": "ignore"
+    },
     "gamehorizon": {
       "Recording Duration and Share": "ignore"
     },

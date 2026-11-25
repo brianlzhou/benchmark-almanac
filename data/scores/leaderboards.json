@@ -58138,11 +58138,13 @@
         },
         "meTurns": {
           "name": "ME turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "meTokens": {
           "name": "ME tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "restrict": {
           "name": "RE strict completion",
@@ -58161,11 +58163,13 @@
         },
         "reTurns": {
           "name": "RE turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "reTokens": {
           "name": "RE tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "capGroundedUnderstanding": {
           "name": "Grounded Understanding completion",
@@ -73038,10 +73042,8 @@
       "feed": "https://crazyrouter.com/experimental",
       "terms": "The service terms cover the API platform. I found no separate license for leaderboard data. The site's robots.txt permits the public experiment page.",
       "retrieved": "2026-11-24",
-      "rows": 11,
-      "unmatched": [
-        "Jev 1.14"
-      ],
+      "rows": 12,
+      "unmatched": [],
       "stats": {
         "dailyReturnPct": {
           "name": "Daily return",
@@ -82165,10 +82167,9 @@
       "feed": "https://benchmark.tazolabs.com/data/leaderboard.json",
       "terms": "The DECIDE repository licenses evaluator and website source under MIT; private recordings and annotations are excluded from that license.",
       "retrieved": "2026-11-24",
-      "rows": 9,
+      "rows": 10,
       "unmatched": [
         "GPT Audio",
-        "Gemini Decision 1",
         "Laya",
         "Nirnaya Flash 1.0",
         "Nirnaya Turbo 1.0",
@@ -128588,6 +128589,88 @@
         }
       }
     },
+    "game-autoresearch-bench": {
+      "url": "https://gameautoresearch.github.io/",
+      "feed": "https://raw.githubusercontent.com/gameautoresearch/gameautoresearch.github.io/main/external-website/src/posts/autoresearch/top-scores.json",
+      "terms": "The page and its data are published in a public GitHub repository under the MIT license. Results are credited to Game Autoresearch Bench.",
+      "headline": "The page's overall ranking: each of six tasks standardized so 50 is the ten reference models' average and 10 points is their standard deviation, then averaged over the tasks a model ran. The interval is ±1 standard error across its tasks.",
+      "retrieved": "2026-11-25",
+      "rows": 10,
+      "unmatched": [],
+      "reference": [
+        "Terminus-2"
+      ],
+      "parts": {
+        "polytopiaEmpty": {
+          "name": "Polytopia, empty file",
+          "group": "Task",
+          "note": "Train a Polytopia network from an empty training file, graded privately. Standardized score."
+        },
+        "polytopiaRecipes": {
+          "name": "Polytopia recipes",
+          "group": "Task",
+          "note": "Improve the Polytopia starter recipe on five research budgets, scored by the training compute it saves. Standardized score."
+        },
+        "pokemon": {
+          "name": "Pokémon 3v3",
+          "group": "Task",
+          "note": "Improve a working Pokémon Showdown starter, scored against the starter. Standardized score."
+        },
+        "generals": {
+          "name": "Generals",
+          "group": "Task",
+          "note": "The submitted networks' Elo in a 20-network Generals.io tournament. Standardized score."
+        },
+        "hex": {
+          "name": "Hex 13×13",
+          "group": "Task",
+          "note": "Improve a working AlphaZero-style Hex starter, graded against MoHex and other bots. Standardized score."
+        },
+        "forecasting": {
+          "name": "Forecasting",
+          "group": "Task",
+          "note": "Predict how training recipes will do before they run, scored as skill over a blind guess. Standardized score."
+        }
+      },
+      "stats": {
+        "polytopiaEmptyGrade": {
+          "name": "Polytopia, empty file grade",
+          "unit": "score",
+          "better": "higher",
+          "note": "Private grade from 0 to 100."
+        },
+        "polytopiaRecipeMultiplier": {
+          "name": "Polytopia recipe compute multiplier",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Times the starter's training compute to reach the same strength on a typical budget cell. Research spend isn't counted."
+        },
+        "pokemonScore": {
+          "name": "Pokémon 3v3 score against the starter",
+          "unit": "score",
+          "better": "higher",
+          "note": "From 0 to 100, where 50 is level with the starter."
+        },
+        "generalsElo": {
+          "name": "Generals tournament Elo",
+          "unit": "elo",
+          "better": "higher",
+          "note": "Tournament Elo with the field centered at 1000."
+        },
+        "hexElo": {
+          "name": "Hex 13×13 panel Elo",
+          "unit": "elo",
+          "better": "higher",
+          "note": "Elo against a fixed panel, where MoHex at 50,000 simulations per move is 0."
+        },
+        "forecastingSkill": {
+          "name": "Forecasting skill",
+          "unit": "score",
+          "better": "higher",
+          "note": "Skill relative to a blind guess."
+        }
+      }
+    },
     "gameadsbench": {
       "url": "https://video-arena.com/gameadsbench/leaderboard",
       "feed": "https://video-arena.com/gameadsbench/api/leaderboard",
@@ -128716,6 +128799,51 @@
       "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": []
+    },
+    "gamedojo": {
+      "url": "https://gamedojo-benchmark.github.io/#results",
+      "feed": "https://gamedojo-benchmark.github.io/assets/js/results.js",
+      "terms": "The project page publishes the paper results openly. Results are credited to GameDojo.",
+      "static": "paper",
+      "retrieved": "2026-11-25",
+      "rows": 22,
+      "unmatched": [
+        "GameScaling-9B-S3",
+        "Gamer-35B-A3B"
+      ],
+      "parts": {
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        }
+      },
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of Medium fights won through the computer-use interface."
+        },
+        "semanticProgress": {
+          "name": "Progress, semantic interface",
+          "unit": "%",
+          "better": "higher",
+          "note": "Medium progress when the model acts through named game actions instead of mouse and keyboard."
+        },
+        "semanticWinRate": {
+          "name": "Win rate, semantic interface",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "gameenginebench": {
       "url": "https://www.nitrode.com/research",
@@ -159777,7 +159905,7 @@
       "feed": "https://insurebench.insure-thing.com/decision-models/data.json",
       "terms": "InsureThing allows crawling in robots.txt. Its copyright notice gives no separate reuse license for the aggregate results.",
       "retrieved": "2026-11-24",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
         "Clef",
         "Clef Flash",
@@ -159787,9 +159915,7 @@
         "Drex v2.0",
         "Elephant 1",
         "Elephant 1 (free)",
-        "Gemini Decision 1",
         "JEV 1.13",
-        "JEV 1.14",
         "Joey 1",
         "KEV 4B",
         "Liquid d1",
@@ -162525,7 +162651,7 @@
       "feed": "https://benchmarkheaven.com/api/jevbench/latest",
       "terms": "Public results published by the benchmark authors at benchmarkheaven.com; retain source attribution and follow the upstream terms.",
       "retrieved": "2026-11-24",
-      "rows": 7,
+      "rows": 9,
       "unmatched": [
         "AJev lm6q (Gemma 4 31B)",
         "APUS-OpenJev-v1-35B-A3B (merged bf16 checkpoint-5949 MoE on Qwen3.5-35B-A3B, their own native runtime, full depth, self-hosted)",
@@ -162605,7 +162731,6 @@
         "FrontiersMind Lumma-fev-27B",
         "GEV-26B-Decide (AutoTrust, Gemma-4-26B-A4B + LoRA + head)",
         "GLiClass v4 9B (Knowledgator)",
-        "Gemini Decision 1",
         "Granite Switch 4.1 30B (revision 4.1.1, decision adapter)",
         "Granite Switch 4.1 8B (revision 4.1.1, decision adapter)",
         "Gutsy 0.8B v0.3",
@@ -162637,7 +162762,6 @@
         "Jeffan-31b-1710",
         "Jeffan-4B-2010",
         "Jev 1.13.0 (TypeSafe AI)",
-        "Jev 1.14.0 (TypeSafe AI)",
         "Jev-Omni (akhilaaa3, Gemma-4-12B merged)",
         "Jev-Style-2B",
         "JevAct (einptein, jev1-2b-v2)",
@@ -205496,7 +205620,7 @@
       "feed": "https://mmdm-benchmark.github.io/",
       "terms": "The authors publish the MMDM leaderboard and protocol at https://mmdm-benchmark.github.io/.",
       "retrieved": "2026-11-24",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
         "Autotrust JEV 27B-VL",
         "Clef",
@@ -205506,14 +205630,12 @@
         "Decisio-Gemma-4-31B",
         "Decisio-Qwen3.6-35B-A3B",
         "GPT-6 Luna Decisions",
-        "Gemini Decision 1",
         "H2O-Lightning 4B",
         "HeyGen Decision-1",
         "HeyGen Decision-1 Turbo",
         "Intern-Decision 0.8B",
         "Intern-Decision 2B",
         "Intern-Decision 4B",
-        "Jev 1.14.0",
         "JevK5 4B",
         "KnowLine 31B Gen1",
         "Liquid-d1",
@@ -210539,10 +210661,9 @@
       "feed": "https://molmospaces.allen.ai/benchmark/data/index.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "retrieved": "2026-11-24",
-      "rows": 5,
+      "rows": 6,
       "unmatched": [
         "AsterPick",
-        "Awomo-0.5I",
         "Awomo-0.5V",
         "CAP<sub>close</sub> + Gemini-ER",
         "CAP<sub>open</sub> + Gemini-ER",
@@ -280037,7 +280158,7 @@
       "feed": "https://robocoliseum.ai/api/challenge/leaderboard/overall?page=N&per-page=100&model_type=all (overall score)",
       "terms": "Public JSON the leaderboard page reads; robocoliseum.ai serves no robots.txt rules (the path returns the app) and publishes no terms for the board.",
       "retrieved": "2026-11-24",
-      "rows": 15,
+      "rows": 16,
       "unmatched": [
         "ACoT-VLA",
         "Dream-1 SFT 500 steps",
@@ -280049,7 +280170,6 @@
         "KaneRSI",
         "MXI SimWorld v0 Preview",
         "NexusBrain",
-        "OpenWAM-Alpha",
         "Prime-0",
         "PyRUA-Lean",
         "RoboMan-Pi05",
@@ -280235,7 +280355,7 @@
       "feed": "https://robodojo-benchmark.com/data/leaderboard.generated.json (sim, average score)",
       "terms": "Static JSON the board itself loads; robots.txt allows it (disallows only /internal/ and /login) and the RoboDojo repository is MIT-licensed.",
       "retrieved": "2026-11-24",
-      "rows": 15,
+      "rows": 16,
       "unmatched": [
         "A1",
         "ABot-M0",
@@ -280272,7 +280392,6 @@
         "ME-Brain-1.0",
         "MachEmbodied-U0",
         "Motubrain 2.0",
-        "OpenWAM-α",
         "PhysicalRSI",
         "PyRUA-Lean",
         "Q0-Preview",
@@ -281614,7 +281733,7 @@
       "feed": "https://www.vals.ai/benchmarks/rctbench (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-24",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
         "Bison 1",
         "Clef",
@@ -281626,10 +281745,8 @@
         "Drex v1.5",
         "Drex v2.0",
         "GPT-6 Luna Decisions",
-        "Gemini Decision 1",
         "Groundhog 1",
         "Jev 1.13.0",
-        "Jev 1.14",
         "d1.2",
         "d1.2-ultra"
       ],
@@ -296141,16 +296258,14 @@
       "feed": "https://lichenlillc.github.io/SO-Arena/data/arena.json",
       "terms": "SO-Arena publishes its annotations under CC BY 4.0 and its code under MIT. https://github.com/holdrain/SO-Arena#licence",
       "retrieved": "2026-11-24",
-      "rows": 2,
+      "rows": 4,
       "unmatched": [
         "Clef-27B",
         "Clef-Flash-9B",
         "Decider Flash",
         "Decider-27B",
         "GLiDE",
-        "Gemini Decision 1",
         "H2O Lightning",
-        "Jev API 1.14",
         "JevAny-27B",
         "JevAny-4B",
         "Jeva-4B",
@@ -324401,7 +324516,7 @@
       "feed": "https://www.vals.ai/benchmarks/claimbench",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-24",
-      "rows": 0,
+      "rows": 2,
       "unmatched": [
         "Bison 1",
         "Classify-1",
@@ -324418,10 +324533,8 @@
         "Drex v2.0",
         "Elephant 1",
         "GPT-6 Luna Decisions",
-        "Gemini Decision 1",
         "Groundhog 1",
         "Jev 1.13.0",
-        "Jev 1.14",
         "Joey 1",
         "Mammoth 1",
         "Mercury Decide",
@@ -343804,6 +343917,86 @@
           "name": "Augmented task successes",
           "unit": "count",
           "better": "higher"
+        }
+      }
+    },
+    "worldleague": {
+      "url": "https://xyangzhou.github.io/WorldLeague/",
+      "feed": "https://xyangzhou.github.io/WorldLeague/",
+      "terms": "The project page publishes the leaderboard openly, and the code and benchmark materials are under the MIT license. Results are credited to WorldLeague.",
+      "retrieved": "2026-11-25",
+      "rows": 13,
+      "unmatched": [],
+      "reference": [
+        "WorldHarness"
+      ],
+      "parts": {
+        "navigation": {
+          "name": "Navigation",
+          "group": "WorldSeek"
+        },
+        "grounding": {
+          "name": "Grounding",
+          "group": "WorldSeek"
+        },
+        "geometry": {
+          "name": "Geometry",
+          "group": "WorldShape"
+        },
+        "physics": {
+          "name": "Physics",
+          "group": "WorldShape"
+        },
+        "memory": {
+          "name": "Memory",
+          "group": "WorldShift"
+        },
+        "constraints": {
+          "name": "Constraints",
+          "group": "WorldShift"
+        }
+      },
+      "stats": {
+        "success": {
+          "name": "Physical success",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of episodes where the full goal and every task constraint hold."
+        },
+        "navigationSuccess": {
+          "name": "Navigation physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "groundingSuccess": {
+          "name": "Grounding physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "geometrySuccess": {
+          "name": "Geometry physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "physicsSuccess": {
+          "name": "Physics physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "memorySuccess": {
+          "name": "Memory physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "constraintsSuccess": {
+          "name": "Constraints physical success",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tasks": {
+          "name": "Tasks run",
+          "unit": "count",
+          "note": "The continuous-control evaluation of VLAs and WAMs covers 59 of the 60 tasks."
         }
       }
     },

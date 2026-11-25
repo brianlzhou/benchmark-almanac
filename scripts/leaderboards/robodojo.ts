@@ -10,6 +10,8 @@ const FEED = 'https://robodojo-benchmark.com/data/leaderboard.generated.json';
 
 const board: Leaderboard = {
   benchmark: 'robodojo',
+  // the board writes OpenWAM's model with a Greek alpha, which the shared resolver's keys drop
+  aliases: { 'OpenWAM-α': 'openwam-alpha' },
   parts: {
     generalizationScore: { name: 'Generalization', group: 'Category' },
     precisionScore: { name: 'Precision', group: 'Category' },
