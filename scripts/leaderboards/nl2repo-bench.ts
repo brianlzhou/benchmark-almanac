@@ -3,7 +3,21 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2512.12730';
 const board: Leaderboard = {
-  benchmark: 'nl2repo-bench', static: 'paper', stats: { fullyPassedTasks: { name: 'Fully passed tasks', unit: 'count' }, meanTurns: { name: 'Mean interaction turns', unit: 'count' }, stdTurns: { name: 'Standard deviation of turns', unit: 'count' }, maxTurns: { name: 'Maximum interaction turns', unit: 'count' } }, parts: {
+  benchmark: 'nl2repo-bench', static: 'paper', stats: {
+    fullyPassedTasks: { name: 'Fully passed tasks', unit: 'count', better: 'higher' },
+    easyFullyPassed: { name: 'Easy fully passed tasks', unit: 'count', better: 'higher' },
+    mediumFullyPassed: { name: 'Medium fully passed tasks', unit: 'count', better: 'higher' },
+    hardFullyPassed: { name: 'Hard fully passed tasks', unit: 'count', better: 'higher' },
+    meanTurns: { name: 'Mean interaction turns', unit: 'count' },
+    maxTurns: { name: 'Maximum observed turns', unit: 'count' },
+    turnsPerScore: { name: 'Turns per score point', unit: 'score', better: 'lower' },
+    'toolUses:str_replace_editor': { name: 'Editor tool uses', unit: 'count' },
+    'toolUses:execute_bash': { name: 'Bash tool uses', unit: 'count' },
+    'toolUses:task_tracker': { name: 'Task tracker tool uses', unit: 'count' },
+    'toolUses:Other': { name: 'Other tool uses', unit: 'count' },
+    'toolUses:Total': { name: 'Total tool uses', unit: 'count' },
+    'toolUses:Avg/Task': { name: 'Average tool uses per task', unit: 'count' },
+  }, parts: {
   easy: { name: 'Easy', group: 'Difficulty' },
   medium: { name: 'Medium', group: 'Difficulty' },
   hard: { name: 'Hard', group: 'Difficulty' },
@@ -33,7 +47,7 @@ const board: Leaderboard = {
         else if (c[0] === r[0]) c.slice(1).forEach((v, i) => {if (Number.isFinite(parseFloat(v))) metrics[header[i + 1]] = parseFloat(v);});
       }
       const n = turns.find(x => x[0].toLowerCase() === r[0].toLowerCase());
-      if (n) { metrics.meanTurns = Number(n[1]); metrics.stdTurns = Number(n[2]); metrics.maxTurns = Number(n[3]); metrics.turnsPerScore = Number(n[5]); }
+      if (n) { metrics.meanTurns = Number(n[1]); metrics.turnsStd = Number(n[2]); metrics.maxTurns = Number(n[3]); metrics.turnsPerScore = Number(n[5]); }
       if (tools && !m[2]) {
         const col = tools[0].findIndex((h, i) => (h + (tools[1][i] ?? '')).toLowerCase() === m[1].toLowerCase());
         if (col > 0) for (const cells of tools.slice(2)) {
