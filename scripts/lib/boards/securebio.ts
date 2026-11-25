@@ -33,9 +33,11 @@ export async function abcRows(track: 'fragment-design' | 'liquid-handling-robot'
       const ci = hover.match(/Accuracy:\s*[\d.]+%\s*\[([\d.]+)%,\s*([\d.]+)%\]/);
       const refusal = hover.match(/Refusals:\s*([\d.]+)%/);
       const metrics: Record<string, number> = {};
-      if (ci) { metrics.ciLow = Number(ci[1]); metrics.ciHigh = Number(ci[2]); }
+      const low = ci ? Number(ci[1]) : undefined;
+      const high = ci ? Number(ci[2]) : undefined;
+      if (low !== undefined && high !== undefined && low <= high) { metrics.ciLow = low; metrics.ciHigh = high; }
       if (refusal) metrics.refusalPercent = Number(refusal[1]);
-      rows.set(label, { model, score: Number(accuracy[1]), setting, harness, metrics });
+      rows.set(label, { model, score: Number(accuracy[1]), setting, harness, ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}), metrics });
     }
   }
   if (!rows.size) throw new Error(`ABC-Bench ${track} results missing`);

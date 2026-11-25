@@ -38,13 +38,12 @@ async function withRetries<T>(read: () => Promise<T>): Promise<T> {
   }
 }
 
-export function valsSmithBoard(benchmark: string, repo: string, tokensAvailable = true): Leaderboard {
+export function valsSmithBoard(benchmark: string, repo: string, tokensAvailable = true, passedAvailable = true): Leaderboard {
   const url = `https://www.vals.ai/vals-smith/${repo}`;
   const board: Leaderboard = {
     benchmark,
     stats: {
-      passed: { name: 'Tests passed', unit: 'count' },
-      tests: { name: 'Tests', unit: 'count' },
+      ...(passedAvailable ? { passed: { name: 'Tests passed', unit: 'count' } } : {}),
       ...(tokensAvailable ? { totalTokens: { name: 'Total tokens', unit: 'tokens' } } : {}),
       minutes: { name: 'Duration', unit: 'minutes', better: 'lower' },
     },
@@ -75,7 +74,7 @@ export function valsSmithBoard(benchmark: string, repo: string, tokensAvailable 
         const share = percent(c[iScore]);
         if (!c[iModel] || (!pass && !share)) continue;
         const cost = cell(c, iCost) ? money(cell(c, iCost)!) : NaN;
-        const metrics: Record<string, number> = pass ? { passed: Number(pass[1]), tests: Number(pass[2]) } : {};
+        const metrics: Record<string, number> = pass ? { passed: Number(pass[1]) } : {};
         for (const [h, i] of typeCols) {
           const p = percent(cell(c, i));
           if (p) metrics[typeKey(h)] = Number(p[1]);

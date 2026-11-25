@@ -10,6 +10,6 @@ const board = makeTerminalBench({
   // the 2.1 feed carries the same cost, tokens, pass@k, interval and trial time as 4.0
   extras: true,
 });
-const { successes: _successes, ...terminalBench21Stats } = TERMINAL_BENCH_STATS;
+const { ci95: _ci95, successes: _successes, ...terminalBench21Stats } = TERMINAL_BENCH_STATS;
 board.stats = terminalBench21Stats;
 export default board;

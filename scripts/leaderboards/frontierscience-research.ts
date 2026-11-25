@@ -14,9 +14,11 @@ const board: Leaderboard = {
       let model = (typeof r.family === 'string' ? r.family : r.model).replace(/^OpenAI /, '');
       if (model === 'GPT-4o') model += ' (snapshot unspecified)';
       const metrics: Record<string, number> = {};
-      if (typeof r.ci95_low_pct === 'number') metrics.ciLow = r.ci95_low_pct;
-      if (typeof r.ci95_high_pct === 'number') metrics.ciHigh = r.ci95_high_pct;
-      rows.push({ model, score: r.accuracy_pct, setting: r.family ? r.model.toLowerCase() : 'maximum reasoning', metrics });
+      const low = typeof r.ci95_low_pct === 'number' ? r.ci95_low_pct : undefined;
+      const high = typeof r.ci95_high_pct === 'number' ? r.ci95_high_pct : undefined;
+      if (low !== undefined) metrics.ciLow = low;
+      if (high !== undefined) metrics.ciHigh = high;
+      rows.push({ model, score: r.accuracy_pct, setting: r.family ? r.model.toLowerCase() : 'maximum reasoning', ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}), metrics });
     }
     if (!rows.length) throw new Error('FrontierScience Research has no accuracy rows');
     return rows;
