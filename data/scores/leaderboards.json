@@ -57811,25 +57811,24 @@
       }
     },
     "co-design-bench": {
-      "url": "https://codesignbench.github.io/#leaderboard",
-      "feed": "https://codesignbench.github.io/data/site-data.json",
-      "terms": "The authors publish the benchmark and its results at https://github.com/Wiselnn570/Co-Design-Bench",
-      "retrieved": "2026-11-20",
+      "url": "https://arxiv.org/html/2610.35138",
+      "feed": "https://arxiv.org/html/2610.35138",
+      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2610.35138.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
-      "reference": [
-        "Claude Code"
-      ],
-      "parts": {
+      "stats": {
         "graded": {
-          "name": "Graded completion"
+          "name": "Graded completion",
+          "unit": "%",
+          "better": "higher"
         },
         "full": {
-          "name": "Full pass"
-        }
-      },
-      "static": "paper",
-      "stats": {
+          "name": "Full-pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "mestrict": {
           "name": "ME strict completion",
           "unit": "%",
@@ -57847,11 +57846,13 @@
         },
         "meTurns": {
           "name": "ME turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "meTokens": {
           "name": "ME tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "restrict": {
           "name": "RE strict completion",
@@ -57870,106 +57871,13 @@
         },
         "reTurns": {
           "name": "RE turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "reTokens": {
           "name": "RE tokens",
-          "unit": "tokens"
-        },
-        "capGroundedUnderstanding": {
-          "name": "Grounded Understanding completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capVisualUnderstanding": {
-          "name": "Visual Understanding completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capAudioTemporalUnderstanding": {
-          "name": "Audio Temporal Understanding completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capEvidenceIntegration": {
-          "name": "Evidence Integration completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capUiTransformation": {
-          "name": "UI Transformation completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capContentAssets": {
-          "name": "Content Assets completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capStyleLayout": {
-          "name": "Style and Layout completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capMotionAdaptation": {
-          "name": "Motion Adaptation completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capFunctionalImplementation": {
-          "name": "Functional Implementation completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capInteractionBehaviors": {
-          "name": "Interaction Behaviors completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capDataLogic": {
-          "name": "Data Logic completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "capEngineeringIntegration": {
-          "name": "Engineering Integration completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "modNone": {
-          "name": "No-attachment completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "modImage": {
-          "name": "Image-attachment completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "modVideo": {
-          "name": "Video-attachment completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "modAudio": {
-          "name": "Audio-attachment completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "modDocument": {
-          "name": "Document-attachment completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "breadthB12": {
-          "name": "One or two edit types completion",
-          "unit": "%",
-          "better": "higher"
-        },
-        "breadthB34": {
-          "name": "Three or four edit types completion",
-          "unit": "%",
-          "better": "higher"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -92460,16 +92368,21 @@
       "url": "https://arxiv.org/html/1903.00161",
       "feed": "https://arxiv.org/html/1903.00161 (main results, test F1)",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BERT (DROP paper baseline)",
         "BiDAF",
         "NAQANet",
+        "OpenIE",
+        "P-only",
+        "Q-only",
         "QANet",
-        "QANet+ELMo"
+        "QANet+ELMo",
+        "SRL",
+        "Syn Dep"
       ],
-      "static": "paper",
       "stats": {
         "testExactMatch": {
           "name": "Test exact match",
@@ -92483,6 +92396,46 @@
         },
         "devF1": {
           "name": "Development F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev exact match: Date": {
+          "name": "Development exact match on dates",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev F1: Date": {
+          "name": "Development F1 on dates",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev exact match: Numbers": {
+          "name": "Development exact match on numbers",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev F1: Numbers": {
+          "name": "Development F1 on numbers",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev exact match: Single Span": {
+          "name": "Development exact match on single spans",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev F1: Single Span": {
+          "name": "Development F1 on single spans",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev exact match: >1 Spans": {
+          "name": "Development exact match on multiple spans",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Dev F1: >1 Spans": {
+          "name": "Development F1 on multiple spans",
           "unit": "%",
           "better": "higher"
         }
@@ -177103,7 +177056,117 @@
       "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 23,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "callsPerStep": {
+          "name": "Tool calls per step",
+          "unit": "count"
+        },
+        "validCallRate": {
+          "name": "Valid call rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "routingQuality": {
+          "name": "Routing quality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "avgTokens": {
+          "name": "Average tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "toolCallScore": {
+          "name": "Tool call score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "hallucinationFree": {
+          "name": "Hallucination-free rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "judgeMean": {
+          "name": "Judge mean score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "relevance": {
+          "name": "Tool relevance",
+          "unit": "score",
+          "better": "higher"
+        },
+        "efficiency": {
+          "name": "Information efficiency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "coverage": {
+          "name": "Information coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "faithfulness": {
+          "name": "Evidence faithfulness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "drawdownPct": {
+          "name": "Maximum drawdown",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hardRulePass": {
+          "name": "Hard rule pass rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ruleSatisfaction": {
+          "name": "Rule satisfaction score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ruleAuditability": {
+          "name": "Rule auditability score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "traces": {
+          "name": "Collaboration traces",
+          "unit": "count"
+        },
+        "collaboration": {
+          "name": "Reported overall collaboration score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "alternativeCollaboration": {
+          "name": "Alternative collaboration score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "sharpLosses": {
+          "name": "Sharp losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "sharpGains": {
+          "name": "Sharp gains",
+          "unit": "count",
+          "better": "higher"
+        },
+        "maxLossStreak": {
+          "name": "Maximum loss streak",
+          "unit": "count",
+          "better": "lower"
+        },
+        "tailLossPct": {
+          "name": "Tail loss",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "livemathbench": {
       "url": "https://github.com/open-compass/GPassK",
@@ -322210,12 +322273,24 @@
       "terms": "arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.",
       "headline": "The paper reports no overall score, so this is Recall@1 on the VALOR-32K retrieval column.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "VALOR B",
         "VALOR L"
-      ]
+      ],
+      "stats": {
+        "rAt5": {
+          "name": "Recall@5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "rAt10": {
+          "name": "Recall@10",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "vals-access-to-justice": {
       "url": "https://www.vals.ai/benchmarks/a2j",
@@ -331293,7 +331368,8 @@
       "url": "https://www.codabench.org/competitions/9829/",
       "feed": "https://arxiv.org/html/2501.01366v2",
       "terms": "The authors publish baseline scores in their arXiv paper. arXiv permits HTML access with a 15-second crawl delay. Codabench serves a challenge.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "3D-GRAND",
@@ -331354,7 +331430,6 @@
           "name": "Neg"
         }
       },
-      "static": "paper",
       "stats": {
         "Acc@25": {
           "name": "Accuracy at 25 IoU",
@@ -331382,6 +331457,11 @@
           "name": "F1 at 50 IoU",
           "unit": "%",
           "better": "higher"
+        },
+        "latency": {
+          "name": "Inference time",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
