@@ -23,6 +23,7 @@ const board: Leaderboard = {
   terms: XBENCH_TERMS,
   stats: {
     reportedPriceUSD: { name: 'Reported query price', unit: 'usd', better: 'lower', note: 'Dollar amount shown in the source cost column.' },
+    latency: { name: 'Query time', unit: 'seconds', better: 'lower', note: 'Single reported query time, converted from minutes.' },
     latencyMin: { name: 'Minimum query time', unit: 'seconds', better: 'lower', note: 'Lower bound of the source time range, converted from minutes.' },
     latencyMax: { name: 'Maximum query time', unit: 'seconds', better: 'lower', note: 'Upper bound of the source time range, converted from minutes.' },
   },

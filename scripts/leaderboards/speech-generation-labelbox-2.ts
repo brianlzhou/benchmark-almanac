@@ -33,21 +33,32 @@ const board: Leaderboard = {
     pronunciation_accuracy_High: { name: 'High pronunciation accuracy preference share', unit: '%', better: 'higher' },
     pronunciation_accuracy_Medium: { name: 'Medium pronunciation accuracy preference share', unit: '%', better: 'higher' },
     word_deletion_errors_0: { name: 'Zero word deletion errors', unit: '%', better: 'higher' },
-    word_deletion_errors_1: { name: 'One word deletion error', unit: '%', better: 'higher' },
-    word_deletion_errors_2: { name: 'Two word deletion errors', unit: '%', better: 'higher' },
+    word_deletion_errors_1: { name: 'One word deletion error', unit: '%', better: 'lower' },
+    word_deletion_errors_2: { name: 'Two word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_3: { name: 'Three word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_4: { name: 'Four word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_5: { name: 'Five word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_6: { name: 'Six word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_9: { name: 'Nine word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_10: { name: 'Ten word deletion errors', unit: '%', better: 'lower' },
+    word_deletion_errors_11: { name: 'Eleven word deletion errors', unit: '%', better: 'lower' },
     word_insertion_errors_0: { name: 'Zero word insertion errors', unit: '%', better: 'higher' },
-    word_insertion_errors_2: { name: 'Two word insertion errors', unit: '%', better: 'higher' },
+    word_insertion_errors_1: { name: 'One word insertion error', unit: '%', better: 'lower' },
+    word_insertion_errors_2: { name: 'Two word insertion errors', unit: '%', better: 'lower' },
+    word_insertion_errors_3: { name: 'Three word insertion errors', unit: '%', better: 'lower' },
+    word_insertion_errors_4: { name: 'Four word insertion errors', unit: '%', better: 'lower' },
+    word_insertion_errors_5: { name: 'Five word insertion errors', unit: '%', better: 'lower' },
+    word_insertion_errors_9: { name: 'Nine word insertion errors', unit: '%', better: 'lower' },
+    word_insertion_errors_12: { name: 'Twelve word insertion errors', unit: '%', better: 'lower' },
     word_substitution_errors_0: { name: 'Zero word substitution errors', unit: '%', better: 'higher' },
-    word_substitution_errors_1: { name: 'One word substitution error', unit: '%', better: 'higher' },
-    word_substitution_errors_2: { name: 'Two word substitution errors', unit: '%', better: 'higher' },
-    word_substitution_errors_3: { name: 'Three word substitution errors', unit: '%', better: 'higher' },
-    word_substitution_errors_5: { name: 'Five word substitution errors', unit: '%', better: 'higher' },
-    word_deletion_errors_4: { name: 'Four word deletion errors', unit: '%', better: 'higher' },
-    word_deletion_errors_9: { name: 'Nine word deletion errors', unit: '%', better: 'higher' },
-    word_insertion_errors_1: { name: 'One word insertion error', unit: '%', better: 'higher' },
-    word_insertion_errors_3: { name: 'Three word insertion errors', unit: '%', better: 'higher' },
-    word_insertion_errors_4: { name: 'Four word insertion errors', unit: '%', better: 'higher' },
-    word_insertion_errors_9: { name: 'Nine word insertion errors', unit: '%', better: 'higher' },
+    word_substitution_errors_1: { name: 'One word substitution error', unit: '%', better: 'lower' },
+    word_substitution_errors_2: { name: 'Two word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_3: { name: 'Three word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_4: { name: 'Four word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_5: { name: 'Five word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_6: { name: 'Six word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_8: { name: 'Eight word substitution errors', unit: '%', better: 'lower' },
+    word_substitution_errors_9: { name: 'Nine word substitution errors', unit: '%', better: 'lower' },
   },
   async fetch() {
     const { info } = await labelboxData(feed,'speech-generation') as {info:Entry[]};
@@ -56,7 +67,15 @@ const board: Leaderboard = {
       if (!r.label || !Number.isFinite(r.elo_rating)) throw new Error('Missing Elo rating');
       const metrics:Record<string,number> = {averageRank:r.average_rank, trueSkill:r.trueskill_rating, rank1:r.rank1_percentage, rank2:r.rank2_percentage};
       for (const [dimension,ratings] of Object.entries(r.detailed_stats))
-        for (const [label,share] of Object.entries(ratings)) metrics[dimension+'_'+label] = share;
+        for (const [label,share] of Object.entries(ratings)) {
+          if (dimension.startsWith('word_')) {
+            if (!/^\d+$/.test(label)) continue;
+            const key = dimension + '_' + String(Number(label));
+            if (key in board.stats!) metrics[key] = (metrics[key] ?? 0) + share;
+          } else if (/^(Low|Medium|High|None)$/.test(label)) {
+            metrics[dimension + '_' + label] = share;
+          }
+        }
       return {model:r.label,score:r.elo_rating,metrics};
     });
   },

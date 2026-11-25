@@ -9,6 +9,12 @@ const board: Leaderboard = {
   feed: 'https://toolathlon.xyz/docs/leaderboard.md (current table)',
   terms: TERMS,
   reference: ['Default'],
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    pass3: { name: 'Pass^3', unit: '%', better: 'higher' },
+    turns: { name: 'Turns', unit: 'count' },
+    toolCalls: { name: 'Tool calls', unit: 'count' },
+  },
   aliases: {},
   fetch: () => toolathlonRows('verified', { metrics: true }),
 };
