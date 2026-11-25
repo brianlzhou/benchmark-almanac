@@ -2218,10 +2218,6 @@
       "rows": 14,
       "unmatched": [],
       "stats": {
-        "examples": {
-          "name": "Examples",
-          "unit": "count"
-        },
         "outputQuality": {
           "name": "Output quality",
           "unit": "%",
@@ -31336,10 +31332,6 @@
         "ehzawad FastConformer-CTC"
       ],
       "stats": {
-        "clips": {
-          "name": "Clips",
-          "unit": "count"
-        },
         "characterErrorRate": {
           "name": "Character error rate",
           "unit": "%",
@@ -31347,10 +31339,6 @@
         },
         "wordErrors": {
           "name": "Word errors",
-          "unit": "count"
-        },
-        "referenceWords": {
-          "name": "Reference words",
           "unit": "count"
         },
         "fullSetWordErrorRate": {
@@ -41210,16 +41198,6 @@
         "numericRps": {
           "name": "Numeric",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "nBinary": {
-          "name": "Binary questions",
-          "unit": "count"
-        },
-        "nNumeric": {
-          "name": "Numeric questions",
-          "unit": "count"
         }
       }
     },
@@ -55621,15 +55599,6 @@
       "unmatched": [],
       "costPer": "run",
       "stats": {
-        "languages": {
-          "name": "Languages evaluated",
-          "unit": "count"
-        },
-        "totalCost": {
-          "name": "Total cost",
-          "unit": "usd",
-          "better": "lower"
-        },
         "totalInputTokens": {
           "name": "Input tokens",
           "unit": "tokens"
@@ -72385,10 +72354,6 @@
         }
       },
       "stats": {
-        "discoveryScheduled": {
-          "name": "Find missing facts scheduled attempts",
-          "unit": "count"
-        },
         "discoverySuccesses": {
           "name": "Find missing facts successes",
           "unit": "count"
@@ -72398,10 +72363,6 @@
           "unit": "ms",
           "better": "lower"
         },
-        "source_qaScheduled": {
-          "name": "Read documents scheduled attempts",
-          "unit": "count"
-        },
         "source_qaSuccesses": {
           "name": "Read documents successes",
           "unit": "count"
@@ -72410,10 +72371,6 @@
           "name": "Read documents median call time",
           "unit": "ms",
           "better": "lower"
-        },
-        "workflowScheduled": {
-          "name": "Complete a workflow scheduled attempts",
-          "unit": "count"
         },
         "workflowSuccesses": {
           "name": "Complete a workflow successes",
@@ -89512,12 +89469,6 @@
           "name": "Table cleaning",
           "group": "Long-horizon benchmark"
         }
-      },
-      "stats": {
-        "episodesPerTask": {
-          "name": "Episodes per task",
-          "unit": "count"
-        }
       }
     },
     "dexverse": {
@@ -96741,40 +96692,6 @@
         },
         "errors": {
           "name": "Select Errors"
-        }
-      },
-      "stats": {
-        "questions": {
-          "name": "Questions evaluated",
-          "unit": "count"
-        },
-        "radioN": {
-          "name": "MCQ Radio questions",
-          "unit": "count"
-        },
-        "checkN": {
-          "name": "MCQ Check questions",
-          "unit": "count"
-        },
-        "trueFalseN": {
-          "name": "True/False questions",
-          "unit": "count"
-        },
-        "positioningN": {
-          "name": "Positioning questions",
-          "unit": "count"
-        },
-        "closedN": {
-          "name": "Completion Closed questions",
-          "unit": "count"
-        },
-        "openN": {
-          "name": "Completion Open questions",
-          "unit": "count"
-        },
-        "errorsN": {
-          "name": "Select Errors questions",
-          "unit": "count"
         }
       }
     },
@@ -117067,18 +116984,10 @@
           "unit": "count",
           "better": "lower"
         },
-        "referenceWords": {
-          "name": "Reference words",
-          "unit": "count"
-        },
         "emptyTranscripts": {
           "name": "Empty transcripts",
           "unit": "count",
           "better": "lower"
-        },
-        "utterances": {
-          "name": "Utterances",
-          "unit": "count"
         },
         "latency": {
           "name": "Latency per utterance",
@@ -120656,13 +120565,7 @@
         "Goedel-Prover-SFT-7B",
         "InternLM-Prover-7B",
         "STP-7B"
-      ],
-      "stats": {
-        "samplingBudget": {
-          "name": "Sampling budget",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "formalmath-lite": {
       "url": "https://sphere-ai-lab.github.io/FormalMATH/",
@@ -136870,11 +136773,8 @@
       "stats": {
         "errors": {
           "name": "Errors",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -139860,10 +139760,6 @@
       "stats": {
         "passed": {
           "name": "Passed tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -158107,10 +158003,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
-        },
         "copyright_actExactMatch": {
           "name": "Copyright exact match",
           "unit": "%",
@@ -158120,10 +158012,6 @@
           "name": "Copyright character F1",
           "unit": "%",
           "better": "higher"
-        },
-        "copyright_actCount": {
-          "name": "Copyright questions",
-          "unit": "count"
         },
         "design_actExactMatch": {
           "name": "Designs exact match",
@@ -158135,10 +158023,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "design_actCount": {
-          "name": "Designs questions",
-          "unit": "count"
-        },
         "gi_actExactMatch": {
           "name": "Geographical Indications exact match",
           "unit": "%",
@@ -158148,10 +158032,6 @@
           "name": "Geographical Indications character F1",
           "unit": "%",
           "better": "higher"
-        },
-        "gi_actCount": {
-          "name": "Geographical Indications questions",
-          "unit": "count"
         },
         "patent_actExactMatch": {
           "name": "Patents exact match",
@@ -158163,10 +158043,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "patent_actCount": {
-          "name": "Patents questions",
-          "unit": "count"
-        },
         "plant_varieties_farmers_rights_actExactMatch": {
           "name": "Plant Varieties exact match",
           "unit": "%",
@@ -158176,10 +158052,6 @@
           "name": "Plant Varieties character F1",
           "unit": "%",
           "better": "higher"
-        },
-        "plant_varieties_farmers_rights_actCount": {
-          "name": "Plant Varieties questions",
-          "unit": "count"
         },
         "semiconductor_layout_design_actExactMatch": {
           "name": "Semiconductor exact match",
@@ -158191,10 +158063,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "semiconductor_layout_design_actCount": {
-          "name": "Semiconductor questions",
-          "unit": "count"
-        },
         "trademark_actExactMatch": {
           "name": "Trade Marks exact match",
           "unit": "%",
@@ -158204,10 +158072,6 @@
           "name": "Trade Marks character F1",
           "unit": "%",
           "better": "higher"
-        },
-        "trademark_actCount": {
-          "name": "Trade Marks questions",
-          "unit": "count"
         }
       }
     },
@@ -201027,10 +200891,6 @@
         "defended": {
           "name": "Defended attempts",
           "unit": "count"
-        },
-        "prompts": {
-          "name": "Prompts evaluated",
-          "unit": "count"
         }
       }
     },
@@ -216517,10 +216377,6 @@
           "name": "Judged configurations",
           "unit": "count"
         },
-        "cases": {
-          "name": "Test cases",
-          "unit": "count"
-        },
         "sandbox": {
           "name": "Sandbox success",
           "unit": "%",
@@ -217880,10 +217736,6 @@
         }
       },
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "perfect": {
           "name": "Perfect tasks",
           "unit": "count"
@@ -225275,27 +225127,27 @@
       ],
       "parts": {
         "crypto": {
-          "name": "crypto",
+          "name": "Crypto",
           "group": "Category"
         },
         "forensics": {
-          "name": "forensics",
+          "name": "Forensics",
           "group": "Category"
         },
         "misc": {
-          "name": "misc",
+          "name": "Miscellaneous",
           "group": "Category"
         },
         "pwn": {
-          "name": "pwn",
+          "name": "Pwn",
           "group": "Category"
         },
         "rev": {
-          "name": "rev",
+          "name": "Reverse engineering",
           "group": "Category"
         },
         "web": {
-          "name": "web",
+          "name": "Web",
           "group": "Category"
         }
       },
@@ -225304,12 +225156,8 @@
           "name": "Solved challenges",
           "unit": "count"
         },
-        "total": {
-          "name": "Total challenges",
-          "unit": "count"
-        },
         "passAt5": {
-          "name": "Pass@5",
+          "name": "pass@5",
           "unit": "%",
           "better": "higher"
         },
@@ -280153,10 +280001,6 @@
         "attempted": {
           "name": "Attempted unsafe actions",
           "unit": "count"
-        },
-        "trials": {
-          "name": "Trials",
-          "unit": "count"
         }
       }
     },
@@ -316268,18 +316112,6 @@
         "valid": {
           "name": "Valid answers",
           "unit": "count"
-        },
-        "charts": {
-          "name": "Charts scored",
-          "unit": "count"
-        },
-        "monthsPerChart": {
-          "name": "Months per chart",
-          "unit": "count"
-        },
-        "outputTokenLimit": {
-          "name": "Output token limit",
-          "unit": "tokens"
         }
       }
     },
@@ -316440,14 +316272,6 @@
       "unmatched": [],
       "costPer": "run",
       "stats": {
-        "games": {
-          "name": "Games",
-          "unit": "count"
-        },
-        "estimates": {
-          "name": "Rating estimates",
-          "unit": "count"
-        },
         "rmse": {
           "name": "Root mean squared error",
           "unit": "score",
@@ -316466,10 +316290,6 @@
           "name": "Spearman correlation",
           "unit": "score",
           "better": "higher"
-        },
-        "outputTokenLimit": {
-          "name": "Output token limit",
-          "unit": "tokens"
         }
       }
     },
@@ -330096,10 +329916,6 @@
       "stats": {
         "solved": {
           "name": "Solved tasks",
-          "unit": "count"
-        },
-        "total": {
-          "name": "Total tasks",
           "unit": "count"
         },
         "latency": {
