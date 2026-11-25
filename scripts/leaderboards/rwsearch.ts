@@ -21,14 +21,19 @@ const board: Leaderboard = {
     const t = tables(await fetchText(FEED)).find((x) => x[0]?.map((c) => c.text).join('|') === 'Class|Model|Score');
     if (!t) throw new Error('RW-Search leaderboard table not found');
     const rows: LeaderboardRow[] = [];
+    let open: boolean | undefined;
     for (const r of t.slice(1)) {
       if (r.length < 2) continue;
+      if (r.length >= 3) {
+        const cls = r[0].text.toLowerCase();
+        open = cls.includes('open') ? true : cls.includes('proprietary') ? false : undefined;
+      }
       let model = r[r.length - 2].text;
       const score = num(r[r.length - 1].text);
       if (!model || score === undefined) continue;
       const reasoner = /-reasoner$/.test(model);
       if (reasoner) model = model.replace(/-reasoner$/, '');
-      rows.push({ model, score, setting: reasoner ? 'thinking' : undefined });
+      rows.push({ model, score, setting: reasoner ? 'thinking' : undefined, open });
     }
     return rows;
   },

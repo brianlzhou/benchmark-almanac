@@ -11,6 +11,11 @@ const board: Leaderboard = {
   url: 'https://github.com/intertwine/security-verifiers/tree/main/environments/sv-env-redteam-defense',
   feed,
   terms: 'The repository is MIT licensed. https://github.com/intertwine/security-verifiers/blob/main/LICENSE GitHub requests a one-second crawl delay.',
+  stats: {
+    defenseRate: { name: 'Defense rate', unit: '%', better: 'higher' },
+    falsePositiveRate: { name: 'False positive rate', unit: '%', better: 'lower' },
+    helpfulness: { name: 'Helpfulness', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const table = source.match(/\| Model\s*\| Defense Rate[\s\S]*?(?=\n\n|\n##)/)?.[0];

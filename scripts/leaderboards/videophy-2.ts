@@ -13,17 +13,44 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML tables, All)`,
   terms: 'Static project page on GitHub Pages (no robots.txt rules); the site states no terms.',
+  parts: {
+    hard: 'Hard prompts',
+    physicalActivity: 'Physical activity',
+    objectInteraction: 'Object interaction',
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const t of tables(await fetchText(PAGE))) {
       const head = t[0]?.map((c) => c.text) ?? [];
       const iModel = head.indexOf('Model');
+      const iType = head.indexOf('Type');
       const iAll = head.indexOf('All');
+      const iHard = head.indexOf('Hard');
+      const iPa = head.indexOf('PA');
+      const iOi = head.indexOf('OI');
+      const iRep = head.indexOf('Reported in');
       if (iModel < 0 || iAll < 0) continue;
       for (const r of t.slice(1)) {
         const model = r[iModel]?.text;
         const score = num(r[iAll]?.text);
-        if (model && score !== undefined) rows.push({ model, score });
+        if (!model || score === undefined) continue;
+        const typ = iType >= 0 ? r[iType]?.text.trim().toLowerCase() : '';
+        const open = typ === 'open' ? true : typ === 'closed' ? false : undefined;
+        const link = iRep >= 0 ? r[iRep]?.html.match(/href="(https?:\/\/[^"]+)"/i)?.[1] : undefined;
+        const metrics: Record<string, number> = {};
+        const hard = iHard >= 0 ? num(r[iHard]?.text) : undefined;
+        const pa = iPa >= 0 ? num(r[iPa]?.text) : undefined;
+        const oi = iOi >= 0 ? num(r[iOi]?.text) : undefined;
+        if (hard !== undefined) metrics.hard = hard;
+        if (pa !== undefined) metrics.physicalActivity = pa;
+        if (oi !== undefined) metrics.objectInteraction = oi;
+        rows.push({
+          model,
+          score,
+          ...(open !== undefined ? { open } : {}),
+          ...(link ? { link } : {}),
+          ...(Object.keys(metrics).length ? { metrics } : {}),
+        });
       }
     }
     if (!rows.length) throw new Error('no VideoPhy-2 leaderboard tables found');
