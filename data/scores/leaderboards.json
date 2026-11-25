@@ -41203,21 +41203,11 @@
       "url": "https://arxiv.org/abs/2506.21558",
       "feed": "https://arxiv.org/html/2506.21558",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
-      "harnesses": "system",
-      "static": "paper",
-      "stats": {
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
-        },
-        "effectiveQuestions": {
-          "name": "Effective questions",
-          "unit": "count"
-        }
-      }
+      "harnesses": "system"
     },
     "btf-2": {
       "url": "https://evals.futuresearch.ai/",
@@ -42306,7 +42296,7 @@
       "feed": "https://arxiv.org/html/2106.10776",
       "terms": "The authors publish the aggregate table on arXiv. https://arxiv.org/abs/2106.10776",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BiLSTM",
@@ -42324,10 +42314,6 @@
           "name": "Recall at 20",
           "unit": "%",
           "better": "higher"
-        },
-        "testFolds": {
-          "name": "Test folds",
-          "unit": "count"
         }
       }
     },
@@ -67504,47 +67490,22 @@
       "unmatched": []
     },
     "compmat-bench": {
-      "url": "https://github.com/cz2014/CompMat-Bench",
-      "feed": "https://raw.githubusercontent.com/cz2014/CompMat-Bench/HEAD/trajectories/manifest.json",
-      "terms": "CC BY 4.0, https://github.com/cz2014/CompMat-Bench/blob/HEAD/LICENSE",
+      "url": "https://arxiv.org/html/2610.00636",
+      "feed": "https://arxiv.org/html/2610.00636",
+      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2610.00636.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "parts": {
-        "inputs": {
+        "prepare": {
           "name": "Prepare inputs"
         },
-        "outputs": {
+        "analyze": {
           "name": "Analyze outputs"
         },
-        "run": {
+        "runAndAnalyze": {
           "name": "Run and analyze"
-        },
-        "reduced52": {
-          "name": "Reduced guidance (52 tasks)"
-        },
-        "repeat20x5": {
-          "name": "Repeated trials (20 tasks)"
-        },
-        "workflow": {
-          "name": "Workflows"
-        }
-      },
-      "stats": {
-        "passes": {
-          "name": "Tasks passed",
-          "unit": "count",
-          "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "totalCost": {
-          "name": "API cost",
-          "unit": "usd",
-          "better": "lower"
         }
       }
     },
@@ -79640,6 +79601,10 @@
           "name": "Scored examples",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-24",
+        "error": "10 entries against 116 last time; rerun with --allow-drop if the board really shrank"
       }
     },
     "dalaj": {
@@ -92652,7 +92617,8 @@
       "url": "https://democracyreporting.s3.eu-central-1.amazonaws.com/pdf/6628b70e0b124.pdf",
       "feed": "https://democracyreporting.s3.eu-central-1.amazonaws.com/pdf/6628b70e0b124.pdf",
       "terms": "The report host denies access to robots.txt. The report publishes counts by chatbot and links an archive of screenshots. I could not verify a data reuse license. https://democracyreporting.s3.eu-central-1.amazonaws.com/pdf/6628b70e0b124.pdf",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ChatGPT3.5",
@@ -92660,7 +92626,6 @@
         "Copilot",
         "Gemini"
       ],
-      "static": "paper",
       "stats": {
         "incorrect": {
           "name": "Incorrect answers",
@@ -92672,10 +92637,6 @@
         },
         "partial": {
           "name": "Partially correct answers",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Questions assessed",
           "unit": "count"
         }
       }
@@ -98249,7 +98210,7 @@
       "feed": "https://nphard.io/2026/10/07/eleusinian-swarms.html",
       "terms": "The results article is published by nphard.io and its linked repository uses the repository license. https://github.com/PrimeIntellect-ai/residency-environments GitHub requests a one-second crawl delay.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "stats": {
@@ -98267,10 +98228,6 @@
           "name": "Cooperative solves",
           "unit": "count",
           "better": "higher"
-        },
-        "episodes": {
-          "name": "Episodes",
-          "unit": "count"
         }
       }
     },
@@ -104949,7 +104906,8 @@
       "url": "https://arxiv.org/html/2607.02440",
       "feed": "https://arxiv.org/html/2607.02440",
       "terms": "The authors publish these historical results on arXiv. Credit the EvoPolicyGym authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "parts": {
@@ -104970,12 +104928,7 @@
           "group": "Environment"
         }
       },
-      "static": "paper",
       "stats": {
-        "Budget": {
-          "name": "Episode budget",
-          "unit": "count"
-        },
         "Wins": {
           "name": "Wins recorded",
           "unit": "count"
@@ -275500,252 +275453,252 @@
       },
       "stats": {
         "Provision Compute: Worst variant Pass@10": {
-          "name": "Provision Compute: Worst variant Pass@10",
+          "name": "Provision Compute: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Covert Weight Exfil.: Worst variant Pass@10": {
-          "name": "Covert Weight Exfil.: Worst variant Pass@10",
+          "name": "Covert Weight Exfil.: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Weight Exfiltration: Worst variant Pass@10": {
-          "name": "Weight Exfiltration: Worst variant Pass@10",
+          "name": "Weight Exfiltration: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Make Me Pay: Worst variant Pass@10": {
-          "name": "Make Me Pay: Worst variant Pass@10",
+          "name": "Make Me Pay: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Copycat LLM API: Worst variant Pass@10": {
-          "name": "Copycat LLM API: Worst variant Pass@10",
+          "name": "Copycat LLM API: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Replicate via Worm: Worst variant Pass@10": {
-          "name": "Replicate via Worm: Worst variant Pass@10",
+          "name": "Replicate via Worm: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Spear Phishing: Worst variant Pass@10": {
-          "name": "Spear Phishing: Worst variant Pass@10",
+          "name": "Spear Phishing: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Fake Business Transact.: Worst variant Pass@10": {
-          "name": "Fake Business Transact.: Worst variant Pass@10",
+          "name": "Fake Business Transact.: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Inference Server: Worst variant Pass@10": {
-          "name": "Inference Server: Worst variant Pass@10",
+          "name": "Inference Server: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Recursive Replication: Worst variant Pass@10": {
-          "name": "Recursive Replication: Worst variant Pass@10",
+          "name": "Recursive Replication: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Start Subagent: Worst variant Pass@10": {
-          "name": "Start Subagent: Worst variant Pass@10",
+          "name": "Start Subagent: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Explore & Exploit: Worst variant Pass@10": {
-          "name": "Explore & Exploit: Worst variant Pass@10",
+          "name": "Explore & Exploit: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Rate of Infection: Worst variant Pass@10": {
-          "name": "Rate of Infection: Worst variant Pass@10",
+          "name": "Rate of Infection: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Software Signature: Worst variant Pass@10": {
-          "name": "Software Signature: Worst variant Pass@10",
+          "name": "Software Signature: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Command & Control: Worst variant Pass@10": {
-          "name": "Command & Control: Worst variant Pass@10",
+          "name": "Command & Control: Worst variant pass@10",
           "unit": "%",
           "better": "higher"
         },
         "Online Compute Acquis.: Pass@1": {
-          "name": "Online Compute Acquis.: Pass@1",
+          "name": "Online Compute Acquis.: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Provision Compute: Pass@1": {
-          "name": "Provision Compute: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Provision Compute: Worst variant Pass@1": {
-          "name": "Provision Compute: Worst variant Pass@1",
+          "name": "Provision Compute: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "AWS Signup: Pass@1": {
-          "name": "AWS Signup: Pass@1",
+          "name": "AWS Signup: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Covert Weight Exfil.: Pass@1": {
-          "name": "Covert Weight Exfil.: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Covert Weight Exfil.: Worst variant Pass@1": {
-          "name": "Covert Weight Exfil.: Worst variant Pass@1",
+          "name": "Covert Weight Exfil.: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Weight Exfiltration: Pass@1": {
-          "name": "Weight Exfiltration: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Weight Exfiltration: Worst variant Pass@1": {
-          "name": "Weight Exfiltration: Worst variant Pass@1",
+          "name": "Weight Exfiltration: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Create Bitcoin Wallet: Pass@1": {
-          "name": "Create Bitcoin Wallet: Pass@1",
+          "name": "Create Bitcoin Wallet: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Make Me Pay: Pass@1": {
-          "name": "Make Me Pay: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Make Me Pay: Worst variant Pass@1": {
-          "name": "Make Me Pay: Worst variant Pass@1",
+          "name": "Make Me Pay: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Copycat LLM API: Pass@1": {
-          "name": "Copycat LLM API: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Copycat LLM API: Worst variant Pass@1": {
-          "name": "Copycat LLM API: Worst variant Pass@1",
+          "name": "Copycat LLM API: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Replicate via Worm: Pass@1": {
-          "name": "Replicate via Worm: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Replicate via Worm: Worst variant Pass@1": {
-          "name": "Replicate via Worm: Worst variant Pass@1",
+          "name": "Replicate via Worm: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Spear Phishing: Pass@1": {
-          "name": "Spear Phishing: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Spear Phishing: Worst variant Pass@1": {
-          "name": "Spear Phishing: Worst variant Pass@1",
+          "name": "Spear Phishing: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Pass KYC Check: Pass@1": {
-          "name": "Pass KYC Check: Pass@1",
+          "name": "Pass KYC Check: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Fake Business Trans.: Pass@1": {
-          "name": "Fake Business Trans.: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Fake Business Trans.: Worst variant Pass@1": {
-          "name": "Fake Business Trans.: Worst variant Pass@1",
+          "name": "Fake Business Trans.: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Inference Server: Pass@1": {
-          "name": "Inference Server: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Inference Server: Worst variant Pass@1": {
-          "name": "Inference Server: Worst variant Pass@1",
+          "name": "Inference Server: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Serve Multi-GPU Model: Pass@1": {
-          "name": "Serve Multi-GPU Model: Pass@1",
+          "name": "Serve Multi-GPU Model: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Recursive Replication: Pass@1": {
-          "name": "Recursive Replication: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Recursive Replication: Worst variant Pass@1": {
-          "name": "Recursive Replication: Worst variant Pass@1",
+          "name": "Recursive Replication: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Start Subagent: Pass@1": {
-          "name": "Start Subagent: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Start Subagent: Worst variant Pass@1": {
-          "name": "Start Subagent: Worst variant Pass@1",
+          "name": "Start Subagent: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Explore & Exploit: Pass@1": {
-          "name": "Explore & Exploit: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Explore & Exploit: Worst variant Pass@1": {
-          "name": "Explore & Exploit: Worst variant Pass@1",
+          "name": "Explore & Exploit: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Rate of Infection: Pass@1": {
-          "name": "Rate of Infection: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Rate of Infection: Worst variant Pass@1": {
-          "name": "Rate of Infection: Worst variant Pass@1",
+          "name": "Rate of Infection: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Software Signature: Pass@1": {
-          "name": "Software Signature: Pass@1",
-          "unit": "%",
-          "better": "higher"
-        },
-        "Software Signature: Worst variant Pass@1": {
-          "name": "Software Signature: Worst variant Pass@1",
+          "name": "Software Signature: pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Command & Control: Pass@1": {
-          "name": "Command & Control: Pass@1",
+          "name": "Command & Control: pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Provision Compute: Worst variant Pass@1": {
+          "name": "Provision Compute: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Covert Weight Exfil.: Worst variant Pass@1": {
+          "name": "Covert Weight Exfil.: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Weight Exfiltration: Worst variant Pass@1": {
+          "name": "Weight Exfiltration: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Make Me Pay: Worst variant Pass@1": {
+          "name": "Make Me Pay: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Copycat LLM API: Worst variant Pass@1": {
+          "name": "Copycat LLM API: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replicate via Worm: Worst variant Pass@1": {
+          "name": "Replicate via Worm: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spear Phishing: Worst variant Pass@1": {
+          "name": "Spear Phishing: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Fake Business Trans.: Worst variant Pass@1": {
+          "name": "Fake Business Trans.: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Inference Server: Worst variant Pass@1": {
+          "name": "Inference Server: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Recursive Replication: Worst variant Pass@1": {
+          "name": "Recursive Replication: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Start Subagent: Worst variant Pass@1": {
+          "name": "Start Subagent: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Explore & Exploit: Worst variant Pass@1": {
+          "name": "Explore & Exploit: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Rate of Infection: Worst variant Pass@1": {
+          "name": "Rate of Infection: Worst variant pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Software Signature: Worst variant Pass@1": {
+          "name": "Software Signature: Worst variant pass@1",
           "unit": "%",
           "better": "higher"
         },
         "Command & Control: Worst variant Pass@1": {
-          "name": "Command & Control: Worst variant Pass@1",
+          "name": "Command & Control: Worst variant pass@1",
           "unit": "%",
           "better": "higher"
         }
@@ -283774,7 +283727,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The headline is the geometric mean wire count on the 14 short circuits in Table 4.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Claude3",
@@ -339925,7 +339878,8 @@
       "url": "https://arxiv.org/html/2401.13919",
       "feed": "https://arxiv.org/html/2401.13919 (GPT-4V-judged overall success rate)",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -339991,14 +339945,6 @@
         "Wolfram Alpha": {
           "name": "Wolfram Alpha",
           "group": "Environment"
-        }
-      },
-      "static": "paper",
-      "stats": {
-        "judgeRuns": {
-          "name": "Judge runs",
-          "unit": "count",
-          "note": "Number of GPT-4V judge runs used for the reported score."
         }
       }
     },
@@ -342597,7 +342543,8 @@
       "url": "https://aclanthology.org/2026.wmt-main.91.pdf",
       "feed": "https://aclanthology.org/2026.wmt-main.91.pdf",
       "terms": "Table 2 ranks human construction accuracy. The JSON contains individual judgments. The repository lists no license. ACL Anthology returned 404 for robots.txt.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "AMI",
@@ -342615,12 +342562,7 @@
         "UvA-MT",
         "Wayfinder"
       ],
-      "static": "paper",
       "stats": {
-        "translations": {
-          "name": "Translations",
-          "unit": "count"
-        },
         "evaluated": {
           "name": "Evaluated translations",
           "unit": "count"

@@ -39,14 +39,12 @@ const board:Leaderboard={
       if (!e || !c || cells.length!==16) throw new Error('Missing model diagnostics');
       const metrics:Record<string,number>={drop:Number(cells[15])};
       for (const [i,level] of levels.entries()){
-        const group='Difficulty-'+level;
-        function add(suffix:string,name:string,value:string,unit:string,better:'higher'|'lower'){
+        function add(suffix:string,name:string,value:string){
           if (!/^\d+(?:\.\d+)?$/.test(value)) throw new Error('Invalid '+name);
           const key='d'+level+suffix;
-          parts[key]={name,group,unit,better};
           metrics[key]=Number(value);
         }
-        rates.forEach((name,j)=>add(['SR','Sub','Disc'][j],name,cells[3*i+j],'%','higher'));
+        rates.forEach((name,j)=>add(['SR','Sub','Disc'][j],name,cells[3*i+j]));
         if (i<4){
           errors.forEach((name,j)=>{ const key='d'+level+'error'+j; if (!/^\d+(?:\.\d+)?$/.test(e[1+5*j+i])) throw new Error('Invalid '+name); metrics[key]=Number(e[1+5*j+i]); });
           const key='d'+level+'calls'; if (!/^\d+(?:\.\d+)?$/.test(c[i+1])) throw new Error('Invalid tool calls'); metrics[key]=Number(c[i+1]);
