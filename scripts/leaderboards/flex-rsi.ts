@@ -34,7 +34,40 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The Flex-RSI site publishes this JSON without a separate score reuse license. The robots.txt URL returned a GitHub error page. Results are credited to Flex-RSI with a link to the leaderboard.',
   parts: {},
-  stats: { tasks: { name: 'Tasks completed', unit: 'count' }, firstPlaces: { name: 'First-place finishes', unit: 'count', better: 'higher' } },
+  stats: {
+    tasks: { name: 'Tasks completed', unit: 'count' },
+    firstPlaces: { name: 'First-place finishes', unit: 'count', better: 'higher' },
+    ...Object.fromEntries(([
+      ['3d-tracking', '3D Tracking', 'score', [['t_sr', 'T-SR'], ['J', 'J'], ['F', 'F'], ['JF', 'J&F']]],
+      ['visual-search', 'Visual Search', 'score', [['acc_vstar', 'V*Bench'], ['acc_hrbench8k', 'HR-Bench 8K']]],
+      ['active-search', 'Active Search', 'score', [['success', 'Success'], ['hos_sr', 'Object SR'], ['hps_sr', 'Path SR'], ['avg_steps', 'Average steps', 'count']]],
+      ['video-quality', 'Video Quality', 'score', [['quality_starter', 'Starter'], ['srcc', 'SRCC'], ['plcc', 'PLCC'], ['pair_accuracy', 'Pair accuracy']]],
+      ['ego-exo-memory', 'Ego-Exo Memory', 'score', [['acc_starter', 'Starter'], ['acc_cooking', 'Cooking'], ['acc_bike', 'Bike repair']]],
+      ['image-editing', 'Image Editing', 'score', [['overall_starter', 'Starter'], ['cat_A', 'Local'], ['cat_B', 'Global'], ['cat_C', 'Text'], ['cat_E', 'Retouch'], ['cat_F', 'Reasoning'], ['cat_G', 'Compound']]],
+      ['quantiphy-kinematics', 'Kinematics', 'score', [['mra_starter', 'Starter']]],
+      ['quantiphy-mass', 'Mass', 'score', [['mra_starter', 'Starter']]],
+      ['scene-from-photo', 'Scene from Photo', 'score', [['scene_starter', 'Starter'], ['appearance_term', 'Appearance'], ['object_term', 'Objects'], ['geometry_term', 'Geometry']]],
+      ['scene-from-video', 'Scene from Video', 'score', [['scene_starter', 'Starter'], ['geometry_term', 'Geometry'], ['appearance_term', 'Appearance'], ['physics_term', 'Physics']]],
+      ['multi-turn-editing', 'Multi-turn Editing', 'score', [['mt_starter', 'Starter'], ['success_t1', 'Turn 1'], ['success_t3', 'Turn 3'], ['success_t5', 'Turn 5']]],
+      ['robolab', 'RoboLab', 'score', [['success_rate', 'Success rate']]],
+      ['libero-max', 'LIBERO-MAX', 'score', [['base_success_rate', 'Base success'], ['dsr_starter', 'Starter']]],
+      ['libero-pro', 'LIBERO-PRO', 'score', [['sr_starter', 'Starter']]],
+      ['video-generation', 'Video Generation', 'score', [['comp_starter', 'Starter']]],
+      ['t2i', 'Text-to-Image', 'score', [['starter_mean', 'Starter'], ['score_t2i', 'Fixed'], ['score_t2i-unlimited', 'Any model']]],
+      ['vae-decode', 'VAE Decode', 'speedup', []],
+      ['robodojo', 'RoboDojo', 'score', [['pts_put-bottles-into-dustbin', 'Bottles'], ['pts_arrange-largest-number', 'Largest number'], ['pts_fold-clothes', 'Fold clothes'], ['pts_insert-tubes', 'Insert tubes'], ['pts_fill-egg-holder', 'Egg holder'], ['pts_pick-from-conveyor-by-image', 'Conveyor pick'], ['pts_play-tic-tac-toe', 'Tic-tac-toe'], ['pts_play-xylophone', 'Xylophone'], ['pts_push-t', 'Push-T'], ['pts_sort-nesting-dolls-by-size', 'Nesting dolls']]],
+      ['robocasa', 'RoboCasa', 'score', [['sr_coffee-setup-mug', 'Coffee mug'], ['sr_kettle-boiling', 'Kettle'], ['sr_open-cabinet', 'Cabinet'], ['sr_open-drawer', 'Drawer'], ['sr_portion-hot-dogs', 'Hot dogs'], ['sr_turn-off-stove', 'Stove off'], ['sr_turn-on-microwave', 'Microwave'], ['sr_turn-on-sink-faucet', 'Faucet']]],
+      ['embodied-swe', 'Embodied-SWE', 'score', [['rubric_starter', 'Starter']]],
+      ['arc-agi-1', 'ARC-AGI-1', 'score', [['acc_starter', 'Starter']]],
+      ['arc-agi-2', 'ARC-AGI-2', 'score', [['acc_starter', 'Starter']]],
+      ['arc-agi-3', 'ARC-AGI-3', 'score', [['rhae_starter', 'Starter']]],
+      ['spatial-vsi', 'Spatial-VSI', 'score', [['vsi_starter', 'Starter']]],
+    ] as const).flatMap(([id, track, unit, extras]) => [
+      [id + '.start', { name: track + ' start', unit, better: 'higher' }],
+      [id + '.best', { name: track + ' best', unit, better: 'higher' }],
+      ...extras.map(([k, label, u]) => [id + '.' + k, { name: track + ': ' + label, unit: u ?? 'score', ...(u === 'count' ? {} : { better: 'higher' }) }]),
+    ])),
+  },
   async fetch() {
     const data = await fetchJson<Results>(FEED);
     if (data.tasks.length < 24) throw new Error('Flex-RSI: missing tasks');
@@ -55,11 +88,11 @@ const board: Leaderboard = {
         metrics.tasks++;
         metrics.firstPlaces += Number(rank === 1);
         for (const [key, value] of Object.entries(source.test)) {
+          if (key === 'tasks_run' || key === 'tasks_nonzero') continue;
           if (typeof value === 'number' && Number.isFinite(value)) metrics[key === task.primary ? task.id : `${task.id}.${key}`] = value * scale(key);
         }
         if (typeof source.start === 'number') metrics[task.id + '.start'] = source.start * scale(task.primary);
         if (typeof source.best === 'number') metrics[task.id + '.best'] = source.best * scale(task.primary);
-        if (typeof source.rounds === 'number') metrics[task.id + '.rounds'] = source.rounds;
         models.set(source.model, row);
       }
     }

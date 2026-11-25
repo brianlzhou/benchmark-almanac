@@ -7031,16 +7031,22 @@
         }
       },
       "stats": {
+        "passes": {
+          "name": "Passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "partial": {
+          "name": "Partial credit score",
+          "unit": "%",
+          "better": "higher"
+        },
         "runs": {
           "name": "Runs",
           "unit": "count"
         },
         "tasks": {
           "name": "Tasks",
-          "unit": "count"
-        },
-        "splitTasks": {
-          "name": "Split tasks",
           "unit": "count"
         },
         "latency": {
@@ -7051,6 +7057,286 @@
         "inputTokens": {
           "name": "Input tokens per run",
           "unit": "tokens"
+        },
+        "full/full-spectrum/partial": {
+          "name": "Full spectrum partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "full/full-spectrum/passes": {
+          "name": "Full spectrum passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "full/full-spectrum/totalDurationS": {
+          "name": "Full spectrum total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "full/full-spectrum/totalInputTokens": {
+          "name": "Full spectrum total input tokens",
+          "unit": "tokens"
+        },
+        "full/full-spectrum/totalOutputTokens": {
+          "name": "Full spectrum total output tokens",
+          "unit": "tokens"
+        },
+        "full/full-spectrum/totalCostUsd": {
+          "name": "Full spectrum total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "full/last-exam/partial": {
+          "name": "Last exam partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "full/last-exam/passes": {
+          "name": "Last exam passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "full/last-exam/totalDurationS": {
+          "name": "Last exam total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "full/last-exam/totalInputTokens": {
+          "name": "Last exam total input tokens",
+          "unit": "tokens"
+        },
+        "full/last-exam/totalOutputTokens": {
+          "name": "Last exam total output tokens",
+          "unit": "tokens"
+        },
+        "full/last-exam/totalCostUsd": {
+          "name": "Last exam total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "full/near-term/partial": {
+          "name": "Near term partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "full/near-term/passes": {
+          "name": "Near term passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "full/near-term/totalDurationS": {
+          "name": "Near term total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "full/near-term/totalInputTokens": {
+          "name": "Near term total input tokens",
+          "unit": "tokens"
+        },
+        "full/near-term/totalOutputTokens": {
+          "name": "Near term total output tokens",
+          "unit": "tokens"
+        },
+        "full/near-term/totalCostUsd": {
+          "name": "Near term total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "licensed/partial": {
+          "name": "Licensed partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "licensed/passes": {
+          "name": "Licensed passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "licensed/totalDurationS": {
+          "name": "Licensed total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "licensed/totalInputTokens": {
+          "name": "Licensed total input tokens",
+          "unit": "tokens"
+        },
+        "licensed/totalOutputTokens": {
+          "name": "Licensed total output tokens",
+          "unit": "tokens"
+        },
+        "licensed/totalCostUsd": {
+          "name": "Licensed total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "linux_only/partial": {
+          "name": "Linux only partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "linux_only/passes": {
+          "name": "Linux only passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "linux_only/totalDurationS": {
+          "name": "Linux only total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "linux_only/totalInputTokens": {
+          "name": "Linux only total input tokens",
+          "unit": "tokens"
+        },
+        "linux_only/totalOutputTokens": {
+          "name": "Linux only total output tokens",
+          "unit": "tokens"
+        },
+        "linux_only/totalCostUsd": {
+          "name": "Linux only total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unlicensed/partial": {
+          "name": "Unlicensed partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unlicensed/passes": {
+          "name": "Unlicensed passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "unlicensed/totalDurationS": {
+          "name": "Unlicensed total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "unlicensed/totalInputTokens": {
+          "name": "Unlicensed total input tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/totalOutputTokens": {
+          "name": "Unlicensed total output tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/totalCostUsd": {
+          "name": "Unlicensed total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unlicensed/full-spectrum/partial": {
+          "name": "Unlicensed full spectrum partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unlicensed/full-spectrum/passes": {
+          "name": "Unlicensed full spectrum passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "unlicensed/full-spectrum/totalDurationS": {
+          "name": "Unlicensed full spectrum total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "unlicensed/full-spectrum/totalInputTokens": {
+          "name": "Unlicensed full spectrum total input tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/full-spectrum/totalOutputTokens": {
+          "name": "Unlicensed full spectrum total output tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/full-spectrum/totalCostUsd": {
+          "name": "Unlicensed full spectrum total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unlicensed/last-exam/partial": {
+          "name": "Unlicensed last exam partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unlicensed/last-exam/passes": {
+          "name": "Unlicensed last exam passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "unlicensed/last-exam/totalDurationS": {
+          "name": "Unlicensed last exam total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "unlicensed/last-exam/totalInputTokens": {
+          "name": "Unlicensed last exam total input tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/last-exam/totalOutputTokens": {
+          "name": "Unlicensed last exam total output tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/last-exam/totalCostUsd": {
+          "name": "Unlicensed last exam total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unlicensed/near-term/partial": {
+          "name": "Unlicensed near term partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unlicensed/near-term/passes": {
+          "name": "Unlicensed near term passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "unlicensed/near-term/totalDurationS": {
+          "name": "Unlicensed near term total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "unlicensed/near-term/totalInputTokens": {
+          "name": "Unlicensed near term total input tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/near-term/totalOutputTokens": {
+          "name": "Unlicensed near term total output tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/near-term/totalCostUsd": {
+          "name": "Unlicensed near term total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unlicensed/overall/partial": {
+          "name": "Unlicensed overall partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unlicensed/overall/passes": {
+          "name": "Unlicensed overall passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "unlicensed/overall/totalDurationS": {
+          "name": "Unlicensed overall total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "unlicensed/overall/totalInputTokens": {
+          "name": "Unlicensed overall total input tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/overall/totalOutputTokens": {
+          "name": "Unlicensed overall total output tokens",
+          "unit": "tokens"
+        },
+        "unlicensed/overall/totalCostUsd": {
+          "name": "Unlicensed overall total cost",
+          "unit": "usd",
+          "better": "lower"
         }
       },
       "measures": {
@@ -7080,6 +7366,86 @@
         "latency": {
           "name": "Average time per run",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "runs": {
+          "name": "Overall runs",
+          "unit": "count"
+        },
+        "tasks": {
+          "name": "Overall tasks",
+          "unit": "count"
+        },
+        "partial": {
+          "name": "Overall partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passes": {
+          "name": "Overall passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "totalDurationS": {
+          "name": "Overall total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "totalOutputTokens": {
+          "name": "Overall total output tokens",
+          "unit": "tokens"
+        },
+        "totalCostUsd": {
+          "name": "Overall total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "linux:partial": {
+          "name": "Linux partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "linux:passes": {
+          "name": "Linux passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "linux:totalDurationS": {
+          "name": "Linux total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "linux:totalOutputTokens": {
+          "name": "Linux total output tokens",
+          "unit": "tokens"
+        },
+        "linux:totalCostUsd": {
+          "name": "Linux total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "windows:partial": {
+          "name": "Windows partial credit",
+          "unit": "%",
+          "better": "higher"
+        },
+        "windows:passes": {
+          "name": "Windows passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "windows:totalDurationS": {
+          "name": "Windows total duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "windows:totalOutputTokens": {
+          "name": "Windows total output tokens",
+          "unit": "tokens"
+        },
+        "windows:totalCostUsd": {
+          "name": "Windows total cost",
+          "unit": "usd",
           "better": "lower"
         }
       },
@@ -26873,8 +27239,20 @@
         }
       },
       "stats": {
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "cachedTokens": {
+          "name": "Cached read tokens",
+          "unit": "tokens"
+        },
         "cache_write_tokens": {
           "name": "Cache write tokens",
+          "unit": "tokens"
+        },
+        "outputTokens": {
+          "name": "Output tokens",
           "unit": "tokens"
         },
         "cost_usd": {
@@ -69585,7 +69963,27 @@
         "Retell AI",
         "Ultravox",
         "Vapi"
-      ]
+      ],
+      "parts": {
+        "S1": {
+          "name": "Callback number captured and read back correctly"
+        },
+        "S2": {
+          "name": "Reschedule"
+        },
+        "S3": {
+          "name": "Unknown insurance"
+        },
+        "S4": {
+          "name": "Interruption"
+        },
+        "S5": {
+          "name": "Dental emergency"
+        },
+        "Sat": {
+          "name": "Saturday hours answered after the cut-in"
+        }
+      }
     },
     "cozzo-ai-receptionist-round-5": {
       "url": "https://cozzo.io/benchmarks/round-5",
@@ -79409,7 +79807,7 @@
       ],
       "chart": {
         "title": "Median latency vs Decision Index",
-        "note": "Median time per request on one RTX PRO 6000, on a log scale; for hosted APIs it is an HTTP round trip, so not a controlled comparison.",
+        "note": "Median time per request on one RTX PRO 6000, on a log scale. For hosted APIs it is an HTTP round trip, so not a controlled comparison.",
         "x": {
           "key": "latency",
           "label": "Median latency",
@@ -79439,6 +79837,1813 @@
           "unit": "score",
           "better": "lower",
           "note": "Calibration error, stored in percentage points."
+        },
+        "latency": {
+          "name": "Median latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "completed": {
+          "name": "Completed benchmarks",
+          "unit": "count"
+        },
+        "coverage": {
+          "name": "Benchmark coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pending": {
+          "name": "Pending benchmark share",
+          "unit": "score",
+          "better": "lower"
+        },
+        "latency_rows": {
+          "name": "Latency rows",
+          "unit": "count"
+        },
+        "trainedBytes": {
+          "name": "Trained weights size",
+          "unit": "count",
+          "note": "Reported trained weight bytes."
+        },
+        "latencySeconds:mean": {
+          "name": "Mean latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencySeconds:median": {
+          "name": "Median latency (raw)",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencySeconds:p95": {
+          "name": "95th-percentile latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "counts:ok": {
+          "name": "Successful responses",
+          "unit": "count"
+        },
+        "counts:error": {
+          "name": "Error responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "counts:unsupported": {
+          "name": "Unsupported responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "counts:abstained": {
+          "name": "Abstained responses",
+          "unit": "count"
+        },
+        "gaps:share": {
+          "name": "Gap share",
+          "unit": "score",
+          "better": "lower"
+        },
+        "scores:balanced_raw": {
+          "name": "Balanced raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scores:balanced_skill": {
+          "name": "Balanced skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scores:breadth_skill": {
+          "name": "Breadth skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scores:public_skill": {
+          "name": "Public skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "frozen_scores:balanced_raw": {
+          "name": "Frozen balanced raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "frozen_scores:balanced_skill": {
+          "name": "Frozen balanced skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "frozen_scores:breadth_skill": {
+          "name": "Frozen breadth skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:acc": {
+          "name": "Calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:conf": {
+          "name": "Calibration mean confidence",
+          "unit": "score"
+        },
+        "calibration:ece": {
+          "name": "Expected calibration error (fraction)",
+          "unit": "score",
+          "better": "lower"
+        },
+        "calibration:brier": {
+          "name": "Calibration Brier score",
+          "unit": "brier",
+          "better": "lower"
+        },
+        "calibration:over95": {
+          "name": "Over-95% confidence share",
+          "unit": "score"
+        },
+        "calibration:n": {
+          "name": "Calibration item count",
+          "unit": "count"
+        },
+        "calibration:benchmarks": {
+          "name": "Calibrated benchmarks",
+          "unit": "count"
+        },
+        "index:v": {
+          "name": "Index full score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "index:pub": {
+          "name": "Index public score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "index:same_skills": {
+          "name": "Index same-skills score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "index:new_domains": {
+          "name": "Index new-domains score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "index:eq:S": {
+          "name": "Equated same-skills score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "index:eq:O": {
+          "name": "Equated out-of-domain score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:arts:combined": {
+          "name": "Arts combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:arts:coverage": {
+          "name": "Arts coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:arts:raw": {
+          "name": "Arts raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:arts:skill": {
+          "name": "Arts skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:arts:acc": {
+          "name": "Arts calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:arts:conf": {
+          "name": "Arts calibration confidence",
+          "unit": "score"
+        },
+        "calibration:areas:arts:ece": {
+          "name": "Arts calibration ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "area:knowledge:combined": {
+          "name": "Knowledge combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:knowledge:coverage": {
+          "name": "Knowledge coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:knowledge:raw": {
+          "name": "Knowledge raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:knowledge:skill": {
+          "name": "Knowledge skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:knowledge:acc": {
+          "name": "Knowledge calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:knowledge:conf": {
+          "name": "Knowledge calibration confidence",
+          "unit": "score"
+        },
+        "calibration:areas:knowledge:ece": {
+          "name": "Knowledge calibration ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "area:language:combined": {
+          "name": "Language combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:language:coverage": {
+          "name": "Language coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:language:raw": {
+          "name": "Language raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:language:skill": {
+          "name": "Language skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:language:acc": {
+          "name": "Language calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:language:conf": {
+          "name": "Language calibration confidence",
+          "unit": "score"
+        },
+        "calibration:areas:language:ece": {
+          "name": "Language calibration ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "area:retrieval:combined": {
+          "name": "Retrieval combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:retrieval:coverage": {
+          "name": "Retrieval coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:retrieval:raw": {
+          "name": "Retrieval raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:retrieval:skill": {
+          "name": "Retrieval skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:retrieval:acc": {
+          "name": "Retrieval calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:retrieval:conf": {
+          "name": "Retrieval calibration confidence",
+          "unit": "score"
+        },
+        "calibration:areas:retrieval:ece": {
+          "name": "Retrieval calibration ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "area:tools:combined": {
+          "name": "Tools combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:tools:coverage": {
+          "name": "Tools coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:tools:raw": {
+          "name": "Tools raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "area:tools:skill": {
+          "name": "Tools skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:tools:acc": {
+          "name": "Tools calibration accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration:areas:tools:conf": {
+          "name": "Tools calibration confidence",
+          "unit": "score"
+        },
+        "calibration:areas:tools:ece": {
+          "name": "Tools calibration ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "benchmarks:ACOS:coverage": {
+          "name": "ACOS coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ACOS:raw": {
+          "name": "ACOS raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ACOS:skill": {
+          "name": "ACOS skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ANLI:coverage": {
+          "name": "ANLI coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ANLI:raw": {
+          "name": "ANLI raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ANLI:skill": {
+          "name": "ANLI skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:API-Bank:coverage": {
+          "name": "API-Bank coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:API-Bank:raw": {
+          "name": "API-Bank raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:API-Bank:skill": {
+          "name": "API-Bank skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Challenge:coverage": {
+          "name": "ARC-Challenge coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Challenge:raw": {
+          "name": "ARC-Challenge raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Challenge:skill": {
+          "name": "ARC-Challenge skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Easy:coverage": {
+          "name": "ARC-Easy coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Easy:raw": {
+          "name": "ARC-Easy raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ARC-Easy:skill": {
+          "name": "ARC-Easy skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Amazon ESCI:coverage": {
+          "name": "Amazon ESCI coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Amazon ESCI:raw": {
+          "name": "Amazon ESCI raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Amazon ESCI:skill": {
+          "name": "Amazon ESCI skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BANKING77:coverage": {
+          "name": "BANKING77 coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BANKING77:raw": {
+          "name": "BANKING77 raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BANKING77:skill": {
+          "name": "BANKING77 skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BBH:coverage": {
+          "name": "BBH coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BBH:raw": {
+          "name": "BBH raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BBH:skill": {
+          "name": "BBH skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BFCL:coverage": {
+          "name": "BFCL coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BFCL:raw": {
+          "name": "BFCL raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BFCL:skill": {
+          "name": "BFCL skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BPoMP:coverage": {
+          "name": "BPoMP coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BPoMP:raw": {
+          "name": "BPoMP raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BPoMP:skill": {
+          "name": "BPoMP skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BRIGHT:coverage": {
+          "name": "BRIGHT coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BRIGHT:raw": {
+          "name": "BRIGHT raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BRIGHT:skill": {
+          "name": "BRIGHT skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Boxoban:coverage": {
+          "name": "Boxoban coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Boxoban:raw": {
+          "name": "Boxoban raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Boxoban:skill": {
+          "name": "Boxoban skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLINC150:coverage": {
+          "name": "CLINC150 coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLINC150:raw": {
+          "name": "CLINC150 raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLINC150:skill": {
+          "name": "CLINC150 skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLadder:coverage": {
+          "name": "CLadder coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLadder:raw": {
+          "name": "CLadder raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLadder:skill": {
+          "name": "CLadder skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CRUXEval:coverage": {
+          "name": "CRUXEval coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CRUXEval:raw": {
+          "name": "CRUXEval raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CRUXEval:skill": {
+          "name": "CRUXEval skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ChessBench:coverage": {
+          "name": "ChessBench coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ChessBench:raw": {
+          "name": "ChessBench raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ChessBench:skill": {
+          "name": "ChessBench skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Codenames:coverage": {
+          "name": "Codenames coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Codenames:raw": {
+          "name": "Codenames raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Codenames:skill": {
+          "name": "Codenames skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ContractNLI:coverage": {
+          "name": "ContractNLI coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ContractNLI:raw": {
+          "name": "ContractNLI raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ContractNLI:skill": {
+          "name": "ContractNLI skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:FinEntity:coverage": {
+          "name": "FinEntity coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:FinEntity:raw": {
+          "name": "FinEntity raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:FinEntity:skill": {
+          "name": "FinEntity skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GPQA Diamond:coverage": {
+          "name": "GPQA Diamond coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GPQA Diamond:raw": {
+          "name": "GPQA Diamond raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GPQA Diamond:skill": {
+          "name": "GPQA Diamond skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GSM8K:coverage": {
+          "name": "GSM8K coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GSM8K:raw": {
+          "name": "GSM8K raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GSM8K:skill": {
+          "name": "GSM8K skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HLE:coverage": {
+          "name": "HLE coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HLE:raw": {
+          "name": "HLE raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HLE:skill": {
+          "name": "HLE skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Habermas:coverage": {
+          "name": "Habermas coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Habermas:raw": {
+          "name": "Habermas raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Habermas:skill": {
+          "name": "Habermas skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Hanabi:coverage": {
+          "name": "Hanabi coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Hanabi:raw": {
+          "name": "Hanabi raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Hanabi:skill": {
+          "name": "Hanabi skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HellaSwag:coverage": {
+          "name": "HellaSwag coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HellaSwag:raw": {
+          "name": "HellaSwag raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HellaSwag:skill": {
+          "name": "HellaSwag skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HoVer:coverage": {
+          "name": "HoVer coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HoVer:raw": {
+          "name": "HoVer raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HoVer:skill": {
+          "name": "HoVer skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Home appliances:coverage": {
+          "name": "Home appliances coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Home appliances:raw": {
+          "name": "Home appliances raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Home appliances:skill": {
+          "name": "Home appliances skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Humicroedit:coverage": {
+          "name": "Humicroedit coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Humicroedit:raw": {
+          "name": "Humicroedit raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Humicroedit:skill": {
+          "name": "Humicroedit skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU-Pro:coverage": {
+          "name": "MMLU-Pro coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU-Pro:raw": {
+          "name": "MMLU-Pro raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU-Pro:skill": {
+          "name": "MMLU-Pro skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU:coverage": {
+          "name": "MMLU coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU:raw": {
+          "name": "MMLU raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU:skill": {
+          "name": "MMLU skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MiniWoB++:coverage": {
+          "name": "MiniWoB++ coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MiniWoB++:raw": {
+          "name": "MiniWoB++ raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MiniWoB++:skill": {
+          "name": "MiniWoB++ skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MuSR:coverage": {
+          "name": "MuSR coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MuSR:raw": {
+          "name": "MuSR raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MuSR:skill": {
+          "name": "MuSR skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:NLI4CT:coverage": {
+          "name": "NLI4CT coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:NLI4CT:raw": {
+          "name": "NLI4CT raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:NLI4CT:skill": {
+          "name": "NLI4CT skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:New Yorker:coverage": {
+          "name": "New Yorker coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:New Yorker:raw": {
+          "name": "New Yorker raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:New Yorker:skill": {
+          "name": "New Yorker skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:POP909:coverage": {
+          "name": "POP909 coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:POP909:raw": {
+          "name": "POP909 raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:POP909:skill": {
+          "name": "POP909 skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:PhishNChips:coverage": {
+          "name": "PhishNChips coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:PhishNChips:raw": {
+          "name": "PhishNChips raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:PhishNChips:skill": {
+          "name": "PhishNChips skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RAGTruth:coverage": {
+          "name": "RAGTruth coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RAGTruth:raw": {
+          "name": "RAGTruth raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RAGTruth:skill": {
+          "name": "RAGTruth skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RTFM:coverage": {
+          "name": "RTFM coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RTFM:raw": {
+          "name": "RTFM raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RTFM:skill": {
+          "name": "RTFM skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RouterBench:coverage": {
+          "name": "RouterBench coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RouterBench:raw": {
+          "name": "RouterBench raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RouterBench:skill": {
+          "name": "RouterBench skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SATA-Bench:coverage": {
+          "name": "SATA-Bench coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SATA-Bench:raw": {
+          "name": "SATA-Bench raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SATA-Bench:skill": {
+          "name": "SATA-Bench skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SGD:coverage": {
+          "name": "SGD coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SGD:raw": {
+          "name": "SGD raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SGD:skill": {
+          "name": "SGD skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ScienceWorld:coverage": {
+          "name": "ScienceWorld coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ScienceWorld:raw": {
+          "name": "ScienceWorld raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ScienceWorld:skill": {
+          "name": "ScienceWorld skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ToolRet:coverage": {
+          "name": "ToolRet coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ToolRet:raw": {
+          "name": "ToolRet raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ToolRet:skill": {
+          "name": "ToolRet skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:VAST:coverage": {
+          "name": "VAST coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:VAST:raw": {
+          "name": "VAST raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:VAST:skill": {
+          "name": "VAST skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:When2Call:coverage": {
+          "name": "When2Call coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:When2Call:raw": {
+          "name": "When2Call raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:When2Call:skill": {
+          "name": "When2Call skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:WinoGrande:coverage": {
+          "name": "WinoGrande coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:WinoGrande:raw": {
+          "name": "WinoGrande raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:WinoGrande:skill": {
+          "name": "WinoGrande skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:cfcolor:coverage": {
+          "name": "cfcolor coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:cfcolor:raw": {
+          "name": "cfcolor raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:cfcolor:skill": {
+          "name": "cfcolor skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:iSarcasmEval:coverage": {
+          "name": "iSarcasmEval coverage",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:iSarcasmEval:raw": {
+          "name": "iSarcasmEval raw score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:iSarcasmEval:skill": {
+          "name": "iSarcasmEval skill score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ACOS:combined": {
+          "name": "ACOS combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ACOS:private_eq": {
+          "name": "ACOS equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ANLI:combined": {
+          "name": "ANLI combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ANLI:private_eq": {
+          "name": "ANLI equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:API-Bank:combined": {
+          "name": "API-Bank combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:API-Bank:private_eq": {
+          "name": "API-Bank equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Amazon ESCI:combined": {
+          "name": "Amazon ESCI combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Amazon ESCI:private_eq": {
+          "name": "Amazon ESCI equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BANKING77:combined": {
+          "name": "BANKING77 combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BANKING77:private_eq": {
+          "name": "BANKING77 equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BBH:combined": {
+          "name": "BBH combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BBH:private_eq": {
+          "name": "BBH equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BFCL:combined": {
+          "name": "BFCL combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BFCL:private_eq": {
+          "name": "BFCL equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BPoMP:combined": {
+          "name": "BPoMP combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BPoMP:private_eq": {
+          "name": "BPoMP equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BRIGHT:combined": {
+          "name": "BRIGHT combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:BRIGHT:private_eq": {
+          "name": "BRIGHT equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLINC150:combined": {
+          "name": "CLINC150 combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLINC150:private_eq": {
+          "name": "CLINC150 equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLadder:combined": {
+          "name": "CLadder combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CLadder:private_eq": {
+          "name": "CLadder equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CRUXEval:combined": {
+          "name": "CRUXEval combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:CRUXEval:private_eq": {
+          "name": "CRUXEval equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ChessBench:combined": {
+          "name": "ChessBench combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ChessBench:private_eq": {
+          "name": "ChessBench equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:FinEntity:combined": {
+          "name": "FinEntity combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:FinEntity:private_eq": {
+          "name": "FinEntity equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GPQA Diamond:combined": {
+          "name": "GPQA Diamond combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GPQA Diamond:private_eq": {
+          "name": "GPQA Diamond equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GSM8K:combined": {
+          "name": "GSM8K combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:GSM8K:private_eq": {
+          "name": "GSM8K equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Habermas:combined": {
+          "name": "Habermas combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Habermas:private_eq": {
+          "name": "Habermas equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HellaSwag:combined": {
+          "name": "HellaSwag combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HellaSwag:private_eq": {
+          "name": "HellaSwag equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HoVer:combined": {
+          "name": "HoVer combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:HoVer:private_eq": {
+          "name": "HoVer equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Home appliances:combined": {
+          "name": "Home appliances combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Home appliances:private_eq": {
+          "name": "Home appliances equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Humicroedit:combined": {
+          "name": "Humicroedit combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:Humicroedit:private_eq": {
+          "name": "Humicroedit equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU-Pro:combined": {
+          "name": "MMLU-Pro combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MMLU-Pro:private_eq": {
+          "name": "MMLU-Pro equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MuSR:combined": {
+          "name": "MuSR combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:MuSR:private_eq": {
+          "name": "MuSR equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:NLI4CT:combined": {
+          "name": "NLI4CT combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:NLI4CT:private_eq": {
+          "name": "NLI4CT equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:New Yorker:combined": {
+          "name": "New Yorker combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:New Yorker:private_eq": {
+          "name": "New Yorker equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:POP909:combined": {
+          "name": "POP909 combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:POP909:private_eq": {
+          "name": "POP909 equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:PhishNChips:combined": {
+          "name": "PhishNChips combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:PhishNChips:private_eq": {
+          "name": "PhishNChips equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RAGTruth:combined": {
+          "name": "RAGTruth combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:RAGTruth:private_eq": {
+          "name": "RAGTruth equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SATA-Bench:combined": {
+          "name": "SATA-Bench combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:SATA-Bench:private_eq": {
+          "name": "SATA-Bench equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ToolRet:combined": {
+          "name": "ToolRet combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:ToolRet:private_eq": {
+          "name": "ToolRet equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:VAST:combined": {
+          "name": "VAST combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:VAST:private_eq": {
+          "name": "VAST equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:When2Call:combined": {
+          "name": "When2Call combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:When2Call:private_eq": {
+          "name": "When2Call equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:WinoGrande:combined": {
+          "name": "WinoGrande combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:WinoGrande:private_eq": {
+          "name": "WinoGrande equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:iSarcasmEval:combined": {
+          "name": "iSarcasmEval combined score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benchmarks:iSarcasmEval:private_eq": {
+          "name": "iSarcasmEval equated private score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ACOS:median_ms": {
+          "name": "ACOS median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ACOS:score": {
+          "name": "ACOS score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ANLI:median_ms": {
+          "name": "ANLI median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ANLI:score": {
+          "name": "ANLI score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:API-Bank:median_ms": {
+          "name": "API-Bank median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:API-Bank:score": {
+          "name": "API-Bank score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ARC-Challenge:median_ms": {
+          "name": "ARC-Challenge median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ARC-Challenge:score": {
+          "name": "ARC-Challenge score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ARC-Easy:median_ms": {
+          "name": "ARC-Easy median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ARC-Easy:score": {
+          "name": "ARC-Easy score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:Amazon ESCI:median_ms": {
+          "name": "Amazon ESCI median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:Amazon ESCI:score": {
+          "name": "Amazon ESCI score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:BANKING77:median_ms": {
+          "name": "BANKING77 median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:BANKING77:score": {
+          "name": "BANKING77 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:BBH:median_ms": {
+          "name": "BBH median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:BBH:score": {
+          "name": "BBH score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:BFCL:median_ms": {
+          "name": "BFCL median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:BFCL:score": {
+          "name": "BFCL score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:BPoMP:median_ms": {
+          "name": "BPoMP median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:BPoMP:score": {
+          "name": "BPoMP score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:BRIGHT:median_ms": {
+          "name": "BRIGHT median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:BRIGHT:score": {
+          "name": "BRIGHT score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:CLINC150:median_ms": {
+          "name": "CLINC150 median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:CLINC150:score": {
+          "name": "CLINC150 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:CLadder:median_ms": {
+          "name": "CLadder median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:CLadder:score": {
+          "name": "CLadder score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:CRUXEval:median_ms": {
+          "name": "CRUXEval median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:CRUXEval:score": {
+          "name": "CRUXEval score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ChessBench:median_ms": {
+          "name": "ChessBench median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ChessBench:score": {
+          "name": "ChessBench score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ContractNLI:median_ms": {
+          "name": "ContractNLI median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ContractNLI:score": {
+          "name": "ContractNLI score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:FinEntity:median_ms": {
+          "name": "FinEntity median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:FinEntity:score": {
+          "name": "FinEntity score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:GPQA Diamond:median_ms": {
+          "name": "GPQA Diamond median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:GPQA Diamond:score": {
+          "name": "GPQA Diamond score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:GSM8K:score": {
+          "name": "GSM8K score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:HLE:median_ms": {
+          "name": "HLE median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:HLE:score": {
+          "name": "HLE score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:Habermas:median_ms": {
+          "name": "Habermas median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:Habermas:score": {
+          "name": "Habermas score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:HellaSwag:median_ms": {
+          "name": "HellaSwag median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:HellaSwag:score": {
+          "name": "HellaSwag score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:HoVer:median_ms": {
+          "name": "HoVer median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:HoVer:score": {
+          "name": "HoVer score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:Home appliances:median_ms": {
+          "name": "Home appliances median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:Home appliances:score": {
+          "name": "Home appliances score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:Humicroedit:median_ms": {
+          "name": "Humicroedit median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:Humicroedit:score": {
+          "name": "Humicroedit score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:MMLU-Pro:median_ms": {
+          "name": "MMLU-Pro median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:MMLU-Pro:score": {
+          "name": "MMLU-Pro score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:MMLU:median_ms": {
+          "name": "MMLU median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:MMLU:score": {
+          "name": "MMLU score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:MuSR:median_ms": {
+          "name": "MuSR median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:MuSR:score": {
+          "name": "MuSR score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:NLI4CT:median_ms": {
+          "name": "NLI4CT median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:NLI4CT:score": {
+          "name": "NLI4CT score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:New Yorker:median_ms": {
+          "name": "New Yorker median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:New Yorker:score": {
+          "name": "New Yorker score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:POP909:median_ms": {
+          "name": "POP909 median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:POP909:score": {
+          "name": "POP909 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:PhishNChips:median_ms": {
+          "name": "PhishNChips median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:PhishNChips:score": {
+          "name": "PhishNChips score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:RAGTruth:median_ms": {
+          "name": "RAGTruth median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:RAGTruth:score": {
+          "name": "RAGTruth score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:RouterBench:median_ms": {
+          "name": "RouterBench median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:RouterBench:score": {
+          "name": "RouterBench score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:SATA-Bench:median_ms": {
+          "name": "SATA-Bench median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:SATA-Bench:score": {
+          "name": "SATA-Bench score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:SGD:median_ms": {
+          "name": "SGD median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:SGD:score": {
+          "name": "SGD score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:ToolRet:median_ms": {
+          "name": "ToolRet median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:ToolRet:score": {
+          "name": "ToolRet score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:VAST:median_ms": {
+          "name": "VAST median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:VAST:score": {
+          "name": "VAST score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:When2Call:median_ms": {
+          "name": "When2Call median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:When2Call:score": {
+          "name": "When2Call score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:WinoGrande:median_ms": {
+          "name": "WinoGrande median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:WinoGrande:score": {
+          "name": "WinoGrande score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:cfcolor:median_ms": {
+          "name": "cfcolor median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:cfcolor:score": {
+          "name": "cfcolor score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "results:iSarcasmEval:median_ms": {
+          "name": "iSarcasmEval median latency",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "results:iSarcasmEval:score": {
+          "name": "iSarcasmEval score",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -88813,9 +91018,10 @@
       "terms": "The authors publish these simulation results at https://duobench.github.io/.",
       "headline": "The project reports no overall score, so the headline averages the success rates on its 11 simulation tasks.",
       "retrieved": "2026-11-24",
-      "rows": 2,
+      "rows": 1,
       "unmatched": [
-        "ACT"
+        "ACT",
+        "X-VLA"
       ],
       "parts": {
         "Hinge-Chest": {
@@ -88859,6 +91065,18 @@
           "better": "higher",
           "note": "Success or progress value from 0 to 1."
         },
+        "Hinge-Chest: cube + lid pass rate": {
+          "name": "Hinge-Chest: cube + lid pass rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Success or progress value from 0 to 1."
+        },
+        "Hinge-Chest: lid or cube pass rate": {
+          "name": "Hinge-Chest: lid or cube pass rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Success or progress value from 0 to 1."
+        },
         "Spring-Door Final progress": {
           "name": "Spring-Door Final progress",
           "unit": "score",
@@ -88873,6 +91091,12 @@
         },
         "Pour-Marbles Final progress": {
           "name": "Pour-Marbles Final progress",
+          "unit": "score",
+          "better": "higher",
+          "note": "Success or progress value from 0 to 1."
+        },
+        "Pour-Marbles: pour all pass rate": {
+          "name": "Pour-Marbles: pour all pass rate",
           "unit": "score",
           "better": "higher",
           "note": "Success or progress value from 0 to 1."
@@ -88907,8 +91131,20 @@
           "better": "higher",
           "note": "Success or progress value from 0 to 1."
         },
+        "Block-Balance: grasp rects pass rate": {
+          "name": "Block-Balance: grasp rects pass rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Success or progress value from 0 to 1."
+        },
         "Join-Blocks Final progress": {
           "name": "Join-Blocks Final progress",
+          "unit": "score",
+          "better": "higher",
+          "note": "Success or progress value from 0 to 1."
+        },
+        "Join-Blocks: connect pass rate": {
+          "name": "Join-Blocks: connect pass rate",
           "unit": "score",
           "better": "higher",
           "note": "Success or progress value from 0 to 1."
@@ -112155,6 +114391,590 @@
         "firstPlaces": {
           "name": "First-place finishes",
           "unit": "count",
+          "better": "higher"
+        },
+        "3d-tracking.start": {
+          "name": "3D Tracking start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "3d-tracking.best": {
+          "name": "3D Tracking best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "3d-tracking.t_sr": {
+          "name": "3D Tracking: T-SR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "3d-tracking.J": {
+          "name": "3D Tracking: J",
+          "unit": "score",
+          "better": "higher"
+        },
+        "3d-tracking.F": {
+          "name": "3D Tracking: F",
+          "unit": "score",
+          "better": "higher"
+        },
+        "3d-tracking.JF": {
+          "name": "3D Tracking: J&F",
+          "unit": "score",
+          "better": "higher"
+        },
+        "visual-search.start": {
+          "name": "Visual Search start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "visual-search.best": {
+          "name": "Visual Search best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "visual-search.acc_vstar": {
+          "name": "Visual Search: V*Bench",
+          "unit": "score",
+          "better": "higher"
+        },
+        "visual-search.acc_hrbench8k": {
+          "name": "Visual Search: HR-Bench 8K",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.start": {
+          "name": "Active Search start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.best": {
+          "name": "Active Search best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.success": {
+          "name": "Active Search: Success",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.hos_sr": {
+          "name": "Active Search: Object SR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.hps_sr": {
+          "name": "Active Search: Path SR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "active-search.avg_steps": {
+          "name": "Active Search: Average steps",
+          "unit": "count"
+        },
+        "video-quality.start": {
+          "name": "Video Quality start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-quality.best": {
+          "name": "Video Quality best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-quality.quality_starter": {
+          "name": "Video Quality: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-quality.srcc": {
+          "name": "Video Quality: SRCC",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-quality.plcc": {
+          "name": "Video Quality: PLCC",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-quality.pair_accuracy": {
+          "name": "Video Quality: Pair accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ego-exo-memory.start": {
+          "name": "Ego-Exo Memory start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ego-exo-memory.best": {
+          "name": "Ego-Exo Memory best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ego-exo-memory.acc_starter": {
+          "name": "Ego-Exo Memory: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ego-exo-memory.acc_cooking": {
+          "name": "Ego-Exo Memory: Cooking",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ego-exo-memory.acc_bike": {
+          "name": "Ego-Exo Memory: Bike repair",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.start": {
+          "name": "Image Editing start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.best": {
+          "name": "Image Editing best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.overall_starter": {
+          "name": "Image Editing: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_A": {
+          "name": "Image Editing: Local",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_B": {
+          "name": "Image Editing: Global",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_C": {
+          "name": "Image Editing: Text",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_E": {
+          "name": "Image Editing: Retouch",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_F": {
+          "name": "Image Editing: Reasoning",
+          "unit": "score",
+          "better": "higher"
+        },
+        "image-editing.cat_G": {
+          "name": "Image Editing: Compound",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-kinematics.start": {
+          "name": "Kinematics start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-kinematics.best": {
+          "name": "Kinematics best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-kinematics.mra_starter": {
+          "name": "Kinematics: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-mass.start": {
+          "name": "Mass start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-mass.best": {
+          "name": "Mass best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "quantiphy-mass.mra_starter": {
+          "name": "Mass: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.start": {
+          "name": "Scene from Photo start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.best": {
+          "name": "Scene from Photo best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.scene_starter": {
+          "name": "Scene from Photo: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.appearance_term": {
+          "name": "Scene from Photo: Appearance",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.object_term": {
+          "name": "Scene from Photo: Objects",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-photo.geometry_term": {
+          "name": "Scene from Photo: Geometry",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.start": {
+          "name": "Scene from Video start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.best": {
+          "name": "Scene from Video best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.scene_starter": {
+          "name": "Scene from Video: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.geometry_term": {
+          "name": "Scene from Video: Geometry",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.appearance_term": {
+          "name": "Scene from Video: Appearance",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scene-from-video.physics_term": {
+          "name": "Scene from Video: Physics",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.start": {
+          "name": "Multi-turn Editing start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.best": {
+          "name": "Multi-turn Editing best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.mt_starter": {
+          "name": "Multi-turn Editing: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.success_t1": {
+          "name": "Multi-turn Editing: Turn 1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.success_t3": {
+          "name": "Multi-turn Editing: Turn 3",
+          "unit": "score",
+          "better": "higher"
+        },
+        "multi-turn-editing.success_t5": {
+          "name": "Multi-turn Editing: Turn 5",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robolab.start": {
+          "name": "RoboLab start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robolab.best": {
+          "name": "RoboLab best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robolab.success_rate": {
+          "name": "RoboLab: Success rate",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-max.start": {
+          "name": "LIBERO-MAX start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-max.best": {
+          "name": "LIBERO-MAX best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-max.base_success_rate": {
+          "name": "LIBERO-MAX: Base success",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-max.dsr_starter": {
+          "name": "LIBERO-MAX: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-pro.start": {
+          "name": "LIBERO-PRO start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-pro.best": {
+          "name": "LIBERO-PRO best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "libero-pro.sr_starter": {
+          "name": "LIBERO-PRO: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-generation.start": {
+          "name": "Video Generation start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-generation.best": {
+          "name": "Video Generation best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "video-generation.comp_starter": {
+          "name": "Video Generation: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "t2i.start": {
+          "name": "Text-to-Image start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "t2i.best": {
+          "name": "Text-to-Image best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "t2i.starter_mean": {
+          "name": "Text-to-Image: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "t2i.score_t2i": {
+          "name": "Text-to-Image: Fixed",
+          "unit": "score",
+          "better": "higher"
+        },
+        "t2i.score_t2i-unlimited": {
+          "name": "Text-to-Image: Any model",
+          "unit": "score",
+          "better": "higher"
+        },
+        "vae-decode.start": {
+          "name": "VAE Decode start",
+          "unit": "speedup",
+          "better": "higher"
+        },
+        "vae-decode.best": {
+          "name": "VAE Decode best",
+          "unit": "speedup",
+          "better": "higher"
+        },
+        "robodojo.start": {
+          "name": "RoboDojo start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.best": {
+          "name": "RoboDojo best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_put-bottles-into-dustbin": {
+          "name": "RoboDojo: Bottles",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_arrange-largest-number": {
+          "name": "RoboDojo: Largest number",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_fold-clothes": {
+          "name": "RoboDojo: Fold clothes",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_insert-tubes": {
+          "name": "RoboDojo: Insert tubes",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_fill-egg-holder": {
+          "name": "RoboDojo: Egg holder",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_pick-from-conveyor-by-image": {
+          "name": "RoboDojo: Conveyor pick",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_play-tic-tac-toe": {
+          "name": "RoboDojo: Tic-tac-toe",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_play-xylophone": {
+          "name": "RoboDojo: Xylophone",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_push-t": {
+          "name": "RoboDojo: Push-T",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robodojo.pts_sort-nesting-dolls-by-size": {
+          "name": "RoboDojo: Nesting dolls",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.start": {
+          "name": "RoboCasa start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.best": {
+          "name": "RoboCasa best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_coffee-setup-mug": {
+          "name": "RoboCasa: Coffee mug",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_kettle-boiling": {
+          "name": "RoboCasa: Kettle",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_open-cabinet": {
+          "name": "RoboCasa: Cabinet",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_open-drawer": {
+          "name": "RoboCasa: Drawer",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_portion-hot-dogs": {
+          "name": "RoboCasa: Hot dogs",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_turn-off-stove": {
+          "name": "RoboCasa: Stove off",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_turn-on-microwave": {
+          "name": "RoboCasa: Microwave",
+          "unit": "score",
+          "better": "higher"
+        },
+        "robocasa.sr_turn-on-sink-faucet": {
+          "name": "RoboCasa: Faucet",
+          "unit": "score",
+          "better": "higher"
+        },
+        "embodied-swe.start": {
+          "name": "Embodied-SWE start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "embodied-swe.best": {
+          "name": "Embodied-SWE best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "embodied-swe.rubric_starter": {
+          "name": "Embodied-SWE: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-1.start": {
+          "name": "ARC-AGI-1 start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-1.best": {
+          "name": "ARC-AGI-1 best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-1.acc_starter": {
+          "name": "ARC-AGI-1: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-2.start": {
+          "name": "ARC-AGI-2 start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-2.best": {
+          "name": "ARC-AGI-2 best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-2.acc_starter": {
+          "name": "ARC-AGI-2: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-3.start": {
+          "name": "ARC-AGI-3 start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-3.best": {
+          "name": "ARC-AGI-3 best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "arc-agi-3.rhae_starter": {
+          "name": "ARC-AGI-3: Starter",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial-vsi.start": {
+          "name": "Spatial-VSI start",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial-vsi.best": {
+          "name": "Spatial-VSI best",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial-vsi.vsi_starter": {
+          "name": "Spatial-VSI: Starter",
+          "unit": "score",
           "better": "higher"
         }
       }
@@ -179724,6 +182544,62 @@
           "group": "Level 4",
           "unit": "%"
         }
+      },
+      "stats": {
+        "al80": {
+          "name": "Attained level at 80% threshold",
+          "unit": "score",
+          "better": "higher"
+        },
+        "meanSuccess": {
+          "name": "Mean task success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "evaluated": {
+          "name": "Tasks evaluated",
+          "unit": "count"
+        },
+        "level1At50": {
+          "name": "Level 1 tasks passing 50%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level1At80": {
+          "name": "Level 1 tasks passing 80%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level2At50": {
+          "name": "Level 2 tasks passing 50%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level2At80": {
+          "name": "Level 2 tasks passing 80%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level3At50": {
+          "name": "Level 3 tasks passing 50%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level3At80": {
+          "name": "Level 3 tasks passing 80%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level4At50": {
+          "name": "Level 4 tasks passing 50%",
+          "unit": "count",
+          "better": "higher"
+        },
+        "level4At80": {
+          "name": "Level 4 tasks passing 80%",
+          "unit": "count",
+          "better": "higher"
+        }
       }
     },
     "maniskill3": {
@@ -214960,6 +217836,491 @@
           "name": "Median planning and kinematics likelihood",
           "unit": "score",
           "better": "lower"
+        },
+        "eval_time": {
+          "name": "Evaluation time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "run_time": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "tp_errors:trans_err": {
+          "name": "True positive translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:barrier:trans_err": {
+          "name": "barrier translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bicycle:trans_err": {
+          "name": "bicycle translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bus:trans_err": {
+          "name": "bus translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:car:trans_err": {
+          "name": "car translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:construction_vehicle:trans_err": {
+          "name": "construction vehicle translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:motorcycle:trans_err": {
+          "name": "motorcycle translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:pedestrian:trans_err": {
+          "name": "pedestrian translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:traffic_cone:trans_err": {
+          "name": "traffic cone translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:trailer:trans_err": {
+          "name": "trailer translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:truck:trans_err": {
+          "name": "truck translation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tp_errors:scale_err": {
+          "name": "True positive scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:barrier:scale_err": {
+          "name": "barrier scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bicycle:scale_err": {
+          "name": "bicycle scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bus:scale_err": {
+          "name": "bus scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:car:scale_err": {
+          "name": "car scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:construction_vehicle:scale_err": {
+          "name": "construction vehicle scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:motorcycle:scale_err": {
+          "name": "motorcycle scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:pedestrian:scale_err": {
+          "name": "pedestrian scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:traffic_cone:scale_err": {
+          "name": "traffic cone scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:trailer:scale_err": {
+          "name": "trailer scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:truck:scale_err": {
+          "name": "truck scale error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tp_errors:orient_err": {
+          "name": "True positive orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:barrier:orient_err": {
+          "name": "barrier orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bicycle:orient_err": {
+          "name": "bicycle orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bus:orient_err": {
+          "name": "bus orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:car:orient_err": {
+          "name": "car orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:construction_vehicle:orient_err": {
+          "name": "construction vehicle orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:motorcycle:orient_err": {
+          "name": "motorcycle orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:pedestrian:orient_err": {
+          "name": "pedestrian orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:traffic_cone:orient_err": {
+          "name": "traffic cone orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:trailer:orient_err": {
+          "name": "trailer orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:truck:orient_err": {
+          "name": "truck orientation error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tp_errors:vel_err": {
+          "name": "True positive velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:barrier:vel_err": {
+          "name": "barrier velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bicycle:vel_err": {
+          "name": "bicycle velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bus:vel_err": {
+          "name": "bus velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:car:vel_err": {
+          "name": "car velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:construction_vehicle:vel_err": {
+          "name": "construction vehicle velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:motorcycle:vel_err": {
+          "name": "motorcycle velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:pedestrian:vel_err": {
+          "name": "pedestrian velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:traffic_cone:vel_err": {
+          "name": "traffic cone velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:trailer:vel_err": {
+          "name": "trailer velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:truck:vel_err": {
+          "name": "truck velocity error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tp_errors:attr_err": {
+          "name": "True positive attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:barrier:attr_err": {
+          "name": "barrier attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bicycle:attr_err": {
+          "name": "bicycle attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:bus:attr_err": {
+          "name": "bus attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:car:attr_err": {
+          "name": "car attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:construction_vehicle:attr_err": {
+          "name": "construction vehicle attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:motorcycle:attr_err": {
+          "name": "motorcycle attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:pedestrian:attr_err": {
+          "name": "pedestrian attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:traffic_cone:attr_err": {
+          "name": "traffic cone attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:trailer:attr_err": {
+          "name": "trailer attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_tp_errors:truck:attr_err": {
+          "name": "truck attribute error",
+          "unit": "score",
+          "better": "lower"
+        },
+        "label_aps:barrier:0.5": {
+          "name": "barrier average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:barrier:1.0": {
+          "name": "barrier average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:barrier:2.0": {
+          "name": "barrier average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:barrier:4.0": {
+          "name": "barrier average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bicycle:0.5": {
+          "name": "bicycle average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bicycle:1.0": {
+          "name": "bicycle average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bicycle:2.0": {
+          "name": "bicycle average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bicycle:4.0": {
+          "name": "bicycle average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bus:0.5": {
+          "name": "bus average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bus:1.0": {
+          "name": "bus average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bus:2.0": {
+          "name": "bus average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:bus:4.0": {
+          "name": "bus average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:car:0.5": {
+          "name": "car average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:car:1.0": {
+          "name": "car average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:car:2.0": {
+          "name": "car average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:car:4.0": {
+          "name": "car average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:construction_vehicle:0.5": {
+          "name": "construction vehicle average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:construction_vehicle:1.0": {
+          "name": "construction vehicle average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:construction_vehicle:2.0": {
+          "name": "construction vehicle average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:construction_vehicle:4.0": {
+          "name": "construction vehicle average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:motorcycle:0.5": {
+          "name": "motorcycle average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:motorcycle:1.0": {
+          "name": "motorcycle average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:motorcycle:2.0": {
+          "name": "motorcycle average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:motorcycle:4.0": {
+          "name": "motorcycle average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:pedestrian:0.5": {
+          "name": "pedestrian average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:pedestrian:1.0": {
+          "name": "pedestrian average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:pedestrian:2.0": {
+          "name": "pedestrian average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:pedestrian:4.0": {
+          "name": "pedestrian average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:traffic_cone:0.5": {
+          "name": "traffic cone average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:traffic_cone:1.0": {
+          "name": "traffic cone average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:traffic_cone:2.0": {
+          "name": "traffic cone average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:traffic_cone:4.0": {
+          "name": "traffic cone average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:trailer:0.5": {
+          "name": "trailer average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:trailer:1.0": {
+          "name": "trailer average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:trailer:2.0": {
+          "name": "trailer average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:trailer:4.0": {
+          "name": "trailer average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:truck:0.5": {
+          "name": "truck average precision at 0.5 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:truck:1.0": {
+          "name": "truck average precision at 1.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:truck:2.0": {
+          "name": "truck average precision at 2.0 m",
+          "unit": "score",
+          "better": "higher"
+        },
+        "label_aps:truck:4.0": {
+          "name": "truck average precision at 4.0 m",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -217205,6 +220566,18 @@
         "cppHard": {
           "name": "Hard",
           "group": "C++ difficulty"
+        },
+        "pyEasy": {
+          "name": "Easy",
+          "group": "Python difficulty"
+        },
+        "pyMedium": {
+          "name": "Medium",
+          "group": "Python difficulty"
+        },
+        "pyHard": {
+          "name": "Hard",
+          "group": "Python difficulty"
         }
       },
       "stats": {
@@ -248093,6 +251466,16 @@
       "rows": 8,
       "unmatched": [],
       "stats": {
+        "passAt2": {
+          "name": "Pass@2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt3": {
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
         "meanReward": {
           "name": "Mean reward",
           "unit": "score",
@@ -273005,10 +276388,6 @@
         }
       },
       "stats": {
-        "skills": {
-          "name": "Skills evaluated",
-          "unit": "count"
-        },
         "inputTokens": {
           "name": "Input tokens",
           "unit": "tokens"
@@ -273020,6 +276399,667 @@
         "toolCalls": {
           "name": "Tool calls per skill",
           "unit": "count"
+        },
+        "latency": {
+          "name": "Average skill run duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "attack:peakXpRate": {
+          "name": "Attack peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "attack:finalXp": {
+          "name": "Attack final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "attack:finalLevel": {
+          "name": "Attack final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "attack:durationSeconds": {
+          "name": "Attack duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "attack:toolCalls": {
+          "name": "Attack tool calls",
+          "unit": "count"
+        },
+        "attack:inputTokens": {
+          "name": "Attack input tokens",
+          "unit": "tokens"
+        },
+        "attack:outputTokens": {
+          "name": "Attack output tokens",
+          "unit": "tokens"
+        },
+        "attack:cacheTokens": {
+          "name": "Attack cached tokens",
+          "unit": "tokens"
+        },
+        "attack:costUsd": {
+          "name": "Attack cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "defence:peakXpRate": {
+          "name": "Defence peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "defence:finalXp": {
+          "name": "Defence final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "defence:finalLevel": {
+          "name": "Defence final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "defence:durationSeconds": {
+          "name": "Defence duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "defence:toolCalls": {
+          "name": "Defence tool calls",
+          "unit": "count"
+        },
+        "defence:inputTokens": {
+          "name": "Defence input tokens",
+          "unit": "tokens"
+        },
+        "defence:outputTokens": {
+          "name": "Defence output tokens",
+          "unit": "tokens"
+        },
+        "defence:cacheTokens": {
+          "name": "Defence cached tokens",
+          "unit": "tokens"
+        },
+        "defence:costUsd": {
+          "name": "Defence cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "strength:peakXpRate": {
+          "name": "Strength peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "strength:finalXp": {
+          "name": "Strength final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "strength:finalLevel": {
+          "name": "Strength final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "strength:durationSeconds": {
+          "name": "Strength duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "strength:toolCalls": {
+          "name": "Strength tool calls",
+          "unit": "count"
+        },
+        "strength:inputTokens": {
+          "name": "Strength input tokens",
+          "unit": "tokens"
+        },
+        "strength:outputTokens": {
+          "name": "Strength output tokens",
+          "unit": "tokens"
+        },
+        "strength:cacheTokens": {
+          "name": "Strength cached tokens",
+          "unit": "tokens"
+        },
+        "strength:costUsd": {
+          "name": "Strength cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "hitpoints:peakXpRate": {
+          "name": "Hitpoints peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "hitpoints:finalXp": {
+          "name": "Hitpoints final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "hitpoints:finalLevel": {
+          "name": "Hitpoints final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "hitpoints:durationSeconds": {
+          "name": "Hitpoints duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "hitpoints:toolCalls": {
+          "name": "Hitpoints tool calls",
+          "unit": "count"
+        },
+        "hitpoints:inputTokens": {
+          "name": "Hitpoints input tokens",
+          "unit": "tokens"
+        },
+        "hitpoints:outputTokens": {
+          "name": "Hitpoints output tokens",
+          "unit": "tokens"
+        },
+        "hitpoints:cacheTokens": {
+          "name": "Hitpoints cached tokens",
+          "unit": "tokens"
+        },
+        "hitpoints:costUsd": {
+          "name": "Hitpoints cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "ranged:peakXpRate": {
+          "name": "Ranged peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ranged:finalXp": {
+          "name": "Ranged final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "ranged:finalLevel": {
+          "name": "Ranged final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "ranged:durationSeconds": {
+          "name": "Ranged duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "ranged:toolCalls": {
+          "name": "Ranged tool calls",
+          "unit": "count"
+        },
+        "ranged:inputTokens": {
+          "name": "Ranged input tokens",
+          "unit": "tokens"
+        },
+        "ranged:outputTokens": {
+          "name": "Ranged output tokens",
+          "unit": "tokens"
+        },
+        "ranged:cacheTokens": {
+          "name": "Ranged cached tokens",
+          "unit": "tokens"
+        },
+        "ranged:costUsd": {
+          "name": "Ranged cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "prayer:peakXpRate": {
+          "name": "Prayer peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "prayer:finalXp": {
+          "name": "Prayer final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "prayer:finalLevel": {
+          "name": "Prayer final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "prayer:durationSeconds": {
+          "name": "Prayer duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "prayer:toolCalls": {
+          "name": "Prayer tool calls",
+          "unit": "count"
+        },
+        "prayer:inputTokens": {
+          "name": "Prayer input tokens",
+          "unit": "tokens"
+        },
+        "prayer:outputTokens": {
+          "name": "Prayer output tokens",
+          "unit": "tokens"
+        },
+        "prayer:cacheTokens": {
+          "name": "Prayer cached tokens",
+          "unit": "tokens"
+        },
+        "prayer:costUsd": {
+          "name": "Prayer cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "magic:peakXpRate": {
+          "name": "Magic peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "magic:finalXp": {
+          "name": "Magic final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "magic:finalLevel": {
+          "name": "Magic final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "magic:durationSeconds": {
+          "name": "Magic duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "magic:toolCalls": {
+          "name": "Magic tool calls",
+          "unit": "count"
+        },
+        "magic:inputTokens": {
+          "name": "Magic input tokens",
+          "unit": "tokens"
+        },
+        "magic:outputTokens": {
+          "name": "Magic output tokens",
+          "unit": "tokens"
+        },
+        "magic:cacheTokens": {
+          "name": "Magic cached tokens",
+          "unit": "tokens"
+        },
+        "magic:costUsd": {
+          "name": "Magic cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "woodcutting:peakXpRate": {
+          "name": "Woodcutting peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "woodcutting:finalXp": {
+          "name": "Woodcutting final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "woodcutting:finalLevel": {
+          "name": "Woodcutting final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "woodcutting:durationSeconds": {
+          "name": "Woodcutting duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "woodcutting:toolCalls": {
+          "name": "Woodcutting tool calls",
+          "unit": "count"
+        },
+        "woodcutting:inputTokens": {
+          "name": "Woodcutting input tokens",
+          "unit": "tokens"
+        },
+        "woodcutting:outputTokens": {
+          "name": "Woodcutting output tokens",
+          "unit": "tokens"
+        },
+        "woodcutting:cacheTokens": {
+          "name": "Woodcutting cached tokens",
+          "unit": "tokens"
+        },
+        "woodcutting:costUsd": {
+          "name": "Woodcutting cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "fishing:peakXpRate": {
+          "name": "Fishing peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "fishing:finalXp": {
+          "name": "Fishing final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fishing:finalLevel": {
+          "name": "Fishing final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fishing:durationSeconds": {
+          "name": "Fishing duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "fishing:toolCalls": {
+          "name": "Fishing tool calls",
+          "unit": "count"
+        },
+        "fishing:inputTokens": {
+          "name": "Fishing input tokens",
+          "unit": "tokens"
+        },
+        "fishing:outputTokens": {
+          "name": "Fishing output tokens",
+          "unit": "tokens"
+        },
+        "fishing:cacheTokens": {
+          "name": "Fishing cached tokens",
+          "unit": "tokens"
+        },
+        "fishing:costUsd": {
+          "name": "Fishing cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "mining:peakXpRate": {
+          "name": "Mining peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mining:finalXp": {
+          "name": "Mining final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "mining:finalLevel": {
+          "name": "Mining final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "mining:durationSeconds": {
+          "name": "Mining duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mining:toolCalls": {
+          "name": "Mining tool calls",
+          "unit": "count"
+        },
+        "mining:inputTokens": {
+          "name": "Mining input tokens",
+          "unit": "tokens"
+        },
+        "mining:outputTokens": {
+          "name": "Mining output tokens",
+          "unit": "tokens"
+        },
+        "mining:cacheTokens": {
+          "name": "Mining cached tokens",
+          "unit": "tokens"
+        },
+        "mining:costUsd": {
+          "name": "Mining cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cooking:peakXpRate": {
+          "name": "Cooking peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "cooking:finalXp": {
+          "name": "Cooking final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "cooking:finalLevel": {
+          "name": "Cooking final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "cooking:durationSeconds": {
+          "name": "Cooking duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "cooking:toolCalls": {
+          "name": "Cooking tool calls",
+          "unit": "count"
+        },
+        "cooking:inputTokens": {
+          "name": "Cooking input tokens",
+          "unit": "tokens"
+        },
+        "cooking:outputTokens": {
+          "name": "Cooking output tokens",
+          "unit": "tokens"
+        },
+        "cooking:cacheTokens": {
+          "name": "Cooking cached tokens",
+          "unit": "tokens"
+        },
+        "cooking:costUsd": {
+          "name": "Cooking cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "fletching:peakXpRate": {
+          "name": "Fletching peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "fletching:finalXp": {
+          "name": "Fletching final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fletching:finalLevel": {
+          "name": "Fletching final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fletching:durationSeconds": {
+          "name": "Fletching duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "fletching:toolCalls": {
+          "name": "Fletching tool calls",
+          "unit": "count"
+        },
+        "fletching:inputTokens": {
+          "name": "Fletching input tokens",
+          "unit": "tokens"
+        },
+        "fletching:outputTokens": {
+          "name": "Fletching output tokens",
+          "unit": "tokens"
+        },
+        "fletching:cacheTokens": {
+          "name": "Fletching cached tokens",
+          "unit": "tokens"
+        },
+        "fletching:costUsd": {
+          "name": "Fletching cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "crafting:peakXpRate": {
+          "name": "Crafting peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "crafting:finalXp": {
+          "name": "Crafting final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "crafting:finalLevel": {
+          "name": "Crafting final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "crafting:durationSeconds": {
+          "name": "Crafting duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "crafting:toolCalls": {
+          "name": "Crafting tool calls",
+          "unit": "count"
+        },
+        "crafting:inputTokens": {
+          "name": "Crafting input tokens",
+          "unit": "tokens"
+        },
+        "crafting:outputTokens": {
+          "name": "Crafting output tokens",
+          "unit": "tokens"
+        },
+        "crafting:cacheTokens": {
+          "name": "Crafting cached tokens",
+          "unit": "tokens"
+        },
+        "crafting:costUsd": {
+          "name": "Crafting cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "smithing:peakXpRate": {
+          "name": "Smithing peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "smithing:finalXp": {
+          "name": "Smithing final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "smithing:finalLevel": {
+          "name": "Smithing final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "smithing:durationSeconds": {
+          "name": "Smithing duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "smithing:toolCalls": {
+          "name": "Smithing tool calls",
+          "unit": "count"
+        },
+        "smithing:inputTokens": {
+          "name": "Smithing input tokens",
+          "unit": "tokens"
+        },
+        "smithing:outputTokens": {
+          "name": "Smithing output tokens",
+          "unit": "tokens"
+        },
+        "smithing:cacheTokens": {
+          "name": "Smithing cached tokens",
+          "unit": "tokens"
+        },
+        "smithing:costUsd": {
+          "name": "Smithing cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "firemaking:peakXpRate": {
+          "name": "Firemaking peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "firemaking:finalXp": {
+          "name": "Firemaking final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "firemaking:finalLevel": {
+          "name": "Firemaking final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "firemaking:durationSeconds": {
+          "name": "Firemaking duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "firemaking:toolCalls": {
+          "name": "Firemaking tool calls",
+          "unit": "count"
+        },
+        "firemaking:inputTokens": {
+          "name": "Firemaking input tokens",
+          "unit": "tokens"
+        },
+        "firemaking:outputTokens": {
+          "name": "Firemaking output tokens",
+          "unit": "tokens"
+        },
+        "firemaking:cacheTokens": {
+          "name": "Firemaking cached tokens",
+          "unit": "tokens"
+        },
+        "firemaking:costUsd": {
+          "name": "Firemaking cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "thieving:peakXpRate": {
+          "name": "Thieving peak XP per minute",
+          "unit": "score",
+          "better": "higher"
+        },
+        "thieving:finalXp": {
+          "name": "Thieving final XP",
+          "unit": "count",
+          "better": "higher"
+        },
+        "thieving:finalLevel": {
+          "name": "Thieving final level",
+          "unit": "count",
+          "better": "higher"
+        },
+        "thieving:durationSeconds": {
+          "name": "Thieving duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "thieving:toolCalls": {
+          "name": "Thieving tool calls",
+          "unit": "count"
+        },
+        "thieving:inputTokens": {
+          "name": "Thieving input tokens",
+          "unit": "tokens"
+        },
+        "thieving:outputTokens": {
+          "name": "Thieving output tokens",
+          "unit": "tokens"
+        },
+        "thieving:cacheTokens": {
+          "name": "Thieving cached tokens",
+          "unit": "tokens"
+        },
+        "thieving:costUsd": {
+          "name": "Thieving cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -297171,6 +301211,10 @@
           "name": "Steps",
           "unit": "count",
           "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Average total tokens",
+          "unit": "tokens"
         },
         "tasks": {
           "name": "Tasks",

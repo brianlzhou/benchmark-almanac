@@ -32,7 +32,7 @@ const board: Leaderboard = {
         const row = table.find(r => r[1] === model), tier = 'Tier ' + (i + 1);
         if (!row || num(row[4]) == null) throw new Error('Missing ' + tier);
         part(tier, row[3]);
-        metrics[tier + ' standard deviation'] = num(row[4])!;
+        metrics[tier + 'Std'] = num(row[4])!;
         for (let j = 5; j < table[0].length; j++) part(tier + ': ' + table[0][j], row[j]);
       }
       const index = categories[0].indexOf(short[model] || model);
