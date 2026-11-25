@@ -22,11 +22,11 @@ const board: Leaderboard = {
     for (const c of t.slice(3)) {
       if (c[0].endsWith(' models')) { setting = c[0].replace(' models', ''); continue; }
       if (c[0] === 'Mixture' || c[3] === '-' || c[5] === '-') continue;
-      const [music, musicSE] = c[3].split(' \\pm ').map(numberCell);
-      const [vgg, vggSE] = c[5].split(' \\pm ').map(numberCell);
-      if (musicSE === undefined || vggSE === undefined) throw new Error('Missing standard error');
+      const [music, musicSe] = c[3].split(' \\pm ').map(numberCell);
+      const [vgg, vggSe] = c[5].split(' \\pm ').map(numberCell);
+      if (musicSe === undefined || vggSe === undefined) throw new Error('Missing standard error');
       rows.push({model: c[0].split(' (')[0], setting, score: (music+vgg)/2,
-        metrics: {music, musicSE, musicMedian: numberCell(c[4]), vgg, vggSE, vggMedian: numberCell(c[6])}});
+        metrics: {music, musicSe, musicMedian: numberCell(c[4]), vgg, vggSe, vggMedian: numberCell(c[6])}});
     }
     return checked(rows, 9);
   },

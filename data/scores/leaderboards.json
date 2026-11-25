@@ -35706,13 +35706,295 @@
       "terms": "The authors publish their tables on arXiv. https://arxiv.org/abs/2603.23883",
       "headline": "The paper reports no overall score, so this is the mean of its seen and unseen species top-1 averages.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BioVITA (Stage1)",
         "BioVITA (Stage2)",
         "ImageBind"
-      ]
+      ],
+      "parts": {
+        "SeenspeciesAudiotoTextTop1": {
+          "name": "Seen species: Audio to Text Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesAudiotoTextTop5": {
+          "name": "Seen species: Audio to Text Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesTexttoAudioTop1": {
+          "name": "Seen species: Text to Audio Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesTexttoAudioTop5": {
+          "name": "Seen species: Text to Audio Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesAudiotoImageTop1": {
+          "name": "Seen species: Audio to Image Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesAudiotoImageTop5": {
+          "name": "Seen species: Audio to Image Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesImagetoAudioTop1": {
+          "name": "Seen species: Image to Audio Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesImagetoAudioTop5": {
+          "name": "Seen species: Image to Audio Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesImagetoTextTop1": {
+          "name": "Seen species: Image to Text Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesImagetoTextTop5": {
+          "name": "Seen species: Image to Text Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesTexttoImageTop1": {
+          "name": "Seen species: Text to Image Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesTexttoImageTop5": {
+          "name": "Seen species: Text to Image Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesAverageTop1": {
+          "name": "Seen species: Average Top 1",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "SeenspeciesAverageTop5": {
+          "name": "Seen species: Average Top 5",
+          "group": "Seen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAudiotoTextTop1": {
+          "name": "Unseen species: Audio to Text Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAudiotoTextTop5": {
+          "name": "Unseen species: Audio to Text Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesTexttoAudioTop1": {
+          "name": "Unseen species: Text to Audio Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesTexttoAudioTop5": {
+          "name": "Unseen species: Text to Audio Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAudiotoImageTop1": {
+          "name": "Unseen species: Audio to Image Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAudiotoImageTop5": {
+          "name": "Unseen species: Audio to Image Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesImagetoAudioTop1": {
+          "name": "Unseen species: Image to Audio Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesImagetoAudioTop5": {
+          "name": "Unseen species: Image to Audio Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesImagetoTextTop1": {
+          "name": "Unseen species: Image to Text Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesImagetoTextTop5": {
+          "name": "Unseen species: Image to Text Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesTexttoImageTop1": {
+          "name": "Unseen species: Text to Image Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesTexttoImageTop5": {
+          "name": "Unseen species: Text to Image Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAverageTop1": {
+          "name": "Unseen species: Average Top 1",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "UnseenspeciesAverageTop5": {
+          "name": "Unseen species: Average Top 5",
+          "group": "Unseen species",
+          "unit": "%"
+        },
+        "GenusAudiotoTextTop1": {
+          "name": "Genus: Audio to Text Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusAudiotoTextTop5": {
+          "name": "Genus: Audio to Text Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusTexttoAudioTop1": {
+          "name": "Genus: Text to Audio Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusTexttoAudioTop5": {
+          "name": "Genus: Text to Audio Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusAudiotoImageTop1": {
+          "name": "Genus: Audio to Image Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusAudiotoImageTop5": {
+          "name": "Genus: Audio to Image Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusImagetoAudioTop1": {
+          "name": "Genus: Image to Audio Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusImagetoAudioTop5": {
+          "name": "Genus: Image to Audio Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusImagetoTextTop1": {
+          "name": "Genus: Image to Text Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusImagetoTextTop5": {
+          "name": "Genus: Image to Text Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusTexttoImageTop1": {
+          "name": "Genus: Text to Image Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusTexttoImageTop5": {
+          "name": "Genus: Text to Image Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusAverageTop1": {
+          "name": "Genus: Average Top 1",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "GenusAverageTop5": {
+          "name": "Genus: Average Top 5",
+          "group": "Genus",
+          "unit": "%"
+        },
+        "FamilyAudiotoTextTop1": {
+          "name": "Family: Audio to Text Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyAudiotoTextTop5": {
+          "name": "Family: Audio to Text Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyTexttoAudioTop1": {
+          "name": "Family: Text to Audio Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyTexttoAudioTop5": {
+          "name": "Family: Text to Audio Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyAudiotoImageTop1": {
+          "name": "Family: Audio to Image Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyAudiotoImageTop5": {
+          "name": "Family: Audio to Image Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyImagetoAudioTop1": {
+          "name": "Family: Image to Audio Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyImagetoAudioTop5": {
+          "name": "Family: Image to Audio Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyImagetoTextTop1": {
+          "name": "Family: Image to Text Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyImagetoTextTop5": {
+          "name": "Family: Image to Text Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyTexttoImageTop1": {
+          "name": "Family: Text to Image Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyTexttoImageTop5": {
+          "name": "Family: Text to Image Top 5",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyAverageTop1": {
+          "name": "Family: Average Top 1",
+          "group": "Family",
+          "unit": "%"
+        },
+        "FamilyAverageTop5": {
+          "name": "Family: Average Top 5",
+          "group": "Family",
+          "unit": "%"
+        }
+      }
     },
     "bird-critic": {
       "url": "https://bird-critic.github.io/",
@@ -54616,7 +54898,7 @@
       "terms": "The authors publish these results under the terms linked at https://arxiv.org/abs/2212.07065.",
       "headline": "The paper reports no overall score, so this is the plain mean of mean SDR in decibels on its two mixture tests.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BERTSep",
@@ -68961,12 +69243,110 @@
       "terms": "ACL Anthology distributes the authors’ paper under its publication terms. https://aclanthology.org/faq/copyright/",
       "headline": "The paper gives no overall score, so this is the plain mean of answer error rates across five language pairs.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AssemblyAI",
         "Scribe-V2"
-      ]
+      ],
+      "parts": {
+        "ESENWER": {
+          "name": "ES/EN word error rate",
+          "group": "WER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ESENSWER": {
+          "name": "ES/EN semantic word error rate",
+          "group": "SWER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ESENAER": {
+          "name": "ES/EN answer error rate",
+          "group": "AER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRENWER": {
+          "name": "FR/EN word error rate",
+          "group": "WER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRENSWER": {
+          "name": "FR/EN semantic word error rate",
+          "group": "SWER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRENAER": {
+          "name": "FR/EN answer error rate",
+          "group": "AER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRCAENWER": {
+          "name": "FR-CA/EN word error rate",
+          "group": "WER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRCAENSWER": {
+          "name": "FR-CA/EN semantic word error rate",
+          "group": "SWER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "FRCAENAER": {
+          "name": "FR-CA/EN answer error rate",
+          "group": "AER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "DEENWER": {
+          "name": "DE/EN word error rate",
+          "group": "WER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "DEENSWER": {
+          "name": "DE/EN semantic word error rate",
+          "group": "SWER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "DEENAER": {
+          "name": "DE/EN answer error rate",
+          "group": "AER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ZHENWER": {
+          "name": "ZH/EN word error rate",
+          "group": "WER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ZHENCER": {
+          "name": "ZH/EN character error rate",
+          "group": "CER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ZHENSWER": {
+          "name": "ZH/EN semantic word error rate",
+          "group": "SWER",
+          "better": "lower",
+          "unit": "%"
+        },
+        "ZHENAER": {
+          "name": "ZH/EN answer error rate",
+          "group": "AER",
+          "better": "lower",
+          "unit": "%"
+        }
+      }
     },
     "cosqa": {
       "url": "https://leaderboard.mteb.org/tasks/CosQA",
@@ -76594,7 +76974,14 @@
         "deepseek/deepseek-r1 (snapshot unspecified)",
         "google/gemini-2.5-flash (snapshot unspecified)",
         "google/gemini-2.5-pro (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "targetSuccess": {
+          "name": "Target-specific jailbreak success rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "d2k-bench": {
       "url": "https://arxiv.org/html/2610.03226",
@@ -76684,7 +77071,7 @@
       "terms": "The paper and its license are available at https://arxiv.org/abs/2512.04324.",
       "headline": "The headline weights the engineering and analysis scores by their task counts, 110 and 100.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)"
@@ -79331,7 +79718,7 @@
       "feed": "https://proceedings.neurips.cc/paper_files/paper/2022/file/cae73a974390c0edd95ae7aeae09139c-Paper-Datasets_and_Benchmarks.pdf",
       "terms": "NeurIPS publishes the authors’ paper under its proceedings terms. https://proceedings.neurips.cc/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AARLC",
@@ -90568,7 +90955,15 @@
       "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "equalDomain": {
+          "name": "Equal-domain index",
+          "unit": "score",
+          "better": "higher",
+          "note": "Agent Index weighted equally across physical, digital, social, and scientific domains on a 0 to 100 scale."
+        }
+      }
     },
     "dualchem": {
       "url": "https://scale.com/blog/dualchem-evaluating-ai-models-dual-use-chemistry-risks",
@@ -95087,7 +95482,7 @@
       "feed": "https://arxiv.org/html/2609.31906",
       "terms": "The authors publish the results under the terms at https://arxiv.org/abs/2609.31906.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -95147,6 +95542,58 @@
         },
         "D3": {
           "name": "D3"
+        }
+      },
+      "stats": {
+        "passed": {
+          "name": "Scenarios passed",
+          "unit": "count",
+          "better": "higher",
+          "note": "Count passed out of 206 scenarios."
+        },
+        "retained": {
+          "name": "Retained subset pass rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Pass rate on the 152-scenario retained subset."
+        },
+        "remainder": {
+          "name": "Removed slice pass rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Pass rate on the 54-scenario removed slice."
+        },
+        "staticScore": {
+          "name": "Static assertion score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean over 163 scenarios with static checks, from 0 to 1."
+        },
+        "llmScore": {
+          "name": "LLM judge score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean over all 206 scenarios, from 0 to 1."
+        },
+        "calls": {
+          "name": "Mean tool calls per scenario",
+          "unit": "count"
+        },
+        "callSuccess": {
+          "name": "Tool call success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "clean": {
+          "name": "Clean execution rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of 206 scenarios with at least one call and no API failure."
+        },
+        "latency": {
+          "name": "Mean latency per scenario",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -102457,6 +102904,20 @@
         },
         "critical": {
           "name": "Critical success rate"
+        }
+      },
+      "stats": {
+        "adeMeters": {
+          "name": "Average displacement error",
+          "unit": "score",
+          "better": "lower",
+          "note": "Measured in meters."
+        },
+        "fdeMeters": {
+          "name": "Final displacement error",
+          "unit": "score",
+          "better": "lower",
+          "note": "Measured in meters."
         }
       }
     },
@@ -125350,13 +125811,60 @@
       "feed": "https://arxiv.org/html/2506.07671",
       "terms": "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://creativecommons.org/licenses/by-nc-sa/4.0/.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Gemini 1.5",
         "Mistral",
         "Mixtral"
-      ]
+      ],
+      "stats": {
+        "eligibility": {
+          "name": "Eligibility",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unadjustedFactuality": {
+          "name": "Unadjusted factuality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "factuality": {
+          "name": "Factuality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uRAF": {
+          "name": "Unadjusted relevance-aware factuality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "truePositive": {
+          "name": "Deflection true positive rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "falsePositive": {
+          "name": "Deflection false positive rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "attributionPrecision": {
+          "name": "Attribution precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "attributionRecall": {
+          "name": "Attribution recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "attributionF1": {
+          "name": "Attribution F1",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "garble-bench-voicearena": {
       "url": "https://github.com/Voice-Arena/Garble-Bench",
@@ -157875,7 +158383,19 @@
         "Gemma9B-instruct",
         "Llama 3.1",
         "Llama-3.2"
-      ]
+      ],
+      "parts": {
+        "EnglishExplanation": {
+          "name": "English explanation BERTScore F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ArabicExplanation": {
+          "name": "Arabic explanation BERTScore F1",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "jblimp": {
       "url": "https://aclanthology.org/2023.findings-eacl.117/",
@@ -173083,12 +173603,18 @@
       "feed": "https://aclanthology.org/2026.eacl-long.362.pdf",
       "terms": "ACL Anthology terms. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "deepseek-r1 (snapshot unspecified)",
         "deepseek-v3 (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "averageExplanationLength": {
+          "name": "Average explanation length",
+          "unit": "count"
+        }
+      }
     },
     "litqa-v0-futurehouse": {
       "url": "https://github.com/Future-House/LitQA",
@@ -195721,7 +196247,7 @@
       "terms": "The authors publish the paper under the license listed at https://arxiv.org/abs/2610.39955.",
       "headline": "The paper gives no overall score. Prioritization measures how well descriptions cover salient visual events.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Claude 4",
@@ -243281,42 +243807,42 @@
       ],
       "parts": {
         "target1Injected1": {
-          "name": "Dup. sentence detection / Dup. sentence detection",
+          "name": "Duplicate sentence detection / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected2": {
-          "name": "Dup. sentence detection / Grammar correction",
+          "name": "Duplicate sentence detection / Grammar correction",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected3": {
-          "name": "Dup. sentence detection / Hate detection",
+          "name": "Duplicate sentence detection / Hate detection",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected4": {
-          "name": "Dup. sentence detection / Nat. lang. inference",
+          "name": "Duplicate sentence detection / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected5": {
-          "name": "Dup. sentence detection / Sentiment analysis",
+          "name": "Duplicate sentence detection / Sentiment analysis",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected6": {
-          "name": "Dup. sentence detection / Spam detection",
+          "name": "Duplicate sentence detection / Spam detection",
           "unit": "%",
           "better": "lower"
         },
         "target1Injected7": {
-          "name": "Dup. sentence detection / Summarization",
+          "name": "Duplicate sentence detection / Summarization",
           "unit": "%",
           "better": "lower"
         },
         "target2Injected1": {
-          "name": "Grammar correction / Dup. sentence detection",
+          "name": "Grammar correction / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
@@ -243331,7 +243857,7 @@
           "better": "lower"
         },
         "target2Injected4": {
-          "name": "Grammar correction / Nat. lang. inference",
+          "name": "Grammar correction / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
@@ -243351,7 +243877,7 @@
           "better": "lower"
         },
         "target3Injected1": {
-          "name": "Hate detection / Dup. sentence detection",
+          "name": "Hate detection / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
@@ -243366,7 +243892,7 @@
           "better": "lower"
         },
         "target3Injected4": {
-          "name": "Hate detection / Nat. lang. inference",
+          "name": "Hate detection / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
@@ -243386,42 +243912,42 @@
           "better": "lower"
         },
         "target4Injected1": {
-          "name": "Nat. lang. inference / Dup. sentence detection",
+          "name": "Natural language inference / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected2": {
-          "name": "Nat. lang. inference / Grammar correction",
+          "name": "Natural language inference / Grammar correction",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected3": {
-          "name": "Nat. lang. inference / Hate detection",
+          "name": "Natural language inference / Hate detection",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected4": {
-          "name": "Nat. lang. inference / Nat. lang. inference",
+          "name": "Natural language inference / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected5": {
-          "name": "Nat. lang. inference / Sentiment analysis",
+          "name": "Natural language inference / Sentiment analysis",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected6": {
-          "name": "Nat. lang. inference / Spam detection",
+          "name": "Natural language inference / Spam detection",
           "unit": "%",
           "better": "lower"
         },
         "target4Injected7": {
-          "name": "Nat. lang. inference / Summarization",
+          "name": "Natural language inference / Summarization",
           "unit": "%",
           "better": "lower"
         },
         "target5Injected1": {
-          "name": "Sentiment analysis / Dup. sentence detection",
+          "name": "Sentiment analysis / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
@@ -243436,7 +243962,7 @@
           "better": "lower"
         },
         "target5Injected4": {
-          "name": "Sentiment analysis / Nat. lang. inference",
+          "name": "Sentiment analysis / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
@@ -243456,7 +243982,7 @@
           "better": "lower"
         },
         "target6Injected1": {
-          "name": "Spam detection / Dup. sentence detection",
+          "name": "Spam detection / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
@@ -243471,7 +243997,7 @@
           "better": "lower"
         },
         "target6Injected4": {
-          "name": "Spam detection / Nat. lang. inference",
+          "name": "Spam detection / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
@@ -243491,7 +244017,7 @@
           "better": "lower"
         },
         "target7Injected1": {
-          "name": "Summarization / Dup. sentence detection",
+          "name": "Summarization / Duplicate sentence detection",
           "unit": "%",
           "better": "lower"
         },
@@ -243506,7 +244032,7 @@
           "better": "lower"
         },
         "target7Injected4": {
-          "name": "Summarization / Nat. lang. inference",
+          "name": "Summarization / Natural language inference",
           "unit": "%",
           "better": "lower"
         },
@@ -243524,6 +244050,14 @@
           "name": "Summarization / Summarization",
           "unit": "%",
           "better": "lower"
+        }
+      },
+      "stats": {
+        "matchRate": {
+          "name": "Matching rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean agreement between attacked output and direct injected-task output across 49 task pairs."
         }
       }
     },
@@ -263530,7 +264064,7 @@
       "feed": "https://arxiv.org/html/2410.07961",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -283798,7 +284332,32 @@
         "GPT3+SuperNI Training",
         "GPT3+T0 Training",
         "InstructGPT 001"
-      ]
+      ],
+      "stats": {
+        "ratingA": {
+          "name": "Rating A responses",
+          "unit": "count",
+          "better": "higher",
+          "note": "Valid and satisfying responses out of 252 instructions."
+        },
+        "ratingB": {
+          "name": "Rating B responses",
+          "unit": "count",
+          "note": "Acceptable responses with minor errors or imperfections out of 252 instructions."
+        },
+        "ratingC": {
+          "name": "Rating C responses",
+          "unit": "count",
+          "better": "lower",
+          "note": "Relevant responses with significant errors out of 252 instructions."
+        },
+        "ratingD": {
+          "name": "Rating D responses",
+          "unit": "count",
+          "better": "lower",
+          "note": "Irrelevant or invalid responses out of 252 instructions."
+        }
+      }
     },
     "semantic-dlp-catch-the-data-leak": {
       "url": "https://www.kaggle.com/benchmarks/karthiksethuraman6/semantic-dlp-catch-the-data-leak",
