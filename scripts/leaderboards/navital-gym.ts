@@ -9,10 +9,10 @@ const board: Leaderboard = {
   benchmark: 'navital-gym', url: feed, feed,
   terms: 'Public leaderboard from Navital Labs with links to each published run.',
   stats: {
-    solved: { name: 'Solved tasks', unit: 'count' },
-    tasks: { name: 'Tasks tried', unit: 'count' },
+    solved: { name: 'Solved tasks', unit: 'count', better: 'higher' },
     strictPass1: { name: 'Strict pass@1', unit: '%', better: 'higher' },
     passAll: { name: 'Pass rate across all tasks', unit: '%', better: 'higher' },
+    errorRate: { name: 'Error rate', unit: '%', better: 'lower' },
     badFormatRate: { name: 'Bad-format rate', unit: '%', better: 'lower' },
   },
   async fetch() {
@@ -27,7 +27,7 @@ const board: Leaderboard = {
       const link = r[7].html.match(/href="([^"]+)"/)?.[1];
       if (!model || !solved || !pass || !errs || !link) throw new Error('Incomplete UPI Desk row');
       return { model, score: Number(solved[3]), trials: Number(pass[2]), link, setting: 'UPI Desk',
-        metrics: { solved: Number(solved[1]), tasks: Number(solved[2]), strictPass1: parseFloat(r[3].text),
+        metrics: { solved: Number(solved[1]), strictPass1: parseFloat(r[3].text),
           passAll: Number(pass[1]), errorRate: Number(errs[1]), badFormatRate: Number(errs[2]) } };
     });
   },
