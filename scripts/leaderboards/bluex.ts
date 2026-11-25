@@ -21,8 +21,9 @@ const board: Leaderboard = {
         r.display_name.match(/\((rev: [^)]+)\)/)?.[1], r.precision !== '?' && r.precision, r.date].filter(Boolean).join(', ');
       const score = Number(r.bluex);
       if (!r.bluex.trim() || !Number.isFinite(score) || score < 0 || score > 100) throw new Error('Invalid BLUEX accuracy');
-      return { model, setting, score, date: r.date, params: Number(r.params) || undefined,
-        link: r.details_url || r.link || undefined, license: r.license !== '?' ? r.license : undefined };
+      const open = r.type_name === 'proprietary (closed)' || r.license === 'Proprietary' ? false : r.type_name ? true : undefined;
+      return { model, setting, score, date: r.date, open, params: Number(r.params) || undefined,
+        link: r.details_url || r.link || undefined, license: r.license && r.license !== '?' ? r.license : undefined };
     });
     return checked(rows, 1253);
   },

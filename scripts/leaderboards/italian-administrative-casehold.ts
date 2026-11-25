@@ -10,7 +10,6 @@ const board: Leaderboard = {
   url: FEED,
   feed: FEED,
   terms: 'MTEB publishes these results under the CC0 1.0 license. https://huggingface.co/datasets/mteb/results',
-  parts: { default: { name: 'Italian-Administrative-CaseHold', group: 'Task' } },
   async fetch() {
     const data = await fetchJson<{ task: { name: string }; rows: Array<{ model: { name: string; activeParamsB?: number; totalParamsB?: number; openWeights?: boolean; license?: string }; score: number; subsetScores?: Record<string, Record<string, number>> }> }>(FEED);
     if (data.task.name !== 'ItaCaseholdClassification') throw new Error('MTEB task changed');
