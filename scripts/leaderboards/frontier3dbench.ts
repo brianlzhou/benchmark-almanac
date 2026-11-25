@@ -9,6 +9,7 @@ import { tables, num } from '../lib/html.ts';
 const PAGE = 'https://lab.einsia.ai/frontier3dbench';
 const board: Leaderboard = {
   benchmark: 'frontier3dbench',
+  harnesses: 'system',
   parts: {
     l1: { name: 'Level 1', group: 'Difficulty' },
     l2: { name: 'Level 2', group: 'Difficulty' },

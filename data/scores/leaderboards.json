@@ -64111,7 +64111,8 @@
       "rows": 11,
       "unmatched": [
         "Gemini-Flash-3.0"
-      ]
+      ],
+      "harnesses": "system"
     },
     "coconot": {
       "url": "https://arxiv.org/html/2407.12043",
@@ -78418,6 +78419,7 @@
       "unmatched": [
         "Multi-model (DeepSeek-V4-Flash, Zhian-27B)"
       ],
+      "harnesses": "system",
       "stats": {
         "patchOnly": {
           "name": "Patch-only pass rate",
@@ -78448,6 +78450,7 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "patchOnly": {
           "name": "Patch-only pass rate",
@@ -92663,6 +92666,7 @@
       "rows": 4,
       "unmatched": [],
       "costPer": "run",
+      "harnesses": "system",
       "stats": {
         "inputTokens": {
           "name": "Input tokens",
@@ -118850,6 +118854,7 @@
       "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "basic": {
           "name": "Basic"
@@ -121843,6 +121848,7 @@
       "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "l1": {
           "name": "Level 1",
@@ -122017,6 +122023,7 @@
       "unmatched": [
         "Apodex 1.1"
       ],
+      "harnesses": "system",
       "stats": {
         "nativeMeanScore": {
           "name": "Native mean score",
@@ -122240,7 +122247,8 @@
       "terms": "Public MIT-licensed project results. The Almanac credits FrontierCS and links the source.",
       "retrieved": "2026-11-24",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "frontiercs-2": {
       "url": "https://www.kaggle.com/benchmarks/frontiercs/frontiercs-2",
@@ -139618,6 +139626,7 @@
       "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "SAR_t": {
           "name": "Tool-use safety adherence",
@@ -140563,7 +140572,8 @@
       "terms": "MIT repository, no robots.txt on the maker site.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "healthbench": {
       "url": "https://openai.com/index/healthbench/",
@@ -147333,6 +147343,7 @@
       "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "t1": {
           "name": "T1 Abstraction"
@@ -217498,7 +217509,8 @@
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
       "retrieved": "2026-11-24",
       "rows": 3,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "nanogpt-speedrun-frontier-prime-intellect": {
       "url": "https://www.primeintellect.ai/research/nanogpt-speedrun",
@@ -231595,7 +231607,8 @@
       "terms": "Prime Intellect publishes the comparison table in its public research article. https://www.primeintellect.ai/blog/prime-agent",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "open-arabic-llm-leaderboard-v1": {
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard-v1",
@@ -289365,6 +289378,7 @@
       "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
+      "harnesses": "system",
       "verified": "Marked Verified in the official SEC-bench table.",
       "stats": {
         "patching": {
@@ -289430,6 +289444,7 @@
       "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [],
+      "harnesses": "system",
       "verified": "Marked verified by SEC-bench",
       "parts": {
         "v8": {
@@ -292632,6 +292647,7 @@
       "unmatched": [
         "Reference"
       ],
+      "harnesses": "system",
       "stats": {
         "delivered": {
           "name": "Delivered rate",
@@ -309828,6 +309844,7 @@
       "unmatched": [
         "Amazon Q Developer Agent (v20250402)"
       ],
+      "harnesses": "system",
       "parts": {
         "Java": {
           "name": "Java",
@@ -309846,27 +309863,27 @@
           "group": "Language"
         },
         "resolvedClassOnly": {
-          "name": "Single class",
+          "name": "class only",
           "group": "Patch complexity"
         },
         "resolvedFuncOnly": {
-          "name": "Single function",
+          "name": "function only",
           "group": "Patch complexity"
         },
         "resolvedMixed": {
-          "name": "Mixed class and function",
+          "name": "mixed",
           "group": "Patch complexity"
         },
         "resolvedNone": {
-          "name": "No class or function",
+          "name": "none",
           "group": "Patch complexity"
         },
         "resolvedSingleClass": {
-          "name": "Single class",
+          "name": "single class",
           "group": "Patch complexity"
         },
         "resolvedSingleFunc": {
-          "name": "Single function",
+          "name": "single function",
           "group": "Patch complexity"
         }
       },
@@ -314101,6 +314118,7 @@
         "v4 pro"
       ],
       "costPer": "run",
+      "harnesses": "system",
       "stats": {
         "robust": {
           "name": "Robust O-Eval",
@@ -316134,6 +316152,10 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "stats": {
         "pitStopVisitRate": {
           "name": "Pit stop visit rate",

@@ -6,7 +6,7 @@ import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://harnessaudit.github.io/";
 const board: Leaderboard = {
- benchmark: "harnessaudit-bench", parts: {
+ benchmark: "harnessaudit-bench", harnesses: 'system', parts: {
   SAR_t: { name: 'Tool-use safety adherence', group: 'Dimension' },
   SAR_r: { name: 'Resource-access safety adherence', group: 'Dimension' },
   SAR_f: { name: 'Information-flow safety adherence', group: 'Dimension' },

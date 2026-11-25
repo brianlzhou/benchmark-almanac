@@ -7,6 +7,7 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://cocoabench.github.io/assets/js/chart.js";
 const board: Leaderboard = {
   benchmark: "cocoabench",
+  harnesses: 'system',
   url: "https://cocoabench.github.io/assets/js/chart.js",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

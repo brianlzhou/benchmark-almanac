@@ -36,6 +36,7 @@ const runKey = (r: { agent?: string; model?: string; effort?: string }) => `${r.
 
 const board: Leaderboard = {
   benchmark: 'sec-bench-pro-260617',
+  harnesses: 'system',
   url: 'https://sec-bench.github.io',
   feed: `${FEED} (snapshot ${SNAPSHOT}, overall)`,
   terms: 'Static JSON on the SEC-bench GitHub Pages site, whose repository is Apache-2.0; the SEC-bench Pro repository is MIT.',

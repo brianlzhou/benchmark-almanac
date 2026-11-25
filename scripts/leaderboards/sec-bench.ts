@@ -6,7 +6,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://sec-bench.github.io/";
 const board: Leaderboard = {
-  benchmark: "sec-bench", url: "https://sec-bench.github.io/", feed: FEED,
+  benchmark: "sec-bench", harnesses: 'system', url: "https://sec-bench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   verified: 'Marked Verified in the official SEC-bench table.',
   stats: { patching: { name: 'Vulnerability patching score', unit: '%', better: 'higher' } },

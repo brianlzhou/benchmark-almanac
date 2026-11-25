@@ -28,6 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://raw.githubusercontent.com/IntologyAI/NanoGPT-Bench/main/README.md";
 const board: Leaderboard = {
   "benchmark": "nanogpt-bench-intology",
+  "harnesses": "system",
   "url": "https://github.com/IntologyAI/NanoGPT-Bench",
   "feed": "https://raw.githubusercontent.com/IntologyAI/NanoGPT-Bench/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."

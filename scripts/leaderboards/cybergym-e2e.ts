@@ -22,6 +22,7 @@ interface Row {
 const board: Leaderboard = {
   stats: { patchOnly: { name: 'Patch-only pass rate', unit: '%', better: 'higher' }, s1: { name: 'S1 pass rate', unit: '%', better: 'higher' }, s2: { name: 'S2 pass rate', unit: '%', better: 'higher' }, s4: { name: 'S4 pass rate', unit: '%', better: 'higher' } },
   benchmark: 'cybergym-e2e',
+  harnesses: 'system',
   url: 'https://www.cybergym.io/cybergym-e2e/',
   feed: `${FEED} (current 920-task set, S3)`,
   terms: 'Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.',
