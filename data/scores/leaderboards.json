@@ -26736,7 +26736,7 @@
       "terms": "The authors publish their results on arXiv. https://arxiv.org/abs/2505.16211",
       "headline": "The paper gives no overall score, so the headline is its first metric, group fairness for social stereotypes.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "GPT-4o Audio",
@@ -26758,6 +26758,211 @@
         "decision": {
           "name": "Decision-making",
           "group": "Fairness"
+        },
+        "hallucinationcontentmismatchgpt4o": {
+          "name": "Content mismatch (GPT-4o)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationcontentmismatchqwen3": {
+          "name": "Content mismatch (Qwen3)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationlabelmismatchgpt4o": {
+          "name": "Label mismatch (GPT-4o)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationlabelmismatchqwen3": {
+          "name": "Label mismatch (Qwen3)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationlogicalviolationgpt4o": {
+          "name": "Logical violation (GPT-4o)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationlogicalviolationqwen3": {
+          "name": "Logical violation (Qwen3)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationphysicalviolationgpt4o": {
+          "name": "Physical violation (GPT-4o)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "hallucinationphysicalviolationqwen3": {
+          "name": "Physical violation (Qwen3)",
+          "group": "Hallucination",
+          "unit": "score"
+        },
+        "safetyenterprisegpt4o": {
+          "name": "Enterprise (GPT-4o)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetyenterpriseqwen3": {
+          "name": "Enterprise (Qwen3)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetyfinancialgpt4o": {
+          "name": "Financial (GPT-4o)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetyfinancialqwen3": {
+          "name": "Financial (Qwen3)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetymedicalgpt4o": {
+          "name": "Medical (GPT-4o)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetymedicalqwen3": {
+          "name": "Medical (Qwen3)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetyillegalactivitiesguidancegpt4o": {
+          "name": "Illegal activities guidance (GPT-4o)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "safetyillegalactivitiesguidanceqwen3": {
+          "name": "Illegal activities guidance (Qwen3)",
+          "group": "Safety",
+          "unit": "%"
+        },
+        "privacydirectleakagewithoutprivacypromptinggpt4o": {
+          "name": "Direct leakage without privacy prompting (GPT-4o)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacydirectleakagewithoutprivacypromptingqwen3": {
+          "name": "Direct leakage without privacy prompting (Qwen3)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacydirectleakagewithprivacypromptinggpt4o": {
+          "name": "Direct leakage with privacy prompting (GPT-4o)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacydirectleakagewithprivacypromptingqwen3": {
+          "name": "Direct leakage with privacy prompting (Qwen3)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacyinferenceleakagewithoutprivacypromptinggpt4o": {
+          "name": "Inference leakage without privacy prompting (GPT-4o)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacyinferenceleakagewithoutprivacypromptingqwen3": {
+          "name": "Inference leakage without privacy prompting (Qwen3)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacyinferenceleakagewithprivacypromptinggpt4o": {
+          "name": "Inference leakage with privacy prompting (GPT-4o)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "privacyinferenceleakagewithprivacypromptingqwen3": {
+          "name": "Inference leakage with privacy prompting (Qwen3)",
+          "group": "Privacy",
+          "unit": "%"
+        },
+        "robustnessadversarialrobustnessgpt4o": {
+          "name": "Adversarial robustness (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessadversarialrobustnessqwen3": {
+          "name": "Adversarial robustness (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessaudioqualityvariationgpt4o": {
+          "name": "Audio quality variation (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessaudioqualityvariationqwen3": {
+          "name": "Audio quality variation (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessbackgroundconversationgpt4o": {
+          "name": "Background conversation (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessbackgroundconversationqwen3": {
+          "name": "Background conversation (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessenvironmentalsoundgpt4o": {
+          "name": "Environmental sound (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessenvironmentalsoundqwen3": {
+          "name": "Environmental sound (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessmultiplespeakersgpt4o": {
+          "name": "Multiple speakers (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessmultiplespeakersqwen3": {
+          "name": "Multiple speakers (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessnoiseinterferencegpt4o": {
+          "name": "Noise interference (GPT-4o)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "robustnessnoiseinterferenceqwen3": {
+          "name": "Noise interference (Qwen3)",
+          "group": "Robustness",
+          "unit": "score"
+        },
+        "authenticationidentityverificationbypassgpt4o": {
+          "name": "Identity verification bypass (GPT-4o)",
+          "group": "Authentication",
+          "unit": "%"
+        },
+        "authenticationidentityverificationbypassqwen3": {
+          "name": "Identity verification bypass (Qwen3)",
+          "group": "Authentication",
+          "unit": "%"
+        },
+        "authenticationhybridspoofinggpt4o": {
+          "name": "Hybrid spoofing (GPT-4o)",
+          "group": "Authentication",
+          "unit": "%"
+        },
+        "authenticationhybridspoofingqwen3": {
+          "name": "Hybrid spoofing (Qwen3)",
+          "group": "Authentication",
+          "unit": "%"
+        },
+        "authenticationvoicecloningspoofing": {
+          "name": "Voice cloning spoofing",
+          "group": "Authentication",
+          "unit": "%"
         }
       }
     },
@@ -40823,7 +41028,7 @@
       "terms": "The paper and its license are available at https://arxiv.org/abs/2507.11216.",
       "headline": "The paper reports no overall accuracy, so this is the plain mean of ambiguous and disambiguated context accuracy.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "EuroLLM 1.7B base",
@@ -40863,8 +41068,16 @@
           "name": "Ambiguous-context bias estimate",
           "unit": "score"
         },
+        "upperAmb": {
+          "name": "Ambiguous-context absolute bias upper bound",
+          "unit": "score"
+        },
         "biasDis": {
           "name": "Disambiguated-context bias estimate",
+          "unit": "score"
+        },
+        "upperDis": {
+          "name": "Disambiguated-context absolute bias upper bound",
           "unit": "score"
         }
       }
@@ -63086,7 +63299,35 @@
       "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "stats": {
+        "revenue": {
+          "name": "Revenue",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean 90-day revenue in simulated dollars."
+        },
+        "margin": {
+          "name": "Profit margin",
+          "unit": "%",
+          "better": "higher"
+        },
+        "actions": {
+          "name": "Actions",
+          "unit": "count",
+          "note": "Mean coffee commands other than wait_for_next_day."
+        },
+        "dms": {
+          "name": "Direct messages",
+          "unit": "count",
+          "note": "Mean inter-agent messages sent."
+        },
+        "llmCalls": {
+          "name": "LLM calls",
+          "unit": "count",
+          "note": "Mean calls to the model API."
+        }
+      }
     },
     "cognition-codesearch-eval": {
       "url": "https://cognition.com/blog/swe-grep",
@@ -66492,88 +66733,43 @@
       }
     },
     "corecodebench": {
-      "url": "https://aclanthology.org/2026.acl-long.1196/",
-      "feed": "https://aclanthology.org/2026.acl-long.1196.pdf",
-      "terms": "Paper and license at https://aclanthology.org/2026.acl-long.1196/",
+      "url": "https://arxiv.org/html/2507.05281",
+      "feed": "https://arxiv.org/html/2507.05281",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "The paper reports no overall score, so this is the plain mean of its six atomic and composite task rates.",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 11,
+      "retrieved": "2026-11-24",
+      "rows": 8,
       "unmatched": [
-        "Llama-3.1"
+        "Claude-4.5"
       ],
       "parts": {
-        "AtomicOverallAC": {
-          "name": "Atomic overall accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AtomicOverallRate": {
-          "name": "Atomic overall pass rate",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AtomicDevelopmentAC": {
-          "name": "Atomic development accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AtomicDevelopmentRate": {
+        "atomicDevRate": {
           "name": "Atomic development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "AtomicBugFixAC": {
-          "name": "Atomic bug-fix accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AtomicBugFixRate": {
+        "atomicBugFixRate": {
           "name": "Atomic bug-fix pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "AtomicTDDAC": {
-          "name": "Atomic test-driven development accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "AtomicTDDRate": {
+        "atomicTddRate": {
           "name": "Atomic test-driven development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "CompositeOverallAC": {
-          "name": "Composite overall accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "CompositeOverallRate": {
-          "name": "Composite overall pass rate",
-          "unit": "%",
-          "better": "higher"
-        },
-        "CompositeDevelopmentAC": {
-          "name": "Composite development accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "CompositeDevelopmentRate": {
+        "compositeDevRate": {
           "name": "Composite development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "CompositeBugFixRate": {
+        "compositeBugFixRate": {
           "name": "Composite bug-fix pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "CompositeTDDAC": {
-          "name": "Composite test-driven development accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "CompositeTDDRate": {
+        "compositeTddRate": {
           "name": "Composite test-driven development pass rate",
           "unit": "%",
           "better": "higher"
@@ -69239,7 +69435,8 @@
       "url": "https://arxiv.org/abs/2508.06585",
       "feed": "https://arxiv.org/html/2508.06585",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Llava 13b",
@@ -69276,7 +69473,6 @@
           "group": "Subset"
         }
       },
-      "static": "paper",
       "stats": {
         "ra5": {
           "name": "Relaxed accuracy at 5",
@@ -92550,7 +92746,7 @@
       "feed": "https://arxiv.org/html/2509.23141",
       "terms": "Results from the authors of Earth-Agent. https://arxiv.org/abs/2509.23141",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -92572,6 +92768,108 @@
         "RGB": {
           "name": "RGB",
           "unit": "%"
+        }
+      },
+      "stats": {
+        "Efficiency": {
+          "name": "Trajectory efficiency",
+          "unit": "score",
+          "note": "Ratio of predicted trajectory length to expert trajectory length."
+        },
+        "Tool-Any-Order": {
+          "name": "Tool any-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Tool-In-Order": {
+          "name": "Tool in-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Tool-Exact-Match": {
+          "name": "Tool exact-match accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Parameters": {
+          "name": "Parameter accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spectrum: Efficiency": {
+          "name": "Spectrum trajectory efficiency",
+          "unit": "score",
+          "note": "Ratio of predicted trajectory length to expert trajectory length."
+        },
+        "Spectrum: Tool-Any-Order": {
+          "name": "Spectrum tool any-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spectrum: Tool-In-Order": {
+          "name": "Spectrum tool in-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spectrum: Tool-Exact-Match": {
+          "name": "Spectrum tool exact-match accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Spectrum: Parameters": {
+          "name": "Spectrum parameter accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Products: Efficiency": {
+          "name": "Products trajectory efficiency",
+          "unit": "score",
+          "note": "Ratio of predicted trajectory length to expert trajectory length."
+        },
+        "Products: Tool-Any-Order": {
+          "name": "Products tool any-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Products: Tool-In-Order": {
+          "name": "Products tool in-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Products: Tool-Exact-Match": {
+          "name": "Products tool exact-match accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Products: Parameters": {
+          "name": "Products parameter accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RGB: Efficiency": {
+          "name": "RGB trajectory efficiency",
+          "unit": "score",
+          "note": "Ratio of predicted trajectory length to expert trajectory length."
+        },
+        "RGB: Tool-Any-Order": {
+          "name": "RGB tool any-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RGB: Tool-In-Order": {
+          "name": "RGB tool in-order accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RGB: Tool-Exact-Match": {
+          "name": "RGB tool exact-match accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RGB: Parameters": {
+          "name": "RGB parameter accuracy",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -96834,7 +97132,8 @@
       "url": "https://huggingface.co/datasets/enviroscientist/EnviroExam#leaderboard",
       "feed": "https://arxiv.org/pdf/2405.11265",
       "terms": "The dataset card specifies MIT. Its two score tables repeat identical rows. Check against the paper before import. https://huggingface.co/datasets/enviroscientist/EnviroExam Hugging Face allows crawling in robots.txt. Scores are credited to the EnviroExam authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "baichuan-13b-chat",
@@ -97027,13 +97326,8 @@
         "environmental_behavior_of_atmospheric_science_and_climate_change": {
           "name": "environmental behavior of atmospheric science and climate change",
           "unit": "%"
-        },
-        "M*(1-cv)": {
-          "name": "M*(1-cv)",
-          "unit": "%"
         }
       },
-      "static": "paper",
       "stats": {
         "1-cv": {
           "name": "One minus coefficient of variation",
@@ -97742,7 +98036,7 @@
       "terms": "The paper and its license are available at https://arxiv.org/abs/2507.11216.",
       "headline": "The paper reports no overall accuracy, so this is the plain mean of ambiguous and disambiguated context accuracy.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "EuroLLM 1.7B base",
@@ -97782,8 +98076,16 @@
           "name": "Ambiguous-context bias estimate",
           "unit": "score"
         },
+        "upperAmb": {
+          "name": "Ambiguous-context absolute bias upper bound",
+          "unit": "score"
+        },
         "biasDis": {
           "name": "Disambiguated-context bias estimate",
+          "unit": "score"
+        },
+        "upperDis": {
+          "name": "Disambiguated-context absolute bias upper bound",
           "unit": "score"
         }
       }
@@ -103036,7 +103338,73 @@
         "T5-CTRL",
         "T5-InfoNCE",
         "T5-LossTruncation"
-      ]
+      ],
+      "stats": {
+        "Q2 F1": {
+          "name": "Q2 F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Q2 NLI": {
+          "name": "Q2 NLI",
+          "unit": "%",
+          "better": "higher"
+        },
+        "BERTScore": {
+          "name": "BERTScore",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "F1": {
+          "name": "Token F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "BLEU": {
+          "name": "BLEU",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ROUGE": {
+          "name": "ROUGE",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Human: Interpretable": {
+          "name": "Human interpretable rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Human: Hallucination": {
+          "name": "Human hallucination rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "Human: Cooperativeness": {
+          "name": "Human cooperativeness",
+          "unit": "score",
+          "better": "higher",
+          "note": "Likert scale from 1 to 4."
+        },
+        "Human: Abstractiveness": {
+          "name": "Human abstractiveness",
+          "unit": "score",
+          "better": "higher",
+          "note": "Likert scale from 1 to 4."
+        },
+        "Human: Engagingness": {
+          "name": "Human engagingness",
+          "unit": "score",
+          "better": "higher",
+          "note": "Likert scale from 1 to 4."
+        },
+        "Human: Generic": {
+          "name": "Human generic response rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "faithjudge": {
       "url": "https://github.com/vectara/FaithJudge#leaderboard",
@@ -115972,7 +116340,7 @@
       "feed": "https://arxiv.org/html/2309.16249",
       "terms": "The authors publish Tables 4 and 5 in https://arxiv.org/abs/2309.16249.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BLIP",
@@ -116024,6 +116392,61 @@
       "stats": {
         "thresholdMAP": {
           "name": "Threshold mean average precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Animated Card t-mAP": {
+          "name": "Animated Card threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Photorealistic Card t-mAP": {
+          "name": "Photorealistic Card threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Book Cover t-mAP": {
+          "name": "Book Cover threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Painting t-mAP": {
+          "name": "Painting threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Currency t-mAP": {
+          "name": "Currency threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Logo t-mAP": {
+          "name": "Logo threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Packaged Goods t-mAP": {
+          "name": "Packaged Goods threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Movie Poster t-mAP": {
+          "name": "Movie Poster threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Easy t-mAP": {
+          "name": "Easy threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Medium t-mAP": {
+          "name": "Medium threshold mAP at 5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Hard t-mAP": {
+          "name": "Hard threshold mAP at 5",
           "unit": "%",
           "better": "higher"
         }
@@ -128077,7 +128500,8 @@
       "url": "https://arxiv.org/html/2604.15873#A2.T3",
       "feed": "https://arxiv.org/html/2604.15873",
       "terms": "arXiv allows HTML and requests a 15-second crawl delay. Table 3 reports both scores as fractions. ACL licenses its published version under CC BY 4.0. https://aclanthology.org/2026.findings-acl.372/",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "LLaMA-8B",
@@ -128086,7 +128510,18 @@
         "Phi-4-14B",
         "Prometheus-14B"
       ],
-      "static": "paper"
+      "stats": {
+        "listenerAccuracy": {
+          "name": "Listener accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "listenerMinusSpeaker": {
+          "name": "Listener minus speaker accuracy",
+          "unit": "score",
+          "note": "Percentage point difference between listener and speaker accuracy."
+        }
+      }
     },
     "germanquad": {
       "url": "https://euroeval.com/leaderboards/german",
@@ -129134,12 +129569,24 @@
       "url": "https://github.com/QuantaAlpha/GitTaskBench",
       "feed": "https://arxiv.org/html/2508.18993",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
       ],
-      "static": "paper"
+      "stats": {
+        "executionCompletion": {
+          "name": "Execution completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "gjcool-vertical-book-ocr": {
       "url": "https://ocr.gj.cool/article/2026-04-03-ocr-model",
@@ -192475,7 +192922,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "Mean accuracy across the 30 paper datasets gives each dataset equal weight, with 1,800 test tasks per dataset.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "FO-MAML",
@@ -197834,6 +198281,34 @@
         "t3": {
           "name": "Grounding MCQs",
           "unit": "%"
+        }
+      },
+      "stats": {
+        "mae": {
+          "name": "Personality rating MAE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean absolute error on ordinal personality ratings."
+        },
+        "pr": {
+          "name": "Prejudice rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "cr": {
+          "name": "Confabulation rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ir": {
+          "name": "Integration failure rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "rgm": {
+          "name": "Rating-grounding misalignment",
+          "unit": "score",
+          "note": "Average Task 2 and Task 3 rank minus Task 1 rank. Positive values indicate stronger rating than grounding."
         }
       }
     },
@@ -268768,7 +269243,8 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/file/d88714d4f2c1e826d33d6c1eb1497ec9-Paper-Datasets_and_Benchmarks_Track.pdf",
       "feed": "https://papers.nips.cc/paper_files/paper/2025/file/d88714d4f2c1e826d33d6c1eb1497ec9-Paper-Datasets_and_Benchmarks_Track.pdf",
       "terms": "Tables 18 and 19 report test scores per language and dialect. Keep adapted checkpoints separate from externally trained checkpoints. No score reuse terms found. The paper host returns 404 for robots.txt.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "E-Branchformer",
@@ -268783,10 +269259,575 @@
       ],
       "parts": {
         "cer": {
-          "name": "Average CER"
+          "name": "Average CER",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_CER": {
+          "name": "Bhojpuri CER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_WER": {
+          "name": "Bhojpuri WER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D1_CER": {
+          "name": "Bhojpuri D1 CER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D1_WER": {
+          "name": "Bhojpuri D1 WER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D2_CER": {
+          "name": "Bhojpuri D2 CER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D2_WER": {
+          "name": "Bhojpuri D2 WER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D3_CER": {
+          "name": "Bhojpuri D3 CER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bh_D3_WER": {
+          "name": "Bhojpuri D3 WER",
+          "group": "Bhojpuri",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_CER": {
+          "name": "Bengali CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_WER": {
+          "name": "Bengali WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D1_CER": {
+          "name": "Bengali D1 CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D1_WER": {
+          "name": "Bengali D1 WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D2_CER": {
+          "name": "Bengali D2 CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D2_WER": {
+          "name": "Bengali D2 WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D3_CER": {
+          "name": "Bengali D3 CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D3_WER": {
+          "name": "Bengali D3 WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D4_CER": {
+          "name": "Bengali D4 CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D4_WER": {
+          "name": "Bengali D4 WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D5_CER": {
+          "name": "Bengali D5 CER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "bn_D5_WER": {
+          "name": "Bengali D5 WER",
+          "group": "Bengali",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_CER": {
+          "name": "Chhattisgarhi CER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_WER": {
+          "name": "Chhattisgarhi WER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D1_CER": {
+          "name": "Chhattisgarhi D1 CER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D1_WER": {
+          "name": "Chhattisgarhi D1 WER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D2_CER": {
+          "name": "Chhattisgarhi D2 CER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D2_WER": {
+          "name": "Chhattisgarhi D2 WER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D3_CER": {
+          "name": "Chhattisgarhi D3 CER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D3_WER": {
+          "name": "Chhattisgarhi D3 WER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D4_CER": {
+          "name": "Chhattisgarhi D4 CER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ch_D4_WER": {
+          "name": "Chhattisgarhi D4 WER",
+          "group": "Chhattisgarhi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_CER": {
+          "name": "Hindi CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_WER": {
+          "name": "Hindi WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D1_CER": {
+          "name": "Hindi D1 CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D1_WER": {
+          "name": "Hindi D1 WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D2_CER": {
+          "name": "Hindi D2 CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D2_WER": {
+          "name": "Hindi D2 WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D3_CER": {
+          "name": "Hindi D3 CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D3_WER": {
+          "name": "Hindi D3 WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D4_CER": {
+          "name": "Hindi D4 CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D4_WER": {
+          "name": "Hindi D4 WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D5_CER": {
+          "name": "Hindi D5 CER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hi_D5_WER": {
+          "name": "Hindi D5 WER",
+          "group": "Hindi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_CER": {
+          "name": "Kannada CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_WER": {
+          "name": "Kannada WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D1_CER": {
+          "name": "Kannada D1 CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D1_WER": {
+          "name": "Kannada D1 WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D2_CER": {
+          "name": "Kannada D2 CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D2_WER": {
+          "name": "Kannada D2 WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D3_CER": {
+          "name": "Kannada D3 CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D3_WER": {
+          "name": "Kannada D3 WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D4_CER": {
+          "name": "Kannada D4 CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D4_WER": {
+          "name": "Kannada D4 WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D5_CER": {
+          "name": "Kannada D5 CER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kn_D5_WER": {
+          "name": "Kannada D5 WER",
+          "group": "Kannada",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_CER": {
+          "name": "Magahi CER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_WER": {
+          "name": "Magahi WER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D1_CER": {
+          "name": "Magahi D1 CER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D1_WER": {
+          "name": "Magahi D1 WER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D2_CER": {
+          "name": "Magahi D2 CER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D2_WER": {
+          "name": "Magahi D2 WER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D3_CER": {
+          "name": "Magahi D3 CER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D3_WER": {
+          "name": "Magahi D3 WER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D4_CER": {
+          "name": "Magahi D4 CER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mg_D4_WER": {
+          "name": "Magahi D4 WER",
+          "group": "Magahi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_CER": {
+          "name": "Marathi CER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_WER": {
+          "name": "Marathi WER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D1_CER": {
+          "name": "Marathi D1 CER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D1_WER": {
+          "name": "Marathi D1 WER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D2_CER": {
+          "name": "Marathi D2 CER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D2_WER": {
+          "name": "Marathi D2 WER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D3_CER": {
+          "name": "Marathi D3 CER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D3_WER": {
+          "name": "Marathi D3 WER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D4_CER": {
+          "name": "Marathi D4 CER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mr_D4_WER": {
+          "name": "Marathi D4 WER",
+          "group": "Marathi",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_CER": {
+          "name": "Maithili CER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_WER": {
+          "name": "Maithili WER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D1_CER": {
+          "name": "Maithili D1 CER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D1_WER": {
+          "name": "Maithili D1 WER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D2_CER": {
+          "name": "Maithili D2 CER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D2_WER": {
+          "name": "Maithili D2 WER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D3_CER": {
+          "name": "Maithili D3 CER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D3_WER": {
+          "name": "Maithili D3 WER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D4_CER": {
+          "name": "Maithili D4 CER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mt_D4_WER": {
+          "name": "Maithili D4 WER",
+          "group": "Maithili",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_CER": {
+          "name": "Telugu CER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_WER": {
+          "name": "Telugu WER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D1_CER": {
+          "name": "Telugu D1 CER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D1_WER": {
+          "name": "Telugu D1 WER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D2_CER": {
+          "name": "Telugu D2 CER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D2_WER": {
+          "name": "Telugu D2 WER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D3_CER": {
+          "name": "Telugu D3 CER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D3_WER": {
+          "name": "Telugu D3 WER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D4_CER": {
+          "name": "Telugu D4 CER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
+        },
+        "te_D4_WER": {
+          "name": "Telugu D4 WER",
+          "group": "Telugu",
+          "unit": "%",
+          "better": "lower"
         }
-      },
-      "static": "paper"
+      }
     },
     "retailbench": {
       "url": "https://linghuazhang01.github.io/RetailBench/#leaderboard",
@@ -305806,7 +306847,84 @@
         "Perplexity",
         "Qwen"
       ],
-      "harnesses": "system"
+      "harnesses": "system",
+      "stats": {
+        "vMeasure": {
+          "name": "V-Measure",
+          "unit": "%",
+          "better": "higher"
+        },
+        "overlap": {
+          "name": "Retrieved expert papers",
+          "unit": "count",
+          "better": "higher",
+          "note": "Mean number of expert-cited papers retrieved."
+        },
+        "coveredARI": {
+          "name": "Covered adjusted Rand index",
+          "unit": "%",
+          "better": "higher",
+          "note": "ARI over surveys with at least two aligned papers."
+        },
+        "coveredVMeasure": {
+          "name": "Covered V-Measure",
+          "unit": "%",
+          "better": "higher",
+          "note": "V-Measure over surveys with at least two aligned papers."
+        },
+        "treeEditDistance": {
+          "name": "Unordered semantic tree edit distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "normalizedTreeEditDistance": {
+          "name": "Normalized semantic tree edit distance",
+          "unit": "%",
+          "better": "lower"
+        },
+        "semPath": {
+          "name": "Semantic path similarity",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recall": {
+          "name": "Retrieval recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "precision": {
+          "name": "Retrieval precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "f1": {
+          "name": "Retrieval F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "homogeneity": {
+          "name": "Homogeneity",
+          "unit": "%",
+          "better": "higher"
+        },
+        "completeness": {
+          "name": "Completeness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "depth": {
+          "name": "Mean taxonomy depth",
+          "unit": "score"
+        },
+        "categories": {
+          "name": "Mean category count",
+          "unit": "count"
+        },
+        "singleton": {
+          "name": "Singleton category rate",
+          "unit": "%"
+        }
+      }
     },
     "tb-mathmodel": {
       "url": "https://wxj630.github.io/terminal-bench-math-modeling/",
@@ -314685,6 +315803,68 @@
         "vqaAccuracy": {
           "name": "All VQA questions",
           "unit": "%"
+        }
+      },
+      "stats": {
+        "bleu1": {
+          "name": "Captioning BLEU-1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "bleu2": {
+          "name": "Captioning BLEU-2",
+          "unit": "score",
+          "better": "higher"
+        },
+        "bleu3": {
+          "name": "Captioning BLEU-3",
+          "unit": "score",
+          "better": "higher"
+        },
+        "bleu4": {
+          "name": "Captioning BLEU-4",
+          "unit": "score",
+          "better": "higher"
+        },
+        "meteor": {
+          "name": "Captioning METEOR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "rougeL": {
+          "name": "Captioning ROUGE-L",
+          "unit": "score",
+          "better": "higher"
+        },
+        "cider": {
+          "name": "Captioning CIDEr",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spice": {
+          "name": "Captioning SPICE",
+          "unit": "score",
+          "better": "higher"
+        },
+        "accIou05": {
+          "name": "Referring accuracy at IoU 0.5",
+          "unit": "%",
+          "better": "higher"
+        },
+        "accIou07": {
+          "name": "Referring accuracy at IoU 0.7",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mIoU": {
+          "name": "Referring mean IoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cumulativeIoU": {
+          "name": "Referring cumulative IoU",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },

@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2604.15873#A2.T3",
   feed,
   terms: "arXiv allows HTML and requests a 15-second crawl delay. Table 3 reports both scores as fractions. ACL licenses its published version under CC BY 4.0. https://aclanthology.org/2026.findings-acl.372/",
+  stats: {
+    listenerAccuracy: { name: 'Listener accuracy', unit: '%', better: 'higher' },
+    listenerMinusSpeaker: { name: 'Listener minus speaker accuracy', unit: 'score', note: 'Percentage point difference between listener and speaker accuracy.' },
+  },
   async fetch() {
     const page = await paperHtml(feed);
     const figure = page.match(/<figure id="A2.T3"[^>]*>([\s\S]*?)<\/figure>/);

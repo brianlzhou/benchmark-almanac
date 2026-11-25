@@ -8,9 +8,22 @@ import { text } from '../lib/html.ts';
 const feed = 'https://arxiv.org/html/2509.23141';
 const metrics = ['Accuracy','Efficiency','Tool-Any-Order','Tool-In-Order','Tool-Exact-Match','Parameters'];
 const names: Record<string,string> = {'LLaMA-4':'LLaMA-4-Maverick','Qwen3-Max':'Qwen3-Max-Preview','Gemini-2.5':'Gemini-2.5-Flash','Mistral':'Mistral-Large (snapshot unspecified)','Kimik2':'Kimi-K2'};
+const SUBSETS = ['Spectrum', 'Products', 'RGB'] as const;
+const STAT_SPECS = [
+  ['Efficiency', 'trajectory efficiency', 'score', undefined, 'Ratio of predicted trajectory length to expert trajectory length.'],
+  ['Tool-Any-Order', 'tool any-order accuracy', '%', 'higher', undefined],
+  ['Tool-In-Order', 'tool in-order accuracy', '%', 'higher', undefined],
+  ['Tool-Exact-Match', 'tool exact-match accuracy', '%', 'higher', undefined],
+  ['Parameters', 'parameter accuracy', '%', 'higher', undefined],
+] as const;
 const board: Leaderboard = {
   benchmark: 'earth-bench', url: feed, feed, static: 'paper', reference: ['Earth-Agent'],
   terms: 'Results from the authors of Earth-Agent. https://arxiv.org/abs/2509.23141',
+  parts: Object.fromEntries(SUBSETS.map(s => [s, { name: s, unit: '%' as const }])),
+  stats: Object.fromEntries([
+    ...STAT_SPECS.map(([k, label, unit, better, note]) => [k, { name: label[0].toUpperCase() + label.slice(1), unit, ...(better ? { better } : {}), ...(note ? { note } : {}) }]),
+    ...SUBSETS.flatMap(s => STAT_SPECS.map(([k, label, unit, better, note]) => [s + ': ' + k, { name: s + ' ' + label, unit, ...(better ? { better } : {}), ...(note ? { note } : {}) }])),
+  ]),
   aliases: {'Seed-1.6':'doubao-seed-1-6'},
   async fetch() {
     const html = await paperHtml(feed);
@@ -18,7 +31,6 @@ const board: Leaderboard = {
       caption: text(m[1].match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/)?.[1] || ''), table: flatPaperTables(m[1]).map(grid)[0],
     }));
     const rows: LeaderboardRow[] = [];
-    board.parts = {};
     for (const subset of ['', 'Spectrum', 'Products', 'RGB']) {
       const phrase = subset ? 'on the ' + subset + ' subset' : 'different LLM backbones on Earth-Bench';
       const table = figures.find(f => f.caption.includes(phrase))?.table;
@@ -33,7 +45,6 @@ const board: Leaderboard = {
           else {
             const row = rows.find(r => r.model === model && r.setting === setting);
             if (!row) throw new Error('Unmatched modality result for ' + model);
-            board.parts[subset] = {name: subset, unit:'%'};
             metrics.forEach((k,j) => {row.metrics![j === 0 ? subset : subset + ': ' + k] = values[j];});
           }
         }
