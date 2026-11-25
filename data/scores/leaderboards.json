@@ -58138,11 +58138,13 @@
         },
         "meTurns": {
           "name": "ME turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "meTokens": {
           "name": "ME tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "restrict": {
           "name": "RE strict completion",
@@ -58161,11 +58163,13 @@
         },
         "reTurns": {
           "name": "RE turns",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "reTokens": {
           "name": "RE tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "capGroundedUnderstanding": {
           "name": "Grounded Understanding completion",
@@ -128585,6 +128589,88 @@
           "name": "Error rate",
           "unit": "%",
           "better": "lower"
+        }
+      }
+    },
+    "game-autoresearch-bench": {
+      "url": "https://gameautoresearch.github.io/",
+      "feed": "https://raw.githubusercontent.com/gameautoresearch/gameautoresearch.github.io/main/external-website/src/posts/autoresearch/top-scores.json",
+      "terms": "The page and its data are published in a public GitHub repository under the MIT license. Results are credited to Game Autoresearch Bench.",
+      "headline": "The page's overall ranking: each of six tasks standardized so 50 is the ten reference models' average and 10 points is their standard deviation, then averaged over the tasks a model ran. The interval is ±1 standard error across its tasks.",
+      "retrieved": "2026-11-25",
+      "rows": 10,
+      "unmatched": [],
+      "reference": [
+        "Terminus-2"
+      ],
+      "parts": {
+        "polytopiaEmpty": {
+          "name": "Polytopia, empty file",
+          "group": "Task",
+          "note": "Train a Polytopia network from an empty training file, graded privately. Standardized score."
+        },
+        "polytopiaRecipes": {
+          "name": "Polytopia recipes",
+          "group": "Task",
+          "note": "Improve the Polytopia starter recipe on five research budgets, scored by the training compute it saves. Standardized score."
+        },
+        "pokemon": {
+          "name": "Pokémon 3v3",
+          "group": "Task",
+          "note": "Improve a working Pokémon Showdown starter, scored against the starter. Standardized score."
+        },
+        "generals": {
+          "name": "Generals",
+          "group": "Task",
+          "note": "The submitted networks' Elo in a 20-network Generals.io tournament. Standardized score."
+        },
+        "hex": {
+          "name": "Hex 13×13",
+          "group": "Task",
+          "note": "Improve a working AlphaZero-style Hex starter, graded against MoHex and other bots. Standardized score."
+        },
+        "forecasting": {
+          "name": "Forecasting",
+          "group": "Task",
+          "note": "Predict how training recipes will do before they run, scored as skill over a blind guess. Standardized score."
+        }
+      },
+      "stats": {
+        "polytopiaEmptyGrade": {
+          "name": "Polytopia, empty file grade",
+          "unit": "score",
+          "better": "higher",
+          "note": "Private grade from 0 to 100."
+        },
+        "polytopiaRecipeMultiplier": {
+          "name": "Polytopia recipe compute multiplier",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Times the starter's training compute to reach the same strength on a typical budget cell. Research spend isn't counted."
+        },
+        "pokemonScore": {
+          "name": "Pokémon 3v3 score against the starter",
+          "unit": "score",
+          "better": "higher",
+          "note": "From 0 to 100, where 50 is level with the starter."
+        },
+        "generalsElo": {
+          "name": "Generals tournament Elo",
+          "unit": "elo",
+          "better": "higher",
+          "note": "Tournament Elo with the field centered at 1000."
+        },
+        "hexElo": {
+          "name": "Hex 13×13 panel Elo",
+          "unit": "elo",
+          "better": "higher",
+          "note": "Elo against a fixed panel, where MoHex at 50,000 simulations per move is 0."
+        },
+        "forecastingSkill": {
+          "name": "Forecasting skill",
+          "unit": "score",
+          "better": "higher",
+          "note": "Skill relative to a blind guess."
         }
       }
     },
