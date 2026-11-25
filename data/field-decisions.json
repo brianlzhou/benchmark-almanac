@@ -1,5 +1,4 @@
 {
-  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
   "boards": {
     "3dcodearena": {
       "Time (s)↕": "ignore",
@@ -3540,5 +3539,64 @@
     "zeroclue": {
       "param_desc": "ignore"
     }
+  },
+  "labbench2-tableqa2-pdf": {
+    "Date ↕": "wired"
+  },
+  "livesqlbench": {
+    "Organization": "wired"
+  },
+  "midnight-index": {
+    "verified": "ignore"
+  },
+  "millionaire-bench-de": {
+    "log_percentage": "wired"
+  },
+  "musictheorybench": {
+    "seed": "wired"
+  },
+  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "open-tabletop-gm-session-probe": {
+    "~20-turn session": "wired"
+  },
+  "pdeagent-bench": {
+    "affiliation": "ignore"
+  },
+  "pestclef-2026": {
+    "submissionCount": "wired"
+  },
+  "physiome-ode": {
+    "res.TimeCHEAT": "ignore"
+  },
+  "plcworld": {
+    "metrics.execution_gap_local_submission_profile": "wired",
+    "overall.execution_gap_local_submission_profile": "wired"
+  },
+  "prophet-arena": {
+    "Org": "ignore"
+  },
+  "realmpathology": {
+    "What the agent must do": "ignore",
+    "In the report (n=478)": "wired"
+  },
+  "rvg-bench": {
+    "M-Step": "wired",
+    "S-Step": "wired"
+  },
+  "sec-bench-pro": {
+    "org": "ignore"
+  },
+  "spatial-intelligence-index-2": {
+    "Agent tasks (4/6)": "wired",
+    "Agent tasks (4/8)": "wired"
+  },
+  "spreadsheetbench-2": {
+    "organization": "wired"
+  },
+  "ssmr-bench": {
+    "seed": "wired"
+  },
+  "wildclawbench": {
+    "Org": "ignore"
   }
 }

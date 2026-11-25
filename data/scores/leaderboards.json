@@ -166664,7 +166664,19 @@
       "terms": "Public Edison Scientific leaderboard. Attribution and source licensing apply.",
       "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "averageDuration": {
+          "name": "Average duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "averageOutputTokens": {
+          "name": "Average output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "labbench2-trialqa": {
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/trialqa/",
@@ -194009,6 +194021,54 @@
         },
         "treaty": {
           "name": "Treaty",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "costTotal": {
+          "name": "Total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "survival": {
+          "name": "Survival rate",
+          "unit": "%"
+        },
+        "firstNukeRate": {
+          "name": "First strike rate",
+          "unit": "%"
+        },
+        "nukesLaunched": {
+          "name": "Nukes launched per game",
+          "unit": "count"
+        },
+        "pactsBroken": {
+          "name": "Pacts broken per game",
+          "unit": "count"
+        },
+        "pactsKept": {
+          "name": "Pacts kept per game",
+          "unit": "count"
+        },
+        "promiseBrokenRate": {
+          "name": "Promise broken rate",
+          "unit": "%"
+        },
+        "twoFacedRate": {
+          "name": "Two-faced rate",
+          "unit": "%"
+        },
+        "landEnd": {
+          "name": "Ending territory",
+          "unit": "%"
+        },
+        "landPeak": {
+          "name": "Peak territory",
           "unit": "%"
         }
       }
@@ -243085,6 +243145,11 @@
           "unit": "count",
           "better": "lower"
         },
+        "failures": {
+          "name": "Failures",
+          "unit": "count",
+          "better": "lower"
+        },
         "estimatedSessionTokens": {
           "name": "Estimated session tokens",
           "unit": "tokens",
@@ -253405,6 +253470,18 @@
           "better": "lower",
           "unit": "score"
         }
+      },
+      "stats": {
+        "wins": {
+          "name": "Datasets won",
+          "unit": "count",
+          "better": "higher"
+        },
+        "improvability": {
+          "name": "Improvability",
+          "unit": "%",
+          "better": "lower"
+        }
       }
     },
     "physvista": {
@@ -259868,6 +259945,10 @@
           "unit": "%",
           "better": "higher",
           "note": "Simulated betting return, with 100 as break-even."
+        },
+        "events": {
+          "name": "Events",
+          "unit": "count"
         }
       }
     },
@@ -265858,6 +265939,44 @@
       "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "parts": {
+        "extraction": {
+          "name": "Extraction",
+          "group": "Skill"
+        },
+        "classification": {
+          "name": "Classification",
+          "group": "Skill"
+        },
+        "interpretation": {
+          "name": "Interpretation",
+          "group": "Skill"
+        },
+        "management": {
+          "name": "Management",
+          "group": "Skill"
+        },
+        "communication": {
+          "name": "Communication",
+          "group": "Skill"
+        },
+        "inReport": {
+          "name": "In the report",
+          "group": "Criterion type"
+        },
+        "outsideKnowledge": {
+          "name": "Needs outside knowledge",
+          "group": "Criterion type"
+        },
+        "numeric": {
+          "name": "Numeric",
+          "group": "Criterion type"
+        },
+        "textual": {
+          "name": "Textual",
+          "group": "Criterion type"
+        }
+      },
       "stats": {
         "reasoningTokens": {
           "name": "Reasoning tokens",
@@ -265865,6 +265984,10 @@
         },
         "turns": {
           "name": "Turns",
+          "unit": "count"
+        },
+        "toolCalls": {
+          "name": "Tool calls",
           "unit": "count"
         },
         "minutes": {
@@ -265879,6 +266002,16 @@
         },
         "passAt3": {
           "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "perfect": {
+          "name": "Perfect runs",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tasksWon": {
+          "name": "Tasks won",
           "unit": "%",
           "better": "higher"
         }
@@ -291414,7 +291547,21 @@
         "WPS AI",
         "arito"
       ],
-      "verified": "marked Verified by SpreadsheetBench"
+      "verified": "marked Verified by SpreadsheetBench",
+      "parts": {
+        "Template": {
+          "name": "Template"
+        },
+        "Fin.Model": {
+          "name": "Financial modeling"
+        },
+        "Debug": {
+          "name": "Debug"
+        },
+        "Visualization": {
+          "name": "Visualization"
+        }
+      }
     },
     "spreadsheetbench-verified": {
       "url": "https://spreadsheetbench.github.io/",
@@ -331086,6 +331233,21 @@
         "minutesPerTask": {
           "name": "Average minutes per task",
           "unit": "minutes",
+          "better": "lower"
+        },
+        "latency": {
+          "name": "Average time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mean:steps": {
+          "name": "Mean steps per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "mean:tool_calls": {
+          "name": "Mean tool calls per task",
+          "unit": "count",
           "better": "lower"
         }
       }

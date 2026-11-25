@@ -24,8 +24,8 @@ export const MICRO1_ALIASES: Record<string, string> = {
  * gives the setting ("default" gives none). `metricHeads` (optional) maps other column headers to metrics
  * keys, scaled like the score; a key "ci" reads a "0.742 to 0.817" or "[0.469, 0.548]" cell as ciLow and ciHigh.
  */
-export async function micro1Rows(page: string, scoreHead: string, metricHeads?: Record<string, string>, reasoningTokens = false): Promise<LeaderboardRow[]> {
-  const all = tables(await fetchText(page));
+function parseMicro1Rows(html: string, page: string, scoreHead: string, metricHeads?: Record<string, string>, reasoningTokens = false): LeaderboardRow[] {
+  const all = tables(html);
   const t = all.find((rows) => rows[0]?.[0]?.text === 'Model' && rows[0].some((c) => c.text === scoreHead));
   if (!t) throw new Error(`no results table with a ${scoreHead} column on ${page}`);
   const head = t[0].map((c) => c.text);
@@ -79,6 +79,10 @@ export async function micro1Rows(page: string, scoreHead: string, metricHeads?: 
   return rows;
 }
 
+export async function micro1Rows(page: string, scoreHead: string, metricHeads?: Record<string, string>, reasoningTokens = false): Promise<LeaderboardRow[]> {
+  return parseMicro1Rows(await fetchText(page), page, scoreHead, metricHeads, reasoningTokens);
+}
+
 interface Micro1Data {
   defaultTab?: string;
   tabs: { id: string; rows: { name: string; score: number }[] }[];
@@ -120,7 +124,84 @@ const board: Leaderboard = {
   feed: `${PAGE} (static HTML results table, Mean)`,
   terms: MICRO1_TERMS,
   aliases: MICRO1_ALIASES,
-  stats: { reasoningTokens:{name:'Reasoning tokens',unit:'tokens'}, turns:{name:'Turns',unit:'count'}, minutes:{name:'Minutes',unit:'minutes',better:'lower'}, bestOf3:{name:'Best of 3',unit:'%',better:'higher'}, passAt3:{name:'Pass@3',unit:'%',better:'higher'} },
-  fetch: () => micro1Rows(PAGE, 'Mean', { '95% CI': 'ci', 'Best of 3': 'bestOf3', 'Pass@3': 'passAt3' }, true),
+  parts: {
+    extraction: { name: 'Extraction', group: 'Skill' },
+    classification: { name: 'Classification', group: 'Skill' },
+    interpretation: { name: 'Interpretation', group: 'Skill' },
+    management: { name: 'Management', group: 'Skill' },
+    communication: { name: 'Communication', group: 'Skill' },
+    inReport: { name: 'In the report', group: 'Criterion type' },
+    outsideKnowledge: { name: 'Needs outside knowledge', group: 'Criterion type' },
+    numeric: { name: 'Numeric', group: 'Criterion type' },
+    textual: { name: 'Textual', group: 'Criterion type' },
+  },
+  stats: {
+    reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' },
+    turns: { name: 'Turns', unit: 'count' },
+    toolCalls: { name: 'Tool calls', unit: 'count' },
+    minutes: { name: 'Minutes', unit: 'minutes', better: 'lower' },
+    bestOf3: { name: 'Best of 3', unit: '%', better: 'higher' },
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    perfect: { name: 'Perfect runs', unit: '%', better: 'higher' },
+    tasksWon: { name: 'Tasks won', unit: '%', better: 'higher' },
+  },
+  async fetch() {
+    const html = await fetchText(PAGE);
+    const rows = parseMicro1Rows(html, PAGE, 'Mean', {
+      '95% CI': 'ci',
+      'Best of 3': 'bestOf3',
+      'Pass@3': 'passAt3',
+      Perfect: 'perfect',
+      'Tasks won': 'tasksWon',
+    }, true);
+    const clean = (s: string) => s.replace(/[\s*†‡]+$/u, '').trim();
+    const byModel = new Map(rows.map((r) => [r.model, r]));
+    const extraTables: { match: (head: string[]) => boolean; cols: [RegExp, string, boolean][] }[] = [
+      {
+        match: (h) => h.includes('Extraction') && h.includes('Communication'),
+        cols: [
+          [/^Extraction$/i, 'extraction', true],
+          [/^Classification$/i, 'classification', true],
+          [/^Interpretation$/i, 'interpretation', true],
+          [/^Management$/i, 'management', true],
+          [/^Communication$/i, 'communication', true],
+        ],
+      },
+      {
+        match: (h) => h.some((x) => /^In the report\b/i.test(x)) && h.some((x) => /^Numeric\b/i.test(x)),
+        cols: [
+          [/^In the report\b/i, 'inReport', true],
+          [/^Needs outside knowledge\b/i, 'outsideKnowledge', true],
+          [/^Numeric\b/i, 'numeric', true],
+          [/^Textual\b/i, 'textual', true],
+        ],
+      },
+      {
+        match: (h) => h.includes('Tool calls') && h.includes('Turns'),
+        cols: [[/^Tool calls$/i, 'toolCalls', false]],
+      },
+    ];
+    for (const t of tables(html)) {
+      const head = t[0]?.map((c) => c.text) ?? [];
+      if (head[0] !== 'Model') continue;
+      for (const spec of extraTables) {
+        if (!spec.match(head)) continue;
+        const indices = spec.cols.map(([re, key, pct]) => [head.findIndex((h) => re.test(h)), key, pct] as const);
+        for (const r of t.slice(1)) {
+          const row = byModel.get(clean(r[0]?.text ?? ''));
+          if (!row) continue;
+          const metrics = (row.metrics ??= {});
+          for (const [idx, key, pct] of indices) {
+            if (idx < 0) continue;
+            const cell = r[idx]?.text ?? '';
+            const v = num(cell);
+            if (v === undefined) continue;
+            metrics[key] = pct && !cell.includes('%') && v <= 1 ? Number((v * 100).toFixed(2)) : v;
+          }
+        }
+      }
+    }
+    return rows;
+  },
 };
 export default board;
