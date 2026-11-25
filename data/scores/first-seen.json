@@ -1636,6 +1636,7 @@
     ["euroeval-err-news","~danish-foundation-models/DFM-Mimir-v1.8-Mini","val",null,"2026-11-23"],
     ["euroeval-err-news","~danish-foundation-models/DFM-Mimir-v1.8-Mini","zero-shot, val",null,"2026-11-23"],
     ["exact-words","qwen3-next-80b-a3b-instruct",null,null,"2026-11-23"],
+    ["excel-fix-bench-tencent","tencent-hy4-flash",null,null,"2026-11-24"],
     ["experteval-unipat","qwen3-5-35b-a3b",null,null,"2026-11-23"],
     ["experteval-unipat","qwen3-5-35b-a3b","SFT",null,"2026-11-23"],
     ["experteval-unipat","qwen3-5-35b-a3b","SFT, Heavy",null,"2026-11-23"],

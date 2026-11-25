@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4w8x3.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "creativework-bytedance",
+ static: 'paper',
  url: "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4w8x3.png",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

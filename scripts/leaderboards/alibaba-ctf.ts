@@ -7,7 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf';
 const feed = url + '/resolve/main/assets/leaderboard.png';
 const board: Leaderboard = {
-  benchmark: 'alibaba-ctf', url, feed,
+  benchmark: 'alibaba-ctf', static: 'paper', url, feed,
   terms: 'Alibaba licenses the dataset under Apache 2.0 at https://huggingface.co/datasets/Alibaba-AAIG/alibaba-ctf#license.',
   async fetch() {
     const rows = await chartRows(feed, '4da81aba2247acb95821a311a73622618e6d4578e006282b6ca6aa46e1c2a7cf', [

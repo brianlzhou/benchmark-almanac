@@ -8,6 +8,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = 'https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png';
 const board: Leaderboard = {
   benchmark: 'excel-fix-bench-tencent',
+  static: 'paper',
   url: 'https://huggingface.co/tencent/Hy4-flash#appendix-benchmark-results',
   feed: FEED,
   terms: 'Tencent Hy License. https://huggingface.co/tencent/Hy4-flash/blob/main/LICENSE',
