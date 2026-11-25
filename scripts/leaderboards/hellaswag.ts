@@ -40,7 +40,7 @@ const board: Leaderboard = {
         model: model.display_name,
         score: Number(value),
         setting: Hellaswag.mode,
-        open: model.release_type === 'OpenSource' ? true : undefined,
+        open: model.release_type === 'OpenSource' ? true : model.release_type === 'API' ? false : undefined,
         params: /^\d+(?:\.\d+)?B$/.test(model.num_param) ? parseFloat(model.num_param) : undefined,
       });
     }

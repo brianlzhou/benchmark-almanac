@@ -2147,7 +2147,41 @@
         "ToolACE-2.5-Llama-3.1-8B",
         "Watt-Tool-8B",
         "xLAM-7b-r"
-      ]
+      ],
+      "parts": {
+        "atom": {
+          "name": "Atom",
+          "group": "Normal"
+        },
+        "single": {
+          "name": "Single-Turn",
+          "group": "Normal"
+        },
+        "multi": {
+          "name": "Multi-Turn",
+          "group": "Normal"
+        },
+        "api": {
+          "name": "Similar API",
+          "group": "Normal"
+        },
+        "pref": {
+          "name": "Preference",
+          "group": "Normal"
+        },
+        "summary": {
+          "name": "Normal summary",
+          "group": "Normal"
+        },
+        "special": {
+          "name": "Special",
+          "group": "Category"
+        },
+        "agent": {
+          "name": "Agent",
+          "group": "Category"
+        }
+      }
     },
     "aclue": {
       "url": "https://github.com/isen-zhang/ACLUE",
@@ -6981,7 +7015,40 @@
         "Conifer-DPO-7B",
         "Crab-DPO-7B",
         "GLM-Z1-32B"
-      ]
+      ],
+      "parts": {
+        "vanilla": {
+          "name": "Vanilla",
+          "group": "Presentation Type"
+        },
+        "condition": {
+          "name": "Condition",
+          "group": "Presentation Type"
+        },
+        "example": {
+          "name": "Example",
+          "group": "Presentation Type"
+        },
+        "formatting": {
+          "name": "Formatting",
+          "group": "Constraint Type"
+        },
+        "semantic": {
+          "name": "Semantic",
+          "group": "Constraint Type"
+        },
+        "tool": {
+          "name": "Tool",
+          "group": "Constraint Type"
+        }
+      },
+      "stats": {
+        "isr": {
+          "name": "Instruction success rate (ISR)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "agentif-2026-10": {
       "url": "https://agentif.github.io/",
@@ -37109,7 +37176,76 @@
       "terms": "Data file on GitHub Pages that the public page loads; robots.txt allows it.",
       "retrieved": "2026-11-24",
       "rows": 13,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "text": {
+          "name": "Text-only",
+          "group": "Modality"
+        },
+        "mm": {
+          "name": "Multimodal",
+          "group": "Modality"
+        },
+        "rubric": {
+          "name": "Rubric",
+          "group": "Evaluation"
+        },
+        "dimension": {
+          "name": "Dimension quality",
+          "group": "Evaluation"
+        },
+        "architecture": {
+          "name": "Architecture & Interiors",
+          "group": "Category"
+        },
+        "art": {
+          "name": "Art & Animation",
+          "group": "Category"
+        },
+        "products": {
+          "name": "Products & Manufacturing",
+          "group": "Category"
+        },
+        "characters": {
+          "name": "Characters & Animals",
+          "group": "Category"
+        },
+        "nature": {
+          "name": "Nature & Landscapes",
+          "group": "Category"
+        },
+        "rendering": {
+          "name": "Rendering & Simulation",
+          "group": "Category"
+        },
+        "vehicles": {
+          "name": "Vehicles & Machinery",
+          "group": "Category"
+        },
+        "procedural": {
+          "name": "Procedural & Game Assets",
+          "group": "Category"
+        },
+        "science": {
+          "name": "Science & Visualization",
+          "group": "Category"
+        }
+      },
+      "stats": {
+        "perfect": {
+          "name": "Perfect tasks",
+          "unit": "%",
+          "better": "higher"
+        },
+        "turns": {
+          "name": "Average turns per task",
+          "unit": "count"
+        },
+        "tools": {
+          "name": "Average tool calls per task",
+          "unit": "count"
+        }
+      }
     },
     "blicket-test-causal-reasoning": {
       "url": "https://app.primeintellect.ai/dashboard/environments/irfanjamil/BlicketTest_CausalReasoning",
@@ -76671,7 +76807,60 @@
         "opus",
         "sonnet3",
         "sonnet35"
-      ]
+      ],
+      "parts": {
+        "northAmerica": {
+          "name": "North America",
+          "group": "Region"
+        },
+        "southAmerica": {
+          "name": "South America",
+          "group": "Region"
+        },
+        "eastEurope": {
+          "name": "East Europe",
+          "group": "Region"
+        },
+        "southEurope": {
+          "name": "South Europe",
+          "group": "Region"
+        },
+        "westEurope": {
+          "name": "West Europe",
+          "group": "Region"
+        },
+        "africa": {
+          "name": "Africa",
+          "group": "Region"
+        },
+        "middleEastWestAsia": {
+          "name": "Middle East and West Asia",
+          "group": "Region"
+        },
+        "southAsia": {
+          "name": "South Asia",
+          "group": "Region"
+        },
+        "southeastAsia": {
+          "name": "Southeast Asia",
+          "group": "Region"
+        },
+        "eastAsia": {
+          "name": "East Asia",
+          "group": "Region"
+        },
+        "oceania": {
+          "name": "Oceania",
+          "group": "Region"
+        }
+      },
+      "stats": {
+        "easy": {
+          "name": "Easy accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "culturalriddles": {
       "url": "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html",
@@ -167395,6 +167584,7 @@
         "Allganize-Alpha-Instruct",
         "Aya-23-8B",
         "EXAONE-3.0-7.8B-Instruct",
+        "GPT-4 (June 13, 2023)",
         "Gemma-2-9b-it",
         "KULLM3",
         "MLP-KTLim-Bllossom-8B",
@@ -176606,7 +176796,25 @@
         "Perplexity Sonar Reasoning",
         "Perplexity Sonar Reasoning Pro",
         "Salesforce AIR Deep Research"
-      ]
+      ],
+      "parts": {
+        "presentation": {
+          "name": "Presentation & Organization",
+          "group": "Criterion"
+        },
+        "factLogic": {
+          "name": "Fact & Logic Consistency",
+          "group": "Criterion"
+        },
+        "coverage": {
+          "name": "Coverage & Comprehensiveness",
+          "group": "Criterion"
+        },
+        "citation": {
+          "name": "Citation Association",
+          "group": "Criterion"
+        }
+      }
     },
     "livesearch": {
       "url": "https://arxiv.org/html/2610.37166",
@@ -183545,7 +183753,24 @@
       "terms": "README table in the alibaba/last-secure-code-benchmark repository, licensed Apache-2.0.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "funcPass": {
+          "name": "Functional pass rate (FuncPass)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "secPass": {
+          "name": "Security pass rate (SecPass)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scenariosFuncSec": {
+          "name": "Scenarios Func and Sec",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "lt-history": {
       "url": "https://aclanthology.org/2025.nbreal-1.1/",
@@ -195981,7 +196206,37 @@
       "terms": "Public Hugging Face Space; its robots.txt allows every path and the Space states no terms of its own.",
       "retrieved": "2026-11-24",
       "rows": 16,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "execution": {
+          "name": "Execution",
+          "group": "Capability"
+        },
+        "search": {
+          "name": "Search",
+          "group": "Capability"
+        },
+        "ambiguity": {
+          "name": "Ambiguity",
+          "group": "Capability"
+        },
+        "adaptability": {
+          "name": "Adaptability",
+          "group": "Capability"
+        },
+        "time": {
+          "name": "Time",
+          "group": "Capability"
+        },
+        "noise": {
+          "name": "Noise",
+          "group": "Capability"
+        },
+        "a2a": {
+          "name": "Agent-to-agent (A2A)",
+          "group": "Capability"
+        }
+      }
     },
     "meta-album": {
       "url": "https://arxiv.org/html/2302.08909",
@@ -199646,7 +199901,24 @@
       "terms": "Static JSON on the project GitHub Pages site (no robots.txt); the page credits EvalPlus for its layout and states no other terms.",
       "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "bestOf2": {
+          "name": "Best-of-2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bestOf4": {
+          "name": "Best-of-4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bestOf8": {
+          "name": "Best-of-8",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "miniwob-plus-plus": {
       "url": "https://huggingface.co/spaces/ServiceNow/browsergym-leaderboard",
@@ -225814,7 +226086,53 @@
         "Internlm-2.5-7B-Chat",
         "Internlm2-Chat-20B",
         "Spark 4.0-2024-10-14"
-      ]
+      ],
+      "parts": {
+        "math": {
+          "name": "Math",
+          "group": "Subject"
+        },
+        "physics": {
+          "name": "Physics",
+          "group": "Subject"
+        },
+        "chemistry": {
+          "name": "Chemistry",
+          "group": "Subject"
+        },
+        "biology": {
+          "name": "Biology",
+          "group": "Subject"
+        },
+        "geography": {
+          "name": "Geography",
+          "group": "Subject"
+        },
+        "astronomy": {
+          "name": "Astronomy",
+          "group": "Subject"
+        },
+        "cs": {
+          "name": "CS",
+          "group": "Subject"
+        },
+        "en": {
+          "name": "English",
+          "group": "Language"
+        },
+        "zh": {
+          "name": "Chinese",
+          "group": "Language"
+        },
+        "textOnly": {
+          "name": "Text-only",
+          "group": "Modality"
+        },
+        "multimodal": {
+          "name": "Multimodal",
+          "group": "Modality"
+        }
+      }
     },
     "omi-medical-speech-benchmark": {
       "url": "https://omi.health/research/stt-benchmark",
@@ -257590,7 +257908,19 @@
         "Mistral-Small-4-119B-2603",
         "Pixtral-12B-2409",
         "Qwen2-VL-72B-Instruct-AWQ"
-      ]
+      ],
+      "stats": {
+        "valNoFig": {
+          "name": "Validation (no figures)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "testNoFig": {
+          "name": "Test (no figures)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "physiome-ode": {
       "url": "https://kloetergensc.github.io/Physiome-ODE/",
@@ -331918,7 +332248,33 @@
         "Seed2.0",
         "doubao-1-5-vision-pro-32k-250115",
         "kimi-latest(2025.4)"
-      ]
+      ],
+      "parts": {
+        "qua": {
+          "name": "Quantitative",
+          "group": "Category"
+        },
+        "spa": {
+          "name": "Spatial",
+          "group": "Category"
+        },
+        "pos": {
+          "name": "Positional",
+          "group": "Category"
+        },
+        "att": {
+          "name": "Attribute",
+          "group": "Category"
+        },
+        "sty": {
+          "name": "Stylistic",
+          "group": "Category"
+        },
+        "oth": {
+          "name": "Other",
+          "group": "Category"
+        }
+      }
     },
     "vita-bench": {
       "url": "https://vitabench.github.io/#Leaderboard",
