@@ -21262,16 +21262,6 @@
           "name": "Transfer cube",
           "group": "Task type"
         }
-      },
-      "stats": {
-        "rollouts": {
-          "name": "Rollouts",
-          "unit": "count"
-        },
-        "demonstrations": {
-          "name": "Demonstrations",
-          "unit": "count"
-        }
       }
     },
     "artedit-bench-eval": {
@@ -27881,10 +27871,6 @@
       "stats": {
         "defensesDefeated": {
           "name": "Defenses defeated",
-          "unit": "count"
-        },
-        "defensesEvaluated": {
-          "name": "Defenses evaluated",
           "unit": "count"
         },
         "meanRobustAccuracy": {
@@ -35243,10 +35229,6 @@
       "rows": 8,
       "unmatched": [],
       "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        },
         "invalid": {
           "name": "Invalid responses",
           "unit": "count",
@@ -37754,12 +37736,6 @@
         "npi_licensing": {
           "name": "Negative polarity item licensing",
           "group": "Category"
-        }
-      },
-      "stats": {
-        "paradigms": {
-          "name": "Paradigms",
-          "unit": "count"
         }
       }
     },
@@ -41350,12 +41326,6 @@
         },
         "lift": {
           "name": "Lift"
-        }
-      },
-      "stats": {
-        "samplesPerTask": {
-          "name": "Samples per task",
-          "unit": "count"
         }
       }
     },
@@ -77131,10 +77101,6 @@
           "unit": "count",
           "better": "higher"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "meanReward": {
           "name": "Mean reward",
           "unit": "score",
@@ -78708,44 +78674,6 @@
         "Rust secure (%)": {
           "name": "Rust",
           "group": "Language"
-        }
-      },
-      "stats": {
-        "trials": {
-          "name": "Trials",
-          "unit": "count"
-        },
-        "C trials": {
-          "name": "C trials",
-          "unit": "count"
-        },
-        "C# trials": {
-          "name": "C# trials",
-          "unit": "count"
-        },
-        "C++ trials": {
-          "name": "C++ trials",
-          "unit": "count"
-        },
-        "Java trials": {
-          "name": "Java trials",
-          "unit": "count"
-        },
-        "JavaScript trials": {
-          "name": "JavaScript trials",
-          "unit": "count"
-        },
-        "PHP trials": {
-          "name": "PHP trials",
-          "unit": "count"
-        },
-        "Python trials": {
-          "name": "Python trials",
-          "unit": "count"
-        },
-        "Rust trials": {
-          "name": "Rust trials",
-          "unit": "count"
         }
       }
     },
@@ -93690,12 +93618,6 @@
           "name": "High-cost billing",
           "group": "Category"
         }
-      },
-      "stats": {
-        "scoredDomains": {
-          "name": "Scored domains",
-          "unit": "count"
-        }
       }
     },
     "dtap-prompt-injection": {
@@ -93763,12 +93685,6 @@
         "crm": {
           "name": "Customer relationship management",
           "group": "Environment"
-        }
-      },
-      "stats": {
-        "scoredDomains": {
-          "name": "Scored domains",
-          "unit": "count"
         }
       }
     },
@@ -117695,27 +117611,15 @@
         }
       },
       "stats": {
-        "repoScored": {
-          "name": "Repo scored items",
-          "unit": "count"
-        },
         "repoDeadFrac": {
           "name": "Repo dead fraction",
           "unit": "%",
           "better": "lower"
         },
-        "fixScored": {
-          "name": "Issue or pull request scored items",
-          "unit": "count"
-        },
         "fixDeadFrac": {
           "name": "Issue or pull request dead fraction",
           "unit": "%",
           "better": "lower"
-        },
-        "docsScored": {
-          "name": "Docs scored items",
-          "unit": "count"
         },
         "docsDeadFrac": {
           "name": "Docs dead fraction",
@@ -132533,13 +132437,7 @@
         "deepseek-r1 (snapshot unspecified)",
         "gpt-4o (snapshot unspecified)",
         "gpt-4o-mini (snapshot unspecified)"
-      ],
-      "stats": {
-        "gamesPerEnvironment": {
-          "name": "Games per environment",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "ghostink-honest-ocr-on-bill-photos": {
       "url": "https://www.kaggle.com/benchmarks/akashgoyal7/ghostink-honest-ocr-on-bill-photos",
@@ -143602,10 +143500,6 @@
         "testSets": {
           "name": "Test sets scored",
           "unit": "count"
-        },
-        "totalTestSets": {
-          "name": "Total test sets",
-          "unit": "count"
         }
       }
     },
@@ -144649,10 +144543,6 @@
       "stats": {
         "solved": {
           "name": "Problems solved",
-          "unit": "count"
-        },
-        "problems": {
-          "name": "Problems evaluated",
           "unit": "count"
         },
         "calibrationSolved": {
@@ -254185,18 +254075,6 @@
           "name": "Binary accuracy",
           "unit": "%",
           "better": "higher"
-        },
-        "taskCount": {
-          "name": "Task count",
-          "unit": "count"
-        },
-        "usageTaskCount": {
-          "name": "Tasks with usage data",
-          "unit": "count"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens"
         }
       }
     },
@@ -260077,14 +259955,6 @@
       "rows": 7,
       "unmatched": [],
       "stats": {
-        "taskCount": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "attemptCount": {
-          "name": "Attempts",
-          "unit": "count"
-        },
         "rc0Attempts": {
           "name": "Attempts with zero retries",
           "unit": "count"
@@ -267655,10 +267525,6 @@
           "name": "Warp error",
           "better": "lower",
           "note": "Temporal warp error in the paper table units of 10^-3."
-        },
-        "cases": {
-          "name": "Cases",
-          "unit": "count"
         }
       }
     },
@@ -290281,10 +290147,6 @@
           "name": "Pass rate",
           "unit": "%",
           "better": "higher"
-        },
-        "cases": {
-          "name": "Test cases",
-          "unit": "count"
         }
       }
     },
@@ -296681,10 +296543,6 @@
           "unit": "score",
           "better": "higher",
           "note": "Stored from 0 to 1."
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -302155,10 +302013,6 @@
         }
       },
       "stats": {
-        "Count": {
-          "name": "Evaluated examples count",
-          "unit": "count"
-        },
         "LM Score": {
           "name": "Language model score",
           "unit": "%",
@@ -302169,12 +302023,6 @@
           "name": "Stereotype score",
           "unit": "%",
           "note": "Percentage of stereotype choices among stereotype and anti-stereotype sentences. A score of 50 indicates balance."
-        },
-        "ICAT Score": {
-          "name": "ICAT score",
-          "unit": "%",
-          "better": "higher",
-          "note": "Composite of language model quality and stereotype score, with 50 as the balanced stereotype target."
         }
       }
     },
@@ -315787,10 +315635,6 @@
           "name": "Conditional utility",
           "unit": "score",
           "better": "higher"
-        },
-        "n_episodes": {
-          "name": "Episodes",
-          "unit": "count"
         }
       }
     },
@@ -321738,26 +321582,27 @@
       ],
       "parts": {
         "data-and-operations": {
-          "name": "data-and-operations"
+          "name": "Data and operations",
+          "group": "Suite"
         },
         "real-time-and-agents": {
-          "name": "real-time-and-agents"
+          "name": "Real-time and agents",
+          "group": "Suite"
         },
         "retrieval-and-knowledge": {
-          "name": "retrieval-and-knowledge"
+          "name": "Retrieval and knowledge",
+          "group": "Suite"
         },
         "safety-and-quality": {
-          "name": "safety-and-quality"
+          "name": "Safety and quality",
+          "group": "Suite"
         },
         "workflow-control": {
-          "name": "workflow-control"
+          "name": "Workflow control",
+          "group": "Suite"
         }
       },
       "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        },
         "answered": {
           "name": "Answered items",
           "unit": "count"
@@ -321773,11 +321618,6 @@
         "correct": {
           "name": "Correct decisions",
           "unit": "count"
-        },
-        "decisionScore": {
-          "name": "Decision score",
-          "unit": "%",
-          "better": "higher"
         },
         "accuracy": {
           "name": "Accuracy",
@@ -328048,10 +327888,6 @@
           "name": "Flagged chats",
           "unit": "count",
           "note": "Chats with at least one critical safety check rated as a fail."
-        },
-        "conversations": {
-          "name": "Conversations",
-          "unit": "count"
         }
       }
     },
