@@ -12,6 +12,7 @@ const board: Leaderboard = {
  url: "https://www.upstage.ai/blog/en/solar-pro-3-0323",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
 

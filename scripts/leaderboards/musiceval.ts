@@ -14,6 +14,17 @@ const board: Leaderboard = {
   terms: 'The AudioMOS organizers publish these results on Google Sheets under https://policies.google.com/terms.',
   headline: 'The headline averages the system-level Spearman correlations for overall musical quality and textual alignment.',
   parts: { qualitySystemSRCC: 'Overall musical quality', alignmentSystemSRCC: 'Textual alignment' },
+  stats: Object.fromEntries([
+    ['qualityUtterance', 'Musical quality utterance-level'],
+    ['qualitySystem', 'Musical quality system-level'],
+    ['alignmentUtterance', 'Textual alignment utterance-level'],
+    ['alignmentSystem', 'Textual alignment system-level'],
+  ].flatMap(([group, label]) => [
+    [`${group}MSE`, { name: `${label} MSE`, unit: 'score' as const, better: 'lower' as const, note: 'Mean squared error.' }],
+    [`${group}LCC`, { name: `${label} LCC`, unit: 'score' as const, better: 'higher' as const, note: 'Linear correlation coefficient.' }],
+    ...(group.endsWith('System') ? [] : [[`${group}SRCC`, { name: `${label} SRCC`, unit: 'score' as const, better: 'higher' as const, note: 'Spearman rank correlation coefficient.' }]]),
+    [`${group}KTAU`, { name: `${label} Kendall tau`, unit: 'score' as const, better: 'higher' as const }],
+  ])),
   async fetch() {
     const [section, axes, levels, measures, ...body] = (await fetchText(feed)).trim().split(/\r?\n/).map(line => line.split(','));
     const groups = ['qualityUtterance', 'qualitySystem', 'alignmentUtterance', 'alignmentSystem'];

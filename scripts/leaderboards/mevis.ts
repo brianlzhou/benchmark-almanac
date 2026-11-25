@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: "mevis", parts: {
   J: { name: 'Region similarity', group: 'Dimension' },
   F: { name: 'Contour accuracy', group: 'Dimension' },
+  val: { name: 'Validation split (J&F)', group: 'Split' },
 }, url: "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
