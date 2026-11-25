@@ -13,9 +13,11 @@ const PAGE = 'https://rsi-exam.ai/';
 
 const board: Leaderboard = {
   benchmark: 'rsi-exam',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE} (inline SVG leaderboard, all 88 tasks; effdata JSON for cost)`,
   terms: 'Static page; rsi-exam.ai robots.txt sets no rules or content signals, and the page states no terms.',
+  stats: { minutes: { name: 'Average run time per task', unit: 'minutes', better: 'lower' } },
   chart: {
     title: 'Model resource comparison: average run time',
     note: 'Mean hidden-set score over the 88 published tasks against how long one task took on average.',

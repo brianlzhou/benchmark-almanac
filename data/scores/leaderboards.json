@@ -101,12 +101,8 @@
       "unmatched": [
         "Qwen 3.8"
       ],
+      "harnesses": "system",
       "stats": {
-        "generationSuccess": {
-          "name": "Generation success rate",
-          "unit": "%",
-          "better": "higher"
-        },
         "priceRmb": {
           "name": "Average price",
           "unit": "cny",
@@ -6242,6 +6238,10 @@
       "unmatched": [
         "DuMate"
       ],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Time per run",
@@ -6258,16 +6258,8 @@
           "unit": "%",
           "better": "higher"
         },
-        "baselineRank": {
-          "name": "Baseline rank",
-          "unit": "count"
-        },
         "claims": {
           "name": "Claims",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Questions",
           "unit": "count"
         },
         "responseHallucination": {
@@ -68330,6 +68322,10 @@
       "retrieved": "2026-11-24",
       "rows": 101,
       "unmatched": [],
+      "reference": [
+        "Raw API"
+      ],
+      "harnesses": "system",
       "parts": {
         "counts": {
           "name": "Counts"
@@ -68345,10 +68341,6 @@
         }
       },
       "stats": {
-        "lines": {
-          "name": "Lines",
-          "unit": "count"
-        },
         "countsLines": {
           "name": "Counted lines",
           "unit": "count"
@@ -68477,11 +68469,11 @@
       "unmatched": [
         "Qwen3-30B"
       ],
+      "reference": [
+        "mini-SWE-agent"
+      ],
+      "harnesses": "system",
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "passed": {
           "name": "Tasks passed",
           "unit": "count"
@@ -76181,11 +76173,8 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
-        "cases": {
-          "name": "Cases",
-          "unit": "count"
-        },
         "endToEndPassed": {
           "name": "End-to-end passed cases",
           "unit": "count"
@@ -85412,7 +85401,7 @@
       "unmatched": [],
       "chart": {
         "title": "Score vs. total time",
-        "note": "Each point is one model configuration; the Pareto frontier joins configurations that no other beats on both score and total time.",
+        "note": "Each point is one model configuration, and the Pareto frontier joins configurations that no other beats on both score and total time.",
         "x": {
           "key": "runHours",
           "label": "Total time",
@@ -85426,6 +85415,10 @@
         }
       },
       "costPer": "run",
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "recall": {
           "name": "Recall",
@@ -85447,9 +85440,9 @@
           "unit": "thousands",
           "better": "lower"
         },
-        "time": {
+        "runHours": {
           "name": "Total time",
-          "unit": "seconds",
+          "unit": "hours",
           "better": "lower"
         }
       }
@@ -98413,6 +98406,7 @@
       "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "overall": {
           "name": "Overall solve rate",
@@ -98431,14 +98425,6 @@
         },
         "solved": {
           "name": "Tests solved",
-          "unit": "count"
-        },
-        "tests": {
-          "name": "Tests",
-          "unit": "count"
-        },
-        "attempted": {
-          "name": "Tests attempted",
           "unit": "count"
         },
         "minutes": {
@@ -121695,6 +121681,7 @@
       "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "walletSpend": {
           "name": "Compute spend",
@@ -121713,14 +121700,6 @@
         },
         "steps": {
           "name": "Training steps",
-          "unit": "count"
-        },
-        "graded": {
-          "name": "Tasks graded",
-          "unit": "count"
-        },
-        "total": {
-          "name": "Total tasks",
           "unit": "count"
         },
         "zeros": {
@@ -121940,6 +121919,7 @@
         },
         "note": "The board plots each agent’s mean score against its median minutes per run."
       },
+      "harnesses": "system",
       "stats": {
         "failed": {
           "name": "Failed runs",
@@ -121948,6 +121928,11 @@
         "refused": {
           "name": "Refused runs",
           "unit": "count"
+        },
+        "minutes": {
+          "name": "Median agent minutes per run",
+          "unit": "minutes",
+          "better": "lower"
         },
         "medianCost": {
           "name": "Median run cost",
@@ -122821,6 +122806,7 @@
       "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "avgRank": {
           "name": "Average rank",
@@ -172270,62 +172256,62 @@
       "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "parts": {
         "spatialbench": {
           "name": "SpatialBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "spatialbench-long": {
           "name": "SpatialBench-Long",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "scbench": {
           "name": "scBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "scbench-long": {
           "name": "scBench-Long",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "epibench": {
           "name": "EpiBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "variantbench": {
           "name": "VariantBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "metagenomics": {
           "name": "MetagenomicsBench",
-          "group": "multiomics"
+          "group": "Multiomics"
         },
         "txbench-ab": {
           "name": "TxBench-Antibody-Discovery",
-          "group": "therapeutics"
+          "group": "Therapeutics"
         },
         "txbench-pp": {
           "name": "TxBench-Preclinical-Pharmacology",
-          "group": "therapeutics"
+          "group": "Therapeutics"
         },
         "txbench-od": {
           "name": "TxBench-Oligo-Discovery",
-          "group": "therapeutics"
-        },
-        "biosecbench-surveillance": {
-          "name": "BioSecBench-Surveillance",
-          "group": "biosecurity"
-        },
-        "functionbench": {
-          "name": "BioSecBench-Function",
-          "group": "biosecurity"
-        },
-        "oncologybench": {
-          "name": "OncologyBench",
-          "group": "applications"
+          "group": "Therapeutics"
         },
         "txbench-abdev": {
           "name": "TxBench-Antibody-Development",
           "group": "Therapeutics"
+        },
+        "biosecbench-surveillance": {
+          "name": "BioSecBench-Surveillance",
+          "group": "Biosecurity"
+        },
+        "functionbench": {
+          "name": "BioSecBench-Function",
+          "group": "Biosecurity"
         },
         "biosecbench-respvirus-surveillance": {
           "name": "BioSecBench-RespiratoryVirus-Surveillance",
@@ -172335,6 +172321,18 @@
           "name": "BioSecBench-RespiratoryVirus-Countermeasures",
           "group": "Biosecurity"
         },
+        "biosecbench-refusal": {
+          "name": "BioSecBench-Refusal",
+          "group": "Biosecurity"
+        },
+        "biosecbench-structure": {
+          "name": "BioSecBench-Structure",
+          "group": "Biosecurity"
+        },
+        "oncologybench": {
+          "name": "OncologyBench",
+          "group": "Applications"
+        },
         "rarediseasebench": {
           "name": "RareDiseaseBench",
           "group": "Applications"
@@ -172343,26 +172341,18 @@
           "name": "TissueMicroscopyBench",
           "group": "Bioscience"
         },
+        "cellmicroscopybench": {
+          "name": "CellMicroscopyBench",
+          "group": "Bioscience"
+        },
         "neurosciencebench": {
           "name": "NeuroscienceBench",
           "group": "Bioscience"
-        },
-        "biosecbench-refusal": {
-          "name": "BioSecBench-Refusal",
-          "group": "Biosecurity"
-        },
-        "biosecbench-structure": {
-          "name": "BioSecBench-Structure",
-          "group": "Biosecurity"
         }
       },
       "stats": {
         "benchmarksCovered": {
           "name": "Benchmarks covered",
-          "unit": "count"
-        },
-        "benchmarksPossible": {
-          "name": "Benchmarks possible",
           "unit": "count"
         }
       }
@@ -276703,7 +276693,7 @@
       ],
       "chart": {
         "title": "Grounded F1 / duration",
-        "note": "Each point is one reviewer configuration; highlighted points are not outperformed on both axes by another.",
+        "note": "Each point is one reviewer configuration, and highlighted points are not outperformed on both axes by another.",
         "x": {
           "key": "duration",
           "label": "Duration",
@@ -276717,6 +276707,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "stats": {
         "precision": {
           "name": "Grounded precision",
@@ -276727,6 +276718,11 @@
           "name": "Grounded recall",
           "unit": "%",
           "better": "higher"
+        },
+        "duration": {
+          "name": "Mean review duration",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -282286,6 +282282,14 @@
           "key": "score",
           "label": "Mean held-out normalized score",
           "better": "higher"
+        }
+      },
+      "harnesses": "system",
+      "stats": {
+        "minutes": {
+          "name": "Average run time per task",
+          "unit": "minutes",
+          "better": "lower"
         }
       }
     },
@@ -297465,6 +297469,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "parts": {
         "Earth-Bench V2": {
           "name": "Earth-Bench V2"
@@ -309019,13 +309027,10 @@
       "unmatched": [
         "Seed-OSS-36B"
       ],
+      "harnesses": "system",
       "stats": {
         "resolved": {
           "name": "Resolved tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -309037,13 +309042,10 @@
       "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "resolved": {
           "name": "Resolved tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -310480,6 +310482,7 @@
       "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "accepted": {
           "name": "Accepted runs",
@@ -310491,10 +310494,6 @@
         },
         "broken": {
           "name": "Broken runs",
-          "unit": "count"
-        },
-        "runs": {
-          "name": "Runs",
           "unit": "count"
         }
       }
@@ -318733,6 +318732,7 @@
         },
         "note": "Costs exclude judge calls and discarded runs."
       },
+      "harnesses": "system",
       "parts": {
         "agentScore": {
           "name": "Agent score",
@@ -329433,7 +329433,8 @@
       "terms": "Public report page; ape.socialcatalystlab.org robots.txt allows all paths and the site states no terms.",
       "retrieved": "2026-11-24",
       "rows": 45,
-      "unmatched": []
+      "unmatched": [],
+      "harnesses": "system"
     },
     "verigap": {
       "url": "https://www.kaggle.com/benchmarks/archie40004/verigap",

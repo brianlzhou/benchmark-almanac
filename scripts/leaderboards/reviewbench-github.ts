@@ -22,17 +22,19 @@ interface Metric {
 
 const board: Leaderboard = {
   benchmark: 'reviewbench-github',
+  harnesses: 'system',
   url: 'https://review-bench.ai/',
   feed: `${FEED} (grounded F1 from precision and recall)`,
   chart: {
     title: 'Grounded F1 / duration',
-    note: 'Each point is one reviewer configuration; highlighted points are not outperformed on both axes by another.',
+    note: 'Each point is one reviewer configuration, and highlighted points are not outperformed on both axes by another.',
     x: { key: 'duration', label: 'Duration', unit: 's', better: 'lower' },
     y: { key: 'score', label: 'Grounded F1', unit: '%', better: 'higher' },
   },
   stats: {
     precision: { name: 'Grounded precision', unit: '%', better: 'higher' },
     recall: { name: 'Grounded recall', unit: '%', better: 'higher' },
+    duration: { name: 'Mean review duration', unit: 'seconds', better: 'lower' },
   },
   terms: 'JSON endpoint behind the ReviewBench page; robots.txt allows all, and the site terms put its content under CC BY-NC 4.0 and allow automated access that does not degrade the service.',
   async fetch() {
@@ -46,7 +48,7 @@ const board: Leaderboard = {
       rows.push({
         model: conf.model || r.tableName,
         score: Number(((2 * p * rc) / (p + rc)).toFixed(1)),
-        setting: conf.reasoning ?? conf.effort ?? (conf.model ? undefined : r.configurationLabel ?? undefined),
+        setting: conf.reasoning ?? conf.effort ?? (conf.model ? undefined : r.configurationLabel?.replace(/\s*·\s*/g, ', ')),
         harness: r.tableName,
         date: /^\d{4}-\d\d-\d\d$/.test(r.snapshotDate ?? '') ? r.snapshotDate : undefined,
         metrics: {

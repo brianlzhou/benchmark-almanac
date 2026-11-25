@@ -18,10 +18,11 @@ interface Ratings {
 
 const board: Leaderboard = {
   benchmark: "3d-gamedev-arena",
+  harnesses: 'system',
   url: "https://110.238.108.113/",
   feed: FEED,
   terms: "The live arena gives no reuse terms. Eleven scored configurations represent ten distinct model names on 2026-11-20. https://baibizhe.github.io/gamearena/ The arena serves no robots.txt.",
-  stats: { generationSuccess: { name: 'Generation success rate', unit: '%', better: 'higher' }, priceRmb: { name: 'Average price', unit: 'cny', better: 'lower' }, latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' } },
+  stats: { priceRmb: { name: 'Average price', unit: 'cny', better: 'lower' }, latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const data = await fetchJson<Ratings>(FEED);
     const rows = Object.keys(data.official_rank).filter((id) => data.official_rank[id] != null).map((id) => {
@@ -31,7 +32,6 @@ const board: Leaderboard = {
       const output = data.token_display_averages?.[id]?.avg_output_tokens_m ?? data.avg_output_tokens_m[id];
       if (!model || !harness || !Number.isFinite(score)) throw new Error(`Incomplete rating for ${id}`);
       const metrics: Record<string, number> = {};
-      if (id in data.generation_success_rate) metrics.generationSuccess = data.generation_success_rate[id] * 100;
       if (id in data.avg_price_rmb) metrics.priceRmb = data.avg_price_rmb[id];
       if (id in data.avg_time_per_task_m) metrics.latency = data.avg_time_per_task_m[id] * 60;
       return { model, harness, setting: effort || undefined, score, low: ci?.lower, high: ci?.upper,
