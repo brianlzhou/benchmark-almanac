@@ -33,7 +33,7 @@ const board: Leaderboard = {
         const [mean, spread] = values[i].split(/\s*±\s*/).map(Number);
         metrics[key] = mean;
         sum += mean;
-        if (spread !== undefined) metrics[key + 'Spread'] = spread;
+        if (spread !== undefined) metrics[key + 'Std'] = spread;
       }
       const model = label.startsWith('BioViL-T') ? 'BioViL-T' : label.replace(' w/reg', '');
       const setting = label.includes('(0%)') ? 'Zero-shot prompt' : label.includes('(10%)') ? '10% of labels'

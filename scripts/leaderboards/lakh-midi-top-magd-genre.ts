@@ -18,8 +18,8 @@ const board: Leaderboard = {
       const values = [...line.matchAll(/([\d.]+)\s*\(\s*([\d.]+)\)/g)];
       if (!id || values.length !== 6) throw new Error('Unexpected pattern configuration');
       return { model: id[1], setting: 'Configuration ' + id[2], score: Number(values[0][1]), trials: 5,
-        metrics: { aucReportedSpread: Number(values[0][2]), f1: Number(values[1][1]), f1ReportedSpread: Number(values[1][2]),
-          accuracy: Number(values[2][1]), accuracyReportedSpread: Number(values[2][2]), patterns: Number(line.trim().split(/\s+/).at(-1)) } };
+        metrics: { aucStd: Number(values[0][2]), f1: Number(values[1][1]), f1Std: Number(values[1][2]),
+          accuracy: Number(values[2][1]), accuracyStd: Number(values[2][2]), patterns: Number(line.trim().split(/\s+/).at(-1)) } };
     });
     return checked(rows, 10);
   },

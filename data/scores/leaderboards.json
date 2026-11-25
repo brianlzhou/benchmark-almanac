@@ -132603,7 +132603,7 @@
       "terms": "The authors publish Figure 3 in the GlyphBench paper. https://arxiv.org/abs/2609.34214",
       "headline": "The headline is the plain mean of the 303 task returns plotted in Figure 3.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "parts": {
@@ -132630,6 +132630,16 @@
         "Procgen": {
           "name": "Procgen",
           "unit": "score"
+        }
+      },
+      "stats": {
+        "steps": {
+          "name": "Mean steps",
+          "unit": "count"
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -141707,7 +141717,7 @@
       "terms": "The authors publish Table V at https://arxiv.org/abs/2403.17846.",
       "headline": "The paper gives no overall retrieval success rate, so this is the plain mean across its two query types.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ConceptGraphs",
@@ -141719,6 +141729,18 @@
         },
         "floor": {
           "name": "Object, room and floor"
+        }
+      },
+      "stats": {
+        "floorNavigation": {
+          "name": "Object, room and floor navigation success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "roomNavigation": {
+          "name": "Object and room navigation success rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -161235,11 +161257,18 @@
       "feed": "https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2025.1702668/full",
       "terms": "Frontiers article access terms. https://creativecommons.org/licenses/by/4.0/",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "GPT-4 (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "correct": {
+          "name": "Correct answers",
+          "unit": "count",
+          "better": "higher"
+        }
+      }
     },
     "jsonschemabench": {
       "url": "https://docs.google.com/spreadsheets/d/1gloUwsKiiOgrBmxbNluh-2_-vV_6RgaPji6KAD52pv0/edit",
@@ -169351,7 +169380,7 @@
       "feed": "https://arxiv.org/html/1910.09242",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "P2",
@@ -169373,10 +169402,6 @@
         "patterns": {
           "name": "Patterns",
           "unit": "count"
-        },
-        "folds": {
-          "name": "Cross-validation folds",
-          "unit": "count"
         }
       }
     },
@@ -169385,7 +169410,7 @@
       "feed": "https://repositori.upf.edu/bitstreams/4aef9065-3cec-4356-8d6f-3c0825e1a45b/download",
       "terms": "Universitat Pompeu Fabra provides the paper under the terms listed at https://hdl.handle.net/10230/43405.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "P2",
@@ -182949,12 +182974,19 @@
       "feed": "https://arxiv.org/pdf/1908.03195",
       "terms": "Paper results read from arXiv. https://arxiv.org/abs/1908.03195",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ResNet-101-FPN",
         "ResNet-50-FPN"
-      ]
+      ],
+      "stats": {
+        "boxAP": {
+          "name": "Box average precision",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "lvomnibench": {
       "url": "https://kd-tao.github.io/LVOmniBench/",
@@ -189615,12 +189647,40 @@
       "feed": "https://arxiv.org/html/2302.09155",
       "terms": "The authors publish this table under the terms listed at https://arxiv.org/abs/2302.09155.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ctrlSIM",
         "ctrlSIM_ip"
-      ]
+      ],
+      "stats": {
+        "add": {
+          "name": "SARI add score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "del": {
+          "name": "SARI delete score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "keep": {
+          "name": "SARI keep score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "fkgl": {
+          "name": "Flesch-Kincaid grade level",
+          "unit": "score",
+          "better": "lower"
+        },
+        "rougeL": {
+          "name": "ROUGE-L",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        }
+      }
     },
     "med-halt": {
       "url": "https://aclanthology.org/2023.conll-1.21/",
@@ -200774,7 +200834,7 @@
       "feed": "https://arxiv.org/pdf/2606.07229",
       "terms": "The authors publish Table 2 under the terms at https://arxiv.org/abs/2606.07229.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Ming-UniAudio",
@@ -200807,6 +200867,108 @@
         },
         "Sound-Music-Speech": {
           "name": "Sound-Music-Speech"
+        }
+      },
+      "stats": {
+        "SingleConsistency": {
+          "name": "Single consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "SingleExactMatch": {
+          "name": "Single exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MultipleConsistency": {
+          "name": "Multiple consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MultipleExactMatch": {
+          "name": "Multiple exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "OverallConsistency": {
+          "name": "Overall consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "OverallExactMatch": {
+          "name": "Overall exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "SoundConsistency": {
+          "name": "Sound consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "SoundExactMatch": {
+          "name": "Sound exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MusicConsistency": {
+          "name": "Music consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "MusicExactMatch": {
+          "name": "Music exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "SpeechConsistency": {
+          "name": "Speech consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "SpeechExactMatch": {
+          "name": "Speech exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-MusicConsistency": {
+          "name": "Sound-Music consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-MusicExactMatch": {
+          "name": "Sound-Music exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-SpeechConsistency": {
+          "name": "Sound-Speech consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-SpeechExactMatch": {
+          "name": "Sound-Speech exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Music-SpeechConsistency": {
+          "name": "Music-Speech consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Music-SpeechExactMatch": {
+          "name": "Music-Speech exact match rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-Music-SpeechConsistency": {
+          "name": "Sound-Music-Speech consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sound-Music-SpeechExactMatch": {
+          "name": "Sound-Music-Speech exact match rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -205337,10 +205499,247 @@
       "feed": "https://arxiv.org/html/2406.01014",
       "terms": "The authors publish this table under the terms listed at https://arxiv.org/abs/2406.01014.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
-      "harnesses": "system"
+      "harnesses": "system",
+      "parts": {
+        "NonEnglishSystemappBasic": {
+          "name": "System app Basic",
+          "group": "Non-English"
+        },
+        "NonEnglishSystemappAdvanced": {
+          "name": "System app Advanced",
+          "group": "Non-English"
+        },
+        "NonEnglishExternalappBasic": {
+          "name": "External app Basic",
+          "group": "Non-English"
+        },
+        "NonEnglishExternalappAdvanced": {
+          "name": "External app Advanced",
+          "group": "Non-English"
+        },
+        "NonEnglishMultiappBasic": {
+          "name": "Multi-app Basic",
+          "group": "Non-English"
+        },
+        "NonEnglishMultiappAdvanced": {
+          "name": "Multi-app Advanced",
+          "group": "Non-English"
+        },
+        "EnglishSystemappBasic": {
+          "name": "System app Basic",
+          "group": "English"
+        },
+        "EnglishSystemappAdvanced": {
+          "name": "System app Advanced",
+          "group": "English"
+        },
+        "EnglishExternalappBasic": {
+          "name": "External app Basic",
+          "group": "English"
+        },
+        "EnglishExternalappAdvanced": {
+          "name": "External app Advanced",
+          "group": "English"
+        },
+        "EnglishMultiappBasic": {
+          "name": "Multi-app Basic",
+          "group": "English"
+        },
+        "EnglishMultiappAdvanced": {
+          "name": "Multi-app Advanced",
+          "group": "English"
+        }
+      },
+      "stats": {
+        "successes": {
+          "name": "Instructions completed",
+          "unit": "count",
+          "better": "higher"
+        },
+        "NonEnglishSystemappBasicCR": {
+          "name": "Non-English System app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishSystemappBasicDA": {
+          "name": "Non-English System app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishSystemappBasicRA": {
+          "name": "Non-English System app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishSystemappAdvancedCR": {
+          "name": "Non-English System app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishSystemappAdvancedDA": {
+          "name": "Non-English System app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishSystemappAdvancedRA": {
+          "name": "Non-English System app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappBasicCR": {
+          "name": "Non-English External app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappBasicDA": {
+          "name": "Non-English External app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappBasicRA": {
+          "name": "Non-English External app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappAdvancedCR": {
+          "name": "Non-English External app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappAdvancedDA": {
+          "name": "Non-English External app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishExternalappAdvancedRA": {
+          "name": "Non-English External app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappBasicCR": {
+          "name": "Non-English Multi-app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappBasicDA": {
+          "name": "Non-English Multi-app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappBasicRA": {
+          "name": "Non-English Multi-app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappAdvancedCR": {
+          "name": "Non-English Multi-app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappAdvancedDA": {
+          "name": "Non-English Multi-app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NonEnglishMultiappAdvancedRA": {
+          "name": "Non-English Multi-app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappBasicCR": {
+          "name": "English System app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappBasicDA": {
+          "name": "English System app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappBasicRA": {
+          "name": "English System app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappAdvancedCR": {
+          "name": "English System app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappAdvancedDA": {
+          "name": "English System app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishSystemappAdvancedRA": {
+          "name": "English System app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappBasicCR": {
+          "name": "English External app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappBasicDA": {
+          "name": "English External app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappBasicRA": {
+          "name": "English External app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappAdvancedCR": {
+          "name": "English External app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappAdvancedDA": {
+          "name": "English External app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishExternalappAdvancedRA": {
+          "name": "English External app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappBasicCR": {
+          "name": "English Multi-app Basic completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappBasicDA": {
+          "name": "English Multi-app Basic decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappBasicRA": {
+          "name": "English Multi-app Basic reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappAdvancedCR": {
+          "name": "English Multi-app Advanced completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappAdvancedDA": {
+          "name": "English Multi-app Advanced decision accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "EnglishMultiappAdvancedRA": {
+          "name": "English Multi-app Advanced reflection accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "mobile-eval-e": {
       "url": "https://arxiv.org/html/2501.11733",
@@ -208142,7 +208541,7 @@
       "terms": "CVF provides open access to the authors’ paper under the notice at https://openaccess.thecvf.com/.",
       "headline": "The paper reports no overall image classification score, so this is the plain mean of macro accuracy across five findings.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BioViL",

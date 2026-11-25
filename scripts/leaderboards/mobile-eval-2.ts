@@ -5,10 +5,28 @@ import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2406.01014';
+const mobileLanguages = ['Non-English', 'English'];
+const mobileApps = ['System app', 'External app', 'Multi-app'];
+const mobileLevels = ['Basic', 'Advanced'];
+const mobileSlices = mobileLanguages.flatMap(language => mobileApps.flatMap(app => mobileLevels.map(level => ({
+  key: (language + app + level).replace(/[ -]/g, ''),
+  language,
+  app,
+  level,
+}))));
 const board: Leaderboard = {
   benchmark: 'mobile-eval-2', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2406.01014.',
-  parts: {}, harnesses: 'system',
+  parts: Object.fromEntries(mobileSlices.map(s => [s.key, { name: `${s.app} ${s.level}`, group: s.language }])),
+  stats: {
+    successes: { name: 'Instructions completed', unit: 'count', better: 'higher' },
+    ...Object.fromEntries(mobileSlices.flatMap(s => [
+      [s.key + 'CR', { name: `${s.language} ${s.app} ${s.level} completion rate`, unit: '%' as const, better: 'higher' as const }],
+      [s.key + 'DA', { name: `${s.language} ${s.app} ${s.level} decision accuracy`, unit: '%' as const, better: 'higher' as const }],
+      [s.key + 'RA', { name: `${s.language} ${s.app} ${s.level} reflection accuracy`, unit: '%' as const, better: 'higher' as const }],
+    ])),
+  },
+  harnesses: 'system',
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const results = tables.filter(t => t[1]?.join('|') === 'Method|SR|CR|DA|RA|SR|CR|DA|RA');
@@ -31,7 +49,6 @@ const board: Leaderboard = {
           if (!ratio) throw new Error('Missing instruction success counts');
           const [, solved, total] = ratio.map(Number);
           const key = (language + app + level).replace(/[ -]/g, '');
-          board.parts![key] = {name: app + ' ' + level, group: language};
           run.metrics[key] = 100 * solved / total;
           for (const [k, metric] of ['CR', 'DA', 'RA'].entries()) {
             const value = cells[base + k + 1];
@@ -48,7 +65,7 @@ const board: Leaderboard = {
     for (const [harness, r] of runs) {
       if (r.parts !== 12) continue;
       const models = harness === 'Mobile-Agent-v2' ? ['GPT-4V','GPT-4','Qwen-VL-Chat-Int4'] : undefined;
-      rows.push({model: 'GPT-4V', models, harness, score: 100 * r.solved / r.total, metrics: {...r.metrics, successes: r.solved, instructions: r.total}});
+      rows.push({model: 'GPT-4V', models, harness, score: 100 * r.solved / r.total, metrics: {...r.metrics, successes: r.solved}});
     }
     return checked(rows, 2);
   },

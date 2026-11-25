@@ -23,7 +23,7 @@ const board: Leaderboard = {
       return table.slice(1).map(([model, value]) => {
         const pair = value.match(/^(\d+(?:\.\d+)?)\s*(?:&plusmn;|±)\s*(\d+(?:\.\d+)?)$/);
         if (!pair) throw new Error('Invalid average progress: ' + value);
-        return { model, setting, score: Number(pair[1]), trials: 5, metrics: { standardError: Number(pair[2]) } };
+        return { model, setting, score: Number(pair[1]), trials: 5, metrics: { stderr: Number(pair[2]) } };
       });
     });
   },

@@ -14,6 +14,7 @@ const board:Leaderboard = {
   terms:'The authors publish Figure 3 in the GlyphBench paper. https://arxiv.org/abs/2609.34214',
   headline:'The headline is the plain mean of the 303 task returns plotted in Figure 3.',
   parts:Object.fromEntries(suites.map(name => [name,{name,unit:'score' as const}])),
+  stats:{steps:{name:'Mean steps',unit:'count'},totalTokens:{name:'Total tokens',unit:'tokens'}},
   async fetch() {
     const svg = await paperHtml(feed);
     if (createHash('sha256').update(svg).digest('hex') !== 'c0a350715063a771c62de3807964c3cc62557a6147e3c0732e94bbf87e52d0b4') throw new Error('GlyphBench figure changed');
