@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2510.06961",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    rtfx: { name: 'Real-time factor', unit: 'speedup', better: 'higher' },
+  },
   aliases: {
     'Cohere Labs Transcribe': 'cohere-transcribe-03-2026',
     'Microsoft Phi 4 Multimodal Instruct': 'phi-4-multimodal',
@@ -20,7 +23,11 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.includes('Encoder')) && t[0]?.some(c=>c.text.includes('WER')));
       if(!t) throw new Error('Open ASR English table missing');
-      return t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>({model:r[0].text,score:num(r[2].text)!,metrics:num(r[3].text)!==undefined?{rtfx:num(r[3].text)!}:undefined}));
+      return t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>{
+        const openCell = r[1]?.text.trim();
+        const open = openCell === 'Yes' ? true : openCell === 'No' ? false : undefined;
+        return {model:r[0].text,score:num(r[2].text)!,open,metrics:num(r[3].text)!==undefined?{rtfx:num(r[3].text)!}:undefined};
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();
