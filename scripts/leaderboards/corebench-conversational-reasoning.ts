@@ -12,11 +12,7 @@ const board: Leaderboard = {
     'gemini-1.5-flash-002':'gemini-1-5-flash-sep-2024','gemini-2.0-flash-exp':'gemini-2-0-flash-dec-2024','gemini-2.0-flash-001':'gemini-2-0-flash-feb-2025',
     'gpt-4o-2024-11-20':'gpt-4o-nov-2024'},
   stats:{
-    '# eval':{name:'Evaluation examples',unit:'count'},
-    '# prompt tokens':{name:'Prompt tokens (reported)',unit:'tokens'},
-    '# output tokens':{name:'Output tokens (reported)',unit:'tokens'},
     inputTokens:{name:'Input tokens per request',unit:'tokens'},
-    outputTokens:{name:'Output tokens per request',unit:'tokens'},
   },
   async fetch() {
     const rows = await helmRows(table,true);
@@ -25,8 +21,12 @@ const board: Leaderboard = {
       if (blend) {
         row.model=blend[2]; row.models=[blend[2],blend[1]]; row.harness=blend[1]+' transcription';
       }
-      if (row.metrics && '# prompt tokens' in row.metrics) row.metrics.inputTokens=row.metrics['# prompt tokens'];
-      if (row.tokens !== undefined) row.metrics!.outputTokens=row.tokens;
+      if (row.metrics) {
+        if ('# prompt tokens' in row.metrics) row.metrics.inputTokens = row.metrics['# prompt tokens'];
+        delete row.metrics['# prompt tokens'];
+        delete row.metrics['# output tokens'];
+        delete row.metrics.truncated;
+      }
     }
     return checked(rows,17);
   },
