@@ -77235,14 +77235,26 @@
         "Qwen-SEA-LION 4.5 27B Instruct",
         "Qwen2.5 14B Instruct AWQ"
       ],
+      "chart": {
+        "title": "Hallucination rate vs. accuracy",
+        "x": {
+          "key": "score",
+          "label": "Human-evaluated accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "hallucinationRate",
+          "label": "Hallucination rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "note": "CulturalRiddles plots hallucination share among labeled answers against overall human-evaluated accuracy."
+      },
       "stats": {
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
-        },
-        "evaluatedCommunities": {
-          "name": "Evaluated communities",
-          "unit": "count"
         },
         "evaluatedRiddles": {
           "name": "Evaluated riddles",
@@ -77252,6 +77264,11 @@
           "name": "Exact match",
           "unit": "%",
           "better": "higher"
+        },
+        "hallucinationRate": {
+          "name": "Hallucination rate",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -86182,6 +86199,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86235,6 +86269,23 @@
         "Prime Intellect: INTELLECT-3",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86273,6 +86324,23 @@
       "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86311,6 +86379,23 @@
       "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86345,6 +86430,23 @@
       "retrieved": "2026-11-24",
       "rows": 100,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86383,6 +86485,23 @@
       "retrieved": "2026-11-24",
       "rows": 49,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86426,6 +86545,23 @@
         "Nex N2 Pro",
         "Prime Intellect: INTELLECT-3"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86488,6 +86624,23 @@
         "Murf Falcon 2",
         "Qwen-Audio-3.0 TTS Flash"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86528,6 +86681,23 @@
         "Tripo H3.1",
         "Tripo P2"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86611,6 +86781,23 @@
       "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86659,6 +86846,23 @@
         "Prime Intellect: INTELLECT-3",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86697,6 +86901,23 @@
       "retrieved": "2026-11-24",
       "rows": 55,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86756,6 +86977,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86794,6 +87032,23 @@
       "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -86863,6 +87118,23 @@
         "Wan 2.7 Pro",
         "p-image-ideogram"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -163326,30 +163598,52 @@
         "nvidia/nemotron-3-ultra-550b-a55b",
         "stealth/ox-alpha"
       ],
+      "chart": {
+        "title": "Overall score vs. combined risk",
+        "x": {
+          "key": "score",
+          "label": "Overall score",
+          "better": "higher"
+        },
+        "y": {
+          "key": "risk",
+          "label": "Combined risk score",
+          "better": "higher"
+        },
+        "note": "K-Bench plots combined mental health risk score against overall clinical score (higher is safer on both axes)."
+      },
       "parts": {
         "risk": {
-          "name": "Combined risk"
+          "name": "Combined risk",
+          "group": "Summary"
         },
         "D1": {
-          "name": "Clinical judgment"
+          "name": "Clinical judgment",
+          "group": "Dimension"
         },
         "D2": {
-          "name": "Risk exploration"
+          "name": "Risk exploration",
+          "group": "Dimension"
         },
         "D3": {
-          "name": "Ethical reasoning"
+          "name": "Ethical reasoning",
+          "group": "Dimension"
         },
         "D4": {
-          "name": "Supportive conversation"
+          "name": "Supportive conversation",
+          "group": "Dimension"
         },
         "D5": {
-          "name": "Psychological knowledge"
+          "name": "Psychological knowledge",
+          "group": "Dimension"
         },
         "D6": {
-          "name": "Cultural competence"
+          "name": "Cultural competence",
+          "group": "Dimension"
         },
         "D7": {
-          "name": "Autonomy and boundaries"
+          "name": "Autonomy and boundaries",
+          "group": "Dimension"
         }
       }
     },
@@ -164930,11 +165224,8 @@
       "stats": {
         "hardPassed": {
           "name": "Hard problems passed",
-          "unit": "count"
-        },
-        "hardProblems": {
-          "name": "Hard problems",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "hardPerformance": {
           "name": "Hard performance",
@@ -164942,16 +165233,18 @@
           "better": "higher"
         },
         "cudaPassed": {
-          "name": "Compute Unified Device Architecture problems passed",
-          "unit": "count"
-        },
-        "cudaProblems": {
-          "name": "Compute Unified Device Architecture problems",
-          "unit": "count"
+          "name": "CUDA problems passed",
+          "unit": "count",
+          "better": "higher"
         },
         "cudaPerformance": {
-          "name": "Compute Unified Device Architecture performance",
+          "name": "CUDA performance",
           "unit": "score",
+          "better": "higher"
+        },
+        "megaPassed": {
+          "name": "Mega problems passed",
+          "unit": "count",
           "better": "higher"
         },
         "megaPerformance": {
@@ -164969,6 +165262,21 @@
       "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "chart": {
+        "title": "Memory efficiency vs. speedup (Level 1)",
+        "x": {
+          "key": "Level 1: Correct Speedup",
+          "label": "Level 1 correct speedup",
+          "unit": "x",
+          "better": "higher"
+        },
+        "y": {
+          "key": "Level 1: Correct Mem Eff",
+          "label": "Level 1 memory efficiency",
+          "better": "higher"
+        },
+        "note": "KernelBench Verified plots per-level geometric-mean memory efficiency against speedup over PyTorch on correct kernels."
+      },
       "parts": {
         "Level 1": {
           "name": "Level 1"
