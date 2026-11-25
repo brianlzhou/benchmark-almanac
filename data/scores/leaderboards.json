@@ -139698,6 +139698,23 @@
           "name": "Observed inference time",
           "unit": "seconds",
           "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Prompt tokens",
+          "unit": "tokens"
+        },
+        "evalInstances": {
+          "name": "Evaluated instances",
+          "unit": "count"
+        },
+        "trainInstances": {
+          "name": "Training instances",
+          "unit": "count"
+        },
+        "truncated": {
+          "name": "Truncated responses",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -147845,6 +147862,20 @@
         "Gemini 2.5 Pro (snapshot unspecified)"
       ],
       "stats": {
+        "noProgress": {
+          "name": "No progress rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "minorProgress": {
+          "name": "Minor progress rate",
+          "unit": "%"
+        },
+        "majorProgress": {
+          "name": "Major progress rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "totalQuestions": {
           "name": "Total questions",
           "unit": "count"
@@ -180575,6 +180606,22 @@
         "Mistral Small (02/2024)",
         "Mistral Small 3.1 (03/2025)"
       ],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "priceIn": {
           "name": "Input price",
@@ -186121,6 +186168,22 @@
       "unmatched": [
         "GPT 3.5"
       ],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "unbiased": {
           "name": "Unbiased"
@@ -190051,6 +190114,11 @@
           "name": "80% time horizon",
           "unit": "minutes",
           "better": "higher"
+        },
+        "averageScore": {
+          "name": "Average task score",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -190065,6 +190133,11 @@
         "p80": {
           "name": "80% time horizon",
           "unit": "minutes",
+          "better": "higher"
+        },
+        "averageScore": {
+          "name": "Average task score",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -190206,6 +190279,22 @@
       "retrieved": "2026-11-24",
       "rows": 75,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per test",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "mgsm_en": {
           "name": "English"
@@ -190242,6 +190331,16 @@
         }
       },
       "stats": {
+        "priceIn": {
+          "name": "Input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceOut": {
+          "name": "Output price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
         "latency": {
           "name": "Latency",
           "unit": "seconds",
@@ -262319,6 +262418,11 @@
           "name": "Log boundary accuracy",
           "unit": "%",
           "better": "higher"
+        },
+        "baseline": {
+          "name": "Baseline flag",
+          "unit": "count",
+          "note": "1 when EvalAI marks the submission as a baseline, 0 otherwise."
         }
       }
     },
@@ -263882,6 +263986,11 @@
           "name": "Puzzles passed",
           "unit": "count",
           "better": "higher"
+        },
+        "errors": {
+          "name": "Errors",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -266245,6 +266354,11 @@
           "name": "Saturation",
           "unit": "%",
           "better": "higher"
+        },
+        "costLowerBoundUsd": {
+          "name": "Cost lower bound per trial",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -266794,6 +266908,31 @@
         },
         "successPct_f5b4": {
           "name": "Water the flowers success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_6dcb": {
+          "name": "Fold the clothes success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_fea0": {
+          "name": "Put the pencil case into the schoolbag success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_6ccd": {
+          "name": "Pack the toothbrush holder success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_1c7d": {
+          "name": "Untie the shoelaces success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successPct_671c": {
+          "name": "Pack the items success rate",
           "unit": "%",
           "better": "higher"
         }
@@ -267481,7 +267620,7 @@
         "complete_rate": {
           "name": "Completion rate",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "n_runs": {
           "name": "Runs",
@@ -267493,6 +267632,30 @@
         },
         "n_invalid": {
           "name": "Invalid runs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "refused": {
+          "name": "Explicit refusals",
+          "unit": "count",
+          "better": "higher"
+        },
+        "refused_any": {
+          "name": "Any refusals",
+          "unit": "count",
+          "better": "higher"
+        },
+        "refused_capability": {
+          "name": "Capability refusals",
+          "unit": "count"
+        },
+        "attempted_failed": {
+          "name": "Failed harmful attempts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "attempted_succeeded": {
+          "name": "Succeeded harmful attempts",
           "unit": "count",
           "better": "lower"
         }
@@ -289016,6 +289179,26 @@
         "seconds": {
           "name": "Average run time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "activeCpuSeconds": {
+          "name": "Average active CPU time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "steps": {
+          "name": "Mean steps per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "toolCalls": {
+          "name": "Mean tool calls per task",
+          "unit": "count",
           "better": "lower"
         }
       }

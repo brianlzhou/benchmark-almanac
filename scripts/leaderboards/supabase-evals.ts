@@ -8,14 +8,21 @@ const parts = { build: 'Build', deploy: 'Deploy', investigate: 'Investigate', re
 interface Run {
   experiment: string; experimentDisplay: { modelId: string; agent: string; reasoningEffort?: string };
   stage: string; passed: boolean; skills?: { available: string[] }; experimentCreatedAt?: string;
-  traceUsage?: { outputTokens?: number }; agentRunDurationMs?: number;
+  traceUsage?: { inputTokens?: number; outputTokens?: number }; stepCount?: number; toolCallCount?: number;
+  agentRunDurationMs?: number; sandboxUsage?: { activeCpuDurationMs?: number };
 }
 const names: Record<string,string> = { 'claude-opus-5-5':'Opus 5.5', 'claude-sonnet-5-5':'Sonnet 5.5',
   'gpt-6.1-sol':'GPT-6.1 sol', 'gpt-6-luna':'GPT-6 luna', 'grok-4.7':'Grok 4.7', 'moonshotai/kimi-k3':'Kimi K3' };
 const agents: Record<string,string> = { 'claude-code':'Claude Code', codex:'Codex', opencode:'OpenCode', grok:'Grok Build' };
 const board: Leaderboard = {
   benchmark: 'supabase-evals', url, feed: url, parts,
-  stats: { seconds: { name: 'Average run time', unit: 'seconds', better: 'lower' } },
+  stats: {
+    seconds: { name: 'Average run time', unit: 'seconds', better: 'lower' },
+    activeCpuSeconds: { name: 'Average active CPU time', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Input tokens per task', unit: 'tokens', better: 'lower' },
+    steps: { name: 'Mean steps per task', unit: 'count', better: 'lower' },
+    toolCalls: { name: 'Mean tool calls per task', unit: 'count', better: 'lower' },
+  },
   terms: 'The Supabase Evals project publishes the data underlying its public benchmark page.',
   async fetch() {
     const html = await fetchText(url);
@@ -44,6 +51,15 @@ const board: Leaderboard = {
         return [k,rate(stage)];
       }));
       if (group.every(v => typeof v.agentRunDurationMs === 'number')) metrics.seconds = group.reduce((a,v) => a + v.agentRunDurationMs!,0) / group.length / 1000;
+      const meanOf = (vals: number[]) => vals.length ? vals.reduce((a,b) => a + b, 0) / vals.length : undefined;
+      const cpu = meanOf(group.map(v => v.sandboxUsage?.activeCpuDurationMs).filter((x): x is number => typeof x === 'number'));
+      if (cpu !== undefined) metrics.activeCpuSeconds = cpu / 1000;
+      const inTok = meanOf(group.map(v => v.traceUsage?.inputTokens).filter((x): x is number => typeof x === 'number'));
+      if (inTok !== undefined) metrics.inputTokens = inTok;
+      const steps = meanOf(group.map(v => v.stepCount).filter((x): x is number => typeof x === 'number'));
+      if (steps !== undefined) metrics.steps = steps;
+      const tools = meanOf(group.map(v => v.toolCallCount).filter((x): x is number => typeof x === 'number'));
+      if (tools !== undefined) metrics.toolCalls = tools;
       const tokens = group.every(v => typeof v.traceUsage?.outputTokens === 'number')
         ? group.reduce((a,v) => a + v.traceUsage!.outputTokens!,0) / group.length : undefined;
       return { model: names[d.modelId] ?? d.modelId, harness: agents[d.agent] ?? d.agent, score: rate(group), metrics, tokens,
