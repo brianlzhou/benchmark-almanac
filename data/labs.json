@@ -1109,5 +1109,16 @@
     "aliases": [
       "RLWRLD"
     ]
+  },
+  {
+    "id": "marin",
+    "name": "Marin",
+    "country": "US",
+    "url": "https://marin.community",
+    "aliases": [
+      "The Marin Project",
+      "Marin",
+      "marin-community"
+    ]
   }
 ]
