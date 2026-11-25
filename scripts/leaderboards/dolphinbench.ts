@@ -6,17 +6,38 @@ import { fetchJson } from '../lib/util.ts';
 
 const PAGE = 'https://dolphinbench.ai/leaderboard/';
 const FEED = 'https://dolphinbench.ai/leaderboard/results.json';
+interface PersonaScore {
+  total: number;
+  passes: number;
+}
 interface Config {
   harness: { name: string };
   model: { name: string; id: string };
   memory: { name: string };
+  personas?: Record<string, PersonaScore>;
   pass_rate: number;
+  passes?: number;
+  total?: number;
   total_cost_usd: number;
+  total_cost_usd_test_calls?: number;
   median_latency_seconds: number;
+  p95_latency_seconds?: number;
   runs_url?: string;
 }
 const board: Leaderboard = {
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  costPer: 'run',
+  parts: {
+    morgan: { name: 'Morgan', group: 'Persona' },
+    alex: { name: 'Alex', group: 'Persona' },
+    riley: { name: 'Riley', group: 'Persona' },
+  },
+  stats: {
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    p95Latency: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+    testCallsCost: { name: 'Test calls cost', unit: 'usd', better: 'lower', note: 'Token-priced agent inference cost for test calls, excluding ingestion and grading.' },
+    passes: { name: 'Passed tasks', unit: 'count', better: 'higher' },
+    totalTasks: { name: 'Total tasks', unit: 'count' },
+  },
   benchmark: 'dolphinbench',
   url: PAGE,
   feed: FEED,
@@ -30,12 +51,21 @@ const board: Leaderboard = {
     if (data.schema_version !== 2 || !Array.isArray(data.configurations) || data.configurations.length < 10) throw new Error('DolphinBench: unexpected results schema');
     return data.configurations.map((c) => {
       if (!c.model?.name || !c.harness?.name || !c.memory?.name || typeof c.pass_rate !== 'number') throw new Error('DolphinBench: configuration missing required fields');
+      const metrics: Record<string, number> = { latency: c.median_latency_seconds };
+      if (typeof c.p95_latency_seconds === 'number' && Number.isFinite(c.p95_latency_seconds)) metrics.p95Latency = c.p95_latency_seconds;
+      if (typeof c.total_cost_usd_test_calls === 'number' && Number.isFinite(c.total_cost_usd_test_calls)) metrics.testCallsCost = c.total_cost_usd_test_calls;
+      if (typeof c.passes === 'number' && Number.isFinite(c.passes)) metrics.passes = c.passes;
+      if (typeof c.total === 'number' && Number.isFinite(c.total)) metrics.totalTasks = c.total;
+      for (const persona of ['morgan', 'alex', 'riley']) {
+        const p = c.personas?.[persona];
+        if (p && p.total > 0 && Number.isFinite(p.passes)) metrics[persona] = Math.round((p.passes / p.total) * 1000) / 10;
+      }
       return {
         model: c.model.name,
         harness: `${c.harness.name}, ${c.memory.name}`,
         score: Math.round(c.pass_rate * 1000) / 10,
         cost: c.total_cost_usd,
-        metrics: { latency: c.median_latency_seconds },
+        metrics,
         link: c.runs_url,
       };
     });

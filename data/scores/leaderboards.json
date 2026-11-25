@@ -13294,7 +13294,19 @@
         "merlinite-7B-AOT"
       ],
       "harnesses": "system",
-      "verified": "listed in the verified submission group"
+      "verified": "listed in the verified submission group",
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "length": {
+          "name": "Average output length",
+          "unit": "count",
+          "note": "Average output length in characters."
+        }
+      }
     },
     "alphaeval": {
       "url": "https://alphaeval.ai",
@@ -86054,11 +86066,46 @@
       "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "costPer": "run",
+      "parts": {
+        "morgan": {
+          "name": "Morgan",
+          "group": "Persona"
+        },
+        "alex": {
+          "name": "Alex",
+          "group": "Persona"
+        },
+        "riley": {
+          "name": "Riley",
+          "group": "Persona"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Median latency",
           "unit": "seconds",
           "better": "lower"
+        },
+        "p95Latency": {
+          "name": "95th percentile latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "testCallsCost": {
+          "name": "Test calls cost",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Token-priced agent inference cost for test calls, excluding ingestion and grading."
+        },
+        "passes": {
+          "name": "Passed tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "totalTasks": {
+          "name": "Total tasks",
+          "unit": "count"
         }
       }
     },
@@ -97548,6 +97595,16 @@
           "name": "Incomplete games",
           "unit": "count"
         },
+        "won": {
+          "name": "Games won",
+          "unit": "count",
+          "better": "higher"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "stdevScore": {
           "name": "Score standard deviation",
           "unit": "score"
@@ -99676,15 +99733,26 @@
           "unit": "usd",
           "better": "lower"
         },
+        "Grounding_Added_Cost_Per_Page": {
+          "name": "Added cost per page for grounding",
+          "unit": "usd",
+          "better": "lower"
+        },
         "Confidence_Added_Cost_Per_Page": {
           "name": "Added cost per page for confidence",
           "unit": "usd",
           "better": "lower"
         },
+        "Confidence_Coverage": {
+          "name": "Confidence coverage",
+          "unit": "%",
+          "better": "higher",
+          "note": "Coverage of fields with confidence scores."
+        },
         "Confidence_AUGRC": {
           "name": "Confidence area under gain-risk curve",
           "unit": "score",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -99773,6 +99841,16 @@
           "unit": "usd",
           "better": "lower"
         },
+        "Grounding_Added_Cost_Per_Page": {
+          "name": "Added cost per page for grounding",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "Confidence_Added_Cost_Per_Page": {
+          "name": "Added cost per page for confidence",
+          "unit": "usd",
+          "better": "lower"
+        },
         "Documents": {
           "name": "Document count",
           "unit": "count"
@@ -99783,7 +99861,7 @@
         },
         "Confidence_Coverage": {
           "name": "Confidence coverage",
-          "unit": "score",
+          "unit": "%",
           "better": "higher",
           "note": "Coverage of fields with confidence scores."
         },
@@ -110034,131 +110112,131 @@
         },
         "finance": {
           "name": "Finance",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "economy": {
           "name": "Economy",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "accounting": {
           "name": "Accounting",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "certificate": {
           "name": "Certificate",
-          "group": "Task"
+          "group": "Financial Academic"
         },
         "ftc": {
-          "name": "Financial Text Classification",
-          "group": "Task"
+          "name": "FTC",
+          "group": "Industry Understanding"
         },
         "fsa": {
-          "name": "Financial Sentiment Analysis",
-          "group": "Task"
+          "name": "FSA",
+          "group": "Industry Understanding"
         },
         "re": {
-          "name": "Relation Extraction",
-          "group": "Task"
+          "name": "RE",
+          "group": "Industry Understanding"
         },
         "fee": {
-          "name": "Financial Event Extraction",
-          "group": "Task"
+          "name": "FEE",
+          "group": "Industry Understanding"
         },
         "nee": {
-          "name": "Negative Entity Extraction",
-          "group": "Task"
+          "name": "NEE",
+          "group": "Industry Understanding"
         },
         "cee": {
-          "name": "Causal Event Extraction",
-          "group": "Task"
+          "name": "CEE",
+          "group": "Industry Understanding"
         },
         "fts": {
-          "name": "Financial Text Summarization",
-          "group": "Task"
+          "name": "FTS",
+          "group": "Industry Generation"
         },
         "fcp": {
-          "name": "Financial Customer Portrait",
-          "group": "Task"
+          "name": "FCP",
+          "group": "Industry Generation"
         },
         "msr": {
-          "name": "Marketing Scripts Recommendation",
-          "group": "Task"
+          "name": "MSR",
+          "group": "Industry Generation"
         },
         "ia": {
-          "name": "Investment Advice",
-          "group": "Task"
+          "name": "IA",
+          "group": "Industry Generation"
         },
         "app": {
-          "name": "Application Security",
-          "group": "Task"
+          "name": "App",
+          "group": "Financial Security"
         },
         "cryp": {
-          "name": "Cryptography",
-          "group": "Task"
+          "name": "Cryp",
+          "group": "Financial Security"
         },
         "ma": {
-          "name": "Malware Analysis",
-          "group": "Task"
+          "name": "MA",
+          "group": "Financial Security"
         },
         "ms": {
-          "name": "Memory Security",
-          "group": "Task"
+          "name": "MS",
+          "group": "Financial Security"
         },
         "ns": {
-          "name": "Network Security",
-          "group": "Task"
+          "name": "NS",
+          "group": "Financial Security"
         },
         "pent": {
-          "name": "Penetration Testing",
-          "group": "Task"
+          "name": "Pent",
+          "group": "Financial Security"
         },
         "reve": {
-          "name": "Reverse Engineering",
-          "group": "Task"
+          "name": "Reve",
+          "group": "Financial Security"
         },
         "soft": {
-          "name": "Software Security",
-          "group": "Task"
+          "name": "Soft",
+          "group": "Financial Security"
         },
         "syst": {
-          "name": "System Security",
-          "group": "Task"
+          "name": "Syst",
+          "group": "Financial Security"
         },
         "vul": {
-          "name": "Vulnerability",
-          "group": "Task"
+          "name": "Vul",
+          "group": "Financial Security"
         },
         "ws": {
-          "name": "Web Security",
-          "group": "Task"
+          "name": "WS",
+          "group": "Financial Security"
         },
         "cot": {
-          "name": "Chain of Thought",
-          "group": "Task"
+          "name": "COT",
+          "group": "Financial Agent"
         },
         "rag": {
-          "name": "Retrieval Augmented Generation",
-          "group": "Task"
+          "name": "RAG",
+          "group": "Financial Agent"
         },
         "ft": {
-          "name": "Financial tasks",
-          "group": "Task"
+          "name": "FT",
+          "group": "Financial Agent"
         },
         "mc": {
-          "name": "Multi-turn conversation",
-          "group": "Task"
+          "name": "MC",
+          "group": "Financial Agent"
         },
         "md": {
-          "name": "Multi-document question and answer",
-          "group": "Task"
+          "name": "MD",
+          "group": "Financial Agent"
         },
         "apiI": {
-          "name": "API invocation",
-          "group": "Task"
+          "name": "API-I",
+          "group": "Financial Agent"
         },
         "apiR": {
-          "name": "API retrieval",
-          "group": "Task"
+          "name": "API-R",
+          "group": "Financial Agent"
         }
       }
     },
@@ -209354,31 +209432,37 @@
         "turns": {
           "name": "Average turns",
           "unit": "count",
-          "better": "lower"
+          "better": "higher"
         },
         "trajectory": {
           "name": "Trajectory score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "commitments": {
-          "name": "Commitments",
-          "unit": "count"
+          "name": "Satisfied commitments",
+          "unit": "%",
+          "better": "higher"
         },
         "factConflicts": {
           "name": "Fact conflicts",
-          "unit": "count",
+          "unit": "%",
           "better": "lower"
         },
         "commitmentConflicts": {
           "name": "Commitment conflicts",
-          "unit": "count",
+          "unit": "%",
           "better": "lower"
         },
         "playerConflicts": {
-          "name": "Player conflicts",
-          "unit": "count",
+          "name": "Player-input conflicts",
+          "unit": "%",
           "better": "lower"
+        },
+        "conflictFreeRuns": {
+          "name": "Conflict-free runs",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -261631,6 +261715,11 @@
         "engineCompletedTrials": {
           "name": "Engine-completed trials",
           "unit": "count"
+        },
+        "agentErrors": {
+          "name": "Agent errors",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -268527,7 +268616,7 @@
       ],
       "chart": {
         "title": "Robotics Capabilities vs Time",
-        "note": "Mean score against wall-clock time per task attempt, 120 attempts per configuration; robot policies (VLAs) always run to their 3,600-step cap.",
+        "note": "Mean score against wall-clock time per task attempt, 120 attempts per configuration. Robot policies (VLAs) always run to their 3,600-step cap.",
         "x": {
           "key": "latency",
           "label": "Time per task attempt",
@@ -268569,6 +268658,11 @@
         }
       },
       "stats": {
+        "latency": {
+          "name": "Time per task attempt",
+          "unit": "seconds",
+          "better": "lower"
+        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"

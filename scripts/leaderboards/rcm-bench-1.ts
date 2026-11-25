@@ -35,7 +35,7 @@ const board: Leaderboard = {
   stats: {
     cases: { name: 'Cases', unit: 'count' }, totalTrials: { name: 'Total trials', unit: 'count' }, passedTrials: { name: 'Passed trials', unit: 'count', better: 'higher' },
     priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, priceCachedIn: { name: 'Cached input price', unit: 'usd-per-mtok', better: 'lower' },
-    estimatedRunCost: { name: 'Estimated run cost', unit: 'usd', better: 'lower' }, pricedSubtotal: { name: 'Priced attempts subtotal', unit: 'usd', better: 'lower' }, pricedAttempts: { name: 'Priced attempts', unit: 'count' }, engineCompletedTrials: { name: 'Engine-completed trials', unit: 'count' },
+    estimatedRunCost: { name: 'Estimated run cost', unit: 'usd', better: 'lower' }, pricedSubtotal: { name: 'Priced attempts subtotal', unit: 'usd', better: 'lower' }, pricedAttempts: { name: 'Priced attempts', unit: 'count' }, engineCompletedTrials: { name: 'Engine-completed trials', unit: 'count' }, agentErrors: { name: 'Agent errors', unit: 'count', better: 'lower' },
   },
   async fetch() {
     const data = await fetchJson<{ runs: Run[]; trialsPerCase: number; flows: { id: string; label: string }[] }>(FEED);
