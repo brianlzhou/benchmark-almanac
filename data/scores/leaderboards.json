@@ -55078,7 +55078,8 @@
       "url": "https://www.codabench.org/competitions/16309/",
       "feed": "https://ceur-ws.org/Vol-4283/paper303.pdf",
       "terms": "The authors publish the automatic pun-location ranking in their paper under CC BY 4.0. https://ceur-ws.org/Vol-4283/paper303.pdf CEUR-WS robots.txt permits the paper.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GROQ_FULL_PARTIAL_5",
@@ -55105,15 +55106,7 @@
         "ensemble_0_0_0_100_gpt_pooled_transl",
         "gpt_5.5_single",
         "identity_run"
-      ],
-      "static": "paper",
-      "stats": {
-        "rank": {
-          "name": "Published rank",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      ]
     },
     "clef-simpletext-2025-identify-avoid-hallucination": {
       "url": "https://ceur-ws.org/Vol-4038/paper_345.pdf",
@@ -80876,10 +80869,6 @@
         "completed": {
           "name": "Completed tasks",
           "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -89726,7 +89715,7 @@
       ],
       "stats": {
         "jer": {
-          "name": "Diarization error rate",
+          "name": "Jaccard error rate",
           "unit": "%",
           "better": "lower"
         },
@@ -89749,14 +89738,6 @@
           "name": "Correct speaker count",
           "unit": "%",
           "better": "higher"
-        },
-        "sessions": {
-          "name": "Sessions",
-          "unit": "count"
-        },
-        "minutes": {
-          "name": "Audio minutes",
-          "unit": "minutes"
         }
       }
     },
@@ -106836,36 +106817,20 @@
           "unit": "count",
           "better": "lower"
         },
-        "faithbenchSummarizationExamples": {
-          "name": "FaithBench summarization examples",
-          "unit": "count"
-        },
         "ragTruthSummarizationHallucinations": {
           "name": "RAGTruth summarization hallucinations",
           "unit": "count",
           "better": "lower"
-        },
-        "ragTruthSummarizationExamples": {
-          "name": "RAGTruth summarization examples",
-          "unit": "count"
         },
         "ragTruthQuestionAnsweringHallucinations": {
           "name": "RAGTruth question answering hallucinations",
           "unit": "count",
           "better": "lower"
         },
-        "ragTruthQuestionAnsweringExamples": {
-          "name": "RAGTruth question answering examples",
-          "unit": "count"
-        },
         "ragTruthDataToTextWritingHallucinations": {
           "name": "RAGTruth data-to-text hallucinations",
           "unit": "count",
           "better": "lower"
-        },
-        "ragTruthDataToTextWritingExamples": {
-          "name": "RAGTruth data-to-text examples",
-          "unit": "count"
         },
         "activeParams": {
           "name": "Active parameters",
@@ -107105,18 +107070,7 @@
         "utter-project/EuroMoE-2.6B-A0.6B-Instruct-Preview",
         "utter-project/EuroVLM-1.7B-Preview",
         "yulan-team/YuLan-Mini-Instruct"
-      ],
-      "stats": {
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
-        },
-        "failures": {
-          "name": "Failures",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      ]
     },
     "faroese-metaphorical-explanations": {
       "url": "https://aclanthology.org/2026.lrec-main.354.pdf",
@@ -188606,10 +188560,6 @@
           "name": "Strict false negatives",
           "unit": "count"
         },
-        "strictNum_prs": {
-          "name": "Strict pull requests",
-          "unit": "count"
-        },
         "allPrecision": {
           "name": "All precision",
           "unit": "%",
@@ -188642,10 +188592,6 @@
           "name": "All false negatives",
           "unit": "count"
         },
-        "allNum_prs": {
-          "name": "All pull requests",
-          "unit": "count"
-        },
         "precision": {
           "name": "Precision",
           "unit": "%",
@@ -188660,10 +188606,6 @@
           "name": "F1",
           "unit": "%",
           "better": "higher"
-        },
-        "prs": {
-          "name": "Pull requests",
-          "unit": "count"
         },
         "tp": {
           "name": "True positives",
@@ -200478,10 +200420,6 @@
           "name": "Mean task score",
           "unit": "%",
           "better": "higher"
-        },
-        "zeroShotPct": {
-          "name": "Zero-shot percentage",
-          "unit": "%"
         }
       }
     },
@@ -208996,16 +208934,6 @@
           "name": "MCP",
           "group": "Task type"
         }
-      },
-      "stats": {
-        "maxSteps": {
-          "name": "Maximum steps",
-          "unit": "count"
-        },
-        "historyImages": {
-          "name": "History images",
-          "unit": "count"
-        }
       }
     },
     "model-slant": {
@@ -210575,10 +210503,6 @@
         },
         "validTasks": {
           "name": "Valid tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         },
         "toolCalls": {
@@ -261559,7 +261483,7 @@
       "feed": "https://arxiv.org/html/2605.20873",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -261569,13 +261493,6 @@
       "parts": {
         "avgPass": {
           "name": "Avg-pass"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "note": "Model rank in the PlanningBench table."
         }
       }
     },
@@ -275973,7 +275890,7 @@
       "feed": "https://arxiv.org/pdf/2611.21485",
       "terms": "The paper license is linked at https://arxiv.org/abs/2611.21485.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Cambrian-P-7B",
@@ -276028,13 +275945,6 @@
         },
         "reasoning": {
           "name": "Reasoning"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -288480,7 +288390,7 @@
       "feed": "https://arxiv.org/html/2406.09098",
       "terms": "The authors publish these tables under the license linked at https://arxiv.org/abs/2406.09098.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "ChemDFM-13B",
@@ -288530,13 +288440,6 @@
         "Physics": {
           "name": "Physics",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -294316,32 +294219,6 @@
           "name": "SVP",
           "unit": "%",
           "better": "higher"
-        }
-      },
-      "stats": {
-        "spPoliticians": {
-          "name": "SP politicians",
-          "unit": "count"
-        },
-        "greensPoliticians": {
-          "name": "Grüne politicians",
-          "unit": "count"
-        },
-        "glpPoliticians": {
-          "name": "GLP politicians",
-          "unit": "count"
-        },
-        "centrePoliticians": {
-          "name": "Die Mitte politicians",
-          "unit": "count"
-        },
-        "fdpPoliticians": {
-          "name": "FDP politicians",
-          "unit": "count"
-        },
-        "svpPoliticians": {
-          "name": "SVP politicians",
-          "unit": "count"
         }
       }
     },
@@ -311633,124 +311510,124 @@
         "Ensemble of Qwen 3.8 Flash, DeepSeek V4.1 Flash, Gemini 3.5 Flash-Lite (all raw)"
       ],
       "parts": {
+        "opinionsqa": {
+          "name": "OpinionsQA"
+        },
+        "opinionsqa_politics": {
+          "name": "Politics",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_economy": {
+          "name": "Economy",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_technology": {
+          "name": "Technology",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_science-health": {
+          "name": "Science and health",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_identity": {
+          "name": "Identity",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_society": {
+          "name": "Society",
+          "group": "OpinionsQA"
+        },
         "globalopinionqa": {
           "name": "GlobalOpinionQA"
         },
         "globalopinionqa_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_society": {
-          "name": "society",
+          "name": "Society",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_global": {
-          "name": "global",
+          "name": "Global",
           "group": "GlobalOpinionQA"
         },
         "gss": {
           "name": "GSS"
         },
         "gss_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "GSS"
         },
         "gss_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "GSS"
         },
         "gss_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "GSS"
         },
         "gss_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "GSS"
         },
         "gss_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "GSS"
         },
         "gss_society": {
-          "name": "society",
+          "name": "Society",
           "group": "GSS"
         },
         "gss_global": {
-          "name": "global",
+          "name": "Global",
           "group": "GSS"
-        },
-        "opinionsqa": {
-          "name": "OpinionsQA"
-        },
-        "opinionsqa_politics": {
-          "name": "politics",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_economy": {
-          "name": "economy",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_technology": {
-          "name": "technology",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_science-health": {
-          "name": "science-health",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_identity": {
-          "name": "identity",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_society": {
-          "name": "society",
-          "group": "OpinionsQA"
         },
         "subpop": {
           "name": "SubPOP"
         },
         "subpop_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "SubPOP"
         },
         "subpop_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "SubPOP"
         },
         "subpop_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "SubPOP"
         },
         "subpop_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "SubPOP"
         },
         "subpop_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "SubPOP"
         },
         "subpop_society": {
-          "name": "society",
+          "name": "Society",
           "group": "SubPOP"
         },
         "subpop_global": {
-          "name": "global",
+          "name": "Global",
           "group": "SubPOP"
         }
       },
@@ -311768,26 +311645,6 @@
           "name": "Median latency",
           "unit": "ms",
           "better": "lower"
-        },
-        "opinionsqa_questions": {
-          "name": "OpinionsQA questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "globalopinionqa_questions": {
-          "name": "GlobalOpinionQA questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "gss_questions": {
-          "name": "General Social Survey questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "subpop_questions": {
-          "name": "Subpopulation questions",
-          "unit": "score",
-          "better": "higher"
         }
       }
     },
@@ -317005,7 +316862,8 @@
       "url": "https://arxiv.org/html/2608.19741",
       "feed": "https://arxiv.org/html/2608.19741",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [],
       "parts": {
@@ -317025,15 +316883,15 @@
           "name": "Consulting"
         }
       },
-      "static": "paper",
       "stats": {
         "pass20": {
-          "name": "Pass success",
+          "name": "pass^20",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All twenty attempts pass."
         },
         "passAt20": {
-          "name": "Pass",
+          "name": "pass@20",
           "unit": "%",
           "better": "higher"
         },
@@ -317082,15 +316940,6 @@
         "costPerAll20Task": {
           "name": "Cost per all-20-task run",
           "unit": "usd",
-          "better": "lower"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
-        },
-        "timeoutSeconds": {
-          "name": "Timeout",
-          "unit": "seconds",
           "better": "lower"
         },
         "retailTokensPerTurn": {
@@ -317199,10 +317048,6 @@
         },
         "failed": {
           "name": "Failed tickets",
-          "unit": "count"
-        },
-        "graded": {
-          "name": "Graded tickets",
           "unit": "count"
         },
         "latency": {
@@ -333139,11 +332984,6 @@
           "unit": "count",
           "better": "lower",
           "note": "Memory usage in megabytes."
-        },
-        "zeroShotPct": {
-          "name": "Zero-shot score",
-          "unit": "%",
-          "better": "higher"
         }
       }
     },
@@ -342119,7 +341959,8 @@
       "url": "https://aclanthology.org/2023.wmt-1.3.pdf#page=7",
       "feed": "https://aclanthology.org/2023.wmt-1.3.pdf#page=7",
       "terms": "Table 3 ranks primary systems and baselines within separate groups. ACL publishes the paper under CC BY 4.0. https://aclanthology.org/faq/copyright/ The robots URL returns HTML.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "DLUT",
@@ -342132,17 +341973,11 @@
         "NTU",
         "TJUNLP"
       ],
-      "static": "paper",
       "stats": {
         "d-BLEU": {
           "name": "d-BLEU",
           "unit": "score",
           "better": "higher"
-        },
-        "groupRank": {
-          "name": "Group rank",
-          "unit": "count",
-          "better": "lower"
         },
         "BLEU": {
           "name": "BLEU",
@@ -346220,10 +346055,6 @@
           "name": "Bankrupt runs",
           "unit": "count",
           "better": "lower"
-        },
-        "runs": {
-          "name": "Runs",
-          "unit": "count"
         },
         "funds:2025-01": {
           "name": "Funds in January 2025",

@@ -22,7 +22,7 @@ const board: Leaderboard = {
     x: { key: 'minutes', label: 'Minutes per ticket', unit: 'min', better: 'lower' },
     y: { key: 'score', label: 'Pass rate', unit: '%', better: 'higher' },
   },
-  stats: { correct:{name:'Correct tickets',unit:'count'}, failed:{name:'Failed tickets',unit:'count'}, graded:{name:'Graded tickets',unit:'count'}, latency:{name:'Latency per ticket',unit:'seconds',better:'lower'} },
+  stats: { correct:{name:'Correct tickets',unit:'count'}, failed:{name:'Failed tickets',unit:'count'}, latency:{name:'Latency per ticket',unit:'seconds',better:'lower'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(`${SITE}/`);
     const path = html.match(/\/assets\/home-[\w-]+\.js/)?.[0];
@@ -36,7 +36,7 @@ const board: Leaderboard = {
         score: Number(m[6]),
         setting: m[2] || undefined,
         cost: m[7] ? Number(m[7]) : undefined,
-        metrics: {correct: Number(m[3]), failed: Number(m[4]), graded: Number(m[5]),
+        metrics: {correct: Number(m[3]), failed: Number(m[4]),
           ...(m[8] ? {minutes: Number(m[8]), latency: Number(m[8]) * 60} : {}),
         },
       });

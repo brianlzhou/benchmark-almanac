@@ -7,15 +7,16 @@ const board: Leaderboard = {
   benchmark: "synthbench-survey",
   stats: {
     coverage: { name: 'Coverage', unit: '%', better: 'higher' }, runs: { name: 'Runs', unit: 'count' }, latencyP50: { name: 'Median latency', unit: 'ms', better: 'lower' },
-    opinionsqa: { name: 'OpinionsQA score', unit: 'score', better: 'higher' }, opinionsqa_questions: { name: 'OpinionsQA questions', unit: 'score', better: 'higher' }, opinionsqa_politics: { name: 'OpinionsQA politics', unit: 'score', better: 'higher' }, opinionsqa_economy: { name: 'OpinionsQA economy', unit: 'score', better: 'higher' }, opinionsqa_technology: { name: 'OpinionsQA technology', unit: 'score', better: 'higher' }, 'opinionsqa_science-health': { name: 'OpinionsQA science and health', unit: 'score', better: 'higher' }, opinionsqa_identity: { name: 'OpinionsQA identity', unit: 'score', better: 'higher' }, opinionsqa_society: { name: 'OpinionsQA society', unit: 'score', better: 'higher' },
-    globalopinionqa: { name: 'GlobalOpinionQA score', unit: 'score', better: 'higher' }, globalopinionqa_questions: { name: 'GlobalOpinionQA questions', unit: 'score', better: 'higher' }, globalopinionqa_politics: { name: 'GlobalOpinionQA politics', unit: 'score', better: 'higher' }, globalopinionqa_economy: { name: 'GlobalOpinionQA economy', unit: 'score', better: 'higher' }, globalopinionqa_technology: { name: 'GlobalOpinionQA technology', unit: 'score', better: 'higher' }, 'globalopinionqa_science-health': { name: 'GlobalOpinionQA science and health', unit: 'score', better: 'higher' }, globalopinionqa_identity: { name: 'GlobalOpinionQA identity', unit: 'score', better: 'higher' }, globalopinionqa_society: { name: 'GlobalOpinionQA society', unit: 'score', better: 'higher' }, globalopinionqa_global: { name: 'GlobalOpinionQA global', unit: 'score', better: 'higher' },
-    gss: { name: 'General Social Survey score', unit: 'score', better: 'higher' }, gss_questions: { name: 'General Social Survey questions', unit: 'score', better: 'higher' }, gss_politics: { name: 'General Social Survey politics', unit: 'score', better: 'higher' }, gss_economy: { name: 'General Social Survey economy', unit: 'score', better: 'higher' }, gss_technology: { name: 'General Social Survey technology', unit: 'score', better: 'higher' }, 'gss_science-health': { name: 'General Social Survey science and health', unit: 'score', better: 'higher' }, gss_identity: { name: 'General Social Survey identity', unit: 'score', better: 'higher' }, gss_society: { name: 'General Social Survey society', unit: 'score', better: 'higher' }, gss_global: { name: 'General Social Survey global', unit: 'score', better: 'higher' },
-    subpop: { name: 'Subpopulation score', unit: 'score', better: 'higher' }, subpop_questions: { name: 'Subpopulation questions', unit: 'score', better: 'higher' }, subpop_politics: { name: 'Subpopulation politics', unit: 'score', better: 'higher' }, subpop_economy: { name: 'Subpopulation economy', unit: 'score', better: 'higher' }, subpop_technology: { name: 'Subpopulation technology', unit: 'score', better: 'higher' }, 'subpop_science-health': { name: 'Subpopulation science and health', unit: 'score', better: 'higher' }, subpop_identity: { name: 'Subpopulation identity', unit: 'score', better: 'higher' }, subpop_society: { name: 'Subpopulation society', unit: 'score', better: 'higher' }, subpop_global: { name: 'Subpopulation global', unit: 'score', better: 'higher' },
   },
   url: "https://www.synthbench.org/leaderboard/",
   feed,
   terms: "The project publishes aggregate scores. Each survey has separate terms for question data. The host permits the public index and excludes separate detail paths in robots.txt.",
-  parts: {},
+  parts: {
+    opinionsqa: 'OpinionsQA', opinionsqa_politics: { name: 'Politics', group: 'OpinionsQA' }, opinionsqa_economy: { name: 'Economy', group: 'OpinionsQA' }, opinionsqa_technology: { name: 'Technology', group: 'OpinionsQA' }, 'opinionsqa_science-health': { name: 'Science and health', group: 'OpinionsQA' }, opinionsqa_identity: { name: 'Identity', group: 'OpinionsQA' }, opinionsqa_society: { name: 'Society', group: 'OpinionsQA' },
+    globalopinionqa: 'GlobalOpinionQA', globalopinionqa_politics: { name: 'Politics', group: 'GlobalOpinionQA' }, globalopinionqa_economy: { name: 'Economy', group: 'GlobalOpinionQA' }, globalopinionqa_technology: { name: 'Technology', group: 'GlobalOpinionQA' }, 'globalopinionqa_science-health': { name: 'Science and health', group: 'GlobalOpinionQA' }, globalopinionqa_identity: { name: 'Identity', group: 'GlobalOpinionQA' }, globalopinionqa_society: { name: 'Society', group: 'GlobalOpinionQA' }, globalopinionqa_global: { name: 'Global', group: 'GlobalOpinionQA' },
+    gss: 'GSS', gss_politics: { name: 'Politics', group: 'GSS' }, gss_economy: { name: 'Economy', group: 'GSS' }, gss_technology: { name: 'Technology', group: 'GSS' }, 'gss_science-health': { name: 'Science and health', group: 'GSS' }, gss_identity: { name: 'Identity', group: 'GSS' }, gss_society: { name: 'Society', group: 'GSS' }, gss_global: { name: 'Global', group: 'GSS' },
+    subpop: 'SubPOP', subpop_politics: { name: 'Politics', group: 'SubPOP' }, subpop_economy: { name: 'Economy', group: 'SubPOP' }, subpop_technology: { name: 'Technology', group: 'SubPOP' }, 'subpop_science-health': { name: 'Science and health', group: 'SubPOP' }, subpop_identity: { name: 'Identity', group: 'SubPOP' }, subpop_society: { name: 'Society', group: 'SubPOP' }, subpop_global: { name: 'Global', group: 'SubPOP' },
+  },
   async fetch() {
     type Result = { base:string; name:string; members?:{id:string}[]; method:string; variant:string|null; harness:string|null;
       index:number; indexLo:number; indexHi:number; cost100:number|null; latencyP50:number|null; coverage:number; runs:number;
@@ -27,15 +28,11 @@ const board: Leaderboard = {
       if (r.latencyP50 != null) metrics.latencyP50 = r.latencyP50;
       for (const [key,v] of Object.entries(r.ds)) {
         if (!Number.isFinite(v.idx)) throw new Error('Missing dataset index for ' + key);
-        const label = data.datasets.find(d => d.id === key)?.label ?? key;
-        board.parts![key] = label;
         metrics[key] = v.idx;
         metrics[key+'_lo'] = v.lo;
         metrics[key+'_hi'] = v.hi;
-        metrics[key+'_questions'] = v.n;
         for (const [topic,value] of Object.entries(v.topicIdx ?? {})) {
           if (!Number.isFinite(value)) continue;
-          board.parts![key+'_'+topic] = {name:topic,group:label};
           metrics[key+'_'+topic] = value;
         }
       }
