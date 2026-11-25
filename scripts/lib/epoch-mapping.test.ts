@@ -19,6 +19,13 @@ test('WeirdML v3 selects Score while v2 and other benchmark columns stay unchang
   assert.equal(epochScoreColumn('WeirdML', 'Accuracy'), 'Accuracy');
   assert.equal(epochScoreColumn('Other board', 'Max performance'), 'Max performance');
   assert.equal(epochScoreColumn('METR Time Horizons', 'Wrong column'), 'Time horizon');
+  assert.equal(epochScoreColumn('APEX-Agents', 'Pass@1 score'), 'Mean score');
+});
+
+test('APEX-Agents keeps Pass@1 as a percentage beside the mean score', () => {
+  assert.deepEqual(epochSecondaryMetrics('APEX-Agents', { 'Pass@1 score': '0.8420000000000001' }), { passAt1: 84.2 });
+  assert.equal(epochSecondaryMetrics('APEX-Agents', { 'Pass@1 score': '' }), null);
+  assert.throws(() => epochSecondaryMetrics('APEX-Agents', { 'Pass@1 score': '84.2' }));
 });
 
 test('WeirdML v3 preserves final performance as a percentage and rejects invalid units', () => {
@@ -55,5 +62,6 @@ test('whole Epoch files pinned to the version they hold', () => {
   assert.equal(epochRecord('FrontierCode'), 'frontiercode-1-1');
   assert.equal(epochRecord('CursorBench'), 'cursorbench-4-1');
   assert.equal(epochRecord('PostTrainBench'), 'posttrainbench-1-2');
+  assert.equal(epochRecord('APEX-Agents'), 'apex-agents-1-1');
   assert.equal(epochRecord('GPQA diamond'), undefined);
 });
