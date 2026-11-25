@@ -68879,43 +68879,88 @@
       }
     },
     "corecodebench": {
-      "url": "https://arxiv.org/html/2507.05281",
-      "feed": "https://arxiv.org/html/2507.05281",
-      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "url": "https://aclanthology.org/2026.acl-long.1196/",
+      "feed": "https://aclanthology.org/2026.acl-long.1196.pdf",
+      "terms": "Paper and license at https://aclanthology.org/2026.acl-long.1196/",
       "headline": "The paper reports no overall score, so this is the plain mean of its six atomic and composite task rates.",
       "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 8,
+      "retrieved": "2026-11-20",
+      "rows": 11,
       "unmatched": [
-        "Claude-4.5"
+        "Llama-3.1"
       ],
       "parts": {
-        "atomicDevRate": {
+        "AtomicOverallAC": {
+          "name": "Atomic overall accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AtomicOverallRate": {
+          "name": "Atomic overall pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AtomicDevelopmentAC": {
+          "name": "Atomic development accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AtomicDevelopmentRate": {
           "name": "Atomic development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "atomicBugFixRate": {
+        "AtomicBugFixAC": {
+          "name": "Atomic bug-fix accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AtomicBugFixRate": {
           "name": "Atomic bug-fix pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "atomicTddRate": {
+        "AtomicTDDAC": {
+          "name": "Atomic test-driven development accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "AtomicTDDRate": {
           "name": "Atomic test-driven development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "compositeDevRate": {
+        "CompositeOverallAC": {
+          "name": "Composite overall accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeOverallRate": {
+          "name": "Composite overall pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeDevelopmentAC": {
+          "name": "Composite development accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeDevelopmentRate": {
           "name": "Composite development pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "compositeBugFixRate": {
+        "CompositeBugFixRate": {
           "name": "Composite bug-fix pass rate",
           "unit": "%",
           "better": "higher"
         },
-        "compositeTddRate": {
+        "CompositeTDDAC": {
+          "name": "Composite test-driven development accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeTDDRate": {
           "name": "Composite test-driven development pass rate",
           "unit": "%",
           "better": "higher"
@@ -293485,9 +293530,11 @@
       "url": "https://www.skillsbench.ai/leaderboard",
       "feed": "https://huggingface.co/datasets/benchflow/skillsbench-leaderboard/resolve/main/leaderboard/skillsbench/v1.1/official.json (with_skills_score)",
       "terms": "Hugging Face dataset benchflow/skillsbench-leaderboard, licensed Apache-2.0.",
-      "retrieved": "2026-11-24",
-      "rows": 49,
-      "unmatched": [],
+      "retrieved": "2026-11-25",
+      "rows": 50,
+      "unmatched": [
+        "Ling 3.1 Flash 1019"
+      ],
       "harnesses": "system",
       "verified": "reviewed for release alignment by SkillsBench",
       "stats": {
@@ -311672,37 +311719,96 @@
     "t2i-nsi": {
       "url": "https://arxiv.org/html/2611.09304",
       "feed": "https://arxiv.org/html/2611.09304",
-      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2611.09304",
       "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 2,
+      "retrieved": "2026-11-20",
+      "rows": 6,
       "unmatched": [
-        "FLUX.2",
         "SD 3.5"
       ],
+      "parts": {
+        "lex.": {
+          "name": "lex.",
+          "group": "Form"
+        },
+        "morph.": {
+          "name": "morph.",
+          "group": "Form"
+        },
+        "syn.": {
+          "name": "syn.",
+          "group": "Form"
+        },
+        "L0 (obj)": {
+          "name": "L0 (obj)",
+          "group": "Complexity level"
+        },
+        "L1 (attr)": {
+          "name": "L1 (attr)",
+          "group": "Complexity level"
+        },
+        "L2 (rel)": {
+          "name": "L2 (rel)",
+          "group": "Complexity level"
+        },
+        "L3 (comp)": {
+          "name": "L3 (comp)",
+          "group": "Complexity level"
+        },
+        "L4 (nest)": {
+          "name": "L4 (nest)",
+          "group": "Complexity level"
+        }
+      },
       "stats": {
-        "meanConsistency": {
+        "Mean C_{j}": {
           "name": "Mean consistency",
           "unit": "score",
           "better": "higher"
         },
-        "negAlign": {
+        "NegAlign": {
           "name": "Negative alignment",
           "unit": "score",
           "better": "higher"
         },
-        "weight": {
+        "Weight": {
           "name": "Weight",
           "unit": "score"
         },
-        "similarity": {
+        "Similarity": {
           "name": "Similarity",
           "unit": "score",
           "better": "higher"
         },
-        "uncertainty": {
+        "Uncertainty": {
           "name": "Uncertainty",
           "unit": "score",
+          "better": "lower"
+        },
+        "SUCCESS": {
+          "name": "Successful generations",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ALWAYS_PRESENT": {
+          "name": "Always-present failures",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ALWAYS_ABSENT": {
+          "name": "Always-absent failures",
+          "unit": "score",
+          "better": "lower",
+          "note": "Rate from 0 to 1."
+        },
+        "PARTIAL_SUPPR": {
+          "name": "Partial suppression failures",
+          "unit": "%",
+          "better": "lower"
+        },
+        "WEAKLY_REND": {
+          "name": "Weakly rendered failures",
+          "unit": "%",
           "better": "lower"
         }
       }

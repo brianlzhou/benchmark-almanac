@@ -304,7 +304,6 @@
     "semeval-2022-task-8-multilingual-news-article-similarity": [{"field":"model.releaseDate","kind":"run date","why":"not stored","share":1,"sample":"2025-06-05"},{"field":"model.maxTokens","kind":"tokens","why":"not stored","share":0.93,"sample":"32768"}],
     "sheetbench-hud": [{"field":"raw.organization","kind":"submitter or agent maker","why":"not stored","share":1,"sample":"Pine AI"}],
     "siqa": [{"field":"std","kind":"uncertainty","why":"not stored","share":1}],
-    "skillsbench": [{"field":"Harness","kind":"harness or agent","why":"new"}],
     "slip-zero-shot-transfer-suite": [{"field":"#params.","kind":"open weights, license or size","why":"not stored","share":1}],
     "smartplay": [{"field":"Trials","kind":"trials","why":"not stored","share":1}],
     "smb-bench": [{"field":"Max output tokens per call","kind":"tokens","why":"not stored","share":1}],
