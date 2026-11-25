@@ -25,6 +25,7 @@ const RATES: [string, number][] = [
 
 const board: Leaderboard = {
   benchmark: 'bench-on-the-clocktower',
+  static: 'paper',
   url: POST,
   feed: `${CHART} (chart labels transcribed 2026-11-05)`,
   terms: "Read once through LessWrong's public GraphQL API to confirm the chart; the win rates are cited to the post's authors.",

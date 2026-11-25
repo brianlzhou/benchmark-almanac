@@ -7992,7 +7992,69 @@
       "rows": 1,
       "unmatched": [
         "GPT-4 (snapshot unspecified)"
-      ]
+      ],
+      "parts": {
+        "k": {
+          "name": "General knowledge",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "rw": {
+          "name": "Reading and writing",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "m": {
+          "name": "Math",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "r": {
+          "name": "Reasoning",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "wm": {
+          "name": "Working memory",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "ms": {
+          "name": "Memory storage",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "mr": {
+          "name": "Memory retrieval",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "v": {
+          "name": "Visual",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "a": {
+          "name": "Auditory",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        },
+        "s": {
+          "name": "Speed",
+          "group": "Domain",
+          "unit": "score",
+          "note": "Score out of 10."
+        }
+      }
     },
     "agi-eval-community-base": {
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
@@ -9973,7 +10035,34 @@
       "terms": "FAR.AI publishes the leaderboard for research use and provides no separate data license. Results are credited to FAR.AI.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "Chemical": {
+          "name": "Chemical",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Biological": {
+          "name": "Biological",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "RadiologicalNuclear": {
+          "name": "Radiological & Nuclear",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Explosives": {
+          "name": "Explosives",
+          "group": "Domain",
+          "unit": "usd"
+        },
+        "Cyber": {
+          "name": "Cyber",
+          "group": "Domain",
+          "unit": "usd"
+        }
+      }
     },
     "ai-spire-agi-eval": {
       "url": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
@@ -32651,6 +32740,7 @@
       "url": "https://www.lesswrong.com/posts/4pgGkbwvdmxKPcJsM/bench-on-the-clocktower",
       "feed": "https://res.cloudinary.com/lesswrong-2-0/image/upload/v1790323324/lexical_client_uploads/zladdbqfjjcqlrwjjdlg.png (chart labels transcribed 2026-11-05)",
       "terms": "Read once through LessWrong's public GraphQL API to confirm the chart; the win rates are cited to the post's authors.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": []
@@ -48934,7 +49024,49 @@
       "terms": "Server-rendered public page; the site has no robots.txt and no terms.",
       "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "mr": {
+          "name": "Mathematical Research",
+          "group": "Category"
+        },
+        "mm": {
+          "name": "Multimodal",
+          "group": "Category"
+        },
+        "cw": {
+          "name": "Creative Writing",
+          "group": "Category"
+        },
+        "svg": {
+          "name": "SVG Competition",
+          "group": "Category"
+        },
+        "mc": {
+          "name": "Menial Computation",
+          "group": "Category"
+        },
+        "bio": {
+          "name": "Biology and Bioinformatics",
+          "group": "Category"
+        },
+        "kw": {
+          "name": "Knowledge Work",
+          "group": "Category"
+        },
+        "bg": {
+          "name": "Board Games",
+          "group": "Category"
+        },
+        "sy": {
+          "name": "Sycophancy",
+          "group": "Category"
+        },
+        "swe": {
+          "name": "Software Engineering",
+          "group": "Category"
+        }
+      }
     },
     "checkerbench": {
       "url": "https://arxiv.org/html/2610.07557",
@@ -100015,7 +100147,25 @@
       "terms": "Server-rendered Epoch AI page (robots.txt allows /benchmarks/); Epoch publishes its benchmark data under CC BY 4.0.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "graphicDesign": {
+          "name": "Graphic design",
+          "group": "Category"
+        },
+        "dataInsight": {
+          "name": "Data insight generation",
+          "group": "Category"
+        },
+        "aiDataCenter": {
+          "name": "AI data center research",
+          "group": "Category"
+        },
+        "research": {
+          "name": "Research",
+          "group": "Category"
+        }
+      }
     },
     "epoch-capabilities-index": {
       "url": "https://epoch.ai/eci",
@@ -116716,7 +116866,18 @@
         "Qwen-Max-0919",
         "SenseChat-5",
         "Yi-34B-Chat"
-      ]
+      ],
+      "stats": {
+        "avgWinRate": {
+          "name": "Average win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "battles": {
+          "name": "Pairwise battles",
+          "unit": "count"
+        }
+      }
     },
     "flame-react-eval": {
       "url": "https://arxiv.org/html/2503.01619",
@@ -165113,7 +165274,8 @@
         "percept / adv",
         "qianlan",
         "redde / redde-v7"
-      ]
+      ],
+      "verified": "Verified by the EvalAI challenge host."
     },
     "kimi-asr-internal-moonshot-subset1": {
       "url": "https://github.com/MoonshotAI/Kimi-Audio-Evalkit/blob/main/LEADERBOARD.md",
@@ -165220,7 +165382,14 @@
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "hardWithTools": {
+          "name": "Hard subset (with tools)",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "kina": {
       "url": "https://huggingface.co/datasets/2077AIDataFoundation/KINA/resolve/main/README.md",
@@ -289354,7 +289523,33 @@
       "rows": 6,
       "unmatched": [
         "GPT-5.6"
-      ]
+      ],
+      "parts": {
+        "invariantPlan": {
+          "name": "Invariant clarity and plan quality (out of 20)",
+          "group": "Rubric"
+        },
+        "simplification": {
+          "name": "Simplification outcome (out of 25)",
+          "group": "Rubric"
+        },
+        "endToEndWiring": {
+          "name": "End-to-end wiring (out of 10)",
+          "group": "Rubric"
+        },
+        "noStubs": {
+          "name": "No stubs or parallel authority (out of 17)",
+          "group": "Rubric"
+        },
+        "correctnessProof": {
+          "name": "Correctness proof and incident preservation (out of 25)",
+          "group": "Rubric"
+        },
+        "runtimeDurability": {
+          "name": "Runtime durability and lifecycle (out of 3)",
+          "group": "Rubric"
+        }
+      }
     },
     "senior-engineer-benchmark-every-checks": {
       "url": "https://checks.every.to/p/senior-engineer-benchmark",
@@ -339892,7 +340087,25 @@
       "rows": 19,
       "unmatched": [
         "Hy4-dev"
-      ]
+      ],
+      "parts": {
+        "code": {
+          "name": "Code",
+          "group": "Track"
+        },
+        "web": {
+          "name": "Web",
+          "group": "Track"
+        },
+        "office": {
+          "name": "Office",
+          "group": "Track"
+        },
+        "security": {
+          "name": "Security",
+          "group": "Track"
+        }
+      }
     },
     "workbuddy-user-blind-evaluation-tencent": {
       "url": "https://huggingface.co/tencent/Hy4-flash#user-blind-evaluation",
