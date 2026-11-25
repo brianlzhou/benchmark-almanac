@@ -2400,20 +2400,23 @@
       "url": "https://arxiv.org/html/2607.16165",
       "feed": "https://arxiv.org/html/2607.16165",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
-      "static": "paper",
       "stats": {
         "minutesPerItem": {
           "name": "Time per item",
           "unit": "minutes",
           "better": "lower"
         },
-        "costPerItem": {
-          "name": "API cost per item",
-          "unit": "usd",
-          "better": "lower"
+        "toolCallsPerItem": {
+          "name": "Tool calls per item",
+          "unit": "count"
+        },
+        "agentTurnsPerItem": {
+          "name": "Agent turns per item",
+          "unit": "count"
         }
       }
     },
@@ -17612,8 +17615,8 @@
       "chart": {
         "title": "Cost vs. Performance",
         "x": {
-          "key": "costPerRun",
-          "label": "Source cost per run",
+          "key": "cost",
+          "label": "Average cost per run",
           "unit": "$",
           "better": "lower"
         },
@@ -17623,12 +17626,42 @@
           "unit": "%",
           "better": "higher"
         },
-        "note": "Mercor costPerRun values are preserved without assuming a per-task denominator."
+        "note": "Mercor plots mean score against average cost per run."
       },
       "stats": {
         "tokensPerRun": {
           "name": "Tokens per run",
           "unit": "tokens"
+        },
+        "passAt2": {
+          "name": "Pass@2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt3": {
+          "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt4": {
+          "name": "Pass@4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass2": {
+          "name": "Pass^2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass3": {
+          "name": "Pass^3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass4": {
+          "name": "Pass^4",
+          "unit": "%",
+          "better": "higher"
         }
       },
       "measures": {
@@ -31033,16 +31066,12 @@
       "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
+      "costPer": "run",
       "harnesses": "system",
       "stats": {
         "avgTokens": {
           "name": "Average tokens",
           "unit": "tokens"
-        },
-        "costUsd": {
-          "name": "Cost",
-          "unit": "usd",
-          "better": "lower"
         },
         "durationSeconds": {
           "name": "Duration",
@@ -40794,7 +40823,7 @@
           "name": "Block points",
           "unit": "count"
         },
-        "cost": {
+        "costDeduction": {
           "name": "Cost deduction",
           "unit": "score",
           "better": "lower"
@@ -40847,8 +40876,8 @@
           "unit": "score",
           "better": "lower"
         },
-        "tokens": {
-          "name": "Tokens",
+        "submissionTokens": {
+          "name": "Submission tokens",
           "unit": "tokens"
         }
       }
@@ -52482,6 +52511,7 @@
       "retrieved": "2026-11-24",
       "rows": 35,
       "unmatched": [],
+      "costPer": "run",
       "parts": {
         "easy": {
           "name": "Easy",
@@ -52502,13 +52532,8 @@
           "unit": "score",
           "better": "higher"
         },
-        "reportedCostUsd": {
-          "name": "Reported cost",
-          "unit": "usd",
-          "better": "lower"
-        },
         "reportedTokens": {
-          "name": "Reported tokens",
+          "name": "Reported total tokens",
           "unit": "tokens"
         }
       }
@@ -66499,6 +66524,22 @@
       "unmatched": [
         "DeepSeek Chat"
       ],
+      "chart": {
+        "title": "LMCA performance vs. cost",
+        "x": {
+          "key": "lmca_cost",
+          "label": "Average LMCA cost per response",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "lmca",
+          "label": "LMCA score",
+          "better": "higher"
+        },
+        "note": "Conceptual Reasoning Index plots LMCA score against average cost per response on a log scale with its Pareto frontier."
+      },
       "parts": {
         "lmca": {
           "name": "LMCA"
@@ -66508,6 +66549,45 @@
         },
         "dtbench": {
           "name": "DTBench"
+        }
+      },
+      "stats": {
+        "lmca_cost": {
+          "name": "LMCA cost per response",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "dt_cost": {
+          "name": "DTBench cost per response",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "elo": {
+          "name": "Text Arena Elo",
+          "unit": "elo",
+          "better": "higher"
+        },
+        "concord_norm": {
+          "name": "ACCoRD normalized violation",
+          "unit": "score",
+          "better": "lower",
+          "note": "Normalized linear-margin violation on ACCoRD, where lower means more consistent."
+        },
+        "dtbench_accuracy": {
+          "name": "DTBench capability accuracy",
+          "unit": "score",
+          "better": "higher",
+          "note": "Share of DTBench capability questions answered correctly, stored from 0 to 1."
+        },
+        "attitude_edt": {
+          "name": "EDT preference share",
+          "unit": "score",
+          "note": "Share of Newcomb-like attitude questions preferring evidential over causal decision theory, stored from 0 to 1."
+        },
+        "lmca_mean": {
+          "name": "LMCA raw critique mean",
+          "unit": "score",
+          "note": "Mean of raw per-critique LMCA scores used for routed-mix cost calculations."
         }
       }
     },
@@ -70407,6 +70487,11 @@
       "rows": 10,
       "unmatched": [],
       "stats": {
+        "passRate": {
+          "name": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "costPerSuccessfulTask": {
           "name": "Cost per successful task",
           "unit": "usd",
@@ -84624,19 +84709,8 @@
         },
         "minutes": {
           "name": "Median run time",
-          "unit": "minutes"
-        },
-        "medianCost": {
-          "name": "Median model cost per run",
-          "unit": "usd"
-        },
-        "scored": {
-          "name": "Scored runs",
-          "unit": "count"
-        },
-        "missing": {
-          "name": "Missing runs",
-          "unit": "count"
+          "unit": "minutes",
+          "better": "lower"
         }
       }
     },
@@ -163551,11 +163625,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "medianCost": {
-          "name": "Median inference cost per repository",
-          "unit": "usd",
-          "better": "lower"
-        },
         "medianTime": {
           "name": "Median wall-clock time per repository",
           "unit": "minutes",
@@ -170722,11 +170791,8 @@
         },
         "minutes": {
           "name": "Median minutes per run",
-          "unit": "minutes"
-        },
-        "medianCost": {
-          "name": "Median model cost per run",
-          "unit": "usd"
+          "unit": "minutes",
+          "better": "lower"
         },
         "opened": {
           "name": "Runs that opened the deciding record",
@@ -191234,6 +191300,7 @@
           "label": "F1 (macro)"
         }
       },
+      "costPer": "run",
       "parts": {
         "t1": {
           "name": "Video Tagging: Core dataset"
@@ -191276,6 +191343,11 @@
         },
         "t1.totalCost": {
           "name": "Video tagging core total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "t1.costPerHour": {
+          "name": "Video tagging core cost per hour",
           "unit": "usd",
           "better": "lower"
         },
@@ -219932,15 +220004,8 @@
         "nb-llama-3.1-8b-instruct-cardtmpl:latest",
         "normistral-7b-warm-instruct-cardtmpl:latest"
       ],
+      "costPer": "run",
       "stats": {
-        "answers": {
-          "name": "Answers",
-          "unit": "count"
-        },
-        "series": {
-          "name": "Series",
-          "unit": "count"
-        },
         "outdated": {
           "name": "Outdated answers",
           "unit": "%",
@@ -219957,17 +220022,12 @@
           "better": "lower"
         },
         "tokensIn": {
-          "name": "Input tokens",
+          "name": "Total input tokens",
           "unit": "tokens"
         },
         "tokensOut": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
-        },
-        "costUsd": {
-          "name": "Cost",
-          "unit": "usd",
-          "better": "lower"
         }
       }
     },
@@ -258674,13 +258734,35 @@
         },
         "costPer1m": {
           "name": "Cost per million tokens",
-          "unit": "usd",
+          "unit": "usd-per-mtok",
           "better": "lower"
         },
         "latencySeconds": {
           "name": "Latency",
           "unit": "seconds",
           "better": "lower"
+        },
+        "rubric": {
+          "name": "Rubric score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge rubric rating out of 5."
+        },
+        "engagement": {
+          "name": "Engagement score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge engagement rating out of 5."
+        },
+        "failureAvg": {
+          "name": "Average failure score",
+          "unit": "score",
+          "better": "lower"
+        },
+        "compositeScore": {
+          "name": "Composite score",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -293941,7 +294023,7 @@
       "feed": "https://arxiv.org/pdf/2605.28065",
       "terms": "The authors publish this arXiv paper under its access terms. https://info.arxiv.org/help/license/index.html",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)",
@@ -293963,11 +294045,6 @@
         "allPass": {
           "name": "Runs with all passes",
           "unit": "count"
-        },
-        "costUsd": {
-          "name": "Run cost",
-          "unit": "usd",
-          "better": "lower"
         },
         "turns": {
           "name": "Average turns",
@@ -337329,9 +337406,25 @@
         "sonnet 4 w/ Exa Search MCP",
         "sonnet 4 w/ Native Search"
       ],
+      "chart": {
+        "title": "Search MCP Benchmark",
+        "x": {
+          "key": "cpm",
+          "label": "Cost per 1,000 requests",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Parallel plots answer accuracy against total cost per 1,000 requests (CPM) on a linear scale."
+      },
       "stats": {
-        "costPerQueryCents": {
-          "name": "Cost per query",
+        "cpm": {
+          "name": "Cost per 1,000 requests",
           "unit": "usd",
           "better": "lower"
         }
@@ -340769,6 +340862,12 @@
           "unit": "usd",
           "better": "lower",
           "note": "Dollar amount shown in the source cost column."
+        },
+        "latency": {
+          "name": "Query time",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Reported query duration converted from minutes."
         },
         "latencyMin": {
           "name": "Minimum query time",

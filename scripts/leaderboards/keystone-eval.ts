@@ -19,12 +19,12 @@ const board:Leaderboard={
   benchmark:'keystone-eval',url:'https://imbue.com/blog/keystone-eval',feed:base+figures[0][0],
   terms:'Imbue publishes Figures 1 through 3 at https://imbue.com/blog/keystone-eval under its site terms.',
   aliases:{'Codex GPT-5.3':'gpt-5-3-codex','Codex Mini GPT-5.1':'gpt-5-1-codex-mini'},
-  stats:{mutation:{name:'Mutation win rate',unit:'%',better:'higher'},medianCost:{name:'Median inference cost per repository',unit:'usd',better:'lower'},
+  stats:{mutation:{name:'Mutation win rate',unit:'%',better:'higher'},
     medianTime:{name:'Median wall-clock time per repository',unit:'minutes',better:'lower'},repos:{name:'Repositories',unit:'count'}},
   async fetch(){
     for (const [path,hash] of figures) await chartRows(base+path,hash,[]);
-    return checked(results.map(([model,harness,score,mutation,medianCost,medianTime,repos])=>
-      ({model,harness,score,metrics:{mutation,medianCost,medianTime,repos}})),6);
+    return checked(results.map(([model,harness,score,mutation,cost,medianTime,repos])=>
+      ({model,harness,score,cost,metrics:{mutation,medianTime,repos}})),6);
   },
 };
 export default board;
