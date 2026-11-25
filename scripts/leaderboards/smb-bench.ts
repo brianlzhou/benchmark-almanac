@@ -32,16 +32,11 @@ const board: Leaderboard = {
   terms: 'ORO publishes these results under CC BY 4.0 for comparisons and audits. Hugging Face robots.txt permits the raw paths. No restricted grader data is read.',
   stats: {
     validRuns: { name: 'Valid runs', unit: 'count' },
-    plannedRuns: { name: 'Planned runs', unit: 'count' },
-    tasks: { name: 'Tasks', unit: 'count' },
-    simulatedDays: { name: 'Simulated days', unit: 'count' },
     changedMarginScore: { name: 'Changed-quarter margin score', unit: 'score', better: 'higher' },
     ownMargin: { name: 'Own margin', unit: 'score', better: 'higher', note: 'Net value growth as a share of the business sales potential.' },
     changedCost: { name: 'Changed-quarter cost', unit: 'usd', better: 'lower' },
     controlMarginScore: { name: 'Control margin score', unit: 'score', better: 'higher' },
     activeMinusControl: { name: 'Active minus control', unit: 'score', better: 'higher' },
-    maxOutputTokens: { name: 'Maximum output tokens per call', unit: 'tokens' },
-    profit_all: { name: 'Profit per quarter', unit: 'usd', better: 'higher', note: 'Mean profit over the 18 benchmark tasks.' },
     ...Object.fromEntries(Array.from({length: 91}, (_, day) => [`profit_day${day}`, { name: `Profit on day ${day}`, unit: 'usd', better: 'higher' }])),
   },
   aliases: {'Muse Wonder 1.0': 'muse-wonder'},
@@ -55,21 +50,21 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = d.board.models.map(r => {
       const config = configs?.find(x => x[0] === r.key);
       const build = builds?.find(x => x[0].replace(' (high)', '') === r.name) ?? builds?.find(x => x[0] === 'The first nine models');
-      const metrics: Record<string, number> = {validRuns: r.runs, plannedRuns: 54, tasks: 18, simulatedDays: 90};
+      const metrics: Record<string, number> = {validRuns: r.runs};
       const changed = margin?.find(x=>x[1]===r.key);
       const control = controls?.find(x=>x[0]===r.key);
       const diagnostics = {changedMarginScore:changed?.[2],ownMargin:changed?.[4],changedCost:changed?.[6],
-        controlMarginScore:control?.[1],activeMinusControl:control?.[4],maxOutputTokens:config?.[3]};
+        controlMarginScore:control?.[1],activeMinusControl:control?.[4]};
       for (const [key, cell] of Object.entries(diagnostics)) {
         const value = Number(cell?.replaceAll(',',''));
         if (cell?.trim() && Number.isFinite(value)) metrics[key]=value;
       }
-      for (const [k, v] of Object.entries(r.profitUsd)) metrics[`profit_${k}`] = v;
+      for (const [k, v] of Object.entries(r.profitUsd)) if (k !== 'all') metrics[`profit_${k}`] = v;
       r.dailyUsd.forEach((v, i) => metrics[`profit_day${i}`] = v);
       r.byTask.forEach((v, i) => metrics[`task${i + 1}_finalProfit`] = v.at(-1)!);
       return {model: r.name, score: r.profitUsd.all, trials: 3, cost: r.costPerRunUsd,
         harness: 'ORO buyer loop', agentOrg: 'ORO',
-        setting: [config?.slice(1).join('; ') ?? 'high reasoning; max output 65536', build?.slice(1).join('; ')].filter(Boolean).join('; '),
+        setting: [config?.slice(1).join(', ') ?? 'high reasoning, max output 65536', build?.slice(1).join(', ')].filter(Boolean).join(', ').replace(/;\s*/g, ', '),
         date: build?.[5]?.match(/to (\d{4}-\d{2}-\d{2})/)?.[1] ?? build?.[5]?.match(/\d{4}-\d{2}-\d{2}/)?.[0],
         link: 'https://oroagents.com/smb-bench/runs', metrics};
     });

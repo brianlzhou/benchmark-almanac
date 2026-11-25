@@ -15,9 +15,8 @@ const board: Leaderboard = {
   terms: "The Space lists apache-2.0 for its repository. https://huggingface.co/spaces/Salesforce/GIFT-Eval/blob/main/README.md",
   stats: {
     MASE: { name: 'Mean absolute scaled error', unit: 'score', better: 'lower' },
-    MASE_Rank: { name: 'Mean absolute scaled error rank', unit: 'count', better: 'lower' },
     CRPS: { name: 'Continuous ranked probability score', unit: 'score', better: 'lower' },
-    CRPS_Rank: { name: 'Continuous ranked probability score rank', unit: 'count', better: 'lower' },
+    CRPS_Rank: { name: 'Mean CRPS rank across datasets', unit: 'count', better: 'lower' },
   },
   async fetch() {
     const config = await fetchJson<{components: {type: string; props: {value: Table}}[]}>(FEED);
@@ -43,6 +42,7 @@ const board: Leaderboard = {
           const v = cells[j];
           if (v == null || String(v).trim() === '' || !Number.isFinite(Number(v))) continue;
           const key = grid.headers[j];
+          if (!i && key === 'MASE_Rank') continue;
           row.metrics![key] = Number(v);
           if (i) this.parts[key] = {name: key, group, better: 'lower'};
         }

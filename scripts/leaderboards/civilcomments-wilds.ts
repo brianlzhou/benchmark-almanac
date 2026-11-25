@@ -10,7 +10,6 @@ const board: Leaderboard = {
   benchmark: 'civilcomments-wilds', url: feed + '#civilcomments', feed,
   terms: 'The WILDS team publishes and attributes each submission at https://wilds.stanford.edu/leaderboard/.',
   stats: {
-    rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' },
     valAvg: { name: 'Validation average accuracy', unit: '%', better: 'higher' },
     valWorstGroup: { name: 'Validation worst-group accuracy', unit: '%', better: 'higher' },
     testAvg: { name: 'Test average accuracy', unit: '%', better: 'higher' },
@@ -33,7 +32,7 @@ const board: Leaderboard = {
           if (!m) throw new Error('Missing accuracy or standard deviation');
           return m.slice(1).map(Number);
         });
-        const metrics: Record<string, number> = {std: values[3][1], rank: Number(c[0])};
+        const metrics: Record<string, number> = {std: values[3][1]};
         ['valAvg', 'valWorstGroup', 'testAvg'].forEach((key,i) => {
           metrics[key] = values[i][0];
           metrics[key+'Std'] = values[i][1];

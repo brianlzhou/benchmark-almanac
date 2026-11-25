@@ -408,11 +408,6 @@
           "name": "List price",
           "unit": "usd",
           "better": "lower"
-        },
-        "publishedSceneRank": {
-          "name": "Published scene rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -40809,14 +40804,11 @@
         }
       },
       "stats": {
-        "adapted": {
-          "name": "Adapted score",
-          "unit": "score",
-          "better": "higher"
-        },
         "seed": {
-          "name": "Seed",
-          "unit": "count"
+          "name": "Seed attack success rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Attack success rate of the observed injection on the first attempt."
         }
       }
     },
@@ -46575,38 +46567,6 @@
           "unit": "speedup",
           "better": "higher"
         }
-      },
-      "stats": {
-        "gomokuRank": {
-          "name": "Gomoku rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "holdemRank": {
-          "name": "Holdem rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "oibench_5Rank": {
-          "name": "OIBench-5 rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "swe_perf_10Rank": {
-          "name": "SWE-Perf-10 rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "pommermanRank": {
-          "name": "Pommerman rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "tetrisRank": {
-          "name": "Tetris rank",
-          "unit": "count",
-          "better": "lower"
-        }
       }
     },
     "catarena-gomoku": {
@@ -48536,29 +48496,8 @@
         "Videochat2"
       ],
       "stats": {
-        "publishedTableRank": {
-          "name": "Published table rank",
-          "unit": "count"
-        },
-        "llmParams": {
-          "name": "Language model parameters",
-          "unit": "billions"
-        },
-        "clueFrames": {
-          "name": "Clue frames",
-          "unit": "count"
-        },
-        "longFrames": {
-          "name": "Long-video frames",
-          "unit": "count"
-        },
         "clueAccuracy": {
           "name": "Clue accuracy",
-          "unit": "%",
-          "better": "higher"
-        },
-        "longAccuracy": {
-          "name": "Long-video accuracy",
           "unit": "%",
           "better": "higher"
         },
@@ -49502,12 +49441,6 @@
         "Toxicity and Safety": {
           "name": "Toxicity and safety",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "temperature": {
-          "name": "Temperature",
-          "unit": "score"
         }
       }
     },
@@ -53250,11 +53183,6 @@
         "distilbert-base-uncased"
       ],
       "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "valAvg": {
           "name": "Validation average accuracy",
           "unit": "%",
@@ -90959,11 +90887,6 @@
         "Platform (orchestrated)"
       ],
       "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "classification": {
           "name": "Classification accuracy",
           "unit": "%",
@@ -117857,42 +117780,6 @@
         "panel2": {
           "name": "Panel 2"
         }
-      },
-      "stats": {
-        "group": {
-          "name": "Statistical rank group",
-          "unit": "count"
-        },
-        "rank": {
-          "name": "Point estimate rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "standardError": {
-          "name": "Standard error",
-          "unit": "score",
-          "better": "lower"
-        },
-        "completed": {
-          "name": "Completed tasks",
-          "unit": "count"
-        },
-        "scheduled": {
-          "name": "Scheduled tasks",
-          "unit": "count"
-        },
-        "valid": {
-          "name": "Valid scored tasks",
-          "unit": "count"
-        },
-        "parseable": {
-          "name": "Parseable tasks",
-          "unit": "count"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
-        }
       }
     },
     "flavourbench-powered-v43": {
@@ -117945,15 +117832,6 @@
           "unit": "score",
           "better": "higher",
           "note": "Fraction of responses that parse successfully, stored from 0 to 1."
-        },
-        "scheduled": {
-          "name": "Scheduled tasks",
-          "unit": "count"
-        },
-        "standardError": {
-          "name": "Standard error",
-          "unit": "score",
-          "better": "lower"
         }
       }
     },
@@ -123387,11 +123265,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "IndianEnglish_rank": {
-          "name": "Indian English Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Hindi_pauseSr": {
           "name": "Hindi Pause success rate",
           "unit": "%",
@@ -123436,11 +123309,6 @@
           "name": "Hindi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Hindi_rank": {
-          "name": "Hindi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Bengali_pauseSr": {
           "name": "Bengali Pause success rate",
@@ -123487,11 +123355,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Bengali_rank": {
-          "name": "Bengali Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Punjabi_pauseSr": {
           "name": "Punjabi Pause success rate",
           "unit": "%",
@@ -123536,11 +123399,6 @@
           "name": "Punjabi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Punjabi_rank": {
-          "name": "Punjabi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Gujarati_pauseSr": {
           "name": "Gujarati Pause success rate",
@@ -123587,11 +123445,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Gujarati_rank": {
-          "name": "Gujarati Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Marathi_pauseSr": {
           "name": "Marathi Pause success rate",
           "unit": "%",
@@ -123636,11 +123489,6 @@
           "name": "Marathi Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Marathi_rank": {
-          "name": "Marathi Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Kannada_pauseSr": {
           "name": "Kannada Pause success rate",
@@ -123687,11 +123535,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Kannada_rank": {
-          "name": "Kannada Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Telugu_pauseSr": {
           "name": "Telugu Pause success rate",
           "unit": "%",
@@ -123736,11 +123579,6 @@
           "name": "Telugu Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Telugu_rank": {
-          "name": "Telugu Language rank",
-          "unit": "count",
-          "better": "lower"
         },
         "Tamil_pauseSr": {
           "name": "Tamil Pause success rate",
@@ -123787,11 +123625,6 @@
           "unit": "rating",
           "better": "higher"
         },
-        "Tamil_rank": {
-          "name": "Tamil Language rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "Malayalam_pauseSr": {
           "name": "Malayalam Pause success rate",
           "unit": "%",
@@ -123836,11 +123669,6 @@
           "name": "Malayalam Interruption rating",
           "unit": "rating",
           "better": "higher"
-        },
-        "Malayalam_rank": {
-          "name": "Malayalam Language rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -132855,18 +132683,13 @@
           "unit": "score",
           "better": "lower"
         },
-        "MASE_Rank": {
-          "name": "Mean absolute scaled error rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "CRPS": {
           "name": "Continuous ranked probability score",
           "unit": "score",
           "better": "lower"
         },
         "CRPS_Rank": {
-          "name": "Continuous ranked probability score rank",
+          "name": "Mean CRPS rank across datasets",
           "unit": "count",
           "better": "lower"
         }
@@ -175343,20 +175166,16 @@
         }
       },
       "stats": {
-        "publishedRank": {
-          "name": "Published rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "rule_guided_prompt_accuracy_pct": {
           "name": "Rule guided prompt accuracy",
           "unit": "%",
           "better": "higher"
         },
         "pass3": {
-          "name": "Pass at 3",
+          "name": "pass^3",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All three attempts pass."
         },
         "bad_book_entry_rate_pct": {
           "name": "Bad book entry rate",
@@ -175397,16 +175216,6 @@
           "name": "Double-entry bookkeeping lift consistency",
           "unit": "%",
           "better": "higher"
-        },
-        "wall_time_seconds": {
-          "name": "Wall time",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "estimated_cost_usd": {
-          "name": "Estimated cost",
-          "unit": "usd",
-          "better": "lower"
         },
         "pareto_score": {
           "name": "Pareto score",
@@ -178435,12 +178244,6 @@
         "psychological_health": {
           "name": "Psychological health",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "rankChange": {
-          "name": "Rank change",
-          "unit": "count"
         }
       }
     },
@@ -210466,10 +210269,6 @@
           "name": "Completed turns",
           "unit": "count"
         },
-        "completed": {
-          "name": "Completed tasks",
-          "unit": "count"
-        },
         "passed": {
           "name": "Passed tasks",
           "unit": "count"
@@ -210501,22 +210300,6 @@
         "timeoutTurnsMax": {
           "name": "Maximum timeout turns",
           "unit": "count"
-        },
-        "timeoutLimitSecondsMin": {
-          "name": "Minimum timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsMedian": {
-          "name": "Median timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsAvg": {
-          "name": "Average timeout limit",
-          "unit": "seconds"
-        },
-        "timeoutLimitSecondsMax": {
-          "name": "Maximum timeout limit",
-          "unit": "seconds"
         }
       }
     },
@@ -221907,10 +221690,6 @@
           "name": "Effective context length",
           "unit": "thousands",
           "better": "higher"
-        },
-        "effectiveLengthBelow1K": {
-          "name": "Effective context length below 1K",
-          "unit": "count"
         },
         "claimedLengthK": {
           "name": "Claimed context length",
@@ -257870,17 +257649,10 @@
         "Hallu": {
           "name": "Perception-related hallucination",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "Count": {
-          "name": "Item count",
-          "unit": "count"
         },
-        "#": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
+        "Count": {
+          "name": "Counting",
+          "group": "Task type"
         }
       }
     },
@@ -268642,11 +268414,6 @@
         }
       },
       "stats": {
-        "rank": {
-          "name": "Level 3 rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "delta": {
           "name": "Difference from Laguna-XS.2 in percentage points",
           "unit": "score",
@@ -283104,14 +282871,6 @@
         }
       },
       "stats": {
-        "completedTasks": {
-          "name": "Completed tasks",
-          "unit": "count"
-        },
-        "totalTasks": {
-          "name": "Total tasks",
-          "unit": "count"
-        },
         "activeParamsB": {
           "name": "Active parameters",
           "unit": "billions"
@@ -294149,18 +293908,6 @@
           "name": "Valid runs",
           "unit": "count"
         },
-        "plannedRuns": {
-          "name": "Planned runs",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "simulatedDays": {
-          "name": "Simulated days",
-          "unit": "count"
-        },
         "changedMarginScore": {
           "name": "Changed-quarter margin score",
           "unit": "score",
@@ -294186,16 +293933,6 @@
           "name": "Active minus control",
           "unit": "score",
           "better": "higher"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens per call",
-          "unit": "tokens"
-        },
-        "profit_all": {
-          "name": "Profit per quarter",
-          "unit": "usd",
-          "better": "higher",
-          "note": "Mean profit over the 18 benchmark tasks."
         },
         "profit_day0": {
           "name": "Profit on day 0",
@@ -304563,10 +304300,6 @@
         "cachedTokens": {
           "name": "Cached input tokens",
           "unit": "tokens"
-        },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
         },
         "timeouts": {
           "name": "Timeouts",
@@ -317407,13 +317140,6 @@
         "proximity": {
           "name": "Record proximity",
           "unit": "%"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -331892,13 +331618,6 @@
           "name": "Step Video",
           "group": "Source model"
         }
-      },
-      "stats": {
-        "reviewerRank": {
-          "name": "Reviewer rank",
-          "unit": "rating",
-          "better": "lower"
-        }
       }
     },
     "video-safetybench": {
@@ -336896,10 +336615,6 @@
         }
       },
       "stats": {
-        "#": {
-          "name": "Rank",
-          "unit": "count"
-        },
         "Semantics": {
           "name": "Semantics score",
           "unit": "%",

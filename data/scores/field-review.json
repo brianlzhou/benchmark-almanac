@@ -311,6 +311,7 @@
     "skillsbench": [{"field":"Harness","kind":"harness or agent","why":"new"}],
     "slip-zero-shot-transfer-suite": [{"field":"#params.","kind":"open weights, license or size","why":"not stored","share":1}],
     "smartplay": [{"field":"Trials","kind":"trials","why":"not stored","share":1}],
+    "smb-bench": [{"field":"Max output tokens per call","kind":"tokens","why":"not stored","share":1}],
     "songbench": [{"field":"Open-source Models","kind":"open weights, license or size","why":"not stored","share":1},{"field":"ACE-Step v1.5","kind":"time, latency or steps","why":"not stored","share":1}],
     "songeval": [{"field":"Utt. Average Duration (min)","kind":"time, latency or steps","why":"not stored","share":1}],
     "soohak": [{"field":"Team","kind":"submitter or agent maker","why":"not stored","share":1}],

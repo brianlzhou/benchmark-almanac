@@ -17,7 +17,7 @@ const board: Leaderboard = {
     'Llama 3.3 70B': 'llama-3-3-70b-instruct', 'Gemini 1.5 Flash': 'gemini-1-5-flash-sep-2024',
   },
   parts: Object.fromEntries(lengths.map(n => ['k'+n, { name: n+'K', group: n <= 32 ? 'Standard lengths' : 'Extended lengths' }])),
-  stats: { base: { name: 'Base score', unit: 'score', better: 'higher' }, threshold: { name: 'Base score threshold', unit: 'score' }, effectiveLengthK: { name: 'Effective context length', unit: 'thousands', better: 'higher' }, effectiveLengthBelow1K: { name: 'Effective context length below 1K', unit: 'count' }, claimedLengthK: { name: 'Claimed context length', unit: 'thousands' } },
+  stats: { base: { name: 'Base score', unit: 'score', better: 'higher' }, threshold: { name: 'Base score threshold', unit: 'score' }, effectiveLengthK: { name: 'Effective context length', unit: 'thousands', better: 'higher' }, claimedLengthK: { name: 'Claimed context length', unit: 'thousands' } },
   async fetch() {
     const section = (await fetchText(feed)).split('## Results\n')[1]?.trim().split(/\n\s*\n/)[0];
     if (!section || !section.includes('Effective Length') || !/1K\s*\|\s*2K\s*\|\s*4K\s*\|\s*8K\s*\|\s*16K\s*\|\s*32K\s*\|\s*64K\*\s*\|\s*128K\*/.test(section))
@@ -28,8 +28,7 @@ const board: Leaderboard = {
       if (!reference || scores.length !== 8) throw new Error('Unexpected NoLiMa columns');
       const metrics: Record<string, number> = { base: Number(reference[1]), threshold: Number(reference[2]) };
       if (/^\d+K$/.test(effective)) metrics.effectiveLengthK = parseInt(effective);
-      else if (effective === '<1K') metrics.effectiveLengthBelow1K = 1;
-      else throw new Error('Invalid effective length');
+      else if (effective !== '<1K') throw new Error('Invalid effective length');
       if (/^\d+[KM]$/.test(claimed)) metrics.claimedLengthK = parseInt(claimed) * (claimed.endsWith('M') ? 1000 : 1);
       scores.forEach((value, i) => {
         if (i >= 6 && value === '--') return;
