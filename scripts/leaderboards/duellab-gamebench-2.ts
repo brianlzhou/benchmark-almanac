@@ -16,6 +16,14 @@ const board: Leaderboard = {
     costPerPlayer: { name: 'Cost per player', unit: 'usd', better: 'lower' },
     strength: { name: 'Strength', unit: 'score', better: 'higher' },
     best: { name: 'Best score', unit: 'score', better: 'higher' },
+    wins: { name: 'Wins', unit: 'count', better: 'higher' },
+    draws: { name: 'Draws', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    pricedRuns: { name: 'Priced generation runs', unit: 'count' },
+    firstTry: { name: 'Programs working on first try', unit: '%', better: 'higher' },
+    afterRepair: { name: 'Programs working after repair', unit: '%' },
+    failed: { name: 'Failed programs', unit: '%', better: 'lower' },
+    testedPrograms: { name: 'Tested programs', unit: 'count' },
   },
   
   async fetch() {

@@ -26,6 +26,10 @@ const board: Leaderboard = {
   parts: {
     developmentReported: { name: 'Development', group: 'Split' },
   },
+  stats: {
+    rewardBasedEfficiency: { name: 'Reward-based valid efficiency score', unit: 'score', better: 'higher' },
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+  },
   harnesses: 'system',
   url: URL,
   feed: `${URL} (main leaderboard table, Test %)`,
