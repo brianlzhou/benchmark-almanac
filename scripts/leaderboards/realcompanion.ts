@@ -36,8 +36,8 @@ export default {
           const range = row[k+2].match(/^(\S+) \((\S+)[–-](\S+)\)$/);
           if (!range) throw new Error('Missing run range');
           if (layer === 'profile') metrics[layer + metric] = 100 * number(range[1]);
-          metrics[layer + metric + 'Min'] = 100 * number(range[2]);
-          metrics[layer + metric + 'Max'] = 100 * number(range[3]);
+          metrics[layer + metric + 'Low'] = 100 * number(range[2]);
+          metrics[layer + metric + 'High'] = 100 * number(range[3]);
         }
         metrics[layer + 'CallsPerRun'] = number(cost[1 + 3*j]);
         metrics[layer + 'TokensPerRun'] = number(cost[2 + 3*j]);

@@ -12,22 +12,48 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2305.10971',
   feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2305.10971',
+  parts: {
+    en410: { name: 'English (N=410)', group: 'Language' },
+    en1300: { name: 'English (N=1300)', group: 'Language' },
+    hau: { name: 'Hausa (N=410)', group: 'Language' },
+    ibo: { name: 'Igbo (N=410)', group: 'Language' },
+    pcm: { name: 'Nigerian Pidgin (N=410)', group: 'Language' },
+    yor410: { name: 'Yoruba (N=410)', group: 'Language' },
+    yor900: { name: 'Yoruba (N=900)', group: 'Language' },
+  },
   stats: { excludingEnglish: { name: 'Average excluding English', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
-    if (!text.includes('Table 3: Baseline result using classical machine learning')) throw new Error('NollySenti Table 3 missing');
-    const values: Array<[string, number, number, number, number, number, number, number, number]> = [
-      ['LogisticReg', 79.2, 84.2, 78.8, 81.8, 83.4, 78.8, 80.1, 81.0],
-      ['SVM', 79.0, 85.2, 79.0, 80.6, 83.6, 79.7, 81.9, 81.3],
-      ['mBERT', 90.3, 92.6, 80.0, 82.4, 89.1, 84.8, 87.8, 87.0],
-      ['XLM-R-base', 93.2, 94.1, 76.8, 83.6, 90.8, 83.9, 86.0, 86.9],
-      ['mDeBERTaV3', 94.2, 95.1, 83.7, 87.1, 91.8, 82.2, 87.4, 88.8],
-      ['AfriBERTa-large', 86.2, 89.5, 87.2, 88.4, 88.3, 85.9, 90.9, 88.1],
-      ['AfroXLMR-base', 92.3, 94.1, 84.2, 85.6, 91.0, 83.8, 88.4, 88.5],
-    ];
-    const rows = values.map(([model, english410, english1300, hau, ibo, pcm, yor, hau900, score]) => ({
-      model, score, metrics: { english410, english1300, hau, ibo, pcm, yor, hau900 },
-    }));
+    const cap = text.indexOf('Table 3: Baseline result using classical machine learning');
+    if (cap < 0) throw new Error('NollySenti Table 3 missing');
+    const block = text.slice(Math.max(0, cap - 1200), cap);
+    const ROW = /^\s*(LogisticReg|SVM|mBERT|XLM-R-base|mDeBERTaV3|AfriBERTa-large|AfroXLMR-base)\s+(<\d+K|\d+M)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)±([\d.]+)\s+([\d.]+)±([\d.]+)/;
+    const rows: LeaderboardRow[] = [];
+    for (const line of block.split(/\r?\n/)) {
+      const m = line.match(ROW);
+      if (!m) continue;
+      const [, model, pRaw, en410, en1300, hau, ibo, pcm, yor410, yor900, avg, avgStd, exclEng, exclStd] = m;
+      const pMatch = pRaw.match(/^(\d+)M$/);
+      const params = pMatch ? Number(pMatch[1]) / 1000 : undefined;
+      rows.push({
+        model,
+        score: Number(avg),
+        trials: 5,
+        ...(params !== undefined ? { params } : {}),
+        metrics: {
+          en410: Number(en410),
+          en1300: Number(en1300),
+          hau: Number(hau),
+          ibo: Number(ibo),
+          pcm: Number(pcm),
+          yor410: Number(yor410),
+          yor900: Number(yor900),
+          std: Number(avgStd),
+          excludingEnglish: Number(exclEng),
+          excludingEnglishStd: Number(exclStd),
+        },
+      });
+    }
     return checked(rows, 7);
   },
 };

@@ -220779,11 +220779,11 @@
       }
     },
     "nollysenti": {
-      "url": "https://aclanthology.org/2023.acl-short.85/",
-      "feed": "https://aclanthology.org/2023.acl-short.85.pdf",
-      "terms": "ACL Anthology publishes this paper under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://arxiv.org/abs/2305.10971",
+      "feed": "https://arxiv.org/pdf/2305.10971",
+      "terms": "The authors publish the results in the arXiv paper. https://arxiv.org/abs/2305.10971",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AfriBERTa-large",
@@ -220796,25 +220796,32 @@
       ],
       "parts": {
         "en410": {
-          "name": "English (N=410)"
+          "name": "English (N=410)",
+          "group": "Language"
         },
         "en1300": {
-          "name": "English (N=1300)"
+          "name": "English (N=1300)",
+          "group": "Language"
         },
         "hau": {
-          "name": "Hausa"
+          "name": "Hausa (N=410)",
+          "group": "Language"
         },
         "ibo": {
-          "name": "Igbo"
+          "name": "Igbo (N=410)",
+          "group": "Language"
         },
         "pcm": {
-          "name": "Naija"
+          "name": "Nigerian Pidgin (N=410)",
+          "group": "Language"
         },
         "yor410": {
-          "name": "Yoruba (N=410)"
+          "name": "Yoruba (N=410)",
+          "group": "Language"
         },
         "yor900": {
-          "name": "Yoruba (N=900)"
+          "name": "Yoruba (N=900)",
+          "group": "Language"
         }
       },
       "stats": {
@@ -224560,46 +224567,60 @@
       ],
       "parts": {
         "ShallowLocatetherobot": {
-          "name": "ShallowLocate the robot"
+          "name": "Locate the robot",
+          "group": "Shallow Water"
         },
         "ShallowLocatetheoildrums": {
-          "name": "ShallowLocate the oil drums"
+          "name": "Locate the oil drums",
+          "group": "Shallow Water"
         },
         "ShallowLocatetheelectricalbox": {
-          "name": "ShallowLocate the electrical box"
+          "name": "Locate the electrical box",
+          "group": "Shallow Water"
         },
         "ShallowSearchforasunkenship": {
-          "name": "ShallowSearch for a sunken ship"
+          "name": "Search for a sunken ship",
+          "group": "Shallow Water"
         },
         "ShallowSearchfortheaircraft": {
-          "name": "ShallowSearch for the aircraft"
+          "name": "Search for the aircraft",
+          "group": "Shallow Water"
         },
         "ShallowInspectoilpipe": {
-          "name": "ShallowInspect oil pipe"
+          "name": "Inspect oil pipe",
+          "group": "Shallow Water"
         },
         "ShallowInspectthewindturbine": {
-          "name": "ShallowInspect the wind turbine"
+          "name": "Inspect the wind turbine",
+          "group": "Shallow Water"
         },
         "ShallowDocking": {
-          "name": "ShallowDocking"
+          "name": "Docking",
+          "group": "Shallow Water"
         },
         "ShallowAverage": {
-          "name": "ShallowAverage"
+          "name": "Average",
+          "group": "Shallow Water"
         },
         "DeepLocateoildrums": {
-          "name": "DeepLocate oil drums"
+          "name": "Locate oil drums",
+          "group": "Deep Water"
         },
         "DeepSearchforasunkenship": {
-          "name": "DeepSearch for a sunken ship"
+          "name": "Search for a sunken ship",
+          "group": "Deep Water"
         },
         "DeepInspecttheoilpipe": {
-          "name": "DeepInspect the oil pipe"
+          "name": "Inspect the oil pipe",
+          "group": "Deep Water"
         },
         "DeepInspectthewindturbine": {
-          "name": "DeepInspect the wind turbine"
+          "name": "Inspect the wind turbine",
+          "group": "Deep Water"
         },
         "DeepAverage": {
-          "name": "DeepAverage"
+          "name": "Average",
+          "group": "Deep Water"
         }
       }
     },
@@ -252854,10 +252875,11 @@
       "feed": "https://internlm.github.io/OVO-S-Bench/",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-24",
-      "rows": 18,
+      "rows": 16,
       "unmatched": [
         "Cambrian-S-7B",
         "Cambrian-S-LFP-7B",
+        "Cosmos-Reason1-7B",
         "Flash-VStream-7B",
         "FluxMem-7B",
         "Gemma-4",
@@ -252867,6 +252889,7 @@
         "Qwen3-VL-4B",
         "RoboBrain2.5-4B",
         "RoboBrain2.5-NV-8B",
+        "RynnBrain-8B",
         "SenseNova-SI-1.5-8B",
         "Spatial-MLLM-7B",
         "Spatial-TTT-2B",
@@ -252898,6 +252921,10 @@
       "stats": {
         "activeParams": {
           "name": "Active parameters",
+          "unit": "billions"
+        },
+        "effectiveParams": {
+          "name": "Effective parameters",
           "unit": "billions"
         }
       }
@@ -260186,7 +260213,7 @@
       "stats": {
         "latency": {
           "name": "Latency",
-          "unit": "minutes",
+          "unit": "seconds",
           "better": "lower"
         }
       }
@@ -264758,7 +264785,8 @@
       "url": "https://arxiv.org/html/2609.18805",
       "feed": "https://arxiv.org/html/2609.18805",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "parts": {
@@ -264775,7 +264803,6 @@
           "group": "Task type"
         }
       },
-      "static": "paper",
       "stats": {
         "priceIn": {
           "name": "Input price per million tokens",
@@ -264818,6 +264845,10 @@
         },
         "editWriteSteps": {
           "name": "Edit write steps",
+          "unit": "count"
+        },
+        "editWriteStepsMin": {
+          "name": "Minimum edit write steps",
           "unit": "count"
         },
         "editWriteStepsMax": {
@@ -269840,7 +269871,7 @@
       "terms": "The authors license the paper under CC BY 4.0. https://arxiv.org/abs/2407.11005",
       "headline": "The paper reports separate metrics, so the headline is the plain mean of hallucination AUROC across its 12 datasets.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DeBERTA",
@@ -269858,6 +269889,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "PubMedQA Util": {
+          "name": "PubMedQA utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "CovidQA-RAG Hal": {
           "name": "CovidQA-RAG hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269866,6 +269902,11 @@
         "CovidQA-RAG Rel": {
           "name": "CovidQA-RAG context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "CovidQA-RAG Util": {
+          "name": "CovidQA-RAG utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         },
         "HotpotQA Hal": {
@@ -269878,6 +269919,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "HotpotQA Util": {
+          "name": "HotpotQA utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "MS Marco Hal": {
           "name": "MS Marco hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269886,6 +269932,11 @@
         "MS Marco Rel": {
           "name": "MS Marco context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "MS Marco Util": {
+          "name": "MS Marco utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         },
         "HAGRID Hal": {
@@ -269898,6 +269949,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "HAGRID Util": {
+          "name": "HAGRID utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "ExpertQA Hal": {
           "name": "ExpertQA hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269906,6 +269962,11 @@
         "ExpertQA Rel": {
           "name": "ExpertQA context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "ExpertQA Util": {
+          "name": "ExpertQA utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         },
         "DelucionQA Hal": {
@@ -269918,6 +269979,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "DelucionQA Util": {
+          "name": "DelucionQA utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "EManual Hal": {
           "name": "EManual hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269926,6 +269992,11 @@
         "EManual Rel": {
           "name": "EManual context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "EManual Util": {
+          "name": "EManual utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         },
         "TechQA Hal": {
@@ -269938,6 +270009,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "TechQA Util": {
+          "name": "TechQA utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "FinQA Hal": {
           "name": "FinQA hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269946,6 +270022,11 @@
         "FinQA Rel": {
           "name": "FinQA context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "FinQA Util": {
+          "name": "FinQA utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         },
         "TAT-QA Hal": {
@@ -269958,6 +270039,11 @@
           "group": "Relevance RMSE",
           "better": "lower"
         },
+        "TAT-QA Util": {
+          "name": "TAT-QA utilization RMSE",
+          "group": "Utilization RMSE",
+          "better": "lower"
+        },
         "CUAD Hal": {
           "name": "CUAD hallucination AUROC",
           "group": "Hallucination AUROC",
@@ -269966,6 +270052,11 @@
         "CUAD Rel": {
           "name": "CUAD context relevance RMSE",
           "group": "Relevance RMSE",
+          "better": "lower"
+        },
+        "CUAD Util": {
+          "name": "CUAD utilization RMSE",
+          "group": "Utilization RMSE",
           "better": "lower"
         }
       }
@@ -271169,7 +271260,7 @@
       "terms": "The authors publish their aggregate tables on arXiv. https://arxiv.org/abs/2610.01780",
       "headline": "The headline is persona reconstruction F1 across ten participants, expressed as a percentage.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "harnesses": "system",
@@ -279082,7 +279173,7 @@
       "feed": "https://arxiv.org/html/2611.22138",
       "terms": "The paper is available under the terms linked at https://arxiv.org/abs/2611.22138.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
       "stats": {
@@ -279097,10 +279188,6 @@
         },
         "inputTokens": {
           "name": "Input tokens per task",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Output tokens per task",
           "unit": "tokens"
         },
         "cachedPercent": {
@@ -279201,7 +279288,7 @@
       "terms": "The RoboTwin authors publish these results at CVPR and on arXiv. https://arxiv.org/abs/2504.13059",
       "headline": "The paper reports no overall success rate, so this is the mean of its 14 task success rates.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DP",
@@ -279358,6 +279445,11 @@
       "rows": 3,
       "unmatched": [],
       "stats": {
+        "Test Success": {
+          "name": "Test success rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "Easier Success": {
           "name": "Easier subset success rate",
           "unit": "%",
@@ -295660,7 +295752,7 @@
       "feed": "https://arxiv.org/html/2512.21907v1",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)"
@@ -295673,11 +295765,6 @@
         "latencySeconds": {
           "name": "Latency",
           "unit": "seconds",
-          "better": "lower"
-        },
-        "costUsd": {
-          "name": "Cost",
-          "unit": "usd",
           "better": "lower"
         }
       }
@@ -297546,6 +297633,18 @@
         "non_account": {
           "name": "Non account",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "latency": {
+          "name": "Latency",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -326771,6 +326870,11 @@
         "falcon-7B-instruct"
       ],
       "stats": {
+        "factualConsistency": {
+          "name": "Factual consistency rate",
+          "unit": "%",
+          "better": "higher"
+        },
         "answerRate": {
           "name": "Answer rate",
           "unit": "%",
@@ -336705,7 +336809,7 @@
       "feed": "https://arxiv.org/html/2207.01206",
       "terms": "The authors publish the paper on arXiv. https://info.arxiv.org/help/license/index.html",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "IL",
@@ -336723,6 +336827,44 @@
         },
         "price": {
           "name": "Price"
+        }
+      },
+      "stats": {
+        "states": {
+          "name": "Mean states visited",
+          "unit": "count"
+        },
+        "statesMax": {
+          "name": "Maximum states visited",
+          "unit": "count"
+        },
+        "statesMin": {
+          "name": "Minimum states visited",
+          "unit": "count"
+        },
+        "items": {
+          "name": "Mean items viewed",
+          "unit": "count"
+        },
+        "itemsMax": {
+          "name": "Maximum items viewed",
+          "unit": "count"
+        },
+        "itemsMin": {
+          "name": "Minimum items viewed",
+          "unit": "count"
+        },
+        "searches": {
+          "name": "Mean searches",
+          "unit": "count"
+        },
+        "searchesMax": {
+          "name": "Maximum searches",
+          "unit": "count"
+        },
+        "searchesMin": {
+          "name": "Minimum searches",
+          "unit": "count"
         }
       }
     },
@@ -340149,7 +340291,7 @@
       "terms": "The authors publish the results on arXiv. https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
       "headline": "The paper reports no overall WorkArena++ success rate, so this is the plain mean of L2 and L3.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -340158,6 +340300,24 @@
         },
         "L3": {
           "name": "WorkArena L3"
+        },
+        "L2ContextualUnderstanding": {
+          "name": "Contextual understanding",
+          "group": "WorkArena L2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L2DatadrivenDecisionMaking": {
+          "name": "Data-driven decision making",
+          "group": "WorkArena L2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L2PlanningandProblemSolving": {
+          "name": "Planning and problem solving",
+          "group": "WorkArena L2",
+          "unit": "%",
+          "better": "higher"
         },
         "L2InformationRetrieval": {
           "name": "Information retrieval",
@@ -340168,6 +340328,36 @@
         "L2SophisticatedMemorization": {
           "name": "Sophisticated memorization",
           "group": "WorkArena L2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L3ContextualUnderstanding": {
+          "name": "Contextual understanding",
+          "group": "WorkArena L3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L3DatadrivenDecisionMaking": {
+          "name": "Data-driven decision making",
+          "group": "WorkArena L3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L3PlanningandProblemSolving": {
+          "name": "Planning and problem solving",
+          "group": "WorkArena L3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L3InformationRetrieval": {
+          "name": "Information retrieval",
+          "group": "WorkArena L3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "L3SophisticatedMemorization": {
+          "name": "Sophisticated memorization",
+          "group": "WorkArena L3",
           "unit": "%",
           "better": "higher"
         }

@@ -7,9 +7,14 @@ import { tables } from '../lib/html.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://oceangpt.github.io/OceanGym/';
-const oceanTasks = ['ShallowLocate the robot','ShallowLocate the oil drums','ShallowLocate the electrical box','ShallowSearch for a sunken ship','ShallowSearch for the aircraft','ShallowInspect oil pipe','ShallowInspect the wind turbine','ShallowDocking','ShallowAverage','DeepLocate oil drums','DeepSearch for a sunken ship','DeepInspect the oil pipe','DeepInspect the wind turbine','DeepAverage'];
+const shallowTasks = ['Locate the robot', 'Locate the oil drums', 'Locate the electrical box', 'Search for a sunken ship', 'Search for the aircraft', 'Inspect oil pipe', 'Inspect the wind turbine', 'Docking', 'Average'];
+const deepTasks = ['Locate oil drums', 'Search for a sunken ship', 'Inspect the oil pipe', 'Inspect the wind turbine', 'Average'];
+const parts: Record<string, { name: string; group: string }> = Object.fromEntries([
+  ...shallowTasks.map(name => [('Shallow' + name).replace(/[^A-Za-z0-9]/g, ''), { name, group: 'Shallow Water' }]),
+  ...deepTasks.map(name => [('Deep' + name).replace(/[^A-Za-z0-9]/g, ''), { name, group: 'Deep Water' }]),
+]);
 const board: Leaderboard = {
-  benchmark: 'oceangym', url: feed, feed, parts: Object.fromEntries(oceanTasks.map(name => [name.replace(/[^A-Za-z0-9]/g,''), name])),
+  benchmark: 'oceangym', url: feed, feed, parts,
   terms: 'The OceanGym authors publish aggregate results at https://oceangpt.github.io/OceanGym/.',
   headline: 'The site reports separate environment averages, so the headline is the plain mean of its 12 decision tasks.',
   async fetch() {
@@ -29,13 +34,12 @@ const board: Leaderboard = {
       if (!group || rows.length + 1 !== values.length) throw new Error('Unexpected decision columns');
       const avg = first.text === 'Average';
       const key = (group.split(' ')[0] + first.text).replace(/[^A-Za-z0-9]/g, '');
-      board.parts![key] = {name: first.text, group};
       for (const [j,row] of rows.entries()) {
         const m = values[j].text.match(/^([\d.]+)\s*±\s*([\d.]+)$/);
         if (!m || key in row.metrics) throw new Error('Missing or repeated OceanGym task');
         const value = Number(m[1]);
         row.metrics[key] = value;
-        row.metrics[key + 'Spread'] = Number(m[2]);
+        row.metrics[key + 'Std'] = Number(m[2]);
         if (!avg) row.score += value;
       }
       if (!avg) count++;
