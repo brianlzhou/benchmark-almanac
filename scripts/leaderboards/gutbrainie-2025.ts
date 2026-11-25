@@ -12,8 +12,21 @@ const systems = [
   { team: 'BASELINE', run: 'Organizers', model: 'NuNerZero', models: ['NuNerZero', 'ATLOP'], harness: 'Organizers baseline' },
   { team: 'Schemalink', run: '1', model: 'GPT-4o', harness: 'Schema-based prompting' },
 ];
+const taskNames: Record<string, string> = {
+  ner: 'Named entity recognition',
+  bt: 'Binary tag-based relation extraction',
+  tt: 'Ternary tag-based relation extraction',
+  tm: 'Ternary mention-based relation extraction',
+};
 const board: Leaderboard = {
   benchmark: 'gutbrainie-2025', url: feed + '#six', feed, parts, harnesses: 'system',
+  stats: Object.fromEntries(Object.entries(taskNames).flatMap(([part, label]) => [
+    [`${part}MacroP`, { name: `${label} macro precision`, unit: 'score', better: 'higher' }],
+    [`${part}MacroR`, { name: `${label} macro recall`, unit: 'score', better: 'higher' }],
+    [`${part}MacroF1`, { name: `${label} macro F1`, unit: 'score', better: 'higher' }],
+    [`${part}MicroP`, { name: `${label} micro precision`, unit: 'score', better: 'higher' }],
+    [`${part}MicroR`, { name: `${label} micro recall`, unit: 'score', better: 'higher' }],
+  ])),
   terms: 'The organizers publish these scores on the official challenge site. https://hereditary.dei.unipd.it/challenges/gutbrainie/2025/',
   async fetch() {
     const html = await fetchText(feed);

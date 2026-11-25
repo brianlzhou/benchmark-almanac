@@ -14,6 +14,13 @@ const parts = {
 };
 const board: Leaderboard = {
   benchmark: 'bea-2025-pedagogical-ability-assessment', url: feed + '#results', feed, parts, harnesses: 'system',
+  stats: Object.fromEntries(Object.entries(parts).flatMap(([key, label]) => [
+    [`${key}ExactAccuracy`, { name: `${label} exact accuracy`, unit: 'score', better: 'higher' }],
+    ...(key === 'tutorIdentification' ? [] : [
+      [`${key}LenientF1`, { name: `${label} lenient F1`, unit: 'score', better: 'higher' }],
+      [`${key}LenientAccuracy`, { name: `${label} lenient accuracy`, unit: 'score', better: 'higher' }],
+    ]),
+  ])),
   terms: 'The organizers release the task under MIT. https://github.com/kaushal0494/UnifyingAITutorEvaluation',
   async fetch() {
     const html = await fetchText(feed);

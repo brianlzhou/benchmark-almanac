@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/1846",
   feed: FEED,
   terms: "Public results published by the benchmark authors at codalab.lisn.upsaclay.fr; retain source attribution and follow the upstream terms.",
+  stats: { programAccuracy: { name: 'Program accuracy', unit: '%', better: 'higher' } },
   aliases: {},
   
   async fetch() {

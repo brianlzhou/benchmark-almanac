@@ -15,6 +15,7 @@ const board: Leaderboard = {
     WER: { name: 'Word error rate', unit: '%', better: 'lower' },
     "WER'": { name: "Word error rate prime", unit: '%', better: 'lower' },
     'F-score (P)': { name: 'Punctuation F-score', unit: '%', better: 'higher' },
+    'F-score (B)': { name: 'Parentheses F-score', unit: '%', better: 'higher' },
     'F-score (L)': { name: 'Line-break F-score', unit: '%', better: 'higher' },
     'F-score (S)': { name: 'Section-break F-score', unit: '%', better: 'higher' },
     inferenceRealTimeFactor: { name: 'Inference real-time factor', unit: 'speedup', better: 'lower' },
