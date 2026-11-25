@@ -16,7 +16,7 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md";
 const board: Leaderboard = {
-  benchmark: "spatialbench-latchbio", url: "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md", feed: FEED,
+  benchmark: "spatialbench-latchbio", harnesses: 'system', reference: ['mini-swe-agent'], url: "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

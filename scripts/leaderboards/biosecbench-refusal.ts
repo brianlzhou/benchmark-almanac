@@ -50,6 +50,8 @@ export async function bioRows(key: string): Promise<LeaderboardRow[]> {
 
 const board: Leaderboard = {
   benchmark: 'biosecbench-refusal',
+  harnesses: 'system',
+  reference: ['Pi'],
   url: BIO_PAGE,
   feed: bioFeed('biosecbench-refusal'),
   terms: BIO_TERMS,
