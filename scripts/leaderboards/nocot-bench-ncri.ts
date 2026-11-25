@@ -10,23 +10,20 @@ const board:Leaderboard={benchmark:'nocot-bench-ncri',url:'https://github.com/ne
  const csv=parseCsv(await fetchText(FEED)),rows:LeaderboardRow[]=[];
  for(const r of csv){
   const score=num(r.ncri);if(!r.model_id||score===undefined)continue;
-  const metrics:Record<string,number>={ranked:r.ncri_ranked==='True'?1:0,usesFiller:r.ncri_uses_filler==='True'?1:0};
-  for(const [key,col] of Object.entries({ciLow:'ncri_lo95',ciHigh:'ncri_hi95'})){const n=num(r[col]);if(n!==undefined)metrics[key]=n;}
+  const metrics:Record<string,number>={};
+  const low=num(r.ncri_lo95),high=num(r.ncri_hi95);
   const setting='NCRI 15.2; '+(r.ncri_uses_filler==='True'?r.ncri_filler_recipe:'no filler')+'; '+r.source;
   const filler=num(r.ncri_with_filler);
   if(filler!==undefined&&r.ncri_uses_filler!=='True'){
    metrics.withFiller=filler;
    for(const [key,col] of Object.entries({fillerUplift:'ncri_filler_uplift',fillerUpliftLow:'ncri_filler_uplift_lo95',fillerUpliftHigh:'ncri_filler_uplift_hi95'})){const n=num(r[col]);if(n!==undefined)metrics[key]=n;}
   }
-  if (r.in_ncri_chart) metrics.inChart = Number(r.in_ncri_chart === 'True');
-  if (r.ncri_filler_significant) metrics.fillerSignificant = Number(r.ncri_filler_significant === 'True');
-  rows.push({model:r.model_id,score,setting,low:metrics.ciLow,high:metrics.ciHigh,metrics});
+  rows.push({model:r.model_id,score,setting,low,high,...(Object.keys(metrics).length?{metrics}:{})});
   if (filler !== undefined && r.ncri_uses_filler !== 'True' && r.ncri_filler_recipe) {
     rows.push({
       model: r.model_id,
       score: filler,
       setting: ['NCRI 15.2', r.ncri_filler_recipe, r.source].join('; '),
-      metrics: { usesFiller: 1 },
     });
   }
  }

@@ -23,7 +23,7 @@ const board: Leaderboard = {
       const setting = r.name.match(/ \((.*?)\)$/)?.[1];
       return { model: r.name.replace(/ \(.*?\)$/, ''), setting, score: r.rating, trials: r.games, cost: r.cost,
         low: r.lo, high: r.hi, metrics: { wins: r.wins, winRate: 100*r.win, victoryPoints: r.vp, trades: r.trades,
-          messages: r.msgs, tokensPerGame: r.tokg, provisional: Number(r.provisional) } };
+          messages: r.msgs, tokensPerGame: r.tokg } };
     });
   },
 };

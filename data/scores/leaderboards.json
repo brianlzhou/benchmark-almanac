@@ -266145,7 +266145,7 @@
       "feed": "https://aclanthology.org/2026.semeval-1.444.pdf",
       "terms": "The organizers report 52 teams on CodaBench and list 28 qualifying teams in the paper. Live scores, export and reuse terms remain unverified. https://aclanthology.org/2026.semeval-1.444.pdf The feed host returns no robots.txt.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AGAI",
@@ -267302,6 +267302,22 @@
         "Parallel Fast",
         "Perplexity Search API"
       ],
+      "chart": {
+        "title": "Accuracy versus cost per 1,000 questions",
+        "x": {
+          "key": "costPer1000Questions",
+          "label": "Cost per 1,000 questions",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Parallel Web Systems plots answer accuracy against end-to-end cost per 1,000 questions."
+      },
       "stats": {
         "costPer1000Questions": {
           "name": "Cost per 1,000 questions",
@@ -267368,6 +267384,22 @@
         "Perplexity",
         "Tavily"
       ],
+      "chart": {
+        "title": "Accuracy versus cost per 1,000 questions",
+        "x": {
+          "key": "costPer1000Questions",
+          "label": "Cost per 1,000 questions",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Parallel Web Systems plots answer accuracy against end-to-end cost per 1,000 questions."
+      },
       "stats": {
         "costPer1000Questions": {
           "name": "Cost per 1,000 questions",
@@ -273572,7 +273604,8 @@
       "url": "https://arxiv.org/abs/2406.09175",
       "feed": "https://arxiv.org/html/2406.09175",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Gemini 1.5"
@@ -273617,8 +273650,7 @@
         "IQ": {
           "name": "IQ"
         }
-      },
-      "static": "paper"
+      }
     },
     "remote-labor-index": {
       "url": "https://labs.scale.com/leaderboard/rli",
@@ -284690,12 +284722,19 @@
       "feed": "https://aclanthology.org/2022.lrec-1.105.pdf",
       "terms": "ACL Anthology terms. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Kaldi HMMs",
         "Kaldi LSTM"
-      ]
+      ],
+      "stats": {
+        "developmentWer": {
+          "name": "Development word error rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "samskritam-bench-v0": {
       "url": "https://www.samskritam.ai/bench#results",
@@ -318083,226 +318122,161 @@
       "unmatched": [],
       "parts": {
         "committotal": {
-          "name": "Total cost",
-          "group": "commit",
+          "name": "commit",
+          "group": "Prompt",
           "unit": "usd",
           "better": "lower"
         },
+        "hitotal": {
+          "name": "Hi",
+          "group": "Prompt",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "thankyoutotal": {
+          "name": "Thank you",
+          "group": "Prompt",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "wtftotal": {
+          "name": "WTF",
+          "group": "Prompt",
+          "unit": "usd",
+          "better": "lower"
+        }
+      },
+      "stats": {
         "commitllm": {
-          "name": "LLM API cost",
-          "group": "commit",
+          "name": "commit LLM API cost",
           "unit": "usd",
           "better": "lower"
         },
         "commitwaiting": {
-          "name": "Waiting cost",
-          "group": "commit",
+          "name": "commit waiting cost",
           "unit": "usd",
           "better": "lower"
         },
         "commitavg_latency": {
-          "name": "Average latency (seconds)",
-          "group": "commit",
-          "unit": "score",
+          "name": "commit average latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "commitp95_latency": {
-          "name": "95th percentile latency (seconds)",
-          "group": "commit",
-          "unit": "score",
+          "name": "commit 95th percentile latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "commitavg_tokens_out": {
-          "name": "Output tokens per run",
-          "group": "commit",
-          "unit": "score",
+          "name": "commit output tokens per run",
+          "unit": "tokens",
           "better": "lower"
-        },
-        "commitn_errors": {
-          "name": "Errors",
-          "group": "commit",
-          "unit": "score",
-          "better": "lower"
-        },
-        "commitn_runs": {
-          "name": "Runs",
-          "group": "commit",
-          "unit": "score",
-          "better": "lower"
-        },
-        "commitreward": {
-          "name": "Reward",
-          "group": "commit",
-          "unit": "score",
-          "better": "higher"
         },
         "committool_calls": {
-          "name": "Tool calls",
-          "group": "commit",
-          "unit": "score",
-          "better": "lower"
-        },
-        "hitotal": {
-          "name": "Total cost",
-          "group": "Hi",
-          "unit": "usd",
-          "better": "lower"
+          "name": "commit tool calls",
+          "unit": "count"
         },
         "hillm": {
-          "name": "LLM API cost",
-          "group": "Hi",
+          "name": "Hi LLM API cost",
           "unit": "usd",
           "better": "lower"
         },
         "hiwaiting": {
-          "name": "Waiting cost",
-          "group": "Hi",
+          "name": "Hi waiting cost",
           "unit": "usd",
           "better": "lower"
         },
         "hiavg_latency": {
-          "name": "Average latency (seconds)",
-          "group": "Hi",
-          "unit": "score",
+          "name": "Hi average latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "hip95_latency": {
-          "name": "95th percentile latency (seconds)",
-          "group": "Hi",
-          "unit": "score",
+          "name": "Hi 95th percentile latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "hiavg_tokens_out": {
-          "name": "Output tokens per run",
-          "group": "Hi",
-          "unit": "score",
+          "name": "Hi output tokens per run",
+          "unit": "tokens",
           "better": "lower"
         },
         "hin_errors": {
-          "name": "Errors",
-          "group": "Hi",
-          "unit": "score",
-          "better": "lower"
-        },
-        "hin_runs": {
-          "name": "Runs",
-          "group": "Hi",
-          "unit": "score",
+          "name": "Hi errors",
+          "unit": "count",
           "better": "lower"
         },
         "hitool_calls": {
-          "name": "Tool calls",
-          "group": "Hi",
-          "unit": "score",
-          "better": "lower"
-        },
-        "thankyoutotal": {
-          "name": "Total cost",
-          "group": "Thank you",
-          "unit": "usd",
-          "better": "lower"
+          "name": "Hi tool calls",
+          "unit": "count"
         },
         "thankyoullm": {
-          "name": "LLM API cost",
-          "group": "Thank you",
+          "name": "Thank you LLM API cost",
           "unit": "usd",
           "better": "lower"
         },
         "thankyouwaiting": {
-          "name": "Waiting cost",
-          "group": "Thank you",
+          "name": "Thank you waiting cost",
           "unit": "usd",
           "better": "lower"
         },
         "thankyouavg_latency": {
-          "name": "Average latency (seconds)",
-          "group": "Thank you",
-          "unit": "score",
+          "name": "Thank you average latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "thankyoup95_latency": {
-          "name": "95th percentile latency (seconds)",
-          "group": "Thank you",
-          "unit": "score",
+          "name": "Thank you 95th percentile latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "thankyouavg_tokens_out": {
-          "name": "Output tokens per run",
-          "group": "Thank you",
-          "unit": "score",
+          "name": "Thank you output tokens per run",
+          "unit": "tokens",
           "better": "lower"
         },
         "thankyoun_errors": {
-          "name": "Errors",
-          "group": "Thank you",
-          "unit": "score",
-          "better": "lower"
-        },
-        "thankyoun_runs": {
-          "name": "Runs",
-          "group": "Thank you",
-          "unit": "score",
+          "name": "Thank you errors",
+          "unit": "count",
           "better": "lower"
         },
         "thankyoutool_calls": {
-          "name": "Tool calls",
-          "group": "Thank you",
-          "unit": "score",
-          "better": "lower"
-        },
-        "wtftotal": {
-          "name": "Total cost",
-          "group": "WTF",
-          "unit": "usd",
-          "better": "lower"
+          "name": "Thank you tool calls",
+          "unit": "count"
         },
         "wtfllm": {
-          "name": "LLM API cost",
-          "group": "WTF",
+          "name": "WTF LLM API cost",
           "unit": "usd",
           "better": "lower"
         },
         "wtfwaiting": {
-          "name": "Waiting cost",
-          "group": "WTF",
+          "name": "WTF waiting cost",
           "unit": "usd",
           "better": "lower"
         },
         "wtfavg_latency": {
-          "name": "Average latency (seconds)",
-          "group": "WTF",
-          "unit": "score",
+          "name": "WTF average latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "wtfp95_latency": {
-          "name": "95th percentile latency (seconds)",
-          "group": "WTF",
-          "unit": "score",
+          "name": "WTF 95th percentile latency",
+          "unit": "seconds",
           "better": "lower"
         },
         "wtfavg_tokens_out": {
-          "name": "Output tokens per run",
-          "group": "WTF",
-          "unit": "score",
+          "name": "WTF output tokens per run",
+          "unit": "tokens",
           "better": "lower"
         },
         "wtfn_errors": {
-          "name": "Errors",
-          "group": "WTF",
-          "unit": "score",
-          "better": "lower"
-        },
-        "wtfn_runs": {
-          "name": "Runs",
-          "group": "WTF",
-          "unit": "score",
+          "name": "WTF errors",
+          "unit": "count",
           "better": "lower"
         },
         "wtftool_calls": {
-          "name": "Tool calls",
-          "group": "WTF",
-          "unit": "score",
-          "better": "lower"
+          "name": "WTF tool calls",
+          "unit": "count"
         }
       }
     },
@@ -339802,6 +339776,22 @@
         "Core",
         "Lite"
       ],
+      "chart": {
+        "title": "Accuracy versus cost per 1,000 queries",
+        "x": {
+          "key": "costPer1000Questions",
+          "label": "Cost per 1,000 queries",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Parallel Web Systems plots answer accuracy against normalized cost per 1,000 queries."
+      },
       "stats": {
         "costPer1000Questions": {
           "name": "Cost per 1,000 questions",
@@ -344420,7 +344410,24 @@
       "rows": 0,
       "unmatched": [
         "Masked Transformer"
-      ]
+      ],
+      "stats": {
+        "bleu3": {
+          "name": "BLEU-3 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "bleu4": {
+          "name": "BLEU-4 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "meteor": {
+          "name": "METEOR score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "your-llm-doesn-t-know-boundary": {
       "url": "https://www.kaggle.com/benchmarks/trexbytes/your-llm-doesnt-know-boundary",

@@ -20,8 +20,14 @@ function readResults(markdown: string): Result[] {
 const board: Leaderboard = {
   benchmark: 'wiser-atomic', url: PAGE, feed: FEED,
   stats: { costPer1000Questions: { name: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' } },
+  chart: {
+    title: 'Accuracy versus cost per 1,000 queries',
+    x: { key: 'costPer1000Questions', label: 'Cost per 1,000 queries', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'Parallel Web Systems plots answer accuracy against normalized cost per 1,000 queries.',
+  },
   terms: 'The benchmark is private and the public article provides its reported result arrays. Results are credited to Parallel Web Systems.',
   headline: 'Answer accuracy on 121 customer-inspired web-research questions',
-  fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({ model: r.label, score: r.y, metrics: { costPer1000Questions: r.x } })),
+  fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({ model: r.label, score: r.y, cost: r.x / 1000, metrics: { costPer1000Questions: r.x } })),
 };
 export default board;
