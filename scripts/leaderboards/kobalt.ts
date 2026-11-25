@@ -18,12 +18,12 @@ const FEED = "https://huggingface.co/datasets/snunlp/KoBALT-700/resolve/main/REA
 const board: Leaderboard = {
   benchmark: "kobalt", parts: {
   Syntax: { name: 'Syntax', group: 'Category' },
+  Semantics: { name: 'Semantics', group: 'Category' },
   Pragmatics: { name: 'Pragmatics', group: 'Category' },
   Morphology: { name: 'Morphology', group: 'Category' },
   Phonetics: { name: 'Phonetics', group: 'Category' },
 }, url: "https://huggingface.co/datasets/snunlp/KoBALT-700", feed: FEED,
   terms: "KoBALT dataset card is licensed CC BY-NC 4.0.",
-  stats: { Semantics: { name: 'Semantics accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

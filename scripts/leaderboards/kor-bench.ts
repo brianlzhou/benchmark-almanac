@@ -78,7 +78,9 @@ const board: Leaderboard = {
         if (counter[2]) metrics.counterfactualStd = Number(counter[2]);
       }
       const params = String(e.size ?? '').match(/^(\d+(?:\.\d+)?)B$/i)?.[1];
+      const link = e.link?.trim();
       rows.push({ model, score, date, setting: e.type ?? 'chat model',
+        ...(link && /^https?:\/\/\S+$/.test(link) ? { link } : {}),
         ...(params ? { params: Number(params) } : {}),
         ...(typeof e.open === 'boolean' ? { open: e.open } : {}),
         metrics });

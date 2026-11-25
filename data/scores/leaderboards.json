@@ -11152,27 +11152,27 @@
       ],
       "parts": {
         "Security Risks": {
-          "name": "Security Risks",
+          "name": "Security risks",
           "group": "Risk category"
         },
         "Operational Misuses": {
-          "name": "Operational Misuses",
+          "name": "Operational misuses",
           "group": "Risk category"
         },
         "Violence & Extremism": {
-          "name": "Violence & Extremism",
+          "name": "Violence & extremism",
           "group": "Risk category"
         },
         "Hate/Toxicity": {
-          "name": "Hate/Toxicity",
+          "name": "Hate/toxicity",
           "group": "Risk category"
         },
         "Sexual Content": {
-          "name": "Sexual Content",
+          "name": "Sexual content",
           "group": "Risk category"
         },
         "Child Harm": {
-          "name": "Child Harm",
+          "name": "Child harm",
           "group": "Risk category"
         },
         "Self-harm": {
@@ -11180,11 +11180,11 @@
           "group": "Risk category"
         },
         "Political Usage": {
-          "name": "Political Usage",
+          "name": "Political usage",
           "group": "Risk category"
         },
         "Economic Harm": {
-          "name": "Economic Harm",
+          "name": "Economic harm",
           "group": "Risk category"
         },
         "Deception": {
@@ -11200,11 +11200,11 @@
           "group": "Risk category"
         },
         "Fundamental Rights": {
-          "name": "Fundamental Rights",
+          "name": "Fundamental rights",
           "group": "Risk category"
         },
         "Discrimination/Bias": {
-          "name": "Discrimination/Bias",
+          "name": "Discrimination/bias",
           "group": "Risk category"
         },
         "Privacy": {
@@ -11212,7 +11212,7 @@
           "group": "Risk category"
         },
         "Criminal Activities": {
-          "name": "Criminal Activities",
+          "name": "Criminal activities",
           "group": "Risk category"
         }
       }
@@ -168762,6 +168762,10 @@
           "name": "Syntax",
           "group": "Category"
         },
+        "Semantics": {
+          "name": "Semantics",
+          "group": "Category"
+        },
         "Pragmatics": {
           "name": "Pragmatics",
           "group": "Category"
@@ -168773,13 +168777,6 @@
         "Phonetics": {
           "name": "Phonetics",
           "group": "Category"
-        }
-      },
-      "stats": {
-        "Semantics": {
-          "name": "Semantics accuracy",
-          "unit": "%",
-          "better": "higher"
         }
       }
     },
@@ -253384,10 +253381,6 @@
           "name": "Partial score",
           "unit": "%",
           "better": "higher"
-        },
-        "stepBudget": {
-          "name": "Step budget",
-          "unit": "count"
         }
       }
     },
@@ -260137,12 +260130,12 @@
       "stats": {
         "fullText": {
           "name": "Full text score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "textMinimal": {
           "name": "Minimal text score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "mc": {
@@ -270679,12 +270672,6 @@
           "name": "LLM judge",
           "group": "Dimension",
           "note": "Rubric score used directly or as a gated component of hybrid grading."
-        }
-      },
-      "stats": {
-        "runsPerTask": {
-          "name": "Runs per task",
-          "unit": "count"
         }
       }
     },
@@ -303298,7 +303285,7 @@
       "stats": {
         "rpf": {
           "name": "Reasoning path fidelity",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -331930,10 +331917,6 @@
         }
       },
       "stats": {
-        "llmParamsB": {
-          "name": "LLM parameters",
-          "unit": "billions"
-        },
         "correct": {
           "name": "Correct answers",
           "unit": "%",
@@ -331951,11 +331934,6 @@
         },
         "correctGivenAttempted": {
           "name": "Correct given attempted",
-          "unit": "%",
-          "better": "higher"
-        },
-        "fScore": {
-          "name": "F score",
           "unit": "%",
           "better": "higher"
         }

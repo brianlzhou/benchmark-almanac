@@ -242,6 +242,7 @@
     "osworld-2-0": [{"field":"stepBudget","kind":"time, latency or steps","why":"not stored","share":1,"sample":"500"}],
     "osworld-2-0-2026-08-08": [{"field":"stepBudget","kind":"time, latency or steps","why":"not stored","share":1,"sample":"500"}],
     "osworld-2-1": [{"field":"stepBudget","kind":"time, latency or steps","why":"not stored","share":1,"sample":"500"}],
+    "osworld-2-1-offline": [{"field":"stepBudget","kind":"time, latency or steps","why":"not stored","share":1,"sample":"500"}],
     "panda-cvl": [{"field":"Qwen3.5-397B-A17BQwen Team (2026a)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"Qwen3.6-35B-A3BQwen Team (2026b)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"Step-3.7-FlashStepFun (2026a)","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Step-5-PreviewStepFun (2026b)","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Doubao-Seed-2.1-proByteDance Seed (2026)","kind":"trials","why":"not stored","share":1}],
     "parley-labs-negotiation": [{"field":"Bargaining (passes of 48 runs)","kind":"trials","why":"not stored","share":1},{"field":"Planning ahead (of 16, one attempt)","kind":"trials","why":"not stored","share":1},{"field":"Restraint (passes of 12 runs, two attempts)","kind":"trials","why":"not stored","share":1}],
     "pawbench": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Kling 3 Std.","kind":"uncertainty","why":"not stored","share":1}],

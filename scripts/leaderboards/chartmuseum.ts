@@ -34,7 +34,9 @@ const board: Leaderboard = {
           const v = num(r[i]?.text); if (v !== undefined) metrics[head[i]] = v;
         }
         const effort = name.match(/\s*\((high|medium|low|xhigh|max)\)$/i);
-        out.push({ model: identity(effort ? name.slice(0, effort.index) : name), score, setting: effort?.[1], metrics });
+        const link = r[0]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+        const sz = r[1]?.text.trim().match(/^(\d+(?:\.\d+)?)B$/i);
+        out.push({ model: identity(effort ? name.slice(0, effort.index) : name), score, setting: effort?.[1], params: sz ? Number(sz[1]) : undefined, link, metrics });
       }
     }
     if (!out.length) throw new Error("chartmuseum: expected score table missing");
