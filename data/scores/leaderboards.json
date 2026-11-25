@@ -87291,6 +87291,23 @@
       "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87369,6 +87386,23 @@
         "Wan 2.7 Pro",
         "p-image-ideogram"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87444,6 +87478,23 @@
         "Wan 2.7",
         "Wan 2.7 Pro"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87482,6 +87533,23 @@
       "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87522,6 +87590,23 @@
       "unmatched": [
         "Nex N2 Pro"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87589,6 +87674,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87658,6 +87760,23 @@
         "Wan 2.7 Pro",
         "p-image-ideogram"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87747,6 +87866,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87797,6 +87933,23 @@
         "Wan Vace",
         "Wan v2.6"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87835,6 +87988,23 @@
       "retrieved": "2026-11-24",
       "rows": 65,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87873,6 +88043,23 @@
       "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87911,6 +88098,23 @@
       "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -87963,6 +88167,23 @@
         "Snapdeck",
         "Ultramarine"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88001,6 +88222,23 @@
       "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88052,6 +88290,23 @@
         "Recraft V4.1 Vector Pro",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88116,6 +88371,23 @@
         "Speech 2.6",
         "Voxtral Mini TTS (2603)"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88168,6 +88440,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88237,6 +88526,23 @@
         "Seedance 2.5",
         "Wan 2.7"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88291,6 +88597,23 @@
         "Wan Vace",
         "p-video-edit"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88329,6 +88652,23 @@
       "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88367,6 +88707,23 @@
       "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -88424,6 +88781,23 @@
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
+      "chart": {
+        "title": "Preference vs. speed",
+        "x": {
+          "key": "generationSeconds",
+          "label": "Generation time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo rating",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier."
+      },
       "stats": {
         "winRate": {
           "name": "Win rate",
