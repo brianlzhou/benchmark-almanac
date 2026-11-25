@@ -8,6 +8,8 @@ const FEED = "https://veris.ai/leaderboard/arena";
 
 const board: Leaderboard = {
   benchmark: "veris-finagent-arena-1-1",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://veris.ai/leaderboard/arena",
   feed: FEED,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",

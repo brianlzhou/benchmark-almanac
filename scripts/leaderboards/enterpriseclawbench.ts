@@ -17,6 +17,7 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'enterpriseclawbench',
+  harnesses: 'system',
   url: PAGE,
   feed: `${FEED} (combos[].primaryScore)`,
   stats: {

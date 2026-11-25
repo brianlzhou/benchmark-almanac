@@ -19,6 +19,8 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'researchclawbench',
+  harnesses: 'system',
+  reference: ['ResearchHarness'],
   url: 'https://internscience.github.io/ResearchClawBench-Home/',
   feed: `${FEED} (Pass@1)`,
   terms: 'Static JSON on the ResearchClawBench GitHub Pages site, which states no separate terms; the repository is MIT.',

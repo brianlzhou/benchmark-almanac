@@ -11,7 +11,7 @@ interface Run {
   pass_at: Record<string, number>;
 }
 const board: Leaderboard = {
-  benchmark: 'workspacebench-lite', parts: {
+  benchmark: 'workspacebench-lite', harnesses: 'system', parts: {
   easy: { name: 'Easy', group: 'Difficulty' },
   medium: { name: 'Medium', group: 'Difficulty' },
   hard: { name: 'Hard', group: 'Difficulty' },

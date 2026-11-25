@@ -8,7 +8,7 @@ const feed = 'https://aarr-bench.com/leaderboard/';
 const parts = { context: 'Context', mindset: 'Mindset', interaction: 'Interaction', handsOn: 'Hands-on' };
 type Entry = Record<keyof typeof parts | 'overall', number> & { model: string; harness: string };
 const board: Leaderboard = {
-  benchmark: 'aarri-bench', url: feed, feed, parts,
+  benchmark: 'aarri-bench', harnesses: 'system', reference: ['Mini-SWE-Agent'], url: feed, feed, parts,
   terms: 'The authors publish and maintain the public leaderboard at https://aarr-bench.com/leaderboard/.',
   async fetch() {
     const data = jsonAfter<Entry[]>(nextFlight(await fetchText(feed)), '"rows":');

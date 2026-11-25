@@ -1512,6 +1512,10 @@
       "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Mini-SWE-Agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "context": {
           "name": "Context"
@@ -18152,6 +18156,7 @@
       "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "totalTokens": {
           "name": "Total tokens",
@@ -27977,6 +27982,10 @@
       "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "easy": {
           "name": "Easy"
@@ -64491,6 +64500,10 @@
       "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Pi Agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "dynamicRetention": {
           "name": "Dynamic retention",
@@ -67860,6 +67873,10 @@
         "CodeNib (Haiku5.5 search pair + Opus5.5 mini SWE-agent)",
         "Gemini 2.5 Pro (snapshot unspecified)"
       ],
+      "reference": [
+        "mini SWE-agent"
+      ],
+      "harnesses": "system",
       "stats": {
         "passAt1": {
           "name": "Pass@1",
@@ -79902,6 +79919,7 @@
           "unit": "%"
         }
       },
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Average latency",
@@ -98827,6 +98845,7 @@
       "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "basic": {
           "name": "Basic task success (zero-shot)"
@@ -100049,6 +100068,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "stats": {
         "time": {
           "name": "Average time per task",
@@ -102047,6 +102067,7 @@
       "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "predictiveAccuracy": {
           "name": "Predictive accuracy",
@@ -115974,11 +115995,16 @@
       "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "pass3": {
-          "name": "Pass@3",
+          "name": "pass^3",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All three attempts pass."
         }
       }
     },
@@ -140690,7 +140716,8 @@
       "rows": 11,
       "unmatched": [
         "GPT 5.3"
-      ]
+      ],
+      "harnesses": "system"
     },
     "healthagentbench-2": {
       "url": "https://microsoft.github.io/HealthAgentBench/v2/#leaderboard",
@@ -219944,6 +219971,7 @@
         "Cursor Composer 2.5",
         "Pixel Canary"
       ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Average duration",
@@ -255303,7 +255331,11 @@
       "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system"
     },
     "paraphrase-stability-benchmark": {
       "url": "https://www.kaggle.com/benchmarks/chauhanbalaji/paraphrase-stability-benchmark",
@@ -275572,6 +275604,10 @@
       "retrieved": "2026-11-24",
       "rows": 37,
       "unmatched": [],
+      "reference": [
+        "ResearchHarness"
+      ],
+      "harnesses": "system",
       "stats": {
         "time": {
           "name": "Time per task",
@@ -313668,6 +313704,7 @@
       "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "airline": {
           "name": "Airline",
@@ -320229,6 +320266,7 @@
       "unmatched": [
         "gemini-2.5-flash (snapshot unspecified)"
       ],
+      "harnesses": "system",
       "stats": {
         "totalSeconds": {
           "name": "Total runtime",
@@ -329538,6 +329576,10 @@
       "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "parts": {
         "aml": {
           "name": "AML Bench"
@@ -342699,6 +342741,7 @@
       "unmatched": [
         "Seed-2.0-Code"
       ],
+      "harnesses": "system",
       "parts": {
         "easy": {
           "name": "Easy",

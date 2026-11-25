@@ -10,6 +10,8 @@ const URL = 'https://cadbench.ai/';
 
 const board: Leaderboard = {
   benchmark: 'parametric-cad-bench',
+  harnesses: 'system',
+  reference: ['mini-swe-agent'],
   url: URL,
   feed: `${URL} (server-rendered HTML table, V3 Overall)`,
   terms: 'Server-rendered public page; the site publishes no robots.txt and no terms, and the submission repository is public.',
