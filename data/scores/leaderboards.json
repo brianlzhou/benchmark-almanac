@@ -39340,7 +39340,7 @@
       "url": "https://super.gluebenchmark.com/leaderboard",
       "feed": "https://mtl-sentence-representations.firebaseio.com/superglue/results/<id>.json (Firebase REST, ids from superglue/resultsVisibility.json), task BoolQ",
       "terms": "super.gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 3,
       "unmatched": [
         "ADAPET (ALBERT) - few-shot",
@@ -314749,7 +314749,7 @@
       "url": "https://www.terminal-bench-science.ai/",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench-science/terminal-bench-science\",\"name\":\"v0-1-eval\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint behind the site, under the Harbor Hub Terms of Service; the site robots.txt disallows only its own /api/ proxy, and the repository is Apache-2.0.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 17,
       "unmatched": [],
       "harnesses": "system",
