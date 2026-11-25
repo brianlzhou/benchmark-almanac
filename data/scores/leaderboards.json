@@ -50597,6 +50597,27 @@
         "NS": {
           "name": "Natural Science"
         }
+      },
+      "stats": {
+        "CO": {
+          "name": "Correct",
+          "unit": "%",
+          "better": "higher"
+        },
+        "NA": {
+          "name": "Not attempted",
+          "unit": "%"
+        },
+        "IN": {
+          "name": "Incorrect",
+          "unit": "%",
+          "better": "lower"
+        },
+        "CGA": {
+          "name": "Correct given attempted",
+          "unit": "%",
+          "better": "higher"
+        }
       }
     },
     "chinese-student-english-essay": {
@@ -71804,7 +71825,59 @@
         "stt-rt-v6",
         "universal-3.5-pro",
         "universal-3.6-pro"
-      ]
+      ],
+      "stats": {
+        "TTFS": {
+          "name": "Time to final segment",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "TTFT": {
+          "name": "Time to first token",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "AudioToFinal": {
+          "name": "Audio to final latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "RTF": {
+          "name": "Real-time factor",
+          "unit": "score",
+          "better": "lower"
+        },
+        "WER": {
+          "name": "Word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "p25": {
+          "name": "Time to final segment p25",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "p50": {
+          "name": "Time to final segment p50",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "p75": {
+          "name": "Time to final segment p75",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "p90": {
+          "name": "Time to final segment p90",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "p95": {
+          "name": "Time to final segment p95",
+          "unit": "ms",
+          "better": "lower"
+        }
+      }
     },
     "covebench": {
       "url": "https://nju-link.github.io/CoVEBench/",
@@ -95311,6 +95384,74 @@
         "remote_sensing_geospatial": {
           "name": "Remote sensing and geospatial"
         }
+      },
+      "stats": {
+        "answer_correctness": {
+          "name": "Answer correctness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "llm_rubric": {
+          "name": "LLM rubric score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "strict_at_95": {
+          "name": "Strict pass at 95%",
+          "unit": "%",
+          "better": "higher"
+        },
+        "strict_correct_count_405": {
+          "name": "Strict correct count",
+          "unit": "count",
+          "better": "higher"
+        },
+        "mean_unit_accuracy": {
+          "name": "Mean unit accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "steps": {
+          "name": "Average rounds",
+          "unit": "count"
+        },
+        "avg_tool_calls": {
+          "name": "Average tool calls",
+          "unit": "count"
+        },
+        "avg_file_reads": {
+          "name": "Average file reads",
+          "unit": "count"
+        },
+        "avg_unique_files": {
+          "name": "Average unique files read",
+          "unit": "count"
+        },
+        "avg_python_calls": {
+          "name": "Average Python calls",
+          "unit": "count"
+        },
+        "avg_evidence_queries": {
+          "name": "Average evidence queries",
+          "unit": "count"
+        },
+        "avg_latency_s": {
+          "name": "Average latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Average total tokens",
+          "unit": "tokens"
+        },
+        "availableResults": {
+          "name": "Available results",
+          "unit": "count"
+        },
+        "eligibleResults": {
+          "name": "Eligible results",
+          "unit": "count"
+        }
       }
     },
     "ebench": {
@@ -100231,10 +100372,11 @@
       "feed": "https://www.embodied-arena.com/assets/data-<hash>.js (model score.benchmark legacy arrays, ERQA Total column)",
       "terms": "The site ships its data in its own public JS bundle; it publishes no robots.txt (the path serves the app) and no terms of use.",
       "retrieved": "2026-11-24",
-      "rows": 26,
+      "rows": 18,
       "unmatched": [
         "ABot-ER-Preview",
         "Cambrian-S-7B",
+        "Cosmos-Reason-1-7B",
         "Embodied-R1-3B",
         "Embodied-R1.5",
         "EmbodiedBrain-7B",
@@ -100242,11 +100384,18 @@
         "IflyBot-VLM-8B",
         "KnowinBrain",
         "KnowinBrain-1.5",
+        "Magma",
+        "Mimo-Embodied-7B",
         "PelicanVL-7B",
         "RoboBrain1.0-7B",
+        "RoboBrain2.0-32B",
+        "RoboBrain2.0-7B",
+        "RynnBrain-8B",
         "Space-R",
         "SpatialVLM",
-        "Wall-Brain-Preview"
+        "VeBrain",
+        "Wall-Brain-Preview",
+        "wall-oss-fast"
       ],
       "parts": {
         "ActionReasoning": {
@@ -138436,8 +138585,13 @@
         "reflection/beam"
       ],
       "stats": {
-        "pass3": {
+        "passAt3": {
           "name": "Pass at 3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass3": {
+          "name": "Pass all 3",
           "unit": "%",
           "better": "higher"
         },
@@ -176429,6 +176583,89 @@
           "name": "Design",
           "group": "Category"
         }
+      },
+      "stats": {
+        "avg_input_tokens": {
+          "name": "Average input tokens per task",
+          "unit": "tokens"
+        },
+        "avg_output_tokens": {
+          "name": "Average output tokens per task",
+          "unit": "tokens"
+        },
+        "input_price_per_million": {
+          "name": "Input price per million tokens",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "output_price_per_million": {
+          "name": "Output price per million tokens",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "suiteCost:browser": {
+          "name": "Browser suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_browser": {
+          "name": "Browser average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:coding": {
+          "name": "Coding suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_coding": {
+          "name": "Coding average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:data_analysis": {
+          "name": "Data analysis suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_data_analysis": {
+          "name": "Data analysis average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:design": {
+          "name": "Design suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_design": {
+          "name": "Design average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:long_agentic": {
+          "name": "Long agentic suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_long_agentic": {
+          "name": "Long agentic average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:reasoning": {
+          "name": "Reasoning suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_reasoning": {
+          "name": "Reasoning average output tokens",
+          "unit": "tokens"
+        },
+        "suiteCost:research": {
+          "name": "Research suite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "out_research": {
+          "name": "Research average output tokens",
+          "unit": "tokens"
+        }
       }
     },
     "liveclawbench": {
@@ -214018,6 +214255,30 @@
           "name": "Throughput",
           "unit": "tokens/s",
           "better": "higher"
+        },
+        "Throughput (tokens/s) bs=50": {
+          "name": "Throughput (batch size 50)",
+          "unit": "tokens/s",
+          "better": "higher"
+        },
+        "Win Rate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Seq_length": {
+          "name": "Context length",
+          "unit": "tokens"
+        },
+        "#Languages": {
+          "name": "Supported programming languages",
+          "unit": "count"
+        },
+        "Peak Memory (MB)": {
+          "name": "Peak memory (MB)",
+          "unit": "count",
+          "better": "lower",
+          "note": "Peak GPU memory in megabytes."
         }
       }
     },
@@ -290916,10 +291177,8 @@
       "feed": "https://huggingface.co/datasets/benchflow/skillsbench-leaderboard/resolve/main/leaderboard/skillsbench/v1.1/official.json (with_skills_score)",
       "terms": "Hugging Face dataset benchflow/skillsbench-leaderboard, licensed Apache-2.0.",
       "retrieved": "2026-11-24",
-      "rows": 50,
-      "unmatched": [
-        "Ling 3.1 Flash 1019"
-      ],
+      "rows": 49,
+      "unmatched": [],
       "harnesses": "system",
       "verified": "reviewed for release alignment by SkillsBench",
       "stats": {
@@ -295266,6 +295525,13 @@
           "name": "Average: F-Score",
           "unit": "score",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "secondsPerSequence": {
+          "name": "Time per sequence",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -329735,6 +330001,23 @@
         "level3": {
           "name": "Level 3"
         }
+      },
+      "stats": {
+        "relevance": {
+          "name": "Capability consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "logic": {
+          "name": "Reasoning coherence",
+          "unit": "%",
+          "better": "higher"
+        },
+        "avg_acc": {
+          "name": "Average accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
       }
     },
     "videophy": {
@@ -335609,7 +335892,116 @@
         "R1-Onevision-7B",
         "URSA-8B",
         "URSA-8B-PS-GRPO"
-      ]
+      ],
+      "parts": {
+        "S1": {
+          "name": "One-step problems",
+          "group": "Step count"
+        },
+        "S2": {
+          "name": "Two-step problems",
+          "group": "Step count"
+        },
+        "S3": {
+          "name": "Three-step problems",
+          "group": "Step count"
+        },
+        "UCU(Mem)": {
+          "name": "Understanding and conversion of units",
+          "group": "Measurement"
+        },
+        "AL(Mem)": {
+          "name": "Angles and length",
+          "group": "Measurement"
+        },
+        "CPF(PF)": {
+          "name": "Calculation of plane figures",
+          "group": "Plane figures"
+        },
+        "UPF(PF)": {
+          "name": "Understanding of plane figures",
+          "group": "Plane figures"
+        },
+        "CSF(SF)": {
+          "name": "Calculation of solid figures",
+          "group": "Solid figures"
+        },
+        "USF(SF)": {
+          "name": "Understanding of solid figures",
+          "group": "Solid figures"
+        },
+        "BTF(TMF)": {
+          "name": "Basic transformations of figures",
+          "group": "Transformations and motion of figures"
+        },
+        "CCF(TMF)": {
+          "name": "Cutting and combining of figures",
+          "group": "Transformations and motion of figures"
+        },
+        "Dir(PD)": {
+          "name": "Direction",
+          "group": "Position and direction"
+        },
+        "Pos(PD)": {
+          "name": "Position",
+          "group": "Position and direction"
+        },
+        "RoM(PD)": {
+          "name": "Route map",
+          "group": "Position and direction"
+        },
+        "CCP(PD)": {
+          "name": "Correspondence of coordinates and positions",
+          "group": "Position and direction"
+        }
+      },
+      "stats": {
+        "Avg(Loose)": {
+          "name": "Loose average accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "IK(Strict)": {
+          "name": "Insufficient knowledge (strict)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "IG(Strict)": {
+          "name": "Inadequate generalization (strict)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "CM(Strict)": {
+          "name": "Complete mastery (strict)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RM(Strict)": {
+          "name": "Rote memorization (strict)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "IK(Loose)": {
+          "name": "Insufficient knowledge (loose)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "IG(Loose)": {
+          "name": "Inadequate generalization (loose)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "CM(Loose)": {
+          "name": "Complete mastery (loose)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "RM(Loose)": {
+          "name": "Rote memorization (loose)",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "wearableqa": {
       "url": "https://arxiv.org/html/2609.05405",
@@ -341544,6 +341936,44 @@
         "Domain2_Slogans": {
           "name": "Slogans",
           "group": "Writing task"
+        }
+      },
+      "stats": {
+        "style_R": {
+          "name": "Style queries (all criteria)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on style-related queries across all criteria."
+        },
+        "style_C": {
+          "name": "Style queries (style criteria only)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on style-related queries over style-specific criteria."
+        },
+        "format_R": {
+          "name": "Format queries (all criteria)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on format-related queries across all criteria."
+        },
+        "format_C": {
+          "name": "Format queries (format criteria only)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on format-related queries over format-specific criteria."
+        },
+        "length_R": {
+          "name": "Length queries (all criteria)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on length-related queries across all criteria."
+        },
+        "length_C": {
+          "name": "Length queries (length criteria only)",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean score on length-related queries over length-specific criteria."
         }
       }
     },

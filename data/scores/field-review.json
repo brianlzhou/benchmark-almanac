@@ -207,6 +207,7 @@
     "mind2act-world": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1}],
     "mineamongus": [{"field":"NV-3 R&amp;E (Report &amp; Em. Call)","kind":"link","why":"not stored","share":1},{"field":"TeamCraft (Long et al., 2024)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"(sem, meet-rs)","kind":"uncertainty","why":"not stored","share":1},{"field":"(sem, no-rs)","kind":"uncertainty","why":"not stored","share":1}],
     "mk-bench-dynamic-scheduling": [{"field":"Parameters and Constants","kind":"open weights, license or size","why":"not stored","share":1},{"field":"Processing Time Range","kind":"time, latency or steps","why":"not stored","share":1}],
+    "mle-bench": [{"field":"Running Time (hours)","kind":"time, latency or steps","why":"not stored","share":1}],
     "mm-browsecomp": [{"field":"Avg Cost Time (min)","kind":"cost","why":"not stored","share":1},{"field":"Open-Source Agents","kind":"open weights, license or size","why":"not stored","share":1},{"field":"#Samples","kind":"trials","why":"not stored","share":1}],
     "mm-fineval": [{"field":"Transcript (words)","kind":"link","why":"not stored","share":1}],
     "mm-niah": [{"field":"#Samples","kind":"trials","why":"not stored","share":1}],

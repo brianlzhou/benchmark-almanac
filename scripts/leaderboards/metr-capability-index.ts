@@ -20,7 +20,7 @@ const board: Leaderboard = {
     if (rows.length !== 30) throw new Error(`METR Capability Index: ${rows.length} rows, expected 30`);
     return rows.map((entry) => {
       if (!entry.model || !entry.released || typeof entry.mci !== 'number' || typeof entry.mci_low_95 !== 'number' || typeof entry.mci_high_95 !== 'number') throw new Error('METR Capability Index: incomplete row');
-      return { model: entry.model, score: entry.mci, low: entry.mci_low_95, high: entry.mci_high_95, date: entry.released, metrics: { low80: entry.mci_low_80!, high80: entry.mci_high_80! } };
+      return { model: entry.model, score: entry.mci, low: entry.mci_low_95, high: entry.mci_high_95, date: entry.released, metrics: { ci80Low: entry.mci_low_80!, ci80High: entry.mci_high_80! } };
     });
   },
 };

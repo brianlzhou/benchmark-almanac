@@ -47,8 +47,7 @@ export async function embodiedArenaRows(code: string): Promise<LeaderboardRow[]>
   const prop = bench.$data.default?.property ?? 'Total';
   const col = bench.$data.properties[prop]?.index;
   if (col === undefined) throw new Error(`no ${prop} column for ${code}`);
-  const columns = Object.entries(bench.$data.properties).filter(([key]) => key !== prop);
-  if (code === 'erqa') board.parts = Object.fromEntries(columns.filter(([key]) => key !== 'PercentileRank').map(([key, spec]) => [key, spec.label]));
+  const columns = Object.entries(bench.$data.properties).filter(([key]) => key !== prop && key !== 'PercentileRank');
   const rows: LeaderboardRow[] = [];
   for (const { $data: m } of Object.values(models)) {
     const scores = m.score?.benchmark?.[id]?.legacy;
@@ -71,6 +70,7 @@ const board: Leaderboard = {
   url: `${SITE}/#/leaderboard/09b4a56a-2e41-4103-a330-129381c24450`,
   feed: `${SITE}/assets/data-<hash>.js (model score.benchmark legacy arrays, ERQA Total column)`,
   terms: 'The site ships its data in its own public JS bundle; it publishes no robots.txt (the path serves the app) and no terms of use.',
+  parts: { ActionReasoning: 'Action Reasoning', MultiviewReasoning: 'Multi-view Reasoning', Pointing: 'Pointing', SpatialReasoning: 'Spatial Reasoning', StateEstimation: 'State Estimation', TaskReasoning: 'Task Reasoning', TrajectoryReasoning: 'Trajectory Reasoning', Other: 'Other' },
   fetch: () => embodiedArenaRows('erqa'),
 };
 export default board;
