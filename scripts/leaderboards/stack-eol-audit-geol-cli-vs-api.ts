@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/adriensales/stack-eol-audit-geol-cli-vs-api',
   feed: kaggleFeed('adriensales', 'stack-eol-audit-geol-cli-vs-api'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('adriensales', 'stack-eol-audit-geol-cli-vs-api', "stack-eol-audit-geolcheck", 1),
+  parts: {
+    api: 'API mode',
+    memory: 'Memory mode',
+  },
+  fetch: () => kaggleRowsWithBounds('adriensales', 'stack-eol-audit-geol-cli-vs-api', "stack-eol-audit-geolcheck", 1, {
+    api: { task: 'stack-eol-audit-api' },
+    memory: { task: 'stack-eol-audit-memory' },
+  }),
 };
 export default board;

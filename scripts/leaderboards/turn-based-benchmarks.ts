@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/mikaelaldy/turn-based-benchmarks',
   feed: kaggleFeed('mikaelaldy', 'turn-based-benchmarks'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('mikaelaldy', 'turn-based-benchmarks', "(Overall)", 1),
+  parts: {
+    rpsProspective: 'Rock paper scissors',
+    ticTacToe: 'Tic-tac-toe',
+  },
+  fetch: () => kaggleRowsWithBounds('mikaelaldy', 'turn-based-benchmarks', "(Overall)", 1, {
+    rpsProspective: { task: 'turnbasedbenchmarks-rps-prospective' },
+    ticTacToe: { task: 'turnbasedbenchmarks-ttt' },
+  }),
 };
 export default board;
