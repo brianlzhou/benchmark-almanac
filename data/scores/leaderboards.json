@@ -310483,27 +310483,27 @@
           "group": "Language"
         },
         "resolvedClassOnly": {
-          "name": "class only",
+          "name": "Single class",
           "group": "Patch complexity"
         },
         "resolvedFuncOnly": {
-          "name": "function only",
+          "name": "Single function",
           "group": "Patch complexity"
         },
         "resolvedMixed": {
-          "name": "mixed",
+          "name": "Mixed class and function",
           "group": "Patch complexity"
         },
         "resolvedNone": {
-          "name": "none",
+          "name": "No class or function",
           "group": "Patch complexity"
         },
         "resolvedSingleClass": {
-          "name": "single class",
+          "name": "Single class",
           "group": "Patch complexity"
         },
         "resolvedSingleFunc": {
-          "name": "single function",
+          "name": "Single function",
           "group": "Patch complexity"
         }
       },
@@ -342028,7 +342028,7 @@
       "url": "https://github.com/PKU-YuanGroup/WISE",
       "feed": "https://raw.githubusercontent.com/PKU-YuanGroup/WISE/main/leadboard.md",
       "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 12,
       "unmatched": [
         "DeepGen 1.0",
