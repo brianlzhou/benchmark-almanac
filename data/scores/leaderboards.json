@@ -92048,7 +92048,7 @@
       "url": "https://www.micro1.ai/benchmark/dual-arm-sim",
       "feed": "https://www.micro1.ai/benchmark/dual-arm-sim (inline leaderboard data \"dual-arm-sim\", Progress score, and embedded D.models JSON)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 15,
       "unmatched": [],
       "parts": {
@@ -181808,7 +181808,7 @@
       "url": "https://www.micro1.ai/benchmark/long-extraction",
       "feed": "https://www.micro1.ai/benchmark/long-extraction (inline leaderboard data \"long-extraction\", Recall, and static HTML results tables)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 3,
       "unmatched": [
         "Datalab Extract - Balanced",
@@ -199591,7 +199591,7 @@
       "url": "https://www.micro1.ai/benchmark/mission-report",
       "feed": "https://www.micro1.ai/benchmark/mission-report (inline leaderboard data \"mission-report\", Mean score, Best@3 tab, and embedded report data)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 13,
       "unmatched": [],
       "chart": {
@@ -270996,7 +270996,7 @@
       "url": "https://www.micro1.ai/benchmark/crosby-micro1-redlinebench",
       "feed": "https://www.micro1.ai/benchmark/crosby-micro1-redlinebench (inline leaderboard data \"contract\", Mean score, and static HTML results tables)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 4,
       "unmatched": [],
       "parts": {
