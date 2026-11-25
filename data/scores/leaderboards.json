@@ -4874,6 +4874,10 @@
           "name": "Losses",
           "unit": "count"
         },
+        "ties": {
+          "name": "Ties",
+          "unit": "count"
+        },
         "Against": {
           "name": "Points against",
           "unit": "score"
@@ -4928,6 +4932,11 @@
         "Auto-picks": {
           "name": "Automatic picks",
           "unit": "count"
+        },
+        "Empty slots": {
+          "name": "Empty lineup slots",
+          "unit": "count",
+          "better": "lower"
         },
         "Tokens in": {
           "name": "Input tokens",
@@ -7015,7 +7024,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "Mean speedup weights the three published category means by their task counts across all 196 tasks.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -7067,10 +7076,6 @@
           "name": "HIP-to-HIP output tokens",
           "unit": "tokens"
         },
-        "HIP-to-HIPTask Std": {
-          "name": "HIP-to-HIP task standard deviation",
-          "unit": "speedup"
-        },
         "HIP-to-HIPP25": {
           "name": "HIP-to-HIP 25th percentile speedup",
           "unit": "speedup"
@@ -7116,10 +7121,6 @@
         "Triton-to-TritonOutputTokens": {
           "name": "Triton-to-Triton output tokens",
           "unit": "tokens"
-        },
-        "Triton-to-TritonTask Std": {
-          "name": "Triton-to-Triton task standard deviation",
-          "unit": "speedup"
         },
         "Triton-to-TritonP25": {
           "name": "Triton-to-Triton 25th percentile speedup",
@@ -7167,10 +7168,6 @@
           "name": "PyTorch-to-HIP output tokens",
           "unit": "tokens"
         },
-        "PyTorch-to-HIPTask Std": {
-          "name": "PyTorch-to-HIP task standard deviation",
-          "unit": "speedup"
-        },
         "PyTorch-to-HIPP25": {
           "name": "PyTorch-to-HIP 25th percentile speedup",
           "unit": "speedup"
@@ -7182,10 +7179,6 @@
         "PyTorch-to-HIPP90": {
           "name": "PyTorch-to-HIP 90th percentile speedup",
           "unit": "speedup"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens"
         }
       }
     },
@@ -44135,7 +44128,6 @@
         "Cyrogen Vesper 26B-A4B (Kainxkitsune)",
         "Cyrogen Vesper 26B-A4B Thinking (Kainxkitsune)",
         "Cyrogen Vesper 31B (Kainxkitsune)",
-        "Cyrogen Vesper 31B Thinking (Kainxkitsune)",
         "Dans-PersonalityEngine 12B v1.3.0 (PocketDoc)",
         "Dans-PersonalityEngine 24B v1.3 (PocketDoc)",
         "Dark Craving 26B-A4B (ReadyArt)",
@@ -44164,7 +44156,6 @@
         "Dark-Orthia-Untied 31B Thinking (Nimbz)",
         "Dark-Thoughts V2 31B (Ateron)",
         "Dark-Thoughts V2 31B Thinking (Ateron)",
-        "DarkGlimmer 30B Thinking (UltimateIntent)",
         "DarkIdol 3.1 8B v1.2 Uncensored (aifeifei798)",
         "DarkIdol 31B (aifeifei798)",
         "DarkIdol Qwen3.8 27B v1.1 (aifeifei798)",
@@ -44320,7 +44311,6 @@
         "Gemsicle 31B (Blazed-Forge)",
         "Genesis Hermes V7 35B-A3B (LuffyTheFox)",
         "Giftige-Blume 31B v1 (Blazed-Forge)",
-        "Giftige-Blume 31B v1 Thinking (Blazed-Forge)",
         "Giftige-Blume 31B v2 (Nimbz)",
         "Giftige-Blume-StyleSwap 31B v1 (Casual-Autopsy)",
         "Gilded-Arsenic 12B (Lambent)",
@@ -44396,8 +44386,6 @@
         "Impish QWEN 14B 1M (SicariusSicariiStuff)",
         "Impish QWEN 7B 1M (SicariusSicariiStuff)",
         "Infracelestial 27B (Mawdistical)",
-        "Inkling 2 Mini 26B Thinking (Thinking Machines)",
-        "Inkling 2 Mini 26B Unbound Thinking (nokeepai)",
         "Inkling 2 Small 594B Thinking (Thinking Machines)",
         "Inkling 975B (Thinking Machines)",
         "Inkling 975B Thinking (Thinking Machines)",
@@ -44469,8 +44457,6 @@
         "Llama 4 Maverick 400B-A17B (Meta)",
         "Llama-3.3 70B Instruct Base (Meta)",
         "LucidVitality 9B (BlueNipples)",
-        "Luminescent-Void 31B (Cyclone-Labs)",
-        "Luminescent-Void 31B Thinking (Cyclone-Labs)",
         "Luminous Mirror 26B-A4B (Vortex5)",
         "Luminous Mirror 26B-A4B Thinking (Vortex5)",
         "Lunar Huntress 0.1 31B (Husky110)",
@@ -44836,7 +44822,6 @@
         "The Omega Directive 70B Unslop v2.1 (ReadyArt)",
         "ThinkingCap Qwen3.6-27B Thinking (bottlecapai)",
         "Tiger-Gemma 12B v3 (TheDrummer)",
-        "Tropoplectic 70B (schonsense)",
         "Twisted Cyclone 31B (Cyclone-Labs)",
         "Twisted Cyclone 31B Thinking (Cyclone-Labs)",
         "Ultimate 27B Thinking Heretic Uncensored (DavidAU)",
@@ -44907,14 +44892,497 @@
         }
       },
       "stats": {
-        "rank": {
-          "name": "Published rank",
+        "nsfw_v3": {
+          "name": "Explicit content delivery",
+          "unit": "score",
+          "note": "Ratio relative to requested explicitness where 1 matches the prompt."
+        },
+        "darkness_v3": {
+          "name": "Dark content delivery",
+          "unit": "score",
+          "note": "Ratio relative to requested darkness where 1 matches the prompt."
+        },
+        "slop_combo_v3": {
+          "name": "Combined slop score",
+          "unit": "score",
+          "better": "lower",
+          "note": "Purple prose and template phrasing averaged across creative writing and roleplay."
+        },
+        "literal_combo_v3": {
+          "name": "Combined literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words."
+        },
+        "literal_cw_v3": {
+          "name": "Creative writing literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in creative writing."
+        },
+        "spatial_cw_v3": {
+          "name": "Creative writing spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "literal_rp_v3": {
+          "name": "Roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in sustained roleplay."
+        },
+        "literal_erp_v3": {
+          "name": "Explicit roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in explicit roleplay."
+        },
+        "literal_drp_v3": {
+          "name": "Dark roleplay literal errors",
+          "unit": "score",
+          "better": "lower",
+          "note": "Literal errors per 1,000 words in dark roleplay."
+        },
+        "craft_retention_v3": {
+          "name": "Roleplay craft retention",
+          "unit": "score",
+          "better": "higher",
+          "note": "Craft retained late in 50-turn roleplay sessions, where 100 means no decay."
+        },
+        "coherence_rp_v3": {
+          "name": "Roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_rp_v3": {
+          "name": "Roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_rp_v3": {
+          "name": "Roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_rp_v3": {
+          "name": "Roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_rp_v3": {
+          "name": "Roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_rp_v3": {
+          "name": "Roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_rp_v3": {
+          "name": "Roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slopfloor_rp_v3": {
+          "name": "Roleplay slop floor",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_rp_v3": {
+          "name": "Roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "incharacter_rp_v3": {
+          "name": "Roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_rp_v3": {
+          "name": "Roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_rp_v3": {
+          "name": "Roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_rp_v3": {
+          "name": "Roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_rp_v3": {
+          "name": "Roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_rp_v3": {
+          "name": "Roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "explicit_erp_v3": {
+          "name": "Explicit roleplay explicitness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "coherence_erp_v3": {
+          "name": "Explicit roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_erp_v3": {
+          "name": "Explicit roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_erp_v3": {
+          "name": "Explicit roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_erp_v3": {
+          "name": "Explicit roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_erp_v3": {
+          "name": "Explicit roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_erp_v3": {
+          "name": "Explicit roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_erp_v3": {
+          "name": "Explicit roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engage_erp_v3": {
+          "name": "Explicit roleplay engagement",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_erp_v3": {
+          "name": "Explicit roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "incharacter_erp_v3": {
+          "name": "Explicit roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_erp_v3": {
+          "name": "Explicit roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_erp_v3": {
+          "name": "Explicit roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_erp_v3": {
+          "name": "Explicit roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_erp_v3": {
+          "name": "Explicit roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_erp_v3": {
+          "name": "Explicit roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "empty_profundity_drp_v3": {
+          "name": "Dark roleplay empty profundity",
+          "unit": "score",
+          "better": "lower"
+        },
+        "incharacter_drp_v3": {
+          "name": "Dark roleplay in-character score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "circular_restating_drp_v3": {
+          "name": "Dark roleplay circular restating",
+          "unit": "score",
+          "better": "lower"
+        },
+        "nonsense_metaphor_drp_v3": {
+          "name": "Dark roleplay nonsense metaphor",
+          "unit": "score",
+          "better": "lower"
+        },
+        "incoherence_drp_v3": {
+          "name": "Dark roleplay incoherence",
+          "unit": "score",
+          "better": "lower"
+        },
+        "comprehension_drp_v3": {
+          "name": "Dark roleplay misreads",
+          "unit": "score",
+          "better": "lower"
+        },
+        "purple_prose_drp_v3": {
+          "name": "Dark roleplay purple prose",
+          "unit": "score",
+          "better": "lower"
+        },
+        "coherence_drp_v3": {
+          "name": "Dark roleplay coherence",
+          "unit": "score",
+          "better": "higher"
+        },
+        "character_drp_v3": {
+          "name": "Dark roleplay character consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "repetition_drp_v3": {
+          "name": "Dark roleplay non-repetition",
+          "unit": "score",
+          "better": "higher"
+        },
+        "breakdown_drp_v3": {
+          "name": "Dark roleplay stability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "refusal_drp_v3": {
+          "name": "Dark roleplay non-refusal",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lorededuct_drp_v3": {
+          "name": "Dark roleplay lore recall penalty score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "stamina_drp_v3": {
+          "name": "Dark roleplay stamina",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engage_drp_v3": {
+          "name": "Dark roleplay engagement",
+          "unit": "score",
+          "better": "higher"
+        },
+        "craft_drp_v3": {
+          "name": "Dark roleplay craft",
+          "unit": "score",
+          "better": "higher"
+        },
+        "originality_drp_v3": {
+          "name": "Dark roleplay originality",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slop_drp_v3": {
+          "name": "Dark roleplay slop",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lore_drp_v3": {
+          "name": "Dark roleplay lore recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "spatial_drp_v3": {
+          "name": "Dark roleplay spatial errors per 1,000 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "emdash_drp_v3": {
+          "name": "Dark roleplay em-dashes per 100 words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "format_adherence_mean": {
+          "name": "Instruction adherence rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "willingness": {
+          "name": "Willingness on edgy prompts",
+          "unit": "score",
+          "better": "higher"
+        },
+        "calibration_engagement_density": {
+          "name": "Engagement density",
+          "unit": "score"
+        },
+        "avg_writing_style_score": {
+          "name": "Writing style conformance",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttr_mean": {
+          "name": "Type-token ratio",
+          "unit": "score",
+          "better": "higher"
+        },
+        "trigram_repeat_rate_mean": {
+          "name": "Trigram repeat rate",
+          "unit": "score",
+          "better": "lower"
+        },
+        "lexical_stuckness_mean": {
+          "name": "Lexical stuckness",
+          "unit": "score",
+          "better": "lower",
+          "note": "Within-output 5-gram recurrence rate."
+        },
+        "internal_semantic_redundancy_mean": {
+          "name": "Internal semantic redundancy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "length_error_pct_mean": {
+          "name": "Length error",
+          "unit": "%",
+          "better": "lower",
+          "note": "Mean absolute deviation from target word count."
+        },
+        "wc_exceeded_mean": {
+          "name": "Word count exceeded rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "repetition_interrupts": {
+          "name": "Repetition interrupts",
           "unit": "count",
           "better": "lower"
         },
-        "context_length": {
-          "name": "Context length",
+        "verb_cw": {
+          "name": "Creative writing verbosity index",
+          "unit": "index"
+        },
+        "verb_rp": {
+          "name": "Roleplay verbosity index",
+          "unit": "index"
+        },
+        "calibration_refusal_normal": {
+          "name": "Calibration refusal rate (normal)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "calibration_refusal_extreme": {
+          "name": "Calibration refusal rate (extreme)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c0_refusal_rate": {
+          "name": "C0 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c1_refusal_rate": {
+          "name": "C1 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c2_engagement_rate": {
+          "name": "C2 engagement rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c3_refusal_rate": {
+          "name": "C3 refusal rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "c4_engagement_rate": {
+          "name": "C4 engagement rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "sanitized_rate_v2": {
+          "name": "Sanitized response rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "positivity_lean_mean": {
+          "name": "Positivity lean",
+          "unit": "score"
+        },
+        "word_count_mean": {
+          "name": "Mean word count",
+          "unit": "count"
+        },
+        "verb_to_noun_ratio_mean": {
+          "name": "Verb to noun ratio",
+          "unit": "score"
+        },
+        "adjective_adverb_percentage_mean": {
+          "name": "Adjective and adverb share",
+          "unit": "%"
+        },
+        "dialogue_percentage_mean": {
+          "name": "Dialogue share",
+          "unit": "%"
+        },
+        "em_dash_density_mean": {
+          "name": "Em-dashes per 100 words",
+          "unit": "score"
+        },
+        "hedge_ratio_mean": {
+          "name": "Hedging density per 100 words",
+          "unit": "score"
+        },
+        "thinking_chars_mean": {
+          "name": "Mean leaked thinking characters",
+          "unit": "count"
+        },
+        "reasoning_tokens_mean": {
+          "name": "Mean reasoning tokens per call",
           "unit": "tokens"
+        },
+        "recognition_author_match_rate": {
+          "name": "Author recognition rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recognition_work_match_rate": {
+          "name": "Work recognition rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recognition_hallucination_rate": {
+          "name": "Recognition hallucination rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "collapse_rate_all": {
+          "name": "Overall collapse rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "long_rp_opener_echo_rate": {
+          "name": "Roleplay opener echo rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "long_rp_opener_run_max": {
+          "name": "Longest repeated opener run",
+          "unit": "count",
+          "better": "lower"
+        },
+        "terse_late_sessions": {
+          "name": "Terse late sessions",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -84922,7 +85390,8 @@
       "url": "https://arxiv.org/abs/2510.12798",
       "feed": "https://arxiv.org/html/2510.12798",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Grounding DINO-Swin-T",
@@ -84930,10 +85399,9 @@
         "Rex-Omni",
         "Rex-Omni-SFT"
       ],
-      "static": "paper",
       "stats": {
         "f1At95": {
-          "name": "F1 at 95% precision",
+          "name": "F1 at IoU 0.95",
           "unit": "%",
           "better": "higher"
         },
@@ -84941,6 +85409,20 @@
           "name": "Mean F1",
           "unit": "%",
           "better": "higher"
+        },
+        "outputTokensAt100": {
+          "name": "Output tokens per image (Dense200@100)",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "boxesPerImageAt100": {
+          "name": "Boxes per image (Dense200@100)",
+          "unit": "count"
+        },
+        "tokensPerBoxAt100": {
+          "name": "Output tokens per box (Dense200@100)",
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -96285,12 +96767,8 @@
           "better": "lower"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         },
         "totalCostUsd": {
           "name": "Total cost",
@@ -115678,7 +116156,7 @@
       "terms": "The First Proof Foundation publishes the editorial decisions in its benchmark report. https://1stproof.org/second-batch.html",
       "headline": "The score counts how many of the ten problems received an essentially flawless or minor revisions decision.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "costPer": "run",
@@ -115720,6 +116198,10 @@
           "name": "Reject decisions",
           "unit": "count"
         },
+        "Major Revisions": {
+          "name": "Major revisions decisions",
+          "unit": "count"
+        },
         "Minor Revisions": {
           "name": "Minor revisions decisions",
           "unit": "count"
@@ -115729,11 +116211,11 @@
           "unit": "count"
         },
         "inputTokens": {
-          "name": "Input tokens",
+          "name": "Total input tokens",
           "unit": "tokens"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
         }
       }
@@ -133244,7 +133726,7 @@
       "feed": "https://arxiv.org/html/2611.18981",
       "terms": "The authors publish the scores and analysis files at https://github.com/wendli01/gpbam/blob/main/SUBMISSION.md.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 56,
       "unmatched": [
         "GaleneAI/Magistral-Small-2509-FP8-Dynamic",
@@ -133290,11 +133772,7 @@
           "better": "higher"
         },
         "inputTokens": {
-          "name": "Input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
+          "name": "Input tokens per case",
           "unit": "tokens"
         },
         "goldNormsCited": {
@@ -271154,10 +271632,6 @@
           "name": "Tasks solved",
           "unit": "count"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "timePerTask": {
           "name": "Time per task",
           "unit": "seconds",
@@ -271168,7 +271642,7 @@
           "unit": "count"
         },
         "outputTokens": {
-          "name": "Output tokens",
+          "name": "Total output tokens",
           "unit": "tokens"
         }
       }
@@ -276896,12 +277370,6 @@
           "name": "Minutes per run",
           "unit": "minutes"
         }
-      },
-      "stats": {
-        "outputTokens": {
-          "name": "Output tokens per run",
-          "unit": "tokens"
-        }
       }
     },
     "robodojo": {
@@ -278246,16 +278714,8 @@
         "Qwen/Qwen3-4B-Thinking-2507:alp95fjlgjezxambxacldy4q"
       ],
       "stats": {
-        "samples": {
-          "name": "Scored samples",
-          "unit": "count"
-        },
         "inputTokens": {
           "name": "Mean input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Mean output tokens",
           "unit": "tokens"
         },
         "min": {
@@ -289309,6 +289769,23 @@
         "Mistral Large v2",
         "Ox Alpha"
       ],
+      "chart": {
+        "title": "Score vs. cost per run",
+        "x": {
+          "key": "cost",
+          "label": "Cost per full benchmark run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "SimpleBench plots score against full-run cost on a log scale."
+      },
       "costPer": "run",
       "stats": {
         "openEnded": {
@@ -289531,18 +290008,37 @@
       "rows": 2,
       "unmatched": [],
       "verified": "Marked official in the SimReady validation report.",
+      "parts": {
+        "explicit": {
+          "name": "Explicit",
+          "group": "Prompt phrasing"
+        },
+        "engineer": {
+          "name": "Engineer",
+          "group": "Prompt phrasing"
+        },
+        "intent": {
+          "name": "Intent",
+          "group": "Prompt phrasing"
+        }
+      },
       "stats": {
+        "passAt5": {
+          "name": "Pass@5",
+          "unit": "%",
+          "better": "higher"
+        },
         "latency": {
           "name": "Median latency",
           "unit": "seconds",
           "better": "lower"
         },
         "inputTokens": {
-          "name": "Prompt tokens",
+          "name": "Total prompt tokens",
           "unit": "tokens"
         },
         "outputTokens": {
-          "name": "Completion tokens",
+          "name": "Total completion tokens",
           "unit": "tokens"
         }
       }
@@ -310533,11 +311029,6 @@
         }
       },
       "stats": {
-        "reportedCost": {
-          "name": "Reported cost",
-          "unit": "usd",
-          "better": "lower"
-        },
         "scorePerDollar": {
           "name": "Score per dollar",
           "unit": "score",
@@ -313117,7 +313608,7 @@
       "feed": "https://arxiv.org/html/2610.16733",
       "terms": "The researchers publish the tables under the paper terms at https://arxiv.org/abs/2610.16733.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "costPer": "run",
@@ -313163,17 +313654,12 @@
           "better": "higher"
         },
         "inputTokens": {
-          "name": "Input tokens",
-          "unit": "tokens",
-          "better": "lower"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
+          "name": "Input tokens per problem",
           "unit": "tokens",
           "better": "lower"
         },
         "totalTokens": {
-          "name": "Total tokens",
+          "name": "Total tokens per problem",
           "unit": "tokens",
           "better": "lower"
         }
@@ -313706,16 +314192,6 @@
           "name": "Resolved tasks",
           "unit": "count"
         },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "rate": {
-          "name": "Resolution rate",
-          "unit": "score",
-          "better": "higher",
-          "note": "Rate from 0 to 1."
-        },
         "tests_passed": {
           "name": "Tests passed",
           "unit": "count"
@@ -313792,6 +314268,26 @@
         },
         "tokens_reasoning_output_tokens": {
           "name": "Reasoning output tokens",
+          "unit": "tokens"
+        },
+        "tokens_input": {
+          "name": "Uncached input tokens",
+          "unit": "tokens"
+        },
+        "tokens_cache_creation_input": {
+          "name": "Cache creation input tokens",
+          "unit": "tokens"
+        },
+        "tokens_cache_read_input": {
+          "name": "Cache read input tokens",
+          "unit": "tokens"
+        },
+        "tokens_output": {
+          "name": "Total output tokens",
+          "unit": "tokens"
+        },
+        "tokens_thinking": {
+          "name": "Thinking tokens",
           "unit": "tokens"
         },
         "cost_usd_total": {
