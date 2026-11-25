@@ -95,8 +95,24 @@ function isoDate(s: string): string | undefined {
   return m ? `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}` : undefined;
 }
 
-/** Rows of one sheet: the model column, the 总分 (total) column and the 发布日期 date when present. */
-export async function scRows(file: string, sheet: string, modelCol: string): Promise<LeaderboardRow[]> {
+/** Parse SuperCLUE parameter text ("744B", "552B 主干", "2.4TB") into billions of parameters. */
+function parseParams(s: string | undefined): number | undefined {
+  const m = s?.trim().match(/^(\d+(?:\.\d+)?)\s*(TB|T|B)\b/i);
+  if (!m) return undefined;
+  const n = Number(m[1]);
+  if (!Number.isFinite(n) || n <= 0) return undefined;
+  return /^T/i.test(m[2]) ? Number((n * 1000).toFixed(2)) : n;
+}
+
+export interface ScRowsOptions {
+  /** Map from output metric key to Chinese column header in the main sheet. */
+  parts?: Record<string, string>;
+  /** Optional secondary sheet in the same workbook to join extra part columns by model name. */
+  detail?: { sheet: string; modelCol: string; parts: Record<string, string> };
+}
+
+/** Rows of one sheet: the model column, the 总分 (total) column, optional metadata and sub-scores. */
+export async function scRows(file: string, sheet: string, modelCol: string, opts?: ScRowsOptions): Promise<LeaderboardRow[]> {
   const res = await fetch(`${SC_SITE}${encodeURI(file)}`, { headers: { 'user-agent': 'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)' } });
   if (!res.ok) throw new Error(`${res.status} ${file}`);
   const book = readXlsx(Buffer.from(await res.arrayBuffer()));
@@ -106,18 +122,67 @@ export async function scRows(file: string, sheet: string, modelCol: string): Pro
   const iModel = head.indexOf(modelCol);
   const iScore = head.indexOf('总分');
   const iDate = head.indexOf('发布日期');
+  const iParams = head.findIndex((h) => h === '总参数量' || h === '参数量');
+  const iOpen = head.findIndex((h) => h === '开/闭源' || h === '是否开源' || h === '开闭源');
   if (iModel < 0 || iScore < 0) throw new Error(`unexpected columns in ${sheet}: ${head.join(', ')}`);
+  const mainPartCols = Object.entries(opts?.parts ?? {}).map(([key, colName]) => [key, head.indexOf(colName)] as const).filter(([, i]) => i >= 0);
+  const detailByModel = new Map<string, Record<string, number>>();
+  if (opts?.detail) {
+    const dt = book.get(opts.detail.sheet);
+    if (dt?.length) {
+      const dh = dt[0].map((h) => h.trim());
+      const dModel = dh.indexOf(opts.detail.modelCol);
+      const dCols = Object.entries(opts.detail.parts).map(([key, colName]) => [key, dh.indexOf(colName)] as const).filter(([, i]) => i >= 0);
+      if (dModel >= 0 && dCols.length) {
+        for (const r of dt.slice(1)) {
+          const m = r[dModel]?.trim();
+          if (!m) continue;
+          const rec: Record<string, number> = {};
+          for (const [key, i] of dCols) {
+            const v = num(r[i]);
+            if (v !== undefined) rec[key] = v;
+          }
+          if (Object.keys(rec).length) detailByModel.set(m, rec);
+        }
+      }
+    }
+  }
   const rows: LeaderboardRow[] = [];
   for (const r of t.slice(1)) {
     const model = r[iModel]?.trim();
     const score = num(r[iScore]);
-    if (model && score !== undefined) rows.push({ model, score, date: iDate >= 0 ? isoDate(r[iDate] ?? '') : undefined });
+    if (!model || score === undefined) continue;
+    const metrics: Record<string, number> = {};
+    for (const [key, i] of mainPartCols) {
+      const v = num(r[i]);
+      if (v !== undefined) metrics[key] = v;
+    }
+    const extra = detailByModel.get(model);
+    if (extra) Object.assign(metrics, extra);
+    const openText = iOpen >= 0 ? r[iOpen]?.trim() : undefined;
+    const open = openText === '开源' ? true : openText === '闭源' ? false : undefined;
+    const params = iParams >= 0 ? parseParams(r[iParams]) : undefined;
+    rows.push({
+      model,
+      score,
+      date: iDate >= 0 ? isoDate(r[iDate] ?? '') : undefined,
+      open,
+      params,
+      metrics: Object.keys(metrics).length ? metrics : undefined,
+    });
   }
   return rows;
 }
 
 const board: Leaderboard = {
   benchmark: 'superclue',
+  parts: {
+    agenticCoding: { name: 'Agentic coding', group: 'Dimension' },
+    mathReasoning: { name: 'Math and reasoning', group: 'Dimension' },
+    hallucinationControl: { name: 'Hallucination control', group: 'Dimension' },
+    instructionFollowing: { name: 'Precise instruction following', group: 'Dimension' },
+    longContext: { name: 'Long context', group: 'Dimension' },
+  },
   url: `${SC_SITE}/generalpage`,
   feed: `${SC_SITE}/data/generalboard/<round>.xlsx (总排行榜 sheet, 总分; round from the GeneralBoardPage chunk)`,
   terms: SC_TERMS,
@@ -125,7 +190,15 @@ const board: Leaderboard = {
   async fetch() {
     const round = (await scChunk('GeneralBoardPage-')).match(/selectedDate:"([^"]+)"/)?.[1];
     if (!round) throw new Error('current round not found');
-    return scRows(`/data/generalboard/${round}.xlsx`, '总排行榜', '模型名称');
+    return scRows(`/data/generalboard/${round}.xlsx`, '总排行榜', '模型名称', {
+      parts: {
+        agenticCoding: '智能体编程',
+        mathReasoning: '数理推理',
+        hallucinationControl: '幻觉控制',
+        instructionFollowing: '精确指令遵循',
+        longContext: '超长上下文',
+      },
+    });
   },
 };
 export default board;
