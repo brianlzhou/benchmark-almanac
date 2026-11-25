@@ -16,7 +16,9 @@ const board: Leaderboard = {
     return checked(rows.map((row) => {
       const score = Number(row.eci);
       if (!row.Model || !Number.isFinite(score)) throw new Error('Cyber ECI: incomplete model row');
-      return { model: row.Model, score, date: row.date, low: Number(row.eci_ci_low), high: Number(row.eci_ci_high) };
+      const access = row['Model accessibility'] ?? '';
+      const open = /^Open weights/i.test(access) ? true : /^(?:API access|Limited access|Unreleased)/i.test(access) ? false : undefined;
+      return { model: row.Model, score, date: row.date, low: Number(row.eci_ci_low), high: Number(row.eci_ci_high), ...(open === undefined ? {} : { open }) };
     }));
   },
 };

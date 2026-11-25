@@ -10601,7 +10601,15 @@
         "De-Identified System 7",
         "De-Identified System 8",
         "De-Identified System 9"
-      ]
+      ],
+      "stats": {
+        "naiveHazard": {
+          "name": "Naive hazard rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Baseline hazard rate without jailbreak attacks on the 0.5 en-US demo split."
+        }
+      }
     },
     "ailuminate-safety-1-2": {
       "url": "https://mlcommons.org/ailuminate/safety/results/",
@@ -35980,7 +35988,31 @@
         "Gemini 2.5 Flash (snapshot unspecified)",
         "Nemotron 3 Super 120B A12B",
         "Nemotron 3 Ultra 550B A55B"
-      ]
+      ],
+      "chart": {
+        "title": "Hazardous prompts refused vs benign prompts answered",
+        "x": {
+          "key": "score",
+          "label": "Benign prompts answered (BioTIER-permit)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "refuseRate",
+          "label": "Hazardous prompts refused (BioTIER-refuse)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each model plotted by benign prompt compliance against hazardous prompt refusal on the SecureBio BioTIER dashboard."
+      },
+      "stats": {
+        "refuseRate": {
+          "name": "Hazardous prompts refused",
+          "unit": "%",
+          "better": "higher",
+          "note": "BioTIER-refuse score on 398 dangerous biology prompts."
+        }
+      }
     },
     "biotier-securebio-refuse": {
       "url": "https://securebio.org/benchmarks/details/",
@@ -35993,7 +36025,31 @@
         "Gemini 2.5 Flash (snapshot unspecified)",
         "Nemotron 3 Super 120B A12B",
         "Nemotron 3 Ultra 550B A55B"
-      ]
+      ],
+      "chart": {
+        "title": "Hazardous prompts refused vs benign prompts answered",
+        "x": {
+          "key": "permitRate",
+          "label": "Benign prompts answered (BioTIER-permit)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "y": {
+          "key": "score",
+          "label": "Hazardous prompts refused (BioTIER-refuse)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each model plotted by benign prompt compliance against hazardous prompt refusal on the SecureBio BioTIER dashboard."
+      },
+      "stats": {
+        "permitRate": {
+          "name": "Benign prompts answered",
+          "unit": "%",
+          "better": "higher",
+          "note": "BioTIER-permit score on 144 benign biology prompts."
+        }
+      }
     },
     "biovita-retrieval-benchmark": {
       "url": "https://arxiv.org/html/2603.23883",
@@ -37102,7 +37158,19 @@
         "zai-org/GLM-4.7-Flash (val)",
         "zai-org/GLM-5.3-Flash (val)",
         "zai-org/GLM-5.3-Flash (zero-shot, val)"
-      ]
+      ],
+      "stats": {
+        "macroF1": {
+          "name": "Macro F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "failedExamples": {
+          "name": "Failed evaluations",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "blink": {
       "url": "https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658",
@@ -43655,7 +43723,24 @@
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
       "retrieved": "2026-11-24",
       "rows": 55,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "erqa": {
+          "name": "ERQA"
+        },
+        "mindcube": {
+          "name": "MindCube"
+        },
+        "spatialviz": {
+          "name": "SpatialViz"
+        },
+        "intphys2": {
+          "name": "IntPhys 2"
+        },
+        "enigmaeval": {
+          "name": "EnigmaEval"
+        }
+      }
     },
     "caliper-bench-v3": {
       "url": "https://caliperbench.com/",
@@ -51889,7 +51974,25 @@
         "Polyphony",
         "SEED 2.0 (high)",
         "SEED 2.0 (medium)"
-      ]
+      ],
+      "parts": {
+        "domain": {
+          "name": "Domain knowledge reasoning",
+          "unit": "%"
+        },
+        "rule": {
+          "name": "Rule system application",
+          "unit": "%"
+        },
+        "procedural": {
+          "name": "Procedural task execution",
+          "unit": "%"
+        },
+        "pattern": {
+          "name": "Empirical discovery and simulation",
+          "unit": "%"
+        }
+      }
     },
     "cl-bench-life": {
       "url": "https://www.clbench.com/",
@@ -51897,7 +52000,21 @@
       "terms": "Static JSON on the clbench.com GitHub Pages site, which states no terms; the CL-bench repository licenses its code Apache-2.0 under a Tencent notice.",
       "retrieved": "2026-11-24",
       "rows": 29,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "interpersonal": {
+          "name": "Communication and social interactions",
+          "unit": "%"
+        },
+        "thought": {
+          "name": "Fragmented information and revisions",
+          "unit": "%"
+        },
+        "behavior": {
+          "name": "Behavioral records and activity trails",
+          "unit": "%"
+        }
+      }
     },
     "cladbench-v1": {
       "url": "https://github.com/cladbrain/cladbench#results",
@@ -52810,7 +52927,19 @@
         "VerbaNexAI II",
         "gipplab",
         "whereami"
-      ]
+      ],
+      "stats": {
+        "surpriseScore": {
+          "name": "Surprise profile score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "modelSizeGb": {
+          "name": "Model size",
+          "unit": "gb",
+          "better": "lower"
+        }
+      }
     },
     "clef-joker-2023-pun-detection": {
       "url": "https://ceur-ws.org/Vol-3497/paper-149.pdf",
@@ -82971,7 +83100,41 @@
         "hf/vita-group/vicuna-13b-v1.3_gptq@8bit_128g",
         "hf/vita-group/vicuna-13b-v1.3_magnitude_semistruct@0.5_2to4",
         "hf/vita-group/vicuna-13b-v1.3_sparsegpt_semistruct@0.5_2to4"
-      ]
+      ],
+      "parts": {
+        "toxicity": {
+          "name": "Toxicity",
+          "unit": "score"
+        },
+        "stereotypeBias": {
+          "name": "Stereotype bias",
+          "unit": "score"
+        },
+        "adversarialRobustness": {
+          "name": "Adversarial robustness",
+          "unit": "score"
+        },
+        "oodRobustness": {
+          "name": "Out-of-distribution robustness",
+          "unit": "score"
+        },
+        "advDemonstrations": {
+          "name": "Robustness to adversarial demonstrations",
+          "unit": "score"
+        },
+        "privacy": {
+          "name": "Privacy",
+          "unit": "score"
+        },
+        "machineEthics": {
+          "name": "Machine ethics",
+          "unit": "score"
+        },
+        "fairness": {
+          "name": "Fairness",
+          "unit": "score"
+        }
+      }
     },
     "deep-memory-retrieval": {
       "url": "https://arxiv.org/html/2310.08560",
@@ -224551,6 +224714,23 @@
         "tableTeds": {
           "name": "Table TEDS"
         }
+      },
+      "stats": {
+        "textEdit": {
+          "name": "Text edit distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tableTedsStructure": {
+          "name": "Table TEDS structure",
+          "unit": "score",
+          "better": "higher"
+        },
+        "readOrderEdit": {
+          "name": "Reading order edit distance",
+          "unit": "score",
+          "better": "lower"
+        }
       }
     },
     "omnidocbench-1-6": {
@@ -224589,7 +224769,36 @@
         "Youtu-Parsing",
         "dots.ocr",
         "olmOCR"
-      ]
+      ],
+      "parts": {
+        "textScore": {
+          "name": "Text",
+          "note": "One minus text edit distance, multiplied by 100."
+        },
+        "formulaCdm": {
+          "name": "Formula CDM"
+        },
+        "tableTeds": {
+          "name": "Table TEDS"
+        }
+      },
+      "stats": {
+        "textEdit": {
+          "name": "Text edit distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "tableTedsStructure": {
+          "name": "Table TEDS structure",
+          "unit": "score",
+          "better": "higher"
+        },
+        "readOrderEdit": {
+          "name": "Reading order edit distance",
+          "unit": "score",
+          "better": "lower"
+        }
+      }
     },
     "omniearth-bench": {
       "url": "https://omniearth-bench.github.io/",
@@ -252882,7 +253091,17 @@
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
       "retrieved": "2026-11-24",
       "rows": 48,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "sentimentInconsistency": {
+          "name": "Sentiment inconsistency",
+          "unit": "%"
+        },
+        "helpfulnessInconsistency": {
+          "name": "Helpfulness inconsistency",
+          "unit": "%"
+        }
+      }
     },
     "pd-cft": {
       "url": "https://arxiv.org/abs/1607.02250",
@@ -272836,7 +273055,42 @@
         "HiDream-Edit",
         "OmniGen",
         "Ovis-U1"
-      ]
+      ],
+      "parts": {
+        "temporal": {
+          "name": "Temporal",
+          "unit": "%"
+        },
+        "causal": {
+          "name": "Causal",
+          "unit": "%"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "unit": "%"
+        },
+        "logical": {
+          "name": "Logical",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "instructionReasoning": {
+          "name": "Instruction reasoning",
+          "unit": "%",
+          "better": "higher"
+        },
+        "appearanceConsistency": {
+          "name": "Appearance consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "visualPlausibility": {
+          "name": "Visual plausibility",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "risebench-plus-plus": {
       "url": "https://huggingface.co/spaces/VisionXLab/RISEBench_Leaderboard",
@@ -272862,7 +273116,66 @@
         "SenseNova-U1-A3B-MoT-SFT",
         "UniPic 3.0",
         "UniWorld-V2"
-      ]
+      ],
+      "parts": {
+        "temporal": {
+          "name": "Temporal",
+          "group": "Category",
+          "unit": "%"
+        },
+        "causal": {
+          "name": "Causal",
+          "group": "Category",
+          "unit": "%"
+        },
+        "spatial": {
+          "name": "Spatial",
+          "group": "Category",
+          "unit": "%"
+        },
+        "logical": {
+          "name": "Logical",
+          "group": "Category",
+          "unit": "%"
+        },
+        "counterfactual": {
+          "name": "Counterfactual",
+          "group": "Category",
+          "unit": "%"
+        },
+        "hybrid": {
+          "name": "Hybrid",
+          "group": "Category",
+          "unit": "%"
+        },
+        "single": {
+          "name": "Single-image",
+          "group": "Input",
+          "unit": "%"
+        },
+        "multi": {
+          "name": "Multi-image",
+          "group": "Input",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "instructionReasoning": {
+          "name": "Instruction reasoning",
+          "unit": "%",
+          "better": "higher"
+        },
+        "appearanceConsistency": {
+          "name": "Appearance consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "visualPlausibility": {
+          "name": "Visual plausibility",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "riskrubric": {
       "url": "https://riskrubric.ai/",
