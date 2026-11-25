@@ -24,7 +24,7 @@ const board: Leaderboard = {
   url: "https://benchmarkheaven.com/jev-models",
   feed: FEED,
   terms: "Public results published by the benchmark authors at benchmarkheaven.com; retain source attribution and follow the upstream terms.",
-  aliases: {},
+  aliases: { 'Jev 1.14.0 (TypeSafe AI)': 'jev-1-14-0' },
   
   async fetch() {
     const data = await fetchJson<{revision: string; systems: any[]}>(FEED);

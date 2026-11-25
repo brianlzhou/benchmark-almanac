@@ -71149,6 +71149,38 @@
     "added": "2026-11-01"
   },
   {
+    "id": "gamedojo",
+    "name": "GameDojo",
+    "aliases": [
+      "Game Dojo"
+    ],
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents fight 120 boss encounters from 20 video games at three difficulty levels, either with time paused between steps or in real time. Progress is the share of the boss's health removed, and win rate counts fights won.",
+    "org": "Tsinghua University and others",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.30771",
+      "repo": "https://github.com/THUSI-Lab/GameDojo",
+      "site": "https://gamedojo-benchmark.github.io/",
+      "leaderboard": "https://gamedojo-benchmark.github.io/#results"
+    },
+    "access": "public",
+    "note": "Coding agents rebuilt the encounters and wrote gameplay scripts, which also produced 600 hours of training trajectories (GameDojo-Data). Models act through a computer-use interface (mouse and keyboard) or a semantic one (named game actions). Time-paused runs get 300 steps, one gameplay minute. Real-time runs get three physical minutes, and there every frontier model falls below a random policy. At Medium difficulty, GPT-6.1 Sol removed 44.6% of boss health with time paused and won 3.3% of fights.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://gamedojo-benchmark.github.io/",
+      "https://huggingface.co/papers/2611.30771",
+      "https://github.com/THUSI-Lab/GameDojo"
+    ],
+    "added": "2026-11-25"
+  },
+  {
     "id": "gameenginebench",
     "name": "GameEngineBench",
     "category": "coding",
@@ -200363,6 +200395,39 @@
       "https://huggingface.co/papers/2502.08047"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "worldleague",
+    "name": "WorldLeague",
+    "aliases": [
+      "World League"
+    ],
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "AI systems control simulated robots on 60 tasks in three suites: exploring scenes to gather evidence (WorldSeek), rearranging objects (WorldShape) and adapting to changes (WorldShift). The Interactive Score measures progress toward each task's physical goal from the robot's trajectory.",
+    "org": "xML Lab, National University of Singapore",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.30989",
+      "repo": "https://github.com/xyangzhou/WorldLeague",
+      "site": "https://xyangzhou.github.io/WorldLeague/",
+      "leaderboard": "https://xyangzhou.github.io/WorldLeague/",
+      "dataset": "https://huggingface.co/datasets/xyangzhou/WorldLeague"
+    },
+    "access": "public",
+    "note": "The leaderboard compares 13 systems built on OmniGibson with BEHAVIOR-1K assets. Eight vision-language models choose targets and motions through the board's WorldHarness, and three vision-language-action models and two world-action models use their native controls on 59 of the tasks. Physical success counts episodes where the full goal and every constraint hold, and it stays far below the Interactive Score. In the November 24, 2026 results, Claude Fable 5.2 led with 28.58 and 21.67% physical success. The paper had 135 Hugging Face upvotes a day after release.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://xyangzhou.github.io/WorldLeague/",
+      "https://huggingface.co/papers/2611.30989",
+      "https://github.com/xyangzhou/WorldLeague"
+    ],
+    "added": "2026-11-25"
   },
   {
     "id": "worldmodelbench",
