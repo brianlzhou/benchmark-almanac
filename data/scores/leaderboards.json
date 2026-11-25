@@ -55444,16 +55444,16 @@
       ],
       "parts": {
         "researchDueDiligenceDim": {
-          "name": "证据化投研与尽调"
+          "name": "Research due diligence"
         },
         "financialModelDim": {
-          "name": "财务分析与模型维护"
+          "name": "Financial modeling"
         },
         "bankComplianceDim": {
-          "name": "银行业务与合规管控"
+          "name": "Bank compliance"
         },
         "quantPortfolioDim": {
-          "name": "量化投资与组合管理"
+          "name": "Quantitative portfolio"
         },
         "finProKnowledgeDim": {
           "name": "金融专业知识问答"
@@ -112358,131 +112358,131 @@
         },
         "finance": {
           "name": "Finance",
-          "group": "Financial Academic"
+          "group": "Task"
         },
         "economy": {
           "name": "Economy",
-          "group": "Financial Academic"
+          "group": "Task"
         },
         "accounting": {
           "name": "Accounting",
-          "group": "Financial Academic"
+          "group": "Task"
         },
         "certificate": {
           "name": "Certificate",
-          "group": "Financial Academic"
+          "group": "Task"
         },
         "ftc": {
-          "name": "FTC",
-          "group": "Industry Understanding"
+          "name": "Financial Text Classification",
+          "group": "Task"
         },
         "fsa": {
-          "name": "FSA",
-          "group": "Industry Understanding"
+          "name": "Financial Sentiment Analysis",
+          "group": "Task"
         },
         "re": {
-          "name": "RE",
-          "group": "Industry Understanding"
+          "name": "Relation Extraction",
+          "group": "Task"
         },
         "fee": {
-          "name": "FEE",
-          "group": "Industry Understanding"
+          "name": "Financial Event Extraction",
+          "group": "Task"
         },
         "nee": {
-          "name": "NEE",
-          "group": "Industry Understanding"
+          "name": "Negative Entity Extraction",
+          "group": "Task"
         },
         "cee": {
-          "name": "CEE",
-          "group": "Industry Understanding"
+          "name": "Causal Event Extraction",
+          "group": "Task"
         },
         "fts": {
-          "name": "FTS",
-          "group": "Industry Generation"
+          "name": "Financial Text Summarization",
+          "group": "Task"
         },
         "fcp": {
-          "name": "FCP",
-          "group": "Industry Generation"
+          "name": "Financial Customer Portrait",
+          "group": "Task"
         },
         "msr": {
-          "name": "MSR",
-          "group": "Industry Generation"
+          "name": "Marketing Scripts Recommendation",
+          "group": "Task"
         },
         "ia": {
-          "name": "IA",
-          "group": "Industry Generation"
+          "name": "Investment Advice",
+          "group": "Task"
         },
         "app": {
-          "name": "App",
-          "group": "Financial Security"
+          "name": "Application Security",
+          "group": "Task"
         },
         "cryp": {
-          "name": "Cryp",
-          "group": "Financial Security"
+          "name": "Cryptography",
+          "group": "Task"
         },
         "ma": {
-          "name": "MA",
-          "group": "Financial Security"
+          "name": "Malware Analysis",
+          "group": "Task"
         },
         "ms": {
-          "name": "MS",
-          "group": "Financial Security"
+          "name": "Memory Security",
+          "group": "Task"
         },
         "ns": {
-          "name": "NS",
-          "group": "Financial Security"
+          "name": "Network Security",
+          "group": "Task"
         },
         "pent": {
-          "name": "Pent",
-          "group": "Financial Security"
+          "name": "Penetration Testing",
+          "group": "Task"
         },
         "reve": {
-          "name": "Reve",
-          "group": "Financial Security"
+          "name": "Reverse Engineering",
+          "group": "Task"
         },
         "soft": {
-          "name": "Soft",
-          "group": "Financial Security"
+          "name": "Software Security",
+          "group": "Task"
         },
         "syst": {
-          "name": "Syst",
-          "group": "Financial Security"
+          "name": "System Security",
+          "group": "Task"
         },
         "vul": {
-          "name": "Vul",
-          "group": "Financial Security"
+          "name": "Vulnerability",
+          "group": "Task"
         },
         "ws": {
-          "name": "WS",
-          "group": "Financial Security"
+          "name": "Web Security",
+          "group": "Task"
         },
         "cot": {
-          "name": "COT",
-          "group": "Financial Agent"
+          "name": "Chain of Thought",
+          "group": "Task"
         },
         "rag": {
-          "name": "RAG",
-          "group": "Financial Agent"
+          "name": "Retrieval Augmented Generation",
+          "group": "Task"
         },
         "ft": {
-          "name": "FT",
-          "group": "Financial Agent"
+          "name": "Financial tasks",
+          "group": "Task"
         },
         "mc": {
-          "name": "MC",
-          "group": "Financial Agent"
+          "name": "Multi-turn conversation",
+          "group": "Task"
         },
         "md": {
-          "name": "MD",
-          "group": "Financial Agent"
+          "name": "Multi-document question and answer",
+          "group": "Task"
         },
         "apiI": {
-          "name": "API-I",
-          "group": "Financial Agent"
+          "name": "API invocation",
+          "group": "Task"
         },
         "apiR": {
-          "name": "API-R",
-          "group": "Financial Agent"
+          "name": "API retrieval",
+          "group": "Task"
         }
       }
     },
@@ -306496,7 +306496,7 @@
       "url": "https://www.tbench.ai/?version=3.0",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"3-0-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 11,
       "unmatched": [
         "SWE-1.7 Lightning"
@@ -306600,7 +306600,7 @@
       "url": "https://www.tbench.ai/?version=4.1",
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"4-1-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 67,
       "unmatched": [],
       "chart": {
