@@ -10,7 +10,7 @@ const board: Leaderboard = {
  url: "https://www.grayswan.ai/blog/uk-aisi-x-gray-swan-agent-red-teaming-challenge-results-snapshot",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { breaks: { name: 'Breaks', unit: 'count' }, chats: { name: 'Chats', unit: 'count' } },
+ stats: { breaks: { name: 'Breaks', unit: 'count', better: 'lower' }, chats: { name: 'Chats', unit: 'count' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
@@ -19,7 +19,7 @@ const board: Leaderboard = {
   return t.slice(1).filter(r=>num(r[4]?.text)!==undefined).map(r=>{
     const alias=r[1].text.match(/\s*\(([^)]+)\)$/);let model=r[1].text.replace(/^[^/]+\//,'').replace(/\s*\([^)]+\)$/,'');
     const thinking=model.endsWith(':thinking');model=model.replace(/:thinking$/,'');
-    return {model,score:num(r[4].text)!,setting:[thinking?'thinking':null,alias?.[1]].filter(Boolean).join('; '),metrics:{breaks:num(r[2].text)!,chats:num(r[3].text)!}};
+    return {model,score:num(r[4].text)!,setting:[thinking?'thinking':null,alias?.[1]].filter(Boolean).join(', '),metrics:{breaks:num(r[2].text)!,chats:num(r[3].text)!}};
   });
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

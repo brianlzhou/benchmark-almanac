@@ -29,7 +29,7 @@ const board: Leaderboard = {
     let model=r[1].text.replace(/^[^/]+\//,'');const effort=model.match(/(?:\s*\((max|high|medium|low|thinking|non-thinking|w\/ thinking|w\/o thinking)\)|-(high|low|medium))$/i);
     if(effort) model=model.slice(0,effort.index).trim();
     model=model.replace(/^Claude-(\d+[.]\d+)-(Opus|Sonnet)$/i, 'Claude $2 $1');
-    return {model,score:num(r[2].text)!,setting:'v1.1'+(effort?'; '+(effort[1]??effort[2]).replace('w/o thinking','non-thinking').replace('w/ thinking','thinking'):''),
+    return {model,score:num(r[2].text)!,setting:'v1.1'+(effort?', '+(effort[1]??effort[2]).replace('w/o thinking','non-thinking').replace('w/ thinking','thinking'):''),
       metrics:Object.fromEntries(['travelCS','travelPS','travelComp','travelAcc','shoppingMatch','shoppingAcc'].map((h,i)=>[h,num(r[i+3].text)!]))};
   });
   })();
