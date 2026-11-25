@@ -46392,10 +46392,10 @@
     "careqa": {
       "url": "https://arxiv.org/html/2502.06666",
       "feed": "https://arxiv.org/html/2502.06666",
-      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "terms": "Paper and license at https://arxiv.org/abs/2502.06666",
       "headline": "The paper reports no overall score, so this is the plain mean of its ten close-ended accuracy parts.",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-20",
       "rows": 4,
       "unmatched": [
         "BioMistral-MedMNX",
@@ -46408,35 +46408,66 @@
         "Yi-1.5-34B-Chat"
       ],
       "parts": {
-        "medmcqa": {
-          "name": "MedMCQA"
+        "en": {
+          "name": "English accuracy"
         },
-        "medqa": {
-          "name": "MedQA"
+        "es": {
+          "name": "Spanish accuracy"
         },
-        "careqaEn": {
-          "name": "CareQA (English)"
+        "BitsperByte": {
+          "name": "Bits per Byte",
+          "unit": "score",
+          "better": "lower"
         },
-        "careqaEs": {
-          "name": "CareQA (Spanish)"
+        "BytePerplexity": {
+          "name": "Byte Perplexity",
+          "unit": "score",
+          "better": "lower"
         },
-        "multimedqa": {
-          "name": "MultiMedQA"
+        "WordPerplexity": {
+          "name": "Word Perplexity",
+          "unit": "score",
+          "better": "lower"
         },
-        "pubmedqa": {
-          "name": "PubMedQA"
+        "Prometheus": {
+          "name": "Prometheus",
+          "unit": "score",
+          "better": "higher"
         },
-        "medTextClassification": {
-          "name": "Medical text classification"
+        "BERTScore": {
+          "name": "BERTScore",
+          "unit": "score",
+          "better": "higher"
         },
-        "medTranscriptions": {
-          "name": "Medical transcriptions"
+        "BLEU": {
+          "name": "BLEU",
+          "unit": "score",
+          "better": "higher"
         },
-        "biored": {
-          "name": "BioRED"
+        "BLEURT": {
+          "name": "BLEURT",
+          "unit": "score",
+          "better": "higher"
         },
-        "mmlu": {
-          "name": "MMLU"
+        "MoverScore": {
+          "name": "MoverScore",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ROUGE1": {
+          "name": "ROUGE1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ROUGE2": {
+          "name": "ROUGE2",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ROUGEL": {
+          "name": "ROUGEL",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -58071,24 +58102,25 @@
       }
     },
     "co-design-bench": {
-      "url": "https://arxiv.org/html/2610.35138",
-      "feed": "https://arxiv.org/html/2610.35138",
-      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2610.35138.",
-      "static": "paper",
-      "retrieved": "2026-11-24",
+      "url": "https://codesignbench.github.io/#leaderboard",
+      "feed": "https://codesignbench.github.io/data/site-data.json",
+      "terms": "The authors publish the benchmark and its results at https://github.com/Wiselnn570/Co-Design-Bench",
+      "retrieved": "2026-11-20",
       "rows": 10,
       "unmatched": [],
-      "stats": {
+      "reference": [
+        "Claude Code"
+      ],
+      "parts": {
         "graded": {
-          "name": "Graded completion",
-          "unit": "%",
-          "better": "higher"
+          "name": "Graded completion"
         },
         "full": {
-          "name": "Full-pass rate",
-          "unit": "%",
-          "better": "higher"
-        },
+          "name": "Full pass"
+        }
+      },
+      "static": "paper",
+      "stats": {
         "mestrict": {
           "name": "ME strict completion",
           "unit": "%",
@@ -58106,13 +58138,11 @@
         },
         "meTurns": {
           "name": "ME turns",
-          "unit": "count",
-          "better": "lower"
+          "unit": "count"
         },
         "meTokens": {
           "name": "ME tokens",
-          "unit": "tokens",
-          "better": "lower"
+          "unit": "tokens"
         },
         "restrict": {
           "name": "RE strict completion",
@@ -58131,13 +58161,106 @@
         },
         "reTurns": {
           "name": "RE turns",
-          "unit": "count",
-          "better": "lower"
+          "unit": "count"
         },
         "reTokens": {
           "name": "RE tokens",
-          "unit": "tokens",
-          "better": "lower"
+          "unit": "tokens"
+        },
+        "capGroundedUnderstanding": {
+          "name": "Grounded Understanding completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capVisualUnderstanding": {
+          "name": "Visual Understanding completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capAudioTemporalUnderstanding": {
+          "name": "Audio Temporal Understanding completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capEvidenceIntegration": {
+          "name": "Evidence Integration completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capUiTransformation": {
+          "name": "UI Transformation completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capContentAssets": {
+          "name": "Content Assets completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capStyleLayout": {
+          "name": "Style and Layout completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capMotionAdaptation": {
+          "name": "Motion Adaptation completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capFunctionalImplementation": {
+          "name": "Functional Implementation completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capInteractionBehaviors": {
+          "name": "Interaction Behaviors completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capDataLogic": {
+          "name": "Data Logic completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "capEngineeringIntegration": {
+          "name": "Engineering Integration completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "modNone": {
+          "name": "No-attachment completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "modImage": {
+          "name": "Image-attachment completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "modVideo": {
+          "name": "Video-attachment completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "modAudio": {
+          "name": "Audio-attachment completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "modDocument": {
+          "name": "Document-attachment completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "breadthB12": {
+          "name": "One or two edit types completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "breadthB34": {
+          "name": "Three or four edit types completion",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -67400,22 +67523,47 @@
       "unmatched": []
     },
     "compmat-bench": {
-      "url": "https://arxiv.org/html/2610.00636",
-      "feed": "https://arxiv.org/html/2610.00636",
-      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2610.00636.",
+      "url": "https://github.com/cz2014/CompMat-Bench",
+      "feed": "https://raw.githubusercontent.com/cz2014/CompMat-Bench/HEAD/trajectories/manifest.json",
+      "terms": "CC BY 4.0, https://github.com/cz2014/CompMat-Bench/blob/HEAD/LICENSE",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-20",
       "rows": 4,
       "unmatched": [],
       "parts": {
-        "prepare": {
+        "inputs": {
           "name": "Prepare inputs"
         },
-        "analyze": {
+        "outputs": {
           "name": "Analyze outputs"
         },
-        "runAndAnalyze": {
+        "run": {
           "name": "Run and analyze"
+        },
+        "reduced52": {
+          "name": "Reduced guidance (52 tasks)"
+        },
+        "repeat20x5": {
+          "name": "Repeated trials (20 tasks)"
+        },
+        "workflow": {
+          "name": "Workflows"
+        }
+      },
+      "stats": {
+        "passes": {
+          "name": "Tasks passed",
+          "unit": "count",
+          "better": "higher"
+        },
+        "tasks": {
+          "name": "Tasks",
+          "unit": "count"
+        },
+        "totalCost": {
+          "name": "API cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -272857,39 +273005,44 @@
       }
     },
     "realbench-verilog": {
-      "url": "https://arxiv.org/abs/2507.16200",
-      "feed": "https://arxiv.org/pdf/2507.16200",
-      "terms": "The authors publish the results in the arXiv paper. https://arxiv.org/abs/2507.16200",
+      "url": "https://arxiv.org/html/2507.16200",
+      "feed": "https://arxiv.org/html/2507.16200",
+      "terms": "The paper uses CC BY-NC-SA 4.0. https://creativecommons.org/licenses/by-nc-sa/4.0/",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-20",
       "rows": 3,
       "unmatched": [
-        "DeepSeek-R1-671B",
-        "DeepSeek-V3-671B",
+        "CodeV-QW-7B",
+        "DS-R1-671B",
+        "DS-V3-671B",
         "GPT-4-Turbo (snapshot unspecified)",
         "GPT-4o (snapshot unspecified)",
-        "GPT-4o-V",
-        "QW-7B",
         "RTLCoder-DS-6.7B"
       ],
       "parts": {
-        "syntaxAt1": {
-          "name": "Syntax pass@1"
+        "moduleSyntax": {
+          "name": "Module syntax pass@1"
         },
-        "syntaxAt5": {
-          "name": "Syntax pass@5"
+        "moduleSyntaxAt5": {
+          "name": "Module syntax pass@5"
         },
-        "funcAt1": {
-          "name": "Functional pass@1"
+        "moduleFunction": {
+          "name": "Module functional pass@1"
         },
-        "funcAt5": {
-          "name": "Functional pass@5"
+        "moduleFunctionAt5": {
+          "name": "Module functional pass@5"
         },
-        "formalAt1": {
-          "name": "Formal pass@1"
+        "moduleFormal": {
+          "name": "Module formal pass@1"
         },
-        "formalAt5": {
-          "name": "Formal pass@5"
+        "moduleFormalAt5": {
+          "name": "Module formal pass@5"
+        },
+        "systemSyntax": {
+          "name": "System syntax pass@1"
+        },
+        "systemSyntaxAt5": {
+          "name": "System syntax pass@5"
         }
       }
     },
@@ -289785,24 +289938,39 @@
     "sea-helm-audio": {
       "url": "https://arxiv.org/html/2610.19869",
       "feed": "https://arxiv.org/html/2610.19869",
-      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
+      "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2610.19869",
       "headline": "The paper reports no overall score, so this is the Speech accuracy column, with Text and Delta retained as metrics.",
       "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 6,
+      "retrieved": "2026-11-20",
+      "rows": 1,
       "unmatched": [
         "SEA-LION-4.5-27B"
       ],
-      "stats": {
-        "text": {
-          "name": "Text accuracy",
-          "unit": "%",
-          "better": "higher"
+      "harnesses": "system",
+      "parts": {
+        "mmluChinese": {
+          "name": "Chinese",
+          "group": "Global-MMLU-Lite"
         },
-        "delta": {
-          "name": "Text-to-speech accuracy gap",
-          "unit": "%",
-          "better": "lower"
+        "mmluEnglish": {
+          "name": "English",
+          "group": "Global-MMLU-Lite"
+        },
+        "ifevalEnglish": {
+          "name": "English",
+          "group": "SEA-HELM IFEval"
+        },
+        "ifevalIndonesian": {
+          "name": "Indonesian",
+          "group": "SEA-HELM IFEval"
+        },
+        "ifevalMalay": {
+          "name": "Malay",
+          "group": "SEA-HELM IFEval"
+        },
+        "ifevalTamil": {
+          "name": "Tamil",
+          "group": "SEA-HELM IFEval"
         }
       }
     },
