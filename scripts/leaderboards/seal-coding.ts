@@ -2,9 +2,15 @@
 // Elo-style rating from side-by-side human ratings. Some rows name the effort only in the version field
 // ("o3-mini-2025-01-31 (high)"), which the importer reads.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('coding');
+
+const interval = (e: ScaleEntry) => {
+  const half = Number(e.confidenceInterval_upper);
+  const score = Number(e.score);
+  return half > 0 ? { low: score - half, high: score + half } : undefined;
+};
 
 const board: Leaderboard = {
   benchmark: 'seal-coding',
@@ -18,6 +24,6 @@ const board: Leaderboard = {
     // the version field says gemini-1.5-flash-preview-0514
     'Gemini 1.5 Flash': 'gemini-1-5-flash-may-2024',
   },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE)),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (_, e) => interval(e)),
 };
 export default board;
