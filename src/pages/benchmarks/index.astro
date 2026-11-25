@@ -1,51 +1,18 @@
 ---
-import { evalAttrs } from '../../lib/eval-kind.ts';
-import { facetAttrs, facetWords } from '../../lib/facets.ts';
 import FacetFilters from '../../components/FacetFilters.astro';
+import BenchmarkRows from '../../components/BenchmarkRows.astro';
 import SortHead from '../../components/SortHead.astro';
 import Base from '../../layouts/Base.astro';
-import LabMark from '../../components/LabMark.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import AreaMark from '../../components/AreaMark.astro';
-import ReviewMark from '../../components/ReviewMark.astro';
-import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions, cards, systemCards } from '../../lib/data.ts';
-import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
-import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
-import { familyOf, nextVersion } from '../../lib/reigns.ts';
-import { issuesByBenchmark, unresolved, PROBLEMS } from '../../lib/audits.ts';
-import { epochReviewOf, epochReviews, VERDICTS as EPOCH_VERDICTS, type EpochVerdict } from '../../lib/epoch-reviews.ts';
+import { AS_OF, addedOptions, cards, systemCards } from '../../lib/data.ts';
+import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUBCATEGORIES } from '../../lib/taxonomy.ts';
+import { monthYear, humanDate } from '../../lib/format.ts';
+import { epochReviews, VERDICTS as EPOCH_VERDICTS, type EpochVerdict } from '../../lib/epoch-reviews.ts';
 import reviewedJson from '../../../data/reviewed.json';
-import { familySize, isArena, benchmarkCount } from '../../lib/counts.ts';
+import { familySize, benchmarkCount } from '../../lib/counts.ts';
+import { FIRST_ROWS, rows, all, byId, earlier, METHOD_GROUP, STATUS } from '../../lib/benchmark-table.ts';
 
-// where the newest score came from, for the Last added column's tooltip
-const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
-
-// scoring methods, grouped the way people ask: fixed answers, graders, arenas, real events
-const METHOD_GROUP: Record<string, string> = {
-  verified: 'fixed',
-  'model-judged': 'graded',
-  'expert-graded': 'graded',
-  preference: 'arena',
-  'head-to-head': 'arena',
-  outcome: 'events',
-};
-const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
-// the order a sort by status puts them in
-const STATUS_RANK: Record<string, number> = { 'in use': 0, fading: 1, dropped: 2, 'system cards': 3, 'not in cards': 4 };
-
-// arenas and match leagues have their own page (/arenas/), so this table holds only the tests with fixed standards
-const all = allSummaries().filter((s) => !isArena(s.b));
-// one row per test: a versioned family shows its newest version and links the earlier ones
-const newest = (id: string) => familyOf(id).at(-1);
-// a family row ranks by its whole family, so a version too new to be cited (Terminal-Bench 4.1) doesn't sink a test
-// labs have cited for years below the first rows shown
-const byIdAll = new Map(all.map((s) => [s.b.id, s]));
-const famTotal = (s: (typeof all)[number], f: (x: (typeof all)[number]) => number) => (s.b.family ? familyOf(s.b.id) : [s.b.id]).reduce((n, id) => n + (byIdAll.has(id) ? f(byIdAll.get(id)!) : 0), 0);
-const rows = all
-  .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
-  .map((s) => ({ s, cites: famTotal(s, (x) => x.cites.length), docs: famTotal(s, (x) => x.docCites.length), scores: famTotal(s, (x) => x.nScores) }))
-  .sort((a, b) => b.cites - a.cites || b.docs - a.docs || b.scores - a.scores || a.s.b.name.localeCompare(b.s.b.name))
-  .map((x) => x.s);
 // a row stands for its whole family, and every version counts (src/lib/counts.ts)
 const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).reduce((n, s) => n + familySize(s.b), 0);
 const methodCount = (g: string) => inRows((s) => METHOD_GROUP[s.b.scoring ?? ''] === g);
@@ -80,22 +47,6 @@ const codeOptions: Option[] = [
   { value: '', label: 'With or without code' },
   { value: 'yes', label: 'Public code', count: inRows((s) => !!s.b.links?.repo) },
 ];
-const byId = new Map(all.map((s) => [s.b.id, s]));
-// a family's earlier versions, newest first, so reading down goes back in time
-const earlier = (id: string) =>
-  familyOf(id)
-    .slice(0, -1)
-    .map((v) => byId.get(v))
-    // a family member that is an arena lives on /arenas/, not in this table
-    .filter((s): s is NonNullable<typeof s> => !!s)
-    .reverse();
-const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
-// Epoch AI's verdicts: a row matches a verdict when it, or one of the earlier versions folded under it, has it, and
-// those versions show under it while the filter is on (data-kid-keys)
-const reviewTokens = (ids: string[]) => {
-  const vs = [...new Set(ids.map((id) => epochReviewOf(id)?.verdict).filter((v): v is EpochVerdict => !!v))];
-  return vs.length ? ['reviewed', ...vs].join(' ') : undefined;
-};
 // each count is the reviewed records themselves, as Epoch AI counts them, not every version of their families
 const reviewCount = (v?: EpochVerdict) => [...epochReviews].filter(([id, r]) => byId.has(id) && (!v || r.verdict === v)).length;
 const reviewOptions: Option[] = [
@@ -120,22 +71,6 @@ const span = (docs: { lab: string; date: string }[]) => {
 };
 const postsSpan = span(cards);
 const docsSpan = span(systemCards);
-const labCount = (n: number) => (n === 1 ? '1 lab' : `${n} labs`);
-type Cite = { card: { lab: string; date: string } };
-const citeTip = (xs: Cite[]) => {
-  if (!xs.length) return undefined;
-  const newest = xs.map((x) => x.card.date).sort().at(-1);
-  return `${labCount(new Set(xs.map((x) => x.card.lab)).size)}, newest ${monthYear(newest)}`;
-};
-// the same count over the last 12 and 6 months, and the labs behind each, for the Cited dropdown:
-// "posts in 12 months, posts in 6 months, labs in 12 months, labs in 6 months". None in 12 months leaves it out.
-const windowCounts = (xs: Cite[]) => {
-  const within = (m: number) => xs.filter((x) => monthsBetween(x.card.date, AS_OF) < m);
-  const [a, b] = [within(12), within(6)];
-  if (!a.length) return undefined;
-  const labs = (ys: Cite[]) => new Set(ys.map((y) => y.card.lab)).size;
-  return `${a.length} ${b.length} ${labs(a)} ${labs(b)}`;
-};
 const countedOptions: Option[] = [
   { value: '', label: 'Cited: all time' },
   { value: '12m', label: 'Cited: last 12 months' },
@@ -154,7 +89,7 @@ const lastAddedDate = (reviewedJson as { added: { id: string; date: string }[] }
 const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '') : '';
 ---
 
-<Base title="Benchmarks" description="Every benchmark we catalog, with what it tests, who made it, whether labs report it, and its best score.">
+<Base title="Benchmarks" searchTitle={`AI benchmarks: ${benchmarkCount.toLocaleString('en-US')} LLM benchmarks and leaderboards`} description="Every benchmark we catalog, with what it tests, who made it, whether labs report it, and its best score.">
   <div class="page bx">
     <header class="head">
       <h1>Benchmarks</h1>
@@ -226,7 +161,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
       </div>
 
     <div class="table-wrap wide">
-      <table class="t bt" data-rows data-sort data-keep="counted" data-kid-keys="review">
+      <table class="t bt" data-rows data-sort data-keep="counted" data-kid-keys="review" data-more="/benchmarks/rows.json">
         <thead>
           <tr>
             <SortHead>Benchmark</SortHead>
@@ -267,128 +202,11 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
           </tr>
         </thead>
         <tbody>
-          {
-            rows.map((s, i) => {
-              const top = s.best ? modelById.get(s.best.model) : undefined;
-              const prev = s.b.family ? earlier(s.b.id) : [];
-              const sub = s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory) : undefined;
-              const kind = sub?.name ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
-              const group = prev.length ? s.b.family : undefined;
-              return (
-                <>
-                  <tr
-                    {...evalAttrs(s.b)}
-                    {...facetAttrs(s.b.id)}
-                    class:list={{ fam: !!group }}
-                    data-later={i >= 150 ? '' : undefined}
-                    data-group={group}
-                    data-n={familySize(s.b) > 1 ? familySize(s.b) : undefined}
-                    data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
-                    data-level={s.b.level ?? ''}
-                    data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
-                    data-status={s.status.replace(/ /g, '-')}
-                    data-added={addedWindows(s)}
-                    data-code={s.b.links?.repo ? 'yes' : ''}
-                    data-review={reviewTokens([s.b.id, ...prev.map((p) => p.b.id)])}
-                    data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name), facetWords(s.b.id)].join(' ').trim().toLowerCase() || undefined}
-                  >
-                    <td class="nm">
-                      <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
-                      {group && s.b.version && !s.b.name.includes(s.b.version) && <span class="vtag">{vlabel(s.b.version)}</span>}
-                      {issuesByBenchmark.has(s.b.id) && (() => {
-                        const iss = issuesByBenchmark.get(s.b.id)!;
-                        const open = unresolved(iss).length;
-                        const kinds = [...new Set(iss.flatMap((i) => i.finding.problems))].map((p) => PROBLEMS[p].name.toLowerCase());
-                        return (
-                          <a
-                            class:list={['ki-mark', 'hint', { fixed: open === 0 }]}
-                            href={`/benchmarks/${s.b.id}/#issues`}
-                            aria-label={`${iss.length} known ${iss.length === 1 ? 'issue' : 'issues'}`}
-                            data-tn={iss.length === 1 ? 'A known issue' : `${iss.length} known issues`}
-                            data-ts={`${iss.length === 1 ? 'An audit' : 'Audits'} found: ${kinds.join(', ')}. ${open === 0 ? 'Fixed since then.' : 'Not fixed in the benchmark itself.'}`}
-                          >
-                            <svg width="12" height="12" viewBox="0 0 13 13" aria-hidden="true"><path d="M6.5 1.5l5.2 9.5H1.3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /><path d="M6.5 5.2v2.6M6.5 9.4v.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
-                          </a>
-                        );
-                      })()}
-                      <ReviewMark id={s.b.id} />
-                      {s.b.description && <span class="desc">{s.b.description}</span>}
-                      {group && (
-                        <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
-                          <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                          {prev.length} earlier {prev.length === 1 ? 'version' : 'versions'}
-                          <span class="vlist">{prev.map((p) => vlabel(p.b.version ?? p.b.name)).join(', ')}</span>
-                        </button>
-                      )}
-                    </td>
-                    <td class="org">{s.b.org}</td>
-                    <td class="muted kind">{kind}</td>
-                    <td class="muted nowrap" data-v={s.b.level ? String(levelIndex(s.b.level)) : undefined}>{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
-                    <td class="nowrap" data-v={String(STATUS_RANK[s.status] ?? 9)}>
-                      <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
-                        <span class="dot" />
-                        <span class="sl">{STATUS[s.status]}</span>
-                      </span>
-                    </td>
-                    <td class="best-c" data-v={s.best && (s.b.unit ?? '%') === '%' ? String(s.best.value) : undefined}>
-                      {s.best && top && (
-                        <span class="best">
-                          <LabMark lab={top.lab} size={14} />
-                          <span class="bm">{top.name}</span>
-                          <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
-                        </span>
-                      )}
-                    </td>
-                    <td class="r" title={citeTip(s.cites)} data-w={windowCounts(s.cites)}>{s.cites.length || ''}</td>
-                    <td class="r muted" title={citeTip(s.docCites)} data-w={windowCounts(s.docCites)}>{s.docCites.length || ''}</td>
-                    <td class="muted num nowrap">{monthYear(s.b.released)}</td>
-                    <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
-                  </tr>
-                  {prev.map((p, i) => {
-                    const ptop = p.best ? modelById.get(p.best.model) : undefined;
-                    const next = nextVersion(p.b.id);
-                    const pkind = (p.b.subcategory ? SUB_BY_ID.get(p.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[p.b.category ?? 'other'] ?? 'Other';
-                    return (
-                      <tr {...evalAttrs(p.b)} class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} data-review={reviewTokens([p.b.id])} hidden>
-                        <td class="nm">
-                          <span class="tree" aria-hidden="true" />
-                          <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
-                          {p.b.version && !p.b.name.includes(p.b.version) && <span class="vtag">{vlabel(p.b.version)}</span>}
-                          <ReviewMark id={p.b.id} />
-                          {next && <span class="desc">Replaced in {monthYear(next.date)}</span>}
-                        </td>
-                        <td class="org">{p.b.org !== s.b.org ? p.b.org : ''}</td>
-                        <td class="muted kind">{pkind !== kind ? pkind : ''}</td>
-                        <td class="muted nowrap">{p.b.level && p.b.level !== s.b.level ? LEVEL_BY_ID.get(p.b.level)?.name : ''}</td>
-                        <td class="nowrap">
-                          <span class:list={['tag', `status-${p.status.replace(/ /g, '-')}`]}>
-                            <span class="dot" />
-                            <span class="sl">{STATUS[p.status]}</span>
-                          </span>
-                        </td>
-                        <td class="best-c">
-                          {p.best && ptop && (
-                            <span class="best">
-                              <LabMark lab={ptop.lab} size={14} />
-                              <span class="bm">{ptop.name}</span>
-                              <b class="num">{fmt(p.best.value, p.b.unit ?? '%')}</b>
-                            </span>
-                          )}
-                        </td>
-                        <td class="r" title={citeTip(p.cites)} data-w={windowCounts(p.cites)}>{p.cites.length || ''}</td>
-                        <td class="r muted" title={citeTip(p.docCites)} data-w={windowCounts(p.docCites)}>{p.docCites.length || ''}</td>
-                        <td class="muted num nowrap">{monthYear(p.b.released)}</td>
-                        <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
-                      </tr>
-                    );
-                  })}
-                </>
-              );
-            })
-          }
+          <BenchmarkRows rows={rows.slice(0, FIRST_ROWS)} start={0} />
         </tbody>
       </table>
     </div>
+    <noscript><p class="muted">This list shows the {FIRST_ROWS} most cited benchmarks. The category pages linked above list every benchmark.</p></noscript>
     </div>
   </div>
 
@@ -398,63 +216,68 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
   import { wireFilter } from '../../scripts/filter.ts';
   import { wirePeek } from '../../scripts/peek.ts';
   import { wireFacts } from '../../scripts/facts.ts';
-  // the count columns' time window, from the Cited dropdown: all time, the last 12 months or the last 6. The
-  // server put each cell's window counts in data-w ("12-month count, 6-month count, 12-month labs, 6-month labs"),
-  // and left it out when the last 12 months have none. The URL keeps the choice as counted=. It runs before the
-  // filter, so a shared sorted link sorts by it.
-  const counted = document.querySelector<HTMLTableElement>('table[data-rows]');
-  const pick = document.querySelector<HTMLSelectElement>('select[data-counted]');
-  const SPANS: Record<string, { at: number; months: number }> = { '12m': { at: 0, months: 12 }, '6m': { at: 1, months: 6 } };
-  if (counted && pick) {
-    const heads = [...(counted.tHead?.rows[0]?.cells ?? [])];
-    const cols = ['posts', 'docs'].map((key) => {
-      const at = heads.findIndex((th) => th.dataset.col === key);
-      const btn = heads[at]?.querySelector<HTMLElement>('[data-ts]');
-      const cells = [...counted.tBodies[0].rows].map((r) => r.cells[at]).filter((c): c is HTMLTableCellElement => !!c?.textContent?.trim());
-      return { btn, tip: btn?.dataset.ts ?? '', cells, orig: new Map(cells.map((c) => [c, { text: c.textContent ?? '', title: c.title }])) };
-    });
-    const set = (v: string, write: boolean) => {
-      const w = SPANS[v];
-      for (const { btn, tip, cells, orig } of cols) {
-        for (const c of cells) {
-          const o = orig.get(c)!;
-          if (!w) {
-            c.textContent = o.text;
-            c.title = o.title;
-            continue;
+  import { loadMoreRows } from '../../scripts/more-rows.ts';
+  // The page's HTML holds the first rows only. The rest arrive from /benchmarks/rows.json, and then the scripts that
+  // read every row start: the Cited window, the filters and sorting, the fact buttons and the hover cards.
+  void loadMoreRows(document.querySelector<HTMLTableElement>('table[data-rows]')).then(() => {
+    // the count columns' time window, from the Cited dropdown: all time, the last 12 months or the last 6. The
+    // server put each cell's window counts in data-w ("12-month count, 6-month count, 12-month labs, 6-month labs"),
+    // and left it out when the last 12 months have none. The URL keeps the choice as counted=. It runs before the
+    // filter, so a shared sorted link sorts by it.
+    const counted = document.querySelector<HTMLTableElement>('table[data-rows]');
+    const pick = document.querySelector<HTMLSelectElement>('select[data-counted]');
+    const SPANS: Record<string, { at: number; months: number }> = { '12m': { at: 0, months: 12 }, '6m': { at: 1, months: 6 } };
+    if (counted && pick) {
+      const heads = [...(counted.tHead?.rows[0]?.cells ?? [])];
+      const cols = ['posts', 'docs'].map((key) => {
+        const at = heads.findIndex((th) => th.dataset.col === key);
+        const btn = heads[at]?.querySelector<HTMLElement>('[data-ts]');
+        const cells = [...counted.tBodies[0].rows].map((r) => r.cells[at]).filter((c): c is HTMLTableCellElement => !!c?.textContent?.trim());
+        return { btn, tip: btn?.dataset.ts ?? '', cells, orig: new Map(cells.map((c) => [c, { text: c.textContent ?? '', title: c.title }])) };
+      });
+      const set = (v: string, write: boolean) => {
+        const w = SPANS[v];
+        for (const { btn, tip, cells, orig } of cols) {
+          for (const c of cells) {
+            const o = orig.get(c)!;
+            if (!w) {
+              c.textContent = o.text;
+              c.title = o.title;
+              continue;
+            }
+            const xs = (c.dataset.w ?? '').split(' ').map(Number);
+            const n = xs[w.at] || 0;
+            const labs = xs[w.at + 2] || 0;
+            c.textContent = n ? String(n) : '';
+            if (n) c.title = o.title.replace(/^\d+ labs?/, labs === 1 ? '1 lab' : `${labs} labs`);
+            else c.removeAttribute('title');
           }
-          const xs = (c.dataset.w ?? '').split(' ').map(Number);
-          const n = xs[w.at] || 0;
-          const labs = xs[w.at + 2] || 0;
-          c.textContent = n ? String(n) : '';
-          if (n) c.title = o.title.replace(/^\d+ labs?/, labs === 1 ? '1 lab' : `${labs} labs`);
-          else c.removeAttribute('title');
+          // the hover says which window the numbers count
+          if (btn) btn.dataset.ts = w ? `${tip} Now counting the last ${w.months} months.` : tip;
+          btn?.closest('th')?.classList.toggle('windowed', !!w);
         }
-        // the hover says which window the numbers count
-        if (btn) btn.dataset.ts = w ? `${tip} Now counting the last ${w.months} months.` : tip;
-        btn?.closest('th')?.classList.toggle('windowed', !!w);
+        if (write) {
+          const p = new URLSearchParams(location.search);
+          if (w) p.set('counted', v);
+          else p.delete('counted');
+          const qs = p.toString();
+          history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+        }
+        counted.dispatchEvent(new Event('sort:refresh'));
+      };
+      const start = new URLSearchParams(location.search).get('counted') ?? '';
+      if (SPANS[start]) {
+        pick.value = start;
+        pick.dispatchEvent(new Event('sync'));
+        set(start, false);
       }
-      if (write) {
-        const p = new URLSearchParams(location.search);
-        if (w) p.set('counted', v);
-        else p.delete('counted');
-        const qs = p.toString();
-        history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
-      }
-      counted.dispatchEvent(new Event('sort:refresh'));
-    };
-    const start = new URLSearchParams(location.search).get('counted') ?? '';
-    if (SPANS[start]) {
-      pick.value = start;
-      pick.dispatchEvent(new Event('sync'));
-      set(start, false);
+      pick.addEventListener('change', () => set(pick.value, true));
     }
-    pick.addEventListener('change', () => set(pick.value, true));
-  }
-  wireFilter('benchmarks');
-  wireFacts(document.querySelector<HTMLElement>('[data-filter="benchmarks"]'));
-  const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
-  if (peekTable) wirePeek(peekTable);
+    wireFilter('benchmarks');
+    wireFacts(document.querySelector<HTMLElement>('[data-filter="benchmarks"]'));
+    const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
+    if (peekTable) wirePeek(peekTable);
+  });
   // the area index sets the Area filter, marks the chosen area, and shows that area's categories
   const sel = document.querySelector<HTMLSelectElement>('select[data-area]');
   const areaLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-area-link]')];

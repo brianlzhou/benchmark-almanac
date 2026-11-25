@@ -1,0 +1,143 @@
+---
+// The rows of the /benchmarks/ table: one per benchmark, with its earlier versions folded under it. The page renders
+// the first FIRST_ROWS, and /benchmarks/rows.json renders the rest with this same component.
+import LabMark from './LabMark.astro';
+import ReviewMark from './ReviewMark.astro';
+import { evalAttrs } from '../lib/eval-kind.ts';
+import { facetAttrs, facetWords } from '../lib/facets.ts';
+import { modelById, monthsBetween, AS_OF, addedWindows } from '../lib/data.ts';
+import { CATEGORY_NAMES, LEVEL_BY_ID, SUB_BY_ID, areaOf, levelIndex } from '../lib/taxonomy.ts';
+import { score as fmt, monthYear } from '../lib/format.ts';
+import { nextVersion } from '../lib/reigns.ts';
+import { issuesByBenchmark, unresolved, PROBLEMS } from '../lib/audits.ts';
+import { familySize } from '../lib/counts.ts';
+import { ADDED_FROM, METHOD_GROUP, STATUS, STATUS_RANK, FIRST_ROWS, earlier, vlabel, reviewTokens, citeTip, windowCounts, type Row } from '../lib/benchmark-table.ts';
+
+interface Props {
+  rows: Row[];
+  /** The first row's place in the whole table. Rows from FIRST_ROWS on arrive hidden (data-later). */
+  start: number;
+}
+const { rows, start } = Astro.props;
+---
+
+  {
+    rows.map((s, j) => {
+      const i = start + j;
+      const top = s.best ? modelById.get(s.best.model) : undefined;
+      const prev = s.b.family ? earlier(s.b.id) : [];
+      const sub = s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory) : undefined;
+      const kind = sub?.name ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
+      const group = prev.length ? s.b.family : undefined;
+      return (
+        <>
+          <tr
+            {...evalAttrs(s.b)}
+            {...facetAttrs(s.b.id)}
+            class:list={{ fam: !!group }}
+            data-later={i >= FIRST_ROWS ? '' : undefined}
+            data-group={group}
+            data-n={familySize(s.b) > 1 ? familySize(s.b) : undefined}
+            data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
+            data-level={s.b.level ?? ''}
+            data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
+            data-status={s.status.replace(/ /g, '-')}
+            data-added={addedWindows(s)}
+            data-code={s.b.links?.repo ? 'yes' : ''}
+            data-review={reviewTokens([s.b.id, ...prev.map((p) => p.b.id)])}
+            data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name), facetWords(s.b.id)].join(' ').trim().toLowerCase() || undefined}
+          >
+            <td class="nm">
+              <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+              {group && s.b.version && !s.b.name.includes(s.b.version) && <span class="vtag">{vlabel(s.b.version)}</span>}
+              {issuesByBenchmark.has(s.b.id) && (() => {
+                const iss = issuesByBenchmark.get(s.b.id)!;
+                const open = unresolved(iss).length;
+                const kinds = [...new Set(iss.flatMap((i) => i.finding.problems))].map((p) => PROBLEMS[p].name.toLowerCase());
+                return (
+                  <a
+                    class:list={['ki-mark', 'hint', { fixed: open === 0 }]}
+                    href={`/benchmarks/${s.b.id}/#issues`}
+                    aria-label={`${iss.length} known ${iss.length === 1 ? 'issue' : 'issues'}`}
+                    data-tn={iss.length === 1 ? 'A known issue' : `${iss.length} known issues`}
+                    data-ts={`${iss.length === 1 ? 'An audit' : 'Audits'} found: ${kinds.join(', ')}. ${open === 0 ? 'Fixed since then.' : 'Not fixed in the benchmark itself.'}`}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 13 13" aria-hidden="true"><path d="M6.5 1.5l5.2 9.5H1.3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /><path d="M6.5 5.2v2.6M6.5 9.4v.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
+                  </a>
+                );
+              })()}
+              <ReviewMark id={s.b.id} />
+              {s.b.description && <span class="desc">{s.b.description}</span>}
+              {group && (
+                <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  {prev.length} earlier {prev.length === 1 ? 'version' : 'versions'}
+                  <span class="vlist">{prev.map((p) => vlabel(p.b.version ?? p.b.name)).join(', ')}</span>
+                </button>
+              )}
+            </td>
+            <td class="org">{s.b.org}</td>
+            <td class="muted kind">{kind}</td>
+            <td class="muted nowrap" data-v={s.b.level ? String(levelIndex(s.b.level)) : undefined}>{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
+            <td class="nowrap" data-v={String(STATUS_RANK[s.status] ?? 9)}>
+              <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                <span class="dot" />
+                <span class="sl">{STATUS[s.status]}</span>
+              </span>
+            </td>
+            <td class="best-c" data-v={s.best && (s.b.unit ?? '%') === '%' ? String(s.best.value) : undefined}>
+              {s.best && top && (
+                <span class="best">
+                  <LabMark lab={top.lab} size={14} />
+                  <span class="bm">{top.name}</span>
+                  <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
+                </span>
+              )}
+            </td>
+            <td class="r" title={citeTip(s.cites)} data-w={windowCounts(s.cites)}>{s.cites.length || ''}</td>
+            <td class="r muted" title={citeTip(s.docCites)} data-w={windowCounts(s.docCites)}>{s.docCites.length || ''}</td>
+            <td class="muted num nowrap">{monthYear(s.b.released)}</td>
+            <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
+          </tr>
+          {prev.map((p, i) => {
+            const ptop = p.best ? modelById.get(p.best.model) : undefined;
+            const next = nextVersion(p.b.id);
+            const pkind = (p.b.subcategory ? SUB_BY_ID.get(p.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[p.b.category ?? 'other'] ?? 'Other';
+            return (
+              <tr {...evalAttrs(p.b)} class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} data-review={reviewTokens([p.b.id])} hidden>
+                <td class="nm">
+                  <span class="tree" aria-hidden="true" />
+                  <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
+                  {p.b.version && !p.b.name.includes(p.b.version) && <span class="vtag">{vlabel(p.b.version)}</span>}
+                  <ReviewMark id={p.b.id} />
+                  {next && <span class="desc">Replaced in {monthYear(next.date)}</span>}
+                </td>
+                <td class="org">{p.b.org !== s.b.org ? p.b.org : ''}</td>
+                <td class="muted kind">{pkind !== kind ? pkind : ''}</td>
+                <td class="muted nowrap">{p.b.level && p.b.level !== s.b.level ? LEVEL_BY_ID.get(p.b.level)?.name : ''}</td>
+                <td class="nowrap">
+                  <span class:list={['tag', `status-${p.status.replace(/ /g, '-')}`]}>
+                    <span class="dot" />
+                    <span class="sl">{STATUS[p.status]}</span>
+                  </span>
+                </td>
+                <td class="best-c">
+                  {p.best && ptop && (
+                    <span class="best">
+                      <LabMark lab={ptop.lab} size={14} />
+                      <span class="bm">{ptop.name}</span>
+                      <b class="num">{fmt(p.best.value, p.b.unit ?? '%')}</b>
+                    </span>
+                  )}
+                </td>
+                <td class="r" title={citeTip(p.cites)} data-w={windowCounts(p.cites)}>{p.cites.length || ''}</td>
+                <td class="r muted" title={citeTip(p.docCites)} data-w={windowCounts(p.docCites)}>{p.docCites.length || ''}</td>
+                <td class="muted num nowrap">{monthYear(p.b.released)}</td>
+                <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
+              </tr>
+            );
+          })}
+        </>
+      );
+    })
+  }

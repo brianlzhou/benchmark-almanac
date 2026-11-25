@@ -104,7 +104,7 @@ const span = (months: number) => (months < 1 ? 'under a month' : `${Math.round(m
 const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) => reignDays(b) - reignDays(a))[0];
 ---
 
-<Base title="Leaders" description="Which model has held the top score on each AI benchmark since 2023, and for how long." film="reigns">
+<Base title="Leaders" searchTitle="LLM leaderboard: which AI model leads each benchmark" description="Which model has held the top score on each AI benchmark since 2023, and for how long." film="reigns">
   <div class="page pools">
     <header class="head">
       <h1>Leaders</h1>
