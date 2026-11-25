@@ -16,8 +16,6 @@ const board: Leaderboard = {
   stats: {
     steps: { name: 'Mean steps per task', unit: 'count', better: 'lower' },
     minutes: { name: 'Mean minutes per task', unit: 'minutes', better: 'lower' },
-    scored: { name: 'Scored tasks', unit: 'count' },
-    registered: { name: 'Registered tasks', unit: 'count' },
     totalTokens: { name: 'Mean total tokens per task', unit: 'tokens' },
   },
   chart: {title:'Success rate versus cost',x:{key:'cost',label:'Mean recorded task cost',unit:'$',better:'lower'},y:{key:'score',label:'Success rate',unit:'%',better:'higher'}},
@@ -41,8 +39,7 @@ const board: Leaderboard = {
       return {model, score:100*runs.filter((r:any)=>r.score===1).length/d.registered,
         ...(cost !== undefined ? {cost} : {}),
         ...(output.length ? {tokens:output.reduce((s:number,u:any)=>s+u.outputTokens,0)/output.length} : {}),
-        metrics:{...timing,scored:runs.filter((r:any)=>r.score!==null).length, registered:d.registered,
-          ...(cost !== undefined ? {cost} : {}),
+        metrics:{...timing,
           ...(us.length ? {totalTokens:us.reduce((s:number,u:any)=>s+u.totalTokens,0)/us.length} : {})}};
     });
   },

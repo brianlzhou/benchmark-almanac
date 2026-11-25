@@ -10,6 +10,19 @@ const tasks = ['T2AV', 'I2AV', 'V2AV'];
 const common = ['V_{QA}', 'VQ', 'Cont.', 'Trans', 'Hol.', 'TVAlign'];
 const audio = ['AVS', 'AudQ', 'AudL'];
 
+const commonNames: Record<string, string> = {
+  VQ: 'Visual quality',
+  'Cont.': 'Long-form continuity',
+  Trans: 'Transition stability',
+  'Hol.': 'Holistic presentation',
+  TVAlign: 'Text-video alignment',
+};
+const audioNames: Record<string, string> = {
+  AVS: 'Audio-video synchronization',
+  AudQ: 'Audio quality',
+  AudL: 'Long-audio coherence',
+};
+
 const board: Leaderboard = {
   benchmark: 'longav-compass',
   url: feed,
@@ -20,8 +33,9 @@ const board: Leaderboard = {
   aliases: {'Seedance 2.0': 'dreamina-seedance-2-0'},
   parts: Object.fromEntries(tasks.flatMap(task => [
     [task, {name: 'Event fulfillment', group: task, unit: 'score'}],
-    ...common.map(name => [task + name.replace(/[^a-z0-9]/gi, ''), {name: name.replace('IV_{1}', 'IV1'), group: task, unit: 'score'}]),
-    ...(task === 'I2AV' ? [['I2AVIV1', {name: 'IV1', group: task, unit: 'score'}], ['I2AVImgAlign', {name: 'Image alignment', group: task, unit: 'score'}]] : []),
+    ...Object.entries(commonNames).map(([col, name]) => [task + col.replace(/[^a-z0-9]/gi, ''), {name, group: task, unit: 'score'}]),
+    ...(task === 'I2AV' ? [['I2AVIV1', {name: 'First-frame anchoring', group: task, unit: 'score'}], ['I2AVImgAlign', {name: 'Image alignment', group: task, unit: 'score'}]] : []),
+    ...Object.entries(audioNames).map(([col, name]) => [task + col, {name, group: task, unit: 'score'}]),
   ])),
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
@@ -36,7 +50,6 @@ const board: Leaderboard = {
         const metrics = models.get(model) ?? {};
         for (const [j, name] of columns.entries()) {
           const key = j === 0 ? task : task + name.replace(/[^a-z0-9]/gi, '');
-          board.parts![key] = {name: j === 0 ? 'Event fulfillment' : name.replace('IV_{1}', 'IV1'), group: task};
           if (['–', 'N/A'].includes(cells[j])) continue;
           if (key in metrics) throw new Error('Duplicate ' + model + ' ' + key);
           metrics[key] = numberCell(cells[j]);

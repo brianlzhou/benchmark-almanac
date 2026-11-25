@@ -10,14 +10,18 @@ const FEED = "https://iosworld.io/leaderboard/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "iosworld",
-  stats: { steps: { name: 'Steps', unit: 'count', better: 'lower' } },
+  stats: {
+    steps: { name: 'Steps', unit: 'count', better: 'lower' },
+    single_steps: { name: 'Single app steps', unit: 'count', better: 'lower' },
+    multi_steps: { name: 'Multi app steps', unit: 'count', better: 'lower' },
+    memory_steps: { name: 'Memory steps', unit: 'count', better: 'lower' },
+    meanScore: { name: 'Mean score', unit: '%', better: 'higher' },
+    solved: { name: 'Tasks solved', unit: 'count', better: 'higher' },
+  },
   parts: {
     single: { name: 'Single app', group: 'Environment' },
     multi: { name: 'Multi app', group: 'Environment' },
     memory: { name: 'Memory', group: 'Environment' },
-    single_steps: { name: 'Single app steps', group: 'Environment' },
-    multi_steps: { name: 'Multi app steps', group: 'Environment' },
-    memory_steps: { name: 'Memory steps', group: 'Environment' },
   },
   url: "https://iosworld.io/leaderboard/",
   feed: FEED,
@@ -42,7 +46,7 @@ const board: Leaderboard = {
         const key=x.setting!.split(' ')[0].toLowerCase();return [[key,x.score],...(x.metrics?.steps===undefined?[]:[[key+'_steps',x.metrics.steps]])];
       }))}};
       const solved=r.setting?.match(/; (\d+) \/ (\d+)$/);
-      return {...r,setting:r.setting?.replace(/; \d+ \/ \d+$/,''),metrics:{...r.metrics,...(solved?{solved:Number(solved[1]),tasks:Number(solved[2])}:{})}};
+      return {...r,setting:r.setting?.replace(/; \d+ \/ \d+$/,''),metrics:{...r.metrics,...(solved?{solved:Number(solved[1])}:{})}};
     });
   },
 };

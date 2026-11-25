@@ -10,8 +10,13 @@ import { jsonAfter } from '../lib/html.ts';
 const PAGE = 'https://unipat.ai/blog/ScienceVision';
 const FEED = 'https://unipat.ai/static/sciencevision/data/benchmark.js';
 
+interface SettingScore {
+  mean?: number;
+  runs?: number;
+  byDomain?: Record<string, number>;
+}
 interface Data {
-  leaderboard: { models: { label: string; settings: Record<string, { mean?: number }> }[] };
+  leaderboard: { models: { label: string; group?: string; settings: Record<string, SettingScore> }[] };
 }
 
 const board: Leaderboard = {
@@ -22,12 +27,48 @@ const board: Leaderboard = {
   aliases: {
     'Hunyuan-4 Preview': 'tencent-hy4-preview',
   },
+  parts: {
+    architecture: 'Architecture',
+    biology: 'Biology',
+    chemistry: 'Chemistry',
+    mechanicalCad: 'Mechanical CAD',
+    medical: 'Medical imaging',
+  },
+  stats: {
+    ccMcp: { name: 'Code and MCP setting', unit: 'score', better: 'higher' },
+    cc2d6: { name: '2D multi-view setting', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const data = jsonAfter<Data>(await fetchText(FEED), 'window.SV_BENCHMARK =');
+    const domainMap = [
+      ['architecture', 'architecture'],
+      ['biology', 'biology'],
+      ['chemistry', 'chemistry'],
+      ['mechanical-cad', 'mechanicalCad'],
+      ['medical', 'medical'],
+    ] as const;
     const rows: LeaderboardRow[] = [];
     for (const m of data.leaderboard.models) {
-      const score = m.settings['cc-3d']?.mean;
-      if (typeof score === 'number') rows.push({ model: m.label, score });
+      const s3d = m.settings['cc-3d'];
+      const score = s3d?.mean;
+      if (typeof score !== 'number') continue;
+      const metrics: Record<string, number> = {};
+      for (const [src, key] of domainMap) {
+        const v = s3d.byDomain?.[src];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[key] = Number(v.toFixed(4));
+      }
+      const mcp = m.settings['cc-mcp']?.mean;
+      const v2d = m.settings['cc-2d-6']?.mean;
+      if (typeof mcp === 'number' && Number.isFinite(mcp)) metrics.ccMcp = mcp;
+      if (typeof v2d === 'number' && Number.isFinite(v2d)) metrics.cc2d6 = v2d;
+      const open = m.group === 'open' ? true : m.group === 'closed' ? false : undefined;
+      rows.push({
+        model: m.label,
+        score,
+        ...(open !== undefined ? { open } : {}),
+        ...(typeof s3d.runs === 'number' ? { trials: s3d.runs } : {}),
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     if (!rows.length) throw new Error('no cc-3d scores in the ScienceVision data');
     return rows;

@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const IMAGE = 'https://www.snowflake.com/adobe/dynamicmedia/deliver/dm-aid--bc7d70f6-ded6-47e6-a98e-b05d2500674c/arctictext2sqlr2fig1.png?quality=100&preferwebp=true&sfver=28672822';
 const board: Leaderboard = {
-  benchmark: 'snowflake-text-to-sql-hard', url: 'https://www.snowflake.com/en/blog/engineering/enterprise-text-to-sql-arctic-r2/', feed: IMAGE,
+  benchmark: 'snowflake-text-to-sql-hard', static: 'paper', url: 'https://www.snowflake.com/en/blog/engineering/enterprise-text-to-sql-arctic-r2/', feed: IMAGE,
   terms: 'Snowflake publishes the comparison chart publicly. Attribution and source licensing apply.',
   async fetch(): Promise<LeaderboardRow[]> {
     return chartRows(IMAGE, 'dee301c9c54cbe37991570fa01888b7c3c155a19008b6b4d7d8e5797b938f8d1', [

@@ -7,6 +7,7 @@ const FEED = "https://laiso.github.io/ts-bench/";
 
 const board: Leaderboard = {
   benchmark: "ts-bench",
+  harnesses: 'system',
   url: "https://blog.lai.so/ts-bench/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -3,9 +3,9 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 
 const URL='https://www.frontierswe.com/v1/frogsgame-rl';
-const board:Leaderboard={benchmark:'frogsgame-post-training-task',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'frogsgame-post-training-task',harnesses:'system',url:URL,feed:URL,
  terms:'Official FrontierSWE V1 archived task results; the Almanac credits and links the source.',
- stats:{best:{name:'Best score',unit:'%',better:'higher'},latency:{name:'Latency',unit:'seconds',better:'lower'}},
+ stats:{best:{name:'Best score',unit:'%',better:'higher'},latency:{name:'Latency',unit:'seconds',better:'lower'},totalTokens:{name:'Average total tokens',unit:'tokens',better:'lower'}},
  chart:{title:'Average score vs. tokens',x:{key:'totalTokens',label:'Average total tokens',better:'lower',log:true},y:{key:'score',label:'Average score',unit:'%',better:'higher'}},
  async fetch(){
   const t=tables(await fetchText(URL)).find(t=>t[0].some(c=>c.text==='Avg Score'));

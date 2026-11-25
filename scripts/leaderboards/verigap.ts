@@ -8,6 +8,15 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/archie40004/verigap',
   feed: kaggleFeed('archie40004', 'verigap'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('archie40004', 'verigap', "(Overall)", 1),
+  parts: {
+    validity: 'Validity',
+    mutation: 'Mutation',
+    codegen: 'Code generation',
+  },
+  fetch: () => kaggleRowsWithBounds('archie40004', 'verigap', "(Overall)", 1, {
+    validity: { task: 'verigap-validity' },
+    mutation: { task: 'verigap-mutation' },
+    codegen: { task: 'verigap-codegen' },
+  }),
 };
 export default board;

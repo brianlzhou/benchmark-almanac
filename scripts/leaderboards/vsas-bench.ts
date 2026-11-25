@@ -17,15 +17,20 @@ const board: Leaderboard = {
     const t = tables.find(t => t[0][1]?.startsWith('Sync. Accuracy') && t[0][6]?.startsWith('Async. Accuracy'));
     if (!t || t[1][4] !== 'Overall' || t[1][9] !== 'Overall') throw new Error('Missing Table 2 overall accuracy');
     const rows: LeaderboardRow[] = [];
+    let open: boolean | undefined;
     for (const r of t.slice(2)) {
-      if (r[0] === r[1]) continue;
+      if (r[0] === r[1]) {
+        if (/Open-Source/i.test(r[0])) open = true;
+        else if (/API Models|Proprietary|Closed/i.test(r[0])) open = false;
+        continue;
+      }
       const label = r[0].replace(/\s*\[\s*\d+\s*\]/,'');
       const match = label.match(/^(.+?) \((low|medium|high)\)$/);
       for (const [protocol,start] of [['Synchronous',1],['Asynchronous',6]] as const) {
         const [present,cumulative,future,score,consistency] = r.slice(start,start+5).map(Number);
         if (![present,cumulative,future,score,consistency].every(Number.isFinite)) throw new Error('Invalid streaming score');
         rows.push({ model: match?.[1] ?? label, setting: match ? protocol + ', ' + match[2] + ' effort' : protocol,
-          score, metrics: { present,cumulative,future,consistency } });
+          ...(open === undefined ? {} : { open }), score, metrics: { present,cumulative,future,consistency } });
       }
     }
     return checked(rows,28);

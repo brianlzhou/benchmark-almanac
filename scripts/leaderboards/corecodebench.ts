@@ -6,8 +6,12 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://arxiv.org/html/2507.05281';
 const parts: Record<string, BoardPart> = Object.fromEntries([
-  ['AtomicOverallAC', 'Atomic overall accuracy'], ['AtomicOverallRate', 'Atomic overall pass rate'], ['AtomicDevelopmentAC', 'Atomic development accuracy'], ['AtomicDevelopmentRate', 'Atomic development pass rate'], ['AtomicBugFixAC', 'Atomic bug-fix accuracy'], ['AtomicBugFixRate', 'Atomic bug-fix pass rate'], ['AtomicTDDAC', 'Atomic test-driven development accuracy'], ['AtomicTDDRate', 'Atomic test-driven development pass rate'],
-  ['CompositeOverallAC', 'Composite overall accuracy'], ['CompositeOverallRate', 'Composite overall pass rate'], ['CompositeDevelopmentAC', 'Composite development accuracy'], ['CompositeDevelopmentRate', 'Composite development pass rate'], ['CompositeBugFixRate', 'Composite bug-fix pass rate'], ['CompositeTDDAC', 'Composite test-driven development accuracy'], ['CompositeTDDRate', 'Composite test-driven development pass rate'],
+  ['atomicDevRate', 'Atomic development pass rate'],
+  ['atomicBugFixRate', 'Atomic bug-fix pass rate'],
+  ['atomicTddRate', 'Atomic test-driven development pass rate'],
+  ['compositeDevRate', 'Composite development pass rate'],
+  ['compositeBugFixRate', 'Composite bug-fix pass rate'],
+  ['compositeTddRate', 'Composite test-driven development pass rate'],
 ].map(([key, name]) => [key, { name, unit: '%', better: 'higher' as const }]));
 const board: Leaderboard = { benchmark: 'corecodebench', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
  parts,

@@ -24,7 +24,7 @@ const board: Leaderboard = {
       }
       if (cells.length !== 3 || !['✓','✗'].includes(explanation)) throw new Error('Changed CSEE columns for ' + label);
       return { model, setting: conditions.join(', ') || undefined, score: numberCell(overall),
-        metrics: {...Object.fromEntries(parts.map((name,i) => [name,numberCell(cells[i])])), explanation: Number(explanation === '✓')} };
+        metrics: Object.fromEntries(parts.map((name,i) => [name,numberCell(cells[i])])) };
     }), 9);
   },
 };

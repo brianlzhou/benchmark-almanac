@@ -2,7 +2,7 @@
 // vals-index.ts. Its "Est. API cost" column is each model's estimated API total over all its published runs
 // (a floor, priced from the run ledgers), kept as cost with costPer 'run'.
 import type { Leaderboard } from './types.ts';
-import { VALS_ALIASES, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
+import { VALS_ALIASES, VALS_LATENCY_CHART, VALS_STATS, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
 
 const SLUG = 'cua_bench';
 
@@ -13,7 +13,8 @@ const board: Leaderboard = {
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
   costPer: 'run',
-  stats: { latency: { name: 'Latency per test', unit: 'seconds', better: 'lower' } },
+  stats: VALS_STATS,
+  chart: VALS_LATENCY_CHART,
   fetch: () => valsRows(SLUG, { cost: 'Est. API cost' }),
 };
 export default board;

@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/nikshenoy/pyats-bench',
   feed: kaggleFeed('nikshenoy', 'pyats-bench'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('nikshenoy', 'pyats-bench', "(Overall)", 1),
+  parts: {
+    wireless: 'Wireless scenarios',
+    switching: 'Switching scenarios',
+  },
+  fetch: () => kaggleRowsWithBounds('nikshenoy', 'pyats-bench', "(Overall)", 1, {
+    wireless: { task: 'pyats-wireless-scenarios' },
+    switching: { task: 'pyats-switching-scenarios' },
+  }),
 };
 export default board;

@@ -18,10 +18,17 @@ const stats: Record<string, BoardStat> = Object.fromEntries(datasets.flatMap((da
   [`${dataset} mAP`, { name: `${dataset} mean average precision`, unit: '%', better: 'higher' }],
   [`${dataset} AP50`, { name: `${dataset} average precision at 50% IoU`, unit: '%', better: 'higher' }],
   [`${dataset} AP25`, { name: `${dataset} average precision at 25% IoU`, unit: '%', better: 'higher' }],
+  [`${dataset} NMS mAP`, { name: `${dataset} NMS mean average precision`, unit: '%', better: 'higher' }],
+  [`${dataset} NMS AP50`, { name: `${dataset} NMS average precision at 50% IoU`, unit: '%', better: 'higher' }],
+  [`${dataset} NMS AP25`, { name: `${dataset} NMS average precision at 25% IoU`, unit: '%', better: 'higher' }],
 ]));
 const categories = ['Synonyms','Depictions','Visually similar','Clutter','Missing','Incorrect'];
+const parts: Record<string, BoardPart> = Object.fromEntries(datasets.flatMap((dataset) =>
+  categories.map((category, j) => [dataset + category, { name: category, group: dataset, ...(j ? { better: 'lower' as const } : {}) }])
+));
 const board: Leaderboard = {
   benchmark:'openlex3d', static:'paper', feed, url:'https://openlex3d.github.io/',
+  parts,
   stats,
   terms:PAPER_TERMS + ' https://arxiv.org/abs/2503.19764',
   headline:'The headline is the plain mean of top-five synonym frequency on Replica, ScanNet++ and HM3D.',
@@ -35,7 +42,6 @@ const board: Leaderboard = {
       throw new Error('Missing OpenLex3D results');
     }
     const groups = new Map<string,Record<string,number>>();
-    const parts: Record<string,BoardPart> = {};
     const clean = (s:string)=>s.replace(/\s*\[\s*\d+\s*\]/,'').trim();
     const num = (s:string)=>numberCell(s.replace(/\s/g,''));
     const ranks = ['Mean ranking score','Synonym inlier rate','Synonym penalty','Depiction and visually similar inlier rate',
@@ -53,7 +59,6 @@ const board: Leaderboard = {
           const k = dataset+category;
           metrics[k] = 100*num(r[j+2]);
           metrics[k+'Std'] = 100*num(stdRow[j+3]);
-          parts[k] = {name:category,group:dataset,...(j ? {better:'lower' as const} : {})};
         }
         ranks.forEach((name,j)=>metrics[dataset+name]=num(rankingRow[j+2]));
         const ap = retrieval.find(v=>v[0]===dataset && clean(v[1]).replace(' + NMS','')===model);
@@ -61,7 +66,6 @@ const board: Leaderboard = {
         groups.set(model,metrics);
       }
     }
-    board.parts = parts;
     return checked([...groups].map(([model,metrics])=>({model,metrics,
       score:datasets.reduce((sum,d)=>sum+metrics[d+'Synonyms'],0)/datasets.length})),7);
   },

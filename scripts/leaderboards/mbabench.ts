@@ -18,7 +18,7 @@ const board: Leaderboard = {
     const s=await fetchText(new URL(asset,FEED).href);const m=/\[\{rank:1,model:"Claude \(Web\)"/.exec(s);
     if(!m)throw new Error('MBABench v1 results missing');
     const data=jsLiteral<any[]>(s,m.index);
-    return data.map(r=>({model:r.model,score:r.score,harness:r.type==='API'?'MBABench API harness':r.model,setting:r.type}));
+    return data.map(r=>({model:r.model,score:r.score,harness:r.type==='API'?'MBABench API harness':r.model,setting:r.type,link:typeof r.url==='string'&&/^https?:\/\//.test(r.url)?r.url:undefined}));
   },
 };
 

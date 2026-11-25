@@ -15,6 +15,11 @@ const board: Leaderboard = {
   parts: { answer: 'Answer', hallucination: 'Hallucination', divergence: 'Divergence', conciseness: 'Conciseness' },
   stats: {
     outputTokens: { name: 'Output tokens', unit: 'tokens' },
+    humanAnswer: { name: 'Human subset answer score', unit: 'score', better: 'higher', note: 'Answer score on the human-evaluated subset, from 1 to 5.' },
+    humanHallucination: { name: 'Human subset hallucination score', unit: 'score', better: 'higher', note: 'Hallucination score on the human-evaluated subset, from 1 to 5.' },
+    humanConciseness: { name: 'Human subset conciseness score', unit: 'score', better: 'higher', note: 'Conciseness score on the human-evaluated subset, from 1 to 5.' },
+    humanDivergence: { name: 'Human subset divergence score', unit: 'score', better: 'higher', note: 'Reasoning divergence score on the human-evaluated subset, from 1 to 5.' },
+    humanOutputTokens: { name: 'Human subset output tokens', unit: 'tokens' },
   },
   async fetch() {
     const script = await fetchText(feed);

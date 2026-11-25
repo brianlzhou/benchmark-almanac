@@ -11,6 +11,20 @@ const board: Leaderboard = {
   feed: `${eqbenchFeed('eqbench3.js', 'leaderboardDataEQBench3')} elo_norm`,
   terms: EQBENCH_TERMS,
   aliases: EQBENCH_ALIASES,
+  stats: {
+    rubric_0_100: { name: 'Rubric score', unit: 'score', better: 'higher', note: 'Judge rubric score from 0 to 100.' },
+    humanlike: { name: 'Humanlike', unit: 'score' },
+    safe: { name: 'Safety', unit: 'score', better: 'higher' },
+    assertive: { name: 'Assertiveness', unit: 'score' },
+    social_iq: { name: 'Social IQ', unit: 'score', better: 'higher' },
+    warm: { name: 'Warmth', unit: 'score' },
+    analytical: { name: 'Analytical', unit: 'score' },
+    insightful: { name: 'Insightfulness', unit: 'score', better: 'higher' },
+    empathy: { name: 'Empathy', unit: 'score', better: 'higher' },
+    compliant: { name: 'Compliance', unit: 'score' },
+    moral: { name: 'Moral', unit: 'score' },
+    pragmatic: { name: 'Pragmatism', unit: 'score' },
+  },
   async fetch() {
     const traits = 'rubric_0_100 humanlike safe assertive social_iq warm analytical insightful empathy compliant moral pragmatic'.split(' ');
     const rows = await eqbenchRows('eqbench3.js', 'leaderboardDataEQBench3', 'elo_norm', 1, {

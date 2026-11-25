@@ -112,6 +112,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "aidanbench",
+  static: 'paper',
   url: "https://github.com/aidanmclaughlin/AidanBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

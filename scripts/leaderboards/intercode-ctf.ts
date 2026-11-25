@@ -11,6 +11,7 @@ const board: Leaderboard = {
  url: "https://ukgovernmentbeis.github.io/inspect_evals/evals/gdm_intercode_ctf/index.html",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { time: { name: 'Run duration', unit: 'seconds', better: 'lower' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = 'https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png (transcribed 2026-11-20)';
 const board: Leaderboard = {
   benchmark: 'word-edit-bench-tencent',
+  static: 'paper',
   url: 'https://huggingface.co/tencent/Hy4-flash',
   feed: FEED,
   terms: 'Public results in the Tencent Hugging Face model card. Attribution and source licensing apply.',

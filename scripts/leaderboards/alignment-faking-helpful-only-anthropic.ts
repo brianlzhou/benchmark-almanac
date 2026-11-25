@@ -12,6 +12,7 @@ const rows: LeaderboardRow[] = [
 const board: Leaderboard = {
   benchmark: "alignment-faking-helpful-only-anthropic",
   url: "https://www-cdn.anthropic.com/9ff93dfa8f445c932415d335c88852ef47f1201e.pdf",
+  static: 'paper',
   terms: "Public Anthropic system card on its document CDN. Credit section 5.3.",
   aliases: {"original Claude 3.5 Sonnet": "claude-3-5-sonnet"},
   feed: FEED,

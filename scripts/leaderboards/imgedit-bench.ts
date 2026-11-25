@@ -62,6 +62,7 @@ const ROWS: [string, number][] = [
 ];
 const board: Leaderboard = {
   benchmark: 'imgedit-bench',
+  static: 'paper',
   url: 'https://github.com/PKU-YuanGroup/ImgEdit',
   feed: `${IMAGE} (transcribed 2026-11-08)`, terms: CHART_TERMS,
   aliases: { 'Kontext-dev': 'flux-1-kontext-dev' },

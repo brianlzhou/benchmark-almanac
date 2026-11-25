@@ -12,7 +12,7 @@ const parts = {
   t9: 'Temporal successor', reasoning: 'Reasoning',
 };
 const board: Leaderboard = {
-  benchmark: 'respacebench', url: 'https://arxiv.org/abs/2611.21485', feed, static: 'paper', parts, stats: { rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
+  benchmark: 'respacebench', url: 'https://arxiv.org/abs/2611.21485', feed, static: 'paper', parts,
   terms: 'The paper license is linked at https://arxiv.org/abs/2611.21485.',
   aliases: {'Qwen3-VL-8B':'qwen3-vl-8b-instruct','GLM-4.6V-106B':'glm-4-6v','GLM-4.6V-Flash-9B':'glm-4-6v-flash'},
   async fetch() {
@@ -32,14 +32,13 @@ const board: Leaderboard = {
       if (section === 'ReSpaceBench-mini') continue;
       const values = cells.splice(-13).map(Number);
       if (!values.every(Number.isFinite)) throw new Error('Invalid ReSpaceBench scores');
-      const rank = cells.pop();
+      cells.pop();
       const label = cells.join(' ').replace(/\s*\[\d+\]/g, '');
       if (section === 'Ours' && label === 'Qwen3-VL-8B') continue;
       const blind = label.includes('Blind');
       const model = label.replace(/^Blind \((.+)\)$/, '$1').replace(/ \((Blind|Ours)\)†?$/, '');
       rows.push({model, score: values[0], setting: blind ? 'Blind' : 'Video',
-        metrics: {...Object.fromEntries(Object.keys(parts).map((key, i) => [key, values[i + 1]])),
-          ...(rank && /^\d+$/.test(rank) ? {rank: Number(rank)} : {}) }});
+        metrics: Object.fromEntries(Object.keys(parts).map((key, i) => [key, values[i + 1]]))});
     }
     return checked(rows, 35);
   },

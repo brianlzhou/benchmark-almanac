@@ -35,6 +35,7 @@ function extras(table: Cell[][], row: Cell[], cols: Record<string, string>): Pic
 
 const board: Leaderboard = {
   benchmark: 'frontiercs',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE} (static HTML: "Version 1.0 single attempt" Score@1 and "Version 1.0 agents" Score)`,
   terms: 'Static project page; robots.txt allows every path and the FrontierCS site and repository are MIT-licensed.',

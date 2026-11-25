@@ -38,7 +38,6 @@ const board: Leaderboard = {
           const row = table.find(row => row[0] === abbreviation);
           const raw = row?.[columns[i]];
           const value = raw?.replace(/\s*✗$/, '');
-          if (i === 3) metrics.pooltoolFixedOutput = raw?.includes('✗') ? 1 : 0;
           if (!value || !/^\d+(\.\d+)?%$/.test(value)) throw Error('Missing ' + environments[i] + ' for ' + model);
           metrics[environments[i]] = parseFloat(value);
           if (i === 0 || i === 1 || i === 3) metrics[environments[i] + ' Average Attempts'] = parseFloat(row!.at(-1)!);

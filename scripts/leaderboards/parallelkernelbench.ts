@@ -22,9 +22,8 @@ const board: Leaderboard = {
 }, url: "https://www.together.ai/blog/parallelkernelbench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  stats: {
-  tasks: { name: 'Tasks', unit: 'count' },
   passed: { name: 'Tasks passed', unit: 'count' },
-  passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+  passAt3: { name: 'pass@3', unit: '%', better: 'higher' },
   fast1Percent: { name: 'Faster-than-reference rate', unit: '%', better: 'higher' },
   fast1Count: { name: 'Faster-than-reference tasks', unit: 'count' },
   fast1At3: { name: 'Faster-than-reference pass@3', unit: '%', better: 'higher' },
@@ -44,7 +43,7 @@ const board: Leaderboard = {
       const fast = total[3+m*2]?.text.split('→').map(num);
       if (pass?.[0] === undefined || pass[1] === undefined || fast?.[0] === undefined || fast[1] === undefined)
         throw new Error('Invalid total sampling counts');
-      const metrics: Record<string, number> = {tasks:n, passed:pass[0], passAt3:pass[1]/n*100,
+      const metrics: Record<string, number> = {passed:pass[0], passAt3:pass[1]/n*100,
         fast1Percent:fast[0]/n*100, fast1Count:fast[0], fast1At3:fast[1]/n*100};
       for (const r of t.slice(2)) {
         if (r === total) continue;

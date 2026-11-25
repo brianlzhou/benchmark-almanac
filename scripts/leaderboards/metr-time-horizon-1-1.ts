@@ -3,7 +3,7 @@
 // (p50_horizon_length.estimate), with the agent scaffold as the harness. Read through metrRows in
 // metr-time-horizon.ts (the 1.0 importer). METR stopped updating the page on 2026-09-08.
 import type { Leaderboard } from './types.ts';
-import { METR_ALIASES, METR_TERMS, metrFeed, metrRows } from './metr-time-horizon.ts';
+import { METR_ALIASES, METR_STATS, METR_TERMS, metrFeed, metrRows } from './metr-time-horizon.ts';
 
 const FEED = metrFeed('1_1');
 
@@ -13,7 +13,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: METR_TERMS,
   aliases: METR_ALIASES,
-  stats: { p80: { name: '80% time horizon', unit: 'minutes', better: 'higher' } },
+  stats: METR_STATS,
   fetch: () => metrRows(FEED),
 };
 export default board;

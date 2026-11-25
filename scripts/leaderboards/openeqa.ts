@@ -12,6 +12,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://open-eqa.github.io/assets/images/multi-modal-llms.svg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "openeqa",
+ static: 'paper',
  url: "https://open-eqa.github.io/",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -31,6 +31,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "image2floorplan-bytedance",
+  static: 'paper',
   url: "https://seed.bytedance.com/en/blog/seed2-1-officially-released-advancing-ai-productivity",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -25,6 +25,7 @@ const EFFORT: Record<string, string> = { low: 'low', med: 'medium', high: 'high'
 
 const board: Leaderboard = {
   benchmark: 'verifying-the-verifiers-project-ape-cred-benchmark',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE} (Next.js flight data, figure 4 points: single-error detection recall)`,
   terms: 'Public report page; ape.socialcatalystlab.org robots.txt allows all paths and the site states no terms.',
@@ -50,7 +51,7 @@ const board: Leaderboard = {
         date: p.run_date,
         cost: p.cost_usd,
         ...(Array.isArray(p.recall_ci) && p.recall_ci.length === 2 && p.recall_ci.every(Number.isFinite)
-          ? { low: p.recall_ci[0] * 100, high: p.recall_ci[1] * 100, metrics: { ci: ((p.recall_ci[1] - p.recall_ci[0]) / 2) * 100 } }
+          ? { low: p.recall_ci[0] * 100, high: p.recall_ci[1] * 100 }
           : {}),
       });
     }

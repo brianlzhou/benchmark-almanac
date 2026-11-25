@@ -8,6 +8,8 @@ const FEED = "https://benchmarks.bio/benchmarks/tissuemicroscopybench/latest.jso
 interface Result { model: string; harness: string; modelVariant: string | null; scorePct: number }
 const board: Leaderboard = {
   benchmark: "tissuemicroscopybench-latchbio",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://benchmarks.bio/tissuemicroscopy",
   feed: FEED,
   terms: "The publisher supplies a citation and download on the board. https://benchmarks.bio/tissuemicroscopy The site allows crawling.",

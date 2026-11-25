@@ -23,6 +23,8 @@ interface Data { models?: Model[] }
 
 const board: Leaderboard = {
   benchmark: 'agi-pilled-bench',
+  harnesses: 'system',
+  reference: ['OpenRouter API'],
   url: 'https://agi-pilled-bench.adamholter.chatgpt.site/',
   feed: FEED,
   terms: 'The site publishes data.json and states no separate reuse license. Results are credited to Adam Holter with a link to the source.',

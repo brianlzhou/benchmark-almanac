@@ -5,7 +5,7 @@ interface Standing {modelName: string; returnPct: number; totalTrades: number; s
 
 const feed = "https://www.traderank.ai/data/traderank-facts.json";
 const board: Leaderboard = {
-  stats: { trades: { name: 'Trades', unit: 'count' }, sharpe: { name: 'Sharpe ratio', unit: 'score', better: 'higher' }, maxDrawdownPct: { name: 'Maximum drawdown', unit: '%', better: 'lower' } },
+  stats: { trades: { name: 'Trades', unit: 'count' }, sharpe: { name: 'Sharpe ratio', unit: 'score', better: 'higher' }, maxDrawdownPct: { name: 'Maximum drawdown', unit: '%', better: 'lower' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } },
   benchmark: 'traderank-arena',
   url: "https://www.traderank.ai/ai-trading-leaderboard",
   feed,

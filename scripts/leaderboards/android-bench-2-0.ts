@@ -28,6 +28,7 @@ export function splitEffort(name: string): { model: string; setting?: string } {
 
 const board: Leaderboard = {
   benchmark: 'android-bench-2-0',
+  harnesses: 'system',
   url: ANDROID_PAGE,
   feed: `${ANDROID_PAGE} (server-rendered HTML table "Long-horizon task results", Pass rate)`,
   terms: ANDROID_TERMS,
@@ -38,37 +39,40 @@ const board: Leaderboard = {
     runHours: { name: 'Average run time', unit: 'hours', better: 'lower' },
   },
   parts: Object.fromEntries([
-    ['convertFlutterToAndroidHaboAppHabitTrackerCompletion','Convert Flutter to Android Habo app habit tracker'],
-    ['convertReactNativeToAndroidBluewalletAppBitcoinWalletCompletion','Convert React Native to Android BlueWallet app Bitcoin wallet'],
-    ['newAccessibilitySupportAcrossDroidconConferenceAppCompletion','New accessibility support across Droidcon conference app'],
-    ['newMedia3AndExoplayerVideoPlaybackInNowInAndroidNewsAppCompletion','New Media3 and ExoPlayer video playback in Now in Android news app'],
-    ['newPictureInPictureVideoModeInNowInAndroidNewsAppCompletion','New picture-in-picture video mode in Now in Android news app'],
-    ['newCameraxProfilePictureCaptureInNowInAndroidNewsAppCompletion','New CameraX profile picture capture in Now in Android news app'],
-    ['newUserAccountSubmoduleInFoodVibesFullAppCreationFoodDeliveryCompletion','New user account submodule in Food Vibes full app creation food delivery'],
-    ['newAuthenticationFlowWithSmsVerificationInFoodVibesFullAppCreationFoodDeliveryCompletion','New authentication flow with SMS verification in Food Vibes full app creation food delivery'],
-    ['newBottomNavigationAndBrowseSearchScreenInFoodVibesFullAppCreationFoodDeliveryCompletion','New bottom navigation and browse search screen in Food Vibes full app creation food delivery'],
-    ['newDesignSystemAndReusableUiComponentLibraryInFoodVibesFullAppCreationFoodDeliveryCompletion','New design system and reusable UI component library in Food Vibes full app creation food delivery'],
-    ['newAllFiltersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion','New all filters screen in Food Vibes full app creation food delivery'],
-    ['newMapIntegrationAndLocationFeaturesInFoodVibesFullAppCreationFoodDeliveryCompletion','New map integration and location features in Food Vibes full app creation food delivery'],
-    ['newRealTimeOrderTrackingInFoodVibesFullAppCreationFoodDeliveryCompletion','New real-time order tracking in Food Vibes full app creation food delivery'],
-    ['newPromotionsSubmoduleAndActiveOffersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion','New promotions submodule and active offers screen in Food Vibes full app creation food delivery'],
-    ['newRestaurantListingFeedInFoodVibesFullAppCreationFoodDeliveryCompletion','New restaurant listing feed in Food Vibes full app creation food delivery'],
-    ['newViewmodelLayerInFossifyFileManagerCompletion','New ViewModel layer in Fossify file manager'],
-    ['nav2ToNav3LibraryMigrationInBitwardenPasswordManagerCompletion','Navigation 2 to Navigation 3 library migration in Bitwarden password manager'],
-    ['dualPaneAdaptiveLayoutMigrationInBitwardenPasswordManagerSettingsScreensCompletion','Dual-pane adaptive layout migration in Bitwarden password manager settings screens'],
-    ['hiltToKoinDependencyInjectionMigrationInBitwardenPasswordManagerCompletion','Hilt to Koin dependency injection migration in Bitwarden password manager'],
-    ['xmlViewsToComposeMigrationInFossifyFileManagerMainTabsAndSettingsCompletion','XML views to Compose migration in Fossify file manager main tabs and settings'],
-    ['hiltToKoinDependencyInjectionMigrationInNowInAndroidNewsAppCompletion','Hilt to Koin dependency injection migration in Now in Android news app'],
-    ['kotlinMultiplatformMigrationInNowInAndroidNewsAppDatastoreAndDatabaseCompletion','Kotlin Multiplatform migration in Now in Android news app datastore and database'],
-    ['retrofitToKtorMigrationInPocketCastsPodcastPlayerCompletion','Retrofit to Ktor migration in Pocket Casts podcast player'],
-    ['xmlViewsToComposeMigrationInSignalMessagingAppCustomChatColourCreatorCompletion','XML views to Compose migration in Signal messaging app custom chat colour creator'],
-    ['xmlViewsToComposeMigrationInSignalMessagingAppProfileCreationCompletion','XML views to Compose migration in Signal messaging app profile creation'],
-    ['xmlViewsToComposeMigrationInSignalMessagingAppPhoneNumberEntryCompletion','XML views to Compose migration in Signal messaging app phone number entry'],
-    ['javaToKotlinMigrationInSignalMessagingAppGlideImageLoadingModuleCompletion','Java to Kotlin migration in Signal messaging app Glide image loading module'],
-    ['xmlViewsToComposeMigrationInSignalMessagingAppEditProfileScreensCompletion','XML views to Compose migration in Signal messaging app edit profile screens'],
-    ['xmlViewsToComposeMigrationInWordpressPeopleInviteScreenCompletion','XML views to Compose migration in WordPress people invite screen'],
-    ['newBookSearchingAppUsingTheOpenlibraryApiCompletion','New book-searching app using the Open Library API'],
-  ].map(([key, name]) => [key, { name, group: 'Task' }])) as Leaderboard['parts'],
+    ['convertFlutterToAndroidHaboAppHabitTracker', 'Convert Flutter to Android: Habo app (habit tracker)', 'App conversion'],
+    ['convertReactNativeToAndroidBluewalletAppBitcoinWallet', 'Convert React Native to Android: BlueWallet app (Bitcoin wallet)', 'App conversion'],
+    ['newAccessibilitySupportAcrossDroidconConferenceApp', 'New accessibility support across Droidcon (conference app)', 'New feature'],
+    ['newMedia3AndExoplayerVideoPlaybackInNowInAndroidNewsApp', 'New Media3 and ExoPlayer video playback in Now in Android (news app)', 'New feature'],
+    ['newPictureInPictureVideoModeInNowInAndroidNewsApp', 'New picture-in-picture video mode in Now in Android (news app)', 'New feature'],
+    ['newCameraxProfilePictureCaptureInNowInAndroidNewsApp', 'New CameraX profile picture capture in Now in Android (news app)', 'New feature'],
+    ['newUserAccountSubmoduleInFoodVibesFullAppCreationFoodDelivery', 'New user account submodule in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newAuthenticationFlowWithSmsVerificationInFoodVibesFullAppCreationFoodDelivery', 'New authentication flow with SMS verification in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newBottomNavigationAndBrowseSearchScreenInFoodVibesFullAppCreationFoodDelivery', 'New bottom navigation and Browse search screen in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newDesignSystemAndReusableUiComponentLibraryInFoodVibesFullAppCreationFoodDelivery', 'New design system and reusable UI component library in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newAllFiltersScreenInFoodVibesFullAppCreationFoodDelivery', 'New All Filters screen in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newMapIntegrationAndLocationFeaturesInFoodVibesFullAppCreationFoodDelivery', 'New map integration and location features in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newRealTimeOrderTrackingInFoodVibesFullAppCreationFoodDelivery', 'New real-time order tracking in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newPromotionsSubmoduleAndActiveOffersScreenInFoodVibesFullAppCreationFoodDelivery', 'New promotions submodule and active offers screen in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newRestaurantListingFeedInFoodVibesFullAppCreationFoodDelivery', 'New restaurant listing feed in Food Vibes (full app creation, food delivery)', 'App creation'],
+    ['newViewmodelLayerInFossifyFileManager', 'New ViewModel layer in Fossify File Manager', 'New feature'],
+    ['nav2ToNav3LibraryMigrationInBitwardenPasswordManager', 'Nav 2 to Nav 3 library migration in Bitwarden (password manager)', 'Migration'],
+    ['dualPaneAdaptiveLayoutMigrationInBitwardenPasswordManagerSettingsScreens', 'Dual-pane adaptive layout migration in Bitwarden (password manager): settings screens', 'Migration'],
+    ['hiltToKoinDependencyInjectionMigrationInBitwardenPasswordManager', 'Hilt to Koin dependency injection migration in Bitwarden (password manager)', 'Migration'],
+    ['xmlViewsToComposeMigrationInFossifyFileManagerMainTabsAndSettings', 'XML views to Compose migration in Fossify File Manager: main tabs and settings', 'Migration'],
+    ['hiltToKoinDependencyInjectionMigrationInNowInAndroidNewsApp', 'Hilt to Koin dependency injection migration in Now in Android (news app)', 'Migration'],
+    ['kotlinMultiplatformMigrationInNowInAndroidNewsAppDatastoreAndDatabase', 'Kotlin Multiplatform migration in Now in Android (news app): datastore and database', 'Migration'],
+    ['retrofitToKtorMigrationInPocketCastsPodcastPlayer', 'Retrofit to Ktor migration in Pocket Casts (podcast player)', 'Migration'],
+    ['xmlViewsToComposeMigrationInSignalMessagingAppCustomChatColourCreator', 'XML views to Compose migration in Signal (messaging app): custom chat color creator', 'Migration'],
+    ['xmlViewsToComposeMigrationInSignalMessagingAppProfileCreation', 'XML views to Compose migration in Signal (messaging app): profile creation', 'Migration'],
+    ['xmlViewsToComposeMigrationInSignalMessagingAppPhoneNumberEntry', 'XML views to Compose migration in Signal (messaging app): phone number entry', 'Migration'],
+    ['javaToKotlinMigrationInSignalMessagingAppGlideImageLoadingModule', 'Java to Kotlin migration in Signal (messaging app): Glide image loading module', 'Migration'],
+    ['xmlViewsToComposeMigrationInSignalMessagingAppEditProfileScreens', 'XML views to Compose migration in Signal (messaging app): edit profile screens', 'Migration'],
+    ['xmlViewsToComposeMigrationInWordpressPeopleInviteScreen', 'XML views to Compose migration in WordPress: people invite screen', 'Migration'],
+    ['newBookSearchingAppUsingTheOpenlibraryApi', 'New book searching app using the OpenLibrary API', 'App creation'],
+  ].flatMap(([key, name, group]) => [
+    [key, { name, group }],
+    [`${key}Completion`, { name: `${name} completion`, group: 'Task completion' }],
+  ])) as Leaderboard['parts'],
   async fetch() {
     const page = await fetchText(ANDROID_PAGE);
     const { head, rows: body } = await androidBenchTable(/^Model - Agent/, /^Pass rate/, page);
@@ -78,8 +82,6 @@ const board: Leaderboard = {
       const table = section.match(/<table class="android-bench-llm-modal-table">[\s\S]*?<\/table>/)?.[0];
       if (id && table) dialogs.set(id, table);
     }
-    const parts: NonNullable<Leaderboard['parts']> = {};
-    board.parts = parts;
     const col = (re: RegExp) => head.findIndex((h) => re.test(h));
     const iScore = col(/^Pass rate/);
     const [iCi, iCompletion, iTime, iCost] = [/C[Il] range/, /^Completion rate/, /^Avg latency \(h\)/, /^Avg cost/].map(col);
@@ -106,7 +108,6 @@ const board: Leaderboard = {
           if (!passed || !Number(passed[2])) continue;
           denominators.add(Number(passed[2]));
           const key = task[0].text.toLowerCase().replace(/[^a-z0-9]+([a-z0-9])?/g, (_, c?: string) => c?.toUpperCase() ?? '');
-          parts[key] = {name: task[0].text, group: task[1].text};
           metrics[key] = 100 * Number(passed[1]) / Number(passed[2]);
           const completion = num(task[2]?.text);
           if (completion !== undefined) metrics[key + 'Completion'] = completion;

@@ -14,8 +14,8 @@ const board: Leaderboard = {
   benchmark: 'lifesci-diamond',
   url: 'https://github.com/arcainc/lifesci-diamond',
   feed: FEED,
-  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
-  stats:{graded:{name:'Graded tasks',unit:'count'},tasks:{name:'Tasks',unit:'count'},passes:{name:'Passes',unit:'count',better:'higher'},meanGraded:{name:'Mean on graded tasks',unit:'%',better:'higher'}},
+  terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+  stats:{passes:{name:'Passes',unit:'count',better:'higher'},meanGraded:{name:'Mean on graded tasks',unit:'%',better:'higher'}},
   reference: ['API'],
   harnesses: 'system',
   aliases: { 'meta/muse-wonder-1.0': 'muse-wonder' },
@@ -28,7 +28,7 @@ const board: Leaderboard = {
       const low = num(r.pass_lower_pct);
       const high = num(r.pass_upper_pct);
       const metrics: Record<string, number> = {};
-      for (const [k, v] of [['graded', r.graded], ['tasks', r.tasks], ['passes', r.passes], ['unavailable', r.unavailable], ['meanGraded', r.mean_on_graded]] as const) if (num(v) !== undefined) metrics[k] = num(v)!;
+      for (const [k, v] of [['passes', r.passes], ['meanGraded', r.mean_on_graded]] as const) if (num(v) !== undefined) metrics[k] = num(v)!;
       rows.push({
         model: r.model === 'auto' ? 'Arca Auto' : r.model,
         score,

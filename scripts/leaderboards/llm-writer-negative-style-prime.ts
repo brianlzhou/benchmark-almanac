@@ -52,6 +52,13 @@ const id = 'yv4pux6ewjrwcks8aqr8dugq';
 const page = 'https://app.primeintellect.ai/dashboard/environments/primeintellect/llm-writer-negative-style/evals';
 const board: Leaderboard = {
   benchmark: 'llm-writer-negative-style-prime', url: page, feed: primeFeed(id), terms: primeTerms,
-  fetch: () => primeRows(id, page, 1),
+  async fetch() {
+    const rows = await primeRows(id, page, 1);
+    return rows.map(({ metrics, ...rest }) => {
+      if (!metrics) return rest;
+      const { examples: _examples, ...keep } = metrics;
+      return Object.keys(keep).length ? { ...rest, metrics: keep } : rest;
+    });
+  },
 };
 export default board;

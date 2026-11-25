@@ -8,6 +8,15 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/nb9300/memorytrap-bench-php-arrays-go-maps',
   feed: kaggleFeed('nb9300', 'memorytrap-bench-php-arrays-go-maps'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('nb9300', 'memorytrap-bench-php-arrays-go-maps', "(Overall)", 1),
+  parts: {
+    cold: 'Cold',
+    versioned: 'Versioned',
+    evidence: 'Evidence',
+  },
+  fetch: () => kaggleRowsWithBounds('nb9300', 'memorytrap-bench-php-arrays-go-maps', "(Overall)", 1, {
+    cold: { task: 'MemoryTrap Cold' },
+    versioned: { task: 'MemoryTrap Versioned' },
+    evidence: { task: 'MemoryTrap Evidence' },
+  }),
 };
 export default board;

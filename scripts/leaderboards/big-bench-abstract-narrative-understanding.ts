@@ -10,7 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The raw file host has no robots.txt. The ADAGE repository includes an MIT license. The source task retains its own terms. https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/LICENSE",
   host: 'ADAGE',
-  stats: { items: { name: 'Items', unit: 'count' }, invalid: { name: 'Invalid responses', unit: 'count', better: 'lower' }, normalized: { name: 'Normalized score', unit: 'score', better: 'higher' } },
+  stats: { invalid: { name: 'Invalid responses', unit: 'count', better: 'lower' }, normalized: { name: 'Normalized score', unit: 'score', better: 'higher' } },
   async fetch() {
     const { leaderboard } = await fetchJson<{leaderboard: Entry[]}>(feed);
     if (leaderboard.length < 8) throw new Error('Incomplete ePiC leaderboard');
@@ -18,7 +18,7 @@ const board: Leaderboard = {
       if (!r.model || ![r.epic_accuracy, r.epic_n_items, r.epic_n_invalid, r.epic_normalized].every(Number.isFinite))
         throw new Error('Incomplete ePiC result');
       return { model: r.model, setting: 'Five choices', score: 100 * r.epic_accuracy,
-        metrics: { items: r.epic_n_items, invalid: r.epic_n_invalid, normalized: r.epic_normalized } };
+        metrics: { invalid: r.epic_n_invalid, normalized: r.epic_normalized } };
     });
   },
 };

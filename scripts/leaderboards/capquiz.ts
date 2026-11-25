@@ -18,11 +18,19 @@ const board: Leaderboard = {
     if (!table) throw new Error('Missing main results in Table 3');
     const keys = ['CapP','CapR','descriptive','Descriptive precision','Descriptive recall',
       'inferential','Inferential precision','Inferential recall'];
-    return checked(table.slice(2).filter(r => !r.every(c => c === r[0])).map(r => {
+    const rows = [];
+    let open: boolean | undefined;
+    for (const r of table.slice(2)) {
+      if (r.every(c => c === r[0])) {
+        if (/^Open-source/i.test(r[0])) open = true;
+        else if (/^Proprietary/i.test(r[0])) open = false;
+        continue;
+      }
       if (r.length !== 10) throw new Error('CapQuiz table width changed');
-      return {model: r[0].replace(/\s*\(\s*\d{4}\s*\)$/, ''), score: numberCell(r[1]),
-        metrics: Object.fromEntries(keys.map((key,i) => [key, numberCell(r[i+2])]))};
-    }), 15);
+      rows.push({model: r[0].replace(/\s*\(\s*\d{4}\s*\)$/, ''), score: numberCell(r[1]), ...(open === undefined ? {} : {open}),
+        metrics: Object.fromEntries(keys.map((key,i) => [key, numberCell(r[i+2])]))});
+    }
+    return checked(rows, 15);
   },
 };
 export default board;

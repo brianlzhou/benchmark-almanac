@@ -19,6 +19,10 @@ function numbers(c: string[]) {
 }
 const board: Leaderboard = {
   benchmark: 'gittaskbench', static: 'paper', url: 'https://github.com/QuantaAlpha/GitTaskBench', feed: FEED, terms: PAPER_TERMS,
+  stats: {
+    executionCompletion: { name: 'Execution completion rate', unit: '%', better: 'higher' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' },
+  },
   aliases: { 'DeepSeek-V3-0324': 'deepseek-v3-mar-2025' },
   async fetch() {
     const all = await paperTables(FEED);

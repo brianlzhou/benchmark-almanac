@@ -10,7 +10,7 @@ const domains = ['Biology', 'Chemistry', 'Material', 'Physics'];
 const board: Leaderboard = {
   benchmark: 'sciknoweval', url: feed, feed, static: 'paper',
   terms: 'The authors publish these tables under the license linked at https://arxiv.org/abs/2406.09098.',
-  parts: Object.fromEntries([...levels, ...domains].map(name => [name, {name, group: levels.includes(name) ? 'Level' : 'Domain'}])), stats: { rank: { name: 'Rank', unit: 'count', better: 'lower' } },
+  parts: Object.fromEntries([...levels, ...domains].map(name => [name, {name, group: levels.includes(name) ? 'Level' : 'Domain'}])),
   aliases: {'Claude-4-Sonnet':'claude-sonnet-4', 'Llama4-Scout':'llama-4-scout'},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const metrics = Object.fromEntries(levels.map((level, i) => [level, numberCell(row[i + 2])]));
       domains.forEach((domain, i) => {metrics[domain] = numberCell(domainRow[2 * i + 1]);});
       return {model: sourceName.replace(/-thinking$/, ''), setting: sourceName.endsWith('-thinking') ? 'Zero-shot, thinking' : 'Zero-shot',
-        score: numberCell(row[7]), metrics: {...metrics, rank: numberCell(row[8])}};
+        score: numberCell(row[7]), metrics};
     }), 20);
   },
 };

@@ -5,12 +5,20 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 
 const URL = 'https://roger-creus.github.io/agentick/board/';
-const taskNames = ['BacktrackPuzzle-v0','ChaseEvade-v0','CooperativeTransport-v0','DeceptiveReward-v0','DelayedGratification-v0','DistributionShift-v0','DynamicObstacles-v0','EmergentStrategy-v0','FewShotAdaptation-v0','FogOfWarExploration-v0','GoToGoal-v0','GraphColoring-v0','Herding-v0','InstructionFollowing-v0','KeyDoorPuzzle-v0','LightsOut-v0','MazeNavigation-v0','NoisyObservation-v0','PackingPuzzle-v0','PreciseNavigation-v0','ProgramSynthesis-v0','RecipeAssembly-v0','RecursiveRooms-v0','ResourceManagement-v0','RuleInduction-v0','SequenceMemory-v0','ShortestPath-v0','SokobanPush-v0','SwitchCircuit-v0','SymbolMatching-v0','TagHunt-v0','TaskInterference-v0','TileSorting-v0','TimingChallenge-v0','ToolUse-v0','TreasureHunt-v0'];
+const taskNames = ['BacktrackPuzzle-v0','ChaseEvade-v0','CooperativeTransport-v0','CuriosityMaze-v0','DeceptiveReward-v0','DelayedGratification-v0','DistributionShift-v0','DynamicObstacles-v0','EmergentStrategy-v0','FewShotAdaptation-v0','FogOfWarExploration-v0','GoToGoal-v0','GraphColoring-v0','Herding-v0','InstructionFollowing-v0','KeyDoorPuzzle-v0','LightsOut-v0','MazeNavigation-v0','NoisyObservation-v0','PackingPuzzle-v0','PreciseNavigation-v0','ProgramSynthesis-v0','RecipeAssembly-v0','RecursiveRooms-v0','ResourceManagement-v0','RuleInduction-v0','SequenceMemory-v0','ShortestPath-v0','SokobanPush-v0','SwitchCircuit-v0','SymbolMatching-v0','TagHunt-v0','TaskInterference-v0','TileSorting-v0','TimingChallenge-v0','ToolUse-v0','TreasureHunt-v0'];
+const categoryParts = {
+  generalization: { name: 'Generalization', group: 'Category' },
+  memory: { name: 'Memory', group: 'Category' },
+  multiAgent: { name: 'Multi agent', group: 'Category' },
+  navigation: { name: 'Navigation', group: 'Category' },
+  planning: { name: 'Planning', group: 'Category' },
+  reasoning: { name: 'Reasoning', group: 'Category' },
+};
 const taskParts = Object.fromEntries(taskNames.flatMap(task => ['Easy', 'Medium', 'Hard', 'Expert'].map(difficulty => [`${task} ${difficulty}`, { name: `${task} ${difficulty}`, group: 'Task' }])));
 const board: Leaderboard = {
   benchmark: 'agentick', url: URL, feed: URL,
-  terms: 'MIT repository; the project site has no robots.txt.',
-  parts: taskParts,
+  terms: 'MIT repository. The project site has no robots.txt.',
+  parts: { ...categoryParts, ...taskParts },
   async fetch() {
     const page = await fetchText(URL);
     const cells = (html: string) => tables(html)[0]?.map(row => row.map(cell => cell.text));
@@ -36,11 +44,8 @@ const board: Leaderboard = {
       byName.set(name, [...(byName.get(name) ?? []), row]);
       return row;
     });
-    board.parts = {};
     for (const m of page.matchAll(/<table\b[^>]*id="table-cat-([\w-]+)"[\s\S]*?<\/table>/g)) {
       const key = m[1].replace(/_(\w)/g, (_, c: string) => c.toUpperCase());
-      const name = m[1].replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
-      board.parts[key] = { name, group: 'Category' };
       for (const c of cells(m[0])?.slice(1) ?? []) {
         const row = byConfig.get(JSON.stringify(c.slice(1, 5)));
         const score = num(c[5]);

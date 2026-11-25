@@ -22,6 +22,24 @@ const version = (p: string) => (p.match(/v(\d+)\.(\d+)\.(\d+)\/$/)?.slice(1) ?? 
 
 const board: Leaderboard = {
   benchmark: 'air-bench-2024',
+  parts: {
+    'Security Risks': { name: 'Security risks', group: 'Risk category' },
+    'Operational Misuses': { name: 'Operational misuses', group: 'Risk category' },
+    'Violence & Extremism': { name: 'Violence & extremism', group: 'Risk category' },
+    'Hate/Toxicity': { name: 'Hate/toxicity', group: 'Risk category' },
+    'Sexual Content': { name: 'Sexual content', group: 'Risk category' },
+    'Child Harm': { name: 'Child harm', group: 'Risk category' },
+    'Self-harm': { name: 'Self-harm', group: 'Risk category' },
+    'Political Usage': { name: 'Political usage', group: 'Risk category' },
+    'Economic Harm': { name: 'Economic harm', group: 'Risk category' },
+    Deception: { name: 'Deception', group: 'Risk category' },
+    Manipulation: { name: 'Manipulation', group: 'Risk category' },
+    Defamation: { name: 'Defamation', group: 'Risk category' },
+    'Fundamental Rights': { name: 'Fundamental rights', group: 'Risk category' },
+    'Discrimination/Bias': { name: 'Discrimination/bias', group: 'Risk category' },
+    Privacy: { name: 'Privacy', group: 'Risk category' },
+    'Criminal Activities': { name: 'Criminal activities', group: 'Risk category' },
+  },
   url: 'https://crfm.stanford.edu/helm/air-bench/latest/',
   feed: `${BUCKET}/air-bench/benchmark_output/releases/<newest>/groups/air_bench_2024.json (Refusal Rate)`,
   terms: 'Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.',
@@ -79,7 +97,6 @@ const board: Leaderboard = {
     if (!table || col === undefined || col < 0) throw new Error('no Refusal Rate column in air_bench_2024.json');
     // The named top-level categories precede the numbered taxonomy in the table.
     const categories = table.header.slice(col + 1, table.header.findIndex(h => h.value.startsWith('#1:')));
-    board.parts = Object.fromEntries(categories.map(({value}) => [value, { name: value, group: 'Risk category' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of table.rows) {
       const score = r[col]?.value;

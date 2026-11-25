@@ -16,7 +16,7 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'monthly-swebench',
-  stats: { turns: { name: 'Turns', unit: 'count', better: 'lower' }, maxTurns: { name: 'Maximum turns', unit: 'count' }, turnsCompleted: { name: 'Completed turns', unit: 'count' }, completed: { name: 'Completed tasks', unit: 'count' }, passed: { name: 'Passed tasks', unit: 'count' }, timeoutCount: { name: 'Timeouts', unit: 'count' }, timeoutTurnsCompleted: { name: 'Completed timeout turns', unit: 'count' }, unfinishedCount: { name: 'Unfinished tasks', unit: 'count' }, timeoutTurnsMin: { name: 'Minimum timeout turns', unit: 'count' }, timeoutTurnsMedian: { name: 'Median timeout turns', unit: 'count' }, timeoutTurnsAvg: { name: 'Average timeout turns', unit: 'count' }, timeoutTurnsMax: { name: 'Maximum timeout turns', unit: 'count' }, timeoutLimitSecondsMin: { name: 'Minimum timeout limit', unit: 'seconds' }, timeoutLimitSecondsMedian: { name: 'Median timeout limit', unit: 'seconds' }, timeoutLimitSecondsAvg: { name: 'Average timeout limit', unit: 'seconds' }, timeoutLimitSecondsMax: { name: 'Maximum timeout limit', unit: 'seconds' } },
+  stats: { turns: { name: 'Turns', unit: 'count', better: 'lower' }, maxTurns: { name: 'Maximum turns', unit: 'count' }, turnsCompleted: { name: 'Completed turns', unit: 'count' }, passed: { name: 'Passed tasks', unit: 'count' }, timeoutCount: { name: 'Timeouts', unit: 'count' }, timeoutTurnsCompleted: { name: 'Completed timeout turns', unit: 'count' }, unfinishedCount: { name: 'Unfinished tasks', unit: 'count' }, timeoutTurnsMin: { name: 'Minimum timeout turns', unit: 'count' }, timeoutTurnsMedian: { name: 'Median timeout turns', unit: 'count' }, timeoutTurnsAvg: { name: 'Average timeout turns', unit: 'count' }, timeoutTurnsMax: { name: 'Maximum timeout turns', unit: 'count' } },
   parts: {
     bug_fix: { name: 'Bug fix', group: 'Task type' },
     non_bug_fix: { name: 'Non bug fix', group: 'Task type' },
@@ -45,14 +45,13 @@ const board: Leaderboard = {
           const effort=r.modelName.match(/-(High|XHigh|Max|Adaptive|Thinking)$/i);
           const turns=r.avgTurns ?? r.avgEp;
           const metrics:Record<string,number> = typeof turns==='number'?{turns}:{};
-          for (const key of ['maxTurns', 'turnsCompleted', 'completed', 'passed', 'timeoutCount', 'timeoutTurnsMin',
-            'timeoutTurnsMedian', 'timeoutTurnsAvg', 'timeoutTurnsMax', 'timeoutTurnsCompleted', 'timeoutLimitSecondsMin',
-            'timeoutLimitSecondsMedian', 'timeoutLimitSecondsAvg', 'timeoutLimitSecondsMax', 'unfinishedCount']) {
+          for (const key of ['maxTurns', 'turnsCompleted', 'passed', 'timeoutCount', 'timeoutTurnsMin',
+            'timeoutTurnsMedian', 'timeoutTurnsAvg', 'timeoutTurnsMax', 'timeoutTurnsCompleted', 'unfinishedCount']) {
             const value = r[key];
             if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
           }
           for(const [name, group] of Object.entries(data.data)){if(name==='Overall')continue;const sub=group.snapshots[month]?.find(x=>x.modelName===r.modelName&&x.agent===r.agent);if(typeof sub?.passAt1==='number')metrics[name.toLowerCase().replace(/[^a-z]+/g,'_')]=sub.passAt1;}
-          rows.push({model:effort?r.modelName.slice(0,effort.index):r.modelName,score:r.passAt1,harness:r.agent,setting:[month,effort?.[1].toLowerCase()].filter(Boolean).join('; '),metrics});
+          rows.push({model:effort?r.modelName.slice(0,effort.index):r.modelName,score:r.passAt1,harness:r.agent,setting:[month,effort?.[1].toLowerCase()].filter(Boolean).join(', '),metrics});
         }
       }
     }

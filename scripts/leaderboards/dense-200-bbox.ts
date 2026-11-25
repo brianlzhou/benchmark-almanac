@@ -7,7 +7,13 @@ const FEED = 'https://arxiv.org/html/2510.12798';
 
 const board: Leaderboard = {
   benchmark: 'dense-200-bbox', static: 'paper',
-  stats: { f1At95: { name: 'F1 at 95% precision', unit: '%', better: 'higher' }, meanF1: { name: 'Mean F1', unit: '%', better: 'higher' } },
+  stats: {
+    f1At95: { name: 'F1 at IoU 0.95', unit: '%', better: 'higher' },
+    meanF1: { name: 'Mean F1', unit: '%', better: 'higher' },
+    outputTokensAt100: { name: 'Output tokens per image (Dense200@100)', unit: 'tokens', better: 'lower' },
+    boxesPerImageAt100: { name: 'Boxes per image (Dense200@100)', unit: 'count' },
+    tokensPerBoxAt100: { name: 'Output tokens per box (Dense200@100)', unit: 'tokens', better: 'lower' },
+  },
   url: 'https://arxiv.org/abs/2510.12798',
   feed: FEED,
   terms: PAPER_TERMS,

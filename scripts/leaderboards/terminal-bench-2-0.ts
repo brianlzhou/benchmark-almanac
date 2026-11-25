@@ -1,7 +1,7 @@
 // Terminal-Bench 2.0 publishes accuracy, rank, intervals and agent configurations.
 // Its archived rows have no measured cost, tokens or time.
 import type { Leaderboard } from './types.ts';
-import { makeTerminalBench, TERMINAL_BENCH_STATS } from '../lib/boards/terminal-bench.ts';
+import { makeTerminalBench } from '../lib/boards/terminal-bench.ts';
 
 const board: Leaderboard = {
   ...makeTerminalBench({
@@ -21,5 +21,4 @@ const board: Leaderboard = {
   }),
   chart: undefined,
 };
-board.stats = { ci95: TERMINAL_BENCH_STATS.ci95 };
 export default board;

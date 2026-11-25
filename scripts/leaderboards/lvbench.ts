@@ -12,6 +12,7 @@ const URL = 'https://lvbench.github.io/';
 const board: Leaderboard = {
   benchmark: 'lvbench',
   parts: { ER: "Entity recognition", EU: "Event understanding", KIR: "Key information retrieval", TG: "Temporal grounding", Rea: "Reasoning", Sum: "Summarization" },
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table, Overall)`,
   terms: 'Static GitHub Pages project page with no stated terms; the LVBench repository is MIT-licensed, as is the Space.',

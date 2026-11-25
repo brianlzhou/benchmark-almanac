@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed: `${FEED} (table between the LEADERBOARD markers)`,
   terms: 'README table in the vectara/hallucination-leaderboard repository, licensed Apache-2.0.',
   stats: {
+    factualConsistency: { name: 'Factual consistency rate', unit: '%', better: 'higher' },
     answerRate: { name: 'Answer rate', unit: '%', better: 'higher' },
     summaryWords: { name: 'Average summary length', unit: 'count' },
   },

@@ -32,7 +32,6 @@ const board: Leaderboard = {
     trans: { name: 'Camera translation error', better: 'lower', note: 'Normalized trajectory distance.' },
     cammc: { name: 'Camera motion control', better: 'lower', note: 'Normalized pose matrix distance.' },
     warp: { name: 'Warp error', better: 'lower', note: 'Temporal warp error in the paper table units of 10^-3.' },
-    cases: { name: 'Cases', unit: 'count' },
   },
   
   async fetch() {
@@ -60,8 +59,8 @@ const board: Leaderboard = {
       const score = mean([...groups.values()].map(mean));
       if (!Number.isFinite(score)) continue;
       out.push({model: identity(r.model_name), score,
-        setting: ['inputs ' + r.inputs.join('+'), d.models[r.model_id]?.configuration].filter(Boolean).join('; '),
-        metrics: {...r.metrics, cases: split.cases}});
+        setting: ['inputs ' + r.inputs.join('+'), d.models[r.model_id]?.configuration?.replace(/\s*[;·]\s*/g, ', ')].filter(Boolean).join(', '),
+        metrics: {...r.metrics}});
     }if(!out.length)throw new Error('PROWBench manuscript rows missing');return out;
   },
 };

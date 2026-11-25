@@ -20,8 +20,7 @@ const board: Leaderboard = {
   },
   async fetch() {
     const flight = await scaleFlight(PAGE);
-    return ['large', 'small'].flatMap(tab => scaleRows(scaleEntries(flight, tab), (_, entry) =>
-      typeof entry.rank === 'number' ? { metrics: { [tab + 'ModelRank']: entry.rank } } : undefined));
+    return ['large', 'small'].flatMap(tab => scaleRows(scaleEntries(flight, tab)));
   },
 };
 export default board;

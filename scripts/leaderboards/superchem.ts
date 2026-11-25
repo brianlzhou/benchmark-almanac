@@ -8,8 +8,7 @@ const board: Leaderboard = {
   benchmark: 'superchem', url: 'https://superchem.pku.edu.cn/leaderboard', feed: FEED,
   terms: 'Official SUPERChem public leaderboard JSON; the dataset is MIT licensed. Benchmark Almanac credits and links the source.',
   stats: {
-    std_acc: { name: 'Accuracy standard deviation', unit: 'score' },
-    rpf: { name: 'Reasoning path fidelity', unit: 'score', better: 'higher' },
+    rpf: { name: 'Reasoning path fidelity', unit: '%', better: 'higher' },
   },
   aliases: {'qwen3-235b-a22b-instruct-2507': 'qwen3-235b-a22b-instruct-jul-2025'},
   async fetch() {
@@ -24,8 +23,11 @@ const board: Leaderboard = {
       model = model.replace('-think-', '-').replace(/-128k$/, '');
       if (/^(?:gpt-4o|gemini-2\.5-pro)$/.test(model)) model += ' (snapshot unspecified)';
       const metrics: Record<string, number> = {};
-      for (const [key, value] of Object.entries(r.metrics)) if (key !== 'acc' && typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
-      rows.push({ model, score: r.metrics.acc!, setting: [r.modality, effort?.[1], think ? 'thinking' : undefined].filter(Boolean).join('; '), metrics });
+      for (const [key, value] of Object.entries(r.metrics)) {
+        if (key === 'acc' || typeof value !== 'number' || !Number.isFinite(value)) continue;
+        metrics[key === 'std_acc' ? 'accStd' : key === 'std_pass8' ? 'pass8Std' : key] = value;
+      }
+      rows.push({ model, score: r.metrics.acc!, setting: [r.modality, effort?.[1], think ? 'thinking' : undefined].filter(Boolean).join(', '), metrics });
     }
     if (!rows.length) throw new Error('SUPERChem feed has no model results');
     return rows;

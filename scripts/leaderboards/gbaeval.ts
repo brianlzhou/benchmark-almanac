@@ -25,6 +25,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'gbaeval',
+  harnesses: 'system',
   url: 'https://gbaeval.com/leaderboard/',
   feed: `${FEED} (overall)`,
   terms: 'Public JSON behind the leaderboard page; gbaeval.com robots.txt allows all paths and the site states no terms.',
@@ -40,8 +41,9 @@ const board: Leaderboard = {
     timer: { name: 'Timer', group: 'Procedural', better: 'higher' },
     replay: { name: 'Replay', group: 'Section', better: 'higher' },
     gameplay: { name: 'Gameplay', group: 'Replay', better: 'higher' },
+    boot: { name: 'Boot', group: 'Section', better: 'higher' },
   },
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, time: { name: 'Grading time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, checkpoints: { name: 'Checkpoints', unit: 'count' } },
+  stats: { latency: { name: 'Wall-clock time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, checkpoints: { name: 'Checkpoints', unit: 'count' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const e of await fetchJson<Entry[]>(FEED)) {
@@ -50,7 +52,7 @@ const board: Leaderboard = {
       if (!model) continue;
       const harness = /^goose-/.test(e.candidate ?? '') ? 'goose' : /^codex-/.test(e.candidate ?? '') ? 'Codex' : undefined;
       const metrics: Record<string, number> = {};
-      if (typeof e.wall_clock_hours === 'number') metrics.latency = metrics.time = e.wall_clock_hours * 3600;
+      if (typeof e.wall_clock_hours === 'number') metrics.latency = e.wall_clock_hours * 3600;
       if (typeof e.tokens_used === 'number') metrics.totalTokens = e.tokens_used;
       if (typeof e.checkpoints_count === 'number') metrics.checkpoints = e.checkpoints_count;
       if (typeof e.failure_summary?.build_failed === 'number') metrics.buildFailures = e.failure_summary.build_failed;
@@ -58,13 +60,11 @@ const board: Leaderboard = {
       for (const [section, data] of Object.entries(e.sections ?? {})) {
         if (typeof data.score === 'number') {
           metrics[section] = data.score * 100;
-          board.parts![section] = { name: section, group: 'Section' };
         }
         for (const [subsystem, value] of Object.entries(data.subsystems ?? {})) {
           if (typeof value !== 'number') continue;
           const key = subsystem.replace(/_(.)/g, (_, c: string) => c.toUpperCase());
           metrics[key] = value * 100;
-          board.parts![key] = { name: subsystem.replaceAll('_', ' '), group: section };
         }
       }
       rows.push({ model, harness, score: Number((e.overall * 100).toFixed(2)), date: e.graded_at.slice(0, 10), metrics });

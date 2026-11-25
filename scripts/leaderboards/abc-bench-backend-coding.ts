@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "abc-bench-backend-coding",
+ static: 'paper',
  url: "https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -7,9 +7,9 @@ import { nextFlight } from '../lib/html.ts';
 
 const FEED = "https://www.reactbench.com/";
 const board: Leaderboard = {
- benchmark: "reactbench", url: "https://www.reactbench.com/", feed: FEED,
+ benchmark: "reactbench", harnesses: 'system', reference: ['mini-swe-agent'], url: "https://www.reactbench.com/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
- stats:{trials:{name:'Trials',unit:'count'},scored:{name:'Scored cases',unit:'count'},testsOnly:{name:'Tests-only pass rate',unit:'%',better:'higher'}},
+ stats:{testsOnly:{name:'Tests-only pass rate',unit:'%',better:'higher'}},
 chart:{title:'ReactBench score vs. cost',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Pass rate',unit:'%',better:'higher'}},
  async fetch() {
 const flight=nextFlight(await fetchText(FEED));const rows:LeaderboardRow[]=[];
@@ -20,7 +20,7 @@ for(const line of flight.split('\n')){const at=line.indexOf(':');if(at<0)continu
  for(const r of d.leaderboard){if(!r.model||!Number.isFinite(r.passRate))continue;
  const harness=r.model.startsWith('cursor-')?'Cursor':r.id.includes('mini-swe-agent')?'mini-swe-agent':undefined;
  const model=r.model.replace(/^cursor-/,'');
- rows.push({model,score:r.passRate*100,setting:[revision,r.effort,r.id.split(':').slice(1).join(':')].filter(Boolean).filter((x,i,a)=>a.indexOf(x)===i).join('; '),harness,low:r.ciLo*100,high:r.ciHi*100,trials:r.trials,cost:r.avgCost,tokens:r.avgOutTokens,metrics:{ciLow:r.ciLo*100,ciHigh:r.ciHi*100,trials:r.trials,scored:r.scored,...(r.testsOnly?{testsOnly:r.testsOnly.passRate*100,testsOnlyLow:r.testsOnly.ciLo*100,testsOnlyHigh:r.testsOnly.ciHi*100}:{})}});
+ rows.push({model,score:r.passRate*100,setting:[revision,r.effort,r.id.split(':').slice(1).join(':')].filter(Boolean).filter((x,i,a)=>a.indexOf(x)===i).join(', '),harness,low:r.ciLo*100,high:r.ciHi*100,trials:r.trials,cost:r.avgCost,tokens:r.avgOutTokens,metrics:r.testsOnly?{testsOnly:r.testsOnly.passRate*100,testsOnlyLow:r.testsOnly.ciLo*100,testsOnlyHigh:r.testsOnly.ciHi*100}:undefined});
  }}}
 if(!rows.length)throw new Error('Missing ReactBench serialized results');return rows;
  },

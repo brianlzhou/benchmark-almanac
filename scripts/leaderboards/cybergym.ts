@@ -34,6 +34,9 @@ const board: Leaderboard = {
   url: 'https://www.cybergym.io/cybergym/',
   feed: `${FEED} (level1, single trial)`,
   terms: 'Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.',
+  stats: {
+    scoreX1: { name: 'Post-patch crash rate (score_x1)', unit: '%', note: 'Alternate aggregate score_x1 published in the CyberGym level 1 JSON feed.' },
+  },
   aliases: {
     'Claude Sonnet 3.7': 'claude-3-7-sonnet',
     'Gemini 2.5 Flash Preview': 'gemini-2-5-flash-apr-2025',

@@ -19,7 +19,8 @@ function values(table: string, team: string, width: number) {
   return numbers;
 }
 const board: Leaderboard = {
-  benchmark: 'climatecheck-2026', url: 'https://aclanthology.org/2026.nslp-1.6/', feed,
+  benchmark: 'climatecheck-2026', url: 'https://aclanthology.org/2026.nslp-1.6/', feed, static: 'paper',
+  headline: 'Abstract retrieval score (Score1.1), the first ranked task measure in the overview paper.',
   terms: 'ACL Anthology provides this paper under its publication terms. https://aclanthology.org/faq/copyright/',
   harnesses: 'system',
   stats: {
@@ -29,6 +30,10 @@ const board: Leaderboard = {
     precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     f1: { name: 'F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    macroPrecision: { name: 'Narrative macro precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    macroRecall: { name: 'Narrative macro recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    microF1: { name: 'Narrative micro F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    weightedF1: { name: 'Narrative weighted F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
   },
   parts: { retrieval: 'Abstract retrieval', verification: 'Claim verification', narrative: 'Disinformation narrative classification' },
   async fetch() {

@@ -19,11 +19,11 @@ const board: Leaderboard = {
     return checked(main.slice(1).map(([model, iou, mae, psnr]) => {
       const u = user.find(r => r[0] === model), m = mask.find(r => r[0] === model), e = error.find(r => r[0] === model);
       if (!u || !m || !e || m[1] !== iou) throw new Error('Incomplete results for ' + model);
-      const [meanRank, rankSpread] = u[1].split('\\pm').map(v => numberCell(v));
-      if (!Number.isFinite(rankSpread)) throw new Error('Missing rank spread');
+      const [meanRank, meanRankStd] = u[1].split('\\pm').map(v => numberCell(v));
+      if (!Number.isFinite(meanRankStd)) throw new Error('Missing rank spread');
       return { model, score: numberCell(iou), trials: 5, metrics: { mae: numberCell(mae), psnr: numberCell(psnr),
         precision: numberCell(m[2]), recall: numberCell(m[3]), f1: numberCell(m[4]),
-        maskMae: numberCell(e[1]), maskPsnr: numberCell(e[2]), meanRank, rankSpread,
+        maskMae: numberCell(e[1]), maskPsnr: numberCell(e[2]), meanRank, meanRankStd,
         firstPlacePct: numberCell(u[2].replace(/%$/, '')) } };
     }), 4);
   },

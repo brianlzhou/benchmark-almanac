@@ -58,7 +58,7 @@ const board: Leaderboard = {
       if (typeof r.with_skills_score !== 'number' || (r.version && r.version !== 'v1.1')) continue;
       const ci = r.with_skills_ci;
       const metrics: Record<string, number> = typeof ci === 'number' ? { ciLow: r.with_skills_score - ci, ciHigh: r.with_skills_score + ci } : {};
-      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain', 'without_skills_ci', 'without_selected_trials', 'num_tasks', 'expected_trials_per_mode', 'trials_per_task_target'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
+      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain', 'without_skills_ci', 'without_selected_trials'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
       rows.push({
         model: r.model.trim(),
         score: r.with_skills_score, setting: 'With Skills',
@@ -76,9 +76,7 @@ const board: Leaderboard = {
         rows.push({ model: base.model, harness: base.harness, verified: base.verified, score,
           setting: 'Without Skills', trials: r.without_selected_trials,
           low: typeof ci === 'number' ? score - ci : undefined,
-          high: typeof ci === 'number' ? score + ci : undefined,
-          metrics: Object.fromEntries(Object.entries(metrics).filter(([key]) =>
-            ['num_tasks', 'expected_trials_per_mode', 'trials_per_task_target'].includes(key))) });
+          high: typeof ci === 'number' ? score + ci : undefined });
       }
     }
     // The live site also publishes runs without a paired no-skills evaluation. Keep these

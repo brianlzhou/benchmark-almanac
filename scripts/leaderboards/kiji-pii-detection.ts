@@ -10,14 +10,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "PII Arena licenses its original publication material under MIT. Dataiku licenses the source under Apache 2.0. https://github.com/Quakeer444/pii-arena/blob/main/README.md PII Arena robots.txt allows the feed.",
   stats: {
-    gold: { name: 'Gold annotations', unit: 'count' },
     hit: { name: 'Detected annotations', unit: 'count', better: 'higher' },
     hidden: { name: 'Fully hidden annotations', unit: 'count', better: 'higher' },
     rawHidden: { name: 'Raw fully hidden annotations', unit: 'count', better: 'higher' },
     tp: { name: 'True-positive characters', unit: 'count', better: 'higher' },
     fp: { name: 'False-positive characters', unit: 'count', better: 'lower' },
     fn: { name: 'False-negative characters', unit: 'count', better: 'lower' },
-    positiveRows: { name: 'Rows with annotations', unit: 'count' },
     residualRows: { name: 'Rows with residual personally identifiable information', unit: 'count', better: 'lower' },
     detected: { name: 'Detection rate', unit: '%', better: 'higher' },
     charF1: { name: 'Character F1', unit: 'score', better: 'higher', note: 'Character F1 is stored from 0 to 1.' },
@@ -26,16 +24,17 @@ const board: Leaderboard = {
     const detectors = parseCsv(await fetchText(FEED)).filter(r => r.dataset === 'kiji-en' && r.train === 'false' && r.system.startsWith('model:'));
     if (detectors.length < 41) throw new Error('Missing Kiji detectors');
     return detectors.map(r => {
+      const gold = Number(r.gold);
+      if (!r.gold || !Number.isFinite(gold) || gold <= 0) throw new Error('Missing Kiji annotations');
       const metrics: Record<string, number> = {};
-      for (const key of ['gold','hit','hidden','rawHidden','tp','fp','fn','negativeChars','maskedNegativeChars','negativeRows','touchedNegativeRows','positiveRows','residualRows']) {
+      for (const key of ['hit','hidden','rawHidden','tp','fp','fn','residualRows']) {
         if (!r[key] || !Number.isFinite(Number(r[key]))) throw new Error('Missing Kiji count ' + key);
         metrics[key] = Number(r[key]);
       }
-      if (metrics.gold <= 0) throw new Error('Missing Kiji annotations');
-      metrics.detected = metrics.hit / metrics.gold * 100;
+      metrics.detected = metrics.hit / gold * 100;
       metrics.charF1 = 2 * metrics.tp / (2 * metrics.tp + metrics.fp + metrics.fn);
       const model = r.system.slice('model:'.length);
-      return { model, score: metrics.hidden / metrics.gold * 100, metrics, link: 'https://www.piiarena.com/detectors/' + encodeURIComponent(model) };
+      return { model, score: metrics.hidden / gold * 100, metrics, link: 'https://www.piiarena.com/detectors/' + encodeURIComponent(model) };
     });
   },
 };

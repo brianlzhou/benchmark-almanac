@@ -8,12 +8,13 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://jaaackhongggg.github.io/WorldSense";
 const board: Leaderboard = {
- benchmark: "worldsense-omnimodal", stats: { Games: { name: 'Games played', unit: 'count' } }, parts: {
+ benchmark: "worldsense-omnimodal", parts: {
   'Tech & Science': { name: 'Tech & science', group: 'Domain' },
   'Culture & Politics': { name: 'Culture & politics', group: 'Domain' },
   'Daily Life': { name: 'Daily life', group: 'Domain' },
   'Film & TV': { name: 'Film & TV', group: 'Domain' },
   Performance: { name: 'Performance', group: 'Domain' },
+  Games: { name: 'Games', group: 'Domain' },
   Sports: { name: 'Sports', group: 'Domain' },
   Music: { name: 'Music', group: 'Domain' },
 }, url: "https://jaaackhongggg.github.io/WorldSense", feed: FEED,
@@ -28,8 +29,10 @@ for(const r of t.slice(1)){
  const effort=model.match(/ (No-Thinking|Adaptive-Thinking|Thinking)$/i)?.[1];
  if(effort)model=model.slice(0,-effort.length).trim();
  if(/^[\d.]+B$/i.test(r[2].text)&&!model.toLowerCase().includes(r[2].text.toLowerCase()))model+=' '+r[2].text;
+ const sz=r[2].text.match(/^(\d+(?:\.\d+)?)B(?:-A\d+(?:\.\d+)?B)?$/i);
+ const href=r[1].html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
  const metrics:Record<string,number>={};for(let i=4;i<12;i++){const v=num(r[i].text);if(v!==undefined)metrics[t[0][i].text]=v;}
- rows.push({model,score,setting:[`modality ${r[3].text}`,effort].filter(Boolean).join('; '),metrics});
+ rows.push({model,score,setting:[`modality ${r[3].text}`,effort].filter(Boolean).join(', '),params:sz?Number(sz[1]):undefined,link:href,metrics});
 }
 if(!rows.length)throw new Error('No WorldSense results');return rows;
  },

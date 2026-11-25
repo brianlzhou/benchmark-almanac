@@ -11,7 +11,10 @@ const board: Leaderboard = {
   L4: { name: 'Level 4', group: 'Difficulty' },
 }, url: "https://internlm.github.io/OVO-S-Bench/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
-  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
+  stats: {
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+    effectiveParams: { name: 'Effective parameters', unit: 'billions' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

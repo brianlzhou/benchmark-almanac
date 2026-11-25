@@ -9,7 +9,7 @@ const header = ["Model", "Hands", "Win %", "1st", "Chip \\Delta", "\\sigma_{\\De
 const board: Leaderboard = {
   benchmark: "poker-arena", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2606.13815." ,
-  stats: { handsWon: { name: 'Hands won', unit: 'count' }, winPercent: { name: 'Win rate', unit: '%', better: 'higher' }, firstPlaceFinishes: { name: 'First place finishes', unit: 'count' }, averagePosition: { name: 'Average position', unit: 'score', better: 'lower' } },
+  stats: { handsWon: { name: 'Hands won', unit: 'count', better: 'higher' }, winPercent: { name: 'Win rate', unit: '%', better: 'higher' }, firstPlaceFinishes: { name: 'First place finishes', unit: 'count', better: 'higher' }, averagePosition: { name: 'Average position', unit: 'score', better: 'lower' } },
   aliases: {"Kimi K2 (thinking)": "kimi-k2-thinking"},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

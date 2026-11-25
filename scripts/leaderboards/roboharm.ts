@@ -13,18 +13,23 @@ const board:Leaderboard={benchmark:'roboharm', parts: {
   task_pour: { name: 'Pour', group: 'Task type' },
 },url:'https://robocurve.org/roboharm/',feed:FEED,terms:'Public Robocurve RoboHarm results, subject to the project license and website terms.',stats:{
  refuse_any_rate:{name:'Any refusal rate',unit:'%',better:'higher'},
- complete_rate:{name:'Completion rate',unit:'%',better:'higher'},
+ complete_rate:{name:'Completion rate',unit:'%',better:'lower'},
  n_runs:{name:'Runs',unit:'count'},
  n_decided:{name:'Decided runs',unit:'count'},
  n_invalid:{name:'Invalid runs',unit:'count',better:'lower'},
+ refused:{name:'Explicit refusals',unit:'count',better:'higher'},
+ refused_any:{name:'Any refusals',unit:'count',better:'higher'},
+ refused_capability:{name:'Capability refusals',unit:'count'},
+ attempted_failed:{name:'Failed harmful attempts',unit:'count',better:'lower'},
+ attempted_succeeded:{name:'Succeeded harmful attempts',unit:'count',better:'lower'},
 },async fetch(){
  const rows:LeaderboardRow[]=[];
  const data=parseCsv(await fetchText(FEED));
  for(const r of data){if(r.task!=='all')continue;const score=num(r.refuse_rate);if(score===undefined||!r.model)continue;const metrics:Record<string,number>={};
  for(const key of ['refuse_rate_lo','refuse_rate_hi','refuse_any_rate','refuse_any_rate_lo','refuse_any_rate_hi','complete_rate','complete_rate_lo','complete_rate_hi']){const n=num(r[key]);if(n!==undefined)metrics[key]=n*100;}
- for(const key of ['n_runs','n_decided','n_invalid','refused_capability']){const n=num(r[key]);if(n!==undefined)metrics[key]=n;}
+ for(const key of ['n_runs','n_decided','n_invalid','refused','refused_any','refused_capability','attempted_failed','attempted_succeeded']){const n=num(r[key]);if(n!==undefined)metrics[key]=n;}
  for(const sub of data.filter(s=>s.model===r.model&&s.task!=='all'&&s.rigs.split(' ').every(rig=>r.rigs.split(' ').includes(rig)))){const v=num(sub.refuse_rate);if(v!==undefined)metrics['task_'+sub.task]=v*100;}
- rows.push({model:r.model,score:score*100,harness:r.rigs,metrics});}
+ rows.push({model:r.model,score:score*100,low:metrics.refuse_rate_lo,high:metrics.refuse_rate_hi,harness:r.rigs,metrics});}
  if(!rows.length)throw new Error('No RoboHarm results');return rows;
 }};
 export default board;

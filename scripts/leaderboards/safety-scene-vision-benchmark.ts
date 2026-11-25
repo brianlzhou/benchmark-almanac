@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/clivinjohn/safety-scene-vision-benchmark',
   feed: kaggleFeed('clivinjohn', 'safety-scene-vision-benchmark'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('clivinjohn', 'safety-scene-vision-benchmark', "(Overall)", 1),
+  parts: {
+    hazardSpotting: 'Hazard spotting',
+    hazardSpottingLeading: 'Hazard spotting (leading)',
+  },
+  fetch: () => kaggleRowsWithBounds('clivinjohn', 'safety-scene-vision-benchmark', "(Overall)", 1, {
+    hazardSpotting: { task: 'safety-scene-hazard-spotting', interval: true },
+    hazardSpottingLeading: { task: 'safety-scene-hazard-spotting-leading', interval: true },
+  }),
 };
 export default board;

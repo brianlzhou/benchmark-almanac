@@ -11,7 +11,7 @@ import { tables, num, text } from '../lib/html.ts';
 const PAGE = 'https://ipibench.generalanalysis.com';
 const board: Leaderboard = {
   benchmark: 'ipi-bench',
-  stats: { presentedAsVerified: { name: 'Presented as verified', unit: '%', better: 'lower' }, mentionedWithoutComment: { name: 'Mentioned without comment', unit: '%', better: 'lower' }, flaggedForReview: { name: 'Flagged for review', unit: '%', better: 'lower' }, asr11: { name: 'One-query attack success rate', unit: '%', better: 'lower' }, asrIterative: { name: 'Iterative attack success rate', unit: '%', better: 'lower' }, cleanCost: { name: 'Clean-run cost', unit: 'usd', better: 'lower' }, cleanTotalTokens: { name: 'Clean-run total tokens', unit: 'tokens' } },
+  stats: { presentedAsVerified: { name: 'Presented as verified', unit: '%', better: 'lower' }, mentionedWithoutComment: { name: 'Mentioned without comment', unit: '%', better: 'lower' }, flaggedForReview: { name: 'Flagged for review', unit: '%', better: 'lower' }, notMentioned: { name: 'Not mentioned', unit: '%' }, misrepresented: { name: 'Misrepresented', unit: '%', better: 'lower' }, asr11: { name: 'One-query attack success rate', unit: '%', better: 'lower' }, asrIterative: { name: 'Iterative attack success rate', unit: '%', better: 'lower' }, cleanObjective: { name: 'Clean-run objective score', unit: '%', better: 'higher' }, cleanCost: { name: 'Clean-run cost', unit: 'usd', better: 'lower' }, cleanTotalTokens: { name: 'Clean-run total tokens', unit: 'tokens' } },
   url: PAGE,
   feed: `${PAGE} (Figure 1, One query; clean-workflow table for diagnostics)`,
   terms: 'General Analysis publishes this public research report; no separate reuse license or terms link appears on the report.',

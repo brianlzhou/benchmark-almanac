@@ -6,10 +6,8 @@ import { tables, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/moinnadeem/StereoSet/master/code/predictions.txt";
 const board: Leaderboard = {
   benchmark: "stereoset", stats: {
-    Count: { name: 'Evaluated examples count', unit: 'count' },
     'LM Score': { name: 'Language model score', unit: '%', better: 'higher', note: 'Mean likelihood of selecting related sentences over unrelated sentences.' },
     'SS Score': { name: 'Stereotype score', unit: '%', note: 'Percentage of stereotype choices among stereotype and anti-stereotype sentences. A score of 50 indicates balance.' },
-    'ICAT Score': { name: 'ICAT score', unit: '%', better: 'higher', note: 'Composite of language model quality and stereotype score, with 50 as the balanced stereotype target.' },
   }, parts: {
   intrasentence_gender: { name: 'Intrasentence gender', group: 'Category' },
   intrasentence_profession: { name: 'Intrasentence profession', group: 'Category' },
@@ -30,7 +28,7 @@ const board: Leaderboard = {
     let model="",split="",category="",metrics:Record<string,number>={};for(const line of source.split(/\r?\n/)){const start=line.match(/^Evaluating predictions\/predictions_(.+)\.json/);if(start){model=start[1];continue;}if(/^(intrasentence|intersentence|overall)$/.test(line)){split=line;category="";metrics={};continue;}if(/^\t[^\t:]+$/.test(line)){category=line.trim();metrics={};continue;}const m=line.match(/^\s+(Count|LM Score|SS Score|ICAT Score): ([\d.]+)/);if(!m)continue;metrics[m[1]]=Number(m[2]);if(m[1]==="ICAT Score")rows.push({model,score:Number(m[2]),setting:[split,category].filter(Boolean).join("; "),metrics:{...metrics}});}
     if (!rows.length) throw new Error("No stereoset score rows");
     return rows.filter(r => r.setting === 'overall').map(r => ({...r, setting:undefined,
-      metrics: {...r.metrics, ...Object.fromEntries(rows.filter(x => x.model === r.model && x !== r)
+      metrics: { ...Object.fromEntries(Object.entries(r.metrics ?? {}).filter(([k]) => k !== 'Count' && k !== 'ICAT Score')), ...Object.fromEntries(rows.filter(x => x.model === r.model && x !== r)
         .map(x => [x.setting!.replace(/; /g,'_'), x.score]))}}));
   },
 };

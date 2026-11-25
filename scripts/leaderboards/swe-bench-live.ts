@@ -18,10 +18,11 @@ interface Report {
 
 const board: Leaderboard = {
   benchmark: 'swe-bench-live',
+  harnesses: 'system',
   url: `${SITE}/`,
   feed: `${SITE}/reports-0605.jsonl (set "lite")`,
   terms: 'Static file on GitHub Pages that the page loads; robots.txt allows it and the SWE-bench-Live repository is MIT-licensed.',
-  stats: { resolved: { name: 'Resolved tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' } },
+  stats: { resolved: { name: 'Resolved tasks', unit: 'count' } },
   aliases: {
     'Claude-4.6-Opus': 'claude-opus-4-6',
     'Claude-4.8-Opus': 'claude-opus-4-8',
@@ -50,7 +51,7 @@ export async function fetchLiveRows(set = 'lite'): Promise<LeaderboardRow[]> {
       rows.push({
         model: last.replace(/\s*\([^)]*\)\s*$/, ''),
         score: (solved / r.total) * 100,
-        metrics: {resolved: solved, tasks: r.total},
+        metrics: {resolved: solved},
         setting: effort?.toLowerCase(),
         harness: parts.join(' + ') || undefined,
         date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date : undefined,

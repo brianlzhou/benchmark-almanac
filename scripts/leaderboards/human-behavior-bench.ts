@@ -10,6 +10,13 @@ const board: Leaderboard = {
   feed: kaggleFeed('rehearsals', 'human-behavior-bench'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('rehearsals', 'human-behavior-bench', 'Combined Score', 100),
+  parts: {
+    public: { name: 'Public', group: 'Split' },
+    private: { name: 'Private', group: 'Split' },
+  },
+  fetch: () => kaggleRows('rehearsals', 'human-behavior-bench', 'Combined Score', 100, {
+    public: { task: 'Public Score', scale: 100 },
+    private: { task: 'Private Score', scale: 100 },
+  }),
 };
 export default board;

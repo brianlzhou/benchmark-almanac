@@ -6,7 +6,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://research.nvidia.com/labs/amri/projects/video-fdb/leaderboard.html";
 const board: Leaderboard = {
- stats: { timingRate: { name: 'Timing rate', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+ stats: { timingRate: { name: 'Timing rate', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, generation: { name: 'Avatar generation overall score', unit: 'score', better: 'higher' } },
   benchmark: "videofdb-nvidia", parts: {
   Fluency: { name: 'Fluency', group: 'Dimension' },
   'Conv. Flow': { name: 'Conversational flow', group: 'Dimension' },

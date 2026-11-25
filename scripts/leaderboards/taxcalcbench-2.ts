@@ -21,7 +21,14 @@ interface Summary {
 
 const board: Leaderboard = {
   benchmark: 'taxcalcbench-2',
-  stats: { runtime: { name: 'Runtime', unit: 'seconds', better: 'lower' }, time: { name: 'Runtime including web search', unit: 'seconds', better: 'lower' } },
+  stats: {
+    lenient: { name: 'Correct returns lenient', unit: '%', better: 'higher' },
+    byLine: { name: 'Correct by line', unit: '%', better: 'higher' },
+    byLineLenient: { name: 'Correct by line lenient', unit: '%', better: 'higher' },
+    cases: { name: 'Returns evaluated', unit: 'count' },
+    runtime: { name: 'Runtime', unit: 'seconds', better: 'lower' },
+    time: { name: 'Runtime including web search', unit: 'seconds', better: 'lower' },
+  },
   url: TCB_PAGE,
   feed: `${TCB_FEED} (edition v2, strict)`,
   terms: TCB_TERMS,
@@ -38,7 +45,7 @@ const board: Leaderboard = {
       const counts = tests?.match(/^(\d+)×(\d+)\/(\d+)$/);
       if (!counts || !strict?.endsWith('%')) continue;
       const model = summary.find(row => row.modelId === id)?.base ?? id;
-      const metrics: Record<string, number> = { cases: Number(counts[1]), totalCases: Number(counts[3]) };
+      const metrics: Record<string, number> = { cases: Number(counts[1]) };
       for (const [key, cell] of Object.entries({ lenient, byLine, byLineLenient, runtime, time: runtime })) {
         if (Number.isFinite(parseFloat(cell))) metrics[key] = parseFloat(cell);
       }

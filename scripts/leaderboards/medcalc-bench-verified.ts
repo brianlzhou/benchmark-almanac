@@ -13,6 +13,7 @@ const rows: LeaderboardRow[] = [
 
 const board: Leaderboard = {
   benchmark: "medcalc-bench-verified",
+  static: 'paper',
   url: "https://assets.claude.com/bbd8ef16d70b7a1665f14f306ee88b53f686aa75.pdf",
   terms: "Public Anthropic system card. The asset host returns 404 for robots.txt. Credit Figure 2.21.2.A.",
   host: "Anthropic",

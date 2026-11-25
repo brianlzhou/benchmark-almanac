@@ -10,8 +10,19 @@ import { ghRaw, mdRecords, mdTables } from './big-bench-extra-hard.ts';
 const REPO = 'sylvestf/LIBERO-plus';
 const FEED = ghRaw(REPO, 'README.md');
 
+const LIBERO_PARTS = [
+  ['camera', 'Camera'],
+  ['robot', 'Robot'],
+  ['language', 'Language'],
+  ['light', 'Light'],
+  ['background', 'Background'],
+  ['noise', 'Noise'],
+  ['layout', 'Layout'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'libero-plus',
+  parts: Object.fromEntries(LIBERO_PARTS.map(([k, name]) => [k, { name, group: 'Perturbation' }])),
   url: `https://github.com/${REPO}#-libero-plus-benchmark-leaderboard`,
   feed: `${FEED} (LIBERO-Plus Benchmark Leaderboard, Total)`,
   terms: 'README table in the sylvestf/LIBERO-plus GitHub repository, which states no license; scores are cited to the LIBERO-Plus authors.',
@@ -25,7 +36,13 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of mdRecords(t)) {
       const score = Number(r.Total);
-      if (r.Model && Number.isFinite(score)) rows.push({ model: r.Model, score });
+      if (!r.Model || !Number.isFinite(score)) continue;
+      const metrics: Record<string, number> = {};
+      for (const [k, col] of LIBERO_PARTS) {
+        const v = Number(r[col]);
+        if (r[col] !== '' && Number.isFinite(v)) metrics[k] = v;
+      }
+      rows.push({ model: r.Model, score, metrics: Object.keys(metrics).length ? metrics : undefined });
     }
     return rows;
   },

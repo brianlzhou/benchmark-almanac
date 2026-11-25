@@ -10,7 +10,6 @@ const board: Leaderboard = {
   terms: 'Public results from the authors, hosted under GitHub’s terms. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service',
   stats: {
     defensesDefeated: { name: 'Defenses defeated', unit: 'count' },
-    defensesEvaluated: { name: 'Defenses evaluated', unit: 'count' },
     meanRobustAccuracy: { name: 'Mean robust accuracy', unit: '%', better: 'higher' },
   },
   aliases: { 'Sonnet 3.7': 'claude-3-7-sonnet' },
@@ -21,11 +20,11 @@ const board: Leaderboard = {
     for (const line of text.split('\n').filter(line => line.startsWith('- '))) {
       const match = /^- (.+?) attacks (\d+)% of defenses \((\d+) of (\d+)\).*?average robust accuracy to ([\d.]+)%\./.exec(line);
       if (!match) throw new Error('Changed defense result: ' + line);
-      const [, label, rate, defeated, total, accuracy] = match;
+      const [, label, rate, defeated, , accuracy] = match;
       const joint = label.endsWith(' (+o3)');
       const model = joint ? label.replace(' (+o3)', '') : label;
       rows.push({model, score: Number(rate), ...(joint ? { models: [model, 'o3'], setting: 'With o3' } : {}),
-        metrics: { defensesDefeated: Number(defeated), defensesEvaluated: Number(total), meanRobustAccuracy: Number(accuracy) }});
+        metrics: { defensesDefeated: Number(defeated), meanRobustAccuracy: Number(accuracy) }});
     }
     return checked(rows, 6);
   },

@@ -11,6 +11,7 @@ const URL = 'https://lab.einsia.ai/swe-refactor-bench/leaderboard/';
 
 const board: Leaderboard = {
   benchmark: 'swe-refactor-bench',
+  harnesses: 'system',
   url: URL,
   feed: `${URL} (ranking tables, Score)`,
   terms: 'Static public page; robots.txt allows all paths and the site publishes no terms.',
@@ -21,7 +22,6 @@ const board: Leaderboard = {
     accepted: { name: 'Accepted runs', unit: 'count' },
     blind: { name: 'Blind runs', unit: 'count' },
     broken: { name: 'Broken runs', unit: 'count' },
-    runs: { name: 'Runs', unit: 'count' },
   },
   async fetch() {
     const source = await fetchText(URL);
@@ -40,7 +40,7 @@ const board: Leaderboard = {
     }
     for(const m of source.matchAll(/title="([^"·]+) · ([^"—]+) — score ([\d.]+), (\d+) accepted \/ (\d+) broken \/ (\d+) blind of (\d+) runs, \$([\d.]+) per task"/g)) {
       const base=rows.find(r=>r.model===m[1]);if(!base)throw new Error(`Unknown configuration model ${m[1]}`);
-      rows.push({model:m[1],score:Number(m[3]),setting:m[2],harness:base.harness,cost:Number(m[8]),metrics:{accepted:Number(m[4]),broken:Number(m[5]),blind:Number(m[6]),runs:Number(m[7])}});
+      rows.push({model:m[1],score:Number(m[3]),setting:m[2],harness:base.harness,cost:Number(m[8]),metrics:{accepted:Number(m[4]),broken:Number(m[5]),blind:Number(m[6])}});
     }
     return rows;
   },

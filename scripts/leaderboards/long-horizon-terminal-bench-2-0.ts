@@ -10,6 +10,10 @@ const FEED = 'https://raw.githubusercontent.com/zli12321/LHTB/main/assets/lhtb2_
 
 const board: Leaderboard = {
   benchmark: 'long-horizon-terminal-bench-2-0',
+  parts: {
+    original: { name: 'Original tasks', group: 'Task set' },
+    newTasks: { name: 'New tasks', group: 'Task set' },
+  },
   url: 'https://github.com/zli12321/LHTB#lhtb-20-results-october-2026',
   feed: FEED,
   terms: 'CSV in the zli12321/LHTB repository, licensed Apache-2.0.',
@@ -20,10 +24,29 @@ const board: Leaderboard = {
   async fetch() {
     const cells = parseCsv(await fetchText(FEED));
     const tasks = new Set(cells.map((c) => c.task));
-    const sums = new Map<string, number>();
-    for (const c of cells) sums.set(c.model, (sums.get(c.model) ?? 0) + (Number(c.reward) || 0));
+    const origTasks = new Set(cells.filter((c) => c.task_set === 'original').map((c) => c.task));
+    const newTaskSet = new Set(cells.filter((c) => c.task_set === 'new').map((c) => c.task));
+    const sums = new Map<string, { all: number; orig: number; added: number }>();
+    for (const c of cells) {
+      const e = sums.get(c.model) ?? { all: 0, orig: 0, added: 0 };
+      const r = Number(c.reward) || 0;
+      e.all += r;
+      if (c.task_set === 'original') e.orig += r;
+      else if (c.task_set === 'new') e.added += r;
+      sums.set(c.model, e);
+    }
     const rows: LeaderboardRow[] = [];
-    for (const [model, sum] of sums) rows.push({ model, score: (100 * sum) / tasks.size });
+    for (const [model, s] of sums) {
+      const metrics: Record<string, number> = {};
+      if (origTasks.size) metrics.original = Number(((100 * s.orig) / origTasks.size).toFixed(2));
+      if (newTaskSet.size) metrics.newTasks = Number(((100 * s.added) / newTaskSet.size).toFixed(2));
+      rows.push({
+        model,
+        score: (100 * s.all) / tasks.size,
+        trials: 1,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
+    }
     if (tasks.size < 70) throw new Error(`only ${tasks.size} tasks in lhtb2_results.csv`);
     return rows;
   },

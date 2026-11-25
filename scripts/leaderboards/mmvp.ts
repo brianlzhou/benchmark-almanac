@@ -43,6 +43,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "mmvp",
+  static: 'paper',
   url: "https://arxiv.org/abs/2401.06209",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
 export function kilometerBoard(benchmark:string,split:number):Leaderboard {
  const feed=`https://eval.ai/api/jobs/challenge_phase_split/${split}/leaderboard/?page_size=1000&order_by=Top-1`;
- return {benchmark,url:'https://eval.ai/web/challenges/challenge-page/2707/leaderboard',feed,
+ return {benchmark,verified:'Verified by the EvalAI challenge host.',url:'https://eval.ai/web/challenges/challenge-page/2707/leaderboard',feed,
   terms:'EvalAI publicly serves the challenge leaderboard. The Almanac credits EvalAI and the Perception Test organizers and links their board.',
   async fetch():Promise<LeaderboardRow[]>{
    let next:string|null=feed;const seen=new Set<string>();const rows:LeaderboardRow[]=[];
@@ -20,7 +20,7 @@ export function kilometerBoard(benchmark:string,split:number):Leaderboard {
      const mode=metadata.find((m:any)=>m.name==='evaluation_mode')?.value ?? (typeof r.submission__submission_metadata?.evaluation_mode==='string'?r.submission__submission_metadata.evaluation_mode:undefined);
      const team=r.submission__participant_team__team_name;
      const method=named||r.submission__method_name;
-     rows.push({model:method?`${team} / ${method}`:team,score:score*100,harness:team,submitter:team,setting:[mode,`submission ${r.submission__id}`].filter(Boolean).join('; '),date:r.submission__submitted_at?.slice(0,10),metrics:{hostVerified:r.submission__is_verified_by_host?1:0,baseline:r.submission__is_baseline?1:0}});
+     rows.push({model:method?`${team} / ${method}`:team,score:score*100,harness:team,submitter:team,setting:[mode,`submission ${r.submission__id}`].filter(Boolean).join(', '),date:r.submission__submitted_at?.slice(0,10),verified:Boolean(r.submission__is_verified_by_host)});
     }
     next=d.next;if(next)await new Promise(r=>setTimeout(r,1100));
    }

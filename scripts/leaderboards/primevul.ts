@@ -8,7 +8,7 @@ const feed = 'https://arxiv.org/html/2403.18624';
 const board: Leaderboard = {
   benchmark: 'primevul', static: 'paper', url: 'https://arxiv.org/abs/2403.18624', feed, terms: PAPER_TERMS,
   aliases: { StarCoder2: 'starcoder-2-7b' },
-  stats: { F1: { name: 'F1 score', unit: '%', better: 'higher' }, 'VD-S': { name: 'Vulnerability detection score', unit: '%', better: 'higher' }, 'P-C': { name: 'Precision on vulnerable code', unit: '%', better: 'higher' }, 'P-V': { name: 'Precision on vulnerable functions', unit: '%', better: 'higher' }, 'P-B': { name: 'Precision on vulnerable blocks', unit: '%', better: 'higher' }, 'P-R': { name: 'Precision on vulnerable repositories', unit: '%', better: 'higher' } },
+  stats: { F1: { name: 'F1 score', unit: '%', better: 'higher' }, 'VD-S': { name: 'Vulnerability detection score', unit: '%', better: 'lower', note: 'False negative rate at a fixed false positive rate threshold.' }, 'P-C': { name: 'Pair-wise correct prediction', unit: '%', better: 'higher' }, 'P-V': { name: 'Pair-wise vulnerable prediction', unit: '%', better: 'lower' }, 'P-B': { name: 'Pair-wise benign prediction', unit: '%', better: 'lower' }, 'P-R': { name: 'Pair-wise reversed prediction', unit: '%', better: 'lower' } },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

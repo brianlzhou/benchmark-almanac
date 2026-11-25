@@ -26,12 +26,12 @@ const board: Leaderboard = {
     posthocRecall: { name: 'Posthoc recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     posthocAUROC: { name: 'Posthoc area under ROC curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     posthocAUPRC: { name: 'Posthoc area under precision-recall curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
-    sourcedCount: { name: 'Sourced examples', unit: 'count' },
     sourcedAccuracy: { name: 'Sourced accuracy', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     sourcedPrecision: { name: 'Sourced precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     sourcedRecall: { name: 'Sourced recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     sourcedAUROC: { name: 'Sourced area under ROC curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     sourcedAUPRC: { name: 'Sourced area under precision-recall curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    ...Object.fromEntries(Object.entries(categories).map(([key, label]) => [key + 'AUPRC', { name: label + ' area under precision-recall curve', unit: 'score' as const, better: 'higher' as const, note: 'Reported from 0 to 1.' }])),
   },
   parts: { posthoc: 'Posthoc detection', sourced: 'Detection with sources', ...categories },
   async fetch() {
@@ -49,7 +49,7 @@ const board: Leaderboard = {
         const [accuracy, precision, recall, f1, auroc, auprc] = values;
         const row = rows.get(key) ?? { model: identities[key], submitter: team, score: f1, metrics: {} };
         if (part === 'sourced' && !rows.has(key)) continue;
-        Object.assign(row.metrics!, { [part]: f1, [part+'Count']: Number(count.replaceAll(',', '')),
+        Object.assign(row.metrics!, { [part]: f1, ...(part === 'posthoc' ? { posthocCount: Number(count.replaceAll(',', '')) } : {}),
           [part+'Accuracy']: accuracy, [part+'Precision']: precision, [part+'Recall']: recall,
           [part+'AUROC']: auroc, [part+'AUPRC']: auprc });
         rows.set(key, row);

@@ -12,8 +12,7 @@ const board: Leaderboard = {
   stats: {
     haiku: { name: 'Claude Haiku judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
     gemini: { name: 'Gemini judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
-    gpt41: { name: 'Generative pre-trained transformer 4.1 judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
-    prompts: { name: 'Prompts', unit: 'count' },
+    gpt41: { name: 'GPT-4.1 judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
   },
   async fetch() {
     const judges = ['claude-haiku-4-5-20251001','gemini-2.5-flash','gpt-4.1-2025-04-14'];
@@ -30,7 +29,7 @@ const board: Leaderboard = {
     return [...models].map(([model,scores]) => {
       if (scores.size !== 3) throw new Error('Missing judge for ' + model);
       const [haiku,gemini,gpt41] = judges.map(j=>scores.get(j)!);
-      return { model, score: (haiku + gemini + gpt41)/3, metrics: { haiku, gemini, gpt41, prompts: 610 } };
+      return { model, score: (haiku + gemini + gpt41)/3, metrics: { haiku, gemini, gpt41 } };
     });
   },
 };

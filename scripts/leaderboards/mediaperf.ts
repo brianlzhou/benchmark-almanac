@@ -35,7 +35,7 @@ const mediaStatDefinitions: Record<string, { name: string; unit: string; better?
   inferenceHoursRounds5: { name: 'Inference time for round 5', unit: 'hours', better: 'lower' },
 };
 const mediaTaskFields: Record<string, string[]> = {
-  t1: ['precision', 'recall', 'f1', 'preprocessingCost', 'inferenceCost', 'totalCost', 'preprocessingHours', 'inferenceHours', 'totalLatencyHours', 'throughput', 'ingestionCost'],
+  t1: ['precision', 'recall', 'f1', 'preprocessingCost', 'inferenceCost', 'totalCost', 'costPerHour', 'preprocessingHours', 'inferenceHours', 'totalLatencyHours', 'throughput', 'ingestionCost'],
   t2: ['precision', 'recall', 'f1', 'preprocessingCost', 'inferenceCost', 'totalCost', 'costPerHour', 'preprocessingHours', 'inferenceHours', 'totalLatencyHours', 'throughput', 'ingestionCost'],
   t3: ['scoreMean', 'scoreMedian', 'preprocessingCost', 'inferenceCost', 'totalCost', 'costPerHour', 'preprocessingHours', 'inferenceHours', 'totalLatencyHours', 'throughput', 'ingestionCost'],
   t4: ['preprocessingCost', 'inferenceCostRounds1', 'inferenceCostRounds2', 'inferenceCostRounds3', 'inferenceCostRounds4', 'inferenceCostRounds5', 'totalCost', 'preprocessingHours', 'inferenceHoursRounds1', 'inferenceHoursRounds2', 'inferenceHoursRounds3', 'inferenceHoursRounds4', 'inferenceHoursRounds5', 'totalLatencyHours', 'ingestionCost'],
@@ -47,7 +47,7 @@ const mediaStats = Object.fromEntries(Object.entries(mediaTaskFields).flatMap(([
 })));
 
 const board: Leaderboard = {
-  benchmark: 'mediaperf', url: page, feed: page + ' (current /assets/index-*.js bundle)',
+  benchmark: 'mediaperf', url: page, feed: page + ' (current /assets/index-*.js bundle)', costPer: 'run',
   terms: 'MediaPerf allows the leaderboard in robots.txt and reserves rights without a separate score license.',
   headline: 'The default Video Tagging table ranks models by macro F1 on the 68 core tags.',
   aliases: { 'Nova Lite v2.0': 'nova-2-lite', 'Nova Pro v1.0': 'amazon-nova-pro',
@@ -74,7 +74,8 @@ const board: Leaderboard = {
       for (const entry of task.models) {
         const primary = entry[task.id === 't3' ? 'scoreMean' : task.id === 't4' ? 'totalCost' : 'f1'];
         if (!entry.model || typeof primary !== 'number') throw new Error('Missing MediaPerf result on ' + task.name);
-        const row = task.id === 't1' ? { model: entry.model, score: primary, setting: entry.model.endsWith('FP8') ? 'FP8' : undefined, open: entry.access === 'open', metrics: {} } : rows.get(entry.model);
+        const cost = task.id === 't1' && typeof entry.totalCost === 'number' && Number.isFinite(entry.totalCost) ? entry.totalCost : undefined;
+        const row = task.id === 't1' ? { model: entry.model, score: primary, setting: entry.model.endsWith('FP8') ? 'FP8' : undefined, open: entry.access === 'open', cost, metrics: {} } : rows.get(entry.model);
         if (!row) throw new Error('No core score for ' + entry.model);
         const metrics: Record<string, number> = row.metrics!;
         if (task.id !== 't4') metrics[task.id] = primary;

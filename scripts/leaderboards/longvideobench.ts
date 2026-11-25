@@ -7,7 +7,6 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://longvideobench.github.io/";
 const board: Leaderboard = {
  benchmark: "longvideobench",
- stats: { maxFrames: { name: 'Maximum frames', unit: 'count' } },
  parts: {
    'Test 8s-15s': { name: 'Test 8 to 15 seconds', group: 'Split' },
    'Test 15s-60s': { name: 'Test 15 to 60 seconds', group: 'Split' },
@@ -31,7 +30,7 @@ const board: Leaderboard = {
     const size = model.match(/[- ](\d+(?:\.\d+)?)B\b/i);
     return {model,open:r[2]?.text === 'Yes' ? true : r[2]?.text === 'No' ? false : undefined,
       params:size ? Number(size[1]) : undefined,score:num(r[3].text)!,date,setting:frames?`max_frames=${frames[1]}`:undefined,
-      metrics:{...(frames ? { maxFrames: Number(frames[1]) } : {}), ...Object.fromEntries([4,5,6,7,8].filter(i=>num(r[i]?.text)!==undefined).map(i=>[t[0][i].text,num(r[i].text)!]))}};
+      metrics:Object.fromEntries([4,5,6,7,8].filter(i=>num(r[i]?.text)!==undefined).map(i=>[t[0][i].text,num(r[i].text)!]))};
   });
  },
 };

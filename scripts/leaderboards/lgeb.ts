@@ -9,6 +9,12 @@ const board: Leaderboard = {
   benchmark: 'lgeb', url: 'https://github.com/CLUEbenchmark/LGEB', feed,
   terms: 'The CLUE team publishes the results with attribution to UniLM. https://github.com/CLUEbenchmark/LGEB',
   parts: { gigaword: 'Gigaword ROUGE-1', squad: 'SQuAD BLEU-4' },
+  stats: {
+    gigawordRouge2: { name: 'Gigaword ROUGE-2', unit: 'score', better: 'higher' },
+    gigawordRougeL: { name: 'Gigaword ROUGE-L', unit: 'score', better: 'higher' },
+    squadMeteor: { name: 'SQuAD METEOR', unit: 'score', better: 'higher' },
+    squadRougeL: { name: 'SQuAD ROUGE-L', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const readme = await fetchText(feed);
     const [summary, questions] = readme.split('### Question Generation');

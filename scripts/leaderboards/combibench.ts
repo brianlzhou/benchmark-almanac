@@ -16,8 +16,11 @@ const board: Leaderboard = {
     const html=await fetchText(FEED);const out:LeaderboardRow[]=[];
     for(const [marker,setting] of [['const renderLeaderboard =','with solution'],['const renderWithoutSolution =','without solution']]) {
       const section=html.slice(html.indexOf(marker)); const start=section.indexOf('[',section.indexOf('const leaderboardData ='));
-      const data=jsLiteral<{model:string,solved:number,compute:string}[]>(section,start);
-      for(const r of data)out.push({model:r.model,score:r.solved,setting:`${setting}, ${r.compute}`});
+      const data=jsLiteral<{model:string,solved:number,compute:string,url?:string}[]>(section,start);
+      for(const r of data){
+        const tr=r.compute?.match(/pass@(\d+)/i);
+        out.push({model:r.model,score:r.solved,setting:`${setting}, ${r.compute}`,trials:tr?Number(tr[1]):undefined,link:r.url&&/^https?:\/\//.test(r.url)?r.url:undefined});
+      }
     }
     if(out.length<10)throw new Error('CombiBench arrays missing');return out;
   },

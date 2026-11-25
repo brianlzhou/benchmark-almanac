@@ -13,11 +13,17 @@ const specs = [
   { header: 'AR', group: 'Robustness', names: ['Adversarial robustness', 'Audio quality variation', 'Background conversation', 'Environmental sound', 'Multiple speakers', 'Noise interference'], unit: 'score' },
   { header: 'IVB', group: 'Authentication', names: ['Identity verification bypass', 'Hybrid spoofing', 'Voice cloning spoofing'], unit: '%' },
 ] as const;
+const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
 const parts: Record<string, BoardPart> = {
   stereotypes: { name: 'Social stereotypes', group: 'Fairness' },
   decision: { name: 'Decision-making', group: 'Fairness' },
+  ...Object.fromEntries(specs.flatMap(spec => spec.names.flatMap(name =>
+    (name === 'Voice cloning spoofing' ? [''] : ['GPT-4o', 'Qwen3']).map(judge => {
+      const label = judge ? name + ' (' + judge + ')' : name;
+      return [key(spec.group + label), { name: label, group: spec.group, unit: spec.unit }];
+    }),
+  ))),
 };
-const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
 const value = (s: string) => numberCell(s.split(' ')[0]);
 const board: Leaderboard = {
   benchmark: 'audiotrust', url: feed, feed, static: 'paper', parts,
@@ -47,7 +53,6 @@ const board: Leaderboard = {
           judges.forEach((judge, j) => {
             const label = judge ? name + ' (' + judge + ')' : name;
             const metric = key(spec.group + label);
-            parts[metric] = { name: label, group: spec.group, unit: spec.unit };
             row.metrics![metric] = value(values[j]);
           });
         });

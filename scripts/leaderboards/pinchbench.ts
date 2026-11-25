@@ -4,7 +4,7 @@
 // The reader also keeps submission counts, weight access and best-run statistics. Execution time
 // per run is metrics.time (seconds), which the page's "Success Rate vs. Execution Time" scatter plots.
 import type { Leaderboard } from './types.ts';
-import { PINCH_ALIASES, PINCH_TERMS, pinchPage, pinchRows } from './pinchbench-2.ts';
+import { PINCH_ALIASES, PINCH_STATS, PINCH_TERMS, pinchPage, pinchRows } from './pinchbench-2.ts';
 
 const VERSION = '1.2.1';
 
@@ -15,6 +15,7 @@ const board: Leaderboard = {
   terms: PINCH_TERMS,
   aliases: PINCH_ALIASES,
   costPer: 'run',
+  stats: PINCH_STATS,
   chart: {
     title: 'Success Rate vs. Execution Time',
     note: 'Each point is one model: its average score against its average execution time for a full run, over its official submissions.',

@@ -8,7 +8,8 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://aclanthology.org/2026.arabicnlp-sharedtasks.161.pdf';
 const board: Leaderboard = {
-  benchmark: 'daleel-2026', url: 'https://aclanthology.org/2026.arabicnlp-sharedtasks.161/', feed,
+  benchmark: 'daleel-2026', url: 'https://aclanthology.org/2026.arabicnlp-sharedtasks.161/', feed, static: 'paper',
+  headline: 'Plain mean of the Paragraph Classification and ADU Detection closed-track F1 scores.',
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
   harnesses: 'system', parts: { classification: 'Paragraph Classification', detection: 'ADU Detection' },
   async fetch() {

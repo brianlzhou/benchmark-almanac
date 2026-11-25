@@ -10,12 +10,37 @@ const board: Leaderboard = {
   benchmark: "clawbench-v2",
   url: "https://claw-bench.com/leaderboard",
   feed: FEED,
-  terms: "Public results published by the benchmark authors at claw-bench.com; retain source attribution and follow the upstream terms.",
+  terms: "Public results published by the benchmark authors at claw-bench.com. Retain source attribution and follow the upstream terms.",
+  stats: {
+    intercepted: { name: 'Intercepted rate', unit: '%', better: 'higher' },
+    strictReward: { name: 'Strict reward', unit: '%', better: 'higher' },
+  },
   aliases: {},
-  
   async fetch() {
-    const out=await clawRows('v2');const ts=tables(await fetchText(FEED));
-    for(const t of ts){if(!t[0]?.some(c=>c.text==='Reward'))continue;for(const r of t.slice(1)){if(r[2]?.text!=='openclaw'||!r[7]?.text.endsWith('/ 130'))continue;const score=num(r[3].text);if(score===undefined||out.some(v=>v.harness==='openclaw'&&v.model===r[1].text))continue;const cost=num(r[6].text);out.push({model:r[1].text,score,harness:'openclaw',cost,metrics:{intercepted:num(r[4].text)!,strictReward:num(r[5].text)!}});}}
+    const out = await clawRows('v2');
+    const ts = tables(await fetchText(FEED));
+    for (const t of ts) {
+      if (!t[0]?.some(c => c.text === 'Reward')) continue;
+      for (const r of t.slice(1)) {
+        if (!r[7]?.text.endsWith('/ 130')) continue;
+        const harness = r[2]?.text;
+        const model = r[1]?.text;
+        const intercepted = num(r[4]?.text);
+        const strictReward = num(r[5]?.text);
+        const existing = out.find(v => v.harness === harness && v.model === model);
+        if (existing) {
+          if (intercepted !== undefined || strictReward !== undefined) {
+            existing.metrics = { ...existing.metrics, ...(intercepted !== undefined ? { intercepted } : {}), ...(strictReward !== undefined ? { strictReward } : {}) };
+          }
+          continue;
+        }
+        if (harness !== 'openclaw') continue;
+        const score = num(r[3].text);
+        if (score === undefined) continue;
+        const cost = num(r[6].text);
+        out.push({ model, score, harness: 'openclaw', cost, metrics: { ...(intercepted !== undefined ? { intercepted } : {}), ...(strictReward !== undefined ? { strictReward } : {}) } });
+      }
+    }
     return out;
   },
 };

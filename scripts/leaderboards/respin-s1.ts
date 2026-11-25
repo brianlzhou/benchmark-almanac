@@ -3,12 +3,27 @@ import type { Leaderboard } from './types.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
 
 const feed = "https://papers.nips.cc/paper_files/paper/2025/file/d88714d4f2c1e826d33d6c1eb1497ec9-Paper-Datasets_and_Benchmarks_Track.pdf";
+const LANGS = [
+  ['bh', 'Bhojpuri', 3], ['bn', 'Bengali', 5], ['ch', 'Chhattisgarhi', 4], ['hi', 'Hindi', 5],
+  ['kn', 'Kannada', 5], ['mg', 'Magahi', 4], ['mr', 'Marathi', 4], ['mt', 'Maithili', 4], ['te', 'Telugu', 4],
+] as const;
+const parts: NonNullable<Leaderboard['parts']> = {
+  cer: { name: 'Average CER', unit: '%', better: 'lower' },
+  ...Object.fromEntries(LANGS.flatMap(([code, lang, dialects]) => [
+    [code + '_CER', { name: lang + ' CER', group: lang, unit: '%', better: 'lower' as const }],
+    [code + '_WER', { name: lang + ' WER', group: lang, unit: '%', better: 'lower' as const }],
+    ...Array.from({ length: dialects }, (_, idx) => 'D' + (idx + 1)).flatMap(d => [
+      [code + '_' + d + '_CER', { name: lang + ' ' + d + ' CER', group: lang, unit: '%', better: 'lower' as const }],
+      [code + '_' + d + '_WER', { name: lang + ' ' + d + ' WER', group: lang, unit: '%', better: 'lower' as const }],
+    ]),
+  ])),
+};
 const board: Leaderboard = {
   benchmark: "respin-s1", static: 'paper',
   url: "https://papers.nips.cc/paper_files/paper/2025/file/d88714d4f2c1e826d33d6c1eb1497ec9-Paper-Datasets_and_Benchmarks_Track.pdf",
   feed,
   terms: "Tables 18 and 19 report test scores per language and dialect. Keep adapted checkpoints separate from externally trained checkpoints. No score reuse terms found. The paper host returns 404 for robots.txt.",
-  parts: { cer: 'Average CER' },
+  parts,
   async fetch() {
     const paper = await pdfText(feed);
     const langs = ['bh','bn','ch','hi','kn','mg','mr','mt','te'];
@@ -25,7 +40,6 @@ const board: Leaderboard = {
       const metrics: Record<string,number> = { cer:Number(raw[9]) };
       for (const [i,lang] of langs.entries()) for (const [measure,offset] of [['CER',0],['WER',10]] as const) {
         const key = lang + '_' + measure;
-        board.parts![key] = lang + ' ' + measure;
         metrics[key] = Number(raw[offset+i]);
       }
       rows.push({ model, setting, score:Number(raw[19]), metrics });
@@ -47,7 +61,6 @@ const board: Leaderboard = {
       for (const [i,lang] of langs.entries()) for (const [measure,value] of [['CER',d[i+1]],['WER',d[d.length-9+i]]] as const) {
         if (value === '-' || !Number.isFinite(Number(value))) continue;
         const key = lang + '_' + d[0] + '_' + measure;
-        board.parts![key] = lang + ' ' + d[0] + ' ' + measure;
         current.metrics[key] = Number(value);
       }
     }

@@ -34,6 +34,10 @@ const board: Leaderboard = {
   benchmark: 'physiome-ode', url: 'https://kloetergensc.github.io/Physiome-ODE/', feed,
   terms: 'The project uses Apache-2.0 at https://github.com/kloetergensc/Physiome-ODE/blob/main/LICENSE.',
   headline: 'The leaderboard ranks all IMTS models by Elo from pairwise comparisons of forecast error. Higher Elo is better.',
+  stats: {
+    wins: { name: 'Datasets won', unit: 'count', better: 'higher' },
+    improvability: { name: 'Improvability', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<{models: {name: string}[]; datasets: Dataset[]; anchor: string}>(feed);
     const names = data.models.map(m => m.name);
@@ -56,14 +60,13 @@ const board: Leaderboard = {
     board.parts = Object.fromEntries(data.datasets.map(d => [d.id, {name: d.id + ' (' + d.model + ')', better: 'lower' as const, unit: 'score' as const}]));
     const rows = names.map((model, i) => {
       const sampled = bootstrap.map(b => b[i]).sort((a, b) => a - b);
-      const metrics: Record<string, number> = { wins: 0, averageRank: 0, improvability: 0 };
+      const metrics: Record<string, number> = { wins: 0, improvability: 0 };
       data.datasets.forEach((d, j) => {
         const [mse, std] = d.res[model];
         metrics[d.id] = mse;
         metrics[d.id + 'Std'] = std;
         const best = Math.min(...errors[j]);
         if (mse === best) metrics.wins++;
-        metrics.averageRank += (1 + errors[j].filter(x => x < mse).length) / errors.length;
         metrics.improvability += 100 * (mse - best) / mse / errors.length;
       });
       return {model, score: elo[i], low: sampled[7], high: sampled[292], setting: 'All IMTS models', metrics};

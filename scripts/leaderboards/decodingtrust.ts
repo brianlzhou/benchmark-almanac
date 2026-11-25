@@ -10,11 +10,23 @@ import { num } from '../lib/html.ts';
 
 const FEED = 'https://decodingtrust.github.io/leaderboard/static/csv/leaderboard.csv';
 
+const PERSPECTIVES: [string, string, string][] = [
+  ['Toxicity', 'toxicity', 'Toxicity'],
+  ['Stereotype Bias', 'stereotypeBias', 'Stereotype bias'],
+  ['Adversarial Robustness', 'adversarialRobustness', 'Adversarial robustness'],
+  ['Out-of-Distribution Robustness', 'oodRobustness', 'Out-of-distribution robustness'],
+  ['Robustness to Adversarial Demonstrations', 'advDemonstrations', 'Robustness to adversarial demonstrations'],
+  ['Privacy', 'privacy', 'Privacy'],
+  ['Machine Ethics', 'machineEthics', 'Machine ethics'],
+  ['Fairness', 'fairness', 'Fairness'],
+];
+
 const board: Leaderboard = {
   benchmark: 'decodingtrust',
   url: 'https://decodingtrust.github.io/leaderboard/',
   feed: `${FEED} (Average)`,
   terms: 'Static CSV on the DecodingTrust GitHub Pages site; the DecodingTrust repository is CC BY-SA 4.0.',
+  parts: Object.fromEntries(PERSPECTIVES.map(([, k, name]) => [k, { name, unit: 'score' as const }])),
   aliases: {
     'GPT-3.5': 'gpt-3-5-turbo-mar-2023',
     'GPT-4': 'gpt-4-mar-2023',
@@ -26,7 +38,16 @@ const board: Leaderboard = {
     for (const r of parseCsv(await fetchText(FEED))) {
       const score = num(r.Average);
       if (!r.Model || score === undefined) continue;
-      rows.push({ model: /^(Claude|MPT|Vicuna|Falcon|RedPajama|Alpaca)$/.test(r.Model) ? `${r.Model} (snapshot unspecified)` : r.Model, score });
+      const metrics: Record<string, number> = {};
+      for (const [col, k] of PERSPECTIVES) {
+        const v = num(r[col]);
+        if (v !== undefined) metrics[k] = v;
+      }
+      rows.push({
+        model: /^(Claude|MPT|Vicuna|Falcon|RedPajama|Alpaca)$/.test(r.Model) ? `${r.Model} (snapshot unspecified)` : r.Model,
+        score,
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     return rows;
   },

@@ -11,7 +11,6 @@ const board: Leaderboard = {
   terms: "The repository uses BSD 3-Clause. The file contains 42 deployments of 41 named models. https://github.com/AadarshSingh0/HEPToolBench/blob/main/LICENSE GitHub requests a one-second crawl delay.",
   stats: {
     passes: { name: 'Tasks passed', unit: 'count' },
-    tasks: { name: 'Tasks evaluated', unit: 'count' },
     meanScore: { name: 'Mean score', unit: 'score', better: 'higher' },
   },
   async fetch() {
@@ -22,7 +21,7 @@ const board: Leaderboard = {
       if (!r.display || !r.deployment || !required.every(k => r[k]?.trim() && Number.isFinite(Number(r[k])))) throw new Error('Incomplete HEPToolBench result');
       return { model: r.display, setting: [r.provider, r.deployment].filter(Boolean).join(' / '), score: Number(r.pass_fraction) * 100,
         low: Number(r.ci_lo) * 100, high: Number(r.ci_hi) * 100, params: r.total_b ? Number(r.total_b) : undefined,
-        open: r.weights === 'open', metrics: { passes: Number(r.passes), tasks: Number(r.tasks), meanScore: Number(r.mean_score) } };
+        open: r.weights === 'open', metrics: { passes: Number(r.passes), meanScore: Number(r.mean_score) } };
     });
   },
 };

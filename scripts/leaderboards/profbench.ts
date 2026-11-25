@@ -26,6 +26,10 @@ const board: Leaderboard = {
   feed: `${FEED} (Overall)`,
   terms: 'JSON lines file in the nvidia/ProfBench Hugging Face Space, licensed MIT.',
   parts: Object.fromEntries([...domains, ...dimensions].map(name => [name, { name, group: domains.includes(name) ? 'Domain' : 'Rubric' }])),
+  stats: {
+    'Input Tokens': { name: 'Input tokens per report', unit: 'tokens' },
+    'Response Characters': { name: 'Response characters per report', unit: 'count' },
+  },
   costPer: 'run',
   // keys without the vendor prefix, so they also apply after the resolver splits off "(Thinking)"
   aliases: {

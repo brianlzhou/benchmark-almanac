@@ -28,6 +28,7 @@ const board: Leaderboard = {
   stats: {
     ece: { name: 'Expected calibration error', unit: 'score', better: 'lower', note: 'Calibration error where 0 is perfect.' },
     avgReturn: { name: 'Average return', unit: '%', better: 'higher', note: 'Simulated betting return, with 100 as break-even.' },
+    events: { name: 'Events', unit: 'count' },
   },
   aliases: {
     'Hunyuan Hy3': 'tencent-hy3',
@@ -35,15 +36,15 @@ const board: Leaderboard = {
   async fetch() {
     const html = await fetchText(URL);
     const rows = readTable(html, { model: /^Model$/i, score: /^Arena score/i, harness: /^Type$/i, skip: /^Market$/i, name });
-    // the same table's ECE and Avg Return, by model and type
+    // the same table's ECE, Avg Return and Events, by model and type
     const t = tables(html).find((r) => r[0]?.some((c) => /^Model$/i.test(c.text)) && r[0]?.some((c) => /^Arena score/i.test(c.text)));
     const head = t?.[0].map((c) => c.text) ?? [];
-    const [iModel, iType, iEce, iRet] = [/^Model$/i, /^Type$/i, /^ECE\b/i, /^Avg Return\b/i].map((re) => head.findIndex((h) => re.test(h)));
+    const [iModel, iType, iEce, iRet, iEvents] = [/^Model$/i, /^Type$/i, /^ECE\b/i, /^Avg Return\b/i, /^Events\b/i].map((re) => head.findIndex((h) => re.test(h)));
     const extra = new Map<string, Record<string, number>>();
     for (const r of (t ?? []).slice(1)) {
       if (!r[iModel]) continue;
-      const [ece, ret] = [num(r[iEce]?.text), num(r[iRet]?.text)];
-      const m = { ...(ece !== undefined ? { ece } : {}), ...(ret !== undefined ? { avgReturn: ret } : {}) };
+      const [ece, ret, events] = [num(r[iEce]?.text), num(r[iRet]?.text), iEvents >= 0 ? num(r[iEvents]?.text) : undefined];
+      const m = { ...(ece !== undefined ? { ece } : {}), ...(ret !== undefined ? { avgReturn: ret } : {}), ...(events !== undefined ? { events } : {}) };
       if (Object.keys(m).length) extra.set(`${name(r[iModel]).trim()}|${r[iType]?.text ?? ''}`, m);
     }
     for (const r of rows) {

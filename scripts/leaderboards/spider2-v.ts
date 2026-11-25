@@ -19,6 +19,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at spider2-v.github.io; retain source attribution and follow the upstream terms.",
   aliases: {"GPT-4V (1106)": "gpt-4-turbo-nov-2023", "GPT-4o (0513)": "gpt-4o-may-2024"},
+  stats: {
+    inputTokens: { name: 'Input tokens per task', unit: 'tokens', better: 'lower' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   
   async fetch() {
     const html=(await fetchText(FEED)).replace(/<!--[\s\S]*?-->/g,'');const out:LeaderboardRow[]=[];

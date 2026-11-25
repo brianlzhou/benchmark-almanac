@@ -32,7 +32,7 @@ const board: Leaderboard = {
         const score = Number(raw[1]);
         scores.push(score);
         metrics[part] = score;
-        metrics[part + 'CIHalfWidth'] = Number(raw[2]);
+        metrics[part + 'Ci'] = Number(raw[2]);
         metrics[part + 'Count'] = Number(row[start]);
         metrics[part + 'PassRate'] = parseInt(row[start + 2], 10);
       });

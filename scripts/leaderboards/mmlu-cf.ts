@@ -17,6 +17,10 @@ const board: Leaderboard = {
   parts: {
     validation: { name: 'Validation', group: 'Split' },
   },
+  stats: {
+    originalMmlu5Shot: { name: 'Original MMLU 5-shot', unit: '%', better: 'higher' },
+    testMinusValidation: { name: 'Test minus validation gap', unit: '%' },
+  },
   url: `https://github.com/${REPO}`,
   feed: `${FEED} (Leaderboard table, MMLU-CF 5-shot Test)`,
   terms: 'README table in the microsoft/MMLU-CF GitHub repository, which is MIT-licensed.',

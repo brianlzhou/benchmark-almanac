@@ -17,10 +17,10 @@ const board: Leaderboard = {
     'Optional criteria (%)': { name: 'Optional criteria passed', unit: '%', better: 'higher', note: 'Percentage of optional checks passed.' },
     'Visual %': { name: 'Visual fidelity', unit: '%', better: 'higher' },
     'Kinematic %': { name: 'Kinematic fidelity', unit: '%', better: 'higher' },
-    'pass@1 %': { name: 'pass@1', unit: '%', better: 'higher', note: 'Percentage of assets passing all mandatory checks in one attempt.' },
-    'pass@3 %': { name: 'pass@3', unit: '%', better: 'higher', note: 'Probability of at least one pass in three attempts.' },
-    'pass^3 %': { name: 'pass^3', unit: '%', better: 'higher', note: 'Probability that all three sampled attempts pass, averaged per object.' },
-    'Tokens/asset': { name: 'Tokens per asset', unit: 'tokens' },
+    passAt1: { name: 'pass@1', unit: '%', better: 'higher', note: 'Percentage of assets passing all mandatory checks in one attempt.' },
+    passAt3: { name: 'pass@3', unit: '%', better: 'higher', note: 'Probability of at least one pass in three attempts.' },
+    pass3: { name: 'pass^3', unit: '%', better: 'higher', note: 'Probability that all three sampled attempts pass, averaged per object.' },
+    totalTokens: { name: 'Tokens per asset', unit: 'tokens' },
     'Inference $/asset': { name: 'Inference cost per asset', unit: 'usd', better: 'lower' },
     '$/formal point': { name: 'Cost per formal point', unit: 'usd', better: 'lower' },
     'Trial min/asset': { name: 'Trial time per asset', unit: 'minutes', better: 'lower' },
@@ -40,7 +40,7 @@ const board: Leaderboard = {
         if (!values?.length || !values.every(Number.isFinite)) throw new Error('Invalid SimReadyBench measure ' + cols[i]);
         const key = measureKeys[cols[i]] ?? cols[i];
         if (values.length === 1) metrics[key] = values[0];
-        else { metrics[key + (measureKeys[cols[i]] ? 'Low' : ' lower')] = values[0]; metrics[key + (measureKeys[cols[i]] ? 'High' : ' upper')] = values[1]; }
+        else { metrics[key + ' low'] = values[0]; metrics[key + ' high'] = values[1]; }
       }
       const score = n(c[3]);
       if (!c[0] || !Number.isFinite(score)) throw new Error('Missing formal fidelity');

@@ -7,6 +7,8 @@ const feed = "https://benchmarks.bio/benchmarks/rarediseasebench/latest.json";
 
 const board: Leaderboard = {
   benchmark: "rarediseasebench-latchbio",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://benchmarks.bio/raredisease",
   feed,
   terms: "The publisher supplies a citation and download on the board. https://benchmarks.bio/raredisease robots.txt allows this feed.",

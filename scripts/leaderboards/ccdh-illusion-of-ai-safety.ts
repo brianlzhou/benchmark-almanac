@@ -6,6 +6,10 @@ const board: Leaderboard = {
   benchmark: 'ccdh-illusion-of-ai-safety', static: 'paper', url: 'https://www.counterharm.com/research/the-illusion-of-ai-safety',
   feed: 'https://counterhate.com/wp-content/uploads/2025/10/ChatGPT-The-Illusion-of-AI-Safety_FINAL_Oct25.pdf',
   terms: 'The report is publicly available from the Center for Countering Digital Hate. Source attribution applies.',
+  stats: {
+    harmfulResponses: { name: 'Harmful responses', unit: 'count', better: 'lower' },
+    safeResponses: { name: 'Safe responses', unit: 'count', better: 'higher' },
+  },
   async fetch() { return [
     { model: 'GPT-4o', score: 43, trials: 120, metrics: { harmfulResponses: 52, safeResponses: 68 } },
     { model: 'GPT-5', score: 53, trials: 120, metrics: { harmfulResponses: 63, safeResponses: 57 } },

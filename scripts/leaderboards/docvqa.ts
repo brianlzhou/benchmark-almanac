@@ -1,8 +1,8 @@
 // DocVQA: live RRC Task 1 submissions plus the retained paper baselines, with ANLS multiplied by 100.
 // The live table keeps every submission and its category scores. Paper baseline rows remain for continuity. The M4C and BERT tables publish model variants with distinct training configurations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, num } from '../lib/html.ts';
+import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { rrcPage } from '../lib/boards/rrc.ts';
 
 const FEED = "https://arxiv.org/html/2007.00398";
@@ -13,10 +13,25 @@ const board: Leaderboard = {
   url: RRC,
   feed: `${RRC} + ${FEED}`,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' } },
+  parts: {
+    'Figure/Diagram': { name: 'Figure/Diagram', group: 'Question type' },
+    Form: { name: 'Form', group: 'Question type' },
+    'Table/List': { name: 'Table/List', group: 'Question type' },
+    Layout: { name: 'Layout', group: 'Question type' },
+    Free_text: { name: 'Free text', group: 'Question type' },
+    'Image/Photo': { name: 'Image/Photo', group: 'Question type' },
+    Handwritten: { name: 'Handwritten', group: 'Question type' },
+    'Yes/No': { name: 'Yes/No', group: 'Question type' },
+    Others: { name: 'Others', group: 'Question type' },
+  },
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    valAnls: { name: 'Validation ANLS', unit: '%', better: 'higher' },
+    valAccuracy: { name: 'Validation accuracy', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const ts=tables(await fetchText(FEED));
+      const ts=tables(await paperHtml(FEED));
       const out: LeaderboardRow[]=[];
       const t=ts.find(t=>t[1]?.[0]?.text==='Method' && t[1]?.[1]?.text.includes('Objects'));
       if(!t) throw new Error('DocVQA model table missing');
@@ -33,7 +48,6 @@ const board: Leaderboard = {
     if (!t) throw new Error('DocVQA live ranking table missing');
     const head = t[0].map(c => c.text);
     const nameCol = head.indexOf('Method'), scoreCol = head.indexOf('Score'), dateCol = head.indexOf('Date');
-    board.parts = Object.fromEntries(head.slice(scoreCol + 1).map(name => [name, { name: name.replace(/_/g, ' '), group: 'Question type' }]));
     for (const [index, r] of t.slice(1).entries()) {
       const model = r[nameCol]?.text, value = num(r[scoreCol]?.text);
       if (!model || /^Human Performance$/i.test(model) || value === undefined) continue;

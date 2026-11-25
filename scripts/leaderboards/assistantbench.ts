@@ -7,6 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://assistantbench.github.io";
 const board: Leaderboard = {
   benchmark: "assistantbench",
+  harnesses: 'system',
   url: "https://assistantbench.github.io",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

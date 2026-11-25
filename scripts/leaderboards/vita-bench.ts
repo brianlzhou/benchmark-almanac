@@ -16,7 +16,7 @@ const board: Leaderboard = {
   feed: `${URL} (static HTML table, Cross-Scenarios Avg@4)`,
   terms: 'Static GitHub Pages site; the VitaBench repository (meituan-longcat/vitabench) is MIT-licensed and the page states no other terms.',
   stats: {
-    passAt4: {name: 'Cross-scenarios pass@4', unit: '%', better: 'higher'}, pass4: {name: 'Cross-scenarios pass^4', unit: '%', better: 'higher'}, reasoningGroupRank: {name: 'Reasoning group rank', unit: 'count'},
+    passAt4: {name: 'Cross-scenarios pass@4', unit: '%', better: 'higher'}, pass4: {name: 'Cross-scenarios pass^4', unit: '%', better: 'higher'},
     'Delivery Avg@4': {name: 'Delivery average at 4', unit: '%', better: 'higher'}, 'Delivery Pass@4': {name: 'Delivery pass@4', unit: '%', better: 'higher'}, 'Delivery Pass^4': {name: 'Delivery pass^4', unit: '%', better: 'higher'},
     'In-store Avg@4': {name: 'In-store average at 4', unit: '%', better: 'higher'}, 'In-store Pass@4': {name: 'In-store pass@4', unit: '%', better: 'higher'}, 'In-store Pass^4': {name: 'In-store pass^4', unit: '%', better: 'higher'},
     'OTA Avg@4': {name: 'Online travel agency average at 4', unit: '%', better: 'higher'}, 'OTA Pass@4': {name: 'Online travel agency pass@4', unit: '%', better: 'higher'}, 'OTA Pass^4': {name: 'Online travel agency pass^4', unit: '%', better: 'higher'},
@@ -52,8 +52,6 @@ const board: Leaderboard = {
       const pass4 = num(r[4]?.text);
       if (passAt4 !== undefined) metrics.passAt4 = passAt4;
       if (pass4 !== undefined) metrics.pass4 = pass4;
-      const rank = num(r[0]?.text);
-      if (rank !== undefined) metrics.reasoningGroupRank = rank;
       for (const [group, task] of ['Delivery', 'In-store', 'OTA'].entries()) {
         for (const [offset, measure] of ['Avg@4', 'Pass@4', 'Pass^4'].entries()) {
           const value = num(r[5 + 3 * group + offset]?.text);

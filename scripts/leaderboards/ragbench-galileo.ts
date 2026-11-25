@@ -9,6 +9,7 @@ const datasets = ['PubMedQA', 'CovidQA-RAG', 'HotpotQA', 'MS Marco', 'HAGRID', '
 const staticParts: Record<string, BoardPart> = Object.fromEntries(datasets.flatMap(dataset => [
   [dataset + ' Hal', {name: dataset + ' hallucination AUROC', group: 'Hallucination AUROC', better: 'higher'}],
   [dataset + ' Rel', {name: dataset + ' context relevance RMSE', group: 'Relevance RMSE', better: 'lower'}],
+  [dataset + ' Util', {name: dataset + ' utilization RMSE', group: 'Utilization RMSE', better: 'lower'}],
 ])) as Record<string, BoardPart>;
 const board: Leaderboard = {
   benchmark: 'ragbench-galileo', url: feed, feed, static: 'paper', parts: staticParts,
@@ -31,7 +32,6 @@ const board: Leaderboard = {
           const value = numberCell(cell);
           const key = dataset + ' ' + prefix;
           metrics[key] = value;
-          board.parts![key] = {name: dataset, group: ['Hallucination AUROC', 'Relevance RMSE', 'Utilization RMSE'][offset], better: offset ? 'lower' : 'higher'};
           if (offset === 0) total += value;
         }
       }

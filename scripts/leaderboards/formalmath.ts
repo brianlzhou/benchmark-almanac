@@ -6,7 +6,6 @@ const FEED = "https://sphere-ai-lab.github.io/FormalMATH/";
 const board: Leaderboard = {
   benchmark: "formalmath", url: "https://sphere-ai-lab.github.io/FormalMATH/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
-  stats: { samplingBudget: { name: 'Sampling budget', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
@@ -15,7 +14,7 @@ const board: Leaderboard = {
     const boards=tables(clean).map(t=>t.map(r=>r.map(c=>c.text))).filter(t=>t[0]?.includes("Sampling Budget"));
     if(boards.length!==2)throw new Error("Expected full and Lite tables");
     boards.slice(0,1).forEach((t,k)=>{for(const r of t.slice(1)){const score=num(r[4]),budget=r[3];if(score===undefined||!budget)continue;
-      const model=(r[0].includes(r[1])?r[0]:r[0]+"-"+r[1]).replace(/^DeepSeek-V/,'DeepSeek-Prover-V');rows.push({model,score,setting:"sampling budget "+budget,metrics:/^\d+$/.test(budget)?{samplingBudget:Number(budget)}:undefined});
+      const model=(r[0].includes(r[1])?r[0]:r[0]+"-"+r[1]).replace(/^DeepSeek-V/,'DeepSeek-Prover-V');rows.push({model,score,setting:"sampling budget "+budget});
     }});
     if (!rows.length) throw new Error("No formalmath score rows");
     return rows;

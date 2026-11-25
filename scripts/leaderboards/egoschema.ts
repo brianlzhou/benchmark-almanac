@@ -15,12 +15,16 @@ const board: Leaderboard = {
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Inference') && t[0]?.some(c=>c.text==='QA'));
     if(!t) throw new Error('EgoSchema main table missing');
-    const out:LeaderboardRow[]=[];let model='';
+    const out:LeaderboardRow[]=[];let model='';let params:number|undefined;
     for(const r of t.slice(2)) {
-      if(r.length===5)model=r[0].text.replace(/ \[.*?\]/g,'');
+      if(r.length===5){
+        model=r[0].text.replace(/ \[.*?\]/g,'');
+        const pm=r[2].text.match(/^(\d+(?:\.\d+)?)([BM])$/i);
+        params=pm?(pm[2].toUpperCase()==='M'?Number(pm[1])/1000:Number(pm[1])):undefined;
+      }
       if(!model)continue;
       const score=num(r.at(-1)?.text);if(score===undefined)continue;
-      out.push({model,score,setting:r.at(-2)!.text});
+      out.push({model,score,setting:r.at(-2)!.text,...(params!==undefined?{params}:{})});
     }
     return out;
   },

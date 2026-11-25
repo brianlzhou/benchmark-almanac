@@ -21,6 +21,11 @@ interface Item extends Partial<Record<Dimension, [number | null, number | null]>
 const board: Leaderboard = {
   benchmark: 'videomme-v2-with-subtitles',
   parts: { level1: 'Level 1', level2: 'Level 2', level3: 'Level 3' },
+  stats: {
+    relevance: { name: 'Capability consistency', unit: '%', better: 'higher' },
+    logic: { name: 'Reasoning coherence', unit: '%', better: 'higher' },
+    avg_acc: { name: 'Average accuracy', unit: '%', better: 'higher' },
+  },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (inline leaderboardDataRaw, overall with subtitles)`,
   terms: 'Static page that states no terms; the Video-MME-v2 dataset card on Hugging Face is MIT.',

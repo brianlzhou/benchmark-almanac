@@ -7,7 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://minnesotanlp.github.io/the-amazing-agent-race/';
 const board: Leaderboard = {
-  benchmark: 'the-amazing-agent-race', feed, url: feed,
+  benchmark: 'the-amazing-agent-race', harnesses: 'system', reference: ['mini-swe-agent'], feed, url: feed,
   terms: 'The authors release the project under the MIT License. https://github.com/minnesotanlp/the-amazing-agent-race/blob/main/LICENSE.md',
   stats: {
     pitStopVisitRate: {name: 'Pit stop visit rate', unit: '%', better: 'higher'},

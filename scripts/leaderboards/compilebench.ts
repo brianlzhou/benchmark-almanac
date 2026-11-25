@@ -40,7 +40,7 @@ const board: Leaderboard = {
     'kimi-k2-0905': 'kimi-k2-sep-2025',
   },
   costPer: 'run',
-  stats: { tasks: { name: 'Tasks', unit: 'count' }, tasksPassed: { name: 'Tasks passed', unit: 'count' }, attemptsPassed: { name: 'Attempts passed', unit: 'count', better: 'higher' }, totalInferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' }, totalCommandSeconds: { name: 'Command execution time', unit: 'seconds', better: 'lower' }, finalContextTokens: { name: 'Final context tokens', unit: 'tokens', better: 'lower' }, secondsPerCompletedTask: { name: 'Seconds per completed task', unit: 'seconds', better: 'lower' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' } },
+  stats: { tasksPassed: { name: 'Tasks passed', unit: 'count' }, attemptsPassed: { name: 'Attempts passed', unit: 'count', better: 'higher' }, totalInferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' }, totalCommandSeconds: { name: 'Command execution time', unit: 'seconds', better: 'lower' }, finalContextTokens: { name: 'Final context tokens', unit: 'tokens', better: 'lower' }, secondsPerCompletedTask: { name: 'Seconds per completed task', unit: 'seconds', better: 'lower' }, passAt1: { name: 'pass@1', unit: '%', better: 'higher' } },
   chart: {
     title: 'CompileBench Speed',
     note: 'Share of tasks passed within three attempts against the total time across tasks, with the Pareto frontier.',
@@ -62,7 +62,7 @@ const board: Leaderboard = {
       const budget = e.model.match(/-thinking-(\d+k)$/);
       const d=details.get(e.model);
       const metrics:Record<string,number>={};
-      for (const [key,value] of Object.entries({tasks:e.tasks_total,tasksPassed:e.tasks_passed,attemptsPassed:e.attempts_passed,
+      for (const [key,value] of Object.entries({tasksPassed:e.tasks_passed,attemptsPassed:e.attempts_passed,
         totalInferenceSeconds:d?.total_llm_inference_seconds,totalCommandSeconds:d?.total_command_execution_seconds,
         finalContextTokens:d?.total_final_context_tokens})) if (typeof value==='number') metrics[key]=value;
       const time=times.get(e.model);

@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/1908.03195',
   feed,
   terms: 'Paper results read from arXiv. https://arxiv.org/abs/1908.03195',
+  stats: { boxAP: { name: 'Box average precision', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(feed);
     const rows: LeaderboardRow[] = [];

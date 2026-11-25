@@ -8,19 +8,35 @@ import { XBENCH_TERMS, xbenchArray } from './xbench-scienceqa.ts';
 
 const board: Leaderboard = {
   benchmark: 'xbench-profession-marketing',
+  parts: {
+    ecommerce: { name: 'E-commerce', group: 'Task' },
+    app: { name: 'App', group: 'Task' },
+    game: { name: 'Game', group: 'Task' },
+  },
   url: 'https://xbench.org/profession/marketing',
   feed: 'https://xbench.org/<build>/index-*.js (array with average, ecommerce, app, game)',
   terms: XBENCH_TERMS,
   aliases: {},
   async fetch() {
-    const data = await xbenchArray<{ model: string; average: string }>(/\[\{rank:1,model:"[^"]+",company:"[^"]+",average:"[^"]+",ecommerce:/);
+    const data = await xbenchArray<{ model: string; average: string; ecommerce?: string; app?: string; game?: string }>(/\[\{rank:1,model:"[^"]+",company:"[^"]+",average:"[^"]+",ecommerce:/);
     const rows: LeaderboardRow[] = [];
     for (const r of data) {
       const score = num(r.average);
       if (!r.model || score === undefined) continue;
       // "Grok3-Search": Grok 3 run with its search tool (the Perplexity rows are products and stay unmatched)
       const search = r.model.match(/^(Grok.*?)-Search$/);
-      rows.push({ model: search ? search[1] : r.model, score, harness: search ? 'search' : undefined, date: '2025-05-26' });
+      const metrics: Record<string, number> = {};
+      for (const k of ['ecommerce', 'app', 'game'] as const) {
+        const v = num(r[k]);
+        if (v !== undefined) metrics[k] = v;
+      }
+      rows.push({
+        model: search ? search[1] : r.model,
+        score,
+        harness: search ? 'search' : undefined,
+        date: '2025-05-26',
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },

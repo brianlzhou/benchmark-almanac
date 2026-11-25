@@ -25,7 +25,7 @@ const board: Leaderboard = {
       platforms.forEach((setting,i) => {
         const m = /^([\d.]+)% ± ([\d.]+)%$/.exec(c[i+5]);
         if (!m || !Number.isFinite(trials[i] ?? trials[0])) throw new Error('Incomplete parity row');
-        rows.push({ model:c[1], harness:c[0], setting, trials:trials[i] ?? trials[0], score:Number(m[1]), metrics:{reportedSpread:Number(m[2])} });
+        rows.push({ model:c[1], harness:c[0], setting, trials:trials[i] ?? trials[0], score:Number(m[1]), metrics:{std:Number(m[2])} });
       });
     }
     return checked(rows,4);

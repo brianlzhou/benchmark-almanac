@@ -4,17 +4,84 @@
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
-const FEED = "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data/CulturalBench_Hard_average.csv";
+const BASE = "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data";
+const FEED = `${BASE}/CulturalBench_Hard_average.csv`;
+const REGION_FEED = `${BASE}/CulturalBench_Hard_per_continent.csv`;
+const EASY_FEED = `${BASE}/CulturalBench_Easy_average.csv`;
+
+const REGIONS = [
+  ['northAmerica', 'North America'],
+  ['southAmerica', 'South America'],
+  ['eastEurope', 'East Europe'],
+  ['southEurope', 'South Europe'],
+  ['westEurope', 'West Europe'],
+  ['africa', 'Africa'],
+  ['middleEastWestAsia', 'Middle East/ West Asia'],
+  ['southAsia', 'South Asia'],
+  ['southeastAsia', 'Southeast Asia'],
+  ['eastAsia', 'East Asia'],
+  ['oceania', 'Oceania'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: "culturalbench",
+  parts: {
+    northAmerica: { name: 'North America', group: 'Region' },
+    southAmerica: { name: 'South America', group: 'Region' },
+    eastEurope: { name: 'East Europe', group: 'Region' },
+    southEurope: { name: 'South Europe', group: 'Region' },
+    westEurope: { name: 'West Europe', group: 'Region' },
+    africa: { name: 'Africa', group: 'Region' },
+    middleEastWestAsia: { name: 'Middle East and West Asia', group: 'Region' },
+    southAsia: { name: 'South Asia', group: 'Region' },
+    southeastAsia: { name: 'Southeast Asia', group: 'Region' },
+    eastAsia: { name: 'East Asia', group: 'Region' },
+    oceania: { name: 'Oceania', group: 'Region' },
+  },
+  stats: {
+    easy: { name: 'Easy accuracy', unit: '%', better: 'higher' },
+  },
   url: "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data/CulturalBench_Hard_average.csv",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const rows=parseCsv(await fetchText(FEED));
-    if(!rows.length)throw new Error('CulturalBench CSV empty');
-    return rows.map(r=>({model:r.model,score:Number(r.accuracy)}));
+    const [rows, regionRows, easyRows] = await Promise.all([
+      fetchText(FEED).then(parseCsv),
+      fetchText(REGION_FEED).then(parseCsv),
+      fetchText(EASY_FEED).then(parseCsv),
+    ]);
+    if (!rows.length) throw new Error('CulturalBench CSV empty');
+    const byRegion = new Map<string, Record<string, number>>();
+    for (const r of regionRows) {
+      const m = (r.Models ?? r.model ?? '').trim();
+      if (!m) continue;
+      const trimmed: Record<string, string> = {};
+      for (const [k, v] of Object.entries(r)) trimmed[k.trim()] = v;
+      const vals: Record<string, number> = {};
+      for (const [key, header] of REGIONS) {
+        const v = Number(trimmed[header]);
+        if (trimmed[header] && Number.isFinite(v)) vals[key] = v;
+      }
+      if (Object.keys(vals).length) byRegion.set(m, vals);
+    }
+    const easyByModel = new Map<string, number>();
+    for (const r of easyRows) {
+      const m = (r.model ?? '').trim();
+      const v = Number(r.accuracy);
+      if (m && r.accuracy && Number.isFinite(v)) easyByModel.set(m, Number(v.toFixed(2)));
+    }
+    return rows.map((r) => {
+      const m = r.model.trim();
+      const metrics: Record<string, number> = { ...(byRegion.get(m) ?? {}) };
+      const easy = easyByModel.get(m);
+      if (easy !== undefined) metrics.easy = easy;
+      return {
+        model: r.model,
+        score: Number(r.accuracy),
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      };
+    });
   },
 };
 

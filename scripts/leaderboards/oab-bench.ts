@@ -9,7 +9,7 @@ import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 const feed = 'https://raw.githubusercontent.com/maritaca-ai/oab-bench/HEAD/README.md';
 const board: Leaderboard = {
   benchmark: 'oab-bench', url: 'https://github.com/maritaca-ai/oab-bench#results', feed,
-  stats: { examsPassed: { name: 'Exams passed', unit: 'count', better: 'higher' }, exams: { name: 'Exams', unit: 'count' }, passingRate: { name: 'Passing rate', unit: '%', better: 'higher' } },
+  stats: { examsPassed: { name: 'Exams passed', unit: 'count', better: 'higher' }, passingRate: { name: 'Passing rate', unit: '%', better: 'higher' } },
   terms: 'Apache License 2.0: https://github.com/maritaca-ai/oab-bench/blob/main/LICENSE.',
   aliases: { 'Qwen3.5-35B': 'qwen3-5-35b-a3b', 'Qwen3.5-397B': 'qwen3-5-397b-a17b' },
   async fetch() {
@@ -27,7 +27,7 @@ const board: Leaderboard = {
         if (!match || Number(match[2]) !== 42) throw new Error('Unexpected number of exams');
         const examsPassed = Number(match[1]), exams = Number(match[2]);
         return {model, score: numberCell(value), setting: 'GPT-5.2 judge, ' + (i === 0 ? 'structured' : 'non-structured'),
-          metrics: { examsPassed, exams, passingRate: 100*examsPassed/exams }};
+          metrics: { examsPassed, passingRate: 100*examsPassed/exams }};
       });
     }),24);
   },

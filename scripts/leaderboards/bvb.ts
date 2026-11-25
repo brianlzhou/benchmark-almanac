@@ -50,6 +50,9 @@ const board: Leaderboard = {
   stats: {
     minutes: { name: 'Runtime in minutes', unit: 'minutes', better: 'lower' },
     latency: { name: 'Runtime in seconds', unit: 'seconds', better: 'lower' },
+    sceneCount: { name: 'Evaluated scenes', unit: 'count' },
+    renderedScenes: { name: 'Rendered scenes', unit: 'count' },
+    costScenes: { name: 'Costed scenes', unit: 'count' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
@@ -58,8 +61,7 @@ const board: Leaderboard = {
     return data.filter(r => Number.isFinite(r.overall)).map(r => {
       const metrics: Record<string, number> = { ...r.tasks, dualVqa: r.dualVqa, latentSimilarity: r.latentSim, layout: r.layout, motion: r.motion };
       if (typeof r.runtimeMin === 'number') Object.assign(metrics, { minutes: r.runtimeMin, latency: r.runtimeMin * 60 });
-      if (typeof r.costUsd === 'number') metrics.cost = r.costUsd;
-      for (const key of ['sceneCount', 'renderedScenes', 'costScenes', 'costEstimate', 'baselineComparable'] as const) {
+      for (const key of ['sceneCount', 'renderedScenes', 'costScenes'] as const) {
         if (r[key] != null) metrics[key] = Number(r[key]);
       }
       return { model: identity(r.name), score: r.overall, open: r.openWeight, harness: r.harness, cost: r.costUsd,

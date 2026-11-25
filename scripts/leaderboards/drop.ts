@@ -5,7 +5,19 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/1903.00161';
 const board: Leaderboard = {
   benchmark: 'drop', static: 'paper', url: URL, feed: URL + ' (main results, test F1)', terms: PAPER_TERMS,
-  stats:{testExactMatch:{name:'Test exact match',unit:'%',better:'higher'},devExactMatch:{name:'Development exact match',unit:'%',better:'higher'},devF1:{name:'Development F1',unit:'%',better:'higher'}},
+  stats:{
+    testExactMatch:{name:'Test exact match',unit:'%',better:'higher'},
+    devExactMatch:{name:'Development exact match',unit:'%',better:'higher'},
+    devF1:{name:'Development F1',unit:'%',better:'higher'},
+    'Dev exact match: Date':{name:'Development exact match on dates',unit:'%',better:'higher'},
+    'Dev F1: Date':{name:'Development F1 on dates',unit:'%',better:'higher'},
+    'Dev exact match: Numbers':{name:'Development exact match on numbers',unit:'%',better:'higher'},
+    'Dev F1: Numbers':{name:'Development F1 on numbers',unit:'%',better:'higher'},
+    'Dev exact match: Single Span':{name:'Development exact match on single spans',unit:'%',better:'higher'},
+    'Dev F1: Single Span':{name:'Development F1 on single spans',unit:'%',better:'higher'},
+    'Dev exact match: >1 Spans':{name:'Development exact match on multiple spans',unit:'%',better:'higher'},
+    'Dev F1: >1 Spans':{name:'Development F1 on multiple spans',unit:'%',better:'higher'},
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(URL));
     const t = tables.find(t => t[0]?.join('|') === 'Method|Dev|Dev|Test|Test');

@@ -8,7 +8,15 @@ const feed='https://arxiv.org/html/2505.08775';
 export default {
   benchmark:'healthbench-meta-openai',url:feed,feed,static:'paper',
   terms:'Paper and license at https://arxiv.org/abs/2505.08775',
-  parts:{} as Record<string,string>,
+  parts: {
+    emergencyreferrals: 'Emergency referrals',
+    expertisetailoredcommunication: 'Expertise-tailored communication',
+    respondingunderuncertainty: 'Responding under uncertainty',
+    responsedepth: 'Response depth',
+    healthdatatasks: 'Health data tasks',
+    globalhealth: 'Global health',
+    contextseeking: 'Context seeking',
+  },
   async fetch(){
     const tables=paperTables(await paperHtml(feed)).map(grid);
     const main=tables.find(t=>t[0].join('|')==='Model|MF1');
@@ -17,7 +25,6 @@ export default {
     const breakdown:Record<string,number>={};
     for(const [name,,,value] of themes.slice(3)){
       const key=name.toLowerCase().replace(/[^a-z]/g,'');
-      if (this.parts) this.parts[key]=name;
       breakdown[key]=numberCell(value);
     }
     return checked(main.slice(1).map(([model,value])=>({

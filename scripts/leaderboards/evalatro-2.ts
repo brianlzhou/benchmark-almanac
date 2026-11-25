@@ -12,7 +12,7 @@ const board: Leaderboard = {
   feed,
   terms: "The runner package declares ISC. I found no separate license for submitted scores. The host returned no readable robots.txt rules.",
   stats: {
-    attempts: { name: 'Attempts', unit: 'count' }, completed: { name: 'Completed games', unit: 'count' }, incomplete: { name: 'Incomplete games', unit: 'count' },
+    attempts: { name: 'Attempts', unit: 'count' }, completed: { name: 'Completed games', unit: 'count' }, incomplete: { name: 'Incomplete games', unit: 'count' }, won: { name: 'Games won', unit: 'count', better: 'higher' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' },
     stdevScore: { name: 'Score standard deviation', unit: 'score' }, avgAnte: { name: 'Average ante', unit: 'score' }, stdevAnte: { name: 'Ante standard deviation', unit: 'score' }, maxAnte: { name: 'Maximum ante', unit: 'score' },
     avgMoney: { name: 'Average money', unit: 'score', better: 'higher' }, illegalRate: { name: 'Illegal move rate', unit: '%', better: 'lower' }, latency: { name: 'Average duration', unit: 'seconds', better: 'lower' },
   },

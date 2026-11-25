@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/starkhushi/right-answer-wrong-reason-ml-judgment-calls',
   feed: kaggleFeed('starkhushi', 'right-answer-wrong-reason-ml-judgment-calls'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('starkhushi', 'right-answer-wrong-reason-ml-judgment-calls', "(Overall)", 1),
+  parts: {
+    dsJudgment: 'Data science judgment',
+    dsJudgmentOpen: 'Open-ended data science judgment',
+  },
+  fetch: () => kaggleRowsWithBounds('starkhushi', 'right-answer-wrong-reason-ml-judgment-calls', "(Overall)", 1, {
+    dsJudgment: { task: 'ds-judgment', interval: true },
+    dsJudgmentOpen: { task: 'ds-judgment-open', interval: true },
+  }),
 };
 export default board;

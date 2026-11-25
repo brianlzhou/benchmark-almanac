@@ -11,6 +11,30 @@ const models: Record<string, string> = { DeepSeek: 'DeepSeek-V3.2', Grok: 'Grok-
 const board: Leaderboard = {
   benchmark: 'livemace', static: 'paper', url, feed: url, terms: PAPER_TERMS,
   headline: 'The headline is cumulative portfolio return (%) over the full evaluation period for each agent configuration.',
+  stats: {
+    callsPerStep: { name: 'Tool calls per step', unit: 'count' },
+    validCallRate: { name: 'Valid call rate', unit: 'score', better: 'higher' },
+    routingQuality: { name: 'Routing quality', unit: 'score', better: 'higher' },
+    avgTokens: { name: 'Average tokens', unit: 'tokens', better: 'lower' },
+    toolCallScore: { name: 'Tool call score', unit: 'score', better: 'higher' },
+    hallucinationFree: { name: 'Hallucination-free rate', unit: 'score', better: 'higher' },
+    judgeMean: { name: 'Judge mean score', unit: 'score', better: 'higher' },
+    relevance: { name: 'Tool relevance', unit: 'score', better: 'higher' },
+    efficiency: { name: 'Information efficiency', unit: 'score', better: 'higher' },
+    coverage: { name: 'Information coverage', unit: 'score', better: 'higher' },
+    faithfulness: { name: 'Evidence faithfulness', unit: 'score', better: 'higher' },
+    drawdownPct: { name: 'Maximum drawdown', unit: '%', better: 'lower' },
+    hardRulePass: { name: 'Hard rule pass rate', unit: 'score', better: 'higher' },
+    ruleSatisfaction: { name: 'Rule satisfaction score', unit: 'score', better: 'higher' },
+    ruleAuditability: { name: 'Rule auditability score', unit: 'score', better: 'higher' },
+    traces: { name: 'Collaboration traces', unit: 'count' },
+    collaboration: { name: 'Reported overall collaboration score', unit: 'score', better: 'higher' },
+    alternativeCollaboration: { name: 'Alternative collaboration score', unit: 'score', better: 'higher' },
+    sharpLosses: { name: 'Sharp losses', unit: 'count', better: 'lower' },
+    sharpGains: { name: 'Sharp gains', unit: 'count', better: 'higher' },
+    maxLossStreak: { name: 'Maximum loss streak', unit: 'count', better: 'lower' },
+    tailLossPct: { name: 'Tail loss', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(url));
     const table = tables.find(t => t[0].join('|') === 'Backbone|Base (%)|Tool (%)|Memory (%)|Rule (%)|Multi-Agent (%)');

@@ -67,11 +67,6 @@ const board: Leaderboard = {
       if (h && h !== 24) settings.push(`${h} h`);
       const d = plain(cells[date] ?? '');
       const metrics: Record<string, number> = {};
-      if (h !== undefined) metrics.timeBudgetSeconds = h * 3600;
-      for (const [key, column] of [['sourceCodeAvailable', 'Source Code'], ['gradingReportsAvailable', 'Grading Reports']]) {
-        const mark = plain(cells[at(column)] ?? '');
-        if (mark === '✓' || mark === 'X') metrics[key] = Number(mark === '✓');
-      }
       const pm = num(plain(cells[all] ?? '').split('±')[1]);
       if (pm !== undefined) metrics.stderr = pm;
       for (const [k, i] of splits) {

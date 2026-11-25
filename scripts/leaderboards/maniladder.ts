@@ -11,6 +11,12 @@ const board:Leaderboard={
   benchmark:'maniladder',url:'https://maniladder-benchmark.github.io/#leaderboard',feed,
   terms:'The authors publish the leaderboard and its scoring protocol at https://maniladder-benchmark.github.io/#leaderboard.',
   aliases:{'GPT6-Astra':'gpt-6-astra'},
+  stats:{
+    al80:{name:'Attained level at 80% threshold',unit:'score',better:'higher'},
+    meanSuccess:{name:'Mean task success rate',unit:'%',better:'higher'},
+    evaluated:{name:'Tasks evaluated',unit:'count'},
+    ...Object.fromEntries([1,2,3,4].flatMap(l=>[50,80].map(t=>[`level${l}At${t}`,{name:`Level ${l} tasks passing ${t}%`,unit:'count',better:'higher'}]))),
+  },
   async fetch(){
     const data=jsonAfter<Data>(await fetchText(feed),'window.MANILADDER_LEADERBOARD = ');
     const levels=[1,2,3,4].map(level=>data.tasks.filter(t=>t.level===level));
@@ -38,7 +44,7 @@ const board:Leaderboard={
         metrics[key]=raw*100;values.push(raw);
       }
       metrics.evaluated=values.length;metrics.meanSuccess=100*values.reduce((a,b)=>a+b)/values.length;
-      metrics.al80=attained[0.8];metrics.episodesPerTask=50;
+      metrics.al80=attained[0.8];
       return {model:name,setting:variant,score:attained[0.5],metrics};
     });
     board.parts=parts;

@@ -8,7 +8,7 @@ const board: Leaderboard = {
   url: "https://github.com/steinst/WMT25_EEA_test_suite/blob/main/evaluation/automatic/EEA_automatic_evaluation_results.tsv",
   feed,
   terms: "Automatic term accuracy uses 413 occurrences across 256 sentences. The repository lists no reuse license. GitHub lists crawler restrictions and the media host returns 404 for robots.txt.",
-  stats: { termsCorrect: { name: 'Terms correct', unit: 'count' }, termsTotal: { name: 'Terms tested', unit: 'count' }, sentencesCorrect: { name: 'Sentences correct', unit: 'count' }, sentencesTotal: { name: 'Sentences tested', unit: 'count' } },
+  stats: { termsCorrect: { name: 'Terms correct', unit: 'count' }, sentencesCorrect: { name: 'Sentences correct', unit: 'count' } },
   parts: {"sentence":"Sentence accuracy"},
   async fetch() {
     const source = await fetchText(feed);
@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const model = r["system"];
       if (!model) throw new Error('Missing model name');
       return { model, score: numeric(r["term_accuracy"]),
-        metrics: { sentence: numeric(r["sentence_accuracy"]), termsCorrect: numeric(r["terms_correct"]), termsTotal: numeric(r["terms_total"]), sentencesCorrect: numeric(r["sentences_correct"]), sentencesTotal: numeric(r["sentences_total"]) } };
+        metrics: { sentence: numeric(r["sentence_accuracy"]), termsCorrect: numeric(r["terms_correct"]), sentencesCorrect: numeric(r["sentences_correct"]) } };
     });
     if (rows.length < 34) throw new Error('Incomplete results');
     return rows;

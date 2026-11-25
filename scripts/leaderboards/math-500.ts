@@ -24,6 +24,11 @@ const board: Leaderboard = {
     priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
     latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
   },
+  chart: {
+    title: 'Accuracy versus cost',
+    x: { key: 'cost', label: 'Cost per test', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(FEED);
     const raw = html.match(/props="(\{&quot;benchmarkView&quot;[^"]*)"/)?.[1];

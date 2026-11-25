@@ -6,12 +6,11 @@ const board: Leaderboard = {
   url: "https://www.codabench.org/competitions/16309/",
   feed: "https://ceur-ws.org/Vol-4283/paper303.pdf",
   terms: "The authors publish the automatic pun-location ranking in their paper under CC BY 4.0. https://ceur-ws.org/Vol-4283/paper303.pdf CEUR-WS robots.txt permits the paper.",
-  stats: { rank: { name: 'Published rank', unit: 'count', better: 'lower' } },
   async fetch() {
     const report = await pdfText(this.feed);
     const body = report.split('Top-5 results per team for Task 2 Pun Translation (pun location metric).')[1]?.split('3.1. Participants')[0];
     if (!body || !/Score\s+Rank\s+run_id/.test(body)) throw new Error('Missing JOKER test ranking');
-    const rows = [...body.matchAll(/^\s*\d+\s+(\S+)\s+\d+\s+([\d.]+)\s+(\d+)\s+(\S+)\s*$/gm)].map(([,submitter,value,rank,model]) => ({ model, submitter, score:Number(value), metrics: { rank: Number(rank) } }));
+    const rows = [...body.matchAll(/^\s*\d+\s+(\S+)\s+\d+\s+([\d.]+)\s+(\d+)\s+(\S+)\s*$/gm)].map(([,submitter,value,,model]) => ({ model, submitter, score:Number(value) }));
     if (rows.length < 24) throw new Error('Incomplete JOKER test ranking');
     return rows;
   },

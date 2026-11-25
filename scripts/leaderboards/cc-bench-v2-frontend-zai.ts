@@ -11,6 +11,10 @@ const board: Leaderboard = {
  benchmark: "cc-bench-v2-frontend-zai",
  url: "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png",
  feed: FEED,
+ static: 'paper',
+ stats: {
+  buildSuccess: { name: 'Build success', unit: '%', better: 'higher' },
+ },
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {

@@ -15,9 +15,23 @@ interface Evaluation {
     avg_metrics?: Record<string, number>; usage?: { input_tokens: number; output_tokens: number } };
 }
 const stats: Record<string, BoardStat> = {
-  steps: {name: 'Mean turns', unit: 'count'}, inputTokens: {name: 'Mean input tokens', unit: 'tokens'},
-  outputTokens: {name: 'Mean output tokens', unit: 'tokens'},
+  final_answer_accuracy: { name: 'Final answer accuracy', unit: 'score', better: 'higher' },
+  field_accuracy: { name: 'Field accuracy', unit: 'score', better: 'higher' },
+  regret_score: { name: 'Regret score', unit: 'score', better: 'higher' },
+  required_tools_used: { name: 'Required tools used', unit: 'score', better: 'higher' },
+  workflow_efficiency: { name: 'Workflow efficiency', unit: 'score', better: 'higher' },
+  screened_selected: { name: 'Screened selected', unit: 'score', better: 'higher' },
+  campaign_budget_respected: { name: 'Campaign budget respected', unit: 'score', better: 'higher' },
+  steps: { name: 'Mean turns', unit: 'count' },
+  total_tool_calls: { name: 'Total tool calls', unit: 'count' },
+  rank_compounds_calls: { name: 'Rank compounds calls', unit: 'count' },
+  run_reaction_screen_calls: { name: 'Run reaction screen calls', unit: 'count' },
+  compare_compounds_calls: { name: 'Compare compounds calls', unit: 'count' },
+  submit_decision_calls: { name: 'Submit decision calls', unit: 'count' },
+  inputTokens: { name: 'Mean input tokens', unit: 'tokens' },
+  outputTokens: { name: 'Mean output tokens', unit: 'tokens' },
 };
+const CONSTANT_CALLS = new Set(['inspect_problem_calls', 'list_candidate_compounds_calls']);
 const board: Leaderboard = {
   benchmark: 'science-gym-chem', url, feed: primeFeed(env), stats,
   terms: 'Prime Intellect hosts the public evaluations under https://www.primeintellect.ai/terms-of-service.',
@@ -37,13 +51,14 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = {};
         for (const [key, value] of Object.entries(m.avg_metrics ?? {})) {
           if (!Number.isFinite(value)) throw new Error('Invalid chemistry metric ' + key);
+          if (CONSTANT_CALLS.has(key)) continue;
           const metric = key === 'num_turns' ? 'steps' : key;
           metrics[metric] = value;
-          stats[metric] ??= { name: key.replaceAll('_', ' ').replace(/^./, c => c.toUpperCase()), unit: key.endsWith('calls') ? 'count' : 'score' };
         }
         if (m.usage) Object.assign(metrics, { inputTokens: m.usage.input_tokens, outputTokens: m.usage.output_tokens });
+        const tokens = m.usage && Number.isFinite(m.usage.output_tokens) && m.usage.output_tokens > 0 ? m.usage.output_tokens : undefined;
         rows.push({ model: m.model, score: e.statistics.avgReward, setting: settings.join(', '), harness: e.framework, trials: m.rollouts_per_example,
-          date: e.createdAt.slice(0,10), metrics, submitter: e.user?.name, link: url + '/' + e._id });
+          tokens, date: e.createdAt.slice(0,10), metrics, submitter: e.user?.name, link: url + '/' + e._id });
       }
       skip += evaluations.length;
       if (!pagination.hasMore) {

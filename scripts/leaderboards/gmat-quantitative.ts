@@ -1,4 +1,4 @@
-// GMAT Quantitative: exact accuracy from the Llama 3 report exam table.
+// GMAT Quantitative: exact accuracy and 95% Gaussian confidence intervals (reported as mean ± half-width in Table 17, clamped to [0, 100]) from the Llama 3 report exam table.
 // These static paper rows will not refresh. The report calls its July instruction-tuned systems Llama 3.
 // The table uses Llama 3 for the report’s July 2024 Llama 3.1 release. Unspecified GPT and Claude snapshots remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -15,7 +15,16 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const s=(await fetchText(FEED)).replace(/<annotation\b[\s\S]*?<\/annotation>/g,'');const t=tables(s).find(t=>t.some(r=>r[0]?.text==='GMAT Quant.'));if(!t)throw new Error('GMAT table missing');const r=t.find(r=>r[0]?.text==='GMAT Quant.')!;
-      return r.slice(1).map((c,i)=>({model:t[0][i+1].text.replace(/^\\rotate/,'').trim().replace(/^Llama 3 (\d+B)$/,'Llama 3.1 $1 Instruct').replace(/^GPT-3.5 Turbo$/,'GPT-3.5 Turbo (snapshot unspecified)'),score:num(c.text)!}));
+      return r.slice(1).map((c,i)=>{
+        const rawModel=t[0][i+1].text.replace(/^\\rotate/,'').trim();
+        const model=rawModel.replace(/^Llama 3 (\d+B)$/,'Llama 3.1 $1 Instruct').replace(/^GPT-3.5 Turbo$/,'GPT-3.5 Turbo (snapshot unspecified)');
+        const score=num(c.text)!;
+        const pm=c.text.match(/±\s*(\d+(?:\.\d+)?)/);
+        const half=pm?Number(pm[1]):undefined;
+        const pMatch=rawModel.match(/\b(\d+(?:\.\d+)?)B\b/i);
+        const params=pMatch?Number(pMatch[1]):undefined;
+        return {model,score,...(half!==undefined?{low:Number(Math.max(0,score-half).toFixed(2)),high:Number(Math.min(100,score+half).toFixed(2))}:{}),...(params!==undefined?{params}:{})};
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

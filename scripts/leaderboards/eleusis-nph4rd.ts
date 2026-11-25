@@ -15,7 +15,6 @@ const board: Leaderboard = {
     soloSolveRate: { name: 'Solo solve rate', unit: '%', better: 'higher' },
     independentSolveRate: { name: 'Independent solve rate', unit: '%', better: 'higher' },
     cooperativeSolves: { name: 'Cooperative solves', unit: 'count', better: 'higher' },
-    episodes: { name: 'Episodes', unit: 'count' },
   },
   terms: 'The results article is published by nphard.io and its linked repository uses the repository license. https://github.com/PrimeIntellect-ai/residency-environments GitHub requests a one-second crawl delay.',
   async fetch() {
@@ -37,7 +36,6 @@ const board: Leaderboard = {
         soloSolveRate: solo * 100 / 90,
         independentSolveRate: independent * 100 / 90,
         cooperativeSolves: cooperative,
-        episodes: 90,
       },
     }));
     if (rows.length !== 3) throw new Error('Expected three Eleusis models');

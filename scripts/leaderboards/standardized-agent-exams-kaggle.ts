@@ -27,7 +27,7 @@ const board: Leaderboard = {
     if (!data.agents || data.agents.length !== 25) throw new Error(`Kaggle Standardized Agent Exams: ${data.agents?.length ?? 0} rows, expected 25`);
     return data.agents.map((agent) => {
       if (!agent.agentName || !agent.model || typeof agent.bestScore !== 'number' || typeof agent.totalExams !== 'number') throw new Error('Kaggle Standardized Agent Exams: incomplete row');
-      return { model: agent.model, harness: agent.agentName, score: agent.bestScore, metrics: { totalExams: agent.totalExams } };
+      return { model: agent.model, harness: agent.agentName, score: agent.bestScore };
     });
   },
 };

@@ -16,6 +16,23 @@ const board:Leaderboard={benchmark:'nuscenes-detection', parts: {
   NDS: { name: 'nuScenes Detection Score', unit: 'score', better: 'higher' },
   'Mean PKL': { name: 'Mean planning and kinematics likelihood', unit: 'score', better: 'lower' },
   'Median PKL': { name: 'Median planning and kinematics likelihood', unit: 'score', better: 'lower' },
+  eval_time: { name: 'Evaluation time', unit: 'seconds', better: 'lower' },
+  run_time: { name: 'Run time', unit: 'seconds', better: 'lower' },
+  ...Object.fromEntries(([
+    ['trans_err', 'translation error'],
+    ['scale_err', 'scale error'],
+    ['orient_err', 'orientation error'],
+    ['vel_err', 'velocity error'],
+    ['attr_err', 'attribute error'],
+  ] as const).flatMap(([e, eLabel]) => [
+    ['tp_errors:' + e, { name: 'True positive ' + eLabel, unit: 'score', better: 'lower' }],
+    ...['barrier','bicycle','bus','car','construction_vehicle','motorcycle','pedestrian','traffic_cone','trailer','truck'].map(c =>
+      ['label_tp_errors:' + c + ':' + e, { name: c.replaceAll('_', ' ') + ' ' + eLabel, unit: 'score', better: 'lower' }]
+    ),
+  ])),
+  ...Object.fromEntries(['barrier','bicycle','bus','car','construction_vehicle','motorcycle','pedestrian','traffic_cone','trailer','truck'].flatMap(c =>
+    ['0.5','1.0','2.0','4.0'].map(d => ['label_aps:' + c + ':' + d, { name: c.replaceAll('_', ' ') + ' average precision at ' + d + ' m', unit: 'score', better: 'higher' }])
+  )),
  },
  async fetch():Promise<LeaderboardRow[]>{
   const data=await fetchJson<any[]>(feed);const rows:LeaderboardRow[]=[];

@@ -26,7 +26,6 @@ const board: Leaderboard = {
       }
       if (r.invalid_path_rate != null) metrics.invalidPathRate = r.invalid_path_rate;
       if (r.avg_steps != null) metrics.steps = r.avg_steps;
-      if (r.max_tokens != null) metrics.maxTokens = r.max_tokens;
       const harness = r.inspect_task ?? r.reference?.split(' (')[0];
       return { model: r.model, score: r.accuracy_all, setting: [r.setting, r.reasoning_effort].filter(Boolean).join(', '), harness, date: r.date, metrics };
     });

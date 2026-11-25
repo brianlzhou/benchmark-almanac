@@ -13,6 +13,7 @@ const stats = Object.fromEntries([
 ].map(([key, value]) => [key, typeof value === 'string' ? {name: value, unit: 'count', better: 'lower'} : value]));
 const board: Leaderboard = {
   benchmark: 'rtlrewriter-small', feed, url: feed, static: 'paper',
+  parts: Object.fromEntries(Array.from({length: 14}, (_, i) => ['case' + (i + 1), 'case' + (i + 1) + ' wires'])),
   stats,
   headline: 'The headline is the geometric mean wire count on the 14 short circuits in Table 4.',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
@@ -21,7 +22,6 @@ const board: Leaderboard = {
       t[0]?.join('|') === 'Test Case|Yosys|Yosys|Yosys+Egg|Yosys+Egg|GPT4|GPT4|Claude3|Claude3|VeriGen|VeriGen|RTLCoder|RTLCoder|RTLRwriter|RTLRwriter'
       && t[1]?.join('|') === 'ID|' + Array(7).fill('Wires|Cells').join('|'));
     if (table?.length !== 18 || table[16][0] !== 'GeoMean' || table[17][0] !== 'Ratio') throw Error('Missing short-circuit Table 4');
-    board.parts = Object.fromEntries(table.slice(2,16).map(c => [c[0], c[0] + ' wires']));
     function count(s: string) {
       if (!/^\d+(?:\.\d+)?$/.test(s)) throw Error('Invalid Table 4 count');
       return Number(s);

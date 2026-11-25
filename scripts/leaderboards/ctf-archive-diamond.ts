@@ -13,7 +13,18 @@ const board: Leaderboard = {
     const ts = tables(await fetchText(PAGE));
     const t = ts.find((x) => x[0]?.map((c) => c.text).join('|') === '#|Model|Setting|Score|Source');
     if (!t) throw new Error('CTF-Archive Diamond: leaderboard table missing');
-    const rows: LeaderboardRow[] = t.slice(1).map((r) => ({ model: r[1].text.trim(), setting: r[2].text.replace(/\s*·\s*CAISI.*$/, '').trim(), score: num(r[3].text), harness: 'CAISI Inspect ReAct agent', link: r[4].text.trim() })).filter((r) => r.model && Number.isFinite(r.score));
+    const rows: LeaderboardRow[] = t.slice(1).map((r) => {
+      const href = r[4]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1];
+      const date = r[4]?.text.match(/\b(20\d\d-\d\d-\d\d)\b/)?.[1];
+      return {
+        model: r[1].text.trim(),
+        setting: r[2].text.replace(/\s*·\s*CAISI.*$/, '').trim(),
+        score: num(r[3].text),
+        harness: 'CAISI Inspect ReAct agent',
+        date,
+        link: href,
+      };
+    }).filter((r) => r.model && Number.isFinite(r.score));
     if (rows.length < 6) throw new Error(`CTF-Archive Diamond: ${rows.length} rows, expected 6`);
     return rows;
   },

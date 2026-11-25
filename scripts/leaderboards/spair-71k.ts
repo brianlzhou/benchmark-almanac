@@ -13,11 +13,15 @@ const board: Leaderboard = {
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Method|Links|PCK@0.1');
     if (!table) throw new Error('Missing SPair-71k correspondence leaderboard');
-    return checked(table.slice(1).map(([method,,score]) => {
+    return checked(table.slice(1).map(([method, links, score]) => {
       const model = text(method.html.match(/<a\b[^>]*>([\s\S]*?)<\/a>/)?.[1] ?? '').replace(/[†‡]$/, '');
       if (!model) throw new Error('Missing SPair model');
       const setting = text(method.html.match(/role="tooltip">([\s\S]*?)<\/span>/)?.[1] ?? '');
-      return {model, setting: setting || undefined, score: numberCell(score.text)};
+      const dm = method.html.match(/<small>(\d{4})\.(\d{2})<\/small>/);
+      const date = dm ? `${dm[1]}-${dm[2]}-01` : undefined;
+      const paper = links.html.match(/href="(\/research\/paper\/[^"]+)"/i)?.[1];
+      const link = links.html.match(/href="(https?:\/\/[^"]+)"/i)?.[1] ?? (paper ? `https://www.sota2.com${paper}` : undefined);
+      return { model, setting: setting || undefined, score: numberCell(score.text), ...(date ? { date } : {}), ...(link ? { link } : {}) };
     }), 24);
   },
 };

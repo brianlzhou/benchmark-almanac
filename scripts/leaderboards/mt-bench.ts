@@ -11,6 +11,14 @@ const board: Leaderboard = {
   parts: {
     turn1: { name: 'Turn 1', group: 'Split' },
     turn2: { name: 'Turn 2', group: 'Split' },
+    'category:writing': { name: 'Writing', group: 'Category' },
+    'category:roleplay': { name: 'Roleplay', group: 'Category' },
+    'category:reasoning': { name: 'Reasoning', group: 'Category' },
+    'category:math': { name: 'Math', group: 'Category' },
+    'category:coding': { name: 'Coding', group: 'Category' },
+    'category:extraction': { name: 'Extraction', group: 'Category' },
+    'category:stem': { name: 'STEM', group: 'Category' },
+    'category:humanities': { name: 'Humanities', group: 'Category' },
   },
   url: "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge",
   feed: FEED,
@@ -34,7 +42,6 @@ const board: Leaderboard = {
       g.sum += r.score; g.n++;
       if (Number.isFinite(r.tstamp)) g.last = Math.max(g.last, r.tstamp);
       const category = categories.get(r.question_id);
-      if (category) board.parts!['category:' + category] = { name: category, group: 'Category' };
       for (const key of ['turn' + r.turn, ...(category ? ['category:' + category] : [])]) {
         const t = g.turns[key] ?? { sum: 0, n: 0 };
         t.sum += r.score; t.n++; g.turns[key] = t;

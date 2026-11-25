@@ -8,6 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/icelandic';
 export default {
   benchmark:'hotter-and-colder',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
+  stats:{macroF1:{name:'Macro F1',unit:'%',better:'higher'},scored:{name:'Scored runs',unit:'count'},failures:{name:'Failed runs',unit:'count',better:'lower'}},
   aliases: {
     "google/gemma-3-27b-pt": "gemma-3-27b-pt",
     "Qwen/Qwen3-Next-80B-A3B-Instruct": "qwen3-next-80b-a3b-instruct",
