@@ -190912,7 +190912,7 @@
       "url": "https://github.com/jgerstmayr/MecEng/blob/main/misc/paperTableData/overallResults50models_2026-06-25_mergedLLMs.xlsx",
       "feed": "https://raw.githubusercontent.com/jgerstmayr/MecEng/main/misc/paperTableData/overallResults50models_2026-06-25_mergedLLMs.xlsx",
       "terms": "The repository uses BSD 3-Clause. https://github.com/jgerstmayr/MecEng/blob/main/LICENSE The raw file host serves no robots.txt rules.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-25",
       "rows": 20,
       "unmatched": [
         "codegemma:7b",
