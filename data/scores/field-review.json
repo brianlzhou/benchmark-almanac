@@ -1,6 +1,6 @@
 {
   "note": "Fields a board publishes that its importer may drop, or that the board added since the last sync. Wire them into the importer, or mark them reviewed in data/field-decisions.json.",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "boards": {
     "ad4edu-bench": [{"field":"95% CI","kind":"uncertainty","why":"not stored","share":1}],
     "advancedif": [{"field":"Avg. Turns per Dialog","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Multi-turn","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Multi-turn Carried Context IF","kind":"time, latency or steps","why":"not stored","share":1}],

@@ -10899,6 +10899,20 @@
     ]
   },
   {
+    "id": "olmo-3-32b",
+    "name": "Olmo 3 32B",
+    "lab": "ai2",
+    "family": "Olmo 3",
+    "released": "2025-11-20",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/allenai/Olmo-3-1125-32B",
+    "aliases": [
+      "Olmo-3-1125-32B",
+      "Olmo 3 32B base"
+    ]
+  },
+  {
     "id": "codev-sva-8b",
     "name": "CodeV-SVA-8B",
     "lab": "ict-cas",
@@ -11960,6 +11974,19 @@
     "card": "https://huggingface.co/stepfun-ai/Step-3.5-Flash"
   },
   {
+    "id": "step-3-5-flash-base",
+    "name": "Step 3.5 Flash Base",
+    "lab": "stepfun",
+    "family": "Step 3.5",
+    "released": "2026-03-02",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/stepfun-ai/Step-3.5-Flash-Base",
+    "aliases": [
+      "Step-3.5-Flash-Base"
+    ]
+  },
+  {
     "id": "minicpm-o-4-5",
     "name": "MiniCPM-o 4.5",
     "lab": "openbmb",
@@ -12647,6 +12674,19 @@
     "released": "2026-03-11",
     "weights": "open",
     "epoch": "Nemotron 3 Super"
+  },
+  {
+    "id": "nemotron-3-super-120b-a12b-base",
+    "name": "Nemotron 3 Super 120B-A12B Base",
+    "lab": "nvidia",
+    "family": "Nemotron 3",
+    "released": "2026-03-11",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16",
+    "aliases": [
+      "Nemotron-3-Super-120B-A12B-Base"
+    ]
   },
   {
     "id": "reka-edge-2603",
@@ -13437,6 +13477,14 @@
     "epoch": "DeepSeek-V4-Pro"
   },
   {
+    "id": "deepseek-v4-pro-base",
+    "name": "DeepSeek-V4-Pro-Base",
+    "lab": "deepseek",
+    "released": "2026-04-22",
+    "weights": "open",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-Base"
+  },
+  {
     "id": "qwen-3-6-flash",
     "name": "Qwen 3.6 Flash",
     "lab": "qwen",
@@ -13458,6 +13506,17 @@
     "lab": "poolside",
     "released": "2026-04-28",
     "epoch": "Laguna M.1"
+  },
+  {
+    "id": "laguna-m-1-base",
+    "name": "Laguna M.1 Base",
+    "lab": "poolside",
+    "released": "2026-06-05",
+    "weights": "open",
+    "card": "https://huggingface.co/poolside/Laguna-M.1-base",
+    "aliases": [
+      "Laguna-M.1-base"
+    ]
   },
   {
     "id": "laguna-xs-2",
@@ -13638,6 +13697,18 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://ernie.baidu.com/blog/posts/ernie-5.1-0508-release/"
+  },
+  {
+    "id": "ernie-5-5-flash-base",
+    "name": "ERNIE 5.5 Flash Base",
+    "lab": "baidu",
+    "family": "ERNIE 5",
+    "released": "2026-10-21",
+    "weights": "open",
+    "card": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
+    "aliases": [
+      "ERNIE-5.5-Flash-Base"
+    ]
   },
   {
     "id": "sensenova-6-7-flash-lite",
@@ -15861,6 +15932,20 @@
     ]
   },
   {
+    "id": "ripple-65b-base-preview",
+    "name": "Ripple-65B Base Preview",
+    "lab": "ricursive",
+    "family": "Ripple",
+    "released": "2026-10-14",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/ricursiveAI/Ripple-65B-Base-Preview",
+    "aliases": [
+      "Ripple-65B-Base-Preview",
+      "Ripple 65B Base Preview"
+    ]
+  },
+  {
     "id": "swe-2-flash",
     "name": "SWE-2 Flash",
     "lab": "cognition",
@@ -17463,5 +17548,32 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
+  },
+  {
+    "id": "marin-32b-base",
+    "name": "Marin 32B Base",
+    "lab": "marin",
+    "family": "Marin",
+    "released": "2025-10-25",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/marin-community/marin-32b-base",
+    "aliases": [
+      "marin-32b-base"
+    ]
+  },
+  {
+    "id": "marin-mochi-535b-a23b",
+    "name": "Marin Mochi 535B-A23B",
+    "lab": "marin",
+    "family": "Marin",
+    "released": "2026-11-03",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/open-athena/Marin-Mochi-535B-A23B",
+    "aliases": [
+      "Marin-Mochi-535B-A23B",
+      "Marin Mochi 535B"
+    ]
   }
 ]

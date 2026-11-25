@@ -143706,6 +143706,36 @@
     "added": "2026-11-19"
   },
   {
+    "id": "pretraining-index",
+    "name": "Pre-training Index",
+    "aliases": [
+      "Pretraining Index",
+      "Pre-training Index v0"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reading",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Open base and post-trained models predict the text of documents from about 260 curated sources and Uncheatable Eval. The score is bits per byte, so it measures how well each model compresses code, math and science, systems writing and essays.",
+    "org": "Elie Bakouch",
+    "released": "2026-11",
+    "links": {
+      "site": "https://eliebak.com/pretraining-index",
+      "leaderboard": "https://eliebak.com/pretraining-index"
+    },
+    "access": "public",
+    "note": "Version 0 scores 27 open models, 14 base and 13 post-trained. Half of the index is Uncheatable Eval, whose documents were published after every model's knowledge cutoff. The curated sources make up the other half: code 25%, math and science 10%, systems writing 10% and ideas writing 5%. Old documents that some model predicts far better than expected (loss at least 4 times lower), and so likely trained on, are left out for every model. The maker didn't recover base behavior for the post-trained models, so their base models likely score lower. In the November 24, 2026 results, Kimi K3.1 Pro had the lowest bits per byte, 0.392, and beat the other models on 94% of documents.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://eliebak.com/pretraining-index",
+      "https://x.com/eliebakouch/status/2125403710931005852"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "primevul",
     "name": "PrimeVul",
     "aliases": [

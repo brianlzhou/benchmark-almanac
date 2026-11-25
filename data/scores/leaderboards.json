@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-24",
+  "retrieved": "2026-11-25",
   "rowsIn": "data/scores/rows/<first character of the board id>.json",
   "boards": {
     "1h-videoqa-google": {
@@ -253841,6 +253841,56 @@
       "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
+    },
+    "pretraining-index": {
+      "url": "https://eliebak.com/pretraining-index",
+      "feed": "https://eliebak.com/pretraining-index",
+      "terms": "The page publishes its data and results openly. eliebak.com's robots.txt sets no rules for this path. Results are credited to Elie Bakouch's Pre-training Index.",
+      "retrieved": "2026-11-25",
+      "rows": 27,
+      "unmatched": [],
+      "parts": {
+        "code": {
+          "name": "Code",
+          "group": "Collection"
+        },
+        "mathScience": {
+          "name": "Math & science",
+          "group": "Collection"
+        },
+        "systems": {
+          "name": "Systems writing",
+          "group": "Collection"
+        },
+        "ideas": {
+          "name": "Ideas writing",
+          "group": "Collection"
+        },
+        "uncheatable": {
+          "name": "Uncheatable Eval",
+          "group": "Collection"
+        }
+      },
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of documents where the model has fewer bits per byte than another model, averaged over the other models and weighted like the index."
+        },
+        "recent": {
+          "name": "Documents published after the cutoff",
+          "unit": "score",
+          "better": "lower",
+          "note": "The index over documents published since the page's cutoff month, after every listed model's estimated knowledge cutoff."
+        },
+        "older": {
+          "name": "Older documents",
+          "unit": "score",
+          "better": "lower",
+          "note": "The index over documents published before the cutoff month, which some models may have trained on."
+        }
+      }
     },
     "primevul": {
       "url": "https://arxiv.org/abs/2403.18624",
