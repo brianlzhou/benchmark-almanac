@@ -55066,16 +55066,16 @@
       ],
       "parts": {
         "researchDueDiligenceDim": {
-          "name": "Research due diligence"
+          "name": "证据化投研与尽调"
         },
         "financialModelDim": {
-          "name": "Financial modeling"
+          "name": "财务分析与模型维护"
         },
         "bankComplianceDim": {
-          "name": "Bank compliance"
+          "name": "银行业务与合规管控"
         },
         "quantPortfolioDim": {
-          "name": "Quantitative portfolio"
+          "name": "量化投资与组合管理"
         },
         "finProKnowledgeDim": {
           "name": "金融专业知识问答"
@@ -66430,6 +66430,17 @@
         "avgDurationSeconds": {
           "name": "Average duration",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "providerFailureRate": {
+          "name": "Provider failure rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Fraction of runs with provider failures, from 0 to 1."
+        },
+        "providerFailures": {
+          "name": "Provider failures",
+          "unit": "count",
           "better": "lower"
         },
         "scoredRuns": {
@@ -100675,15 +100686,14 @@
       "rows": 10,
       "unmatched": [],
       "stats": {
-        "standingsRank": {
-          "name": "Standings rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "losses": {
           "name": "Losses",
           "unit": "count",
           "better": "lower"
+        },
+        "ties": {
+          "name": "Ties",
+          "unit": "count"
         },
         "pointsFor": {
           "name": "Points for",
@@ -153096,6 +153106,15 @@
           "unit": "%",
           "better": "lower"
         },
+        "notMentioned": {
+          "name": "Not mentioned",
+          "unit": "%"
+        },
+        "misrepresented": {
+          "name": "Misrepresented",
+          "unit": "%",
+          "better": "lower"
+        },
         "asr11": {
           "name": "One-query attack success rate",
           "unit": "%",
@@ -153105,6 +153124,11 @@
           "name": "Iterative attack success rate",
           "unit": "%",
           "better": "lower"
+        },
+        "cleanObjective": {
+          "name": "Clean-run objective score",
+          "unit": "%",
+          "better": "higher"
         },
         "cleanCost": {
           "name": "Clean-run cost",
