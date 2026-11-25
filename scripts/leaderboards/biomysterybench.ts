@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
 
-import { valsView } from './vals-index.ts';
+import { VALS_LATENCY_CHART, valsView } from './vals-index.ts';
 
 const FEED = 'https://www.vals.ai/benchmarks/biomysterybench';
 const board: Leaderboard = {
@@ -17,6 +17,7 @@ const board: Leaderboard = {
   aliases: { 'Gemini 3.1 Pro Preview (02/26)': 'gemini-3-1-pro' },
   terms: 'Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.',
   stats: { time: { name: 'Time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
+  chart: { ...VALS_LATENCY_CHART, x: { ...VALS_LATENCY_CHART.x, key: 'time' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(FEED);
     const view = await valsView(html);
@@ -33,7 +34,7 @@ const board: Leaderboard = {
       const name = r[model]?.text.trim();
       const parts = r[duration]?.text.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?$/);
       const time = parts && parts[0] ? Number(parts[1] || 0) * 3600 + Number(parts[2] || 0) * 60 + Number(parts[3] || 0) : undefined;
-      const slug = r[model]?.html.match(/href="\/models\/([^"]+)"/)?.[1];
+      const slug = r[model]?.html.match(/href="\/models\/([^"#]+)"/)?.[1];
       const run = slug ? view?.tasks?.overall?.[slug.replace('_', '/')] : undefined;
       const matched = value !== undefined && run?.accuracy != null && Math.abs(run.accuracy - value) < 0.006 ? run : undefined;
       const measured = matched?.token_tasks_measured ?? view?.metadata?.token_tasks_measured;
@@ -43,7 +44,13 @@ const board: Leaderboard = {
       if (total) metrics.totalTokens = Number(total[1].replace(/,/g, '')) * ({ k: 1e3, m: 1e6 }[total[2].toLowerCase()] ?? 1);
       if (time !== undefined) metrics.time = time;
       if (matched?.stderr != null) metrics.stderr = matched.stderr;
-      return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness, v11 full set', cost: num(r[cost]?.text), harness: 'Vals AI', trials: 3, tokens: output, metrics }] : [];
+      return name && value !== undefined ? [{
+        model: name, score: value, setting: 'Vals AI harness, v11 full set', cost: num(r[cost]?.text), harness: 'Vals AI', trials: 3, tokens: output,
+        link: slug ? `https://www.vals.ai/models/${slug}` : undefined,
+        low: matched?.stderr != null && matched.stderr > 0 ? matched.accuracy! - 1.96 * matched.stderr : undefined,
+        high: matched?.stderr != null && matched.stderr > 0 ? matched.accuracy! + 1.96 * matched.stderr : undefined,
+        metrics,
+      }] : [];
     });
     if (!rows.length) throw new Error('BioMysteryBench Vals rows missing');
     return rows;

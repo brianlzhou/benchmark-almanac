@@ -1,7 +1,7 @@
 // Vals ProofBench v1 (the archived first version, while v1.1 is proofbench-1-1) on vals.ai, read through the helper
 // in vals-index.ts.
 import type { Leaderboard } from './types.ts';
-import { VALS_ALIASES, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
+import { VALS_ALIASES, VALS_LATENCY_CHART, VALS_STATS, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
 
 const SLUG = 'proof_bench_v1';
 
@@ -11,7 +11,8 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower', note: 'Mean time per test.' } },
+  stats: VALS_STATS,
+  chart: VALS_LATENCY_CHART,
   fetch: () => valsRows(SLUG),
 };
 export default board;
