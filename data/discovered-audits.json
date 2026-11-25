@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "items": [
     {
       "key": "https://arxiv.org/abs/2611.29744",
@@ -8,7 +8,7 @@
       "source": "arXiv",
       "date": "2026-11-22",
       "first": "2026-11-24",
-      "last": "2026-11-24",
+      "last": "2026-11-25",
       "benchmarks": [
         "agent-memory-leaderboard"
       ],
