@@ -5,7 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json";
 const board: Leaderboard = {
   benchmark: "tau-bench-2-0",
-  stats: { expectedTrials: { name: 'Expected trials', unit: 'count' }, scoredTrials: { name: 'Scored trials', unit: 'count' }, errorTrials: { name: 'Error trials', unit: 'count' }, enAirline: { name: 'English airline pass rate', unit: '%', better: 'higher' }, enRetail: { name: 'English retail pass rate', unit: '%', better: 'higher' }, enTelecom: { name: 'English telecom pass rate', unit: '%', better: 'higher' }, esAirline: { name: 'Spanish airline pass rate', unit: '%', better: 'higher' }, esRetail: { name: 'Spanish retail pass rate', unit: '%', better: 'higher' }, esTelecom: { name: 'Spanish telecom pass rate', unit: '%', better: 'higher' }, ptAirline: { name: 'Portuguese airline pass rate', unit: '%', better: 'higher' }, ptRetail: { name: 'Portuguese retail pass rate', unit: '%', better: 'higher' }, ptTelecom: { name: 'Portuguese telecom pass rate', unit: '%', better: 'higher' }, hiAirline: { name: 'Hindi airline pass rate', unit: '%', better: 'higher' }, hiRetail: { name: 'Hindi retail pass rate', unit: '%', better: 'higher' }, hiTelecom: { name: 'Hindi telecom pass rate', unit: '%', better: 'higher' }, zhAirline: { name: 'Chinese airline pass rate', unit: '%', better: 'higher' }, zhRetail: { name: 'Chinese retail pass rate', unit: '%', better: 'higher' }, zhTelecom: { name: 'Chinese telecom pass rate', unit: '%', better: 'higher' }, koAirline: { name: 'Korean airline pass rate', unit: '%', better: 'higher' }, koRetail: { name: 'Korean retail pass rate', unit: '%', better: 'higher' }, koTelecom: { name: 'Korean telecom pass rate', unit: '%', better: 'higher' } },
+  stats: { scoredTrials: { name: 'Scored trials', unit: 'count' }, errorTrials: { name: 'Error trials', unit: 'count', better: 'lower' } },
   parts: {
     domain_airline: { name: 'Airline', group: 'Domain' },
     domain_retail: { name: 'Retail', group: 'Domain' },
@@ -16,6 +16,24 @@ const board: Leaderboard = {
     language_hi: { name: 'Hindi', group: 'Language' },
     language_zh: { name: 'Chinese', group: 'Language' },
     language_ko: { name: 'Korean', group: 'Language' },
+    enAirline: { name: 'Airline', group: 'English' },
+    enRetail: { name: 'Retail', group: 'English' },
+    enTelecom: { name: 'Telecom', group: 'English' },
+    esAirline: { name: 'Airline', group: 'Spanish' },
+    esRetail: { name: 'Retail', group: 'Spanish' },
+    esTelecom: { name: 'Telecom', group: 'Spanish' },
+    ptAirline: { name: 'Airline', group: 'Portuguese' },
+    ptRetail: { name: 'Retail', group: 'Portuguese' },
+    ptTelecom: { name: 'Telecom', group: 'Portuguese' },
+    hiAirline: { name: 'Airline', group: 'Hindi' },
+    hiRetail: { name: 'Retail', group: 'Hindi' },
+    hiTelecom: { name: 'Telecom', group: 'Hindi' },
+    zhAirline: { name: 'Airline', group: 'Chinese' },
+    zhRetail: { name: 'Retail', group: 'Chinese' },
+    zhTelecom: { name: 'Telecom', group: 'Chinese' },
+    koAirline: { name: 'Airline', group: 'Korean' },
+    koRetail: { name: 'Retail', group: 'Korean' },
+    koTelecom: { name: 'Telecom', group: 'Korean' },
   },
   url: "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json",
   feed: FEED,
@@ -26,14 +44,13 @@ const board: Leaderboard = {
 const base=FEED.slice(0,FEED.lastIndexOf('/'));const manifest=await fetchJson<any>(FEED);const out:LeaderboardRow[]=[];
 for(const id of manifest.voice_v2_submissions){await new Promise(r=>setTimeout(r,1100));const meta=await fetchJson<any>(`${base}/${id}/benchmark-metadata.json`);await new Promise(r=>setTimeout(r,1100));const d=await fetchJson<any>(`${base}/${id}/benchmark-submission.json`);if(d.frame.benchmark_version!=='voice-v2'||!d.summary.complete)throw new Error('Incomplete or wrong voice benchmark');
 const metrics:Record<string,number>={};for(const [group,values] of Object.entries({language:d.summary.by_language,domain:d.summary.by_domain}) as any){for(const [k,v] of Object.entries(values) as any){if(typeof v.score==='number')metrics[`${group}_${k}`]=100*v.score;}}
-for(const [source,key] of Object.entries({expected_trials:'expectedTrials',scored_trials:'scoredTrials',error_trials:'errorTrials',missing_trials:'missingTrials',unscored_trials:'unscoredTrials'})){
+for(const [source,key] of Object.entries({scored_trials:'scoredTrials',error_trials:'errorTrials'})){
   if(typeof d.summary[source]==='number')metrics[key]=d.summary[source];
 }
 for(const cell of d.summary.cells ?? []){
   if(typeof cell.score!=='number')continue;
   const key=cell.language+cell.domain[0].toUpperCase()+cell.domain.slice(1);
   metrics[key]=100*cell.score;
-  board.parts![key]={name:cell.domain,group:cell.language};
 }
 const effort=meta.notes.match(/at (high|medium|low) (?:reasoning|thinking)/i)?.[1]||meta.notes.match(/intelligence level: (high|medium|low)/i)?.[1];out.push({model:meta.model_name,submitter:meta.submitting_organization,agentOrg:meta.model_organization,link:`${base}/${id}/benchmark-submission.json`,trials:Array.isArray(d.frame.trials)?d.frame.trials.length:undefined,score:d.summary.score*100,date:meta.submission_date,harness:meta.agent_provider,setting:effort,metrics});}return out;
 

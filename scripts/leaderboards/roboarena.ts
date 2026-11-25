@@ -20,8 +20,6 @@ const board: Leaderboard = {
   terms: 'Public JSON API that the RoboArena leaderboard page reads (the API host has no robots.txt and states no terms); the RoboArena repository is MIT-licensed.',
   verified: 'At least 100 RoboArena A/B evaluations',
   stats: {
-    uptimeSamples: { name: 'Uptime samples', unit: 'count' },
-    uptimeWindowHours: { name: 'Uptime window', unit: 'hours' },
     evaluations: { name: 'Evaluations', unit: 'count' },
   },
   aliases: {
@@ -31,14 +29,13 @@ const board: Leaderboard = {
     pi0_droid: 'pi0',
   },
   async fetch(): Promise<LeaderboardRow[]> {
-    const data = await fetchJson<{ board: { policy: string; score?: number; std?: number; num_evals?: number; open_source?: boolean; status?: { uptime_percent?:number, uptime_sample_count?:number, uptime_window_hours?:number } }[] }>(FEED);
+    const data = await fetchJson<{ board: { policy: string; score?: number; std?: number; num_evals?: number; open_source?: boolean }[] }>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const p of data.board) {
       if (!p.policy || typeof p.score !== 'number' || !Number.isFinite(p.score) || (p.num_evals ?? 0) <= 0) continue;
       const official=(p.num_evals ?? 0)>=OFFICIAL_EVALS;
       rows.push({ model: p.policy, score: p.score, open: p.open_source, verified:official, setting:official?undefined:'unofficial; fewer than 100 evaluations',
-        metrics:{...Object.fromEntries(Object.entries({uptimePercent:p.status?.uptime_percent,uptimeSamples:p.status?.uptime_sample_count,
-          uptimeWindowHours:p.status?.uptime_window_hours}).filter((entry):entry is [string,number]=>typeof entry[1]==='number')),evaluations:p.num_evals!,official:Number(official),...(typeof p.std==='number'?{std:p.std}:{})} });
+        metrics:{evaluations:p.num_evals!,...(typeof p.std==='number'?{std:p.std}:{})} });
     }
     if (!rows.length) throw new Error('no official RoboArena rows');
     return rows;

@@ -27,8 +27,9 @@ const board: Leaderboard = {
       const dims=['atmosphere','npc_craft','gm_craft'].map(k=>r.judge_averages[k]);
       if(!r.model || r.cases.length!==6 || !dims.every(Number.isFinite)) throw new Error('Incomplete narrative run');
       const mean=(key:'elapsed_s'|'completion_tokens')=>r.cases.reduce((s,c)=>s+c[key],0)/r.cases.length;
+      const summary = Object.fromEntries(Object.entries(r.auto_summary).filter(([k]) => k !== 'ERROR'));
       rows.push({model:r.model,date:r.timestamp.slice(0,10),score:dims.reduce((a,b)=>a+b,0)/3,link:f.html_url,
-        tokens:mean('completion_tokens'),metrics:{...r.judge_averages,...r.auto_summary,latency:mean('elapsed_s')}});
+        tokens:mean('completion_tokens'),metrics:{...r.judge_averages,...summary,latency:mean('elapsed_s')}});
     }
     return rows;
   },

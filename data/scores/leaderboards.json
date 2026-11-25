@@ -218431,6 +218431,11 @@
           "name": "Context receiver operating characteristic difference",
           "unit": "score",
           "note": "Difference between full-context and legacy-context ablation AUROC."
+        },
+        "parseFailures": {
+          "name": "Parse failures",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -218730,12 +218735,29 @@
       "feed": "https://aclanthology.org/W17-2623.pdf",
       "terms": "ACL Anthology publishes the paper under the terms at https://aclanthology.org/info/copyright/.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "FastQA",
         "mLSTM"
-      ]
+      ],
+      "stats": {
+        "exactMatch": {
+          "name": "Test exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "devF1": {
+          "name": "Development F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "devExactMatch": {
+          "name": "Development exact match",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "newt-2021": {
       "url": "https://imageomics.github.io/biobench/",
@@ -221940,7 +221962,7 @@
       "feed": "https://aclanthology.org/2022.lrec-1.106.pdf",
       "terms": "The LREC paper is available under ACL Anthology terms. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "M1",
@@ -221951,6 +221973,11 @@
       "stats": {
         "NB": {
           "name": "NB Tale word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "NSTPrime": {
+          "name": "NST Prime word error rate",
           "unit": "%",
           "better": "lower"
         }
@@ -226922,14 +226949,16 @@
       "stats": {
         "completeT8CHits": {
           "name": "Complete T8-C hits",
-          "unit": "count"
-        },
-        "completeT8CTotal": {
-          "name": "Complete T8-C total",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "explicitTerminalFailures": {
           "name": "Explicit terminal failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "assistanceTerminalFailures": {
+          "name": "Assistance terminal failures",
           "unit": "count",
           "better": "lower"
         }
@@ -251844,10 +251873,6 @@
           "name": "Character n-gram F-score at order 4",
           "unit": "score",
           "better": "higher"
-        },
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
         }
       }
     },
@@ -253007,12 +253032,19 @@
       "feed": "https://aclanthology.org/2026.africanlp-main.8.pdf",
       "terms": "ACL Anthology makes this paper available under its publication terms. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "MMS-1b-all",
         "NCAIR1/Yoruba-ASR"
-      ]
+      ],
+      "stats": {
+        "toneErrorRate": {
+          "name": "Tone error rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "p3b3": {
       "url": "https://arxiv.org/pdf/2606.16753#page=4",
@@ -269191,6 +269223,13 @@
           "name": "MV2H",
           "better": "higher"
         }
+      },
+      "stats": {
+        "realTimeFactor": {
+          "name": "Real-time factor",
+          "unit": "score",
+          "better": "lower"
+        }
       }
     },
     "quartets-mirex-2026": {
@@ -277670,14 +277709,6 @@
       ],
       "verified": "At least 100 RoboArena A/B evaluations",
       "stats": {
-        "uptimeSamples": {
-          "name": "Uptime samples",
-          "unit": "count"
-        },
-        "uptimeWindowHours": {
-          "name": "Uptime window",
-          "unit": "hours"
-        },
         "evaluations": {
           "name": "Evaluations",
           "unit": "count"
@@ -278826,7 +278857,7 @@
       "feed": "https://raw.githubusercontent.com/liveplex-cpu/robogate-leaderboard/main/leaderboard.json",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
       "retrieved": "2026-11-24",
-      "rows": 3,
+      "rows": 2,
       "unmatched": [
         "cosmos-policy-2b",
         "groot-n1.7-libero10",
@@ -278839,12 +278870,14 @@
         "openvla-oft-liberogoal",
         "openvla-oft-liberoobject",
         "openvla-oft-liberospatial",
-        "pi0-base"
+        "pi0-base",
+        "smolvla-base"
       ],
       "stats": {
-        "scenariosTotal": {
-          "name": "Scenarios",
-          "unit": "count"
+        "scenariosPassed": {
+          "name": "Scenarios passed",
+          "unit": "count",
+          "better": "higher"
         },
         "graspMissRate": {
           "name": "Grasp miss rate",
@@ -279878,13 +279911,25 @@
       "url": "https://arxiv.org/html/2010.07954",
       "feed": "https://arxiv.org/html/2010.07954",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "RxR Mono",
         "RxR Multi"
       ],
-      "static": "paper"
+      "stats": {
+        "successRate": {
+          "name": "Success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "successDTW": {
+          "name": "Success-weighted DTW",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "roomelsa-shrec-2025": {
       "url": "https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom#h.a8wvullqsccv_l",
@@ -288061,39 +288106,24 @@
     "sea-helm-audio": {
       "url": "https://arxiv.org/html/2610.19869",
       "feed": "https://arxiv.org/html/2610.19869",
-      "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2610.19869",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "The paper reports no overall score, so this is the Speech accuracy column, with Text and Delta retained as metrics.",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 1,
+      "retrieved": "2026-11-24",
+      "rows": 6,
       "unmatched": [
         "SEA-LION-4.5-27B"
       ],
-      "harnesses": "system",
-      "parts": {
-        "mmluChinese": {
-          "name": "Chinese",
-          "group": "Global-MMLU-Lite"
+      "stats": {
+        "text": {
+          "name": "Text accuracy",
+          "unit": "%",
+          "better": "higher"
         },
-        "mmluEnglish": {
-          "name": "English",
-          "group": "Global-MMLU-Lite"
-        },
-        "ifevalEnglish": {
-          "name": "English",
-          "group": "SEA-HELM IFEval"
-        },
-        "ifevalIndonesian": {
-          "name": "Indonesian",
-          "group": "SEA-HELM IFEval"
-        },
-        "ifevalMalay": {
-          "name": "Malay",
-          "group": "SEA-HELM IFEval"
-        },
-        "ifevalTamil": {
-          "name": "Tamil",
-          "group": "SEA-HELM IFEval"
+        "delta": {
+          "name": "Text-to-speech accuracy gap",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -288965,7 +288995,7 @@
       "feed": "https://arxiv.org/html/2611.09794",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Qwen3-VL-8B",
@@ -289014,6 +289044,10 @@
           "name": "Post-failure rate",
           "unit": "%",
           "better": "lower"
+        },
+        "views": {
+          "name": "Average views per episode",
+          "unit": "count"
         }
       }
     },
@@ -310388,7 +310422,7 @@
       "terms": "The public repository includes its project license and publishes the analysis tables. https://github.com/reductoai/table-judge-benchmark",
       "headline": "The benchmark table ranks judges by F1, the harmonic mean of precision and true positive rate.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "stats": {
@@ -311817,90 +311851,87 @@
           "group": "Language"
         },
         "enAirline": {
-          "name": "airline",
-          "group": "en"
+          "name": "Airline",
+          "group": "English"
         },
         "enRetail": {
-          "name": "retail",
-          "group": "en"
+          "name": "Retail",
+          "group": "English"
         },
         "enTelecom": {
-          "name": "telecom",
-          "group": "en"
+          "name": "Telecom",
+          "group": "English"
         },
         "esAirline": {
-          "name": "airline",
-          "group": "es"
+          "name": "Airline",
+          "group": "Spanish"
         },
         "esRetail": {
-          "name": "retail",
-          "group": "es"
+          "name": "Retail",
+          "group": "Spanish"
         },
         "esTelecom": {
-          "name": "telecom",
-          "group": "es"
+          "name": "Telecom",
+          "group": "Spanish"
         },
         "ptAirline": {
-          "name": "airline",
-          "group": "pt"
+          "name": "Airline",
+          "group": "Portuguese"
         },
         "ptRetail": {
-          "name": "retail",
-          "group": "pt"
+          "name": "Retail",
+          "group": "Portuguese"
         },
         "ptTelecom": {
-          "name": "telecom",
-          "group": "pt"
+          "name": "Telecom",
+          "group": "Portuguese"
         },
         "hiAirline": {
-          "name": "airline",
-          "group": "hi"
+          "name": "Airline",
+          "group": "Hindi"
         },
         "hiRetail": {
-          "name": "retail",
-          "group": "hi"
+          "name": "Retail",
+          "group": "Hindi"
         },
         "hiTelecom": {
-          "name": "telecom",
-          "group": "hi"
+          "name": "Telecom",
+          "group": "Hindi"
         },
         "zhAirline": {
-          "name": "airline",
-          "group": "zh"
+          "name": "Airline",
+          "group": "Chinese"
         },
         "zhRetail": {
-          "name": "retail",
-          "group": "zh"
+          "name": "Retail",
+          "group": "Chinese"
         },
         "zhTelecom": {
-          "name": "telecom",
-          "group": "zh"
+          "name": "Telecom",
+          "group": "Chinese"
         },
         "koAirline": {
-          "name": "airline",
-          "group": "ko"
+          "name": "Airline",
+          "group": "Korean"
         },
         "koRetail": {
-          "name": "retail",
-          "group": "ko"
+          "name": "Retail",
+          "group": "Korean"
         },
         "koTelecom": {
-          "name": "telecom",
-          "group": "ko"
+          "name": "Telecom",
+          "group": "Korean"
         }
       },
       "stats": {
-        "expectedTrials": {
-          "name": "Expected trials",
-          "unit": "count"
-        },
         "scoredTrials": {
           "name": "Scored trials",
           "unit": "count"
         },
         "errorTrials": {
           "name": "Error trials",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -330457,6 +330488,11 @@
           "name": "Latency",
           "unit": "seconds",
           "better": "lower"
+        },
+        "generation": {
+          "name": "Avatar generation overall score",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -343493,7 +343529,7 @@
     "xcopa": {
       "url": "https://github.com/cambridgeltl/xcopa",
       "feed": "https://raw.githubusercontent.com/cambridgeltl/xcopa/master/README.md",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -343545,6 +343581,18 @@
         "zh": {
           "name": "Mandarin Chinese",
           "group": "Language"
+        }
+      },
+      "stats": {
+        "qu_fallback": {
+          "name": "Southern Quechua (fallback)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ht_fallback": {
+          "name": "Haitian Creole (fallback)",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },

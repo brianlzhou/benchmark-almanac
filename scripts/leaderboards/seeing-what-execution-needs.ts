@@ -16,6 +16,7 @@ const board: Leaderboard = {
     selectivity: {name: 'View selectivity', unit: '%', better: 'higher'},
     collision: {name: 'Collision rate', unit: '%', better: 'lower'},
     postFail: {name: 'Post-failure rate', unit: '%', better: 'lower'},
+    views: {name: 'Average views per episode', unit: 'count'},
   },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
