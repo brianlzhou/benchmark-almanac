@@ -71,24 +71,6 @@
         "votes": {
           "name": "Votes",
           "unit": "count"
-        },
-        "renderRank": {
-          "name": "Render rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "renderVotes": {
-          "name": "Render votes",
-          "unit": "count"
-        },
-        "topologyRank": {
-          "name": "Topology rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "topologyVotes": {
-          "name": "Topology votes",
-          "unit": "count"
         }
       }
     },
@@ -19821,7 +19803,7 @@
       "feed": "https://arxiv.org/html/2606.31711",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "SD3.5-M",
@@ -19866,16 +19848,6 @@
           "name": "Dependency satisfaction grounding",
           "unit": "score",
           "better": "higher"
-        },
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "arenaRank": {
-          "name": "Arena rank",
-          "unit": "count",
-          "better": "lower"
         },
         "arenaScore": {
           "name": "Arena score",
@@ -25869,7 +25841,7 @@
       "feed": "https://labs.scale.com/leaderboard/audiomc (the text and audio variants in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The Almanac credits and links the source.",
       "retrieved": "2026-11-24",
-      "rows": 28,
+      "rows": 31,
       "unmatched": [
         "Gemini 2.5 Flash Native Audio",
         "LFM2-Audio-1.5B",
@@ -25880,14 +25852,7 @@
       "reference": [
         "one-pass-agent"
       ],
-      "harnesses": "system",
-      "stats": {
-        "outputModeRank": {
-          "name": "Output mode rank",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      "harnesses": "system"
     },
     "audio-reasoning-challenge-2026": {
       "url": "https://audio-reasoning-challenge.github.io/leaderboard/",
@@ -27246,7 +27211,7 @@
     "autoresearchexam": {
       "url": "https://benchmarks.bespokelabs.ai/autoresearchexam/",
       "feed": "https://benchmarks.bespokelabs.ai/autoresearchexam/ (static efficiency chart plus live script aggregate objects)",
-      "terms": "Public Bespoke Labs page; benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.",
+      "terms": "Public Bespoke Labs page. benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.",
       "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
@@ -27289,10 +27254,6 @@
           "name": "Elo",
           "unit": "elo",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -29239,11 +29200,6 @@
           "name": "Best single hand",
           "unit": "count",
           "better": "higher"
-        },
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -29331,7 +29287,7 @@
     "balrog": {
       "url": "https://balrogai.com/",
       "feed": "https://balrogai.com/ (default LLM board, % Progress)",
-      "terms": "Static public page; the site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.",
+      "terms": "Static public page. The site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.",
       "retrieved": "2026-11-24",
       "rows": 36,
       "unmatched": [
@@ -29364,36 +29320,6 @@
         "NetHack": {
           "name": "NetHack",
           "group": "Environment"
-        }
-      },
-      "stats": {
-        "progressSpread": {
-          "name": "Progress spread",
-          "unit": "score"
-        },
-        "BabyAISpread": {
-          "name": "BabyAI spread",
-          "unit": "score"
-        },
-        "CrafterSpread": {
-          "name": "Crafter spread",
-          "unit": "score"
-        },
-        "TextWorldSpread": {
-          "name": "TextWorld spread",
-          "unit": "score"
-        },
-        "BabaIsAISpread": {
-          "name": "BabaIsAI spread",
-          "unit": "score"
-        },
-        "MiniHackSpread": {
-          "name": "MiniHack spread",
-          "unit": "score"
-        },
-        "NetHackSpread": {
-          "name": "NetHack spread",
-          "unit": "score"
         }
       }
     },
@@ -31559,23 +31485,13 @@
     "benchcad-2-0": {
       "url": "https://benchcad.com/leaderboard.html",
       "feed": "https://benchcad.com/leaderboard.html (BenchCAD 2.0 Core tables)",
-      "terms": "BenchCAD publishes these public tables, including credited vendor results; the Almanac credits BenchCAD and links its source.",
+      "terms": "BenchCAD publishes these public tables, including credited vendor results. The Almanac credits BenchCAD and links its source.",
       "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
         "OpenAI internal model (unreleased)"
       ],
       "stats": {
-        "harnessTableRank": {
-          "name": "Harness table rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "cost": {
-          "name": "Cost per case",
-          "unit": "usd",
-          "better": "lower"
-        },
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens",
@@ -31591,22 +31507,10 @@
     "benchcad-2-1": {
       "url": "https://benchcad.com/leaderboard.html",
       "feed": "https://benchcad.com/leaderboard.html (BenchCAD 2.1 Core tables)",
-      "terms": "BenchCAD publishes these public tables, including credited vendor results; the Almanac credits BenchCAD and links its source.",
+      "terms": "BenchCAD publishes these public tables, including credited vendor results. The Almanac credits BenchCAD and links its source.",
       "retrieved": "2026-11-24",
       "rows": 70,
-      "unmatched": [],
-      "stats": {
-        "harnessTableRank": {
-          "name": "Harness table rank",
-          "unit": "count",
-          "better": "lower"
-        },
-        "cost": {
-          "name": "Cost per case",
-          "unit": "usd",
-          "better": "lower"
-        }
-      }
+      "unmatched": []
     },
     "benchmax": {
       "url": "https://github.com/CONE-MT/BenchMAX",
@@ -43665,11 +43569,13 @@
       "stats": {
         "correct": {
           "name": "Correct answers",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
-        "items": {
-          "name": "Test items",
-          "unit": "count"
+        "invalid": {
+          "name": "Invalid answers",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -43686,11 +43592,13 @@
       "stats": {
         "correct": {
           "name": "Correct answers",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
-        "items": {
-          "name": "Test items",
-          "unit": "count"
+        "invalid": {
+          "name": "Invalid answers",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -65321,14 +65229,14 @@
     "continual-learning-bench": {
       "url": "https://snorkel.ai/leaderboard/continual-learning-bench/",
       "feed": "https://snorkel.ai/leaderboard/continual-learning-bench/",
-      "terms": "Snorkel terms prohibit automated extraction and republication; Benchmark Almanac credits Snorkel AI and links the source.",
+      "terms": "Snorkel terms prohibit automated extraction and republication. Benchmark Almanac credits Snorkel AI and links the source.",
       "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "chart": {
         "title": "Aggregate reward vs. average evaluation cost",
         "x": {
-          "key": "evaluationCost",
+          "key": "cost",
           "label": "Average evaluation cost",
           "unit": "$",
           "better": "lower"
@@ -65342,40 +65250,40 @@
       "costPer": "run",
       "parts": {
         "blindSpectrumMonitoring": {
-          "name": "blind_spectrum_monitoring",
+          "name": "Blind spectrum monitoring",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         },
         "codebaseAdaptation": {
-          "name": "codebase_adaptation",
+          "name": "Codebase adaptation",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         },
         "cohortStudies": {
-          "name": "cohort_studies",
+          "name": "Cohort studies",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         },
         "databaseExploration": {
-          "name": "database_exploration",
+          "name": "Database exploration",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         },
         "exploitablePoker": {
-          "name": "exploitable_poker",
+          "name": "Exploitable poker",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         },
         "salesPrediction": {
-          "name": "sales_prediction",
+          "name": "Sales prediction",
           "group": "Task",
           "unit": "score",
-          "note": "Cumulative reward on the task"
+          "note": "Cumulative reward on the task."
         }
       },
       "stats": {
@@ -65394,10 +65302,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "blindSpectrumMonitoringRuns": {
-          "name": "Blind spectrum monitoring runs",
-          "unit": "count"
-        },
         "codebaseAdaptationGain": {
           "name": "Codebase adaptation gain",
           "unit": "score",
@@ -65407,10 +65311,6 @@
           "name": "Codebase adaptation cost",
           "unit": "usd",
           "better": "lower"
-        },
-        "codebaseAdaptationRuns": {
-          "name": "Codebase adaptation runs",
-          "unit": "count"
         },
         "cohortStudiesGain": {
           "name": "Cohort studies gain",
@@ -65422,10 +65322,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "cohortStudiesRuns": {
-          "name": "Cohort studies runs",
-          "unit": "count"
-        },
         "databaseExplorationGain": {
           "name": "Database exploration gain",
           "unit": "score",
@@ -65435,10 +65331,6 @@
           "name": "Database exploration cost",
           "unit": "usd",
           "better": "lower"
-        },
-        "databaseExplorationRuns": {
-          "name": "Database exploration runs",
-          "unit": "count"
         },
         "exploitablePokerGain": {
           "name": "Exploitable poker gain",
@@ -65450,10 +65342,6 @@
           "unit": "usd",
           "better": "lower"
         },
-        "exploitablePokerRuns": {
-          "name": "Exploitable poker runs",
-          "unit": "count"
-        },
         "salesPredictionGain": {
           "name": "Sales prediction gain",
           "unit": "score",
@@ -65463,10 +65351,6 @@
           "name": "Sales prediction cost",
           "unit": "usd",
           "better": "lower"
-        },
-        "salesPredictionRuns": {
-          "name": "Sales prediction runs",
-          "unit": "count"
         }
       }
     },

@@ -23,7 +23,6 @@
     "ape-attempt-to-persuade": [{"field":"turn1_attempt_conspiracy","kind":"trials","why":"not stored","share":1},{"field":"turn1_attempt_controversial","kind":"trials","why":"not stored","share":1},{"field":"turn1_attempt_noncontroversially_harmful","kind":"trials","why":"not stored","share":1},{"field":"turn1_attempt_undermining_control","kind":"trials","why":"not stored","share":1}],
     "arabculture": [{"field":"#Samples","kind":"trials","why":"not stored","share":1}],
     "are-bench": [{"field":"Time limit","kind":"time, latency or steps","why":"not stored","share":1}],
-    "arena-t2i-hard": [{"field":"EMA on policy weights","kind":"open weights, license or size","why":"not stored","share":1},{"field":"Gradient accumulation steps","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Reported steps","kind":"time, latency or steps","why":"not stored","share":1}],
     "arti4d": [{"field":"w/o trajectory smoothing","kind":"link","why":"not stored","share":1}],
     "asap-essay-scoring": [{"field":"submissionCount","kind":"link","why":"not stored","share":1,"sample":"2"}],
     "ascend": [{"field":"Average duration (minutes)","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Duration (hr)","kind":"time, latency or steps","why":"not stored","share":1}],
