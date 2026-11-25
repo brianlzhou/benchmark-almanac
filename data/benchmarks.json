@@ -11504,14 +11504,6 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.87,
-    "epoch": {
-      "epoch_name": "APEX-Agents",
-      "random": 0,
-      "ceiling": 100,
-      "runs": "external",
-      "in_eci": true
-    },
     "evidence": [
       "https://www.mercor.com/blog/introducing-apex-agents-1-1/",
       "https://www.mercor.com/apex/",
@@ -11555,7 +11547,24 @@
     "evidence": [
       "https://www.mercor.com/blog/introducing-apex-agents-1-1/"
     ],
-    "added": "2026-11-01"
+    "added": "2026-11-01",
+    "metric": "Mean score",
+    "measures": [
+      {
+        "id": "pass-1",
+        "name": "Pass@1",
+        "kind": "metric",
+        "note": "The share of tasks fully passed on the first attempt. The board ranks by mean score."
+      }
+    ],
+    "epoch": {
+      "epoch_name": "APEX-Agents",
+      "random": 0,
+      "ceiling": 100,
+      "runs": "external",
+      "in_eci": true
+    },
+    "edi": 156.87
   },
   {
     "id": "apex-swe",
