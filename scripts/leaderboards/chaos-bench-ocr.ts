@@ -7,6 +7,7 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2607.04884';
 const board: Leaderboard = {
   benchmark: 'chaos-bench-ocr', static: 'paper', url: 'https://arxiv.org/abs/2607.04884', feed, terms: PAPER_TERMS,
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' } },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

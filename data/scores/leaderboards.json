@@ -4039,7 +4039,7 @@
       "feed": "https://arxiv.org/html/2305.06897",
       "terms": "The authors release their paper under CC BY 4.0, https://creativecommons.org/licenses/by/4.0/.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "NLLB"
@@ -4075,6 +4075,118 @@
         },
         "zul": {
           "name": "Zulu"
+        }
+      },
+      "stats": {
+        "exactMatch": {
+          "name": "Average exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bleu": {
+          "name": "Average BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bemBLEU": {
+          "name": "Bemba BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bemEM": {
+          "name": "Bemba exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fonBLEU": {
+          "name": "Fon BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fonEM": {
+          "name": "Fon exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hauBLEU": {
+          "name": "Hausa BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "hauEM": {
+          "name": "Hausa exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "iboBLEU": {
+          "name": "Igbo BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "iboEM": {
+          "name": "Igbo exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "kinBLEU": {
+          "name": "Kinyarwanda BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "kinEM": {
+          "name": "Kinyarwanda exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "swaBLEU": {
+          "name": "Swahili BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "swaEM": {
+          "name": "Swahili exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "twiBLEU": {
+          "name": "Twi BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "twiEM": {
+          "name": "Twi exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "wolBLEU": {
+          "name": "Wolof BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "wolEM": {
+          "name": "Wolof exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "yorBLEU": {
+          "name": "Yoruba BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "yorEM": {
+          "name": "Yoruba exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "zulBLEU": {
+          "name": "Zulu BLEU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "zulEM": {
+          "name": "Zulu exact match",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -25048,7 +25160,8 @@
       "url": "https://arxiv.org/html/2608.31111",
       "feed": "https://arxiv.org/html/2608.31111",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "parts": {
@@ -25077,7 +25190,139 @@
           "group": "Vague goal"
         }
       },
-      "static": "paper"
+      "stats": {
+        "baseMacro": {
+          "name": "Base macro average",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scienceBase": {
+          "name": "Scientific and academic reasoning base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scienceRunA": {
+          "name": "Scientific and academic reasoning run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scienceRunB": {
+          "name": "Scientific and academic reasoning run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scienceDelta": {
+          "name": "Scientific and academic reasoning change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        },
+        "humanitiesBase": {
+          "name": "Humanities and social sciences base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "humanitiesRunA": {
+          "name": "Humanities and social sciences run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "humanitiesRunB": {
+          "name": "Humanities and social sciences run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "humanitiesDelta": {
+          "name": "Humanities and social sciences change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        },
+        "mathBase": {
+          "name": "Mathematical reasoning base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mathRunA": {
+          "name": "Mathematical reasoning run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mathRunB": {
+          "name": "Mathematical reasoning run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mathDelta": {
+          "name": "Mathematical reasoning change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        },
+        "healthBase": {
+          "name": "Health and medicine base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "healthRunA": {
+          "name": "Health and medicine run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "healthRunB": {
+          "name": "Health and medicine run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "healthDelta": {
+          "name": "Health and medicine change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        },
+        "logicBase": {
+          "name": "Logic, reliability, and instruction following base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "logicRunA": {
+          "name": "Logic, reliability, and instruction following run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "logicRunB": {
+          "name": "Logic, reliability, and instruction following run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "logicDelta": {
+          "name": "Logic, reliability, and instruction following change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        },
+        "writingBase": {
+          "name": "Academic and scientific writing base score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "writingRunA": {
+          "name": "Academic and scientific writing run A",
+          "unit": "%",
+          "better": "higher"
+        },
+        "writingRunB": {
+          "name": "Academic and scientific writing run B",
+          "unit": "%",
+          "better": "higher"
+        },
+        "writingDelta": {
+          "name": "Academic and scientific writing change from base",
+          "unit": "score",
+          "better": "higher",
+          "note": "Change from base score in percentage points."
+        }
+      }
     },
     "assembly101-o": {
       "url": "https://arxiv.org/html/2404.01933",
@@ -45914,7 +46159,19 @@
       "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "harmfulResponses": {
+          "name": "Harmful responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "safeResponses": {
+          "name": "Safe responses",
+          "unit": "count",
+          "better": "higher"
+        }
+      }
     },
     "ccpa-2025": {
       "url": "https://cips-cl.org/static/CCL2025/en/cclEval/evalResults/index.html#task5",
@@ -47414,7 +47671,8 @@
       "url": "https://arxiv.org/abs/2607.04884",
       "feed": "https://arxiv.org/html/2607.04884",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "HunyuanOCR-1.5",
@@ -47422,7 +47680,12 @@
         "PaddleOCR-VL-1.6",
         "dots.ocr"
       ],
-      "static": "paper"
+      "stats": {
+        "activeParamsB": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "charades-sta": {
       "url": "https://github.com/jiyanggao/TALL",
@@ -53852,7 +54115,9 @@
       "url": "https://ceur-ws.org/Vol-4038/paper_345.pdf",
       "feed": "https://ceur-ws.org/Vol-4038/paper_345.pdf",
       "terms": "CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
-      "retrieved": "2026-11-20",
+      "headline": "The headline is F1 for posthoc detection, which the organizers identify as the main task.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BERT Classifier",
@@ -53888,8 +54153,6 @@
           "name": "Simplification"
         }
       },
-      "headline": "The headline is F1 for posthoc detection, which the organizers identify as the main task.",
-      "static": "paper",
       "stats": {
         "posthocCount": {
           "name": "Posthoc examples",
@@ -53925,10 +54188,6 @@
           "better": "higher",
           "note": "Reported from 0 to 1."
         },
-        "sourcedCount": {
-          "name": "Sourced examples",
-          "unit": "count"
-        },
         "sourcedAccuracy": {
           "name": "Sourced accuracy",
           "unit": "score",
@@ -53955,6 +54214,36 @@
         },
         "sourcedAUPRC": {
           "name": "Sourced area under precision-recall curve",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "noErrorAUPRC": {
+          "name": "No Error area under precision-recall curve",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "fluencyAUPRC": {
+          "name": "Fluency area under precision-recall curve",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "alignmentAUPRC": {
+          "name": "Alignment area under precision-recall curve",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "informationAUPRC": {
+          "name": "Information area under precision-recall curve",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "simplificationAUPRC": {
+          "name": "Simplification area under precision-recall curve",
           "unit": "score",
           "better": "higher",
           "note": "Reported from 0 to 1."
@@ -62770,7 +63059,7 @@
       "feed": "https://arxiv.org/html/2307.12730",
       "terms": "Results credited to Xiaofeng Mao and colleagues. https://arxiv.org/abs/2307.12730",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ATSS",
@@ -62868,6 +63157,12 @@
           "name": "Frames per second",
           "unit": "count",
           "better": "higher"
+        },
+        "alternateMap": {
+          "name": "Alternate COCO-O mAP",
+          "unit": "%",
+          "better": "higher",
+          "note": "Secondary COCO-O mAP when a configuration appears in another paper table."
         }
       }
     },
@@ -80330,10 +80625,84 @@
       "feed": "https://arxiv.org/html/2401.04621",
       "terms": "The authors publish the paper and its terms at https://arxiv.org/abs/2401.04621.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "parts": {
+        "misused ==/=": {
+          "name": "misused ==/=",
+          "group": "Syntax"
+        },
+        "missing colons": {
+          "name": "missing colons",
+          "group": "Syntax"
+        },
+        "unclosed parentheses": {
+          "name": "unclosed parentheses",
+          "group": "Syntax"
+        },
+        "illegal separation": {
+          "name": "illegal separation",
+          "group": "Syntax"
+        },
+        "illegal indentation": {
+          "name": "illegal indentation",
+          "group": "Syntax"
+        },
+        "unclosed string": {
+          "name": "unclosed string",
+          "group": "Syntax"
+        },
+        "illegal comment": {
+          "name": "illegal comment",
+          "group": "Syntax"
+        },
+        "faulty indexing": {
+          "name": "faulty indexing",
+          "group": "Reference"
+        },
+        "undefined objects": {
+          "name": "undefined objects",
+          "group": "Reference"
+        },
+        "undefined methods": {
+          "name": "undefined methods",
+          "group": "Reference"
+        },
+        "illegal keywords": {
+          "name": "illegal keywords",
+          "group": "Reference"
+        },
+        "condition error": {
+          "name": "condition error",
+          "group": "Logic"
+        },
+        "operation error": {
+          "name": "operation error",
+          "group": "Logic"
+        },
+        "variable error": {
+          "name": "variable error",
+          "group": "Logic"
+        },
+        "other error": {
+          "name": "other error",
+          "group": "Logic"
+        },
+        "double bugs": {
+          "name": "double bugs",
+          "group": "Multiple"
+        },
+        "triple bugs": {
+          "name": "triple bugs",
+          "group": "Multiple"
+        },
+        "quadraple bugs": {
+          "name": "quadraple bugs",
+          "group": "Multiple"
+        }
+      }
     },
     "decbench": {
       "url": "https://decbench.com/leaderboard/?dataset=sample-set&norm=1",
@@ -102059,12 +102428,19 @@
       "feed": "https://arxiv.org/html/2302.06301",
       "terms": "The authors publish their results on arXiv under the terms listed at https://arxiv.org/abs/2302.06301.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ESS",
         "EV-SegNet"
-      ]
+      ],
+      "stats": {
+        "mIoU": {
+          "name": "Mean intersection over union",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "eventhallusion": {
       "url": "https://arxiv.org/html/2409.16597",
@@ -132845,6 +133221,12 @@
         }
       },
       "stats": {
+        "grounding": {
+          "name": "Grounding",
+          "unit": "%",
+          "better": "higher",
+          "note": "Visual attention grounding on question-relevant regions."
+        },
         "validity": {
           "name": "Validity",
           "unit": "%",
@@ -154604,7 +154986,7 @@
       "feed": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Van_Horn_The_INaturalist_Species_CVPR_2018_paper.pdf",
       "terms": "The Computer Vision Foundation provides open access to the paper at https://openaccess.thecvf.com/CVPR2018.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "IncResNetV2",
@@ -154624,29 +155006,11 @@
         "publicTest": {
           "name": "Public Test"
         },
-        "Plantae": {
-          "name": "Public Test: Plantae"
-        },
-        "Insecta": {
-          "name": "Public Test: Insecta"
-        },
-        "Aves": {
-          "name": "Public Test: Aves"
-        },
-        "Reptilia": {
-          "name": "Public Test: Reptilia"
-        },
-        "Mammalia": {
-          "name": "Public Test: Mammalia"
-        },
-        "Fungi": {
-          "name": "Public Test: Fungi"
+        "Actinopterygii": {
+          "name": "Public Test: Actinopterygii"
         },
         "Amphibia": {
           "name": "Public Test: Amphibia"
-        },
-        "Mollusca": {
-          "name": "Public Test: Mollusca"
         },
         "Animalia": {
           "name": "Public Test: Animalia"
@@ -154654,14 +155018,32 @@
         "Arachnida": {
           "name": "Public Test: Arachnida"
         },
-        "Actinopterygii": {
-          "name": "Public Test: Actinopterygii"
+        "Aves": {
+          "name": "Public Test: Aves"
         },
         "Chromista": {
           "name": "Public Test: Chromista"
         },
+        "Fungi": {
+          "name": "Public Test: Fungi"
+        },
+        "Insecta": {
+          "name": "Public Test: Insecta"
+        },
+        "Mammalia": {
+          "name": "Public Test: Mammalia"
+        },
+        "Mollusca": {
+          "name": "Public Test: Mollusca"
+        },
+        "Plantae": {
+          "name": "Public Test: Plantae"
+        },
         "Protozoa": {
           "name": "Public Test: Protozoa"
+        },
+        "Reptilia": {
+          "name": "Public Test: Reptilia"
         }
       },
       "stats": {
@@ -154677,6 +155059,71 @@
         },
         "top5": {
           "name": "Private test top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Actinopterygii top5": {
+          "name": "Public test Actinopterygii top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Amphibia top5": {
+          "name": "Public test Amphibia top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Animalia top5": {
+          "name": "Public test Animalia top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Arachnida top5": {
+          "name": "Public test Arachnida top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Aves top5": {
+          "name": "Public test Aves top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Chromista top5": {
+          "name": "Public test Chromista top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Fungi top5": {
+          "name": "Public test Fungi top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Insecta top5": {
+          "name": "Public test Insecta top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Mammalia top5": {
+          "name": "Public test Mammalia top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Mollusca top5": {
+          "name": "Public test Mollusca top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Plantae top5": {
+          "name": "Public test Plantae top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Protozoa top5": {
+          "name": "Public test Protozoa top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Reptilia top5": {
+          "name": "Public test Reptilia top-5 accuracy",
           "unit": "%",
           "better": "higher"
         }
@@ -180569,7 +181016,7 @@
       "terms": "The authors publish these results under the terms listed at https://arxiv.org/abs/2605.26244.",
       "headline": "The paper reports no overall score, so this is the mean event fulfillment score across its three tasks.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Helios (14B)",
@@ -180582,27 +181029,42 @@
           "unit": "score"
         },
         "T2AVVQ": {
-          "name": "VQ",
+          "name": "Visual quality",
           "group": "T2AV",
           "unit": "score"
         },
         "T2AVCont": {
-          "name": "Cont.",
+          "name": "Long-form continuity",
           "group": "T2AV",
           "unit": "score"
         },
         "T2AVTrans": {
-          "name": "Trans",
+          "name": "Transition stability",
           "group": "T2AV",
           "unit": "score"
         },
         "T2AVHol": {
-          "name": "Hol.",
+          "name": "Holistic presentation",
           "group": "T2AV",
           "unit": "score"
         },
         "T2AVTVAlign": {
-          "name": "TVAlign",
+          "name": "Text-video alignment",
+          "group": "T2AV",
+          "unit": "score"
+        },
+        "T2AVAVS": {
+          "name": "Audio-video synchronization",
+          "group": "T2AV",
+          "unit": "score"
+        },
+        "T2AVAudQ": {
+          "name": "Audio quality",
+          "group": "T2AV",
+          "unit": "score"
+        },
+        "T2AVAudL": {
+          "name": "Long-audio coherence",
           "group": "T2AV",
           "unit": "score"
         },
@@ -180612,37 +181074,52 @@
           "unit": "score"
         },
         "I2AVVQ": {
-          "name": "VQ",
+          "name": "Visual quality",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVCont": {
-          "name": "Cont.",
+          "name": "Long-form continuity",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVTrans": {
-          "name": "Trans",
+          "name": "Transition stability",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVHol": {
-          "name": "Hol.",
+          "name": "Holistic presentation",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVTVAlign": {
-          "name": "TVAlign",
+          "name": "Text-video alignment",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVIV1": {
-          "name": "IV1",
+          "name": "First-frame anchoring",
           "group": "I2AV",
           "unit": "score"
         },
         "I2AVImgAlign": {
           "name": "Image alignment",
+          "group": "I2AV",
+          "unit": "score"
+        },
+        "I2AVAVS": {
+          "name": "Audio-video synchronization",
+          "group": "I2AV",
+          "unit": "score"
+        },
+        "I2AVAudQ": {
+          "name": "Audio quality",
+          "group": "I2AV",
+          "unit": "score"
+        },
+        "I2AVAudL": {
+          "name": "Long-audio coherence",
           "group": "I2AV",
           "unit": "score"
         },
@@ -180652,27 +181129,42 @@
           "unit": "score"
         },
         "V2AVVQ": {
-          "name": "VQ",
+          "name": "Visual quality",
           "group": "V2AV",
           "unit": "score"
         },
         "V2AVCont": {
-          "name": "Cont.",
+          "name": "Long-form continuity",
           "group": "V2AV",
           "unit": "score"
         },
         "V2AVTrans": {
-          "name": "Trans",
+          "name": "Transition stability",
           "group": "V2AV",
           "unit": "score"
         },
         "V2AVHol": {
-          "name": "Hol.",
+          "name": "Holistic presentation",
           "group": "V2AV",
           "unit": "score"
         },
         "V2AVTVAlign": {
-          "name": "TVAlign",
+          "name": "Text-video alignment",
+          "group": "V2AV",
+          "unit": "score"
+        },
+        "V2AVAVS": {
+          "name": "Audio-video synchronization",
+          "group": "V2AV",
+          "unit": "score"
+        },
+        "V2AVAudQ": {
+          "name": "Audio quality",
+          "group": "V2AV",
+          "unit": "score"
+        },
+        "V2AVAudL": {
+          "name": "Long-audio coherence",
           "group": "V2AV",
           "unit": "score"
         }
@@ -200395,7 +200887,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The paper reports no overall MRR@10, so this is the plain mean across its fourteen language rows.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BM25",
@@ -200445,6 +200937,92 @@
         },
         "Arabic": {
           "name": "Arabic"
+        }
+      },
+      "stats": {
+        "English (Orig.) R@1k": {
+          "name": "English (Orig.) Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Spanish R@1k": {
+          "name": "Spanish Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "French R@1k": {
+          "name": "French Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Italian R@1k": {
+          "name": "Italian Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Portuguese R@1k": {
+          "name": "Portuguese Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Indonesian R@1k": {
+          "name": "Indonesian Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "German R@1k": {
+          "name": "German Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Russian R@1k": {
+          "name": "Russian Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Chinese R@1k": {
+          "name": "Chinese Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Japanese R@1k": {
+          "name": "Japanese Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Dutch R@1k": {
+          "name": "Dutch Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Vietnamese R@1k": {
+          "name": "Vietnamese Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Hindi R@1k": {
+          "name": "Hindi Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "Arabic R@1k": {
+          "name": "Arabic Recall@1000",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
         }
       }
     },
@@ -207419,7 +207997,7 @@
       "feed": "https://arxiv.org/html/2209.13738",
       "terms": "Paper and license details at https://arxiv.org/abs/2209.13738.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BM25",
@@ -207461,8 +208039,18 @@
           "unit": "score",
           "better": "higher"
         },
+        "recall1000_en": {
+          "name": "English Recall@1000",
+          "unit": "score",
+          "better": "higher"
+        },
         "ndcgPrime_fr": {
           "name": "French nDCG prime",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall1000_fr": {
+          "name": "French Recall@1000",
           "unit": "score",
           "better": "higher"
         },
@@ -207471,8 +208059,18 @@
           "unit": "score",
           "better": "higher"
         },
+        "recall1000_pt": {
+          "name": "Portuguese Recall@1000",
+          "unit": "score",
+          "better": "higher"
+        },
         "ndcgPrime_it": {
           "name": "Italian nDCG prime",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall1000_it": {
+          "name": "Italian Recall@1000",
           "unit": "score",
           "better": "higher"
         },
@@ -207481,8 +208079,18 @@
           "unit": "score",
           "better": "higher"
         },
+        "recall1000_id": {
+          "name": "Indonesian Recall@1000",
+          "unit": "score",
+          "better": "higher"
+        },
         "ndcgPrime_ru": {
           "name": "Russian nDCG prime",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall1000_ru": {
+          "name": "Russian Recall@1000",
           "unit": "score",
           "better": "higher"
         },
@@ -207491,8 +208099,18 @@
           "unit": "score",
           "better": "higher"
         },
+        "recall1000_es": {
+          "name": "Spanish Recall@1000",
+          "unit": "score",
+          "better": "higher"
+        },
         "ndcgPrime_de": {
           "name": "German nDCG prime",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall1000_de": {
+          "name": "German Recall@1000",
           "unit": "score",
           "better": "higher"
         },
@@ -207501,8 +208119,18 @@
           "unit": "score",
           "better": "higher"
         },
+        "recall1000_zh": {
+          "name": "Chinese Recall@1000",
+          "unit": "score",
+          "better": "higher"
+        },
         "ndcgPrime": {
           "name": "Average nDCG prime",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall1000": {
+          "name": "Average Recall@1000",
           "unit": "score",
           "better": "higher"
         }
@@ -211895,7 +212523,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The paper reports separate metrics on different scales. The headline is visual technical quality (VTQ), the first metric in Table 2.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Gemini-Omni",
@@ -211909,69 +212537,75 @@
       ],
       "parts": {
         "VTQ": {
-          "name": "VTQ",
+          "name": "Visual technical quality",
           "group": "Basic Quality",
           "unit": "score"
         },
         "ATQ": {
-          "name": "ATQ",
+          "name": "Audio technical quality",
+          "group": "Basic Quality",
+          "unit": "score"
+        },
+        "AQ": {
+          "name": "Anatomical quality",
           "group": "Basic Quality",
           "unit": "score"
         },
         "EF": {
-          "name": "EF",
+          "name": "Entity fidelity",
           "group": "Reference Consistency",
           "unit": "score"
         },
-        "SLS": {
-          "name": "SLS",
-          "group": "Audio-Visual Consistency",
-          "unit": "score"
-        },
-        "AQ": {
-          "name": "AQ",
-          "group": "Basic Quality",
-          "unit": "score"
-        },
         "BC": {
-          "name": "BC",
+          "name": "Binding correctness",
           "group": "Reference Consistency",
           "unit": "score"
         },
         "DP": {
-          "name": "DP",
+          "name": "Detail preservation",
           "group": "Reference Consistency",
           "unit": "score"
         },
+        "SLS": {
+          "name": "Speech-lip synchronization",
+          "group": "Audio-Visual Consistency",
+          "unit": "score"
+        },
         "ESM": {
-          "name": "ESM",
+          "name": "Event-sound matching",
           "group": "Audio-Visual Consistency",
           "unit": "score"
         },
         "SC": {
-          "name": "SC",
+          "name": "Source correctness",
           "group": "Audio-Visual Consistency",
           "unit": "score"
         },
         "VT": {
-          "name": "VT",
+          "name": "Visual task following",
           "group": "Instruction Following",
           "unit": "score"
         },
         "AT": {
-          "name": "AT",
+          "name": "Audio task following",
           "group": "Instruction Following",
           "unit": "score"
         },
         "SCA": {
-          "name": "SCA",
+          "name": "Speech content accuracy",
           "group": "Instruction Following",
           "unit": "score"
         },
         "TO": {
-          "name": "TO",
+          "name": "Temporal order following",
           "group": "Instruction Following",
           "unit": "score"
+        }
+      },
+      "stats": {
+        "evaluatedSamples": {
+          "name": "Evaluated samples",
+          "unit": "count"
         }
       }
     },

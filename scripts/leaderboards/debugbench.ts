@@ -10,7 +10,26 @@ const board: Leaderboard = {
   benchmark: 'debugbench', feed, url: feed, static: 'paper',
   terms: 'The authors publish the paper and its terms at https://arxiv.org/abs/2401.04621.',
   aliases: { 'gpt-4-0613': 'gpt-4-jun-2023', 'gpt-3.5-turbo-0613': 'gpt-3-5-turbo-jun-2023' },
-  parts: {}, costPer: 'run',
+  parts: {
+    'misused ==/=': { name: 'misused ==/=', group: 'Syntax' },
+    'missing colons': { name: 'missing colons', group: 'Syntax' },
+    'unclosed parentheses': { name: 'unclosed parentheses', group: 'Syntax' },
+    'illegal separation': { name: 'illegal separation', group: 'Syntax' },
+    'illegal indentation': { name: 'illegal indentation', group: 'Syntax' },
+    'unclosed string': { name: 'unclosed string', group: 'Syntax' },
+    'illegal comment': { name: 'illegal comment', group: 'Syntax' },
+    'faulty indexing': { name: 'faulty indexing', group: 'Reference' },
+    'undefined objects': { name: 'undefined objects', group: 'Reference' },
+    'undefined methods': { name: 'undefined methods', group: 'Reference' },
+    'illegal keywords': { name: 'illegal keywords', group: 'Reference' },
+    'condition error': { name: 'condition error', group: 'Logic' },
+    'operation error': { name: 'operation error', group: 'Logic' },
+    'variable error': { name: 'variable error', group: 'Logic' },
+    'other error': { name: 'other error', group: 'Logic' },
+    'double bugs': { name: 'double bugs', group: 'Multiple' },
+    'triple bugs': { name: 'triple bugs', group: 'Multiple' },
+    'quadraple bugs': { name: 'quadraple bugs', group: 'Multiple' },
+  }, costPer: 'run',
   async fetch() {
     const html = await paperHtml(feed);
     const overall = text(html).match(/gpt-4-0613 [^.]{0,100}?and gpt-3\.5-0613 [^.]{0,70}?\. They respectively pass ([\d.]+)% and ([\d.]+)% of the bug instances/);
@@ -22,10 +41,7 @@ const board: Leaderboard = {
       const col = types[0].indexOf(label);
       const expense = cost.find(r => r[0] === 'Model Evaluation' && r[4] === (i ? 'gpt-3.5-turbo' : label));
       if (col < 0 || !expense || !expense[5].startsWith('$')) throw new Error('Model column or cost missing');
-      const metrics = Object.fromEntries(types.slice(1).map(r => {
-        board.parts![r[1]] = { name: r[1], group: r[0] };
-        return [r[1], numberCell(r[col])];
-      }));
+      const metrics = Object.fromEntries(types.slice(1).map(r => [r[1], numberCell(r[col])]));
       return { model: i ? 'gpt-3.5-turbo-0613' : 'gpt-4-0613', setting: 'Zero-shot', score: numberCell(overall[i + 1]),
         cost: numberCell(expense[5].slice(1)), metrics };
     });

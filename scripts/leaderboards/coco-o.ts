@@ -17,6 +17,7 @@ const board: Leaderboard = {
     coco: { name: 'COCO mAP', unit: '%', better: 'higher' },
     effectiveRobustness: { name: 'Effective robustness', unit: '%', better: 'higher' },
     fps: { name: 'Frames per second', unit: 'count', better: 'higher' },
+    alternateMap: { name: 'Alternate COCO-O mAP', unit: '%', better: 'higher', note: 'Secondary COCO-O mAP when a configuration appears in another paper table.' },
   },
   parts:Object.fromEntries(domains.map(name=>[name,{name,unit:'%'}])),
   async fetch() {
@@ -35,8 +36,8 @@ const board: Leaderboard = {
         for (const [k,v] of Object.entries(metrics)) if (!(k in row.metrics!)) row.metrics![k] = v;
       }
     }
-    for (const t of ranked) for (const [model,backbone,coco,,score,,effective,,mask,extra,fps] of t.slice(2)) {
-      add(model,backbone==='-'?'Standard':backbone,num(score),{coco:num(coco),effectiveRobustness:num(effective),fps:num(fps),useMask:Number(mask==='✓'),additionalData:Number(extra==='✓')});
+    for (const t of ranked) for (const [model,backbone,coco,,score,,effective,,,,fps] of t.slice(2)) {
+      add(model,backbone==='-'?'Standard':backbone,num(score),{coco:num(coco),effectiveRobustness:num(effective),fps:num(fps)});
     }
     for (const t of details) for (const r of t.slice(2)) {
       const labels = r.slice(0,-9).map(s=>s.replace(/\s*\[\s*\d+\s*\]/g,''));
