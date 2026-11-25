@@ -26,7 +26,18 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://raw.githubusercontent.com/weavebench/WeaveBench/main/README.md";
 const board: Leaderboard = {
   stats: { meanScore: {name: 'Mean score', unit: 'score', better: 'higher'} },
+  parts: {
+    games: { name: 'Games', group: 'Domain' },
+    desktop: { name: 'Desktop', group: 'Domain' },
+    documents: { name: 'Documents', group: 'Domain' },
+    web: { name: 'Web', group: 'Domain' },
+    dataVisualization: { name: 'Data visualization', group: 'Domain' },
+    operations: { name: 'Operations', group: 'Domain' },
+    spatial: { name: 'Spatial', group: 'Domain' },
+    design: { name: 'Design', group: 'Domain' },
+  },
   "benchmark": "weavebench",
+  "harnesses": "system",
   "url": "https://github.com/weavebench/WeaveBench",
   "feed": "https://raw.githubusercontent.com/weavebench/WeaveBench/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
@@ -60,15 +71,5 @@ const board: Leaderboard = {
     if (!rows.length) throw new Error("No scored model rows in the published results");
     return rows;
   },
-};
-board.parts = {
-  games: { name: 'Games', group: 'Domain' },
-  desktop: { name: 'Desktop', group: 'Domain' },
-  documents: { name: 'Documents', group: 'Domain' },
-  web: { name: 'Web', group: 'Domain' },
-  dataVisualization: { name: 'Data visualization', group: 'Domain' },
-  operations: { name: 'Operations', group: 'Domain' },
-  spatial: { name: 'Spatial', group: 'Domain' },
-  design: { name: 'Design', group: 'Domain' },
 };
 export default board;
