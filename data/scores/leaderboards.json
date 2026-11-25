@@ -10027,7 +10027,76 @@
       "terms": "Per-prompt scores the makers publish in their GitHub repository under CC BY 4.0.",
       "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "accountants": {
+          "name": "Accountants",
+          "group": "Profession"
+        },
+        "constructionManagers": {
+          "name": "Construction managers",
+          "group": "Profession"
+        },
+        "engineers": {
+          "name": "Engineers",
+          "group": "Profession"
+        },
+        "eventPlanners": {
+          "name": "Event planners",
+          "group": "Profession"
+        },
+        "healthcare": {
+          "name": "Healthcare",
+          "group": "Profession"
+        },
+        "interiorDesigners": {
+          "name": "Interior designers",
+          "group": "Profession"
+        },
+        "lawyers": {
+          "name": "Lawyers",
+          "group": "Profession"
+        },
+        "general": {
+          "name": "General",
+          "group": "Profession"
+        },
+        "realEstateAgents": {
+          "name": "Real estate agents",
+          "group": "Profession"
+        },
+        "salesManagers": {
+          "name": "Sales managers",
+          "group": "Profession"
+        },
+        "travelAgents": {
+          "name": "Travel agents",
+          "group": "Profession"
+        },
+        "en": {
+          "name": "English",
+          "group": "Language"
+        },
+        "es": {
+          "name": "Spanish",
+          "group": "Language"
+        },
+        "fr": {
+          "name": "French",
+          "group": "Language"
+        },
+        "pt": {
+          "name": "Portuguese",
+          "group": "Language"
+        }
+      },
+      "stats": {
+        "allCriteriaRate": {
+          "name": "All-criteria pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ai-security-leaderboard-far-ai": {
       "url": "https://leaderboard.far.ai/",
@@ -64578,7 +64647,42 @@
       "terms": "The repository is licensed under Apache 2.0. https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/LICENSE",
       "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "codeComment": {
+          "name": "Code comments",
+          "group": "Attack vector"
+        },
+        "configFile": {
+          "name": "Config file",
+          "group": "Attack vector"
+        },
+        "issueText": {
+          "name": "Issue text",
+          "group": "Attack vector"
+        },
+        "readme": {
+          "name": "README",
+          "group": "Attack vector"
+        }
+      },
+      "stats": {
+        "irr": {
+          "name": "Injection resistance rate (IRR)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tcr": {
+          "name": "Task completion rate (TCR)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "detection": {
+          "name": "Injection detection rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "codepde": {
       "url": "https://github.com/harbor-framework/harbor/tree/main/adapters/codepde",
@@ -89842,11 +89946,8 @@
       "feed": "https://raw.githubusercontent.com/buildok/dirty-integration/main/README.md",
       "terms": "The repository is licensed under MIT. https://github.com/buildok/dirty-integration/blob/main/LICENSE",
       "retrieved": "2026-11-24",
-      "rows": 0,
-      "unmatched": [
-        "`anthropic/claude-sonnet-5`",
-        "`deepseek/deepseek-v3.2`"
-      ]
+      "rows": 2,
+      "unmatched": []
     },
     "disbench": {
       "url": "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard",
@@ -139417,7 +139518,24 @@
       "terms": "MIT License. https://github.com/CompassionML/harvest-rush-train/blob/main/LICENSE",
       "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "animalsDrivenOver": {
+          "name": "Animals driven over",
+          "unit": "%",
+          "better": "lower"
+        },
+        "propsDrivenOver": {
+          "name": "Props driven over",
+          "unit": "%",
+          "better": "higher"
+        },
+        "rocksStruck": {
+          "name": "Rocks struck",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "harvestbench": {
       "url": "https://compassionbench.com/harvestbench",
@@ -168956,7 +169074,77 @@
         "KANANA-1.5-V 3B",
         "VARCO-VISION 14B",
         "VARCO-VISION-2.0 14B"
-      ]
+      ],
+      "parts": {
+        "system1": {
+          "name": "System 1",
+          "group": "Reasoning"
+        },
+        "system2": {
+          "name": "System 2",
+          "group": "Reasoning"
+        },
+        "gov": {
+          "name": "Government",
+          "group": "Domain"
+        },
+        "econ": {
+          "name": "Economy",
+          "group": "Domain"
+        },
+        "mktg": {
+          "name": "Marketing",
+          "group": "Domain"
+        },
+        "comm": {
+          "name": "Communication",
+          "group": "Domain"
+        },
+        "edu": {
+          "name": "Education",
+          "group": "Domain"
+        },
+        "med": {
+          "name": "Medicine",
+          "group": "Domain"
+        },
+        "tech": {
+          "name": "Technology",
+          "group": "Domain"
+        },
+        "arts": {
+          "name": "Arts",
+          "group": "Domain"
+        },
+        "transp": {
+          "name": "Transportation",
+          "group": "Domain"
+        },
+        "tour": {
+          "name": "Tourism",
+          "group": "Domain"
+        },
+        "fnb": {
+          "name": "Food and beverage",
+          "group": "Domain"
+        },
+        "ent": {
+          "name": "Entertainment",
+          "group": "Domain"
+        },
+        "life": {
+          "name": "Lifestyle",
+          "group": "Domain"
+        },
+        "sci": {
+          "name": "Science",
+          "group": "Domain"
+        },
+        "hist": {
+          "name": "History",
+          "group": "Domain"
+        }
+      }
     },
     "kris-bench": {
       "url": "https://yongliang-wu.github.io/kris_bench_project_page/",
@@ -175329,14 +175517,47 @@
       "feed": "https://raw.githubusercontent.com/sylvestf/LIBERO-plus/main/README.md (LIBERO-Plus Benchmark Leaderboard, Total)",
       "terms": "README table in the sylvestf/LIBERO-plus GitHub repository, which states no license; scores are cited to the LIBERO-Plus authors.",
       "retrieved": "2026-11-24",
-      "rows": 6,
+      "rows": 3,
       "unmatched": [
+        "NORA",
         "OpenVLA-OFT+ (Ours)",
         "OpenVLA-OFT_m",
         "OpenVLA-OFT_w",
         "RIPT-VLA",
+        "UniVLA",
+        "WorldVLA",
         "π₀"
-      ]
+      ],
+      "parts": {
+        "camera": {
+          "name": "Camera",
+          "group": "Perturbation"
+        },
+        "robot": {
+          "name": "Robot",
+          "group": "Perturbation"
+        },
+        "language": {
+          "name": "Language",
+          "group": "Perturbation"
+        },
+        "light": {
+          "name": "Light",
+          "group": "Perturbation"
+        },
+        "background": {
+          "name": "Background",
+          "group": "Perturbation"
+        },
+        "noise": {
+          "name": "Noise",
+          "group": "Perturbation"
+        },
+        "layout": {
+          "name": "Layout",
+          "group": "Perturbation"
+        }
+      }
     },
     "libero-pro": {
       "url": "https://github.com/Zxy-MLlab/LIBERO-PRO#-libero-pro-model-leaderboard",
@@ -182253,7 +182474,17 @@
       "terms": "CSV in the zli12321/LHTB repository, licensed Apache-2.0.",
       "retrieved": "2026-11-24",
       "rows": 15,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "original": {
+          "name": "Original tasks",
+          "group": "Task set"
+        },
+        "newTasks": {
+          "name": "New tasks",
+          "group": "Task set"
+        }
+      }
     },
     "long-horizon-terminal-bench-lhtb": {
       "url": "https://huggingface.co/datasets/IntelligenceLab/LHTB-leaderboard",
@@ -211853,7 +212084,45 @@
         "TextMonkey",
         "TextSquare",
         "mPLUG-DocOwl 1.5"
-      ]
+      ],
+      "parts": {
+        "ar": {
+          "name": "Arabic",
+          "group": "Language"
+        },
+        "de": {
+          "name": "German",
+          "group": "Language"
+        },
+        "fr": {
+          "name": "French",
+          "group": "Language"
+        },
+        "it": {
+          "name": "Italian",
+          "group": "Language"
+        },
+        "ja": {
+          "name": "Japanese",
+          "group": "Language"
+        },
+        "ko": {
+          "name": "Korean",
+          "group": "Language"
+        },
+        "ru": {
+          "name": "Russian",
+          "group": "Language"
+        },
+        "th": {
+          "name": "Thai",
+          "group": "Language"
+        },
+        "vi": {
+          "name": "Vietnamese",
+          "group": "Language"
+        }
+      }
     },
     "mu-bench": {
       "url": "https://research.sierra.ai/mubench/",
@@ -214023,7 +214292,29 @@
       "terms": "README table in the facebookresearch/multiloko GitHub repository, which is MIT-licensed.",
       "retrieved": "2026-11-24",
       "rows": 11,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "gap": {
+          "name": "Cross-lingual gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mte": {
+          "name": "Mother tongue effect (MTE)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "minEm": {
+          "name": "Minimum language EM",
+          "unit": "%",
+          "better": "higher"
+        },
+        "maxEm": {
+          "name": "Maximum language EM",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "multimedia-terminalbench": {
       "url": "https://arxiv.org/html/2605.10966",

@@ -1468,6 +1468,8 @@
     ["devbench-unit-testing","gpt-4-turbo-jan-2024",null,null,"2026-11-18"],
     ["devbench-unit-testing","gpt-4-turbo-nov-2023",null,null,"2026-11-18"],
     ["diabla","~minishlab/blink-multilingual-64M","Bitext mining",null,"2026-11-24"],
+    ["dirty-integration","claude-sonnet-5","hostile",null,"2026-11-24"],
+    ["dirty-integration","deepseek-v3-2","hostile",null,"2026-11-24"],
     ["distressbench","inkling-2-small",null,null,"2026-11-14"],
     ["do-not-answer","chatglm2-6b",null,null,"2026-11-24"],
     ["document-arena","~Grok 4.20 Beta (Reasoning, 0309)",null,null,"2026-11-09"],

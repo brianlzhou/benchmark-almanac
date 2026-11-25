@@ -308,7 +308,7 @@
     ["justiceaxis","gemini-3-8-flash",null,null,84.38,"2026-09-02",null,null,{"charge":82.81,"chargeWilson95HalfWidth":6.51,"family":88.28,"disposition":92.19,"sentence":74.22,"average":84.38,"chargeGivenFamily":93.81,"sentenceGivenDisposition":80.51,"recorded":90.62,"recordedWilson95HalfWidth":5.11,"rigid":5.47,"ungrounded":3.91,"miss":9.38,"polarity":0.167,"polarityWilson95HalfWidth":0.487}]
   ],
   "others": [
-    ["ja-vlm-bench-in-the-wild","EvoVLM-JP-v1-7B",null,null,51.25,null,null,null],
+    ["ja-vlm-bench-in-the-wild","EvoVLM-JP-v1-7B",null,null,51.25,null,null,null,null,{"license":"Apache 2.0","params":7}],
     ["ja-vlm-bench-in-the-wild","Japanese Stable VLM",null,null,40.5,null,null,null],
     ["ja-vlm-bench-in-the-wild","Heron BLIP Japanese StableLM Base 7B llava-620k",null,null,33.26,null,null,null],
     ["jailbreakbench","Vicuna-13B-v1.5","Defense: Remove Non-Dictionary; Logprob access","Prompt with Random Search",91,"2024-04-02",null,null,{"averageQueries":2},{"link":"https://github.com/JailbreakBench/artifacts/blob/main/attack-artifacts/prompt_with_random_search/black_box/vicuna-13b-v1.5.json","open":true}],
