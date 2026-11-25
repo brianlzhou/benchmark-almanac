@@ -8,10 +8,10 @@ const board: Leaderboard = {
   benchmark: "sweparaphrase-2",
   url: "https://lab.kb.se/leaderboard/results",
   feed,
-  stats: { N: { name: 'Items', unit: 'count' }, alpha: { name: 'Krippendorff alpha', unit: 'score', better: 'higher' }, spearmanr: { name: 'Spearman correlation', unit: 'score', better: 'higher' }, pearsonr: { name: 'Pearson correlation', unit: 'score', better: 'higher' } },
+  stats: { spearmanr: { name: 'Spearman correlation', unit: 'score', better: 'higher' }, pearsonr: { name: 'Pearson correlation', unit: 'score', better: 'higher' } },
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
   async fetch() {
-    return superlimRows("sweparaphrase", 13);
+    return (await superlimRows("sweparaphrase", 13)).map(({ metrics: { N: _, alpha: __, ...metrics } = {}, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

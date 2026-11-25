@@ -9,9 +9,8 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-trip-outcome-prediction-5-questions",
   feed,
   terms: "Credit The Aggregate when quoting or charting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
-  stats: { items:{name:'Items',unit:'count'} },
   async fetch() {
-    return aggregateRows(feed, 'trip-outcomes', 36);
+    return (await aggregateRows(feed, 'trip-outcomes', 36)).map(({ metrics: _, ...row }) => row);
   },
 };
 export default board;

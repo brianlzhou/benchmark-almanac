@@ -34481,14 +34481,6 @@
           "name": "Genre accuracy",
           "unit": "%",
           "better": "higher"
-        },
-        "samples": {
-          "name": "Samples",
-          "unit": "count"
-        },
-        "annotators": {
-          "name": "Annotators",
-          "unit": "count"
         }
       }
     },
@@ -53495,40 +53487,52 @@
           "name": "Expert"
         },
         "category01": {
-          "name": "UK Building Regs Q&A"
+          "name": "UK Building Regs Q&A",
+          "group": "Category"
         },
         "category02": {
-          "name": "EPC Trajectory"
+          "name": "EPC Trajectory",
+          "group": "Category"
         },
         "category03": {
-          "name": "IFC Entity Reasoning"
+          "name": "IFC Entity Reasoning",
+          "group": "Category"
         },
         "category04": {
-          "name": "BMS Sensor Anomaly"
+          "name": "BMS Sensor Anomaly",
+          "group": "Category"
         },
         "category05": {
-          "name": "Retrofit Prioritization"
+          "name": "Retrofit Prioritization",
+          "group": "Category"
         },
         "category06": {
-          "name": "BREEAM Credit Eligibility"
+          "name": "BREEAM Credit Eligibility",
+          "group": "Category"
         },
         "category07": {
-          "name": "Thermal Comfort Diagnosis"
+          "name": "Thermal Comfort Diagnosis",
+          "group": "Category"
         },
         "category08": {
-          "name": "CIBSE Technical Q&A"
+          "name": "CIBSE Technical Q&A",
+          "group": "Category"
         },
         "category09": {
-          "name": "Material/Product Spec"
+          "name": "Material/Product Spec",
+          "group": "Category"
         },
         "category10": {
-          "name": "Energy Bill Anomaly"
+          "name": "Energy Bill Anomaly",
+          "group": "Category"
         },
         "category11": {
-          "name": "Net Zero Pathway"
+          "name": "Net Zero Pathway",
+          "group": "Category"
         },
         "category12": {
-          "name": "Regulatory Cliff-Edge"
+          "name": "Regulatory Cliff-Edge",
+          "group": "Category"
         }
       },
       "stats": {
@@ -53537,10 +53541,6 @@
           "unit": "score",
           "better": "higher",
           "note": "Mean score marked by Claude."
-        },
-        "items": {
-          "name": "Items",
-          "unit": "count"
         }
       }
     },
@@ -225163,10 +225163,6 @@
           "unit": "count",
           "better": "higher"
         },
-        "exams": {
-          "name": "Exams",
-          "unit": "count"
-        },
         "passingRate": {
           "name": "Passing rate",
           "unit": "%",
@@ -256463,10 +256459,6 @@
           "name": "Patches passed",
           "unit": "count",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -256485,10 +256477,6 @@
           "name": "Patches passed",
           "unit": "count",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         }
       }
     },
@@ -266998,18 +266986,7 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
-      "costPer": "run",
-      "stats": {
-        "day": {
-          "name": "Day",
-          "unit": "count"
-        },
-        "finalBankEur": {
-          "name": "Final bank in euros",
-          "unit": "score",
-          "better": "higher"
-        }
-      }
+      "costPer": "run"
     },
     "proteingym": {
       "url": "https://proteingym.org/",
@@ -299014,12 +298991,6 @@
           "name": "SPEECHIO_ASR_ZH00046 歌词",
           "group": "Test Set"
         }
-      },
-      "stats": {
-        "resultYearMonth": {
-          "name": "Result year and month",
-          "note": "Year and month shown in the source Date column, stored as YYYYMM."
-        }
       }
     },
     "speed-bench": {
@@ -305998,10 +305969,6 @@
           "name": "Completed questions",
           "unit": "count"
         },
-        "questions": {
-          "name": "Questions",
-          "unit": "count"
-        },
         "generatedVideos": {
           "name": "Generated videos",
           "unit": "count"
@@ -306645,10 +306612,6 @@
         },
         "completedQuestions": {
           "name": "Completed questions",
-          "unit": "count"
-        },
-        "questions": {
-          "name": "Questions",
           "unit": "count"
         }
       }
@@ -310595,19 +310558,7 @@
         "SVM",
         "xlm-roberta-base",
         "xlm-roberta-large"
-      ],
-      "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher",
-          "note": "Agreement coefficient for the diagnostic test."
-        }
-      }
+      ]
     },
     "swedish-analogy": {
       "url": "https://lab.kb.se/leaderboard/results",
@@ -310622,20 +310573,10 @@
         "gpt-sw3-6.7b"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
         "accuracy": {
           "name": "Accuracy",
           "unit": "score",
           "better": "higher"
-        },
-        "pseudoalpha": {
-          "name": "Pseudo-alpha",
-          "unit": "score",
-          "better": "higher",
-          "note": "Agreement coefficient for the analogy test."
         }
       }
     },
@@ -310840,16 +310781,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "accuracy": {
-          "name": "Accuracy",
-          "unit": "score",
-          "better": "higher",
-          "note": "Accuracy stored from 0 to 1."
-        },
         "pseudoalpha": {
           "name": "Pseudo-alpha",
           "unit": "score",
@@ -310878,15 +310809,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher"
-        },
         "accuracy": {
           "name": "Accuracy",
           "unit": "score",
@@ -310920,15 +310842,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher"
-        },
         "spearmanr": {
           "name": "Spearman correlation",
           "unit": "score",
@@ -310954,17 +310867,8 @@
         "gpt-sw3-6.7b"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
         "accuracy": {
           "name": "Accuracy",
-          "unit": "score",
-          "better": "higher"
-        },
-        "pseudoalpha": {
-          "name": "Pseudo-alpha",
           "unit": "score",
           "better": "higher"
         }
@@ -310991,15 +310895,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher"
-        },
         "accuracy": {
           "name": "Accuracy",
           "unit": "score",
@@ -311029,15 +310924,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher"
-        },
         "accuracy": {
           "name": "Accuracy",
           "unit": "score",
@@ -311076,15 +310962,6 @@
         "xlm-roberta-large"
       ],
       "stats": {
-        "N": {
-          "name": "Items",
-          "unit": "count"
-        },
-        "alpha": {
-          "name": "Krippendorff alpha",
-          "unit": "score",
-          "better": "higher"
-        },
         "accuracy": {
           "name": "Accuracy",
           "unit": "score",
@@ -311407,10 +311284,6 @@
         },
         "covered": {
           "name": "Covered cases",
-          "unit": "count"
-        },
-        "expected": {
-          "name": "Expected cases",
           "unit": "count"
         }
       }
@@ -316159,13 +316032,7 @@
       "terms": "Credit The Aggregate when quoting or charting scores. Bulk republication requires written permission. https://theaggregate.ai/terms robots.txt allows the feed path.",
       "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": [],
-      "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        }
-      }
+      "unmatched": []
     },
     "the-aggregate-chart-recall": {
       "url": "https://theaggregate.ai/benchmark?slug=the-aggregate-chart-recall",
@@ -316410,13 +316277,7 @@
       "rows": 18,
       "unmatched": [
         "GPT-6.1 Pro Sol"
-      ],
-      "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "the-aggregate-puzzle-portfolio-ladder": {
       "url": "https://theaggregate.ai/benchmark?slug=the-aggregate-puzzle-portfolio-ladder",
@@ -316446,13 +316307,7 @@
       "rows": 35,
       "unmatched": [
         "GPT-6.1 Pro Sol"
-      ],
-      "stats": {
-        "items": {
-          "name": "Items",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "the-amazing-agent-race": {
       "url": "https://minnesotanlp.github.io/the-amazing-agent-race/",
@@ -316596,10 +316451,6 @@
           "name": "Top-1 accuracy",
           "unit": "%",
           "better": "higher"
-        },
-        "cases": {
-          "name": "Cases",
-          "unit": "count"
         }
       }
     },
@@ -320691,13 +320542,7 @@
         "Tülu 3 DPO 70B",
         "Tülu 3 DPO 8B",
         "Tülu 3 SFT 8B"
-      ],
-      "stats": {
-        "tasks": {
-          "name": "Safety tasks",
-          "unit": "count"
-        }
-      }
+      ]
     },
     "turblimp": {
       "url": "https://arxiv.org/abs/2506.13487",
@@ -324656,7 +324501,7 @@
       "feed": "https://www.vals.ai/benchmarks/cyber_offense",
       "terms": "Public official results, subject to the source repository license and host terms.",
       "retrieved": "2026-11-24",
-      "rows": 6,
+      "rows": 7,
       "unmatched": [
         "gpt-6-sol-daybreak"
       ],
@@ -324700,10 +324545,6 @@
           "name": "Nova runs",
           "unit": "count"
         },
-        "novaTokenBudget": {
-          "name": "Nova token budget",
-          "unit": "tokens"
-        },
         "lighthouseTotalTokens": {
           "name": "Lighthouse total tokens",
           "unit": "tokens",
@@ -324732,10 +324573,6 @@
         "lighthouseRuns": {
           "name": "Lighthouse runs",
           "unit": "count"
-        },
-        "lighthouseTokenBudget": {
-          "name": "Lighthouse token budget",
-          "unit": "tokens"
         }
       }
     },
