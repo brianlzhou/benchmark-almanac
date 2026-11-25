@@ -11,6 +11,7 @@ const board: Leaderboard = {
  benchmark: "ds-fim-eval",
  url: "https://cdn.deepseek.com/api-docs/benchmark_4.jpg",
  feed: FEED,
+ static: 'paper',
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {

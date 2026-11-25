@@ -7,7 +7,11 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://epic-kitchens.github.io/2025';
 const base = 'https://epic-kitchens.github.io/static/results2025/Reports/';
 const board: Leaderboard = {
-  benchmark: 'epic-kitchens-visor-semi-supervised-vos', url, feed: base + 'VOS-R1.pdf', harnesses: 'system',
+  benchmark: 'epic-kitchens-visor-semi-supervised-vos', url, feed: base + 'VOS-R1.pdf', static: 'paper', harnesses: 'system',
+  parts: {
+    regionOverlap: { name: 'Region overlap (J)', unit: '%' },
+    boundaryAccuracy: { name: 'Boundary accuracy (F)', unit: '%' },
+  },
   terms: 'The organizers publish these team reports for the 2025 challenge. ' + url,
   async fetch() {
     const first = await pdfText(base + 'VOS-R1.pdf');

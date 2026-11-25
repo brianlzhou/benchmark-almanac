@@ -13,7 +13,8 @@ const runs = [
     harness: 'RIVER', ids: ['MPNetRoBERTa', 'RIVER_task_1_MPNetRoBERTa'] },
 ];
 const board: Leaderboard = {
-  benchmark: 'clef-joker-2026-humor-aware-retrieval', url: feed, feed,
+  benchmark: 'clef-joker-2026-humor-aware-retrieval', url: feed, feed, static: 'paper',
+  headline: 'Plain mean of the English and Hinglish track MAP scores.',
   terms: 'The organizers publish the overview under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
   stats: Object.fromEntries(['englishNdcg5','englishNdcg10','englishNdcg100','englishMrr','englishPrecision10','hinglishNdcg5','hinglishNdcg10','hinglishNdcg100','hinglishMrr','hinglishPrecision10'].map(key => {
     const metric = key.replace(/^(english|hinglish)/, '').replace('Ndcg', 'NDCG@').replace('Mrr', 'MRR').replace('Precision10', 'P@10');

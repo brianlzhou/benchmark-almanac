@@ -12966,6 +12966,7 @@
       "url": "https://www-cdn.anthropic.com/9ff93dfa8f445c932415d335c88852ef47f1201e.pdf",
       "feed": "https://www-cdn.anthropic.com/9ff93dfa8f445c932415d335c88852ef47f1201e.pdf",
       "terms": "Public Anthropic system card on its document CDN. Credit section 5.3.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
@@ -45356,6 +45357,7 @@
       "url": "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png",
       "feed": "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
@@ -45364,9 +45366,17 @@
       "url": "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png",
       "feed": "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "buildSuccess": {
+          "name": "Build success",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "cc-bench-v2-repo-exploration-zai": {
       "url": "https://raw.githubusercontent.com/zai-org/GLM-5/main/README.md",
@@ -45713,6 +45723,7 @@
       "url": "https://github.com/cubenlp/2023CCL_CEFE/tree/main/track1",
       "feed": "https://raw.githubusercontent.com/cubenlp/2023CCL_CEFE/main/track1/README.md",
       "terms": "The organizers publish the board at https://github.com/cubenlp/2023CCL_CEFE. The paper credits the Chinese Information Processing Society of China.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
@@ -45725,6 +45736,23 @@
         },
         "fineMicro": {
           "name": "Fine-grained micro F1"
+        }
+      },
+      "stats": {
+        "macroF1": {
+          "name": "Final macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "coarseMacro": {
+          "name": "Coarse-grained macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "fineMacro": {
+          "name": "Fine-grained macro F1",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -53233,6 +53261,8 @@
       "url": "https://ceur-ws.org/Vol-4283/paper302.pdf",
       "feed": "https://ceur-ws.org/Vol-4283/paper302.pdf",
       "terms": "The organizers publish the overview under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
+      "headline": "Plain mean of the English and Hinglish track MAP scores.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -54724,6 +54754,8 @@
       "url": "https://aclanthology.org/2026.nslp-1.6/",
       "feed": "https://aclanthology.org/2026.nslp-1.6.pdf",
       "terms": "ACL Anthology provides this paper under its publication terms. https://aclanthology.org/faq/copyright/",
+      "headline": "Abstract retrieval score (Score1.1), the first ranked task measure in the overview paper.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -54776,6 +54808,30 @@
         },
         "f1": {
           "name": "F1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "macroPrecision": {
+          "name": "Narrative macro precision",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "macroRecall": {
+          "name": "Narrative macro recall",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "microF1": {
+          "name": "Narrative micro F1",
+          "unit": "score",
+          "better": "higher",
+          "note": "Reported from 0 to 1."
+        },
+        "weightedF1": {
+          "name": "Narrative weighted F1",
           "unit": "score",
           "better": "higher",
           "note": "Reported from 0 to 1."
@@ -55962,6 +56018,8 @@
       "url": "https://aclanthology.org/L18-1431/",
       "feed": "https://aclanthology.org/L18-1431.pdf",
       "terms": "ACL Anthology terms apply to the attributed paper. https://aclanthology.org/faq/copyright/",
+      "headline": "Plain mean of the Cloze Track and User Query Track accuracy scores.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -77612,6 +77670,8 @@
       "url": "https://aclanthology.org/2026.arabicnlp-sharedtasks.161/",
       "feed": "https://aclanthology.org/2026.arabicnlp-sharedtasks.161.pdf",
       "terms": "ACL Anthology terms apply. https://aclanthology.org/faq/copyright/",
+      "headline": "Plain mean of the Paragraph Classification and ADU Detection closed-track F1 scores.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -90722,6 +90782,7 @@
       "url": "https://api-docs.deepseek.com/news/news0905",
       "feed": "https://cdn.deepseek.com/api-docs/benchmark_3.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
@@ -90732,6 +90793,7 @@
       "url": "https://cdn.deepseek.com/api-docs/benchmark_4.jpg",
       "feed": "https://cdn.deepseek.com/api-docs/benchmark_4.jpg (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
@@ -97370,9 +97432,21 @@
       "url": "https://cohere.com/blog/command-a",
       "feed": "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Win-Rate_Command-A-vs-GPT4o-Nov-.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "tieRate": {
+          "name": "Tie rate",
+          "unit": "%"
+        },
+        "lossRate": {
+          "name": "Loss rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "enterprise-vendor-eval": {
       "url": "https://app.primeintellect.ai/dashboard/environments/musa8026/enterprise-vendor-eval",
@@ -98106,13 +98180,24 @@
       "url": "https://epic-kitchens.github.io/2025",
       "feed": "https://epic-kitchens.github.io/static/results2025/Reports/VOS-R1.pdf",
       "terms": "The organizers publish these team reports for the 2025 challenge. https://epic-kitchens.github.io/2025",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Hiera-L (SAM2)",
         "SAM2"
       ],
-      "harnesses": "system"
+      "harnesses": "system",
+      "parts": {
+        "regionOverlap": {
+          "name": "Region overlap (J)",
+          "unit": "%"
+        },
+        "boundaryAccuracy": {
+          "name": "Boundary accuracy (F)",
+          "unit": "%"
+        }
+      }
     },
     "epic-tent-o": {
       "url": "https://arxiv.org/html/2404.01933",
@@ -257323,6 +257408,7 @@
       "url": "https://poleval.pl/2025/results/",
       "feed": "https://poleval.pl/2025/results/",
       "terms": "PolEval robots.txt disallows /data/ and permits the results page. The organizers give no separate reuse license for the results.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
@@ -257332,40 +257418,64 @@
       ],
       "parts": {
         "PL→EN, PL prompt, BLEU": {
-          "name": "PL→EN, PL prompt, BLEU"
+          "name": "BLEU",
+          "group": "PL→EN, PL prompt",
+          "unit": "score"
         },
         "PL→EN, PL prompt, chrF": {
-          "name": "PL→EN, PL prompt, chrF"
+          "name": "chrF",
+          "group": "PL→EN, PL prompt",
+          "unit": "score"
         },
         "PL→EN, PL prompt, chrF++": {
-          "name": "PL→EN, PL prompt, chrF++"
+          "name": "chrF++",
+          "group": "PL→EN, PL prompt",
+          "unit": "score"
         },
         "PL→EN, EN prompt, BLEU": {
-          "name": "PL→EN, EN prompt, BLEU"
+          "name": "BLEU",
+          "group": "PL→EN, EN prompt",
+          "unit": "score"
         },
         "PL→EN, EN prompt, chrF": {
-          "name": "PL→EN, EN prompt, chrF"
+          "name": "chrF",
+          "group": "PL→EN, EN prompt",
+          "unit": "score"
         },
         "PL→EN, EN prompt, chrF++": {
-          "name": "PL→EN, EN prompt, chrF++"
+          "name": "chrF++",
+          "group": "PL→EN, EN prompt",
+          "unit": "score"
         },
         "EN→PL, PL prompt, BLEU": {
-          "name": "EN→PL, PL prompt, BLEU"
+          "name": "BLEU",
+          "group": "EN→PL, PL prompt",
+          "unit": "score"
         },
         "EN→PL, PL prompt, chrF": {
-          "name": "EN→PL, PL prompt, chrF"
+          "name": "chrF",
+          "group": "EN→PL, PL prompt",
+          "unit": "score"
         },
         "EN→PL, PL prompt, chrF++": {
-          "name": "EN→PL, PL prompt, chrF++"
+          "name": "chrF++",
+          "group": "EN→PL, PL prompt",
+          "unit": "score"
         },
         "EN→PL, EN prompt, BLEU": {
-          "name": "EN→PL, EN prompt, BLEU"
+          "name": "BLEU",
+          "group": "EN→PL, EN prompt",
+          "unit": "score"
         },
         "EN→PL, EN prompt, chrF": {
-          "name": "EN→PL, EN prompt, chrF"
+          "name": "chrF",
+          "group": "EN→PL, EN prompt",
+          "unit": "score"
         },
         "EN→PL, EN prompt, chrF++": {
-          "name": "EN→PL, EN prompt, chrF++"
+          "name": "chrF++",
+          "group": "EN→PL, EN prompt",
+          "unit": "score"
         }
       }
     },
@@ -333657,42 +333767,54 @@
       "url": "https://cdn.openai.com/o1-system-card.pdf",
       "feed": "https://cdn.openai.com/o1-system-card.pdf",
       "terms": "OpenAI publishes the system card on its public CDN. Its robots.txt returns BlobNotFound.",
+      "static": "paper",
       "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [],
       "parts": {
         "harassment": {
-          "name": "harassment"
+          "name": "Harassment",
+          "unit": "%"
         },
         "harassment/threatening": {
-          "name": "harassment/threatening"
+          "name": "Harassment (threatening)",
+          "unit": "%"
         },
         "hate": {
-          "name": "hate"
+          "name": "Hate",
+          "unit": "%"
         },
         "hate/threatening": {
-          "name": "hate/threatening"
+          "name": "Hate (threatening)",
+          "unit": "%"
         },
         "self-harm": {
-          "name": "self-harm"
+          "name": "Self-harm",
+          "unit": "%"
         },
         "self-harm/instructions": {
-          "name": "self-harm/instructions"
+          "name": "Self-harm (instructions)",
+          "unit": "%"
         },
         "self-harm/intent": {
-          "name": "self-harm/intent"
+          "name": "Self-harm (intent)",
+          "unit": "%"
         },
         "sexual": {
-          "name": "sexual"
+          "name": "Sexual",
+          "unit": "%"
         },
         "sexual/minors": {
-          "name": "sexual/minors"
+          "name": "Sexual (minors)",
+          "unit": "%"
         },
         "violence": {
-          "name": "violence"
+          "name": "Violence",
+          "unit": "%"
         },
         "violence/graphic": {
-          "name": "violence/graphic"
+          "name": "Violence (graphic)",
+          "unit": "%"
         }
       }
     },

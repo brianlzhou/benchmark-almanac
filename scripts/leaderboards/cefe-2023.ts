@@ -9,9 +9,14 @@ import { fetchText } from '../lib/util.ts';
 const feed = 'https://raw.githubusercontent.com/cubenlp/2023CCL_CEFE/main/track1/README.md';
 const paper = 'https://aclanthology.org/2023.ccl-3.31.pdf';
 const board: Leaderboard = {
-  benchmark: 'cefe-2023', url: 'https://github.com/cubenlp/2023CCL_CEFE/tree/main/track1', feed,
+  benchmark: 'cefe-2023', url: 'https://github.com/cubenlp/2023CCL_CEFE/tree/main/track1', feed, static: 'paper',
   terms: 'The organizers publish the board at https://github.com/cubenlp/2023CCL_CEFE. The paper credits the Chinese Information Processing Society of China.',
   parts: {coarseMicro: 'Coarse-grained micro F1', fineMicro: 'Fine-grained micro F1'},
+  stats: {
+    macroF1: { name: 'Final macro F1', unit: 'score', better: 'higher' },
+    coarseMacro: { name: 'Coarse-grained macro F1', unit: 'score', better: 'higher' },
+    fineMacro: { name: 'Fine-grained macro F1', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const text = await fetchText(feed);
     const section = text.split('Track1测试集B排行榜')[1]?.split('2023年6月9日提交结果')[0];

@@ -7,7 +7,8 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://aclanthology.org/L18-1431.pdf';
 const board: Leaderboard = {
-  benchmark: 'cmrc-2017', url: 'https://aclanthology.org/L18-1431/', feed,
+  benchmark: 'cmrc-2017', url: 'https://aclanthology.org/L18-1431/', feed, static: 'paper',
+  headline: 'Plain mean of the Cloze Track and User Query Track accuracy scores.',
   terms: 'ACL Anthology terms apply to the attributed paper. https://aclanthology.org/faq/copyright/',
   parts: { cloze: 'Cloze Track', userQuery: 'User Query Track' },
   async fetch() {
