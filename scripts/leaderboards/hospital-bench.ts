@@ -18,6 +18,12 @@ const board: Leaderboard = {
     turns: { name: 'Turns per task', unit: 'count' },
     toolCalls: { name: 'Tool calls per task', unit: 'count' },
   },
+  chart: {
+    title: 'Score vs. cost per task',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Score', unit: '%', better: 'higher' },
+    note: 'Zavo plots Hospital-bench score against per-task cost on a log scale.',
+  },
   async fetch() {
     const html = await fetchText(URL);
     const head = ['Model', 'Score', 'Passes', 'Cost / task', 'Turns / task', 'Tool calls / task', 'Output tokens / task'];

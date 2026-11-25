@@ -9,17 +9,14 @@ const drawingColumns = ['Graphs and plots', 'Chemical structures', 'Circuits and
 const stats = Object.fromEntries([
   ['worstOf5', { name: 'Worst of 5 runs', unit: '%', better: 'higher' }],
   ['bestOf5', { name: 'Best of 5 runs', unit: '%', better: 'higher' }],
-  ...[...subjectColumns, 'Drawings', 'Written'].flatMap(name => [[`subjects_${name}_answers`, { name: `${name} answer count`, unit: 'count' }]]),
   ...subjectColumns.flatMap(name => [
     [`subjects_${name}_worstOf5`, { name: `${name} worst of five score`, unit: 'score', better: 'higher' }],
     [`subjects_${name}_bestOf5`, { name: `${name} best of five score`, unit: 'score', better: 'higher' }],
   ]),
   ...drawingColumns.flatMap(name => [
-    [`drawings_${name}_answers`, { name: `${name} answer count`, unit: 'count' }],
     [`drawings_${name}_worstOf5`, { name: `${name} worst of five score`, unit: 'score', better: 'higher' }],
     [`drawings_${name}_bestOf5`, { name: `${name} best of five score`, unit: 'score', better: 'higher' }],
   ]),
-  ['drawings_All drawings_answers', { name: 'All drawings answer count', unit: 'count' }],
 ]);
 const board: Leaderboard = {
   benchmark: 'gradebench', parts: {
@@ -43,6 +40,12 @@ const board: Leaderboard = {
   terms: 'GradeBench publishes this results file. Its robots.txt permits this path and the site states no separate scraping restriction. Source: GradeBench by Pensive.',
   aliases: { 'Muse Wonder': 'muse-wonder' },
   stats,
+  chart: {
+    title: 'Exact rubric match vs. cost',
+    x: { key: 'cost', label: 'Cost per answer', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Exact rubric match', unit: '%', better: 'higher' },
+    note: 'GradeBench plots exact rubric match against grading cost.',
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const read = <T>(name: string): T => {
@@ -59,12 +62,11 @@ const board: Leaderboard = {
         b.rows[r.model]?.forEach((value, i) => {
           const key = `${kind}_${b.columns[i][0]}`;
           metrics[key] = value;
-          metrics[`${key}_answers`] = b.columns[i][1];
           const range = b.ranges?.[r.model]?.[i];
           if (range) { metrics[`${key}_worstOf5`] = range[0]; metrics[`${key}_bestOf5`] = range[1]; }
         });
       }
-      return {model: r.model, score: r.exact, trials: 5, setting: 'single-shot user prompt; medium reasoning or nearest supported level', cost: r.cost / 1000, tokens: r.tokens, metrics};
+      return {model: r.model, score: r.exact, trials: 5, setting: 'single-shot user prompt, medium reasoning or nearest supported level', cost: r.cost / 1000, tokens: r.tokens, metrics};
     });
     if (rows.length < 3 || rows.some(r => !Number.isFinite(r.score))) throw new Error('GradeBench results changed');
     return rows;
