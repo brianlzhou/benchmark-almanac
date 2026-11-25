@@ -28,15 +28,28 @@ const board: Leaderboard = {
     'gpt-3.5-turbo-0125': 'gpt-3-5-turbo-jan-2024',
     'CodeLlama-34b-Instruct-hf': 'codellama-34b-instruct',
   },
+  parts: {
+    python: 'Python',
+    cpp: 'C++',
+    java: 'Java',
+    typescript: 'TypeScript',
+    rust: 'Rust',
+  },
   async fetch() {
     const data = await fetchJson<Record<string, Entry>>(FEED);
+    const langs = ['python', 'cpp', 'java', 'typescript', 'rust'] as const;
     const rows: LeaderboardRow[] = [];
     for (const [id, e] of Object.entries(data)) {
       const v = e.scores?.all?.['0.8']?.['pass@1'];
       const model = id.split('/').pop()!;
       // the April 2024 Command R+ (the registry has only the August 2024 release)
       if (typeof v !== 'number' || model === 'c4ai-command-r-plus') continue;
-      rows.push({ model, score: Number((v * 100).toFixed(1)), date: e.eval_date?.slice(0, 10) });
+      const metrics: Record<string, number> = {};
+      for (const lang of langs) {
+        const lv = e.scores?.[lang]?.['0.8']?.['pass@1'];
+        if (typeof lv === 'number' && Number.isFinite(lv)) metrics[lang] = Number((lv * 100).toFixed(1));
+      }
+      rows.push({ model, score: Number((v * 100).toFixed(1)), date: e.eval_date?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no scores in COMBINED-RESULTS.json');
     return rows;

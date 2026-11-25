@@ -257038,7 +257038,8 @@
         "vllama2-m+v-o-all",
         "zesen cheng",
         "zyw241"
-      ]
+      ],
+      "verified": "verified by host"
     },
     "perceptionbench-moonshot": {
       "url": "https://github.com/MoonshotAI/PerceptionBench#leaderboard",
@@ -271504,7 +271505,42 @@
         "OpenAI CUA (backbone unspecified)",
         "amazon/nova-act-v1.0"
       ],
-      "verified": "marked verified by REAL"
+      "verified": "marked verified by REAL",
+      "parts": {
+        "staynb": {
+          "name": "Staynb"
+        },
+        "omnizon": {
+          "name": "Omnizon"
+        },
+        "dashdish": {
+          "name": "DashDish"
+        },
+        "gocalendar": {
+          "name": "GoCalendar"
+        },
+        "gomail": {
+          "name": "GoMail"
+        },
+        "opendining": {
+          "name": "OpenDining"
+        },
+        "networkin": {
+          "name": "NetworkIn"
+        },
+        "udriver": {
+          "name": "Udriver"
+        },
+        "flyUnified": {
+          "name": "Fly Unified"
+        },
+        "topwork": {
+          "name": "TopWork"
+        },
+        "zilloft": {
+          "name": "Zilloft"
+        }
+      }
     },
     "real-pocqi": {
       "url": "https://arxiv.org/html/2606.28960",
@@ -274559,7 +274595,24 @@
         "codegemma-7b-it",
         "deepseek-coder-33b-instruct",
         "deepseek-coder-6.7b-instruct"
-      ]
+      ],
+      "parts": {
+        "python": {
+          "name": "Python"
+        },
+        "cpp": {
+          "name": "C++"
+        },
+        "java": {
+          "name": "Java"
+        },
+        "typescript": {
+          "name": "TypeScript"
+        },
+        "rust": {
+          "name": "Rust"
+        }
+      }
     },
     "reportbench": {
       "url": "https://github.com/ByteDance-BandAI/ReportBench#evaluation-results",
@@ -287106,7 +287159,36 @@
       "terms": "Static data script on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.",
       "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "architecture": {
+          "name": "Architecture"
+        },
+        "biology": {
+          "name": "Biology"
+        },
+        "chemistry": {
+          "name": "Chemistry"
+        },
+        "mechanicalCad": {
+          "name": "Mechanical CAD"
+        },
+        "medical": {
+          "name": "Medical imaging"
+        }
+      },
+      "stats": {
+        "ccMcp": {
+          "name": "Code and MCP setting",
+          "unit": "score",
+          "better": "higher"
+        },
+        "cc2d6": {
+          "name": "2D multi-view setting",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "scienceworld": {
       "url": "https://aclanthology.org/2022.emnlp-main.775/",
@@ -313294,7 +313376,29 @@
       "unmatched": [
         "Abominable Intelligence",
         "tsunumon"
-      ]
+      ],
+      "stats": {
+        "accuracy": {
+          "name": "Accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "logic": {
+          "name": "Logic",
+          "unit": "score",
+          "better": "higher"
+        },
+        "adaptability": {
+          "name": "Adaptability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engagement": {
+          "name": "Engagement",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "teachobs": {
       "url": "https://arxiv.org/html/2605.30673",
