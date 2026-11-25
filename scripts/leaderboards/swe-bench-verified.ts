@@ -54,7 +54,6 @@ export async function sweBenchRows(name: string, extraMetrics?: (details: NonNul
     const path = typeof r.logs === 'string' ? r.logs : typeof r.trajs === 'string' ? r.trajs : undefined;
     const split = !path ? null : path.match(/^s3:\/\/swe-bench-submissions\/([\w-]+)\/([^/]+)\//);
     const metrics: Record<string, number> = extraMetrics?.(r.per_instance_details ?? {}) ?? {};
-    if (typeof r.os_system === 'boolean') metrics.openSystem = Number(r.os_system);
     if (typeof r.cost === 'number') metrics.totalCostUsd = r.cost;
     if (typeof r.instance_calls === 'number') metrics.callsPerInstance = r.instance_calls;
     const attempts = r.tags?.map((tag) => tag.match(/^System: Attempts - (\d+)$/)).find(Boolean);
@@ -68,10 +67,7 @@ export async function sweBenchRows(name: string, extraMetrics?: (details: NonNul
         if (task.resolved) count.solved++;
         totals.set(repo, count);
       }
-      for (const [repo, count] of totals) {
-        metrics[repo] = 100 * count.solved / count.tasks;
-        (board.parts ??= {})[repo] = { name: repo, group: 'Repository' };
-      }
+      for (const [repo, count] of totals) metrics[repo] = 100 * count.solved / count.tasks;
     }
     out.push({
       metrics,
@@ -96,15 +92,16 @@ export async function sweBenchRows(name: string, extraMetrics?: (details: NonNul
  * What every SWE-bench board shares: each entry is an agent and a model. mini-SWE-agent, the "Bash Only" view, is
  * the neutral one (data/harnesses.json). Other agents show as their own entries.
  */
+export const SWE_BENCH_COST_STATS: NonNullable<Leaderboard['stats']> = {
+  totalCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' },
+  callsPerInstance: { name: 'Calls per instance', unit: 'count', better: 'lower' },
+};
+
 export const SWE_BENCH_BOARD = {
   harnesses: 'system',
   reference: ['mini-SWE-agent', 'RAG'],
   verified: 'checked by the SWE-bench team',
-  stats: {
-    totalCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' as const },
-    callsPerInstance: { name: 'Calls per instance', unit: 'count', better: 'lower' as const },
-  },
-} satisfies Pick<Leaderboard, 'harnesses' | 'reference' | 'verified' | 'stats'>;
+} satisfies Pick<Leaderboard, 'harnesses' | 'reference' | 'verified'>;
 
 export const SWE_BENCH_ALIASES: Record<string, string> = {
   'Claude 4 Opus': 'claude-opus-4',
@@ -127,12 +124,20 @@ export const SWE_BENCH_ALIASES: Record<string, string> = {
   'Devstral Small (2512)': 'devstral-small-2',
 };
 
+const VERIFIED_REPOS = [
+  'astropy/astropy', 'django/django', 'matplotlib/matplotlib', 'mwaskom/seaborn',
+  'pallets/flask', 'psf/requests', 'pydata/xarray', 'pylint-dev/pylint',
+  'pytest-dev/pytest', 'scikit-learn/scikit-learn', 'sphinx-doc/sphinx', 'sympy/sympy',
+];
+
 const board: Leaderboard = {
   benchmark: 'swe-bench-verified',
   url: 'https://www.swebench.com/',
   feed: SWE_BENCH_FEED,
   terms: SWE_BENCH_TERMS,
   aliases: SWE_BENCH_ALIASES,
+  parts: Object.fromEntries(VERIFIED_REPOS.map((repo) => [repo, { name: repo, group: 'Repository' }])),
+  stats: SWE_BENCH_COST_STATS,
   ...SWE_BENCH_BOARD,
   fetch: () => sweBenchRows('Verified'),
 };

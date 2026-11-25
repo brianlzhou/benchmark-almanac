@@ -20,9 +20,11 @@ const board: Leaderboard = {
   stats: {
     runSeconds: { name: 'Run time', unit: 'seconds' },
     samples: { name: 'Scored samples', unit: 'count' }, inputTokens: { name: 'Mean input tokens', unit: 'tokens' },
-    outputTokens: { name: 'Mean output tokens', unit: 'tokens' }, game_reward: { name: 'Game reward', unit: 'score' },
-    cluegiver_format_reward: { name: 'Cluegiver format reward', unit: 'score' },
-    guesser_format_reward: { name: 'Guesser format reward', unit: 'score' }, shot_calling_reward: { name: 'Shot calling reward', unit: 'score' },
+    game_reward: { name: 'Game reward', unit: 'score', better: 'higher' },
+    cluegiver_format_reward: { name: 'Cluegiver format reward', unit: 'score', better: 'higher' },
+    guesser_format_reward: { name: 'Guesser format reward', unit: 'score', better: 'higher' },
+    format_reward_func: { name: 'Format reward', unit: 'score', better: 'higher' },
+    shot_calling_reward: { name: 'Shot calling reward', unit: 'score', better: 'higher' },
   },
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -41,9 +43,10 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = { samples: e.total_samples };
         for (const [key, value] of Object.entries(e.detailedMetrics?.metricsStats ?? {})) metrics[key] = value.mean;
         if (m.time_ms !== undefined) metrics.runSeconds = m.time_ms / 1000;
-        if (m.usage) { metrics.inputTokens = m.usage.input_tokens; metrics.outputTokens = m.usage.output_tokens; }
+        if (m.usage) metrics.inputTokens = m.usage.input_tokens;
         rows.push({ model: e.model_name, models: args.guesser_model ? [e.model_name, args.guesser_model] : undefined,
           score: e.statistics.avgReward, harness: e.framework, setting: mode + ', ' + m.num_examples + ' boards, v' + e.semanticVersion,
+          tokens: m.usage && Number.isFinite(m.usage.output_tokens) && m.usage.output_tokens > 0 ? m.usage.output_tokens : undefined,
           link: url + '/' + e._id, trials: m.rollouts_per_example, date: e.createdAt.slice(0,10), submitter: e.user?.name, metrics });
       }
       if (!pagination.hasMore) {
