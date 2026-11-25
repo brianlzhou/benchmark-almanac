@@ -26,7 +26,10 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const tr of body.matchAll(/<tr\b[\s\S]*?<\/tr>/g)) {
       const cell = (label: string) => tr[0].match(new RegExp(`data-label=(?:"${label}"|${label})>([\\s\\S]*?)</td>`))?.[1] ?? '';
-      let model = text(cell('Model'));
+      const modelCell = cell('Model');
+      let model = text(modelCell);
+      const href = modelCell.match(/href=(?:"([^"]+)"|([^\s>]+))/);
+      const link = href ? new URL(href[1] ?? href[2], PAGE).href : undefined;
       const rating = cell('Rating').match(/<span>(\d+)<\/span>\s*<span[^>]*>±(\d+)/);
       const rates = [...cell('Win Rate').matchAll(/>(\d+)%</g)].map((m) => Number(m[1]));
       const cost = cell('Cost').match(/title="\$([\d.]+) \/ game"/)?.[1];
@@ -47,7 +50,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = { ciLow: low, ciHigh: high };
       if (rates.length === 2) [metrics.goodWin, metrics.evilWin] = rates;
       if (verbose) metrics.tokensPerAction = Number(verbose.replace(/,/g, ''));
-      rows.push({ model, setting, score, low, high, cost: cost ? Number(cost) : undefined, metrics });
+      rows.push({ model, setting, score, low, high, link, cost: cost ? Number(cost) : undefined, metrics });
     }
     if (rows.length < 10) throw new Error(`Clocktower Radio: ${rows.length} rows`);
     return rows;

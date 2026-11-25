@@ -51185,6 +51185,25 @@
         }
       },
       "stats": {
+        "resolved": {
+          "name": "Resolved instances",
+          "unit": "count",
+          "better": "higher"
+        },
+        "instances": {
+          "name": "Instances evaluated",
+          "unit": "count"
+        },
+        "cost_usd": {
+          "name": "Total API cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        },
         "avg_duration_s": {
           "name": "Average duration per task",
           "unit": "seconds",
@@ -114860,6 +114879,7 @@
       "unmatched": [
         "Gestalt"
       ],
+      "costPer": "run",
       "stats": {
         "winRate": {
           "name": "Win rate",
@@ -114887,10 +114907,28 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "chart": {
+        "title": "Performance vs. cost",
+        "note": "Cost per run in US dollars on a log scale against Pass@1 on all 10 tasks.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "passed": {
           "name": "Runs passed",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "runs": {
           "name": "Runs",
@@ -115177,7 +115215,7 @@
         "attackSuccessRate": {
           "name": "Attack success rate",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -115877,7 +115915,7 @@
       "unmatched": [],
       "chart": {
         "title": "Agent Performance",
-        "note": "Overall pass rate against the average agent wall-clock time per rollout, on a log scale; the board marks the Pareto frontier.",
+        "note": "Overall pass rate against the average agent wall-clock time per rollout, on a log scale. The board marks the Pareto frontier.",
         "x": {
           "key": "minutes",
           "label": "Wall-clock per rollout",
@@ -115900,11 +115938,41 @@
         },
         "steps": {
           "name": "Steps per rollout",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "passAt3": {
           "name": "Pass@3",
           "unit": "%",
+          "better": "higher"
+        },
+        "verifierAvg3": {
+          "name": "Verifier pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "verifierPassAt3": {
+          "name": "Verifier Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "partialScore": {
+          "name": "Partial credit score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passes": {
+          "name": "Passed rollouts",
+          "unit": "count",
+          "better": "higher"
+        },
+        "rollouts": {
+          "name": "Rollouts",
+          "unit": "count"
+        },
+        "tasksSolved": {
+          "name": "Tasks solved",
+          "unit": "count",
           "better": "higher"
         }
       }
@@ -121566,11 +121634,13 @@
       "stats": {
         "totalTokens": {
           "name": "Total tokens",
-          "unit": "thousands"
+          "unit": "tokens",
+          "better": "lower"
         },
         "steps": {
           "name": "Steps",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },

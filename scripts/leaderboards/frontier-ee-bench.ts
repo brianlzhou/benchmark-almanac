@@ -12,7 +12,13 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (the results table and the cost chart's point titles in the page HTML)`,
   terms: 'Evident Machines’ terms (November 2026) allow automated collection as its robots.txt permits, and robots.txt allows this page. Results are credited to Evident Machines.',
-  stats: { passed: { name: 'Runs passed', unit: 'count' }, runs: { name: 'Runs', unit: 'count' } },
+  stats: { passed: { name: 'Runs passed', unit: 'count', better: 'higher' }, runs: { name: 'Runs', unit: 'count' } },
+  chart: {
+    title: 'Performance vs. cost',
+    note: 'Cost per run in US dollars on a log scale against Pass@1 on all 10 tasks.',
+    x: { key: 'cost', label: 'Cost per run', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     const body = html.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1];
