@@ -40,6 +40,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "qodo-code-review-benchmark",
+  static: 'paper',
   url: "https://www.qodo.ai/ai-code-review-benchmark/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

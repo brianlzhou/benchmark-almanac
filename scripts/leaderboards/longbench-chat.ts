@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "longbench-chat",
+ static: 'paper',
  url: "https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
