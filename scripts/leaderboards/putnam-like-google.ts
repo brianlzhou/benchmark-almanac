@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED='https://codeload.github.com/google-deepmind/eval_hub/tar.gz/refs/heads/master';
 const board:Leaderboard={benchmark:'putnam-like-google',url:'https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/putnam_like',feed:FEED,
  terms:'Public Google DeepMind eval_hub graded samples. Benchmark Almanac credits Google DeepMind and links the source.',
- stats:{problems:{name:'Problems',unit:'count'},totalPoints:{name:'Total points',unit:'score',better:'higher',note:'Sum of grades from 0 to 10 across the 96 problems.'}},
+ stats:{totalPoints:{name:'Total points',unit:'score',better:'higher',note:'Sum of grades from 0 to 10 across the 96 problems.'}},
  aliases:{'gemini-2.5-flash-04-17':'gemini-2-5-flash-apr-2025','gemini-2.5-pro-03-25':'gemini-2-5-pro-mar-2025','sonnet-3.7':'claude-3-7-sonnet'},
  async fetch():Promise<LeaderboardRow[]>{
   const res=await fetch(FEED,{headers:{'user-agent':'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)'},signal:AbortSignal.timeout(120000)});
@@ -30,7 +30,7 @@ const board:Leaderboard={benchmark:'putnam-like-google',url:'https://github.com/
   const rows:LeaderboardRow[]=[];
   for(const [name,grades] of groups){if(grades.size!==96)throw new Error(`Incomplete Putnam-like sample set: ${name}`);
    const effort=name.match(/^(o[34]-mini)-(high)$/);const model=effort?effort[1]:name==='r1'?'DeepSeek R1 (snapshot unspecified)':name;
-   rows.push({model,setting:effort?.[2],harness:'Published Gemini 2.5 Pro judge (2025-07-18)',score:[...grades.values()].reduce((a,b)=>a+b,0)/960*100,metrics:{problems:96,totalPoints:[...grades.values()].reduce((a,b)=>a+b,0)}});
+   rows.push({model,setting:effort?.[2],harness:'Published Gemini 2.5 Pro judge (2025-07-18)',score:[...grades.values()].reduce((a,b)=>a+b,0)/960*100,metrics:{totalPoints:[...grades.values()].reduce((a,b)=>a+b,0)}});
   }
   if(!rows.length)throw new Error('Putnam-like grade files missing');return rows;
  }};

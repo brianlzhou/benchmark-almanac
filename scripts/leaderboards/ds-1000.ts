@@ -21,11 +21,6 @@ const board: Leaderboard = {
     perturbation_semantic: { name: 'Semantic', group: 'Category' },
     perturbation_surface: { name: 'Surface', group: 'Category' },
   },
-  stats: {
-    tasks: { name: 'Tasks', unit: 'count' },
-    library_matplotlibCount: { name: 'Matplotlib tasks', unit: 'count' }, library_numpyCount: { name: 'NumPy tasks', unit: 'count' }, library_pandasCount: { name: 'pandas tasks', unit: 'count' }, library_pytorchCount: { name: 'PyTorch tasks', unit: 'count' }, library_scipyCount: { name: 'SciPy tasks', unit: 'count' }, library_sklearnCount: { name: 'scikit-learn tasks', unit: 'count' }, library_tensorflowCount: { name: 'TensorFlow tasks', unit: 'count' },
-    'perturbation_difficult-rewriteCount': { name: 'Difficult rewrite tasks', unit: 'count' }, perturbation_originCount: { name: 'Original perturbation tasks', unit: 'count' }, perturbation_semanticCount: { name: 'Semantic perturbation tasks', unit: 'count' }, perturbation_surfaceCount: { name: 'Surface perturbation tasks', unit: 'count' },
-  },
   url: "https://github.com/xlang-ai/DS-1000",
   feed: FEED,
   terms: "Public results published by the benchmark authors at api.github.com; retain source attribution and follow the upstream terms.",
@@ -36,12 +31,12 @@ const board: Leaderboard = {
     for(const f of tree.tree){if(!/^results\/[^/]+-result\.txt$/.test(f.path))continue;
       const model=f.path.slice('results/'.length).replace(/-result\.txt$/,'');
       await new Promise(resolve => setTimeout(resolve, 1100));
-      const source=await fetchText('https://raw.githubusercontent.com/xlang-ai/DS-1000/HEAD/'+f.path);const score=source.match(/^mean\s+([\d.]+)/m);const count=source.match(/^count\s+([\d.]+)/m);
+      const source=await fetchText('https://raw.githubusercontent.com/xlang-ai/DS-1000/HEAD/'+f.path);const score=source.match(/^mean\s+([\d.]+)/m);
       if (!score) continue;
       const link='https://github.com/xlang-ai/DS-1000/blob/'+tree.sha+'/'+f.path;
-      const row: LeaderboardRow = {model, link, score:Number(score[1])*100, metrics:count?{tasks:Number(count[1])}:{}};
+      const row: LeaderboardRow = {model, link, score:Number(score[1])*100, metrics:{}};
       out.push(row);
-      let group='';for(const line of source.split(/\r?\n/)){if(line.trim()==='library')group='Library';if(line.trim()==='perturbation_type')group='Perturbation';const m=line.match(/^([A-Za-z][\w-]*)\s+(\d+)\s+([\d.]+)\s*$/);if(group&&m){const key=group.toLowerCase()+'_'+m[1].toLowerCase();row.metrics![key]=Number(m[3])*100;row.metrics![key+'Count']=Number(m[2]);}}
+      let group='';for(const line of source.split(/\r?\n/)){if(line.trim()==='library')group='Library';if(line.trim()==='perturbation_type')group='Perturbation';const m=line.match(/^([A-Za-z][\w-]*)\s+(\d+)\s+([\d.]+)\s*$/);if(group&&m){const key=group.toLowerCase()+'_'+m[1].toLowerCase();row.metrics![key]=Number(m[3])*100;}}
     }if(!out.length)throw new Error('DS-1000 result files missing');return out;
   },
 };

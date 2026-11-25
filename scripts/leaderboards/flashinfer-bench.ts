@@ -12,11 +12,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at bench.flashinfer.ai; retain source attribution and follow the upstream terms.",
   aliases: {},
-  stats: { resolvedPercent: { name: 'Resolved workloads', unit: '%', better: 'higher' }, workloads: { name: 'Workloads', unit: 'count' } },
+  stats: { resolvedPercent: { name: 'Resolved workloads', unit: '%', better: 'higher' } },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.startsWith('Avg Speedup')));if(!t)throw new Error('FlashInfer leaderboard missing');
-    return t.slice(1).flatMap(r=>{const score=num(r[1]?.text);if(score===undefined)return [];const count=r[2].text.match(/\(\s*([\d,]+)\s*workloads/);return [{model:identity(r[0].text.replace(/^\d+\s*\.\s*/,'')),score,metrics:{resolvedPercent:num(r[2].text)!,...(count?{workloads:Number(count[1].replace(/,/g,''))}:{})}}];});
+    return t.slice(1).flatMap(r=>{const score=num(r[1]?.text);if(score===undefined)return [];return [{model:identity(r[0].text.replace(/^\d+\s*\.\s*/,'')),score,metrics:{resolvedPercent:num(r[2].text)!}}];});
   },
 };
 export default board;
