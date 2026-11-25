@@ -9,8 +9,16 @@ interface Detail {
   leaderboard: { scaffold: string; models: {name: string; avg: number; scores: number[]}[] }[];
 }
 const board: Leaderboard = {
-  benchmark: 'alphaeval', url: FEED, feed: FEED,
+  benchmark: 'alphaeval', harnesses: 'system', url: FEED, feed: FEED,
   terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+  parts: {
+    hr: { name: 'Human Resources', group: 'Domain' },
+    fni: { name: 'Finance & Investment', group: 'Domain' },
+    poo: { name: 'Procurement & Operations', group: 'Domain' },
+    swe: { name: 'Software Engineering', group: 'Domain' },
+    hls: { name: 'Healthcare & Life Sciences', group: 'Domain' },
+    tr: { name: 'Technology Research', group: 'Domain' },
+  },
   async fetch() {
     const page = await fetchText(FEED);
     const table = tables(page).find(t => t[0]?.some(c => c.text === 'Scaffold'));
@@ -28,12 +36,11 @@ const board: Leaderboard = {
       if (start === -1) continue;
       const data = jsLiteral<Detail>(script, start);
       if (!Array.isArray(data.leaderboard)) continue;
-      board.parts = Object.fromEntries(data.tasks.map(task => [task.key, {name: task.label, group: 'Domain'}]));
       for (const entry of data.leaderboard) {
         for (const model of entry.models) {
           const row = rows.find(r => r.harness === entry.scaffold && r.model === model.name && r.score === model.avg);
           if (row && model.scores.length === data.tasks.length) {
-            row.metrics = Object.fromEntries(data.tasks.map((task, i) => [task.key, model.scores[i]]));
+            row.metrics = Object.fromEntries(data.tasks.map((task, i) => [task.key === 'se' ? 'swe' : task.key, model.scores[i]]));
           }
         }
       }

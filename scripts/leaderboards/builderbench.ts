@@ -19,6 +19,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'builderbench',
+  harnesses: 'system',
   url: PAGE,
   feed: `${BASE}tasks.json and one JSON file per task listed there`,
   terms: 'The leaderboard publishes JSON files from the MIT-licensed BuilderBench repository. Results are credited to the BuilderBench authors.',
