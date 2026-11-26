@@ -1,0 +1,25 @@
+name: IndexNow
+
+# When Vercel finishes a production deploy of main, send the pages that deploy changed to IndexNow (Bing, Yandex,
+# Seznam, Naver and the other engines that take part), so they crawl them soon. The build listed the pages in
+# /indexnow/changed.txt (scripts/lib/indexnow.ts). Vercel reports deploys as commit statuses, and the script reads
+# the status event and waits until the live site shows the deploy.
+on:
+  status:
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    if: github.event.context == 'Vercel' && github.event.state == 'success' && contains(github.event.branches.*.name, 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/indexnow.ts
