@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { INDEXNOW_KEY, changedPaths, formatChanged, formatPages, isProductionDeploy, pageDigest, parseChanged, parsePages, sendToIndexNow } from './indexnow.ts';
+import { FINGERPRINT, INDEXNOW_KEY, changedPaths, formatChanged, formatPages, isProductionDeploy, pageDigest, parseChanged, parsePages, sendToIndexNow } from './indexnow.ts';
 
 const page = (o: { title?: string; head?: string; main?: string; foot?: string }) =>
   `<html><head><title>${o.title ?? 'GPQA Diamond leaderboard'}</title><meta name="description" content="Who leads GPQA Diamond."><link rel="stylesheet" href="/_astro/a1.css"></head>` +
@@ -14,6 +14,9 @@ test('a page fingerprint follows the indexed text and ignores the header, footer
   assert.equal(pageDigest(page({ head: 'Cite: retrieved November 26, 2026', foot: '6,700 benchmarks. Data as of November 26, 2026.' })), base);
   assert.equal(pageDigest(page({ main: '<h1 class="x">GPQA Diamond</h1>\n<p data-v="1">Gemini leads with <b>91.9%</b>.</p><script src="/_astro/b2.js"></script>' })), base);
   assert.notEqual(pageDigest(page({ main: '<h1>GPQA Diamond</h1><p>Gemini leads with 92.1%.</p>' })), base);
+  const read = (d: string, stars: number) => `<h1>GPQA Diamond</h1><p>Gemini leads with 91.9%<span data-volatile data-astro-cid-x>, read on ${d}</span>.</p><span class="muted" data-volatile="">${stars} stars</span>`;
+  assert.equal(pageDigest(page({ main: read('November 24th, 2026', 92) })), pageDigest(page({ main: read('November 26th, 2026', 93) })));
+  assert.equal(pageDigest(page({ main: read('November 24th, 2026', 92) })), base);
   assert.notEqual(pageDigest(page({ title: 'GPQA Diamond leaderboard and scores (December 2026)' })), base);
 });
 
@@ -27,8 +30,10 @@ test('changed pages are the new ones and the ones whose fingerprint moved', () =
 test('the page and list files read back what was written', () => {
   const pages = new Map([['/b/', 'bbbbbbbbbbbb'], ['/', 'aaaaaaaaaaaa']]);
   const text = formatPages('abc123', pages);
-  assert.equal(text.split('\n')[1], '/ aaaaaaaaaaaa');
-  assert.deepEqual(parsePages(text), { commit: 'abc123', pages: new Map([['/', 'aaaaaaaaaaaa'], ['/b/', 'bbbbbbbbbbbb']]) });
+  assert.equal(text.split('\n')[2], '/ aaaaaaaaaaaa');
+  assert.deepEqual(parsePages(text), { commit: 'abc123', version: FINGERPRINT, pages: new Map([['/', 'aaaaaaaaaaaa'], ['/b/', 'bbbbbbbbbbbb']]) });
+  // the first files had no version line
+  assert.deepEqual(parsePages('# commit old\n/ aaaaaaaaaaaa\n'), { commit: 'old', version: 1, pages: new Map([['/', 'aaaaaaaaaaaa']]) });
   assert.throws(() => parsePages('<!doctype html><html>'), /no commit line/);
   assert.deepEqual(parseChanged(formatChanged('abc123', 'none', ['/x/', '/y/'])), { commit: 'abc123', base: 'none', paths: ['/x/', '/y/'] });
 });

@@ -48,7 +48,7 @@ if (!changed) {
   process.exit(0);
 }
 if (changed.base === 'unknown') {
-  summary(`The build of ${commit.slice(0, 8)} couldn't read the live fingerprints, so it listed no pages and nothing was sent.`);
+  summary(`The build of ${commit.slice(0, 8)} couldn't compare with the live fingerprints, so it listed no pages and nothing was sent. Its build log says why.`);
   process.exit(0);
 }
 const since = changed.base === 'none' ? 'the first fingerprinted deploy' : `commit ${changed.base?.slice(0, 8)}`;

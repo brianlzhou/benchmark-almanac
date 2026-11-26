@@ -314,7 +314,7 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
       ))
     }
   </div>
-  {f < 1 && <p class="as-hint" data-note hidden>{`The last half year runs through ${asOf}, so its count is partial.`}</p>}
+  {f < 1 && <p class="as-hint" data-note data-volatile hidden>{`The last half year runs through ${asOf}, so its count is partial.`}</p>}
   </ChartDownload>
   <span class="sr" aria-live="polite" data-live></span>
   <script type="application/json" is:inline data-json set:html={json} />
