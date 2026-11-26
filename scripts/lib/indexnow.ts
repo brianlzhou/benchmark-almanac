@@ -116,16 +116,30 @@ export function isProductionDeploy(e: { context?: string; state?: string; branch
   return e.context === 'Vercel' && e.state === 'success' && !!e.branches?.some((b) => b.name === 'main');
 }
 
-/** Sends full URLs on the site to IndexNow, which shares them with every engine that takes part. */
-export async function sendToIndexNow(urls: string[]): Promise<void> {
+/**
+ * Answers worth another try: the engine hasn't checked the key file yet (the first send, on 2026-11-26, got this and
+ * went through a minute later), it wants fewer requests, or it failed on its side.
+ */
+const retryable = (status: number, body: string) => status === 429 || status >= 500 || body.includes('SiteVerificationNotCompleted');
+
+/**
+ * Sends full URLs on the site to IndexNow, which shares them with every engine that takes part. A refused batch gets
+ * two more tries, `wait` milliseconds apart, because the next deploy compares with this one and won't list its pages again.
+ */
+export async function sendToIndexNow(urls: string[], wait = 60_000): Promise<void> {
   for (let i = 0; i < urls.length; i += BATCH) {
-    const res = await fetch('https://api.indexnow.org/indexnow', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({ host: new URL(SITE).host, key: INDEXNOW_KEY, urlList: urls.slice(i, i + BATCH) }),
-      signal: AbortSignal.timeout(60_000),
-    });
-    // 200 means taken, and 202 means taken while the engine still checks the key file
-    if (res.status !== 200 && res.status !== 202) throw new Error(`IndexNow answered ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    for (let attempt = 1; ; attempt++) {
+      const res = await fetch('https://api.indexnow.org/indexnow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify({ host: new URL(SITE).host, key: INDEXNOW_KEY, urlList: urls.slice(i, i + BATCH) }),
+        signal: AbortSignal.timeout(60_000),
+      });
+      // 200 means taken, and 202 means taken while the engine still checks the key file
+      if (res.status === 200 || res.status === 202) break;
+      const body = (await res.text()).slice(0, 300);
+      if (attempt >= 3 || !retryable(res.status, body)) throw new Error(`IndexNow answered ${res.status}: ${body}`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
   }
 }

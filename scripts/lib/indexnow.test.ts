@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { INDEXNOW_KEY, changedPaths, formatChanged, formatPages, isProductionDeploy, pageDigest, parseChanged, parsePages } from './indexnow.ts';
+import { INDEXNOW_KEY, changedPaths, formatChanged, formatPages, isProductionDeploy, pageDigest, parseChanged, parsePages, sendToIndexNow } from './indexnow.ts';
 
 const page = (o: { title?: string; head?: string; main?: string; foot?: string }) =>
   `<html><head><title>${o.title ?? 'GPQA Diamond leaderboard'}</title><meta name="description" content="Who leads GPQA Diamond."><link rel="stylesheet" href="/_astro/a1.css"></head>` +
@@ -45,4 +45,18 @@ test('the key file the site serves holds the key', () => {
   const file = new URL(`../../public/${INDEXNOW_KEY}.txt`, import.meta.url);
   assert.ok(existsSync(file), `public/${INDEXNOW_KEY}.txt is missing`);
   assert.equal(readFileSync(file, 'utf8'), INDEXNOW_KEY);
+});
+
+test('a send tries again while the key is unchecked, and stops on a refusal that another try cannot fix', async (t) => {
+  const answers: [number, string][] = [[403, '{"errorCode":"SiteVerificationNotCompleted"}'], [200, '']];
+  const sent: string[] = [];
+  t.mock.method(globalThis, 'fetch', async (_url: string, init: RequestInit) => {
+    sent.push(JSON.parse(String(init.body)).urlList.join(' '));
+    const [status, body] = answers.shift() ?? [422, 'URLs do not belong to the host'];
+    return new Response(body, { status });
+  });
+  await sendToIndexNow(['https://www.benchmarkalmanac.com/'], 0);
+  assert.equal(sent.length, 2);
+  await assert.rejects(sendToIndexNow(['https://www.benchmarkalmanac.com/'], 0), /answered 422/);
+  assert.equal(sent.length, 3);
 });
