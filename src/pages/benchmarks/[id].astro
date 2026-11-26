@@ -307,6 +307,7 @@ const links = [
   b.links?.paper && { kind: 'paper', href: b.links.paper, label: 'Paper', note: hostname(b.links.paper) },
   b.links?.dataset && { kind: 'dataset', href: b.links.dataset, label: 'Dataset', note: hostname(b.links.dataset) },
   b.links?.leaderboard && { kind: 'leaderboard', href: b.links.leaderboard, label: 'Leaderboard', note: hostname(b.links.leaderboard) },
+  b.links?.kaggle && b.links.kaggle !== b.links.leaderboard && { kind: 'leaderboard', href: b.links.kaggle, label: 'Kaggle leaderboard', note: 'kaggle.com' },
   b.links?.site && { kind: 'site', href: b.links.site, label: hostname(b.links.site) },
 ].filter(Boolean) as { kind: LinkKind; href: string; label: string; note?: string; volatile?: boolean }[];
 // The strongest model with any score here, by its rank on the capability index (ECI). A benchmark that
