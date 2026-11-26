@@ -11179,7 +11179,7 @@
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
       "retrieved": "2026-11-26",
-      "rows": 61,
+      "rows": 129,
       "unmatched": [],
       "stats": {
         "inputTokens": {
@@ -11199,6 +11199,14 @@
           "name": "Average retries",
           "unit": "count",
           "better": "lower"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/aime-2025/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -40772,20 +40780,28 @@
       "url": "https://arxiv.org/abs/2504.12516",
       "feed": "https://arxiv.org/html/2504.12516",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
-      "rows": 3,
+      "static": "paper",
+      "retrieved": "2026-11-26",
+      "rows": 45,
       "unmatched": [
         "OpenAI Deep Research (base model unspecified)",
         "gpt-4o-search-preview-2025-03-11"
       ],
       "harnesses": "system",
-      "static": "paper",
       "stats": {
         "calibrationError": {
           "name": "Calibration error",
           "unit": "%",
           "better": "lower",
           "note": "Difference between the model’s confidence and the likelihood that its answer is correct."
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/openai/browsecomp",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/openai/browsecomp/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -106011,7 +106027,7 @@
       "feed": "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard.csv",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
       "retrieved": "2026-11-26",
-      "rows": 34,
+      "rows": 58,
       "unmatched": [
         "Antigravity CLI (Gemini 4 Hydrogen)",
         "CodeBuddy Code (Tencent Hy4 Flash)",
@@ -106182,6 +106198,14 @@
           "name": "Confidence area under gain-risk curve",
           "unit": "score",
           "better": "lower"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/llamaindex-org/extractbench",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/llamaindex-org/extractbench/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -141690,8 +141714,42 @@
       "feed": "https://openai.com/index/making-chatgpt-better-for-clinicians/ (embedded overall-score chart)",
       "terms": "OpenAI terms restrict automated extraction; Benchmark Almanac credits OpenAI and links the official source.",
       "retrieved": "2026-11-26",
-      "rows": 7,
-      "unmatched": []
+      "rows": 30,
+      "unmatched": [],
+      "parts": {
+        "consultation": {
+          "name": "Clinical Consultation",
+          "group": "Use case"
+        },
+        "writing": {
+          "name": "Clinical Writing",
+          "group": "Use case"
+        },
+        "research": {
+          "name": "Clinical Research",
+          "group": "Use case"
+        },
+        "goodFaithTypical": {
+          "name": "Good-Faith Typical",
+          "group": "Prompt type"
+        },
+        "goodFaithDifficult": {
+          "name": "Good-Faith Difficult",
+          "group": "Prompt type"
+        },
+        "redTeamingDifficult": {
+          "name": "Red-Teaming Difficult",
+          "group": "Prompt type"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/openai/healthbench-professional",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/openai/healthbench-professional/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
+        }
+      }
     },
     "healthbench-psych": {
       "url": "https://github.com/mindbench-ai/healthbench-psych/blob/main/eval/runs/matrix_healthbench-psych-v1.csv",
@@ -189771,7 +189829,7 @@
       "terms": "Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.",
       "host": "Vals AI",
       "retrieved": "2026-11-26",
-      "rows": 46,
+      "rows": 68,
       "unmatched": [
         "Command A",
         "GPT 4o (2024-08-06)",
@@ -189819,6 +189877,14 @@
           "name": "Latency",
           "unit": "seconds",
           "better": "lower"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/math-500",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/math-500/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -190369,7 +190435,7 @@
       "feed": "https://mathvista.github.io/data/results/model_scores.js (ALL, testmini)",
       "terms": "Static data file on the MathVista GitHub Pages site; the MathVista repository is CC BY-SA 4.0.",
       "retrieved": "2026-11-26",
-      "rows": 45,
+      "rows": 74,
       "unmatched": [
         "Chimera-Reasoner-8B",
         "CoT ChatGPT (Caption+OCR)",
@@ -190454,6 +190520,14 @@
         "STA": {
           "name": "Statistical",
           "group": "Domain"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/mathvista-testmini",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/mathvista-testmini/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -191166,7 +191240,7 @@
       "feed": "https://maxxbench.unlap.ai/",
       "terms": "The makers publish this public results table; robots.txt has no restrictions and no separate extraction terms are stated.",
       "retrieved": "2026-11-26",
-      "rows": 21,
+      "rows": 37,
       "unmatched": [],
       "stats": {
         "deepsweScore": {
@@ -191188,6 +191262,14 @@
           "name": "Reported tokens",
           "unit": "tokens",
           "better": "lower"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/unlap/maxxbench",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/unlap/maxxbench/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -199729,7 +199811,7 @@
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI. The dataset is licensed CC BY 4.0.",
       "host": "Vals AI",
       "retrieved": "2026-11-26",
-      "rows": 75,
+      "rows": 121,
       "unmatched": [],
       "chart": {
         "title": "Accuracy versus cost",
@@ -199797,6 +199879,14 @@
           "name": "Latency",
           "unit": "seconds",
           "better": "lower"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/mgsm",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/mgsm/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -207768,11 +207858,12 @@
       "feed": "https://raw.githubusercontent.com/hendrycks/test/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
       "retrieved": "2026-11-26",
-      "rows": 2,
+      "rows": 62,
       "unmatched": [
         "Chinchilla 70B",
         "GPT-2",
         "GPT-3 175B",
+        "Qwen 3 235B A22B Instruct 2506",
         "UnifiedQA",
         "flan-T5-base",
         "flan-T5-large",
@@ -207795,6 +207886,14 @@
         "Other": {
           "name": "Other",
           "group": "Subject group"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/mmlu",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/mmlu/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -208033,7 +208132,7 @@
       "feed": "https://huggingface.co/datasets/TIGER-Lab/mmlu_pro_leaderboard_submission/resolve/main/results.csv",
       "terms": "CSV in the Hugging Face dataset TIGER-Lab/mmlu_pro_leaderboard_submission, licensed Apache-2.0.",
       "retrieved": "2026-11-26",
-      "rows": 233,
+      "rows": 297,
       "unmatched": [
         "Cohere-Aya-Vision",
         "ECHO_Ego_v2_14B",
@@ -208053,6 +208152,7 @@
         "Neo-7B-Instruct",
         "NewenAI/Phi4-sft",
         "OpenChat-3.5-8B",
+        "Qwen 3 235B A22B Instruct 2506",
         "Qwen2-72B-32k",
         "RRD2.5-9B",
         "Reflection-Llama-3.1-70B",
@@ -208120,6 +208220,14 @@
         "Other": {
           "name": "Other",
           "group": "Subject"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/mmlu-pro/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -288453,13 +288561,33 @@
       "feed": "https://raw.githubusercontent.com/scicode-bench/scicode-bench.github.io/main/docs/leaderboard.md",
       "terms": "Markdown file in the scicode-bench/scicode-bench.github.io repository, which has no license; the SciCode repository is Apache-2.0.",
       "retrieved": "2026-11-26",
-      "rows": 20,
-      "unmatched": [],
+      "rows": 81,
+      "unmatched": [
+        "Qwen 3 235B A22B Instruct 2506"
+      ],
       "stats": {
         "subproblem": {
           "name": "Subproblem resolve rate",
           "unit": "%",
           "better": "higher"
+        },
+        "mainWithBackground": {
+          "name": "Main problems with background",
+          "unit": "%",
+          "better": "higher"
+        },
+        "subproblemWithBackground": {
+          "name": "Subproblems with background",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/open-benchmarks/scicode",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/scicode/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
         }
       }
     },
@@ -293296,10 +293424,18 @@
       "feed": "https://raw.githubusercontent.com/openai/simple-evals/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
       "retrieved": "2026-11-26",
-      "rows": 22,
+      "rows": 71,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)"
-      ]
+      ],
+      "sources": {
+        "kaggle": {
+          "name": "Kaggle Benchmarks",
+          "url": "https://www.kaggle.com/benchmarks/openai/simpleqa",
+          "feed": "https://www.kaggle.com/api/v1/benchmarks/openai/simpleqa/leaderboard",
+          "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply."
+        }
+      }
     },
     "simpleqa-hallucination-rate": {
       "url": "https://arxiv.org/html/2411.04368",

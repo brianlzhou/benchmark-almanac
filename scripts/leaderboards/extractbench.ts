@@ -2,6 +2,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard.csv";
 const board: Leaderboard = {
@@ -24,4 +25,4 @@ return parseCsv(await fetchText(FEED)).filter(r=>r.Provider&&r.include_in_rankin
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));
  },
 };
-export default board;
+export default withKaggle(board, { owner: 'llamaindex-org', slug: 'extractbench', task: 'extractbench-full', scale: 100 });

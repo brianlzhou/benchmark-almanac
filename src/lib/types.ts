@@ -234,6 +234,11 @@ export interface ScoreInfo {
   open?: boolean;
   license?: string;
   params?: number;
+  /**
+   * The key of the other source the run came from, on a board that adds one (Board.sources): "kaggle" for Kaggle's
+   * reruns beside an open test's official board. Absent for the board's own rows.
+   */
+  source?: string;
 }
 
 /** A harness or agent in data/harnesses.json. */

@@ -277,7 +277,7 @@ for (const r of boards.rows) {
 
 // the info column (scripts/sync-leaderboards.ts): what a board says about an entry beyond its score
 {
-  const INFO_KEYS = new Set(['submitter', 'agentOrg', 'verified', 'models', 'run', 'link', 'trials', 'low', 'high', 'open', 'license', 'params']);
+  const INFO_KEYS = new Set(['submitter', 'agentOrg', 'verified', 'models', 'run', 'link', 'trials', 'low', 'high', 'open', 'license', 'params', 'source']);
   const all = [...boards.rows, ...((boards as { others?: unknown[][] }).others ?? [])];
   for (const r of all) {
     if (r.length <= 9) continue;
@@ -292,6 +292,8 @@ for (const r of boards.rows) {
     if (i.models !== undefined && (!Array.isArray(i.models) || i.models.length < 2 || i.models.some((m) => typeof m !== 'string' || (!m.startsWith('~') && !modelIds.has(m)))))
       fail(`${at}: info.models must list two or more known model ids or ~names`);
     if (i.run !== undefined && !/^\d{4}-\d\d-\d\d$/.test(String(i.run))) fail(`${at}: info.run is not a date`);
+    // a row from another source names one its board lists (scripts/lib/boards/kaggle.ts)
+    if (i.source !== undefined && !(boards.boards as Record<string, { sources?: Record<string, unknown> }>)[String(r[0])]?.sources?.[String(i.source)]) fail(`${at}: info.source ${i.source} is not one of its board's sources`);
     if (i.link !== undefined && !/^https?:\/\/\S+$/.test(String(i.link))) fail(`${at}: info.link is not a web address`);
     if ((i.low === undefined) !== (i.high === undefined) || (typeof i.low === 'number' && typeof i.high === 'number' && i.low > i.high)) fail(`${at}: info.low and info.high must come together, low first`);
     for (const k of ['verified', 'open']) if (i[k] !== undefined && typeof i[k] !== 'boolean') fail(`${at}: info.${k} is not true or false`);

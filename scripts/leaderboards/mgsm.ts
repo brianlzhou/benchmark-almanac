@@ -4,6 +4,7 @@ import { VALS_ALIASES, VALS_TERMS } from './vals-index.ts';
 
 import { fetchText } from '../lib/util.ts';
 import { tables } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const parts = {"mgsm_en":"English","mgsm_ja":"Japanese","mgsm_zh":"Chinese","mgsm_bn":"Bengali","mgsm_ru":"Russian","mgsm_de":"German","mgsm_fr":"French","mgsm_th":"Thai","mgsm_es":"Spanish","mgsm_te":"Telugu","mgsm_sw":"Swahili"};
 const board: Leaderboard = {
@@ -49,4 +50,11 @@ const board: Leaderboard = {
     });
   },
 };
-export default board;
+export default withKaggle(board, {
+  owner: 'open-benchmarks',
+  slug: 'mgsm',
+  task: 'Average',
+  scale: 100,
+  // Kaggle's language tasks score the same parts as Vals AI's language columns
+  extra: Object.fromEntries(Object.entries(parts).map(([k, name]) => [k, { task: `MGSM ${name}`, scale: 100 }])),
+});
