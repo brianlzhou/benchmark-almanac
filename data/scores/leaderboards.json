@@ -1136,6 +1136,14 @@
         }
       }
     },
+    "aa-lcr-1-1": {
+      "url": "https://www.kaggle.com/benchmarks/artificial-analysis/aa-lcr",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/artificial-analysis/aa-lcr/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 13,
+      "unmatched": []
+    },
     "aa-lcr-extended-mercor": {
       "url": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/",
       "feed": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData, held-out scores only)",
@@ -13718,6 +13726,14 @@
         "GLM-4 All Tools"
       ],
       "static": "paper"
+    },
+    "allfaith-religious-representation": {
+      "url": "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/cefe-ai/allfaith-religious-representation/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 20,
+      "unmatched": []
     },
     "almieyar": {
       "url": "https://arxiv.org/html/2609.35564",
@@ -164872,6 +164888,14 @@
         }
       }
     },
+    "kaggle-animated-story-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/animated-story-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 9,
+      "unmatched": []
+    },
     "kaggle-ascii-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/ascii-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/ascii-arena/leaderboard",
@@ -164971,6 +164995,14 @@
           "unit": "count"
         }
       }
+    },
+    "kaggle-fps-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/fps-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/fps-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 5,
+      "unmatched": []
     },
     "kaggle-game-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/game-arena",
@@ -165676,6 +165708,14 @@
           "unit": "count"
         }
       }
+    },
+    "kaggle-racing-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/racing-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/racing-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 10,
+      "unmatched": []
     },
     "kaggle-sort-viz-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/sort-viz-arena",
@@ -178673,6 +178713,33 @@
           "better": "lower"
         }
       }
+    },
+    "livecodebench-v2": {
+      "url": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/livecodebench-release-v2/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "host": "Kaggle",
+      "retrieved": "2026-11-26",
+      "rows": 45,
+      "unmatched": []
+    },
+    "livecodebench-v3": {
+      "url": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/livecodebench-release-v3/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "host": "Kaggle",
+      "retrieved": "2026-11-26",
+      "rows": 45,
+      "unmatched": []
+    },
+    "livecodebench-v4": {
+      "url": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/open-benchmarks/livecodebench-release-v4/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "host": "Kaggle",
+      "retrieved": "2026-11-26",
+      "rows": 45,
+      "unmatched": []
     },
     "livecodebench-v5": {
       "url": "https://livecodebench.github.io/leaderboard.html",
@@ -267049,6 +267116,14 @@
         }
       }
     },
+    "prompt-injection-robustness-jamble": {
+      "url": "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/chaitanyajamble/prompt-injection-robustness/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 5,
+      "unmatched": []
+    },
     "prompt-to-bench-16": {
       "url": "https://github.com/ATinyGreenCell/prompt-to-bench#65-larger-open-models-on-an-npu-box",
       "feed": "https://raw.githubusercontent.com/ATinyGreenCell/prompt-to-bench/HEAD/README.md",
@@ -278321,6 +278396,14 @@
         "RVT-2"
       ],
       "verified": "CodeSOTA marks the result as verified"
+    },
+    "rlbench-interactive-learning": {
+      "url": "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kdcyberdude/rlbench/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 10,
+      "unmatched": []
     },
     "rmbench": {
       "url": "https://arxiv.org/html/2603.01229",
@@ -292632,6 +292715,14 @@
         }
       }
     },
+    "shellbench": {
+      "url": "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/openclaw-foundation/shellbench/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 8,
+      "unmatched": []
+    },
     "sherlock-holmes-qa-gutenberg": {
       "url": "https://github.com/DerOeko/prime-environments/tree/gutenberg_env/environments/gutenberg_env",
       "feed": "https://raw.githubusercontent.com/DerOeko/prime-environments/gutenberg_env/environments/gutenberg_env/README.md",
@@ -296768,6 +296859,16 @@
           "unit": "score"
         }
       }
+    },
+    "socrates-social-cognition": {
+      "url": "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/alfaxadeyembe/socrates/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 22,
+      "unmatched": [
+        "Qwen 3 Next 80B Instruct"
+      ]
     },
     "sofc-exp": {
       "url": "https://aclanthology.org/2020.acl-main.116/",
@@ -321329,6 +321430,14 @@
           "better": "lower"
         }
       }
+    },
+    "turnbench-executive-functions": {
+      "url": "https://www.kaggle.com/benchmarks/zxsimon2/turnbench",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/zxsimon2/turnbench/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 15,
+      "unmatched": []
     },
     "tutorbench": {
       "url": "https://labs.scale.com/leaderboard/tutorbench",

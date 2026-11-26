@@ -40,6 +40,8 @@ export interface Links {
   repo?: string;
   dataset?: string;
   leaderboard?: string;
+  /** The benchmark's board on Kaggle Benchmarks, when Kaggle runs it beside the board in `leaderboard`. */
+  kaggle?: string;
   paper?: string;
   site?: string;
 }

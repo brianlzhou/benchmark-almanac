@@ -1156,6 +1156,16 @@
       "via": "GLM-4.5V benchmark table."
     },
     {
+      "id": "allfaith-conversion-bias",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
+      "id": "allfaith-religious-representation",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
       "id": "allocine",
       "date": "2026-11-19",
       "via": "EuroEval documents the evaluation in its French dataset list."
@@ -12521,6 +12531,11 @@
       "via": "Following Animal-Bench comparisons led to the canine video project and its two scoring protocols."
     },
     {
+      "id": "kaggle-animated-story-arena",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
       "id": "kaggle-ascii-arena",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
@@ -12554,6 +12569,11 @@
       "id": "kaggle-floorplan-arena",
       "date": "2026-11-10",
       "via": "A final check of Kaggle public listings found this additional independent vote board."
+    },
+    {
+      "id": "kaggle-fps-arena",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "kaggle-game-arena",
@@ -12694,6 +12714,11 @@
       "id": "kaggle-pelican-arena",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "kaggle-racing-arena",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "kaggle-sort-viz-arena",
@@ -13684,6 +13709,21 @@
       "id": "liveclawbench",
       "date": "2026-11-01",
       "via": "Liquid AI's LFM3 launch post reports a LiveClaw score run with the OpenClaw agent."
+    },
+    {
+      "id": "livecodebench-v2",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
+      "id": "livecodebench-v3",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
+      "id": "livecodebench-v4",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "livedrbench-microsoft",
@@ -19541,6 +19581,11 @@
       "via": "The publisher lists this evaluation in its research publications."
     },
     {
+      "id": "prompt-injection-robustness-jamble",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
       "id": "prompt-to-bench-16",
       "date": "2026-11-20",
       "via": "Searching for printability evaluations after reading CADClamp led to Cocioba’s comparison of models making small laboratory fixtures."
@@ -20664,6 +20709,11 @@
       "id": "rlbench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "rlbench-interactive-learning",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "rmbench",
@@ -21866,6 +21916,11 @@
       "via": "Fireworks Specialized Intelligence Index, finance domain."
     },
     {
+      "id": "shellbench",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
+    },
+    {
       "id": "sherlock-holmes-qa-gutenberg",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -22364,6 +22419,11 @@
       "id": "socrates",
       "date": "2026-11-15",
       "via": "Benchmark Radar. 40 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
+      "id": "socrates-social-cognition",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "sofc-exp",
@@ -24929,6 +24989,11 @@
       "id": "turnbench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "turnbench-executive-functions",
+      "date": "2026-11-26",
+      "via": "A review of Kaggle Benchmarks' full list on 2026-11-26 found it missing from the catalog."
     },
     {
       "id": "tut-urban-acoustic-scenes-2018",
@@ -28581,6 +28646,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "ATLAS",
+      "url": "https://www.kaggle.com/benchmarks/sebastiangil00/atlas",
+      "reason": "The four binary task results and tied leaders provide little evidence of measurement quality.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "ATLAS (Meituan long-context)",
       "url": "https://arxiv.org/abs/2605.28079",
       "reason": "Meituan and Fudan long-context framework (2026-05, 26 models in the paper). Data and scoring scripts not released yet and no launch post uses it. Recheck when released",
@@ -28941,6 +29012,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Bench",
+      "url": "https://www.kaggle.com/benchmarks/selnour/bench",
+      "reason": "The board omits the assertion denominators needed to interpret its raw score.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "BenchBench",
       "url": "https://github.com/reductoai/benchbench",
       "reason": "compares document parsers, not AI models",
@@ -29229,6 +29306,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "BoundaryBench",
+      "url": "https://www.kaggle.com/benchmarks/s0occz/boundarybench",
+      "reason": "The table task lacks five scored models or evidence of independent use.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "Boxoban",
       "url": "https://arxiv.org/abs/1901.03559",
       "reason": "older puzzle environment with only a 2018 use cited",
@@ -29479,6 +29562,12 @@
       "url": "https://arxiv.org/abs/2505.21318",
       "reason": "criteria: This is a narrow chemistry benchmark and the exclusion applies.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "Chess endgame",
+      "url": "https://www.kaggle.com/benchmarks/bobfraserg/chess-endgame",
+      "reason": "The narrow prompt set and lack of external use support the previous exclusion.",
+      "date": "2026-11-26"
     },
     {
       "name": "Chess endgame (Kaggle community)",
@@ -29827,6 +29916,12 @@
       "url": "https://aclanthology.org/2021.acl-long.130.pdf",
       "reason": "criteria: The available evidence does not establish an inclusion test.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "CORE-Bench",
+      "url": "https://www.kaggle.com/benchmarks/taiwofeyijimi/core-bench",
+      "reason": "The five displayed leaders all score 100 despite missing task scores, leaving the headline difficult to interpret.",
+      "date": "2026-11-26"
     },
     {
       "name": "Cortex Analyst Business Intelligence Evaluation",
@@ -30193,6 +30288,12 @@
       "url": "https://euroeval.com/datasets/danish",
       "reason": "EuroEval identifies this evaluation as a component of the Danish Semantic Reasoning Benchmark.",
       "date": "2026-11-19"
+    },
+    {
+      "name": "DarijaBench",
+      "url": "https://www.kaggle.com/benchmarks/soufianzaari/darijabench",
+      "reason": "Four model scores and no documented independent use fall short of the inclusion criteria.",
+      "date": "2026-11-26"
     },
     {
       "name": "daspartho/agency-bench",
@@ -31581,6 +31682,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "FrontierScience",
+      "url": "https://www.kaggle.com/benchmarks/cedsbstn/frontierscience",
+      "reason": "Five pass-or-fail exercises with tied top scores do not support a separate catalog record.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "FSC-147",
       "url": "https://huggingface.co/Kwai-Keye/Keye-VL-2.0-30B-A3B",
       "reason": "Class-agnostic object counting dataset scored by mean absolute error, a narrow counting task. Reported in the Keye-VL-2.0 card (28.0).",
@@ -31909,6 +32016,12 @@
       "url": "https://www.nature.com/articles/s41598-023-49989-z",
       "reason": "criteria: The tasks score animal species, calls, and song dialects for ecological monitoring.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "GIAGo",
+      "url": "https://www.kaggle.com/benchmarks/vasanaust/giago",
+      "reason": "A small collection of familiar riddles provides little evidence of learning from feedback.",
+      "date": "2026-11-26"
     },
     {
       "name": "GIAGo (Kaggle community)",
@@ -34257,6 +34370,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "JWST Exoplanet Discovery Report Benchmark",
+      "url": "https://www.kaggle.com/benchmarks/andrometocs/jwst-exoplanet-discovery-report-benchmark",
+      "reason": "The available evidence does not establish repeatable scoring across a set of research assignments.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "K12-PEM-800K",
       "url": "https://arxiv.org/abs/2506.01676",
       "reason": "The authors use these annotated examples to train models to check reasoning steps. They evaluate those models on K12-PEBench.",
@@ -35133,6 +35252,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Math Benchmark",
+      "url": "https://www.kaggle.com/benchmarks/rosebv/math-benchmark",
+      "reason": "A notification test and a single arithmetic task do not establish a math evaluation.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "MathArena USAMO 2024, HMMT Feb 2023/2024, AIME 2023 datasets",
       "url": "https://huggingface.co/MathArena",
       "reason": "Old contest datasets kept for contamination checks. MathArena does not list them on its leaderboard and labs do not report them.",
@@ -35281,6 +35406,12 @@
       "url": "https://huggingface.co/datasets/llm-jp/mbpp-ja",
       "reason": "LLM-jp translates the original MBPP prompts with DeepL and uses them in its multilingual harness.",
       "date": "2026-11-19"
+    },
+    {
+      "name": "MCBench",
+      "url": "https://www.kaggle.com/benchmarks/ivogeorg/mcbench",
+      "reason": "The available material does not establish how many items support the metacognition score or how its component measures combine.",
+      "date": "2026-11-26"
     },
     {
       "name": "MCPTox",
@@ -35769,6 +35900,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Model Siege: Injection Resistance Arena",
+      "url": "https://www.kaggle.com/benchmarks/jacoporepossi/model-siege-injection-resistance-arena",
+      "reason": "Models receive headline scores over different observed tasks, and the supplied evidence gives no common comparison protocol.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "Model Siege: Injection Resistance Arena (Kaggle community)",
       "url": "https://www.kaggle.com/benchmarks",
       "reason": "Individual community arena (19 models, 2026-02) with no paper, repo or outside use found.",
@@ -35959,6 +36096,12 @@
       "url": "https://reference-global.com/article/10.5334/tismir.12",
       "reason": "Only the original audio retrieval experiment is reported",
       "date": "2026-11-20"
+    },
+    {
+      "name": "MT-Bench",
+      "url": "https://www.kaggle.com/benchmarks/ayushrudani/mt-bench",
+      "reason": "A single pass-or-fail scenario provides insufficient coverage.",
+      "date": "2026-11-26"
     },
     {
       "name": "MTG LLM Benchmark",
@@ -36261,6 +36404,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "New Ai Career Roles",
+      "url": "https://www.kaggle.com/benchmarks/andrometocs/new-ai-career-roles",
+      "reason": "A single binary task with tied top scores does not establish evaluation quality.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "NextEval",
       "url": "https://arxiv.org/abs/2610.36553",
       "reason": "Agent-based derivative-free optimization solver with its own test set. Method paper on a narrow numerical task.",
@@ -36531,10 +36680,22 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Omnibal",
+      "url": "https://www.kaggle.com/benchmarks/andrometocs/omnibal",
+      "reason": "One undocumented formula check provides insufficient evidence of general mathematical ability.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "OmniCompass",
       "url": "https://huggingface.co/datasets/VCLab-PolyU/OmniCompass",
       "reason": "Added 2026-10 with 7 likes. Recheck when traction appears.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "omnidimensionalai",
+      "url": "https://www.kaggle.com/benchmarks/andrometocs/omnidimensionalai",
+      "reason": "The board gives no interpretable common measure for these tasks.",
+      "date": "2026-11-26"
     },
     {
       "name": "OmniScience (llm-stats.com)",
@@ -37981,6 +38142,12 @@
       "url": "https://github.com/UKGovernmentBEIS/inspect_evals/blob/c2d3d5e1335c07fb8032bcfc7869e9437e635c4c/register/prism_instruction_order/eval.yaml",
       "reason": "The MATH-500 condition is part of PRISM Instruction Order Sensitivity.",
       "date": "2026-11-19"
+    },
+    {
+      "name": "PRISM",
+      "url": "https://www.kaggle.com/benchmarks/sahiltanna/prism",
+      "reason": "The small problem set and lack of independent use do not support a separate record.",
+      "date": "2026-11-26"
     },
     {
       "name": "PRISM GSM8K Exhaustive",
@@ -39603,6 +39770,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Smilyai Code Test",
+      "url": "https://www.kaggle.com/benchmarks/smilyailabs/smilyai-code-test",
+      "reason": "The page provides no results or evidence of independent use.",
+      "date": "2026-11-26"
+    },
+    {
       "name": "smolclaims/abercrombie",
       "url": "https://app.primeintellect.ai/dashboard/environments/smolclaims/abercrombie",
       "reason": "This adapter evaluates trademark classification on the 95-row LegalBench Abercrombie test set.",
@@ -39733,6 +39906,12 @@
       "url": "https://proceedings.mlr.press/v133/etten21a.html",
       "reason": "criteria: The task measures a specialized capability outside general AI ability.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "SpaceTech Insurance Space Data analytics assets",
+      "url": "https://www.kaggle.com/benchmarks/andrometocs/spacetech-insurance-space-data-analytics-assets",
+      "reason": "One undocumented discovery task and five board entries provide little evidence of a general test.",
+      "date": "2026-11-26"
     },
     {
       "name": "SpaceXAI MTS Eval (internal)",
@@ -40219,6 +40398,12 @@
       "url": "https://arxiv.org/abs/1902.00506",
       "reason": "older multi-agent game environment with no current model result cited",
       "date": "2026-11-20"
+    },
+    {
+      "name": "The P.A.C.T. Benchmark",
+      "url": "https://www.kaggle.com/benchmarks/yusufdin/the-p-a-c-t-benchmark",
+      "reason": "Four model entries and an undocumented score do not establish a separate benchmark.",
+      "date": "2026-11-26"
     },
     {
       "name": "The Prestige",
@@ -41899,6 +42084,12 @@
       "url": "https://thezvi.wordpress.com/",
       "reason": "Informal labels or one-off anecdotes in Zvi's roundups, not maintained benchmarks. SpireBench maps to Epoch SpireClimb.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "γ-Bench",
+      "url": "https://www.kaggle.com/benchmarks/orecord/bench",
+      "reason": "The supplied evidence does not establish the prompt count or validate the composite score.",
+      "date": "2026-11-26"
     },
     {
       "name": "τ²-Bench-Telecom",
