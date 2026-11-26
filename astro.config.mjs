@@ -5,6 +5,7 @@ import { closeSync, existsSync, openSync, readFileSync, readdirSync, statSync } 
 import { spawn } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeIndexNowFiles } from './scripts/lib/indexnow.ts';
 
 /** Under `astro dev` only, the pages scripts/og-film.ts films the link-preview videos from. */
 const ogFilm = {
@@ -74,6 +75,27 @@ const localJobs = {
 };
 
 /**
+ * Vercel production builds only: fingerprint each sitemap page and list the pages this deploy changes, for the
+ * IndexNow step that runs once the deploy is live (scripts/lib/indexnow.ts). It runs after the sitemap integration,
+ * because it reads the sitemap's page list.
+ */
+const indexNow = {
+  name: 'indexnow',
+  hooks: {
+    /** @param {{ dir: URL, logger: { info: (message: string) => void, warn: (message: string) => void } }} options */
+    'astro:build:done': async ({ dir, logger }) => {
+      if (process.env.VERCEL_ENV !== 'production') return;
+      // the lists only speed up crawling, so a failure here warns and the deploy goes on
+      try {
+        await writeIndexNowFiles(fileURLToPath(dir), process.env.VERCEL_GIT_COMMIT_SHA || 'unknown', (s) => logger.info(s));
+      } catch (e) {
+        logger.warn(`IndexNow: this deploy has no page lists (${e instanceof Error ? e.message : e})`);
+      }
+    },
+  },
+};
+
+/**
  * The sitemap's lastmod: when a page's content last changed, read from the data. A benchmark page changes when a
  * score or a model card for it is added, a model page when one of its scores or cards is, a lab page when one of
  * its cards is. Every other page is rebuilt from the whole dataset, so it takes the data's date (AS_OF in
@@ -122,7 +144,7 @@ export default defineConfig({
   // Reporting moved under Insights on 2026-11-17. Vercel sends the same redirect with the query kept (vercel.json).
   redirects: { '/benchmarks/factscore-precision/': '/benchmarks/factscore/', '/benchmarks/programbench-almost/': '/benchmarks/programbench/', '/benchmarks/programbench-tests-passed/': '/benchmarks/programbench/', '/benchmarks/kradleverse/': '/benchmarks/kradlebench/', '/reporting': '/insights/reporting/' },
   build: { inlineStylesheets: 'auto' },
-  integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm, localJobs],
+  integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm, localJobs, indexNow],
   fonts: [
     {
       provider: fontProviders.google(),
