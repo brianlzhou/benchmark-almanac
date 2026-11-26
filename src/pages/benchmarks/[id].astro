@@ -301,12 +301,14 @@ const links = [
     href: b.links.repo,
     label: /github\.com/.test(b.links.repo) ? repoName(b.links.repo) : 'Code',
     note: gh?.stars !== undefined ? `${gh.stars.toLocaleString('en-US')} stars` : hostname(b.links.repo).replace(/^github\.com$/, ''),
+    // the star count moves every day, so the IndexNow fingerprint skips it (scripts/lib/indexnow.ts)
+    volatile: gh?.stars !== undefined,
   },
   b.links?.paper && { kind: 'paper', href: b.links.paper, label: 'Paper', note: hostname(b.links.paper) },
   b.links?.dataset && { kind: 'dataset', href: b.links.dataset, label: 'Dataset', note: hostname(b.links.dataset) },
   b.links?.leaderboard && { kind: 'leaderboard', href: b.links.leaderboard, label: 'Leaderboard', note: hostname(b.links.leaderboard) },
   b.links?.site && { kind: 'site', href: b.links.site, label: hostname(b.links.site) },
-].filter(Boolean) as { kind: LinkKind; href: string; label: string; note?: string }[];
+].filter(Boolean) as { kind: LinkKind; href: string; label: string; note?: string; volatile?: boolean }[];
 // The strongest model with any score here, by its rank on the capability index (ECI). A benchmark that
 // frontier models stopped running shows an older model here, well down the index.
 const eciRank = new Map(eciOrder.map((m, i) => [m, i + 1]));
@@ -635,7 +637,7 @@ const cite = {
                 {s.refreshed && !(updates?.kind === 'stopped' && updates.last === s.refreshed) && (
                   <div>
                     <dt>Scores refreshed</dt>
-                    <dd>{humanDate(s.refreshed)}</dd>
+                    <dd data-volatile>{humanDate(s.refreshed)}</dd>
                   </div>
                 )}
               </dl>
@@ -649,7 +651,7 @@ const cite = {
                     <a href={l.href} rel="noopener">
                       <LinkIcon kind={l.kind} />
                       <span class="ll">{l.label}</span>
-                      {l.note && <span class="muted">{l.note}</span>}
+                      {l.note && <span class="muted" data-volatile={l.volatile ? '' : undefined}>{l.note}</span>}
                     </a>
                   </li>
                 ))}
@@ -726,7 +728,7 @@ const cite = {
                 <p>
                   {s.shownSource === 'leaderboard' ? (
                     <>
-                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : paperBoard ? <>the benchmark's <a href={official?.url}>paper</a></> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}{updates?.kind === 'stopped' ? `, last read on ${humanDate(official?.retrieved)}. ${updates.failing ? 'We can’t read it now' : 'We haven’t read it since'}, so newer models may be missing. ` : `, read on ${humanDate(official?.retrieved)}. `}{paperBoard && 'A paper’s table doesn’t add newer models. '}{official?.headline && `${official.headline} `}{s.systems.length ? 'Where a model ran on its own with several settings, we keep its best.' : 'Where a model ran with several settings or harnesses, we keep its best.'}{effort && ' Every run is in the next chart.'}
+                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : paperBoard ? <>the benchmark's <a href={official?.url}>paper</a></> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}{updates?.kind === 'stopped' ? `, last read on ${humanDate(official?.retrieved)}. ${updates.failing ? 'We can’t read it now' : 'We haven’t read it since'}, so newer models may be missing. ` : <>, read on <span data-volatile>{humanDate(official?.retrieved)}</span>. </>}{paperBoard && 'A paper’s table doesn’t add newer models. '}{official?.headline && `${official.headline} `}{s.systems.length ? 'Where a model ran on its own with several settings, we keep its best.' : 'Where a model ran with several settings or harnesses, we keep its best.'}{effort && ' Every run is in the next chart.'}
                       <span class="ent-every">
                         {shownWhat === 'entries' && (s.systems.length ? ` Agents other companies built around a model get a pale shade of that model's lab color. Gray marks blends and entries not in our model list, such as fine-tunes and older models. None of these count toward leaders.` : ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`)}
                         {otherAhead && s.best && ` The best ${otherAhead.system ? 'model on its own' : 'model we track'} is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}

@@ -18,12 +18,21 @@ export const SITE = 'https://www.benchmarkalmanac.com';
 export const INDEXNOW_KEY = 'cb2eb341ad69961bff311fd491e6b2b4';
 export const PAGES_FILE = 'indexnow/pages.txt';
 export const CHANGED_FILE = 'indexnow/changed.txt';
+/**
+ * The fingerprint's version. Raise it whenever pageDigest changes what it reads. Every page's fingerprint changes then,
+ * so the first deploy with the new version sends no pages instead of resending all of them. Version 2 (2026-11-26)
+ * skipped data-volatile elements.
+ */
+export const FINGERPRINT = 2;
 /** The most URLs one IndexNow request may carry. */
 const BATCH = 10_000;
 
 /**
  * A page's fingerprint: 12 hex digits of a hash of its title, its description and the text of its main element. The
  * text loses its tags and its spaces too, so markup that moves around the same words (a word put in bold) isn't a change.
+ * An element marked data-volatile is left out with its text: a value that moves every day while the page says the same
+ * thing, such as the date a board was last read or a repository's star count. The marked element must not hold another
+ * element of the same tag.
  */
 export function pageDigest(html: string): string {
   const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
@@ -36,6 +45,7 @@ export function pageDigest(html: string): string {
       : html
           .slice(start, end)
           .replace(/<(script|style|template)\b[\s\S]*?<\/\1>/g, '')
+          .replace(/<(\w+)\b[^>]*\sdata-volatile\b[^>]*>[\s\S]*?<\/\1>/g, '')
           .replace(/<[^>]*>/g, '')
           .replace(/\s+/g, '');
   return createHash('sha256').update(`${title}\n${description}\n${main}`).digest('hex').slice(0, 12);
@@ -48,22 +58,25 @@ export function sitemapPaths(dist: string): string[] {
   return files.flatMap((f) => [...readFileSync(join(dist, f), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname));
 }
 
-/** The fingerprint file: a "# commit <sha>" line, then a "<path> <fingerprint>" line for each page. */
+/** The fingerprint file: "# commit <sha>" and "# fingerprint <version>" lines, then a "<path> <fingerprint>" line for each page. */
 export function formatPages(commit: string, pages: Map<string, string>): string {
-  return [`# commit ${commit}`, ...[...pages].sort(([a], [b]) => (a < b ? -1 : 1)).map(([p, d]) => `${p} ${d}`), ''].join('\n');
+  return [`# commit ${commit}`, `# fingerprint ${FINGERPRINT}`, ...[...pages].sort(([a], [b]) => (a < b ? -1 : 1)).map(([p, d]) => `${p} ${d}`), ''].join('\n');
 }
 
-export function parsePages(text: string): { commit: string; pages: Map<string, string> } {
-  const [head, ...lines] = text.trim().split('\n');
+export function parsePages(text: string): { commit: string; version: number; pages: Map<string, string> } {
+  const [head, ...rest] = text.trim().split('\n');
   const commit = head?.match(/^# commit (\S+)$/)?.[1];
   if (!commit) throw new Error('the fingerprint file has no commit line');
+  // the first files, from version 1, had no version line
+  const version = Number(rest[0]?.match(/^# fingerprint (\d+)$/)?.[1] ?? 1);
+  const lines = rest.filter((l) => !l.startsWith('#'));
   const pages = new Map<string, string>();
   for (const line of lines) {
     const [path, digest] = line.split(' ');
     if (!path?.startsWith('/') || !digest) throw new Error(`the fingerprint file has a bad line: ${line.slice(0, 80)}`);
     pages.set(path, digest);
   }
-  return { commit, pages };
+  return { commit, version, pages };
 }
 
 /** The pages to send: new pages, and pages whose fingerprint changed. With no live fingerprints, every page is new. */
@@ -101,11 +114,12 @@ export async function writeIndexNowFiles(dist: string, commit: string, log: (s: 
     } else if (!res.ok) throw new Error(`HTTP ${res.status}`);
     else {
       const live = parsePages(await res.text());
+      if (live.version !== FINGERPRINT) throw new Error(`the live fingerprints are version ${live.version}, and this build's are version ${FINGERPRINT}`);
       paths = changedPaths(live.pages, pages);
       base = live.commit;
     }
   } catch (e) {
-    log(`IndexNow: the live fingerprints could not be read, so this deploy sends no pages (${(e as Error).message})`);
+    log(`IndexNow: this build can't compare with the live fingerprints, so this deploy sends no pages (${(e as Error).message})`);
   }
   writeFileSync(join(dist, CHANGED_FILE), formatChanged(commit, base, paths));
   log(`IndexNow: ${pages.size.toLocaleString('en-US')} pages fingerprinted, ${paths.length.toLocaleString('en-US')} new or changed since ${base}`);

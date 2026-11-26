@@ -20,6 +20,9 @@ const tally = (checks: { status: AuditStatus }[]) =>
     .filter((x) => x.n)
     .map((x) => ({ ...x, text: x.st === 'pass' ? `${x.n} pass` : count(x.n, STATUS_WORD[x.st].toLowerCase()) }));
 const checked = linksChecked();
+// the read checks name the date of the last read, which moves every day, so the IndexNow fingerprint skips them
+// (scripts/lib/indexnow.ts). The status word and the tally still change when a check does.
+const READ_DATES = new Set(['import.read', 'import.failed']);
 // under astro dev the localhost-only checks show too: their findings get their own clause, outside the public count
 const local = ALL_CHECKS ? audit.checks.filter((c) => !CHECKS[c.key].public) : [];
 const localIssues = [count(local.filter((c) => c.status === 'fail').length, 'problem'), count(local.filter((c) => c.status === 'warn').length, 'warning')].filter((t) => !t.startsWith('0 '));
@@ -62,7 +65,7 @@ const localIssues = [count(local.filter((c) => c.status === 'fail').length, 'pro
                   {c.label}
                   {ALL_CHECKS && !CHECKS[c.key].public && <span class="au-local">Only on localhost</span>}
                 </span>
-                <span class="au-d">{c.detail}</span>
+                <span class="au-d" data-volatile={READ_DATES.has(c.key) ? '' : undefined}>{c.detail}</span>
               </li>
             ))}
           </ul>
