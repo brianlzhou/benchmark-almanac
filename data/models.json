@@ -10550,6 +10550,19 @@
     ]
   },
   {
+    "id": "marin-32b-base",
+    "name": "Marin 32B Base",
+    "lab": "marin",
+    "family": "Marin",
+    "released": "2025-10-25",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/marin-community/marin-32b-base",
+    "aliases": [
+      "marin-32b-base"
+    ]
+  },
+  {
     "id": "minimax-m2",
     "name": "MiniMax-M2",
     "lab": "minimax",
@@ -10884,6 +10897,20 @@
     ]
   },
   {
+    "id": "olmo-3-32b",
+    "name": "Olmo 3 32B",
+    "lab": "ai2",
+    "family": "Olmo 3",
+    "released": "2025-11-20",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/allenai/Olmo-3-1125-32B",
+    "aliases": [
+      "Olmo-3-1125-32B",
+      "Olmo 3 32B base"
+    ]
+  },
+  {
     "id": "olmo-3-32b-think",
     "name": "Olmo 3 32B Think",
     "lab": "ai2",
@@ -10896,20 +10923,6 @@
       "Olmo-3-32B-Think",
       "Olmo 3 Think 32B",
       "Olmo 3-Think (32B)"
-    ]
-  },
-  {
-    "id": "olmo-3-32b",
-    "name": "Olmo 3 32B",
-    "lab": "ai2",
-    "family": "Olmo 3",
-    "released": "2025-11-20",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/allenai/Olmo-3-1125-32B",
-    "aliases": [
-      "Olmo-3-1125-32B",
-      "Olmo 3 32B base"
     ]
   },
   {
@@ -11974,19 +11987,6 @@
     "card": "https://huggingface.co/stepfun-ai/Step-3.5-Flash"
   },
   {
-    "id": "step-3-5-flash-base",
-    "name": "Step 3.5 Flash Base",
-    "lab": "stepfun",
-    "family": "Step 3.5",
-    "released": "2026-03-02",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/stepfun-ai/Step-3.5-Flash-Base",
-    "aliases": [
-      "Step-3.5-Flash-Base"
-    ]
-  },
-  {
     "id": "minicpm-o-4-5",
     "name": "MiniCPM-o 4.5",
     "lab": "openbmb",
@@ -12553,6 +12553,19 @@
     "card": "https://huggingface.co/Qwen/Qwen3.5-2B-Base",
     "aliases": [
       "Qwen3.5-2B-Base (base)"
+    ]
+  },
+  {
+    "id": "step-3-5-flash-base",
+    "name": "Step 3.5 Flash Base",
+    "lab": "stepfun",
+    "family": "Step 3.5",
+    "released": "2026-03-02",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/stepfun-ai/Step-3.5-Flash-Base",
+    "aliases": [
+      "Step-3.5-Flash-Base"
     ]
   },
   {
@@ -13361,6 +13374,14 @@
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Base"
   },
   {
+    "id": "deepseek-v4-pro-base",
+    "name": "DeepSeek-V4-Pro-Base",
+    "lab": "deepseek",
+    "released": "2026-04-22",
+    "weights": "open",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-Base"
+  },
+  {
     "id": "openai-privacy-filter",
     "name": "OpenAI Privacy Filter",
     "lab": "openai",
@@ -13477,14 +13498,6 @@
     "epoch": "DeepSeek-V4-Pro"
   },
   {
-    "id": "deepseek-v4-pro-base",
-    "name": "DeepSeek-V4-Pro-Base",
-    "lab": "deepseek",
-    "released": "2026-04-22",
-    "weights": "open",
-    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-Base"
-  },
-  {
     "id": "qwen-3-6-flash",
     "name": "Qwen 3.6 Flash",
     "lab": "qwen",
@@ -13506,17 +13519,6 @@
     "lab": "poolside",
     "released": "2026-04-28",
     "epoch": "Laguna M.1"
-  },
-  {
-    "id": "laguna-m-1-base",
-    "name": "Laguna M.1 Base",
-    "lab": "poolside",
-    "released": "2026-06-05",
-    "weights": "open",
-    "card": "https://huggingface.co/poolside/Laguna-M.1-base",
-    "aliases": [
-      "Laguna-M.1-base"
-    ]
   },
   {
     "id": "laguna-xs-2",
@@ -13697,18 +13699,6 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://ernie.baidu.com/blog/posts/ernie-5.1-0508-release/"
-  },
-  {
-    "id": "ernie-5-5-flash-base",
-    "name": "ERNIE 5.5 Flash Base",
-    "lab": "baidu",
-    "family": "ERNIE 5",
-    "released": "2026-10-21",
-    "weights": "open",
-    "card": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
-    "aliases": [
-      "ERNIE-5.5-Flash-Base"
-    ]
   },
   {
     "id": "sensenova-6-7-flash-lite",
@@ -13973,6 +13963,17 @@
     "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16",
     "aliases": [
       "Nemotron-3-Ultra-550B-A55B-Base"
+    ]
+  },
+  {
+    "id": "laguna-m-1-base",
+    "name": "Laguna M.1 Base",
+    "lab": "poolside",
+    "released": "2026-06-05",
+    "weights": "open",
+    "card": "https://huggingface.co/poolside/Laguna-M.1-base",
+    "aliases": [
+      "Laguna-M.1-base"
     ]
   },
   {
@@ -15156,6 +15157,17 @@
     ]
   },
   {
+    "id": "openwam-alpha",
+    "name": "OpenWAM-Alpha",
+    "lab": "openwam",
+    "released": "2026-09-04",
+    "weights": "open",
+    "card": "https://openwam-official.github.io/",
+    "aliases": [
+      "OpenWAM Alpha"
+    ]
+  },
+  {
     "id": "minicpm5-2b",
     "name": "MiniCPM5-2B",
     "lab": "openbmb",
@@ -15439,6 +15451,19 @@
     "card": "https://www.upstage.ai/blog/en/solar-mini-4"
   },
   {
+    "id": "awomo-0-5i",
+    "name": "Awomo-0.5I",
+    "lab": "awomo",
+    "family": "Awomo",
+    "released": "2026-10-03",
+    "weights": "open",
+    "card": "https://github.com/Awomo-WestlakeDI/Awomo-0.5",
+    "aliases": [
+      "Awomo-0.5-Image",
+      "Awomo 0.5I"
+    ]
+  },
+  {
     "id": "beam-1-0",
     "name": "Beam 1.0",
     "lab": "reflection",
@@ -15621,6 +15646,34 @@
     "card": "https://x.ai/news/grok-voice-3"
   },
   {
+    "id": "jev-1-14-0",
+    "name": "Jev 1.14.0",
+    "lab": "typesafe-ai",
+    "family": "Jev",
+    "released": "2026-10-14",
+    "weights": "closed",
+    "card": "https://typesafe.ai/blog/jev-1-14",
+    "aliases": [
+      "Jev 1.14",
+      "Jev-1.14.0",
+      "jev-1.14.0"
+    ]
+  },
+  {
+    "id": "ripple-65b-base-preview",
+    "name": "Ripple-65B Base Preview",
+    "lab": "ricursive",
+    "family": "Ripple",
+    "released": "2026-10-14",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/ricursiveAI/Ripple-65B-Base-Preview",
+    "aliases": [
+      "Ripple-65B-Base-Preview",
+      "Ripple 65B Base Preview"
+    ]
+  },
+  {
     "id": "muse-spark-open",
     "name": "Muse Spark Open",
     "lab": "meta",
@@ -15716,6 +15769,18 @@
     "aliases": [
       "Mistral AI Voxtral-mini-tts-3-0",
       "Voxtral TTS 3"
+    ]
+  },
+  {
+    "id": "ernie-5-5-flash-base",
+    "name": "ERNIE 5.5 Flash Base",
+    "lab": "baidu",
+    "family": "ERNIE 5",
+    "released": "2026-10-21",
+    "weights": "open",
+    "card": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
+    "aliases": [
+      "ERNIE-5.5-Flash-Base"
     ]
   },
   {
@@ -15901,6 +15966,20 @@
     ]
   },
   {
+    "id": "marin-mochi-535b-a23b",
+    "name": "Marin Mochi 535B-A23B",
+    "lab": "marin",
+    "family": "Marin",
+    "released": "2026-11-03",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/open-athena/Marin-Mochi-535B-A23B",
+    "aliases": [
+      "Marin-Mochi-535B-A23B",
+      "Marin Mochi 535B"
+    ]
+  },
+  {
     "id": "gpt-image-2-6-flare",
     "name": "GPT-Image-2.6 Flare",
     "lab": "openai",
@@ -15929,20 +16008,6 @@
       "Ripple-65B-Preview",
       "Ripple 65B Preview",
       "ricursiveai/ripple-65b-preview"
-    ]
-  },
-  {
-    "id": "ripple-65b-base-preview",
-    "name": "Ripple-65B Base Preview",
-    "lab": "ricursive",
-    "family": "Ripple",
-    "released": "2026-10-14",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/ricursiveAI/Ripple-65B-Base-Preview",
-    "aliases": [
-      "Ripple-65B-Base-Preview",
-      "Ripple 65B Base Preview"
     ]
   },
   {
@@ -16066,6 +16131,18 @@
       "muse-ember-1.0"
     ],
     "epoch": "Muse Ember"
+  },
+  {
+    "id": "gemini-decision-1",
+    "name": "Gemini Decision 1",
+    "lab": "google",
+    "released": "2026-11-11",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+    "aliases": [
+      "gemini-decision-1",
+      "Gemini-Decision-1"
+    ]
   },
   {
     "id": "praxis-1",
@@ -17407,18 +17484,6 @@
     ]
   },
   {
-    "id": "gemini-decision-1",
-    "name": "Gemini Decision 1",
-    "lab": "google",
-    "released": "2026-11-11",
-    "weights": "closed",
-    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
-    "aliases": [
-      "gemini-decision-1",
-      "Gemini-Decision-1"
-    ]
-  },
-  {
     "id": "vidu-q2-pro",
     "name": "Vidu Q2 Pro",
     "lab": "shengshu",
@@ -17560,70 +17625,5 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
-  },
-  {
-    "id": "marin-32b-base",
-    "name": "Marin 32B Base",
-    "lab": "marin",
-    "family": "Marin",
-    "released": "2025-10-25",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/marin-community/marin-32b-base",
-    "aliases": [
-      "marin-32b-base"
-    ]
-  },
-  {
-    "id": "marin-mochi-535b-a23b",
-    "name": "Marin Mochi 535B-A23B",
-    "lab": "marin",
-    "family": "Marin",
-    "released": "2026-11-03",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/open-athena/Marin-Mochi-535B-A23B",
-    "aliases": [
-      "Marin-Mochi-535B-A23B",
-      "Marin Mochi 535B"
-    ]
-  },
-  {
-    "id": "jev-1-14-0",
-    "name": "Jev 1.14.0",
-    "lab": "typesafe-ai",
-    "family": "Jev",
-    "released": "2026-10-14",
-    "weights": "closed",
-    "card": "https://typesafe.ai/blog/jev-1-14",
-    "aliases": [
-      "Jev 1.14",
-      "Jev-1.14.0",
-      "jev-1.14.0"
-    ]
-  },
-  {
-    "id": "awomo-0-5i",
-    "name": "Awomo-0.5I",
-    "lab": "awomo",
-    "family": "Awomo",
-    "released": "2026-10-03",
-    "weights": "open",
-    "card": "https://github.com/Awomo-WestlakeDI/Awomo-0.5",
-    "aliases": [
-      "Awomo-0.5-Image",
-      "Awomo 0.5I"
-    ]
-  },
-  {
-    "id": "openwam-alpha",
-    "name": "OpenWAM-Alpha",
-    "lab": "openwam",
-    "released": "2026-09-04",
-    "weights": "open",
-    "card": "https://openwam-official.github.io/",
-    "aliases": [
-      "OpenWAM Alpha"
-    ]
   }
 ]
