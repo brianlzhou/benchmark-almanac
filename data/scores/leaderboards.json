@@ -143567,6 +143567,14 @@
         }
       }
     },
+    "hfe": {
+      "url": "https://www.kaggle.com/benchmarks/deepmind/hfe",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/deepmind/hfe/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-26",
+      "rows": 16,
+      "unmatched": []
+    },
     "hi4d": {
       "url": "https://yifeiyin04.github.io/Hi4D/",
       "feed": "https://openaccess.thecvf.com/content/CVPR2023/papers/Yin_Hi4D_4D_Instance_Segmentation_of_Close_Human_Interaction_CVPR_2023_paper.pdf",

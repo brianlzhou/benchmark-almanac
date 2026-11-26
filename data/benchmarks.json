@@ -202919,5 +202919,37 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "hfe",
+    "name": "Humanity's First Exam (HFE)",
+    "aliases": [
+      "Humanity's First Exam",
+      "HFE"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "544 simple text and image prompts that people almost always get right, in 136 families of four close variants. A model passes a family only when all 16 of its tries (four per prompt) are correct, so the score measures how reliably a model solves easy tasks, not whether it can solve them once.",
+    "org": "Google DeepMind",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf",
+      "site": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/humanitys-first-exam/",
+      "dataset": "https://www.kaggle.com/datasets/deepmind/hfe-public",
+      "leaderboard": "https://www.kaggle.com/benchmarks/deepmind/hfe"
+    },
+    "access": "public+private-holdout",
+    "note": "The Kaggle board ranks models by family pass^4. 112 prompts (28 families) are public under CC BY 4.0, and the other 432 stay private. A Kaggle competition through 2026-12-15 collects new everyday questions that models still get wrong.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/deepmind/hfe",
+      "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf"
+    ],
+    "added": "2026-11-26"
   }
 ]

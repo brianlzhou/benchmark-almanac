@@ -21,7 +21,7 @@ import { saveAudits } from './lib/discover/audits.ts';
 import { bluesky } from './lib/discover/social.ts';
 import { xGrok, X_SECONDS } from './lib/discover/x.ts';
 import { epochHub, inspectEvals, hfOfficial, harbor, harborRegistry, primeHub, everyEvalEver, vlmevalkit, awesomeAiLeaderboard, awesomeCua, benchmarkList, hfBenchmarkResults } from './lib/discover/registries.ts';
-import { vals, arena } from './lib/discover/leaderboards.ts';
+import { vals, arena, kaggle } from './lib/discover/leaderboards.ts';
 import { labs } from './lib/discover/labs.ts';
 import { sites } from './lib/discover/sites.ts';
 
@@ -51,6 +51,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   vlmevalkit: { run: vlmevalkit },
   vals: { run: vals },
   lmarena: { run: arena },
+  'kaggle-benchmarks': { run: kaggle, seconds: 120 },
   'lab-cards': { run: labs, seconds: 150 },
   'awesome-ai-leaderboard': { run: awesomeAiLeaderboard },
   'awesome-cua': { run: awesomeCua },

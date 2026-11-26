@@ -10866,6 +10866,11 @@
       "via": "We checked the publisher’s evaluation sources for this audit."
     },
     {
+      "id": "hfe",
+      "date": "2026-11-26",
+      "via": "The discovery scan found Google DeepMind's launch post on 2026-11-24. The user asked about it on 2026-11-26."
+    },
+    {
       "id": "hi4d",
       "date": "2026-11-19",
       "via": "SAM 3D Body technical report reports results for this evaluation."
