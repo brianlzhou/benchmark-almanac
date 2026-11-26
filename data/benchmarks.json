@@ -8379,6 +8379,62 @@
     "added": "2026-11-01"
   },
   {
+    "id": "allfaith-conversion-bias",
+    "name": "AllFaith Conversion Bias",
+    "category": "safety-alignment",
+    "subcategory": "safety-bias",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models advise people considering a change between 14 faith or nonreligious identities. A judge rates whether each answer encourages or discourages the change.",
+    "org": "CEFE-AI",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/CEFEAI/allfaith-conversion-bias",
+      "site": "https://cefeai.org/",
+      "leaderboard": "https://cefeai.org/"
+    },
+    "access": "public",
+    "note": "CEFE-AI reports total bias as the percentage of possible deviation from neutrality. Signed scores for individual traditions measure direction.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-conversion-bias",
+      "https://github.com/CEFEAI/allfaith-conversion-bias",
+      "https://cefeai.org/"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "allfaith-religious-representation",
+    "name": "AllFaith Religious Representation",
+    "category": "safety-alignment",
+    "subcategory": "safety-bias",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer 150 everyday ethics questions that do not mention religion. A judge rates how prominently each answer discusses religious ideas, practices or leaders.",
+    "org": "CEFE-AI",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/CEFEAI/allfaith-religious-representation",
+      "site": "https://cefeai.org/",
+      "leaderboard": "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation"
+    },
+    "access": "public",
+    "note": "The judge uses a scale from zero to four. Higher ratings indicate more religious content, independent of factual accuracy.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation",
+      "https://github.com/CEFEAI/allfaith-religious-representation",
+      "https://cefeai.org/"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "allocine",
     "name": "AlloCiné",
     "category": "multilingual",
@@ -10390,6 +10446,30 @@
       "https://huggingface.co/imageomics/bioclip-2.5-vith14"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "kaggle-animated-story-arena",
+    "name": "Animated Story Arena",
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models make short animated stories explaining topics such as lightning or compound interest. People compare the stories, and their votes determine Elo ratings.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
+    },
+    "access": "public",
+    "note": "Kaggle lists ten story prompts. Some specify the age of the intended audience.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "animation-bench-physera",
@@ -67790,6 +67870,30 @@
     "added": "2026-11-20"
   },
   {
+    "id": "kaggle-fps-arena",
+    "name": "FPS Arena",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build a mouse-controlled 3D first-person shooter in a single browser page. Human votes determine its Elo rating.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
+    },
+    "access": "public",
+    "note": "Kaggle gives models one game prompt and reports the number of comparisons for each entry.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "fquad",
     "name": "FQuAD",
     "aliases": [
@@ -83250,6 +83354,38 @@
       "https://github.com/laude-institute/harbor/tree/main/adapters/humanevalfix",
       "https://github.com/laude-institute/harbor/blob/main/registry.json"
     ]
+  },
+  {
+    "id": "hfe",
+    "name": "Humanity's First Exam (HFE)",
+    "aliases": [
+      "Humanity's First Exam",
+      "HFE"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "544 simple text and image prompts that people almost always get right, in 136 families of four close variants. A model passes a family only when all 16 of its tries (four per prompt) are correct, so the score measures how reliably a model solves easy tasks, not whether it can solve them once.",
+    "org": "Google DeepMind",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf",
+      "site": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/humanitys-first-exam/",
+      "dataset": "https://www.kaggle.com/datasets/deepmind/hfe-public",
+      "leaderboard": "https://www.kaggle.com/benchmarks/deepmind/hfe"
+    },
+    "access": "public+private-holdout",
+    "note": "The Kaggle board ranks models by family pass^4. 112 prompts (28 families) are public under CC BY 4.0, and the other 432 stay private. A Kaggle competition through 2026-12-15 collects new everyday questions that models still get wrong.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/deepmind/hfe",
+      "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "humanitys-last-exam",
@@ -100669,6 +100805,111 @@
       "https://huggingface.co/datasets/QAQAQAQAQ/LiveCodeBench-Pro",
       "https://github.com/GavinZhengOI/LiveCodeBench-Pro"
     ]
+  },
+  {
+    "id": "livecodebench-v2",
+    "name": "LiveCodeBench v2",
+    "aliases": [
+      "LiveCodeBench release_v2"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v2",
+    "description": "Models write programs for 511 contest problems published from May 2023 through May 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v2 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/356356a5c3a6baf7748838d82c5c36c62235ca50"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "livecodebench-v3",
+    "name": "LiveCodeBench v3",
+    "aliases": [
+      "LiveCodeBench release_v3"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v3",
+    "description": "Models write programs for 612 contest problems published from May 2023 through July 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v3 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/b9e169151fc9cb803690a6b1a72f2f11a7da6334"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "livecodebench-v4",
+    "name": "LiveCodeBench v4",
+    "aliases": [
+      "LiveCodeBench release_v4"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v4",
+    "description": "Models write programs for 713 contest problems published from May 2023 through September 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v4 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/94753272a13ab63f91040131208e64ae6c96615b"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "livecodebench-v5",
@@ -144601,6 +144842,34 @@
     ]
   },
   {
+    "id": "prompt-injection-robustness-jamble",
+    "name": "Prompt Injection Robustness (Chaitanya Jamble)",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer ordinary requests using documents that contain conflicting instructions. The score is the fraction of responses that keep a designated token private.",
+    "org": "Chaitanya Jamble",
+    "released": "2026-08",
+    "links": {
+      "site": "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness",
+      "dataset": "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
+      "leaderboard": "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness"
+    },
+    "access": "public",
+    "note": "The dataset pairs 486 altered documents with 486 clean controls. The published notebook samples 30 altered documents and reports a fraction from zero to one.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness",
+      "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
+      "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "prompt-injection-adaptive-browser-use-anthropic",
     "name": "Prompt injection robustness against adaptive attackers, browser use (Anthropic)",
     "aliases": [
@@ -148475,6 +148744,30 @@
       "https://api.crossref.org/works/10.1038/s41746-023-00939-z"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "kaggle-racing-arena",
+    "name": "Racing Arena",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build a keyboard-controlled 3D racing game that runs in a single browser page. Human votes determine its Elo rating.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
+    },
+    "access": "public",
+    "note": "Kaggle gives models one game prompt. The vote count records how many comparisons included each entry.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "radiobench",
@@ -153636,6 +153929,30 @@
       "https://github.com/stepjam/RLBench"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "rlbench-interactive-learning",
+    "name": "RLBench (Interactive Learning)",
+    "category": "science-reasoning",
+    "subcategory": "science-puzzles",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models query hidden environments and use numerical feedback to revise their guesses within a step limit. The suite covers 30 puzzles.",
+    "org": "kdcyberdude",
+    "released": "2026-04",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
+    },
+    "access": "unknown",
+    "note": "The board reports scores from zero to one. Each puzzle defines the feedback and step budget.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "rmbench",
@@ -162100,6 +162417,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "shellbench",
+    "name": "ShellBench",
+    "category": "tool-use",
+    "subcategory": "tools-assistants",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents complete 100 everyday requests, such as reconciling receipts or sorting an inbox. A task requires both the requested result and safe handling.",
+    "org": "OpenClaw Foundation and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.32946",
+      "site": "https://openclaw.ai/blog/shellbench",
+      "dataset": "https://huggingface.co/datasets/OpenClaw/ShellBench",
+      "leaderboard": "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench"
+    },
+    "access": "public+private-holdout",
+    "note": "A judge checks 90 tasks against rubrics. Code checks the other ten. The public split contains 20 tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench",
+      "https://arxiv.org/abs/2611.32946",
+      "https://openclaw.ai/blog/shellbench",
+      "https://huggingface.co/datasets/OpenClaw/ShellBench"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "sherlock-holmes-qa-gutenberg",
     "name": "Sherlock Holmes Q&A",
     "category": "knowledge-qa",
@@ -165701,6 +166048,32 @@
       "https://huggingface.co/api/papers/2606.05563"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "socrates-social-cognition",
+    "name": "SOCRATES (Social Cognition)",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models interpret social cues and choose actions in tasks about cooperation, negotiation, risk and other people’s beliefs.",
+    "org": "alfaxadeyembe",
+    "released": "2026-04",
+    "links": {
+      "dataset": "https://www.kaggle.com/datasets/alfaxadeyembe/socrates",
+      "leaderboard": "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates"
+    },
+    "access": "public",
+    "note": "The public development set contains 359 items adapted from six sources. The score balances task families within each module.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates",
+      "https://www.kaggle.com/datasets/alfaxadeyembe/socrates"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "sofc-exp",
@@ -184085,6 +184458,32 @@
       "https://github.com/SesameAILabs/turnbench"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "turnbench-executive-functions",
+    "name": "TurnBench (Executive Functions)",
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models play two turn-based games across 800 scenarios. They adapt to changing goals in a farm game and infer hidden rules in a creature battle.",
+    "org": "Simon Zhang and Bill Cai",
+    "released": "2026-04",
+    "links": {
+      "site": "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879",
+      "leaderboard": "https://www.kaggle.com/benchmarks/zxsimon2/turnbench"
+    },
+    "access": "public",
+    "note": "Each game has four modes with 100 scenarios per mode. The game engine checks whether the model wins.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/zxsimon2/turnbench",
+      "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "tut-urban-acoustic-scenes-2018",
@@ -202948,404 +203347,5 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
-  },
-  {
-    "id": "hfe",
-    "name": "Humanity's First Exam (HFE)",
-    "aliases": [
-      "Humanity's First Exam",
-      "HFE"
-    ],
-    "category": "knowledge-qa",
-    "subcategory": "knowledge-commonsense",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "short-answer",
-    "description": "544 simple text and image prompts that people almost always get right, in 136 families of four close variants. A model passes a family only when all 16 of its tries (four per prompt) are correct, so the score measures how reliably a model solves easy tasks, not whether it can solve them once.",
-    "org": "Google DeepMind",
-    "released": "2026-11",
-    "links": {
-      "paper": "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf",
-      "site": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/humanitys-first-exam/",
-      "dataset": "https://www.kaggle.com/datasets/deepmind/hfe-public",
-      "leaderboard": "https://www.kaggle.com/benchmarks/deepmind/hfe"
-    },
-    "access": "public+private-holdout",
-    "note": "The Kaggle board ranks models by family pass^4. 112 prompts (28 families) are public under CC BY 4.0, and the other 432 stay private. A Kaggle competition through 2026-12-15 collects new everyday questions that models still get wrong.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/deepmind/hfe",
-      "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "livecodebench-v3",
-    "name": "LiveCodeBench v3",
-    "aliases": [
-      "LiveCodeBench release_v3"
-    ],
-    "category": "coding",
-    "subcategory": "coding-competitive",
-    "level": "competition",
-    "scoring": "verified",
-    "format": "code",
-    "family": "livecodebench",
-    "version": "v3",
-    "description": "Models write programs for 612 contest problems published from May 2023 through July 2024. Hidden tests check each solution.",
-    "org": "UC Berkeley / MIT / Cornell",
-    "released": "2024-08",
-    "links": {
-      "paper": "https://arxiv.org/abs/2403.07974",
-      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
-      "site": "https://livecodebench.github.io",
-      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
-      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3"
-    },
-    "access": "public",
-    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v3 using its own harness.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3",
-      "https://github.com/LiveCodeBench/LiveCodeBench",
-      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/b9e169151fc9cb803690a6b1a72f2f11a7da6334"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "livecodebench-v4",
-    "name": "LiveCodeBench v4",
-    "aliases": [
-      "LiveCodeBench release_v4"
-    ],
-    "category": "coding",
-    "subcategory": "coding-competitive",
-    "level": "competition",
-    "scoring": "verified",
-    "format": "code",
-    "family": "livecodebench",
-    "version": "v4",
-    "description": "Models write programs for 713 contest problems published from May 2023 through September 2024. Hidden tests check each solution.",
-    "org": "UC Berkeley / MIT / Cornell",
-    "released": "2024-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2403.07974",
-      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
-      "site": "https://livecodebench.github.io",
-      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
-      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4"
-    },
-    "access": "public",
-    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v4 using its own harness.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4",
-      "https://github.com/LiveCodeBench/LiveCodeBench",
-      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/94753272a13ab63f91040131208e64ae6c96615b"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "livecodebench-v2",
-    "name": "LiveCodeBench v2",
-    "aliases": [
-      "LiveCodeBench release_v2"
-    ],
-    "category": "coding",
-    "subcategory": "coding-competitive",
-    "level": "competition",
-    "scoring": "verified",
-    "format": "code",
-    "family": "livecodebench",
-    "version": "v2",
-    "description": "Models write programs for 511 contest problems published from May 2023 through May 2024. Hidden tests check each solution.",
-    "org": "UC Berkeley / MIT / Cornell",
-    "released": "2024-06",
-    "links": {
-      "paper": "https://arxiv.org/abs/2403.07974",
-      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
-      "site": "https://livecodebench.github.io",
-      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
-      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2"
-    },
-    "access": "public",
-    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v2 using its own harness.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2",
-      "https://github.com/LiveCodeBench/LiveCodeBench",
-      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/356356a5c3a6baf7748838d82c5c36c62235ca50"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "shellbench",
-    "name": "ShellBench",
-    "category": "tool-use",
-    "subcategory": "tools-assistants",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "agent-task",
-    "description": "Agents complete 100 everyday requests, such as reconciling receipts or sorting an inbox. A task requires both the requested result and safe handling.",
-    "org": "OpenClaw Foundation and collaborators",
-    "released": "2026-11",
-    "links": {
-      "paper": "https://arxiv.org/abs/2611.32946",
-      "site": "https://openclaw.ai/blog/shellbench",
-      "dataset": "https://huggingface.co/datasets/OpenClaw/ShellBench",
-      "leaderboard": "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench"
-    },
-    "access": "public+private-holdout",
-    "note": "A judge checks 90 tasks against rubrics. Code checks the other ten. The public split contains 20 tasks.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench",
-      "https://arxiv.org/abs/2611.32946",
-      "https://openclaw.ai/blog/shellbench",
-      "https://huggingface.co/datasets/OpenClaw/ShellBench"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "rlbench-interactive-learning",
-    "name": "RLBench (Interactive Learning)",
-    "category": "science-reasoning",
-    "subcategory": "science-puzzles",
-    "level": "university",
-    "scoring": "verified",
-    "format": "agent-task",
-    "description": "Models query hidden environments and use numerical feedback to revise their guesses within a step limit. The suite covers 30 puzzles.",
-    "org": "kdcyberdude",
-    "released": "2026-04",
-    "links": {
-      "leaderboard": "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
-    },
-    "access": "unknown",
-    "note": "The board reports scores from zero to one. Each puzzle defines the feedback and step budget.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "turnbench-executive-functions",
-    "name": "TurnBench (Executive Functions)",
-    "category": "games-long-horizon",
-    "subcategory": "games-video-games",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "agent-task",
-    "description": "Models play two turn-based games across 800 scenarios. They adapt to changing goals in a farm game and infer hidden rules in a creature battle.",
-    "org": "Simon Zhang and Bill Cai",
-    "released": "2026-04",
-    "links": {
-      "site": "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879",
-      "leaderboard": "https://www.kaggle.com/benchmarks/zxsimon2/turnbench"
-    },
-    "access": "public",
-    "note": "Each game has four modes with 100 scenarios per mode. The game engine checks whether the model wins.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/zxsimon2/turnbench",
-      "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "kaggle-racing-arena",
-    "name": "Racing Arena",
-    "category": "coding",
-    "subcategory": "coding-frontend",
-    "level": "university",
-    "scoring": "preference",
-    "format": "code",
-    "description": "Models build a keyboard-controlled 3D racing game that runs in a single browser page. Human votes determine its Elo rating.",
-    "org": "Kaggle",
-    "released": "2026-11",
-    "links": {
-      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
-    },
-    "access": "public",
-    "note": "Kaggle gives models one game prompt. The vote count records how many comparisons included each entry.",
-    "unit": "elo",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "kaggle-fps-arena",
-    "name": "FPS Arena",
-    "category": "coding",
-    "subcategory": "coding-frontend",
-    "level": "university",
-    "scoring": "preference",
-    "format": "code",
-    "description": "Models build a mouse-controlled 3D first-person shooter in a single browser page. Human votes determine its Elo rating.",
-    "org": "Kaggle",
-    "released": "2026-11",
-    "links": {
-      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
-    },
-    "access": "public",
-    "note": "Kaggle gives models one game prompt and reports the number of comparisons for each entry.",
-    "unit": "elo",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "kaggle-animated-story-arena",
-    "name": "Animated Story Arena",
-    "category": "audio-video",
-    "subcategory": "video-generation",
-    "level": "everyday",
-    "scoring": "preference",
-    "format": "open-ended",
-    "description": "Models make short animated stories explaining topics such as lightning or compound interest. People compare the stories, and their votes determine Elo ratings.",
-    "org": "Kaggle",
-    "released": "2026-11",
-    "links": {
-      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
-    },
-    "access": "public",
-    "note": "Kaggle lists ten story prompts. Some specify the age of the intended audience.",
-    "unit": "elo",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "allfaith-conversion-bias",
-    "name": "AllFaith Conversion Bias",
-    "category": "safety-alignment",
-    "subcategory": "safety-bias",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Models advise people considering a change between 14 faith or nonreligious identities. A judge rates whether each answer encourages or discourages the change.",
-    "org": "CEFE-AI",
-    "released": "2026-05",
-    "links": {
-      "repo": "https://github.com/CEFEAI/allfaith-conversion-bias",
-      "site": "https://cefeai.org/",
-      "leaderboard": "https://cefeai.org/"
-    },
-    "access": "public",
-    "note": "CEFE-AI reports total bias as the percentage of possible deviation from neutrality. Signed scores for individual traditions measure direction.",
-    "unit": "%",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-conversion-bias",
-      "https://github.com/CEFEAI/allfaith-conversion-bias",
-      "https://cefeai.org/"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "allfaith-religious-representation",
-    "name": "AllFaith Religious Representation",
-    "category": "safety-alignment",
-    "subcategory": "safety-bias",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Models answer 150 everyday ethics questions that do not mention religion. A judge rates how prominently each answer discusses religious ideas, practices or leaders.",
-    "org": "CEFE-AI",
-    "released": "2026-05",
-    "links": {
-      "repo": "https://github.com/CEFEAI/allfaith-religious-representation",
-      "site": "https://cefeai.org/",
-      "leaderboard": "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation"
-    },
-    "access": "public",
-    "note": "The judge uses a scale from zero to four. Higher ratings indicate more religious content, independent of factual accuracy.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation",
-      "https://github.com/CEFEAI/allfaith-religious-representation",
-      "https://cefeai.org/"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "socrates-social-cognition",
-    "name": "SOCRATES (Social Cognition)",
-    "category": "knowledge-qa",
-    "subcategory": "knowledge-reasoning",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "description": "Models interpret social cues and choose actions in tasks about cooperation, negotiation, risk and other people’s beliefs.",
-    "org": "alfaxadeyembe",
-    "released": "2026-04",
-    "links": {
-      "dataset": "https://www.kaggle.com/datasets/alfaxadeyembe/socrates",
-      "leaderboard": "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates"
-    },
-    "access": "public",
-    "note": "The public development set contains 359 items adapted from six sources. The score balances task families within each module.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates",
-      "https://www.kaggle.com/datasets/alfaxadeyembe/socrates"
-    ],
-    "added": "2026-11-26"
-  },
-  {
-    "id": "prompt-injection-robustness-jamble",
-    "name": "Prompt Injection Robustness (Chaitanya Jamble)",
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models answer ordinary requests using documents that contain conflicting instructions. The score is the fraction of responses that keep a designated token private.",
-    "org": "Chaitanya Jamble",
-    "released": "2026-08",
-    "links": {
-      "site": "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness",
-      "dataset": "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
-      "leaderboard": "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness"
-    },
-    "access": "public",
-    "note": "The dataset pairs 486 altered documents with 486 clean controls. The published notebook samples 30 altered documents and reports a fraction from zero to one.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness",
-      "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
-      "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness"
-    ],
-    "added": "2026-11-26"
   }
 ]

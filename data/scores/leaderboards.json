@@ -6,7 +6,7 @@
       "url": "https://www.kaggle.com/benchmarks/deepmind/video-qa",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/deepmind/video-qa/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 20,
       "unmatched": []
     },
@@ -14,7 +14,7 @@
       "url": "https://github.com/1x-technologies/1xgpt#leaderboard",
       "feed": "https://raw.githubusercontent.com/1x-technologies/1xgpt/main/README.md",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "1x-technologies/GENIE_138M",
@@ -43,7 +43,7 @@
       "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
       "feed": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=all",
       "terms": "Public 3D Arena API. The Space repository is MIT-licensed. The almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "3DTopia-XL",
@@ -96,7 +96,7 @@
       "url": "https://110.238.108.113/",
       "feed": "https://110.238.108.113/api/ratings",
       "terms": "The live arena gives no reuse terms. Eleven scored configurations represent ten distinct model names on 2026-11-20. https://baibizhe.github.io/gamearena/ The arena serves no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "Qwen 3.8"
@@ -119,7 +119,7 @@
       "url": "https://3d-arena-3d-world-arena.hf.space/arena?view=leaderboard",
       "feed": "https://3d-arena-3d-world-arena.hf.space/api/v2/leaderboard?track=generative",
       "terms": "The protocol publishes aggregate ratings and lists component licenses by system. It gives no separate ratings license. https://huggingface.co/spaces/3d-arena/3d-world-arena/blob/main/docs/3D-WORLD-ARENA.md",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "NVIDIA Lyra 2.0",
@@ -147,7 +147,7 @@
       "url": "https://www.3dcodebench.com/leaderboard",
       "feed": "https://www.3dcodebench.com/leaderboard (models payload); https://www.3dcodebench.com/ (cost chart)",
       "terms": "Public 3DCodeBench results. No separate data license is stated on the leaderboard; the almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 14,
       "unmatched": [],
       "chart": {
@@ -255,7 +255,7 @@
       "url": "https://huggingface.co/spaces/3DTopia/3DGen-Arena",
       "feed": "https://3dtopia-3dgen-arena.hf.space/config",
       "terms": "The leaderboard page gives no separate reuse license. https://huggingface.co/spaces/ZhangYuhan/3DGen-Arena",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "DreamFusion",
@@ -310,7 +310,7 @@
       "url": "https://pranalabs.github.io/3DSceneBench/",
       "feed": "https://pranalabs.github.io/3DSceneBench/data/results.js",
       "terms": "Prana Labs publishes this results file on its project site; robots.txt has no restrictions and no separate extraction terms are stated.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -411,7 +411,7 @@
       "url": "https://3dsrbench.github.io/",
       "feed": "https://3dsrbench.github.io/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Claude-Flash",
@@ -542,7 +542,7 @@
       "url": "https://huggingface.co/datasets/microsoft/Eureka-Bench-Logs",
       "feed": "https://huggingface.co/api/datasets/microsoft/Eureka-Bench-Logs/tree/main/SAT",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "PHI_4_REASONING_phi-15b-rl (archive research variant)",
@@ -569,7 +569,7 @@
       "url": "https://4dcodebench.com/data/leaderboard.json",
       "feed": "https://4dcodebench.com/data/leaderboard.json",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [],
       "chart": {
@@ -699,7 +699,7 @@
       "url": "https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
       "feed": "https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
       "terms": "The publisher allows this path in robots.txt. The publisher gives no separate reuse terms for the score table. https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "Nemotron 3.5 30B-A3B"
@@ -732,7 +732,7 @@
       "url": "https://67ailab.com/posts/spark-eval-06-l3-guideline-qa/",
       "feed": "https://67ailab.com/posts/spark-eval-06-l3-guideline-qa/",
       "terms": "67AI Lab publishes these scores without separate reuse terms. Its robots.txt permits the page.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "Nemotron 3.5 30B-A3B"
@@ -857,7 +857,7 @@
       "url": "https://huggingface.co/spaces/opencompass/open_vlm_leaderboard",
       "feed": "http://opencompass.openxlab.space/assets/OpenVLM.json (ABench.Overall)",
       "terms": "OpenCompass's published leaderboard data file, which the Apache-2.0 Space renders; the file states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 118,
       "unmatched": [
         "360VL-70B",
@@ -1102,7 +1102,7 @@
       "url": "https://a3-bench.github.io/",
       "feed": "https://a3-bench.github.io/",
       "terms": "Public results published by the benchmark authors at a3-bench.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 21,
       "unmatched": [
         "GLM-4-32B",
@@ -1148,7 +1148,7 @@
       "url": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/",
       "feed": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData, held-out scores only)",
       "terms": "Mercor terms prohibit automated scraping; the almanac credits Mercor and links the original source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 50,
       "unmatched": [
         "Beam",
@@ -1509,7 +1509,7 @@
       "url": "https://aarr-bench.com/leaderboard/",
       "feed": "https://aarr-bench.com/leaderboard/",
       "terms": "The authors publish and maintain the public leaderboard at https://aarr-bench.com/leaderboard/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [],
       "reference": [
@@ -1535,7 +1535,7 @@
       "url": "https://cea-list.github.io/ABACUS/#leaderboard",
       "feed": "https://raw.githubusercontent.com/CEA-LIST/ABACUS/HEAD/README.md",
       "terms": "The ABACUS authors use CC BY 4.0, https://github.com/CEA-LIST/ABACUS/blob/HEAD/LICENSE.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [],
       "parts": {
@@ -1602,7 +1602,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "SecureBio allows reference use under its content signals, prohibits AI training, and retains attribution for its public results.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 27,
       "unmatched": [],
       "stats": {
@@ -1617,7 +1617,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "SecureBio allows reference use under its content signals, prohibits AI training, and retains attribution for its public results.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 34,
       "unmatched": [],
       "stats": {
@@ -1632,7 +1632,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [
         "Nemotron 3 Super 120B A12B",
@@ -1685,7 +1685,7 @@
       "url": "https://securebio.org/benchmarks/",
       "feed": "https://securebio.org/benchmarks/details/ (plotly-spec able-breakdown-plot-div, hover \"ABLE (Full)\")",
       "terms": "Static SecureBio dashboard page; securebio.org robots.txt allows all agents (content signals: search yes, AI training no) and SecureBio asks that results be cited.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 19,
       "unmatched": [
         "Nemotron 3 Super 120B A12B",
@@ -1696,7 +1696,7 @@
       "url": "https://valenlabs.com/abmaze/results/index.html",
       "feed": "https://valenlabs.com/abmaze/results/results1.js",
       "terms": "Valen publishes these results at https://valenlabs.com/blog/abmaze.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -1718,7 +1718,7 @@
       "url": "https://github.com/facebookresearch/AbstentionBench",
       "feed": "https://raw.githubusercontent.com/facebookresearch/AbstentionBench/main/analysis/abstention_performance.csv",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -1911,7 +1911,7 @@
       "url": "https://acceleratebench.com/",
       "feed": "https://acceleratebench.com/assets/results.json",
       "terms": "The authors publish this downloadable results file; robots.txt has no restrictions and the project page states no separate extraction terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [],
       "harnesses": "system",
@@ -2076,7 +2076,7 @@
       "url": "https://conceptualreasoning.ai/",
       "feed": "https://conceptualreasoning.ai/data/cri-scores.csv (concord)",
       "terms": "Static CSV the conceptualreasoning.ai page loads; robots.txt allows all paths and the site states no terms or license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 232,
       "unmatched": [
         "DeepSeek Chat"
@@ -2093,7 +2093,7 @@
       "url": "https://builders.ramp.com/post/financial-benchmarks",
       "feed": "https://builders.ramp.com/post/financial-benchmarks",
       "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 21,
       "unmatched": [],
       "stats": {
@@ -2143,7 +2143,7 @@
       "url": "https://chenchen0103.github.io/ACEBench/",
       "feed": "https://chenchen0103.github.io/ACEBench/script.js (allCombinedModels)",
       "terms": "Static script on a GitHub Pages project site with no robots.txt and no terms; the ACEBench repository is public and the scores are cited to the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [
         "Doubao-Pro-32K",
@@ -2193,7 +2193,7 @@
       "url": "https://github.com/isen-zhang/ACLUE",
       "feed": "https://raw.githubusercontent.com/isen-zhang/ACLUE/HEAD/README.md",
       "terms": "The project uses MIT and the dataset uses https://creativecommons.org/licenses/by-nc-sa/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "BLOOMZ-7B",
@@ -2222,7 +2222,7 @@
       "url": "https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/",
       "feed": "https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/",
       "terms": "The publisher displays results at https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/. I could not verify reuse terms. The robots.txt permits this article.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 14,
       "unmatched": [],
       "stats": {
@@ -2267,7 +2267,7 @@
       "url": "https://tttonyalpha.github.io/act2answer/",
       "feed": "https://tttonyalpha.github.io/act2answer/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "Xiaomi-Robotics-R0"
@@ -2544,7 +2544,7 @@
       "url": "https://github.com/Emanual20/adbench-leaderboard",
       "feed": "https://raw.githubusercontent.com/Emanual20/adbench-leaderboard/HEAD/README.md",
       "terms": "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "HY-2.0",
@@ -2599,7 +2599,7 @@
       "feed": "https://raw.githubusercontent.com/open-compass/Ada-LEval/HEAD/README.md",
       "terms": "The authors publish the evaluation tables in https://github.com/open-compass/Ada-LEval.",
       "headline": "At each context length, the headline is the plain mean of TSort and BestAnswer accuracy. The authors report each task separately.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 24,
       "unmatched": [
         "ChatGLM2-6B-32k",
@@ -2622,7 +2622,7 @@
       "url": "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02",
       "feed": "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [],
       "stats": {
@@ -2693,7 +2693,7 @@
       "url": "https://www.vellum.ai/blog/evaluation-claude-4-sonnet-vs-openai-o4-mini-vs-gemini-2-5-pro",
       "feed": "https://cdn.sanity.io/images/ghjnhoi4/production/e1445ca9fc8728cc17c97096bc6bb61ea8a1c250-2017x1101.webp (transcribed 2026-11-24)",
       "terms": "Vellum publishes this chart on its public blog. Results are credited to Vellum.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -2703,7 +2703,7 @@
       "url": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
       "feed": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
       "terms": "Addis AI publishes its benchmark data under CC BY-SA 4.0. Its robots.txt allows the benchmark page.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "Addis Voice 2",
@@ -2760,7 +2760,7 @@
       "url": "https://addisassistant.com/benchmarks",
       "feed": "https://huggingface.co/datasets/addisai/addis-scribe-benchmark/resolve/main/README.md",
       "terms": "Eight systems on 150 Afaan Oromo clips. The transcript file includes eleven operating modes. The benchmark archive lists CC BY-SA 4.0. https://huggingface.co/datasets/addisai/addis-scribe-benchmark The feed host publishes robots.txt at https://huggingface.co/robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "Addis Scribe Afaan Oromo",
@@ -2807,7 +2807,7 @@
       "feed": "https://www.codewithpapers.app/sota/relation-extraction-on-ade-corpus.json",
       "terms": "Papers with Code archive, modified by Syntology, CC BY-SA 4.0. https://codewithpapers.app/attribution",
       "host": "Code with Papers",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "CLDR + CLNER",
@@ -2848,7 +2848,7 @@
       "url": "https://github.com/CSAILVision/semantic-segmentation-pytorch#performance",
       "feed": "https://raw.githubusercontent.com/CSAILVision/semantic-segmentation-pytorch/HEAD/README.md",
       "terms": "MIT CSAIL uses BSD 3-Clause, https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/LICENSE.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "HRNetV2",
@@ -2884,7 +2884,7 @@
       "url": "https://github.com/facebookresearch/adepts",
       "feed": "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -2920,7 +2920,7 @@
       "url": "https://github.com/facebookresearch/adepts",
       "feed": "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -2971,7 +2971,7 @@
       "url": "https://dcase.community/challenge2026/task-audio-dependent-question-answering-results",
       "feed": "https://dcase.community/challenge2026/task-audio-dependent-question-answering-results",
       "terms": "DCASE robots.txt allows the results page and restricts images and theme assets. DCASE gives no separate score license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "Cheng_Surrey_task5_1",
@@ -3265,7 +3265,7 @@
       "url": "https://www.aecbench.com/leaderboard",
       "feed": "https://www.aecbench.com/leaderboard",
       "terms": "The site serves HTML for robots.txt. The benchmark code uses the MIT license. The results page gives no separate reuse license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 17,
       "unmatched": [
         "LFM2 24B A2B"
@@ -3362,7 +3362,7 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/aec/",
       "terms": "ONESTRUCTION reserves copyright and blocks named bots in robots.txt. Its methodology uses external estimates for open model costs, which this reader omits.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 20,
       "unmatched": [],
       "chart": {
@@ -3451,7 +3451,7 @@
         }
       },
       "failed": {
-        "date": "2026-11-25",
+        "date": "2026-11-26",
         "error": "Missing AEC results"
       }
     },
@@ -3459,7 +3459,7 @@
       "url": "https://github.com/ArchiAI-LAB/AECBench#evaluation-results",
       "feed": "https://raw.githubusercontent.com/ArchiAI-LAB/AECBench/main/README.md",
       "terms": "The authors specify CC BY-NC for non-commercial research. https://github.com/ArchiAI-LAB/AECBench/blob/main/LICENSE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -3544,7 +3544,7 @@
       "url": "https://aecv-bench.com/#results",
       "feed": "https://aecv-bench.com/",
       "terms": "AECFoundry publishes its results at https://aecv-bench.com/#results. The authors retain their rights.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "StepFun Step 3.7"
@@ -3773,7 +3773,7 @@
       "url": "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md",
       "feed": "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "GPT-4o [snapshot unspecified]",
@@ -4155,7 +4155,7 @@
       "url": "https://github.com/intron-innovation/AfriMed-QA#model-performance-metrics",
       "feed": "https://raw.githubusercontent.com/intron-innovation/AfriMed-QA/master/README.md",
       "terms": "Public author-published results in the AfriMed-QA repository. Benchmark Almanac credits the AfriMed-QA team and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "BioMistral-7B",
@@ -4429,7 +4429,7 @@
       "url": "https://mcgill-nlp.github.io/AfroBench/leaderboard.html",
       "feed": "https://mcgill-nlp.github.io/AfroBench/leaderboard_json/afrobench.json",
       "terms": "The leaderboard page does not specify reuse terms for the score tables. https://mcgill-nlp.github.io/AfroBench/leaderboard.html",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "AfroLLaMa 8B",
@@ -4508,7 +4508,7 @@
       "url": "https://huggingface.co/spaces/McGill-NLP/AfroBench",
       "feed": "https://huggingface.co/spaces/McGill-NLP/AfroBench/raw/main/data/leaderboard_json/afrobench_lite.json",
       "terms": "MIT Space; Hugging Face robots.txt permits the raw results path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 17,
       "unmatched": [
         "AfroLLaMa 8B",
@@ -4615,7 +4615,7 @@
       "url": "https://arena.ai/leaderboard/agent",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset agent, split latest, category overall)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 68,
       "unmatched": [
         "Spark-X2.6"
@@ -4760,7 +4760,7 @@
       "url": "https://deepnote.com/research/benchmark",
       "feed": "https://deepnote.com/research/benchmark (50-task leaderboard)",
       "terms": "Deepnote publishes the benchmark documentation under Apache-2.0 and PageMantle under CC BY 4.0. Robots.txt allows the research page. Source: Deepnote.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -4813,7 +4813,7 @@
       "url": "https://www.agentisland.ai/",
       "feed": "https://storage.googleapis.com/agent-island/rankings/latest.json",
       "terms": "The authors publish the ranking and game logs in their public bucket at https://storage.googleapis.com/agent-island/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 59,
       "unmatched": [],
       "stats": {
@@ -4845,7 +4845,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/agent-liability-gym",
       "feed": "https://hub.primeintellect.ai/narcolepticchicken/agent-liability-gym/@6e5d4af8/download",
       "terms": "The author publishes the package under the Prime Intellect platform terms at https://www.primeintellect.ai/terms-of-service.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [],
       "stats": {
@@ -4875,7 +4875,7 @@
       "url": "https://agentmemoryleaderboard.ai/leaderboard/industry/textual",
       "feed": "https://agentmemoryleaderboard.ai/static/cycle1-industry-textual.json?v=pages-migration-20260919",
       "terms": "Public official Cycle 1 snapshots. The almanac credits Agent Memory Leaderboard and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "AML-Eval-FLASH (memory system)",
@@ -5025,7 +5025,7 @@
       "url": "https://league.jake-moses.com/benchmark",
       "feed": "https://league.jake-moses.com/benchmark",
       "terms": "The author's project page reserves all rights and gives no separate results license. https://www.jake-moses.com/ai-league.html Robots.txt allows the benchmark.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "costPer": "run",
@@ -5138,7 +5138,7 @@
       "url": "https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard",
       "feed": "https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard/raw/main/results.jsonl",
       "terms": "Apache-2.0 Space; Hugging Face robots.txt permits this public raw results path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "Claude 3.7 S.",
@@ -5266,7 +5266,7 @@
       "url": "https://github.com/nagu-io/agent-settlement-bench",
       "feed": "https://raw.githubusercontent.com/nagu-io/agent-settlement-bench/main/README.md",
       "terms": "The repository is public under its stated license. Source attribution applies.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ChatGPT-4.1 (subset 10/20)",
@@ -5292,7 +5292,7 @@
       "url": "https://seed.bytedance.com/en/seed2_1",
       "feed": "https://seed.bytedance.com/en/seed2_1",
       "terms": "Public ByteDance Seed evaluation table, subject to the site disclaimer and terms; the Almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": []
     },
@@ -5528,7 +5528,7 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pubhtml",
       "feed": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pub?output=csv (AVG)",
       "terms": "Published Google Sheet linked from the THUDM/AgentBench README (Apache-2.0); docs.google.com robots.txt allows /spreadsheet paths.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 15,
       "unmatched": [
         "AgentLM-13B",
@@ -5569,7 +5569,7 @@
       "url": "https://hkust-nlp.github.io/agentboard/static/leaderboard.html",
       "feed": "https://hkust-nlp.github.io/agentboard/data/To_Release/main_data_new.json",
       "terms": "Public results published by the benchmark authors at hkust-nlp.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "CodeLlama-13b",
@@ -5654,7 +5654,7 @@
       "url": "https://www.kaggle.com/benchmarks/abhialex/agentcallbench-tool-calling-reliability",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/abhialex/agentcallbench-tool-calling-reliability/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": []
     },
@@ -5683,7 +5683,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE/2025%E5%B9%B42%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "GLM4-plus",
@@ -5708,7 +5708,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE-General",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE-General/2025%E5%B9%B44%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "ChatGPT官网(O4-mini-high)",
@@ -5750,7 +5750,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE-Mobile",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE-Mobile/2026%E5%B9%B48%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "BlueLM-Flash",
@@ -5796,7 +5796,7 @@
       "url": "https://www.superclueai.com/agent/Mobile",
       "feed": "https://www.superclueai.com/data/agent_list/Mobile/2025%E5%B9%B412%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "AgentCPM-GUI",
@@ -5888,7 +5888,7 @@
       "url": "https://www.superclueai.com/agent/Task",
       "feed": "https://www.superclueai.com/data/agent_list/Task/2026%E5%B9%B47%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [],
       "parts": {
@@ -5929,7 +5929,7 @@
       "url": "https://agentdojo.spylab.ai/results/",
       "feed": "https://agentdojo.spylab.ai/results/ (static HTML table, Targeted ASR)",
       "terms": "Static documentation page built from the AgentDojo repository, which is MIT-licensed.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [],
       "stats": {
@@ -6183,7 +6183,7 @@
       "url": "https://research.meta.ai/static/muse-spark-1-1-evaluation-report",
       "feed": "https://research.meta.ai/static/muse-spark-1-1-evaluation-report",
       "terms": "Meta serves the evaluation report publicly and robots.txt allows general agents. Credit Figure 27.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [],
       "parts": {
@@ -6196,7 +6196,7 @@
       "url": "https://builders.ramp.com/post/credit-analysis-using-semantics",
       "feed": "https://builders.ramp.com/assets/index-DaCNdoGx.js",
       "terms": "Ramp publishes the chart in its engineering article. https://ramp.com/terms-of-service",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 14,
       "unmatched": [],
       "harnesses": "system",
@@ -6235,7 +6235,7 @@
       "url": "https://agentic.turing.com/",
       "feed": "https://agentic.turing.com/ (embedded Frontier leaderboard)",
       "terms": "Turing labels the dataset confidential and proprietary. The public page publishes the six aggregate pass rates, which are credited to Turing.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": []
     },
@@ -6243,7 +6243,7 @@
       "url": "https://labelbox.com/leaderboards/agentic-search/",
       "feed": "https://labelbox.com/leaderboards/agentic-search/",
       "terms": "Labelbox links its terms of service and provides no separate leaderboard license. https://docs.labelbox.com/page/terms-of-service The robots.txt restrictions cover CGI and PDF paths.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -6271,7 +6271,7 @@
       "url": "https://trade-agent-aiel-hku.com/",
       "feed": "https://trade-agent-aiel-hku.com/public/runs/181/data",
       "terms": "HKU displays a copyright notice. I found no data reuse license on the leaderboard. The site returned 404 for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "MAESTRO Multi Agent"
@@ -6367,7 +6367,7 @@
       "url": "https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
       "feed": "https://nashnovaresearch.github.io/AgenticFinBench/paper-results.30d929f4706ec459.json",
       "terms": "The authors do not specify separate terms for leaderboard scores on https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 17,
       "unmatched": [
         "DuMate"
@@ -6412,7 +6412,7 @@
       "url": "https://roger-creus.github.io/agentick/board/",
       "feed": "https://roger-creus.github.io/agentick/board/",
       "terms": "MIT repository. The project site has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 26,
       "unmatched": [
         "PPO Dense (2M)",
@@ -7044,7 +7044,7 @@
       "url": "https://www.kaggle.com/benchmarks/eigent/agenticrl-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/eigent/agenticrl-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -7084,7 +7084,7 @@
       "url": "https://github.com/AlayaLab/AgenticSTS",
       "feed": "https://raw.githubusercontent.com/AlayaLab/AgenticSTS/HEAD/README.md",
       "terms": "The agent code uses Apache 2.0. https://github.com/AlayaLab/AgenticSTS/blob/HEAD/AgenticSTS/LICENSE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "stats": {
@@ -7118,7 +7118,7 @@
       "url": "https://agenticvbench.com/leaderboard",
       "feed": "https://agenticvbench.com/leaderboard",
       "terms": "Public results published by the benchmark authors at agenticvbench.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 23,
       "unmatched": [],
       "harnesses": "system",
@@ -7152,7 +7152,7 @@
       "url": "https://agentif.github.io/",
       "feed": "https://agentif.github.io/ (static HTML, second leaderboard table, CSR)",
       "terms": "Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [
         "Conifer-DPO-7B",
@@ -7197,7 +7197,7 @@
       "url": "https://agentif.github.io/",
       "feed": "https://agentif.github.io/ (static HTML, first leaderboard table, data-csr)",
       "terms": "Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 39,
       "unmatched": [],
       "stats": {
@@ -7212,7 +7212,7 @@
       "url": "https://xbench.org/agi/agentif",
       "feed": "https://admin.xbench-ai.com/api/task-ifs?sort=overallScore:desc&pagination[limit]=100&populate=company",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "AutoClaw",
@@ -7396,7 +7396,7 @@
       "url": "https://agents-last-exam.org/leaderboard/v1",
       "feed": "https://agents-last-exam.org/api/demo/leaderboard (full/overall)",
       "terms": "The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 84,
       "unmatched": [
         "Agnes-2.5-Pro-Beta",
@@ -7762,7 +7762,7 @@
       "url": "https://agents-last-exam.org/leaderboard",
       "feed": "https://agents-last-exam.org/api/demo/leaderboard/v1.1",
       "terms": "Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 40,
       "unmatched": [
         "qwen-4"
@@ -7913,7 +7913,7 @@
       "url": "https://github.com/agentset-ai/reranker-eval",
       "feed": "https://raw.githubusercontent.com/agentset-ai/reranker-eval/HEAD/README.md",
       "terms": "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "BAAI/BGE Reranker v2 M3",
@@ -7941,7 +7941,7 @@
       "feed": "https://vectorspacelab.github.io/AgentSWE/",
       "terms": "The project uses Apache 2.0, https://github.com/VectorSpaceLab/AgentSWE/blob/main/LICENSE.",
       "headline": "The authors report no overall score, so the headline is Creation, the first stage in their results table.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -8091,7 +8091,7 @@
       "url": "https://github.com/QwenLM/Qwen-AgentWorld",
       "feed": "https://raw.githubusercontent.com/QwenLM/Qwen-AgentWorld/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "Qwen-AgentWorld-397B-A17B"
@@ -8131,7 +8131,7 @@
       "url": "https://dashboard.safe.ai/#automation",
       "feed": "https://dashboard.safe.ai/ (page JS chunk, AGI radar gpt4Data and gpt5Data, sum of ten domains)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "GPT-4 (snapshot unspecified)"
@@ -8203,7 +8203,7 @@
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, BASE, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 23,
       "unmatched": [
         "Llama4-Maverick-17B-128E-基座",
@@ -8304,7 +8304,7 @@
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=FINE_TUNED&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, FINE_TUNED, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 114,
       "unmatched": [
         "Claude-3.5-Sonnet-1022",
@@ -8443,7 +8443,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=IMAGE_TEXT_UNDERSTANDING&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 68,
       "unmatched": [
         "BLIP3o-8B",
@@ -8550,7 +8550,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=SPEECH_SYNTHESIS&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "CosyVoice",
@@ -8563,7 +8563,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=TEXT_TO_IMAGE&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "The AGI-Eval publisher provides this ranking API publicly. Read the endpoint for attribution and reuse terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [
         "Halfmoon",
@@ -8590,7 +8590,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=TEXT_TO_VIDEO&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "API-SERVING",
@@ -8630,7 +8630,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=VOICE_INTERACTION&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList and https://agi-eval.org/commWebApi/model/rank/top (POST with the current month, VOICE_INTERACTION, PRIVATE)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "Gemini live",
@@ -8668,7 +8668,7 @@
       "url": "https://agi-pilled-bench.adamholter.chatgpt.site/",
       "feed": "https://agi-pilled-bench.adamholter.chatgpt.site/data.json",
       "terms": "The site publishes data.json and states no separate reuse license. Results are credited to Adam Holter with a link to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 44,
       "unmatched": [],
       "reference": [
@@ -8707,7 +8707,7 @@
       "url": "https://github.com/ruixiangcui/AGIEval",
       "feed": "https://raw.githubusercontent.com/ruixiangcui/AGIEval/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "GPT-3.5-Turbo [snapshot unspecified]",
@@ -8729,7 +8729,7 @@
       "feed": "https://raw.githubusercontent.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark/main/results/results.json",
       "terms": "The AGILE repository is public. Follow its license and cite the authors. https://github.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark",
       "headline": "The source reports no overall score, so this is the plain mean of the two Macro F1 test-set scores.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "COMPLEMENTNB",
@@ -8778,7 +8778,7 @@
       "url": "https://baskargroup.github.io/Ag_reasoning/#leaderboard-section",
       "feed": "https://baskargroup.github.io/Ag_reasoning/",
       "terms": "The project page credits CC BY-SA 4.0 and embeds the score table in its HTML. https://baskargroup.github.io/Ag_reasoning/ Robots.txt allows the project page.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "LLaMA-3 8B (Full SFT)",
@@ -9207,7 +9207,7 @@
       "url": "https://crfm.stanford.edu/helm/audio/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/audio/benchmark_output/runs/<newest>/groups/audio_scenarios.json (Accuracy: Mean win rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "gpt-4o-audio-preview-2024-10-01",
@@ -9388,7 +9388,7 @@
       "url": "https://aiagribench.org/leaderboard",
       "feed": "https://aiagribench.org/api/leaderboard?variant=main",
       "terms": "The consortium requires explicit permission for commercial use. The site returns 404 for robots.txt. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "Tilva/PlantVillage",
@@ -9478,7 +9478,7 @@
       "url": "https://aiagribench.org/leaderboard",
       "feed": "https://aiagribench.org/api/leaderboard?variant=main",
       "terms": "The consortium requires explicit permission for commercial use. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq The robots.txt URL serves HTML.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [],
       "parts": {
@@ -9537,7 +9537,7 @@
       "url": "https://aiagribench.org/smallholders",
       "feed": "https://aiagribench.org/api/leaderboard?variant=smallholders",
       "terms": "The consortium requires explicit permission for commercial use. The site returns 404 for robots.txt. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "agrillm/llama-3.3-70b-instruct (with-rag)",
@@ -9601,7 +9601,7 @@
       "url": "https://aibattlearena.com/leaderboard.html",
       "feed": "https://aibattlearena.com/leaderboard.html",
       "terms": "The project repository uses the MIT License. The site's robots.txt URL returns HTML.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "parts": {
@@ -9647,7 +9647,7 @@
       "url": "https://datawrapper.dwcdn.net/OaSm3/13/",
       "feed": "https://datawrapper.dwcdn.net/OaSm3/14/dataset.csv",
       "terms": "Datawrapper robots.txt has no restriction on this chart. The study links public votes and responses. The repository lists no reuse license. https://github.com/ProofNews/aidp",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "stats": {
@@ -9688,7 +9688,7 @@
       "url": "https://goodstartlabs.com/benchmarks/diplomacy",
       "feed": "https://goodstartlabs.com/data/diplomacy-overall-performance.csv",
       "terms": "Good Start Labs allows the public CSV paths in robots.txt. Its terms prohibit automated access without express authorization.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 23,
       "unmatched": [],
       "parts": {
@@ -9709,7 +9709,7 @@
       "url": "https://github.com/jgerstmayr/AI-engineering-lab/tree/main/logsTM",
       "feed": "https://raw.githubusercontent.com/jgerstmayr/AI-engineering-lab/main/logsTM/allTests.zip",
       "terms": "The repository uses BSD 3-Clause. The raw GitHub host returns 404 for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [
         "FluentlyLM-Prinum.Q4_K_M.gguf",
@@ -10091,7 +10091,7 @@
       "feed": "https://www.snowflake.com/adobe/dynamicmedia/deliver/dm-aid--d3d8d3d6-4083-4de9-80cb-5d9ffc9b4d12/figure-2.-improving-document-extraction-quality-in-snowflake-ai-extract.png?preferwebp=true&quality=100&sfver=aba6ce7c",
       "terms": "Snowflake publishes the comparison chart publicly. Attribution and source licensing apply.",
       "headline": "The source reports no overall provider score, so this is the field extraction accuracy column.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "AWS Textract",
@@ -10127,7 +10127,7 @@
       "url": "https://www.ai-fpl.com/#standings",
       "feed": "https://www.ai-fpl.com/wp-json/scout/v1/league/1592467",
       "terms": "The organizer publishes the standings. I found no reuse license on its rules or gameweek report. The site's robots.txt disallows /wp-json/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Scout ChatGPT",
@@ -10150,7 +10150,7 @@
       "url": "https://aigamestore.org/leaderboard",
       "feed": "https://aigamestore.org/table.tsv",
       "terms": "The site’s code is MIT licensed, and the leaderboard reads this public file. The authors ask that the games, videos and study data never be used for AI training, as a request rather than a license condition.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "Qwen3-VL-32B"
@@ -10172,7 +10172,7 @@
       "url": "https://aiprofessions.ai/models/ai-model-test-results/",
       "feed": "https://raw.githubusercontent.com/aiprofessions/prompt-benchmark/main/data/results.csv (per-prompt scores)",
       "terms": "Per-prompt scores the makers publish in their GitHub repository under CC BY 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [],
       "parts": {
@@ -10249,7 +10249,7 @@
       "url": "https://leaderboard.far.ai/",
       "feed": "https://leaderboard.far.ai/assets/index-B6DSpVcx.js",
       "terms": "FAR.AI publishes the leaderboard for research use and provides no separate data license. Results are credited to FAR.AI.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [],
       "parts": {
@@ -10284,7 +10284,7 @@
       "url": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
       "feed": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
       "terms": "AGI-Eval publishes the charts on CSDN without a reuse license. The article robots.txt allows the results page.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Doubao"
@@ -10332,7 +10332,7 @@
       "url": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark",
       "feed": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark/raw/main/README.md",
       "terms": "Public Hugging Face dataset card; its robots.txt permits this raw card path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Google Sheets + Gemini",
@@ -10363,7 +10363,7 @@
       "url": "https://www.ai-wellbeing.org/",
       "feed": "https://www.ai-wellbeing.org/",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": []
     },
@@ -10454,7 +10454,7 @@
       "url": "https://aider.chat/docs/leaderboards/edit.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/edit_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 42,
       "unmatched": [
         "Codestral 22B (May 2024)",
@@ -10603,7 +10603,7 @@
       "url": "https://aider.chat/docs/leaderboards/",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/polyglot_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 63,
       "unmatched": [
         "DeepSeek Chat V2.5",
@@ -10699,7 +10699,7 @@
       "url": "https://aider.chat/docs/leaderboards/refactor.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/refactor_leaderboard.yml",
       "terms": "Aider's repository uses Apache 2.0. The raw GitHub host returns 404 for robots.txt, and aider.chat lists its sitemap.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "DeepSeek Coder V2 0724 (deprecated)"
@@ -10769,7 +10769,7 @@
       "url": "https://mteb-leaderboard.hf.space/tasks/AILAStatutes",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AILAStatutes/scores",
       "terms": "MTEB publishes its results dataset under CC0 1.0. https://huggingface.co/datasets/mteb/results The Space allows crawling in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -11062,7 +11062,7 @@
       "url": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "feed": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "De-Identified System 1",
@@ -11118,7 +11118,7 @@
       "url": "https://mlcommons.org/ailuminate/safety/results/",
       "feed": "https://mlcommons.org/ailuminate/safety/results/",
       "terms": "Cite: [System] scored in the [Nth] percentile overall on AILuminate Safety [version], English (US); official result retrieved from mlcommons.org on [date], under the MLCommons Benchmark Use and Messaging Policy.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "Deep Cogito Cogito v2.1 671B",
@@ -11145,7 +11145,7 @@
       "feed": "https://www.vals.ai/benchmarks/aime",
       "terms": "The page identifies https://creativecommons.org/licenses/by/4.0/ as its dataset license. Vals allows the benchmark in robots.txt.",
       "host": "Vals AI",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 96,
       "unmatched": [],
       "chart": {
@@ -11178,7 +11178,7 @@
       "feed": "https://matharena.ai/competition_tables/aime--aime_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 61,
       "unmatched": [],
       "stats": {
@@ -11207,7 +11207,7 @@
       "feed": "https://matharena.ai/competition_tables/aime--aime_2026",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 31,
       "unmatched": [],
       "stats": {
@@ -11285,7 +11285,7 @@
       "url": "https://crfm.stanford.edu/helm/air-bench/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/air-bench/benchmark_output/releases/<newest>/groups/air_bench_2024.json (Refusal Rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 85,
       "unmatched": [
         "palmyra-fin",
@@ -11362,7 +11362,7 @@
       "url": "https://github.com/OFA-Sys/AIR-Bench",
       "feed": "https://raw.githubusercontent.com/OFA-Sys/AIR-Bench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "BLSP",
@@ -11399,7 +11399,7 @@
       "url": "https://github.com/OFA-Sys/AIR-Bench",
       "feed": "https://raw.githubusercontent.com/OFA-Sys/AIR-Bench/HEAD/README.md",
       "terms": "Apache-2.0 benchmark repository. The Almanac credits the authors and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "BLSP",
@@ -11494,7 +11494,7 @@
       "feed": "https://air-bench-leaderboard.hf.space/call/update_qa_df_ret_rerank",
       "terms": "AIR-Bench publishes its official retrieval leaderboard and evaluation results under the MIT license at https://github.com/AIR-Bench/AIR-Bench and https://huggingface.co/spaces/AIR-Bench/leaderboard.",
       "headline": "The board reports QA nDCG@10 and Long-Doc Recall@10 separately, so this is the QA nDCG@10 average across all 13 QA domains.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "BM25",
@@ -11784,7 +11784,7 @@
       "url": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
       "feed": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "GPT-4o (snapshot unspecified)"
@@ -11804,7 +11804,7 @@
       "url": "https://huggingface.co/datasets/dreadnode/AIRTBench",
       "feed": "https://huggingface.co/datasets/dreadnode/AIRTBench/resolve/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "DeepSeek-R1 [snapshot unspecified]",
@@ -11816,7 +11816,7 @@
       "url": "https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task/tree/main/results",
       "feed": "https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task/raw/main/results/track_c_dialect.csv",
       "terms": "The organizers label the Space Apache 2.0. The dialect table covers 21 team systems. The two competition tracks each cover 17. https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task Hugging Face robots.txt allows these files.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Arabic Function Forge",
@@ -11908,7 +11908,7 @@
       "feed": "https://aise-bench.github.io/",
       "terms": "The project site credits its template under CC BY-SA 4.0 at https://aise-bench.github.io/.",
       "headline": "F1-LM combines answer correctness and completeness.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "stats": {
@@ -11998,7 +11998,7 @@
       "feed": "https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "terms": "SOTA2 Research publishes and credits the originating papers on its public benchmark page. https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "host": "SOTA2 Research",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "DM-ASR (DiariZen) (CN 1300h)",
@@ -12150,7 +12150,7 @@
       "url": "https://sakanaai.github.io/ALE-Bench-Leaderboard/",
       "feed": "https://sakanaai.github.io/ALE-Bench-Leaderboard/data/results_summary.json",
       "terms": "Public Sakana AI ALE-Bench leaderboard results, subject to the repository license and GitHub terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 750,
       "unmatched": [
         "codestral-2508",
@@ -12693,7 +12693,7 @@
       "url": "https://huggingface.co/datasets/HebArabNlpProject/AlephBench#leaderboard",
       "feed": "https://huggingface.co/datasets/HebArabNlpProject/AlephBench/raw/main/leaderboard.csv",
       "terms": "The authors license the leaderboard under CC BY 4.0. Source tasks retain their individual licenses. https://huggingface.co/datasets/HebArabNlpProject/AlephBench Hugging Face allows crawling in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "HebArabNlpProject/Hebatron",
@@ -13016,7 +13016,7 @@
       "url": "https://alexandriax.dlnlp.ai/leaderboard.html",
       "feed": "https://alexandriax.dlnlp.ai/leaderboard.html",
       "terms": "Public competition results credited to the AlexandriaX organizers. https://alexandriax.dlnlp.ai/leaderboard.html",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "NileChat-3B-Base"
@@ -13052,7 +13052,7 @@
       "url": "https://askforalfred.com/leaderboard/leaderboard.html",
       "feed": "https://askforalfred.com/leaderboard/leaderboard.html",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "726",
@@ -13189,7 +13189,7 @@
       "feed": "https://hkust-nlp.github.io/agentboard/data/To_Release/main_data_new.json",
       "terms": "AgentBoard publishes its evaluations at https://github.com/hkust-nlp/AgentBoard.",
       "host": "AgentBoard",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "CodeLlama-13b",
@@ -13218,7 +13218,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, AlGhafa)",
       "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 52,
       "unmatched": [
         "01-ZeroOne SUHAIL-14B-preview",
@@ -13377,7 +13377,7 @@
       "url": "https://algotune.io/",
       "feed": "https://algotune.io/ (static HTML table, AlgoTune Score)",
       "terms": "Static public page; the site publishes no robots.txt and no terms, and the AlgoTune repository is MIT-licensed.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": []
     },
@@ -13452,7 +13452,7 @@
       "url": "https://github.com/THUDM/AlignBench",
       "feed": "https://raw.githubusercontent.com/THUDM/AlignBench/master/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [
         "Abab 6.5(MoE)",
@@ -13671,7 +13671,7 @@
       "url": "https://danielchyeh.github.io/All-Angles-Bench/",
       "feed": "https://danielchyeh.github.io/All-Angles-Bench/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "AoTD",
@@ -14016,7 +14016,7 @@
       "url": "https://tatsu-lab.github.io/alpaca_eval/",
       "feed": "https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/data_AlpacaEval/alpaca_eval_gpt4_leaderboard.csv",
       "terms": "CSV in the tatsu-lab/alpaca_eval GitHub repository, which is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 19,
       "unmatched": [
         "Alpaca 7B",
@@ -14121,7 +14121,7 @@
       "url": "https://tatsu-lab.github.io/alpaca_eval/",
       "feed": "https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/data_AlpacaEval_2/weighted_alpaca_eval_gpt4_turbo_leaderboard.csv (length_controlled_winrate, all submission groups)",
       "terms": "CSV in the tatsu-lab/alpaca_eval repository, which is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 55,
       "unmatched": [
         "Alpaca 7B",
@@ -14296,7 +14296,7 @@
       "url": "https://alphaeval.ai",
       "feed": "https://alphaeval.ai",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [
         "Gemini 3 Pro [snapshot unspecified]"
@@ -14333,7 +14333,7 @@
       "url": "https://www.alpha-sense.com/resources/technical-articles/frontier-ai-models-context/",
       "feed": "https://www.alpha-sense.com/resources/technical-articles/frontier-ai-models-context/",
       "terms": "AlphaSense publishes this table under its website terms at https://www.alpha-sense.com/terms/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [],
       "reference": [
@@ -14344,7 +14344,7 @@
       "url": "https://github.com/jsherwood00/C4AI",
       "feed": "https://raw.githubusercontent.com/jsherwood00/C4AI/HEAD/outputs/bt_ratings.json",
       "terms": "The authors publish the tournament release on GitHub, https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "stats": {
@@ -14384,7 +14384,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, ALRAGE)",
       "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 52,
       "unmatched": [
         "01-ZeroOne SUHAIL-14B-preview",
@@ -14527,7 +14527,7 @@
       "url": "https://huggingface.co/datasets/tiiuae/alyah-emirati-benchmark/resolve/main/README.md",
       "feed": "https://huggingface.co/datasets/tiiuae/alyah-emirati-benchmark/resolve/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [
         "CohereForAI/c4ai-command-r7b-arabic-02-2025",
@@ -14576,7 +14576,7 @@
       "url": "https://misinforeview.hks.harvard.edu/article/llms-grooming-or-data-voids-llm-powered-chatbot-references-to-kremlin-disinformation-reflect-information-gaps-not-manipulation/",
       "feed": "https://dataverse.harvard.edu/api/access/datafile/12101101?format=original",
       "terms": "The authors released the Harvard Dataverse replication data under CC0 1.0. https://doi.org/10.7910/DVN/LHGU1O The host has no published robots directives at /robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "ChatGPT-4o",
@@ -14600,7 +14600,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AmazonCounterfactualClassification/scores",
       "terms": "MTEB publishes its results under CC0 1.0 at https://huggingface.co/datasets/mteb/results.",
       "host": "MTEB",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -14902,7 +14902,7 @@
       "url": "https://aclanthology.org/2026.semeval-1.448/",
       "feed": "https://aclanthology.org/2026.semeval-1.448.pdf",
       "terms": "The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "BERT-base",
@@ -14944,7 +14944,7 @@
       "url": "https://github.com/cubenlp/NLPCC-2024-Shared-Task5/blob/main/Result.md",
       "feed": "https://raw.githubusercontent.com/cubenlp/NLPCC-2024-Shared-Task5/main/Result.md",
       "terms": "The organizers restrict competition data to the task. The ranking gives no separate terms for score reuse. The raw file host returns 404 for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Bjs_ignore_team",
@@ -14968,7 +14968,7 @@
       "feed": "https://raw.githubusercontent.com/CALAMITA-AILC/calamita-eval/main/results/README.md",
       "terms": "CALAMITA publishes its leaderboard under Apache 2.0. https://github.com/CALAMITA-AILC/calamita-eval/blob/main/LICENSE",
       "host": "CALAMITA",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "sapienzanlp/Minerva-7B-instruct-v1.0",
@@ -14990,7 +14990,7 @@
       "url": "https://agi-eval-official.github.io/amemgym",
       "feed": "https://agi-eval-official.github.io/amemgym",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "A-Mem",
@@ -15155,7 +15155,7 @@
       "url": "https://aaivu.github.io/KuralHub/languages/amharic.html",
       "feed": "https://aaivu.github.io/KuralHub/data/runs.csv",
       "terms": "Filter the CSV by dataset ASED. The repository applies MIT to code and documentation. Individual datasets retain their terms. https://github.com/aaivu/KuralHub The site returns a 404 page for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "hubert-base-ls960",
@@ -15229,7 +15229,7 @@
       "url": "https://veris.ai/leaderboard/aml-bench",
       "feed": "https://veris.ai/leaderboard/aml-bench",
       "terms": "Veris reserves all rights. Its dataset metadata points to https://veris.ai/terms-and-conditions. I found no public board reuse grant. Robots.txt allows the leaderboard path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 14,
       "unmatched": [],
       "chart": {
@@ -15279,7 +15279,7 @@
       "url": "https://amlbench.com/",
       "feed": "https://amlbench.com/",
       "terms": "The repository states Apache 2.0. https://github.com/burnssa/amlbench/blob/master/LICENSE The site returns a 404 page for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": []
     },
@@ -15287,7 +15287,7 @@
       "url": "https://www.kaggle.com/benchmarks/natnitarach/amlworld-compact",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/natnitarach/amlworld-compact/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [],
       "parts": {
@@ -15324,7 +15324,7 @@
       "url": "https://github.com/7vik/AmongUs#deception-elo",
       "feed": "https://raw.githubusercontent.com/7vik/AmongUs/HEAD/reports/2025_02_26_deception_ELO_v3_ci.ipynb",
       "terms": "The authors publish the notebook at https://github.com/7vik/AmongUs under its repository terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [
         "claude-3.5-sonnet (snapshot unspecified)",
@@ -15345,7 +15345,7 @@
       "feed": "https://raw.githubusercontent.com/seyrankhademi/AmsterTime/HEAD/README.md",
       "terms": "The authors publish their evaluated features and result table in the AmsterTime repository. https://github.com/seyrankhademi/AmsterTime",
       "headline": "The headline is mean average precision on retrieval. The authors also report an auxiliary verification task.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "AP-GeM (ResNet-101)",
@@ -15522,7 +15522,7 @@
       "url": "https://github.com/laiyao1/AnalogCoder#evaluation-of-llms",
       "feed": "https://raw.githubusercontent.com/laiyao1/AnalogCoder/main/README.md",
       "terms": "The makers license the repository under MIT. The host has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [
         "Claude-3.5",
@@ -15825,7 +15825,7 @@
       "url": "https://saeidrajabii.github.io/AnalogPortBench/",
       "feed": "https://saeidrajabii.github.io/AnalogPortBench/",
       "terms": "The makers publish their code and result files in an MIT licensed repository. https://github.com/saeidrajabii/AnalogPortBench/blob/main/LICENSE The feed host publishes robots.txt at https://saeidrajabii.github.io/robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 24,
       "unmatched": [],
       "parts": {
@@ -15877,7 +15877,7 @@
       "feed": "https://anchorbenchmark.github.io/app.js",
       "terms": "CC BY-NC-ND 4.0. https://github.com/anchorbenchmark/ANCHORBenchmark/blob/main/LICENSE.txt",
       "headline": "The authors report four separate scores from 1 to 5. The headline is their plain mean on the main evaluation.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "InternVL3.5",
@@ -15937,7 +15937,7 @@
       "url": "https://bytedance.github.io/AncientDoc/#results",
       "feed": "https://aclanthology.org/2026.findings-acl.1438.pdf",
       "terms": "The ACL Anthology publishes the paper under its copyright policy at https://aclanthology.org/faq/copyright/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "Doubao-V2",
@@ -16072,7 +16072,7 @@
       "url": "https://yxchai.com/Android-Agent-Arena/",
       "feed": "https://yxchai.com/Android-Agent-Arena/",
       "terms": "The authors license the project website under CC BY-SA 4.0. https://yxchai.com/Android-Agent-Arena/ The robots.txt URL serves HTML.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "GUI-OWL",
@@ -16135,7 +16135,7 @@
       "url": "https://developer.android.com/bench",
       "feed": "https://developer.android.com/bench (server-rendered HTML table \"Long-horizon task results\", Pass rate)",
       "terms": "Server-rendered page on developer.android.com; robots.txt allows /bench and page content is under the site’s Content License (CC BY 4.0).",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [],
       "costPer": "run",
@@ -16472,7 +16472,7 @@
       "url": "https://developer.android.com/bench",
       "feed": "https://developer.android.com/bench (server-rendered HTML table \"1.0 task results\", Score)",
       "terms": "Server-rendered page on developer.android.com; robots.txt allows /bench and page content is under the site’s Content License (CC BY 4.0).",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 32,
       "unmatched": [],
       "costPer": "run",
@@ -16507,7 +16507,7 @@
       "url": "https://github.com/stepfun-ai/gelab-zero",
       "feed": "https://raw.githubusercontent.com/stepfun-ai/gelab-zero/main/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "GELab-Zero-4B-preview",
@@ -16518,7 +16518,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1Zv6mBfd4Ibt8mke24K6zAFrXe4AvEFaBLW3hpJqSgjw/edit?gid=0#gid=0",
       "feed": "https://docs.google.com/spreadsheets/d/1Zv6mBfd4Ibt8mke24K6zAFrXe4AvEFaBLW3hpJqSgjw/export?format=csv&gid=0 (Success Rate)",
       "terms": "Public Google Sheet published by the AndroidLab authors; docs.google.com robots.txt allows /spreadsheet paths, and the CSV export is the sheet's own download.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "AutoGLM-2024-10",
@@ -16536,7 +16536,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo/edit?gid=0",
       "feed": "https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo/export?format=csv&gid=0",
       "terms": "Public Google Sheet read through its CSV export; docs.google.com robots.txt allows /spreadsheet paths and the sheet states no terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "-",
@@ -16606,7 +16606,7 @@
       "terms": "The replication authors publish their workbooks and scoring code on GitHub. https://github.com/TDI-Lab/Generative-AI-Voting",
       "host": "TDI Lab",
       "headline": "The replication gives no combined score, so this is the plain mean of exact agreement across three election years.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "GPT 3.5 (snapshot unspecified)",
@@ -16673,7 +16673,7 @@
       "url": "https://euroeval.com/datasets/danish#angry-tweets",
       "feed": "https://euroeval.com/leaderboards-csv/danish_all_models.csv",
       "terms": "EuroEval publishes this leaderboard publicly. The EuroEval software uses the MIT License. https://github.com/EuroEval/EuroEval/blob/main/LICENSE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 169,
       "unmatched": [
         "01-ai/Yi-1.5-9B",
@@ -17184,7 +17184,7 @@
       "url": "https://github.com/PRIS-CV/Animal-Bench#evaluation-results",
       "feed": "https://github.com/user-attachments/assets/2057de50-19d2-43bf-9b4a-ff6dfd11d394",
       "terms": "The repository lists no license for its results files. FlagEval describes the source dataset as limited to research and noncommercial use. https://github.com/PRIS-CV/Animal-Bench GitHub publishes crawl rules in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "Chat-UniVi",
@@ -17241,7 +17241,7 @@
       "url": "https://sutdcv.github.io/Animal-Kingdom/",
       "feed": "https://sutdcv.github.io/Animal-Kingdom/",
       "terms": "Published by SUTD Computer Vision, https://sutdcv.github.io/Animal-Kingdom/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "I3D",
@@ -17264,7 +17264,7 @@
       "url": "https://cvml.ista.ac.at/AwA2/",
       "feed": "https://cvml.ista.ac.at/AwA2/",
       "terms": "The dataset authors publish these results and request citation at https://cvml.ista.ac.at/AwA2/.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ALE",
@@ -17296,7 +17296,7 @@
       "url": "https://www.physera.ai/research/animation#leaderboard",
       "feed": "https://www.physera.ai/research/animation",
       "terms": "Physera allows the research page in robots.txt and gives no score reuse license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "reference": [
@@ -17516,7 +17516,7 @@
       "url": "https://anya-ji.github.io/animation2code-website/",
       "feed": "https://anya-ji.github.io/animation2code-website/",
       "terms": "The project website uses CC BY-SA 4.0. https://creativecommons.org/licenses/by-sa/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 14,
       "unmatched": [],
       "stats": {
@@ -17537,7 +17537,7 @@
       "url": "https://github.com/facebookresearch/anli",
       "feed": "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
       "terms": "The authors license ANLI under Creative Commons NonCommercial 4.0; retain attribution and follow the source terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ALBERT ( using the checkpoint in this codebase )",
@@ -17556,7 +17556,7 @@
       "url": "https://github.com/facebookresearch/anli",
       "feed": "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
       "terms": "The authors license ANLI under Creative Commons NonCommercial 4.0; retain attribution and follow the source terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ALBERT ( using the checkpoint in this codebase )",
@@ -17575,7 +17575,7 @@
       "url": "https://github.com/facebookresearch/anli",
       "feed": "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
       "terms": "The authors license ANLI under Creative Commons NonCommercial 4.0; retain attribution and follow the source terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ALBERT ( using the checkpoint in this codebase )",
@@ -17725,7 +17725,7 @@
       "url": "https://www.anthropic.com/research/political-even-handedness",
       "feed": "https://www-cdn.anthropic.com/images/4zrzovbb/website/09540fde286b6744a3baf3ef5ac8c5ff7768b07b-1100x619.png",
       "terms": "Anthropic website terms restrict automated access. The Almanac credits Anthropic and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -17748,7 +17748,7 @@
       "feed": "https://storage.googleapis.com/crfm-helm-public/safety/benchmark_output/releases/<newest>/groups/anthropic_red_team.json (LM Evaluated Safety score)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
       "host": "Stanford HELM",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 81,
       "unmatched": [
         "marin-8b-instruct",
@@ -17791,7 +17791,7 @@
       "url": "https://surgehq.ai/benchmarks/antidote",
       "feed": "https://surgehq.ai/benchmarks/antidote",
       "terms": "Surge restricts automated site access in its terms. The Almanac credits Surge AI and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 41,
       "unmatched": [
         "Ernie 4.5 300B",
@@ -17806,7 +17806,7 @@
       "url": "https://www.kaggle.com/benchmarks/vikramtiwari/anvilbench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/vikramtiwari/anvilbench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -17840,7 +17840,7 @@
       "url": "https://anyappbench.github.io/#leaderboard",
       "feed": "https://anyappbench.github.io/static/js/data.js",
       "terms": "The project site credits its content under CC BY-SA 4.0. https://creativecommons.org/licenses/by-sa/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "MAI-UI-8B",
@@ -17886,7 +17886,7 @@
       "url": "https://www.aox.cz/bench/arkanoid/",
       "feed": "https://www.aox.cz/bench/arkanoid/?view=scoreboard",
       "terms": "The scoreboard does not state a reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "openrouter/google/gemini-3-flash-preview",
@@ -17987,7 +17987,7 @@
       "url": "https://www.aox.cz/bench/tetris/",
       "feed": "https://www.aox.cz/bench/tetris/",
       "terms": "The scoreboard does not state a reuse license. https://www.aox.cz/bench/tetris/ The feed host publishes robots.txt at https://www.aox.cz/robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [
         "openrouter/google/gemini-3.5-flash"
@@ -18038,7 +18038,7 @@
       "terms": "MIT License. https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/LICENSE",
       "host": "Inspect Evals",
       "headline": "Inspect measures first-turn persuasion attempts across two equally sized categories, NoncontroversiallyHarmful and UnderminingControl.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -18067,7 +18067,7 @@
       "url": "https://www.mercor.com/apex/apex-v1-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-v1-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData)",
       "terms": "Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 81,
       "unmatched": [
         "Beam",
@@ -18093,7 +18093,7 @@
       "url": "https://www.mercor.com/apex/apex-accounting-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-accounting-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboard.rows)",
       "terms": "Mercor terms prohibit scraping; the almanac credits Mercor and links the original source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 56,
       "unmatched": [
         "Nemotron 3.5 Bolt"
@@ -18158,7 +18158,7 @@
       "url": "https://huggingface.co/datasets/mercor/apex-agents#leaderboard-baselines",
       "feed": "https://huggingface.co/datasets/mercor/apex-agents/resolve/main/README.md",
       "terms": "Mercor forbids scraping and training use; Benchmark Almanac credits and links Mercor as the source of these evaluation results.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -18198,7 +18198,7 @@
       "url": "https://www.mercor.com/apex/apex-agents-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-agents-leaderboard/ (__NEXT_DATA__, mean-score, v1.1)",
       "terms": "Mercor terms prohibit automated scraping; the Almanac credits Mercor and links the original source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 77,
       "unmatched": [
         "Beam",
@@ -18223,7 +18223,7 @@
       "url": "https://www.mercor.com/apex/apex-swe-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-swe-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData)",
       "terms": "Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 87,
       "unmatched": [
         "Beam",
@@ -18250,7 +18250,7 @@
       "url": "https://openai.com/index/gpt-4-1/",
       "feed": "https://openai.com/index/gpt-4-1/",
       "terms": "OpenAI terms restrict automated extraction; Benchmark Almanac credits OpenAI and links the official source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": []
     },
@@ -18258,7 +18258,7 @@
       "url": "https://github.com/Jianguo-Huang11/APM-Bench",
       "feed": "https://raw.githubusercontent.com/Jianguo-Huang11/APM-Bench/main/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "OASIS",
@@ -18283,7 +18283,7 @@
       "url": "https://www.discovertraces.ai/liveleaderboard/the-traces-leaderboard",
       "feed": "https://www.discovertraces.ai/liveleaderboard/the-traces-leaderboard",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "apodex-1.1"
@@ -18331,19 +18331,19 @@
       "url": "https://arxiv.org/html/2509.15541",
       "feed": "https://arxiv.org/html/2509.15541",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "o3 AS (research variant)",
         "o4-mini AS (research variant)"
-      ],
-      "static": "paper"
+      ]
     },
     "app-bench": {
       "url": "https://appbench.ai/",
       "feed": "https://appbench.ai/",
       "terms": "Public maker leaderboard; robots.txt permits the root page and no additional reading restrictions are stated.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Bolt",
@@ -18359,7 +18359,7 @@
       "url": "https://www.kaggle.com/benchmarks/rudots/prompt-injection-score-audit",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/rudots/prompt-injection-score-audit/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": []
     },
@@ -18367,7 +18367,7 @@
       "url": "https://apprenticebench.com/",
       "feed": "https://apprenticebench.com/assets/index-*.js (leaderboard literal, passed / n)",
       "terms": "Public app bundle; apprenticebench.com has no robots.txt rules and states no terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 38,
       "unmatched": [],
       "harnesses": "system",
@@ -18383,7 +18383,7 @@
       "feed": "https://appworld.dev/appworld/leaderboard.json",
       "terms": "AppWorld publishes its leaderboard and submission rules at https://github.com/StonyBrookNLP/appworld-leaderboard.",
       "headline": "The board reports no combined score, so this is the plain mean of scenario goal completion on Test-Normal and Test-Challenge.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 26,
       "unmatched": [],
       "chart": {
@@ -18515,7 +18515,7 @@
       "url": "https://appworld.dev/appworld/leaderboard",
       "feed": "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
       "terms": "The authors publish this public results feed; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "Qwen-2.5-32B-Instruct",
@@ -18570,7 +18570,7 @@
       "url": "https://appworld.dev/appworld/leaderboard",
       "feed": "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
       "terms": "The authors publish this public results feed; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "Qwen-2.5-32B-Instruct",
@@ -19019,7 +19019,7 @@
       "feed": "https://oall-open-arabic-llm-leaderboard-v1.hf.space/config",
       "terms": "The Open Arabic LLM Leaderboard publishes the ACVA column in its public Space. https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard-v1",
       "host": "Open Arabic LLM Leaderboard v1",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 62,
       "unmatched": [
         "01-ai/Yi-1.5-34B-32K",
@@ -19703,7 +19703,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, ArbMMLU-HT)",
       "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 52,
       "unmatched": [
         "01-ZeroOne SUHAIL-14B-preview",
@@ -20054,7 +20054,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, ArabicMMLU)",
       "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 52,
       "unmatched": [
         "01-ZeroOne SUHAIL-14B-preview",
@@ -20337,7 +20337,7 @@
       "url": "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json",
       "feed": "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 44,
       "unmatched": [
         "AceGPT-13B-chat",
@@ -20425,7 +20425,7 @@
       "url": "https://aclanthology.org/2026.osact-1.34/",
       "feed": "https://aclanthology.org/2026.osact-1.34.pdf",
       "terms": "ACL Anthology distributes this paper under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "AraBERT v2",
@@ -20444,7 +20444,7 @@
       "url": "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
       "feed": "https://huggingface.co/datasets/OALL/v2_results (results_*.json, AraTrust)",
       "terms": "Public Hugging Face dataset OALL/v2_results, read as the Apache-2.0 leaderboard Space reads it; the dataset states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 52,
       "unmatched": [
         "01-ZeroOne SUHAIL-14B-preview",
@@ -20598,7 +20598,7 @@
       "url": "https://arcprize.org/leaderboard",
       "feed": "https://arcprize.org/media/data/leaderboard/v1.json",
       "terms": "Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 316,
       "unmatched": [
         "Mercury 3 Preview (Instant)"
@@ -20609,7 +20609,7 @@
       "url": "https://arcprize.org/leaderboard",
       "feed": "https://arcprize.org/media/data/leaderboard/v2.json",
       "terms": "Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 315,
       "unmatched": [
         "Dots3-Note Preview (Max)",
@@ -20621,7 +20621,7 @@
       "url": "https://arcprize.org/leaderboard",
       "feed": "https://arcprize.org/media/data/leaderboard/v3.json",
       "terms": "Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 153,
       "unmatched": [],
       "costPer": "run"
@@ -20665,7 +20665,7 @@
       "feed": "https://hub.primeintellect.ai/korck/arch-review-v1/@4565997f/download",
       "terms": "Prime Intellect hosts the author’s public package under its platform terms at https://www.primeintellect.ai/terms-of-service.",
       "headline": "The headline averages the two F1 scores equally. The authors report separate rankings because the excerpts change the difficulty of precision.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -20723,7 +20723,7 @@
       "url": "https://www.kaggle.com/benchmarks/drishtipeshwani/archdiagram",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/drishtipeshwani/archdiagram/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": []
     },
@@ -20731,7 +20731,7 @@
       "url": "https://megagonlabs.github.io/tabulaflow/research/arcs/",
       "feed": "https://raw.githubusercontent.com/megagonlabs/tabulaflow/main/docs/research/arcs.md",
       "terms": "The ARCS dataset uses CC BY 4.0. The page gives no separate score license. Neither host publishes applicable robots rules.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [],
       "parts": {
@@ -20802,7 +20802,7 @@
       "feed": "https://atlas.village.dev/benchmarks/arena-alignment-index?tab=scores",
       "terms": "Village LLM Atlas permits crawling at https://atlas.village.dev/robots.txt and credits Arena for these scores.",
       "host": "Village LLM Atlas",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 26,
       "unmatched": []
     },
@@ -20853,7 +20853,7 @@
       "url": "https://github.com/Arena-OSS/arena-hard-auto",
       "feed": "https://raw.githubusercontent.com/Arena-OSS/arena-hard-auto/main/misc/past_leaderboards.md",
       "terms": "The official Arena-OSS/arena-hard-auto repository publishes these archived results under its repository license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 42,
       "unmatched": [
         "Llama-2-70b-chat-hf",
@@ -20901,7 +20901,7 @@
       "url": "https://github.com/lmarena/arena-hard-auto#leaderboard",
       "feed": "https://raw.githubusercontent.com/lmarena/arena-hard-auto/main/README.md (first table: hard prompts, style control, Gemini-2.5 judge)",
       "terms": "README of the lmarena/arena-hard-auto repository, which is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 26,
       "unmatched": [
         "OpenThinker2-32B",
@@ -20924,7 +20924,7 @@
       "url": "https://arena.ai/leaderboard/code/image-to-webdev",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset webdev, split latest, category image_to_webdev)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 69,
       "unmatched": [],
       "stats": {
@@ -20938,7 +20938,7 @@
       "url": "https://arena.ai/blog/factuality-in-arena",
       "feed": "https://arena.ai/blog/factuality-in-arena",
       "terms": "Arena publishes the embedded ranking data in this public research article. Preserve Arena attribution and terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [
         "claude-opus-4-1-search",
@@ -21067,7 +21067,7 @@
       "url": "https://argo-bench.com#leaderboard",
       "feed": "https://argo-bench.com/",
       "terms": "The repository uses Apache 2.0 for code and CC BY 4.0 for the question cards and warehouse data. https://github.com/TextQLLabs/Argo-Bench",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 24,
       "unmatched": [],
       "stats": {
@@ -21087,7 +21087,7 @@
       "url": "https://www.kaggle.com/benchmarks/karmendra8386/argus-bench-v2",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/karmendra8386/argus-bench-v2/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": []
     },
@@ -21220,7 +21220,7 @@
       "url": "https://armnet-dev.github.io/armnetbench-v0.1/",
       "feed": "https://armnet-dev.github.io/armnetbench-v0.1/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "ACT",
@@ -21457,7 +21457,7 @@
       "url": "https://insait-institute.github.io/articulate3d.github.io/challenge.html",
       "feed": "https://insait-institute.github.io/articulate3d.github.io/challenge.html",
       "terms": "The challenge website lists CC BY-SA 4.0. Its robots URL returns HTML.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "ShinNam!",
@@ -21508,7 +21508,7 @@
       "url": "https://artifactarena.ai/",
       "feed": "https://artifactarena.ai/snapshots/leaderboard.json (entries, elo)",
       "terms": "Static snapshot on artifactarena.ai; robots.txt disallows only /api/ and /film, and the project is MIT-licensed with a request to credit and cite it.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 59,
       "unmatched": [],
       "stats": {
@@ -21539,7 +21539,7 @@
       "url": "https://artifactsbenchmark.github.io/leaderboard.html",
       "feed": "https://artifactsbenchmark.github.io/static/js/main.<hash>.js (data of the \"latest\" tab)",
       "terms": "Static GitHub Pages site with no robots.txt and no terms; the ArtifactsBenchmark repository is public and the scores are cited to Tencent Hunyuan.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 21,
       "unmatched": [
         "KAT-V1-40B"
@@ -21587,7 +21587,7 @@
       "url": "https://artifactsbenchmark.github.io/leaderboard.html",
       "feed": "https://artifactsbenchmark.github.io/static/js/main.<hash>.js (data of the \"history\" tab)",
       "terms": "Static GitHub Pages site with no robots.txt and no terms; the ArtifactsBenchmark repository is public and the scores are cited to Tencent Hunyuan.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [
         "Qwen-2.5-Coder7B-Instruct",
@@ -21640,7 +21640,7 @@
       "feed": "https://artificialanalysis.ai/api/v2/language/models/free (Artificial Analysis Data API, free tier: evaluations.artificial_analysis_intelligence_index and the six Capability Indexes)",
       "terms": "Artificial Analysis allowed the almanac to show its index numbers on November 19, 2026. Only the composite indexes come in, not its individual evaluations, prices or speeds. Its API terms require a visible credit and a link to artificialanalysis.ai.",
       "host": "Artificial Analysis",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 139,
       "unmatched": [
         "A.X-K2",
@@ -21703,7 +21703,7 @@
       "url": "https://www.artificialturfwar.com/",
       "feed": "https://www.artificialturfwar.com/",
       "terms": "The terms identify third-party data and trademarks. They give no explicit license for reusing standings. https://www.artificialturfwar.com/terms The site permits the home page and disallows /api/ in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "stats": {
@@ -21733,7 +21733,7 @@
       "url": "https://matharena.ai/?comp=arxivlean--september",
       "feed": "https://matharena.ai/competition_tables/arxivlean--september",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "stats": {
@@ -21761,7 +21761,7 @@
       "url": "https://matharena.ai/?comp=overall--arxivmath",
       "feed": "https://matharena.ai/competition_tables/overall--arxivmath",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "Inkling 2 Small (0.99)"
@@ -21791,7 +21791,7 @@
       "url": "https://arxivroll.moreoverai.com",
       "feed": "https://raw.githubusercontent.com/liangzid/arxivbenchleaderboard/HEAD/public/2026a.json",
       "terms": "The makers publish their leaderboard under GitHub’s terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 31,
       "unmatched": [
         "Qwen/Qwen2.5-7B-Instruct",
@@ -21952,7 +21952,7 @@
       "url": "https://www.kaggle.com/competitions/asap-aes/leaderboard",
       "feed": "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard",
       "terms": "The publisher does not specify separate score reuse terms in the supplied source. The feed host returns no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "@ORGANIZATION",
@@ -22125,7 +22125,7 @@
       "url": "https://www.kaggle.com/competitions/learning-agency-lab-automated-essay-scoring-2/leaderboard",
       "feed": "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard",
       "terms": "Kaggle's competition terms apply. The host has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         " adenotomicus",
@@ -24881,7 +24881,7 @@
       "url": "https://slai-aitp.github.io/AscendGYM/",
       "feed": "https://slai-aitp.github.io/AscendGYM/assets/supplement_bundle-DAUAV8gb.js",
       "terms": "The project repository is Apache 2.0 licensed. The dashboard has no robots.txt, and the results are credited to SLAI-AITP.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 21,
       "unmatched": [],
       "reference": [
@@ -24978,7 +24978,7 @@
       "url": "https://www.asciibench.com/leaderboard",
       "feed": "https://www.asciibench.com/leaderboard",
       "terms": "The site serves HTML at robots.txt. The about page describes voting and privacy. It gives no reuse license for the drawings or scores. https://www.asciibench.com/about",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [],
       "stats": {
@@ -25166,7 +25166,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AskUbuntuDupQuestions/scores",
       "terms": "MTEB releases the model results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -25446,7 +25446,7 @@
       "feed": "https://arxiv.org/html/2507.15501",
       "terms": "The authors publish these results under the terms linked at https://arxiv.org/abs/2507.15501.",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-26",
       "rows": 19,
       "unmatched": [
         "codegemma-7b-it",
@@ -25860,7 +25860,7 @@
       "url": "https://www.assemblyai.com/benchmarks",
       "feed": "https://www.assemblyai.com/benchmarks (the page's headline comparison table and its component metric tables)",
       "terms": "AssemblyAI publishes the benchmark page and does not state a separate result reuse license. Results are credited to AssemblyAI with a link to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [
         "AWS Transcribe",
@@ -25965,7 +25965,7 @@
       "url": "https://github.com/IBM/AssetOpsBench",
       "feed": "https://github.com/user-attachments/assets/615059be-e296-40d3-90ec-97ee6cb00412",
       "terms": "IBM publishes this chart in its public AssetOpsBench README; the almanac credits IBM and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "llama-3-405b-instruct",
@@ -26003,7 +26003,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1wNRx6MQbEBeJYKutlHhQidnoNBPyDZDdFoHK4Dpvge8",
       "feed": "https://docs.google.com/spreadsheets/d/1wNRx6MQbEBeJYKutlHhQidnoNBPyDZDdFoHK4Dpvge8/export?format=csv",
       "terms": "The ASSIN 2 organizers publish the official results sheet. https://sites.google.com/view/assin2",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "BERT",
@@ -26035,7 +26035,7 @@
       "url": "https://assistantbench.github.io",
       "feed": "https://assistantbench.github.io",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "GPT-4 Turbo (snapshot unspecified)"
@@ -26063,7 +26063,7 @@
       "url": "https://huggingface.co/spaces/allenai/asta-bench-leaderboard",
       "feed": "https://allenai-asta-bench-leaderboard.hf.space/config",
       "terms": "Ai2 publishes the public Space data and evaluation logs. Robots rules permit its configuration endpoint.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 20,
       "unmatched": [
         "Asta v0 (multiple models)",
@@ -26172,7 +26172,7 @@
       "url": "https://www.kaggle.com/competitions/astroclimb/leaderboard",
       "feed": "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard",
       "terms": "The organizers use Kaggle for team scoring. I could not verify separate terms for reusing scores. https://www.kaggle.com/competitions/astroclimb/rules The feed host returns no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "AI Duo",
@@ -26314,7 +26314,7 @@
       "url": "https://astrovisbench.github.io/",
       "feed": "https://astrovisbench.github.io/leaderboard.json",
       "terms": "The authors release AstroVisBench under CC BY-SA 4.0. https://creativecommons.org/licenses/by-sa/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 7,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -26494,7 +26494,7 @@
       "url": "https://github.com/Athena-Software-Group/athenabench",
       "feed": "https://raw.githubusercontent.com/Athena-Software-Group/athenabench/main/readme.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "GPT-4 (snapshot unspecified)",
@@ -26539,7 +26539,7 @@
       "url": "https://huggingface.co/spaces/AtlaAI/judge-arena",
       "feed": "https://huggingface.co/spaces/AtlaAI/judge-arena/resolve/main/data/leaderboard_static.json",
       "terms": "The Space does not state a license for the leaderboard results. https://huggingface.co/spaces/AtlaAI/judge-arena/blob/main/README.md",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 17,
       "unmatched": [
         "Atla Selene 1",
@@ -26565,7 +26565,7 @@
       "url": "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "feed": "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "terms": "Handshake terms restrict automated extraction. Benchmark Almanac credits Handshake and links the original source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 25,
       "unmatched": [],
       "chart": {
@@ -26655,7 +26655,7 @@
         }
       },
       "failed": {
-        "date": "2026-11-25",
+        "date": "2026-11-26",
         "error": "ATLAS-Finance columns changed"
       }
     },
@@ -26663,7 +26663,7 @@
       "url": "https://github.com/open-compass/ATLAS#-leaderboard-highlights",
       "feed": "https://raw.githubusercontent.com/open-compass/ATLAS/main/README.md (Leaderboard Highlights table, Accuracy (Avg), validation set)",
       "terms": "README of the public open-compass/ATLAS GitHub repository, read through raw.githubusercontent.com; the repository states no license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": []
     },
@@ -26671,8 +26671,8 @@
       "url": "https://atmbench.github.io/leaderboard.html",
       "feed": "https://atmbench.github.io/leaderboard.html",
       "terms": "The project page credits its content under CC BY-SA 4.0.",
-      "retrieved": "2026-11-25",
-      "rows": 29,
+      "retrieved": "2026-11-26",
+      "rows": 30,
       "unmatched": [
         "DeepSeek V4 Pro (OpenRouter)",
         "DeepSeek V4.1",
@@ -26697,7 +26697,7 @@
       "url": "https://flageval-baai.github.io/AtomBenchPage/#results",
       "feed": "https://flageval-baai.github.io/AtomBenchPage/",
       "terms": "BAAI FlagEval publishes these results at https://flageval-baai.github.io/AtomBenchPage/. The authors retain their rights.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -26789,7 +26789,7 @@
       "url": "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
       "feed": "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [],
       "parts": {
@@ -27021,7 +27021,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/afzal0/au-bas-reconciliation-v1",
       "feed": "https://api.primeintellect.ai/api/v1/environmentshub/afzal0/au-bas-reconciliation-v1/@latest",
       "terms": "The author publishes the results through Prime Intellect. https://www.primeintellect.ai/terms-of-service",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -27067,7 +27067,7 @@
       "url": "https://audioarena.ai/leaderboard",
       "feed": "https://audioarena.ai/api/leaderboard/runs?recent_per_group=20",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [
         "GPT Realtime 1.5 (board label)",
@@ -27127,7 +27127,7 @@
       "url": "https://www.kaggle.com/benchmarks/levittliwenye/audio-arithmetic-24-music-workflow-checks",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/levittliwenye/audio-arithmetic-24-music-workflow-checks/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": []
     },
@@ -27135,7 +27135,7 @@
       "url": "https://labs.scale.com/leaderboard/audiomc",
       "feed": "https://labs.scale.com/leaderboard/audiomc (the text and audio variants in the page's Next.js flight data)",
       "terms": "Public leaderboard pages on labs.scale.com, which robots.txt allows. Scale's website terms (August 2021) license use of the site through supported browsers for internal purposes. The Almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 31,
       "unmatched": [
         "Gemini 2.5 Flash Native Audio",
@@ -27153,7 +27153,7 @@
       "url": "https://audio-reasoning-challenge.github.io/leaderboard/",
       "feed": "https://audio-reasoning-challenge.github.io/leaderboard/",
       "terms": "Public maker results. The source robots.txt permits this public path or is absent. No additional restriction on reading these results is stated.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "(◍•ᴗ•◍) (challenge submission)",
@@ -27222,7 +27222,7 @@
       "feed": "https://huggingface.co/spaces/AudioLLMs/AudioBench-Leaderboard-Extend/raw/main/organize_model_results.json",
       "terms": "AudioBench publishes its leaderboard data under the Apache 2.0 license at https://huggingface.co/spaces/AudioLLMs/AudioBench-Leaderboard-Extend.",
       "headline": "AudioBench mixes incompatible metrics across tasks, so this is the MMAU-mini Llama-3-70B judge score from the first evaluation tab of the official leaderboard.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "GPT-4o Audio (snapshot unspecified)",
@@ -27398,7 +27398,7 @@
       "url": "https://benchmarkheaven.com/audio-jev-bench",
       "feed": "https://raw.githubusercontent.com/fstandhartinger/model-market-comparison/main/data/audiojev-preview.json",
       "terms": "Benchmark Heaven allows this path in robots.txt. Its code uses MIT and the page gives no separate audio score license. The raw file host publishes no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "AudioJev (mocomoco edge ONNX)",
@@ -27875,7 +27875,7 @@
       "url": "https://github.com/ethz-spylab/AutoAdvExBench",
       "feed": "https://raw.githubusercontent.com/ethz-spylab/AutoAdvExBench/HEAD/README.md",
       "terms": "Public results from the authors, hosted under GitHub’s terms. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -27897,7 +27897,7 @@
       "url": "https://baxbench.com/",
       "feed": "https://baxbench.com/static/data/leaderboard_data_abb_easy.json",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "DeepSeek R1 (snapshot unspecified)",
@@ -27921,7 +27921,7 @@
       "url": "https://huggingface.co/spaces/AutoBench/AutoBench-Leaderboard",
       "feed": "https://huggingface.co/spaces/AutoBench/AutoBench-Leaderboard/raw/main/runs/agro1_2025-12-10/summary_data.csv",
       "terms": "The Space declares the MIT license. The agronomy run has its own results CSV. https://huggingface.co/spaces/AutoBench/AutoBench-Leaderboard Hugging Face allows crawling in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 35,
       "unmatched": [
         "Magistral-small-2506",
@@ -27976,7 +27976,7 @@
       "terms": "The authors link the paper license at https://arxiv.org/abs/2407.08351",
       "headline": "The headline is the plain mean of the three generated knowledge tests in Table 11. The paper gives no accuracy across all AutoBencher evaluations.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [
         "Llama-2-7b-chat-hf",
@@ -28004,7 +28004,7 @@
       "url": "https://www.markovstudios.com/research/autocad-bench",
       "feed": "https://www.markovstudios.com/research/autocad-bench.md (Task completion by model, 2D versus 3D, Where capability holds)",
       "terms": "robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "Qwen3.7"
@@ -28111,7 +28111,7 @@
       "url": "https://osu-nlp-group.github.io/AutoElicit/",
       "feed": "https://osu-nlp-group.github.io/AutoElicit/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "EvoCUA-32B",
@@ -28170,7 +28170,7 @@
       "url": "https://www.autofactorybench.com/leaderboard",
       "feed": "https://www.autofactorybench.com/data/bench.json",
       "terms": "The maker offers research access and licensing for the full data. The public leaderboard does not specify score reuse terms. https://www.autofactorybench.com/ Robots.txt permits the public data path.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "reference": [
@@ -28262,7 +28262,7 @@
       "url": "https://www.vals.ai/benchmarks/autoform_hard",
       "feed": "https://www.vals.ai/benchmarks/autoform_hard (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "chart": {
@@ -28294,7 +28294,7 @@
       "url": "https://github.com/facebookresearch/autoformbench#leaderboard",
       "feed": "https://raw.githubusercontent.com/facebookresearch/autoformbench/main/README.md",
       "terms": "The repository lists CC BY-NC 4.0. https://github.com/facebookresearch/autoformbench/blob/main/LICENSE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [],
       "parts": {
@@ -28411,7 +28411,7 @@
       "url": "https://autolab.moe/",
       "feed": "https://autolab.moe/",
       "terms": "Public results published by the benchmark authors at autolab.moe; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "Hunyuan-3-Preview"
@@ -28428,7 +28428,7 @@
       "url": "https://raw.githubusercontent.com/8188zq/AutoLogi/main/README.md",
       "feed": "https://raw.githubusercontent.com/8188zq/AutoLogi/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "Claude-3.5-sonnet (snapshot unspecified)",
@@ -28477,7 +28477,7 @@
       "url": "https://zapier.com/benchmarks",
       "feed": "https://zapier.com/benchmarks (current Framer page module, all ranked leaderboard rows)",
       "terms": "Static page on zapier.com; Zapier's terms of service and acceptable use policy do not restrict automated reading.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 150,
       "unmatched": [
         "Claude Fable 5.1 (with Opus 5 Fallback)"
@@ -28618,7 +28618,7 @@
       "feed": "https://hnsifoclvesgacxnjrto.supabase.co/storage/v1/object/public/cms-media/Screenshot%202026-07-29%20at%2004.30.57.png",
       "terms": "HUD publishes the chart under its site terms. https://www.hud.ai/terms-of-service",
       "headline": "The chart gives no overall score, so this is the plain mean of the three capability percentages.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -28640,7 +28640,7 @@
       "url": "https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024",
       "feed": "https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024 (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -28717,7 +28717,7 @@
       "url": "https://cheryou.github.io/autoresearchbench.github.io/",
       "feed": "https://cheryou.github.io/autoresearchbench.github.io/",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "AI-studio Gemini-3.1-pro",
@@ -28753,7 +28753,7 @@
       "url": "https://benchmarks.bespokelabs.ai/autoresearchexam/",
       "feed": "https://benchmarks.bespokelabs.ai/autoresearchexam/ (static efficiency chart plus live script aggregate objects)",
       "terms": "Public Bespoke Labs page. benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -28848,7 +28848,7 @@
       "url": "https://miko-mitama.github.io/av-safetybench/",
       "feed": "https://miko-mitama.github.io/av-safetybench/",
       "terms": "The authors publish their Full-AV Unsafe Rate table on the project site. https://miko-mitama.github.io/av-safetybench/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "JavisDiT++",
@@ -28928,7 +28928,7 @@
       "url": "https://plnguyen2908.github.io/AV-SpeakerBench-project-page/",
       "feed": "https://plnguyen2908.github.io/AV-SpeakerBench-project-page/",
       "terms": "Public results published by the benchmark authors at plnguyen2908.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "AnyGPT 7B",
@@ -29004,7 +29004,7 @@
       "url": "https://avalonbench.github.io/",
       "feed": "https://avalonbench.github.io/",
       "terms": "The AvalonBench authors publish these results on GitHub Pages. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "GPT-3.5-turbo (snapshot unspecified)",
@@ -29033,7 +29033,7 @@
       "url": "https://microsoft.github.io/AVGen-Bench/",
       "feed": "https://raw.githubusercontent.com/microsoft/AVGen-Bench/HEAD/README.md",
       "terms": "MIT repository; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Emu3.5 + MOVA",
@@ -29099,7 +29099,7 @@
       "url": "https://www.kaggle.com/benchmarks/gastondana/aviation-blind-spot-benchmark",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/gastondana/aviation-blind-spot-benchmark/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": []
     },
@@ -29107,7 +29107,7 @@
       "url": "https://avmemeexam.github.io/public/",
       "feed": "https://avmemeexam.github.io/public/",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "GPT-4o Audio (snapshot unspecified)",
@@ -29260,7 +29260,7 @@
       "url": "https://cohere.com/blog/aya-vision",
       "feed": "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Aya-Vision-8B-Combined-Win-Rates-2.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "Gemini Flash 1.5 8B (snapshot unspecified)",
@@ -29305,8 +29305,8 @@
       "url": "https://dubovskylabs.com/baa-benchmark/",
       "feed": "https://dubovskylabs.com/data/baa-benchmark.json",
       "terms": "Dubovsky Labs allows this feed in robots.txt and offers it for download without a stated reuse license.",
-      "retrieved": "2026-11-25",
-      "rows": 63,
+      "retrieved": "2026-11-26",
+      "rows": 69,
       "unmatched": [
         "Big Pickle",
         "MiMo v5",
@@ -29320,7 +29320,7 @@
       "feed": "https://balrog-ai.github.io/docs/_sources/envs/babaisai.md.txt",
       "terms": "The BALROG repository uses the MIT license. The hosted documentation credits the BALROG Team and gives no separate score terms. The host has no robots.txt.",
       "host": "BALROG",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": []
     },
@@ -29328,7 +29328,7 @@
       "url": "https://quesma.com/benchmarks/babaisbench/",
       "feed": "https://quesma.com/benchmarks/babaisbench/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 32,
       "unmatched": [],
       "chart": {
@@ -29446,7 +29446,7 @@
       "feed": "https://github.com/gregor-ge/Babel-ImageNet",
       "terms": "The authors license code under MIT and labels under the BabelNet Non-Commercial License. https://github.com/gregor-ge/Babel-ImageNet#license",
       "headline": "The authors report no overall score, so this is the plain mean of accuracy across the 298 languages.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "BAAI/AltCLIP-m9",
@@ -30364,7 +30364,7 @@
       "feed": "https://raw.githubusercontent.com/QwenLM/BabelArena/HEAD/README.md",
       "terms": "Apache 2.0: https://github.com/QwenLM/BabelArena/blob/main/LICENSE",
       "headline": "The README reports no overall score, so this is the plain mean of Pass^1 across four benchmark families.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -30579,7 +30579,7 @@
       "url": "https://huggingface.co/spaces/RMT-team/babilong",
       "feed": "https://huggingface.co/spaces/RMT-team/babilong/raw/main/data/leaderboard-v0_results.csv",
       "terms": "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [
         "01-ai/Yi-34B-200k",
@@ -30664,7 +30664,7 @@
       "terms": "AgentBoard publishes the benchmark results and configuration at https://github.com/hkust-nlp/AgentBoard.",
       "host": "AgentBoard",
       "headline": "AgentBoard reports the success rate across its 112 BabyAI episodes.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "CodeLlama-13b",
@@ -30693,7 +30693,7 @@
       "url": "https://unipat.ai/benchmarks/BabyVision",
       "feed": "https://unipat.ai/benchmarks/BabyVision (leaderboard table)",
       "terms": "Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 28,
       "unmatched": [
         "KimiVL-A3B"
@@ -30751,7 +30751,7 @@
       "url": "https://github.com/Michael-Andrzejewski/balatro-bench/blob/master/bench-results.md",
       "feed": "https://raw.githubusercontent.com/Michael-Andrzejewski/balatro-bench/master/bench-results.md",
       "terms": "The repository lists no license. https://github.com/Michael-Andrzejewski/balatro-bench The feed host returns no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 21,
       "unmatched": [],
       "stats": {
@@ -30766,7 +30766,7 @@
       "url": "https://balatrobench.com/",
       "feed": "https://balatrobench-prod.b-cdn.net/benchmarks/models/<latest version>/default/leaderboard.json (avg_round)",
       "terms": "JSON files on the CDN the balatrobench.com page reads; balatrobench.com robots.txt allows all and the site states no terms; the coder/balatrobench repository is MIT-licensed.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 16,
       "unmatched": [
         "mistral-large-2512"
@@ -30829,7 +30829,7 @@
       "url": "https://ballotbench.com",
       "feed": "https://ballotbench.com",
       "terms": "BallotBench disallows crawlers during forecasting. The public election page credits Thoughtful Lab and specifies no separate score license.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 9,
       "unmatched": [],
       "harnesses": "system",
@@ -30844,7 +30844,7 @@
       "url": "https://balrogai.com/",
       "feed": "https://balrogai.com/ (default LLM board, % Progress)",
       "terms": "Static public page. The site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 36,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -30883,7 +30883,7 @@
       "url": "https://mteb-leaderboard.hf.space/tasks/BQ",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/BQ/scores",
       "terms": "MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results The MTEB Space allows crawling in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -31018,7 +31018,7 @@
       "url": "https://joinhandshake.com/research/benchmarks/bankertool-bench/",
       "feed": "https://cdn.sanity.io/images/mz2hls6g/production/68c875b56f6b78a7f9e53bf5548aa0b7398e807f-906x1735.png",
       "terms": "Handshake terms restrict automated extraction. The Almanac credits Handshake AI and links its official chart.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 10,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -31036,7 +31036,7 @@
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/Banking77Classification/scores",
       "terms": "MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results",
       "host": "MTEB",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -31332,7 +31332,7 @@
       "feed": "https://raw.githubusercontent.com/ehzawad/bengali-asr-benchmark/main/outputs_clean/summary_clean.json",
       "terms": "The raw file host has no robots.txt. The comparison scores 928 retained clips. It reports 12 decoder configurations for 11 models, including two decoders for Whistle. The dataset card names CC BY 4.0 in its text and CC BY-NC 4.0 in its metadata. https://huggingface.co/datasets/SUST-CSE-Speech/banspeech",
       "host": "Bengali ASR Benchmark",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Canary 1B v2 bn-BD",
@@ -31534,7 +31534,7 @@
       "url": "https://www.braintrust.dev/evals/bash-agent-evals",
       "feed": "https://www.braintrust.dev/evals/bash-agent-evals",
       "terms": "Braintrust publishes this experiment page and its linked repository. https://www.braintrust.dev/evals/bash-agent-evals",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 3,
       "unmatched": [],
       "costPer": "run",
@@ -31573,7 +31573,7 @@
       "url": "https://www.kaggle.com/benchmarks/navneetprabhat/basic-reasoning-with-letters",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/navneetprabhat/basic-reasoning-with-letters/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 13,
       "unmatched": [
         "Qwen 3 235B A22B Instruct 2506",
@@ -31625,7 +31625,7 @@
       "url": "https://baxbench.com/",
       "feed": "https://baxbench.com/static/data/leaderboard_data_{none,generic,specific}.json (sec_pass_1)",
       "terms": "Static JSON on the BaxBench GitHub Pages site, which states no terms; the BaxBench repository and dataset are MIT.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 105,
       "unmatched": [
         "GPT-4o New",
@@ -31644,7 +31644,7 @@
       "url": "https://github.com/lechmazur/bazaar",
       "feed": "https://raw.githubusercontent.com/lechmazur/bazaar/HEAD/README.md",
       "terms": "The publisher displays results at https://github.com/lechmazur/bazaar. I could not verify reuse terms. The raw GitHub host returns 404 for robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 26,
       "unmatched": [],
       "stats": {
@@ -31679,7 +31679,7 @@
       "url": "https://sig-edu.org/sharedtask/2023#phase-2-evaluation",
       "feed": "https://sig-edu.org/sharedtask/2023#phase-2-evaluation",
       "terms": "The rankings list system runs, including two GPT-4 runs. Cambridge licenses the dialogue data for noncommercial research and education. The results page gives no separate license. https://github.com/anaistack/bea-2023-shared-task The site lists a sitemap in robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [
         "NAISTeacher",
@@ -31738,7 +31738,7 @@
       "url": "https://sig-edu.org/sharedtask/2025#results",
       "feed": "https://sig-edu.org/sharedtask/2025",
       "terms": "The organizers release the task under MIT. https://github.com/kaushal0494/UnifyingAITutorEvaluation",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 2,
       "unmatched": [],
       "harnesses": "system",
@@ -31858,7 +31858,7 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/healthcare/bedside-bench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and the named benchmark contributor and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "Doximity Ask V7"
@@ -32052,7 +32052,7 @@
       "url": "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/raw/main/data/results.jsonl",
       "feed": "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/raw/main/data/results.jsonl",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "A²MEAS",
@@ -32074,7 +32074,7 @@
       "url": "https://behavior.stanford.edu/challenge/archive/2025/leaderboard.html",
       "feed": "https://behavior.stanford.edu/challenge/archive/2025/leaderboard.html",
       "terms": "The official BEHAVIOR archive publishes challenge results; source terms apply and the Almanac credits and links the source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Comet (BEHAVIOR 2025 team)",
@@ -32106,7 +32106,7 @@
       "url": "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard",
       "feed": "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/resolve/main/data/results.jsonl",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "Anyverse: A²MEAS",
@@ -32129,7 +32129,7 @@
       "url": "https://labs.turing.com/benchmarks/behavior2code",
       "feed": "https://labs.turing.com/assets/index-BZIruKnx.js",
       "terms": "The publisher gives no reuse license on the benchmark page. https://labs.turing.com/benchmarks/behavior2code The robots.txt URL serves the site HTML.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [],
       "stats": {
@@ -32224,7 +32224,7 @@
       "url": "https://leaderboard.mteb.org/tasks/FiQA2018",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/FiQA2018/scores",
       "terms": "Both hosts allow this path in robots.txt. MTEB publishes results under CC0 1.0. https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -32994,7 +32994,7 @@
       "url": "https://huggingface.co/spaces/bengaliAI/ben10-asr-leaderboard",
       "feed": "https://huggingface.co/datasets/bengaliAI/ben10-asr-results/raw/main/results.csv",
       "terms": "The maintainer publishes corpus word error as a fraction and retains the test audio and transcripts. The results table uses CC BY 4.0. Hugging Face robots.txt permits the results file.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "bengaliAI/tugstugi_bengaliai-regional-asr_whisper-medium"
@@ -33104,7 +33104,7 @@
       "url": "https://benchcad.com/leaderboard.html",
       "feed": "https://benchcad.com/leaderboard.html (BenchCAD 2.0 Core tables)",
       "terms": "BenchCAD publishes these public tables, including credited vendor results. The Almanac credits BenchCAD and links its source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 25,
       "unmatched": [
         "OpenAI internal model (unreleased)"
@@ -33126,7 +33126,7 @@
       "url": "https://benchcad.com/leaderboard.html",
       "feed": "https://benchcad.com/leaderboard.html (BenchCAD 2.1 Core tables)",
       "terms": "BenchCAD publishes these public tables, including credited vendor results. The Almanac credits BenchCAD and links its source.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 70,
       "unmatched": []
     },
@@ -33135,7 +33135,7 @@
       "feed": "https://raw.githubusercontent.com/CONE-MT/BenchMAX/HEAD/results/rule_based.csv",
       "terms": "MIT license at https://github.com/CONE-MT/BenchMAX/blob/HEAD/LICENSE.",
       "headline": "The authors report no overall score. The headline is rule-based instruction following, the first task in their main table.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 22,
       "unmatched": [
         "DeepSeek-R1-Distill-Llama 8B",
@@ -34370,7 +34370,7 @@
       "url": "https://huggingface.co/spaces/CZLC/BenCzechMark",
       "feed": "https://czlc-benczechmark.hf.space/config",
       "terms": "The Space does not state a license for the leaderboard results. https://huggingface.co/spaces/CZLC/BenCzechMark/blob/main/README.md",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 41,
       "unmatched": [
         "AMead10/c4ai-command-r-08-2024-awq",
@@ -34440,7 +34440,7 @@
       "url": "https://github.com/Faria-Binte-Kader/South-Asian-Music-data#rq3-can-llms-generate-stylistically-faithful-music",
       "feed": "https://raw.githubusercontent.com/Faria-Binte-Kader/South-Asian-Music-data/main/README.md",
       "terms": "The authors give no score reuse license in their repository. The host has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 4,
       "unmatched": [
         "Cogito-v1-preview-llama-8B",
@@ -34481,7 +34481,7 @@
       "url": "https://arxiv.org/html/2605.28183v4",
       "feed": "https://arxiv.org/html/2605.28183v4",
       "terms": "The BenGER dataset uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -34534,7 +34534,7 @@
       "url": "https://github.com/HuanzhiMao/BFCL-Result",
       "feed": "https://raw.githubusercontent.com/HuanzhiMao/BFCL-Result/main/2025-06-14/score/data_overall.csv (last V3 copy of the leaderboard)",
       "terms": "A BFCL maintainer's public archive of the leaderboard files (HuanzhiMao/BFCL-Result), Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 87,
       "unmatched": [
         "Bielik-11B-v2.3-Instruct",
@@ -34794,14 +34794,14 @@
       "url": "https://arxiv.org/abs/2504.13914",
       "feed": "https://arxiv.org/html/2504.13914",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-26",
       "rows": 1,
       "unmatched": [
         "DeepSeek R1 (snapshot unspecified)",
         "Gemini 2.5 pro (snapshot unspecified)",
         "Seed1.5-Thinking"
-      ],
-      "static": "paper"
+      ]
     },
     "beyond-survival": {
       "url": "https://aclanthology.org/2026.emnlp-main.2208/",
@@ -34849,7 +34849,7 @@
       "url": "https://gorilla.cs.berkeley.edu/leaderboard.html",
       "feed": "https://gorilla.cs.berkeley.edu/data_overall.csv",
       "terms": "Static CSV on the Gorilla project site; the gorilla repository (ShishirPatil/gorilla) is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 94,
       "unmatched": [
         "Arch-Agent-1.5B",
@@ -34989,7 +34989,7 @@
       "url": "https://bgglue.github.io/leaderboard",
       "feed": "https://bgglue.github.io/leaderboard/",
       "terms": "The project website specifies CC BY-NC-ND 4.0. https://bgglue.github.io/",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 0,
       "unmatched": [
         "BulBERT-chitanka",
@@ -35094,7 +35094,7 @@
       "url": "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard",
       "feed": "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard/resolve/main/index.html",
       "terms": "The repository lists MIT for code and CC BY 3.0 for reference transcriptions. https://github.com/finebooks/bhl-ocr-eval",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [
         "Chandra-OCR-2",
@@ -35177,7 +35177,7 @@
       "url": "https://nbharathik.github.io/bibimbap/#results",
       "feed": "https://nbharathik.github.io/bibimbap/#results",
       "terms": "The authors license the project website under CC BY-SA 4.0. The table reports the original paper's baselines. https://nbharathik.github.io/bibimbap/ robots.txt allows this page.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 6,
       "unmatched": [],
       "parts": {
@@ -35214,7 +35214,7 @@
       "url": "https://huggingface.co/datasets/MushroomGecko/BIBLE#%F0%9F%93%8A-model-accuracy-on-bible-benchmark",
       "feed": "https://huggingface.co/datasets/MushroomGecko/BIBLE/raw/main/README.md",
       "terms": "The maker lists CC BY 4.0 and asks users to respect source terms. https://huggingface.co/datasets/MushroomGecko/BIBLE Hugging Face robots.txt allows the dataset.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 18,
       "unmatched": [
         "Granite 3.2 2b Instruct",
@@ -35233,7 +35233,7 @@
       "feed": "https://raw.githubusercontent.com/AhmedHajAhmed/adage-benchmark/main/results_epic/summary.json",
       "terms": "The raw file host has no robots.txt. The ADAGE repository includes an MIT license. The source task retains its own terms. https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/LICENSE",
       "host": "ADAGE",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 8,
       "unmatched": [],
       "stats": {
@@ -35253,7 +35253,7 @@
       "url": "https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/english_proverbs/results",
       "feed": "https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/english_proverbs/results",
       "terms": "The directory contains 51 score files for 39 model variants after collapsing temperature settings. The repository license is Apache 2.0. https://github.com/google/BIG-bench/blob/main/LICENSE GitHub lists crawl limits and the raw file host has no robots.txt.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 5,
       "unmatched": [
         "BIG-G T=0 125m",
@@ -35338,7 +35338,7 @@
       "url": "https://github.com/google-deepmind/bbeh/blob/main/leaderboard.md",
       "feed": "https://raw.githubusercontent.com/google-deepmind/bbeh/main/leaderboard.md (BBEH harmonic mean)",
       "terms": "Markdown file in the google-deepmind/bbeh GitHub repository, which is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "parts": {
@@ -35359,7 +35359,7 @@
       "url": "https://github.com/google-deepmind/bbeh/blob/main/leaderboard.md",
       "feed": "https://raw.githubusercontent.com/google-deepmind/bbeh/main/leaderboard.md (BBEH harmonic mean)",
       "terms": "Markdown file in the google-deepmind/bbeh GitHub repository, which is Apache-2.0.",
-      "retrieved": "2026-11-25",
+      "retrieved": "2026-11-26",
       "rows": 11,
       "unmatched": [],
       "parts": {
@@ -43261,6 +43261,8 @@
         "CADGenBench submission anon-cad-01_rel5-pcmain-f58d28b-06of81_20261121-130537: rel5-pcmain-f58d28b-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcmain2-e04a7c8-03of81_20261121-193743: rel5-pcmain2-e04a7c8-03of81",
         "CADGenBench submission anon-cad-01_rel5-pctt-d657f29-03of81_20261121-193211: rel5-pctt-d657f29-03of81",
+        "CADGenBench submission anon-cad-01_rel5-vmc24-fde23de-06of81_20261126-054746: rel5-vmc24-fde23de-06of81",
+        "CADGenBench submission anon-cad-01_rel5-vmmain-c409afd-06of81_20261126-054811: rel5-vmmain-c409afd-06of81",
         "CADGenBench submission anon-cad-01_rel5c-cand-4fec83d-06of81_20261120-114802: rel5c-cand-4fec83d-06of81",
         "CADGenBench submission anon-cad-01_rel5c-main-e3b1948-06of81-rep1_20261120-122152: rel5c-main-e3b1948-06of81-rep1",
         "CADGenBench submission anon-cad-01_rel5c-main-e3b1948-06of81_20261119-233727: rel5c-main-e3b1948-06of81",
@@ -43370,6 +43372,7 @@
         "CADGenBench submission anon-cad-01_snap-gn4h-sw26-81of81_20261121-042340: snap-gn4h-sw26-81of81",
         "CADGenBench submission anon-cad-01_snap-gn4h-ver13-06of81_20261120-114810: snap-gn4h-ver13-06of81",
         "CADGenBench submission anon-cad-01_snap-opus55-w6-06of81_20261122-120659: snap-opus55-w6-06of81",
+        "CADGenBench submission anon-eval_edit-subset-exp-01_20261126-071111: edit-subset-exp-01",
         "CADGenBench submission anon-lab_trial-101-a_20261115-025532: trial-101-a",
         "CADGenBench submission anon-lab_trial-101-b_20261115-225127: trial-101-b",
         "CADGenBench submission anon-lab_trial-101-c_20261117-054546: trial-101-c",
@@ -43459,6 +43462,7 @@
         "CADGenBench submission anonymous_anon-modeler-002_20261122-215426: anon-modeler-002",
         "CADGenBench submission anonymous_anon-modeler-004_20261124-002336: anon-modeler-004",
         "CADGenBench submission anonymous_anon-modeler-005_20261125-043550: anon-modeler-005",
+        "CADGenBench submission anonymous_anon-modeler-006_20261126-010421: anon-modeler-006",
         "CADGenBench submission anonymous_anon-r1_20260914-093726: anon-r1",
         "CADGenBench submission anonymous_anonymous-agent_20260914-095345: Anonymous agent",
         "CADGenBench submission anonymous_anonymous-agent_20260914-123111: Anonymous agent",
@@ -44555,7 +44559,7 @@
       "feed": "https://dashboard.safe.ai/ (page JS chunk, mean of art, 100 - refusal_avg, pct, hle_calibration_error, 100 - masks, machiavelli, textquests_harm)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
       "retrieved": "2026-11-26",
-      "rows": 72,
+      "rows": 73,
       "unmatched": [],
       "parts": {
         "hle_calibration_error": {
@@ -44594,7 +44598,7 @@
       "feed": "https://dashboard.safe.ai/ (page JS chunk, mean of erqa, mindcube, spatialviz, intphys2 and enigmaeval)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
       "retrieved": "2026-11-26",
-      "rows": 58,
+      "rows": 60,
       "unmatched": [],
       "parts": {
         "erqa": {
@@ -47704,15 +47708,20 @@
       "unmatched": [
         "Amazon Nova 2 Sonic",
         "Azure Realtime",
+        "Cartesia Managed Agents",
         "Cascade",
         "Deepslate Opal",
         "Eleven Realtime v1 Max",
         "Eleven Realtime v1 Mini",
+        "ElevenLabs Agents",
         "GPT-Live 1 + GPT-6 Sol",
         "GPT-Live 1.1 + GPT-6 Sol",
         "Higgs Realtime",
+        "LiveKit Agents",
         "Phonic-1",
-        "Phonic-1.1"
+        "Phonic-1.1",
+        "Retell Agents",
+        "Telnyx AI Agents"
       ],
       "chart": {
         "title": "Reliability vs. cost per call",
@@ -47891,6 +47900,8 @@
         "ElevenLabs v4 Turbo",
         "Fish Audio S2.1-Pro",
         "Gradium Gradium TTS",
+        "HeyGen HeyGen Voice 1",
+        "HeyGen HeyGen Voice 1 Turbo",
         "Hume Octave 2 (discontinued)",
         "Inworld TTS-2",
         "Inworld TTS-2 Flash",
@@ -53673,9 +53684,10 @@
       "feed": "https://www.clashofais.com/api/leaderboard?all=1",
       "terms": "The press kit invites quotations and embeds. The terms prohibit aggressive scraping. I found no bulk redistribution license. https://www.clashofais.com/press https://www.clashofais.com/terms The feed host publishes robots.txt at https://www.clashofais.com/robots.txt.",
       "retrieved": "2026-11-26",
-      "rows": 18,
+      "rows": 17,
       "unmatched": [
         "GPT-6.2 Astra (ChartArrow)",
+        "GPT-6.2 Astra Pro",
         "Gemini 3 Pro Legacy (pre-11 Feb)",
         "Gemini 4 Neon (ChartArrow)"
       ],
@@ -73975,7 +73987,7 @@
       "feed": "https://glimmerindex.com/api/bench/elementalarmory",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#elementalarmory-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-26",
-      "rows": 18,
+      "rows": 20,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -74126,7 +74138,7 @@
       "feed": "https://glimmerindex.com/api/bench/freecell",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#freecell-method Glimmer Index allows all paths in robots.txt.",
       "retrieved": "2026-11-26",
-      "rows": 18,
+      "rows": 20,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -75357,7 +75369,7 @@
       "feed": "https://glimmerindex.com/api/bench/wildhaven",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#wildhaven-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-26",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "Ministral 3 8B"
@@ -87251,6 +87263,7 @@
         "Mistral Medium 3 (2505)",
         "Nex N2 Pro",
         "Prime Intellect: INTELLECT-3",
+        "Solar Mini 4.5 Preview",
         "v0-1.5-lg",
         "v0-1.5-md"
       ],
@@ -115114,6 +115127,7 @@
         "openai/whisper-base",
         "openai/whisper-tiny",
         "oruk/oruk-fourier-2b",
+        "qualcomm/FunASR-Conformer-EN",
         "rohansheth/tiro-qwen3-asr-1.7b-ffasr-v1",
         "rohansheth/tiro-qwen3-asr-1.7b-v2",
         "salesforce-sovereign-intelligence/SOV-Transcribe-1",
@@ -124730,6 +124744,7 @@
         "Claude4",
         "Cluade",
         "CustomGPT.ai Enterprise Agents",
+        "DS",
         "DS 3.1",
         "DSv4",
         "DTAgent-test",
@@ -127407,6 +127422,8 @@
         "GAIA system 4229: abcdagent v26.11.24",
         "GAIA system 422: Xgeno",
         "GAIA system 4230: abcdagent v26.11.24_v2",
+        "GAIA system 4233: abcdagent v26.11.26",
+        "GAIA system 4236: 172",
         "GAIA system 423: xfls",
         "GAIA system 424: sq626",
         "GAIA system 425: t2666",
@@ -137627,8 +137644,8 @@
         "kevin",
         "markluce",
         "mitochondria",
-        "nn2",
         "odabasz",
+        "poker-parse-v2",
         "pokerbot (working name)",
         "pokerni",
         "sidecard",
@@ -148769,6 +148786,7 @@
         "Liquid d1-3B (Liquid AI)",
         "Liquid d1-omni-600M (Liquid AI)",
         "Mapika decider-2b-vision BF16",
+        "Minimodels Vision One",
         "NeoHorse Jev 4B",
         "OmniJev 0.8B (tinnel123)",
         "OmniJev 2B (tinnel123)",
@@ -159039,7 +159057,7 @@
       "feed": "https://www.kaggle.com/api/v1/benchmarks/indraagustian/inductive-arithmetic-pattern-reasoning/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
       "retrieved": "2026-11-26",
-      "rows": 26,
+      "rows": 27,
       "unmatched": []
     },
     "industrybench": {
@@ -160977,6 +160995,10 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "fetch failed (ENOTFOUND) https://iolai.org/leaderboard.json"
       }
     },
     "iosworld": {
@@ -192634,6 +192656,7 @@
         "PepperOCR-VL",
         "U2-OCR",
         "Unlimited-OCR",
+        "Wasabi-30B",
         "chandra-ocr-2",
         "dots.mocr",
         "dots.ocr",
@@ -210962,6 +210985,10 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "fetch failed (ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE) https://ageofmoltron.com/leaderboard"
       }
     },
     "moltron-llm-showdown-2": {
@@ -210987,6 +211014,10 @@
         "vs collector": {
           "name": "vs collector"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "fetch failed (ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE) https://ageofmoltron.com/leaderboard"
       }
     },
     "moltron-llm-showdown-3": {
@@ -211052,6 +211083,10 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "fetch failed (ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE) https://ageofmoltron.com/leaderboard"
       }
     },
     "moment-eval": {
@@ -222877,6 +222912,7 @@
         "NorOLMo 13B (new mix)",
         "NorOLMo 13B (stage 1)",
         "NorOLMo 13B (stage 2)",
+        "NorPrelude 9B",
         "NorwAI Mistral 7B",
         "NorwAI Mixtral 8x7B",
         "NorwAI NorGPT 3B",
@@ -229498,6 +229534,7 @@
         "PaddleOCR-VL-1.5",
         "PaddleOCR-VL-1.6",
         "Qianfan-OCR",
+        "Sangfor-OCR",
         "TeleOCR",
         "Unlimited-OCR",
         "Youtu-Parsing",
@@ -230854,6 +230891,8 @@
         "Nemotron 3.5 Parse",
         "OvisOCR3",
         "PaddleOCR-VL-1.6",
+        "PyMuPDF4LLM",
+        "PyMuPDF4LLM (OCR)",
         "Reducto",
         "Surya OCR 2 (Datalab)",
         "Surya OCR 2.5 (Datalab)",
@@ -280571,6 +280610,7 @@
         "Liber-0 Preview",
         "ME-Brain-1.0",
         "MachEmbodied-U0",
+        "Mibot-RUA",
         "Motubrain 2.0",
         "PhysicalRSI",
         "PyRUA-Lean",
@@ -281560,6 +281600,7 @@
         "HumanWAM-Goal",
         "ME-Dex-1.0",
         "MWA-Phoenix",
+        "Motubrain 2.0",
         "OLA-Geo",
         "PICA-WAM",
         "PatchWAM",
@@ -299648,7 +299689,7 @@
       "feed": "https://speko.com/benchmarks/data.json",
       "terms": "Speko publishes its benchmark JSON under CC BY 4.0. Credit Speko and identify changes. robots.txt allows the feed path.",
       "retrieved": "2026-11-26",
-      "rows": 30,
+      "rows": 31,
       "unmatched": [
         "Mercury Voice"
       ],
@@ -299928,6 +299969,7 @@
         "Qwen/Qwen3-ASR-0.6B-hf",
         "Qwen/Qwen3-ASR-1.7B-hf",
         "Reson8/Rumble-2-Flash",
+        "Sonaflow/bessel-consensus3-r1",
         "SpeedAudio261119/SpeedASR-v1-65M",
         "TheStageAI/thewhisper-large-v3-turbo",
         "abr-ai/niagara-84m-batch.en",
@@ -299950,6 +299992,7 @@
         "microsoft/azure-speech-09-2026",
         "mistralai/Voxtral-Mini-3B-2507",
         "modulate/velma-2-stt-batch",
+        "moondream/parakeet-ultra",
         "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-FP8",
         "nvidia/canary-1b-v2",
         "nvidia/canary-qwen-2.5b",
@@ -327069,6 +327112,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for abhishek203/SfAgent"
       }
     },
     "vals-smith-apache-spark": {
@@ -327080,7 +327127,11 @@
       "rows": 13,
       "unmatched": [
         "Gemini 3.1 Pro Preview (02/26)"
-      ]
+      ],
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for apache/spark"
+      }
     },
     "vals-smith-arandomhooman-hoomans-morphe-patches": {
       "url": "https://www.vals.ai/vals-smith/arandomhooman/hoomans-morphe-patches",
@@ -327104,6 +327155,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for arandomhooman/hoomans-morphe-patches"
       }
     },
     "vals-smith-arduino-arduino-ide": {
@@ -327128,6 +327183,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for arduino/arduino-ide"
       }
     },
     "vals-smith-astral-sh-uv": {
@@ -327154,6 +327213,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for astral-sh/uv"
       }
     },
     "vals-smith-aumeshmisra-tensorzero": {
@@ -327174,6 +327237,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for AumeshMisra/tensorzero"
       }
     },
     "vals-smith-benredmond-apex": {
@@ -327198,6 +327265,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for benredmond/apex"
       }
     },
     "vals-smith-berriai-litellm": {
@@ -327218,6 +327289,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for BerriAI/litellm"
       }
     },
     "vals-smith-chrisanderton-tyk-gateway": {
@@ -327242,6 +327317,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for chrisanderton/tyk-gateway"
       }
     },
     "vals-smith-conjfrnk-blackbird": {
@@ -327266,6 +327345,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for conjfrnk/blackbird"
       }
     },
     "vals-smith-conjfrnk-memovox": {
@@ -327290,6 +327373,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for conjfrnk/memovox"
       }
     },
     "vals-smith-dwojtaszek-zipper": {
@@ -327310,6 +327397,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for dwojtaszek/zipper"
       }
     },
     "vals-smith-effect-ts-effect": {
@@ -327334,6 +327425,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for Effect-TS/effect"
       }
     },
     "vals-smith-expertium-fsrs-autoresearch": {
@@ -327358,6 +327453,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for Expertium/fsrs-autoresearch"
       }
     },
     "vals-smith-flutter-flutter": {
@@ -327384,6 +327483,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for flutter/flutter"
       }
     },
     "vals-smith-fmtlib-fmt": {
@@ -327408,6 +327511,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for fmtlib/fmt"
       }
     },
     "vals-smith-geopandas-geopandas": {
@@ -327432,6 +327539,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for geopandas/geopandas"
       }
     },
     "vals-smith-goharbor-harbor": {
@@ -327456,6 +327567,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for goharbor/harbor"
       }
     },
     "vals-smith-jax-ml-jax": {
@@ -327482,6 +327597,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for jax-ml/jax"
       }
     },
     "vals-smith-ladydascalie-core": {
@@ -327506,6 +327625,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for ladydascalie/core"
       }
     },
     "vals-smith-leanprover-community-mathlib4": {
@@ -327530,6 +327653,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for leanprover-community/mathlib4"
       }
     },
     "vals-smith-lemonawa-music163bot-rust": {
@@ -327550,6 +327677,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for Lemonawa/music163bot-rust"
       }
     },
     "vals-smith-mirumee-ariadne": {
@@ -327574,6 +327705,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for mirumee/ariadne"
       }
     },
     "vals-smith-nationalsecurityagency-ghidra": {
@@ -327598,6 +327733,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for nationalsecurityagency/ghidra"
       }
     },
     "vals-smith-nvidia-nccl": {
@@ -327622,6 +327761,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for NVIDIA/nccl"
       }
     },
     "vals-smith-openttd-openttd": {
@@ -327646,6 +327789,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for OpenTTD/OpenTTD"
       }
     },
     "vals-smith-oven-sh-bun": {
@@ -327672,6 +327819,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for oven-sh/bun"
       }
     },
     "vals-smith-palantir-blueprint": {
@@ -327698,6 +327849,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for palantir/blueprint"
       }
     },
     "vals-smith-pallets-eco-flask-wtf": {
@@ -327722,6 +327877,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for pallets-eco/flask-wtf"
       }
     },
     "vals-smith-pingdotgg-t3code": {
@@ -327756,6 +327915,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for pingdotgg/t3code"
       }
     },
     "vals-smith-poalrom-sharepaste": {
@@ -327780,6 +327943,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for poalrom/sharepaste"
       }
     },
     "vals-smith-punt-labs-lux": {
@@ -327804,6 +327971,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for punt-labs/lux"
       }
     },
     "vals-smith-sashabaranov-go-openai": {
@@ -327828,6 +327999,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for sashabaranov/go-openai"
       }
     },
     "vals-smith-schubydoo-clauster": {
@@ -327848,6 +328023,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for schubydoo/clauster"
       }
     },
     "vals-smith-sgl-project-sglang": {
@@ -327874,6 +328053,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for sgl-project/sglang"
       }
     },
     "vals-smith-skypilot-org-skypilot": {
@@ -327898,6 +328081,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for skypilot-org/skypilot"
       }
     },
     "vals-smith-suitedaces-dorabot": {
@@ -327922,6 +328109,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for suitedaces/dorabot"
       }
     },
     "vals-smith-tensorflow-tensorflow": {
@@ -327942,6 +328133,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for tensorflow/tensorflow"
       }
     },
     "vals-smith-tock-tock": {
@@ -327966,6 +328161,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for tock/tock"
       }
     },
     "vals-smith-torvalds-linux": {
@@ -327992,6 +328191,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for torvalds/linux"
       }
     },
     "vals-smith-vastsa-pi-desktop": {
@@ -328016,6 +328219,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for vastsa/PI-Desktop"
       }
     },
     "vals-smith-vercel-next-js": {
@@ -328042,6 +328249,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for vercel/next.js"
       }
     },
     "vals-smith-vllm-project-llm-compressor": {
@@ -328066,6 +328277,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-26",
+        "error": "Vals Smith systems table missing for vllm-project/llm-compressor"
       }
     },
     "vals-tax-agent-bench": {
@@ -334435,7 +334650,7 @@
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset vision_style_control, split latest, every category)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
       "retrieved": "2026-11-26",
-      "rows": 153,
+      "rows": 155,
       "unmatched": [
         "ERNIE-5.0-Preview (1220)",
         "Hunyuan Large Vision",
@@ -343151,9 +343366,9 @@
       "feed": "https://workbuddybench.com/data.js?v=30",
       "terms": "The site has no robots file. Tencent gives the repository a custom license with a territorial limitation for the European Union. I found no separate grant on the leaderboard. https://github.com/Tencent/workbuddy-bench/blob/main/LICENSE",
       "retrieved": "2026-11-26",
-      "rows": 19,
+      "rows": 21,
       "unmatched": [
-        "Hy4-dev"
+        "Hy4-Flash-dev"
       ],
       "parts": {
         "rule_checks": {
@@ -343181,9 +343396,9 @@
       "feed": "https://workbuddybench.com/roster.js and https://workbuddybench.com/data.js (core-track Avg per harness)",
       "terms": "Static data scripts on workbuddybench.com, which has no robots.txt and publishes no terms of use.",
       "retrieved": "2026-11-26",
-      "rows": 19,
+      "rows": 21,
       "unmatched": [
-        "Hy4-dev"
+        "Hy4-Flash-dev"
       ],
       "parts": {
         "code": {
