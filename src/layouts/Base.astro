@@ -15,6 +15,8 @@ import { NAV_MENUS } from '../lib/nav-menus.ts';
 
 interface Props {
   title?: string;
+  /** The title in search results, browser tabs and link previews, when it should differ from the page's headline. */
+  searchTitle?: string;
   description?: string;
   wide?: boolean;
   /** The link-preview film and poster (public/og/): the footer ridge unless the page says otherwise. */
@@ -29,6 +31,7 @@ interface Props {
 }
 const {
   title,
+  searchTitle,
   description = SITE_DESCRIPTION,
   film,
   crumbs,
@@ -36,7 +39,7 @@ const {
   noindex,
   cite,
 } = Astro.props;
-const fullTitle = title ? `${title} | Benchmark Almanac` : 'Benchmark Almanac: AI benchmarks and who leads them';
+const fullTitle = searchTitle || title ? `${searchTitle ?? title} | Benchmark Almanac` : 'Benchmark Almanac: AI benchmarks and who leads them';
 const path = Astro.url.pathname;
 // Three tracks: the tests we track, who does well on them, and what labs say about their own models. Pages about
 // the catalog itself sit in the More menu at the right, beside Submit. A link marked fold moves into More on
@@ -95,7 +98,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <SeoHead title={title} description={description} film={film} crumbs={crumbs} jsonLd={jsonLd} noindex={noindex} />
+    <SeoHead title={title} searchTitle={searchTitle} description={description} film={film} crumbs={crumbs} jsonLd={jsonLd} noindex={noindex} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)" />

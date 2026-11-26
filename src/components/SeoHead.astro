@@ -13,6 +13,8 @@ type Json = Record<string, unknown>;
 interface Props {
   /** The page's own name, for og:title. Absent on the home page. */
   title?: string;
+  /** The title in search results and link previews, when it differs from the page's name. */
+  searchTitle?: string;
   description: string;
   film?: Film;
   /** Trail above the title (Crumbs.astro). The page itself is added as the last step. */
@@ -32,7 +34,7 @@ const FILM_ALT: Record<Film, string> = {
 };
 const SIZE = { width: '1200', height: '630' };
 
-const { title, description, film = 'ridge', crumbs, jsonLd, noindex = false } = Astro.props;
+const { title, searchTitle, description, film = 'ridge', crumbs, jsonLd, noindex = false } = Astro.props;
 const site = Astro.site!;
 // Every page is a folder, so its URL ends in a slash (vercel.json trailingSlash).
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
@@ -47,13 +49,13 @@ const posterFile = named('png');
 const videoFile = named('mp4');
 const poster = posterFile ? abs(`/og/${posterFile}`) : '';
 const video = videoFile ? abs(`/og/${videoFile}`) : '';
-const ogTitle = title ?? SITE_NAME;
+const ogTitle = searchTitle ?? title ?? SITE_NAME;
 
 const graph: Json[] = [...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
 if (crumbs?.length)
   graph.push({
     '@type': 'BreadcrumbList',
-    itemListElement: [...crumbs, { href: path, label: ogTitle }].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: abs(c.href) })),
+    itemListElement: [...crumbs, { href: path, label: title ?? SITE_NAME }].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: abs(c.href) })),
   });
 // keeps "</script>" inside a string from closing the tag
 const ld = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c') : '';

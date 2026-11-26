@@ -335,6 +335,8 @@ const trail = [
 // search results and link previews lead with who is ahead, in the words of the leaderboard heading below, then
 // what the benchmark tests
 const metaLead = otherAhead ? `${entryLabel(otherAhead)} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : s.best ? leaderLine(s, gap?.last) : '';
+// Search engines get the words people search for. A page with no scores has no leaderboard to offer.
+const searchTitle = s.nScores > 0 ? `${b.name} leaderboard and scores (${longMonthYear(AS_OF)})` : `${b.name} benchmark: what it tests`;
 const metaDescription = `${metaLead ? `${metaLead}. ` : ''}${b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}`;
 // schema.org Dataset, for Google Dataset Search: the benchmark's tasks, who made them, and where they live
 const dataset = {
@@ -364,7 +366,7 @@ const cite = {
 };
 ---
 
-<Base title={b.name} description={metaDescription} crumbs={trail} jsonLd={dataset} cite={cite}>
+<Base title={b.name} searchTitle={searchTitle} description={metaDescription} crumbs={trail} jsonLd={dataset} cite={cite}>
   <div class:list={['page', poolOn && 'pools']}>
     <header class="head" style={`--a: var(--area-${s.area})`}>
       <Crumbs items={trail} />
