@@ -1,6 +1,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 const url='https://maxxbench.unlap.ai/';
 const stats = {
   deepsweScore: { name: 'DeepSWE score', unit: '%', better: 'higher', note: 'Reference DeepSWE score shown beside MaxxBench.' },
@@ -8,7 +9,7 @@ const stats = {
   steps: { name: 'Steps', unit: 'count', better: 'lower' },
   reportedTokens: { name: 'Reported tokens', unit: 'tokens', better: 'lower' },
 } as const;
-export default {
+const board = {
   benchmark:'maxxbench',url,feed:url,
   terms:'The makers publish this public results table; robots.txt has no restrictions and no separate extraction terms are stated.',
   stats,
@@ -28,3 +29,4 @@ export default {
     return rows;
   },
 } satisfies Leaderboard;
+export default withKaggle(board, { owner: 'unlap', slug: 'maxxbench', task: '(Overall)', scale: 100 });

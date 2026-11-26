@@ -92,6 +92,8 @@ type Board = {
   stats?: Record<string, { name: string; unit?: string; better?: 'higher' | 'lower'; note?: string }>;
   /** Columns that hold another of the benchmark's measures: metric key -> measure id (Benchmark.measures). */
   measures?: Record<string, string>;
+  /** Other sources whose runs of the same open test the board adds, by the key their rows carry in info.source. */
+  sources?: Record<string, { name: string; url: string; feed: string; terms: string }>;
   /** true when GitHub's runners can't read the board, so a maintainer's computer reads it (scripts/lib/local-boards.ts). */
   local?: true;
   failed?: { date: string; error: string };
@@ -334,7 +336,7 @@ const epochScore = (r: EpochRow) => ({
 
 const hostOf = (u: string | null | undefined) => (u ?? '').match(/https?:\/\/([^/\s?#]+)/i)?.[1].toLowerCase().replace(/^www\./, '') ?? '';
 // the hosts of the boards the almanac reads itself, per benchmark: Epoch's copy of one of them is a duplicate
-const readHosts = new Map(Object.entries(lb.boards).map(([id, x]) => [id, new Set([hostOf(x.url), hostOf(x.feed)].filter(Boolean))]));
+const readHosts = new Map(Object.entries(lb.boards).map(([id, x]) => [id, new Set([x.url, x.feed, ...Object.values(x.sources ?? {}).flatMap((o) => [o.url, o.feed])].map(hostOf).filter(Boolean))]));
 
 // Epoch AI's own benchmarks (FrontierMath, SpireClimb and others) have a board the almanac reads from epoch.ai, and
 // Epoch's data export holds the same runs. A run shows once: from the board when the board lists that model, and
@@ -374,8 +376,16 @@ export function fromName(x: Pick<Score, 'from'>): string {
 }
 
 /** Where a score came from, in a few words, for tooltips and tables. */
-export function sourceLabel(x: Pick<Score, 'source' | 'via' | 'from'>): string {
-  if (x.source === 'leaderboard') return 'Official leaderboard';
+export function sourceLabel(x: Pick<Score, 'source' | 'via' | 'from'> & Partial<Pick<Score, 'benchmark' | 'info'>>): string {
+  if (x.source === 'leaderboard') {
+    const board = x.benchmark ? LEADERBOARDS[x.benchmark] : undefined;
+    // a board that adds another source's runs names the source of each run (scripts/lib/boards/kaggle.ts)
+    const other = x.info?.source ? board?.sources?.[x.info.source] : undefined;
+    if (other) return `${other.name} run`;
+    if (board?.host) return `${board.host} leaderboard`;
+    if (board?.static === 'paper') return 'Benchmark paper';
+    return 'Official leaderboard';
+  }
   if (x.source === 'epoch') return 'Epoch AI run';
   if (x.source === 'card') return 'Lab model card';
   if (x.via === 'board') return `${fromName(x)}, via Epoch AI`;
@@ -490,7 +500,8 @@ export function boardUpdates(id: string): BoardUpdates | undefined {
   if (!board?.retrieved || !(lbByBench.get(id)?.length || sysByBench.get(id)?.length || unlistedByBench.get(id)?.length)) return undefined;
   const days = lb.retrieved ? Math.max(0, Math.round((Date.parse(lb.retrieved) - Date.parse(board.retrieved)) / 86_400_000)) : 0;
   if ((board.failed || board.local) && days >= STOPPED_AFTER) return { kind: 'stopped', last: board.retrieved, days, failing: !!board.failed };
-  return { kind: board.static === 'paper' ? 'paper' : 'daily', last: board.retrieved, days };
+  // a paper's table beside a live source still gains models from that source
+  return { kind: board.static === 'paper' && !board.sources ? 'paper' : 'daily', last: board.retrieved, days };
 }
 const citesByBench = groupBy(
   cards.flatMap((c) => c.results.map((r) => ({ card: c, result: r }))),

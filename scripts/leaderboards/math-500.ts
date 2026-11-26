@@ -4,6 +4,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = 'https://www.vals.ai/benchmarks/math500';
 const board: Leaderboard = {
@@ -63,4 +64,4 @@ const board: Leaderboard = {
     return rows;
   },
 };
-export default board;
+export default withKaggle(board, { owner: 'open-benchmarks', slug: 'math-500', task: 'math_500_task', scale: 100 });

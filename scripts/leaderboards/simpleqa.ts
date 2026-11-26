@@ -4,6 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = "https://raw.githubusercontent.com/openai/simple-evals/HEAD/README.md";
 const board: Leaderboard = {
@@ -32,4 +33,4 @@ const board: Leaderboard = {
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));
  },
 };
-export default board;
+export default withKaggle(board, { owner: 'openai', slug: 'simpleqa', task: 'simpleqa_task', scale: 100 });
