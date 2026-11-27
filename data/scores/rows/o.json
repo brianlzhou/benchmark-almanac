@@ -180,7 +180,7 @@
     ["ocr-arena","gemini-2-5-pro-jun-2025",null,null,1751,"2025-06-05",null,null,{"latency":45.924,"winRate":71.243,"votes":2236,"wins":1593,"losses":643}],
     ["ocr-arena","gpt-5","low",null,1403,"2025-08-07",null,null,{"latency":13.027,"winRate":42.7,"votes":2096,"wins":895,"losses":1201}],
     ["ocr-arena","gpt-5","medium",null,1366,"2025-08-07",null,null,{"latency":27.238,"winRate":45.123,"votes":2112,"wins":953,"losses":1159}],
-    ["ocr-arena","gemini-2-5-flash-sep-2025",null,null,1743,"2025-09-25",null,null,{"latency":15.916,"winRate":58.954,"votes":2351,"wins":1386,"losses":965}],
+    ["ocr-arena","gemini-2-5-flash-sep-2025",null,null,1743,"2025-09-25",null,null,{"latency":15.928,"winRate":58.954,"votes":2351,"wins":1386,"losses":965}],
     ["ocr-arena","claude-sonnet-4-5",null,null,1623,"2025-09-29",null,null,{"latency":20.516,"winRate":46.862,"votes":1641,"wins":769,"losses":872}],
     ["ocr-arena","deepseek-ocr",null,null,1377,"2025-10-17",null,null,{"latency":44.343,"winRate":20.446,"votes":2064,"wins":422,"losses":1642}],
     ["ocr-arena","gpt-5-1","medium",null,1367,"2025-11-13",null,null,{"latency":21.507,"winRate":58.549,"votes":2082,"wins":1219,"losses":863}],
