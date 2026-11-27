@@ -2,7 +2,7 @@
   "about": "Epoch AI's Benchmark Reviews: audits of benchmarks, each with a verdict (verified, flawed, or not-enough-info), keyed by our benchmark id. Summaries are Epoch AI's own words, quoted from each review. Written by scripts/sync-epoch-reviews.ts.",
   "source": "https://epoch.ai/benchmarks/search?reviewed=verified&reviewed=flawed&reviewed=not-enough-info",
   "license": "CC BY 4.0, Epoch AI",
-  "retrieved": "2026-11-26",
+  "retrieved": "2026-11-27",
   "reviews": {
     "agents-last-exam-1-1": {
       "epoch": "agents-last-exam",

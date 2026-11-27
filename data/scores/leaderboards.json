@@ -6,7 +6,7 @@
       "url": "https://www.kaggle.com/benchmarks/deepmind/video-qa",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/deepmind/video-qa/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 20,
       "unmatched": []
     },
@@ -14,7 +14,7 @@
       "url": "https://github.com/1x-technologies/1xgpt#leaderboard",
       "feed": "https://raw.githubusercontent.com/1x-technologies/1xgpt/main/README.md",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "1x-technologies/GENIE_138M",
@@ -43,7 +43,7 @@
       "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
       "feed": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=all",
       "terms": "Public 3D Arena API. The Space repository is MIT-licensed. The almanac credits and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "3DTopia-XL",
@@ -90,17 +90,13 @@
           "name": "Votes",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-26",
-        "error": "429 https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=all"
       }
     },
     "3d-gamedev-arena": {
       "url": "https://110.238.108.113/",
       "feed": "https://110.238.108.113/api/ratings",
       "terms": "The live arena gives no reuse terms. Eleven scored configurations represent ten distinct model names on 2026-11-20. https://baibizhe.github.io/gamearena/ The arena serves no robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 9,
       "unmatched": [
         "Qwen 3.8"
@@ -123,7 +119,7 @@
       "url": "https://3d-arena-3d-world-arena.hf.space/arena?view=leaderboard",
       "feed": "https://3d-arena-3d-world-arena.hf.space/api/v2/leaderboard?track=generative",
       "terms": "The protocol publishes aggregate ratings and lists component licenses by system. It gives no separate ratings license. https://huggingface.co/spaces/3d-arena/3d-world-arena/blob/main/docs/3D-WORLD-ARENA.md",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "NVIDIA Lyra 2.0",
@@ -151,7 +147,7 @@
       "url": "https://www.3dcodebench.com/leaderboard",
       "feed": "https://www.3dcodebench.com/leaderboard (models payload); https://www.3dcodebench.com/ (cost chart)",
       "terms": "Public 3DCodeBench results. No separate data license is stated on the leaderboard; the almanac credits and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 14,
       "unmatched": [],
       "chart": {
@@ -259,7 +255,7 @@
       "url": "https://huggingface.co/spaces/3DTopia/3DGen-Arena",
       "feed": "https://3dtopia-3dgen-arena.hf.space/config",
       "terms": "The leaderboard page gives no separate reuse license. https://huggingface.co/spaces/ZhangYuhan/3DGen-Arena",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "DreamFusion",
@@ -314,7 +310,7 @@
       "url": "https://pranalabs.github.io/3DSceneBench/",
       "feed": "https://pranalabs.github.io/3DSceneBench/data/results.js",
       "terms": "Prana Labs publishes this results file on its project site; robots.txt has no restrictions and no separate extraction terms are stated.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -415,7 +411,7 @@
       "url": "https://3dsrbench.github.io/",
       "feed": "https://3dsrbench.github.io/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "Claude-Flash",
@@ -546,7 +542,7 @@
       "url": "https://huggingface.co/datasets/microsoft/Eureka-Bench-Logs",
       "feed": "https://huggingface.co/api/datasets/microsoft/Eureka-Bench-Logs/tree/main/SAT",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [
         "PHI_4_REASONING_phi-15b-rl (archive research variant)",
@@ -573,7 +569,7 @@
       "url": "https://4dcodebench.com/data/leaderboard.json",
       "feed": "https://4dcodebench.com/data/leaderboard.json",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 18,
       "unmatched": [],
       "chart": {
@@ -703,7 +699,7 @@
       "url": "https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
       "feed": "https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
       "terms": "The publisher allows this path in robots.txt. The publisher gives no separate reuse terms for the score table. https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": [
         "Nemotron 3.5 30B-A3B"
@@ -736,7 +732,7 @@
       "url": "https://67ailab.com/posts/spark-eval-06-l3-guideline-qa/",
       "feed": "https://67ailab.com/posts/spark-eval-06-l3-guideline-qa/",
       "terms": "67AI Lab publishes these scores without separate reuse terms. Its robots.txt permits the page.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": [
         "Nemotron 3.5 30B-A3B"
@@ -861,7 +857,7 @@
       "url": "https://huggingface.co/spaces/opencompass/open_vlm_leaderboard",
       "feed": "http://opencompass.openxlab.space/assets/OpenVLM.json (ABench.Overall)",
       "terms": "OpenCompass's published leaderboard data file, which the Apache-2.0 Space renders; the file states no license.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 118,
       "unmatched": [
         "360VL-70B",
@@ -1106,7 +1102,7 @@
       "url": "https://a3-bench.github.io/",
       "feed": "https://a3-bench.github.io/",
       "terms": "Public results published by the benchmark authors at a3-bench.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 21,
       "unmatched": [
         "GLM-4-32B",
@@ -1144,7 +1140,7 @@
       "url": "https://www.kaggle.com/benchmarks/artificial-analysis/aa-lcr",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/artificial-analysis/aa-lcr/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 13,
       "unmatched": []
     },
@@ -1152,7 +1148,7 @@
       "url": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/",
       "feed": "https://www.mercor.com/apex/mercor-extended/ots-held-out-aa-lcr-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData, held-out scores only)",
       "terms": "Mercor terms prohibit automated scraping; the almanac credits Mercor and links the original source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 50,
       "unmatched": [
         "Beam",
@@ -1513,7 +1509,7 @@
       "url": "https://aarr-bench.com/leaderboard/",
       "feed": "https://aarr-bench.com/leaderboard/",
       "terms": "The authors publish and maintain the public leaderboard at https://aarr-bench.com/leaderboard/.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 16,
       "unmatched": [],
       "reference": [
@@ -1539,7 +1535,7 @@
       "url": "https://cea-list.github.io/ABACUS/#leaderboard",
       "feed": "https://raw.githubusercontent.com/CEA-LIST/ABACUS/HEAD/README.md",
       "terms": "The ABACUS authors use CC BY 4.0, https://github.com/CEA-LIST/ABACUS/blob/HEAD/LICENSE.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 7,
       "unmatched": [],
       "parts": {
@@ -1606,7 +1602,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "SecureBio allows reference use under its content signals, prohibits AI training, and retains attribution for its public results.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 27,
       "unmatched": [],
       "stats": {
@@ -1621,7 +1617,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "SecureBio allows reference use under its content signals, prohibits AI training, and retains attribution for its public results.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 34,
       "unmatched": [],
       "stats": {
@@ -1636,7 +1632,7 @@
       "url": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [
         "Nemotron 3 Super 120B A12B",
@@ -1689,7 +1685,7 @@
       "url": "https://securebio.org/benchmarks/",
       "feed": "https://securebio.org/benchmarks/details/ (plotly-spec able-breakdown-plot-div, hover \"ABLE (Full)\")",
       "terms": "Static SecureBio dashboard page; securebio.org robots.txt allows all agents (content signals: search yes, AI training no) and SecureBio asks that results be cited.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 19,
       "unmatched": [
         "Nemotron 3 Super 120B A12B",
@@ -1700,7 +1696,7 @@
       "url": "https://valenlabs.com/abmaze/results/index.html",
       "feed": "https://valenlabs.com/abmaze/results/results1.js",
       "terms": "Valen publishes these results at https://valenlabs.com/blog/abmaze.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -1722,7 +1718,7 @@
       "url": "https://github.com/facebookresearch/AbstentionBench",
       "feed": "https://raw.githubusercontent.com/facebookresearch/AbstentionBench/main/analysis/abstention_performance.csv",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -1915,7 +1911,7 @@
       "url": "https://acceleratebench.com/",
       "feed": "https://acceleratebench.com/assets/results.json",
       "terms": "The authors publish this downloadable results file; robots.txt has no restrictions and the project page states no separate extraction terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 16,
       "unmatched": [],
       "harnesses": "system",
@@ -2080,7 +2076,7 @@
       "url": "https://conceptualreasoning.ai/",
       "feed": "https://conceptualreasoning.ai/data/cri-scores.csv (concord)",
       "terms": "Static CSV the conceptualreasoning.ai page loads; robots.txt allows all paths and the site states no terms or license.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 232,
       "unmatched": [
         "DeepSeek Chat"
@@ -2097,7 +2093,7 @@
       "url": "https://builders.ramp.com/post/financial-benchmarks",
       "feed": "https://builders.ramp.com/post/financial-benchmarks",
       "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 21,
       "unmatched": [],
       "stats": {
@@ -2147,7 +2143,7 @@
       "url": "https://chenchen0103.github.io/ACEBench/",
       "feed": "https://chenchen0103.github.io/ACEBench/script.js (allCombinedModels)",
       "terms": "Static script on a GitHub Pages project site with no robots.txt and no terms; the ACEBench repository is public and the scores are cited to the authors.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 16,
       "unmatched": [
         "Doubao-Pro-32K",
@@ -2197,7 +2193,7 @@
       "url": "https://github.com/isen-zhang/ACLUE",
       "feed": "https://raw.githubusercontent.com/isen-zhang/ACLUE/HEAD/README.md",
       "terms": "The project uses MIT and the dataset uses https://creativecommons.org/licenses/by-nc-sa/4.0/",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "BLOOMZ-7B",
@@ -2226,7 +2222,7 @@
       "url": "https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/",
       "feed": "https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/",
       "terms": "The publisher displays results at https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/. I could not verify reuse terms. The robots.txt permits this article.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 14,
       "unmatched": [],
       "stats": {
@@ -2271,7 +2267,7 @@
       "url": "https://tttonyalpha.github.io/act2answer/",
       "feed": "https://tttonyalpha.github.io/act2answer/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [
         "Xiaomi-Robotics-R0"
@@ -2548,7 +2544,7 @@
       "url": "https://github.com/Emanual20/adbench-leaderboard",
       "feed": "https://raw.githubusercontent.com/Emanual20/adbench-leaderboard/HEAD/README.md",
       "terms": "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [
         "HY-2.0",
@@ -2603,7 +2599,7 @@
       "feed": "https://raw.githubusercontent.com/open-compass/Ada-LEval/HEAD/README.md",
       "terms": "The authors publish the evaluation tables in https://github.com/open-compass/Ada-LEval.",
       "headline": "At each context length, the headline is the plain mean of TSort and BestAnswer accuracy. The authors report each task separately.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 24,
       "unmatched": [
         "ChatGLM2-6B-32k",
@@ -2626,7 +2622,7 @@
       "url": "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02",
       "feed": "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 28,
       "unmatched": [],
       "stats": {
@@ -2697,7 +2693,7 @@
       "url": "https://www.vellum.ai/blog/evaluation-claude-4-sonnet-vs-openai-o4-mini-vs-gemini-2-5-pro",
       "feed": "https://cdn.sanity.io/images/ghjnhoi4/production/e1445ca9fc8728cc17c97096bc6bb61ea8a1c250-2017x1101.webp (transcribed 2026-11-24)",
       "terms": "Vellum publishes this chart on its public blog. Results are credited to Vellum.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -2707,7 +2703,7 @@
       "url": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
       "feed": "https://addisassistant.com/benchmarks/addis-voice-2-amharic",
       "terms": "Addis AI publishes its benchmark data under CC BY-SA 4.0. Its robots.txt allows the benchmark page.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 2,
       "unmatched": [
         "Addis Voice 2",
@@ -2764,7 +2760,7 @@
       "url": "https://addisassistant.com/benchmarks",
       "feed": "https://huggingface.co/datasets/addisai/addis-scribe-benchmark/resolve/main/README.md",
       "terms": "Eight systems on 150 Afaan Oromo clips. The transcript file includes eleven operating modes. The benchmark archive lists CC BY-SA 4.0. https://huggingface.co/datasets/addisai/addis-scribe-benchmark The feed host publishes robots.txt at https://huggingface.co/robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "Addis Scribe Afaan Oromo",
@@ -2811,7 +2807,7 @@
       "feed": "https://www.codewithpapers.app/sota/relation-extraction-on-ade-corpus.json",
       "terms": "Papers with Code archive, modified by Syntology, CC BY-SA 4.0. https://codewithpapers.app/attribution",
       "host": "Code with Papers",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "CLDR + CLNER",
@@ -2852,7 +2848,7 @@
       "url": "https://github.com/CSAILVision/semantic-segmentation-pytorch#performance",
       "feed": "https://raw.githubusercontent.com/CSAILVision/semantic-segmentation-pytorch/HEAD/README.md",
       "terms": "MIT CSAIL uses BSD 3-Clause, https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/LICENSE.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "HRNetV2",
@@ -2888,7 +2884,7 @@
       "url": "https://github.com/facebookresearch/adepts",
       "feed": "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -2924,7 +2920,7 @@
       "url": "https://github.com/facebookresearch/adepts",
       "feed": "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 7,
       "unmatched": [],
       "stats": {
@@ -2975,7 +2971,7 @@
       "url": "https://dcase.community/challenge2026/task-audio-dependent-question-answering-results",
       "feed": "https://dcase.community/challenge2026/task-audio-dependent-question-answering-results",
       "terms": "DCASE robots.txt allows the results page and restricts images and theme assets. DCASE gives no separate score license.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "Cheng_Surrey_task5_1",
@@ -3269,7 +3265,7 @@
       "url": "https://www.aecbench.com/leaderboard",
       "feed": "https://www.aecbench.com/leaderboard",
       "terms": "The site serves HTML for robots.txt. The benchmark code uses the MIT license. The results page gives no separate reuse license.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 17,
       "unmatched": [
         "LFM2 24B A2B"
@@ -3366,7 +3362,7 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/aec/",
       "terms": "ONESTRUCTION reserves copyright and blocks named bots in robots.txt. Its methodology uses external estimates for open model costs, which this reader omits.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 20,
       "unmatched": [],
       "chart": {
@@ -3455,7 +3451,7 @@
         }
       },
       "failed": {
-        "date": "2026-11-26",
+        "date": "2026-11-27",
         "error": "Missing AEC results"
       }
     },
@@ -3463,7 +3459,7 @@
       "url": "https://github.com/ArchiAI-LAB/AECBench#evaluation-results",
       "feed": "https://raw.githubusercontent.com/ArchiAI-LAB/AECBench/main/README.md",
       "terms": "The authors specify CC BY-NC for non-commercial research. https://github.com/ArchiAI-LAB/AECBench/blob/main/LICENSE",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -3548,7 +3544,7 @@
       "url": "https://aecv-bench.com/#results",
       "feed": "https://aecv-bench.com/",
       "terms": "AECFoundry publishes its results at https://aecv-bench.com/#results. The authors retain their rights.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [
         "StepFun Step 3.7"
@@ -3777,7 +3773,7 @@
       "url": "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md",
       "feed": "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 9,
       "unmatched": [
         "GPT-4o [snapshot unspecified]",
@@ -4159,7 +4155,7 @@
       "url": "https://github.com/intron-innovation/AfriMed-QA#model-performance-metrics",
       "feed": "https://raw.githubusercontent.com/intron-innovation/AfriMed-QA/master/README.md",
       "terms": "Public author-published results in the AfriMed-QA repository. Benchmark Almanac credits the AfriMed-QA team and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "BioMistral-7B",
@@ -4433,7 +4429,7 @@
       "url": "https://mcgill-nlp.github.io/AfroBench/leaderboard.html",
       "feed": "https://mcgill-nlp.github.io/AfroBench/leaderboard_json/afrobench.json",
       "terms": "The leaderboard page does not specify reuse terms for the score tables. https://mcgill-nlp.github.io/AfroBench/leaderboard.html",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [
         "AfroLLaMa 8B",
@@ -4512,7 +4508,7 @@
       "url": "https://huggingface.co/spaces/McGill-NLP/AfroBench",
       "feed": "https://huggingface.co/spaces/McGill-NLP/AfroBench/raw/main/data/leaderboard_json/afrobench_lite.json",
       "terms": "MIT Space; Hugging Face robots.txt permits the raw results path.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 17,
       "unmatched": [
         "AfroLLaMa 8B",
@@ -4619,7 +4615,7 @@
       "url": "https://arena.ai/leaderboard/agent",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset agent, split latest, category overall)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 68,
       "unmatched": [
         "Spark-X2.6"
@@ -4764,7 +4760,7 @@
       "url": "https://deepnote.com/research/benchmark",
       "feed": "https://deepnote.com/research/benchmark (50-task leaderboard)",
       "terms": "Deepnote publishes the benchmark documentation under Apache-2.0 and PageMantle under CC BY 4.0. Robots.txt allows the research page. Source: Deepnote.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -4817,7 +4813,7 @@
       "url": "https://www.agentisland.ai/",
       "feed": "https://storage.googleapis.com/agent-island/rankings/latest.json",
       "terms": "The authors publish the ranking and game logs in their public bucket at https://storage.googleapis.com/agent-island/",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 59,
       "unmatched": [],
       "stats": {
@@ -4849,7 +4845,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/narcolepticchicken/agent-liability-gym",
       "feed": "https://hub.primeintellect.ai/narcolepticchicken/agent-liability-gym/@6e5d4af8/download",
       "terms": "The author publishes the package under the Prime Intellect platform terms at https://www.primeintellect.ai/terms-of-service.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 2,
       "unmatched": [],
       "stats": {
@@ -4879,7 +4875,7 @@
       "url": "https://agentmemoryleaderboard.ai/leaderboard/industry/textual",
       "feed": "https://agentmemoryleaderboard.ai/static/cycle1-industry-textual.json?v=pages-migration-20260919",
       "terms": "Public official Cycle 1 snapshots. The almanac credits Agent Memory Leaderboard and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "AML-Eval-FLASH (memory system)",
@@ -5029,7 +5025,7 @@
       "url": "https://league.jake-moses.com/benchmark",
       "feed": "https://league.jake-moses.com/benchmark",
       "terms": "The author's project page reserves all rights and gives no separate results license. https://www.jake-moses.com/ai-league.html Robots.txt allows the benchmark.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [],
       "costPer": "run",
@@ -5142,7 +5138,7 @@
       "url": "https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard",
       "feed": "https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard/raw/main/results.jsonl",
       "terms": "Apache-2.0 Space; Hugging Face robots.txt permits this public raw results path.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [
         "Claude 3.7 S.",
@@ -5270,7 +5266,7 @@
       "url": "https://github.com/nagu-io/agent-settlement-bench",
       "feed": "https://raw.githubusercontent.com/nagu-io/agent-settlement-bench/main/README.md",
       "terms": "The repository is public under its stated license. Source attribution applies.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "ChatGPT-4.1 (subset 10/20)",
@@ -5296,7 +5292,7 @@
       "url": "https://seed.bytedance.com/en/seed2_1",
       "feed": "https://seed.bytedance.com/en/seed2_1",
       "terms": "Public ByteDance Seed evaluation table, subject to the site disclaimer and terms; the Almanac credits and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": []
     },
@@ -5532,7 +5528,7 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pubhtml",
       "feed": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pub?output=csv (AVG)",
       "terms": "Published Google Sheet linked from the THUDM/AgentBench README (Apache-2.0); docs.google.com robots.txt allows /spreadsheet paths.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 15,
       "unmatched": [
         "AgentLM-13B",
@@ -5573,7 +5569,7 @@
       "url": "https://hkust-nlp.github.io/agentboard/static/leaderboard.html",
       "feed": "https://hkust-nlp.github.io/agentboard/data/To_Release/main_data_new.json",
       "terms": "Public results published by the benchmark authors at hkust-nlp.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "CodeLlama-13b",
@@ -5658,7 +5654,7 @@
       "url": "https://www.kaggle.com/benchmarks/abhialex/agentcallbench-tool-calling-reliability",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/abhialex/agentcallbench-tool-calling-reliability/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 10,
       "unmatched": []
     },
@@ -5687,7 +5683,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE/2025%E5%B9%B42%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 10,
       "unmatched": [
         "GLM4-plus",
@@ -5712,7 +5708,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE-General",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE-General/2025%E5%B9%B44%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "ChatGPT官网(O4-mini-high)",
@@ -5754,7 +5750,7 @@
       "url": "https://www.superclueai.com/agent/AgentCLUE-Mobile",
       "feed": "https://www.superclueai.com/data/agent_list/AgentCLUE-Mobile/2026%E5%B9%B48%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "BlueLM-Flash",
@@ -5800,7 +5796,7 @@
       "url": "https://www.superclueai.com/agent/Mobile",
       "feed": "https://www.superclueai.com/data/agent_list/Mobile/2025%E5%B9%B412%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 9,
       "unmatched": [
         "AgentCPM-GUI",
@@ -5892,7 +5888,7 @@
       "url": "https://www.superclueai.com/agent/Task",
       "feed": "https://www.superclueai.com/data/agent_list/Task/2026%E5%B9%B47%E6%9C%88.xlsx",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": [],
       "parts": {
@@ -5933,7 +5929,7 @@
       "url": "https://agentdojo.spylab.ai/results/",
       "feed": "https://agentdojo.spylab.ai/results/ (static HTML table, Targeted ASR)",
       "terms": "Static documentation page built from the AgentDojo repository, which is MIT-licensed.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 28,
       "unmatched": [],
       "stats": {
@@ -6187,7 +6183,7 @@
       "url": "https://research.meta.ai/static/muse-spark-1-1-evaluation-report",
       "feed": "https://research.meta.ai/static/muse-spark-1-1-evaluation-report",
       "terms": "Meta serves the evaluation report publicly and robots.txt allows general agents. Credit Figure 27.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [],
       "parts": {
@@ -6200,7 +6196,7 @@
       "url": "https://builders.ramp.com/post/credit-analysis-using-semantics",
       "feed": "https://builders.ramp.com/assets/index-DaCNdoGx.js",
       "terms": "Ramp publishes the chart in its engineering article. https://ramp.com/terms-of-service",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 14,
       "unmatched": [],
       "harnesses": "system",
@@ -6239,7 +6235,7 @@
       "url": "https://agentic.turing.com/",
       "feed": "https://agentic.turing.com/ (embedded Frontier leaderboard)",
       "terms": "Turing labels the dataset confidential and proprietary. The public page publishes the six aggregate pass rates, which are credited to Turing.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": []
     },
@@ -6247,7 +6243,7 @@
       "url": "https://labelbox.com/leaderboards/agentic-search/",
       "feed": "https://labelbox.com/leaderboards/agentic-search/",
       "terms": "Labelbox links its terms of service and provides no separate leaderboard license. https://docs.labelbox.com/page/terms-of-service The robots.txt restrictions cover CGI and PDF paths.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 3,
       "unmatched": [],
       "parts": {
@@ -6275,7 +6271,7 @@
       "url": "https://trade-agent-aiel-hku.com/",
       "feed": "https://trade-agent-aiel-hku.com/public/runs/181/data",
       "terms": "HKU displays a copyright notice. I found no data reuse license on the leaderboard. The site returned 404 for robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 10,
       "unmatched": [],
       "stats": {
@@ -6369,7 +6365,7 @@
       "url": "https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
       "feed": "https://nashnovaresearch.github.io/AgenticFinBench/paper-results.30d929f4706ec459.json",
       "terms": "The authors do not specify separate terms for leaderboard scores on https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 17,
       "unmatched": [
         "DuMate"
@@ -6414,7 +6410,7 @@
       "url": "https://roger-creus.github.io/agentick/board/",
       "feed": "https://roger-creus.github.io/agentick/board/",
       "terms": "MIT repository. The project site has no robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 26,
       "unmatched": [
         "PPO Dense (2M)",
@@ -7046,7 +7042,7 @@
       "url": "https://www.kaggle.com/benchmarks/eigent/agenticrl-bench",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/eigent/agenticrl-bench/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -7086,7 +7082,7 @@
       "url": "https://github.com/AlayaLab/AgenticSTS",
       "feed": "https://raw.githubusercontent.com/AlayaLab/AgenticSTS/HEAD/README.md",
       "terms": "The agent code uses Apache 2.0. https://github.com/AlayaLab/AgenticSTS/blob/HEAD/AgenticSTS/LICENSE",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [],
       "stats": {
@@ -7120,7 +7116,7 @@
       "url": "https://agenticvbench.com/leaderboard",
       "feed": "https://agenticvbench.com/leaderboard",
       "terms": "Public results published by the benchmark authors at agenticvbench.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 23,
       "unmatched": [],
       "harnesses": "system",
@@ -7154,7 +7150,7 @@
       "url": "https://agentif.github.io/",
       "feed": "https://agentif.github.io/ (static HTML, second leaderboard table, CSR)",
       "terms": "Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [
         "Conifer-DPO-7B",
@@ -7199,7 +7195,7 @@
       "url": "https://agentif.github.io/",
       "feed": "https://agentif.github.io/ (static HTML, first leaderboard table, data-csr)",
       "terms": "Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 39,
       "unmatched": [],
       "stats": {
@@ -7214,7 +7210,7 @@
       "url": "https://xbench.org/agi/agentif",
       "feed": "https://admin.xbench-ai.com/api/task-ifs?sort=overallScore:desc&pagination[limit]=100&populate=company",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "AutoClaw",
@@ -7398,7 +7394,7 @@
       "url": "https://agents-last-exam.org/leaderboard/v1",
       "feed": "https://agents-last-exam.org/api/demo/leaderboard (full/overall)",
       "terms": "The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 84,
       "unmatched": [
         "Agnes-2.5-Pro-Beta",
@@ -7764,7 +7760,7 @@
       "url": "https://agents-last-exam.org/leaderboard",
       "feed": "https://agents-last-exam.org/api/demo/leaderboard/v1.1",
       "terms": "Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 40,
       "unmatched": [
         "qwen-4"
@@ -7915,7 +7911,7 @@
       "url": "https://github.com/agentset-ai/reranker-eval",
       "feed": "https://raw.githubusercontent.com/agentset-ai/reranker-eval/HEAD/README.md",
       "terms": "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "BAAI/BGE Reranker v2 M3",
@@ -7943,7 +7939,7 @@
       "feed": "https://vectorspacelab.github.io/AgentSWE/",
       "terms": "The project uses Apache 2.0, https://github.com/VectorSpaceLab/AgentSWE/blob/main/LICENSE.",
       "headline": "The authors report no overall score, so the headline is Creation, the first stage in their results table.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -8093,7 +8089,7 @@
       "url": "https://github.com/QwenLM/Qwen-AgentWorld",
       "feed": "https://raw.githubusercontent.com/QwenLM/Qwen-AgentWorld/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 13,
       "unmatched": [
         "Qwen-AgentWorld-397B-A17B"
@@ -8133,7 +8129,7 @@
       "url": "https://dashboard.safe.ai/#automation",
       "feed": "https://dashboard.safe.ai/ (page JS chunk, AGI radar gpt4Data and gpt5Data, sum of ten domains)",
       "terms": "Public dashboard page; dashboard.safe.ai robots.txt sets no rules or content signals, and the data ships in the page's own JS chunk.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "GPT-4 (snapshot unspecified)"
@@ -8205,7 +8201,7 @@
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=BASE&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, BASE, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 23,
       "unmatched": [
         "Llama4-Maverick-17B-128E-基座",
@@ -8306,7 +8302,7 @@
       "url": "https://agi-eval.org/topRanking?modality=LARGE_LANGUAGE_MODEL&modelType=FINE_TUNED&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList (POST with the current month, FINE_TUNED, PRIVATE, and objective accuracy sort)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 114,
       "unmatched": [
         "Claude-3.5-Sonnet-1022",
@@ -8445,7 +8441,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=IMAGE_TEXT_UNDERSTANDING&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 68,
       "unmatched": [
         "BLIP3o-8B",
@@ -8552,7 +8548,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=SPEECH_SYNTHESIS&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "CosyVoice",
@@ -8565,7 +8561,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=TEXT_TO_IMAGE&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "The AGI-Eval publisher provides this ranking API publicly. Read the endpoint for attribution and reuse terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [
         "Halfmoon",
@@ -8592,7 +8588,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=TEXT_TO_VIDEO&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList",
       "terms": "AGI-Eval publishes this ranking publicly. The site does not state separate score reuse terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 8,
       "unmatched": [
         "API-SERVING",
@@ -8632,7 +8628,7 @@
       "url": "https://agi-eval.org/topRanking?modality=MULTIMODAL_MODEL&modelType=VOICE_INTERACTION&rankType=PRIVATE",
       "feed": "https://agi-eval.org/commWebApi/model/rank/dataList and https://agi-eval.org/commWebApi/model/rank/top (POST with the current month, VOICE_INTERACTION, PRIVATE)",
       "terms": "AGI-Eval publishes the ranking API and page. The site gives no separate score reuse license. Results are credited to AGI-Eval (Meituan).",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "Gemini live",
@@ -8670,7 +8666,7 @@
       "url": "https://agi-pilled-bench.adamholter.chatgpt.site/",
       "feed": "https://agi-pilled-bench.adamholter.chatgpt.site/data.json",
       "terms": "The site publishes data.json and states no separate reuse license. Results are credited to Adam Holter with a link to the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 44,
       "unmatched": [],
       "reference": [
@@ -8709,7 +8705,7 @@
       "url": "https://github.com/ruixiangcui/AGIEval",
       "feed": "https://raw.githubusercontent.com/ruixiangcui/AGIEval/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "GPT-3.5-Turbo [snapshot unspecified]",
@@ -8731,7 +8727,7 @@
       "feed": "https://raw.githubusercontent.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark/main/results/results.json",
       "terms": "The AGILE repository is public. Follow its license and cite the authors. https://github.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark",
       "headline": "The source reports no overall score, so this is the plain mean of the two Macro F1 test-set scores.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "COMPLEMENTNB",
@@ -8780,7 +8776,7 @@
       "url": "https://baskargroup.github.io/Ag_reasoning/#leaderboard-section",
       "feed": "https://baskargroup.github.io/Ag_reasoning/",
       "terms": "The project page credits CC BY-SA 4.0 and embeds the score table in its HTML. https://baskargroup.github.io/Ag_reasoning/ Robots.txt allows the project page.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [
         "LLaMA-3 8B (Full SFT)",
@@ -9209,7 +9205,7 @@
       "url": "https://crfm.stanford.edu/helm/audio/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/audio/benchmark_output/runs/<newest>/groups/audio_scenarios.json (Accuracy: Mean win rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [
         "gpt-4o-audio-preview-2024-10-01",
@@ -9390,7 +9386,7 @@
       "url": "https://aiagribench.org/leaderboard",
       "feed": "https://aiagribench.org/api/leaderboard?variant=main",
       "terms": "The consortium requires explicit permission for commercial use. The site returns 404 for robots.txt. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 13,
       "unmatched": [
         "Tilva/PlantVillage",
@@ -9480,7 +9476,7 @@
       "url": "https://aiagribench.org/leaderboard",
       "feed": "https://aiagribench.org/api/leaderboard?variant=main",
       "terms": "The consortium requires explicit permission for commercial use. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq The robots.txt URL serves HTML.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 7,
       "unmatched": [],
       "parts": {
@@ -9539,7 +9535,7 @@
       "url": "https://aiagribench.org/smallholders",
       "feed": "https://aiagribench.org/api/leaderboard?variant=smallholders",
       "terms": "The consortium requires explicit permission for commercial use. The site returns 404 for robots.txt. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 9,
       "unmatched": [
         "agrillm/llama-3.3-70b-instruct (with-rag)",
@@ -9603,7 +9599,7 @@
       "url": "https://aibattlearena.com/leaderboard.html",
       "feed": "https://aibattlearena.com/leaderboard.html",
       "terms": "The project repository uses the MIT License. The site's robots.txt URL returns HTML.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [],
       "parts": {
@@ -9649,7 +9645,7 @@
       "url": "https://datawrapper.dwcdn.net/OaSm3/13/",
       "feed": "https://datawrapper.dwcdn.net/OaSm3/14/dataset.csv",
       "terms": "Datawrapper robots.txt has no restriction on this chart. The study links public votes and responses. The repository lists no reuse license. https://github.com/ProofNews/aidp",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [],
       "stats": {
@@ -9690,7 +9686,7 @@
       "url": "https://goodstartlabs.com/benchmarks/diplomacy",
       "feed": "https://goodstartlabs.com/data/diplomacy-overall-performance.csv",
       "terms": "Good Start Labs allows the public CSV paths in robots.txt. Its terms prohibit automated access without express authorization.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 23,
       "unmatched": [],
       "parts": {
@@ -9711,7 +9707,7 @@
       "url": "https://github.com/jgerstmayr/AI-engineering-lab/tree/main/logsTM",
       "feed": "https://raw.githubusercontent.com/jgerstmayr/AI-engineering-lab/main/logsTM/allTests.zip",
       "terms": "The repository uses BSD 3-Clause. The raw GitHub host returns 404 for robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [
         "FluentlyLM-Prinum.Q4_K_M.gguf",
@@ -10093,7 +10089,7 @@
       "feed": "https://www.snowflake.com/adobe/dynamicmedia/deliver/dm-aid--d3d8d3d6-4083-4de9-80cb-5d9ffc9b4d12/figure-2.-improving-document-extraction-quality-in-snowflake-ai-extract.png?preferwebp=true&quality=100&sfver=aba6ce7c",
       "terms": "Snowflake publishes the comparison chart publicly. Attribution and source licensing apply.",
       "headline": "The source reports no overall provider score, so this is the field extraction accuracy column.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "AWS Textract",
@@ -10129,7 +10125,7 @@
       "url": "https://www.ai-fpl.com/#standings",
       "feed": "https://www.ai-fpl.com/wp-json/scout/v1/league/1592467",
       "terms": "The organizer publishes the standings. I found no reuse license on its rules or gameweek report. The site's robots.txt disallows /wp-json/.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "Scout ChatGPT",
@@ -10152,7 +10148,7 @@
       "url": "https://aigamestore.org/leaderboard",
       "feed": "https://aigamestore.org/table.tsv",
       "terms": "The site’s code is MIT licensed, and the leaderboard reads this public file. The authors ask that the games, videos and study data never be used for AI training, as a request rather than a license condition.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": [
         "Qwen3-VL-32B"
@@ -10174,7 +10170,7 @@
       "url": "https://aiprofessions.ai/models/ai-model-test-results/",
       "feed": "https://raw.githubusercontent.com/aiprofessions/prompt-benchmark/main/data/results.csv (per-prompt scores)",
       "terms": "Per-prompt scores the makers publish in their GitHub repository under CC BY 4.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [],
       "parts": {
@@ -10251,7 +10247,7 @@
       "url": "https://leaderboard.far.ai/",
       "feed": "https://leaderboard.far.ai/assets/index-B6DSpVcx.js",
       "terms": "FAR.AI publishes the leaderboard for research use and provides no separate data license. Results are credited to FAR.AI.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": [],
       "parts": {
@@ -10286,7 +10282,7 @@
       "url": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
       "feed": "https://agent.csdn.net/6a74244310ee7a33f296fc9a.html",
       "terms": "AGI-Eval publishes the charts on CSDN without a reuse license. The article robots.txt allows the results page.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "Doubao"
@@ -10334,7 +10330,7 @@
       "url": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark",
       "feed": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark/raw/main/README.md",
       "terms": "Public Hugging Face dataset card; its robots.txt permits this raw card path.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "Google Sheets + Gemini",
@@ -10365,7 +10361,7 @@
       "url": "https://www.ai-wellbeing.org/",
       "feed": "https://www.ai-wellbeing.org/",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 6,
       "unmatched": []
     },
@@ -10456,7 +10452,7 @@
       "url": "https://aider.chat/docs/leaderboards/edit.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/edit_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 42,
       "unmatched": [
         "Codestral 22B (May 2024)",
@@ -10605,7 +10601,7 @@
       "url": "https://aider.chat/docs/leaderboards/",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/polyglot_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 63,
       "unmatched": [
         "DeepSeek Chat V2.5",
@@ -10701,7 +10697,7 @@
       "url": "https://aider.chat/docs/leaderboards/refactor.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/refactor_leaderboard.yml",
       "terms": "Aider's repository uses Apache 2.0. The raw GitHub host returns 404 for robots.txt, and aider.chat lists its sitemap.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 13,
       "unmatched": [
         "DeepSeek Coder V2 0724 (deprecated)"
@@ -10771,7 +10767,7 @@
       "url": "https://mteb-leaderboard.hf.space/tasks/AILAStatutes",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/tasks/AILAStatutes/scores",
       "terms": "MTEB publishes its results dataset under CC0 1.0. https://huggingface.co/datasets/mteb/results The Space allows crawling in robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "Alibaba-NLP/gte-Qwen1.5-7B-instruct",
@@ -11064,7 +11060,7 @@
       "url": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "feed": "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "De-Identified System 1",
@@ -11120,7 +11116,7 @@
       "url": "https://mlcommons.org/ailuminate/safety/results/",
       "feed": "https://mlcommons.org/ailuminate/safety/results/",
       "terms": "Cite: [System] scored in the [Nth] percentile overall on AILuminate Safety [version], English (US); official result retrieved from mlcommons.org on [date], under the MLCommons Benchmark Use and Messaging Policy.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 10,
       "unmatched": [
         "Deep Cogito Cogito v2.1 671B",
@@ -11147,7 +11143,7 @@
       "feed": "https://www.vals.ai/benchmarks/aime",
       "terms": "The page identifies https://creativecommons.org/licenses/by/4.0/ as its dataset license. Vals allows the benchmark in robots.txt.",
       "host": "Vals AI",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 96,
       "unmatched": [],
       "chart": {
@@ -11180,7 +11176,7 @@
       "feed": "https://matharena.ai/competition_tables/aime--aime_2025",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 129,
       "unmatched": [],
       "stats": {
@@ -11217,7 +11213,7 @@
       "feed": "https://matharena.ai/competition_tables/aime--aime_2026",
       "terms": "matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.",
       "host": "MathArena",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 31,
       "unmatched": [],
       "stats": {
@@ -11295,7 +11291,7 @@
       "url": "https://crfm.stanford.edu/helm/air-bench/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/air-bench/benchmark_output/releases/<newest>/groups/air_bench_2024.json (Refusal Rate)",
       "terms": "Public HELM output bucket that the leaderboard reads; the HELM code is Apache-2.0.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 85,
       "unmatched": [
         "palmyra-fin",
@@ -11372,7 +11368,7 @@
       "url": "https://github.com/OFA-Sys/AIR-Bench",
       "feed": "https://raw.githubusercontent.com/OFA-Sys/AIR-Bench/HEAD/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 1,
       "unmatched": [
         "BLSP",
@@ -11409,7 +11405,7 @@
       "url": "https://github.com/OFA-Sys/AIR-Bench",
       "feed": "https://raw.githubusercontent.com/OFA-Sys/AIR-Bench/HEAD/README.md",
       "terms": "Apache-2.0 benchmark repository. The Almanac credits the authors and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "BLSP",
@@ -11504,7 +11500,7 @@
       "feed": "https://air-bench-leaderboard.hf.space/call/update_qa_df_ret_rerank",
       "terms": "AIR-Bench publishes its official retrieval leaderboard and evaluation results under the MIT license at https://github.com/AIR-Bench/AIR-Bench and https://huggingface.co/spaces/AIR-Bench/leaderboard.",
       "headline": "The board reports QA nDCG@10 and Long-Doc Recall@10 separately, so this is the QA nDCG@10 average across all 13 QA domains.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "BM25",
@@ -11794,7 +11790,7 @@
       "url": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
       "feed": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 11,
       "unmatched": [
         "GPT-4o (snapshot unspecified)"
@@ -11814,7 +11810,7 @@
       "url": "https://huggingface.co/datasets/dreadnode/AIRTBench",
       "feed": "https://huggingface.co/datasets/dreadnode/AIRTBench/resolve/main/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 9,
       "unmatched": [
         "DeepSeek-R1 [snapshot unspecified]",
@@ -11826,7 +11822,7 @@
       "url": "https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task/tree/main/results",
       "feed": "https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task/raw/main/results/track_c_dialect.csv",
       "terms": "The organizers label the Space Apache 2.0. The dialect table covers 21 team systems. The two competition tracks each cover 17. https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task Hugging Face robots.txt allows these files.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "Arabic Function Forge",
@@ -11918,7 +11914,7 @@
       "feed": "https://aise-bench.github.io/",
       "terms": "The project site credits its template under CC BY-SA 4.0 at https://aise-bench.github.io/.",
       "headline": "F1-LM combines answer correctness and completeness.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 12,
       "unmatched": [],
       "stats": {
@@ -12008,7 +12004,7 @@
       "feed": "https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "terms": "SOTA2 Research publishes and credits the originating papers on its public benchmark page. https://www.sota2.com/research/sota/speaker-attributed-automatic-speech-recognition-on-aishell-4-test",
       "host": "SOTA2 Research",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "DM-ASR (DiariZen) (CN 1300h)",
@@ -12160,8 +12156,8 @@
       "url": "https://sakanaai.github.io/ALE-Bench-Leaderboard/",
       "feed": "https://sakanaai.github.io/ALE-Bench-Leaderboard/data/results_summary.json",
       "terms": "Public Sakana AI ALE-Bench leaderboard results, subject to the repository license and GitHub terms.",
-      "retrieved": "2026-11-26",
-      "rows": 750,
+      "retrieved": "2026-11-27",
+      "rows": 760,
       "unmatched": [
         "codestral-2508",
         "gemini-2.5-flash-lite-thinking (snapshot unspecified)",
@@ -12703,7 +12699,7 @@
       "url": "https://huggingface.co/datasets/HebArabNlpProject/AlephBench#leaderboard",
       "feed": "https://huggingface.co/datasets/HebArabNlpProject/AlephBench/raw/main/leaderboard.csv",
       "terms": "The authors license the leaderboard under CC BY 4.0. Source tasks retain their individual licenses. https://huggingface.co/datasets/HebArabNlpProject/AlephBench Hugging Face allows crawling in robots.txt.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 4,
       "unmatched": [
         "HebArabNlpProject/Hebatron",
@@ -13026,7 +13022,7 @@
       "url": "https://alexandriax.dlnlp.ai/leaderboard.html",
       "feed": "https://alexandriax.dlnlp.ai/leaderboard.html",
       "terms": "Public competition results credited to the AlexandriaX organizers. https://alexandriax.dlnlp.ai/leaderboard.html",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 2,
       "unmatched": [
         "NileChat-3B-Base"
@@ -13062,7 +13058,7 @@
       "url": "https://askforalfred.com/leaderboard/leaderboard.html",
       "feed": "https://askforalfred.com/leaderboard/leaderboard.html",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 0,
       "unmatched": [
         "726",
@@ -13199,7 +13195,7 @@
       "feed": "https://hkust-nlp.github.io/agentboard/data/To_Release/main_data_new.json",
       "terms": "AgentBoard publishes its evaluations at https://github.com/hkust-nlp/AgentBoard.",
       "host": "AgentBoard",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 5,
       "unmatched": [
         "CodeLlama-13b",
@@ -21656,6 +21652,7 @@
         "A.X-K2",
         "Agnes 2.5 Pro Theta",
         "Apodex 1.1",
+        "ERNIE 5.5 Flash Preview",
         "JT-4.1 Flash 236B A21B",
         "JoyAI-VL-Preview",
         "K2 Horizon 0.9B",
@@ -21668,7 +21665,8 @@
         "Ling 3.1 Flash 1019",
         "Ling-3.2-air",
         "Nanbeige4.3-33B",
-        "Nemotron 3 Ultra 550B A55B (Reasoning)"
+        "Nemotron 3 Ultra 550B A55B (Reasoning)",
+        "Quasar 1.2 358B (Max, Based on GLM-5.3)"
       ],
       "parts": {
         "financeAccounting": {
@@ -30839,6 +30837,10 @@
           "name": "Favorite won",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "404 https://ballotbench.com/live/head.json"
       }
     },
     "balrog": {
@@ -31366,6 +31368,10 @@
           "unit": "%",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "Unknown model or incomplete BanSpeech results for rumble_bn_v2"
       }
     },
     "barc-bench": {
@@ -35645,7 +35651,7 @@
       "url": "https://huggingface.co/spaces/bigcode/arena",
       "feed": "https://bigcode-arena.hf.space/gradio_api/call/update_ranking_display",
       "terms": "Public BigCodeArena leaderboard callback. Hugging Face and repository terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 14,
       "unmatched": [],
       "stats": {
@@ -35653,10 +35659,6 @@
           "name": "Votes",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-27",
-        "error": "The operation was aborted due to timeout"
       }
     },
     "bigcodebench": {
@@ -44296,6 +44298,7 @@
         "CADGenBench submission xyz_gpt-5-6-sol-incremental-v1-high-pi-agent_20260917-122313: GPT-5.6-sol-incremental-v1-high-pi-agent-103-r1",
         "CADGenBench submission xyz_gpt-5-6-sol-incremental-v1-high-step-103_20260917-122339: GPT-5.6-sol-incremental-v1-high-step-103-r1",
         "CADGenBench submission xyz_gpt-5-6-sol-oneshot-visual-check-high-10_20260918-062536: GPT-5.6-sol-oneshot-visual-check-high-101-102-r1",
+        "CADGenBench submission ya_ay_20261127-003346: AY",
         "CADGenBench submission yerin-choi_cad-mcp-paired-heldout-v1-cad-mcp-replic_20260814-143202: CAD-MCP paired heldout v1 cad_mcp replicate 1",
         "CADGenBench submission yerin-choi_cad-mcp-paired-heldout-v1-cad-mcp-replic_20260814-143420: CAD-MCP paired heldout v1 cad_mcp replicate 2",
         "CADGenBench submission yerin-choi_cad-mcp-paired-heldout-v1-cad-mcp-replic_20260814-143620: CAD-MCP paired heldout v1 cad_mcp replicate 3",
@@ -56588,6 +56591,10 @@
           "unit": "count",
           "note": "Memory usage in megabytes."
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "Paper table has a duplicate configuration: [\"Hcompany/NeoMME-800M-Retriever\",null,null]"
       }
     },
     "climatecheck-2025": {
@@ -74309,7 +74316,7 @@
       "feed": "https://glimmerindex.com/api/bench/hustlesim",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#hustlesim-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-27",
-      "rows": 18,
+      "rows": 19,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -74437,7 +74444,7 @@
       "feed": "https://glimmerindex.com/api/bench/micromouse",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#micromouse-method Glimmer Index allows all paths in robots.txt.",
       "retrieved": "2026-11-27",
-      "rows": 18,
+      "rows": 19,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -86585,7 +86592,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=3d",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-27",
-      "rows": 173,
+      "rows": 174,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -87290,7 +87297,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=gamedev",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-27",
-      "rows": 183,
+      "rows": 184,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -93711,6 +93718,10 @@
           "name": "Surface",
           "group": "Category"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "403 https://api.github.com/repos/xlang-ai/DS-1000/git/trees/HEAD?recursive=1"
       }
     },
     "ds-arena-code": {
@@ -103437,6 +103448,10 @@
           "name": "Total tokens",
           "unit": "tokens"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "403 https://api.github.com/repos/hitz-zentroa/latxa/git/trees/main?recursive=1"
       }
     },
     "eusreading": {
@@ -124772,7 +124787,7 @@
       "feed": "https://huggingface.co/datasets/gaia-benchmark/results_public/resolve/main/2023/test-00000-of-00001.parquet",
       "terms": "Public, ungated Hugging Face dataset that the GAIA Space reads to draw its board; the dataset states no license, and Hugging Face terms allow reading it.",
       "retrieved": "2026-11-27",
-      "rows": 443,
+      "rows": 445,
       "unmatched": [
         "4o-mini",
         "4ominiio",
@@ -124812,6 +124827,7 @@
         "Deepseek-Flash",
         "Deepseek，Kimi，Claude",
         "Diagnostic",
+        "Favon",
         "Fine-tuned GPT-4o",
         "Flint 40B MoE",
         "GAIA system 1000: pku_aaaagent_0822",
@@ -127482,6 +127498,9 @@
         "GAIA system 4233: abcdagent v26.11.26",
         "GAIA system 4236: 172",
         "GAIA system 423: xfls",
+        "GAIA system 4242: abcdagent v26.11.27",
+        "GAIA system 4244: 184",
+        "GAIA system 4245: OmniSeek_Preview_v1.2",
         "GAIA system 424: sq626",
         "GAIA system 425: t2666",
         "GAIA system 426: 🦤 AWorld (Run Instantly)",
@@ -137627,6 +137646,7 @@
         "Ablion",
         "Alex",
         "AlphaPoker",
+        "Bentham",
         "Bitcrumbs",
         "Boreal",
         "Bulochka",
@@ -137663,6 +137683,7 @@
         "No Mercy",
         "No Mercy v2",
         "Oryx",
+        "Oryx2",
         "Oski",
         "PatchSolver",
         "Perun",
@@ -137674,11 +137695,9 @@
         "PokerBotV1",
         "PokerNi",
         "PokerSkill",
-        "PokerVision",
         "Pokermon",
         "RabbitHunt",
         "Riverline",
-        "RobinAI",
         "Roman_SL",
         "SHUTDOWN",
         "Sean-Poker-4B",
@@ -146846,7 +146865,7 @@
       "feed": "https://pku-liang.github.io/hwe-bench/scores-v1.1.json",
       "terms": "The author repository uses Apache License 2.0. https://raw.githubusercontent.com/pku-liang/hwe-bench/main/LICENSE The project host serves no robots.txt.",
       "retrieved": "2026-11-27",
-      "rows": 7,
+      "rows": 8,
       "unmatched": [],
       "chart": {
         "title": "Resolved rate vs. run cost",
@@ -162908,6 +162927,8 @@
         "AJev lm6q (Gemma 4 31B)",
         "APUS-OpenJev-v1-35B-A3B (merged bf16 checkpoint-5949 MoE on Qwen3.5-35B-A3B, their own native runtime, full depth, self-hosted)",
         "APUS-OpenJev-v1-9B (merged bf16 checkpoint-3000 on Qwen3.5-9B, their own native runtime, full depth, self-hosted)",
+        "APUS-Reflex2.1",
+        "APUS_Reflex2.2",
         "Aleria Judge 1.1.1 (ALERIA-ML, inference technique on stock Gemma 4 31B, author server, self-hosted)",
         "Alibaba GTE Reranker ModernBERT-base",
         "Amazon Strands Decider 26B-A4B",
@@ -162955,6 +162976,7 @@
         "D1A on Gemma 4 E2B (JohnP1 d1a-e2b)",
         "D1A on Gemma 4 E4B (JohnP1 d1a-e4b)",
         "DOPEST 1.0 31B",
+        "Decibel-30B-A3B-v0 (Decagon, Qwen3-Omni-30B-A3B thinker fine-tune, self-hosted)",
         "Decider-4B (roudone, NeoHorse 4B pointer model, author server, self-hosted)",
         "Decisio 12B tuned commit (variant of the Decisio family)",
         "Decisio 12B tuned commit-think (variant of the Decisio family)",
@@ -162964,6 +162986,7 @@
         "Decision 2B (FlyMy.AI, v59)",
         "Decision 4B v1.1 (FlyMyJev, Qwen3.5-4B + LoRA)",
         "Decision 4B v1.2 (FlyMyJev, Qwen3.5-4B + LoRA)",
+        "Decision 4B v1.6 (FlyMyJev, rank-16 LoRA on Qwen3.5-4B, in-process adapter, self-hosted)",
         "Decision Fast (FlyMy.AI, v53a)",
         "Decision-4B (Eval Engine / Chromia)",
         "Decision-King v1.1 (xsdfasfgsa)",
@@ -163047,6 +163070,7 @@
         "Messier One v0.4 (Qwen3.5-4B fine-tune, self-hosted)",
         "MetaDecision-31B-Rain",
         "Metask rain 4B",
+        "Mica v0.1 4B (akivet, LoRA on Qwen3.5-4B, BF16 GGUF via llama.cpp, self-hosted)",
         "Microsoft-Decision-1 (Azure Foundry)",
         "Microsoft-Decision-1 (updated weights, Oct 2026)",
         "Minimodels Decision 1.0 (candy-cane)",
@@ -163140,6 +163164,7 @@
         "Super Decider",
         "Super Decider (thinking)",
         "Surogate Rune 26B-A4B v3 (v1.6 pool)",
+        "Synaps-Decision-1.0-27B-Preview (Synaptivo, LoRA on Qwen3.8-27B merged into the base, self-hosted)",
         "TDE general large v0.1 (tdelab, ModernBERT-large encoder)",
         "Tacet Sonata (CodePawl, 144M packed encoder on mmBERT-small, option-marker softmax in one pass, in-process via the author's tacet package)",
         "Tern-35B-A3B (matthewagi, Qwen3.6 35B-A3B MoE decision model, author server, self-hosted)",
@@ -163149,6 +163174,7 @@
         "Torchcast Decision 4B (v1.3)",
         "Trio-Spark v1.3 (MachineFi)",
         "Turion Jev 31B",
+        "Turion-JEV-4B (turion-ai, Qwen3.5-4B fine-tune, self-hosted)",
         "TypeCastLM 1.4.0 (Mikhail Gribov, Qwen3.5-4B computed head)",
         "Umpire 35B-A3B",
         "Uniphore-4B-Decider",
@@ -163165,6 +163191,7 @@
         "Wald 4B v2.1",
         "WaterSheep (Samrat Dutta, ModernBERT-base encoder with calibrated heads, served by the author's own `watersheep --serve`)",
         "WeMM-JEV (Rover00)",
+        "WePocketModel1.0-4B (Tencent WeChat AI, Qwen3.5-4B based, learned decision slot, self-hosted)",
         "Winnow-12B Q8",
         "Xevn-4B",
         "Xor 26B-A4B (Juspay, Gemma-4-26B-A4B, bf16)",
@@ -165843,7 +165870,7 @@
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/racing-arena/leaderboard",
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
       "retrieved": "2026-11-27",
-      "rows": 10,
+      "rows": 11,
       "unmatched": []
     },
     "kaggle-sort-viz-arena": {
@@ -172849,7 +172876,7 @@
       "url": "https://last-translation-benchmark.vilda.net/leaderboard-results",
       "feed": "https://last-translation-benchmark.vilda.net/api/leaderboard/results?mode=blind&subset=LTBv1-eval (also mode=oracle)",
       "terms": "The official site restricts automated access in robots.txt; the almanac credits the Last Translation Benchmark authors and links the original source.",
-      "retrieved": "2026-11-26",
+      "retrieved": "2026-11-27",
       "rows": 40,
       "unmatched": [
         "Command A",
@@ -172874,10 +172901,6 @@
           "name": "Parameter upper bound",
           "unit": "billions"
         }
-      },
-      "failed": {
-        "date": "2026-11-27",
-        "error": "no answer in 60 s from https://last-translation-benchmark.vilda.net/api/leaderboard/results?mode=blind&subset=LTBv1-eval"
       }
     },
     "latchbio-capabilities-v0": {
@@ -185929,41 +185952,11 @@
         "sentence-transformers/gtr-t5-base"
       ],
       "parts": {
-        "science_forum_test": {
-          "name": "science forum (test)"
+        "technology_search_test": {
+          "name": "technology search (test)"
         },
-        "science_forum_dev": {
-          "name": "science forum (dev)"
-        },
-        "writing_search_dev": {
-          "name": "writing search (dev)"
-        },
-        "writing_search_test": {
-          "name": "writing search (test)"
-        },
-        "writing_forum_dev": {
-          "name": "writing forum (dev)"
-        },
-        "writing_forum_test": {
-          "name": "writing forum (test)"
-        },
-        "recreation_search_dev": {
-          "name": "recreation search (dev)"
-        },
-        "recreation_search_test": {
-          "name": "recreation search (test)"
-        },
-        "recreation_forum_dev": {
-          "name": "recreation forum (dev)"
-        },
-        "recreation_forum_test": {
-          "name": "recreation forum (test)"
-        },
-        "technology_forum_dev": {
-          "name": "technology forum (dev)"
-        },
-        "technology_forum_test": {
-          "name": "technology forum (test)"
+        "technology_search_dev": {
+          "name": "technology search (dev)"
         },
         "lifestyle_search_dev": {
           "name": "lifestyle search (dev)"
@@ -185971,23 +185964,53 @@
         "lifestyle_search_test": {
           "name": "lifestyle search (test)"
         },
+        "science_search_test": {
+          "name": "science search (test)"
+        },
+        "science_search_dev": {
+          "name": "science search (dev)"
+        },
+        "recreation_search_test": {
+          "name": "recreation search (test)"
+        },
+        "recreation_search_dev": {
+          "name": "recreation search (dev)"
+        },
+        "writing_search_test": {
+          "name": "writing search (test)"
+        },
+        "writing_search_dev": {
+          "name": "writing search (dev)"
+        },
+        "technology_forum_test": {
+          "name": "technology forum (test)"
+        },
+        "technology_forum_dev": {
+          "name": "technology forum (dev)"
+        },
+        "science_forum_dev": {
+          "name": "science forum (dev)"
+        },
+        "science_forum_test": {
+          "name": "science forum (test)"
+        },
         "lifestyle_forum_dev": {
           "name": "lifestyle forum (dev)"
         },
         "lifestyle_forum_test": {
           "name": "lifestyle forum (test)"
         },
-        "science_search_dev": {
-          "name": "science search (dev)"
+        "recreation_forum_test": {
+          "name": "recreation forum (test)"
         },
-        "science_search_test": {
-          "name": "science search (test)"
+        "recreation_forum_dev": {
+          "name": "recreation forum (dev)"
         },
-        "technology_search_test": {
-          "name": "technology search (test)"
+        "writing_forum_dev": {
+          "name": "writing forum (dev)"
         },
-        "technology_search_dev": {
-          "name": "technology search (dev)"
+        "writing_forum_test": {
+          "name": "writing forum (test)"
         }
       }
     },
@@ -200628,20 +200651,20 @@
           "name": "Visual semantic textual similarity, multilingual",
           "group": "Task type"
         },
-        "fashionIQIT2IRetrieval": {
-          "name": "FashionIQIT2IRetrieval",
+        "sTS16VisualSTS": {
+          "name": "STS16VisualSTS",
           "group": "Task"
         },
-        "dTD": {
-          "name": "DTD",
+        "caltech101ZeroShot": {
+          "name": "Caltech101ZeroShot",
           "group": "Task"
         },
-        "oVENIT2TRetrieval": {
-          "name": "OVENIT2TRetrieval",
+        "cLEVRCountZeroShot": {
+          "name": "CLEVRCountZeroShot",
           "group": "Task"
         },
-        "sUN397ZeroShot": {
-          "name": "SUN397ZeroShot",
+        "nIGHTSI2IRetrieval": {
+          "name": "NIGHTSI2IRetrieval",
           "group": "Task"
         },
         "vidoreArxivQARetrieval": {
@@ -200652,500 +200675,500 @@
           "name": "VidoreSyntheticDocQAEnergyRetrieval",
           "group": "Task"
         },
-        "imageCoDe": {
-          "name": "ImageCoDe",
-          "group": "Task"
-        },
-        "imagenet1k": {
-          "name": "Imagenet1k",
-          "group": "Task"
-        },
-        "cIFAR10": {
-          "name": "CIFAR10",
-          "group": "Task"
-        },
-        "sketchyI2IRetrieval": {
-          "name": "SketchyI2IRetrieval",
-          "group": "Task"
-        },
-        "fashion200kT2IRetrieval": {
-          "name": "Fashion200kT2IRetrieval",
-          "group": "Task"
-        },
-        "vidoreDocVQARetrieval": {
-          "name": "VidoreDocVQARetrieval",
-          "group": "Task"
-        },
-        "sOPI2IRetrieval": {
-          "name": "SOPI2IRetrieval",
-          "group": "Task"
-        },
-        "bLINKIT2TMultiChoice": {
-          "name": "BLINKIT2TMultiChoice",
-          "group": "Task"
-        },
-        "flickr30kT2IRetrieval": {
-          "name": "Flickr30kT2IRetrieval",
-          "group": "Task"
-        },
-        "visualSTSBMultilingual": {
-          "name": "VisualSTS-b-Multilingual",
-          "group": "Task"
-        },
-        "vQA2IT2TRetrieval": {
-          "name": "VQA2IT2TRetrieval",
-          "group": "Task"
-        },
-        "sUN397": {
-          "name": "SUN397",
-          "group": "Task"
-        },
-        "cLEVRZeroShot": {
-          "name": "CLEVRZeroShot",
-          "group": "Task"
-        },
-        "tinyImageNetClustering": {
-          "name": "TinyImageNetClustering",
-          "group": "Task"
-        },
-        "euroSAT": {
-          "name": "EuroSAT",
-          "group": "Task"
-        },
-        "mNIST": {
-          "name": "MNIST",
-          "group": "Task"
-        },
-        "cUB200I2IRetrieval": {
-          "name": "CUB200I2IRetrieval",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAAIRetrieval": {
-          "name": "VidoreSyntheticDocQAAIRetrieval",
-          "group": "Task"
-        },
-        "oxfordFlowersClassification": {
-          "name": "OxfordFlowersClassification",
-          "group": "Task"
-        },
-        "imageNetDog15Clustering": {
-          "name": "ImageNetDog15Clustering",
-          "group": "Task"
-        },
-        "mNISTZeroShot": {
-          "name": "MNISTZeroShot",
-          "group": "Task"
-        },
-        "imagenet1kZeroShot": {
-          "name": "Imagenet1kZeroShot",
-          "group": "Task"
-        },
-        "hatefulMemesT2IRetrieval": {
-          "name": "HatefulMemesT2IRetrieval",
-          "group": "Task"
-        },
-        "uCF101": {
-          "name": "UCF101",
-          "group": "Task"
-        },
-        "patchCamelyon": {
-          "name": "PatchCamelyon",
-          "group": "Task"
-        },
-        "vidoreTatdqaRetrieval": {
-          "name": "VidoreTatdqaRetrieval",
-          "group": "Task"
-        },
-        "hatefulMemesI2TRetrieval": {
-          "name": "HatefulMemesI2TRetrieval",
-          "group": "Task"
-        },
-        "uCF101ZeroShot": {
-          "name": "UCF101ZeroShot",
-          "group": "Task"
-        },
-        "food101Classification": {
-          "name": "Food101Classification",
-          "group": "Task"
-        },
-        "rOxfordHardI2IRetrieval": {
-          "name": "ROxfordHardI2IRetrieval",
-          "group": "Task"
-        },
-        "eDIST2ITRetrieval": {
-          "name": "EDIST2ITRetrieval",
-          "group": "Task"
-        },
-        "cIFAR100ZeroShot": {
-          "name": "CIFAR100ZeroShot",
-          "group": "Task"
-        },
-        "infoSeekIT2TRetrieval": {
-          "name": "InfoSeekIT2TRetrieval",
-          "group": "Task"
-        },
-        "cVBenchCount": {
-          "name": "CVBenchCount",
-          "group": "Task"
-        },
-        "gTSRBZeroShot": {
-          "name": "GTSRBZeroShot",
-          "group": "Task"
-        },
-        "sTS13VisualSTS": {
-          "name": "STS13VisualSTS",
-          "group": "Task"
-        },
-        "patchCamelyonZeroShot": {
-          "name": "PatchCamelyonZeroShot",
-          "group": "Task"
-        },
-        "sTS14VisualSTS": {
-          "name": "STS14VisualSTS",
-          "group": "Task"
-        },
-        "oxfordPets": {
-          "name": "OxfordPets",
-          "group": "Task"
-        },
-        "imageCoDeT2IRetrieval": {
-          "name": "ImageCoDeT2IRetrieval",
-          "group": "Task"
-        },
-        "sciMMIRI2TRetrieval": {
-          "name": "SciMMIRI2TRetrieval",
+        "memotionI2TRetrieval": {
+          "name": "MemotionI2TRetrieval",
           "group": "Task"
         },
         "oVENIT2ITRetrieval": {
           "name": "OVENIT2ITRetrieval",
           "group": "Task"
         },
-        "sugarCrepe": {
-          "name": "SugarCrepe",
-          "group": "Task"
-        },
-        "euroSATZeroShot": {
-          "name": "EuroSATZeroShot",
-          "group": "Task"
-        },
-        "aROVisualAttribution": {
-          "name": "AROVisualAttribution",
-          "group": "Task"
-        },
-        "rP2kI2IRetrieval": {
-          "name": "RP2kI2IRetrieval",
-          "group": "Task"
-        },
-        "mSCOCOT2IRetrieval": {
-          "name": "MSCOCOT2IRetrieval",
-          "group": "Task"
-        },
-        "memotionT2IRetrieval": {
-          "name": "MemotionT2IRetrieval",
-          "group": "Task"
-        },
-        "cVBenchRelation": {
-          "name": "CVBenchRelation",
-          "group": "Task"
-        },
-        "vidoreTabfquadRetrieval": {
-          "name": "VidoreTabfquadRetrieval",
-          "group": "Task"
-        },
-        "sTL10ZeroShot": {
-          "name": "STL10ZeroShot",
-          "group": "Task"
-        },
-        "aROVisualRelation": {
-          "name": "AROVisualRelation",
-          "group": "Task"
-        },
-        "fGVCAircraftZeroShot": {
-          "name": "FGVCAircraftZeroShot",
-          "group": "Task"
-        },
-        "cVBenchDepth": {
-          "name": "CVBenchDepth",
-          "group": "Task"
-        },
-        "visualSTS17Multilingual": {
-          "name": "VisualSTS17Multilingual",
-          "group": "Task"
-        },
-        "stanfordCarsI2IRetrieval": {
-          "name": "StanfordCarsI2IRetrieval",
-          "group": "Task"
-        },
-        "fGVCAircraft": {
-          "name": "FGVCAircraft",
-          "group": "Task"
-        },
-        "rParisHardI2IRetrieval": {
-          "name": "RParisHardI2IRetrieval",
-          "group": "Task"
-        },
-        "mETI2IRetrieval": {
-          "name": "METI2IRetrieval",
-          "group": "Task"
-        },
-        "fER2013ZeroShot": {
-          "name": "FER2013ZeroShot",
-          "group": "Task"
-        },
-        "cIFAR100Clustering": {
-          "name": "CIFAR100Clustering",
-          "group": "Task"
-        },
-        "wITT2IRetrieval": {
-          "name": "WITT2IRetrieval",
-          "group": "Task"
-        },
-        "country211": {
-          "name": "Country211",
-          "group": "Task"
-        },
-        "caltech101ZeroShot": {
-          "name": "Caltech101ZeroShot",
-          "group": "Task"
-        },
-        "stanfordCars": {
-          "name": "StanfordCars",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAHealthcareIndustryRetrieval": {
-          "name": "VidoreSyntheticDocQAHealthcareIndustryRetrieval",
-          "group": "Task"
-        },
-        "gLDv2I2TRetrieval": {
-          "name": "GLDv2I2TRetrieval",
-          "group": "Task"
-        },
-        "mSCOCOI2TRetrieval": {
-          "name": "MSCOCOI2TRetrieval",
-          "group": "Task"
-        },
-        "rESISC45ZeroShot": {
-          "name": "RESISC45ZeroShot",
-          "group": "Task"
-        },
-        "vidoreShiftProjectRetrieval": {
-          "name": "VidoreShiftProjectRetrieval",
-          "group": "Task"
-        },
-        "visualNewsI2TRetrieval": {
-          "name": "VisualNewsI2TRetrieval",
-          "group": "Task"
-        },
-        "fashion200kI2TRetrieval": {
-          "name": "Fashion200kI2TRetrieval",
-          "group": "Task"
-        },
-        "cIFAR10Clustering": {
-          "name": "CIFAR10Clustering",
-          "group": "Task"
-        },
-        "birdsnapZeroShot": {
-          "name": "BirdsnapZeroShot",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAGovernmentReportsRetrieval": {
-          "name": "VidoreSyntheticDocQAGovernmentReportsRetrieval",
-          "group": "Task"
-        },
-        "visualSTSBEng": {
-          "name": "VisualSTS-b-Eng",
-          "group": "Task"
-        },
-        "bLINKIT2IMultiChoice": {
-          "name": "BLINKIT2IMultiChoice",
-          "group": "Task"
-        },
-        "vOC2007": {
-          "name": "VOC2007",
-          "group": "Task"
-        },
-        "visualSTS17Eng": {
-          "name": "VisualSTS17Eng",
-          "group": "Task"
-        },
-        "bLINKIT2IRetrieval": {
-          "name": "BLINKIT2IRetrieval",
-          "group": "Task"
-        },
-        "cIFAR100": {
-          "name": "CIFAR100",
-          "group": "Task"
-        },
-        "vidoreInfoVQARetrieval": {
-          "name": "VidoreInfoVQARetrieval",
-          "group": "Task"
-        },
-        "memotionI2TRetrieval": {
-          "name": "MemotionI2TRetrieval",
-          "group": "Task"
-        },
-        "flickr30kI2TRetrieval": {
-          "name": "Flickr30kI2TRetrieval",
-          "group": "Task"
-        },
-        "aROFlickrOrder": {
-          "name": "AROFlickrOrder",
-          "group": "Task"
-        },
-        "tUBerlinT2IRetrieval": {
-          "name": "TUBerlinT2IRetrieval",
-          "group": "Task"
-        },
-        "dTDZeroShot": {
-          "name": "DTDZeroShot",
-          "group": "Task"
-        },
-        "sTL10": {
-          "name": "STL10",
-          "group": "Task"
-        },
-        "webQAT2TRetrieval": {
-          "name": "WebQAT2TRetrieval",
-          "group": "Task"
-        },
-        "cIRRIT2IRetrieval": {
-          "name": "CIRRIT2IRetrieval",
-          "group": "Task"
-        },
-        "vizWizIT2TRetrieval": {
-          "name": "VizWizIT2TRetrieval",
-          "group": "Task"
-        },
-        "cVBenchDistance": {
-          "name": "CVBenchDistance",
-          "group": "Task"
-        },
-        "rOxfordMediumI2IRetrieval": {
-          "name": "ROxfordMediumI2IRetrieval",
-          "group": "Task"
-        },
-        "imageNet10Clustering": {
-          "name": "ImageNet10Clustering",
-          "group": "Task"
-        },
-        "xM3600T2IRetrieval": {
-          "name": "XM3600T2IRetrieval",
-          "group": "Task"
-        },
-        "renderedSST2": {
-          "name": "RenderedSST2",
-          "group": "Task"
-        },
-        "oxfordPetsZeroShot": {
-          "name": "OxfordPetsZeroShot",
-          "group": "Task"
-        },
-        "nIGHTSI2IRetrieval": {
-          "name": "NIGHTSI2IRetrieval",
-          "group": "Task"
-        },
-        "fORBI2IRetrieval": {
-          "name": "FORBI2IRetrieval",
-          "group": "Task"
-        },
-        "sTS15VisualSTS": {
-          "name": "STS15VisualSTS",
-          "group": "Task"
-        },
-        "sTS12VisualSTS": {
-          "name": "STS12VisualSTS",
-          "group": "Task"
-        },
-        "stanfordCarsZeroShot": {
-          "name": "StanfordCarsZeroShot",
-          "group": "Task"
-        },
-        "gTSRB": {
-          "name": "GTSRB",
-          "group": "Task"
-        },
-        "fER2013": {
-          "name": "FER2013",
-          "group": "Task"
-        },
-        "sciMMIRT2IRetrieval": {
-          "name": "SciMMIRT2IRetrieval",
-          "group": "Task"
-        },
-        "sTS16VisualSTS": {
-          "name": "STS16VisualSTS",
-          "group": "Task"
-        },
-        "food101ZeroShot": {
-          "name": "Food101ZeroShot",
-          "group": "Task"
-        },
-        "cIFAR10ZeroShot": {
-          "name": "CIFAR10ZeroShot",
-          "group": "Task"
-        },
-        "aROCocoOrder": {
-          "name": "AROCocoOrder",
-          "group": "Task"
-        },
-        "caltech101": {
-          "name": "Caltech101",
-          "group": "Task"
-        },
-        "webQAT2ITRetrieval": {
-          "name": "WebQAT2ITRetrieval",
-          "group": "Task"
-        },
-        "country211ZeroShot": {
-          "name": "Country211ZeroShot",
-          "group": "Task"
-        },
-        "bLINKIT2TRetrieval": {
-          "name": "BLINKIT2TRetrieval",
-          "group": "Task"
-        },
-        "rParisEasyI2IRetrieval": {
-          "name": "RParisEasyI2IRetrieval",
+        "cLEVRZeroShot": {
+          "name": "CLEVRZeroShot",
           "group": "Task"
         },
         "visualNewsT2IRetrieval": {
           "name": "VisualNewsT2IRetrieval",
           "group": "Task"
         },
-        "winoground": {
-          "name": "Winoground",
+        "patchCamelyonZeroShot": {
+          "name": "PatchCamelyonZeroShot",
           "group": "Task"
         },
-        "rParisMediumI2IRetrieval": {
-          "name": "RParisMediumI2IRetrieval",
+        "webQAT2TRetrieval": {
+          "name": "WebQAT2TRetrieval",
           "group": "Task"
         },
-        "infoSeekIT2ITRetrieval": {
-          "name": "InfoSeekIT2ITRetrieval",
+        "imagenet1k": {
+          "name": "Imagenet1k",
           "group": "Task"
         },
-        "rOxfordEasyI2IRetrieval": {
-          "name": "ROxfordEasyI2IRetrieval",
+        "fORBI2IRetrieval": {
+          "name": "FORBI2IRetrieval",
           "group": "Task"
         },
-        "xFlickr30kCoT2IRetrieval": {
-          "name": "XFlickr30kCoT2IRetrieval",
+        "mETI2IRetrieval": {
+          "name": "METI2IRetrieval",
           "group": "Task"
         },
-        "gLDv2I2IRetrieval": {
-          "name": "GLDv2I2IRetrieval",
+        "gTSRBZeroShot": {
+          "name": "GTSRBZeroShot",
           "group": "Task"
         },
         "birdsnap": {
           "name": "Birdsnap",
           "group": "Task"
         },
-        "cLEVRCountZeroShot": {
-          "name": "CLEVRCountZeroShot",
+        "tinyImageNetClustering": {
+          "name": "TinyImageNetClustering",
+          "group": "Task"
+        },
+        "visualSTSBMultilingual": {
+          "name": "VisualSTS-b-Multilingual",
+          "group": "Task"
+        },
+        "visualSTS17Multilingual": {
+          "name": "VisualSTS17Multilingual",
+          "group": "Task"
+        },
+        "bLINKIT2TMultiChoice": {
+          "name": "BLINKIT2TMultiChoice",
+          "group": "Task"
+        },
+        "bLINKIT2IMultiChoice": {
+          "name": "BLINKIT2IMultiChoice",
+          "group": "Task"
+        },
+        "oxfordPets": {
+          "name": "OxfordPets",
+          "group": "Task"
+        },
+        "cIFAR10ZeroShot": {
+          "name": "CIFAR10ZeroShot",
+          "group": "Task"
+        },
+        "eDIST2ITRetrieval": {
+          "name": "EDIST2ITRetrieval",
+          "group": "Task"
+        },
+        "fashion200kT2IRetrieval": {
+          "name": "Fashion200kT2IRetrieval",
+          "group": "Task"
+        },
+        "patchCamelyon": {
+          "name": "PatchCamelyon",
+          "group": "Task"
+        },
+        "fashion200kI2TRetrieval": {
+          "name": "Fashion200kI2TRetrieval",
+          "group": "Task"
+        },
+        "country211": {
+          "name": "Country211",
+          "group": "Task"
+        },
+        "fER2013": {
+          "name": "FER2013",
+          "group": "Task"
+        },
+        "vQA2IT2TRetrieval": {
+          "name": "VQA2IT2TRetrieval",
+          "group": "Task"
+        },
+        "cIFAR100ZeroShot": {
+          "name": "CIFAR100ZeroShot",
+          "group": "Task"
+        },
+        "aROFlickrOrder": {
+          "name": "AROFlickrOrder",
+          "group": "Task"
+        },
+        "vidoreTatdqaRetrieval": {
+          "name": "VidoreTatdqaRetrieval",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAAIRetrieval": {
+          "name": "VidoreSyntheticDocQAAIRetrieval",
+          "group": "Task"
+        },
+        "imageCoDeT2IRetrieval": {
+          "name": "ImageCoDeT2IRetrieval",
+          "group": "Task"
+        },
+        "rOxfordEasyI2IRetrieval": {
+          "name": "ROxfordEasyI2IRetrieval",
+          "group": "Task"
+        },
+        "flickr30kT2IRetrieval": {
+          "name": "Flickr30kT2IRetrieval",
+          "group": "Task"
+        },
+        "oVENIT2TRetrieval": {
+          "name": "OVENIT2TRetrieval",
+          "group": "Task"
+        },
+        "mSCOCOI2TRetrieval": {
+          "name": "MSCOCOI2TRetrieval",
+          "group": "Task"
+        },
+        "sOPI2IRetrieval": {
+          "name": "SOPI2IRetrieval",
+          "group": "Task"
+        },
+        "vidoreTabfquadRetrieval": {
+          "name": "VidoreTabfquadRetrieval",
+          "group": "Task"
+        },
+        "infoSeekIT2TRetrieval": {
+          "name": "InfoSeekIT2TRetrieval",
+          "group": "Task"
+        },
+        "euroSATZeroShot": {
+          "name": "EuroSATZeroShot",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAHealthcareIndustryRetrieval": {
+          "name": "VidoreSyntheticDocQAHealthcareIndustryRetrieval",
+          "group": "Task"
+        },
+        "rOxfordMediumI2IRetrieval": {
+          "name": "ROxfordMediumI2IRetrieval",
+          "group": "Task"
+        },
+        "oxfordFlowersClassification": {
+          "name": "OxfordFlowersClassification",
+          "group": "Task"
+        },
+        "cVBenchRelation": {
+          "name": "CVBenchRelation",
+          "group": "Task"
+        },
+        "aROCocoOrder": {
+          "name": "AROCocoOrder",
+          "group": "Task"
+        },
+        "vidoreShiftProjectRetrieval": {
+          "name": "VidoreShiftProjectRetrieval",
+          "group": "Task"
+        },
+        "vidoreInfoVQARetrieval": {
+          "name": "VidoreInfoVQARetrieval",
+          "group": "Task"
+        },
+        "imageNetDog15Clustering": {
+          "name": "ImageNetDog15Clustering",
+          "group": "Task"
+        },
+        "bLINKIT2TRetrieval": {
+          "name": "BLINKIT2TRetrieval",
+          "group": "Task"
+        },
+        "cIRRIT2IRetrieval": {
+          "name": "CIRRIT2IRetrieval",
+          "group": "Task"
+        },
+        "webQAT2ITRetrieval": {
+          "name": "WebQAT2ITRetrieval",
+          "group": "Task"
+        },
+        "rP2kI2IRetrieval": {
+          "name": "RP2kI2IRetrieval",
+          "group": "Task"
+        },
+        "sTS15VisualSTS": {
+          "name": "STS15VisualSTS",
+          "group": "Task"
+        },
+        "sTL10": {
+          "name": "STL10",
+          "group": "Task"
+        },
+        "hatefulMemesI2TRetrieval": {
+          "name": "HatefulMemesI2TRetrieval",
+          "group": "Task"
+        },
+        "cIFAR100": {
+          "name": "CIFAR100",
+          "group": "Task"
+        },
+        "visualSTS17Eng": {
+          "name": "VisualSTS17Eng",
+          "group": "Task"
+        },
+        "sTS12VisualSTS": {
+          "name": "STS12VisualSTS",
+          "group": "Task"
+        },
+        "bLINKIT2IRetrieval": {
+          "name": "BLINKIT2IRetrieval",
+          "group": "Task"
+        },
+        "cIFAR10Clustering": {
+          "name": "CIFAR10Clustering",
+          "group": "Task"
+        },
+        "gLDv2I2TRetrieval": {
+          "name": "GLDv2I2TRetrieval",
+          "group": "Task"
+        },
+        "dTD": {
+          "name": "DTD",
+          "group": "Task"
+        },
+        "gTSRB": {
+          "name": "GTSRB",
+          "group": "Task"
+        },
+        "winoground": {
+          "name": "Winoground",
+          "group": "Task"
+        },
+        "sUN397ZeroShot": {
+          "name": "SUN397ZeroShot",
+          "group": "Task"
+        },
+        "fER2013ZeroShot": {
+          "name": "FER2013ZeroShot",
+          "group": "Task"
+        },
+        "fGVCAircraftZeroShot": {
+          "name": "FGVCAircraftZeroShot",
+          "group": "Task"
+        },
+        "memotionT2IRetrieval": {
+          "name": "MemotionT2IRetrieval",
+          "group": "Task"
+        },
+        "vOC2007": {
+          "name": "VOC2007",
+          "group": "Task"
+        },
+        "mNIST": {
+          "name": "MNIST",
+          "group": "Task"
+        },
+        "rParisMediumI2IRetrieval": {
+          "name": "RParisMediumI2IRetrieval",
+          "group": "Task"
+        },
+        "country211ZeroShot": {
+          "name": "Country211ZeroShot",
+          "group": "Task"
+        },
+        "sTS14VisualSTS": {
+          "name": "STS14VisualSTS",
+          "group": "Task"
+        },
+        "tUBerlinT2IRetrieval": {
+          "name": "TUBerlinT2IRetrieval",
+          "group": "Task"
+        },
+        "wITT2IRetrieval": {
+          "name": "WITT2IRetrieval",
+          "group": "Task"
+        },
+        "aROVisualRelation": {
+          "name": "AROVisualRelation",
+          "group": "Task"
+        },
+        "rParisEasyI2IRetrieval": {
+          "name": "RParisEasyI2IRetrieval",
+          "group": "Task"
+        },
+        "stanfordCarsZeroShot": {
+          "name": "StanfordCarsZeroShot",
           "group": "Task"
         },
         "rESISC45": {
           "name": "RESISC45",
+          "group": "Task"
+        },
+        "cUB200I2IRetrieval": {
+          "name": "CUB200I2IRetrieval",
+          "group": "Task"
+        },
+        "visualSTSBEng": {
+          "name": "VisualSTS-b-Eng",
+          "group": "Task"
+        },
+        "sugarCrepe": {
+          "name": "SugarCrepe",
+          "group": "Task"
+        },
+        "oxfordPetsZeroShot": {
+          "name": "OxfordPetsZeroShot",
+          "group": "Task"
+        },
+        "uCF101ZeroShot": {
+          "name": "UCF101ZeroShot",
+          "group": "Task"
+        },
+        "sciMMIRT2IRetrieval": {
+          "name": "SciMMIRT2IRetrieval",
+          "group": "Task"
+        },
+        "euroSAT": {
+          "name": "EuroSAT",
+          "group": "Task"
+        },
+        "fGVCAircraft": {
+          "name": "FGVCAircraft",
+          "group": "Task"
+        },
+        "sciMMIRI2TRetrieval": {
+          "name": "SciMMIRI2TRetrieval",
+          "group": "Task"
+        },
+        "cIFAR10": {
+          "name": "CIFAR10",
+          "group": "Task"
+        },
+        "xM3600T2IRetrieval": {
+          "name": "XM3600T2IRetrieval",
+          "group": "Task"
+        },
+        "rOxfordHardI2IRetrieval": {
+          "name": "ROxfordHardI2IRetrieval",
+          "group": "Task"
+        },
+        "gLDv2I2IRetrieval": {
+          "name": "GLDv2I2IRetrieval",
+          "group": "Task"
+        },
+        "sUN397": {
+          "name": "SUN397",
+          "group": "Task"
+        },
+        "imageNet10Clustering": {
+          "name": "ImageNet10Clustering",
+          "group": "Task"
+        },
+        "visualNewsI2TRetrieval": {
+          "name": "VisualNewsI2TRetrieval",
+          "group": "Task"
+        },
+        "food101Classification": {
+          "name": "Food101Classification",
+          "group": "Task"
+        },
+        "mNISTZeroShot": {
+          "name": "MNISTZeroShot",
+          "group": "Task"
+        },
+        "rParisHardI2IRetrieval": {
+          "name": "RParisHardI2IRetrieval",
+          "group": "Task"
+        },
+        "renderedSST2": {
+          "name": "RenderedSST2",
+          "group": "Task"
+        },
+        "dTDZeroShot": {
+          "name": "DTDZeroShot",
+          "group": "Task"
+        },
+        "uCF101": {
+          "name": "UCF101",
+          "group": "Task"
+        },
+        "fashionIQIT2IRetrieval": {
+          "name": "FashionIQIT2IRetrieval",
+          "group": "Task"
+        },
+        "infoSeekIT2ITRetrieval": {
+          "name": "InfoSeekIT2ITRetrieval",
+          "group": "Task"
+        },
+        "imageCoDe": {
+          "name": "ImageCoDe",
+          "group": "Task"
+        },
+        "cIFAR100Clustering": {
+          "name": "CIFAR100Clustering",
+          "group": "Task"
+        },
+        "hatefulMemesT2IRetrieval": {
+          "name": "HatefulMemesT2IRetrieval",
+          "group": "Task"
+        },
+        "caltech101": {
+          "name": "Caltech101",
+          "group": "Task"
+        },
+        "rESISC45ZeroShot": {
+          "name": "RESISC45ZeroShot",
+          "group": "Task"
+        },
+        "imagenet1kZeroShot": {
+          "name": "Imagenet1kZeroShot",
+          "group": "Task"
+        },
+        "sTL10ZeroShot": {
+          "name": "STL10ZeroShot",
+          "group": "Task"
+        },
+        "birdsnapZeroShot": {
+          "name": "BirdsnapZeroShot",
+          "group": "Task"
+        },
+        "xFlickr30kCoT2IRetrieval": {
+          "name": "XFlickr30kCoT2IRetrieval",
+          "group": "Task"
+        },
+        "cVBenchDepth": {
+          "name": "CVBenchDepth",
+          "group": "Task"
+        },
+        "sketchyI2IRetrieval": {
+          "name": "SketchyI2IRetrieval",
+          "group": "Task"
+        },
+        "vizWizIT2TRetrieval": {
+          "name": "VizWizIT2TRetrieval",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAGovernmentReportsRetrieval": {
+          "name": "VidoreSyntheticDocQAGovernmentReportsRetrieval",
+          "group": "Task"
+        },
+        "vidoreDocVQARetrieval": {
+          "name": "VidoreDocVQARetrieval",
+          "group": "Task"
+        },
+        "aROVisualAttribution": {
+          "name": "AROVisualAttribution",
+          "group": "Task"
+        },
+        "stanfordCarsI2IRetrieval": {
+          "name": "StanfordCarsI2IRetrieval",
+          "group": "Task"
+        },
+        "sTS13VisualSTS": {
+          "name": "STS13VisualSTS",
+          "group": "Task"
+        },
+        "flickr30kI2TRetrieval": {
+          "name": "Flickr30kI2TRetrieval",
+          "group": "Task"
+        },
+        "stanfordCars": {
+          "name": "StanfordCars",
+          "group": "Task"
+        },
+        "cVBenchDistance": {
+          "name": "CVBenchDistance",
+          "group": "Task"
+        },
+        "food101ZeroShot": {
+          "name": "Food101ZeroShot",
+          "group": "Task"
+        },
+        "cVBenchCount": {
+          "name": "CVBenchCount",
+          "group": "Task"
+        },
+        "mSCOCOT2IRetrieval": {
+          "name": "MSCOCOT2IRetrieval",
           "group": "Task"
         },
         "mIEBEngTaskMeanTaskMean": {
@@ -219535,7 +219558,9 @@
       "terms": "Static data file on the project site (GitHub Pages, no robots.txt rules); the FrontisAI/NatureBench repository is MIT-licensed.",
       "retrieved": "2026-11-27",
       "rows": 25,
-      "unmatched": [],
+      "unmatched": [
+        "Gemini 4 Carbon (Megatron) [full/gemini-4-carbon-megatron]"
+      ],
       "harnesses": "system",
       "parts": {
         "proteinBiology": {
@@ -231221,6 +231246,10 @@
           "unit": "count",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "unexpected Omni Parse Bench columns: "
       }
     },
     "omniphys": {
@@ -250664,6 +250693,10 @@
           "unit": "seconds",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "403 https://api.github.com/repos/Bobby-Gray/open-tabletop-gm/contents/probe/results/narrative?ref=ac5579736dae04cca65d7cdbe76273fde8c0bd86"
       }
     },
     "open-tabletop-gm-narrative-probe-2": {
@@ -254308,6 +254341,10 @@
           "name": "Total tokens",
           "unit": "tokens"
         }
+      },
+      "failed": {
+        "date": "2026-11-27",
+        "error": "403 https://api.github.com/repos/ORCA-bench/ORCA-bench/contents/leaderboard/submissions"
       }
     },
     "os-critic-bench": {
@@ -284129,8 +284166,32 @@
         "sentence-transformers/static-similarity-mrl-multilingual-v1"
       ],
       "parts": {
-        "japaneseCode1Retrieval": {
-          "name": "JapaneseCode1Retrieval",
+        "dS1000Retrieval": {
+          "name": "DS1000Retrieval",
+          "group": "Task"
+        },
+        "cUREv1": {
+          "name": "CUREv1",
+          "group": "Task"
+        },
+        "englishFinance2Retrieval": {
+          "name": "EnglishFinance2Retrieval",
+          "group": "Task"
+        },
+        "legalQuAD": {
+          "name": "LegalQuAD",
+          "group": "Task"
+        },
+        "chatDoctorRetrieval": {
+          "name": "ChatDoctorRetrieval",
+          "group": "Task"
+        },
+        "japaneseLegal1Retrieval": {
+          "name": "JapaneseLegal1Retrieval",
+          "group": "Task"
+        },
+        "aILACasedocs": {
+          "name": "AILACasedocs",
           "group": "Task"
         },
         "finQARetrieval": {
@@ -284141,32 +284202,64 @@
           "name": "MIRACLRetrievalHardNegatives",
           "group": "Task"
         },
-        "freshStackRetrieval": {
-          "name": "FreshStackRetrieval",
+        "germanLegal1Retrieval": {
+          "name": "GermanLegal1Retrieval",
           "group": "Task"
         },
-        "englishFinance2Retrieval": {
-          "name": "EnglishFinance2Retrieval",
+        "wikiSQLRetrieval": {
+          "name": "WikiSQLRetrieval",
           "group": "Task"
         },
-        "dS1000Retrieval": {
-          "name": "DS1000Retrieval",
+        "englishFinance1Retrieval": {
+          "name": "EnglishFinance1Retrieval",
+          "group": "Task"
+        },
+        "englishFinance4Retrieval": {
+          "name": "EnglishFinance4Retrieval",
+          "group": "Task"
+        },
+        "aILAStatutes": {
+          "name": "AILAStatutes",
+          "group": "Task"
+        },
+        "frenchLegal1Retrieval": {
+          "name": "FrenchLegal1Retrieval",
+          "group": "Task"
+        },
+        "french1Retrieval": {
+          "name": "French1Retrieval",
           "group": "Task"
         },
         "hC3FinanceRetrieval": {
           "name": "HC3FinanceRetrieval",
           "group": "Task"
         },
-        "mBPPRetrieval": {
-          "name": "MBPPRetrieval",
+        "japaneseCode1Retrieval": {
+          "name": "JapaneseCode1Retrieval",
           "group": "Task"
         },
-        "financeBenchRetrieval": {
-          "name": "FinanceBenchRetrieval",
+        "code1Retrieval": {
+          "name": "Code1Retrieval",
           "group": "Task"
         },
-        "aILACasedocs": {
-          "name": "AILACasedocs",
+        "humanEvalRetrieval": {
+          "name": "HumanEvalRetrieval",
+          "group": "Task"
+        },
+        "englishHealthcare1Retrieval": {
+          "name": "EnglishHealthcare1Retrieval",
+          "group": "Task"
+        },
+        "sWEbenchCodeRetrieval": {
+          "name": "SWEbenchCodeRetrieval",
+          "group": "Task"
+        },
+        "englishFinance3Retrieval": {
+          "name": "EnglishFinance3Retrieval",
+          "group": "Task"
+        },
+        "appsRetrieval": {
+          "name": "AppsRetrieval",
           "group": "Task"
         },
         "legalSummarization": {
@@ -284177,76 +284270,20 @@
           "name": "German1Retrieval",
           "group": "Task"
         },
-        "code1Retrieval": {
-          "name": "Code1Retrieval",
-          "group": "Task"
-        },
-        "aILAStatutes": {
-          "name": "AILAStatutes",
-          "group": "Task"
-        },
-        "legalQuAD": {
-          "name": "LegalQuAD",
-          "group": "Task"
-        },
-        "appsRetrieval": {
-          "name": "AppsRetrieval",
-          "group": "Task"
-        },
-        "french1Retrieval": {
-          "name": "French1Retrieval",
-          "group": "Task"
-        },
-        "sWEbenchCodeRetrieval": {
-          "name": "SWEbenchCodeRetrieval",
-          "group": "Task"
-        },
-        "humanEvalRetrieval": {
-          "name": "HumanEvalRetrieval",
-          "group": "Task"
-        },
-        "frenchLegal1Retrieval": {
-          "name": "FrenchLegal1Retrieval",
-          "group": "Task"
-        },
-        "cUREv1": {
-          "name": "CUREv1",
-          "group": "Task"
-        },
-        "englishHealthcare1Retrieval": {
-          "name": "EnglishHealthcare1Retrieval",
-          "group": "Task"
-        },
         "germanHealthcare1Retrieval": {
           "name": "GermanHealthcare1Retrieval",
           "group": "Task"
         },
-        "chatDoctorRetrieval": {
-          "name": "ChatDoctorRetrieval",
+        "mBPPRetrieval": {
+          "name": "MBPPRetrieval",
           "group": "Task"
         },
-        "englishFinance4Retrieval": {
-          "name": "EnglishFinance4Retrieval",
+        "freshStackRetrieval": {
+          "name": "FreshStackRetrieval",
           "group": "Task"
         },
-        "wikiSQLRetrieval": {
-          "name": "WikiSQLRetrieval",
-          "group": "Task"
-        },
-        "japaneseLegal1Retrieval": {
-          "name": "JapaneseLegal1Retrieval",
-          "group": "Task"
-        },
-        "germanLegal1Retrieval": {
-          "name": "GermanLegal1Retrieval",
-          "group": "Task"
-        },
-        "englishFinance3Retrieval": {
-          "name": "EnglishFinance3Retrieval",
-          "group": "Task"
-        },
-        "englishFinance1Retrieval": {
-          "name": "EnglishFinance1Retrieval",
+        "financeBenchRetrieval": {
+          "name": "FinanceBenchRetrieval",
           "group": "Task"
         }
       },
