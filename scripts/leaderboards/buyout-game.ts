@@ -1,6 +1,6 @@
 // Buyout Game ranks models by Bradley–Terry ratings from mirrored wealth comparisons.
 // The author’s CSV gives the rating intervals and match counts, and the README supplies display names.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
@@ -25,17 +25,18 @@ const board: Leaderboard = {
     ts_sigma: { name: 'TrueSkill rating uncertainty', unit: 'rating', better: 'lower' },
   },
   aliases: { 'Grok 4.20 0309': 'grok-4-20', 'Xiaomi MiMo V2.5 Pro': 'mimo-v2-5-pro', 'Xiaomi MiMo V2 Pro': 'mimo-v2-pro',
-    'ByteDance Seed2.0 Pro': 'seed-2-0-pro', 'Baidu Ernie 5.1': 'ernie-5-1', 'Baidu Ernie 5.0': 'ernie-5-0' },
+    'Xiaomi MiMo V2.6 Pro': 'mimo-v2-6-pro', 'Xiaomi MiMo V2.6 Flash': 'mimo-v2-6-flash',
+    'ByteDance Seed2.0 Pro': 'seed-2-0-pro', 'ByteDance Seed2.1 Pro': 'seed-2-1-pro', 'Baidu Ernie 5.1': 'ernie-5-1', 'Baidu Ernie 5.0': 'ernie-5-0' },
   async fetch() {
     const entries = parseCsv(await fetchText(feed));
     await new Promise(resolve => setTimeout(resolve, 1000));
     const readme = await fetchText(feed.replace('reference/current/scoreboard_bt.csv', 'README.md'));
-    const labels = markdownTables(readme).find(t => t[0].join('|') === 'Rank|Model|BT|Games|Match Packs');
+    const labels = markdownTables(readme).find(t => t[0].join('|') === 'Rank|Model|BT rating|95% rating interval|Games|Mirrored pairs');
     if (!labels || entries.length < 36 || labels.length !== entries.length + 1) throw new Error('Buyout tables disagree');
     return entries.map(r => {
       const label = labels[Number(r.bt_rank)];
       if (!label || !r.bt_rating || Math.abs(Number(label[2]) - Number(r.bt_rating)) > 0.051 ||
-          Number(label[3]) !== Number(r.games) || Number(label[4]) !== Number(r.rating_units)) throw new Error('Buyout rank mismatch');
+          Number(label[4]) !== Number(r.games) || Number(label[5]) !== Number(r.rating_units)) throw new Error('Buyout rank mismatch');
       const metrics: Record<string, number> = {};
       for (const key of ['games','rating_units','bt_se','bt_matches','bt_opponent_count','wealth_partial_points_sum','wealth_partial_score','wealth_winner_count',
           'wealth_winner_rate','pairwise_win_rate','ts_mu','ts_sigma']) {
