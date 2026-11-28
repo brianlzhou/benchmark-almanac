@@ -1,0 +1,806 @@
+---
+// The Almanac Index: which model leads overall and in each domain, from the tests labs cite most. The index and its
+// monthly versions come from src/lib/almanac-index-data.ts. The server draws the current version, so the page reads
+// without JavaScript, and the page script (src/scripts/almanac-index.ts) redraws it from /index/data.json when a
+// reader switches versions, sorts, or picks a domain or a model. Both use the same markup
+// (src/components/almanac-index/render.ts).
+import Base from '../../layouts/Base.astro';
+import { indexPayload } from '../../components/almanac-index/payload.ts';
+import * as R from '../../components/almanac-index/render.ts';
+
+const all = indexPayload();
+const c = R.ctxOf(all, all.main);
+const state: R.State = { sortKey: 'rank', lbOpen: false, domain: R.defaultDomain(c), who: R.defaultWho(c), rankOpen: false };
+const leader = c.P.headline.rows[0];
+const domainCount = c.P.domains.filter((d) => !d.thin).length;
+const description = `Which AI model leads overall and in each of ${domainCount} domains, from the tests labs cite most in launch posts and system cards. A new version freezes each month.`;
+---
+
+<Base title="Almanac Index" searchTitle={`Almanac Index ${all.main}: the best AI model overall and by domain`} description={description}>
+  <div class="page ix-page" data-main={all.main} data-domain={state.domain} data-who={state.who}>
+    <header class="head">
+      <h1 id="ix-title">{R.title(c)}</h1>
+      <p class="lede" id="ix-lede" set:html={R.lede(c)} />
+      <div class="ix-vbar">
+        <div class="seg" id="ix-vseg" role="group" aria-label="Version" set:html={R.versionSeg(c)} />
+        <p class="ix-vnote" id="ix-vnote">{R.versionNote(c)}</p>
+      </div>
+      <div class="facts" id="ix-facts" set:html={R.facts(c)} />
+    </header>
+
+    <section id="overall" aria-labelledby="ix-h-overall">
+      <div class="sh">
+        <h2 id="ix-h-overall">Who leads overall?</h2>
+        <p id="ix-cap-overall">{R.overallCaption(c)}</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t ix-lb" id="ix-lb" set:html={R.table(c, state)} />
+      </div>
+      <button type="button" class="more-rows" id="ix-lb-more" hidden={c.P.headline.rows.length <= R.LB_TOP}>{R.moreText(c, state)}</button>
+    </section>
+
+    <section id="changes" aria-labelledby="ix-h-changes">
+      <div class="sh">
+        <h2 id="ix-h-changes">What changed in this version?</h2>
+        <p id="ix-cap-changes">{R.changesCaption(c)}</p>
+      </div>
+      <div class="ix-chg" id="ix-chg" set:html={R.changes(c)} />
+    </section>
+
+    <section id="domains" aria-labelledby="ix-h-domains">
+      <div class="sh">
+        <h2 id="ix-h-domains">Who leads each domain?</h2>
+        <p id="ix-cap-domains">{R.domainsCaption(c)}</p>
+      </div>
+      <div class="ix-groups" id="ix-groups" set:html={R.cards(c, state.domain)} />
+      <div class="ix-board" id="ix-board" aria-live="polite" set:html={R.board(c, state.domain)} />
+    </section>
+
+    <section id="strengths" aria-labelledby="ix-h-models">
+      <div class="sh">
+        <h2 id="ix-h-models">Where is each model strong or weak?</h2>
+        <p id="ix-cap-models">{R.modelsCaption(c, state.who)}</p>
+      </div>
+      <div class="ix-chips" id="ix-chips" role="group" aria-label="Pick a model" set:html={R.chips(c, state.who)} />
+      <div class="ix-prof" id="ix-prof" set:html={R.profile(c, state.who)} />
+      <div class="ix-heat-head">
+        <h3>All the leading models at once</h3>
+        <p>Each cell is the model's rank among current models in that domain. Darker means closer to first.</p>
+      </div>
+      <div class="ix-legend" set:html={R.legend()} />
+      <div class="ix-scroll">
+        <table class="ix-heat" id="ix-heat" set:html={R.heat(c)} />
+      </div>
+    </section>
+
+    <section id="tests" aria-labelledby="ix-h-tests">
+      <div class="sh">
+        <h2 id="ix-h-tests">Which tests count most?</h2>
+        <p id="ix-cap-tests">{R.testsCaption(c)}</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t ix-ranking" id="ix-rank" set:html={R.ranking(c, false)} />
+      </div>
+      <button type="button" class="more-rows" id="ix-rank-more" hidden={c.P.ranking.length <= R.RANK_TOP}>{R.rankMoreText(c, false)}</button>
+    </section>
+
+    <section id="how" aria-labelledby="ix-h-how">
+      <div class="sh">
+        <h2 id="ix-h-how">How does it work?</h2>
+        <p>{leader ? `Everything on this page is computed from the almanac's data, and changes as new scores come in.` : ''}</p>
+      </div>
+      <ol class="ix-how" id="ix-how" set:html={R.how(c)} />
+      <h3 class="ix-h3">Known limits</h3>
+      <ul class="ix-notes" id="ix-limits" set:html={R.limits(c)} />
+    </section>
+  </div>
+</Base>
+
+<script>
+  import '../../scripts/almanac-index.ts';
+</script>
+
+<style is:global>
+  /* The page's markup comes from render.ts as strings, so these styles are global, under .ix-page. */
+  .ix-page .ix-vbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-top: 22px;
+  }
+  .ix-page .ix-vbar .seg button .ix-tag {
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 6px;
+  }
+  .ix-page .ix-vnote {
+    font-size: 14px;
+    color: var(--ink-3);
+    max-width: 70ch;
+    flex: 1 1 320px;
+  }
+  .ix-page .lede b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ix-page .facts span b {
+    font-variant-numeric: tabular-nums;
+  }
+  .ix-page .ix-small {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .ix-page .ix-scroll {
+    overflow-x: auto;
+    min-width: 0;
+  }
+
+  /* lab marks, drawn as strings (the site's LabMark.astro scopes its styles) */
+  .ix-page .ix-mk {
+    display: inline-block;
+    flex: none;
+    width: var(--s, 16px);
+    height: var(--s, 16px);
+  }
+  .ix-page .ix-mask {
+    background: var(--ink);
+    -webkit-mask: var(--m) center / contain no-repeat;
+    mask: var(--m) center / contain no-repeat;
+  }
+  .ix-page .ix-init {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--ink-2);
+    font: 600 10px/1 var(--sans);
+  }
+  .ix-page .ix-who {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .ix-page .ix-who > a,
+  .ix-page .ix-who > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ix-page .ix-who > a,
+  .ix-page .ix-lab a {
+    text-decoration: none;
+  }
+  .ix-page .ix-who > a:hover,
+  .ix-page .ix-lab a:hover {
+    text-decoration: underline;
+  }
+
+  /* the leaderboard: fixed columns, so sorting or switching versions never moves them */
+  .ix-page .ix-lb {
+    table-layout: fixed;
+    min-width: 1100px;
+    font-size: 14px;
+  }
+  .ix-page .ix-lb th,
+  .ix-page .ix-lb td {
+    padding-left: 6px;
+    padding-right: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ix-page .ix-lb td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+  /* seven group columns fit a laptop screen only with their sort arrows shown on demand */
+  .ix-page .ix-lb th.ix-gh {
+    font-size: 12px;
+  }
+  .ix-page .ix-lb th:not([aria-sort]) .sort svg {
+    display: none;
+  }
+  .ix-page .ix-lb th:not([aria-sort]) .sort:is(:hover, :focus-visible) svg {
+    display: block;
+  }
+  .ix-page .ix-lb td.ix-lab,
+  .ix-page .ix-lb td.ix-rel {
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+  .ix-page .ix-lb td.ix-lab a {
+    color: var(--ink-2);
+  }
+  .ix-page .ix-ix {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ix-page .ix-fill {
+    display: block;
+    height: 8px;
+    border-radius: 0 3px 3px 0;
+    flex: none;
+  }
+  .ix-page .ix-est {
+    color: var(--ink-4);
+    font-style: italic;
+  }
+  .ix-page .ix-lb tr.ix-div td {
+    padding: 22px 6px 8px;
+    color: var(--ink-3);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-top: 0;
+  }
+  .ix-page .ix-lb tbody tr.ix-div:hover td {
+    background: none;
+    box-shadow: none;
+  }
+  .ix-page .ix-lb tr.ix-prov td {
+    color: var(--ink-3);
+  }
+  .ix-page .ix-lb tr.ix-prov .ix-fill {
+    opacity: 0.45;
+  }
+  @media (max-width: 720px) {
+    /* on a phone the lab column goes (the mark names the lab), the model column narrows, and the model's
+       name stays put while the numbers scroll under it */
+    .ix-page .ix-lb col:nth-child(2) {
+      width: 150px !important;
+    }
+    .ix-page .ix-lb col:nth-child(3) {
+      width: 0 !important;
+    }
+    .ix-page .ix-lb th:nth-child(3),
+    .ix-page .ix-lb td:nth-child(3) {
+      padding: 0;
+      visibility: hidden;
+    }
+    .ix-page .ix-lb td.ix-m,
+    .ix-page .ix-lb th:nth-child(2) {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background: var(--bg);
+    }
+  }
+
+  /* the changelog */
+  .ix-page .ix-chg {
+    display: grid;
+    gap: 18px;
+  }
+  .ix-page .ix-chg-top {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px 32px;
+  }
+  .ix-page .ix-chg-top ol {
+    margin: 8px 0 0;
+    padding-left: 22px;
+    display: grid;
+    gap: 4px;
+    font-size: 14.5px;
+  }
+  .ix-page .ix-chg-top li::marker {
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .ix-page .ix-chg-top li .ix-who {
+    vertical-align: middle;
+  }
+  .ix-page .ix-chg-more .ix-chg-list {
+    margin-top: 4px;
+  }
+  .ix-page .ix-chg-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 10px;
+  }
+  .ix-page .ix-chg-d {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    min-width: 0;
+  }
+  .ix-page .ix-chg-d .ix-nm {
+    font-weight: 500;
+  }
+  .ix-page .ix-chg-d .ix-ld {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .ix-page .ix-chg-d .ix-ld.ix-moved {
+    color: var(--ink-2);
+  }
+  .ix-page .ix-chg-d ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .ix-page .ix-chg-d li {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr);
+    gap: 6px;
+  }
+  .ix-page .ix-sg {
+    font-family: var(--mono);
+    color: var(--ink-3);
+  }
+  .ix-page .ix-why {
+    display: block;
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+
+  /* domain cards */
+  .ix-page .ix-groups {
+    display: grid;
+    gap: 24px;
+  }
+  .ix-page .ix-group {
+    display: grid;
+    gap: 10px;
+  }
+  .ix-page .ix-group h3 {
+    font: 500 12.5px/1.2 var(--sans);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .ix-page .ix-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 216px), 1fr));
+    gap: 10px;
+  }
+  .ix-page .ix-card {
+    all: unset;
+    box-sizing: border-box;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 12px 14px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+    background: var(--bg);
+    min-width: 0;
+    transition: background-color 140ms ease;
+  }
+  .ix-page button.ix-card:hover {
+    background: var(--hover);
+  }
+  .ix-page .ix-card:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .ix-page .ix-card[aria-pressed='true'] {
+    border-color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .ix-page .ix-card .ix-nm {
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .ix-page .ix-card .ix-lead {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    min-width: 0;
+  }
+  .ix-page .ix-card .ix-n {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ix-page .ix-card .ix-v {
+    margin-left: auto;
+    font-size: 13.5px;
+  }
+  .ix-page .ix-card .ix-sub {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .ix-page .ix-mini {
+    display: grid;
+    gap: 3px;
+  }
+  .ix-page .ix-mini i {
+    display: block;
+    height: 4px;
+    border-radius: 0 2px 2px 0;
+  }
+  .ix-page .ix-card.ix-thin {
+    cursor: default;
+    background: var(--panel-2);
+  }
+  .ix-page .ix-card.ix-thin .ix-nm {
+    color: var(--ink-2);
+  }
+
+  /* the selected domain's board */
+  .ix-page .ix-board {
+    display: grid;
+    gap: 20px;
+    margin-top: 28px;
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    min-width: 0;
+    scroll-margin-top: 84px;
+  }
+  .ix-page .ix-bhead {
+    display: grid;
+    gap: 8px;
+  }
+  .ix-page .ix-bhead h3 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .ix-page .ix-bhead p {
+    color: var(--ink-2);
+    max-width: 80ch;
+  }
+  .ix-page .ix-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .ix-page .ix-bars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+    max-width: 860px;
+  }
+  .ix-page .ix-bars li {
+    display: grid;
+    grid-template-columns: 28px minmax(120px, 240px) minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    min-height: 30px;
+    padding: 0 6px;
+    border-radius: 6px;
+  }
+  .ix-page .ix-bars li:hover {
+    background: var(--hover);
+  }
+  .ix-page .ix-rk {
+    color: var(--ink-3);
+    font-size: 13px;
+    text-align: right;
+  }
+  .ix-page .ix-track {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    min-width: 0;
+  }
+  .ix-page .ix-bfill {
+    display: block;
+    height: 10px;
+    border-radius: 0 4px 4px 0;
+    min-width: 2px;
+  }
+  .ix-page .ix-val {
+    font-size: 13.5px;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+  .ix-page .ix-tests,
+  .ix-page .ix-grid {
+    font-size: 13.5px;
+  }
+  .ix-page .ix-board .t td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .ix-page .ix-board .t tbody tr:hover td {
+    background: var(--panel);
+  }
+  .ix-page .ix-board .t tbody tr:hover td:first-child {
+    box-shadow: -8px 0 0 var(--panel);
+  }
+  .ix-page .ix-board .t tbody tr:hover td:last-child {
+    box-shadow: 8px 0 0 var(--panel);
+  }
+  .ix-page .ix-tests td:first-child {
+    min-width: 180px;
+  }
+  .ix-page .ix-best {
+    white-space: nowrap;
+  }
+  .ix-page .ix-wbar {
+    display: inline-block;
+    height: 6px;
+    border-radius: 0 3px 3px 0;
+    background: var(--ink-3);
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .ix-page .ix-pred {
+    color: var(--ink-4);
+    font-style: italic;
+  }
+  .ix-page .ix-grid td.ix-m {
+    white-space: nowrap;
+  }
+  .ix-page .ix-details summary {
+    cursor: pointer;
+    color: var(--ink-2);
+    font-size: 14.5px;
+  }
+  .ix-page .ix-details[open] summary {
+    margin-bottom: 10px;
+  }
+  .ix-page .ix-details .ix-small {
+    margin-bottom: 10px;
+  }
+  @media (max-width: 720px) {
+    .ix-page .ix-board {
+      padding: 16px;
+    }
+    .ix-page .ix-bars li {
+      grid-template-columns: 22px minmax(96px, 150px) minmax(0, 1fr);
+      gap: 8px;
+    }
+  }
+
+  /* strengths and weaknesses */
+  .ix-page .ix-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ix-page .ix-chip {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  .ix-page .ix-chip:hover {
+    background: var(--hover);
+  }
+  .ix-page .ix-chip:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .ix-page .ix-chip[aria-pressed='true'] {
+    border-color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .ix-page .ix-prof {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .ix-page .ix-prof-sum {
+    color: var(--ink-2);
+    max-width: 80ch;
+  }
+  .ix-page .ix-prof-sum b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ix-page .ix-plist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .ix-page .ix-plist li {
+    display: grid;
+    grid-template-columns: minmax(130px, 230px) 96px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    min-height: 32px;
+    padding: 0 6px;
+    border-radius: 6px;
+    font-size: 14.5px;
+  }
+  .ix-page .ix-plist li:hover {
+    background: var(--hover);
+  }
+  .ix-page .ix-plist .ix-sep {
+    display: block;
+    min-height: 0;
+    padding: 16px 6px 4px;
+    color: var(--ink-3);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ix-page .ix-plist .ix-sep:hover {
+    background: none;
+  }
+  .ix-page .ix-rank b {
+    font-weight: 500;
+  }
+  .ix-page .ix-gap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    min-width: 0;
+  }
+  .ix-page .ix-g-track {
+    position: relative;
+    flex: 0 0 min(220px, 42%);
+    height: 10px;
+  }
+  .ix-page .ix-g-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 10px;
+    border-radius: 0 4px 4px 0;
+  }
+  .ix-page .ix-g-lead {
+    position: absolute;
+    top: -3px;
+    right: 0;
+    width: 2px;
+    height: 16px;
+    background: var(--ink);
+    border-radius: 1px;
+  }
+  .ix-page .ix-g-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .ix-page .ix-plist li {
+      grid-template-columns: minmax(0, 1fr) 84px;
+      row-gap: 2px;
+      padding-block: 6px;
+    }
+    .ix-page .ix-plist .ix-gap {
+      grid-column: 1 / -1;
+    }
+  }
+  .ix-page .ix-heat-head {
+    display: grid;
+    gap: 8px;
+    margin-top: 48px;
+  }
+  .ix-page .ix-heat-head h3,
+  .ix-page .ix-h3 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .ix-page .ix-heat-head p {
+    color: var(--ink-2);
+    max-width: 80ch;
+  }
+  .ix-page .ix-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    margin: 16px 0 12px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .ix-page .ix-sw {
+    display: inline-block;
+    width: 22px;
+    height: 14px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  .ix-page .ix-sw.ix-none,
+  .ix-page .ix-heat td.ix-none {
+    background: repeating-linear-gradient(45deg, transparent 0 4px, var(--grid) 4px 5px);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .ix-page .ix-heat {
+    border-collapse: separate;
+    border-spacing: 2px;
+    font-size: 12.5px;
+  }
+  .ix-page .ix-heat th {
+    padding: 4px 2px;
+    font-weight: 500;
+  }
+  .ix-page .ix-heat th.ix-col {
+    height: 132px;
+    vertical-align: bottom;
+    width: 34px;
+  }
+  .ix-page .ix-heat th.ix-col span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    display: inline-block;
+    color: var(--ink-2);
+    font-size: 12.5px;
+  }
+  .ix-page .ix-heat th.ix-row {
+    text-align: left;
+    white-space: nowrap;
+    padding-right: 12px;
+    font-weight: 400;
+    font-size: 13.5px;
+    position: sticky;
+    left: 0;
+    background: var(--bg);
+    z-index: 1;
+  }
+  .ix-page .ix-heat td {
+    width: 34px;
+    min-width: 34px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+  }
+
+  /* the test ranking */
+  .ix-page .ix-ranking {
+    font-size: 14px;
+    min-width: 960px;
+  }
+  .ix-page .ix-ranking td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+  .ix-page .ix-ranking td.ix-doms {
+    max-width: 260px;
+  }
+  .ix-page .ix-relv {
+    white-space: nowrap;
+  }
+
+  /* the method */
+  .ix-page .ix-how {
+    display: grid;
+    gap: 14px;
+    max-width: 80ch;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .ix-page .ix-how li {
+    color: var(--ink-2);
+  }
+  .ix-page .ix-how li b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ix-page .ix-h3 {
+    margin-top: 40px;
+  }
+  .ix-page .ix-notes {
+    display: grid;
+    gap: 10px;
+    max-width: 80ch;
+    padding-left: 22px;
+    margin: 14px 0 0;
+    color: var(--ink-2);
+  }
+</style>
