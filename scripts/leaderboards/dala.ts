@@ -1,11 +1,60 @@
-// DaLA evaluates Danish linguistic acceptability with real-world corruption types.
-// Table 2 reports DaLA Matthews correlation coefficient and macro F1 for ten models.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { pdfText } from '../lib/boards/pdf-text.ts';
-const FEED = 'https://arxiv.org/pdf/2512.04799';
-const board: Leaderboard = { benchmark: 'dala', static: 'paper', url: 'https://arxiv.org/html/2512.04799', feed: FEED, terms: 'The authors publish this paper on arXiv under its applicable terms.', stats: { dalaF1: { name: 'DaLA macro F1', unit: 'score', better: 'higher' } }, async fetch(): Promise<LeaderboardRow[]> {
- const text = await pdfText(FEED); const part = text.split('Danish part of ScaLA              DaLA (ours)')[1]?.split('Table 2:')[0]; if (!part) throw new Error('DaLA Table 2 missing');
- const rows: LeaderboardRow[] = []; const re = /(?:^|\n)\s*([a-z0-9][^\n]+?)\s{2,}(\d+\.\d+)\s±[^\n]+\s+(\d+\.\d+)\s±[^\n]+\s+(\d+\.\d+)\s±[^\n]+\s+(\d+\.\d+)\s±/g; let m;
- while ((m = re.exec(part))) { const model=m[1].trim(); const mcc=Number(m[4]), f1=Number(m[5]); rows.push({model, score:mcc, metrics:{dalaF1:f1}}); }
- if (rows.length < 10) throw new Error(`DaLA rows changed: ${rows.length}`); return rows;
-}}; export default board;
+// DaLA tests Danish linguistic acceptability. EuroEval publishes the test-split scores on its Danish leaderboard.
+// EuroEval reports Matthews correlation first, then macro F1, both scaled by 100.
+import type { Leaderboard } from './types.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { text } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+
+const feed = 'https://euroeval.com/leaderboards-csv/danish_all_models.csv';
+const board: Leaderboard = {
+  benchmark: 'dala',
+  url: 'https://euroeval.com/leaderboards/danish',
+  feed,
+  host: 'EuroEval',
+  terms: 'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
+  stats: {
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
+    failures: { name: 'Failures', unit: 'count', better: 'lower' },
+  },
+  aliases: {
+    'mistralai/Mistral-Small-3.1-24B-Instruct-2503': 'mistral-small-3-1',
+    'mistralai/Mistral-Small-3.2-24B-Instruct-2506': 'mistral-small-3-2',
+  },
+  headline: 'EuroEval reports Matthews correlation on the DaLA Danish linguistic acceptability test split, scaled by 100.',
+  async fetch() {
+    const csv = await fetchText(feed);
+    const start = csv.indexOf('Rank,Model,');
+    if (start < 0) throw new Error('Missing EuroEval Danish leaderboard CSV');
+    const records = parseCsv(csv.slice(start));
+    const key = Object.keys(records[0] ?? {}).find(k => k.includes('#dala') || text(k) === 'dala');
+    if (!key) throw new Error('Missing DaLA column');
+    const rows = records
+      .filter(r => r[key] && r[key] !== '-' && !/\([^)]*\bval\)$/.test(text(r.Model)))
+      .map(r => {
+        const values = r[key].match(/^(-?[\d.]+)\s*±\s*([\d.]+)\s*\/\s*([\d.]+)\s*±\s*([\d.]+)$/);
+        if (!values) throw new Error('Malformed DaLA result: ' + r[key]);
+        const [score, margin, f1, f1Margin] = values.slice(1).map(Number);
+        const label = text(r.Model).trim();
+        const settings = label.match(/ \(([^()]+)\)$/);
+        const [model, mode] = label.replace(/ \([^()]+\)$/, '').split('#');
+        const failures = Number(r.dala_failures);
+        return {
+          model,
+          setting: [mode, settings?.[1]].filter(Boolean).join(', ') || undefined,
+          score,
+          low: score - margin,
+          high: score + margin,
+          link: r.Model.match(/href='([^']+)'/)?.[1],
+          open: r.Open === '✓',
+          metrics: {
+            macroF1: f1,
+            macroF1Low: f1 - f1Margin,
+            macroF1High: f1 + f1Margin,
+            ...(Number.isFinite(failures) ? { failures } : {}),
+          },
+        };
+      });
+    return checked(rows, 100);
+  },
+};
+export default board;

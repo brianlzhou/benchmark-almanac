@@ -2,7 +2,7 @@
 import type { Leaderboard } from './types.ts';
 import { turingPage } from './frontier-agentic-stem-turing.ts';
 
-const FEED = "https://labs.turing.com/assets/index-BZIruKnx.js";
+const FEED = "https://labs.turing.com/";
 
 const board: Leaderboard = {
   benchmark: "frontier-agentic-ml-ds-turing",

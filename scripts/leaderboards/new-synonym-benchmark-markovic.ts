@@ -49,7 +49,7 @@ const board: Leaderboard = {
     note: 'Accuracy against average latency on a log scale, matching the New Synonym Benchmark scatter plot on the Swedish Benchmarks V1.1 dashboard.',
   },
   async fetch() {
-    return swedishTask(feed, 'new_synonym_benchmark', 23);
+    return swedishTask(feed, 'new_synonym_benchmark', 20);
   },
 };
 export default board;
