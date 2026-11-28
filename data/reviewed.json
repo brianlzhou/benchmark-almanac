@@ -9801,11 +9801,6 @@
       "via": "Latent Space AINews issue of 2026-09-10, where Arena highlighted it."
     },
     {
-      "id": "gamedojo",
-      "date": "2026-11-24",
-      "via": "Found in Nov 2026 arXiv (arXiv:2611.30771) from THUSI-Lab with a structured JSON leaderboard at gamedojo-benchmark.github.io scoring 13 models."
-    },
-    {
       "id": "gameenginebench",
       "date": "2026-11-20",
       "via": "A comparison with CraftBench-UE led to Nitrode’s own Unreal Engine leaderboard and the data behind its chart."
@@ -28064,11 +28059,6 @@
       "id": "worldgui",
       "date": "2026-11-01",
       "via": "Awesome-CUA catalog benchmark records."
-    },
-    {
-      "id": "worldleague",
-      "date": "2026-11-24",
-      "via": "Found in Nov 2026 arXiv cs.RO (arXiv:2611.30989) with a live leaderboard at xyangzhou.github.io/WorldLeague scoring 13 embodied AI systems."
     },
     {
       "id": "worldolympiad",
