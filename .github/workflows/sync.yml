@@ -83,6 +83,8 @@ jobs:
           node scripts/embed.ts | tee -a sync.log
       - run: node scripts/check-data.ts
       - run: npm run build
+      # on the 1st of a month this freezes the Almanac Index's new version (data/index/YY.MM.json)
+      - run: node scripts/freeze-index.ts | tee -a sync.log
       - name: Update the sync pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
