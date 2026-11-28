@@ -69656,7 +69656,7 @@
     "level": "university",
     "scoring": "verified",
     "format": "multiple-choice",
-    "description": "Models choose a fund for a transaction. Ramp measures how often a user overrides that choice.",
+    "description": "Models choose a fund for a transaction. Ramp measures how often a user would override an incorrect choice, reported as a multiple of the lowest observed override rate (1.00 is best).",
     "org": "Ramp Labs",
     "released": "2026-03",
     "links": {
@@ -69664,7 +69664,9 @@
       "leaderboard": "https://builders.ramp.com/post/financial-benchmarks"
     },
     "access": "private",
-    "unit": "%",
+    "note": "Ramp normalizes published override rates to the lowest-error model in the chart (GPT-5.1 at 1.00x) rather than disclosing raw percentages.",
+    "unit": "score",
+    "metric": "Override rate multiple",
     "better": "lower",
     "confidence": "verified",
     "evidence": [

@@ -1,21 +1,24 @@
-// Ramp ranks fund routing models by override rate relative to the lowest observed rate.
-// The chart shows multiples. The headline expresses them as percentages of that baseline.
+// Ramp ranks fund routing models by override rate as a multiple of the lowest observed rate (GPT-5.1 at 1.00x).
+// The chart publishes normalized multiples (rateNx) rather than raw override percentages.
 import type { Leaderboard } from './types.ts';
 import { rampBundle, rampTerms } from './accounting-autocoding-ramp.ts';
 import { jsLiteral } from '../lib/html.ts';
 
 const board: Leaderboard = {
-  benchmark: 'fund-smart-routing-agent-ramp', url: 'https://builders.ramp.com/post/financial-benchmarks', feed: 'https://builders.ramp.com/post/financial-benchmarks', terms: rampTerms,
-  stats:{overrideRateMultiple:{name:'Override rate multiple',unit:'score',better:'lower'}},
+  benchmark: 'fund-smart-routing-agent-ramp',
+  url: 'https://builders.ramp.com/post/financial-benchmarks',
+  feed: 'https://builders.ramp.com/post/financial-benchmarks',
+  terms: rampTerms,
+  headline: 'Override rate as a multiple of the lowest-override model (GPT-5.1 at 1.00). Lower is better.',
   async fetch() {
     const js = await rampBundle();
     const start = [...js.matchAll(/\[\{name:"[^"]+",provider:"[^"]+",rateNx:[\d.]+\}/g)];
     if (start.length !== 1) throw new Error('Missing or ambiguous override-rate chart');
-    const runs = jsLiteral<{ name:string, rateNx:number }[]>(js,start[0].index!);
+    const runs = jsLiteral<{ name: string; rateNx: number }[]>(js, start[0].index!);
     if (runs.length < 10) throw new Error('Incomplete override-rate chart');
     return runs.map(r => {
       if (!r.name || !Number.isFinite(r.rateNx)) throw new Error('Invalid override-rate result');
-      return { model:r.name, score:r.rateNx*100, metrics:{ overrideRateMultiple:r.rateNx } };
+      return { model: r.name, score: r.rateNx };
     });
   },
 };

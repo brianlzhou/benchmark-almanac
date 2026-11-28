@@ -126898,16 +126898,10 @@
       "url": "https://builders.ramp.com/post/financial-benchmarks",
       "feed": "https://builders.ramp.com/post/financial-benchmarks",
       "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp.",
+      "headline": "Override rate as a multiple of the lowest-override model (GPT-5.1 at 1.00). Lower is better.",
       "retrieved": "2026-11-28",
       "rows": 10,
-      "unmatched": [],
-      "stats": {
-        "overrideRateMultiple": {
-          "name": "Override rate multiple",
-          "unit": "score",
-          "better": "lower"
-        }
-      }
+      "unmatched": []
     },
     "fungraph3d": {
       "url": "https://arxiv.org/html/2503.19199",
