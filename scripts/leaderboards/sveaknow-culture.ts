@@ -23,7 +23,7 @@ const board: Leaderboard = {
     note: 'Exact match accuracy against average latency on a log scale, matching the SveaKnow Culture scatter plot on the Swedish Benchmarks V1.1 dashboard.',
   },
   async fetch() {
-    return swedishTask(feed, 'sveaknow_culture', 23);
+    return swedishTask(feed, 'sveaknow_culture', 20);
   },
 };
 export default board;

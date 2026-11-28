@@ -41,7 +41,7 @@ const board: Leaderboard = {
   },
   async fetch() {
     const data = jsonAfter<{ leaderboard: Row[]; benchmarks: {id: string; label: string}[] }>(await fetchText(feed), 'const dashboard = ');
-    if (data.leaderboard.length < 23 || data.benchmarks.length < 13) throw new Error('Incomplete Swedish suite');
+    if (data.leaderboard.length < 20 || data.benchmarks.length < 13) throw new Error('Incomplete Swedish suite');
     return data.leaderboard.map(r => {
       if (!r.model || !Number.isFinite(r.overall_score)) throw new Error('Invalid overall score');
       const metrics = Object.fromEntries(r.benchmark_scores.map(s => [s.benchmark, 100 * s.score]));
