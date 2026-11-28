@@ -126900,14 +126900,7 @@
       "terms": "Ramp's robots.txt allows the site. The engineering post gives no data reuse license. Results are credited to Ramp.",
       "retrieved": "2026-11-28",
       "rows": 10,
-      "unmatched": [],
-      "stats": {
-        "overrideRateMultiple": {
-          "name": "Override rate multiple",
-          "unit": "score",
-          "better": "lower"
-        }
-      }
+      "unmatched": []
     },
     "fungraph3d": {
       "url": "https://arxiv.org/html/2503.19199",

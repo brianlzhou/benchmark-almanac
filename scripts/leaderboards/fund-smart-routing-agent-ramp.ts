@@ -1,12 +1,11 @@
-// Ramp ranks fund routing models by override rate relative to the lowest observed rate.
-// The chart shows multiples. The headline expresses them as percentages of that baseline.
+// Ramp ranks fund routing models by override rate: how often a user would have to override the fund a model picked.
+// It publishes only multiples of the best model's rate (GPT-5.1 = 1.00x), so the score is that multiple.
 import type { Leaderboard } from './types.ts';
 import { rampBundle, rampTerms } from './accounting-autocoding-ramp.ts';
 import { jsLiteral } from '../lib/html.ts';
 
 const board: Leaderboard = {
   benchmark: 'fund-smart-routing-agent-ramp', url: 'https://builders.ramp.com/post/financial-benchmarks', feed: 'https://builders.ramp.com/post/financial-benchmarks', terms: rampTerms,
-  stats:{overrideRateMultiple:{name:'Override rate multiple',unit:'score',better:'lower'}},
   async fetch() {
     const js = await rampBundle();
     const start = [...js.matchAll(/\[\{name:"[^"]+",provider:"[^"]+",rateNx:[\d.]+\}/g)];
@@ -15,7 +14,7 @@ const board: Leaderboard = {
     if (runs.length < 10) throw new Error('Incomplete override-rate chart');
     return runs.map(r => {
       if (!r.name || !Number.isFinite(r.rateNx)) throw new Error('Invalid override-rate result');
-      return { model:r.name, score:r.rateNx*100, metrics:{ overrideRateMultiple:r.rateNx } };
+      return { model:r.name, score:r.rateNx };
     });
   },
 };

@@ -69656,7 +69656,7 @@
     "level": "university",
     "scoring": "verified",
     "format": "multiple-choice",
-    "description": "Models choose a fund for a transaction. Ramp measures how often a user overrides that choice.",
+    "description": "Models choose a fund for a transaction. Ramp measures how often a user would have to override that choice, and reports each model's override rate as a multiple of the best model's rate (1.00 is the best).",
     "org": "Ramp Labs",
     "released": "2026-03",
     "links": {
@@ -69664,7 +69664,8 @@
       "leaderboard": "https://builders.ramp.com/post/financial-benchmarks"
     },
     "access": "private",
-    "unit": "%",
+    "unit": "score",
+    "metric": "Override rate, as a multiple of the best model's",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
