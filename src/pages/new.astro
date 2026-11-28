@@ -8,6 +8,7 @@ import reviewedJson from '../../data/reviewed.json';
 import { benchmarks, benchById, models, labById } from '../lib/data.ts';
 import { fullDate, monthYear, humanDate } from '../lib/format.ts';
 import { CATEGORY_NAMES } from '../lib/taxonomy.ts';
+import { REPO } from '../lib/criteria.ts';
 
 interface Candidate {
   key: string;
@@ -68,6 +69,11 @@ const added = rv.added
 const olderOf = (id: string) => benchmarks.find((b) => b.successor === id);
 const newVersions = added.filter((x) => olderOf(x.b.id)).length;
 const rejected = [...rv.rejected].sort((p, q) => q.date.localeCompare(p.date) || p.name.localeCompare(q.name));
+// the three long lists show their newest rows. All of them ran to 8 MB of HTML, which stalls phones, and the full
+// lists stay in the data files on GitHub
+const SHOWN = 300;
+const REVIEWED_FILE = `${REPO}/blob/main/data/reviewed.json`;
+const MODELS_FILE = `${REPO}/blob/main/data/discovered-models.json`;
 // a review sometimes left out a whole group in one row ("Awesome-CUA low-traction benchmarks (AppSim-Bench, ...)"):
 // show the group's label, and its names behind a toggle
 function splitName(n: string): { label: string; list?: string; count?: number } {
@@ -98,7 +104,7 @@ const mq = discoveredModelsJson as unknown as { updated: string | null; items: M
 const modelKeys = new Set(models.flatMap((m) => [m.id, m.name, ...(m.aliases ?? [])].map(key)));
 const modelFinds = mq.items.filter((f) => !modelKeys.has(key(f.name)));
 const modelTop = modelFinds.filter((f) => f.score >= 7);
-const modelWatch = modelFinds.filter((f) => f.score < 7);
+const modelWatch = modelFinds.filter((f) => f.score < 7).sort((p, q) => (q.created ?? q.first ?? '').localeCompare(p.created ?? p.first ?? ''));
 const makerOf = (f: ModelFind) => (f.lab ? labById.get(f.lab)?.name : undefined) ?? f.org ?? '';
 const sizeOf = (f: ModelFind) => (!f.params ? '' : f.params >= 1000 ? `${(f.params / 1000).toFixed(1)}T` : `${f.params >= 10 ? Math.round(f.params) : f.params}B`);
 const foundIn = (f: ModelFind) => f.sources.map((s) => s.source).join(', ');
@@ -168,7 +174,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
                 </tr>
               </thead>
               <tbody>
-                {added.map(({ a, b }) => {
+                {added.slice(0, SHOWN).map(({ a, b }) => {
                   const old = olderOf(b.id);
                   return (
                     <tr>
@@ -191,6 +197,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
               </tbody>
             </table>
           </div>
+          {added.length > SHOWN && <p class="muted more">The newest {SHOWN} of {added.length.toLocaleString('en-US')}. Every addition is in <a href={REVIEWED_FILE}>data/reviewed.json</a>.</p>}
         </section>
       )
     }
@@ -283,7 +290,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
               <summary>
                 <span class="sh">
                   <h3>Model watch list</h3>
-                  <p>{modelWatch.length} models that scored 3 to 6. Most are research releases or community models. A model drops off after 21 days with no new mention.</p>
+                  <p>{modelWatch.length.toLocaleString('en-US')} models that scored 3 to 6. Most are research releases or community models. A model drops off after 21 days with no new mention. The newest {Math.min(SHOWN, modelWatch.length)} are listed here, and all of them are in <a href={MODELS_FILE}>data/discovered-models.json</a>.</p>
                 </span>
               </summary>
               <div class="table-wrap">
@@ -292,7 +299,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
                     <tr><th class="r">Score</th><th>Model</th><th>Found in</th><th class="r">Size</th><th class="nowrap">Published</th></tr>
                   </thead>
                   <tbody>
-                    {modelWatch.map((f) => (
+                    {modelWatch.slice(0, SHOWN).map((f) => (
                       <tr>
                         <td class="r muted">{f.score}</td>
                         <td class="mn"><a href={f.url}>{f.name}</a>{makerOf(f) && <span class="muted"> {makerOf(f)}</span>}</td>
@@ -378,7 +385,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
             <summary>
               <span class="sh">
                 <h2>Checked and left out</h2>
-                <p>{rejected.length} finds that failed all four of our <a href="/about/#cataloged">tests for cataloging</a>. Some weren't benchmarks, and others were too narrow or had no users yet.</p>
+                <p>{rejected.length.toLocaleString('en-US')} finds that failed all four of our <a href="/about/#cataloged">tests for cataloging</a>. Some weren't benchmarks, and others were too narrow or had no users yet. The newest {Math.min(SHOWN, rejected.length)} are listed here, and all of them are in <a href={REVIEWED_FILE}>data/reviewed.json</a>.</p>
               </span>
             </summary>
             <div class="table-wrap">
@@ -387,7 +394,7 @@ const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).p
                   <tr><th>Name</th><th>Why it was left out</th><th class="nowrap">Checked</th></tr>
                 </thead>
                 <tbody>
-                  {rejected.map((r) => (
+                  {rejected.slice(0, SHOWN).map((r) => (
                     <tr>
                       <td class="rn">
                         {(() => {
