@@ -496,6 +496,11 @@
       "via": "Seed2.0 and Seed2.1 model cards report AetherCode, and the almanac had no record."
     },
     {
+      "id": "afk-bench-uiuc",
+      "date": "2026-11-24",
+      "via": "Launched on X on 2026-11-24 with arXiv 2611.28202 and a live leaderboard at autopilot-harness.github.io scoring eight frontier models across 120 games."
+    },
+    {
       "id": "afribed",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -536,6 +541,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "agent-arena-index",
+      "date": "2026-11-24",
+      "via": "Arena launch blog post and Hugging Face lmarena-ai/leaderboard-dataset agent_capability, agent_task_outcome and agent_tool_efficiency splits."
+    },
+    {
       "id": "agent-bazaar",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -569,6 +579,11 @@
       "id": "agent-memory-leaderboard",
       "date": "2026-11-01",
       "via": "GitHub keyword search for benchmark repos since 2025-07."
+    },
+    {
+      "id": "agent-money-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: BlockRunAI Agent Money Benchmark with 153 stars and live frontier-model leaderboard."
     },
     {
       "id": "agent-only-fantasy-football-league",
@@ -619,6 +634,11 @@
       "id": "agentcallbench-tool-calling-reliability",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "agentcibench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (Hugging Face UKPLab/agentcibench) confirmed a live EMNLP 2026 leaderboard at ukplab.github.io/emnlp2026-agentcibench scoring 21 computer-use agents with a utility versus leakage Pareto plot."
     },
     {
       "id": "agentclinic",
@@ -879,6 +899,11 @@
       "id": "ai-agribench-smallholders",
       "date": "2026-11-20",
       "via": "The main AI AgriBench leaderboard links to a preliminary comparison using farmer questions collected by three advisory organizations."
+    },
+    {
+      "id": "ai-all-round-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: AI All-Round Bench (AI Decathlon) with 112 stars and 27 ranked models."
     },
     {
       "id": "ai-battle-arena",
@@ -1436,6 +1461,11 @@
       "via": "The NeurIPS 2026 poster linked to a results dashboard where each generated animation can be checked against its source."
     },
     {
+      "id": "animweb-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.09769) with a public results table scoring 14 frontier multimodal models."
+    },
+    {
       "id": "anli-r1",
       "date": "2026-11-08",
       "via": "Held leaderboard tracks get separate records, a rule set on 2026-11-08."
@@ -1536,6 +1566,11 @@
       "via": "We traced a smartphone user study to the original publication and compared its nine app rows with the Mobile-Agent-E comparison."
     },
     {
+      "id": "appcif-bench",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found AppCIF-Bench (NeurIPS 2026) with live leaderboard scoring 12 frontier models."
+    },
+    {
       "id": "appendix-boundary",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
@@ -1589,6 +1624,11 @@
       "id": "arabic-mmlu-ht",
       "date": "2026-11-01",
       "via": "TII Falcon-Arabic post lists Arabic MMLU native and translated."
+    },
+    {
+      "id": "arabic-tts-arena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Arabic TTS Arena with 8,793 blind votes and 31 ranked models."
     },
     {
       "id": "arabicmmlu",
@@ -1769,6 +1809,11 @@
       "id": "artificial-turf-war",
       "date": "2026-11-20",
       "via": "Searching for fantasy team managers led from Premier League assistants to an NFL league with published results."
+    },
+    {
+      "id": "artisan-3d",
+      "date": "2026-11-24",
+      "via": "GitHub repository physicalvision/artisan (141 stars), arXiv:2610.13947, and project page leaderboard."
     },
     {
       "id": "arxiv-papers-analytical-search-snowflake",
@@ -2136,6 +2181,11 @@
       "via": "Benchmark Radar. The dedicated benchmark repository had 220 stars in the required first-run snapshot. Its README and paper were opened in this run."
     },
     {
+      "id": "auditbench-anthropic",
+      "date": "2026-11-24",
+      "via": "Anthropic Alignment Science blog sweep found AuditBench with 56 audited model organisms on Hugging Face and arXiv:2602.22755."
+    },
+    {
       "id": "augmented-reality-patent-search",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -2179,6 +2229,11 @@
       "id": "autocodebench-tencent",
       "date": "2026-11-01",
       "via": "Harbor hub dataset tencent/autocodebench."
+    },
+    {
+      "id": "autocontrol-arena",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: ICML 2026 AutoControl Arena with 105 stars and live 9-model safety table."
     },
     {
       "id": "autods-scientific-cases",
@@ -2239,6 +2294,11 @@
       "id": "autoplc",
       "date": "2026-11-20",
       "via": "Agents4PLC credits AutoPLC for its competition cases, leading to the original datasets and vendor compiler comparison."
+    },
+    {
+      "id": "autoragbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.25582) confirmed a live leaderboard at zhanghang9991.github.io/AutoRAGBench_Website scoring 9 frontier coding agents across 9 RAG tasks with a score versus latency Pareto chart."
     },
     {
       "id": "autoresearchbench",
@@ -2309,6 +2369,11 @@
       "id": "aws-bench",
       "date": "2026-11-01",
       "via": "GitHub topic scan (141 stars)."
+    },
+    {
+      "id": "axe-world-models",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.30120) with a live leaderboard at AxEBench.github.io scoring 20 video world models."
     },
     {
       "id": "aya-redteaming",
@@ -2641,6 +2706,16 @@
       "via": "EleutherAI publishes a task configuration for this evaluation."
     },
     {
+      "id": "betu-slm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live BETU SLM Leaderboard scoring 182 sub-1B language models."
+    },
+    {
+      "id": "beyond-accuracy-exp-planning",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.29467) from EPFL Schwaller Group with a public CSV leaderboard scoring 10 LLM agents."
+    },
+    {
       "id": "beyond-survival",
       "date": "2026-11-19",
       "via": "A search for game evaluations identified this candidate."
@@ -2959,6 +3034,11 @@
       "id": "biovita-retrieval-benchmark",
       "date": "2026-11-19",
       "via": "A biology benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "bioxarena-pro",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard from MBZUAI scoring 22 agent and frontier-backbone pairs across 64 biomedical machine learning tasks."
     },
     {
       "id": "bird-critic",
@@ -3289,6 +3369,11 @@
       "id": "bucc-2018-bitext-mining-shared-task",
       "date": "2026-11-19",
       "via": "Gemini Embedding 2 technical report reports results for this evaluation."
+    },
+    {
+      "id": "bug-hunt-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: verified official maker site bughunt.productcompass.pm (224 stars, 56 models, live JSON), superseding the 2026-11-01 benchlm.ai missing-maker-page bucket."
     },
     {
       "id": "bug-in-the-code-stack",
@@ -4511,6 +4596,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "cloudopsbench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: CloudOpsBench with 86 stars and live 18-run AWS cloud operations leaderboard."
+    },
+    {
       "id": "clue",
       "date": "2026-11-01",
       "via": "CLUEbenchmark GitHub organization. Task count from the arXiv abstract."
@@ -5136,6 +5226,11 @@
       "via": "A search for blind cooking comparisons surfaced a cook’s ingredient quantity test and its original score chart."
     },
     {
+      "id": "cookie-bench",
+      "date": "2026-11-24",
+      "via": "Baidu ERNIE-5.5-Flash-Preview model card sweep led to Cookie-Bench (arXiv:2605.30000) scoring 13 frontier models in Table 1."
+    },
+    {
       "id": "cooperative-codenames-bittker",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -5164,6 +5259,11 @@
       "id": "copious-biodiversity-ner",
       "date": "2026-11-20",
       "via": "We followed the biodiversity text mining literature cited by the INAS authors to the COPIOUS release and two later evaluations."
+    },
+    {
+      "id": "copy-bench",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 16 frontier models across 50 moving web-component tasks with cost and time breakdowns."
     },
     {
       "id": "coqa",
@@ -5961,6 +6061,11 @@
       "via": "Qwen's authenticated repository list exposed D2K-Bench and its README links the paper."
     },
     {
+      "id": "da7em-bench-v2",
+      "date": "2026-11-24",
+      "via": "Launched on X by Da7em on 2026-11-19 with a live bilingual leaderboard scoring 11 frontier models across four pillars and 12 axes."
+    },
+    {
       "id": "dabstep",
       "date": "2026-11-01",
       "via": "Harbor hub dataset adyen/dabstep."
@@ -5989,6 +6094,11 @@
       "id": "dailyreport-meituan",
       "date": "2026-11-20",
       "via": "The publisher's research and repository indexes led to this release."
+    },
+    {
+      "id": "dailysafe",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 16 proprietary and open-weight multimodal models on multi-turn everyday safety and helpfulness."
     },
     {
       "id": "dala",
@@ -6641,6 +6751,11 @@
       "via": "DesignArena's code leaderboards list 19 boards, and the almanac had two DesignArena records."
     },
     {
+      "id": "designarena-human-intelligence-index",
+      "date": "2026-11-24",
+      "via": "Live DesignArena leaderboard audit covering Human Intelligence Index and Office Leaderboards."
+    },
+    {
       "id": "designarena-image",
       "date": "2026-11-01",
       "via": "DesignArena's code leaderboards list 19 boards, and the almanac had two DesignArena records."
@@ -6876,6 +6991,11 @@
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
     },
     {
+      "id": "diagsafe",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found DiagSafe with live frontier safety and usefulness leaderboard."
+    },
+    {
       "id": "diagtrace",
       "date": "2026-11-19",
       "via": "A medicine benchmark search led to the authors’ paper."
@@ -6924,6 +7044,11 @@
       "id": "dihard-iii",
       "date": "2026-11-19",
       "via": "NVIDIA Nemotron 3 Diarization reports this evaluation in its release results."
+    },
+    {
+      "id": "dii-v1-muscle",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard by the HKU BIRD team scoring 12 frontier models across 500 sandboxed data tasks."
     },
     {
       "id": "diligencebench",
@@ -7009,6 +7134,11 @@
       "id": "displace-m-2026",
       "date": "2026-11-20",
       "via": "Following the original DISPLACE organizers led to their medical dialogue challenge and a team that scored speaker-attributed transcripts."
+    },
+    {
+      "id": "distdebug-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.SE (arXiv:2611.03523) with a live JSON leaderboard at distdebug.com scoring 18 frontier model-harness configurations."
     },
     {
       "id": "distemist",
@@ -7386,6 +7516,11 @@
       "via": "Benchmark Radar. Clear-use test: 222 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
+      "id": "dyn-3d",
+      "date": "2026-11-24",
+      "via": "GitHub repository InkMind-AI/Dyn-3D (100 stars), arXiv:2609.01059, and project page quantitative tables."
+    },
+    {
       "id": "dynamic-programming-m8ngotree",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -7629,6 +7764,11 @@
       "id": "egotom",
       "date": "2026-11-20",
       "via": "The Meta repository releases the benchmark and evaluation code over Ego4D videos."
+    },
+    {
+      "id": "egowitness",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.25849) with a live leaderboard at egowitness.github.io scoring 16+ vision-language models."
     },
     {
       "id": "egyhellaswag",
@@ -8324,6 +8464,11 @@
       "id": "eventhallusion",
       "date": "2026-11-19",
       "via": "Meta Perception Encoder and Perception Language Model release reports this evaluation in its release results."
+    },
+    {
+      "id": "everydaybench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.25146) confirmed a live Stanford leaderboard at everydaybench.stanford.edu scoring 13 frontier model and agent configurations on 77 live-web tasks."
     },
     {
       "id": "evf-bench",
@@ -9221,6 +9366,11 @@
       "via": "EuroEval documents the evaluation in its Faroese dataset list."
     },
     {
+      "id": "for-t2i",
+      "date": "2026-11-24",
+      "via": "Baidu ERNIE Research release github.com/ernie-research/FoR-T2I (115 stars) and arXiv:2608.03357."
+    },
+    {
       "id": "forb",
       "date": "2026-11-19",
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
@@ -9491,6 +9641,11 @@
       "via": "The publisher lists this evaluation in its research publications."
     },
     {
+      "id": "full-duplex-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces audit found an independent live full-duplex voice evaluation leaderboard with reproducible traces."
+    },
+    {
       "id": "fund-smart-routing-agent-ramp",
       "date": "2026-11-20",
       "via": "Ramp links to this evaluation from its research site or engineering blog."
@@ -9504,6 +9659,11 @@
       "id": "fungraph3d",
       "date": "2026-11-20",
       "via": "We followed the KeySG results table next to hierarchical object retrieval to a test of which part controls an object."
+    },
+    {
+      "id": "furniturebench",
+      "date": "2026-11-24",
+      "via": "Robotics benchmark audit found the standard RSS 2023 real-robot furniture assembly suite with 244 GitHub stars."
     },
     {
       "id": "futureeval-metaculus",
@@ -9834,6 +9994,11 @@
       "id": "general365",
       "date": "2026-11-01",
       "via": "Meituan LongCat's GitHub org, checked while reviewing AMO-Bench."
+    },
+    {
+      "id": "generalist-gaming-agents-kaggle",
+      "date": "2026-11-24",
+      "via": "Launched on X by Kaggle on 2026-11-23 in partnership with GARC and Princeton CS and PLI."
     },
     {
       "id": "geneval",
@@ -10426,6 +10591,11 @@
       "via": "A video benchmark search led to the authors’ paper."
     },
     {
+      "id": "ha-vln-2",
+      "date": "2026-11-24",
+      "via": "GitHub benchmark search found the HA-VLN 2.0 human-aware vision-and-language navigation leaderboard with 525 stars."
+    },
+    {
       "id": "habit-bench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
@@ -10844,6 +11014,11 @@
       "id": "hemingway-bench",
       "date": "2026-11-01",
       "via": "Surge AI blog index."
+    },
+    {
+      "id": "hep-ex-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.28194) with a live interactive leaderboard at hep-ex-bench.github.io scoring 11 frontier models across four harnesses."
     },
     {
       "id": "heptoolbench-1-2",
@@ -11344,6 +11519,16 @@
       "id": "hype-trap",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "hyper-intervention",
+      "date": "2026-11-24",
+      "via": "Launched on X by Hyperstition on 2026-11-20 with an MIT-licensed repository and replicated session scores for seven frontier models."
+    },
+    {
+      "id": "hyperlogic",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found HyperLogic with live three-rollout frontier reasoning leaderboard."
     },
     {
       "id": "i2b2-2006-smoking",
@@ -12041,6 +12226,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "ionwarp-code-review",
+      "date": "2026-11-24",
+      "via": "CC BY 4.0 OpenAPI code review leaderboard by Winding Labs reproducing Martian Core 50-PR tasks with composite F1, latency, and cost metrics across 9 reviewers."
+    },
+    {
       "id": "iosworld",
       "date": "2026-11-01",
       "via": "Base environment of the queue item iPrefBench (Apple and Ohio State)."
@@ -12476,6 +12666,11 @@
       "via": "The organization's publication index or project repository identifies this evaluation."
     },
     {
+      "id": "jup-eval",
+      "date": "2026-11-24",
+      "via": "Independent CC BY 4.0 leaderboard by Ortelan Research scoring 10 frontier systems across 156 multi-turn judgment scenarios with 95% intervals."
+    },
+    {
       "id": "justiceaxis",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -12686,6 +12881,11 @@
       "via": "Kaggle Benchmarks list (owner kaggle, type GAME). The almanac catalogs the suite, chess, poker, werewolf and go only."
     },
     {
+      "id": "kaggle-hindsight-costliest-bugs",
+      "date": "2026-11-24",
+      "via": "Kaggle Benchmarks featured directory and public Kaggle Benchmarks leaderboard API."
+    },
+    {
       "id": "kaggle-icml-2025-experts",
       "date": "2026-11-20",
       "via": "Kaggle's benchmark registry lists this suite under the Kaggle organization."
@@ -12821,6 +13021,11 @@
       "via": "The publisher lists this evaluation in its research publications."
     },
     {
+      "id": "kernelshift",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.29590) from CMU L3 with a live leaderboard scoring six frontier models across four agent harnesses."
+    },
+    {
       "id": "kespeech",
       "date": "2026-11-19",
       "via": "Qwen/Qwen3-ASR-1.7B reports this evaluation in its release results."
@@ -12926,6 +13131,11 @@
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
     },
     {
+      "id": "kinetix",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found Kinetix scored under the 12-task real-time chunking protocol."
+    },
+    {
       "id": "kitti-depth-prediction",
       "date": "2026-11-19",
       "via": "Meta DINOv3 release reports this evaluation in its release results."
@@ -13014,6 +13224,11 @@
       "id": "ko-longbench-lg",
       "date": "2026-11-01",
       "via": "LG K-EXAONE 2.0 model card reports Ko-LongBench."
+    },
+    {
+      "id": "ko-online-mind2web",
+      "date": "2026-11-24",
+      "via": "Hugging Face dataset KORMo-VL/Ko-Online-Mind2Web (98 likes), released November 2026."
     },
     {
       "id": "koala-test-set",
@@ -13591,6 +13806,11 @@
       "via": "GitHub keyword search for benchmark repos since 2025-07."
     },
     {
+      "id": "libero-mem",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found LIBERO-Mem episodic memory manipulation tasks."
+    },
+    {
       "id": "libero-para",
       "date": "2026-11-01",
       "via": "A web search for LIBERO successors after logging LIBERO-Plus."
@@ -13669,6 +13889,11 @@
       "id": "lineex",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "lingee-bench",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Kingdee Harbor-based Lingee Bench ERP agent suite with 190 stars and public HF dataset."
     },
     {
       "id": "lingoly",
@@ -13899,6 +14124,11 @@
       "id": "llm-jp-eval",
       "date": "2026-11-19",
       "via": "The regional brief named llm-jp-eval as a Japanese evaluation source."
+    },
+    {
+      "id": "llm-leaderboard-fr",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found the French government Leaderboard LLM FR with live JSON API and BAC FR."
     },
     {
       "id": "llm-meta-analysis",
@@ -14549,6 +14779,11 @@
       "id": "maniladder",
       "date": "2026-11-19",
       "via": "A robotics benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "maniskill2",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found ManiSkill2 manipulation benchmarks separate from ManiSkill3."
     },
     {
       "id": "manta-animal-welfare",
@@ -15551,6 +15786,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "mikasa-robo",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found MIKASA-Robo memory tabletop manipulation tasks."
+    },
+    {
       "id": "miklos-schweitzer-2025",
       "date": "2026-11-01",
       "via": "MathArena's Hugging Face dataset list."
@@ -15846,6 +16086,11 @@
       "via": "Harbor lists this evaluation in its official registry."
     },
     {
+      "id": "ml-energy-leaderboard-v3",
+      "date": "2026-11-24",
+      "via": "Hugging Face Datasets and ML.ENERGY discovery: live GPU energy and latency leaderboard across open-weight models."
+    },
+    {
       "id": "mlagentbench",
       "date": "2026-11-01",
       "via": "AI R&D vertical check."
@@ -15869,6 +16114,11 @@
       "id": "mlgym-bench-meta",
       "date": "2026-11-01",
       "via": "Harbor hub dataset meta/mlgym-bench."
+    },
+    {
+      "id": "mllm-jailbreak-bench",
+      "date": "2026-11-24",
+      "via": "GitHub repository ziyuwowo/mllm-jailbreak-bench (187 stars) with published attack evaluation table."
     },
     {
       "id": "mlqa",
@@ -16396,6 +16646,11 @@
       "via": "SAM 3 technical report reports results for this evaluation."
     },
     {
+      "id": "motiongraphicsbench",
+      "date": "2026-11-24",
+      "via": "Figma and Stanford benchmark (arXiv:2611.10592) evaluating 32 proprietary and open-weight LLMs across 47 settings with deterministic SVG animation verifiers."
+    },
+    {
       "id": "motoverse",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -16664,6 +16919,11 @@
       "id": "multihop-rag",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "multilangbench-openai",
+      "date": "2026-11-24",
+      "via": "OpenAI official repository github.com/openai/MultiLangBench released October 2026."
     },
     {
       "id": "multilingual-conversational-speech-language-model-challenge",
@@ -17216,6 +17476,11 @@
       "via": "The INQUIRE paper compared its ecological retrieval queries with NeWT, which led to the original labels and an independent model card."
     },
     {
+      "id": "newtonbench",
+      "date": "2026-11-24",
+      "via": "GitHub scientific discovery benchmark audit found NewtonBench (ICLR 2026, 165 stars) with Table 2 results in arXiv HTML."
+    },
+    {
       "id": "next-qa",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card video table."
@@ -17336,6 +17601,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "noisebench",
+      "date": "2026-11-24",
+      "via": "Independent MIT-licensed leaderboard scoring 20 frontier models on Polymarket probability consistency across five noise components."
+    },
+    {
       "id": "noisybench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -17359,6 +17629,11 @@
       "id": "noor-mmlu-var",
       "date": "2026-11-19",
       "via": "EleutherAI publishes a task configuration for this evaluation."
+    },
+    {
+      "id": "nopebench",
+      "date": "2026-11-24",
+      "via": "Hugging Face paper with 55 upvotes and public GitHub evaluator scoring six open-source video world models."
     },
     {
       "id": "noreval",
@@ -17524,6 +17799,11 @@
       "id": "nv-chat-benchmark-nvidia",
       "date": "2026-11-01",
       "via": "The Nemotron 3.5 Super VL card lists LMArena v3 proxy, and Table 10 of the technical report names the same numbers NV Chat Benchmark."
+    },
+    {
+      "id": "nvidia-av-causal-scenario-retrieval",
+      "date": "2026-11-24",
+      "via": "NVIDIA Hugging Face org sweep found AV Causal Scenario Retrieval Challenge with live API leaderboard."
     },
     {
       "id": "nwpu-captions",
@@ -17791,6 +18071,11 @@
       "via": "Review of the Omni-InteractScope importer, which was on hold."
     },
     {
+      "id": "omni-worldbench",
+      "date": "2026-11-24",
+      "via": "Alibaba AMAP-ML repository AMAP-ML/Omni-WorldBench (108 GitHub stars) and arXiv:2603.22212."
+    },
+    {
       "id": "omni3d",
       "date": "2026-11-12",
       "via": ""
@@ -17819,6 +18104,11 @@
       "id": "omnicap-if",
       "date": "2026-11-01",
       "via": "Qwen3.8-Omni-Flash launch post benchmark table."
+    },
+    {
+      "id": "omnicapbench",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found OmniCapBench (NeurIPS 2026) with published omnimodal captioning leaderboard."
     },
     {
       "id": "omnidocbench-1-5",
@@ -18016,6 +18306,11 @@
       "via": "A Hebrew search found Dicta’s evaluation and led to the original Space, its results table, and its launch announcement."
     },
     {
+      "id": "open-ita-llm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found Open Ita LLM Leaderboard scoring over 200 open models in Italian."
+    },
+    {
       "id": "open-japanese-llm-leaderboard",
       "date": "2026-11-20",
       "via": "We checked the publisher’s evaluation sources for this audit."
@@ -18046,9 +18341,19 @@
       "via": "The publisher's research and repository indexes led to this release."
     },
     {
+      "id": "open-nli-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live OpenNLI Leaderboard scoring 56 models across 44 NLI test sets."
+    },
+    {
       "id": "open-persian-llm-leaderboard",
       "date": "2026-11-20",
       "via": "A Persian search named the local university and its industry partner, whose leaderboard code and result file show the scored tasks."
+    },
+    {
+      "id": "open-pl-llm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found SpeakLeash Open PL LLM Leaderboard across 26 Polish tasks."
     },
     {
       "id": "open-portuguese-llm-leaderboard",
@@ -18064,6 +18369,11 @@
       "id": "open-rag-benchmark",
       "date": "2026-11-20",
       "via": "Vectara's authenticated repository and Hugging Face dataset listings exposed Open RAG Benchmark, which was absent from the catalog."
+    },
+    {
+      "id": "open-slm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Open SLM Leaderboard tracking 369 small language models."
     },
     {
       "id": "open-tabletop-gm-narrative-probe",
@@ -18116,6 +18426,16 @@
       "via": "We checked the publisher’s evaluation sources for this audit."
     },
     {
+      "id": "open-tts-leaderboard-1-7",
+      "date": "2026-11-24",
+      "via": "Version audit of hf-audio/open_tts_leaderboard leaderboard_data.py found minor release 1.7.0 adding ZTTS2-Eval Mini clean."
+    },
+    {
+      "id": "open-universal-arabic-asr-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Open Universal Arabic ASR Leaderboard scoring 39 speech models."
+    },
+    {
       "id": "openai-mrcr",
       "date": "2026-11-01",
       "via": "The almanac's mrcr-v2 record mixed Google's MRCR v2 with OpenAI's dataset. Anthropic and OpenAI documents name OpenAI MRCR v2 separately."
@@ -18124,6 +18444,11 @@
       "id": "openai-mrcr-v2",
       "date": "2026-11-01",
       "via": "The openai/mrcr dataset changelog and the GPT-5.2 launch footnote, which says Version 2 of the eval fixes about 5% of tasks."
+    },
+    {
+      "id": "openart-ai45lab",
+      "date": "2026-11-24",
+      "via": "Shanghai AI Lab repository AI45Lab/OpenART (277 GitHub stars), arXiv:2608.00677, and project page."
     },
     {
       "id": "openaudiobench",
@@ -18251,6 +18576,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "openresearch-intelligence-index",
+      "date": "2026-11-24",
+      "via": "Launched on X by alphaXiv on 2026-11-20 with a public blog leaderboard scoring eight frontier models across six providers and backed by the alphaXiv/OpenResearch repository."
+    },
+    {
       "id": "openrsi-index",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-09-24."
@@ -18366,6 +18696,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "optimization-bench-replit",
+      "date": "2026-11-24",
+      "via": "Replit engineering benchmark scoring 6 frontier models across 1 to 32 parallel agents on NumPy, SQLite, SQLGlot, and Git performance optimization."
+    },
+    {
       "id": "opus-100",
       "date": "2026-11-19",
       "via": "Stanford HELM includes a configuration for this evaluation."
@@ -18399,6 +18734,11 @@
       "id": "orav-bench",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "orbia",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Orbia video world model benchmark with 67 stars and 29 ranked models."
     },
     {
       "id": "orca-bench-oncall",
@@ -18599,6 +18939,11 @@
       "id": "paperscope",
       "date": "2026-11-19",
       "via": "A research benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "paperwritingbench",
+      "date": "2026-11-24",
+      "via": "Google Cloud AI Research PaperOrchestra release (6,191 GitHub stars) and Hugging Face dataset yiwen-song/PaperWritingBench (61 likes)."
     },
     {
       "id": "paprika3d-kaeru-flip",
@@ -19049,6 +19394,11 @@
       "id": "physclosurebench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers ranked by upvotes."
+    },
+    {
+      "id": "physgym",
+      "date": "2026-11-24",
+      "via": "GitHub scientific discovery benchmark audit found PhysGym (NeurIPS 2025, 103 stars) with Table 1 results in arXiv HTML."
     },
     {
       "id": "physgym-arena-dr-hard",
@@ -20016,6 +20366,11 @@
       "via": "Hugging Face benchmark datasets sorted by likes."
     },
     {
+      "id": "qwen3guardtest",
+      "date": "2026-11-24",
+      "via": "Qwen Hugging Face org sweep found Qwen3GuardTest with 37 HF likes and thinking moderation scores in arXiv:2510.14276 Table 3."
+    },
+    {
       "id": "qwenchinesebench",
       "date": "2026-11-01",
       "via": "Qwen3.6-Max-Preview launch post score image."
@@ -20401,6 +20756,11 @@
       "via": "The publisher's research and repository indexes led to this release."
     },
     {
+      "id": "redactionbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json confirmed a 44-model PII redaction leaderboard on Hugging Face (RedactionBench/RedactionBench) comparing frontier general-purpose agents and specialized detectors."
+    },
+    {
       "id": "reddit-impacts",
       "date": "2026-11-20",
       "via": "The 2026 opioid task cited its original corpus, which led to the 2024 announcement and the 2025 participant results."
@@ -20496,9 +20856,19 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "rehearsalbench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.22480) confirmed a live Round 3 leaderboard and CSV feed at afterflow.dev/research/rehearsalbench scoring 10 frontier models with 95% intervals and a cost-savings scatter plot."
+    },
+    {
       "id": "relate-audio-text",
       "date": "2026-11-20",
       "via": "We followed the XACLE baseline citation and checked which paper scored RELATE separately from XACLE."
+    },
+    {
+      "id": "rele-chinese-llm-benchmark",
+      "date": "2026-11-24",
+      "via": "GitHub LLM leaderboard audit found ReLE (formerly CLiB, 6,525 stars) tracking frontier models weekly across eight domains."
     },
     {
       "id": "relytoolbench",
@@ -20539,6 +20909,11 @@
       "id": "reponormbench",
       "date": "2026-11-19",
       "via": "The Hugging Face leaderboard links its results and evaluation method."
+    },
+    {
+      "id": "repoprobe",
+      "date": "2026-11-24",
+      "via": "Tencent-Hunyuan GitHub sweep found RepoProbe (ASE 2026) scoring 20 frontier models in arXiv:2608.04783."
     },
     {
       "id": "reportbench",
@@ -20706,6 +21081,11 @@
       "via": "RISEBench repository README, which now lists RISEBench++."
     },
     {
+      "id": "risk-aware-trading-agents",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: Risk-Aware Trading Agents (rta-bench-1) with 476 stars and live JSON leaderboard."
+    },
+    {
       "id": "riskrubric",
       "date": "2026-11-20",
       "via": "The publisher's research and repository indexes led to this release."
@@ -20756,6 +21136,11 @@
       "via": "We followed a customer support phone benchmark to Roark’s change log and checked which industry calls its current suite scores."
     },
     {
+      "id": "robo-swe",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json confirmed a 236-task Harbor robotics issue-resolution benchmark on Hugging Face (vharatian/Robo-SWE) with a JSON leaderboard comparing 7 frontier agent configurations across 6 models."
+    },
+    {
       "id": "roboarcade",
       "date": "2026-11-19",
       "via": "A robotics benchmark search led to the authors’ paper."
@@ -20774,6 +21159,11 @@
       "id": "robocasa-mem",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "robocerebra",
+      "date": "2026-11-24",
+      "via": "AllenAI VLA Evaluation Harness leaderboard audit found RoboCerebra long-horizon household manipulation tasks."
     },
     {
       "id": "robochallenge-table30-v2",
@@ -20816,6 +21206,16 @@
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
     },
     {
+      "id": "robomme",
+      "date": "2026-11-24",
+      "via": "University of Michigan and Stanford robotics memory benchmark with 201 GitHub stars and 30 evaluated policies across 16 manipulation tasks."
+    },
+    {
+      "id": "robomme-plus",
+      "date": "2026-11-24",
+      "via": "November 2026 RoboMME held-out extension evaluating 16 robotic policy and agentic adaptation methods across 800 variation episodes."
+    },
+    {
       "id": "roborewardbench",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-07-11. Hosted on HELM, an established eval group."
@@ -20824,6 +21224,11 @@
       "id": "robospatial-home",
       "date": "2026-11-01",
       "via": "The Qwen3-VL technical report (arXiv 2511.21631) lists its evaluation prompt for this benchmark, and the almanac lacked it."
+    },
+    {
+      "id": "robotap",
+      "date": "2026-11-24",
+      "via": "AllenAI RoboTracker model card sweep led to Google DeepMind RoboTAP benchmark (arXiv:2308.15975) with Tables 4 and 5 scores."
     },
     {
       "id": "roboteam",
@@ -20854,6 +21259,11 @@
       "id": "robotworld",
       "date": "2026-11-01",
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
+    },
+    {
+      "id": "robowild",
+      "date": "2026-11-24",
+      "via": "Hugging Face Datasets and X discovery: XLANG Lab RoboWild robotics benchmark with live website and Pareto charts."
     },
     {
       "id": "roboworld",
@@ -21026,6 +21436,16 @@
       "via": "Latent Space AINews issue of 2026-08-04 (Kimi K3 + Kimi Code at 27.317% weighted score)."
     },
     {
+      "id": "rsibench-infra",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.24395) confirmed a live ByteDance Seed and Tsinghua AIR leaderboard at rsibench-infra.github.io scoring 7 frontier models on 20 infrastructure optimization tasks."
+    },
+    {
+      "id": "rsibench-infra-lite",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (arXiv 2611.24395) confirmed a separate 5-workload Lite leaderboard with its own normalized Agent score metric on rsibench-infra.github.io across 7 frontier models."
+    },
+    {
       "id": "rsicd",
       "date": "2026-11-20",
       "via": "We followed the VLEO-Bench captioning table to the authors’ reference captions and the first repository commit."
@@ -21096,6 +21516,11 @@
       "via": "A successor check on RealToxicityPrompts found the Microsoft multilingual version."
     },
     {
+      "id": "rtr-bench",
+      "date": "2026-11-24",
+      "via": "Independent CC0-1.0 leaderboard scoring 11 frontier and open models on verified human audience distribution prediction and learning."
+    },
+    {
       "id": "rtsgamebench",
       "date": "2026-11-19",
       "via": "The game evaluation survey listed this candidate."
@@ -21104,6 +21529,11 @@
       "id": "ruc-tt07-32k",
       "date": "2026-11-20",
       "via": "The TuRTLe data loader exposed a separate rule completion table for one Tiny Tapeout collection."
+    },
+    {
+      "id": "rukopys",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: Ukrainian Catholic University RUKOPYS Leaderboard scoring 47 models on handwritten OCR."
     },
     {
       "id": "rule2drc",
@@ -21186,6 +21616,11 @@
       "via": "Benchmark Radar. 123 GitHub stars. Opened maker sources in the second run."
     },
     {
+      "id": "s1mb",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: hotchpotch S1MB-leaderboard with 89 likes and 219 complete English v1 models."
+    },
+    {
       "id": "s3gym",
       "date": "2026-11-01",
       "via": "HarnessDev project site, which lists both benchmarks."
@@ -21209,6 +21644,11 @@
       "id": "sac-bench",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "safeclawarena",
+      "date": "2026-11-24",
+      "via": "Joint UC Berkeley, UIUC, NUS, Google DeepMind, and NVIDIA security leaderboard scoring 5 frontier models across 3 OpenClaw-family agent platforms."
     },
     {
       "id": "safelibero",
@@ -21516,6 +21956,11 @@
       "via": "The MTEB leaderboard on Hugging Face links to a scored implementation of this evaluation."
     },
     {
+      "id": "sciformabench-2k",
+      "date": "2026-11-24",
+      "via": "Microsoft Hugging Face org sweep found SciFormaBench-2K scoring 14 image generation models on scientific diagrams."
+    },
+    {
       "id": "sciknoweval",
       "date": "2026-11-19",
       "via": "The UK AISI Inspect Evals register lists the evaluation."
@@ -21679,6 +22124,11 @@
       "id": "secit-bench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, SRE domain."
+    },
+    {
+      "id": "seclens",
+      "date": "2026-11-24",
+      "via": "GitHub 2026 discovery: MatterSec Labs SecLens CVE benchmark with 42 stars and live 12-model leaderboard."
     },
     {
       "id": "secqa",
@@ -21951,6 +22401,11 @@
       "via": "Fireworks Specialized Intelligence Index, media domain."
     },
     {
+      "id": "showdown-clicks",
+      "date": "2026-11-24",
+      "via": "General Agents open desktop UI grounding benchmark (98 GitHub stars) scoring 9 computer-use models with 95% confidence intervals and latency."
+    },
+    {
       "id": "shrec-2026-human-perceived-visual-complexity",
       "date": "2026-11-20",
       "via": "We followed the SHREC index from the museum retrieval task to the paper comparing CAD parts, teeth, and fractals."
@@ -22101,6 +22556,11 @@
       "via": "We followed the VoiceMOS singing track to the original paper and compared its two test splits."
     },
     {
+      "id": "singularity-bench",
+      "date": "2026-11-24",
+      "via": "Launched on X by InfiniAI Lab on 2026-11-20 with arXiv 2611.16591 and a public leaderboard scoring nine frontier models across 13 agent runs."
+    },
+    {
       "id": "sinhala-language-proficiency-linguistic-mastery",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
@@ -22109,6 +22569,11 @@
       "id": "site-bench",
       "date": "2026-11-01",
       "via": "SenseNova-SI model card spatial benchmark table."
+    },
+    {
+      "id": "sk-llm-eval",
+      "date": "2026-11-24",
+      "via": "Independent MIT-licensed Slovak language leaderboard on Hugging Face scoring 26 frontier and open-weight models across 207 tasks."
     },
     {
       "id": "skatebench-2",
@@ -22154,6 +22619,11 @@
       "id": "sldbench",
       "date": "2026-11-19",
       "via": "Harbor lists this evaluation in its official registry."
+    },
+    {
+      "id": "sleight-bench",
+      "date": "2026-11-24",
+      "via": "Anthropic Alignment Science blog sweep found SLEIGHT-Bench with public transcript repository and arXiv:2605.16626."
     },
     {
       "id": "slidevqa",
@@ -22421,6 +22891,11 @@
       "via": "A search for game evaluations identified this candidate."
     },
     {
+      "id": "societybench",
+      "date": "2026-11-24",
+      "via": "GitHub repository co-minder/SocietyBench-codebase (139 stars) and Hugging Face dataset Social-AI-2026/SocietyBench."
+    },
+    {
       "id": "sociohack",
       "date": "2026-11-01",
       "via": "Import AI 460 (2026-06-08)."
@@ -22439,6 +22914,11 @@
       "id": "sofc-exp",
       "date": "2026-11-20",
       "via": "We followed SEED’s fuel cell results to the original annotations and matched sentences from the LLaMat evaluation to the source papers."
+    },
+    {
+      "id": "softvtbench",
+      "date": "2026-11-24",
+      "via": "GitHub repository TuojingAI/SoftVTBench (248 stars) and arXiv:2607.04234."
     },
     {
       "id": "sokobench",
@@ -22816,6 +23296,31 @@
       "via": "Baidu ERNIE 5.1 launch post reports SpreadsheetBench-Verified (pass@1)."
     },
     {
+      "id": "springprompt-bulletbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 45 models on real-time chess under strict wall-clock time controls with cost and latency scatter plots."
+    },
+    {
+      "id": "springprompt-catalogbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 36 models on factual e-commerce product catalog generation with cost per 10,000 products."
+    },
+    {
+      "id": "springprompt-deckbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 37 models on business presentation generation by pairwise panel rating and cost per deck."
+    },
+    {
+      "id": "springprompt-roasbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 37 models on a 12-month simulated paid-marketing budget allocation environment."
+    },
+    {
+      "id": "springprompt-surveybench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 28 models on survey design and evidence-grounded analysis with trap handling and cost per task."
+    },
+    {
       "id": "spy-pii-detection",
       "date": "2026-11-20",
       "via": "The independent Kiji comparison cited a medical and legal test that OpenAI also used for adaptation."
@@ -23094,6 +23599,11 @@
       "id": "streamingqa",
       "date": "2026-11-20",
       "via": "An independent EMNLP 2024 retrieval study used StreamingQA to compare how models adapt to newly published documents."
+    },
+    {
+      "id": "strideworld",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.24408) with a Hugging Face Space leaderboard scoring 15 interactive video world models."
     },
     {
       "id": "structeval",
@@ -23961,6 +24471,11 @@
       "via": "An arXiv search led to the authors' paper."
     },
     {
+      "id": "t2j-bench",
+      "date": "2026-11-24",
+      "via": "Google Research GitHub sweep found T2J-Bench with live HTML leaderboard scoring 21 agent-model configurations."
+    },
+    {
       "id": "t2lsc-bench",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -23971,9 +24486,19 @@
       "via": "Gemini Embedding 2 technical report reports results for this evaluation."
     },
     {
+      "id": "t3bench",
+      "date": "2026-11-24",
+      "via": "GitHub 3D generation benchmark search found T3Bench with 1,100 stars and a public project leaderboard."
+    },
+    {
       "id": "taarofbench",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "tabarena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: AutoGluon and AWS TabArena Elo leaderboard with 103 tabular models."
     },
     {
       "id": "tabfact",
@@ -24951,6 +25476,11 @@
       "via": "Audio vertical check."
     },
     {
+      "id": "tts-spaces-arena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces arena audit found Pendrokar TTS Spaces Arena with its own live vote pool and Elo ratings."
+    },
+    {
       "id": "tua-bench-meta",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
@@ -25186,6 +25716,11 @@
       "via": "The UK AISI Inspect Evals register lists the evaluation."
     },
     {
+      "id": "ugi-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: DontPlanToEnd UGI Leaderboard with 2,233 Space likes and 1,331 scored models."
+    },
+    {
       "id": "ugmathbench",
       "date": "2026-11-01",
       "via": "Table 1 of the Ring-1T technical report."
@@ -25271,6 +25806,11 @@
       "via": "Table 5 of the codex-1 system card addendum."
     },
     {
+      "id": "unfinished-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.AI (arXiv:2611.17460) from NAVER AI Lab with a public results page scoring 12 current models."
+    },
+    {
       "id": "unhealthy-comments-corpus",
       "date": "2026-11-20",
       "via": "We followed the Bremen feedback study to the comment corpus and matched its released labels to the PaLM paper’s test counts."
@@ -25334,6 +25874,11 @@
       "id": "uno-bench",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card omni-modality table."
+    },
+    {
+      "id": "unsafe-eval-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: Principled Intelligence unsafe-eval Leaderboard scoring 40 safety classifiers."
     },
     {
       "id": "unsatz",
@@ -25931,6 +26476,11 @@
       "via": "Other versions link on the Vibe Code Bench v1.1 page."
     },
     {
+      "id": "vals-vibe-code-bench-v1-1-1",
+      "date": "2026-11-24",
+      "via": "Vals AI sitemap and live vibe-code-v1-1-1 leaderboard page."
+    },
+    {
       "id": "vals-web-search-index",
       "date": "2026-11-01",
       "via": "Vals benchmarks list. Vals introduced it on 2026-07-23."
@@ -26149,6 +26699,11 @@
       "id": "veteval",
       "date": "2026-11-20",
       "via": "A veterinary licensing exam search surfaced VetEval's item bank, which linked to its methodology and leaderboard."
+    },
+    {
+      "id": "vg-gui-bench",
+      "date": "2026-11-24",
+      "via": "Waiting-list triage of data/discovered.json (Hugging Face Aoraku/VG-GUI-Bench) confirmed an ECCV 2026 project leaderboard at vg-gui-tasker.github.io comparing 7 frontier multimodal models on video-guided mobile GUI control."
     },
     {
       "id": "vggsound",
@@ -26441,6 +26996,11 @@
       "via": "An arXiv search led to the authors' paper."
     },
     {
+      "id": "vissearch-bench",
+      "date": "2026-11-24",
+      "via": "Hugging Face Daily Papers and GitHub discovery: Ant Group and Tsinghua VisSearch-Bench with live project leaderboard."
+    },
+    {
       "id": "vist-toloka",
       "date": "2026-11-20",
       "via": "The organization's publication index or project repository identifies this evaluation."
@@ -26474,6 +27034,11 @@
       "id": "visual-aesthetic-benchmark",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "visual-cipher-bench",
+      "date": "2026-11-24",
+      "via": "Launched on X by Einsia AI on 2026-11-17 with arXiv 2611.16861 and a live leaderboard scoring eight frontier models across 29 effort settings."
     },
     {
       "id": "visual-spatial-reasoning",
@@ -26651,6 +27216,16 @@
       "via": "Coverage audit of independent public speech preference boards."
     },
     {
+      "id": "voicearena-egyptian-arabic",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
+      "id": "voicearena-filipino-accented-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
       "id": "voicearena-french",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
@@ -26659,6 +27234,11 @@
       "id": "voicearena-german",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
+    },
+    {
+      "id": "voicearena-gujarati",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
     },
     {
       "id": "voicearena-hindi",
@@ -26681,9 +27261,44 @@
       "via": "Coverage audit of independent public speech preference boards."
     },
     {
+      "id": "voicearena-stt-brazilian-portuguese",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-hindi",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-indian-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-romanian",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-us-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
       "id": "voicearena-tagalog",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
+    },
+    {
+      "id": "voicearena-tamil",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
+      "id": "voicearena-telugu",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
     },
     {
       "id": "voicearena-us-english",
@@ -26866,6 +27481,11 @@
       "via": "A GitHub repository search led to the authors’ evaluation harness."
     },
     {
+      "id": "waterfallbench",
+      "date": "2026-11-24",
+      "via": "Independent public leaderboard scoring 7 frontier models on 20 deterministic SEC securitization waterfall tasks with cost and token metrics."
+    },
+    {
       "id": "waxal-asr-test",
       "date": "2026-11-20",
       "via": "Addis AI's comparison on the complete Afaan Oromo test set led to the original WAXAL splits and WaxalNet's independent evaluation."
@@ -26879,6 +27499,11 @@
       "id": "wbench-meituan",
       "date": "2026-11-01",
       "via": "Hugging Face datasets tagged benchmark:official."
+    },
+    {
+      "id": "wearable-ai-challenge",
+      "date": "2026-11-24",
+      "via": "Meta FAIR Hugging Face org sweep found Wearable-AI Challenge held-out test leaderboard across 44 submissions."
     },
     {
       "id": "wearableqa",
@@ -27024,6 +27649,11 @@
       "id": "whamr",
       "date": "2026-11-20",
       "via": "We followed the WHAM project page to the reverberant extension and checked the authors’ paper and a separate test harness."
+    },
+    {
+      "id": "whatifibought",
+      "date": "2026-11-24",
+      "via": "GitHub repository mamawai/wtfibought (146 stars) and live paper-trading site intro.wtfibought.com."
     },
     {
       "id": "when2call",
@@ -27556,6 +28186,11 @@
       "via": "Kimi K3.1 Pro tech blog cybersecurity section."
     },
     {
+      "id": "xl-docbench",
+      "date": "2026-11-24",
+      "via": "Microsoft Hugging Face org sweep found XL-DocBench (NeurIPS 2026) with per-item scores for 13 model configurations."
+    },
+    {
       "id": "xl-sum-english",
       "date": "2026-11-15",
       "via": "Benchmark Radar aggregator lead. Clear-use test: 279 GitHub stars on the newly identified maker repository, checked in this run. GEM also includes the evaluation."
@@ -27634,6 +28269,11 @@
       "id": "yakk",
       "date": "2026-11-20",
       "via": "HUD's November 2026 research index exposed its new GPU kernel benchmark."
+    },
+    {
+      "id": "yanami",
+      "date": "2026-11-24",
+      "via": "Hugging Face Daily Papers entry for arXiv:2611.05280 (33 upvotes) and project page."
     },
     {
       "id": "yocausal",
@@ -27729,6 +28369,11 @@
       "id": "ziqi-eval",
       "date": "2026-11-20",
       "via": "Searching for the SSMR-Bench code led to MuTheoryEval and its published results for individual models."
+    },
+    {
+      "id": "zoombench",
+      "date": "2026-11-24",
+      "via": "ICML 2026 paper arXiv:2602.11858 and repository inclusionAI/Zooming-without-Zooming (202 GitHub stars)."
     },
     {
       "id": "zoomed-in-bvcc",
@@ -29061,12 +29706,6 @@
       "name": "benchlm.ai derived rows (AA component scores, CLEF decision index tasks, Fastino and Liquid decision-index boards, perplexity panels, NoLiMa-Hard, KMMLU subsets, classic NLP sets TabFact, Circa, FinancialPhraseBank, ContractNLI)",
       "url": "https://benchlm.ai/benchmarks",
       "reason": "Sub-scores, vendor panels or legacy classification sets, not separate benchmarks.",
-      "date": "2026-11-01"
-    },
-    {
-      "name": "benchlm.ai entries without a maker page found (Ramp Accounting Bench, Gert Labs, MazeBench, VulcanBench v3, OpenHarmony Bench, IDE-Bench, App-Bench, Bug Hunt Bench, React Native Evals, STEMBench, AI-Needle, FinanceArena, KindBench, AutoCAD-Bench, MCP-Tasks, Kimi Financial Modeling, SOB Value Acc, MStar, ChatCVQA, ImageMining, MMSearch, Facts-VLM, MMAnswerBench, VWT2k-lite)",
-      "url": "https://benchlm.ai/benchmarks",
-      "reason": "Aggregator listings used as leads only. Their maker pages were not found, so they are not cataloged. Ramp Accounting Bench relates to APEX-Accounting, which the almanac has.",
       "date": "2026-11-01"
     },
     {

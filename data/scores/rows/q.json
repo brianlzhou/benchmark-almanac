@@ -574,6 +574,19 @@
     ["qwen-image-bench","Imagen 4.0 Ultra",null,null,51.99,null,null,null,{"quality":50.9,"aesthetics":54.25,"alignment":54.02,"real_world_fidelity":45.59,"creative_generation":51.14}],
     ["qwen-image-bench","Imagen 4.0",null,null,50.29,null,null,null,{"quality":50.16,"aesthetics":52.68,"alignment":51.64,"real_world_fidelity":44.84,"creative_generation":47.94}],
     ["qwen-image-bench","Kling Image 2.1",null,null,48.26,null,null,null,{"quality":49.11,"aesthetics":50.15,"alignment":49.18,"real_world_fidelity":44.74,"creative_generation":44.67}],
+    ["qwen3guardtest","Qwen3Guard-4B-Gen","strict",null,84,null,null,null,null,{"params":4}],
+    ["qwen3guardtest","Qwen3Guard-8B-Gen","strict",null,84,null,null,null,null,{"params":8}],
+    ["qwen3guardtest","Qwen3Guard-0.6B-Gen","strict",null,83.6,null,null,null,null,{"params":0.6}],
+    ["qwen3guardtest","Qwen3Guard-8B-Gen","loose",null,83.3,null,null,null,null,{"params":8}],
+    ["qwen3guardtest","Qwen3Guard-0.6B-Gen","loose",null,83.1,null,null,null,null,{"params":0.6}],
+    ["qwen3guardtest","PolyGuard-Qwen-7B",null,null,81.1,null,null,null,null,{"params":7}],
+    ["qwen3guardtest","Qwen3Guard-4B-Gen","loose",null,80.2,null,null,null,null,{"params":4}],
+    ["qwen3guardtest","NemoGuard-8B",null,null,77.9,null,null,null,null,{"params":8}],
+    ["qwen3guardtest","LlamaGuard3-8B",null,null,72,null,null,null,null,{"params":8}],
+    ["qwen3guardtest","WildGuard-7B",null,null,71.4,null,null,null,null,{"params":7}],
+    ["qwen3guardtest","ShieldGemma-27B",null,null,68,null,null,null,null,{"params":27}],
+    ["qwen3guardtest","ShieldGemma-9B",null,null,61.1,null,null,null,null,{"params":9}],
+    ["qwen3guardtest","LlamaGuard4-12B",null,null,59.3,null,null,null,null,{"params":12}],
     ["qwenworldbench","DeepSeek V4 Pro (snapshot unspecified)","max",null,52.3,null,null,null]
   ]
 }

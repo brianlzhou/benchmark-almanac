@@ -295,6 +295,15 @@
     ["judgmentbench","claude-sonnet-5","Rubric scoring",null,44.6,"2026-06-30",null,null,{"protocolDifference":40.6}],
     ["judgmentbench","gemini-3-6-flash","Comparative judgment",null,81.9,"2026-07-21",null,null,{"protocolDifference":25.9}],
     ["judgmentbench","gemini-3-6-flash","Rubric scoring",null,56,"2026-07-21",null,null,{"protocolDifference":25.9}],
+    ["jup-eval","gemini-3-5-flash-lite",null,null,81.33,"2026-07-21",null,null,{"honesty":77.85,"agency":83.78,"pluralism":89.45,"care":85.74,"integrity":76.7,"action":77.05},{"trials":3,"low":76.77,"high":85.26}],
+    ["jup-eval","grok-4-7",null,null,95.06,"2026-09-21",null,null,{"honesty":94.65,"agency":95.06,"pluralism":96.87,"care":95.9,"integrity":93.62,"action":94.58},{"trials":3,"low":93.06,"high":96.72}],
+    ["jup-eval","claude-opus-5-5",null,null,97.24,"2026-09-22",null,null,{"honesty":99.68,"agency":95.06,"pluralism":98.64,"care":97.15,"integrity":96.86,"action":95.74},{"trials":3,"low":95.15,"high":98.88}],
+    ["jup-eval","claude-sonnet-5-5",null,null,97.63,"2026-09-28",null,null,{"honesty":99.84,"agency":97.72,"pluralism":99.05,"care":95.58,"integrity":97.56,"action":95.87},{"trials":3,"low":95.61,"high":99.08}],
+    ["jup-eval","claude-haiku-5-5",null,null,98.34,"2026-10-07",null,null,{"honesty":97.44,"agency":98.33,"pluralism":98.86,"care":99.42,"integrity":96.51,"action":99.42},{"trials":3,"low":97.36,"high":99.15}],
+    ["jup-eval","gemini-4-carbon",null,null,96.85,"2026-10-28",null,null,{"honesty":98.49,"agency":98.49,"pluralism":96.84,"care":96.15,"integrity":97.24,"action":94.23},{"trials":3,"low":94.98,"high":98.28}],
+    ["jup-eval","gemini-4-hydrogen",null,null,97.31,"2026-11-12",null,null,{"honesty":98.49,"agency":96.44,"pluralism":96.61,"care":94.71,"integrity":96.76,"action":99.68},{"trials":3,"low":96.3,"high":98.22}],
+    ["jup-eval","gpt-6-2-astra",null,null,95.07,"2026-11-17",null,null,{"honesty":96.7,"agency":93.14,"pluralism":94.28,"care":95.19,"integrity":90.1,"action":99.13},{"trials":3,"low":93.56,"high":96.49}],
+    ["jup-eval","gpt-6-2-sol",null,null,95.55,"2026-11-17",null,null,{"honesty":93.69,"agency":93.88,"pluralism":94.94,"care":97.69,"integrity":94.04,"action":98.65},{"trials":3,"low":94.03,"high":96.95}],
     ["justiceaxis","gemma-4-31b-it",null,null,32.03,"2026-04-02",null,null,{"charge":32.81,"chargeWilson95HalfWidth":8.03,"family":37.5,"disposition":39.84,"sentence":17.97,"average":32.03,"chargeGivenFamily":87.5,"sentenceGivenDisposition":45.1,"recorded":34.38,"recordedWilson95HalfWidth":8.12,"rigid":20.31,"ungrounded":45.31,"miss":65.62,"polarity":-0.381,"polarityWilson95HalfWidth":0.194}],
     ["justiceaxis","deepseek-v4-flash",null,null,58.4,"2026-04-24",null,null,{"charge":59.38,"chargeWilson95HalfWidth":8.39,"family":64.06,"disposition":73.44,"sentence":36.72,"average":58.4,"chargeGivenFamily":92.68,"sentenceGivenDisposition":50,"recorded":66.41,"recordedWilson95HalfWidth":8.08,"rigid":11.72,"ungrounded":21.88,"miss":33.59,"polarity":-0.302,"polarityWilson95HalfWidth":0.274}],
     ["justiceaxis","claude-sonnet-5",null,null,78.52,"2026-06-30",null,null,{"charge":78.12,"chargeWilson95HalfWidth":7.1,"family":81.25,"disposition":86.72,"sentence":67.97,"average":78.52,"chargeGivenFamily":96.15,"sentenceGivenDisposition":78.38,"recorded":84.38,"recordedWilson95HalfWidth":6.28,"rigid":11.72,"ungrounded":3.91,"miss":15.62,"polarity":0.5,"polarityWilson95HalfWidth":0.357}],
@@ -1243,6 +1252,7 @@
     ["judgerbench-v2","RISE-Judge-Qwen2.5-32B",null,null,56.42,null,null,null],
     ["judgerbench-v2","Con-J-7B-Instruct",null,null,52.35,null,null,null],
     ["judgerbench-v2","RISE-Judge-Qwen2.5-7B",null,null,46.12,null,null,null],
+    ["jup-eval","Praus",null,null,98.52,null,null,null,{"honesty":99.36,"agency":97.08,"pluralism":99.11,"care":98.43,"integrity":98.08,"action":98.72},{"trials":3,"low":97.57,"high":99.28}],
     ["justiceaxis","GPT-5.6",null,null,91.02,null,null,null,{"charge":89.06,"chargeWilson95HalfWidth":5.45,"family":92.97,"disposition":96.88,"sentence":85.16,"average":91.02,"chargeGivenFamily":95.8,"sentenceGivenDisposition":87.9,"recorded":93.75,"recordedWilson95HalfWidth":4.32,"rigid":5.47,"ungrounded":0.78,"miss":6.25,"polarity":0.75,"polarityWilson95HalfWidth":0.448}]
   ]
 }
