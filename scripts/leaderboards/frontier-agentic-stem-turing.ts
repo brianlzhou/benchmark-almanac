@@ -6,10 +6,11 @@ import { jsonAt } from '../lib/html.ts';
 
 const url = 'https://labs.turing.com/benchmarks/frontier-agentic-stem';
 export async function turingPage(page: string, slug: string) {
-  const script = (await fetchText(page)).match(/src="(\/assets\/index-[\w-]+\.js)"/)?.[1];
+  const root = new URL('/', page).href;
+  const script = (await fetchText(root)).match(/src="(\/assets\/index-[\w-]+\.js)"/)?.[1];
   if (!script) throw new Error('Missing Turing app script');
   await new Promise(resolve => setTimeout(resolve, 1000));
-  const js = await fetchText(new URL(script, page).href);
+  const js = await fetchText(new URL(script, root).href);
   const start = js.indexOf('slug:"' + slug + '"');
   if (start < 0) throw new Error('Cannot find Turing page ' + slug);
   return js.slice(start).split(/,\w+=\{slug:/, 1)[0];
@@ -25,9 +26,23 @@ function table(page: string, first: string) {
 }
 
 const board: Leaderboard = {
-  benchmark: 'frontier-agentic-stem-turing', url, feed: 'https://labs.turing.com/assets/index-BZIruKnx.js',
+  benchmark: 'frontier-agentic-stem-turing', url, feed: 'https://labs.turing.com/',
   terms: 'The robots.txt URL serves the app. Turing gives no separate reuse license on the benchmark page.',
   reference: ['Terminus-2'],
+  parts: {
+    domain0: { name: 'Physics', group: 'Sub-domain', unit: '%' },
+    domain1: { name: 'Biology', group: 'Sub-domain', unit: '%' },
+    domain2: { name: 'Mathematics', group: 'Sub-domain', unit: '%' },
+    domain3: { name: 'Chemistry', group: 'Sub-domain', unit: '%' },
+    domain4: { name: 'Mathematics and Theoretical Sciences', group: 'Sub-domain', unit: '%' },
+    domain5: { name: 'Computational Chemistry', group: 'Sub-domain', unit: '%' },
+    domain6: { name: 'Computational and Theoretical Chemistry', group: 'Sub-domain', unit: '%' },
+    domain7: { name: 'Computational Physics', group: 'Sub-domain', unit: '%' },
+    domain8: { name: 'Computational Biology', group: 'Sub-domain', unit: '%' },
+    domain9: { name: 'Chemistry and Molecular Engineering', group: 'Sub-domain', unit: '%' },
+    domain10: { name: 'Data Science', group: 'Sub-domain', unit: '%' },
+    domain11: { name: 'Biophysics', group: 'Sub-domain', unit: '%' },
+  },
   stats: { passed: { name: 'Rollouts passed', unit: 'count' }, steps: { name: 'Mean steps', unit: 'count' }, toolCalls: { name: 'Mean tool calls', unit: 'count' }, latency: { name: 'Runtime', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const page = await turingPage(url, 'frontier-agentic-stem');
@@ -44,11 +59,9 @@ const board: Leaderboard = {
           latency: Number(String(runtime).replace(/m$/, '')) * 60 } };
     });
     const sub = table(page, 'Sub-domain');
-    board.parts = {};
-    for (const entry of sub.data) {
-      const name = String(entry[0]);
-      const key = 'domain' + Object.keys(board.parts).length;
-      board.parts[key] = { name, group: 'Sub-domain', unit: '%' };
+    for (let idx = 0; idx < sub.data.length; idx++) {
+      const entry = sub.data[idx];
+      const key = 'domain' + idx;
       for (const row of rows) {
         const i = sub.cols.indexOf(row.model);
         if (i < 0 || !Number.isFinite(Number(entry[i]))) throw new Error('Missing sub-domain score: ' + row.model);
