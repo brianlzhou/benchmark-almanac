@@ -10116,6 +10116,16 @@
       "via": "The GPT study’s German test led to the Swiss Job Market Monitor deposit and its original term recognition experiment."
     },
     {
+      "id": "gobench",
+      "date": "2026-11-28",
+      "via": "Submitted by Roland Gao in GitHub issue #131. Track 1 leaderboard reports Elo ratings for 35 frontier model configurations across six labs."
+    },
+    {
+      "id": "gobench-track-2",
+      "date": "2026-11-28",
+      "via": "Submitted by Roland Gao in GitHub issue #131. Track 2 leaderboard reports Elo ratings for five current frontier models writing 9x9 Go engines over 1 to 8 hours."
+    },
+    {
       "id": "gold-commodity-news",
       "date": "2026-11-19",
       "via": "Stanford HELM includes a configuration for this evaluation."
