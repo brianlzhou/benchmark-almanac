@@ -46507,9 +46507,9 @@
       "url": "https://arxiv.org/html/2502.06666",
       "feed": "https://arxiv.org/html/2502.06666",
       "terms": "Paper and license at https://arxiv.org/abs/2502.06666",
-      "headline": "The paper reports no overall score, so this is the plain mean of its ten close-ended accuracy parts.",
+      "headline": "CareQA close-ended English multiple-choice accuracy (%). CareQA Spanish accuracy and CareQA-Open metrics are stored separately.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 4,
       "unmatched": [
         "BioMistral-MedMNX",
@@ -46522,12 +46522,13 @@
         "Yi-1.5-34B-Chat"
       ],
       "parts": {
-        "en": {
-          "name": "English accuracy"
-        },
         "es": {
-          "name": "Spanish accuracy"
-        },
+          "name": "Spanish accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "stats": {
         "BitsperByte": {
           "name": "Bits per Byte",
           "unit": "score",
@@ -46544,7 +46545,7 @@
           "better": "lower"
         },
         "Prometheus": {
-          "name": "Prometheus",
+          "name": "Prometheus judge",
           "unit": "score",
           "better": "higher"
         },
@@ -46569,17 +46570,17 @@
           "better": "higher"
         },
         "ROUGE1": {
-          "name": "ROUGE1",
+          "name": "ROUGE-1",
           "unit": "score",
           "better": "higher"
         },
         "ROUGE2": {
-          "name": "ROUGE2",
+          "name": "ROUGE-2",
           "unit": "score",
           "better": "higher"
         },
         "ROUGEL": {
-          "name": "ROUGEL",
+          "name": "ROUGE-L",
           "unit": "score",
           "better": "higher"
         }
@@ -58240,7 +58241,8 @@
       "url": "https://codesignbench.github.io/#leaderboard",
       "feed": "https://codesignbench.github.io/data/site-data.json",
       "terms": "The authors publish the benchmark and its results at https://github.com/Wiselnn570/Co-Design-Bench",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-28",
       "rows": 10,
       "unmatched": [],
       "reference": [
@@ -58254,7 +58256,6 @@
           "name": "Full pass"
         }
       },
-      "static": "paper",
       "stats": {
         "mestrict": {
           "name": "ME strict completion",
@@ -67666,9 +67667,10 @@
       "url": "https://github.com/cz2014/CompMat-Bench",
       "feed": "https://raw.githubusercontent.com/cz2014/CompMat-Bench/HEAD/trajectories/manifest.json",
       "terms": "CC BY 4.0, https://github.com/cz2014/CompMat-Bench/blob/HEAD/LICENSE",
+      "headline": "Full-guidance pass rate across all 94 single-step computational materials science tasks from trajectories/manifest.json.",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 4,
+      "retrieved": "2026-11-28",
+      "rows": 10,
       "unmatched": [],
       "parts": {
         "inputs": {
@@ -67695,10 +67697,6 @@
           "name": "Tasks passed",
           "unit": "count",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         },
         "totalCost": {
           "name": "API cost",
@@ -69174,9 +69172,9 @@
       "url": "https://aclanthology.org/2026.acl-long.1196/",
       "feed": "https://aclanthology.org/2026.acl-long.1196.pdf",
       "terms": "Paper and license at https://aclanthology.org/2026.acl-long.1196/",
-      "headline": "The paper reports no overall score, so this is the plain mean of its six atomic and composite task rates.",
+      "headline": "Mean of Atomic Overall AC@1 and Composite Overall AC@1 from ACL Anthology Tables 11 and 12.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 11,
       "unmatched": [
         "Llama-3.1"
@@ -69239,6 +69237,11 @@
         },
         "CompositeDevelopmentRate": {
           "name": "Composite development pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeBugFixAC": {
+          "name": "Composite bug-fix accuracy",
           "unit": "%",
           "better": "higher"
         },
@@ -273700,8 +273703,9 @@
       "url": "https://arxiv.org/html/2507.16200",
       "feed": "https://arxiv.org/html/2507.16200",
       "terms": "The paper uses CC BY-NC-SA 4.0. https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "headline": "Mean of module-level formal pass@1 and system-level formal pass@1 across RealBench Verilog designs.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 3,
       "unmatched": [
         "CodeV-QW-7B",
@@ -273735,6 +273739,18 @@
         },
         "systemSyntaxAt5": {
           "name": "System syntax pass@5"
+        },
+        "systemFunction": {
+          "name": "System functional pass@1"
+        },
+        "systemFunctionAt5": {
+          "name": "System functional pass@5"
+        },
+        "systemFormal": {
+          "name": "System formal pass@1"
+        },
+        "systemFormalAt5": {
+          "name": "System formal pass@5"
         }
       }
     },
@@ -290687,9 +290703,9 @@
       "url": "https://arxiv.org/html/2610.19869",
       "feed": "https://arxiv.org/html/2610.19869",
       "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2610.19869",
-      "headline": "The paper reports no overall score, so this is the Speech accuracy column, with Text and Delta retained as metrics.",
+      "headline": "Mean Speech accuracy across the six Global-MMLU-Lite and SEA-HELM IFEval language splits. Text baselines and text-to-speech accuracy gaps are kept as stats.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 1,
       "unmatched": [
         "SEA-LION-4.5-27B"
@@ -290719,6 +290735,68 @@
         "ifevalTamil": {
           "name": "Tamil",
           "group": "SEA-HELM IFEval"
+        }
+      },
+      "stats": {
+        "mmluChineseText": {
+          "name": "Global-MMLU-Lite Chinese text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mmluChineseGap": {
+          "name": "Global-MMLU-Lite Chinese text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mmluEnglishText": {
+          "name": "Global-MMLU-Lite English text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mmluEnglishGap": {
+          "name": "Global-MMLU-Lite English text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalEnglishText": {
+          "name": "SEA-HELM IFEval English text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalEnglishGap": {
+          "name": "SEA-HELM IFEval English text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalIndonesianText": {
+          "name": "SEA-HELM IFEval Indonesian text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalIndonesianGap": {
+          "name": "SEA-HELM IFEval Indonesian text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalMalayText": {
+          "name": "SEA-HELM IFEval Malay text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalMalayGap": {
+          "name": "SEA-HELM IFEval Malay text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalTamilText": {
+          "name": "SEA-HELM IFEval Tamil text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalTamilGap": {
+          "name": "SEA-HELM IFEval Tamil text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -312628,42 +312706,42 @@
       "feed": "https://arxiv.org/html/2611.09304",
       "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2611.09304",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 6,
       "unmatched": [
         "SD 3.5"
       ],
       "parts": {
         "lex.": {
-          "name": "lex.",
+          "name": "Lexical negation",
           "group": "Form"
         },
         "morph.": {
-          "name": "morph.",
+          "name": "Morphological negation",
           "group": "Form"
         },
         "syn.": {
-          "name": "syn.",
+          "name": "Syntactic negation",
           "group": "Form"
         },
         "L0 (obj)": {
-          "name": "L0 (obj)",
+          "name": "L0 (object)",
           "group": "Complexity level"
         },
         "L1 (attr)": {
-          "name": "L1 (attr)",
+          "name": "L1 (attribute)",
           "group": "Complexity level"
         },
         "L2 (rel)": {
-          "name": "L2 (rel)",
+          "name": "L2 (relation)",
           "group": "Complexity level"
         },
         "L3 (comp)": {
-          "name": "L3 (comp)",
+          "name": "L3 (composition)",
           "group": "Complexity level"
         },
         "L4 (nest)": {
-          "name": "L4 (nest)",
+          "name": "L4 (nested)",
           "group": "Complexity level"
         }
       },
@@ -312704,9 +312782,8 @@
         },
         "ALWAYS_ABSENT": {
           "name": "Always-absent failures",
-          "unit": "score",
-          "better": "lower",
-          "note": "Rate from 0 to 1."
+          "unit": "%",
+          "better": "lower"
         },
         "PARTIAL_SUPPR": {
           "name": "Partial suppression failures",
@@ -312717,6 +312794,10 @@
           "name": "Weakly rendered failures",
           "unit": "%",
           "better": "lower"
+        },
+        "atoms": {
+          "name": "Prompt atoms evaluated",
+          "unit": "count"
         }
       }
     },
