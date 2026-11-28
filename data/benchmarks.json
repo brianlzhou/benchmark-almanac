@@ -207126,5 +207126,471 @@
       "https://huggingface.co/datasets/principled-intelligence/unsafe-eval-leaderboard"
     ],
     "added": "2026-11-24"
+  },
+  {
+    "id": "airis",
+    "name": "AIRIS",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Vision-language models answer 8,000 causal, time-anchored questions across 357 egocentric streaming video clips covering Attention, Intention, Reaction, and Interaction in social scenes.",
+    "org": "Tencent Robotics X Lab",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.34347",
+      "repo": "https://github.com/AIRIS-bench/AIRIS",
+      "site": "https://airis-bench.github.io/",
+      "leaderboard": "https://airis-bench.github.io/#leaderboard"
+    },
+    "access": "public",
+    "note": "Published leaderboard compares 45 proprietary, general, embodied, streaming, and omni-modal VLMs on a 0 to 1 scale across 36 capability dimensions.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://airis-bench.github.io/",
+      "https://airis-bench.github.io/data.js",
+      "https://arxiv.org/abs/2611.34347"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "bizgeneval",
+    "name": "BizGenEval",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Image generation models produce structured commercial visuals across slides, charts, webpages, posters and scientific figures from 400 prompts. A multimodal judge checks each image against 8,000 human-verified yes-or-no checklist questions covering text rendering, layout control, attribute binding and knowledge reasoning.",
+    "org": "Microsoft Research",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.25732",
+      "repo": "https://github.com/microsoft/BizGenEval",
+      "dataset": "https://huggingface.co/datasets/microsoft/BizGenEval",
+      "leaderboard": "https://huggingface.co/spaces/microsoft/BizGenEval-Leaderboard"
+    },
+    "access": "public",
+    "note": "The leaderboard ranks models by the 4,000 hard checklist questions and also publishes easy-split scores across all five domains and four dimensions. Reported by NVIDIA on the Nemotron-Labs-Image-30B-A3B model card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B",
+      "https://huggingface.co/spaces/microsoft/BizGenEval-Leaderboard",
+      "https://arxiv.org/abs/2603.25732"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "clinical3d-bench",
+    "name": "Clinical3D-Bench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Multimodal models answer 3,368 multiple-choice spatial reasoning questions on egocentric video walkthroughs of 373 simulated hospital rooms. Questions cover eight types including counting, re-identification, patient-relative frames, routing and equipment passability, with exact answers computed from the 3D scenes.",
+    "org": "A*STAR, University of Science and Technology of China and Wenzhou Medical University",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.32094",
+      "site": "https://clinicalspace.github.io/clinical3d-bench/",
+      "dataset": "https://huggingface.co/datasets/clinicalspace/Clinical3D-Bench",
+      "leaderboard": "https://clinicalspace.github.io/clinical3d-bench/#leaderboard"
+    },
+    "access": "public",
+    "note": "Ten physicians screened the room layouts, and five physicians scored 79.0% on a 400-question subset. The leaderboard reports zero-shot macro accuracy across 35 models plus three models fine-tuned on Clinical3D-45K.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/clinicalspace/Clinical3D-Bench",
+      "https://clinicalspace.github.io/clinical3d-bench/",
+      "https://arxiv.org/abs/2611.32094"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "drbench-pro",
+    "name": "DRBench Pro",
+    "category": "tool-use",
+    "subcategory": "tools-deep-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Knowledge-centric benchmark for professional deep research agents with 144 multi-hop cases spanning 24 domains and 44,102 fine-grained rubrics measuring overall, breadth, and depth coverage.",
+    "org": "Zhejiang University and Tencent",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.34852",
+      "repo": "https://github.com/ZJU-REAL/DRBenchPro",
+      "site": "https://zjureal.com/DRBenchPro/",
+      "leaderboard": "https://zjureal.com/DRBenchPro/",
+      "dataset": "https://huggingface.co/datasets/zhuiluozhiji/DRBenchPro"
+    },
+    "access": "public",
+    "note": "Live leaderboard evaluates 16 frontier models and deep research systems across Deep Research System, Native Search LLM, and Local Research Framework settings on 24 domains.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://zjureal.com/DRBenchPro/",
+      "https://zjureal.com/DRBenchPro/assets/data/results.json",
+      "https://github.com/ZJU-REAL/DRBenchPro",
+      "https://arxiv.org/abs/2611.34852"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "grape-bench",
+    "name": "GRAPE-Bench",
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Video reasoning robustness benchmark testing whether multimodal models maintain perception, understanding, and reasoning accuracy under real-world and synthetic visual degradations such as rain, snow, night, fog, and lens occlusions.",
+    "org": "GRAPE-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.33020",
+      "repo": "https://github.com/zhangce01/GRAPE-Bench",
+      "site": "https://zhangce01.github.io/grape-bench/",
+      "leaderboard": "https://zhangce01.github.io/grape-bench/#leaderboard"
+    },
+    "access": "public",
+    "note": "Project leaderboard scores 30 proprietary and open-weight video reasoning models on the real-world degraded video suite across Level 1 to Level 3 reasoning and four weather conditions, alongside synthetic degradation accuracy.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://zhangce01.github.io/grape-bench/",
+      "https://github.com/zhangce01/GRAPE-Bench",
+      "https://arxiv.org/abs/2611.33020"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "iclworld",
+    "name": "ICLWorld",
+    "category": "computer-use-browser",
+    "subcategory": "computer-desktop",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents learn customized and counterfactual task rules from human video demonstrations or text instructions and execute them across 160 online tasks in 30 web, desktop and simulated robot environments. Scored by verified task completion across replay, resample and relocate generalization levels.",
+    "org": "Tsinghua University",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.32649",
+      "repo": "https://github.com/ICLWorld/ICLWorld",
+      "site": "https://iclworld.github.io/",
+      "dataset": "https://huggingface.co/datasets/Aoraku/ICLWorld",
+      "leaderboard": "https://iclworld.github.io/#leaderboard"
+    },
+    "access": "public",
+    "note": "Includes 110 computer-use tasks (75 web and 35 desktop) and 50 robot-use tasks, each with three rule versions tested under both text and video context through the UIverse harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://iclworld.github.io/",
+      "https://github.com/ICLWorld/ICLWorld",
+      "https://arxiv.org/abs/2611.32649"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "os-omni",
+    "name": "OS-Omni",
+    "category": "computer-use-browser",
+    "subcategory": "computer-desktop",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Computer-using agents execute 300 long-horizon GUI workflows across Windows, Linux, macOS, iOS, Android, web and cross-device desktop-plus-phone setups. Agents observe screenshots only and are graded by executable final-state checks across 35 applications.",
+    "org": "Touchstone AI",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.34232",
+      "repo": "https://github.com/OS-Copilot/OS-Omni",
+      "site": "https://os-copilot.github.io/OS-Omni-Home/",
+      "leaderboard": "https://os-copilot.github.io/OS-Omni-Home/#leaderboard"
+    },
+    "access": "public",
+    "note": "Version v1 ships 48 tasks per platform plus 12 cross-device workflows, averaging 67.54 human interaction steps. Headline average is the unweighted mean across the seven evaluation groups. Accepted at NeurIPS 2026, with over 100 GitHub stars and 100 Hugging Face upvotes.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.34232",
+      "https://github.com/OS-Copilot/OS-Omni",
+      "https://os-copilot.github.io/OS-Omni-Home/"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "phycove",
+    "name": "PhyCoVE",
+    "category": "world-models",
+    "subcategory": "world-physics",
+    "level": "everyday",
+    "scoring": "expert-graded",
+    "format": "open-ended",
+    "description": "Video editing models take a source video and a physical edit instruction and generate the counterfactual video showing how rigid, elastic and fluid objects evolve afterward across 533 cases on 110 videos. Ranked by human preference win rate alongside counterfactual fidelity and visual metrics.",
+    "org": "Fudan University",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.29184",
+      "repo": "https://github.com/Hammour-steak/PhyCoVE",
+      "site": "https://phycove.github.io/",
+      "dataset": "https://huggingface.co/datasets/ccmoony/PhyCoVE",
+      "leaderboard": "https://phycove.github.io/#leaderboard"
+    },
+    "access": "public",
+    "note": "Covers remove, change and insert edits across five material interaction patterns on simulated and real-camera clips. Counterfactual fidelity measures how much of the ground-truth physical change from source to target the generated video reproduces.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://phycove.github.io/",
+      "https://github.com/Hammour-steak/PhyCoVE",
+      "https://arxiv.org/abs/2611.29184"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "proteomicsbench",
+    "name": "ProteomicsBench",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents analyze real bottom-up mass spectrometry proteomics datasets across 49 evaluations covering quality control, protein inference, modification localization, quantification, and differential abundance.",
+    "org": "LatchBio",
+    "released": "2026-11",
+    "links": {
+      "site": "https://benchmarks.bio/proteomicsbench-bottom-up",
+      "leaderboard": "https://benchmarks.bio/proteomicsbench-bottom-up",
+      "repo": "https://github.com/latchbio/proteomicsbench-bottom-up",
+      "paper": "https://benchmarks.bio/papers/proteomicsbench-bottom-up.pdf"
+    },
+    "access": "public",
+    "note": "LatchBio publishes V1 results across 38 model and harness configurations with per-run cost, token, and turn counts.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.bio/proteomicsbench-bottom-up",
+      "https://benchmarks.bio/benchmarks/proteomicsbench/latest.json"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "proxygenbench",
+    "name": "ProxyGenBench",
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Video generators produce proxy-guided clips across 60 scenes and 312 evaluation cases scored on 32 fine-grained criteria covering Preserve, Complete, and Bind.",
+    "org": "Tencent",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.34457",
+      "repo": "https://github.com/2kxx/ProxyGenBench",
+      "site": "https://2kxx.github.io/ProxyGenBench/",
+      "leaderboard": "https://2kxx.github.io/ProxyGenBench/#results"
+    },
+    "access": "public",
+    "note": "Ranked by Strict score on a 0 to 100 scale across without-audio and with-audio reference splits.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://2kxx.github.io/ProxyGenBench/",
+      "https://2kxx.github.io/ProxyGenBench/app.js",
+      "https://arxiv.org/abs/2611.34457"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "rezepteval",
+    "name": "RezeptEval",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Language models complete 78 German everyday cooking tasks across six disciplines: recipe writing under constraints, food safety, cooking theory, kitchen troubleshooting, meal scheduling and culinary chemistry. Responses are graded by code-based checks and a Claude Opus 4.8 judge panel on a 0 to 100 composite scale.",
+    "org": "Matteo Möller",
+    "released": "2026-07",
+    "links": {
+      "site": "https://moeller-bonn.com/app/rezept-bench/",
+      "leaderboard": "https://moeller-bonn.com/app/rezept-bench/",
+      "dataset": "https://doi.org/10.5281/zenodo.24308835"
+    },
+    "access": "public",
+    "note": "Independent German evaluation run via OpenRouter with per-item responses published on Zenodo under CC BY 4.0. Also tracks run cost, completion and reasoning tokens, and a score-versus-cost Pareto chart.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://moeller-bonn.com/app/rezept-bench/",
+      "https://doi.org/10.5281/zenodo.24308835"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "roam-bench",
+    "name": "ROAM-Bench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Embodied active spatial intelligence benchmark of 250 exploration tasks requiring vision-language models to navigate 3D indoor scenes, collect visual evidence, and satisfy verifiable task requirements.",
+    "org": "The University of Hong Kong, UESTC, Shanghai Innovation Institute, and JD.com",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.33143",
+      "repo": "https://github.com/rxjfighting/ROAM-Bench",
+      "site": "https://rxjfighting.github.io/ROAM-Bench/",
+      "leaderboard": "https://rxjfighting.github.io/ROAM-Bench/",
+      "dataset": "https://huggingface.co/datasets/xjran/ROAM-Bench-scenes"
+    },
+    "access": "public",
+    "note": "Project leaderboard ranks seven frontier vision-language models by Task Success (T) across 250 episodes alongside outcome correctness (A), required checks (N), stronger checks (S), gap cases, error rate, and average actions.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rxjfighting.github.io/ROAM-Bench/",
+      "https://rxjfighting.github.io/ROAM-Bench/assets/project.js",
+      "https://github.com/rxjfighting/ROAM-Bench",
+      "https://arxiv.org/abs/2611.33143"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "robodojo-mirror",
+    "name": "RoboDojo-Mirror",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Robotic manipulation policies built on RoboDojo are tested under mirror-free, single-mirror, dual-mirror, and mirrored-tabletop scene conditions to measure reflection-induced failures.",
+    "org": "Peking University",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.33010",
+      "repo": "https://github.com/iPPLab/robodojo-mirror",
+      "site": "https://ipplab.github.io/robodojo-mirror/"
+    },
+    "access": "public",
+    "note": "Headline score reports the mean success-rate drop in percentage points across the three mirror conditions, where lower drop is better.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ipplab.github.io/robodojo-mirror/",
+      "https://arxiv.org/abs/2611.33010"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "spatialarena",
+    "name": "SpatialArena",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Geometric foundation models and vision-language models are scored under a unified protocol with deterministic alignment across five 3D perception tasks: monocular depth, video depth, multi-view reconstruction, structure from motion and SLAM. Aggregates 23 public datasets plus original captures totaling 418,929 images.",
+    "org": "MVP Lab and Imperial College London",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.32816",
+      "repo": "https://github.com/mvp-ai-lab/SpatialArena",
+      "site": "https://mvp-ai-lab.github.io/SpatialArena/",
+      "dataset": "https://huggingface.co/datasets/mvp-lab/SpatialArena-Dataset",
+      "leaderboard": "https://mvp-ai-lab.github.io/SpatialArena/"
+    },
+    "access": "public",
+    "note": "Evaluates 53 RGB-track models on a 0 to 100 overall normalized score, spanning feed-forward 3D networks, streaming SLAM systems, monocular depth models and five vision-language models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mvp-ai-lab.github.io/SpatialArena/",
+      "https://github.com/mvp-ai-lab/SpatialArena",
+      "https://arxiv.org/abs/2611.32816"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "synthdcb",
+    "name": "SynthDCB",
+    "category": "tool-use",
+    "subcategory": "tools-apps",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents control distilled executable device worlds across Home, Car, and Phone domains over five deterministic task families (Control, Query, Aggregate, Goal, and Workflow).",
+    "org": "SJTU X-LANCE Lab",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.18639",
+      "repo": "https://github.com/X-LANCE/SynthDCB",
+      "dataset": "https://huggingface.co/datasets/X-LANCE/SynthDCB",
+      "site": "https://x-lance.github.io/SynthDCB/",
+      "leaderboard": "https://x-lance.github.io/SynthDCB/#leaderboard"
+    },
+    "access": "public",
+    "note": "Live leaderboard reports mean test pass@1 across 22 models alongside cached and uncached API cost per attempt.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://x-lance.github.io/SynthDCB/",
+      "https://x-lance.github.io/SynthDCB/assets/benchmark-data.js",
+      "https://arxiv.org/abs/2611.18639"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "twinenv-bench",
+    "name": "TwinEnv-Bench",
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Software and terminal agents solve 117 paired scripting, systems, and data-engineering tasks across baseline containers and target sandboxes shifted along a single verified operating-system property across five OS layers.",
+    "org": "TraceLite AI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://tracelite.ai/twinenv-bench.html",
+      "leaderboard": "https://tracelite.ai/twinenv-leaderboard.html",
+      "dataset": "https://huggingface.co/datasets/TraceLite-AI/TwinEnv-Bench"
+    },
+    "access": "public",
+    "note": "Live leaderboard compares nine frontier models on Target pass@1, pass@3, pass^3 reliability, OS layer breakdowns, and per-run cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://tracelite.ai/twinenv-leaderboard.html",
+      "https://tracelite.ai/twinenv-bench.html",
+      "https://huggingface.co/datasets/TraceLite-AI/TwinEnv-Bench"
+    ],
+    "added": "2026-11-28"
   }
 ]

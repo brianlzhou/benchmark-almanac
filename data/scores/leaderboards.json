@@ -12107,6 +12107,142 @@
       "headline": "The paper reports no overall score, so this is the QA nDCG@10 column, which it puts before Long-Doc Recall@10.",
       "static": "paper"
     },
+    "airis": {
+      "url": "https://airis-bench.github.io/#leaderboard",
+      "feed": "https://airis-bench.github.io/data.js",
+      "terms": "Public leaderboard data published by Tencent Robotics X Lab on the AIRIS project site.",
+      "retrieved": "2026-11-28",
+      "rows": 32,
+      "unmatched": [
+        "AURA-8B",
+        "Embodied-R1-3B-V1",
+        "Flash-VStream-Qwen-7B",
+        "HY-Embodied-0.5-X",
+        "HY-Embodied-VLM-1.0",
+        "JoyAI-VL-Interaction-Preview",
+        "OmniVinci",
+        "Pelican1.0-VL-7B",
+        "Qwen2.5-Omni-3B",
+        "RynnBrain-30B-A3B",
+        "RynnBrain1.1-2B",
+        "StreamingVLM",
+        "VeBrain-7B"
+      ],
+      "parts": {
+        "attAll": {
+          "name": "Attention overall",
+          "group": "Stage"
+        },
+        "intAll": {
+          "name": "Intention overall",
+          "group": "Stage"
+        },
+        "reaAll": {
+          "name": "Reaction overall",
+          "group": "Stage"
+        },
+        "interAll": {
+          "name": "Interaction overall",
+          "group": "Stage"
+        },
+        "attNonverbal": {
+          "name": "Nonverbal state",
+          "group": "Attention"
+        },
+        "attTarget": {
+          "name": "Semantic target",
+          "group": "Attention"
+        },
+        "attGround": {
+          "name": "Attention grounding",
+          "group": "Attention"
+        },
+        "attSpatial": {
+          "name": "Spatial localization",
+          "group": "Attention"
+        },
+        "attJoint": {
+          "name": "Joint identification and localization",
+          "group": "Attention"
+        },
+        "attMultimodal": {
+          "name": "Multimodal attribution",
+          "group": "Attention"
+        },
+        "intKey": {
+          "name": "Key moment",
+          "group": "Intention"
+        },
+        "intOnline": {
+          "name": "Online prefix",
+          "group": "Intention"
+        },
+        "intEvidence": {
+          "name": "Evidence grounding",
+          "group": "Intention"
+        },
+        "intIas": {
+          "name": "Intention anticipation score",
+          "group": "Intention"
+        },
+        "reaEngage": {
+          "name": "Engage F1",
+          "group": "Reaction"
+        },
+        "reaDomain": {
+          "name": "Action domain",
+          "group": "Reaction"
+        },
+        "reaSubspeak": {
+          "name": "Subaction and speech",
+          "group": "Reaction"
+        },
+        "reaJoint": {
+          "name": "Joint exact match",
+          "group": "Reaction"
+        },
+        "reaComm": {
+          "name": "Communication",
+          "group": "Reaction"
+        },
+        "reaNav": {
+          "name": "Navigation",
+          "group": "Reaction"
+        },
+        "reaManip": {
+          "name": "Manipulation",
+          "group": "Reaction"
+        },
+        "reaIdle": {
+          "name": "Refrain and idle",
+          "group": "Reaction"
+        },
+        "interState": {
+          "name": "Online state",
+          "group": "Interaction"
+        },
+        "interOutcome": {
+          "name": "Task outcome",
+          "group": "Interaction"
+        },
+        "interComp": {
+          "name": "Completion",
+          "group": "Interaction"
+        },
+        "interViol": {
+          "name": "Social norm violation detection",
+          "group": "Interaction"
+        }
+      },
+      "stats": {
+        "intFcr": {
+          "name": "Pre-T1 false commitment rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Premature intention commitment rate before the earliest decidable moment T1."
+        }
+      }
+    },
     "airs-bench": {
       "url": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
       "feed": "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md",
@@ -38623,6 +38759,103 @@
         "Qwen2.5-7B-Instruct"
       ]
     },
+    "bizgeneval": {
+      "url": "https://huggingface.co/spaces/microsoft/BizGenEval-Leaderboard",
+      "feed": "https://huggingface.co/spaces/microsoft/BizGenEval-Leaderboard/raw/main/commit_results.jsonl",
+      "terms": "Public Hugging Face Space leaderboard published by Microsoft Research under MIT.",
+      "retrieved": "2026-11-28",
+      "rows": 17,
+      "unmatched": [
+        "Emu3.5",
+        "FLUX.1-Krea-dev",
+        "FLUX.1-schnell",
+        "HunyuanImage-2.1",
+        "LongCat-Image",
+        "SD3.5-Large",
+        "Seedream-5.0",
+        "Wan2.6-T2I",
+        "X-Omni-EN",
+        "Z-Image"
+      ],
+      "parts": {
+        "slidesHard": {
+          "name": "Slides (hard)",
+          "group": "Domain (hard)"
+        },
+        "webpageHard": {
+          "name": "Webpage (hard)",
+          "group": "Domain (hard)"
+        },
+        "posterHard": {
+          "name": "Poster (hard)",
+          "group": "Domain (hard)"
+        },
+        "chartHard": {
+          "name": "Chart (hard)",
+          "group": "Domain (hard)"
+        },
+        "sciFigHard": {
+          "name": "Scientific figure (hard)",
+          "group": "Domain (hard)"
+        },
+        "layoutHard": {
+          "name": "Layout (hard)",
+          "group": "Dimension (hard)"
+        },
+        "attributeHard": {
+          "name": "Attribute (hard)",
+          "group": "Dimension (hard)"
+        },
+        "textHard": {
+          "name": "Text (hard)",
+          "group": "Dimension (hard)"
+        },
+        "knowledgeHard": {
+          "name": "Knowledge (hard)",
+          "group": "Dimension (hard)"
+        },
+        "easyOverall": {
+          "name": "Easy overall",
+          "group": "Easy split"
+        },
+        "slidesEasy": {
+          "name": "Slides (easy)",
+          "group": "Easy split"
+        },
+        "webpageEasy": {
+          "name": "Webpage (easy)",
+          "group": "Easy split"
+        },
+        "posterEasy": {
+          "name": "Poster (easy)",
+          "group": "Easy split"
+        },
+        "chartEasy": {
+          "name": "Chart (easy)",
+          "group": "Easy split"
+        },
+        "sciFigEasy": {
+          "name": "Scientific figure (easy)",
+          "group": "Easy split"
+        },
+        "layoutEasy": {
+          "name": "Layout (easy)",
+          "group": "Easy split"
+        },
+        "attributeEasy": {
+          "name": "Attribute (easy)",
+          "group": "Easy split"
+        },
+        "textEasy": {
+          "name": "Text (easy)",
+          "group": "Easy split"
+        },
+        "knowledgeEasy": {
+          "name": "Knowledge (easy)",
+          "group": "Easy split"
+        }
+      }
+    },
     "blenderbench-refresh": {
       "url": "https://www.refresh.dev/blog/blenderbench",
       "feed": "https://www.refresh.dev/blog/blenderbench",
@@ -57943,6 +58176,62 @@
           "name": "Reasoning hallucination rate",
           "unit": "%",
           "better": "lower"
+        }
+      }
+    },
+    "clinical3d-bench": {
+      "url": "https://clinicalspace.github.io/clinical3d-bench/#leaderboard",
+      "feed": "https://huggingface.co/datasets/clinicalspace/Clinical3D-Bench/raw/main/leaderboard.csv",
+      "terms": "Public Hugging Face dataset leaderboard CSV published under CC BY 4.0.",
+      "static": "paper",
+      "retrieved": "2026-11-28",
+      "rows": 25,
+      "unmatched": [
+        "GeoJeV",
+        "LLaVA-CoT-11B",
+        "LLaVA-NeXT-Video-34B",
+        "SenseNova-SI-1.1-Qwen2.5-VL-7B",
+        "SenseNova-SI-1.1-Qwen3-VL-8B",
+        "SpaceLLaVA-13B",
+        "SpaceR-7B",
+        "Spatial-MLLM SFT",
+        "Spatial-MLLM-135K",
+        "Spatial-MLLM-820K",
+        "VST-7B-SFT",
+        "VideoJev-4B",
+        "VideoJev-4B SFT"
+      ],
+      "parts": {
+        "count": {
+          "name": "Count"
+        },
+        "reId": {
+          "name": "Re-ID"
+        },
+        "lightOwner": {
+          "name": "Light owner"
+        },
+        "patientFrame": {
+          "name": "Patient frame"
+        },
+        "deviceRef": {
+          "name": "Device reference"
+        },
+        "direction": {
+          "name": "Direction"
+        },
+        "route": {
+          "name": "Route"
+        },
+        "passability": {
+          "name": "Passability"
+        }
+      },
+      "stats": {
+        "frames": {
+          "name": "Input frames",
+          "unit": "count",
+          "note": "Number of sampled video frames supplied to the model."
         }
       }
     },
@@ -94562,6 +94851,128 @@
         },
         "quality": {
           "name": "Report Quality"
+        }
+      }
+    },
+    "drbench-pro": {
+      "url": "https://zjureal.com/DRBenchPro/",
+      "feed": "https://zjureal.com/DRBenchPro/assets/data/results.json",
+      "terms": "Public research benchmark leaderboard published by Zhejiang University and Tencent.",
+      "retrieved": "2026-11-28",
+      "rows": 13,
+      "unmatched": [
+        "Perplexity Sonar Deep Research",
+        "Qwen Deep Research",
+        "Sonar Reasoning Pro"
+      ],
+      "parts": {
+        "adult": {
+          "name": "Adult",
+          "group": "Domain"
+        },
+        "artDesign": {
+          "name": "Art & Design",
+          "group": "Domain"
+        },
+        "crimeLaw": {
+          "name": "Crime & Law",
+          "group": "Domain"
+        },
+        "educationJobs": {
+          "name": "Education & Jobs",
+          "group": "Domain"
+        },
+        "entertainment": {
+          "name": "Entertainment",
+          "group": "Domain"
+        },
+        "fashionBeauty": {
+          "name": "Fashion & Beauty",
+          "group": "Domain"
+        },
+        "financeBusiness": {
+          "name": "Finance & Business",
+          "group": "Domain"
+        },
+        "foodDining": {
+          "name": "Food & Dining",
+          "group": "Domain"
+        },
+        "games": {
+          "name": "Games",
+          "group": "Domain"
+        },
+        "hardware": {
+          "name": "Hardware",
+          "group": "Domain"
+        },
+        "health": {
+          "name": "Health",
+          "group": "Domain"
+        },
+        "history": {
+          "name": "History",
+          "group": "Domain"
+        },
+        "homeHobbies": {
+          "name": "Home & Hobbies",
+          "group": "Domain"
+        },
+        "industrial": {
+          "name": "Industrial",
+          "group": "Domain"
+        },
+        "literature": {
+          "name": "Literature",
+          "group": "Domain"
+        },
+        "politics": {
+          "name": "Politics",
+          "group": "Domain"
+        },
+        "religion": {
+          "name": "Religion",
+          "group": "Domain"
+        },
+        "scienceTechnology": {
+          "name": "Science & Technology",
+          "group": "Domain"
+        },
+        "socialLife": {
+          "name": "Social Life",
+          "group": "Domain"
+        },
+        "software": {
+          "name": "Software",
+          "group": "Domain"
+        },
+        "softwareDevelopment": {
+          "name": "Software Development",
+          "group": "Domain"
+        },
+        "sportsFitness": {
+          "name": "Sports & Fitness",
+          "group": "Domain"
+        },
+        "transportation": {
+          "name": "Transportation",
+          "group": "Domain"
+        },
+        "travel": {
+          "name": "Travel",
+          "group": "Domain"
+        }
+      },
+      "stats": {
+        "breadth": {
+          "name": "Breadth",
+          "unit": "%",
+          "better": "higher"
+        },
+        "depth": {
+          "name": "Depth",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -138205,6 +138616,63 @@
         }
       }
     },
+    "grape-bench": {
+      "url": "https://zhangce01.github.io/grape-bench/",
+      "feed": "https://zhangce01.github.io/grape-bench/",
+      "terms": "Public project leaderboard published by the GRAPE-Bench authors.",
+      "retrieved": "2026-11-28",
+      "rows": 24,
+      "unmatched": [
+        "Cosmos-Reason2-32B",
+        "GLM-4.1V-Thinking-9B",
+        "Qwen3-VL-4B",
+        "Qwen3-VL-8B",
+        "Qwen3.8-Flash-Next-125B",
+        "VITA-1.5-7B"
+      ],
+      "parts": {
+        "l1": {
+          "name": "Level 1",
+          "group": "Reasoning level"
+        },
+        "l2": {
+          "name": "Level 2",
+          "group": "Reasoning level"
+        },
+        "l3": {
+          "name": "Level 3",
+          "group": "Reasoning level"
+        },
+        "rain": {
+          "name": "Rain",
+          "group": "Condition"
+        },
+        "snow": {
+          "name": "Snow",
+          "group": "Condition"
+        },
+        "night": {
+          "name": "Night",
+          "group": "Condition"
+        },
+        "fog": {
+          "name": "Fog",
+          "group": "Condition"
+        }
+      },
+      "stats": {
+        "synthAll": {
+          "name": "Synthetic degraded accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "synthDelta": {
+          "name": "Synthetic degradation delta",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "graphicdesignbench": {
       "url": "https://arxiv.org/html/2604.04192",
       "feed": "https://arxiv.org/html/2604.04192",
@@ -149724,6 +150192,85 @@
         "privateTokens": {
           "name": "Private output tokens",
           "unit": "tokens"
+        }
+      }
+    },
+    "iclworld": {
+      "url": "https://iclworld.github.io/#leaderboard",
+      "feed": "https://iclworld.github.io/assets/js/data.js",
+      "terms": "Public project leaderboard script published on iclworld.github.io.",
+      "static": "paper",
+      "retrieved": "2026-11-28",
+      "rows": 12,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "cua": {
+          "name": "Computer use",
+          "group": "Domain"
+        },
+        "rua": {
+          "name": "Robot use",
+          "group": "Domain"
+        },
+        "cuaEasy": {
+          "name": "Computer use easy",
+          "group": "Computer use difficulty"
+        },
+        "cuaMedium": {
+          "name": "Computer use medium",
+          "group": "Computer use difficulty"
+        },
+        "cuaHard": {
+          "name": "Computer use hard",
+          "group": "Computer use difficulty"
+        },
+        "ruaEasy": {
+          "name": "Robot use easy",
+          "group": "Robot use difficulty"
+        },
+        "ruaMedium": {
+          "name": "Robot use medium",
+          "group": "Robot use difficulty"
+        },
+        "ruaHard": {
+          "name": "Robot use hard",
+          "group": "Robot use difficulty"
+        },
+        "cuaReplay": {
+          "name": "Computer use replay (n=13)",
+          "group": "Generalization"
+        },
+        "cuaResample13": {
+          "name": "Computer use resample (n=13)",
+          "group": "Generalization"
+        },
+        "cuaResample37": {
+          "name": "Computer use resample (n=37)",
+          "group": "Generalization"
+        },
+        "cuaRelocate": {
+          "name": "Computer use relocate (n=37)",
+          "group": "Generalization"
+        },
+        "ruaReplay": {
+          "name": "Robot use replay (n=14)",
+          "group": "Generalization"
+        },
+        "ruaResample": {
+          "name": "Robot use resample (n=15)",
+          "group": "Generalization"
+        },
+        "ruaRelocate": {
+          "name": "Robot use relocate (n=17)",
+          "group": "Generalization"
+        }
+      },
+      "stats": {
+        "cuaRuaGap": {
+          "name": "Computer minus robot gap",
+          "unit": "%",
+          "note": "Computer-use average minus robot-use average in percentage points."
         }
       }
     },
@@ -258981,6 +259528,40 @@
         }
       }
     },
+    "os-omni": {
+      "url": "https://os-copilot.github.io/OS-Omni-Home/#leaderboard",
+      "feed": "https://os-copilot.github.io/OS-Omni-Home/static/js/osomni-data.js",
+      "terms": "Public project leaderboard data published by OS-Copilot on GitHub Pages.",
+      "retrieved": "2026-11-28",
+      "rows": 5,
+      "unmatched": [
+        "Gemini 4",
+        "Qwen 3.8 9B"
+      ],
+      "parts": {
+        "windows": {
+          "name": "Windows"
+        },
+        "linux": {
+          "name": "Linux"
+        },
+        "macos": {
+          "name": "macOS"
+        },
+        "ios": {
+          "name": "iOS"
+        },
+        "android": {
+          "name": "Android"
+        },
+        "web": {
+          "name": "Web"
+        },
+        "crossDevice": {
+          "name": "Cross-device"
+        }
+      }
+    },
     "ost-bench": {
       "url": "https://github.com/OpenRobotLab/OST-Bench",
       "feed": "https://raw.githubusercontent.com/OpenRobotLab/OST-Bench/main/README.md",
@@ -264999,6 +265580,129 @@
           "unit": "score",
           "better": "higher",
           "note": "Expression edit distance score on a 0 to 100 scale."
+        }
+      }
+    },
+    "phycove": {
+      "url": "https://phycove.github.io/#leaderboard",
+      "feed": "https://phycove.github.io/assets/data/leaderboard.json",
+      "terms": "Public leaderboard JSON published by the PhyCoVE authors at Fudan University.",
+      "retrieved": "2026-11-28",
+      "rows": 3,
+      "unmatched": [
+        "JoyAI",
+        "Kiwi-Edit",
+        "Kling 4.0",
+        "OmniWeaving"
+      ],
+      "verified": "evaluated by the PhyCoVE team",
+      "parts": {
+        "removeHpwr": {
+          "name": "Remove edit HPWR",
+          "group": "Edit type"
+        },
+        "changeHpwr": {
+          "name": "Change edit HPWR",
+          "group": "Edit type"
+        },
+        "insertHpwr": {
+          "name": "Insert edit HPWR",
+          "group": "Edit type"
+        },
+        "rigidRigidCf": {
+          "name": "Rigid and rigid CF",
+          "group": "Material interaction",
+          "unit": "score"
+        },
+        "rigidElasticCf": {
+          "name": "Rigid and elastic CF",
+          "group": "Material interaction",
+          "unit": "score"
+        },
+        "rigidFluidCf": {
+          "name": "Rigid and fluid CF",
+          "group": "Material interaction",
+          "unit": "score"
+        },
+        "elasticFluidCf": {
+          "name": "Elastic and fluid CF",
+          "group": "Material interaction",
+          "unit": "score"
+        },
+        "elasticElasticCf": {
+          "name": "Elastic and elastic CF",
+          "group": "Material interaction",
+          "unit": "score"
+        }
+      },
+      "stats": {
+        "cf": {
+          "name": "Counterfactual fidelity",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of the ground-truth physical change from source to target reproduced by the edited video."
+        },
+        "ea": {
+          "name": "Edit adherence",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Human rating of how accurately the requested physical edit was applied."
+        },
+        "pc": {
+          "name": "Physical consistency",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Human rating of physical plausibility across the edited sequence."
+        },
+        "joint": {
+          "name": "Joint pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "miou": {
+          "name": "Mask IoU",
+          "unit": "score",
+          "better": "higher"
+        },
+        "psnr": {
+          "name": "PSNR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ssim": {
+          "name": "SSIM",
+          "unit": "score",
+          "better": "higher"
+        },
+        "lpips": {
+          "name": "LPIPS",
+          "unit": "score",
+          "better": "lower"
+        },
+        "fvd": {
+          "name": "FVD",
+          "unit": "score",
+          "better": "lower"
+        },
+        "removeCf": {
+          "name": "Remove edit CF",
+          "unit": "score",
+          "better": "higher"
+        },
+        "changeCf": {
+          "name": "Change edit CF",
+          "unit": "score",
+          "better": "higher"
+        },
+        "insertCf": {
+          "name": "Insert edit CF",
+          "unit": "score",
+          "better": "higher"
+        },
+        "rigidSubsetCf": {
+          "name": "Rigid-subset CF",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -272673,6 +273377,33 @@
         }
       }
     },
+    "proteomicsbench": {
+      "url": "https://benchmarks.bio/proteomicsbench-bottom-up",
+      "feed": "https://benchmarks.bio/benchmarks/proteomicsbench/latest.json",
+      "terms": "Public V1 leaderboard JSON published by LatchBio on benchmarks.bio with citation and open access.",
+      "retrieved": "2026-11-28",
+      "rows": 38,
+      "unmatched": [],
+      "costPer": "run",
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
+      "stats": {
+        "totalTokens": {
+          "name": "Total tokens per run",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Average total tokens consumed across a benchmark run."
+        },
+        "turns": {
+          "name": "Turns per run",
+          "unit": "count",
+          "better": "lower",
+          "note": "Average agent turns per benchmark run."
+        }
+      }
+    },
     "protocollm": {
       "url": "https://github.com/ArmmyC/RTLBench/blob/main/reports/baseline_v0.1_public_rtl_benchmarks.md",
       "feed": "https://raw.githubusercontent.com/ArmmyC/RTLBench/main/reports/baseline_v0.1_public_rtl_benchmarks.csv",
@@ -272776,6 +273507,69 @@
           "name": "Warp error",
           "better": "lower",
           "note": "Temporal warp error in the paper table units of 10^-3."
+        }
+      }
+    },
+    "proxygenbench": {
+      "url": "https://2kxx.github.io/ProxyGenBench/#results",
+      "feed": "https://2kxx.github.io/ProxyGenBench/app.js",
+      "terms": "Public paper results published by the ProxyGenBench authors on the official project site.",
+      "static": "paper",
+      "retrieved": "2026-11-28",
+      "rows": 4,
+      "unmatched": [
+        "Kling-4.0"
+      ],
+      "parts": {
+        "preserve": {
+          "name": "Preserve",
+          "group": "Without audio references"
+        },
+        "complete": {
+          "name": "Complete",
+          "group": "Without audio references"
+        },
+        "bind": {
+          "name": "Bind",
+          "group": "Without audio references"
+        },
+        "average": {
+          "name": "Average",
+          "group": "Without audio references"
+        },
+        "audioStrict": {
+          "name": "Strict (with audio)",
+          "group": "With audio references"
+        },
+        "audioPreserve": {
+          "name": "Preserve (with audio)",
+          "group": "With audio references"
+        },
+        "audioComplete": {
+          "name": "Complete (with audio)",
+          "group": "With audio references"
+        },
+        "audioBind": {
+          "name": "Bind (with audio)",
+          "group": "With audio references"
+        },
+        "audioAverage": {
+          "name": "Average (with audio)",
+          "group": "With audio references"
+        }
+      },
+      "stats": {
+        "joint": {
+          "name": "Joint pass rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Percentage of outputs passing all critical Preserve checks without audio references."
+        },
+        "audioJoint": {
+          "name": "Joint pass rate (with audio)",
+          "unit": "%",
+          "better": "higher",
+          "note": "Percentage of outputs passing all critical Preserve checks with audio references."
         }
       }
     },
@@ -282833,6 +283627,121 @@
         }
       }
     },
+    "rezepteval": {
+      "url": "https://moeller-bonn.com/app/rezept-bench/",
+      "feed": "https://moeller-bonn.com/app/data/rezept-bench/leaderboard.json",
+      "terms": "Public JSON leaderboard published by Matteo Moeller with per-item results under CC BY 4.0.",
+      "retrieved": "2026-11-28",
+      "rows": 46,
+      "unmatched": [],
+      "chart": {
+        "title": "Score vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Run cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Composite score across 78 German cooking tasks plotted against total OpenRouter run cost."
+      },
+      "costPer": "run",
+      "parts": {
+        "recipes": {
+          "name": "Recipes",
+          "group": "Discipline"
+        },
+        "foodSafety": {
+          "name": "Food safety",
+          "group": "Discipline"
+        },
+        "cookingTheory": {
+          "name": "Cooking theory",
+          "group": "Discipline"
+        },
+        "troubleshooting": {
+          "name": "Troubleshooting",
+          "group": "Discipline"
+        },
+        "mealScheduling": {
+          "name": "Meal scheduling",
+          "group": "Discipline"
+        },
+        "culinaryChemistry": {
+          "name": "Culinary chemistry",
+          "group": "Discipline"
+        }
+      },
+      "stats": {
+        "constraints": {
+          "name": "Constraint adherence",
+          "unit": "%",
+          "better": "higher"
+        },
+        "consistency": {
+          "name": "Ingredient consistency",
+          "unit": "%",
+          "better": "higher"
+        },
+        "plausibility": {
+          "name": "Plausibility",
+          "unit": "%",
+          "better": "higher"
+        },
+        "schemaCompliance": {
+          "name": "Schema compliance",
+          "unit": "%",
+          "better": "higher"
+        },
+        "practicality": {
+          "name": "Panel practicality",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Judge panel rating on a 1 to 10 scale."
+        },
+        "flavor": {
+          "name": "Panel flavor",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Judge panel rating on a 1 to 10 scale."
+        },
+        "creativity": {
+          "name": "Panel creativity",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Judge panel rating on a 1 to 10 scale."
+        },
+        "completionTokensTotal": {
+          "name": "Total completion tokens",
+          "unit": "tokens"
+        },
+        "reasoningTokensTotal": {
+          "name": "Total reasoning tokens",
+          "unit": "tokens"
+        },
+        "hardFails": {
+          "name": "Hard fails",
+          "unit": "count",
+          "better": "lower"
+        },
+        "repairs": {
+          "name": "Schema repairs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "safetyFlags": {
+          "name": "Recipe safety flags",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
+    },
     "rgraph-eval": {
       "url": "https://arxiv.org/html/2610.31121",
       "feed": "https://arxiv.org/html/2610.31121",
@@ -283957,6 +284866,47 @@
         },
         "turns": {
           "name": "Average agent steps",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
+    },
+    "roam-bench": {
+      "url": "https://rxjfighting.github.io/ROAM-Bench/",
+      "feed": "https://rxjfighting.github.io/ROAM-Bench/assets/project.js",
+      "terms": "Public project leaderboard published by the ROAM-Bench authors.",
+      "retrieved": "2026-11-28",
+      "rows": 7,
+      "unmatched": [],
+      "stats": {
+        "outcomeCorrectness": {
+          "name": "Outcome correctness (A)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "requiredChecks": {
+          "name": "Required checks (N)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "strongerChecks": {
+          "name": "Stronger checks (S)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "gapCases": {
+          "name": "Gap cases",
+          "unit": "count",
+          "better": "lower",
+          "note": "Correct outcomes with unmet task requirements."
+        },
+        "errorGivenS": {
+          "name": "Error given stronger checks",
+          "unit": "%",
+          "better": "lower"
+        },
+        "avgActions": {
+          "name": "Average actions",
           "unit": "count",
           "better": "lower"
         }
@@ -285993,6 +286943,69 @@
           "name": "Generalization randomized success rate",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "robodojo-mirror": {
+      "url": "https://ipplab.github.io/robodojo-mirror/",
+      "feed": "https://ipplab.github.io/robodojo-mirror/",
+      "terms": "Public paper results published by Peking University on the RoboDojo-Mirror project site.",
+      "static": "paper",
+      "retrieved": "2026-11-28",
+      "rows": 2,
+      "unmatched": [
+        "Awomo-0.5",
+        "Rex-M1 Preview",
+        "VPP2"
+      ],
+      "parts": {
+        "noMirror": {
+          "name": "No mirror",
+          "group": "Success rate",
+          "better": "higher"
+        },
+        "singleMirror": {
+          "name": "Single mirror",
+          "group": "Success rate",
+          "better": "higher"
+        },
+        "dualMirrors": {
+          "name": "Dual mirrors",
+          "group": "Success rate",
+          "better": "higher"
+        },
+        "mirroredTabletop": {
+          "name": "Mirrored tabletop",
+          "group": "Success rate",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "taskNoMirror": {
+          "name": "Task score (no mirror)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "taskSingleMirror": {
+          "name": "Task score (single mirror)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "taskDualMirrors": {
+          "name": "Task score (dual mirrors)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "taskMirroredTabletop": {
+          "name": "Task score (mirrored tabletop)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "taskMeanDrop": {
+          "name": "Task score mean drop",
+          "unit": "score",
+          "better": "lower",
+          "note": "Average decrease in native task score across the three mirror conditions."
         }
       }
     },
@@ -304742,6 +305755,100 @@
         }
       }
     },
+    "spatialarena": {
+      "url": "https://mvp-ai-lab.github.io/SpatialArena/",
+      "feed": "https://mvp-ai-lab.github.io/SpatialArena/data/results_live.json",
+      "terms": "Public live leaderboard JSON published by MVP Lab on GitHub Pages.",
+      "retrieved": "2026-11-28",
+      "rows": 4,
+      "unmatched": [
+        "ABot-Recon",
+        "AMB3R",
+        "CUT3R",
+        "ChronoDepth",
+        "Co-Me",
+        "DA3-G",
+        "DA3-L",
+        "DA3-NGL",
+        "DUSt3R",
+        "DVD",
+        "Depth Pro",
+        "Depth Pro 2 H+",
+        "DepthCrafter",
+        "DepthLM",
+        "DepthVLM",
+        "Déjà View",
+        "Fast3R",
+        "FastVGGT",
+        "GenCeption-Depth",
+        "GenCeption-Pose",
+        "GeoNeXt",
+        "IGGT",
+        "IGGT4D",
+        "InfiniDepth",
+        "LingBot-Map",
+        "LoGeR",
+        "Lotus-D",
+        "MASt3R",
+        "Marigold",
+        "Marigold V2",
+        "Marigold v1.1",
+        "MoGe",
+        "MoGe-2",
+        "MoGe-3",
+        "OmniVGGT",
+        "Pi-Long",
+        "Pi3X",
+        "Pow3R",
+        "Qwen3-VL",
+        "R3",
+        "RobustVGGT",
+        "Scal3R",
+        "SenseNova-Vision",
+        "UniDepthV2",
+        "VGGT",
+        "VGGT-Long",
+        "VGGT-SLAM",
+        "VGGT-Ω",
+        "ZipMap"
+      ],
+      "parts": {
+        "monoDepth": {
+          "name": "Monocular depth"
+        },
+        "videoDepth": {
+          "name": "Video depth"
+        },
+        "mvRecon": {
+          "name": "Multi-view reconstruction"
+        },
+        "sfm": {
+          "name": "Structure from motion"
+        },
+        "slam": {
+          "name": "SLAM"
+        }
+      },
+      "stats": {
+        "averageRank": {
+          "name": "Average rank",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean rank across evaluated tasks and datasets."
+        },
+        "coverage": {
+          "name": "Evaluated cases",
+          "unit": "count",
+          "note": "Number of benchmark scenes scored for this model."
+        },
+        "firstPlaceWins": {
+          "name": "First-place wins",
+          "unit": "count",
+          "better": "higher",
+          "note": "Number of per-scene metric comparisons won by this model."
+        }
+      }
+    },
     "spatialbench-latchbio": {
       "url": "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md",
       "feed": "https://raw.githubusercontent.com/latchbio/spatialbench/main/README.md",
@@ -319015,6 +320122,75 @@
         }
       }
     },
+    "synthdcb": {
+      "url": "https://x-lance.github.io/SynthDCB/#leaderboard",
+      "feed": "https://x-lance.github.io/SynthDCB/assets/benchmark-data.js",
+      "terms": "Public leaderboard and benchmark data published by SJTU X-LANCE Lab on the SynthDCB site.",
+      "retrieved": "2026-11-28",
+      "rows": 21,
+      "unmatched": [
+        "MiniCPM5-1B"
+      ],
+      "chart": {
+        "title": "Cost and performance",
+        "x": {
+          "key": "cost",
+          "label": "API cost per attempt (with cache)",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean test pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Mean test pass@1 against cached API cost per attempt in US dollars, matching the site cost scatter plot."
+      },
+      "parts": {
+        "home": {
+          "name": "Home",
+          "group": "Domain"
+        },
+        "car": {
+          "name": "Car",
+          "group": "Domain"
+        },
+        "phone": {
+          "name": "Phone",
+          "group": "Domain"
+        },
+        "control": {
+          "name": "Control",
+          "group": "Task"
+        },
+        "query": {
+          "name": "Query",
+          "group": "Task"
+        },
+        "aggregate": {
+          "name": "Aggregate",
+          "group": "Task"
+        },
+        "goal": {
+          "name": "Goal",
+          "group": "Task"
+        },
+        "workflow": {
+          "name": "Workflow",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "costUncached": {
+          "name": "API cost per attempt (without cache)",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Average uncached API cost in US dollars per test attempt."
+        }
+      }
+    },
     "synthdocbench": {
       "url": "https://arxiv.org/html/2607.10400",
       "feed": "https://arxiv.org/html/2607.10400",
@@ -328989,6 +330165,110 @@
         },
         "negativeF1": {
           "name": "Negative F1"
+        }
+      }
+    },
+    "twinenv-bench": {
+      "url": "https://tracelite.ai/twinenv-leaderboard.html",
+      "feed": "https://tracelite.ai/twinenv-leaderboard.html",
+      "terms": "Public leaderboard data published by TraceLite AI on tracelite.ai.",
+      "retrieved": "2026-11-28",
+      "rows": 18,
+      "unmatched": [],
+      "chart": {
+        "title": "Cost and reliability Pareto frontier",
+        "x": {
+          "key": "cost",
+          "label": "Cost per target run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "passHat3",
+          "label": "Strict pass^3 reliability",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Strict pass^3 reliability against mean USD cost per executed target run, matching the TraceLite cost Pareto figure."
+      },
+      "parts": {
+        "exposed1": {
+          "name": "Interactive exposed pass@1",
+          "group": "Shift type"
+        },
+        "latent1": {
+          "name": "Deployment latent pass@1",
+          "group": "Shift type"
+        },
+        "e1System": {
+          "name": "E1 System",
+          "group": "OS layer"
+        },
+        "e2SoftwareStack": {
+          "name": "E2 Software stack",
+          "group": "OS layer"
+        },
+        "e3ExecutionContext": {
+          "name": "E3 Execution context",
+          "group": "OS layer"
+        },
+        "e4Boundary": {
+          "name": "E4 Boundary",
+          "group": "OS layer"
+        },
+        "e5State": {
+          "name": "E5 State",
+          "group": "OS layer"
+        }
+      },
+      "stats": {
+        "base1": {
+          "name": "Baseline pass@1",
+          "unit": "%",
+          "better": "higher",
+          "note": "Baseline pass@1 inside standard permissive containers."
+        },
+        "shiftDrop": {
+          "name": "Shift delta",
+          "unit": "%",
+          "better": "higher",
+          "note": "Change in percentage points from baseline pass@1 to shifted target pass@1 (less negative is better)."
+        },
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "%",
+          "better": "higher",
+          "note": "Probability of solving a target task in at least one of three attempts."
+        },
+        "passHat3": {
+          "name": "pass^3",
+          "unit": "%",
+          "better": "higher",
+          "note": "Probability of solving a target task consistently across all three attempts."
+        },
+        "probePct": {
+          "name": "Environment probe rate",
+          "unit": "%",
+          "note": "Share of runs where the agent actively probed the environment before acting."
+        },
+        "cmds": {
+          "name": "Shell commands per run",
+          "unit": "count",
+          "better": "lower",
+          "note": "Mean shell commands executed per target run."
+        },
+        "totalTokens": {
+          "name": "Total tokens per run",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Mean total tokens consumed per executed target run."
+        },
+        "latency": {
+          "name": "Wall time per run",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Mean wall time in seconds per executed target run."
         }
       }
     },
