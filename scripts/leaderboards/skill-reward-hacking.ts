@@ -18,6 +18,8 @@ const board: Leaderboard = {
     hidden_keyword_reward: { name: 'Hidden keyword reward', unit: 'score', better: 'higher' },
     hidden_quantum_reward: { name: 'Hidden quantum reward', unit: 'score', better: 'higher' },
     hidden_semantic_reward: { name: 'Hidden semantic reward', unit: 'score', better: 'higher' },
+    runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' },
   },
   aliases: {"meta-llama/Llama-3.2-1B-Instruct":"llama-3-2-1b"},
   fetch() { return primeRows(this.url, env, 1, 7); },

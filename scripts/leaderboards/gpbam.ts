@@ -44,7 +44,6 @@ const board: Leaderboard = {
       if (cost) {
         metrics.inputTokens=Number(cost.prompt_tokens)/81;
         tokens=Math.round(Number(cost.completion_tokens)/81);
-        metrics.costImputed=Number(cost.cost_source==='imputed');
       }
       rows.push({model,setting:'No retrieval',harness:r[0].includes('†')?'Claude Code':undefined,
         score:numberCell(match[1]),cost:cost?Number(cost.cost_usd):undefined,tokens,metrics});

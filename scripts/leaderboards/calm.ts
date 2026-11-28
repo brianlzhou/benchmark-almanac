@@ -22,5 +22,5 @@ const board:Leaderboard={benchmark:'calm', parts: {
  },
  terms:'Public maker results on GitHub Pages; robots.txt has no restriction on this path.',
  async fetch(){const s=await fetchText(FEED);const i=s.indexOf('[',s.indexOf('model_data'));if(i<0)throw new Error('Data missing');
- const data=jsLiteral<Record<string,unknown>[]>(s,i);return checked(data.map(r=>({model:String(r.Model),score:Number(r.Average),open:r.Access==='open'?true:r.Access==='limited'?false:undefined,metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>typeof v==='number'&&!['Rank','Average'].includes(k))) as Record<string,number>})),3);
+ const data=jsLiteral<Record<string,unknown>[]>(s,i);return checked(data.map(r=>({model:String(r.Model),score:Number(r.Average),open:r.Access==='open'?true:r.Access==='limited'?false:undefined,metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>typeof v==='number'&&!['Rank','Average'].includes(k)).map(([k,v])=>[k==='Std'?'std':k,v])) as Record<string,number>})),3);
  }};export default board;

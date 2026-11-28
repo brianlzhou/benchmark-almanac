@@ -1,4 +1,11 @@
 // UQ tests whether models answer genuinely unsolved questions and pass an independent validator.
 // The headline is the UQ-Validator pass rate on 500 questions, expressed as a percentage.
 // Table 3 in the paper reports pass counts and rates for nine named answer models.
-import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';const URL='https://arxiv.org/html/2508.17580';const board:Leaderboard={benchmark:'uq-unsolved-questions',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const ts=paperTables(await paperHtml(URL)).map(grid);const t=ts[2];if(!t||!t[0]?.includes('Answer Model'))throw new Error('UQ table missing');const rows:LeaderboardRow[]=[];for(const r of t.slice(2)){const model=r[0];if(!model||model.startsWith('\\')||model==='Total unique questions')continue;const m=r[2]?.match(/([0-9.]+)%/);if(!m)continue;rows.push({model,score:Number(m[1]),metrics:{passed:Number(r[1]?.split('/')[0]),humanPassRate:Number(r[3]?.split('/')[0])}});}return checked(rows,5);}};export default board;
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';const URL='https://arxiv.org/html/2508.17580';
+const board:Leaderboard={
+  benchmark:'uq-unsolved-questions',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,
+  stats:{
+    passed:{name:'UQ-Validator passed',unit:'count',better:'higher',note:'Number of questions out of 500 passing the UQ-Validator.'},
+    humanPassRate:{name:'Human-verified answers',unit:'count',better:'higher',note:'Number of validator-passed answers verified correct by human reviewers.'},
+  },
+  async fetch(){const ts=paperTables(await paperHtml(URL)).map(grid);const t=ts[2];if(!t||!t[0]?.includes('Answer Model'))throw new Error('UQ table missing');const rows:LeaderboardRow[]=[];for(const r of t.slice(2)){const model=r[0];if(!model||model.startsWith('\\')||model==='Total unique questions')continue;const m=r[2]?.match(/([0-9.]+)%/);if(!m)continue;rows.push({model,score:Number(m[1]),metrics:{passed:Number(r[1]?.split('/')[0]),humanPassRate:Number(r[3]?.split('/')[0])}});}return checked(rows,5);}};export default board;

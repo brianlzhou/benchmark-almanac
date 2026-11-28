@@ -36,6 +36,7 @@ const board: Leaderboard = {
     epibench: { name: 'EpiBench', group: 'Multiomics' },
     variantbench: { name: 'VariantBench', group: 'Multiomics' },
     metagenomics: { name: 'MetagenomicsBench', group: 'Multiomics' },
+    proteomicsbench: { name: 'ProteomicsBench', group: 'Multiomics' },
     'txbench-ab': { name: 'TxBench-Antibody-Discovery', group: 'Therapeutics' },
     'txbench-pp': { name: 'TxBench-Preclinical-Pharmacology', group: 'Therapeutics' },
     'txbench-od': { name: 'TxBench-Oligo-Discovery', group: 'Therapeutics' },

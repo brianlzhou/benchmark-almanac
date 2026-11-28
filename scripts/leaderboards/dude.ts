@@ -13,7 +13,19 @@ const board: Leaderboard = {
   url: RRC,
   feed: `${RRC} + ${FEED}`,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-  stats: { ece: { name: 'Expected calibration error', unit: '%', better: 'lower' }, aurc: { name: 'Area under the risk coverage curve', unit: 'score', better: 'lower' } },
+  parts: {
+    Extractive: { name: 'Extractive', group: 'Question type', unit: 'score', better: 'higher', note: 'RRC Task 1 ANLS on extractive questions on a 0 to 1 scale.' },
+    Abstractive: { name: 'Abstractive', group: 'Question type', unit: 'score', better: 'higher', note: 'RRC Task 1 ANLS on abstractive questions on a 0 to 1 scale.' },
+    'List of answers': { name: 'List of answers', group: 'Question type', unit: 'score', better: 'higher', note: 'RRC Task 1 ANLS on list-of-answers questions on a 0 to 1 scale.' },
+    Unanswerable: { name: 'Unanswerable', group: 'Question type', unit: 'score', better: 'higher', note: 'RRC Task 1 ANLS on unanswerable questions on a 0 to 1 scale.' },
+  },
+  stats: {
+    ece: { name: 'Expected calibration error', unit: '%', better: 'lower' },
+    aurc: { name: 'Area under the risk coverage curve', unit: 'score', better: 'lower' },
+    ECE: { name: 'RRC expected calibration error', unit: 'score', better: 'lower', note: 'RRC Task 1 live submission calibration error on a 0 to 1 scale.' },
+    AURC: { name: 'RRC area under the risk coverage curve', unit: 'score', better: 'lower', note: 'RRC Task 1 live submission risk coverage area on a 0 to 1 scale.' },
+    AUROC: { name: 'RRC selective prediction AUROC', unit: 'score', better: 'higher', note: 'RRC Task 1 live submission AUROC on a 0 to 1 scale.' },
+  },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Model' && t[0]?.some(c=>/^ANLS/.test(c.text)) && t[0]?.some(c=>/^ECE/.test(c.text)));
