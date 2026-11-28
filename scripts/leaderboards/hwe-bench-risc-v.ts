@@ -3,10 +3,10 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { tables, num } from '../lib/html.ts';
 import { fetchText } from '../lib/util.ts';
-const feed = "https://hwebench.com/";
+const feed = "https://hwebench.com/v1/index.html";
 const board: Leaderboard = {
   benchmark: 'hwe-bench-risc-v',
-  url: "https://hwebench.com/",
+  url: "https://hwebench.com/v1/index.html",
   feed,
   terms: "The site returns an HTML error page for robots.txt. The authors' repository uses Apache 2.0.",
   stats: {
@@ -14,7 +14,6 @@ const board: Leaderboard = {
     attempted: { name: 'Attempted runs', unit: 'count' },
     delta: { name: 'Change from baseline', unit: '%' },
     mean: { name: 'Mean score', unit: 'score', better: 'higher' },
-    std: { name: 'Standard deviation', unit: 'score' },
     area: { name: 'Four-input lookup table area', unit: 'count', better: 'lower' },
     frequency: { name: 'Maximum frequency', unit: 'score', better: 'higher' },
   },
