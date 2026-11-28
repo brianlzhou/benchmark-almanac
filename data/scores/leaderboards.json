@@ -3398,9 +3398,9 @@
     },
     "aec-geometric-bench-kamai": {
       "url": "https://kamai.io/blog/aec-geometric-bench",
-      "feed": "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/README.md",
+      "feed": "https://kamai.io/blog/aec-geometric-bench",
       "terms": "Kamai licenses released drawings and derived dataset files under CC BY-NC 4.0 and the scorer under Apache 2.0. https://github.com/KamaiEnterprises/aec-geometric-bench/blob/main/dataset/LICENSE-DATA.md Kamai's robots.txt allows the article.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 5,
       "unmatched": [
         "Kamai"
@@ -3453,10 +3453,6 @@
           "better": "higher",
           "note": "Recall on 15 released sheets, stored from 0 to 1."
         }
-      },
-      "failed": {
-        "date": "2026-11-27",
-        "error": "Missing AEC results"
       }
     },
     "aecbench-liang": {
@@ -43354,9 +43350,12 @@
       "url": "https://github.com/lechmazur/buyout_game",
       "feed": "https://raw.githubusercontent.com/lechmazur/buyout_game/HEAD/reference/current/scoreboard_bt.csv",
       "terms": "The author publishes the README and rating data. The raw GitHub host returns 404 for robots.txt. No separate score license is stated.",
-      "retrieved": "2026-11-24",
-      "rows": 36,
-      "unmatched": [],
+      "retrieved": "2026-11-28",
+      "rows": 51,
+      "unmatched": [
+        "Baidu ERNIE 5.5 Flash Preview",
+        "ByteDance Seed2.1 Turbo"
+      ],
       "stats": {
         "games": {
           "name": "Games played",
@@ -43411,10 +43410,6 @@
           "unit": "rating",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-27",
-        "error": "Buyout tables disagree"
       }
     },
     "buzzbench": {
@@ -81647,8 +81642,8 @@
       "url": "https://developers.databricks.com/ai-index",
       "feed": "https://developers.databricks.com/ai-index",
       "terms": "The publisher displays results at https://developers.databricks.com/ai-index. I could not verify reuse terms. The site allows this path in robots.txt.",
-      "retrieved": "2026-11-24",
-      "rows": 19,
+      "retrieved": "2026-11-28",
+      "rows": 22,
       "unmatched": [
         "Beam-501B-A23B"
       ],
@@ -81678,10 +81673,6 @@
           "unit": "count",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-28",
-        "error": "Incomplete coding frontier point"
       }
     },
     "datacenterbench-tier-1": {
