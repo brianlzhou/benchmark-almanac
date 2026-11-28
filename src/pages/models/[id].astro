@@ -106,7 +106,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
           {m.released && <span>Released <b>{humanDate(m.released)}</b></span>}
           {m.family && <span>Family <b>{m.family}</b></span>}
           {m.card && <a href={m.card}>The lab's model card</a>}
-          {rival && <a href={`/compare/?m=${m.id},${rival}`}>Compare with others</a>}
+          {rival && <a rel="nofollow" href={`/compare/?m=${m.id},${rival}`}>Compare with others</a>}
         </div>
         <div class="stats mini">
           <div class="stat">
