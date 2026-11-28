@@ -70112,6 +70112,7 @@
         "score": 455.82,
         "unit": "score",
         "as_written": "PMPP-Hard (AUC, 0 to 10h), pi v0.83.0",
+        "measure": "auc",
         "section": "capabilities"
       },
       {

@@ -48602,7 +48602,8 @@
         "benchmark": "pmpp-hard",
         "score": 494.27,
         "unit": "score",
-        "as_written": "PMPP-Hard AUC, 494.27 task-hours"
+        "as_written": "PMPP-Hard AUC, 494.27 task-hours",
+        "measure": "auc"
       },
       {
         "benchmark": "misbehavior-thinking-machines",
@@ -48716,7 +48717,8 @@
         "benchmark": "pmpp-hard",
         "score": 455.82,
         "unit": "score",
-        "as_written": "PMPP-Hard (AUC, 0 to 10h), pi v0.83.0"
+        "as_written": "PMPP-Hard (AUC, 0 to 10h), pi v0.83.0",
+        "measure": "auc"
       },
       {
         "benchmark": "browsecomp",

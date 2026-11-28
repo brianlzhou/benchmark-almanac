@@ -142420,7 +142420,7 @@
     "level": "frontier",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents write GPU kernels for 69 tasks that must be correct, and on 48 of them also run within 1.25 times the reference time. The score is the area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours.",
+    "description": "Agents write GPU kernels for 69 tasks that must be correct, and on 48 of them also run within 1.25 times the reference time. The board's score is the share of the 69 tasks a model passes, from 0 to 1. Thinking Machines quotes another number: the area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours.",
     "org": "Sinatras, sponsored by Prime Intellect",
     "released": "2026-07",
     "links": {
@@ -142433,6 +142433,16 @@
     "note": "Thinking Machines reports an adapted version with task and grading fixes.",
     "unit": "score",
     "better": "higher",
+    "metric": "Share of tasks passed",
+    "measures": [
+      {
+        "id": "auc",
+        "name": "Area under the curve (task-hours)",
+        "kind": "metric",
+        "unit": "score",
+        "note": "The area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours. Thinking Machines quotes it, on its adapted version of the tasks."
+      }
+    ],
     "confidence": "verified",
     "evidence": [
       "https://thinkingmachines.ai/model-card/inkling-2-small/",
