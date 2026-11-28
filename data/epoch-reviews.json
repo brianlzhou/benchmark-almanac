@@ -4,6 +4,14 @@
   "license": "CC BY 4.0, Epoch AI",
   "retrieved": "2026-11-27",
   "reviews": {
+    "aa-omniscience": {
+      "epoch": "aa-omniscience",
+      "verdict": "verified",
+      "url": "https://epoch.ai/benchmarks/aa-omniscience/review",
+      "reviewed": "2026-11-16",
+      "creator": "Artificial Analysis",
+      "summary": "AA-Omniscience v1.1 measures an AI model’s world knowledge across six domains. It evaluates whether a model can recall factual, obscure information without using tools (including internet access), and whether it abstains instead of providing false information."
+    },
     "agents-last-exam-1-1": {
       "epoch": "agents-last-exam",
       "verdict": "flawed",
@@ -82,6 +90,10 @@
     },
     "frontiercode-2-0": {
       "epoch": "frontiercode-2",
+      "verdict": "not-enough-info"
+    },
+    "gdpx": {
+      "epoch": "gdpx",
       "verdict": "not-enough-info"
     },
     "graphwalks": {

@@ -3660,7 +3660,7 @@
     ["ocnli","biLSTM (OCNLI trained)",null,null,59.2,null,null,null,{"std":0.5}],
     ["ocnli","CBOW (OCNLI trained)",null,null,55.7,null,null,null,{"std":0.5}],
     ["ocr-arena","Qwen3-VL-8B",null,null,1525,null,null,null,{"latency":80.077,"winRate":40.022,"votes":1784,"wins":714,"losses":1070}],
-    ["ocr-arena","dots.ocr",null,null,1519,null,null,null,{"latency":63.462,"winRate":36.419,"votes":1804,"wins":657,"losses":1147}],
+    ["ocr-arena","dots.ocr",null,null,1519,null,null,null,{"latency":63.564,"winRate":36.419,"votes":1804,"wins":657,"losses":1147}],
     ["ocr-arena","Mistral OCR v3",null,null,1516,null,null,null,{"latency":2.387,"winRate":39.099,"votes":555,"wins":217,"losses":338}],
     ["ocr-arena","Nanonets2-3B",null,null,1494,null,null,null,{"latency":62.335,"winRate":33.621,"votes":1392,"wins":468,"losses":924}],
     ["ocr-arena","olmOCR 2",null,null,1412,null,null,null,{"latency":77.673,"winRate":28.914,"votes":2210,"wins":639,"losses":1571}],
