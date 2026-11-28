@@ -4,19 +4,37 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
-
 import { VALS_LATENCY_CHART, valsView } from './vals-index.ts';
 
+interface BioTurnMetrics {
+  avg_turns?: number | null;
+  avg_query_seconds?: number | null;
+  median_query_seconds?: number | null;
+  avg_ttft_seconds?: number | null;
+}
+
 const FEED = 'https://www.vals.ai/benchmarks/biomysterybench';
+const clamp = (v: number) => Math.max(0, Math.min(100, Math.round(v * 1000) / 1000));
+
 const board: Leaderboard = {
   benchmark: 'biomysterybench',
   host: 'Vals AI',
   url: FEED,
   feed: FEED,
   reference: ['Vals AI'],
-  aliases: { 'Gemini 3.1 Pro Preview (02/26)': 'gemini-3-1-pro' },
+  aliases: {
+    'Gemini 3.1 Pro Preview (02/26)': 'gemini-3-1-pro',
+    Wonder: 'muse-wonder',
+  },
   terms: 'Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.',
-  stats: { time: { name: 'Time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
+  stats: {
+    time: { name: 'Time', unit: 'seconds', better: 'lower' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    turns: { name: 'Mean turns per test', unit: 'count', better: 'lower' },
+    avgQuerySeconds: { name: 'Mean query latency', unit: 'seconds', better: 'lower' },
+    medianQuerySeconds: { name: 'Median query latency', unit: 'seconds', better: 'lower' },
+    avgTtftSeconds: { name: 'Mean time to first token', unit: 'seconds', better: 'lower' },
+  },
   chart: { ...VALS_LATENCY_CHART, x: { ...VALS_LATENCY_CHART.x, key: 'time' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(FEED);
@@ -43,14 +61,27 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (total) metrics.totalTokens = Number(total[1].replace(/,/g, '')) * ({ k: 1e3, m: 1e6 }[total[2].toLowerCase()] ?? 1);
       if (time !== undefined) metrics.time = time;
-      if (matched?.stderr != null) metrics.stderr = matched.stderr;
-      return name && value !== undefined ? [{
-        model: name, score: value, setting: 'Vals AI harness, v11 full set', cost: num(r[cost]?.text), harness: 'Vals AI', trials: 3, tokens: output,
-        link: slug ? `https://www.vals.ai/models/${slug}` : undefined,
-        low: matched?.stderr != null && matched.stderr > 0 ? matched.accuracy! - 1.96 * matched.stderr : undefined,
-        high: matched?.stderr != null && matched.stderr > 0 ? matched.accuracy! + 1.96 * matched.stderr : undefined,
-        metrics,
-      }] : [];
+      if (matched?.stderr != null && Number.isFinite(matched.stderr)) metrics.stderr = matched.stderr;
+      const tm = matched?.turn_metrics as BioTurnMetrics | null | undefined;
+      if (typeof tm?.avg_turns === 'number' && Number.isFinite(tm.avg_turns)) metrics.turns = tm.avg_turns;
+      if (typeof tm?.avg_query_seconds === 'number' && Number.isFinite(tm.avg_query_seconds)) metrics.avgQuerySeconds = tm.avg_query_seconds;
+      if (typeof tm?.median_query_seconds === 'number' && Number.isFinite(tm.median_query_seconds)) metrics.medianQuerySeconds = tm.median_query_seconds;
+      if (typeof tm?.avg_ttft_seconds === 'number' && Number.isFinite(tm.avg_ttft_seconds)) metrics.avgTtftSeconds = tm.avg_ttft_seconds;
+      const hasCi = matched?.stderr != null && Number.isFinite(matched.stderr) && matched.stderr > 0;
+      return name && value !== undefined
+        ? [{
+            model: name,
+            score: value,
+            setting: 'Vals AI harness, v11 full set',
+            cost: num(r[cost]?.text),
+            harness: 'Vals AI',
+            trials: 3,
+            tokens: output,
+            ...(slug ? { link: `https://www.vals.ai/models/${slug}` } : {}),
+            ...(hasCi ? { low: clamp(matched!.accuracy! - 1.96 * matched!.stderr!), high: clamp(matched!.accuracy! + 1.96 * matched!.stderr!) } : {}),
+            metrics,
+          }]
+        : [];
     });
     if (!rows.length) throw new Error('BioMysteryBench Vals rows missing');
     return rows;

@@ -79,7 +79,7 @@ const segs = (r: Rival) =>
               <span class="rv-w">
                 {`${r.wins} ahead, ${r.losses} behind`}{r.ties > 0 && <span class="muted">{`, ${r.ties} tied`}</span>}
               </span>
-              <a class="rv-c" href={`/compare/?m=${id},${r.model}`}>
+              <a class="rv-c" rel="nofollow" href={`/compare/?m=${id},${r.model}`}>
                 Compare
               </a>
             </li>

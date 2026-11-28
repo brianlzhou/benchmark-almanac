@@ -56,7 +56,7 @@ const unspecified = (name: string) => /^(?:gpt4o|gpt4|gpt4turbo|gpt4v|gpt35turbo
 const board: Leaderboard = {
   benchmark: 'forecastbench',
   parts: { brierDataset: 'Brier Dataset', brierMarket: 'Brier Market' },
-  stats: { brierIndexRank:{name:'Brier index rank',unit:'count',better:'lower'}, brierIndex:{name:'Brier overall index',unit:'index',better:'higher'}, datasetIndex:{name:'Brier dataset index',unit:'index',better:'higher'}, marketIndex:{name:'Brier market index',unit:'index',better:'higher'}, questions:{name:'Questions',unit:'count'}, datasetQuestions:{name:'Dataset questions',unit:'count'}, marketQuestions:{name:'Market questions',unit:'count'}, pctRankedFirst:{name:'Percent ranked first',unit:'%',better:'higher'}, pctRankedTop5:{name:'Percent ranked in top five',unit:'%',better:'higher'}, peer:{name:'Peer score',unit:'score'}, brierSkillScore:{name:'Brier skill score',unit:'score',better:'higher'}, supersBeatForecasterPBelow:{name:'Superforecaster beats forecaster p value below threshold',unit:'score',better:'lower'}, forecasterBeatsPublicP:{name:'P value for forecaster beating public',unit:'score',better:'lower'}, supersBeatForecasterP:{name:'P value for superforecasters beating forecaster',unit:'score',better:'lower'}, forecasterBeatsPublicPBelow:{name:'Forecaster beats public p value below threshold',unit:'score',better:'lower'} },
+  stats: { brierIndex:{name:'Brier overall index',unit:'index',better:'higher'}, datasetIndex:{name:'Brier dataset index',unit:'index',better:'higher'}, marketIndex:{name:'Brier market index',unit:'index',better:'higher'}, questions:{name:'Questions',unit:'count'}, datasetQuestions:{name:'Dataset questions',unit:'count'}, marketQuestions:{name:'Market questions',unit:'count'}, pctRankedFirst:{name:'Percent ranked first',unit:'%',better:'higher'}, pctRankedTop5:{name:'Percent ranked in top five',unit:'%',better:'higher'}, peer:{name:'Peer score',unit:'score'}, brierSkillScore:{name:'Brier skill score',unit:'score',better:'higher'}, supersBeatForecasterPBelow:{name:'Superforecaster beats forecaster p value below threshold',unit:'score',better:'lower'}, forecasterBeatsPublicP:{name:'P value for forecaster beating public',unit:'score',better:'lower'}, supersBeatForecasterP:{name:'P value for superforecasters beating forecaster',unit:'score',better:'lower'}, forecasterBeatsPublicPBelow:{name:'Forecaster beats public p value below threshold',unit:'score',better:'lower'} },
   url: 'https://www.forecastbench.org/leaderboards/',
   feed: `${FEED} (all model systems, Brier Overall)`,
   terms: 'CSV in the forecastingresearch/forecastbench-datasets repository; the site and datasets are CC BY-SA 4.0.',
@@ -102,7 +102,7 @@ export async function fetchForecastRows(feed: string, metric: 'Overall' | 'Brier
       seen.add(key);
       const metrics: Record<string, number> = {};
       const columns = {
-        Rank: 'brierIndexRank', Overall: 'brierIndex', Dataset: 'datasetIndex', Market: 'marketIndex',
+        Overall: 'brierIndex', Dataset: 'datasetIndex', Market: 'marketIndex',
         'Brier Dataset': 'brierDataset', 'Brier Market': 'brierMarket', 'Brier Overall': 'brierOverall',
         N: 'questions', 'N dataset': 'datasetQuestions', 'N market': 'marketQuestions',
         'Pct times № 1': 'pctRankedFirst', 'Pct times top 5%': 'pctRankedTop5', Peer: 'peer', BSS: 'brierSkillScore',
@@ -119,7 +119,6 @@ export async function fetchForecastRows(feed: string, metric: 'Overall' | 'Brier
         }
       }
       for (const [column, name] of [['Supers > Forecaster?', 'supersBeatForecaster'], ['Forecaster > Public?', 'forecasterBeatsPublic']]) {
-        if (['Yes', 'No'].includes(r[column])) metrics[name] = Number(r[column] === 'Yes');
         const value = r['p-val ' + column]?.trim();
         if (value && Number.isFinite(Number(value))) metrics[name + 'P'] = Number(value);
         if (value?.startsWith('<') && Number.isFinite(Number(value.slice(1)))) metrics[name + 'PBelow'] = Number(value.slice(1));

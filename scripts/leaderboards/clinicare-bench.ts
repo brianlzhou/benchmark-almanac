@@ -3,11 +3,39 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
 const feed = "https://static.remotasks.com/uploads/6a74bd9cebda5487911dfbc2/scale-clinicare-bench.pdf";
+const SCENARIOS: Record<string, string> = {
+  'advanced-imaging': 'Advanced imaging',
+  'post-ct-aki': 'Post-CT kidney injury',
+  'pe-workup': 'Pulmonary embolism workup',
+  'discharge-audit': 'Discharge audit',
+  'renal-trajectory': 'Renal trajectory',
+  'sepsis-bundle': 'Sepsis bundle',
+  'readmission-30d': '30-day readmission',
+  'eol-goal-concordance': 'End-of-life goal concordance',
+  'overdose-disposition': 'Overdose disposition',
+  'transfusion-audit': 'Transfusion audit',
+  'hfref-gdmt': 'Heart failure guideline therapy',
+  'goals-of-care': 'Goals of care',
+  'frequent-admitter': 'Frequent admitter',
+  'icu-delirium': 'ICU delirium',
+  'sepsis-source-abx': 'Sepsis source antibiotics',
+  'med-reconciliation': 'Medication reconciliation',
+  'postop-complications': 'Postoperative complications',
+  'dka-resolution': 'DKA resolution',
+  'hyperkalemia-management': 'Hyperkalemia management',
+  'ams-workup': 'Altered mental status workup',
+  'empiric-abx': 'Empiric antibiotics',
+  'he-precipitant': 'Hepatic encephalopathy precipitant',
+  'stroke-time-targets': 'Stroke time targets',
+  'anticoag-reversal': 'Anticoagulation reversal',
+  'pneumonia-curb65': 'Pneumonia CURB-65',
+};
 const board: Leaderboard = {
   benchmark: 'clinicare-bench', static: 'paper',
   url: "https://labs.scale.com/papers/clinicare-bench",
   feed,
   terms: "Scale allows the public paper page in robots.txt and restricts use through its terms. Results are credited to the paper authors.",
+  parts: Object.fromEntries(Object.entries(SCENARIOS).map(([k, name]) => [k, { name, group: 'Scenario' }])),
   stats: {
     macF1: { name: 'Macro F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
     defectFree: { name: 'Defect-free accuracy', unit: '%', better: 'higher' },
@@ -44,7 +72,7 @@ const board: Leaderboard = {
     for (const line of lines) {
       const [scenario, ...values] = line.trim().split(/\s+/);
       if (values.length !== 17 || values.some(v => !Number.isFinite(Number(v)))) throw new Error('Invalid scenario scores');
-      (board.parts ??= {})[scenario] = scenario;
+      if (!(scenario in SCENARIOS)) throw new Error('Unknown CliniCARE scenario ' + scenario);
       rows.forEach((row, i) => { row.metrics![scenario] = Number(values[i]); });
     }
     return rows;

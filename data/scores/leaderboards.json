@@ -36464,11 +36464,9 @@
       "feed": "https://www.vals.ai/benchmarks/biomysterybench",
       "terms": "Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.",
       "host": "Vals AI",
-      "retrieved": "2026-11-27",
-      "rows": 34,
-      "unmatched": [
-        "Wonder"
-      ],
+      "retrieved": "2026-11-28",
+      "rows": 35,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -36498,6 +36496,26 @@
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
+        },
+        "turns": {
+          "name": "Mean turns per test",
+          "unit": "count",
+          "better": "lower"
+        },
+        "avgQuerySeconds": {
+          "name": "Mean query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "medianQuerySeconds": {
+          "name": "Median query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "avgTtftSeconds": {
+          "name": "Mean time to first token",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -41597,7 +41615,7 @@
       "url": "https://petergpt.github.io/bullshit-benchmark/",
       "feed": "https://petergpt.github.io/bullshit-benchmark/data/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
       "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
-      "retrieved": "2026-11-27",
+      "retrieved": "2026-11-28",
       "rows": 195,
       "unmatched": [
         "baidu/ernie-4.5-vl-424b-a47b",
@@ -41647,74 +41665,6 @@
           "name": "Wrong unit of analysis",
           "group": "Technique"
         }
-      }
-    },
-    "bullshitbench-2": {
-      "url": "https://petergpt.github.io/bullshit-benchmark/",
-      "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
-      "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
-      "retrieved": "2026-11-27",
-      "rows": 257,
-      "unmatched": [
-        "baidu/ernie-4.5-vl-424b-a47b",
-        "deepseek/deepseek-chat",
-        "openrouter/healer-alpha",
-        "openrouter/hunter-alpha",
-        "stealth/ox-alpha"
-      ],
-      "parts": {
-        "authoritative_framing": {
-          "name": "Authoritative framing",
-          "group": "Technique"
-        },
-        "fabricated_authority": {
-          "name": "Fabricated authority",
-          "group": "Technique"
-        },
-        "false_granularity": {
-          "name": "False granularity",
-          "group": "Technique"
-        },
-        "misapplied_mechanism": {
-          "name": "Misapplied mechanism",
-          "group": "Technique"
-        },
-        "nested_nonsense": {
-          "name": "Nested nonsense",
-          "group": "Technique"
-        },
-        "plausible_nonexistent_framework": {
-          "name": "Plausible nonexistent framework",
-          "group": "Technique"
-        },
-        "reified_metaphor": {
-          "name": "Reified metaphor",
-          "group": "Technique"
-        },
-        "sunk_cost_framing": {
-          "name": "Sunk cost framing",
-          "group": "Technique"
-        },
-        "specificity_trap": {
-          "name": "Specificity trap",
-          "group": "Technique"
-        },
-        "temporal_category_error": {
-          "name": "Temporal category error",
-          "group": "Technique"
-        },
-        "cross_domain_stitching": {
-          "name": "Cross domain stitching",
-          "group": "Technique"
-        },
-        "wrong_unit_of_analysis": {
-          "name": "Wrong unit of analysis",
-          "group": "Technique"
-        },
-        "confident_extrapolation": {
-          "name": "Confident extrapolation",
-          "group": "Technique"
-        }
       },
       "stats": {
         "accepted": {
@@ -41730,8 +41680,8 @@
           "unit": "tokens"
         },
         "clear": {
-          "name": "Clear pushback rate",
-          "unit": "%",
+          "name": "Clear pushback responses",
+          "unit": "count",
           "better": "higher"
         },
         "greenRate": {
@@ -41758,13 +41708,149 @@
           "name": "Partial responses",
           "unit": "count"
         },
-        "publishedCsvRank": {
-          "name": "Published CSV rank",
+        "reasoningTokens": {
+          "name": "Reasoning tokens",
+          "unit": "tokens"
+        },
+        "redRate": {
+          "name": "Red rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "refusalRate": {
+          "name": "Refusal rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "refusals": {
+          "name": "Refusals",
+          "unit": "count"
+        },
+        "tokensPerSecond": {
+          "name": "Tokens per second",
+          "unit": "tokens/s",
+          "better": "higher"
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "errors": {
+          "name": "Errors",
           "unit": "count",
           "better": "lower"
+        }
+      }
+    },
+    "bullshitbench-2": {
+      "url": "https://petergpt.github.io/bullshit-benchmark/",
+      "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
+      "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
+      "retrieved": "2026-11-28",
+      "rows": 257,
+      "unmatched": [
+        "baidu/ernie-4.5-vl-424b-a47b",
+        "deepseek/deepseek-chat",
+        "openrouter/healer-alpha",
+        "openrouter/hunter-alpha",
+        "stealth/ox-alpha"
+      ],
+      "parts": {
+        "authoritative_framing": {
+          "name": "Authoritative framing",
+          "group": "Technique"
         },
-        "questions": {
-          "name": "Questions",
+        "confident_extrapolation": {
+          "name": "Confident extrapolation",
+          "group": "Technique"
+        },
+        "cross_domain_stitching": {
+          "name": "Cross domain stitching",
+          "group": "Technique"
+        },
+        "fabricated_authority": {
+          "name": "Fabricated authority",
+          "group": "Technique"
+        },
+        "false_granularity": {
+          "name": "False granularity",
+          "group": "Technique"
+        },
+        "misapplied_mechanism": {
+          "name": "Misapplied mechanism",
+          "group": "Technique"
+        },
+        "nested_nonsense": {
+          "name": "Nested nonsense",
+          "group": "Technique"
+        },
+        "plausible_nonexistent_framework": {
+          "name": "Plausible nonexistent framework",
+          "group": "Technique"
+        },
+        "reified_metaphor": {
+          "name": "Reified metaphor",
+          "group": "Technique"
+        },
+        "specificity_trap": {
+          "name": "Specificity trap",
+          "group": "Technique"
+        },
+        "sunk_cost_framing": {
+          "name": "Sunk cost framing",
+          "group": "Technique"
+        },
+        "temporal_category_error": {
+          "name": "Temporal category error",
+          "group": "Technique"
+        },
+        "wrong_unit_of_analysis": {
+          "name": "Wrong unit of analysis",
+          "group": "Technique"
+        }
+      },
+      "stats": {
+        "accepted": {
+          "name": "Accepted responses",
+          "unit": "count"
+        },
+        "answered": {
+          "name": "Answered responses",
+          "unit": "count"
+        },
+        "cachedTokens": {
+          "name": "Cached tokens",
+          "unit": "tokens"
+        },
+        "clear": {
+          "name": "Clear pushback responses",
+          "unit": "count",
+          "better": "higher"
+        },
+        "greenRate": {
+          "name": "Green rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "latency": {
+          "name": "Latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "meanJudgeScore": {
+          "name": "Mean judge score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "partial": {
+          "name": "Partial responses",
           "unit": "count"
         },
         "reasoningTokens": {
@@ -41926,7 +42012,7 @@
       "url": "https://www.buseybench.com/leaderboard?suite=svg",
       "feed": "https://www.buseybench.com/api/v1/leaderboard?suite=svg",
       "terms": "The site allows the leaderboard and public API in robots.txt. The site makes artifacts and model metadata public. Its privacy and governance pages give no reuse license. https://www.buseybench.com/privacy",
-      "retrieved": "2026-11-27",
+      "retrieved": "2026-11-28",
       "rows": 282,
       "unmatched": [
         "Aion-RP 1.0 (8B)",
@@ -41997,10 +42083,6 @@
           "name": "Prompt adherence",
           "unit": "score",
           "better": "higher"
-        },
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count"
         },
         "unroundedScore": {
           "name": "Unrounded score",
@@ -46507,9 +46589,9 @@
       "url": "https://arxiv.org/html/2502.06666",
       "feed": "https://arxiv.org/html/2502.06666",
       "terms": "Paper and license at https://arxiv.org/abs/2502.06666",
-      "headline": "The paper reports no overall score, so this is the plain mean of its ten close-ended accuracy parts.",
+      "headline": "CareQA close-ended English multiple-choice accuracy (%). CareQA Spanish accuracy and CareQA-Open metrics are stored separately.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 4,
       "unmatched": [
         "BioMistral-MedMNX",
@@ -46522,12 +46604,13 @@
         "Yi-1.5-34B-Chat"
       ],
       "parts": {
-        "en": {
-          "name": "English accuracy"
-        },
         "es": {
-          "name": "Spanish accuracy"
-        },
+          "name": "Spanish accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "stats": {
         "BitsperByte": {
           "name": "Bits per Byte",
           "unit": "score",
@@ -46544,7 +46627,7 @@
           "better": "lower"
         },
         "Prometheus": {
-          "name": "Prometheus",
+          "name": "Prometheus judge",
           "unit": "score",
           "better": "higher"
         },
@@ -46569,17 +46652,17 @@
           "better": "higher"
         },
         "ROUGE1": {
-          "name": "ROUGE1",
+          "name": "ROUGE-1",
           "unit": "score",
           "better": "higher"
         },
         "ROUGE2": {
-          "name": "ROUGE2",
+          "name": "ROUGE-2",
           "unit": "score",
           "better": "higher"
         },
         "ROUGEL": {
-          "name": "ROUGEL",
+          "name": "ROUGE-L",
           "unit": "score",
           "better": "higher"
         }
@@ -56783,84 +56866,109 @@
       "feed": "https://static.remotasks.com/uploads/6a74bd9cebda5487911dfbc2/scale-clinicare-bench.pdf",
       "terms": "Scale allows the public paper page in robots.txt and restricts use through its terms. Results are credited to the paper authors.",
       "static": "paper",
-      "retrieved": "2026-11-27",
+      "retrieved": "2026-11-28",
       "rows": 16,
       "unmatched": [],
       "parts": {
-        "eol-goal-concordance": {
-          "name": "eol-goal-concordance"
-        },
-        "overdose-disposition": {
-          "name": "overdose-disposition"
-        },
-        "renal-trajectory": {
-          "name": "renal-trajectory"
-        },
-        "transfusion-audit": {
-          "name": "transfusion-audit"
-        },
-        "discharge-audit": {
-          "name": "discharge-audit"
-        },
         "advanced-imaging": {
-          "name": "advanced-imaging"
-        },
-        "hfref-gdmt": {
-          "name": "hfref-gdmt"
+          "name": "Advanced imaging",
+          "group": "Scenario"
         },
         "post-ct-aki": {
-          "name": "post-ct-aki"
-        },
-        "sepsis-bundle": {
-          "name": "sepsis-bundle"
-        },
-        "goals-of-care": {
-          "name": "goals-of-care"
-        },
-        "frequent-admitter": {
-          "name": "frequent-admitter"
-        },
-        "readmission-30d": {
-          "name": "readmission-30d"
-        },
-        "icu-delirium": {
-          "name": "icu-delirium"
-        },
-        "sepsis-source-abx": {
-          "name": "sepsis-source-abx"
-        },
-        "med-reconciliation": {
-          "name": "med-reconciliation"
-        },
-        "postop-complications": {
-          "name": "postop-complications"
+          "name": "Post-CT kidney injury",
+          "group": "Scenario"
         },
         "pe-workup": {
-          "name": "pe-workup"
+          "name": "Pulmonary embolism workup",
+          "group": "Scenario"
+        },
+        "discharge-audit": {
+          "name": "Discharge audit",
+          "group": "Scenario"
+        },
+        "renal-trajectory": {
+          "name": "Renal trajectory",
+          "group": "Scenario"
+        },
+        "sepsis-bundle": {
+          "name": "Sepsis bundle",
+          "group": "Scenario"
+        },
+        "readmission-30d": {
+          "name": "30-day readmission",
+          "group": "Scenario"
+        },
+        "eol-goal-concordance": {
+          "name": "End-of-life goal concordance",
+          "group": "Scenario"
+        },
+        "overdose-disposition": {
+          "name": "Overdose disposition",
+          "group": "Scenario"
+        },
+        "transfusion-audit": {
+          "name": "Transfusion audit",
+          "group": "Scenario"
+        },
+        "hfref-gdmt": {
+          "name": "Heart failure guideline therapy",
+          "group": "Scenario"
+        },
+        "goals-of-care": {
+          "name": "Goals of care",
+          "group": "Scenario"
+        },
+        "frequent-admitter": {
+          "name": "Frequent admitter",
+          "group": "Scenario"
+        },
+        "icu-delirium": {
+          "name": "ICU delirium",
+          "group": "Scenario"
+        },
+        "sepsis-source-abx": {
+          "name": "Sepsis source antibiotics",
+          "group": "Scenario"
+        },
+        "med-reconciliation": {
+          "name": "Medication reconciliation",
+          "group": "Scenario"
+        },
+        "postop-complications": {
+          "name": "Postoperative complications",
+          "group": "Scenario"
         },
         "dka-resolution": {
-          "name": "dka-resolution"
+          "name": "DKA resolution",
+          "group": "Scenario"
         },
         "hyperkalemia-management": {
-          "name": "hyperkalemia-management"
+          "name": "Hyperkalemia management",
+          "group": "Scenario"
         },
         "ams-workup": {
-          "name": "ams-workup"
+          "name": "Altered mental status workup",
+          "group": "Scenario"
         },
         "empiric-abx": {
-          "name": "empiric-abx"
+          "name": "Empiric antibiotics",
+          "group": "Scenario"
         },
         "he-precipitant": {
-          "name": "he-precipitant"
+          "name": "Hepatic encephalopathy precipitant",
+          "group": "Scenario"
         },
         "stroke-time-targets": {
-          "name": "stroke-time-targets"
+          "name": "Stroke time targets",
+          "group": "Scenario"
         },
         "anticoag-reversal": {
-          "name": "anticoag-reversal"
+          "name": "Anticoagulation reversal",
+          "group": "Scenario"
         },
         "pneumonia-curb65": {
-          "name": "pneumonia-curb65"
+          "name": "Pneumonia CURB-65",
+          "group": "Scenario"
         }
       },
       "stats": {
@@ -58240,7 +58348,8 @@
       "url": "https://codesignbench.github.io/#leaderboard",
       "feed": "https://codesignbench.github.io/data/site-data.json",
       "terms": "The authors publish the benchmark and its results at https://github.com/Wiselnn570/Co-Design-Bench",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-28",
       "rows": 10,
       "unmatched": [],
       "reference": [
@@ -58254,7 +58363,6 @@
           "name": "Full pass"
         }
       },
-      "static": "paper",
       "stats": {
         "mestrict": {
           "name": "ME strict completion",
@@ -66841,31 +66949,40 @@
       "unmatched": [],
       "parts": {
         "Reconciliation & Settlement": {
-          "name": "Reconciliation & Settlement"
+          "name": "Reconciliation & Settlement",
+          "group": "Category"
         },
         "Deposits & Funding": {
-          "name": "Deposits & Funding"
+          "name": "Deposits & Funding",
+          "group": "Category"
         },
         "Customer & Account Analytics": {
-          "name": "Customer & Account Analytics"
+          "name": "Customer & Account Analytics",
+          "group": "Category"
         },
         "Revenue & Fees": {
-          "name": "Revenue & Fees"
+          "name": "Revenue & Fees",
+          "group": "Category"
         },
         "Compliance & Regulatory": {
-          "name": "Compliance & Regulatory"
+          "name": "Compliance & Regulatory",
+          "group": "Category"
         },
         "Cards & Interchange": {
-          "name": "Cards & Interchange"
+          "name": "Cards & Interchange",
+          "group": "Category"
         },
         "Payments & Transfers": {
-          "name": "Payments & Transfers"
+          "name": "Payments & Transfers",
+          "group": "Category"
         },
         "Risk & Fraud": {
-          "name": "Risk & Fraud"
+          "name": "Risk & Fraud",
+          "group": "Category"
         },
         "Subscriptions & Billing": {
-          "name": "Subscriptions & Billing"
+          "name": "Subscriptions & Billing",
+          "group": "Category"
         }
       },
       "stats": {
@@ -67666,9 +67783,10 @@
       "url": "https://github.com/cz2014/CompMat-Bench",
       "feed": "https://raw.githubusercontent.com/cz2014/CompMat-Bench/HEAD/trajectories/manifest.json",
       "terms": "CC BY 4.0, https://github.com/cz2014/CompMat-Bench/blob/HEAD/LICENSE",
+      "headline": "Full-guidance pass rate across all 94 single-step computational materials science tasks from trajectories/manifest.json.",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 4,
+      "retrieved": "2026-11-28",
+      "rows": 10,
       "unmatched": [],
       "parts": {
         "inputs": {
@@ -67695,10 +67813,6 @@
           "name": "Tasks passed",
           "unit": "count",
           "better": "higher"
-        },
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
         },
         "totalCost": {
           "name": "API cost",
@@ -69174,9 +69288,9 @@
       "url": "https://aclanthology.org/2026.acl-long.1196/",
       "feed": "https://aclanthology.org/2026.acl-long.1196.pdf",
       "terms": "Paper and license at https://aclanthology.org/2026.acl-long.1196/",
-      "headline": "The paper reports no overall score, so this is the plain mean of its six atomic and composite task rates.",
+      "headline": "Mean of Atomic Overall AC@1 and Composite Overall AC@1 from ACL Anthology Tables 11 and 12.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 11,
       "unmatched": [
         "Llama-3.1"
@@ -69239,6 +69353,11 @@
         },
         "CompositeDevelopmentRate": {
           "name": "Composite development pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CompositeBugFixAC": {
+          "name": "Composite bug-fix accuracy",
           "unit": "%",
           "better": "higher"
         },
@@ -84756,11 +84875,11 @@
           "group": "Private benchmarks"
         },
         "kIECORDFUNSDPublic": {
-          "name": "KIE (CORD+FUNSD)",
+          "name": "KIE (CORD / FUNSD)",
           "group": "Public benchmarks"
         },
         "kIECORDFUNSDPrivate": {
-          "name": "KIE (CORD+FUNSD)",
+          "name": "KIE (CORD / FUNSD)",
           "group": "Private benchmarks"
         },
         "moderationHatefulMemesPublic": {
@@ -84776,7 +84895,7 @@
           "group": "Public benchmarks"
         },
         "mMMUProVisionPublic": {
-          "name": "MMMU-Pro vision",
+          "name": "MMMU-Pro (Vision)",
           "group": "Public benchmarks"
         }
       },
@@ -84814,10 +84933,6 @@
           "name": "Calibration examples",
           "unit": "count"
         },
-        "calibrationBenchmarks": {
-          "name": "Calibration benchmarks",
-          "unit": "count"
-        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -84825,15 +84940,6 @@
         "gpuHours": {
           "name": "GPU hours",
           "unit": "hours",
-          "better": "lower"
-        },
-        "maxPixels": {
-          "name": "Maximum image pixels",
-          "unit": "count"
-        },
-        "publicRank": {
-          "name": "Public rank",
-          "unit": "count",
           "better": "lower"
         },
         "nativePublic": {
@@ -90577,28 +90683,24 @@
           "group": "Domain"
         },
         "Split_public": {
-          "name": "public",
+          "name": "Public",
           "group": "Split"
         },
         "Split_private": {
-          "name": "private",
+          "name": "Private",
           "group": "Split"
         }
       },
       "stats": {
         "amend": {
-          "name": "Amendments",
-          "unit": "score",
+          "name": "Amendment rate",
+          "unit": "%",
           "better": "lower"
         },
         "cleanDrafts": {
           "name": "Clean drafts",
           "unit": "count",
           "better": "higher"
-        },
-        "clips": {
-          "name": "Clips",
-          "unit": "count"
         }
       }
     },
@@ -120794,11 +120896,6 @@
         }
       },
       "stats": {
-        "brierIndexRank": {
-          "name": "Brier index rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "brierIndex": {
           "name": "Brier overall index",
           "unit": "index",
@@ -129129,35 +129226,23 @@
         },
         "onlineShortHorizonPassed": {
           "name": "Short-horizon tasks passed",
-          "unit": "count"
-        },
-        "onlineShortHorizonTotal": {
-          "name": "Short-horizon tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineLongHorizonPassed": {
           "name": "Long-horizon tasks passed",
-          "unit": "count"
-        },
-        "onlineLongHorizonTotal": {
-          "name": "Long-horizon tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineCausalPassed": {
           "name": "Causal tasks passed",
-          "unit": "count"
-        },
-        "onlineCausalTotal": {
-          "name": "Causal tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineThematicPassed": {
           "name": "Thematic tasks passed",
-          "unit": "count"
-        },
-        "onlineThematicTotal": {
-          "name": "Thematic tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -135232,6 +135317,88 @@
         "GPT-3.5 Turbo (snapshot unspecified)",
         "GPT-4o (snapshot unspecified)"
       ]
+    },
+    "gobench": {
+      "url": "https://rolandgao.com/blog/gobench/",
+      "feed": "https://rolandgao.com/blog/gobench/ (__NEXT_DATA__ Track 1 standings)",
+      "terms": "The author publishes the benchmark code and summary results under the MIT License at https://github.com/RolandGao/gobench/blob/main/LICENSE and rolandgao.com robots.txt allows the leaderboard page.",
+      "retrieved": "2026-11-28",
+      "rows": 33,
+      "unmatched": [
+        "Muse Spark 1.3 Contributor"
+      ],
+      "chart": {
+        "title": "Elo versus cost per move",
+        "x": {
+          "key": "costPerMove",
+          "label": "Cost per move",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Track 1 direct 9x9 Go play without tools, plotted against cost per move on a logarithmic scale."
+      },
+      "stats": {
+        "costPerMove": {
+          "name": "Cost per move",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "games": {
+          "name": "Games played",
+          "unit": "count"
+        }
+      }
+    },
+    "gobench-track-2": {
+      "url": "https://rolandgao.com/blog/gobench/",
+      "feed": "https://rolandgao.com/blog/gobench/ (__NEXT_DATA__ Track 2 standings)",
+      "terms": "The author publishes the benchmark code and summary results under the MIT License at https://github.com/RolandGao/gobench/blob/main/LICENSE and rolandgao.com robots.txt allows the leaderboard page.",
+      "retrieved": "2026-11-28",
+      "rows": 17,
+      "unmatched": [],
+      "chart": {
+        "title": "Elo versus continual learning duration",
+        "x": {
+          "key": "learningHours",
+          "label": "Continual learning duration",
+          "unit": "hours",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Track 2 coding agents spend 1 to 8 hours building a 9x9 Go engine, evaluated at 1 minute per game."
+      },
+      "costPer": "run",
+      "harnesses": "system",
+      "stats": {
+        "learningHours": {
+          "name": "Continual learning duration",
+          "unit": "hours",
+          "better": "lower"
+        },
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "gold-commodity-news": {
       "url": "https://arxiv.org/html/2009.04202",
@@ -143114,12 +143281,6 @@
         "Summ": {
           "name": "Summarization",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "contextWindowK": {
-          "name": "Context window",
-          "unit": "thousands"
         }
       }
     },
@@ -202353,29 +202514,15 @@
         "GPT 6.2 Astra Pro"
       ],
       "stats": {
-        "eloRating": {
-          "name": "Elo rating",
-          "unit": "elo",
-          "better": "higher"
-        },
         "ratingDeviation": {
           "name": "Rating deviation",
           "unit": "rating",
           "better": "lower"
         },
-        "rankScore": {
-          "name": "Rank score",
-          "unit": "score",
-          "better": "higher"
-        },
         "confidence": {
           "name": "Confidence",
           "unit": "%",
           "better": "higher"
-        },
-        "rankDelta24h": {
-          "name": "Rank change in 24 hours",
-          "unit": "count"
         },
         "shownCount": {
           "name": "Shown prompts",
@@ -202397,14 +202544,6 @@
           "name": "Both-bad votes",
           "unit": "count"
         },
-        "coveredPrompts": {
-          "name": "Covered prompts",
-          "unit": "count"
-        },
-        "activePrompts": {
-          "name": "Active prompts",
-          "unit": "count"
-        },
         "qualityFloorScore": {
           "name": "Quality floor score",
           "unit": "score",
@@ -202424,46 +202563,18 @@
           "unit": "%",
           "better": "higher"
         },
-        "sampledPrompts": {
-          "name": "Sampled prompts",
-          "unit": "count"
-        },
         "sampledVotes": {
           "name": "Sampled votes",
           "unit": "count"
         },
         "averageBlocks": {
           "name": "Average blocks",
-          "unit": "count",
-          "better": "lower"
-        },
-        "blockSampleCount": {
-          "name": "Block sample count",
           "unit": "count"
-        },
-        "expectedBuildCount": {
-          "name": "Expected builds",
-          "unit": "count"
-        },
-        "averageCostUsd": {
-          "name": "Average cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "averageTimeMs": {
-          "name": "Average build time",
-          "unit": "ms",
-          "better": "lower"
         },
         "secondsPerBuild": {
           "name": "Seconds per build",
           "unit": "seconds",
           "better": "lower"
-        },
-        "pairCoverageScore": {
-          "name": "Pair coverage score",
-          "unit": "score",
-          "better": "higher"
         }
       }
     },
@@ -226080,7 +226191,7 @@
       },
       "stats": {
         "passAt3": {
-          "name": "Pass@3",
+          "name": "pass@3",
           "unit": "%",
           "better": "higher"
         },
@@ -226090,10 +226201,6 @@
         },
         "solved": {
           "name": "Solved trials",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -227788,68 +227895,89 @@
       "rows": 4,
       "unmatched": [],
       "parts": {
-        "News & Media Publishers": {
-          "name": "News & Media Publishers"
-        },
-        "Games": {
-          "name": "Games"
-        },
-        "Health": {
-          "name": "Health"
-        },
-        "Heavy Industry and Engineering": {
-          "name": "Heavy Industry and Engineering"
-        },
-        "Sports": {
-          "name": "Sports"
-        },
-        "Food and Drink": {
-          "name": "Food and Drink"
-        },
-        "Jobs and Career": {
-          "name": "Jobs and Career"
-        },
-        "Reference Materials": {
-          "name": "Reference Materials"
-        },
-        "Science and Education": {
-          "name": "Science and Education"
+        "Arts & Entertainment": {
+          "name": "Arts & Entertainment",
+          "group": "Subdomain"
         },
         "Business and Consumer Services": {
-          "name": "Business and Consumer Services"
-        },
-        "Law and Government": {
-          "name": "Law and Government"
-        },
-        "Travel and Tourism": {
-          "name": "Travel and Tourism"
-        },
-        "Finance": {
-          "name": "Finance"
-        },
-        "Home and Garden": {
-          "name": "Home and Garden"
-        },
-        "Computers Electronics and Technology": {
-          "name": "Computers Electronics and Technology"
-        },
-        "Ecommerce & Shopping": {
-          "name": "Ecommerce & Shopping"
-        },
-        "Vehicles": {
-          "name": "Vehicles"
+          "name": "Business and Consumer Services",
+          "group": "Subdomain"
         },
         "Community and Society": {
-          "name": "Community and Society"
+          "name": "Community and Society",
+          "group": "Subdomain"
+        },
+        "Computers Electronics and Technology": {
+          "name": "Computers Electronics and Technology",
+          "group": "Subdomain"
+        },
+        "Ecommerce & Shopping": {
+          "name": "Ecommerce & Shopping",
+          "group": "Subdomain"
+        },
+        "Finance": {
+          "name": "Finance",
+          "group": "Subdomain"
+        },
+        "Food and Drink": {
+          "name": "Food and Drink",
+          "group": "Subdomain"
+        },
+        "Games": {
+          "name": "Games",
+          "group": "Subdomain"
+        },
+        "Health": {
+          "name": "Health",
+          "group": "Subdomain"
+        },
+        "Heavy Industry and Engineering": {
+          "name": "Heavy Industry and Engineering",
+          "group": "Subdomain"
         },
         "Hobbies and Leisure": {
-          "name": "Hobbies and Leisure"
+          "name": "Hobbies and Leisure",
+          "group": "Subdomain"
         },
-        "Arts & Entertainment": {
-          "name": "Arts & Entertainment"
+        "Home and Garden": {
+          "name": "Home and Garden",
+          "group": "Subdomain"
+        },
+        "Jobs and Career": {
+          "name": "Jobs and Career",
+          "group": "Subdomain"
+        },
+        "Law and Government": {
+          "name": "Law and Government",
+          "group": "Subdomain"
         },
         "Lifestyle": {
-          "name": "Lifestyle"
+          "name": "Lifestyle",
+          "group": "Subdomain"
+        },
+        "News & Media Publishers": {
+          "name": "News & Media Publishers",
+          "group": "Subdomain"
+        },
+        "Reference Materials": {
+          "name": "Reference Materials",
+          "group": "Subdomain"
+        },
+        "Science and Education": {
+          "name": "Science and Education",
+          "group": "Subdomain"
+        },
+        "Sports": {
+          "name": "Sports",
+          "group": "Subdomain"
+        },
+        "Travel and Tourism": {
+          "name": "Travel and Tourism",
+          "group": "Subdomain"
+        },
+        "Vehicles": {
+          "name": "Vehicles",
+          "group": "Subdomain"
         }
       },
       "stats": {
@@ -267506,13 +267634,7 @@
       "terms": "Anthropic terms restrict automated extraction. Benchmark Almanac credits Anthropic and links the source.",
       "retrieved": "2026-11-28",
       "rows": 12,
-      "unmatched": [],
-      "stats": {
-        "attackerAttemptsPerEnvironment": {
-          "name": "Attacker attempts per environment",
-          "unit": "count"
-        }
-      }
+      "unmatched": []
     },
     "prompt-injection-robustness-jamble": {
       "url": "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness",
@@ -268320,7 +268442,7 @@
       "feed": "https://arxiv.org/pdf/2606.05463",
       "terms": "Scale permits its public paper page in robots.txt and grants browser access for internal use. Results are credited to the paper authors.",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 12,
       "unmatched": [
         "HuatuoGPT-o1 (70B)",
@@ -268329,34 +268451,44 @@
       ],
       "parts": {
         "Clause accuracy": {
-          "name": "Clause accuracy"
+          "name": "Clause accuracy",
+          "group": "Measure"
         },
         "Evidence citation F1": {
-          "name": "Evidence citation F1"
+          "name": "Evidence citation F1",
+          "group": "Measure"
         },
         "Boundary hit rate": {
-          "name": "Boundary hit rate"
+          "name": "Boundary hit rate",
+          "group": "Measure"
         },
         "Missing detection F1": {
-          "name": "Missing detection F1"
+          "name": "Missing detection F1",
+          "group": "Measure"
         },
         "Missing slot identification F1": {
-          "name": "Missing slot identification F1"
+          "name": "Missing slot identification F1",
+          "group": "Measure"
         },
         "Uncertain detection F1": {
-          "name": "Uncertain detection F1"
+          "name": "Uncertain detection F1",
+          "group": "Measure"
         },
         "Reportable detection F1": {
-          "name": "Reportable detection F1"
+          "name": "Reportable detection F1",
+          "group": "Measure"
         },
         "Complete": {
-          "name": "Complete"
+          "name": "Complete cases",
+          "group": "Case type"
         },
         "Missing": {
-          "name": "Missing"
+          "name": "Missing cases",
+          "group": "Case type"
         },
         "Uncertain": {
-          "name": "Uncertain"
+          "name": "Uncertain cases",
+          "group": "Case type"
         }
       }
     },
@@ -273700,8 +273832,9 @@
       "url": "https://arxiv.org/html/2507.16200",
       "feed": "https://arxiv.org/html/2507.16200",
       "terms": "The paper uses CC BY-NC-SA 4.0. https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "headline": "Mean of module-level formal pass@1 and system-level formal pass@1 across RealBench Verilog designs.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 3,
       "unmatched": [
         "CodeV-QW-7B",
@@ -273735,6 +273868,18 @@
         },
         "systemSyntaxAt5": {
           "name": "System syntax pass@5"
+        },
+        "systemFunction": {
+          "name": "System functional pass@1"
+        },
+        "systemFunctionAt5": {
+          "name": "System functional pass@5"
+        },
+        "systemFormal": {
+          "name": "System formal pass@1"
+        },
+        "systemFormalAt5": {
+          "name": "System formal pass@5"
         }
       }
     },
@@ -290687,9 +290832,9 @@
       "url": "https://arxiv.org/html/2610.19869",
       "feed": "https://arxiv.org/html/2610.19869",
       "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2610.19869",
-      "headline": "The paper reports no overall score, so this is the Speech accuracy column, with Text and Delta retained as metrics.",
+      "headline": "Mean Speech accuracy across the six Global-MMLU-Lite and SEA-HELM IFEval language splits. Text baselines and text-to-speech accuracy gaps are kept as stats.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 1,
       "unmatched": [
         "SEA-LION-4.5-27B"
@@ -290719,6 +290864,68 @@
         "ifevalTamil": {
           "name": "Tamil",
           "group": "SEA-HELM IFEval"
+        }
+      },
+      "stats": {
+        "mmluChineseText": {
+          "name": "Global-MMLU-Lite Chinese text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mmluChineseGap": {
+          "name": "Global-MMLU-Lite Chinese text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mmluEnglishText": {
+          "name": "Global-MMLU-Lite English text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "mmluEnglishGap": {
+          "name": "Global-MMLU-Lite English text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalEnglishText": {
+          "name": "SEA-HELM IFEval English text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalEnglishGap": {
+          "name": "SEA-HELM IFEval English text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalIndonesianText": {
+          "name": "SEA-HELM IFEval Indonesian text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalIndonesianGap": {
+          "name": "SEA-HELM IFEval Indonesian text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalMalayText": {
+          "name": "SEA-HELM IFEval Malay text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalMalayGap": {
+          "name": "SEA-HELM IFEval Malay text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ifevalTamilText": {
+          "name": "SEA-HELM IFEval Tamil text accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ifevalTamilGap": {
+          "name": "SEA-HELM IFEval Tamil text-to-speech gap",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -312628,42 +312835,42 @@
       "feed": "https://arxiv.org/html/2611.09304",
       "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2611.09304",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-28",
       "rows": 6,
       "unmatched": [
         "SD 3.5"
       ],
       "parts": {
         "lex.": {
-          "name": "lex.",
+          "name": "Lexical negation",
           "group": "Form"
         },
         "morph.": {
-          "name": "morph.",
+          "name": "Morphological negation",
           "group": "Form"
         },
         "syn.": {
-          "name": "syn.",
+          "name": "Syntactic negation",
           "group": "Form"
         },
         "L0 (obj)": {
-          "name": "L0 (obj)",
+          "name": "L0 (object)",
           "group": "Complexity level"
         },
         "L1 (attr)": {
-          "name": "L1 (attr)",
+          "name": "L1 (attribute)",
           "group": "Complexity level"
         },
         "L2 (rel)": {
-          "name": "L2 (rel)",
+          "name": "L2 (relation)",
           "group": "Complexity level"
         },
         "L3 (comp)": {
-          "name": "L3 (comp)",
+          "name": "L3 (composition)",
           "group": "Complexity level"
         },
         "L4 (nest)": {
-          "name": "L4 (nest)",
+          "name": "L4 (nested)",
           "group": "Complexity level"
         }
       },
@@ -312704,9 +312911,8 @@
         },
         "ALWAYS_ABSENT": {
           "name": "Always-absent failures",
-          "unit": "score",
-          "better": "lower",
-          "note": "Rate from 0 to 1."
+          "unit": "%",
+          "better": "lower"
         },
         "PARTIAL_SUPPR": {
           "name": "Partial suppression failures",
@@ -312717,6 +312923,10 @@
           "name": "Weakly rendered failures",
           "unit": "%",
           "better": "lower"
+        },
+        "atoms": {
+          "name": "Prompt atoms evaluated",
+          "unit": "count"
         }
       }
     },
@@ -336374,19 +336584,16 @@
         "Full Context"
       ],
       "stats": {
-        "fullContextRank": {
-          "name": "Full context rank",
-          "unit": "count"
-        },
         "passAt4": {
-          "name": "Full context pass@4",
+          "name": "pass@4",
           "unit": "%",
           "better": "higher"
         },
         "pass4": {
-          "name": "Full context pass^4",
+          "name": "pass^4",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "all four attempts pass"
         }
       }
     },
@@ -340958,71 +341165,71 @@
       },
       "parts": {
         "shapes_easy": {
-          "name": "shapes easy",
+          "name": "Shapes easy",
           "group": "Task"
         },
         "shapes_hard": {
-          "name": "shapes hard",
+          "name": "Shapes hard",
           "group": "Task"
         },
         "digits_unsup": {
-          "name": "digits unsup",
+          "name": "Digits unsup",
           "group": "Task"
         },
         "chess_winners": {
-          "name": "chess winners",
+          "name": "Chess winners",
           "group": "Task"
         },
         "kolmo_shuffle": {
-          "name": "kolmo shuffle",
+          "name": "Kolmo shuffle",
           "group": "Task"
         },
         "classify_sentences": {
-          "name": "classify sentences",
+          "name": "Classify sentences",
           "group": "Task"
         },
         "classify_shuffled": {
-          "name": "classify shuffled",
+          "name": "Classify shuffled",
           "group": "Task"
         },
         "insert_patches": {
-          "name": "insert patches",
+          "name": "Insert patches",
           "group": "Task"
         },
         "blunders_easy": {
-          "name": "blunders easy",
+          "name": "Blunders easy",
           "group": "Task"
         },
         "blunders_hard": {
-          "name": "blunders hard",
+          "name": "Blunders hard",
           "group": "Task"
         },
         "digits_generalize": {
-          "name": "digits generalize",
+          "name": "Digits generalize",
           "group": "Task"
         },
         "shapes_variable": {
-          "name": "shapes variable",
+          "name": "Shapes variable",
           "group": "Task"
         },
         "xor_easy": {
-          "name": "xor easy",
+          "name": "XOR easy",
           "group": "Task"
         },
         "xor_hard": {
-          "name": "xor hard",
+          "name": "XOR hard",
           "group": "Task"
         },
         "splash_easy": {
-          "name": "splash easy",
+          "name": "Splash easy",
           "group": "Task"
         },
         "splash_hard": {
-          "name": "splash hard",
+          "name": "Splash hard",
           "group": "Task"
         },
         "number_patterns": {
-          "name": "number patterns",
+          "name": "Number patterns",
           "group": "Task"
         }
       },
@@ -341045,6 +341252,11 @@
         "time": {
           "name": "Median execution time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "tokensPerCall": {
+          "name": "Output tokens per response",
+          "unit": "tokens",
           "better": "lower"
         }
       }
@@ -344052,10 +344264,6 @@
           "name": "Refusal rate",
           "unit": "%",
           "better": "lower"
-        },
-        "reasoningBudget": {
-          "name": "Reasoning budget",
-          "unit": "tokens"
         }
       }
     },

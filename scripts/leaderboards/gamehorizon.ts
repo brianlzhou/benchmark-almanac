@@ -30,9 +30,22 @@ const board: Leaderboard = {
   "benchmark": "gamehorizon",
   "url": "https://gamehorizon-suite.github.io/",
   "feed": "https://gamehorizon-suite.github.io/",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
-  stats: { onlineShortHorizon: { name: 'Short-horizon success rate', unit: '%', better: 'higher' }, onlineLongHorizon: { name: 'Long-horizon success rate', unit: '%', better: 'higher' }, onlineCausal: { name: 'Causal success rate', unit: '%', better: 'higher' }, onlineThematic: { name: 'Thematic success rate', unit: '%', better: 'higher' }, onlineShortHorizonPassed: { name: 'Short-horizon tasks passed', unit: 'count' }, onlineShortHorizonTotal: { name: 'Short-horizon tasks', unit: 'count' }, onlineLongHorizonPassed: { name: 'Long-horizon tasks passed', unit: 'count' }, onlineLongHorizonTotal: { name: 'Long-horizon tasks', unit: 'count' }, onlineCausalPassed: { name: 'Causal tasks passed', unit: 'count' }, onlineCausalTotal: { name: 'Causal tasks', unit: 'count' }, onlineThematicPassed: { name: 'Thematic tasks passed', unit: 'count' }, onlineThematicTotal: { name: 'Thematic tasks', unit: 'count' } },
+  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  parts: {
+    T1: { name: 'Tier 1', group: 'Difficulty' },
+    T2: { name: 'Tier 2', group: 'Difficulty' },
+    T3: { name: 'Tier 3', group: 'Difficulty' },
+  },
+  stats: {
+    onlineShortHorizon: { name: 'Short-horizon success rate', unit: '%', better: 'higher' },
+    onlineLongHorizon: { name: 'Long-horizon success rate', unit: '%', better: 'higher' },
+    onlineCausal: { name: 'Causal success rate', unit: '%', better: 'higher' },
+    onlineThematic: { name: 'Thematic success rate', unit: '%', better: 'higher' },
+    onlineShortHorizonPassed: { name: 'Short-horizon tasks passed', unit: 'count', better: 'higher' },
+    onlineLongHorizonPassed: { name: 'Long-horizon tasks passed', unit: 'count', better: 'higher' },
+    onlineCausalPassed: { name: 'Causal tasks passed', unit: 'count', better: 'higher' },
+    onlineThematicPassed: { name: 'Thematic tasks passed', unit: 'count', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = tables(await fetchText(FEED));
     const rows = new Map<string,LeaderboardRow>();
@@ -54,17 +67,11 @@ const board: Leaderboard = {
         const counts = cell?.match(/\((\d+)\s*\/\s*(\d+)\)/);
         if (counts) {
           metrics[key + 'Passed'] = Number(counts[1]);
-          metrics[key + 'Total'] = Number(counts[2]);
         }
       }
     }
     if (!rows.size) throw new Error('GameHorizon table missing');
     return [...rows.values()];
   },
-};
-board.parts = {
-  T1: { name: 'Tier 1', group: 'Difficulty' },
-  T2: { name: 'Tier 2', group: 'Difficulty' },
-  T3: { name: 'Tier 3', group: 'Difficulty' },
 };
 export default board;

@@ -102,9 +102,13 @@ function infoOf(r: LeaderboardRow, resolve: ReturnType<typeof makeResolver>, run
   if (runDiffers && r.date) i.run = r.date;
   if (r.link && /^https?:\/\/\S+$/.test(r.link.trim())) i.link = r.link.trim();
   if ((finite(r.trials) ?? 0) > 0) i.trials = Math.round(r.trials!);
+  // an interval holds the score and has some width: a board's 0 to 0 beside a score of 130, or a low equal to its
+  // high, says nothing about uncertainty and drew as a broken range
   const low = finite(r.low);
   const high = finite(r.high);
-  if (low !== undefined && high !== undefined && low <= high) Object.assign(i, { low, high });
+  const score = finite(r.score);
+  const tol = Math.abs(score ?? 0) * 1e-3 + 1e-9;
+  if (low !== undefined && high !== undefined && low < high && (score === undefined || (low - tol <= score && score <= high + tol))) Object.assign(i, { low, high });
   if (typeof r.open === 'boolean') i.open = r.open;
   if (clean(r.license)) i.license = clean(r.license);
   if ((finite(r.params, 4) ?? 0) > 0) i.params = finite(r.params, 4);

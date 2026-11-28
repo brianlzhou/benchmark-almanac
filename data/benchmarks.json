@@ -74857,6 +74857,70 @@
     ]
   },
   {
+    "id": "gobench",
+    "name": "GoBench",
+    "aliases": [
+      "GoBench Track 1",
+      "GoBench: Evaluating LLMs on the Game of Go"
+    ],
+    "category": "games-long-horizon",
+    "subcategory": "games-multi-agent",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Models play full games of 9x9 Go directly over multi-turn APIs without tools against a ladder of KataGo reference players. Bradley-Terry Elo ratings are anchored at zero for a uniform random player under Tromp-Taylor rules with 7.0 komi.",
+    "org": "Roland Gao",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://rolandgao.com/gobench.pdf",
+      "repo": "https://github.com/RolandGao/gobench",
+      "leaderboard": "https://rolandgao.com/blog/gobench/"
+    },
+    "access": "public",
+    "note": "Track 1 covers direct move-by-move play without tools. KataGo reference opponents anchor the Elo ladder and are excluded from model standings. Released under the MIT License.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rolandgao.com/blog/gobench/",
+      "https://rolandgao.com/gobench.pdf",
+      "https://github.com/RolandGao/gobench"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "gobench-track-2",
+    "name": "GoBench Track 2",
+    "aliases": [
+      "GoBench Track 2 (Coding)",
+      "GoBench Engine Track"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Coding agents spend 1 to 8 hours without internet or KataGo access writing a 9x9 Go engine from scratch. Each resulting engine is evaluated at 1 minute per game on the same KataGo-anchored Bradley-Terry Elo ladder as GoBench Track 1.",
+    "org": "Roland Gao",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://rolandgao.com/gobench.pdf",
+      "repo": "https://github.com/RolandGao/gobench",
+      "leaderboard": "https://rolandgao.com/blog/gobench/"
+    },
+    "access": "public",
+    "note": "Track 2 measures continual learning and coding by rating agent-built Go engines across 1, 2, 4, and 8 hour budgets. Released under the MIT License.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rolandgao.com/blog/gobench/",
+      "https://rolandgao.com/gobench.pdf",
+      "https://github.com/RolandGao/gobench"
+    ],
+    "added": "2026-11-28"
+  },
+  {
     "id": "gold-commodity-news",
     "name": "Gold Commodity News",
     "category": "domain-legal-finance-medical",
@@ -142420,7 +142484,7 @@
     "level": "frontier",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents write GPU kernels for 69 tasks that must be correct, and on 48 of them also run within 1.25 times the reference time. The score is the area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours.",
+    "description": "Agents write GPU kernels for 69 tasks that must be correct, and on 48 of them also run within 1.25 times the reference time. The board's score is the share of the 69 tasks a model passes, from 0 to 1. Thinking Machines quotes another number: the area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours.",
     "org": "Sinatras, sponsored by Prime Intellect",
     "released": "2026-07",
     "links": {
@@ -142433,6 +142497,16 @@
     "note": "Thinking Machines reports an adapted version with task and grading fixes.",
     "unit": "score",
     "better": "higher",
+    "metric": "Share of tasks passed",
+    "measures": [
+      {
+        "id": "auc",
+        "name": "Area under the curve (task-hours)",
+        "kind": "metric",
+        "unit": "score",
+        "note": "The area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours. Thinking Machines quotes it, on its adapted version of the tasks."
+      }
+    ],
     "confidence": "verified",
     "evidence": [
       "https://thinkingmachines.ai/model-card/inkling-2-small/",
