@@ -3709,6 +3709,7 @@
     },
     "access": "public",
     "note": "Arena says the board measures signals from real sessions rather than preference votes alone. It went live on 2026-06-04, and signal definitions changed on 2026-10-01 and 2026-10-12. Scores can fall below zero, as Mistral Medium 3.5 does at -14.5.",
+    "successor": "agent-arena-index",
     "unit": "%",
     "better": "higher",
     "confidence": "likely",
@@ -15837,7 +15838,8 @@
     "org": "Handshake AI Research",
     "released": "2026-09",
     "links": {
-      "paper": "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
+      "paper": "https://arxiv.org/abs/2611.22085",
+      "site": "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
       "repo": "https://github.com/Handshake-AI-Research/ATLAS-Finance",
       "dataset": "https://huggingface.co/datasets/handshake-ai-research/ATLAS-Finance/tree/v1.0.0",
       "leaderboard": "https://joinhandshake.com/research/benchmarks/atlas-finance/"
@@ -15852,7 +15854,8 @@
       "https://joinhandshake.com/research/benchmarks/atlas-finance/",
       "https://joinhandshake.com/research/benchmarks/articles/atlas-finance-evaluating-ai-agents-inside-a-bank/",
       "https://huggingface.co/datasets/handshake-ai-research/ATLAS-Finance/raw/main/CHANGELOG.md",
-      "https://app.primeintellect.ai/dashboard/environments/handshake-ai/atlas-finance"
+      "https://app.primeintellect.ai/dashboard/environments/handshake-ai/atlas-finance",
+      "https://arxiv.org/abs/2611.22085"
     ],
     "added": "2026-11-01"
   },
@@ -35999,6 +36002,7 @@
     "org": "Martian",
     "released": "2026-02",
     "links": {
+      "paper": "https://arxiv.org/abs/2611.26942",
       "repo": "https://github.com/withmartian/code-review-benchmark",
       "site": "https://codereview.withmartian.com",
       "leaderboard": "https://codereview.withmartian.com"
@@ -36009,7 +36013,8 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/withmartian/code-review-benchmark"
+      "https://github.com/withmartian/code-review-benchmark",
+      "https://arxiv.org/abs/2611.26942"
     ],
     "added": "2026-11-01"
   },
@@ -133527,6 +133532,7 @@
     "format": "open-ended",
     "family": "open-tts-leaderboard",
     "version": "1.6.0",
+    "successor": "open-tts-leaderboard-1-7",
     "description": "Speech models read multilingual text aloud. The board compares transcriptions with the reference text and measures voice similarity.",
     "org": "Hugging Face",
     "released": "2026-11",
@@ -191732,6 +191738,7 @@
     "format": "code",
     "family": "vibe-code-bench",
     "version": "1.1",
+    "successor": "vals-vibe-code-bench-v1-1-1",
     "description": "End-to-end web application development from natural-language specs. Built apps are tested against functional requirements.",
     "org": "Vals AI",
     "released": "2026-03",
@@ -203421,5 +203428,3917 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "arabic-tts-arena",
+    "name": "Arabic TTS Arena",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Listeners compare blind pairs of Arabic text-to-speech outputs across Modern Standard Arabic, Gulf, Egyptian, Levantine, and Maghrebi dialects, producing Elo ratings and 95% confidence intervals.",
+    "org": "Navid AI",
+    "released": "2026-02",
+    "links": {
+      "site": "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena",
+      "leaderboard": "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena"
+    },
+    "access": "public",
+    "note": "Ranks 31 Arabic text-to-speech models from 8,793 human blind listening votes, reporting overall and per-dialect Elo, win rate, and average synthesis latency.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena",
+      "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena/raw/main/leaderboard.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "betu-slm-leaderboard",
+    "name": "BETU SLM Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Evaluates small open-weight language models up to 1B parameters across six commonsense, arithmetic, theory-of-mind, and hand-written base-model benchmarks, combining chance-normalized quality with a peer size-efficiency adjustment.",
+    "org": "BananaMind",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard"
+    },
+    "access": "public",
+    "note": "Scores 182 sub-1B language models on HellaSwag, ARC-Easy, PIQA, ArithMark-3.0, Tiny Theory of Mind, and BananaMind Base Bench 1.1, ranking them by an Overall Index where chance is 0 and perfect is 100 before peer size adjustment.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard",
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard/raw/main/data/models.jsonl",
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard/raw/main/data/config.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-slm-leaderboard",
+    "name": "Open SLM Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Ranks small open-weight language models by parameter count and chance-normalized Intelligence Index across HellaSwag, ARC-Easy, ARC-Challenge, PIQA, and ArithMark arithmetic tests.",
+    "org": "Axiomic Labs",
+    "released": "2026-05",
+    "links": {
+      "site": "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard"
+    },
+    "access": "public",
+    "note": "Tracks 369 small language models using a chance-normalized Intelligence Index where random guessing maps to 0 and perfect accuracy maps to 100.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard",
+      "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard/raw/main/index.html"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-universal-arabic-asr-leaderboard",
+    "name": "Open Universal Arabic ASR Leaderboard",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates open-weight and commercial Arabic speech recognition models on multi-dialect datasets (SADA, Common Voice, MASC clean and noisy, MGB-2, and Casablanca) by average Word Error Rate and Character Error Rate.",
+    "org": "Elm Research Center",
+    "released": "2024-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "paper": "https://arxiv.org/abs/2412.13788",
+      "repo": "https://github.com/Natural-Language-Processing-Elm/open_universal_arabic_asr_leaderboard"
+    },
+    "access": "public",
+    "note": "Actively maintained across 39 speech recognition models including Jais-ASR, Cohere Transcribe Arabic, Gemma 4, Qwen3-Omni, and Nemotron 3.5 ASR. Lower average Word Error Rate is better.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard/raw/main/app.py",
+      "https://github.com/Natural-Language-Processing-Elm/open_universal_arabic_asr_leaderboard",
+      "https://arxiv.org/abs/2412.13788"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-nli-leaderboard",
+    "name": "OpenNLI Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Evaluates natural language inference and decision models across 44 entailment, logical reasoning, grounding, and domain test sets using a Brier-calibrated Skill Index and standardized GPU throughput timing.",
+    "org": "dleemiller",
+    "released": "2026-10",
+    "links": {
+      "site": "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard"
+    },
+    "access": "public",
+    "note": "Scores 56 models on a Brier-calibrated Skill Index (scaled to 100, where 0 matches uniform guessing) with category accuracies, Expected Calibration Error, contamination handling, and throughput tradeoffs.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard",
+      "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard/raw/main/data/board.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robowild",
+    "name": "RoboWild",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates frontier vision-language models as robot-use agents across 341 diverse Isaac Lab simulation tasks and multiple robot embodiments, tracking weighted task success, actions, output tokens, wall time, and dollar cost.",
+    "org": "XLANG Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robowild.xlang.ai",
+      "leaderboard": "https://robowild.xlang.ai",
+      "paper": "https://huggingface.co/datasets/xlangai/RoboWild/blob/main/RoboWild.pdf",
+      "repo": "https://github.com/xlang-ai/RoboWild",
+      "dataset": "https://huggingface.co/datasets/xlangai/RoboWild"
+    },
+    "access": "public",
+    "note": "Created by the OSWorld team at XLANG Lab. Scores five frontier models across 21 thinking-effort configurations in a ReAct harness and plots weighted success against output tokens and cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robowild.xlang.ai",
+      "https://github.com/xlang-ai/RoboWild",
+      "https://huggingface.co/datasets/xlangai/RoboWild",
+      "https://huggingface.co/datasets/xlangai/RoboWild/blob/main/RoboWild.pdf"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rukopys",
+    "name": "RUKOPYS Leaderboard",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Benchmarks frontier and open-weight vision-language models on Ukrainian handwritten document OCR across archival, dictation, school, and university pages, scoring composite accuracy, detection F1, character error rates, and cost per 1,000 pages.",
+    "org": "Ukrainian Catholic University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "dataset": "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results"
+    },
+    "access": "public",
+    "note": "Scores 47 models across 102 comparable runs on a 0 to 1 composite OCR score and plots a quality-versus-cost frontier in US dollars per 1,000 pages.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results",
+      "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results/raw/main/leaderboard.csv"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "tabarena",
+    "name": "TabArena",
+    "category": "other",
+    "subcategory": "other-misc",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "prediction",
+    "description": "A living Elo-ranked benchmark for tabular machine learning and tabular foundation models across curated classification and regression datasets, reporting Elo with 95% confidence intervals, normalized score, improvability, and train and predict times.",
+    "org": "AutoGluon, University of Freiburg, and AWS",
+    "released": "2025-05",
+    "links": {
+      "site": "https://tabarena.ai",
+      "leaderboard": "https://huggingface.co/spaces/TabArena/leaderboard",
+      "paper": "https://tabarena.ai/paper-tabular-ml-iid-study",
+      "repo": "https://github.com/autogluon/tabarena"
+    },
+    "access": "public",
+    "note": "Tracks 103 entries across tabular foundation models (such as LimiX, Kumo-Tabular, TabPFN, and TabICL), tree ensembles, and neural baselines with Elo-versus-latency Pareto charts.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://tabarena.ai",
+      "https://huggingface.co/spaces/TabArena/leaderboard",
+      "https://github.com/autogluon/tabarena",
+      "https://tabarena.ai/paper-tabular-ml-iid-study"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ml-energy-leaderboard-v3",
+    "name": "The ML.ENERGY Leaderboard v3",
+    "category": "other",
+    "subcategory": "other-misc",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Measures real GPU energy consumption in joules per response alongside inter-token latency and throughput for open-weight language, multimodal, and diffusion models on standardized workloads.",
+    "org": "ML.ENERGY Initiative (University of Michigan)",
+    "released": "2026-02",
+    "links": {
+      "site": "https://ml.energy/leaderboard/",
+      "leaderboard": "https://ml.energy/leaderboard/",
+      "repo": "https://github.com/ml-energy/leaderboard",
+      "dataset": "https://huggingface.co/datasets/ml-energy/benchmark-v3"
+    },
+    "access": "public",
+    "note": "Headline score is GPU energy in joules per response on the Conversational AI Chatbot workload (lm-arena-chat) under the default 500 ms inter-token latency deadline, where lower energy is better.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ml.energy/leaderboard/",
+      "https://ml.energy/leaderboard/data/tasks/lm-arena-chat.json",
+      "https://github.com/ml-energy/leaderboard",
+      "https://huggingface.co/datasets/ml-energy/benchmark-v3"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ugi-leaderboard",
+    "name": "UGI Leaderboard",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Independent benchmark ranking language models on Uncensored General Intelligence, refusal willingness (W/10), natural intelligence, world-model estimation, creative writing style, and political lean.",
+    "org": "DontPlanToEnd",
+    "released": "2024-03",
+    "links": {
+      "site": "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard"
+    },
+    "access": "public",
+    "note": "Scores over 1,300 open-weight and API language models on a composite UGI score alongside detailed willingness, world-model, writing-style, and political-axis measurements.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard",
+      "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard/raw/main/ugi-leaderboard-data.csv"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "vissearch-bench",
+    "name": "VisSearch-Bench",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates multimodal agents on 204 long-horizon visual search tasks requiring iterative image inspection and web retrieval across seven domains and five visual search patterns, scoring final accuracy and partial-credit process scores.",
+    "org": "Ant Group and Tsinghua University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://dingwu1021.github.io/VisSearch-Bench/",
+      "leaderboard": "https://dingwu1021.github.io/VisSearch-Bench/",
+      "paper": "https://arxiv.org/abs/2611.04894",
+      "repo": "https://github.com/antins-labs/VisSearch-Bench-v1"
+    },
+    "access": "public",
+    "note": "Publishes 26 evaluation runs across 16 models in Direct Answer, ReAct, and DeerFlow settings on 204 visual search tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://dingwu1021.github.io/VisSearch-Bench/",
+      "https://dingwu1021.github.io/VisSearch-Bench/data/results.json",
+      "https://github.com/antins-labs/VisSearch-Bench-v1",
+      "https://arxiv.org/abs/2611.04894"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "agentcibench",
+    "name": "AgentCIBench",
+    "aliases": [
+      "AgentCI-Bench",
+      "Agent CI Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Computer-use agents complete everyday personal-assistant tasks across six BrowserGym apps while keeping private context from the wrong recipient. A deterministic matcher and LLM judge score utility, refusal and privacy leakage.",
+    "org": "UKPLab, TU Darmstadt",
+    "released": "2026-06",
+    "links": {
+      "site": "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "leaderboard": "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "paper": "https://arxiv.org/abs/2606.23189",
+      "repo": "https://github.com/UKPLab/emnlp2026-agentcibench",
+      "dataset": "https://huggingface.co/datasets/UKPLab/agentcibench"
+    },
+    "access": "public",
+    "note": "EMNLP 2026 benchmark built from 28 hand-authored seeds expanded into 117 scenarios via MCTS over Messenger, Calendar, Maps, ToDo and sibling OpenApps. The headline is engagement-conditioned leakage L / (1 - R), where lower is better, alongside task utility, raw leakage with 95% bootstrap intervals and refusal rate. Includes 15 paper models and 6 post-submission temporal holdout models evaluated in July 2026.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ukplab.github.io/emnlp2026-agentcibench/",
+      "https://ukplab.github.io/emnlp2026-agentcibench/data.js",
+      "https://github.com/UKPLab/emnlp2026-agentcibench",
+      "https://huggingface.co/datasets/UKPLab/agentcibench",
+      "https://arxiv.org/abs/2606.23189"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "autoragbench",
+    "name": "AutoRAGBench",
+    "aliases": [
+      "Auto RAG Bench"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents build retrieval-augmented generation systems from scratch under a six-hour single-H800 budget across nine QA and fact-verification corpora. Each frozen system retrieves evidence for hidden test questions, and five held-out answering models score the retrieved evidence.",
+    "org": "Tsinghua University and Sina Weibo",
+    "released": "2026-11",
+    "links": {
+      "site": "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "leaderboard": "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "paper": "https://arxiv.org/abs/2611.25582",
+      "repo": "https://github.com/ZhanGHanG9991/AutoRAGBench"
+    },
+    "access": "public+private-holdout",
+    "note": "Nine tasks span NQ, HotpotQA, MuSiQue, MultiHop-RAG, PubMedQA, QASPER, FEVER, WebQSP and CWQ, graded with primary task metrics averaged across five answering models (Gemma 4 E4B, Gemma 3 4B, Phi-4-mini, SmolLM3 3B and Llama 3.2 3B). The November 2026 leaderboard compares 9 frontier agent configurations alongside Reference RAG, BM25, Closed-book and Human-SOTA baselines, and plots average score against mean retrieval latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://zhanghang9991.github.io/AutoRAGBench_Website/",
+      "https://zhanghang9991.github.io/AutoRAGBench_Website/assets/data.js",
+      "https://github.com/ZhanGHanG9991/AutoRAGBench",
+      "https://arxiv.org/abs/2611.25582"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "everydaybench",
+    "name": "EverydayBench",
+    "aliases": [
+      "Everyday Bench"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Computer-use and coding agents complete 77 open-ended everyday digital work tasks on the live web across lookup, comparison, planning, analysis and build categories. Executable constraint checks, live source verification and per-task rubrics grade each deliverable.",
+    "org": "Stanford University and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://everydaybench.stanford.edu/",
+      "leaderboard": "https://everydaybench.stanford.edu/",
+      "paper": "https://arxiv.org/abs/2611.25146"
+    },
+    "access": "private",
+    "note": "Strict pass rate requires an overall rubric score of at least 85 and every rubric component at least 3 on a single attempt per task. The November 2026 Stanford leaderboard ranks 13 frontier model and agent pairs at high effort where configurable, led by Claude Opus 5.5 and Claude Fable 5.1 tied at 54.55%.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://everydaybench.stanford.edu/",
+      "https://arxiv.org/abs/2611.25146"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "redactionbench",
+    "name": "RedactionBench",
+    "aliases": [
+      "Redaction Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models identify and redact sensitive content and personal identifiers across 200 exhaustively annotated documents spanning forms, templates and structured files. Predictions are scored with mean R-Score on character-offset spans, with invalid outputs receiving zero.",
+    "org": "RedactionBench",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/RedactionBench/RedactionBench",
+      "leaderboard": "https://huggingface.co/datasets/RedactionBench/RedactionBench"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 dataset of 200 randomized synthetic and public-template documents containing no real personal data. The November 2026 leaderboard compares 44 models spanning frontier general-purpose agents and specialized token-level, span-level and generative PII detectors, led by Claude Opus 5.5 at 0.832 mean R-Score.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/RedactionBench/RedactionBench",
+      "https://huggingface.co/datasets/RedactionBench/RedactionBench/raw/main/README.md"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rehearsalbench",
+    "name": "RehearsalBench",
+    "aliases": [
+      "Rehearsal Bench",
+      "Afterflow RehearsalBench"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models analyze a simulated bank contact center built from real call records, propose an operational plan and forecast its financial effect. Each plan runs 600 times in the simulator to measure actual running cost saved and forecast accuracy.",
+    "org": "Afterflow",
+    "released": "2026-11",
+    "links": {
+      "site": "https://afterflow.dev/research/rehearsalbench",
+      "leaderboard": "https://afterflow.dev/research/rehearsalbench",
+      "paper": "https://arxiv.org/abs/2611.22480",
+      "repo": "https://github.com/afterflowinc/rehearsalbench"
+    },
+    "access": "public",
+    "note": "Round 3 results in November 2026 score 10 frontier models (9 complete plus partial Mistral Small 2603 at 11% valid runs) alongside two baselines, reporting simulated running cost saved (%) with 95% intervals, forecast accuracy (%), forecast error score, dollar value versus no change and API cost per run. GPT-6 Astra leads at 6.83% cost saved and 76.5% forecast accuracy.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://afterflow.dev/research/rehearsalbench",
+      "https://afterflow.dev/research/rehearsalbench/leaderboard.csv",
+      "https://github.com/afterflowinc/rehearsalbench",
+      "https://arxiv.org/abs/2611.22480"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robo-swe",
+    "name": "ROBO-SWE",
+    "aliases": [
+      "Robo-SWE",
+      "RoboSWE"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents resolve 236 executable GitHub issues mined from 28 robotics repositories spanning ROS 2 systems, physics simulators, robotics algorithm libraries and robot-learning frameworks. Each Harbor task pairs a pre-fix container snapshot with developer regression tests.",
+    "org": "Vahid Haratian, Vahid Ansari, Mohammadhossein Malmir and Alois Knoll",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/vharatian/Robo-SWE",
+      "leaderboard": "https://huggingface.co/datasets/vharatian/Robo-SWE"
+    },
+    "access": "public",
+    "note": "Scores are mean resolution percentages across complete 236-task cycles (4,248 graded attempts across 7 frontier agent configurations and 6 unique models). In November 2026 results, Claude Opus 5.5 on Claude Code leads at 56.50% over 3 cycles ahead of GPT-6.1 Sol on Codex max (54.10%) and medium (52.54%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/vharatian/Robo-SWE",
+      "https://huggingface.co/datasets/vharatian/Robo-SWE/raw/main/results/summary.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rsibench-infra",
+    "name": "RSIBench-Infra",
+    "aliases": [
+      "RSIBench Infra",
+      "RSI-Bench-Infra"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "rsibench-infra",
+    "version": "Full",
+    "description": "AI agents optimize real production-scale training and inference infrastructure across 20 tasks (16 inference serving workloads and 4 training pipelines), from kernels to the full software stack. Evaluations measure speedup against oracle and speed-of-light bounds.",
+    "org": "ByteDance Seed and Tsinghua AIR SIA-Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://rsibench-infra.github.io/",
+      "leaderboard": "https://rsibench-infra.github.io/",
+      "paper": "https://arxiv.org/abs/2611.24395"
+    },
+    "access": "private",
+    "note": "Headline Faster rate is the share of formally scored tasks exceeding 1.10x speedup, alongside median speedup and mean speed-of-light score across 7 frontier models. Claude Opus 5.5 was formally scored on 10 of 20 tasks due to API safety terminations on 10 tasks (80% faster rate on its 10 completed tasks), while GPT-6 Astra led full-coverage models at 80% faster rate and 0.667 mean SOL. Distinct from cataloged RSIBench-Data (Evolvent AI).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rsibench-infra.github.io/",
+      "https://arxiv.org/abs/2611.24395"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rsibench-infra-lite",
+    "name": "RSIBench-Infra-Lite",
+    "aliases": [
+      "RSIBench Infra Lite"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "rsibench-infra",
+    "version": "Lite",
+    "description": "Five-workload Lite subset of RSIBench-Infra evaluating AI agents optimizing model inference infrastructure across Qwen3.8-27B, Qwen3-VL-32B, Wan2.2-TI2V-5B, LLaDA 2.1 Mini and Muse Glimmer. Agents are ranked by mean normalized score anchored at Oracle equals 0.5 and speed-of-light equals 1.0.",
+    "org": "ByteDance Seed and Tsinghua AIR SIA-Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://rsibench-infra.github.io/",
+      "leaderboard": "https://rsibench-infra.github.io/",
+      "paper": "https://arxiv.org/abs/2611.24395"
+    },
+    "access": "private",
+    "note": "Separate 5-workload leaderboard and normalized Agent score metric from the 20-task full RSIBench-Infra suite. Claude Opus 5.5 averaged 0.798 across its 3 formally tested workloads (partial coverage flagged on the board), while Qwen3.8 Max led full-coverage models at 0.670 across all 5 workloads ahead of GLM-5.3 (0.643) and GPT-6 Astra (0.641).",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://rsibench-infra.github.io/",
+      "https://arxiv.org/abs/2611.24395"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "vg-gui-bench",
+    "name": "VG-GUI-Bench",
+    "aliases": [
+      "VG-GUI Bench",
+      "Video-Guided GUI Bench"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-mobile",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Multimodal mobile GUI agents watch short tutorial videos and execute multi-step Android actions (click, scroll, type, press, zoom and finish) across device screens. Step accuracy scores 0.3 for action type plus 0.7 for exact arguments, alongside episode completion and video improvement rate.",
+    "org": "Tsinghua University",
+    "released": "2026-06",
+    "links": {
+      "site": "https://vg-gui-tasker.github.io/",
+      "leaderboard": "https://vg-gui-tasker.github.io/",
+      "paper": "https://arxiv.org/abs/2606.29445",
+      "dataset": "https://huggingface.co/datasets/Aoraku/VG-GUI-Bench"
+    },
+    "access": "public",
+    "note": "ECCV 2026 benchmark comparing 7 frontier multimodal models under both No Video and 10 Uniform Frames settings. With 10 uniform tutorial frames, Gemini 3.1 Pro leads at 61.68% step accuracy (up from 58.51% without video), ahead of GPT-5-mini (58.40%) and Kimi K2.5 (58.22%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://vg-gui-tasker.github.io/",
+      "https://huggingface.co/datasets/Aoraku/VG-GUI-Bench",
+      "https://arxiv.org/abs/2606.29445"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "whatifbench",
+    "name": "WhatIfBench",
+    "aliases": [
+      "What If Bench",
+      "WhatIf-Bench"
+    ],
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Diagnostic benchmark of 220 open-domain, long-horizon counterfactual causal reasoning questions across STEM, humanities and social sciences, and hybrid scenarios. The PRISM evaluator converts each response into a semantic causal graph and averages graph-level Process Metric with rubric-level explanatory adequacy.",
+    "org": "Zhejiang University, Alibaba Group and City University of Hong Kong",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.27953",
+      "repo": "https://github.com/zju-gt/WhatIfBench",
+      "dataset": "https://huggingface.co/datasets/zju-gt/WhatIfBench"
+    },
+    "access": "public",
+    "note": "Published in Findings of EMNLP 2026, with code and Hugging Face dataset released in November 2026. Scores 6 frontier LLMs using GPT-5.4 as unified causal-graph parser and rubric judge (temperature 0.0), led by GPT-5.5 at 64.62% ahead of Claude Opus 4.7 (59.11%) and Gemini 3.1 Pro Preview (56.33%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/zju-gt/WhatIfBench",
+      "https://huggingface.co/datasets/zju-gt/WhatIfBench",
+      "https://arxiv.org/abs/2608.27953"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "evident-gui",
+    "name": "EVIDENT",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Two hundred twenty live web agent tasks (150 Korean and 70 English) paired with human-authored evidence checks that separate surface task completion from evidence-grounded answers.",
+    "org": "KAIST (KORMo-VL)",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.20488",
+      "repo": "https://github.com/yerinNam/EVIDENT",
+      "dataset": "https://huggingface.co/datasets/KORMo-VL/EVIDENT"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Grounded Success Rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/KORMo-VL/EVIDENT",
+      "https://arxiv.org/abs/2611.20488",
+      "https://github.com/yerinNam/EVIDENT"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ko-online-mind2web",
+    "name": "Ko-Online-Mind2Web",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "A live Korean web agent benchmark of 312 manually authored tasks across 104 Korean websites following the Online-Mind2Web evaluation protocol.",
+    "org": "KAIST (KORMo-VL)",
+    "released": "2026-11",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/KORMo-VL/Ko-Online-Mind2Web"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/KORMo-VL/Ko-Online-Mind2Web"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "yanami",
+    "name": "YANAMI",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Four hundred multi-turn dialogues across multi-image fusion, image editing, world modeling, and visual reasoning where later turns depend on tracking visual state across earlier turns.",
+    "org": "HKUST and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.05280",
+      "site": "https://rowletqwq.github.io/YANAMI/"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Overall score",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.05280",
+      "https://rowletqwq.github.io/YANAMI/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "paperwritingbench",
+    "name": "PaperWritingBench",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Two hundred CVPR 2025 and ICLR 2025 research packages evaluating whether autonomous paper writing systems can turn experimental logs, ideas, and literature into submission-ready LaTeX manuscripts.",
+    "org": "Google Cloud AI Research",
+    "released": "2026-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2604.05018",
+      "repo": "https://github.com/google-research/paper-orchestra",
+      "dataset": "https://huggingface.co/datasets/yiwen-song/PaperWritingBench",
+      "site": "https://yiwen-song.github.io/paper_orchestra/"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2604.05018",
+      "https://github.com/google-research/paper-orchestra",
+      "https://huggingface.co/datasets/yiwen-song/PaperWritingBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "moonworks-lunara-art-eval",
+    "name": "Moonworks Lunara Art Eval",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "One thousand art prompts (500 across 14 artistic styles and 500 open-ended) scoring text-to-image models on aesthetic quality, emotional resonance, and content integrity.",
+    "org": "Moonworks",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.22272",
+      "dataset": "https://huggingface.co/datasets/moonworks/lunara-art-eval"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Aesthetic Quality",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/moonworks/lunara-art-eval",
+      "https://arxiv.org/abs/2609.22272"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "multilangbench-openai",
+    "name": "MultiLangBench",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "An OpenAI coding evaluation where models implement SQLite 3.40.1 from its documentation across programming languages and are graded against tests derived from the official SQLite TCL test suite.",
+    "org": "OpenAI",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/openai/MultiLangBench"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Test pass rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/openai/MultiLangBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "loco-mujoco",
+    "name": "LocoMuJoCo",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A MuJoCo imitation learning benchmark for humanoid and quadruped whole-body locomotion and motion-capture tracking across simulated and sim-to-real robot embodiments.",
+    "org": "TU Darmstadt IAS",
+    "released": "2023-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.26293",
+      "repo": "https://github.com/robfiras/loco-mujoco",
+      "site": "https://loco-mujoco.readthedocs.io/"
+    },
+    "access": "public",
+    "note": "Original v0.1.0 paper is arXiv:2311.02496 (NeurIPS 2023 Robot Learning Workshop).",
+    "unit": "score",
+    "better": "higher",
+    "metric": "Mean return",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/robfiras/loco-mujoco",
+      "https://arxiv.org/abs/2611.26293",
+      "https://arxiv.org/abs/2311.02496"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "openart-ai45lab",
+    "name": "OpenART",
+    "aliases": [
+      "Open Agent Red Teaming"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "An executable red-teaming benchmark measuring strict attack success rate for tool-using agents operating in long-horizon workspaces with evolving state and multi-step tool dependencies.",
+    "org": "Shanghai AI Lab (AI45Lab)",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.00677",
+      "repo": "https://github.com/AI45Lab/OpenART",
+      "site": "https://ai45lab.github.io/OpenART/",
+      "leaderboard": "https://ai45lab.github.io/OpenART/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Strict Attack Success Rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://ai45lab.github.io/OpenART/",
+      "https://github.com/AI45Lab/OpenART",
+      "https://arxiv.org/abs/2608.00677"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "copy-bench",
+    "name": "Copy Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Coding agents rebuild 50 animated web components (WebGL, shaders, 3D, and interactive animations) from screen recordings in a one-shot pass and a browser self-verified pass, scored from 0 to 100 by a two-judge panel.",
+    "org": "21st Labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://21st.dev/benchmarks/copy",
+      "leaderboard": "https://21st.dev/benchmarks/copy",
+      "repo": "https://github.com/21st-dev/copy-bench"
+    },
+    "access": "public",
+    "note": "Scores 16 frontier models in their native coding agents across five component categories, reporting both one-shot and browser self-verified scores alongside cost and time per copy.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://21st.dev/benchmarks/copy",
+      "https://github.com/21st-dev/copy-bench",
+      "https://hub.harborframework.com/datasets/21st/copy-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sciresearch-eval",
+    "name": "SciResearch-Eval",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous agents measure a material’s thermal properties by designing heating experiments and fitting a supplied simulator that may be under-resolved or missing real physics, reporting 95% confidence intervals scored against exact ground truth.",
+    "org": "Lawrence Livermore National Laboratory",
+    "released": "2026-11",
+    "links": {
+      "site": "https://btwestyo.github.io/sciresearch-eval/",
+      "leaderboard": "https://btwestyo.github.io/sciresearch-eval/",
+      "paper": "https://arxiv.org/abs/2611.21541",
+      "repo": "https://github.com/Btwestyo/sciresearch-eval"
+    },
+    "access": "public",
+    "note": "Headline leaderboard scores 9 models across 21 reasoning settings on 38 held-out physics-trap tasks by geometric-mean interval score (lower is better), with 95% interval coverage, output tokens, and API cost per episode.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://btwestyo.github.io/sciresearch-eval/",
+      "https://arxiv.org/abs/2611.21541",
+      "https://github.com/Btwestyo/sciresearch-eval",
+      "https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robotrack-bench",
+    "name": "RoboTrack-Bench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Point trackers estimate 2D trajectories and frame-by-frame occlusion visibility for 2,522 hand-annotated point tracks across 307 real-world robotic and human manipulation videos, scored by Average Jaccard.",
+    "org": "Allen Institute for AI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robotrack.allen.ai",
+      "paper": "https://allenai.org/papers/robotrack",
+      "repo": "https://github.com/allenai/robotrack",
+      "leaderboard": "https://github.com/allenai/robotrack"
+    },
+    "access": "public",
+    "note": "Evaluates 10 point-tracking checkpoints across six model families under one uniform protocol, with per-source Average Jaccard breakdowns across DROID Franka, MolmoAct2, EgoVerse, and Ego-Exo4D clips.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://allenai.org/blog/robotrack",
+      "https://github.com/allenai/robotrack",
+      "https://huggingface.co/datasets/allenai/RoboTrack-Bench",
+      "https://huggingface.co/allenai/RoboTracker-Warp"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "nopebench",
+    "name": "NoPeBench",
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Interactive video world models generate camera trajectories toward walls and obstacles across three tasks evaluated on Unreal Engine geometry and open-domain scenes, measuring physical obstacle penetration and safe intent compliance.",
+    "org": "The Hong Kong Polytechnic University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://nopeworld.github.io/",
+      "paper": "https://arxiv.org/abs/2611.27963",
+      "repo": "https://github.com/yuhangdai427/NoPeWorld",
+      "leaderboard": "https://github.com/yuhangdai427/NoPeWorld"
+    },
+    "access": "public",
+    "note": "Benchmarks six open-source video world models in raw, collision-aware, and prediction-guided modes on obstacle violation rate and overall safe-intent compliance.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/papers/2611.27963",
+      "https://arxiv.org/abs/2611.27963",
+      "https://nopeworld.github.io/",
+      "https://github.com/yuhangdai427/NoPeWorld"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dii-v1-muscle",
+    "name": "Data Intelligence Index (DII) v1.0 Muscle",
+    "aliases": [
+      "DII v1.0 Muscle",
+      "Data Intelligence Index v1.0"
+    ],
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous data agents solve 500 sandboxed Harbor tasks across nine data benchmarks covering SQL querying, BI analysis, app debugging, data science, query optimization, and computer use.",
+    "org": "HKU BIRD Team",
+    "released": "2026-11",
+    "links": {
+      "site": "https://livesqlbench.ai/data-intelligence-index/",
+      "leaderboard": "https://livesqlbench.ai/data-intelligence-index/dashboard",
+      "repo": "https://github.com/bird-bench/Data-Intelligence-Index"
+    },
+    "access": "public",
+    "note": "Composite index over 200 public and 300 hidden tasks across nine data benchmarks, reporting category splits, sub-benchmark scores, and average API cost per task.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://livesqlbench.ai/data-intelligence-index/dashboard",
+      "https://huggingface.co/datasets/birdsql/dii-v1-muscle/raw/main/results/leaderboard.jsonl",
+      "https://github.com/bird-bench/Data-Intelligence-Index"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "bioxarena-pro",
+    "name": "BioXArena-Pro",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Autonomous biomedical machine learning agents build and submit models for 64 end-to-end research tasks across eight domains including genomics, single-cell, protein structure, drug discovery, and medical imaging under a two-hour budget.",
+    "org": "Mohamed Bin Zayed University of Artificial Intelligence",
+    "released": "2026-11",
+    "links": {
+      "site": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "leaderboard": "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "paper": "https://arxiv.org/abs/2611.13994",
+      "repo": "https://github.com/mbzuai-ai4bio/BioXArena-Pro"
+    },
+    "access": "public",
+    "note": "Evaluates 22 agent and frontier-backbone configurations across seven coding and scientific scaffolds, reporting mean normalized task score (x100, failures as 0), completed tasks, and eight domain scores.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mbzuai-ai4bio.github.io/BioXArena-Pro/",
+      "https://arxiv.org/abs/2611.13994",
+      "https://github.com/mbzuai-ai4bio/BioXArena-Pro",
+      "https://huggingface.co/datasets/mbzuai-ai4bio/BioXArena-Pro-Public"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "waterfallbench",
+    "name": "WaterfallBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models read asset-backed securitization legal documents and compute exact monthly cash-flow waterfall distributions to the cent, deterministically verified against SEC trustee filings.",
+    "org": "Ritik",
+    "released": "2026-11",
+    "links": {
+      "site": "https://ritik-12.github.io/WaterfallBench/",
+      "leaderboard": "https://ritik-12.github.io/WaterfallBench/",
+      "repo": "https://github.com/RITIK-12/WaterfallBench"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 benchmark of 20 auto-loan and equipment-lease securitization tasks. Reports fully resolved task rate with standard error, field and line-item accuracy, latency, token counts, and API cost per task.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ritik-12.github.io/WaterfallBench/",
+      "https://ritik-12.github.io/WaterfallBench/data.json",
+      "https://github.com/RITIK-12/WaterfallBench",
+      "https://huggingface.co/datasets/ritik12/WaterfallBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "noisebench",
+    "name": "NoiseBench",
+    "category": "forecasting",
+    "subcategory": "forecasting-events",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models repeatedly forecast probabilities for 100 live Polymarket events under Yes and No wordings and pairwise comparisons to measure internal judgment inconsistency (noise).",
+    "org": "Luis Fominaya",
+    "released": "2026-07",
+    "links": {
+      "site": "https://noisebench.com/",
+      "leaderboard": "https://noisebench.com/",
+      "repo": "https://github.com/fpluis"
+    },
+    "access": "public",
+    "note": "MIT-licensed benchmark measuring five consistency components across 20 frontier models, alongside cost per answer and output token usage. Lower noise is better.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://noisebench.com/",
+      "https://noisebench.com/data/metrics.json",
+      "https://huggingface.co/datasets/fpluis/noisebench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "jup-eval",
+    "name": "JUP-Eval",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Evaluates whether AI assistants maintain sound judgment across 156 multi-turn scenarios when users dispute correct answers, ask beyond the evidence, or withdraw permission to act.",
+    "org": "Ortelan Research",
+    "released": "2026-11",
+    "links": {
+      "site": "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "leaderboard": "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "paper": "https://ortelan.com/journal/jup-eval/",
+      "repo": "https://github.com/ortelan-lab/jup-eval-benchmark"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 benchmark scoring 10 systems over three trials per case across six judgment dimensions (honesty, agency, pluralism, care, integrity, and action) with 95% bootstrap confidence intervals.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ortelan-lab.github.io/jup-eval-benchmark/",
+      "https://ortelan-lab.github.io/jup-eval-benchmark/scores.csv",
+      "https://github.com/ortelan-lab/jup-eval-benchmark",
+      "https://huggingface.co/datasets/Ortelan-PrausAI/jup-eval"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sk-llm-eval",
+    "name": "sk-llm-eval",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates Slovak language quality across 207 original tasks written in Slovak covering grammar, declension, formal address, formatting, local facts, long-form coherence, and English-to-Slovak translation.",
+    "org": "Lubomir Tchurik",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "leaderboard": "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "paper": "https://doi.org/10.5281/zenodo.24091954",
+      "repo": "https://github.com/ltchurik/sk-llm-eval"
+    },
+    "access": "public",
+    "note": "MIT-licensed benchmark with mostly deterministic checks and 23 model-judged tasks, scoring 26 frontier and open-weight models across six Slovak language categories.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/lubomirtchurik/sk-llm-eval",
+      "https://github.com/ltchurik/sk-llm-eval",
+      "https://doi.org/10.5281/zenodo.24091954"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rtr-bench",
+    "name": "RTR-bench",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models predict how a real human audience distributes its interpretations of ambiguous prompts on a four-quadrant grid, both zero-shot (Predict) and after choosing historical crowd examples (Learn).",
+    "org": "1999labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://github.com/1999labs/RTR-bench",
+      "repo": "https://github.com/1999labs/RTR-bench",
+      "leaderboard": "https://github.com/1999labs/RTR-bench/blob/main/results/final-8000/README.md"
+    },
+    "access": "public",
+    "note": "CC0-1.0 dataset built from 39,828 Mixed Messages crowd responses across 165 closed windows, reporting verified Predict and Learn distribution agreement scores (out of 100), 95% exploratory intervals, and track costs for 11 models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/1999labs/RTR-bench/blob/main/results/final-8000/README.md",
+      "https://huggingface.co/datasets/noahmclaughlin/RTR-Bench",
+      "https://mixedmessages.fyi"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dailysafe",
+    "name": "DailySafe",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Tests whether multimodal assistants connect earlier visual and textual evidence across three or four turns to avoid unsafe everyday advice while remaining helpful on legitimate requests.",
+    "org": "Wuhan University, Ant Group, Tsinghua University, and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://dailysafe-bench.github.io/",
+      "leaderboard": "https://dailysafe-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.26298",
+      "repo": "https://github.com/XuankunRong/DailySafe"
+    },
+    "access": "public",
+    "note": "Scores 16 proprietary and open-weight multimodal models across 195 multi-turn everyday cases over three runs on Safety Rate (headline) and Helpfulness Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://dailysafe-bench.github.io/",
+      "https://arxiv.org/abs/2611.26298",
+      "https://github.com/XuankunRong/DailySafe"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "agent-arena-index",
+    "name": "Agent Arena Index",
+    "category": "tool-use",
+    "subcategory": "tools-assistants",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "agent-task",
+    "description": "Arena composite index of agentic performance across work, coding and chat sessions on an anchored 1000-centered scale, combining task outcome and tool efficiency signals.",
+    "org": "Arena (formerly LMArena)",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://arena.ai/leaderboard/agent",
+      "site": "https://arena.ai/blog/introducing-the-agent-arena-index",
+      "dataset": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    },
+    "access": "public",
+    "note": "Launched on 2026-11-18 across 2.9 million user sessions with 69 models in the agent_capability Hugging Face split. Replaces the earlier net-improvement percentage scale with an anchored index and adds task outcome and tool efficiency sub-indexes.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arena.ai/blog/introducing-the-agent-arena-index",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "kaggle-hindsight-costliest-bugs",
+    "name": "Hindsight: Catching History's Costliest Bugs",
+    "aliases": [
+      "Kaggle Hindsight Costliest Bugs"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models review 26 famous historical software failures rebuilt in historical, disguised and fixed control forms to test real bug detection against memorization.",
+    "org": "fuddle (Kaggle Benchmarks)",
+    "released": "2026-10",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs",
+      "leaderboard": "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs"
+    },
+    "access": "public",
+    "note": "Featured on Kaggle Benchmarks with 13 frontier models scored on overall accuracy plus historical, disguised, disguised-with-context and fixed control variants.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs",
+      "https://www.kaggle.com/api/v1/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs/leaderboard"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "vals-vibe-code-bench-v1-1-1",
+    "name": "Vibe Code Bench v1.1.1",
+    "aliases": [
+      "Vibe Code v1.1.1"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "code",
+    "family": "vibe-code-bench",
+    "version": "1.1.1",
+    "description": "Updated version of Vals AI end-to-end web application building benchmark with an upgraded browser-use testing agent, a second verification judge checking screenshots and action logs, and an all-substeps pass rule.",
+    "org": "Vals AI",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.04601",
+      "repo": "https://github.com/vals-ai/VibeCodeBench-Openhands-Scaffold",
+      "leaderboard": "https://www.vals.ai/benchmarks/vibe-code-v1-1-1"
+    },
+    "access": "private",
+    "note": "Released on 2026-11-20 with changed browser grading and stricter all-substeps verification across frontier models in OpenHands.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/vibe-code-v1-1-1",
+      "https://arxiv.org/abs/2603.04601"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "designarena-human-intelligence-index",
+    "name": "DesignArena Human Intelligence Index",
+    "aliases": [
+      "Design Arena Human Intelligence Index",
+      "Human Intelligence Index",
+      "DesignArena HII"
+    ],
+    "category": "other",
+    "subcategory": "other-indices",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "A composite human preference index aggregating blind pairwise votes across DesignArena's creative, coding, office, and multimodal arenas. Scores represent how many times in 100 users would pick a model's work over Claude Opus 5.5, which is anchored at 50.",
+    "org": "DesignArena (Intelligence)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://designarena.ai/blog/human-intelligence-index",
+      "leaderboard": "https://www.designarena.ai/leaderboard?section=overall&board=human-intelligence-index"
+    },
+    "access": "public",
+    "note": "Combines more than two million human pairwise votes across DesignArena categories onto a 0 to 100 index centered on Claude Opus 5.5 at 50.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://designarena.ai/blog/human-intelligence-index",
+      "https://www.designarena.ai/leaderboard?section=overall&board=human-intelligence-index"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-egyptian-arabic",
+    "name": "Voice Arena Egyptian Arabic",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Egyptian Arabic. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/egyptian-arabic"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/egyptian-arabic",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-filipino-accented-english",
+    "name": "Voice Arena Filipino-Accented English",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Filipino-accented English. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/filipino-accented-english"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/filipino-accented-english",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-gujarati",
+    "name": "Voice Arena Gujarati",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Gujarati. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/gujarati"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/gujarati",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-brazilian-portuguese",
+    "name": "Voice Arena STT Brazilian Portuguese",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Brazilian Portuguese audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-pt-BR"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
+      "https://voicearena.com/data/stt-v2/stt_brazilian-portuguese.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-pt-BR"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-hindi",
+    "name": "Voice Arena STT Hindi",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Hindi audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level orthography-insensitive WER (OI-WER) on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/hindi",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports orthography-insensitive WER (OI-WER), character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices, plus substitution, deletion, and insertion rates on the public split.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/hindi",
+      "https://voicearena.com/data/stt-v2/stt_hindi.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-indian-english",
+    "name": "Voice Arena STT Indian English",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Indian English audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/indian-english",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/indian-english",
+      "https://voicearena.com/data/stt-v2/stt_indian-english.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-romanian",
+    "name": "Voice Arena STT Romanian",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Romanian audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/romanian",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-ro-RO"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/romanian",
+      "https://voicearena.com/data/stt-v2/stt_romanian.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-ro-RO"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-us-english",
+    "name": "Voice Arena STT US English",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe US English audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/us-english",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-en-US"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/us-english",
+      "https://voicearena.com/data/stt-v2/stt_us-english.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-en-US"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-tamil",
+    "name": "Voice Arena Tamil",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Tamil. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/tamil"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/tamil",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-telugu",
+    "name": "Voice Arena Telugu",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Telugu. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/telugu"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/telugu",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "softvtbench",
+    "name": "SoftVTBench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A safety-aware visuo-tactile robotics benchmark of 40 tasks across 4 suites evaluating deformable and rigid object manipulation in Isaac Sim under contact deformation limits.",
+    "org": "TuojingAI and collaborators",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.04234",
+      "repo": "https://github.com/TuojingAI/SoftVTBench",
+      "dataset": "https://huggingface.co/datasets/Arthur12137/SoftVTBench",
+      "site": "https://softvtbench.github.io/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Safety success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/TuojingAI/SoftVTBench",
+      "https://arxiv.org/abs/2607.04234",
+      "https://softvtbench.github.io/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "zoombench",
+    "name": "ZoomBench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "A dual-view fine-grained perception benchmark testing vision-language models on counting, OCR, color, structure, material, and identification across high-resolution images and cropped regions.",
+    "org": "Shanghai Jiao Tong University and Ant Group (inclusionAI)",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.11858",
+      "repo": "https://github.com/inclusionAI/Zooming-without-Zooming"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Global accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2602.11858",
+      "https://github.com/inclusionAI/Zooming-without-Zooming"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "mllm-jailbreak-bench",
+    "name": "MLLM-Jailbreak-Bench",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "A reproducible adversarial safety benchmark evaluating multimodal language models across image injection, text-image collusion, OCR jailbreaks, audio injection, and visual prompt leakage.",
+    "org": "Ziyu Wang",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/ziyuwowo/mllm-jailbreak-bench"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Average attack success rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/ziyuwowo/mllm-jailbreak-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "whatifibought",
+    "name": "WhatIfIBought",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "A live paper-trading arena where language model agents trade real historical and live market data with virtual capital while logging every reasoning trace, tool call, thesis, and post-mortem.",
+    "org": "mamawai",
+    "released": "2026-02",
+    "links": {
+      "repo": "https://github.com/mamawai/wtfibought",
+      "site": "https://intro.wtfibought.com",
+      "leaderboard": "https://wtfibought.com"
+    },
+    "access": "public",
+    "note": "The live leaderboard API requires an authenticated user token, so scores are not imported automatically.",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Portfolio return",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/mamawai/wtfibought",
+      "https://intro.wtfibought.com",
+      "https://wtfibought.com"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "artisan-3d",
+    "name": "Artisan",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "A benchmark for physically grounded articulated 3D asset generation measuring single-joint, double-joint, and multi-joint collision rates in physics simulation.",
+    "org": "Oxford VGG and ETH Zurich (PhysicalVision)",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.13947",
+      "repo": "https://github.com/physicalvision/artisan",
+      "site": "https://physicalvision.github.io/artisan/",
+      "leaderboard": "https://physicalvision.github.io/artisan/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "metric": "Single-joint collision rate",
+    "confidence": "verified",
+    "evidence": [
+      "https://physicalvision.github.io/artisan/",
+      "https://github.com/physicalvision/artisan",
+      "https://arxiv.org/abs/2610.13947"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "societybench",
+    "name": "SocietyBench",
+    "category": "forecasting",
+    "subcategory": "forecasting-events",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Bilingual Chinese and English forecasting benchmark of 125 anonymized cutoff points across 5 real-world events scoring probability calibration over 25,364 questions and temporal accuracy over 3,112 timeline events.",
+    "org": "co-minder",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/co-minder/SocietyBench-codebase",
+      "dataset": "https://huggingface.co/datasets/Social-AI-2026/SocietyBench"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/co-minder/SocietyBench-codebase",
+      "https://huggingface.co/datasets/Social-AI-2026/SocietyBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "for-t2i",
+    "name": "FoR-T2I",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Twelve hundred paired frame-of-reference and camera-view prompts across three difficulty levels testing whether text-to-image models render spatial relations from an oriented anchor object perspective.",
+    "org": "Baidu ERNIE Research",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.03357",
+      "repo": "https://github.com/ernie-research/FoR-T2I",
+      "dataset": "https://huggingface.co/datasets/ernie-research/FoR-T2I",
+      "site": "https://ernie-research.github.io/FoR-T2I/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Frame-of-reference accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2608.03357",
+      "https://github.com/ernie-research/FoR-T2I",
+      "https://ernie-research.github.io/FoR-T2I/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "omni-worldbench",
+    "name": "Omni-WorldBench",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "An interaction-centric benchmark for video-based world models measuring responsiveness to user control actions, physical plausibility, and temporal consistency across multi-step rollouts.",
+    "org": "Alibaba AMAP-ML",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.22212",
+      "repo": "https://github.com/AMAP-ML/Omni-WorldBench"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/AMAP-ML/Omni-WorldBench",
+      "https://arxiv.org/abs/2603.22212"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "dyn-3d",
+    "name": "Dyn-3D",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Eight hundred thirty-five dynamic videos and 16,000 questions testing whether vision-language models resolve ego-motion ambiguity across spatial, kinematic, and trajectory reasoning.",
+    "org": "InkMind-AI",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.01059",
+      "repo": "https://github.com/InkMind-AI/Dyn-3D",
+      "site": "https://inkmind-ai.github.io/Dyn-3D/",
+      "leaderboard": "https://inkmind-ai.github.io/Dyn-3D/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "metric": "Overall accuracy",
+    "confidence": "verified",
+    "evidence": [
+      "https://inkmind-ai.github.io/Dyn-3D/",
+      "https://github.com/InkMind-AI/Dyn-3D",
+      "https://arxiv.org/abs/2609.01059"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "appcif-bench",
+    "name": "AppCIF-Bench",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-instructions",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Bilingual Chinese and English application-level complex instruction following benchmark with deeply nested rules, multi-turn constraints, and code simulation engines.",
+    "org": "Tencent",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/Tencent-Hunyuan/AppCIF-Bench",
+      "site": "https://ac2333.github.io/AppCIF/",
+      "leaderboard": "https://ac2333.github.io/AppCIF/#leaderboard"
+    },
+    "access": "public",
+    "note": "Accepted to NeurIPS 2026. The official leaderboard ranks 12 frontier models by Hard Satisfaction Rate average across L1 to L4 difficulty tiers alongside Soft Satisfaction Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ac2333.github.io/AppCIF/",
+      "https://github.com/Tencent-Hunyuan/AppCIF-Bench",
+      "https://ac2333.github.io/AppCIF/static/main.js"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "diagsafe",
+    "name": "DiagSafe",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Bilingual diagnostic LLM safety benchmark scoring unsafe rates and usefulness independently across 3,489 single-turn and multi-turn prompts covering an 84-label safety taxonomy.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.29225",
+      "repo": "https://github.com/Tencent-Hunyuan/DiagSafe",
+      "site": "https://tencent-hunyuan.github.io/DiagSafe/",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/DiagSafe"
+    },
+    "access": "public",
+    "note": "Lower overall unsafe rate is better across DiagBase and DiagAttack subsets. Usefulness is scored independently on a 0 to 3 scale.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://tencent-hunyuan.github.io/DiagSafe/",
+      "https://github.com/Tencent-Hunyuan/DiagSafe",
+      "https://arxiv.org/abs/2610.29225"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "hyperlogic",
+    "name": "HyperLogic",
+    "category": "science-reasoning",
+    "subcategory": "science-puzzles",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Forward-authored Chinese logical reasoning benchmark of 523 items with execution-verified answers across Seed, Base, and Hard tiers with and without code sandboxes.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.19597",
+      "repo": "https://github.com/Tencent-Hunyuan/HyperLogic",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/HyperLogic"
+    },
+    "access": "public",
+    "note": "Models are ranked by three-rollout Base item accuracy at their highest reasoning setting, alongside Seed, Base Sub-Q, Hard Direct, Hard Sandbox, and Hard + Library tiers.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Tencent-Hunyuan/HyperLogic",
+      "https://arxiv.org/abs/2605.19597"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "nvidia-av-causal-scenario-retrieval",
+    "name": "NVIDIA AV Causal Scenario Retrieval Challenge",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Autonomous-driving multimodal retrieval challenge evaluating models on retrieving driving video scenarios matching causal reasoning descriptions across easy, medium, and hard queries.",
+    "org": "NVIDIA",
+    "released": "2026-06",
+    "links": {
+      "site": "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge",
+      "leaderboard": "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge"
+    },
+    "access": "public+private-holdout",
+    "note": "Hosted by NVIDIA on Hugging Face Spaces. Submissions are ranked by Average R-Precision across 1,773 queries alongside mAP, Precision@10, and Recall@10.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/nvidia/AV-Causal-Scenario-Retrieval-Challenge",
+      "https://nvidia-av-causal-scenario-retrieval-challenge.hf.space/api/leaderboard"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "omnicapbench",
+    "name": "OmniCapBench",
+    "category": "audio-video",
+    "subcategory": "video-captioning",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Structured audio-visual video captioning benchmark of 786 videos evaluating shot segmentation, entity tracking, temporal event grounding, speaker attribution, and cross-modal association.",
+    "org": "Tencent Hunyuan, NTU, and Northumbria University",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.12458",
+      "repo": "https://github.com/Tencent-Hunyuan/OmniCapBench",
+      "site": "https://01yzzyu.github.io/OmniCapBench/",
+      "leaderboard": "https://01yzzyu.github.io/OmniCapBench/"
+    },
+    "access": "public",
+    "note": "Accepted to NeurIPS 2026 Evaluations and Datasets Track. Scores 9 proprietary and open-source omnimodal models across structural and localized semantic metrics.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://01yzzyu.github.io/OmniCapBench/",
+      "https://github.com/Tencent-Hunyuan/OmniCapBench",
+      "https://arxiv.org/abs/2610.12458"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "repoprobe",
+    "name": "RepoProbe",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Repository-level code comprehension benchmark with 500 open-ended questions mined from real GitHub Discussions across 50 repositories in 15 programming languages, graded by tiered checklists.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.04783",
+      "repo": "https://github.com/Tencent-Hunyuan/RepoProbe",
+      "leaderboard": "https://github.com/Tencent-Hunyuan/RepoProbe"
+    },
+    "access": "public",
+    "note": "Published at ASE 2026. Evaluates 20 closed-weight and open-weight models under Docker-isolated agent scaffolding on Overall, Knowledge, Clarity, and Perfect Solve Rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Tencent-Hunyuan/RepoProbe",
+      "https://arxiv.org/abs/2608.04783"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sciformabench-2k",
+    "name": "SciFormaBench-2K",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Structure-faithful image generation benchmark evaluating 2,000 scientific methodology diagrams across simple, medium, and hard complexity tiers on component, arrow, and text fidelity.",
+    "org": "Microsoft Research Asia, Peking University, and Zhejiang University",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.18091",
+      "repo": "https://github.com/microsoft/SciForma",
+      "site": "https://microsoft.github.io/SciForma/",
+      "leaderboard": "https://microsoft.github.io/SciForma/"
+    },
+    "access": "public",
+    "note": "Evaluates 14 proprietary and open image generation models on diagram structure fidelity, topology arrows, and text legibility.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://microsoft.github.io/SciForma/",
+      "https://github.com/microsoft/SciForma",
+      "https://arxiv.org/abs/2607.18091"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "t2j-bench",
+    "name": "T2J-Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Execution-grounded coding agent benchmark testing whole-repository migration of 63 real PyTorch training and inference codebases to native JAX and Flax.",
+    "org": "Google Cloud AI Research, Google DeepMind, and UIUC",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.29054",
+      "repo": "https://github.com/google-research/t2j-bench",
+      "site": "https://ft2023.github.io/T2j-web/",
+      "leaderboard": "https://ft2023.github.io/T2j-web/"
+    },
+    "access": "public",
+    "note": "Reports three-seed mean reward with sample standard deviation across 21 model-harness configurations alongside Spec, Numeric, Behavior, Train, and Serve breakdowns.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ft2023.github.io/T2j-web/",
+      "https://github.com/google-research/t2j-bench",
+      "https://arxiv.org/abs/2605.29054"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "wearable-ai-challenge",
+    "name": "Wearable-AI Challenge",
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Multimodal wearable AI benchmark evaluating egocentric conversational QA (EgoConv), long-horizon video QA (EgoLongQA), and proactive assistant interventions (EgoProactive).",
+    "org": "Meta FAIR",
+    "released": "2026-06",
+    "links": {
+      "site": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "Final held-out test standings across 44 submissions split into Small (up to 2B parameters) and Large (2B+) divisions for each track.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard",
+      "https://huggingface.co/spaces/facebook/wearable-ai-leaderboard/raw/main/final_rankings.py"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "xl-docbench",
+    "name": "XL-DocBench",
+    "category": "long-context",
+    "subcategory": "long-reasoning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evidence-grounded extra-long multimodal document understanding benchmark spanning hundreds to thousands of pages across 1,345 single-document and cross-document questions.",
+    "org": "Microsoft Research Asia and Wuhan University",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.00036",
+      "site": "https://officeintelligence.github.io/xl-docbench/",
+      "leaderboard": "https://officeintelligence.github.io/xl-docbench/",
+      "dataset": "https://huggingface.co/datasets/microsoft/XL-DocBench"
+    },
+    "access": "public",
+    "note": "Published at NeurIPS 2026. Per-item evaluation scores for 13 model and agent configurations are published on Hugging Face for exact accuracy, Token F1, and ANLS aggregation.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://officeintelligence.github.io/xl-docbench/",
+      "https://huggingface.co/datasets/microsoft/XL-DocBench",
+      "https://arxiv.org/abs/2608.00036"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "openresearch-intelligence-index",
+    "name": "OpenResearch Intelligence Index",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "An open-source composite autoresearch benchmark evaluating frontier models in their native coding harnesses inside OpenResearch across three weighted tracks: 20 Terminal-Bench-Science experimentation tasks (40%), six model post-training tasks on an H100 GPU (40%), and 45 PaperFindingBench literature search queries (20%).",
+    "org": "alphaXiv",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.alphaxiv.org/blog/introducing-openresearch-intelligence-index",
+      "leaderboard": "https://www.alphaxiv.org/blog/introducing-openresearch-intelligence-index#results",
+      "repo": "https://github.com/alphaXiv/OpenResearch"
+    },
+    "access": "public",
+    "note": "Each model runs in its provider’s native harness (Claude Code for Anthropic, Codex for OpenAI, and OpenCode for others) inside the OpenResearch container, reporting composite score with standard error, 95% confidence intervals, and full-run API cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.alphaxiv.org/blog/introducing-openresearch-intelligence-index",
+      "https://github.com/alphaXiv/OpenResearch"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "singularity-bench",
+    "name": "Singularity-Bench",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates whether AI coding agents can autonomously execute the full agent development lifecycle across six long-horizon tasks covering pre-training, mid-training, post-training, inference engine engineering, harness engineering, and cluster orchestration on production GPUs.",
+    "org": "InfiniAI Lab (CMU)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://infini-ai-lab.github.io/singularity-bench/",
+      "leaderboard": "https://infini-ai-lab.github.io/singularity-bench/#leaderboard",
+      "paper": "https://arxiv.org/abs/2611.16591",
+      "repo": "https://github.com/Infini-AI-Lab/singularity-bench"
+    },
+    "access": "public",
+    "note": "The headline Singularity-Index averages each task’s score relative to its human baseline (where 1.0 matches the baseline and failed submissions count as zero), alongside total API spend across all six tasks.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://infini-ai-lab.github.io/singularity-bench/",
+      "https://arxiv.org/abs/2611.16591",
+      "https://github.com/Infini-AI-Lab/singularity-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "visual-cipher-bench",
+    "name": "Visual Cipher Bench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Long-horizon visual reasoning benchmark of 40 original hand-drawn puzzles grouped into Spatial, Logic, Rule induction, and Decoding subsets where tool-using coding agents must infer hidden visual rules and decode answers without written instructions or correctness feedback.",
+    "org": "Navers Lab, Einsia AI, and Tsinghua University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://lab.einsia.ai/visual-cipher-bench/",
+      "leaderboard": "https://lab.einsia.ai/visual-cipher-bench/",
+      "paper": "https://arxiv.org/abs/2611.16861",
+      "repo": "https://github.com/Einsia/Visual-Cipher-Bench"
+    },
+    "access": "public",
+    "note": "Scores eight frontier models across 29 reasoning-effort settings (3,480 graded runs) on the 40 puzzles, reporting overall accuracy and four category subscores.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://lab.einsia.ai/visual-cipher-bench/",
+      "https://arxiv.org/abs/2611.16861",
+      "https://github.com/Einsia/Visual-Cipher-Bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "da7em-bench-v2",
+    "name": "Da7em Bench",
+    "version": "v2.0",
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "expert-graded",
+    "format": "open-ended",
+    "description": "Independent private-task benchmark evaluating frontier models on real client work across 12 professional axes grouped into Mind, Execution, Reliability, and Output pillars.",
+    "org": "Da7em",
+    "released": "2026-11",
+    "links": {
+      "site": "https://da7tech.com/da7em-bench/?lang=en",
+      "leaderboard": "https://da7tech.com/da7em-bench/?lang=en"
+    },
+    "access": "private",
+    "note": "Scores 11 frontier models on a 0 to 10 scale across four pillars and 12 axes based on blind bilingual English and Arabic work evaluations.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://da7tech.com/da7em-bench/?lang=en"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "hyper-intervention",
+    "name": "Hyper-Intervention",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Evaluates frontier models acting as token-level editor judges that inspect Qwen2.5-7B student rollouts, resample forks, and allocate gradient updates over 3-hour post-training sessions on held-out MATH problems.",
+    "org": "Hyperstition",
+    "released": "2026-11",
+    "links": {
+      "site": "https://github.com/Hyperstitioncc/HyperIntervention",
+      "repo": "https://github.com/Hyperstitioncc/HyperIntervention",
+      "leaderboard": "https://github.com/Hyperstitioncc/HyperIntervention"
+    },
+    "access": "public",
+    "note": "Headline score is the mean percentage-point gain on the 5,000-problem held-out MATH test split averaged across replicated sessions, alongside inter-session standard deviation and session API cost.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Hyperstitioncc/HyperIntervention"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "afk-bench-uiuc",
+    "name": "AFK-Bench",
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "frontier",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Real-time visual gameplay benchmark of 120 browser games split evenly into Hostile, Benign, and Turn-based subsets where agents perceive only screen frames and must act and adapt on a live game clock.",
+    "org": "University of Illinois Urbana-Champaign",
+    "released": "2026-11",
+    "links": {
+      "site": "https://autopilot-harness.github.io/",
+      "leaderboard": "https://autopilot-harness.github.io/",
+      "paper": "https://arxiv.org/abs/2611.28202"
+    },
+    "access": "public",
+    "note": "Compares eight frontier models across four coding and visual agent harnesses under both Real time and Paused game clocks, reporting task success rate and normalized mean progress.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://autopilot-harness.github.io/",
+      "https://arxiv.org/abs/2611.28202"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "generalist-gaming-agents-kaggle",
+    "name": "Generalist Gaming Agents (GGA)",
+    "aliases": [
+      "GG Agents"
+    ],
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "frontier",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Offline generalist gaming benchmark and Kaggle competition testing single agents on 32 real-time browser games across 10 genres with 28 hidden evaluation games using raw screen frames and mouse and keyboard actions.",
+    "org": "GARC, Kaggle, and Princeton University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://generalistgaming.org/",
+      "leaderboard": "https://www.kaggle.com/competitions/generalist-gaming-agent"
+    },
+    "access": "public+private-holdout",
+    "note": "Launched on November 23, 2026 as an official Kaggle research competition with a $50,000 prize pool and a March 1, 2027 submission deadline. Public model scores have not been published yet.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://generalistgaming.org/",
+      "https://www.kaggle.com/competitions/generalist-gaming-agent"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "hep-ex-bench",
+    "name": "HEP-Ex-Bench",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates AI coding agents on four end-to-end experimental high-energy physics analyses using CMS open data (Higgs mass, Higgs width, lepton calibration, and jet calibration) across three guidance levels.",
+    "org": "HEP-Ex-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://hep-ex-bench.github.io/",
+      "leaderboard": "https://hep-ex-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.28194"
+    },
+    "access": "public",
+    "note": "Scores 11 frontier models across four coding harnesses as a percentage of the expert reference precision (where 100% matches the reference), with standard error across runs and session API cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://hep-ex-bench.github.io/",
+      "https://arxiv.org/abs/2611.28194"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "distdebug-bench",
+    "name": "DistDebug-Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates coding agents on diagnosing root causes across 120 real distributed-system failure incidents from incomplete logs and telemetry without full stack traces.",
+    "org": "OrderLab (University of Michigan)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://distdebug.com/",
+      "leaderboard": "https://distdebug.com/leaderboard/",
+      "paper": "https://arxiv.org/abs/2611.03523",
+      "repo": "https://github.com/OrderLab/distdebug-bench"
+    },
+    "access": "public",
+    "note": "Ranks 18 model-harness configurations by block localization coverage (%) with 95% confidence intervals, alongside file, function, and line coverage, precision, flakiness, and token usage.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://distdebug.com/leaderboard/",
+      "https://arxiv.org/abs/2611.03523",
+      "https://github.com/OrderLab/distdebug-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "unfinished-bench",
+    "name": "Unfinished-Bench",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Measures whether AI agents violate workplace rules when given realistic assignments that cannot be cleanly finished under persistence instructions.",
+    "org": "NAVER AI Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://francis21c.github.io/unfinished-bench/",
+      "leaderboard": "https://francis21c.github.io/unfinished-bench/",
+      "paper": "https://arxiv.org/abs/2611.17460",
+      "repo": "https://github.com/naver-ai/unfinished-bench"
+    },
+    "access": "public",
+    "note": "Headline score is the document-rule violation rate (%) under persistence (lower is better), alongside no-persistence baselines and user-rule violation rates across 12 frontier models.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://francis21c.github.io/unfinished-bench/",
+      "https://arxiv.org/abs/2611.17460",
+      "https://github.com/naver-ai/unfinished-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "beyond-accuracy-exp-planning",
+    "name": "Beyond Accuracy (Experiment Planning)",
+    "category": "science-reasoning",
+    "subcategory": "science-lab",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates LLM agents on experimental planning in chemistry, testing whether models select genuinely informative follow-up experiments beyond static property prediction accuracy.",
+    "org": "EPFL Schwaller Group",
+    "released": "2026-11",
+    "links": {
+      "site": "https://schwallergroup.github.io/beyond-accuracy/",
+      "leaderboard": "https://schwallergroup.github.io/beyond-accuracy/",
+      "paper": "https://arxiv.org/abs/2611.29467",
+      "repo": "https://github.com/schwallergroup/beyond-accuracy-bench"
+    },
+    "access": "public",
+    "note": "Reports experimental planning decision accuracy (%) with 95% confidence intervals across 10 LLM agents from results.csv.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://schwallergroup.github.io/beyond-accuracy/",
+      "https://arxiv.org/abs/2611.29467",
+      "https://github.com/schwallergroup/beyond-accuracy-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "axe-world-models",
+    "name": "AxE",
+    "aliases": [
+      "AxE Bench"
+    ],
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates agent-environment generalization in video world models by pairing original scenarios with controlled agent-side and environment-side variants using the AxE Score (grounded event Fidelity weighted by Stability).",
+    "org": "AxE Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://AxEBench.github.io/",
+      "leaderboard": "https://AxEBench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.30120",
+      "repo": "https://github.com/AxEBench/WM-PerceptHarness"
+    },
+    "access": "public",
+    "note": "Scores 20 text-to-video and camera-conditioned video world models on AxE Score alongside Fidelity, Stability, Timing, and Content metrics.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://AxEBench.github.io/",
+      "https://arxiv.org/abs/2611.30120",
+      "https://github.com/AxEBench/WM-PerceptHarness"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "kernelshift",
+    "name": "KernelShift",
+    "category": "coding",
+    "subcategory": "coding-performance",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates AI coding agents on porting and optimizing 79 ARM SVE, SVE2, and SME2 SIMD kernels across four open-source libraries: ncnn (23 tasks), llama.cpp (26), SIMD Loops (24), and KleidiAI (6).",
+    "org": "Carnegie Mellon University (CMU L3)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://cmu-l3.github.io/kernel-shift/",
+      "leaderboard": "https://cmu-l3.github.io/kernel-shift/",
+      "paper": "https://arxiv.org/abs/2611.29590",
+      "repo": "https://github.com/cmu-l3/kernel-shift"
+    },
+    "access": "public",
+    "note": "Reports Speedup@40 and pass rates across four agent harnesses and six frontier models, summarized here by the geometric mean of Speedup@40 across the four suites.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://cmu-l3.github.io/kernel-shift/",
+      "https://arxiv.org/abs/2611.29590",
+      "https://github.com/cmu-l3/kernel-shift"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "strideworld",
+    "name": "StrideWorld",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates interactive video world models on 3D camera-action controllability across 30 scenes (3,640 generated videos per model), measuring response rate, rigidity offset, pace stability, and multi-step route composition.",
+    "org": "StrideWorld Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "paper": "https://arxiv.org/abs/2611.24408",
+      "repo": "https://github.com/chuangwang123/strideworld"
+    },
+    "access": "public",
+    "note": "Scores 15 interactive video world models on Composition score (0 to 100) alongside response rate, rigidity offset, pace, near-target rate, stall rate, end error, swap gap, and MUSIQ.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "https://arxiv.org/abs/2611.24408",
+      "https://github.com/chuangwang123/strideworld"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "egowitness",
+    "name": "EgoWitness",
+    "category": "audio-video",
+    "subcategory": "video-long",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Long-horizon egocentric memory and spatial question-answering benchmark spanning roughly 324 hours of multi-day first-person video with object and room re-identification and scored evidence intervals.",
+    "org": "EgoWitness Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://egowitness.github.io/",
+      "leaderboard": "https://egowitness.github.io/",
+      "paper": "https://arxiv.org/abs/2611.25849",
+      "repo": "https://github.com/egowitness/EgoWitness"
+    },
+    "access": "public",
+    "note": "Scores 20 visual-reasoning models, shared-tool controllers, and week-long-trained systems by Micro accuracy (%) across Q01, Q04, Q06, and Q07 task families.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://egowitness.github.io/",
+      "https://arxiv.org/abs/2611.25849",
+      "https://github.com/egowitness/EgoWitness"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "animweb-bench",
+    "name": "AnimWeb-Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Evaluates multimodal language models on recreating real animated web pages from recorded videos, scoring four Static Appearance Fidelity metrics and four Animation Fidelity metrics.",
+    "org": "AnimWeb-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "leaderboard": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "paper": "https://arxiv.org/abs/2611.09769",
+      "repo": "https://github.com/starry1001/AnimWeb"
+    },
+    "access": "public",
+    "note": "Scores 14 proprietary and open-weight multimodal models on Static Appearance (Structure, Text, Color, CLIP) and Animation Fidelity (Position, Size, Velocity, CLIP), summarized here by the plain mean across all eight dimensions.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "https://arxiv.org/abs/2611.09769",
+      "https://github.com/starry1001/AnimWeb"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "egodepth-bench",
+    "name": "EgoDepth-Bench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates foundation metric-depth and 3D reconstruction models on synchronized multi-camera egocentric manipulation video with laser-scanned ground truth across full-image, hand, and object subsets.",
+    "org": "EgoDepth-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://egodepth-bench.github.io/",
+      "leaderboard": "https://egodepth-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.30734",
+      "repo": "https://github.com/Chris004869/EgoDepth-Bench"
+    },
+    "access": "public",
+    "note": "Headline score is full-image AbsRel (absolute relative depth error, lower is better) across 19 metric monocular, stereo, multi-view, and oracle-aligned foundation depth models, alongside MAE Z (cm), delta-1 accuracy, and coverage.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://egodepth-bench.github.io/",
+      "https://arxiv.org/abs/2611.30734",
+      "https://github.com/Chris004869/EgoDepth-Bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "safeclawarena",
+    "name": "SafeClawArena",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Containerized security benchmark testing OpenClaw-style agents on 406 adversarial tasks across four attack dimensions (SSI, PSE, CDF, and IPI) and 24 sub-categories, scored by attack success rate and security score.",
+    "org": "UC Berkeley, UIUC, NUS, Google DeepMind, NVIDIA, and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://safeclawarena.github.io/",
+      "leaderboard": "https://safeclawarena.github.io/",
+      "repo": "https://github.com/sunblaze-ucb/SafeClawArena"
+    },
+    "access": "public",
+    "note": "Evaluates 5 frontier models across three agent platforms (OpenClaw, NemoClaw, and SeClaw) for 15 configurations. Headline metric is overall attack success rate (%, lower is better), alongside the 0 to 1 security score.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://safeclawarena.github.io/",
+      "https://safeclawarena.github.io/static/js/leaderboard.js",
+      "https://github.com/sunblaze-ucb/SafeClawArena"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robomme",
+    "name": "RoboMME",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "robomme",
+    "version": "v1",
+    "description": "Manipulation benchmark testing robotic memory across 16 tasks in four memory suites (Counting, Permanence, Reference, and Imitation) that require tracking past events, hidden objects, visual references, and demonstrated procedures.",
+    "org": "University of Michigan and Stanford University",
+    "released": "2026-02",
+    "links": {
+      "site": "https://robomme.github.io/",
+      "leaderboard": "https://robomme.github.io/leaderboard.html",
+      "paper": "https://arxiv.org/abs/2603.04639",
+      "repo": "https://github.com/RoboMME/robomme_benchmark"
+    },
+    "access": "public",
+    "note": "Evaluates 30 robotic policy and agent methods across 16 memory-intensive manipulation tasks, reporting per-suite and per-task success rates alongside parameter counts.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robomme.github.io/",
+      "https://robomme.github.io/leaderboard.html",
+      "https://github.com/RoboMME/robomme_benchmark",
+      "https://arxiv.org/abs/2603.04639"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robomme-plus",
+    "name": "RoboMME-Plus",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "robomme",
+    "version": "Plus",
+    "description": "Held-out extension of RoboMME evaluating robotic policies and agentic adaptation methods across 800 variation episodes (16 tasks x 50 episodes) spanning temporal, spatial, object, and procedural memory under zero-shot and budgeted few-shot protocols.",
+    "org": "University of Michigan and Stanford University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robomme.github.io/plus.html",
+      "leaderboard": "https://robomme.github.io/leaderboard.html?benchmark=plus",
+      "repo": "https://github.com/RoboMME/robomme_benchmark"
+    },
+    "access": "public",
+    "note": "Evaluates 16 policy and agentic adaptation configurations across 800 held-out episodes, reporting per-suite and per-task success rates, parameter counts, audit status, and total API development or evaluation costs.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robomme.github.io/plus.html",
+      "https://robomme.github.io/data/plus.json",
+      "https://github.com/RoboMME/robomme_benchmark"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "motiongraphicsbench",
+    "name": "MotionGraphicsBench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models animate 100 expert-curated static SVG vector graphics into motion graphics graded by deterministic verification programs that check spatial structure, motion trajectories, and timing requirements.",
+    "org": "Figma and Stanford University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://motion-graphics-bench.github.io/",
+      "leaderboard": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "paper": "https://arxiv.org/abs/2611.10592",
+      "repo": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench"
+    },
+    "access": "public",
+    "note": "Reports pass@1 with 95% confidence intervals across 47 model and reasoning-effort configurations (32 proprietary and open-weight LLMs), plus pass@32 for top models.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.10592",
+      "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+      "https://motion-graphics-bench.github.io/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "bearcubs",
+    "name": "BEARCUBS",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Live web-browsing benchmark testing computer-use and search agents on information-seeking questions across real websites that require multi-step navigation, interaction, and visual or textual synthesis.",
+    "org": "University of Massachusetts Amherst",
+    "released": "2025-03",
+    "links": {
+      "site": "https://bear-cubs.github.io/",
+      "leaderboard": "https://bear-cubs.github.io/",
+      "paper": "https://arxiv.org/abs/2503.07919"
+    },
+    "access": "private",
+    "note": "Evaluates 12 computer-use agents, deep-research agents, and search-augmented LLM baselines across overall, text-only, and multimodal accuracy splits.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bear-cubs.github.io/",
+      "https://arxiv.org/abs/2503.07919"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "optimization-bench-replit",
+    "name": "Optimization-Bench (Replit)",
+    "category": "coding",
+    "subcategory": "coding-performance",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Single agents and parallel multi-agent swarms (1, 8, 16, and 32 agents) optimize real-world performance bottlenecks across four open-source codebases (NumPy, SQLite, SQLGlot, and Git), scored by verified median runtime speedup.",
+    "org": "Replit",
+    "released": "2026-11",
+    "links": {
+      "site": "https://frontier.replit.com/throwing-headcount-at-the-problem/",
+      "leaderboard": "https://frontier.replit.com/throwing-headcount-at-the-problem/"
+    },
+    "access": "private",
+    "note": "Evaluates 6 frontier models across 1, 8, 16, and 32 parallel agents (24 configurations) on 36 workloads across NumPy, SQLite, SQLGlot, and Git, reporting per-suite median speedup and run cost.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://frontier.replit.com/throwing-headcount-at-the-problem/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "showdown-clicks",
+    "name": "Showdown Clicks",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Offline desktop UI grounding benchmark measuring single left-click coordinate accuracy against bounding boxes on macOS desktop screenshots across common applications.",
+    "org": "General Agents",
+    "released": "2025-04",
+    "links": {
+      "site": "https://generalagents.com/ace/",
+      "leaderboard": "https://generalagents.com/ace/",
+      "repo": "https://github.com/generalagents/showdown"
+    },
+    "access": "public",
+    "note": "Open dataset in generalagents/showdown scoring 9 computer-use agents and vision-language models on click accuracy with 95% confidence intervals and mean click latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://generalagents.com/ace/",
+      "https://github.com/generalagents/showdown"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-bulletbench",
+    "name": "BulletBench (Spring Prompt)",
+    "category": "games-long-horizon",
+    "subcategory": "games-multi-agent",
+    "level": "competition",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Real-time chess benchmark where models play head-to-head under strict wall-clock time controls (Lightning 10+1, Bullet 60s, and Blitz 3+2), ranking models by ladder Elo while measuring move time, timeouts, and cost per game.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/bulletbench",
+      "leaderboard": "https://springprompt.com/benchmarks/bulletbench"
+    },
+    "access": "private",
+    "note": "Scores 45 models on Lightning 10+1 ladder Elo with 95% ranges, Bullet 60s and Blitz 3+2 Elo ratings, latency, timeout rate, and cost per game.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/bulletbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-catalogbench",
+    "name": "CatalogBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models write e-commerce product listings from product specs and images across 56 products and three runs each, graded for factual compliance, unsupported claims, and publish-ready consistency.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/catalogbench",
+      "leaderboard": "https://springprompt.com/benchmarks/catalogbench"
+    },
+    "access": "private",
+    "note": "Scores 36 models on reliably publish-ready factual listing rate (%), sales brief publish-ready rate, unsupported claim rate, cost per 10,000 products, and response time.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/catalogbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-deckbench",
+    "name": "DeckBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-office",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models generate business slide presentations from six structured briefs, ranked by a pairwise deck rating from a three-model judging panel alongside presentability, factual accuracy, design quality, and cost per deck.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/deckbench",
+      "leaderboard": "https://springprompt.com/benchmarks/deckbench"
+    },
+    "access": "private",
+    "note": "Scores 37 models on pairwise deck rating with 95% confidence ranges, plus presentable deck rate, accurate deck rate, design quality, and cost per deck.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/deckbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-roasbench",
+    "name": "ROASBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models manage a 12-month simulated paid-marketing budget across channels and campaigns, scored from 0 to 100 on overall return on ad spend, simulated profit, budget discipline, and run cost.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/roasbench",
+      "leaderboard": "https://springprompt.com/benchmarks/roasbench",
+      "paper": "https://springprompt.com/blog/how-we-built-roasbench"
+    },
+    "access": "private",
+    "note": "Scores 37 models on overall 0 to 100 marketing performance score, simulated profit, profit per dollar spent, months over budget, months losing money, and run cost.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/roasbench",
+      "https://springprompt.com/blog/how-we-built-roasbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-surveybench",
+    "name": "SurveyBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models design research surveys and draw evidence-grounded conclusions across nine tasks with methodological traps, ranked by pairwise analysis rating from a three-model judging panel alongside research score, trap handling, and cost.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/surveybench",
+      "leaderboard": "https://springprompt.com/benchmarks/surveybench"
+    },
+    "access": "private",
+    "note": "Scores 28 models on pairwise analysis rating with 95% confidence ranges, research score (0 to 100), sound research rate, traps handled, and cost per task.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/surveybench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ionwarp-code-review",
+    "name": "IonWarp AI Code Review Benchmark",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Pinned reproduction of the Martian Core 50-PR code review cohort (158 issues) adding latency and inference cost to a composite Reviewer Score = (3 x F1 + latency + cost) / 5 across IonWarp-hosted models and commercial code review tools.",
+    "org": "Winding Labs",
+    "released": "2026-10",
+    "links": {
+      "site": "https://ionwarp.com/benchmarks",
+      "leaderboard": "https://ionwarp.com/benchmarks",
+      "paper": "https://ionwarp.com/benchmarks/methodology",
+      "repo": "https://github.com/Winding-Labs/ai-code-review-benchmark"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 OpenAPI JSON endpoint scoring 5 frontier models under IonWarp and 4 commercial code review tools (Qodo v2, Greptile v4.1, Cursor Bugbot, and CodeRabbit) on composite Reviewer Score, F1, precision, recall, p50 and p90 latency, and cost per review.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ionwarp.com/benchmarks",
+      "https://ionwarp.com/benchmarks/v1/reviewers/ionwarp-code-review/metrics",
+      "https://github.com/Winding-Labs/ai-code-review-benchmark"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "kinetix",
+    "name": "Kinetix",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Open-ended 2D physics control tasks in JAX, used to test whether robot policies perform reliably under inference delay.",
+    "org": "FLAIR, University of Oxford",
+    "released": "2024-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2410.23208",
+      "repo": "https://github.com/FLAIROx/Kinetix",
+      "site": "https://kinetix-env.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "The AllenAI VLA Evaluation Harness reports per-delay success rates (d=0 through d=4) on the 12-task real-time chunking protocol. Realtime mode is a setting on this record rather than a separate benchmark.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2410.23208",
+      "https://github.com/FLAIROx/Kinetix",
+      "https://kinetix-env.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "libero-mem",
+    "name": "LIBERO-Mem",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Ten LIBERO manipulation tasks requiring episodic memory, where the right action depends on what the robot observed earlier. Scored by subgoal completion rate.",
+    "org": "LIBERO-Mem authors",
+    "released": "2025-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2511.11478",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "Tasks differ from base LIBERO, so this is a distinct benchmark rather than a renamed copy.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2511.11478",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "maniskill2",
+    "name": "ManiSkill2",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Twenty simulated manipulation task families with rigid and soft objects, scored by success rate across standard manipulation tasks.",
+    "org": "UC San Diego (Hao Su Lab)",
+    "released": "2023-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2302.04659",
+      "repo": "https://github.com/haosulab/ManiSkill2",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "note": "ManiSkill3 changed the simulator, tasks, and scoring, so ManiSkill2 keeps its own record. The AllenAI VLA Evaluation Harness ranks entries evaluated on the standard five-task set.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2302.04659",
+      "https://github.com/haosulab/ManiSkill2",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "mikasa-robo",
+    "name": "MIKASA-Robo",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Tabletop manipulation tasks that require memory, such as remembering a hidden object or a color shown earlier. Scored by average success rate across five standard tasks.",
+    "org": "AIRI and MIPT (CognitiveAISystems)",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.10550",
+      "repo": "https://github.com/CognitiveAISystems/MIKASA-Robo",
+      "site": "https://mikasarobo.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2502.10550",
+      "https://github.com/CognitiveAISystems/MIKASA-Robo",
+      "https://mikasarobo.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robocerebra",
+    "name": "RoboCerebra",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Long-horizon household manipulation tasks that test planning and reflection in a robot policy paired with a high-level planner across six evaluation dimensions.",
+    "org": "Beihang University (BUAA CoLab)",
+    "released": "2025-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.06677",
+      "repo": "https://github.com/buaa-colalab/RoboCerebra",
+      "site": "https://robocerebra.github.io/",
+      "leaderboard": "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2506.06677",
+      "https://github.com/buaa-colalab/RoboCerebra",
+      "https://robocerebra.github.io/",
+      "https://allenai.github.io/vla-evaluation-harness/leaderboard/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ha-vln-2",
+    "name": "HA-VLN 2.0",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Vision and language navigation among moving people, scored on reaching the goal while avoiding collisions in discrete and continuous environments.",
+    "org": "University of Washington, NUS, CMU and Microsoft Research",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.14229",
+      "repo": "https://github.com/UWMILab/HA-VLN",
+      "site": "https://uwmilab.github.io/HA-VLN-webpage/",
+      "leaderboard": "https://uwmilab.github.io/HA-VLN-webpage/"
+    },
+    "access": "public+private-holdout",
+    "note": "Agents are specialized navigation models such as BEVBert and ETPNav rather than frontier chat models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2503.14229",
+      "https://github.com/UWMILab/HA-VLN",
+      "https://uwmilab.github.io/HA-VLN-webpage/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "furniturebench",
+    "name": "FurnitureBench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Real-world robot furniture assembly with a reproducible hardware setup and matching simulator, scored on how many assembly phases a policy completes.",
+    "org": "KAIST CLVR Lab",
+    "released": "2023-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.12821",
+      "repo": "https://github.com/clvrai/furniture-bench"
+    },
+    "access": "public",
+    "note": "Paper results only. There is no live public leaderboard feed to import.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.12821",
+      "https://github.com/clvrai/furniture-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "t3bench",
+    "name": "T3Bench",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Three hundred text prompts at three levels of complexity for text-to-3D generation, scored for visual quality and text alignment from multi-view renders.",
+    "org": "Tsinghua University",
+    "released": "2023-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2310.02977",
+      "repo": "https://github.com/THU-LYJ-Lab/T3Bench",
+      "site": "https://t3bench.com/",
+      "leaderboard": "https://t3bench.com/"
+    },
+    "access": "public",
+    "note": "The project leaderboard reports six 2023 text-to-3D optimization methods across single-object, surroundings, and multi-object prompts.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2310.02977",
+      "https://github.com/THU-LYJ-Lab/T3Bench",
+      "https://t3bench.com/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-tts-leaderboard-1-7",
+    "name": "Open TTS Leaderboard 1.7.0",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "open-tts-leaderboard",
+    "version": "1.7.0",
+    "description": "Speech models read multilingual text aloud across 36 languages. The board compares transcriptions with reference text and measures speaker similarity.",
+    "org": "Hugging Face",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard/blob/main/leaderboard_data.py",
+      "site": "https://huggingface.co/blog/open-tts-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard"
+    },
+    "access": "public",
+    "note": "Adds the ZTTS2-Eval Mini clean split, rescores Arabic and Korean, and caps per-utterance WER and CER at 100% before pooling. Patch updates 1.7.1 through 1.7.3 add models under the same protocol.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/blog/open-tts-leaderboard",
+      "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard",
+      "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard/blob/main/leaderboard_data.py"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "tts-spaces-arena",
+    "name": "TTS Spaces Arena",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Blind pairwise voting arena that queries open and hosted text-to-speech Spaces on Hugging Face and ranks them by Elo.",
+    "org": "Pendrokar (Hugging Face community)",
+    "released": "2024-03",
+    "links": {
+      "repo": "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena/tree/main",
+      "dataset": "https://huggingface.co/datasets/Pendrokar/TTS_Arena",
+      "leaderboard": "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena"
+    },
+    "access": "public",
+    "note": "Maintains its own vote pool and model list separate from TTS-AGI TTS Arena V2.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena",
+      "https://huggingface.co/spaces/Pendrokar/TTS-Spaces-Arena/tree/main",
+      "https://huggingface.co/datasets/Pendrokar/TTS_Arena"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "full-duplex-leaderboard",
+    "name": "Full-Duplex Leaderboard",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Independent evaluation of full-duplex speech and real-time voice models across turn taking, spoken tool calling, and voice style with public measurement traces.",
+    "org": "aufklarer",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard"
+    },
+    "access": "public",
+    "note": "The source warns against averaging across separate tracks, so the imported board reports the primary Turn-taking track on TurnBench dev.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard",
+      "https://huggingface.co/spaces/aufklarer/full-duplex-leaderboard/raw/main/data/unified-ratings.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "auditbench-anthropic",
+    "name": "AuditBench",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Alignment auditing benchmark measuring whether autonomous investigator agents can uncover implanted hidden behaviors across 56 target language models covering 14 behavior categories.",
+    "org": "Anthropic",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.22755",
+      "repo": "https://github.com/safety-research/auditing-agents",
+      "site": "https://alignment.anthropic.com/2026/auditbench/",
+      "dataset": "https://huggingface.co/auditing-agents"
+    },
+    "access": "public",
+    "note": "Evaluates 13 auditing agent tool configurations across 56 fine-tuned model organisms. Paper results are reported in figures rather than a per-model leaderboard table.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://alignment.anthropic.com/2026/auditbench/",
+      "https://arxiv.org/abs/2602.22755",
+      "https://github.com/safety-research/auditing-agents",
+      "https://huggingface.co/auditing-agents"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "cookie-bench",
+    "name": "Cookie-Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Interactive front-end web generation benchmark testing 1,000 static and dynamic web app prompts across 11 domains through autonomous on-screen interaction rather than static screenshots.",
+    "org": "Haoyue Yang and collaborators",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.30000",
+      "repo": "https://github.com/Haoyue-Yang/Cookie-Bench",
+      "dataset": "https://huggingface.co/datasets/Y36521478Y/Cookie-Bench"
+    },
+    "access": "public",
+    "note": "Table 1 in arXiv:2605.30000 scores 13 frontier models across React agent scaffold and HTML direct chat modes. Also cited in Baidu ERNIE-5.5-Flash-Preview model card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Haoyue-Yang/Cookie-Bench",
+      "https://arxiv.org/abs/2605.30000",
+      "https://huggingface.co/datasets/Y36521478Y/Cookie-Bench",
+      "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "fairchem-leaderboard",
+    "name": "FAIR Chemistry Leaderboard",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Chemistry and materials modeling leaderboard evaluating atomistic foundation models across Open Molecules 2025 (OMol25) and Open Catalyst 2020 (OC20) energy and force benchmarks.",
+    "org": "Meta FAIR",
+    "released": "2025-08",
+    "links": {
+      "repo": "https://github.com/facebookresearch/fairchem",
+      "site": "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/facebook/fairchem_leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "Lower energy MAE in meV is better. Importer reads complete entries from the live OMol25 Overview table across seven chemistry tasks.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
+      "https://github.com/facebookresearch/fairchem"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "qwen3guardtest",
+    "name": "Qwen3GuardTest",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Safety moderation benchmark testing whether guardrail models detect unsafe content inside intermediate reasoning traces and real-time streaming responses across thinking, response_loc, and thinking_loc splits.",
+    "org": "Qwen (Alibaba)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.14276",
+      "repo": "https://github.com/QwenLM/Qwen3Guard",
+      "dataset": "https://huggingface.co/datasets/Qwen/Qwen3GuardTest"
+    },
+    "access": "public",
+    "note": "Published in the Qwen3Guard technical report (arXiv:2510.14276). Table 3 reports F1 scores for 13 guard model configurations on the thinking-content moderation split.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/Qwen/Qwen3GuardTest",
+      "https://github.com/QwenLM/Qwen3Guard",
+      "https://arxiv.org/abs/2510.14276"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robotap",
+    "name": "RoboTAP",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "university",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Benchmark for dense arbitrary point tracking on 265 real-world robotic manipulation videos with hands, grippers, and heavy occlusions scored by Average Jaccard under the TAP-Vid protocol.",
+    "org": "Google DeepMind and University College London",
+    "released": "2023-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2308.15975",
+      "repo": "https://github.com/google-deepmind/tapnet",
+      "site": "https://robotap.github.io/"
+    },
+    "access": "public",
+    "note": "Tables 4 and 5 in arXiv:2308.15975 report Average Jaccard overall and by static or moving camera and points. Also reported in AllenAI RoboTracker model cards.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robotap.github.io/",
+      "https://arxiv.org/abs/2308.15975",
+      "https://github.com/google-deepmind/tapnet",
+      "https://huggingface.co/allenai/RoboTracker"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "sleight-bench",
+    "name": "SLEIGHT-Bench",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Benchmark of evasive AI agent transcripts designed to exploit blind spots in trusted LLM monitoring systems, testing whether monitors detect subtle misaligned attacks at low false-positive rates.",
+    "org": "Anthropic and Redwood Research",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.16626",
+      "repo": "https://github.com/safety-research/sleight-bench",
+      "site": "https://alignment.anthropic.com/2026/sleight-bench/"
+    },
+    "access": "public",
+    "note": "Published on Anthropic Alignment Science blog with encrypted public transcript repository. Per-model catch rates are plotted in paper figures rather than HTML tables.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://alignment.anthropic.com/2026/sleight-bench/",
+      "https://arxiv.org/abs/2605.16626",
+      "https://github.com/safety-research/sleight-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "newtonbench",
+    "name": "NewtonBench",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Three hundred twenty-four tasks across 12 physics domains where an LLM agent runs interactive experiments on altered physical laws and must recover the hidden symbolic law.",
+    "org": "HKUST KnowComp",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.07172",
+      "repo": "https://github.com/HKUST-KnowComp/NewtonBench"
+    },
+    "access": "public",
+    "note": "Altered physical laws prevent models from reciting textbook formulas. Paper Table 2 scores 11 frontier models across vanilla and code-assisted agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2510.07172",
+      "https://github.com/HKUST-KnowComp/NewtonBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "physgym",
+    "name": "PhysGym",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Ninety-seven interactive physics environments where an LLM agent probes a system and must discover the governing equation under four controlled levels of prior knowledge.",
+    "org": "Principia AI",
+    "released": "2025-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2507.15550",
+      "repo": "https://github.com/principia-ai/PhysGym"
+    },
+    "access": "public",
+    "note": "Original NeurIPS 2025 benchmark suite behind the Prime Intellect port physgym-arena-dr-hard. Paper Table 1 scores six frontier models across prior levels L1 through L4.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2507.15550",
+      "https://github.com/principia-ai/PhysGym"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rele-chinese-llm-benchmark",
+    "name": "ReLE",
+    "aliases": [
+      "CLiB",
+      "Chinese LLM Benchmark"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Long-running Chinese LLM evaluation with about 300 fine-grained dimensions across eight domains, updated regularly with commercial and open models.",
+    "org": "NoneLinear (ReLE benchmark team)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2601.17399",
+      "repo": "https://github.com/jeinlee1991/chinese-llm-benchmark",
+      "leaderboard": "https://github.com/jeinlee1991/chinese-llm-benchmark/blob/main/leaderboard/alldata.md"
+    },
+    "access": "private",
+    "note": "Formerly named CLiB. Headline totals evaluate private Chinese items across eight domains alongside reported API output prices.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2601.17399",
+      "https://github.com/jeinlee1991/chinese-llm-benchmark",
+      "https://github.com/jeinlee1991/chinese-llm-benchmark/blob/main/leaderboard/alldata.md"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-pl-llm-leaderboard",
+    "name": "Open PL LLM Leaderboard",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Polish open-model leaderboard run by SpeakLeash over 26 Polish understanding, question answering, RAG, and professional exam tasks at 0-shot and 5-shot.",
+    "org": "SpeakLeash",
+    "released": "2024-02",
+    "links": {
+      "repo": "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard"
+    },
+    "access": "public",
+    "note": "Aggregate of Polish NLP and exam benchmarks including PolEmo2, KLEJ NER, PolQA, PoQuAD, Polish EQ-Bench, and Polish Medical Exam (PES).",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard",
+      "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard/tree/main"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "llm-leaderboard-fr",
+    "name": "Leaderboard LLM FR",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "French government leaderboard scoring open language models on French instruction following (IFEval FR), graduate science questions (GPQA FR), and French baccalaureate exams (BAC FR).",
+    "org": "French Government AI Coordination (fr-gouv-coordination-ia)",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr",
+      "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr/tree/main"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-ita-llm-leaderboard",
+    "name": "Open Ita LLM Leaderboard",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Open Italian language model leaderboard evaluating open models on Italian MMLU, ARC, and HellaSwag reasoning suites.",
+    "org": "MII-LLM community",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard",
+      "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard/tree/main"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "agent-money-bench",
+    "name": "Agent Money Benchmark",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates frontier models operating with real spending tasks across 76 questions and seller traps, measuring wasted spend per $100, scam incidence, money errors, task success, cost per task, and rubric-graded answer quality.",
+    "org": "BlockRunAI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://agentmoneybench.com",
+      "leaderboard": "https://agentmoneybench.com",
+      "repo": "https://github.com/BlockRunAI/agent-money-bench"
+    },
+    "access": "public",
+    "note": "Scores 12 frontier models including Claude Fable 5.2, GPT-6.1 Sol, Claude Opus 5.5, GPT-6 Astra, and Gemini 4 Argon. Headline is wasted spend in US dollars per $100 (lower is better).",
+    "unit": "usd",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://agentmoneybench.com",
+      "https://github.com/BlockRunAI/agent-money-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ai-all-round-bench",
+    "name": "AI All-Round Bench (AI Decathlon)",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Timed 10-category, 13-task coding and engineering suite testing agents in isolated sandboxes across formal proofs, performance optimization, algorithm battles, spatial reasoning, geometric modeling, interactive apps, game dev, physics, visuals, and systems.",
+    "org": "Wendystar0628",
+    "released": "2026-10",
+    "links": {
+      "site": "https://octathlon.wendystars.com/",
+      "leaderboard": "https://octathlon.wendystars.com/decathlon/",
+      "repo": "https://github.com/Wendystar0628/AI-All-Round-Bench"
+    },
+    "access": "public",
+    "note": "Scores 27 frontier models including GPT-6.2 Astra, Gemini 4 Neon, Claude Fable 5.2, and Claude Opus 5.5 across Standard and Design tracks with total run cost, tokens, and wall time.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://octathlon.wendystars.com/",
+      "https://octathlon.wendystars.com/decathlon/",
+      "https://octathlon.wendystars.com/decathlon/data/scores.json",
+      "https://github.com/Wendystar0628/AI-All-Round-Bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "autocontrol-arena",
+    "name": "AutoControl Arena",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Synthesizes executable test environments to measure frontier AI safety risks across seven dimensions: specification gaming, covert action, capability misuse, instrumental convergence, evaluation awareness, oversight evasion, and strategic misalignment.",
+    "org": "AutoControl Arena Authors",
+    "released": "2026-03",
+    "links": {
+      "site": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "leaderboard": "https://cosmosyi.github.io/AutoControl-Arena/",
+      "paper": "https://arxiv.org/abs/2603.07427",
+      "repo": "https://github.com/CosmosYi/AutoControl-Arena"
+    },
+    "access": "public",
+    "note": "Accepted at ICML 2026. Evaluates nine models across Google, OpenAI, and Alibaba on action and chain-of-thought risk rates (lower is safer).",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://cosmosyi.github.io/AutoControl-Arena/",
+      "https://github.com/CosmosYi/AutoControl-Arena",
+      "https://arxiv.org/abs/2603.07427"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "bug-hunt-bench",
+    "name": "Bug Hunt Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates coding models and CLI harnesses on finding and fixing 105 real planted bugs across two production repositories (a TypeScript VS Code extension with 45 bugs and a React and Supabase LMS with 60 bugs), graded blind against withheld fix commits.",
+    "org": "Pawel Huryn (Product Compass)",
+    "released": "2026-08",
+    "links": {
+      "site": "https://bughunt.productcompass.pm",
+      "leaderboard": "https://bughunt.productcompass.pm",
+      "repo": "https://github.com/phuryn/bug-hunt-bench"
+    },
+    "access": "public",
+    "note": "Scores 56 frontier and open coding models across 151 active configurations (341 total runs), reporting planted bugs fixed out of 105 alongside partial fixes, false positives, turns, wall time, and log-scale cost scatter maps.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bughunt.productcompass.pm",
+      "https://bughunt.productcompass.pm/data/benchmark.json",
+      "https://github.com/phuryn/bug-hunt-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "cloudopsbench",
+    "name": "CloudOpsBench",
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Open-source benchmark of 45 real-world AWS cloud operations tasks for AI agents, tracking resolution rate, wall-clock hours, token consumption, and total run dollar cost across coding agent harnesses.",
+    "org": "CloudOpsBench",
+    "released": "2026-09",
+    "links": {
+      "site": "https://cloudopsbench.ai",
+      "leaderboard": "https://cloudopsbench.ai",
+      "repo": "https://github.com/CloudOpsBench/CloudOpsBench"
+    },
+    "access": "public",
+    "note": "Reports 18 model-harness configurations across frontier models including Claude Fable 5.1, GPT-6 Astra, Gemini 4 Argon, Grok 4.7, and Claude Opus 5.5.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://cloudopsbench.ai",
+      "https://github.com/CloudOpsBench/CloudOpsBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "lingee-bench",
+    "name": "Lingee Bench",
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Enterprise AI agent benchmark built on Harbor with an offline ERP mock service and MCP proxies to evaluate verifiable business workflow execution across finance, manufacturing, supply chain, and general professional tasks.",
+    "org": "Kingdee",
+    "released": "2026-10",
+    "links": {
+      "site": "https://bench.lingee.com/",
+      "repo": "https://github.com/kingdee/lingee-bench",
+      "dataset": "https://huggingface.co/datasets/KD-Lingee/lingee-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "Publishes open task datasets on Hugging Face and GitHub alongside a private evaluation split. Initial whitepaper compares three harnesses on one execution model (GLM-5.3-Flash) while multi-model leaderboard submissions are open.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bench.lingee.com/",
+      "https://github.com/kingdee/lingee-bench",
+      "https://huggingface.co/datasets/KD-Lingee/lingee-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "orbia",
+    "name": "Orbia",
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates generative video world models on whether generated videos form a consistent 3D world across six dimensions: camera control, visual quality, input preservation, persistence, 3D consistency, and stability.",
+    "org": "Orbia Authors",
+    "released": "2026-10",
+    "links": {
+      "site": "https://orbia-bench.github.io",
+      "leaderboard": "https://orbia-bench.github.io",
+      "paper": "https://arxiv.org/abs/2610.20693",
+      "repo": "https://github.com/worldbench/Orbia"
+    },
+    "access": "public",
+    "note": "Ranks 29 camera-, text-, and action-conditioned video world models including WorldCrafter-Fast, Genie3, Cosmos3, Seedance2.5, Kling3.0, and Wan2.7.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://orbia-bench.github.io",
+      "https://github.com/worldbench/Orbia",
+      "https://arxiv.org/abs/2610.20693"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "risk-aware-trading-agents",
+    "name": "Risk-Aware Trading Agents (rta-bench-1)",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Look-ahead-free US stock trading agent benchmark that replays financial news by exact publication minute to test whether language model trading agents earn risk-adjusted alpha over equal-weight and SPY baselines.",
+    "org": "jackson-cmd",
+    "released": "2026-11",
+    "links": {
+      "site": "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "leaderboard": "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "paper": "https://arxiv.org/abs/2611.19530",
+      "repo": "https://github.com/jackson-cmd/risk-aware-trading-agents"
+    },
+    "access": "public",
+    "note": "Headline score is the clean 2026 out-of-sample blind Sharpe ratio across six evaluated models, with 2020 and 2022 period Sharpe ratios, total return, excess returns, max drawdown, and post-cutoff Sharpe.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://jackson-cmd.github.io/risk-aware-trading-agents/",
+      "https://jackson-cmd.github.io/risk-aware-trading-agents/assets/data/leaderboard.json",
+      "https://github.com/jackson-cmd/risk-aware-trading-agents",
+      "https://arxiv.org/abs/2611.19530"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "s1mb",
+    "name": "S1MB (System One Mosaic Benchmark)",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-instructions",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Benchmarks System One decision models across English, Japanese, and vision tasks unified into choice, yes-no judgment, and numeric scoring formats with baseline-adjusted skill scoring.",
+    "org": "hotchpotch",
+    "released": "2026-09",
+    "links": {
+      "site": "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "dataset": "https://huggingface.co/datasets/hotchpotch/s1mb-result"
+    },
+    "access": "public",
+    "note": "Scores over 215 decision models on complete 137-task English v1 coverage (mean baseline-adjusted skill scaled to 100), alongside Japanese v1 (27 tasks) and Vision v1 (26 tasks) suites.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/hotchpotch/S1MB-leaderboard",
+      "https://huggingface.co/datasets/hotchpotch/s1mb-result"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "seclens",
+    "name": "SecLens",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates large language models on real-world CVE security vulnerability detection across 35 dimensions and five security stakeholder lenses (CISO, CAIO, Security Researcher, Engineering, and AI Actor) alongside cost per case.",
+    "org": "MatterSec Labs",
+    "released": "2026-04",
+    "links": {
+      "site": "https://mattersec-labs.github.io/seclens/",
+      "leaderboard": "https://mattersec-labs.github.io/seclens/",
+      "paper": "https://arxiv.org/abs/2604.01637",
+      "repo": "https://github.com/mattersec-labs/seclens"
+    },
+    "access": "public",
+    "note": "Scores 12 frontier coding models including Gemini 3 Flash, Gemini 3.1 Pro, Claude Sonnet 4.6, Kimi K2.5, Claude Opus 4.6, and GPT-5.4 with a live cost-versus-score scatter plot.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mattersec-labs.github.io/seclens/",
+      "https://github.com/mattersec-labs/seclens",
+      "https://arxiv.org/abs/2604.01637"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "unsafe-eval-leaderboard",
+    "name": "unsafe-eval Leaderboard",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Reproducible evaluation leaderboard for AI safety guard classifiers and moderation APIs across eight prompt-safety benchmarks (Aegis 2.0, OpenAI Mod, ToxicChat, WildGuardMix, CoSApien, DynaGuardrail, SST, and HarmBench).",
+    "org": "Principled Intelligence",
+    "released": "2026-10",
+    "links": {
+      "site": "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "repo": "https://github.com/Principled-Intelligence/unsafe-eval",
+      "dataset": "https://huggingface.co/datasets/principled-intelligence/unsafe-eval-leaderboard"
+    },
+    "access": "public",
+    "note": "Evaluates 40 open-weight and hosted safety guard models, ranking by average balanced accuracy (%) alongside unsafe F1, unsafe recall, refusal rate, cost, output tokens, and latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/principled-intelligence/unsafe-eval-leaderboard",
+      "https://github.com/Principled-Intelligence/unsafe-eval",
+      "https://huggingface.co/datasets/principled-intelligence/unsafe-eval-leaderboard"
+    ],
+    "added": "2026-11-24"
   }
 ]
