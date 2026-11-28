@@ -27,7 +27,7 @@ const board: Leaderboard = {
       const score = Number(match[3]);
       const interval = Number(match[4]);
       if (!model || !Number.isFinite(score) || !Number.isFinite(interval)) throw new Error('FrontierBreach row is incomplete');
-      rows.push({ model, score, low: score - interval, high: score + interval, metrics: { interval, attackSuccessRate: score } });
+      rows.push({ model, score, low: score - interval, high: score + interval, metrics: { attackSuccessRate: score } });
     }
     if (rows.length < 20) throw new Error(`FrontierBreach: ${rows.length} models, expected at least 20`);
     return rows;

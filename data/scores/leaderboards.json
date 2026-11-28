@@ -14114,13 +14114,13 @@
       "url": "https://arxiv.org/abs/2412.14093",
       "feed": "https://arxiv.org/html/2412.14093",
       "terms": "arXiv robots.txt allows the HTML paper. The authors publish the compliance gaps.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-28",
       "rows": 17,
       "unmatched": [
         "Claude 3 Opus (Post-RL)",
         "Mistral-7B-Instruct-v0.3"
       ],
-      "static": "paper",
       "stats": {
         "alignmentFakingReasoning": {
           "name": "Alignment-faking reasoning",
@@ -45967,7 +45967,7 @@
       "feed": "https://arxiv.org/html/2410.05340",
       "terms": "The authors publish their evaluation in the paper. https://arxiv.org/abs/2410.05340",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 0,
       "unmatched": [
         "CodeLlama 70B",
@@ -47578,7 +47578,7 @@
       "url": "https://opencausalab.github.io/CaLM/calm_website/pages/leaderboard.html",
       "feed": "https://opencausalab.github.io/CaLM/calm_website/tables/model_overview.js",
       "terms": "Public maker results on GitHub Pages; robots.txt has no restriction on this path.",
-      "retrieved": "2026-11-27",
+      "retrieved": "2026-11-28",
       "rows": 8,
       "unmatched": [
         "Baichuan1-chat (13B)",
@@ -50604,6 +50604,10 @@
         },
         "generated": {
           "name": "Generated",
+          "group": "Split"
+        },
+        "validation": {
+          "name": "Validation split",
           "group": "Split"
         }
       }
@@ -66208,6 +66212,12 @@
         "votes": {
           "name": "Votes",
           "unit": "count"
+        },
+        "cat:webdev": {
+          "name": "WebDev category rating",
+          "unit": "rating",
+          "better": "higher",
+          "note": "Secondary Arena category rating across all webdev prompts."
         }
       }
     },
@@ -80123,7 +80133,8 @@
       "url": "https://eval.ai/web/challenges/challenge-page/2305/leaderboard/5695",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/5695/leaderboard/?page_size=100 and https://arxiv.org/html/2406.05967",
       "terms": "EvalAI's public leaderboard API, the endpoint its challenge pages read; eval.ai has no robots.txt rules and EvalAI's code is open source (Cloud-CV/EvalAI). arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-28",
       "rows": 8,
       "unmatched": [
         "CLIP",
@@ -80305,8 +80316,7 @@
         "Web Image": {
           "name": "Web Image"
         }
-      },
-      "static": "paper"
+      }
     },
     "cwe-bench": {
       "url": "https://cwe-bench.com/v1",
@@ -96779,6 +96789,54 @@
           "name": "Area under the risk coverage curve",
           "unit": "score",
           "better": "lower"
+        },
+        "ECE": {
+          "name": "RRC expected calibration error",
+          "unit": "score",
+          "better": "lower",
+          "note": "RRC Task 1 live submission calibration error on a 0 to 1 scale."
+        },
+        "AURC": {
+          "name": "RRC area under the risk coverage curve",
+          "unit": "score",
+          "better": "lower",
+          "note": "RRC Task 1 live submission risk coverage area on a 0 to 1 scale."
+        },
+        "AUROC": {
+          "name": "RRC selective prediction AUROC",
+          "unit": "score",
+          "better": "higher",
+          "note": "RRC Task 1 live submission AUROC on a 0 to 1 scale."
+        }
+      },
+      "parts": {
+        "Extractive": {
+          "name": "Extractive",
+          "group": "Question type",
+          "unit": "score",
+          "better": "higher",
+          "note": "RRC Task 1 ANLS on extractive questions on a 0 to 1 scale."
+        },
+        "Abstractive": {
+          "name": "Abstractive",
+          "group": "Question type",
+          "unit": "score",
+          "better": "higher",
+          "note": "RRC Task 1 ANLS on abstractive questions on a 0 to 1 scale."
+        },
+        "List of answers": {
+          "name": "List of answers",
+          "group": "Question type",
+          "unit": "score",
+          "better": "higher",
+          "note": "RRC Task 1 ANLS on list-of-answers questions on a 0 to 1 scale."
+        },
+        "Unanswerable": {
+          "name": "Unanswerable",
+          "group": "Question type",
+          "unit": "score",
+          "better": "higher",
+          "note": "RRC Task 1 ANLS on unanswerable questions on a 0 to 1 scale."
         }
       }
     },
@@ -132593,7 +132651,178 @@
         "HMPSAC",
         "IDDQN",
         "PPO-OC"
-      ]
+      ],
+      "parts": {
+        "small1": {
+          "name": "Small instance 1",
+          "group": "Small instances"
+        },
+        "small2": {
+          "name": "Small instance 2",
+          "group": "Small instances"
+        },
+        "small3": {
+          "name": "Small instance 3",
+          "group": "Small instances"
+        },
+        "small4": {
+          "name": "Small instance 4",
+          "group": "Small instances"
+        },
+        "small5": {
+          "name": "Small instance 5",
+          "group": "Small instances"
+        },
+        "small6": {
+          "name": "Small instance 6",
+          "group": "Small instances"
+        },
+        "small7": {
+          "name": "Small instance 7",
+          "group": "Small instances"
+        },
+        "small8": {
+          "name": "Small instance 8",
+          "group": "Small instances"
+        },
+        "small9": {
+          "name": "Small instance 9",
+          "group": "Small instances"
+        },
+        "small10": {
+          "name": "Small instance 10",
+          "group": "Small instances"
+        },
+        "small11": {
+          "name": "Small instance 11",
+          "group": "Small instances"
+        },
+        "small12": {
+          "name": "Small instance 12",
+          "group": "Small instances"
+        },
+        "small13": {
+          "name": "Small instance 13",
+          "group": "Small instances"
+        },
+        "small14": {
+          "name": "Small instance 14",
+          "group": "Small instances"
+        },
+        "small15": {
+          "name": "Small instance 15",
+          "group": "Small instances"
+        },
+        "small16": {
+          "name": "Small instance 16",
+          "group": "Small instances"
+        },
+        "small17": {
+          "name": "Small instance 17",
+          "group": "Small instances"
+        },
+        "small18": {
+          "name": "Small instance 18",
+          "group": "Small instances"
+        },
+        "normal1": {
+          "name": "Normal instance 1",
+          "group": "Normal instances"
+        },
+        "normal2": {
+          "name": "Normal instance 2",
+          "group": "Normal instances"
+        },
+        "normal3": {
+          "name": "Normal instance 3",
+          "group": "Normal instances"
+        },
+        "normal4": {
+          "name": "Normal instance 4",
+          "group": "Normal instances"
+        },
+        "normal5": {
+          "name": "Normal instance 5",
+          "group": "Normal instances"
+        },
+        "normal6": {
+          "name": "Normal instance 6",
+          "group": "Normal instances"
+        },
+        "normal7": {
+          "name": "Normal instance 7",
+          "group": "Normal instances"
+        },
+        "normal8": {
+          "name": "Normal instance 8",
+          "group": "Normal instances"
+        },
+        "normal9": {
+          "name": "Normal instance 9",
+          "group": "Normal instances"
+        },
+        "normal10": {
+          "name": "Normal instance 10",
+          "group": "Normal instances"
+        },
+        "normal11": {
+          "name": "Normal instance 11",
+          "group": "Normal instances"
+        },
+        "normal12": {
+          "name": "Normal instance 12",
+          "group": "Normal instances"
+        },
+        "normal13": {
+          "name": "Normal instance 13",
+          "group": "Normal instances"
+        },
+        "normal14": {
+          "name": "Normal instance 14",
+          "group": "Normal instances"
+        },
+        "normal15": {
+          "name": "Normal instance 15",
+          "group": "Normal instances"
+        },
+        "normal16": {
+          "name": "Normal instance 16",
+          "group": "Normal instances"
+        },
+        "normal17": {
+          "name": "Normal instance 17",
+          "group": "Normal instances"
+        },
+        "normal18": {
+          "name": "Normal instance 18",
+          "group": "Normal instances"
+        },
+        "normal19": {
+          "name": "Normal instance 19",
+          "group": "Normal instances"
+        },
+        "normal20": {
+          "name": "Normal instance 20",
+          "group": "Normal instances"
+        }
+      },
+      "stats": {
+        "avgRank": {
+          "name": "Average rank",
+          "unit": "score",
+          "better": "lower"
+        },
+        "smallTokens": {
+          "name": "Small-instance tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "normalTokens": {
+          "name": "Normal-instance tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "genai-arena": {
       "url": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena",
@@ -138087,7 +138316,7 @@
       "feed": "https://arxiv.org/html/2611.18981",
       "terms": "The authors publish the scores and analysis files at https://github.com/wendli01/gpbam/blob/main/SUBMISSION.md.",
       "static": "paper",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 56,
       "unmatched": [
         "GaleneAI/Magistral-Small-2509-FP8-Dynamic",
@@ -176157,6 +176386,10 @@
         "neurosciencebench": {
           "name": "NeuroscienceBench",
           "group": "Bioscience"
+        },
+        "proteomicsbench": {
+          "name": "ProteomicsBench",
+          "group": "Multiomics"
         }
       },
       "stats": {
@@ -183371,6 +183604,11 @@
         },
         "week10": {
           "name": "Week 10 points",
+          "unit": "score",
+          "better": "higher"
+        },
+        "week11": {
+          "name": "Week 11 points",
           "unit": "score",
           "better": "higher"
         }
@@ -203017,6 +203255,11 @@
           "unit": "minutes",
           "better": "higher",
           "note": "Task length in human minutes at which the agent reaches 80% success."
+        },
+        "averageScore": {
+          "name": "Average task score",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -217064,7 +217307,14 @@
       "terms": "Public repository results under the repository license. https://github.com/skyberg11/MTGBench",
       "retrieved": "2026-11-28",
       "rows": 56,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "mth-v2": {
       "url": "https://arxiv.org/pdf/2608.07917#page=12",
@@ -221446,7 +221696,20 @@
         "tiiuae/falcon-7b-instruct",
         "tiiuae/falcon-mamba-7b"
       ],
-      "verified": "Marked as an official provider by the Open LLM Leaderboard."
+      "verified": "Marked as an official provider by the Open LLM Leaderboard.",
+      "stats": {
+        "normalized": {
+          "name": "Chance-normalized accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Open LLM Leaderboard v2 score rescaled so random chance is 0."
+        },
+        "suiteCo2Kg": {
+          "name": "Full-suite CO2 emissions (kg)",
+          "better": "lower",
+          "note": "Estimated CO2 emissions in kilograms for the full Open LLM Leaderboard v2 run."
+        }
+      }
     },
     "mustbench": {
       "url": "https://daeyongkwon98.github.io/mustbench/",
@@ -234901,6 +235164,11 @@
         }
       },
       "stats": {
+        "PA": {
+          "name": "Proactivity alerting score",
+          "unit": "%",
+          "better": "higher"
+        },
         "PT": {
           "name": "Proactivity task score",
           "unit": "%",
@@ -301063,6 +301331,86 @@
           "name": "Object Attributes Recognition F-score",
           "unit": "%",
           "better": "higher"
+        },
+        "chineseCGA": {
+          "name": "Chinese correct given attempted",
+          "unit": "%",
+          "better": "higher"
+        },
+        "chineseFScore": {
+          "name": "Chinese F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "englishCGA": {
+          "name": "English correct given attempted",
+          "unit": "%",
+          "better": "higher"
+        },
+        "englishFScore": {
+          "name": "English F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:LES": {
+          "name": "Literature, Education and Sports F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:EHC": {
+          "name": "Euro-American History and Culture F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:CS": {
+          "name": "Contemporary Society F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:ETA": {
+          "name": "Engineering, Technology and Application F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:FTM": {
+          "name": "Film, Television and Media F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:NS": {
+          "name": "Natural Science F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:AR": {
+          "name": "Art F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:CHC": {
+          "name": "Chinese History and Culture F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "fScore:LI": {
+          "name": "Life F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cfq:origin": {
+          "name": "Original Q&A accuracy (atomic subset)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cfq:atomic": {
+          "name": "Atomic Q&A accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "cfq:atomicGiven": {
+          "name": "Original Q&A accuracy given atomic facts",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -301649,7 +301997,19 @@
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
       "retrieved": "2026-11-28",
       "rows": 7,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "skills-il-human-or-ai": {
       "url": "https://agentskills.co.il/en/leaderboard",
@@ -333820,7 +334180,21 @@
         "Claude Sonnet 3.7 (16K)",
         "GPT-4o (snapshot unspecified)",
         "Gemini 2.5 Pro (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "passed": {
+          "name": "UQ-Validator passed",
+          "unit": "count",
+          "better": "higher",
+          "note": "Number of questions out of 500 passing the UQ-Validator."
+        },
+        "humanPassRate": {
+          "name": "Human-verified answers",
+          "unit": "count",
+          "better": "higher",
+          "note": "Number of validator-passed answers verified correct by human reviewers."
+        }
+      }
     },
     "urdu-language-speech-emotional-corpus": {
       "url": "https://aaivu.github.io/KuralHub/languages/urdu.html",
@@ -340966,7 +341340,24 @@
         "ResNet18",
         "ResNet34",
         "ResNet50"
-      ]
+      ],
+      "stats": {
+        "map": {
+          "name": "Mean average precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "auc": {
+          "name": "ROC AUC",
+          "unit": "%",
+          "better": "higher"
+        },
+        "top5": {
+          "name": "Top-5 accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "vgi-bench": {
       "url": "https://hexuan21.github.io/VGI-Bench/",
@@ -343119,7 +343510,17 @@
         "Owl-Con ( Ours )",
         "Owl-Rand",
         "VideoCLIP"
-      ]
+      ],
+      "parts": {
+        "human": {
+          "name": "Human test",
+          "group": "Split"
+        },
+        "humanHard": {
+          "name": "Human hard test",
+          "group": "Split"
+        }
+      }
     },
     "videodr-with-search": {
       "url": "https://videodr-benchmark.github.io/#/home",
@@ -344417,7 +344818,34 @@
         "resemblyzer",
         "wav2vec 2.0",
         "x-vector"
-      ]
+      ],
+      "stats": {
+        "task1R2": {
+          "name": "Task 1 R-squared",
+          "unit": "score",
+          "better": "higher"
+        },
+        "task2Auc": {
+          "name": "Task 2 AUROC",
+          "unit": "score",
+          "better": "higher"
+        },
+        "task2EceRaw": {
+          "name": "Task 2 raw ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "task2EceCal": {
+          "name": "Task 2 calibrated ECE",
+          "unit": "score",
+          "better": "lower"
+        },
+        "task3Rho": {
+          "name": "Task 3 Spearman rho",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "vipseg": {
       "url": "https://openaccess.thecvf.com/content/CVPR2022/html/Miao_Large-Scale_Video_Panoptic_Segmentation_in_the_Wild_A_Benchmark_CVPR_2022_paper.html",
@@ -346866,7 +347294,43 @@
         "Llama-3.1-8B-UltraMedical",
         "Meditron3-70B",
         "Meditron3-8B"
-      ]
+      ],
+      "parts": {
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        }
+      },
+      "stats": {
+        "passAt1": {
+          "name": "pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt1Easy": {
+          "name": "Easy pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt1Medium": {
+          "name": "Medium pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt1Hard": {
+          "name": "Hard pass@1",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "vocalgrad": {
       "url": "https://arxiv.org/html/2610.23745",
@@ -352945,6 +353409,86 @@
         "mean:tool_calls": {
           "name": "Mean tool calls per task",
           "unit": "count",
+          "better": "lower"
+        },
+        "mmElapsed": {
+          "name": "Multimodal total elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "ptElapsed": {
+          "name": "Pure text total elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mmCost": {
+          "name": "Multimodal total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "ptCost": {
+          "name": "Pure text total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "productivity:seconds": {
+          "name": "Productivity elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "productivity:usd": {
+          "name": "Productivity cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "code:seconds": {
+          "name": "Code elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "code:usd": {
+          "name": "Code cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "social:seconds": {
+          "name": "Social elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "social:usd": {
+          "name": "Social cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "search:seconds": {
+          "name": "Search elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "search:usd": {
+          "name": "Search cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "creative:seconds": {
+          "name": "Creative elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "creative:usd": {
+          "name": "Creative cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "safety:seconds": {
+          "name": "Safety elapsed time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "safety:usd": {
+          "name": "Safety cost",
+          "unit": "usd",
           "better": "lower"
         }
       }
@@ -359228,6 +359772,28 @@
       }
     }
   },
-  "columns": ["benchmark","model","setting","harness","score","date","cost","tokens","metrics","info"],
-  "otherColumns": ["benchmark","name","setting","harness","score","date","cost","tokens","metrics","info"]
+  "columns": [
+    "benchmark",
+    "model",
+    "setting",
+    "harness",
+    "score",
+    "date",
+    "cost",
+    "tokens",
+    "metrics",
+    "info"
+  ],
+  "otherColumns": [
+    "benchmark",
+    "name",
+    "setting",
+    "harness",
+    "score",
+    "date",
+    "cost",
+    "tokens",
+    "metrics",
+    "info"
+  ]
 }

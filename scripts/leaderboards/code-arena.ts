@@ -8,7 +8,10 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'code-arena',
-  stats: { votes: { name: 'Votes', unit: 'count' } },
+  stats: {
+    votes: { name: 'Votes', unit: 'count' },
+    'cat:webdev': { name: 'WebDev category rating', unit: 'rating', better: 'higher', note: 'Secondary Arena category rating across all webdev prompts.' },
+  },
   parts: { 'cat:webdev-html': 'HTML', 'cat:webdev-react': 'React' },
   url: 'https://arena.ai/leaderboard/code/webdev',
   feed: arenaFeed('webdev', '*'),

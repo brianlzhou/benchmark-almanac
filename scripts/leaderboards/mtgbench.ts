@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://github.com/skyberg11/MTGBench',
   feed: FEED,
   terms: 'Public repository results under the repository license. https://github.com/skyberg11/MTGBench',
+  stats: { winRate: { name: 'Win rate', unit: 'score', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const lines = (await fetchText(FEED)).trim().split(/\r?\n/);
     const rows: LeaderboardRow[] = [];

@@ -24,7 +24,7 @@ function metrics(cells: string[], names: string[], group: string) {
     if (!m) throw new Error('Invalid ' + name);
     const key = name.replace(/[^A-Za-z0-9]/g, '');
     result[key] = Number(m[1]);
-    if (m[2]) result[key + 'ReportedSpread'] = Number(m[2]);
+    if (m[2]) result[key + 'Std'] = Number(m[2]);
   });
   return result;
 }

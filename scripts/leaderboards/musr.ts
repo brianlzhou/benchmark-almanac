@@ -14,6 +14,10 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard',
   feed: 'https://huggingface.co/datasets/open-llm-leaderboard/contents/resolve/main/data/train-00000-of-00001.parquet (MUSR Raw, model makers only)',
   terms: 'Public results dataset published by the board on Hugging Face, read through the dataset viewer API.',
+  stats: {
+    normalized: { name: 'Chance-normalized accuracy', unit: '%', better: 'higher', note: 'Open LLM Leaderboard v2 score rescaled so random chance is 0.' },
+    suiteCo2Kg: { name: 'Full-suite CO2 emissions (kg)', better: 'lower', note: 'Estimated CO2 emissions in kilograms for the full Open LLM Leaderboard v2 run.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows = (await openLlmEntries())
       .filter((r) => OPEN_LLM_MAKERS.has(openLlmOwner(r)) && typeof r['MUSR Raw'] === 'number')
@@ -22,7 +26,6 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = {};
         if (Number.isFinite(r.MUSR)) metrics.normalized = r.MUSR;
         if (Number.isFinite(r['CO₂ cost (kg)'])) metrics.suiteCo2Kg = r['CO₂ cost (kg)'];
-        if (r['Hub ❤️'] != null) metrics.hubLikes = Number(r['Hub ❤️']);
         return { model: openLlmModel(r), metrics, open: true,
           params: r['#Params (B)'] > 0 ? r['#Params (B)'] : undefined,
           license: r['Hub License'] && r['Hub License'] !== 'unknown' ? r['Hub License'] : undefined,

@@ -85,7 +85,6 @@ export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
     for (const key of ['Training compute (FLOP)', 'Training dataset size (datapoints)', 'Training compute cost (2023 USD)', 'Finetune compute (FLOP)', 'Hardware quantity', 'Citations', 'Epochs', 'Batch size']) {
       if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
     }
-    if (r['Manual evaluation'] === 'True') metrics.manualEvaluation = 1;
     const setting = [effort?.[1], r['task version'] ? `task version ${r['task version']}` : undefined].filter(Boolean).join(', ') || undefined;
     const access = r['Model accessibility'];
     const size = Number(r.Parameters);

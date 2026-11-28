@@ -12,6 +12,7 @@ export default {
     name, { name, group: 'Question type', note: 'Accuracy on a sample of 200 ChartQA-H questions.' },
   ])),
   generated: { name: 'Generated', group: 'Split' },
+  validation: { name: 'Validation split', group: 'Split' },
 },url:'https://arxiv.org/abs/2203.10244',feed,terms:PAPER_TERMS,
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

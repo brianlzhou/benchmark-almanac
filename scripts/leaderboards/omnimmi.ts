@@ -22,7 +22,10 @@ const board: Leaderboard = {
     'VITA (Mistrl-8×7B)': 'vita',
     'Video-LLaVA (Vicuna-7B)': 'video-llava-7b',
   },
-  stats: { PT: { name: 'Proactivity task score', unit: '%', better: 'higher' } },
+  stats: {
+    PA: { name: 'Proactivity alerting score', unit: '%', better: 'higher' },
+    PT: { name: 'Proactivity task score', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(PAGE)).map(t => t.map(r => r.map(c => c.text))).filter(t => t[0]?.at(-1) === 'avg. w/o P');
     if (ts.length !== 2) throw new Error('OmniMMI video/audio tables changed');

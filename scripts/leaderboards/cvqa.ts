@@ -33,7 +33,7 @@ const board: Leaderboard = {
         const {labels,default_order_by} = r.leaderboard__schema;
         if (labels[0] !== 'Macro-Acc' || default_order_by !== labels[0] || labels.length < 40 || labels.length !== r.result.length ||
           typeof r.result[0] !== 'number' || !r.result.every(x => x === '#' || (Number.isFinite(x) && x >= 0 && x <= 1))) throw new Error('Unexpected CVQA metrics');
-        const metrics: Record<string,number> = {submissionId:r.submission__id};
+        const metrics: Record<string,number> = {};
         labels.slice(1).forEach((k,i) => {parts[k] = k; const value = r.result[i+1]; if (typeof value === 'number') metrics[k] = value*100;});
         const team = r.submission__participant_team__team_name;
         const model = r.submission__method_name?.trim() || team+' (submission '+r.submission__id+')';

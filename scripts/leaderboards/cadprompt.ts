@@ -46,18 +46,18 @@ const board: Leaderboard = {
       if (feedback.startsWith('Geometric solver')) continue;
       const [name, setting] = label.split(': ');
       const model = name === 'CodeLlama' ? 'CodeLlama 70B' : name;
-      const [score, iqr] = pair(cloud);
-      const [iogt, iogtIqr] = pair(overlap);
-      const [hausdorff, hausdorffIqr] = pair(distance);
+      const [score] = pair(cloud);
+      const [iogt] = pair(overlap);
+      const [hausdorff] = pair(distance);
       if (!/^[\d.]+%$/.test(compile)) throw new Error('Missing compile rate');
-      const metrics: Record<string, number> = { iqr, iogt, iogtIqr, hausdorff, hausdorffIqr, compileRate: parseFloat(compile) };
+      const metrics: Record<string, number> = { iogt, hausdorff, compileRate: parseFloat(compile) };
       if (name === 'GPT-4' && setting === 'Few-shot') {
         for (const [group, mechanism, subsetOverlap, subsetCloud, subsetHausdorff, subsetCompile] of split.slice(1)) {
           if (mechanism !== feedback) continue;
           const key = group.replaceAll(' ', '');
-          [metrics[key], metrics[key + 'Iqr']] = pair(subsetCloud);
-          [metrics[key + 'Iogt'], metrics[key + 'IogtIqr']] = pair(subsetOverlap);
-          [metrics[key + 'Hausdorff'], metrics[key + 'HausdorffIqr']] = pair(subsetHausdorff);
+          [metrics[key]] = pair(subsetCloud);
+          [metrics[key + 'Iogt']] = pair(subsetOverlap);
+          [metrics[key + 'Hausdorff']] = pair(subsetHausdorff);
           if (/^[\d.]+%$/.test(subsetCompile)) metrics[key + 'CompileRate'] = parseFloat(subsetCompile);
         }
       }
