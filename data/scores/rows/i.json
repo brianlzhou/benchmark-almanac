@@ -779,6 +779,7 @@
     ["inductive-arithmetic-pattern-reasoning","gemini-3-8-flash",null,null,100,"2026-09-02",null,null,null,{"run":"2026-11-14"}],
     ["inductive-arithmetic-pattern-reasoning","grok-4-7",null,null,100,"2026-09-21",null,null,null,{"run":"2026-11-15"}],
     ["inductive-arithmetic-pattern-reasoning","claude-opus-5-5",null,null,100,"2026-09-22",null,null,null,{"run":"2026-11-16"}],
+    ["inductive-arithmetic-pattern-reasoning","gpt-6-luna",null,null,100,"2026-09-22",null,null,null,{"run":"2026-11-28"}],
     ["inductive-arithmetic-pattern-reasoning","claude-sonnet-5-5",null,null,100,"2026-09-28",null,null,null,{"run":"2026-11-18"}],
     ["inductive-arithmetic-pattern-reasoning","gpt-6-1-sol",null,null,100,"2026-09-29",null,null,null,{"run":"2026-11-16"}],
     ["inductive-arithmetic-pattern-reasoning","gemini-4-argon",null,null,100,"2026-09-30",null,null,null,{"run":"2026-11-16"}],
