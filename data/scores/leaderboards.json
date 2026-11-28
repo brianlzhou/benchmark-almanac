@@ -135233,6 +135233,88 @@
         "GPT-4o (snapshot unspecified)"
       ]
     },
+    "gobench": {
+      "url": "https://rolandgao.com/blog/gobench/",
+      "feed": "https://rolandgao.com/blog/gobench/ (__NEXT_DATA__ Track 1 standings)",
+      "terms": "The author publishes the benchmark code and summary results under the MIT License at https://github.com/RolandGao/gobench/blob/main/LICENSE and rolandgao.com robots.txt allows the leaderboard page.",
+      "retrieved": "2026-11-28",
+      "rows": 33,
+      "unmatched": [
+        "Muse Spark 1.3 Contributor"
+      ],
+      "chart": {
+        "title": "Elo versus cost per move",
+        "x": {
+          "key": "costPerMove",
+          "label": "Cost per move",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Track 1 direct 9x9 Go play without tools, plotted against cost per move on a logarithmic scale."
+      },
+      "stats": {
+        "costPerMove": {
+          "name": "Cost per move",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "games": {
+          "name": "Games played",
+          "unit": "count"
+        }
+      }
+    },
+    "gobench-track-2": {
+      "url": "https://rolandgao.com/blog/gobench/",
+      "feed": "https://rolandgao.com/blog/gobench/ (__NEXT_DATA__ Track 2 standings)",
+      "terms": "The author publishes the benchmark code and summary results under the MIT License at https://github.com/RolandGao/gobench/blob/main/LICENSE and rolandgao.com robots.txt allows the leaderboard page.",
+      "retrieved": "2026-11-28",
+      "rows": 17,
+      "unmatched": [],
+      "chart": {
+        "title": "Elo versus continual learning duration",
+        "x": {
+          "key": "learningHours",
+          "label": "Continual learning duration",
+          "unit": "hours",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Elo",
+          "unit": "Elo",
+          "better": "higher"
+        },
+        "note": "Track 2 coding agents spend 1 to 8 hours building a 9x9 Go engine, evaluated at 1 minute per game."
+      },
+      "costPer": "run",
+      "harnesses": "system",
+      "stats": {
+        "learningHours": {
+          "name": "Continual learning duration",
+          "unit": "hours",
+          "better": "lower"
+        },
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
+    },
     "gold-commodity-news": {
       "url": "https://arxiv.org/html/2009.04202",
       "feed": "https://arxiv.org/html/2009.04202",
