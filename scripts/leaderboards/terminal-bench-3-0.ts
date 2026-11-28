@@ -1,6 +1,7 @@
 // Terminal-Bench 3.0 publishes total run costs. It has no trial time for the Pareto chart.
 import type { Leaderboard } from './types.ts';
 import { makeTerminalBench } from './terminal-bench-4-0.ts';
+import { TERMINAL_BENCH_STATS } from '../lib/boards/terminal-bench.ts';
 
 const board: Leaderboard = {
   ...makeTerminalBench({
@@ -11,6 +12,10 @@ const board: Leaderboard = {
     extras: true,
     costPer: 'run',
   }),
+  stats: {
+    runCostUsd: TERMINAL_BENCH_STATS.runCostUsd,
+    runTotalTokens: TERMINAL_BENCH_STATS.runTotalTokens,
+  },
   chart: undefined,
 };
 export default board;

@@ -10,6 +10,17 @@ const FEED = "https://mistral.ai/news/leanstral/";
 const board: Leaderboard = {
  benchmark: "flteval", measures: { passAt2: 'pass-2', passAt4: 'pass-4', passAt8: 'pass-8', passAt16: 'pass-16' },
  costPer: 'run',
+ stats: {
+  runCost: { name: 'Total run cost', unit: 'usd', better: 'lower', note: 'Total US dollar cost for the pass@1 evaluation run.' },
+  passAt2: { name: 'Pass@2', unit: 'score', better: 'higher' },
+  'pass@2_cost': { name: 'Pass@2 run cost', unit: 'usd', better: 'lower' },
+  passAt4: { name: 'Pass@4', unit: 'score', better: 'higher' },
+  'pass@4_cost': { name: 'Pass@4 run cost', unit: 'usd', better: 'lower' },
+  passAt8: { name: 'Pass@8', unit: 'score', better: 'higher' },
+  'pass@8_cost': { name: 'Pass@8 run cost', unit: 'usd', better: 'lower' },
+  passAt16: { name: 'Pass@16', unit: 'score', better: 'higher' },
+  'pass@16_cost': { name: 'Pass@16 run cost', unit: 'usd', better: 'lower' },
+ },
  url: "https://mistral.ai/news/leanstral/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

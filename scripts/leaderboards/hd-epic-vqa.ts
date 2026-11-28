@@ -7,6 +7,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const FEED = "https://hd-epic.github.io/site/";
 const board: Leaderboard = {
   benchmark: "hd-epic-vqa",
+  static: 'paper',
   url: "https://www.codabench.org/competitions/13645/",
   feed: FEED,
   terms: "The organizers publish the benchmarks under CC BY-NC 4.0. https://hd-epic.github.io/site/#-copyright Codabench serves a challenge page. The organizer links the reports publicly.",

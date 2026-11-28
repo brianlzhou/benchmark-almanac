@@ -9,7 +9,7 @@ const FEED = "https://eval.raycaster.ai/benchmarks/biopharma-bench/";
 const board: Leaderboard = {
  benchmark: "biopharma-bench", url: "https://eval.raycaster.ai/benchmarks/biopharma-bench/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
- stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' }, passAt1Margin: { name: 'Pass@1 margin', unit: '%' }, steps: { name: 'Steps', unit: 'count' }, toolCalls: { name: 'Tool calls', unit: 'count' } },
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' }, fullPassCount: { name: 'Full passes', unit: 'count', better: 'higher' }, steps: { name: 'Steps', unit: 'count' }, toolCalls: { name: 'Tool calls', unit: 'count' } },
  aliases:{'Muse Wonder 1.0':'muse-wonder'},
  chart:{title:'Mean rubric score vs. cost',x:{key:'cost',label:'Mean task cost',unit:'$',better:'lower'},y:{key:'score',label:'Mean rubric score',unit:'%',better:'higher'}},
  async fetch() {
@@ -26,8 +26,8 @@ const board: Leaderboard = {
     const metrics: Record<string,number> = {};
     const values = {cost, steps: num(r[5].text), toolCalls: num(r[6].text), latency: minutes === undefined ? undefined : minutes * 60,
       passAt1: pass ? 100 * Number(pass[1]) / Number(pass[2]) : num(r[3].text),
-      fullPassCount: pass ? Number(pass[1]) : undefined, tasks: pass ? Number(pass[2]) : undefined,
-      passAt1Margin: num(r[3].text.split('±')[1] ?? '')};
+      fullPassCount: pass ? Number(pass[1]) : undefined,
+      passAt1Ci: num(r[3].text.split('±')[1] ?? '')};
     for (const [key, value] of Object.entries(values)) if (value !== undefined) metrics[key] = value;
     return {model, harness, setting: `V0.2; ${effort}; 81 tasks`, score, cost, metrics,
       low: margin === undefined ? undefined : score-margin, high: margin === undefined ? undefined : score+margin};

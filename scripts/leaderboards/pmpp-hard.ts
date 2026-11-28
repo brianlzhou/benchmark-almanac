@@ -3,7 +3,7 @@ import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 const feed='https://raw.githubusercontent.com/SinatrasC/pmpp-hard/HEAD/README.md';
 export default {
-  benchmark:'pmpp-hard',url:'https://github.com/SinatrasC/pmpp-hard',feed,
+  benchmark:'pmpp-hard',harnesses:'system',url:'https://github.com/SinatrasC/pmpp-hard',feed,
   stats:{passed:{name:'Tests passed',unit:'count'},cudaCutlassPassed:{name:'CUDA CUTLASS tests passed',unit:'count'},tritonPassed:{name:'Triton tests passed',unit:'count'}},
   terms:'The PMPP Hard repository is MIT licensed. The raw README path is permitted by robots.txt.',
   async fetch():Promise<LeaderboardRow[]> {

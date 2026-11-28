@@ -5,8 +5,6 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
 
 const FEED = "https://euroeval.com/leaderboards-csv/european_all_models.csv";
-const marginLanguages = ['Albanian','Belarusian','Bosnian','Bulgarian','Catalan','Croatian','Czech','Danish','Dutch','English','Estonian','Faroese','Finnish','French','German','Greek','Hungarian','Icelandic','Italian','Latvian','Lithuanian','Luxembourgish','Norwegian','Polish','Portuguese','Romanian','Serbian','Slovak','Slovene','Spanish','Swedish','Ukrainian'];
-const marginStats = Object.fromEntries(marginLanguages.map(language => [language + 'Margin', { name: language + ' rank score margin', unit: 'score' }]))
 
 function score(cell: string) {
   const m = cell?.trim().match(/^(\d+(?:\.\d+)?)\s*±\s*(\d+(?:\.\d+)?)$/);
@@ -20,10 +18,8 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The repository uses the MIT License for its software and documentation. The leaderboard does not specify separate data terms. https://github.com/EuroEval/EuroEval/blob/main/LICENSE",
   stats: {
-    rank: { name: 'Rank', unit: 'count', better: 'lower' },
     Context: { name: 'Context length', unit: 'tokens' },
     Vocabulary: { name: 'Vocabulary size', unit: 'tokens' },
-    ...marginStats,
   },
   aliases: {
     "Qwen/Qwen3.6-27B-FP8": "qwen3-6-27b",
@@ -55,12 +51,12 @@ const board: Leaderboard = {
       const label = text(r.Model);
       const [, model, effort, config] = label.match(/^([^#(]+?)(?:#([^ (]+))?(?: \(([^)]+)\))?$/) ?? [];
       if (!model) throw new Error('Unexpected EuroEval label: ' + label);
-      const metrics: Record<string,number> = {tiedRank: Number(r.Rank)};
+      const metrics: Record<string,number> = {};
       for (const lang of langs) {
         if (r[lang] === '-') continue;
         const [v, delta] = score(r[lang]);
         metrics[lang] = v;
-        metrics[lang+'Margin'] = delta;
+        metrics[lang+'Ci'] = delta;
       }
       for (const key of ['Context','Vocabulary']) if (Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
       rows.push({ model: model.trim(), setting: [effort,config].filter(Boolean).join(', ') || undefined, score: mean, low: mean-margin, high: mean+margin, metrics, open: r.Open === '✓', params: Number(r.Parameters)/1e9 || undefined, link: r.Model.match(/href=['"]([^'"]+)/)?.[1] });

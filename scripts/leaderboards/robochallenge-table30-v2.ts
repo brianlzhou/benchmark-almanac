@@ -60,6 +60,11 @@ const board: Leaderboard = {
     successPct_d96c: { name: 'Turn on the light switch success rate', unit: '%', better: 'higher' },
     successPct_f31b: { name: 'Lint roller remove dirt success rate', unit: '%', better: 'higher' },
     successPct_f5b4: { name: 'Water the flowers success rate', unit: '%', better: 'higher' },
+    successPct_6dcb: { name: 'Fold the clothes success rate', unit: '%', better: 'higher' },
+    successPct_fea0: { name: 'Put the pencil case into the schoolbag success rate', unit: '%', better: 'higher' },
+    successPct_6ccd: { name: 'Pack the toothbrush holder success rate', unit: '%', better: 'higher' },
+    successPct_1c7d: { name: 'Untie the shoelaces success rate', unit: '%', better: 'higher' },
+    successPct_671c: { name: 'Pack the items success rate', unit: '%', better: 'higher' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<{display_name:string,user_name:string,score:number,success_ratio:number,task_count:number,is_multi_task_model:boolean,last_submit_time:string,last_running_end_time?:string,company_name?:string,task_results:{task_id:string,score:number,success_ratio:number,weight?:number}[]}[]>(FEED);

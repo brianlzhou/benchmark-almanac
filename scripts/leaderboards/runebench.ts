@@ -6,7 +6,24 @@ import { fetchText } from '../lib/util.ts';
 const ROOT='https://maxbittker.github.io/runebench/';
 const board:Leaderboard={benchmark:'runebench',url:ROOT,feed:ROOT+'results/skills-30m/_data.js',
  terms:'Public RuneBench results. Benchmark Almanac credits Websim and links the source.',
- stats:{skills:{name:'Skills evaluated',unit:'count'},inputTokens:{name:'Input tokens',unit:'tokens'},pricedRuns:{name:'Priced skill runs',unit:'count'},toolCalls:{name:'Tool calls per skill',unit:'count'}},
+ stats:{
+  inputTokens:{name:'Input tokens',unit:'tokens'},pricedRuns:{name:'Priced skill runs',unit:'count'},toolCalls:{name:'Tool calls per skill',unit:'count'},
+  latency:{name:'Average skill run duration',unit:'seconds',better:'lower'},
+  ...Object.fromEntries(['attack','defence','strength','hitpoints','ranged','prayer','magic','woodcutting','fishing','mining','cooking','fletching','crafting','smithing','firemaking','thieving'].flatMap(s => {
+    const label = s[0].toUpperCase() + s.slice(1);
+    return [
+      [s + ':peakXpRate', { name: label + ' peak XP per minute', unit: 'score', better: 'higher' }],
+      [s + ':finalXp', { name: label + ' final XP', unit: 'count', better: 'higher' }],
+      [s + ':finalLevel', { name: label + ' final level', unit: 'count', better: 'higher' }],
+      [s + ':durationSeconds', { name: label + ' duration', unit: 'seconds', better: 'lower' }],
+      [s + ':toolCalls', { name: label + ' tool calls', unit: 'count' }],
+      [s + ':inputTokens', { name: label + ' input tokens', unit: 'tokens' }],
+      [s + ':outputTokens', { name: label + ' output tokens', unit: 'tokens' }],
+      [s + ':cacheTokens', { name: label + ' cached tokens', unit: 'tokens' }],
+      [s + ':costUsd', { name: label + ' cost', unit: 'usd', better: 'lower' }],
+    ];
+  })),
+ },
  aliases:{'Beam 1.0 501B':'beam-1-0','Qwen3.5 35B':'qwen3-5-35b-a3b','Mistral Large 4 (open weights)':'mistral-large-4-le-chonk','Codex CLI 5.3':'gpt-5-3-codex'},
  chart:{title:'Skill performance vs cost',x:{key:'cost',label:'Mean cost per skill run',unit:'$',better:'lower',log:true},y:{key:'score',label:'Mean ln(1 + peak XP/min)',better:'higher'}},
  async fetch():Promise<LeaderboardRow[]>{
@@ -28,7 +45,7 @@ const board:Leaderboard={benchmark:'runebench',url:ROOT,feed:ROOT+'results/skill
    for(const s of skills){const d=r[s];
     metrics[s] = Math.log1p(d.peakXpRate || 0);
     sum += metrics[s];
-    for (const field of ['peakXpRate','finalXp','finalLevel','durationSeconds','sampleCount','toolCalls','trimmedSamples']) {
+    for (const field of ['peakXpRate','finalXp','finalLevel','durationSeconds','toolCalls']) {
       if (typeof d[field] === 'number') metrics[s + ':' + field] = d[field];
     }
     for (const [field, value] of Object.entries(d.tokenUsage ?? {})) {
@@ -44,7 +61,7 @@ const board:Leaderboard={benchmark:'runebench',url:ROOT,feed:ROOT+'results/skill
    if (durations.length) metrics.latency = durations.reduce((a,b) => a+b, 0) / durations.length;
    rows.push({date: dates.sort().at(-1), model:m[1],setting:['30 minutes',m[2]].filter(Boolean).join('; '),score:sum/skills.length,
     cost:count?cost/count:undefined,tokens:count?output/count:undefined,
-    metrics:{...metrics, skills:skills.length,...(count?{inputTokens:input/count,pricedRuns:count}:{}),...(turnCount?{toolCalls:turns/turnCount}:{})}});
+    metrics:{...metrics, ...(count?{inputTokens:input/count,pricedRuns:count}:{}),...(turnCount?{toolCalls:turns/turnCount}:{})}});
   }
   if(!rows.length)throw new Error('RuneBench has no complete sweeps');return rows;
  }};

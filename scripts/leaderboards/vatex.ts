@@ -15,9 +15,24 @@ const board: Leaderboard = {
   },
   async fetch() {
     const source = await fetchText(FEED);
-    const all = tables(source).map(t => t.map(r => r.map(c => c.text)));
+    const all = tables(source);
     const rows: LeaderboardRow[] = [];
-    for(const [i,table] of all.filter(t=>t[0].includes("CIDEr")).entries())for(const r of table.slice(1)){const score=num(r[5]);if(score===undefined)continue;const team = /baseline/i.test(r[1]) ? undefined : r[1].replace(/\s+\([^()]*\d{4}\)$/, '');rows.push({model:r[1],submitter:team,score,setting:i===0?"English":"Chinese",metrics:Object.fromEntries(table[0].slice(2,5).flatMap((h,j)=>{const v=num(r[j+2]);return v===undefined?[]:[[h,v]];}))});}
+    for (const [i, table] of all.filter(t => t[0]?.some(c => c.text === "CIDEr")).entries()) {
+      for (const r of table.slice(1)) {
+        const score = num(r[5]?.text);
+        if (score === undefined) continue;
+        const name = r[1]?.text ?? '';
+        const team = /baseline/i.test(name) ? undefined : name.replace(/\s+\([^()]*\d{4}\)$/, '');
+        const link = r[1]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+        rows.push({
+          model: name, submitter: team, link, score, setting: i === 0 ? "English" : "Chinese",
+          metrics: Object.fromEntries(table[0].slice(2, 5).flatMap((h, j) => {
+            const v = num(r[j + 2]?.text);
+            return v === undefined ? [] : [[h.text, v]];
+          })),
+        });
+      }
+    }
     if (!rows.length) throw new Error("No vatex score rows");
     return rows.filter(r=>r.setting==="English");
   },

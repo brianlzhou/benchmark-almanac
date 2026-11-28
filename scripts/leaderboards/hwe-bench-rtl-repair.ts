@@ -5,16 +5,24 @@ import { fetchJson } from '../lib/util.ts';
 const feed = "https://pku-liang.github.io/hwe-bench/scores-v1.0.json";
 const board: Leaderboard = {
   benchmark: 'hwe-bench-rtl-repair',
+  harnesses: 'system',
   url: "https://pku-liang.github.io/hwe-bench/?version=v1.0",
   feed,
   terms: "The host returns HTML for robots.txt. The authors publish HWE-Bench under Apache 2.0.",
+  parts: {
+    opentitan: 'OpenTitan',
+    ibex: 'Ibex',
+    cva6: 'CVA6',
+    caliptra: 'Caliptra',
+    xiangshan: 'XiangShan',
+    rocketchip: 'Rocket Chip',
+  },
   stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Precision is stored from 0 to 1.' } },
   costPer: 'run',
   async fetch() {
     const { benchmark, models } = await fetchJson<{ benchmark: { total: number; repos: { id: string; name: string; cases: number }[] };
       models: { name: string; agent: string; effort?: string; group: string; resolved: Record<string, number>; overall: number; costs: number; precision: number }[] }>(feed);
     if (benchmark.total !== 417 || models.length < 15 || benchmark.repos.length !== 6) throw new Error('Incomplete v1.0 benchmark');
-    board.parts = Object.fromEntries(benchmark.repos.map(r => [r.id, r.name]));
     return models.map(m => {
       if (!m.name || !Number.isFinite(m.overall) || !benchmark.repos.every(r => Number.isFinite(m.resolved[r.id]) && r.cases > 0))
         throw new Error('Invalid RTL repair result');

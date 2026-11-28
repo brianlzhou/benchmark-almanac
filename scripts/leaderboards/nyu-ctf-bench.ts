@@ -11,10 +11,17 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at nyu-llm-ctf.github.io; retain source attribution and follow the upstream terms.",
   aliases: {"gpt-3.5-turbo-1106": "gpt-3-5-turbo-nov-2023", "gpt-4-1106-preview": "gpt-4-turbo-nov-2023"},
+  parts: {
+    crypto: { name: 'Crypto', group: 'Category' },
+    forensics: { name: 'Forensics', group: 'Category' },
+    misc: { name: 'Miscellaneous', group: 'Category' },
+    pwn: { name: 'Pwn', group: 'Category' },
+    rev: { name: 'Reverse engineering', group: 'Category' },
+    web: { name: 'Web', group: 'Category' },
+  },
   stats: {
     solved: { name: 'Solved challenges', unit: 'count' },
-    total: { name: 'Total challenges', unit: 'count' },
-    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+    passAt5: { name: 'pass@5', unit: '%', better: 'higher' },
     'solved:crypto': { name: 'Crypto challenges solved', unit: 'count' },
     'solved:forensics': { name: 'Forensics challenges solved', unit: 'count' },
     'solved:misc': { name: 'Miscellaneous challenges solved', unit: 'count' },
@@ -26,11 +33,10 @@ const board: Leaderboard = {
   async fetch() {
     const data = await fetchJson<{dataset: Record<string,number>; submissions: any[]}>(FEED);
     if (!data.dataset.total) throw new Error('NYU CTF challenge total missing');
-    board.parts = Object.fromEntries(Object.keys(data.dataset).filter(key => key !== 'total').map(key => [key, {name: key, group: 'Category'}]));
     return data.submissions.flatMap(r => {
       if (typeof r.solved !== 'number') return [];
       const score = 100 * r.solved / data.dataset.total;
-      const metrics: Record<string, number> = {solved: r.solved, total: data.dataset.total};
+      const metrics: Record<string, number> = {solved: r.solved};
       if (r.comment === 'pass@5') metrics.passAt5 = score;
       for (const [key, count] of Object.entries(r.per_category ?? {})) {
         if (typeof count !== 'number') continue;

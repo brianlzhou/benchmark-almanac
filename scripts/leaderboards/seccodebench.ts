@@ -9,11 +9,11 @@ const board: Leaderboard = {
   url: "https://alibaba.github.io/sec-code-bench",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-  stats: { passRate: { name: 'Pass rate', unit: '%', better: 'higher' }, cases: { name: 'Test cases', unit: 'count' } },
+  stats: { passRate: { name: 'Pass rate', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any>(FEED);
-      return d.modelResults.map((r:any)=>{const parts=r.modelName.split(' + ');return {model:parts.pop(),harness:parts.join(' + ')||undefined,score:r.summary.averageScore,metrics:{passRate:r.summary.passRate,cases:r.summary.totalTestCases}};});
+      return d.modelResults.map((r:any)=>{const parts=r.modelName.split(' + ');return {model:parts.pop(),harness:parts.join(' + ')||undefined,score:r.summary.averageScore,metrics:{passRate:r.summary.passRate}};});
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

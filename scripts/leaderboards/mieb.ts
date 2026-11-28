@@ -6,7 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores";
 const board: Leaderboard = {
   benchmark: "mieb",
-  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' }, meanTask: { name: 'Mean task score', unit: '%', better: 'higher' }, zeroShotPct: { name: 'Zero-shot percentage', unit: '%' } },
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' }, meanTask: { name: 'Mean task score', unit: '%', better: 'higher' } },
   parts: {
     ImageClassification: { name: 'Image classification', group: 'Task type' },
     DocumentUnderstanding: { name: 'Document understanding', group: 'Task type' },
@@ -52,7 +52,7 @@ const board: Leaderboard = {
         }
         for (const [key, value] of Object.entries({
           activeParamsB: r.activeParamsB, maxTokens: r.maxTokens, embeddingDim: r.embeddingDim,
-          zeroShotPct: r.zeroShotPct, opennessScore: r.model.opennessScore,
+          opennessScore: r.model.opennessScore,
         })) {
           if (typeof value === 'number' && Number.isFinite(value) && value >= 0) metrics[key] = value;
         }

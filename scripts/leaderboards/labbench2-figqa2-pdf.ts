@@ -13,7 +13,7 @@ function compact(value: string): number {
 const board: Leaderboard = {
   benchmark: 'labbench2-figqa2-pdf', url: FEED, feed: FEED,
   terms: 'The Edison Scientific benchmark page is publicly readable. Link and attribute the source.',
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  stats: { durationSeconds: { name: 'Duration', unit: 'seconds', better: 'lower' } },
   aliases: { 'gemini-3-pro-preview': 'gemini-3-pro' },
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(FEED)).find((rows) => rows[0]?.[1]?.text === 'Model ↕');

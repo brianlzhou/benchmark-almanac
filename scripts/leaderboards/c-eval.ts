@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: "c-eval",
   parts: {
     hard: { name: 'C-Eval Hard', group: 'Difficulty' },
+    validation: { name: 'Validation split', group: 'Split' },
     'Social Science': { name: 'Social science', group: 'Domain' },
     Humanities: { name: 'Humanities', group: 'Domain' },
     Other: { name: 'Other', group: 'Domain' },

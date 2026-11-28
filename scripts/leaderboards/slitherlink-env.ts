@@ -20,7 +20,7 @@ const board: Leaderboard = {
   stats: {
     board_solved_score: { name: 'Board solved score', unit: 'score' }, clue_score: { name: 'Clue satisfaction', unit: 'score' },
     connectivity_score: { name: 'Connectivity', unit: 'score' }, vertex_score: { name: 'Vertex validity', unit: 'score' },
-    edge_accuracy_score: { name: 'Edge accuracy', unit: 'score' }, runSeconds: { name: 'Run time', unit: 'seconds' },
+    edge_accuracy_score: { name: 'Edge accuracy', unit: 'score' }, runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' },
     inputTokens: { name: 'Mean input tokens', unit: 'tokens' }, outputTokens: { name: 'Mean output tokens', unit: 'tokens' },
   },
   async fetch() {
@@ -40,8 +40,9 @@ const board: Leaderboard = {
         const metrics = Object.fromEntries(Object.entries(e.detailedMetrics.metricsStats).map(([k,v]) => [k,v.mean]));
         if (m.time_ms !== undefined) metrics.runSeconds = m.time_ms / 1000;
         if (m.usage) { metrics.inputTokens = m.usage.input_tokens; metrics.outputTokens = m.usage.output_tokens; }
+        const tokens = m.usage && Number.isFinite(m.usage.output_tokens) && m.usage.output_tokens > 0 ? m.usage.output_tokens : undefined;
         rows.push({ model: e.model_name, score: e.statistics.avgReward, harness: e.framework, setting: settings.join(', '),
-          date: e.createdAt.slice(0,10), trials: m.rollouts_per_example, metrics, link: url + '/' + e._id });
+          tokens, date: e.createdAt.slice(0,10), trials: m.rollouts_per_example, metrics, link: url + '/' + e._id });
       }
       if (!pagination.hasMore) {
         if (skip + evaluations.length !== pagination.total) throw new Error('Incomplete Slitherlink results');

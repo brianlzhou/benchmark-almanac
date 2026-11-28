@@ -9,5 +9,11 @@ const board = makeFrontierCode({
 });
 board.stats = {
   passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
+  flaggedRate: { name: 'Flagged rate', unit: '%', better: 'lower' },
 };
+const load = board.fetch;
+board.fetch = async () => (await load()).map(row => {
+  if (row.metrics) delete row.metrics.tasks;
+  return row;
+});
 export default board;

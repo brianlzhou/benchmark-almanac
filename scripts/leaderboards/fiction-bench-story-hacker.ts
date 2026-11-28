@@ -17,7 +17,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The public leaderboard gives no explicit reuse license. https://bench.storyhacker.ai/ The robots URL returns the site HTML.",
   stats: {
-    stories: { name: 'Completed stories', unit: 'count' }, human_rating: { name: 'Human rating', unit: 'rating', better: 'higher' },
+    human_rating: { name: 'Human rating', unit: 'rating', better: 'higher' },
     human_votes: { name: 'Human votes', unit: 'count' }, human_wins: { name: 'Human wins', unit: 'count' },
     human_losses: { name: 'Human losses', unit: 'count' }, human_ties: { name: 'Human ties', unit: 'count' },
     human_win_rate: { name: 'Human win rate', unit: '%', better: 'higher' },
@@ -30,7 +30,7 @@ const board: Leaderboard = {
     const rows = data.map((r) => {
       if (!r.model || !r.finished_at || !Number.isFinite(r.overall_score) || !r.criteria?.length) throw new Error('Incomplete fiction result');
       const metrics: Record<string, number> = { story: r.story_score, intelligence: r.intelligence_score,
-        prose: r.prose_score, human: r.human_score, ai: r.ai_score, aiLow: r.ai_low, aiHigh: r.ai_high, stories: r.completed_stories };
+        prose: r.prose_score, human: r.human_score, ai: r.ai_score, aiLow: r.ai_low, aiHigh: r.ai_high };
       for (const c of r.criteria) { parts[c.criterion] = c.criterion; metrics[c.criterion] = c.score; }
       for (const [key, value] of Object.entries(r.human ?? {})) if (typeof value === 'number') metrics['human_' + key] = value;
       if (!Object.values(metrics).every(Number.isFinite)) throw new Error(`Invalid metric for ${r.model}`);

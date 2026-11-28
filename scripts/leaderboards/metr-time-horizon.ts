@@ -26,9 +26,14 @@ export const METR_ALIASES: Record<string, string> = {
   'Kimi K2 Thinking (inference via Novita AI)': 'kimi-k2-thinking',
 };
 
+export const METR_STATS = {
+  p80: { name: '80% time horizon', unit: 'minutes', better: 'higher' as const },
+  averageScore: { name: 'Average task score', unit: '%', better: 'higher' as const },
+};
+
 /**
  * One row per model in a METR benchmark_results YAML: the p50 horizon (minutes), scaffold and release date,
- * with the p50 horizon's 95% interval (metrics.ciLow, ciHigh) and the p80 horizon (metrics.p80, minutes).
+ * with the p50 horizon's 95% interval (metrics.ciLow, ciHigh), the p80 horizon (metrics.p80, minutes), and average score.
  */
 export async function metrRows(feed: string): Promise<LeaderboardRow[]> {
   const [yaml, js] = await Promise.all([fetchText(feed), fetchText(NAMES).catch(() => '')]);
@@ -47,8 +52,17 @@ export async function metrRows(feed: string): Promise<LeaderboardRow[]> {
       const v = block.match(new RegExp(`^ {6}${metric}:\\n(?:^ {8}.*\\n)*?^ {8}${name}:\\s*([\\d.eE+-]+)`, 'm'))?.[1];
       return v === undefined || !Number.isFinite(Number(v)) ? undefined : Number(v);
     };
-    const [ciLow, ciHigh, p80] = [field('p50_horizon_length', 'ci_low'), field('p50_horizon_length', 'ci_high'), field('p80_horizon_length', 'estimate')];
-    const metrics = { ...(ciLow !== undefined && ciHigh !== undefined ? { ciLow, ciHigh } : {}), ...(p80 !== undefined ? { p80 } : {}) };
+    const [ciLow, ciHigh, p80, p80Low, p80High, avgScore] = [
+      field('p50_horizon_length', 'ci_low'), field('p50_horizon_length', 'ci_high'),
+      field('p80_horizon_length', 'estimate'), field('p80_horizon_length', 'ci_low'), field('p80_horizon_length', 'ci_high'),
+      field('average_score', 'estimate'),
+    ];
+    const metrics = {
+      ...(ciLow !== undefined && ciHigh !== undefined ? { ciLow, ciHigh } : {}),
+      ...(p80 !== undefined ? { p80 } : {}),
+      ...(p80Low !== undefined && p80High !== undefined ? { p80Low, p80High } : {}),
+      ...(avgScore !== undefined ? { averageScore: avgScore * 100 } : {}),
+    };
     const scaffolds = [...block.matchAll(/^ {4}- (.+)$/gm)].map((s) => s[1].split(',').at(-1)!.trim());
     const agent = scaffolds.at(-1);
     const base = key.replace(/_inspect$/, '');
@@ -71,7 +85,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: METR_TERMS,
   aliases: METR_ALIASES,
-  stats: { p80: { name: '80% time horizon', unit: 'minutes', better: 'higher' } },
+  stats: METR_STATS,
   fetch: () => metrRows(FEED),
 };
 export default board;

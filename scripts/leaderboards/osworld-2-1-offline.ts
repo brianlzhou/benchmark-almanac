@@ -46,7 +46,6 @@ const board: Leaderboard = {
   aliases: ALIASES,
   stats: {
     partial: { name: 'Partial score', unit: '%', better: 'higher' },
-    stepBudget: { name: 'Step budget', unit: 'count' },
   },
   async fetch() {
     const data = await fetchJson<{ defaultResultReleaseVersion?: string; defaultStepBudget?: number; results: Result[] }>(FEED);
@@ -68,10 +67,7 @@ const board: Leaderboard = {
           link: [r.trajectoryUrl, r.reproductionGuideUrl].find((url) => url?.startsWith('https://')),
         cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / OFFLINE_TASKS : undefined),
         tokens: r.outputTokensPerTask ?? undefined,
-        metrics: {
-          ...(typeof r.partialScore === 'number' ? {partial: r.partialScore} : {}),
-          ...(typeof r.stepBudget === 'number' ? {stepBudget: r.stepBudget} : {}),
-        },
+        ...(typeof r.partialScore === 'number' ? { metrics: { partial: r.partialScore } } : {}),
       });
     }
     return rows;

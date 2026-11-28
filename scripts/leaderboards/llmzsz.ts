@@ -6,7 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://huggingface.co/spaces/amu-cai/LLMZSZL_Leaderboard/resolve/main/leaderboards/llmzszl.json';
-type Entry = { Name?: string; Score?: number; Date?: string };
+type Entry = { Name?: string; Score?: number; Date?: string; 'Parameters (B)'?: number };
 
 const board: Leaderboard = {
   benchmark: 'llmzsz',
@@ -16,7 +16,9 @@ const board: Leaderboard = {
   async fetch() {
     const entries = await fetchJson<Entry[]>(feed);
     const rows = entries.filter(entry => typeof entry.Name === 'string' && Number.isFinite(entry.Score)).map(entry => ({
-      model: entry.Name!, score: entry.Score!,
+      model: entry.Name!,
+      score: entry.Score!,
+      ...(typeof entry['Parameters (B)'] === 'number' && Number.isFinite(entry['Parameters (B)']) && entry['Parameters (B)'] > 0 ? { params: entry['Parameters (B)'] } : {}),
     }));
     return checked(rows, 50);
   },

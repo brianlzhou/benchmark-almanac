@@ -11,8 +11,8 @@ const board: Leaderboard = {
   feed,
   terms: "The authors license the project under MIT and reserve third party rights in Pokémon assets. The page gives no separate standings license. https://github.com/zjunet/PTCG-Bench The site returns 404 for robots.txt.",
   stats: {
-    wins: { name: 'Wins', unit: 'count' },
-    losses: { name: 'Losses', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count', better: 'higher' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
     winRate: { name: 'Win rate', unit: '%', better: 'higher' },
   },
   async fetch() {

@@ -16,6 +16,7 @@ const board: Leaderboard = {
     CER: { name: 'Character error rate', unit: '%', better: 'lower' },
     'Delta cpCER': { name: 'Delta cpCER', unit: '%', better: 'lower', note: 'Difference between cpCER and CER.' },
     DER: { name: 'Diarization error rate', unit: '%', better: 'lower' },
+    'DER (0.5s-collar)': { name: 'Diarization error rate (0.5s collar)', unit: '%', better: 'lower' },
     tcpCER: { name: 'tcpCER', unit: '%', better: 'lower', note: 'Character error rate with time-constrained speaker assignment.' },
   },
   async fetch() {

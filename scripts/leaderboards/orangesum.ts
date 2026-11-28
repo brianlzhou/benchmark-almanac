@@ -8,7 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/french';
 export default {
   benchmark:'orangesum',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
-  stats: { chrf4: { name: 'Character n-gram F-score at order 4', unit: 'score', better: 'higher' }, scored: { name: 'Scored examples', unit: 'count' } },
+  stats: { chrf4: { name: 'Character n-gram F-score at order 4', unit: 'score', better: 'higher' } },
   aliases: {
     "HuggingFaceTB/SmolLM2-135M": "smollm2-135m",
     "HuggingFaceTB/SmolLM2-360M": "smollm2-360m",
@@ -52,7 +52,7 @@ export default {
       const [model,mode] = label.replace(/ \([^()]+\)$/,'').split('#');
       return {model,setting:[mode,settings?.[1]].filter(Boolean).join(', ') || undefined,
         score,low:score-margin,high:score+margin,link:r.Model.match(/href='([^']+)'/)?.[1],open:r.Open === '✓',
-        metrics:{chrf4:f1,chrf4Low:f1-f1Margin,chrf4High:f1+f1Margin,scored:Number(r.orange_sum_scored),failures:Number(r.orange_sum_failures)}};
+        metrics:{chrf4:f1,chrf4Low:f1-f1Margin,chrf4High:f1+f1Margin}};
     });
     return checked(rows,81);
   },

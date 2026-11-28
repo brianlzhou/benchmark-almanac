@@ -12,7 +12,7 @@ interface Attempt {
 }
 interface Entry { name: string; harness: string; reasoning: string; best_progress: number; attempts: Attempt[] }
 const board: Leaderboard = {
-  benchmark: 'drivingbench', url: feed, feed, costPer: 'run', harnesses: 'model',
+  benchmark: 'drivingbench', url: feed, feed, costPer: 'run', harnesses: 'system',
   terms: 'DrivingBench publishes the results as research software with no stated data license. ' + feed,
   stats: {
     inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' },

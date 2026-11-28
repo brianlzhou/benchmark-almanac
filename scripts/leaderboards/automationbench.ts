@@ -28,7 +28,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (current Framer page module, all ranked leaderboard rows)`,
   terms: "Static page on zapier.com; Zapier's terms of service and acceptable use policy do not restrict automated reading.",
-  stats: { tasks:{name:'Tasks',unit:'count'}, promotionalCostUsd:{name:'Promotional cost per task',unit:'usd',better:'lower'} },
+  stats: { promotionalCostUsd:{name:'Promotional cost per task',unit:'usd',better:'lower'}, uncachedCostUsd:{name:'Uncached cost per task',unit:'usd',better:'lower'}, cachedCostUsd:{name:'Cached cost per task',unit:'usd',better:'lower'} },
   parts: Object.fromEntries(['Sales', 'Marketing', 'Operations', 'Support', 'Finance', 'HR'].map(name => [name, { name, group: 'Department' }])),
   aliases: { 'Gemini 3.1 Pro (preview)': 'gemini-3-1-pro' },
   async fetch() {
@@ -107,7 +107,6 @@ const board: Leaderboard = {
           const half = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / denominator;
           row.low = Number((Math.max(0, center - half) * 100).toFixed(1));
           row.high = Number((Math.min(1, center + half) * 100).toFixed(1));
-          metrics.tasks = n;
         }
       }
       rows.push(row);

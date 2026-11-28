@@ -11,7 +11,6 @@ const board: Leaderboard = {
   headline:'The leaderboard ranks models by accuracy on the foil task, the default ColDeR evaluation.',
   stats:{
     pairedTStatistic:{name:'Paired t-test statistic',unit:'score'},
-    pValueUpperExclusive:{name:'P-value upper bound',unit:'score',note:'Published upper-exclusive p-value threshold.'},
   },
   async fetch() {
     const source = await fetchText(feed);
@@ -24,7 +23,7 @@ const board: Leaderboard = {
       const limit = p.match(/^<\s*(\d*\.\d+)$/);
       if (!link || !score || !limit || !/^-?\d+(?:\.\d+)?$/.test(statistic)) throw new Error('Invalid ColDeR row');
       return {model:link[1],link:link[2],score:Number(score[1])/100,
-        metrics:{pairedTStatistic:Number(statistic),pValueUpperExclusive:Number(limit[1])}};
+        metrics:{pairedTStatistic:Number(statistic)}};
     }),8);
   },
 };

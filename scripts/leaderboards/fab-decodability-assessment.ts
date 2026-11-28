@@ -32,7 +32,7 @@ const board: Leaderboard = {
   terms: "Fab AI marks the leaderboard as all rights reserved. robots.txt allows the feed path.",
   stats: { items: { name: 'Items', unit: 'count' } },
   async fetch() {
-    return fabAccuracy(feed, 'DA-sw', 32);
+    return (await fabAccuracy(feed, 'DA-sw', 32)).map(({ metrics: { badFormat: _, ...metrics }, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

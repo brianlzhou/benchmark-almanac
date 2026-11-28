@@ -21,7 +21,13 @@ export default {
   headline: 'The authors rank agents by their TrueSkill mean across the 98 canonical games.',
   stats: {
     median: { name: 'Median game score', unit: 'score', better: 'higher' },
-    gameStd: { name: 'Game score standard deviation', unit: 'score' },
+    bidAggression: { name: 'Bid aggression', unit: 'score' },
+    buyRight: { name: 'Buy-right rate', unit: '%' },
+    tcAccept: { name: 'Trade acceptance rate', unit: '%' },
+    bluff: { name: 'Bluff rate', unit: '%' },
+    selfBid: { name: 'Self-bid rate', unit: '%' },
+    spendingEfficiency: { name: 'Spending efficiency', unit: 'score', better: 'higher' },
+    overbid: { name: 'Overbid rate', unit: '%', better: 'lower' },
   },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

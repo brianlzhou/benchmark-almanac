@@ -15,6 +15,18 @@ const board: Leaderboard = {
   benchmark: 'coval-voice-benchmarks', url: feed, feed,
   terms: 'Coval publishes its methodology under Apache 2.0. https://github.com/coval-ai/benchmarks/blob/main/LICENSE',
   headline: 'Coval ranks speech-to-text services by mean time to the final segment over the last 24 hours, so this is that latency in milliseconds. Lower is better.',
+  stats: {
+    TTFS: { name: 'Time to final segment', unit: 'seconds', better: 'lower' },
+    TTFT: { name: 'Time to first token', unit: 'seconds', better: 'lower' },
+    AudioToFinal: { name: 'Audio to final latency', unit: 'seconds', better: 'lower' },
+    RTF: { name: 'Real-time factor', unit: 'score', better: 'lower' },
+    WER: { name: 'Word error rate', unit: '%', better: 'lower' },
+    p25: { name: 'Time to final segment p25', unit: 'ms', better: 'lower' },
+    p50: { name: 'Time to final segment p50', unit: 'ms', better: 'lower' },
+    p75: { name: 'Time to final segment p75', unit: 'ms', better: 'lower' },
+    p90: { name: 'Time to final segment p90', unit: 'ms', better: 'lower' },
+    p95: { name: 'Time to final segment p95', unit: 'ms', better: 'lower' },
+  },
   async fetch() {
     const source = nextFlight(await fetchText(feed));
     if (!source.includes('"sortSpecKey":"TTFS"') || !source.includes('last 24 hours')) throw new Error('STT ranking changed');

@@ -11,8 +11,10 @@ interface Entry {
   correct?: number;
   incorrect?: number;
   errors?: number;
+  errorRate?: number;
   totalTests?: number;
   averageDuration?: number;
+  totalCost?: number;
   averageCostPerTest?: number;
   totalCompletionTokens?: number;
   tokensPerSecond?: number;
@@ -23,9 +25,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The repository is MIT licensed. Results are credited to Adam Holter with a link to the repository.',
   stats: {
-    correct: { name: 'Correct tests', unit: 'count' },
-    incorrect: { name: 'Incorrect tests', unit: 'count' },
+    correct: { name: 'Correct tests', unit: 'count', better: 'higher' },
+    incorrect: { name: 'Incorrect tests', unit: 'count', better: 'lower' },
+    errors: { name: 'Errors', unit: 'count', better: 'lower' },
+    errorRate: { name: 'Error rate', unit: '%', better: 'lower' },
     totalTests: { name: 'Total tests', unit: 'count' },
+    totalCost: { name: 'Total cost', unit: 'usd', better: 'lower' },
+    totalCompletionTokens: { name: 'Total completion tokens', unit: 'tokens' },
     latency: { name: 'Average test duration', unit: 'seconds', better: 'lower' },
     tokensPerSecond: { name: 'Token throughput', unit: 'tokens/s', better: 'higher' },
   },
@@ -36,19 +42,23 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const e of data.rankings) {
       if (!e.model || typeof e.successRate !== 'number' || !Number.isFinite(e.successRate)) continue;
+      const metrics: Record<string, number> = {
+        correct: e.correct ?? 0,
+        incorrect: e.incorrect ?? 0,
+        errors: e.errors ?? 0,
+        totalTests: e.totalTests ?? 0,
+        latency: e.averageDuration ? e.averageDuration / 1000 : 0,
+        tokensPerSecond: e.tokensPerSecond ?? 0,
+      };
+      if (typeof e.errorRate === 'number' && Number.isFinite(e.errorRate)) metrics.errorRate = e.errorRate;
+      if (typeof e.totalCost === 'number' && Number.isFinite(e.totalCost)) metrics.totalCost = e.totalCost;
+      if (typeof e.totalCompletionTokens === 'number' && Number.isFinite(e.totalCompletionTokens)) metrics.totalCompletionTokens = e.totalCompletionTokens;
       rows.push({
         model: e.model,
         score: e.successRate,
         cost: e.averageCostPerTest,
         tokens: e.totalCompletionTokens && e.totalTests ? e.totalCompletionTokens / e.totalTests : undefined,
-        metrics: {
-          correct: e.correct ?? 0,
-          incorrect: e.incorrect ?? 0,
-          errors: e.errors ?? 0,
-          totalTests: e.totalTests ?? 0,
-          latency: e.averageDuration ? e.averageDuration / 1000 : 0,
-          tokensPerSecond: e.tokensPerSecond ?? 0,
-        },
+        metrics,
       });
     }
     if (rows.length < 44) throw new Error(`ButtonBench: ${rows.length} readable rows, expected at least 44`);

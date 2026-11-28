@@ -16,7 +16,7 @@ const board: Leaderboard = {
   benchmark: 'mme',
   parts: {
     Existence: { name: 'Existence', group: 'Task type' },
-    Count: { name: 'Count', group: 'Task' },
+    Count: { name: 'Count', group: 'Task type' },
     Position: { name: 'Position', group: 'Task type' },
     Color: { name: 'Color', group: 'Task type' },
     Poster: { name: 'Poster', group: 'Task type' },

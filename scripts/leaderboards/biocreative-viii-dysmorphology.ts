@@ -10,6 +10,14 @@ const board: Leaderboard = {
   feed,
   terms: "The terms authorize organizers to release scores at the workshop and in its proceedings. They do not specify broader score reuse. CodaLab returned 404 for robots.txt.",
   parts: { exactF1: 'Exact extraction and normalization F1', overlapF1: 'Overlap extraction and normalization F1' },
+  stats: {
+    precision: { name: 'Normalized precision', unit: 'score', better: 'higher' },
+    recall: { name: 'Normalized recall', unit: 'score', better: 'higher' },
+    exactPrecision: { name: 'Exact extraction and normalization precision', unit: 'score', better: 'higher' },
+    exactRecall: { name: 'Exact extraction and normalization recall', unit: 'score', better: 'higher' },
+    overlapPrecision: { name: 'Overlap extraction and normalization precision', unit: 'score', better: 'higher' },
+    overlapRecall: { name: 'Overlap extraction and normalization recall', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const raw = await fetchText(feed);
     const section = raw.split(/(?=^submission_pk,)/m).find(t => t.split('\n')[0].includes("b'exact Ext/Norm F1'"));

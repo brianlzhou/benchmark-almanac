@@ -372,9 +372,8 @@
     "cadence": "Several new benchmarks a day",
     "signal": "medium",
     "why": "Anyone can publish a benchmark on Kaggle and run models on it, and some of these become widely used.",
-    "feed": "https://www.kaggle.com/api/v1/benchmarks/{owner}/{slug}/leaderboard",
-    "automated": false,
-    "manual": "Kaggle’s public API reads a benchmark’s leaderboard but has no way to list benchmarks, and its terms forbid crawling the site. So we add new Kaggle benchmarks by hand, and the daily sync then reads each leaderboard through the API."
+    "feed": "https://www.kaggle.com/api/i/benchmarks.BenchmarkService/ListBenchmarks",
+    "automated": true
   },
   {
     "id": "x",

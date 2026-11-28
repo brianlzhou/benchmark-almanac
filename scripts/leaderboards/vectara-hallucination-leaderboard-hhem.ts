@@ -4,9 +4,8 @@
 // HHEM-2.1 and last updated in October 2025. That branch's README table is read: Hallucination Rate (lower is
 // better, the ranking and the score), Factual Consistency Rate, Answer Rate and summary length. Names lead
 // with the vendor ("Google Gemini-2.0-Flash-001", "OpenAI GPT-4o"), which is dropped when it is a known
-// company word. A "-Think" suffix ("Claude-3.7-Sonnet-Think") becomes the thinking setting. Answer Rate
-// (percent) and Average Summary Length (words) are kept as metrics.answerRate and metrics.summaryWords; the
-// Factual Consistency Rate is 100 minus the score, so it is not kept.
+// company word. A "-Think" suffix ("Claude-3.7-Sonnet-Think") becomes the thinking setting. Factual Consistency Rate,
+// Answer Rate (percent) and Average Summary Length (words) are kept in metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -21,6 +20,7 @@ const board: Leaderboard = {
   feed: `${FEED} (Hallucination Rate)`,
   terms: 'README table on a branch of the vectara/hallucination-leaderboard repository, licensed Apache-2.0.',
   stats: {
+    factualConsistency: { name: 'Factual consistency rate', unit: '%', better: 'higher' },
     answerRate: { name: 'Answer rate', unit: '%', better: 'higher' },
     summaryWords: { name: 'Average summary length', unit: 'count' },
   },

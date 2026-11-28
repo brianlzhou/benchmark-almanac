@@ -15,8 +15,6 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   stats: {
-    languages: { name: 'Languages evaluated', unit: 'count' },
-    totalCost: { name: 'Total cost', unit: 'usd', better: 'lower' },
     totalInputTokens: { name: 'Input tokens', unit: 'tokens' },
     totalOutputTokens: { name: 'Output tokens', unit: 'tokens' },
   },
@@ -39,7 +37,7 @@ const board: Leaderboard = {
       const cs=costs.filter(r=>canon(r.model_folder || r.model_label)===model);
       return {model,score:scores.reduce((s,x)=>s+x,0)/scores.length,setting:'v4, all languages',
         ...(cs.some(r=>num(r.total_cost)!==undefined)?{cost:cs.reduce((s,r)=>s+(num(r.total_cost)||0),0)}:{}),
-        metrics:{languages:langs.length,totalCost:cs.reduce((s,r)=>s+(num(r.total_cost)||0),0),totalInputTokens:cs.reduce((s,r)=>s+(num(r.input_tokens)||0),0),totalOutputTokens:cs.reduce((s,r)=>s+(num(r.output_tokens)||0),0)}};
+        metrics:{totalInputTokens:cs.reduce((s,r)=>s+(num(r.input_tokens)||0),0),totalOutputTokens:cs.reduce((s,r)=>s+(num(r.output_tokens)||0),0)}};
     });
   },
 };

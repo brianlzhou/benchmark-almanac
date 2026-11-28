@@ -19,12 +19,16 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'continual-learning-exam',
+  harnesses: 'system',
   url: 'https://haoyu-zhao.github.io/CLE/leaderboard/index.html',
   feed: `${FEED} (rows[].t2.completion)`,
   terms: 'Static data script on the project GitHub Pages site; the site publishes no terms of use, so only the published numbers are read.',
+  stats: {
+    time: { name: 'Active runtime per task', unit: 'seconds', better: 'lower' },
+  },
   chart: {
     title: 'Trial 2 completion against active runtime',
-    note: 'Figure 3 on the page: each point is one harness and model; it plots total runtime, redrawn here per task.',
+    note: 'Figure 3 on the page: each point is one harness and model, plotting total runtime redrawn here per task.',
     x: { key: 'time', label: 'Active runtime per task', unit: 's', better: 'lower', log: true },
     y: { key: 'score', label: 'Trial 2 completion', unit: '%', better: 'higher' },
   },

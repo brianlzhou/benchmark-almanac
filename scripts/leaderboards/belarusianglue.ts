@@ -16,8 +16,12 @@ const board: Leaderboard = {
   terms,
   headline: 'The paper reports no overall score, so this is the plain mean of its six accuracy columns.',
   parts: {
-    besls: 'BeSLS', belacolaId: 'BelaCoLA in domain', belacolaOod: 'BelaCoLA out of domain',
+    besls: 'BeSLS', belacolaIdAccuracy: 'BelaCoLA in domain', belacolaOodAccuracy: 'BelaCoLA out of domain',
     bewic: 'BeWiC', bewsc: 'BeWSC', berteWd: 'BeRTE-WD',
+  },
+  stats: {
+    belacolaIdMcc: { name: 'BelaCoLA in-domain MCC', unit: 'score', better: 'higher' },
+    belacolaOodMcc: { name: 'BelaCoLA out-of-domain MCC', unit: 'score', better: 'higher' },
   },
   async fetch() {
     const text = await pdfText(URL);

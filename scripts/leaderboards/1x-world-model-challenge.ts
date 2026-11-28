@@ -11,6 +11,11 @@ const board: Leaderboard = {
   url: "https://github.com/1x-technologies/1xgpt#leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    tokenAccuracy: { name: 'Token accuracy', unit: '%', better: 'higher' },
+    lpips: { name: 'LPIPS', unit: 'score', better: 'lower', note: 'Learned perceptual image patch similarity.' },
+    secondsPerFrame: { name: 'Seconds per frame', unit: 'seconds', better: 'lower' },
+  },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.includes('CE Loss')));

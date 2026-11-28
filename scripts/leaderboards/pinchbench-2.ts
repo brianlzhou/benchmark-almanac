@@ -50,8 +50,6 @@ export async function pinchRows(version: string, extras = false, details = false
     const metrics: Record<string, number> = {};
     if (extras && positive(e.average_execution_time_seconds)) metrics.time = e.average_execution_time_seconds;
     if (details) {
-      // The detailed table ranks the published percentage. The headline averages submissions.
-      if (typeof e.rank === 'number') metrics.percentageRank = e.rank;
       for (const key of ['percentage', 'best_execution_time_seconds', 'best_cost_usd', 'value_score', 'cpst'] as const) {
         const value = e[key];
         if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
@@ -91,6 +89,14 @@ export const PINCH_ALIASES: Record<string, string> = {
   'llama-3.1-70b-instruct': 'llama-3-1-70b',
 };
 
+export const PINCH_STATS: NonNullable<Leaderboard['stats']> = {
+  time: { name: 'Execution time per run', unit: 'seconds', better: 'lower' },
+  percentage: { name: 'Best run score', unit: '%', better: 'higher' },
+  best_execution_time_seconds: { name: 'Best run execution time', unit: 'seconds', better: 'lower' },
+  best_cost_usd: { name: 'Best run cost', unit: 'usd', better: 'lower' },
+  value_score: { name: 'Value score', unit: 'score', better: 'higher' },
+};
+
 const VERSION = '2.0.0';
 
 const board: Leaderboard = {
@@ -100,12 +106,13 @@ const board: Leaderboard = {
   terms: PINCH_TERMS,
   aliases: PINCH_ALIASES,
   costPer: 'run',
+  stats: PINCH_STATS,
   chart: {
     title: 'Success Rate vs. Execution Time',
     note: 'Each point is one model: its average score against its average execution time for a full run, over its official submissions.',
     x: { key: 'time', label: 'Execution time per run', unit: 's', better: 'lower', log: true },
     y: { key: 'score', label: 'Success rate', unit: '%', better: 'higher' },
   },
-  fetch: () => pinchRows(VERSION, true),
+  fetch: () => pinchRows(VERSION, true, true),
 };
 export default board;

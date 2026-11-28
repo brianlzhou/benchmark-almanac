@@ -2,7 +2,17 @@
 // The human baseline is excluded. The ChatGPT for Clinicians product configuration remains a separate harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { openaiSpecs, chartTitle, OPENAI_TERMS } from '../lib/boards/openai.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 const PAGE = 'https://openai.com/index/making-chatgpt-better-for-clinicians/';
+// the subscores OpenAI's Kaggle board gives for each use case and prompt type, on the headline's adjusted scale
+const HBP_PARTS = {
+  consultation: { name: 'Clinical Consultation', group: 'Use case' },
+  writing: { name: 'Clinical Writing', group: 'Use case' },
+  research: { name: 'Clinical Research', group: 'Use case' },
+  goodFaithTypical: { name: 'Good-Faith Typical', group: 'Prompt type' },
+  goodFaithDifficult: { name: 'Good-Faith Difficult', group: 'Prompt type' },
+  redTeamingDifficult: { name: 'Red-Teaming Difficult', group: 'Prompt type' },
+};
 const board: Leaderboard = {
   benchmark: 'healthbench-professional', url: PAGE, feed: `${PAGE} (embedded overall-score chart)`, terms: OPENAI_TERMS,
   async fetch() {
@@ -25,4 +35,11 @@ const board: Leaderboard = {
     return rows;
   },
 };
-export default board;
+export default withKaggle(board, {
+  owner: 'openai',
+  slug: 'healthbench-professional',
+  task: 'HealthBench Professional',
+  scale: 100,
+  extra: Object.fromEntries(Object.entries(HBP_PARTS).map(([k, p]) => [k, { task: `Subscore: ${p.name}`, scale: 100 }])),
+  parts: HBP_PARTS,
+});

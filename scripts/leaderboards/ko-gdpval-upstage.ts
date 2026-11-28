@@ -6,6 +6,11 @@ const FEED = "https://www.upstage.ai/blog/en/solar-pro-4";
 const board: Leaderboard = {
   benchmark: "ko-gdpval-upstage", url: "https://www.upstage.ai/blog/en/solar-pro-4", feed: FEED,
   terms: "Public Upstage launch article, with benchmark results attributed to Upstage and subject to site terms.",
+  stats: {
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+    priceCachedIn: { name: 'Cached input price', unit: 'usd-per-mtok', better: 'lower' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source).map(t => t.map(r => r.map(c => c.text)));

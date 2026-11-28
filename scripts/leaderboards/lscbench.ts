@@ -10,6 +10,11 @@ const FEED = 'https://raw.githubusercontent.com/alibaba/last-secure-code-benchma
 
 const board: Leaderboard = {
   benchmark: 'lscbench',
+  stats: {
+    funcPass: { name: 'Functional pass rate (FuncPass)', unit: '%', better: 'higher' },
+    secPass: { name: 'Security pass rate (SecPass)', unit: '%', better: 'higher' },
+    scenariosFuncSec: { name: 'Scenarios Func and Sec', unit: '%', better: 'higher' },
+  },
   url: 'https://last-secure-code-benchmark.github.io',
   feed: `${FEED} (Leaderboard table, Func∧Sec)`,
   terms: 'README table in the alibaba/last-secure-code-benchmark repository, licensed Apache-2.0.',
@@ -21,12 +26,19 @@ const board: Leaderboard = {
     const head = lines[0]?.split('|').slice(1, -1).map((c) => c.trim());
     const col = head?.indexOf('Func∧Sec') ?? -1;
     if (head?.[0] !== 'Model' || head?.[1] !== 'Agent' || col < 0) throw new Error(`unexpected LSCBench header: ${head?.join(' | ')}`);
+    const iFunc = head.indexOf('FuncPass');
+    const iSec = head.indexOf('SecPass');
+    const iScen = head.findIndex((h) => /Scenarios.*Func/i.test(h));
     const rows: LeaderboardRow[] = [];
     for (const line of lines.slice(2)) {
       const cells = line.split('|').slice(1, -1).map((c) => c.replace(/\*/g, '').trim());
       const score = num(cells[col]);
       if (!cells[0] || score === undefined) continue;
-      rows.push({ model: cells[0], harness: cells[1] || undefined, score });
+      const metrics: Record<string, number> = {};
+      if (iFunc >= 0 && num(cells[iFunc]) !== undefined) metrics.funcPass = num(cells[iFunc])!;
+      if (iSec >= 0 && num(cells[iSec]) !== undefined) metrics.secPass = num(cells[iSec])!;
+      if (iScen >= 0 && num(cells[iScen]) !== undefined) metrics.scenariosFuncSec = num(cells[iScen])!;
+      rows.push({ model: cells[0], harness: cells[1] || undefined, score, metrics: Object.keys(metrics).length ? metrics : undefined });
     }
     return rows;
   },

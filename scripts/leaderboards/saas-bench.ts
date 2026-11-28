@@ -12,6 +12,8 @@ const URL = 'https://unipat.ai/benchmarks/SaaS-Bench';
 
 const board: Leaderboard = {
   benchmark: 'saas-bench',
+  harnesses: 'system',
+  reference: ['Browser-Use (Open-Source)'],
   url: URL,
   feed: `${URL} (results table, RS column)`,
   terms: 'Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',

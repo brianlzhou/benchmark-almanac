@@ -22,17 +22,13 @@ const board: Leaderboard = {
    open_lamp_door: { name: 'Open lamp door', group: 'Task type' },
    transfer_cube: { name: 'Transfer cube', group: 'Task type' },
  },
- stats: {
-   rollouts: { name: 'Rollouts', unit: 'count' },
-   demonstrations: { name: 'Demonstrations', unit: 'count' },
- },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {
 const html=await fetchText(FEED);const rows:LeaderboardRow[]=[];
 for(const m of html.matchAll(/<div class="bar-row[^"]*">([\s\S]*?)<strong>([\d.]+)%<\/strong>/g)){
  const model=text(m[1].match(/<span class="policy">([\s\S]*?)<\/span>/)?.[1]??'');
- if(model)rows.push({model,score:Number(m[2]),setting:'50 demonstrations',metrics:{rollouts:30,demonstrations:50}});
+ if(model)rows.push({model,score:Number(m[2]),setting:'50 demonstrations',metrics:{}});
 }
 const t=tables(html)[0];if(t?.[0]?.[0]?.text!=='Task')throw new Error('No policy matrix');
 for(const r of t.slice(1)){if(r.length===1)continue;for(let i=1;i<r.length;i++){const score=num(r[i].text);const row=rows.find(x=>x.model===t[0][i].text);if(row&&score!==undefined)row.metrics![r[0].text]=score;}}

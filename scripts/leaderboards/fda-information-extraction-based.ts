@@ -22,7 +22,9 @@ const board: Leaderboard = {
       const [arch, size, checkpoint, , accuracy] = cells(line);
       const link = checkpoint.match(/\((https:\/\/huggingface\.co\/hazyresearch\/[^)]+)\)/)?.[1];
       if (!link) throw new Error('Missing model checkpoint');
-      return { model: arch + ' ' + size, link, score: numberCell(accuracy) };
+      const mSize = size.match(/^(\d+(?:\.\d+)?)([mb])$/i);
+      const params = mSize ? (mSize[2].toLowerCase() === 'm' ? Number((Number(mSize[1]) / 1000).toFixed(3)) : Number(mSize[1])) : undefined;
+      return { model: arch + ' ' + size, link, params, score: numberCell(accuracy) };
     }), 6);
   },
 };

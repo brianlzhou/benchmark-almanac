@@ -17,7 +17,20 @@ const board: Leaderboard = {
   url: 'https://contextarena.ai/?needles=8&mode=full&showExtra=true',
   feed: `${FEED} (bin ${BIN})`,
   terms: 'Context Arena publishes this independently run leaderboard and its API feed. The almanac credits and links Context Arena.',
-  stats: { samples: { name: 'Bin samples', unit: 'count' } },
+  parts: {
+    'in_(4096,8192)': { name: '4K to 8K', group: 'Context length' },
+    'in_(8192,16384)': { name: '8K to 16K', group: 'Context length' },
+    'in_(16384,32768)': { name: '16K to 32K', group: 'Context length' },
+    'in_(32768,65536)': { name: '32K to 64K', group: 'Context length' },
+    'in_(65536,131072)': { name: '64K to 128K', group: 'Context length' },
+    'in_(262144,524288)': { name: '256K to 512K', group: 'Context length' },
+    'in_(524288,1048576)': { name: '512K to 1M', group: 'Context length' },
+  },
+  stats: {
+    samples: { name: '128K to 256K bin samples', unit: 'count' },
+    allBins: { name: 'All bins mean score', unit: '%', better: 'higher', note: 'Average across only the context bins evaluated for that model.' },
+    allBinSamples: { name: 'Total samples across bins', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<{ needles: number; mode: string; leaderboard: Entry[] }>(FEED);
     if (data.needles !== 8 || data.mode !== 'full') throw new Error('Context Arena MRCR feed is not the 8-needle full board');
@@ -31,7 +44,6 @@ const board: Leaderboard = {
       for (const [range, other] of Object.entries(r.bins)) {
         if (range === BIN) continue;
         if (Number.isFinite(other.avg_score)) metrics[range] = 100 * other.avg_score;
-        if (Number.isFinite(other.sample_count)) metrics[range + ' samples'] = other.sample_count;
       }
       return [{ model: r.model_slug, score: bin.avg_score * 100, setting, metrics }];
     });

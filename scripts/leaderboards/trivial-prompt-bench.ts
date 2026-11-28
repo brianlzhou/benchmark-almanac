@@ -2,25 +2,55 @@
 // Quesma measures what a trivial coding request costs with the Terminus agent. The report defines
 // "total_cost = LLM API cost + user waiting cost" and prices waiting at the salary in its metadata.
 // The report excludes errored runs from its per-prompt averages.
-import type { BoardPart, Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardPart, BoardStat, Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAt } from '../lib/html.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
+
 const feed = 'https://raw.githubusercontent.com/QuesmaOrg/trival-prompt-bench/main/report.html';
-const parts: Record<string,BoardPart> = {};
-type Run = {model:string;total:number|null;n_runs:number;n_errors:number;llm:number;waiting:number;
-  avg_latency:number;p95_latency:number;avg_tokens_out:number;reward:number|null;tool_calls:number|null};
-const fields = { total:'Total cost', llm:'LLM API cost', waiting:'Waiting cost', avg_latency:'Average latency (seconds)',
-  p95_latency:'95th percentile latency (seconds)', avg_tokens_out:'Output tokens per run', n_errors:'Errors',
-  n_runs:'Runs',reward:'Reward',tool_calls:'Tool calls' } as const;
-const stats: Record<string, import('./types.ts').BoardStat> = Object.fromEntries(['commit', 'hi', 'thankyou', 'wtf'].flatMap(prompt => Object.entries(fields).filter(([key]) => key !== 'reward' || prompt === 'commit').map(([key, name]) => {
-  const cost = ['total', 'llm', 'waiting'].includes(key);
-  const unit = cost ? 'usd' : key.includes('latency') ? 'seconds' : ['avg_tokens_out'].includes(key) ? 'tokens' : key === 'reward' ? 'score' : 'count';
-  const better = key === 'reward' ? 'higher' : ['total', 'llm', 'waiting', 'avg_latency', 'p95_latency'].includes(key) ? 'lower' : undefined;
-  return [prompt + key, {name: prompt + ' ' + name.toLowerCase(), unit, ...(better ? {better: better as 'higher' | 'lower'} : {})}];
-})));
+type Run = {
+  model: string; total: number | null; n_runs: number; n_errors: number; llm: number; waiting: number;
+  avg_latency: number; p95_latency: number; avg_tokens_out: number; reward: number | null; tool_calls: number | null;
+};
+
+const PROMPTS: [string, string][] = [
+  ['commit', 'commit'],
+  ['hi', 'Hi'],
+  ['thankyou', 'Thank you'],
+  ['wtf', 'WTF'],
+];
+
+const parts: Record<string, BoardPart> = Object.fromEntries(
+  PROMPTS.map(([k, label]) => [`${k}total`, { name: label, group: 'Prompt', unit: 'usd', better: 'lower' }]),
+);
+
+const STAT_FIELDS = {
+  llm: { label: 'LLM API cost', unit: 'usd', better: 'lower' as const },
+  waiting: { label: 'waiting cost', unit: 'usd', better: 'lower' as const },
+  avg_latency: { label: 'average latency', unit: 'seconds', better: 'lower' as const },
+  p95_latency: { label: '95th percentile latency', unit: 'seconds', better: 'lower' as const },
+  avg_tokens_out: { label: 'output tokens per run', unit: 'tokens', better: 'lower' as const },
+  n_errors: { label: 'errors', unit: 'count', better: 'lower' as const },
+  tool_calls: { label: 'tool calls', unit: 'count' },
+} as const;
+
+const stats: Record<string, BoardStat> = Object.fromEntries(
+  PROMPTS.flatMap(([k, label]) =>
+    (Object.entries(STAT_FIELDS) as [keyof typeof STAT_FIELDS, (typeof STAT_FIELDS)[keyof typeof STAT_FIELDS]][])
+      // On the commit prompt every tested model had zero errors (and reward 1), so omit constant zero-error stat.
+      .filter(([f]) => !(k === 'commit' && f === 'n_errors'))
+      .map(([f, meta]) => [
+        `${k}${f}`,
+        { name: `${label} ${meta.label}`, unit: meta.unit, ...('better' in meta ? { better: meta.better } : {}) },
+      ]),
+  ),
+);
+
 const board: Leaderboard = {
-  benchmark:'trivial-prompt-bench',url:'https://github.com/QuesmaOrg/trival-prompt-bench/blob/main/report.html',feed,parts,
+  benchmark: 'trivial-prompt-bench',
+  url: 'https://github.com/QuesmaOrg/trival-prompt-bench/blob/main/report.html',
+  feed,
+  parts,
   stats,
   aliases: {
     'openrouter/openai/gpt-5.4-mini': 'gpt-5-4-mini',
@@ -37,39 +67,59 @@ const board: Leaderboard = {
     'openrouter/qwen/qwen3.7-max': 'qwen3-7-max',
     'openrouter/anthropic/claude-fable-5': 'claude-fable-5',
   },
-  terms:'Quesma publishes this report on GitHub (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).',
-  headline:'The source gives no overall cost, so this is the plain mean of API and waiting cost per run across its four prompts.',
+  terms: 'Quesma publishes this report on GitHub (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).',
+  headline: 'The source gives no overall cost, so this is the plain mean of API and waiting cost per run across its four prompts.',
   async fetch() {
     const html = await fetchText(feed);
     const mark = html.match(/const DATA\s*=\s*/);
     if (!mark) throw new Error('Missing report data');
-    const data = jsonAt<{tasks:{task:string;prompt:string;models:Run[]}[];meta:{annual_salary_usd:number;work_hours_per_year:number}}>(html,mark.index!+mark[0].length);
+    const data = jsonAt<{ tasks: { task: string; prompt: string; models: Run[] }[]; meta: { annual_salary_usd: number; work_hours_per_year: number } }>(html, mark.index! + mark[0].length);
     if (data.tasks.length !== 4) throw new Error('Published task count changed');
-    const models = new Map<string,{row:LeaderboardRow;costs:number[]}>();
+    const models = new Map<string, { row: LeaderboardRow; costs: number[]; llmCosts: number[]; tokensOut: number[] }>();
     for (const t of data.tasks) {
-      const key = t.task.split('/').pop()!.replace(/[^a-z0-9]/gi,'');
+      const key = t.task.split('/').pop()!.replace(/[^a-z0-9]/gi, '');
       for (const run of t.models) {
         if (run.total === null) continue;
         if (!Number.isFinite(run.total)) throw new Error('Missing total cost');
         const model = run.model;
-        const entry = models.get(model) ?? {row:{model,harness:'Terminus',setting:'$'+data.meta.annual_salary_usd+' annual salary, '+data.meta.work_hours_per_year+' work hours per year',score:0,trials:0,metrics:{}},costs:[] as number[]};
-        if (key+'total' in entry.row.metrics!) throw new Error('Duplicate task for ' + model);
-        for (const f of Object.keys(fields) as (keyof typeof fields)[]) {
+        const entry = models.get(model) ?? {
+          row: {
+            model,
+            harness: 'Terminus',
+            setting: '$' + data.meta.annual_salary_usd + ' annual salary, ' + data.meta.work_hours_per_year + ' work hours per year',
+            score: 0,
+            trials: 0,
+            metrics: {},
+          },
+          costs: [],
+          llmCosts: [],
+          tokensOut: [],
+        };
+        if (key + 'total' in entry.row.metrics!) throw new Error('Duplicate task for ' + model);
+        entry.row.metrics![key + 'total'] = run.total;
+        for (const f of Object.keys(STAT_FIELDS) as (keyof typeof STAT_FIELDS)[]) {
+          if (key === 'commit' && f === 'n_errors') continue;
           const value = run[f];
           if (value === null) continue;
           if (!Number.isFinite(value)) throw new Error('Missing ' + f);
-          const cost = ['total','llm','waiting'].includes(f);
-          parts[key+f] = {name:fields[f],group:t.prompt,unit:cost?'usd':'score',better:f === 'reward'?'higher':'lower'};
-          entry.row.metrics![key+f] = value;
+          entry.row.metrics![key + f] = value;
         }
         entry.costs.push(run.total);
+        entry.llmCosts.push(run.llm);
+        entry.tokensOut.push(run.avg_tokens_out);
         entry.row.trials! += run.n_runs;
-        models.set(model,entry);
+        models.set(model, entry);
       }
     }
-    const rows = [...models.values()].filter(e=>e.costs.length===data.tasks.length).map(({row,costs}) =>
-      ({...row,score:costs.reduce((a,b)=>a+b,0)/costs.length}));
-    return checked(rows,12);
+    const rows = [...models.values()]
+      .filter(e => e.costs.length === data.tasks.length)
+      .map(({ row, costs, llmCosts, tokensOut }) => ({
+        ...row,
+        score: costs.reduce((a, b) => a + b, 0) / costs.length,
+        cost: llmCosts.reduce((a, b) => a + b, 0) / llmCosts.length,
+        tokens: tokensOut.reduce((a, b) => a + b, 0) / tokensOut.length,
+      }));
+    return checked(rows, 12);
   },
 };
 export default board;

@@ -7,7 +7,7 @@ const FEED = "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc/resolve/m
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mmlongbench-doc",
-  stats: { activeParametersBillions: { name: 'Active parameters from parameter field', unit: 'billions' }, activeParams: { name: 'Active parameters from params_b', unit: 'billions' } },
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   url: "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
@@ -21,10 +21,7 @@ const board: Leaderboard = {
       open: typeof r.open_source === 'boolean' ? r.open_source : undefined,
       params: /([\d.]+)B total/i.test(r.params) ? Number(r.params.match(/([\d.]+)B total/i)![1]) : /^([\d.]+)B$/.test(r.params) ? Number(r.params.slice(0, -1)) : undefined,
       setting: `${r.modality}; ${r.params}${/ detail high$/.test(r.model) ? '; detail high' : ''}`,
-      metrics: {
-        ...(typeof r.moe === 'boolean' ? { mixtureOfExperts: Number(r.moe) } : {}),
-        ...(r.params_b == null ? {} : { activeParametersBillions: r.params_b, ...(r.moe ? { activeParams: r.params_b } : {}) }),
-      },
+      ...(r.moe === true && r.params_b != null ? { metrics: { activeParams: r.params_b } } : {}),
     }));
     if (!rows.length) throw new Error('MMLongBench-Doc leaderboard missing');
     return rows;

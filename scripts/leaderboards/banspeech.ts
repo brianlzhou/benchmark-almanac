@@ -24,7 +24,7 @@ const board: Leaderboard = {
   feed,
   terms: "The raw file host has no robots.txt. The comparison scores 928 retained clips. It reports 12 decoder configurations for 11 models, including two decoders for Whistle. The dataset card names CC BY 4.0 in its text and CC BY-NC 4.0 in its metadata. https://huggingface.co/datasets/SUST-CSE-Speech/banspeech",
   host: 'Bengali ASR Benchmark',
-  stats: { clips:{name:'Clips',unit:'count'}, characterErrorRate:{name:'Character error rate',unit:'%',better:'lower'}, wordErrors:{name:'Word errors',unit:'count'}, referenceWords:{name:'Reference words',unit:'count'}, fullSetWordErrorRate:{name:'Full-set word error rate',unit:'%',better:'lower'} },
+  stats: { characterErrorRate:{name:'Character error rate',unit:'%',better:'lower'}, wordErrors:{name:'Word errors',unit:'count'}, fullSetWordErrorRate:{name:'Full-set word error rate',unit:'%',better:'lower'} },
   async fetch() {
     const data = await fetchJson<{models: Record<string, {banspeech: Result}>}>(feed);
     const rows = Object.entries(data.models).map(([key, { banspeech: r }]) => {
@@ -34,8 +34,8 @@ const board: Leaderboard = {
         throw new Error('Unknown model or incomplete BanSpeech results for ' + key);
       const setting = key === 'whistle_bn_bd' ? '55M, CPU engine' : key === 'whistle_bn_bd_a100' ? '55M, A100, greedy' : undefined;
       return { model, setting, score: 100 * r.wer, low: 100 * lo, high: 100 * hi,
-        metrics: { clips: r.n, characterErrorRate: 100 * r.cer, wordErrors: r.word_errors,
-          referenceWords: r.ref_words, fullSetWordErrorRate: 100 * r.wer_full_set } };
+        metrics: { characterErrorRate: 100 * r.cer, wordErrors: r.word_errors,
+          fullSetWordErrorRate: 100 * r.wer_full_set } };
     });
     if (rows.length < 14) throw new Error('Missing BanSpeech decoder configurations');
     return rows;

@@ -22,14 +22,13 @@ const board: Leaderboard = {
   terms: "The raw file host has no robots.txt. CladBrain licenses the code and dataset under Apache 2.0. https://github.com/cladbrain/cladbench#licence-and-source-material",
   parts: {
     settled: 'Settled', live: 'Live policy', foundation: 'Foundation', practitioner: 'Practitioner', expert: 'Expert',
-    category01: 'UK Building Regs Q&A', category02: 'EPC Trajectory', category03: 'IFC Entity Reasoning',
-    category04: 'BMS Sensor Anomaly', category05: 'Retrofit Prioritization', category06: 'BREEAM Credit Eligibility',
-    category07: 'Thermal Comfort Diagnosis', category08: 'CIBSE Technical Q&A', category09: 'Material/Product Spec',
-    category10: 'Energy Bill Anomaly', category11: 'Net Zero Pathway', category12: 'Regulatory Cliff-Edge',
+    category01: { name: 'UK Building Regs Q&A', group: 'Category' }, category02: { name: 'EPC Trajectory', group: 'Category' }, category03: { name: 'IFC Entity Reasoning', group: 'Category' },
+    category04: { name: 'BMS Sensor Anomaly', group: 'Category' }, category05: { name: 'Retrofit Prioritization', group: 'Category' }, category06: { name: 'BREEAM Credit Eligibility', group: 'Category' },
+    category07: { name: 'Thermal Comfort Diagnosis', group: 'Category' }, category08: { name: 'CIBSE Technical Q&A', group: 'Category' }, category09: { name: 'Material/Product Spec', group: 'Category' },
+    category10: { name: 'Energy Bill Anomaly', group: 'Category' }, category11: { name: 'Net Zero Pathway', group: 'Category' }, category12: { name: 'Regulatory Cliff-Edge', group: 'Category' },
   },
   stats: {
     claudeMarked: { name: 'Claude-marked score', unit: 'score', better: 'higher', note: 'Mean score marked by Claude.' },
-    items: { name: 'Items', unit: 'count' },
   },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));
@@ -39,19 +38,18 @@ const board: Leaderboard = {
     const categories = tables.find(t => t[0][0] === 'Cat');
     if (!overall || overall.length < 8 || !policy || !difficulty || !categories || categories.length < 14)
       throw new Error('Incomplete CladBench tables');
-    return overall.slice(1).map(([, model, score, ci, claude, n]) => {
+    return overall.slice(1).map(([, model, score, ci, claude]) => {
       const p = policy.find(r => r[0] === model), d = difficulty.find(r => r[0] === model);
       const col = categories[0].indexOf(model);
       if (!p || !d || col < 1) throw new Error('Missing breakdown for ' + model);
       const [low, high] = bounds(ci), [settledLow, settledHigh] = bounds(p[3]);
-      const metrics: Record<string, number> = { claudeMarked: numeric(claude), items: numeric(n), settledLow, settledHigh,
+      const metrics: Record<string, number> = { claudeMarked: numeric(claude), settledLow, settledHigh,
         settled: numeric(p[2]), live: numeric(p[4]), foundation: numeric(d[1]), practitioner: numeric(d[2]), expert: numeric(d[3]) };
       for (const [name, ...scores] of categories.slice(1)) {
         if (name === 'Overall') continue;
         const match = name.match(/^(\d+) (.+)$/);
         if (!match) throw new Error('Unexpected CladBench category');
         const key = 'category' + match[1];
-        board.parts![key] = { name: match[2].replace('Prioritisation', 'Prioritization'), group: 'Category' };
         metrics[key] = numeric(scores[col-1]);
       }
       return { model, score: numeric(score), low, high, metrics };

@@ -17,6 +17,7 @@ interface Exam {
 
 const board: Leaderboard = {
   benchmark: 'embodied-first-exam',
+  harnesses: 'system',
   url: PAGE,
   feed: `${FEED} (leaderboard.shared.views.standard; default view)`,
   terms: 'Static JSON the site itself loads; robots.txt allows all paths and the site states no other terms.',
@@ -25,8 +26,6 @@ const board: Leaderboard = {
     privileged: { name: 'Privileged solve rate', unit: '%', better: 'higher' },
     realtime: { name: 'Real-time solve rate', unit: '%', better: 'higher' },
     solved: { name: 'Tests solved', unit: 'count' },
-    tests: { name: 'Tests', unit: 'count' },
-    attempted: { name: 'Tests attempted', unit: 'count' },
     minutes: { name: 'Minutes per attempt', unit: 'minutes', better: 'lower' },
   },
   aliases: { 'Kimi 3.1 Pro': 'kimi-k3-1-pro' },
@@ -43,10 +42,10 @@ const board: Leaderboard = {
       rows.push({
         model: run.model,
         score: Number(((s[0] / s[1]) * 100).toFixed(2)),
-        setting: [view,run.effort?.toLowerCase()].filter(Boolean).join('; '),
+        setting: [view,run.effort?.toLowerCase()].filter(Boolean).join(', '),
         harness: run.harness,
         cost: typeof run.est_usd==='number' && run.est_n ? run.est_usd / run.est_n : undefined,
-        metrics: {...Object.fromEntries(Object.entries(views).filter(([k,v])=>k!==view&&v.scores[id]?.[1]>0).map(([k,v])=>[k,100*v.scores[id][0]/v.scores[id][1]])),solved:s[0],tests:s[1],...(typeof s[2]==='number'?{attempted:s[2]}:{}),...(run.agent_s && run.agent_n ? { minutes: run.agent_s / run.agent_n / 60 } : {})},
+        metrics: {...Object.fromEntries(Object.entries(views).filter(([k,v])=>k!==view&&v.scores[id]?.[1]>0).map(([k,v])=>[k,100*v.scores[id][0]/v.scores[id][1]])),solved:s[0],...(run.agent_s && run.agent_n ? { minutes: run.agent_s / run.agent_n / 60 } : {})},
       });
     }
     if (rows.length < 3) throw new Error(`only ${rows.length} Embodied First Exam rows`);

@@ -6,6 +6,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = 'https://mathvista.github.io/data/results/model_scores.js';
 
@@ -63,4 +64,17 @@ const board: Leaderboard = {
     return rows;
   },
 };
-export default board;
+export default withKaggle(board, {
+  owner: 'open-benchmarks',
+  slug: 'mathvista-testmini',
+  task: 'Score',
+  scale: 100,
+  // Kaggle's testmini category scores, under the official board's part keys. Kaggle has no arithmetic score.
+  extra: Object.fromEntries(
+    Object.entries({
+      FQA: 'Figure QA Score', GPS: 'Geometry Problem Solving Score', MWP: 'Math Word Problem Score', TQA: 'Textbook QA Score',
+      VQA: 'Visual QA Score', ALG: 'Algebraic Score', GEO: 'Geometry Score', LOG: 'Logical Score', NUM: 'Numeric Score',
+      SCI: 'Scientific Score', STA: 'Statistical Score',
+    }).map(([k, task]) => [k, { task, scale: 100 }]),
+  ),
+});

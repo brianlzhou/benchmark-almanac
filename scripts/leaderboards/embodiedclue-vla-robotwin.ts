@@ -33,7 +33,7 @@ const board: Leaderboard = {
     const bytes = new Uint8Array(await fetchBytes(FEED)); const sharedXml = await unzip(bytes, 'xl/sharedStrings.xml'); const strings = [...sharedXml.matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]); const sheet = cells(await unzip(bytes, 'xl/worksheets/sheet2.xml'));
     const rows = sheet.slice(1).map((row) => Object.fromEntries(row.map((c) => [col(c.ref), c.type === 's' ? strings[Number(c.value)] : c.value])));
     if (rows.length < 10) throw new Error(`EmbodiedCLUE-VLA: ${rows.length} rows, expected at least 10`);
-    return rows.map((r) => { const score = Number(r.D); if (!r.B || !Number.isFinite(score)) throw new Error('EmbodiedCLUE-VLA: invalid row'); const ci = String(r.E ?? '').match(/-([\d.]+)\/\+([\d.]+)/); return { model: String(r.B), score, submitter: String(r.C ?? ''), low: ci ? score - Number(ci[1]) : undefined, high: ci ? score + Number(ci[2]) : undefined, setting: String(r.H ?? '') }; });
+    return rows.map((r) => { const score = Number(r.D); if (!r.B || !Number.isFinite(score)) throw new Error('EmbodiedCLUE-VLA: invalid row'); const ci = String(r.E ?? '').match(/-([\d.]+)\/\+([\d.]+)/); const pm = String(r.G ?? '').trim().match(/^(\d+(?:\.\d+)?)B$/i); return { model: String(r.B), score, submitter: String(r.C ?? ''), low: ci ? score - Number(ci[1]) : undefined, high: ci ? score + Number(ci[2]) : undefined, params: pm ? Number(pm[1]) : undefined, setting: String(r.H ?? '') }; });
   },
 };
 export default board;

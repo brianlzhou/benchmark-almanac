@@ -11,6 +11,17 @@ const PAGE = 'https://matthewcym.github.io/VoiceBench/';
 
 const board: Leaderboard = {
   benchmark: 'voicebench',
+  parts: {
+    AlpacaEval: { name: 'AlpacaEval', group: 'Task', unit: 'score' },
+    CommonEval: { name: 'CommonEval', group: 'Task', unit: 'score' },
+    WildVoice: { name: 'WildVoice', group: 'Task', unit: 'score' },
+    'SD-QA': { name: 'SD-QA', group: 'Task', unit: '%' },
+    MMSU: { name: 'MMSU', group: 'Task', unit: '%' },
+    OBQA: { name: 'OBQA', group: 'Task', unit: '%' },
+    BBH: { name: 'BBH', group: 'Task', unit: '%' },
+    IFEval: { name: 'IFEval', group: 'Task', unit: '%' },
+    AdvBench: { name: 'AdvBench', group: 'Task', unit: '%' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML table, data-overall)`,
   terms: 'Static GitHub Pages site that states no terms; the VoiceBench repository is Apache-2.0.',
@@ -24,13 +35,13 @@ const board: Leaderboard = {
     const table = html.match(/<table\b[\s\S]*?<\/table>/)?.[0];
     if (!table) throw new Error('no leaderboard table on the VoiceBench page');
     const dimensions = [...table.matchAll(/<th(?:\s[^>]*)?>([\s\S]*?)<\/th>/g)].map(m => text(m[1])).slice(2, -2);
-    board.parts = Object.fromEntries(dimensions.map((name, i) => [name, { name, group: 'Task', unit: i < 3 ? 'score' : '%' }]));
     const rows: LeaderboardRow[] = [];
     for (const m of table.matchAll(/<tr\b([^>]*\bdata-overall="([\d.]+)"[^>]*)>([\s\S]*?)<\/tr>/g)) {
       const arch = m[1].match(/data-arch="([^"]+)"/)?.[1];
-      const name = m[3].match(/class="model-name"[^>]*>([\s\S]*?)<\/(?:a|span)>/)?.[1];
-      if (!name) continue;
-      const model = text(name);
+      const cell = m[3].match(/<(a|span)\b([^>]*class="model-name"[^>]*)>([\s\S]*?)<\/\1>/);
+      if (!cell) continue;
+      const model = text(cell[3]);
+      const href = cell[1] === 'a' ? cell[2].match(/href="(https?:\/\/[^\s"]+)"/)?.[1] : undefined;
       // the Qwen3-Omni Thinking and Instruct releases share one registry record
       const mode = model.match(/^Qwen3-Omni-.*-(Thinking|Instruct)$/)?.[1];
       const metrics: Record<string, number> = {};
@@ -40,7 +51,7 @@ const board: Leaderboard = {
         if (value !== undefined && dimensions[i]) metrics[dimensions[i]] = value;
       }
       const access = m[1].match(/data-open="([^"]+)"/)?.[1];
-      rows.push({ model, metrics, open: access === 'open' ? true : access === 'closed' ? false : undefined, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
+      rows.push({ model, metrics, link: href, open: access === 'open' ? true : access === 'closed' ? false : undefined, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
     }
     if (!rows.length) throw new Error('no rows in the VoiceBench table');
     return rows;

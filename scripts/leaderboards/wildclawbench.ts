@@ -15,6 +15,9 @@ const board: Leaderboard = {
  stats: {
    minutes: { name: 'Total time per task', unit: 'minutes', better: 'lower' },
    minutesPerTask: { name: 'Average minutes per task', unit: 'minutes', better: 'lower' },
+   latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' },
+   'mean:steps': { name: 'Mean steps per task', unit: 'count', better: 'lower' },
+   'mean:tool_calls': { name: 'Mean tool calls per task', unit: 'count', better: 'lower' },
  },
 
  aliases: {'Muse Glimmer 30B':'muse-glimmer'},

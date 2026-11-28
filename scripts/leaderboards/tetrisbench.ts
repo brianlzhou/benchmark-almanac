@@ -25,13 +25,14 @@ const board: Leaderboard = {
     if (!data.ok || data.models.length < 4) throw new Error('Incomplete TetrisBench results');
     return data.models.map(id => {
       const { wins, losses, draws, totalGames, winRate } = data.totals[id];
-      const metrics: Record<string, number> = { wins, losses, draws };
+      const metrics: Record<string, number> = { wins, losses };
       for (const [opponent, record] of Object.entries(data.matrix[id])) {
-        for (const key of ['wins', 'losses', 'draws'] as const) {
+        if (!Number.isFinite(record.draws)) throw new Error('Invalid draw record for ' + id);
+        for (const key of ['wins', 'losses'] as const) {
           metrics[key + ' vs ' + (data.modelNames[opponent] || opponent)] = record[key];
         }
       }
-      if (![winRate, totalGames, ...Object.values(metrics)].every(Number.isFinite) ||
+      if (![winRate, totalGames, draws, ...Object.values(metrics)].every(Number.isFinite) ||
           totalGames !== wins + losses + draws) throw new Error('Invalid game record for ' + id);
       return { model: data.modelNames[id] || id, score: winRate, trials: totalGames, metrics };
     });

@@ -6,6 +6,7 @@
 // rewritten into registry order. Each published subject accuracy uses the same percentage scale as Overall.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = 'https://huggingface.co/datasets/TIGER-Lab/mmlu_pro_leaderboard_submission/resolve/main/results.csv';
 
@@ -113,4 +114,4 @@ const board: Leaderboard = {
     return rows;
   },
 };
-export default board;
+export default withKaggle(board, { owner: 'open-benchmarks', slug: 'mmlu-pro', task: 'mmlu_pro_task', scale: 100 });

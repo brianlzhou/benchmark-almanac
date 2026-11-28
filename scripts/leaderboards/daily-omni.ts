@@ -6,6 +6,13 @@ import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/Lliar-liar/Daily-Omni/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
+const CANON_PART: Record<string, string> = {
+  'Comp.': 'Comparison',
+  'Ctx. Und.': 'Context Understanding',
+  'Evt. Seq.': 'Event Sequence',
+  'Infer.': 'Inference',
+  'Reas.': 'Reasoning',
+};
 const board: Leaderboard = {
   benchmark: "daily-omni",
   parts: {
@@ -17,11 +24,6 @@ const board: Leaderboard = {
     Reasoning: { name: 'Reasoning', group: 'Task type' },
     '30s': { name: '30 seconds', group: 'Split' },
     '60s': { name: '60 seconds', group: 'Split' },
-    'Comp.': { name: 'Comparison', group: 'Task type' },
-    'Ctx. Und.': { name: 'Context understanding', group: 'Task type' },
-    'Evt. Seq.': { name: 'Event sequence', group: 'Task type' },
-    'Infer.': { name: 'Inference', group: 'Task type' },
-    'Reas.': { name: 'Reasoning', group: 'Task type' },
   },
   url: "https://github.com/Lliar-liar/Daily-Omni",
   feed: FEED,
@@ -40,7 +42,8 @@ const board: Leaderboard = {
         for (let i = 0; i < t.head.length; i++) {
           if (i === (0) || i === (t.head.indexOf('Avg'))) continue;
           const value = num(r[i]);
-          if (value !== undefined) metrics[t.head[i]] = value;
+          const partKey = CANON_PART[t.head[i]] ?? t.head[i];
+          if (value !== undefined) metrics[partKey] = value;
         }
         out.push({ model: identity(name), score: score * 1, setting: t.heading, metrics });
       }

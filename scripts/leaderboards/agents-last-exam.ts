@@ -29,7 +29,28 @@ const board: Leaderboard = {
   },
   terms: 'The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.',
   stats: {
-    runs: { name: 'Runs', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' }, splitTasks: { name: 'Split tasks', unit: 'count' }, latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens per run', unit: 'tokens' },
+    passes: { name: 'Passes', unit: 'count', better: 'higher' },
+    partial: { name: 'Partial credit score', unit: '%', better: 'higher' },
+    runs: { name: 'Runs', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' }, latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens per run', unit: 'tokens' },
+    ...Object.fromEntries(([
+      ['full/full-spectrum', 'Full spectrum'],
+      ['full/last-exam', 'Last exam'],
+      ['full/near-term', 'Near term'],
+      ['licensed', 'Licensed'],
+      ['linux_only', 'Linux only'],
+      ['unlicensed', 'Unlicensed'],
+      ['unlicensed/full-spectrum', 'Unlicensed full spectrum'],
+      ['unlicensed/last-exam', 'Unlicensed last exam'],
+      ['unlicensed/near-term', 'Unlicensed near term'],
+      ['unlicensed/overall', 'Unlicensed overall'],
+    ] as const).flatMap(([s, label]) => [
+      [s + '/partial', { name: label + ' partial credit', unit: '%', better: 'higher' }],
+      [s + '/passes', { name: label + ' passes', unit: 'count', better: 'higher' }],
+      [s + '/totalDurationS', { name: label + ' total duration', unit: 'seconds', better: 'lower' }],
+      [s + '/totalInputTokens', { name: label + ' total input tokens', unit: 'tokens' }],
+      [s + '/totalOutputTokens', { name: label + ' total output tokens', unit: 'tokens' }],
+      [s + '/totalCostUsd', { name: label + ' total cost', unit: 'usd', better: 'lower' }],
+    ])),
   },
   aliases: { 'anthropic-claude-fable-5': 'claude-fable-5', 'qwen-qwen3-7-max': 'qwen3-7-max' },
   async fetch(): Promise<LeaderboardRow[]> {
@@ -38,12 +59,12 @@ const board: Leaderboard = {
     const out: LeaderboardRow[] = [];
     for (const r of rows) {
       if (r.split !== 'full/overall' || !Number.isFinite(r.passRate)) continue;
-      const metrics: Record<string, number> = { passes: r.passes, runs: r.runs, tasks: r.tasks, splitTasks: r.splitTasks };
+      const metrics: Record<string, number> = { passes: r.passes, runs: r.runs, tasks: r.tasks };
       if (Number.isFinite(r.avgScore)) metrics.partial = r.avgScore! * 100;
       if (r.runs > 0 && typeof r.totalDurationS === 'number') metrics.latency = r.totalDurationS / r.runs;
       if (r.runs > 0 && typeof r.totalInputTokens === 'number') metrics.inputTokens = r.totalInputTokens / r.runs;
       for (const split of rows.filter(s => key(s) === key(r) && s.split !== r.split && s.split !== 'full')) {
-        for (const key of ['passes', 'runs', 'tasks', 'splitTasks', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const) {
+        for (const key of ['passes', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const) {
           const value = split[key];
           if (typeof value === 'number' && Number.isFinite(value)) metrics[split.split + '/' + key] = value;
         }

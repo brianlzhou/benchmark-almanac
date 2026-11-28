@@ -13,7 +13,6 @@ const board: Leaderboard = {
   harnesses: 'system',
   stats: {
     losses: { name: 'Losses', unit: 'count', better: 'lower' },
-    standingsRank: { name: 'Standings rank', unit: 'count', better: 'lower' },
     headToHeadWins: { name: 'Head to head wins', unit: 'count', better: 'higher' },
     headToHeadLosses: { name: 'Head to head losses', unit: 'count', better: 'lower' },
     medianWins: { name: 'Median wins', unit: 'count', better: 'higher' },
@@ -31,10 +30,10 @@ const board: Leaderboard = {
       const record = row[2].text.match(/^(\d+)–(\d+)–(\d+)$/);
       const href = row[1].html.match(/href="([^"]+)"/)?.[1];
       if (!team || !model || !record || !href) throw new Error('Incomplete football team');
-      const metrics: Record<string, number> = { losses: Number(record[2]), ties: Number(record[3]), standingsRank: Number(row[0].text) };
+      const metrics: Record<string, number> = { losses: Number(record[2]) };
       for (const [i,key] of ['headToHead','median'].entries()) {
-        const [wins,losses,ties] = row[i+3].text.split('–').map(Number);
-        metrics[key+'Wins'] = wins; metrics[key+'Losses'] = losses; metrics[key+'Ties'] = ties;
+        const [wins,losses] = row[i+3].text.split('–').map(Number);
+        metrics[key+'Wins'] = wins; metrics[key+'Losses'] = losses;
       }
       for (const [i,key] of ['pointsFor','pointsAgainst','differential','efficiency'].entries()) {
         const value = num(row[i+5].text.replace('−','-'));

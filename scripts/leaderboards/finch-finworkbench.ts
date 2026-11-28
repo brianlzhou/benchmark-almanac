@@ -57,9 +57,13 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "finch-finworkbench",
+  static: 'paper',
   url: "https://github.com/FinWorkBench/Finch",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    humanPassRate: { name: 'Human-evaluated pass rate', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return checkedImageRows(IMAGE, SHA256, ROWS);
   },

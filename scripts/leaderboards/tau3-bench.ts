@@ -4,11 +4,12 @@
 // keeps the site's Overall pass^2 to pass^4 (metrics.pass2 to pass4) and the mean cost per task, through
 // overallExtras.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { ALIASES, TERMS, loadTau, overall, overallExtras, row } from './tau2-bench.ts';
+import { ALIASES, TAU_PARTS, TAU_STATS, TERMS, loadTau, overall, overallExtras, row } from './tau2-bench.ts';
 
 const board: Leaderboard = {
   benchmark: 'tau3-bench',
-  stats: { pass2: { name: 'Pass@2', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass4: { name: 'Pass@4', unit: '%', better: 'higher' } },
+  stats: TAU_STATS,
+  parts: TAU_PARTS,
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: 'https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (submissions)',
   terms: TERMS,

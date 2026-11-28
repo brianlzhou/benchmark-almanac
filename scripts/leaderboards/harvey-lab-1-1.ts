@@ -1,6 +1,6 @@
 // Harvey Legal Agent Benchmark (LAB) v1.1, run by Vals AI for Harvey (headline Task Pass Rate) on vals.ai, read through the helper in vals-index.ts.
 import type { Leaderboard } from './types.ts';
-import { VALS_ALIASES, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
+import { VALS_ALIASES, VALS_LATENCY_CHART, VALS_STATS, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
 
 const SLUG = 'hlab';
 
@@ -10,7 +10,8 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
-  stats: { latency: { name: 'Mean latency per test', unit: 'seconds', better: 'lower' }, turns: { name: 'Average turns per test', unit: 'count', better: 'lower' } },
+  stats: VALS_STATS,
+  chart: { ...VALS_LATENCY_CHART, title: 'Task pass rate against latency', y: { ...VALS_LATENCY_CHART.y, label: 'Task pass rate' } },
   fetch: () => valsRows(SLUG, { score: 'Task Pass Rate' }),
 };
 export default board;

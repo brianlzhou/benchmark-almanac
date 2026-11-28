@@ -60,6 +60,25 @@ export interface LeaderboardRow {
    * A board's `chart` names the ones it plots, and its `parts` names the ones that score a part of the benchmark.
    */
   metrics?: Record<string, number>;
+  /**
+   * The key in `Leaderboard.sources` of the source this row came from, when the board adds another source's runs.
+   * Rows from the board itself leave it out.
+   */
+  source?: string;
+}
+/**
+ * Another place that runs the same test and publishes its runs, read beside the board: Kaggle Benchmarks for an open
+ * test. Pages credit it and name it on each of its rows (scripts/lib/boards/kaggle.ts).
+ */
+export interface BoardSource {
+  /** Its name, as pages show it: "Kaggle Benchmarks". */
+  name: string;
+  /** The page people read. */
+  url: string;
+  /** The machine-readable file or endpoint the importer reads. */
+  feed: string;
+  /** One sentence on the terms that apply to reading the feed. */
+  terms: string;
 }
 /** One axis of a board's own chart: the headline score ("score") or a key in each row's `metrics`. */
 export interface ChartAxis {
@@ -157,6 +176,12 @@ export interface Leaderboard {
    * beside its pass rate. Lab numbers on that measure are then compared with this column, never the headline.
    */
   measures?: Record<string, string>;
+  /**
+   * Other sources whose runs of the same test this board adds, by a short key that each of their rows carries in
+   * `source`. Only for a fully open test (public questions and grader), where anyone's run is the same test. The
+   * user chose on 2026-11-26 to combine official boards with Kaggle's reruns this way, with each row's source shown.
+   */
+  sources?: Record<string, BoardSource>;
   fetch(): Promise<LeaderboardRow[]>;
 }
 /** One part of a benchmark that a board scores on its own. */

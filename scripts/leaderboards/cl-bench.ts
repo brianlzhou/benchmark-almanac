@@ -10,11 +10,11 @@ export const clbenchFeed = (file: string) => `https://www.clbench.com/data/${fil
 export const CLBENCH_TERMS =
   'Static JSON on the clbench.com GitHub Pages site, which states no terms; the CL-bench repository licenses its code Apache-2.0 under a Tencent notice.';
 
-export async function clbenchRows(file: string): Promise<LeaderboardRow[]> {
-  const data = await fetchJson<{ model: string; overall?: number }[]>(clbenchFeed(file));
+export async function clbenchRows(file: string, partKeys: readonly string[] = []): Promise<LeaderboardRow[]> {
+  const data = await fetchJson<Record<string, unknown>[]>(clbenchFeed(file));
   const rows: LeaderboardRow[] = [];
   for (const r of data) {
-    if (typeof r.overall !== 'number' || !r.model) continue;
+    if (typeof r.overall !== 'number' || typeof r.model !== 'string' || !r.model) continue;
     let model = r.model.trim();
     let setting: string | undefined;
     // "Grok 4.20 (non-reasoning)", "Hy3 preview (NoThink)", "Qwen 3.5 Plus (thinking)": the mode in brackets
@@ -30,7 +30,15 @@ export async function clbenchRows(file: string): Promise<LeaderboardRow[]> {
       model = suffix[1];
       setting = 'thinking';
     }
-    rows.push({ model, setting, score: r.overall * 100 });
+    const metrics: Record<string, number> = {};
+    for (const k of partKeys) {
+      const v = r[k];
+      if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = Number((v * 100).toFixed(1));
+    }
+    if (typeof r.overall_std === 'number' && Number.isFinite(r.overall_std) && r.overall_std > 0) {
+      metrics.std = Number((r.overall_std * 100).toFixed(2));
+    }
+    rows.push({ model, setting, score: r.overall * 100, ...(Object.keys(metrics).length ? { metrics } : {}) });
   }
   if (!rows.length) throw new Error(`no rows in ${file}`);
   return rows;
@@ -46,7 +54,13 @@ const board: Leaderboard = {
   url: 'https://www.clbench.com/',
   feed: clbenchFeed('clb-data.json'),
   terms: CLBENCH_TERMS,
+  parts: {
+    domain: { name: 'Domain knowledge reasoning', unit: '%' },
+    rule: { name: 'Rule system application', unit: '%' },
+    procedural: { name: 'Procedural task execution', unit: '%' },
+    pattern: { name: 'Empirical discovery and simulation', unit: '%' },
+  },
   aliases: CLBENCH_ALIASES,
-  fetch: () => clbenchRows('clb-data.json'),
+  fetch: () => clbenchRows('clb-data.json', ['domain', 'rule', 'procedural', 'pattern']),
 };
 export default board;

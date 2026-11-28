@@ -23,16 +23,14 @@ const board: Leaderboard = {
     const all = tables(source).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].some(h=>h.includes("AlignBench v1.1"))); if(!table)throw new Error("Missing v1.1 table");
-    const counts = Object.fromEntries([...source.matchAll(/^\|\s*([^|]+?)\s*\|\s*[^|]+\|\s*(\d+)\s*\|$/gm)]
-      .map(m => ['samples:' + m[1].trim(), Number(m[2])]));
     for (const r of table.slice(3)) {
       const score = num(r[1]);
       if (!r[0] || score === undefined) continue;
       const size = r[0].match(/-(\d+(?:\.\d+)?)B\b/);
-      const metrics = { ...counts, ...Object.fromEntries(table[2].slice(1).flatMap((h, j) => {
+      const metrics = Object.fromEntries(table[2].slice(1).flatMap((h, j) => {
         const value = num(r[j + 2]);
         return value === undefined ? [] : [[h, value]];
-      })) };
+      }));
       rows.push({ model: r[0], score, setting: 'v1.1', params: size ? Number(size[1]) : undefined, metrics });
     }
     if (!rows.length) throw new Error("No alignbench score rows");

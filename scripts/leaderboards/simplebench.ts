@@ -17,6 +17,12 @@ const board: Leaderboard = {
     priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
     reportedOutputTokens: { name: 'Reported output tokens', unit: 'tokens', better: 'lower' },
   },
+  chart: {
+    title: 'Score vs. cost per run',
+    x: { key: 'cost', label: 'Cost per full benchmark run', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Score', unit: '%', better: 'higher' },
+    note: 'SimpleBench plots score against full-run cost on a log scale.',
+  },
   aliases: {
     // dateAdded 2026-06-10, the day after Claude Fable 5 shipped
     'Claude Fable': 'claude-fable-5',
@@ -66,7 +72,7 @@ const board: Leaderboard = {
       rows.push({ model, cost: priced ? price.cpr : undefined,
         score: Number(m[3]), metrics: { ...(other.has(m[2]) ? { openEnded: other.get(m[2])! } : {}),
           ...(priced && typeof price.tout === 'number' ? { reportedOutputTokens: price.tout } : {}),
-          ...(price?.est ? { estimatedPrice: 1 } : {}), ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[5] ?? listed.get(m[2].trim()) });
+          ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[5] ?? listed.get(m[2].trim()) });
     }
     if (!rows.length) throw new Error('no leaderboardData rows');
     return rows;

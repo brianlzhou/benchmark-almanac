@@ -6,7 +6,19 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://ceur-ws.org/Vol-2624/paper9.pdf';
-const parts = { supervised: 'Supervised', crossLingual: 'Cross-Lingual', crossQuestion: 'Cross-Question', crossTopic: 'Cross-Topic' };
+const mainKeys = ['supervised', 'crossLingual', 'crossQuestion', 'crossTopic'] as const;
+const parts = {
+  supervised: 'Supervised',
+  crossLingual: 'Cross-Lingual',
+  crossQuestion: 'Cross-Question',
+  crossTopic: 'Cross-Topic',
+  supervisedDE: { name: 'Supervised German', group: 'Language split' },
+  supervisedFR: { name: 'Supervised French', group: 'Language split' },
+  crossQuestionDE: { name: 'Cross-Question German', group: 'Language split' },
+  crossQuestionFR: { name: 'Cross-Question French', group: 'Language split' },
+  crossTopicDE: { name: 'Cross-Topic German', group: 'Language split' },
+  crossTopicFR: { name: 'Cross-Topic French', group: 'Language split' },
+};
 const board: Leaderboard = {
   benchmark: 'x-stance', static: 'paper', feed, url: feed,
   terms: 'The paper uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
@@ -19,7 +31,7 @@ const board: Leaderboard = {
     const ablations = paper.match(/Supervised\s+Cross-Lingual\s+Cross-Question\s+Cross-Topic([\s\S]*?)Table 5: Results for additional experiments/)?.[1];
     if (!language || !target || !ablations || !/DE\s+FR\s+Mean/.test(target)) throw new Error('Missing X-Stance results');
     const rows: LeaderboardRow[] = [];
-    const keys = Object.keys(parts);
+    const keys = mainKeys;
     function add(model: string, values: number[], setting?: string, extra = {}) {
       if (values.length !== 4 || !values.every(Number.isFinite)) throw new Error('Missing test partitions for ' + model);
       const metrics = { ...extra, ...Object.fromEntries(keys.map((k, i) => [k, values[i]])) };

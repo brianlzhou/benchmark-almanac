@@ -20,6 +20,12 @@ const board: Leaderboard = {
   feed: `${FEED} (Overall)`,
   terms: 'Repository file in run-llama/ParseBench, licensed Apache-2.0.',
   parts,
+  stats: {
+    Cost_Charts_USD: { name: 'Charts cost per page', unit: 'usd', better: 'lower' },
+    Cost_Tables_USD: { name: 'Tables cost per page', unit: 'usd', better: 'lower' },
+    Cost_Text_USD: { name: 'Text cost per page', unit: 'usd', better: 'lower' },
+    Cost_Layout_USD: { name: 'Layout cost per page', unit: 'usd', better: 'lower' },
+  },
   verified: 'The ParseBench leaderboard marks this entry as verified.',
   aliases: {},
   async fetch() {

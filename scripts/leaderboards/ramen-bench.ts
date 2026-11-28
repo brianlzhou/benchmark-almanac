@@ -11,7 +11,7 @@ interface Run {
   usage?: { tokens?: { output?: number }; cost?: { currency: string; total: number } };
 }
 const board: Leaderboard = {
-  benchmark: 'ramen-bench', url: 'https://bitbin.de/ramen-bench/', feed,
+  benchmark: 'ramen-bench', harnesses: 'system', url: 'https://bitbin.de/ramen-bench/', feed,
   terms: 'Public ratings API and per-run manifests linked by the Ramen Bench site.',
   stats: { votes: { name: 'Votes', unit: 'count' }, seconds: { name: 'Wall time', unit: 'seconds', better: 'lower' } },
   async fetch() {

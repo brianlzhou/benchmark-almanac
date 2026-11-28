@@ -14,7 +14,6 @@ const board: Leaderboard = {
   aliases: {},
   stats: {
     passed: { name: 'Patches passed', unit: 'count', better: 'higher' },
-    tasks: { name: 'Tasks', unit: 'count' },
   },
   
   async fetch() {
@@ -24,7 +23,7 @@ const board: Leaderboard = {
     for (const r of t.rows) {
       const m = r[2]?.match(/(\d+)\s*\/\s*(\d+)\s*\(([\d.]+)%\)/);
       if (!r[1] || !m) continue;
-      rows.push({ model: identity(r[1]), harness: r[0], score: Number(m[3]), setting: 'PatchEval-Verified', metrics: { passed: Number(m[1]), tasks: Number(m[2]) } });
+      rows.push({ model: identity(r[1]), harness: r[0], score: Number(m[3]), setting: 'PatchEval-Verified', metrics: { passed: Number(m[1]) } });
     }
     if (!rows.length) throw new Error('PatchEval percentage rows missing');
     return rows;

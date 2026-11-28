@@ -19,7 +19,7 @@ const board: Leaderboard = {
  async fetch() {
 
 const ts=tables(await fetchText(FEED)).filter(t=>t[0]?.[1]?.text.startsWith('Corr.'));if(ts.length!==2)throw new Error('Expected streaming and offline tables');const rows:LeaderboardRow[]=[];
-for(const [i,t] of ts.entries())for(const r of t.slice(1)){if(/^Human/i.test(r[0]?.text??''))continue;const score=num(r[1]?.text);if(score===undefined)continue;let model=r[0].text;if(/^(GPT-4o|Gemini[- ]1\.5[- ](?:Pro|Flash))$/i.test(model))model+=' [snapshot unspecified]';const metrics:Record<string,number>={};const spread=num(r[1].text.split('±')[1]);if(spread!==undefined)metrics.reportedSpread=spread;for(let j=2;j<r.length;j++){const v=num(r[j].text);if(v!==undefined)metrics[t[0][j].text.replace(/ ↑/,'')]=v;}rows.push({model,score,setting:i===0?'Streaming':'Offline',metrics});}
+for(const [i,t] of ts.entries())for(const r of t.slice(1)){if(/^Human/i.test(r[0]?.text??''))continue;const score=num(r[1]?.text);if(score===undefined)continue;let model=r[0].text;if(/^(GPT-4o|Gemini[- ]1\.5[- ](?:Pro|Flash))$/i.test(model))model+=' [snapshot unspecified]';const metrics:Record<string,number>={};const spread=num(r[1].text.split('±')[1]);if(spread!==undefined)metrics.std=spread;for(let j=2;j<r.length;j++){const v=num(r[j].text);if(v!==undefined)metrics[t[0][j].text.replace(/ ↑/,'')]=v;}rows.push({model,score,setting:i===0?'Streaming':'Offline',metrics});}
 return rows;
  },
 };

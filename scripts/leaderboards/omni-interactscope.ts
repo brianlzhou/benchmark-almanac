@@ -15,7 +15,7 @@ const board: Leaderboard = {
   terms: 'The authors publish their reference scores on GitHub. https://github.com/YinsongYan/Omni-InteractScope#code-license',
   headline: 'The leaderboard ranks explicit requests by the equally weighted accuracy of T1 to T4, T6 and T7. It reports assistance recall separately.',
   aliases: { 'qwen3-vl-8b': 'qwen3-vl-8b-instruct', 'minicpm-o': 'minicpm-o-4-5', 'livecc-7b': 'livecc-7b-instruct' },
-  stats: { completeT8CHits: { name: 'Complete T8-C hits', unit: 'count' }, completeT8CTotal: { name: 'Complete T8-C total', unit: 'count' }, explicitTerminalFailures: { name: 'Explicit terminal failures', unit: 'count', better: 'lower' } },
+  stats: { completeT8CHits: { name: 'Complete T8-C hits', unit: 'count', better: 'higher' }, explicitTerminalFailures: { name: 'Explicit terminal failures', unit: 'count', better: 'lower' }, assistanceTerminalFailures: { name: 'Assistance terminal failures', unit: 'count', better: 'lower' } },
   parts: { ...Object.fromEntries([...explicit,'T5','T8A','T8B','T8C'].map(key => [key,key.replace(/^T8(.)$/, 'T8-$1')])),
     t8Overall: 'T8 overall', explicitMicro: 'Explicit-request accuracy across targets' },
   async fetch() {
@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const t8 = doc.results.find(t => t.split === 'table3' && t.model === r.model && t.input === r.input);
       if (!t8) throw Error('Missing assistance results for ' + r.model);
       const metrics: Record<string,number> = { explicitMicro: r.overall.percentage, t8Overall: t8.overall.percentage,
-        completeT8CHits: t8.complete_c.hits, completeT8CTotal: t8.complete_c.total,
+        completeT8CHits: t8.complete_c.hits,
         explicitTerminalFailures: r.terminal_failures, assistanceTerminalFailures: t8.terminal_failures };
       for (const task of explicit) metrics[task] = r.by_task[task].percentage;
       for (const task of ['A','B','C']) metrics['T8' + task] = t8.by_task[task].percentage;

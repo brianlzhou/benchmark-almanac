@@ -29,6 +29,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://www.frontiermemory.com/blog/v1/";
 const board: Leaderboard = {
   "benchmark": "frontiermemory",
+  "harnesses": "system",
   "url": "https://www.frontiermemory.com/blog/v1/",
   "feed": "https://www.frontiermemory.com/blog/v1/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
@@ -59,7 +60,7 @@ const board: Leaderboard = {
       const values=label.match(/effort:\s*([\d.]+)%,\s*\$([\d.]+) per trial/);
       const pair=memory.match(/^(.*?) \(([^)]+)\)$/); if(!values || !pair || !task) throw new Error('Memory chart point changed');
       const cost=Number(values[2]);
-      rows.push({model:pair[1],score:Number(values[1]),setting:`memory effort ${pair[2]}; task ${task}`,harness:'Letta Dream / Letta Code',cost,metrics:{cost}});
+      rows.push({model:pair[1],score:Number(values[1]),setting:`memory effort ${pair[2]}, task ${task}`,harness:'Letta Dream / Letta Code',cost});
     }
     for(const m of html.matchAll(/<tr\b[^>]*class="harness-bar"[^>]*>/g)) {
       const memory=attr(m[0],'data-tip-mem'), task=attr(m[0],'data-tip-task'), summary=attr(m[0],'data-tip-sub');
@@ -67,11 +68,11 @@ const board: Leaderboard = {
       const score=numeric(summary.split('%')[0]); if(!pair || !t || score===undefined) continue;
       const sd=summary.match(/±([\d.]+) pp SD/);
       if (pair[3] === 'Letta Dream') {
-        const match = rows.find(r => r.model === pair[1] && r.score === score && r.setting === `memory effort ${pair[2]}; task ${t[1]}`);
+        const match = rows.find(r => r.model === pair[1] && r.score === score && r.setting === `memory effort ${pair[2]}, task ${t[1]}`);
         if (match && sd) (match.metrics ??= {}).std = Number(sd[1]);
         if (match) continue;
       }
-      rows.push({model:pair[1],score,setting:`memory effort ${pair[2]}; task ${t[1]}`,harness:`${pair[3]} / ${t[2]}`,metrics:sd?{std:Number(sd[1])}:undefined});
+      rows.push({model:pair[1],score,setting:`memory effort ${pair[2]}, task ${t[1]}`,harness:`${pair[3]} / ${t[2]}`,metrics:sd?{std:Number(sd[1])}:undefined});
     }
     if(!rows.length) throw new Error('No FrontierMemory chart results');
     return rows;

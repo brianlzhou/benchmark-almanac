@@ -48,6 +48,25 @@ const board: Leaderboard = {
   aliases: {
     'muse-wonder-1.0': 'muse-wonder',
   },
+  parts: Object.fromEntries(['Long Agentic', 'Reasoning', 'Coding', 'Browser', 'Data Analysis', 'Research', 'Design'].map(name => [name, { name, group: 'Category' }])),
+  stats: {
+    avg_input_tokens: { name: 'Average input tokens per task', unit: 'tokens' },
+    avg_output_tokens: { name: 'Average output tokens per task', unit: 'tokens' },
+    input_price_per_million: { name: 'Input price per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    output_price_per_million: { name: 'Output price per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    ...Object.fromEntries(([
+      ['browser', 'Browser'],
+      ['coding', 'Coding'],
+      ['data_analysis', 'Data analysis'],
+      ['design', 'Design'],
+      ['long_agentic', 'Long agentic'],
+      ['reasoning', 'Reasoning'],
+      ['research', 'Research'],
+    ] as const).flatMap(([k, label]) => [
+      ['suiteCost:' + k, { name: label + ' suite cost', unit: 'usd', better: 'lower' }],
+      ['out_' + k, { name: label + ' average output tokens', unit: 'tokens' }],
+    ])),
+  },
   chart: {
     title: 'Score vs. cost per task',
     x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true },
@@ -66,7 +85,6 @@ const board: Leaderboard = {
     await pause();
     const costs = new Map(parseCsv(await fetchText(`${base}/cost.csv`)).map(r => [r.model, r]));
     const date = `${release.slice(0, 4)}-${release.slice(4, 6)}-${release.slice(6)}`;
-    board.parts = Object.fromEntries(Object.keys(cats).map(name => [name, { name, group: 'Category' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of table) {
       if (!r.model) continue;
@@ -84,7 +102,7 @@ const board: Leaderboard = {
       if (!wsum) continue;
       const c = costs.get(r.model);
       for (const [key, cell] of Object.entries(c ?? {})) {
-        if (key === 'model' || !cell.trim() || !Number.isFinite(Number(cell))) continue;
+        if (key === 'model' || key.startsWith('nq_') || !cell.trim() || !Number.isFinite(Number(cell))) continue;
         const metric = (Object.values(cats) as string[][]).some(cols => cols.includes(key)) ? 'suiteCost:' + key : key;
         metrics[metric] = Number(cell);
       }

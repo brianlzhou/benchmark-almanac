@@ -12,7 +12,6 @@ const board: Leaderboard = {
   parts: { naturalness: 'Naturalness', intelligibility: 'Intelligibility', voiceQuality: 'Voice quality' },
   costPer: 'run',
   stats: {
-    clips: { name: 'Audio clips', unit: 'count' },
     latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
     latencyP95: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
     meanRTF: { name: 'Mean real-time factor', unit: 'speedup', better: 'lower' },
@@ -46,7 +45,7 @@ const board: Leaderboard = {
         model, score: number(composite), date: '2026-08-12',
         cost: price?.[4].startsWith('USD ') ? number(price[4]) : undefined,
         tokens: tokens ? number(tokens[1]) / number(clips) : undefined,
-        metrics: { clips: number(clips), naturalness: number(naturalness), intelligibility: number(intelligibility),
+        metrics: { naturalness: number(naturalness), intelligibility: number(intelligibility),
           voiceQuality: number(quality), latency: number(time?.[2]), latencyP95: number(time?.[3]),
           meanRTF: number(time?.[4]), failures: number(time?.[5]), cer: number(error?.[2]), wer: number(error?.[4]) },
       };

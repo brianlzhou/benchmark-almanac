@@ -16,6 +16,12 @@ const board: Leaderboard = {
   terms: 'Server-rendered public page; robots.txt allows all paths for generic agents with a search=yes, ai-train=no content signal, and the site publishes no terms.',
   // OpenRouter-style slugs, shared with the PinchBench importers
   aliases: PINCH_ALIASES,
+  stats: {
+    attempts: { name: 'Attempts', unit: 'count' },
+    latency: { name: 'Mean attempt duration', unit: 'seconds', better: 'lower' },
+    averageTurns: { name: 'Mean turns per attempt', unit: 'count' },
+    meanAttemptCost: { name: 'Mean attempt cost', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     const table = tables(html).find(t => t[0]?.some(c => c.text === 'Agentic'));

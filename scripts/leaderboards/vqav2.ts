@@ -64,7 +64,6 @@ const board: Leaderboard = {
         const score = e.result?.[3];
         if (!Number.isFinite(score)) continue;
         const metrics: Record<string, number> = {};
-        if (typeof e.submission__id === 'number') metrics.submissionId = e.submission__id;
         ['yesNo', 'number', 'other'].forEach((key, i) => { if (Number.isFinite(e.result[i])) metrics[key] = e.result[i]; });
         rows.push({ model, score, date: e.submission__submitted_at?.slice(0, 10),
 

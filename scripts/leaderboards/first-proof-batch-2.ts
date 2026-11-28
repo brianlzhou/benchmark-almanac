@@ -19,10 +19,11 @@ const board: Leaderboard = {
   costPer:'run',
   stats: {
     Reject: { name: 'Reject decisions', unit: 'count' },
+    'Major Revisions': { name: 'Major revisions decisions', unit: 'count' },
     'Minor Revisions': { name: 'Minor revisions decisions', unit: 'count' },
     'Essentially Flawless': { name: 'Essentially flawless decisions', unit: 'count' },
-    inputTokens: { name: 'Input tokens', unit: 'tokens' },
-    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+    inputTokens: { name: 'Total input tokens', unit: 'tokens' },
+    outputTokens: { name: 'Total output tokens', unit: 'tokens' },
   },
   parts:Object.fromEntries(Array.from({length:10},(_,i)=>['p'+(i+1),'Problem '+(i+1)])),
   async fetch() {
@@ -45,7 +46,7 @@ const board: Leaderboard = {
       }
       if (id === 'A') metrics.p6 = 0;
       if (Object.keys(metrics).length !== 10) throw new Error('Incomplete decision set for System ' + id);
-      return {...system, score, cost:costs[3*i+2],
+      return {...system, score, cost:costs[3*i+2], tokens:Math.round(costs[3*i+1]*1e5),
         metrics:{...metrics,...counts, inputTokens:costs[3*i]*1e6,outputTokens:costs[3*i+1]*1e6}};
     }),4);
   },

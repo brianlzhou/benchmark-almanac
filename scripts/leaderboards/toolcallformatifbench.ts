@@ -26,7 +26,7 @@ const ROWS: LeaderboardRow[] = [
   }
 ];
 const board: Leaderboard = {
- benchmark: 'toolcallformatifbench', url: 'https://qwen.ai/blog?id=qwen3.6-max-preview', feed: IMAGE + ' (transcribed 2026-11-10)',
+ benchmark: 'toolcallformatifbench', static: 'paper', url: 'https://qwen.ai/blog?id=qwen3.6-max-preview', feed: IMAGE + ' (transcribed 2026-11-10)',
  terms: 'Qwen publishes this comparison image publicly; the almanac credits Qwen and links the source.',
  fetch: () => checkedImageRows(IMAGE, 'e01c316dd7a53af03cfe7f537cae02e2827f430aa933476612578a5299ab0f75', ROWS),
 };

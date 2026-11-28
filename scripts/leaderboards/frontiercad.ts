@@ -9,9 +9,9 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://normal.ai/research/frontiercad';
 const feed = url + '/technical-report';
 const board: Leaderboard = {
-  benchmark: 'frontiercad', url, feed, parts: { parts: 'Parts', assemblies: 'Assemblies' },
+  benchmark: 'frontiercad', harnesses: 'system', url, feed, parts: { parts: 'Parts', assemblies: 'Assemblies' },
   terms: 'Normal Research publishes aggregate results in its technical report. https://normal.ai/research/frontiercad/technical-report',
-  stats: { partsPassed: { name: 'Parts passed', unit: 'count' }, partsScored: { name: 'Parts scored', unit: 'count' }, assembliesPassed: { name: 'Assemblies passed', unit: 'count' }, assembliesScored: { name: 'Assemblies scored', unit: 'count' } },
+  stats: { partsPassed: { name: 'Parts passed', unit: 'count' }, assembliesPassed: { name: 'Assemblies passed', unit: 'count' } },
   async fetch() {
     const html = await fetchText(feed);
     const groups = tables(html).filter(t => t[0]?.map(c => c.text).join() === 'Model and setting,Scored,Mean,Passed');
@@ -34,7 +34,7 @@ const board: Leaderboard = {
         const row = models.get(model) ?? { model, harness, setting, trials: 1, score: 0, metrics: {} };
         if (row.setting !== setting || row.harness !== harness) throw new Error('Settings differ across tracks');
         Object.assign(row.metrics!, { [key]: value, [key+'Low']: Number(interval[3]), [key+'High']: Number(interval[4]),
-          [key+'Passed']: Number(passes.text.split('/')[0]), [key+'Scored']: scored });
+          [key+'Passed']: Number(passes.text.split('/')[0]) });
         models.set(model, row);
       }
     });

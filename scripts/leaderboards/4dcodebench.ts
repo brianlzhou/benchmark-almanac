@@ -7,6 +7,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://4dcodebench.com/data/leaderboard.json";
 const board: Leaderboard = {
   benchmark: "4dcodebench",
+  harnesses: 'system',
   parts: {
     Perceptual: { name: 'Perceptual', group: 'Dimension' },
     '2D Dynamics': { name: '2D dynamics', group: 'Dimension' },
@@ -43,7 +44,7 @@ const board: Leaderboard = {
         const model = registry.models.find((m:any) => m.key === r.run);
         if (!model) throw new Error('Unknown model run ' + r.run);
         const metrics: Record<string,number> = {
-          ...r.families, elo:r.elo, humanElo:r.human_elo, totalTokens:r.tokens, cost:r.cost_usd,
+          ...r.families, elo:r.elo, humanElo:r.human_elo, totalTokens:r.tokens,
           steps:r.steps, rendered:r.rendered,
         };
         for (const split of ['real', 'synthetic']) {

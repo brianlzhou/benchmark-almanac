@@ -14,7 +14,8 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t = tables(await fetchText(FEED)).find(t => t.some(r => r[0]?.text === 'Solver'));
       if (!t) throw new Error('ARC test table missing');
-      return t.filter(r => r.length === 3 && num(r[2].text) !== undefined && !/dataset defn|random/i.test(r[0].text)).map(r => ({model:r[0].text.replace(/[‡†]/g,''),score:num(r[2].text)!}));
+      return t.filter(r => r.length === 3 && num(r[2].text) !== undefined && !/dataset defn|random/i.test(r[0].text)).map(r => ({model:r[0].text.replace(/[‡†]/g,''),score:num(r[2].text)!,
+        link: r[0].text.includes('‡') ? 'https://github.com/allenai/arc-solvers' : undefined}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

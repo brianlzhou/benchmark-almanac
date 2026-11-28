@@ -20,7 +20,7 @@ export async function musicResults(board: Leaderboard, key: string, minimum: num
       throw new Error('Incomplete music result for ' + c.model);
     const settings = Object.entries(c.config ?? {}).filter(([k,v]) => v != null && k !== 'system_prompt_hash')
       .map(([k,v]) => k + '=' + (typeof v === 'object' ? JSON.stringify(v) : String(v)));
-    const metrics: Record<string, number> = { questions: c.n, seed: c.seed, ...c.error_counts, ...c.usage };
+    const metrics: Record<string, number> = { questions: c.n, ...c.error_counts, ...c.usage };
     if (c.elapsed_sec != null) metrics.elapsedSeconds = c.elapsed_sec;
     for (const [task, result] of Object.entries(c.task_accuracy ?? {})) {
       if (!Number.isFinite(result.accuracy)) throw new Error('Missing accuracy for ' + task);
@@ -43,7 +43,7 @@ const board: Leaderboard = {
   host: 'MuTheoryEval',
   costPer: 'run',
   stats: {
-    questions: { name: 'Questions', unit: 'count' }, seed: { name: 'Random seed', unit: 'count' }, elapsedSeconds: { name: 'Elapsed time', unit: 'seconds', better: 'lower' }, total_completion_tokens: { name: 'Completion tokens', unit: 'tokens' }, total_prompt_tokens: { name: 'Prompt tokens', unit: 'tokens' }, total_thinking_tokens: { name: 'Thinking tokens', unit: 'tokens' }, avg_thinking_tokens_per_q: { name: 'Average thinking tokens per question', unit: 'tokens', better: 'lower' },
+    questions: { name: 'Questions', unit: 'count' }, elapsedSeconds: { name: 'Elapsed time', unit: 'seconds', better: 'lower' }, total_completion_tokens: { name: 'Completion tokens', unit: 'tokens' }, total_prompt_tokens: { name: 'Prompt tokens', unit: 'tokens' }, total_thinking_tokens: { name: 'Thinking tokens', unit: 'tokens' }, avg_thinking_tokens_per_q: { name: 'Average thinking tokens per question', unit: 'tokens', better: 'lower' },
   },
   async fetch() {
     return musicResults(board, 'cmi_bench', 3);

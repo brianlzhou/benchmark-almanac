@@ -8,6 +8,19 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/kelechukwuagbo/judge-bait',
   feed: kaggleFeed('kelechukwuagbo', 'judge-bait'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('kelechukwuagbo', 'judge-bait', "(Overall)", 100),
+  parts: {
+    baseline: 'Baseline',
+    verbosity: 'Verbosity',
+    pressure: 'Pressure',
+    authority: 'Authority',
+    injection: 'Injection',
+  },
+  fetch: () => kaggleRowsWithBounds('kelechukwuagbo', 'judge-bait', "(Overall)", 100, {
+    baseline: { task: 'Judge Bait: Baseline', scale: 100, interval: true },
+    verbosity: { task: 'Judge Bait: Verbosity', scale: 100, interval: true },
+    pressure: { task: 'Judge Bait: Pressure', scale: 100, interval: true },
+    authority: { task: 'Judge Bait: Authority', scale: 100, interval: true },
+    injection: { task: 'Judge Bait: Injection', scale: 100, interval: true },
+  }),
 };
 export default board;

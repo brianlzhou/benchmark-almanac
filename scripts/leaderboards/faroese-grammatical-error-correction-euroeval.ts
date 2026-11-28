@@ -9,10 +9,6 @@ const board: Leaderboard = {
   url: "https://euroeval.com/leaderboards/faroese",
   feed: FEED,
   terms: "Use the grammatical correction column. It has 248 test runs for 245 models and 183 validation runs. The source corpus restricts redistribution. https://mtd.setur.fo/resource/villugrunnur/ EuroEval robots.txt allows the leaderboard and bundle.",
-  stats: {
-    scored: { name: 'Scored examples', unit: 'count' },
-    failures: { name: 'Failures', unit: 'count', better: 'lower' },
-  },
   aliases: {"mistralai/Mistral-Small-3.2-24B-Instruct-2506": "mistral-small-3-2", "mistralai/Mistral-Small-3.1-24B-Instruct-2503": "mistral-small-3-1"},
   async fetch() {
     const html = await fetchText(FEED);
@@ -38,8 +34,7 @@ const board: Leaderboard = {
       const setting = label.match(/ \(([^)]+)\)$/)?.[1];
       const params = Number(r.Parameters);
       rows.push({ model: label.replace(/ \([^)]+\)$/, ''), setting, score, low: score - margin, high: score + margin,
-        open: r.Open === '✓', link: r.Model.match(/href='([^']+)'/)?.[1], params: Number.isFinite(params) && params > 0 ? params / 1e9 : undefined,
-        metrics: { scored: Number(r.faroese_grammatical_correctness_scored), failures: Number(r.faroese_grammatical_correctness_failures) } });
+        open: r.Open === '✓', link: r.Model.match(/href='([^']+)'/)?.[1], params: Number.isFinite(params) && params > 0 ? params / 1e9 : undefined });
     }
     if (rows.length < 248) throw new Error('Missing Faroese test runs: ' + rows.length);
     return rows;

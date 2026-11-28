@@ -3,6 +3,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = "https://raw.githubusercontent.com/hendrycks/test/HEAD/README.md";
 const board: Leaderboard = {
@@ -25,4 +26,4 @@ const board: Leaderboard = {
   });
  },
 };
-export default board;
+export default withKaggle(board, { owner: 'open-benchmarks', slug: 'mmlu', task: 'mmlu_task', scale: 100 });

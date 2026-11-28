@@ -26,9 +26,8 @@ const board: Leaderboard = {
     validJson: { name: 'Valid JSON', unit: 'score', better: 'higher' },
     steps: { name: 'Mean turns', unit: 'count' },
     inputTokens: { name: 'Mean input tokens', unit: 'tokens' },
-    outputTokens: { name: 'Mean output tokens', unit: 'tokens' },
-    passAt2: { name: 'Pass@2', unit: '%', better: 'higher' },
-    pass2: { name: 'Pass^2', unit: '%', better: 'higher' },
+    passAt2: { name: 'pass@2', unit: '%', better: 'higher' },
+    pass2: { name: 'pass^2', unit: '%', better: 'higher', note: 'both attempts pass' },
   },
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -38,11 +37,12 @@ const board: Leaderboard = {
       for (const e of evaluations) {
         const m = e.metadata;
         const metrics: Record<string, number> = { findingsF1: m.avg_metrics.findings_f1, validJson: m.avg_metrics.valid_json, steps: m.avg_metrics.num_turns };
-        if (m.usage) Object.assign(metrics, { inputTokens: m.usage.input_tokens, outputTokens: m.usage.output_tokens });
+        if (m.usage) metrics.inputTokens = m.usage.input_tokens;
         if (m.pass_at_k?.['2'] != null) metrics.passAt2 = 100 * m.pass_at_k['2'];
         if (m.pass_all_k?.['2'] != null) metrics.pass2 = 100 * m.pass_all_k['2'];
         if (!Object.values(metrics).every(Number.isFinite)) throw new Error('Missing FS Review run metrics');
         rows.push({ model: m.model, score: e.statistics.avgReward, metrics, trials: m.rollouts_per_example, date: e.createdAt.slice(0,10),
+          tokens: m.usage && Number.isFinite(m.usage.output_tokens) && m.usage.output_tokens > 0 ? m.usage.output_tokens : undefined,
           setting: e.semanticVersion + ', ' + m.num_examples + ' examples', harness: e.framework, submitter: e.user?.name, link: url + '/' + e._id });
       }
       if (!pagination.hasMore) {

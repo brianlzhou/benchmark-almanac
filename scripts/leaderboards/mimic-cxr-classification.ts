@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark:'mimic-cxr-classification', host:'CodeSOTA', url, feed:url,
   terms:'CodeSOTA publishes the leaderboard publicly and retains copyright. https://www.codesota.com/benchmark/mimic-cxr',
   headline:'CodeSOTA reports AUROC on a 100-point scale and does not specify the test split or label set.',
+  verified:'CodeSOTA marks the result as verified',
   async fetch() {
     const html = await fetchText(url);
     const section = html.match(/Auroc is the reported evaluation metric[\s\S]*?<\/table>/i)?.[0];

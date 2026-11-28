@@ -6,15 +6,32 @@ import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { grid, paperTables, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const url = 'https://arxiv.org/html/2504.13059';
+const TASKS = [
+  'Block Hammer Beat',
+  'Block Handover',
+  'Bottle Adjust',
+  'Container Place',
+  'Empty Cup Place',
+  'Mug Hanging (Easy)',
+  'Mug Hanging (Hard)',
+  'Pick Apple Messy',
+  'Put Apple Cabinet',
+  'Dual Bottles Pick (Easy)',
+  'Dual Bottles Pick (Hard)',
+  'Diverse Bottles Pick',
+  'Shoe Place',
+  'Dual Shoes Place',
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'robotwin-1-0', static: 'paper', url, feed: url,
   terms: 'The RoboTwin authors publish these results at CVPR and on arXiv. https://arxiv.org/abs/2504.13059',
   headline: 'The paper reports no overall success rate, so this is the mean of its 14 task success rates.',
+  parts: Object.fromEntries(TASKS.map(t => [t, t])),
   async fetch() {
     const html = await paperHtml(url);
     const figures = [...html.matchAll(/<figure\b[\s\S]*?<\/figure>/gi)].map(m => m[0]);
     const rows: LeaderboardRow[] = [];
-    const parts: Record<string, string> = {};
     for (const camera of ['D435', 'L515']) {
       const figure = figures.find(f => f.includes(camera + ' camera setting') && f.includes('Number of Demonstrations'));
       const t = figure && paperTables(figure).map(grid)[0];
@@ -29,9 +46,8 @@ const board: Leaderboard = {
               const result = t[k+1+i];
               const m = result[col+j].match(/^(\d+(?:\.\d+)?)\s*(?:\\pm|±)\s*(\d+(?:\.\d+)?)$/);
               if (!m || result[col] !== model || !task || task in metrics) throw new Error('Invalid RoboTwin task row');
-              parts[task] = task;
               metrics[task] = Number(m[1]);
-              metrics[task + ' SD'] = Number(m[2]);
+              metrics[task + ':std'] = Number(m[2]);
               means.push(metrics[task]);
             }
           }
@@ -40,7 +56,6 @@ const board: Leaderboard = {
         }
       }
     }
-    board.parts = parts;
     return checked(rows, 18);
   },
 };

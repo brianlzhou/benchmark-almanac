@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const version = cells[1];
       for (const [model, cell] of [['Claude Sonnet 4.5', cells[2]], ['Claude Opus 4.5', cells[3]], ['GLM-5', cells[4]]] as const) {
         const score = parseFloat(cell.replace(/\*/g, ''));
-        if (Number.isFinite(score)) out.push({ model, setting: version, score });
+        if (Number.isFinite(score)) out.push({ model, harness: 'Claude Code', setting: version, score });
       }
     }
     return checked(out, 8);

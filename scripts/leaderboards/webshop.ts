@@ -9,6 +9,17 @@ const parts = { attributes: 'Attributes', options: 'Options', type: 'Type', pric
 const board: Leaderboard = {
   benchmark: 'webshop', feed, url: feed, static: 'paper', parts,
   terms: 'The authors publish the paper on arXiv. https://info.arxiv.org/help/license/index.html',
+  stats: {
+    states: { name: 'Mean states visited', unit: 'count' },
+    statesMax: { name: 'Maximum states visited', unit: 'count' },
+    statesMin: { name: 'Minimum states visited', unit: 'count' },
+    items: { name: 'Mean items viewed', unit: 'count' },
+    itemsMax: { name: 'Maximum items viewed', unit: 'count' },
+    itemsMin: { name: 'Minimum items viewed', unit: 'count' },
+    searches: { name: 'Mean searches', unit: 'count' },
+    searchesMax: { name: 'Maximum searches', unit: 'count' },
+    searchesMin: { name: 'Minimum searches', unit: 'count' },
+  },
   async fetch() {
     const header = ['', 'All', 'Att', 'Opt', 'Type', 'Price', 'State', 'Item', 'Search'];
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => header.every((h, i) => t[1]?.[i] === h));

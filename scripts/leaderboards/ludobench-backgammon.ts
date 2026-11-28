@@ -23,7 +23,7 @@ const board: Leaderboard = {
       const interval = rating.match(/(\d+)\s*±\s*(\d+)/);
       if (!interval || !model) throw new Error('Invalid player rating');
       const score = Number(interval[1]), width = Number(interval[2]);
-      const metrics: Record<string, number> = { matches: Number(matches), fallback: Number.parseFloat(fallback), latency: Number(think) / 1000 };
+      const metrics: Record<string, number> = { latency: Number(think) / 1000 };
       if (num(win) !== undefined) metrics.winRate = num(win)!;
       rows.push({ model, score, low: score - width, high: score + width, cost: num(cost), metrics });
     }

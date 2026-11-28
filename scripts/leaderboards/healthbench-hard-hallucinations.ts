@@ -6,7 +6,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const feed = 'https://cdn.openai.com/gpt-5-system-card.pdf';
 const digest = 'f9f9c72d08cba81dcbb189129119357c8c32eca4e0b16c813aca386aed6b0459';
 export default {
-  benchmark: 'healthbench-hard-hallucinations', url: feed, feed,
+  benchmark: 'healthbench-hard-hallucinations', static: 'paper', url: feed, feed,
   terms: 'OpenAI publishes this system card on its public CDN, which serves no robots.txt.',
   aliases: { 'gpt-5-thinking': 'gpt-5', 'gpt-5-thinking-mini': 'gpt-5-mini', 'gpt-5-main': 'gpt-5-chat',
     'OpenAI o3': 'o3', 'OpenAI o4-mini': 'o4-mini', 'OpenAI o1': 'o1' },

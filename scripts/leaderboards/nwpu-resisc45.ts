@@ -4,7 +4,7 @@ import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
-type Entry = {score: number, model: {name: string, openWeights?: boolean, totalParamsB?: number, license?: string}};
+type Entry = {score: number, model: {name: string, url?: string, openWeights?: boolean, totalParamsB?: number, license?: string}};
 const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/RESISC45/scores';
 const board: Leaderboard = {
   benchmark: 'nwpu-resisc45', url: 'https://huggingface.co/spaces/mteb/leaderboard', host: 'MTEB', feed,
@@ -14,7 +14,7 @@ const board: Leaderboard = {
     if (d.task.name !== 'RESISC45' || d.task.mainScore !== 'accuracy' || !d.splits.includes('test')) throw new Error('Unexpected RESISC45 task definition');
     const rows = d.rows.map(({score, model}) => {
       if (typeof score !== 'number' || score < 0 || score > 1) throw new Error('Invalid test accuracy');
-      return {model: model.name, score: score * 100, open: model.openWeights, params: model.totalParamsB ?? undefined, license: model.license};
+      return {model: model.name, score: score * 100, open: model.openWeights, params: model.totalParamsB ?? undefined, license: model.license, link: model.url || undefined};
     });
     return checked(rows, 57);
   },

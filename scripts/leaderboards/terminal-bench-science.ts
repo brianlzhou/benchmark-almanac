@@ -31,7 +31,6 @@ const board: Leaderboard = {
   stats: {
     passes: { name: 'Passes', unit: 'count' },
     runCostUsd: { name: 'Run cost', unit: 'usd', better: 'lower' },
-    trials: { name: 'Trials', unit: 'count' },
     runTotalTokens: { name: 'Run total tokens', unit: 'tokens' },
     totalTokens: { name: 'Total tokens per trial', unit: 'tokens' },
   },
@@ -48,7 +47,6 @@ const board: Leaderboard = {
       if (typeof r.metrics.passes === 'number') metrics.passes = r.metrics.passes;
       if (typeof total === 'number') metrics.runCostUsd = total;
       if (typeof sem === 'number') metrics.stderr = sem;
-      if (typeof tasks === 'number' && tasks > 0) metrics.trials = tasks;
       if (typeof totalTokens === 'number' && totalTokens >= 0) {
         metrics.runTotalTokens = totalTokens;
         if (tasks && tasks > 0) metrics.totalTokens = totalTokens / tasks;

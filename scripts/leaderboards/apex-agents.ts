@@ -15,8 +15,8 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'Mercor forbids scraping and training use; Benchmark Almanac credits and links Mercor as the source of these evaluation results.',
   stats: {
-    passAt8: { name: 'Pass at 8', unit: '%', better: 'higher' },
-    pass8: { name: 'Pass^8', unit: '%', better: 'higher' },
+    passAt8: { name: 'pass@8', unit: '%', better: 'higher' },
+    pass8: { name: 'pass^8', unit: '%', better: 'higher', note: 'all eight attempts pass' },
     meanScore: { name: 'Mean rubric score', unit: '%', better: 'higher' },
   },
   async fetch() {

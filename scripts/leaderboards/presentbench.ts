@@ -29,27 +29,42 @@ const board: Leaderboard = {
   "benchmark": "presentbench",
   "url": "https://presentbench.github.io/",
   "feed": "https://presentbench.github.io/",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
+  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  parts: {
+    academia: { name: 'Academia', group: 'Domain' },
+    advertising: { name: 'Advertising', group: 'Domain' },
+    education: { name: 'Education', group: 'Domain' },
+    economics: { name: 'Economics', group: 'Domain' },
+    talk: { name: 'Talk', group: 'Domain' },
+    'Presentation Fundamentals': { name: 'Presentation fundamentals', group: 'Dimension' },
+    'Visual Design and Layout': { name: 'Visual design and layout', group: 'Dimension' },
+    'Content Completeness': { name: 'Content completeness', group: 'Dimension' },
+    'Content Correctness': { name: 'Content correctness', group: 'Dimension' },
+    'Content Fidelity': { name: 'Content fidelity', group: 'Dimension' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
-    const data = tables(source).map(t => t.map(r => r.map(c => c.text)));
+    const rawTables = tables(source);
+    const data = rawTables.map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
     {
-      const t = data.find(t => new RegExp("Method.*Total.*Academia", "i").test(t.slice(0, 1).flat().join(" | ")));
-      if (!t || !new RegExp("Method.*Total.*Academia", "i").test(t.slice(0, 1).flat().join(" | "))) throw new Error("Results table changed");
-      for (const r of t.slice(1)) {
-        const value = numeric(r[1]);
-        let model = clean(r[0] ?? "");
+      const rawT = rawTables.find(t => new RegExp("Method.*Total.*Academia", "i").test((t[0] ?? []).map(c => c.text).join(" | ")));
+      if (!rawT) throw new Error("Results table changed");
+      for (const r of rawT.slice(1)) {
+        const value = numeric(r[1]?.text);
+        let model = clean(r[0]?.text ?? "");
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
-        const row: LeaderboardRow = { model: identity(model), score: value * 1 };
-        row.setting = 'tested '+r[8];
+        const href = r[7]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+        const srcText = r[7]?.text.trim() ?? '';
+        const submitter = !href && /^by\s+/i.test(srcText) ? srcText.replace(/^by\s+/i, '').trim() : undefined;
+        const row: LeaderboardRow = { model: identity(model), score: value * 1, ...(href ? { link: href } : {}), ...(submitter ? { submitter } : {}) };
+        row.setting = 'tested ' + (r[8]?.text ?? '');
         row.metrics = {};
-        { const n = numeric(r[2]); if (n !== undefined) row.metrics["academia"] = n; }
-        { const n = numeric(r[3]); if (n !== undefined) row.metrics["advertising"] = n; }
-        { const n = numeric(r[4]); if (n !== undefined) row.metrics["education"] = n; }
-        { const n = numeric(r[5]); if (n !== undefined) row.metrics["economics"] = n; }
-        { const n = numeric(r[6]); if (n !== undefined) row.metrics["talk"] = n; }
+        { const n = numeric(r[2]?.text); if (n !== undefined) row.metrics["academia"] = n; }
+        { const n = numeric(r[3]?.text); if (n !== undefined) row.metrics["advertising"] = n; }
+        { const n = numeric(r[4]?.text); if (n !== undefined) row.metrics["education"] = n; }
+        { const n = numeric(r[5]?.text); if (n !== undefined) row.metrics["economics"] = n; }
+        { const n = numeric(r[6]?.text); if (n !== undefined) row.metrics["talk"] = n; }
         rows.push(row);
       }
     }
@@ -63,17 +78,5 @@ const board: Leaderboard = {
     if (!rows.length) throw new Error("No scored model rows in the published results");
     return rows;
   },
-};
-board.parts = {
-  academia: { name: 'Academia', group: 'Domain' },
-  advertising: { name: 'Advertising', group: 'Domain' },
-  education: { name: 'Education', group: 'Domain' },
-  economics: { name: 'Economics', group: 'Domain' },
-  talk: { name: 'Talk', group: 'Domain' },
-  'Presentation Fundamentals': { name: 'Presentation fundamentals', group: 'Dimension' },
-  'Visual Design and Layout': { name: 'Visual design and layout', group: 'Dimension' },
-  'Content Completeness': { name: 'Content completeness', group: 'Dimension' },
-  'Content Correctness': { name: 'Content correctness', group: 'Dimension' },
-  'Content Fidelity': { name: 'Content fidelity', group: 'Dimension' },
 };
 export default board;

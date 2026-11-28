@@ -8,10 +8,27 @@ import { scRound } from './superclue-agent.ts';
 
 const board: Leaderboard = {
   benchmark: 'superclue-rag',
+  parts: {
+    refusal: { name: 'Refusal capability', group: 'Task' },
+    errorCorrection: { name: 'Error detection and correction', group: 'Task' },
+    infoIntegration: { name: 'Information integration', group: 'Task' },
+    timeliness: { name: 'Answer timeliness', group: 'Task' },
+  },
   url: `${SC_SITE}/specificpage`,
   feed: `${SC_SITE}/data/specialized_list/RAG/<round>.xlsx (总榜 sheet, 总分)`,
   terms: SC_TERMS,
   aliases: SC_ALIASES,
-  fetch: async () => scRows(`/data/specialized_list/RAG/${await scRound('RAG')}.xlsx`, 'SuperCLUE-RAG检索增强生成-总榜', '模型名称'),
+  fetch: async () => scRows(`/data/specialized_list/RAG/${await scRound('RAG')}.xlsx`, 'SuperCLUE-RAG检索增强生成-总榜', '模型名称', {
+    detail: {
+      sheet: 'SuperCLUE-RAG检索增强生成-四大任务',
+      modelCol: '模型名称',
+      parts: {
+        refusal: '拒答能力',
+        errorCorrection: '检错和纠错能力',
+        infoIntegration: '信息整合能力',
+        timeliness: '答案及时性',
+      },
+    },
+  }),
 };
 export default board;

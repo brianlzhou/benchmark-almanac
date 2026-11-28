@@ -18,6 +18,10 @@ const board: Leaderboard = {
   url: `${SHEET}/edit?gid=0`,
   feed: FEED,
   terms: 'Public Google Sheet read through its CSV export; docs.google.com robots.txt allows /spreadsheet paths and the sheet states no terms.',
+  stats: {
+    passAt2: { name: 'Pass@2', unit: '%', better: 'higher' },
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+  },
   aliases: {
     'GPT6 Astra': 'gpt-6-astra',
     'Gemini 2.5 Computer Use': 'gemini-2-5-computer-use',
@@ -42,7 +46,6 @@ const board: Leaderboard = {
       const count = get(/^Number of trials$/);
       const mark = get(/^Open\?$/);
       const open = mark === '✔' ? true : mark === '✗' ? false : undefined;
-      if (type === 'AI agent' && open !== undefined) metrics.openAgent = Number(open);
       const size = get(/^Model Size$/).match(/^(\d+(?:\.\d+)?)\s*B$/i);
       const link = get(/^Trajectory submissions$/).match(/https?:\/\/[^\s,]+/)?.[0];
       const setting = get(/^Screen Representation$/);

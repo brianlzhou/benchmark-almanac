@@ -11,10 +11,18 @@ export function epochModelOverride(benchmark: string, version: string): EpochMod
 export function epochScoreColumn(benchmark: string, column: string): string {
   if (benchmark === 'METR Time Horizons') return 'Time horizon';
   if (benchmark === 'WeirdML v3') return 'Score';
+  // Epoch ranks APEX-Agents by Pass@1, and Mercor's 1.1 board (where these rows come from) ranks by mean score
+  if (benchmark === 'APEX-Agents') return 'Mean score';
   return column;
 }
 
 export function epochSecondaryMetrics(benchmark: string, row: Record<string, string>): Record<string, number> | null {
+  if (benchmark === 'APEX-Agents') {
+    const value = Number(row['Pass@1 score']);
+    if (!row['Pass@1 score']?.trim()) return null;
+    if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error('APEX-Agents Pass@1 score is not a fraction');
+    return { passAt1: Math.round(value * 1000) / 10 };
+  }
   if (benchmark !== 'WeirdML v3' || !row['Max performance']?.trim()) return null;
   const value = Number(row['Max performance']);
   // Epoch publishes both fields as fractions. Preserve final performance on the headline's percent scale.
@@ -35,10 +43,14 @@ export function epochSecondaryMetrics(benchmark: string, row: Record<string, str
 //     have since changed (GPT-5.6 Sol max: 41.7 to 40.9).
 //   - PostTrainBench: Epoch's page says v1.1, the version it reviewed, but all 22 rows equal the site's results
 //     version 1.2 (2026-09-30), which dropped BFCL and reweighted the rest (Claude Fable 5: 37.27 against 41.79 on 1.1).
+//   - APEX-Agents: Epoch's page names no version and still describes the 480-task 1.0 set, and its file names no
+//     source (checked 2026-11-25). But 69 of its 70 rows equal Mercor's 1.1 board on both Pass@1 and mean score
+//     (Gemini 4 Carbon: 84.2 and 90.4), and none equals a 1.0 result (Gemini 3 Flash: 24.0 on 1.0).
 const EPOCH_RECORD: Record<string, string> = {
   FrontierCode: 'frontiercode-1-1',
   CursorBench: 'cursorbench-4-1',
   PostTrainBench: 'posttrainbench-1-2',
+  'APEX-Agents': 'apex-agents-1-1',
 };
 
 /** The record an Epoch benchmark's name, metadata and rows belong on, when it isn't the family's first version. */

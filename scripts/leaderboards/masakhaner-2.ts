@@ -8,6 +8,7 @@ import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.
 const url = 'https://arxiv.org/html/2210.12391';
 const board: Leaderboard = {
   benchmark: 'masakhaner-2', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats: { spread: { name: 'Five-run standard deviation', unit: 'score' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(url)).map(grid);
     const baseline = tables.find(t => t[0][0] === 'Model' && t[0][1] === 'bam' && t[0][21] === 'AVG');

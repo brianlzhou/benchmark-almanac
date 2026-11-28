@@ -12,7 +12,6 @@ const board: Leaderboard = {
   feed,
   terms: "The publisher displays results at https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/. I could not verify reuse terms. The robots.txt permits this article.",
   stats: {
-    examples: { name: 'Examples', unit: 'count' },
     outputQuality: { name: 'Output quality', unit: '%', better: 'higher' },
     efficiency: { name: 'Efficiency', unit: '%', better: 'higher' },
     latencyScore: { name: 'Latency score', unit: '%', better: 'higher' },
@@ -38,7 +37,7 @@ const board: Leaderboard = {
           throw new Error('Invalid Acme row');
         const v = values as number[];
         const metrics: Record<string, number> = pi
-          ? { examples: v[1], outputQuality: v[3], efficiency: v[4], latencyScore: v[5], toolAdherence: v[6], latency: v[7], avgToolCalls: v[8] }
+          ? { outputQuality: v[3], efficiency: v[4], latencyScore: v[5], toolAdherence: v[6], latency: v[7], avgToolCalls: v[8] }
           : { toolAdherence: v[3], runnerErrors: v[4] };
         rows.push({ model: cells[0].text, harness, trials: pi ? v[0] : 10, score: pi ? v[2] : v[1], metrics });
       }

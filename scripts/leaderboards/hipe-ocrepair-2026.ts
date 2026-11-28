@@ -14,7 +14,6 @@ const board: Leaderboard = {
   stats: {
     preference: { name: 'Overall preference', unit: 'score', better: 'higher' },
     testSets: { name: 'Test sets scored', unit: 'count' },
-    totalTestSets: { name: 'Total test sets', unit: 'count' },
   },
   async fetch() {
     const [header, ...lines] = (await fetchText(FEED)).trim().split(/\r?\n/);
@@ -22,8 +21,8 @@ const board: Leaderboard = {
     return lines.map(line => {
       const [, model, ...cells] = line.split('\t');
       if (!model || cells.length !== 8 || !cells.every(v => v.trim() && Number.isFinite(Number(v)))) throw new Error('Incomplete HIPE system');
-      const [score, low, high, preference, preferenceLow, preferenceHigh, testSets, totalTestSets] = cells.map(Number);
-      return { model, score, low, high, metrics: { preference, preferenceLow, preferenceHigh, testSets, totalTestSets } };
+      const [score, low, high, preference, preferenceLow, preferenceHigh, testSets] = cells.map(Number);
+      return { model, score, low, high, metrics: { preference, preferenceLow, preferenceHigh, testSets } };
     });
   },
 };

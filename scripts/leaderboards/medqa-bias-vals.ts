@@ -34,6 +34,7 @@ const board: Leaderboard = {
   },
   parts,
   stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  chart: { title: 'Accuracy versus cost', x: { key: 'cost', label: 'Cost per test', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(this.url);
     const table = tables(html)[0];
@@ -65,6 +66,7 @@ const board: Leaderboard = {
         metrics[part] = score;
       }
       if (run.latency != null) metrics.latency = run.latency;
+      if (run.stderr != null) metrics.stderr = run.stderr;
       const prices = row[3].text.match(/^\$([\d.,]+)\s*\/\s*\$([\d.,]+)$/);
       if (prices) {
         metrics.priceIn = Number(prices[1].replaceAll(',', ''));
@@ -72,6 +74,7 @@ const board: Leaderboard = {
       }
       return {
         model, score: run.accuracy, metrics, cost: run.cost_per_test ?? undefined,
+        link: slug ? new URL(`/models/${slug}`, this.url).href : undefined,
         setting: run.reasoning_effort || (key.endsWith('-thinking') ? 'thinking' : undefined),
         low: run.stderr == null ? undefined : run.accuracy - 1.96 * run.stderr,
         high: run.stderr == null ? undefined : run.accuracy + 1.96 * run.stderr,

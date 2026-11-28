@@ -7,7 +7,6 @@ const feed = "https://huggingface.co/datasets/GSMA/leaderboard/resolve/main/lead
 
 const board: Leaderboard = {
   benchmark: 'teletables', url, feed,
-  stats: { standardError: { name: 'Standard error', unit: '%', note: 'Standard error of the TeleTables accuracy.' } },
   terms: "GSMA lists the leaderboard dataset under Apache 2.0. https://huggingface.co/datasets/GSMA/leaderboard" ,
   host: 'GSMA Open Telco Leaderboard',
   aliases: {
@@ -25,7 +24,8 @@ const board: Leaderboard = {
       if (r.teletables === '') return [];
       const pair = JSON.parse(r.teletables);
       if (!Array.isArray(pair) || pair.length !== 2 || !pair.every(Number.isFinite)) throw new Error('Invalid TeleTables result for ' + r.model);
-      return [{model:r.model, score:100*pair[0], metrics:{stderr:100*pair[1]}}];
+      const score = 100 * pair[0], stderr = 100 * pair[1];
+      return [{model:r.model, score, low: score - stderr, high: score + stderr, metrics:{stderr}}];
     });
   },
 };

@@ -7,10 +7,10 @@ import { tables } from '../lib/html.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://web.archive.org/web/20260923112431id_/https://withspecific.com/benchmarks/real-swe';
-const taskNames = ['API keys environments', 'Multi-region sweep', 'Entitlement overage lines', 'Customer identity migration', 'Billing schedule migration', 'API token metering', 'S3 datastore measurement', 'Linearizable scan', 'Tax jurisdiction'];
+const taskNames = ['API keys & environments', 'Multi-region sweep', 'Entitlement overage lines', 'Customer identity migration', 'Billing schedule migration', 'API token metering', 'S3 datastore measurement', 'Linearizable scan', 'Tax jurisdiction', 'Analytics stream reducer'];
 const parts: Record<string,BoardPart> = Object.fromEntries(taskNames.map(name => [name.replace(/[^A-Za-z0-9]/g, ''), {name, unit: '%'}]));
 const board: Leaderboard = {
-  benchmark: 'real-swe', url: feed.replace('id_/', '/'), feed, parts,
+  benchmark: 'real-swe', harnesses: 'system', url: feed.replace('id_/', '/'), feed, parts,
   terms: 'Specific Labs published these results. The Internet Archive provides the September snapshot (https://archive.org/about/terms.php).',
   async fetch() {
     const response = await fetch(feed);
@@ -41,7 +41,6 @@ const board: Leaderboard = {
         if (!count || !Number(count[2])) throw new Error('Missing task counts: ' + name);
         passed += Number(count[1]);
         trials += Number(count[2]);
-        parts[key] = { name, unit: '%' };
         metrics[key] = 100 * Number(count[1]) / Number(count[2]);
       }
       if (Math.abs(score - 100 * passed / trials) > 0.00001) throw new Error('Task total disagrees with headline');

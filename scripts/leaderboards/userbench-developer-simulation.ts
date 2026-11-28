@@ -11,6 +11,7 @@ const board: Leaderboard = {
   stats: {
     exact: { name: 'Exact agreement', unit: '%', better: 'higher' },
     chance: { name: 'Chance baseline', unit: '%', better: 'higher' },
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
     cacheHit: { name: 'Cache hit rate', unit: '%', better: 'higher' },
   },
   async fetch() {
@@ -46,7 +47,7 @@ const board: Leaderboard = {
           const model = ds ? JSON.parse(field('DS_FLASH', 'model')!) as string : 'GPT-5.6 Sol';
           const row: LeaderboardRow = { model, setting: arm + ' / ' + effort, score: 100 * number(get('jaccard')),
             trials: effort === 'high' ? 3 : 1, metrics: {} };
-          for (const key of ['exact', 'chance', 'exactChance', 'macroF1', 'cacheHit']) {
+          for (const key of ['exact', 'chance', 'macroF1', 'cacheHit']) {
             if (get(key) !== undefined) row.metrics![key] = 100 * number(get(key));
           }
           const interval = get('ci');

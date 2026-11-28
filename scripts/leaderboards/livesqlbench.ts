@@ -5,7 +5,9 @@
 // trailing "Reported in ..." note marks a row the maker reported, and is dropped from the name. The reader
 // lives in visulogic.ts.
 import type { Leaderboard } from './types.ts';
-import { tableRows } from './visulogic.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables } from '../lib/html.ts';
+import { readTable } from './visulogic.ts';
 
 const URL = 'https://livesqlbench.ai/';
 
@@ -20,11 +22,25 @@ const board: Leaderboard = {
     'Mixtral 8x7B Instruct': 'mixtral-8x7b',
   },
   async fetch() {
-    const rows = await tableRows(URL, { model: /^Model$/i, score: /^Success Rate$/i, date: /^Rank \/ Sub Date$/i, cost: /^Cost \/ Task$/i });
+    const html = await fetchText(URL);
+    const rows = readTable(html, { model: /^Model$/i, score: /^Success Rate$/i, date: /^Rank \/ Sub Date$/i, cost: /^Cost \/ Task$/i });
+    const t = tables(html).find((rs) => rs[0]?.some((c) => /^Model$/i.test(c.text)) && rs[0]?.some((c) => /^Success Rate$/i.test(c.text)));
+    const head = t?.[0].map((c) => c.text) ?? [];
+    const iModel = head.findIndex((h) => /^Model$/i.test(h));
+    const iOrg = head.findIndex((h) => /^Organization$/i.test(h));
+    const orgByModel = new Map<string, string>();
+    if (t && iModel >= 0 && iOrg >= 0) {
+      for (const r of t.slice(1)) {
+        const raw = r[iModel]?.text.trim(), org = r[iOrg]?.text.trim();
+        if (raw && org && org !== '-') orgByModel.set(raw, org);
+      }
+    }
     return rows.map((r) => {
+      const submitter = orgByModel.get(r.model);
       const name = r.model.replace(/\s+Reported\b.*$/i, '').trim();
       const agent = name.match(/\s*\(([^()]*(?:CLI|Claude Code|OpenHands|Codex|Agent)[^()]*)\)$/i);
-      return agent ? { ...r, model: name.slice(0, agent.index).trim(), harness: agent[1] } : { ...r, model: name };
+      const base = { ...r, ...(submitter ? { submitter } : {}) };
+      return agent ? { ...base, model: name.slice(0, agent.index).trim(), harness: agent[1] } : { ...base, model: name };
     });
   },
 };

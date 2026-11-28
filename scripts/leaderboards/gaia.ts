@@ -54,7 +54,7 @@ const board: Leaderboard = {
         model: ambiguous ? `GAIA system ${index}: ${r.model?.trim() || family || 'unnamed'}` : family!,
         score: r.score * 100,
         harness: r.model?.trim() || undefined,
-        setting: `public test submission ${index}${ambiguous && family ? '; models: ' + family : ''}`,
+        setting: `public test submission ${index}${ambiguous && family ? ', models: ' + family.replace(/\s*;\s*/g, ', ') : ''}`,
         date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date! : undefined,
         submitter: r.organisation?.trim() || undefined,
         link: /^https?:\/\/\S+$/.test(r.url?.trim() ?? '') ? r.url!.trim() : `https://huggingface.co/datasets/${DATASET}/viewer/2023/test?row=${index}`,

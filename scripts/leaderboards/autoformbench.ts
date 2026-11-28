@@ -18,10 +18,10 @@ const board: Leaderboard = {
   benchmark: 'autoformbench', url, feed,
   terms: "The repository lists CC BY-NC 4.0. https://github.com/facebookresearch/autoformbench/blob/main/LICENSE" ,
   stats: {
-    input_tokens: { name: 'Input tokens', unit: 'tokens' },
-    cached_read_tokens: { name: 'Cached read tokens', unit: 'tokens' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    cachedTokens: { name: 'Cached read tokens', unit: 'tokens' },
     cache_write_tokens: { name: 'Cache write tokens', unit: 'tokens' },
-    output_tokens: { name: 'Output tokens', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
     cost_usd: { name: 'Cost', unit: 'usd', better: 'lower' },
     turns: { name: 'Turns', unit: 'count' },
     compactions: { name: 'Compactions', unit: 'count' },

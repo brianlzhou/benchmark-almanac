@@ -46,6 +46,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "healthbench-hallu-baichuan",
+  static: 'paper',
   url: "https://github.com/baichuan-inc/Baichuan-M3-235B",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

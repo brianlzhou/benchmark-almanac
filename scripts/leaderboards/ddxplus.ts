@@ -31,7 +31,7 @@ const board: Leaderboard = {
         if (!/^[X×]\s/.test(line) || pairs.length !== 7) throw Error('Unexpected Table 3 row');
         const metrics: Record<string, number> = {};
         ['interactionLength','gtpaAt1','gtpa','per','ddr','ddp','ddf1'].forEach((key,i) => {
-          [metrics[key], metrics[key + 'CI95']] = pairs[i];
+          [metrics[key], metrics[key + 'Ci95']] = pairs[i];
         });
         const [score, halfWidth] = pairs[1];
         rows.push({ model, score, low: score - halfWidth, high: score + halfWidth, trials: 3, metrics,

@@ -20,12 +20,18 @@ const chipParts = {
   'Arithmetic: adder_16bit': {name: '16 bit adder', group: 'Arithmetic benchmark', unit: '%'},
   'Arithmetic: add_16bit_csa': {name: '16 bit carry-save adder', group: 'Arithmetic benchmark', unit: '%'},
   'Arithmetic: adder_8bit': {name: '8 bit adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: adder_32bit': {name: '32 bit adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: adder_64_bit': {name: '64 bit adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: div_16bit': {name: '16 bit divider', group: 'Arithmetic benchmark', unit: '%'},
   'Arithmetic: multi_booth': {name: 'Booth multiplier', group: 'Arithmetic benchmark', unit: '%'},
   'Arithmetic: multi_pipe_4bit': {name: '4 bit pipelined multiplier', group: 'Arithmetic benchmark', unit: '%'},
   'Arithmetic: multipipe_8bit': {name: '8 bit pipelined multiplier', group: 'Arithmetic benchmark', unit: '%'},
   'Advanced: 1x2nocpe': {name: '1x2 NOC PE', group: 'Advanced benchmark', unit: '%'},
   'Advanced: 1x4systolic': {name: '1x4 systolic', group: 'Advanced benchmark', unit: '%'},
   'Advanced: 2x2systolic': {name: '2x2 systolic', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 3stagepipe': {name: '3 stage pipeline', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 4x4spatialacc': {name: '4x4 spatial accelerator', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 5stagepipe': {name: '5 stage pipeline', group: 'Advanced benchmark', unit: '%'},
   'Advanced: fsm': {name: 'FSM', group: 'Advanced benchmark', unit: '%'},
   'Advanced: macpe': {name: 'MAC PE', group: 'Advanced benchmark', unit: '%'},
   'Advanced: statemachine': {name: 'State machine', group: 'Advanced benchmark', unit: '%'},
@@ -64,7 +70,6 @@ const board: Leaderboard = {
         rows.push({model,setting:'Vision and text, '+detail+' prompt',score:percent(promptTotals[column]),metrics,trials:5});
       }
     }
-    board.parts = {syntax:'Syntax success rate',...Object.fromEntries(main.slice(2,-1).map(c => [c[0]+': '+c[1],{name:c[1],group:c[0]}]))};
     return checked(rows,10);
   },
 };

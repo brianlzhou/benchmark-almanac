@@ -9,9 +9,15 @@ const board: Leaderboard = {
   benchmark: "culturalriddles",
   stats: {
     activeParams: { name: 'Active parameters', unit: 'billions' },
-    evaluatedCommunities: { name: 'Evaluated communities', unit: 'count' },
     evaluatedRiddles: { name: 'Evaluated riddles', unit: 'count' },
     exactMatch: { name: 'Exact match', unit: '%', better: 'higher' },
+    hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower' },
+  },
+  chart: {
+    title: 'Hallucination rate vs. accuracy',
+    x: { key: 'score', label: 'Human-evaluated accuracy', unit: '%', better: 'higher' },
+    y: { key: 'hallucinationRate', label: 'Hallucination rate', unit: '%', better: 'lower' },
+    note: 'CulturalRiddles plots hallucination share among labeled answers against overall human-evaluated accuracy.',
   },
   url: "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html",
   feed: FEED,
@@ -20,7 +26,8 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=jsonAfter<any>(await fetchText(FEED),'const D = adapt(');
-      return d.leaderboard.map((r:any)=>{const size=d.model_sizes?.find((m:any)=>m.model_display===r.model);return {params:typeof size?.model_size_b==='number'?size.model_size_b:undefined,open:size?.access==='proprietary'?false:['open-weight','open-source'].includes(size?.access)?true:undefined,model:r.model.replace(/\s*\[[^\]]+\]$/,''),setting:r.model.match(/\[([^\]]+)\]$/)?.[1]||r.reasoning,score:r.human_accuracy,metrics:{...(typeof size?.active_parameter_count_b==='number'?{activeParams:size.active_parameter_count_b}:{}),exactMatch:r.exact_match,evaluatedCommunities:r.n_evaluated_communities,evaluatedRiddles:r.n}};});
+      const hallucByModel=new Map<string,number>((d.hallucination??[]).filter((h:any)=>typeof h.pct_hallucinated==='number').map((h:any)=>[h.model_display,h.pct_hallucinated]));
+      return d.leaderboard.map((r:any)=>{const size=d.model_sizes?.find((m:any)=>m.model_display===r.model);const halluc=hallucByModel.get(r.model);return {params:typeof size?.model_size_b==='number'?size.model_size_b:undefined,open:size?.access==='proprietary'?false:['open-weight','open-source'].includes(size?.access)?true:undefined,model:r.model.replace(/\s*\[[^\]]+\]$/,''),setting:r.model.match(/\[([^\]]+)\]$/)?.[1]||r.reasoning,score:r.human_accuracy,metrics:{...(typeof size?.active_parameter_count_b==='number'?{activeParams:size.active_parameter_count_b}:{}),exactMatch:r.exact_match,evaluatedRiddles:r.n,...(halluc!==undefined?{hallucinationRate:halluc}:{})}};});
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

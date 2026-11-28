@@ -61,6 +61,7 @@ const board: Leaderboard = {
   url: 'https://app.primeintellect.ai/dashboard/environments/primeintellect/gpu-puzzles/evals',
   feed: primeFeed(env),
   terms: primeTerms,
+  stats: { runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' } },
   fetch() { return primeRows(this.url, env, 100, 2); },
 };
 export default board;

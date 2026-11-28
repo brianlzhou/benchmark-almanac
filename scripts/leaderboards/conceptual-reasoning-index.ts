@@ -12,6 +12,21 @@ const FEED = 'https://conceptualreasoning.ai/data/cri-scores.csv';
 const board: Leaderboard = {
   benchmark: 'conceptual-reasoning-index',
   parts: { lmca: 'LMCA', concord: 'ACCoRD', dtbench: 'DTBench' },
+  stats: {
+    lmca_cost: { name: 'LMCA cost per response', unit: 'usd', better: 'lower' },
+    dt_cost: { name: 'DTBench cost per response', unit: 'usd', better: 'lower' },
+    elo: { name: 'Text Arena Elo', unit: 'elo', better: 'higher' },
+    concord_norm: { name: 'ACCoRD normalized violation', unit: 'score', better: 'lower', note: 'Normalized linear-margin violation on ACCoRD, where lower means more consistent.' },
+    dtbench_accuracy: { name: 'DTBench capability accuracy', unit: 'score', better: 'higher', note: 'Share of DTBench capability questions answered correctly, stored from 0 to 1.' },
+    attitude_edt: { name: 'EDT preference share', unit: 'score', note: 'Share of Newcomb-like attitude questions preferring evidential over causal decision theory, stored from 0 to 1.' },
+    lmca_mean: { name: 'LMCA raw critique mean', unit: 'score', note: 'Mean of raw per-critique LMCA scores used for routed-mix cost calculations.' },
+  },
+  chart: {
+    title: 'LMCA performance vs. cost',
+    x: { key: 'lmca_cost', label: 'Average LMCA cost per response', unit: '$', better: 'lower', log: true },
+    y: { key: 'lmca', label: 'LMCA score', better: 'higher' },
+    note: 'Conceptual Reasoning Index plots LMCA score against average cost per response on a log scale with its Pareto frontier.',
+  },
   url: 'https://conceptualreasoning.ai/',
   feed: `${FEED} (0.6 LMCA + 0.2 ACCoRD + 0.2 DTBench, as the page computes)`,
   terms: 'Static CSV the conceptualreasoning.ai page loads; robots.txt allows all paths and the site states no terms or license.',

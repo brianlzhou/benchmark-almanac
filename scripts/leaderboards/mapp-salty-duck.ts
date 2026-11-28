@@ -8,6 +8,11 @@ const board: Leaderboard = {
   url: "https://app.primeintellect.ai/dashboard/environments/salty-duck/MAPP/evals",
   feed: primeFeed(env),
   terms: primeTerms,
+  stats: {
+    collision_penalty: { name: 'Collision penalty', unit: 'score', better: 'higher', note: 'Negative reward penalty for collisions, where values closer to 0 are better.' },
+    progress_reward: { name: 'Progress reward', unit: 'score', better: 'higher' },
+    success_reward: { name: 'Success reward', unit: 'score', better: 'higher' },
+  },
   fetch() { return primeRows(this.url, env, 100, 1); },
 };
 export default board;

@@ -10,7 +10,7 @@ const board: Leaderboard = {
   benchmark: "llm-fantasy-football-arena-classic",
   url: "https://arena.wildcardlabs.tech/",
   feed: FEED,
-  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The robots file permits reference use and bars AI training.", stats:{leagueRank:{name:'League rank',unit:'count',better:'lower'},wins:{name:'Wins',unit:'count',better:'higher'},losses:{name:'Losses',unit:'count',better:'lower'},pointsFor:{name:'Points for',unit:'score',better:'higher'},pointsAgainst:{name:'Points against',unit:'score',better:'lower'}},
+  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The robots file permits reference use and bars AI training.", stats:{wins:{name:'Wins',unit:'count',better:'higher'},losses:{name:'Losses',unit:'count',better:'lower'},pointsFor:{name:'Points for',unit:'score',better:'higher'},pointsAgainst:{name:'Points against',unit:'score',better:'lower'}},
   async fetch() {
     const rows = [];
     for (const slug of ['classic-trades','classic-no-trades']) {
@@ -23,7 +23,7 @@ const board: Leaderboard = {
         const score = r.winning_percentage_exact.numerator / r.winning_percentage_exact.denominator;
         if (!team?.current_operator_label || !Number.isFinite(score)) throw new Error('Invalid team standings');
         rows.push({ model: team.current_operator_label, setting: data.league.league_name, score,
-          metrics: { leagueRank: r.rank, wins: r.wins, losses: r.losses, ties: r.ties, pointsFor: Number(r.points_for_exact), pointsAgainst: Number(r.points_against_exact) } });
+          metrics: { wins: r.wins, losses: r.losses, pointsFor: Number(r.points_for_exact), pointsAgainst: Number(r.points_against_exact) } });
       }
     }
     return rows;

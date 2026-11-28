@@ -3,8 +3,9 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-span-tables.ts';
 import { num } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 const feed='https://arxiv.org/html/2504.12516';
-export default {
+const board = {
   benchmark:'browsecomp', static: 'paper',url:'https://arxiv.org/abs/2504.12516',feed,terms:PAPER_TERMS,harnesses:'system',
   aliases:{"OpenAI o1": "o1"},
   stats:{ calibrationError:{ name:'Calibration error', unit:'%', better:'lower', note:'Difference between the model’s confidence and the likelihood that its answer is correct.' } },
@@ -17,3 +18,4 @@ export default {
     return checked(rows,3);
   },
 } satisfies Leaderboard;
+export default withKaggle(board, { owner: 'openai', slug: 'browsecomp', task: 'Score', scale: 100 });

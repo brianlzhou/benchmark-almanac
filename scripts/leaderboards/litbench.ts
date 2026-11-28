@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: 'https://aclanthology.org/2026.eacl-long.362/',
   feed,
   terms: 'ACL Anthology terms. https://aclanthology.org/faq/copyright/',
+  stats: { averageExplanationLength: { name: 'Average explanation length', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(feed);
     // The published paper moved the raw results to Table 3 in appendix A.2, which sits in the left column of a

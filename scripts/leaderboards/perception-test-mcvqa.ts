@@ -17,6 +17,7 @@ interface Entry {
   submission__submitted_at: string;
   submission__is_baseline: boolean;
   submission__is_verified_by_host?: boolean;
+  submission__submission_metadata?: { name?: string; value?: string | null }[];
   result: number[];
   leaderboard__schema: { labels: string[]; default_order_by?: string };
 }
@@ -26,6 +27,7 @@ const board: Leaderboard = {
   url: 'https://eval.ai/web/challenges/challenge-page/2091/leaderboard',
   feed: `${FEED} (Test Phase, Top-1)`,
   terms: "EvalAI's public challenge API needs no login; eval.ai serves no robots.txt rules and the open-source EvalAI platform states no reuse limits for public leaderboards.",
+  verified: 'verified by host',
   async fetch() {
     const data = await fetchJson<{ results: Entry[] }>(FEED);
     const rows: LeaderboardRow[] = [];
@@ -34,9 +36,20 @@ const board: Leaderboard = {
       if (col < 0) throw new Error(`no Top-1 column: ${e.leaderboard__schema.labels.join(', ')}`);
       if (e.submission__is_baseline) continue;
       const model = e.submission__method_name?.trim() || e.submission__participant_team__team_name;
+      const meta = e.submission__submission_metadata ?? [];
+      const mode = meta.find((m) => m.name === 'evaluation_mode')?.value?.trim() || undefined;
+      const rawParams = meta.find((m) => m.name === 'number_of_parameters')?.value?.trim() ?? '';
+      let params: number | undefined;
+      const pb = rawParams.match(/^(\d+(?:\.\d+)?)\s*B$/i);
+      const pm = rawParams.match(/^(\d+(?:\.\d+)?)\s*M$/i);
+      if (pb) params = Number(pb[1]);
+      else if (pm) params = Number(pm[1]) / 1000;
+      else if (/^\d+(?:\.\d+)?$/.test(rawParams) && Number(rawParams) >= 50) params = Number(rawParams) / 1000;
       rows.push({
         model,
         score: e.result[col] * 100,
+        ...(mode ? { setting: mode } : {}),
+        ...(params !== undefined ? { params } : {}),
         date: e.submission__submitted_at.slice(0, 10),
         submitter: e.submission__participant_team__team_name,
         verified: e.submission__is_verified_by_host,

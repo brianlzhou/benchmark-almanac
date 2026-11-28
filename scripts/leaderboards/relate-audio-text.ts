@@ -12,6 +12,11 @@ const board: Leaderboard = {
   benchmark: 'relate-audio-text', static: 'paper', url: feed, feed,
   terms: 'The ISCA Archive publishes the authors’ paper at https://www.isca-archive.org/interspeech_2025/kanamori25_interspeech.html.',
   parts: Object.fromEntries(categories.map(name => [name, name])),
+  stats: {
+    mse: { name: 'Mean squared error', unit: 'score', better: 'lower' },
+    lcc: { name: 'Linear correlation coefficient', unit: 'score', better: 'higher' },
+    ktau: { name: 'Kendall rank correlation', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const overall = tables.find(t => t[0].map(cell => cell.split(' ')[0]).join('|') === 'Method|MSE|LCC|SRCC|KTAU');

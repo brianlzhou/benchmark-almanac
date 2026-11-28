@@ -13,7 +13,7 @@ aliases:{'GPT-4-turbo-0409':'gpt-4-turbo-apr-2024'},
  async fetch() {
 
 const data=parseCsv(await fetchText(FEED));if(!data[0]||!('TheoremQA'in data[0]))throw new Error('TheoremQA column missing');const rows:LeaderboardRow[]=[];
-for(const r of data){const model=r['Model (CoT)']?.replace(/^\[([^\]]+)\]\([^)]+\)$/,'$1');const score=num(r.TheoremQA);if(model&&score!==undefined)rows.push({model,score,setting:'5-shot CoT'});}
+for(const r of data){const cell=r['Model (CoT)']?.trim()??'';const m=cell.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);const model=m?m[1]:cell;const link=m?m[2]:undefined;const score=num(r.TheoremQA);if(model&&score!==undefined)rows.push({model,score,link,setting:'5-shot CoT'});}
 return rows;
  },
 };

@@ -1109,5 +1109,44 @@
     "aliases": [
       "RLWRLD"
     ]
+  },
+  {
+    "id": "marin",
+    "name": "Marin",
+    "country": "US",
+    "url": "https://marin.community",
+    "aliases": [
+      "The Marin Project",
+      "Marin",
+      "marin-community"
+    ]
+  },
+  {
+    "id": "typesafe-ai",
+    "name": "TypeSafe AI",
+    "url": "https://typesafe.ai",
+    "aliases": [
+      "TypeSafe AI",
+      "TypeSafe"
+    ]
+  },
+  {
+    "id": "awomo",
+    "name": "Awomo",
+    "url": "https://awomo.ch",
+    "aliases": [
+      "Awomo",
+      "Auwomo",
+      "Awomo-WestlakeDI"
+    ]
+  },
+  {
+    "id": "openwam",
+    "name": "OpenWAM",
+    "url": "https://openwam-official.github.io/",
+    "aliases": [
+      "OpenWAM",
+      "OpenWAM-Official"
+    ]
   }
 ]

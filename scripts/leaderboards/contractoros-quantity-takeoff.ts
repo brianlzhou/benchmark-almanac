@@ -8,12 +8,14 @@ const feed = "https://www.contractoros.build/benchmarks/takeoff/";
 
 const board: Leaderboard = {
   benchmark: "contractoros-quantity-takeoff",
+  harnesses: 'system',
+  reference: ['Raw API'],
   url: "https://www.contractoros.build/benchmarks/takeoff/",
   feed,
   terms: "The terms restrict redistribution of ContractorOS material. They give no explicit license for benchmark scores. https://www.contractoros.build/terms/ Robots.txt permits public benchmark pages.",
   parts: { counts: 'Counts', measured: 'Measured', electrical: 'Performing arts centre electrical', plumbing: 'Supermarket plumbing' },
   aliases: { "Mistral Large 2512": "mistral-large-3" },
-  stats: { lines: { name: 'Lines', unit: 'count' }, countsLines: { name: 'Counted lines', unit: 'count' }, measuredLines: { name: 'Measured lines', unit: 'count' }, flagged: { name: 'Flagged lines', unit: 'count' }, declined: { name: 'Declined lines', unit: 'count' } },
+  stats: { countsLines: { name: 'Counted lines', unit: 'count' }, measuredLines: { name: 'Measured lines', unit: 'count' }, flagged: { name: 'Flagged lines', unit: 'count' }, declined: { name: 'Declined lines', unit: 'count' } },
   async fetch() {
     const source = tables(await fetchText(feed));
     const rows: LeaderboardRow[] = [];
@@ -33,7 +35,7 @@ const board: Leaderboard = {
         const setup = label.match(/class="model-id"[^>]*>([^<]+)/)?.[1];
         const score = num(row[pos('Correct')].text), lines = num(row[pos('Lines')].text);
         if (!name || score === undefined || lines !== 130) throw new Error('Invalid ContractorOS row');
-        const metrics: Record<string, number> = { lines };
+        const metrics: Record<string, number> = {};
         for (const [col,key] of [['Counts','counts'], ['Measured','measured']]) {
           const s = row[pos(col)].text;
           if (s === 'n/a' || s === '—') continue;
@@ -48,9 +50,9 @@ const board: Leaderboard = {
           if (rate) metrics[key] = +rate[1];
         }
         const model = text(name), harness = app ? row[pos('Harness')].text : 'Raw API';
-        rows.push({ model, harness, setting: app ? setup : 'Required answers', score, metrics });
+        rows.push({ model, harness, setting: app ? setup?.replace(/\s*·\s*/g, ', ') : 'Required answers', score, metrics });
         const optional = detail.text.match(/could leave lines blank, it scored ([\d.]+)% and declined (\d+)/);
-        if (!app && optional) rows.push({ model, harness, setting: 'May leave lines blank', score: +optional[1], metrics: { lines, declined: +optional[2] } });
+        if (!app && optional) rows.push({ model, harness, setting: 'May leave lines blank', score: +optional[1], metrics: { declined: +optional[2] } });
       }
     }
     return rows;

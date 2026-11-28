@@ -8,6 +8,13 @@ const FEED = 'https://www.kimi.ai/resources/kimi-k2-7-code';
 const board: Leaderboard = {
   benchmark: 'kimi-claw-24-7-bench', url: FEED, feed: FEED,
   terms: 'Public Moonshot AI release-page results. Benchmark Almanac credits Moonshot AI and links the source.',
+  stats: {
+    priceCachedIn: { name: 'Cached input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+    contextWindow: { name: 'Context window', unit: 'tokens', better: 'higher' },
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     const all = tables(await fetchText(FEED));

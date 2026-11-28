@@ -8,6 +8,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://research.meta.ai/articles/introducing-muse-wonder/images/focusbench-light-v1.webp (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "focusbench-meta",
+ static: 'paper',
  url: "https://research.meta.ai/blog/muse-wonder",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

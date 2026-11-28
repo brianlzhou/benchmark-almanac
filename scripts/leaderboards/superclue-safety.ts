@@ -21,13 +21,25 @@ const board: Leaderboard = {
     'gpt-3.5-turbo': 'gpt-3-5-turbo-jun-2023',
     'Llama-2-13B-Chat': 'llama-2-13b',
   },
+  parts: {
+    traditionalSafety: 'Traditional safety',
+    responsibleAi: 'Responsible AI',
+    instructionAttack: 'Instruction attacks',
+  },
   async fetch() {
     const t = mdTables(await fetchText(FEED)).find((x) => /安全总榜/.test(x.heading) && x.head.includes('总分'));
     if (!t) throw new Error('SC-Safety overall table not found');
     const rows: LeaderboardRow[] = [];
     for (const r of mdRecords(t)) {
       const score = Number(r['总分']);
-      if (r['模型'] && Number.isFinite(score)) rows.push({ model: r['模型'], score, date: '2023-10-15' });
+      if (!r['模型'] || !Number.isFinite(score)) continue;
+      const metrics: Record<string, number> = {};
+      for (const [col, key] of [['传统安全类', 'traditionalSafety'], ['责任类', 'responsibleAi'], ['指令攻击类', 'instructionAttack']] as const) {
+        const v = Number(r[col]);
+        if (Number.isFinite(v)) metrics[key] = v;
+      }
+      const open = r['许可'] === '开源' ? true : r['许可'] === '闭源' ? false : undefined;
+      rows.push({ model: r['模型'], score, date: '2023-10-15', open, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

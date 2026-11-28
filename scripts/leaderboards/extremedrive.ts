@@ -9,6 +9,10 @@ const board: Leaderboard = {
   benchmark:'extremedrive', static:'paper', url:feed, feed, terms:PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline:'S+ is the published upper bound on the composite planning score, on a scale from 0 to 100.',
   parts:{ collision:{name:'Collision',unit:'%',better:'lower'},road:'Road compliance',ttc:'Time-to-collision compliance',progress:'Progress',comfort:'Noncritical comfort',critical:'Critical success rate' },
+  stats:{
+    adeMeters:{name:'Average displacement error',unit:'score',better:'lower',note:'Measured in meters.'},
+    fdeMeters:{name:'Final displacement error',unit:'score',better:'lower',note:'Measured in meters.'},
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t=>t[0].join('|')==='Method|Input|ADE/FDE (m)\\downarrow|S^{+}\\uparrow|Collision\\downarrow|Road\\uparrow|TTC\\uparrow|Progress\\uparrow|C\\uparrow|ES\\uparrow');
     if (!table) throw Error('Missing planning and execution results');

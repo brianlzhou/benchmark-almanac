@@ -15,7 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (row labels and mean F1 values)`,
   terms: 'Figure file on a personal academic site; robots.txt allows every path and the site states no terms.',
-  stats: { texts: { name: 'Texts', unit: 'count' }, inputTokens: { name: 'Input tokens', unit: 'tokens' } },
+  stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' } },
   chart: { title: 'Cost and performance', note: 'Source costs include conservative usage-based estimates. Values are per text classified.', x: { key: 'cost', label: 'Cost per text', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Mean F1', unit: '%', better: 'higher' } },
   aliases: {
     // the registry keeps one record per Qwen size, without the chat or instruct variant
@@ -50,8 +50,8 @@ const board: Leaderboard = {
     for (const row of rows) {
       const detail = details.find(d => key(d.model) === key(row.model));
       if (!detail || !(Number(detail.n) > 0)) continue;
-      const n = Number(detail.n), metrics: Record<string, number> = { texts: n };
-      if (detail.cost_usd_upper?.trim()) { row.cost = Number(detail.cost_usd_upper) / n; metrics.cost = row.cost; }
+      const n = Number(detail.n), metrics: Record<string, number> = {};
+      if (detail.cost_usd_upper?.trim()) row.cost = Number(detail.cost_usd_upper) / n;
       if (detail.output_tokens?.trim()) row.tokens = Number(detail.output_tokens) / n;
       if (detail.input_tokens?.trim()) metrics.inputTokens = Number(detail.input_tokens) / n;
       if (detail.task_ci_low?.trim()) metrics.ciLow = 100 * Number(detail.task_ci_low);

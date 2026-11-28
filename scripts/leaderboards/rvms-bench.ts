@@ -17,8 +17,14 @@ const board: Leaderboard = {
     const loc = tables.find(t => t[0][1] === 'Moment Localization');
     if (!t || !loc || t[1][10] !== 'Avg' || t[1][20] !== 'Avg' || loc[1][10] !== 'Avg') throw new Error('Missing RVMS tables');
     const rows: LeaderboardRow[] = [];
+    let open: boolean | undefined;
     for (const r of t.slice(2)) {
-      if (r[0] === 'Human' || r[0] === r[1]) continue;
+      if (r[0] === r[1]) {
+        if (/Open Source/i.test(r[0])) open = true;
+        else if (/Closed Source/i.test(r[0])) open = false;
+        continue;
+      }
+      if (r[0] === 'Human') continue;
       const l = loc.find(row => row[0] === r[0]);
       if (!l) throw new Error('Missing localization scores');
       const metrics: Record<string,number> = { modelRule: Number(r[20]), localization: Number(l[10]) };
@@ -31,7 +37,7 @@ const board: Leaderboard = {
         }
       }
       if (!Object.values(metrics).every(Number.isFinite)) throw new Error('Invalid retrieval result');
-      rows.push({ model: r[0], score: Number(r[10]), metrics });
+      rows.push({ model: r[0], score: Number(r[10]), ...(open === undefined ? {} : { open }), metrics });
     }
     return checked(rows, 9);
   },

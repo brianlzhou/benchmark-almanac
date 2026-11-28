@@ -41,7 +41,8 @@ const board: Leaderboard = {
           if (typeof value==='number') metrics[key+suffix]=value;
         }
       }
-      rows.push({model:r.name,score:r.score,setting:`v${d.version}; ${r.high?"high":"minimum"} reasoning effort`,
+      const date = typeof d.generated === 'string' && /^\d{4}-\d{2}-\d{2}/.test(d.generated) ? d.generated.slice(0, 10) : undefined;
+      rows.push({model:r.name,score:r.score,date,setting:`v${d.version}; ${r.high?"high":"minimum"} reasoning effort`,
         open:r.open,trials:r.runs,verified:r.status==='verified',low:r.ci?.[0],high:r.ci?.[1],metrics});
     }
     if (!rows.length) throw new Error("No collaborative-intelligence-benchmark score rows");

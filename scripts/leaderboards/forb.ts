@@ -8,7 +8,10 @@ const feed = 'https://arxiv.org/html/2309.16249';
 const objects = ['Animated Card','Photorealistic Card','Book Cover','Painting','Currency','Logo','Packaged Goods','Movie Poster'];
 const difficulty = ['Easy','Medium','Hard'];
 const board: Leaderboard = {
-  stats: { thresholdMAP: { name: 'Threshold mean average precision', unit: '%', better: 'higher' } },
+  stats: {
+    thresholdMAP: { name: 'Threshold mean average precision', unit: '%', better: 'higher' },
+    ...Object.fromEntries([...objects, ...difficulty].map(name => [name + ' t-mAP', { name: name + ' threshold mAP at 5', unit: '%', better: 'higher' as const }])),
+  },
   benchmark:'forb', url:'https://github.com/pxiangwu/FORB', feed, static:'paper',
   terms:'The authors publish Tables 4 and 5 in https://arxiv.org/abs/2309.16249.',
   parts:Object.fromEntries([...objects,...difficulty].map(name=>[name,name])),

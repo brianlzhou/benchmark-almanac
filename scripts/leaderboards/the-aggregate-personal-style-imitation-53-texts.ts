@@ -9,9 +9,8 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-personal-style-imitation-53-texts",
   feed,
   terms: "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
-  stats: { items: { name: 'Items', unit: 'count' } },
   async fetch() {
-    return aggregateRows(feed, 'write-like-me', 18);
+    return (await aggregateRows(feed, 'write-like-me', 18)).map(({ metrics: _, ...row }) => row);
   },
 };
 export default board;

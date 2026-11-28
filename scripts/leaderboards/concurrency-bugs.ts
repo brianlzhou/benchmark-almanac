@@ -25,7 +25,7 @@ const board: Leaderboard = {
       const cost = costs.find(r => r[0] === model);
       const taskCol = tasks[0].indexOf(model);
       if (!cost || taskCol < 0) throw new Error('Missing model breakdown');
-      const metrics: Record<string, number> = { outputTokens: Number(cost[5]) };
+      const metrics: Record<string, number> = {};
       for (const r of summary.slice(2)) metrics[r[0]] = parseFloat(r[i + 1]);
       for (const r of tasks.slice(1)) {
         const [pass, trials] = r[taskCol].split('/').map(Number);

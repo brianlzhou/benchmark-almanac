@@ -22,7 +22,7 @@ import { readScores, writeScores } from './lib/scores.ts';
 import { LOCAL_BOARDS } from './lib/local-boards.ts';
 import { withoutNonModels } from './lib/not-models.ts';
 import { makeResolver } from './lib/models.ts';
-import type { BoardPart, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
+import type { BoardPart, BoardSource, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
 
 // a board's parts as stored: each declared part the rows actually score, written out in full
 function partsOf(board: Leaderboard, rows: Row[]): Record<string, BoardPart> | undefined {
@@ -55,6 +55,8 @@ interface Info {
   open?: boolean;
   license?: string;
   params?: number;
+  /** The key of the other source the run came from (Leaderboard.sources), for a board that adds one. */
+  source?: string;
 }
 type Row = [string, string, string | null, string | null, number, string | null, number | null, number | null, (Metrics | null)?, Info?];
 const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
@@ -62,7 +64,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; local?: true; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; sources?: Record<string, BoardSource>; local?: true; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -106,6 +108,7 @@ function infoOf(r: LeaderboardRow, resolve: ReturnType<typeof makeResolver>, run
   if (typeof r.open === 'boolean') i.open = r.open;
   if (clean(r.license)) i.license = clean(r.license);
   if ((finite(r.params, 4) ?? 0) > 0) i.params = finite(r.params, 4);
+  if (r.source) i.source = r.source;
   return Object.keys(i).length ? i : undefined;
 }
 
@@ -239,6 +242,9 @@ for (const f of files) {
     else delete kept.headline;
     if (board.static) kept.static = board.static;
     else delete kept.static;
+    // and the other sources it reads beside the board
+    if (board.sources) kept.sources = board.sources;
+    else delete kept.sources;
     // and whether only a maintainer's computer can read it
     if (LOCAL_BOARDS[f.replace(/\.ts$/, '')]) kept.local = true;
     else delete kept.local;
@@ -267,7 +273,8 @@ for (const f of files) {
   }
   if (rematch && !dry && kept) rematchBoard(board);
   if (only && !only.includes(board.benchmark) && !only.includes(f.replace(/\.ts$/, ''))) continue;
-  if (!only && kept && board.static && !readsStaticToday(board.benchmark, kept.retrieved)) continue;
+  // a paper's table read beside a live source, such as Kaggle's runs, is read every run so the live rows stay current
+  if (!only && kept && board.static && !board.sources && !readsStaticToday(board.benchmark, kept.retrieved)) continue;
   if (!only && process.env.GITHUB_ACTIONS && LOCAL_BOARDS[f.replace(/\.ts$/, '')]) continue;
   if (!benchmarks.has(board.benchmark)) {
     console.log(`  ${f}: unknown benchmark ${board.benchmark}`);
@@ -291,6 +298,7 @@ for (const f of files) {
     const unmatched = new Set<string>();
     for (const r of raw) {
       if (!Number.isFinite(r.score)) continue;
+      if (r.source && !board.sources?.[r.source]) throw new Error(`row source ${r.source} is not in the board's sources`);
       if (r.date) r.date = day(r.date)!;
       const cost = typeof r.cost === 'number' && r.cost > 0 ? Number(r.cost.toPrecision(4)) : null;
       const tokens = typeof r.tokens === 'number' && r.tokens > 0 ? Math.round(r.tokens) : null;
@@ -329,7 +337,7 @@ for (const f of files) {
     const parts = partsOf(board, [...rows, ...others]);
     const stats = statsOf(board, [...rows, ...others], parts);
     const measures = measuresOf(board, [...rows, ...others]);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), ...(LOCAL_BOARDS[f.replace(/\.ts$/, '')] ? { local: true as const } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), ...(LOCAL_BOARDS[f.replace(/\.ts$/, '')] ? { local: true as const } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}), ...(board.sources ? { sources: board.sources } : {}) };
     if (store.unread) delete store.unread[board.benchmark];
   } catch (e) {
     failed++;

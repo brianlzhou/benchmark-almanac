@@ -27,6 +27,12 @@ const board: Leaderboard = {
     support_conversations: { name: 'Support conversations', unit: 'count' },
     support_stores: { name: 'Support stores', unit: 'count' },
   },
+  chart: {
+    title: 'Shopping answer quality vs. automation rate',
+    x: { key: 'shopping_automation', label: 'Shopping automation rate', unit: '%', better: 'higher' },
+    y: { key: 'shopping_quality', label: 'Shopping quality', unit: '%', better: 'higher' },
+    note: 'Gorgias plots answer quality against automation rate for shopping conversations.',
+  },
   async fetch() {
     const data = jsonAfter<{ overall: Overall[]; shopping: Lane[]; support: Lane[] }>(await fetchText(FEED), 'var FJB=');
     if (data.overall.length < 13) throw new Error('Missing vendor rankings');

@@ -11,6 +11,13 @@ const board: Leaderboard = {
   url: "https://varworkshop.github.io/challenges/",
   feed,
   terms: "The workshop page gives no separate score reuse terms. robots.txt allows the feed path.",
+  stats: {
+    METEOR: { name: 'METEOR', unit: 'score', better: 'higher' },
+    'ROUGE-L': { name: 'ROUGE-L', unit: 'score', better: 'higher' },
+    BERT: { name: 'BERTScore', unit: 'score', better: 'higher' },
+    'LLM-Acc': { name: 'LLM accuracy', unit: 'score', better: 'higher' },
+    'T-F-Score': { name: 'Temporal F-score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const doc = await fetchText(feed);
     const names = ['METEOR', 'ROUGE-L', 'BERT', 'LLM-Acc', 'T-F-Score'];

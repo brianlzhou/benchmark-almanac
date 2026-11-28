@@ -14,6 +14,8 @@ const TASKS = 82;
 
 const board: Leaderboard = {
   benchmark: 'harbor-index',
+  harnesses: 'system',
+  reference: ['Terminus 2'],
   url: PAGE,
   feed: `${PAGE} (chart points in the Next.js chunk that defines HarborIndexParetoChart)`,
   terms: 'Public launch post on tbench.ai, which serves no robots.txt and states no terms for its posts; the Terminal-Bench repository is Apache-2.0.',

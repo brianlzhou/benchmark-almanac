@@ -25,7 +25,6 @@ const board: Leaderboard = {
     parsed: { name: 'Fraction parsed', unit: 'score', better: 'higher' },
     labels: { name: 'BAS label accuracy', unit: 'score', better: 'higher' },
     completed: { name: 'Completed tasks', unit: 'count' },
-    scheduled: { name: 'Scheduled tasks', unit: 'count' },
   },
   async fetch() {
     const { data } = await fetchJson<{ data: { package_url: string } }>(feed);
@@ -42,7 +41,7 @@ const board: Leaderboard = {
         precision: value(line, /(?:\x60fault_precision\x60|precision) ([\d.]+)/),
         recall: value(line, /(?:\x60fault_recall\x60|recall) ([\d.]+)/),
         flagged: value(line, /\x60num_flagged\x60 ([\d.]+)/), parsed: value(line, /\x60parsed\x60 ([\d.]+)/),
-        completed: value(line, /(\d+)\/\d+ completed/), scheduled: value(line, /\d+\/(\d+) completed/),
+        completed: value(line, /(\d+)\/\d+ completed/),
       };
       if (line.includes('\x60bas_label_accuracy\x60')) metrics.labels = value(line, /\x60bas_label_accuracy\x60 ([\d.]+)/);
       return { model, date, harness: 'null', setting: date === '2026-09-11' ? 'Original prompt' : 'Revised prompt',

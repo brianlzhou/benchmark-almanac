@@ -11,7 +11,7 @@ const board: Leaderboard = {
 
  async fetch() {
 
-const t=tables(await fetchText(FEED)).find(t=>t[0]?.[2]?.text==='Overall Accuracy');if(!t)throw new Error('OK-VQA table missing');return t.slice(1).flatMap(r=>{const score=num(r[2]?.text);const model=text((r[1]?.html??'').split(/<p\b|<br\s*\/?\s*>/i)[0]);return model&&score!==undefined?[{model,score}]:[];});
+const t=tables(await fetchText(FEED)).find(t=>t[0]?.[2]?.text==='Overall Accuracy');if(!t)throw new Error('OK-VQA table missing');return t.slice(1).flatMap(r=>{const score=num(r[2]?.text);const html=r[1]?.html??'';const model=text(html.split(/<p\b|<br\s*\/?\s*>/i)[0]);const link=html.match(/href="(https?:\/\/[^"]+)"/i)?.[1];const submitter=text(html.match(/<p\b[^>]*class=["']institution["'][^>]*>([\s\S]*?)<\/p>/i)?.[1]??'')||undefined;return model&&score!==undefined?[{model,score,...(submitter?{submitter}:{}),...(link?{link}:{})}]:[];});
  },
 };
 export default board;

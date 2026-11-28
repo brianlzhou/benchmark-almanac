@@ -11,7 +11,7 @@ interface Arm {
 const board: Leaderboard = {
   benchmark: 'finnish-parliament-asr', url: 'https://github.com/GAIK-project/finnish-asr#public-test-sets-skn-and-la-murre-dialects-fleurs-and-voxpopuli',
   feed, terms: 'GAIK requests credit under CC BY 4.0. The raw file host supplies no robots.txt rules.',
-  stats: { characterErrorRate: { name: 'Character error rate', unit: '%', better: 'lower' }, substitutions: { name: 'Substitutions', unit: 'count', better: 'lower' }, deletions: { name: 'Deletions', unit: 'count', better: 'lower' }, insertions: { name: 'Insertions', unit: 'count', better: 'lower' }, referenceWords: { name: 'Reference words', unit: 'count' }, emptyTranscripts: { name: 'Empty transcripts', unit: 'count', better: 'lower' }, utterances: { name: 'Utterances', unit: 'count' }, latency: { name: 'Latency per utterance', unit: 'seconds', better: 'lower' } },
+  stats: { characterErrorRate: { name: 'Character error rate', unit: '%', better: 'lower' }, substitutions: { name: 'Substitutions', unit: 'count', better: 'lower' }, deletions: { name: 'Deletions', unit: 'count', better: 'lower' }, insertions: { name: 'Insertions', unit: 'count', better: 'lower' }, emptyTranscripts: { name: 'Empty transcripts', unit: 'count', better: 'lower' }, latency: { name: 'Latency per utterance', unit: 'seconds', better: 'lower' } },
   aliases: { 'NVIDIA Nemotron 3.5 Transcribe': 'nemotron-3-5-transcribe-30b-a4b' },
   async fetch() {
     const readme = await fetchText(base + 'README.md');
@@ -28,7 +28,7 @@ const board: Leaderboard = {
       const model = match[1].replaceAll('**', '');
       const setting = model.match(/\((API[^)]*)\)/)?.[1];
       rows.push({ model, setting, score: arm.WER, metrics: { characterErrorRate: arm.CER, substitutions: arm.SUB, deletions: arm.DEL,
-        insertions: arm.INS, referenceWords: arm.ref_words, emptyTranscripts: arm.empty_hyps, utterances: arm.utterances,
+        insertions: arm.INS, emptyTranscripts: arm.empty_hyps,
         ...(typeof arm.seconds_per_utterance === 'number' ? { latency: arm.seconds_per_utterance } : {}) } });
     }
     if (rows.length < 16) throw new Error('Missing Parliament configurations');

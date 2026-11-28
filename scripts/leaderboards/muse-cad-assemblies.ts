@@ -14,7 +14,6 @@ const board: Leaderboard = {
   parts: { functionality: 'Functionality', manufacturability: 'Manufacturability', assemblability: 'Assemblability' },
   stats: {
     judged: { name: 'Judged configurations', unit: 'count' },
-    cases: { name: 'Test cases', unit: 'count' },
     sandbox: { name: 'Sandbox success', unit: '%', better: 'higher', note: 'Share of generated scripts that execute without error.' },
     watertight: { name: 'Watertight geometry', unit: '%', better: 'higher' },
     manifold: { name: 'Manifold geometry', unit: '%', better: 'higher' },
@@ -31,7 +30,7 @@ const board: Leaderboard = {
   async fetch() {
     const { rows } = await fetchJson<{ rows: Entry[] }>(feed);
     if (rows.length < 15) throw new Error('Missing MUSE configurations');
-    return rows.map(({ model, family, final, ...metrics }) => {
+    return rows.map(({ model, family, final, cases: _cases, ...metrics }) => {
       if (!model || ![final, metrics.sandbox, metrics.geom_valid, metrics.functionality, metrics.manufacturability, metrics.assemblability].every(Number.isFinite))
         throw new Error('Incomplete MUSE row');
       return { model, score: final, open: family === 'open', metrics };

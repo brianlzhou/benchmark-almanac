@@ -11,11 +11,13 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: "agenticfinbench",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
   feed: FEED,
   terms: "The authors do not specify separate terms for leaderboard scores on https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
   stats: {
-    latency: { name: 'Time per run', unit: 'seconds', better: 'lower' }, baseline: { name: 'Baseline quality', unit: '%', better: 'higher' }, delta: { name: 'Difference from baseline', unit: '%', better: 'higher' }, baselineRank: { name: 'Baseline rank', unit: 'count' }, claims: { name: 'Claims', unit: 'count' }, questions: { name: 'Questions', unit: 'count' }, responseHallucination: { name: 'Response hallucination rate', unit: '%', better: 'lower' }, claimHallucination: { name: 'Claim hallucination rate', unit: '%', better: 'lower' },
+    latency: { name: 'Time per run', unit: 'seconds', better: 'lower' }, baseline: { name: 'Baseline quality', unit: '%', better: 'higher' }, delta: { name: 'Difference from baseline', unit: '%', better: 'higher' }, claims: { name: 'Claims', unit: 'count' }, responseHallucination: { name: 'Response hallucination rate', unit: '%', better: 'lower' }, claimHallucination: { name: 'Claim hallucination rate', unit: '%', better: 'lower' },
   },
   async fetch() {
     const data = await fetchJson<{ models: Entry[]; configuration_count: number }>(FEED);
@@ -24,8 +26,8 @@ const board: Leaderboard = {
       if (!r.model || !r.harness || ![r.q, ...r.ci, r.cost_usd, r.time_minutes].every(Number.isFinite) || r.ci.length !== 2)
         throw new Error('Incomplete financial agent result');
       return { model: r.model, harness: r.harness, score: r.q, low: r.ci[0], high: r.ci[1], cost: r.cost_usd,
-        metrics: { latency: r.time_minutes * 60, baseline: r.baseline, delta: r.delta, baselineRank: r.baseline_rank,
-          claims: r.claims, questions: r.count, responseHallucination: r.response_hallucination, claimHallucination: r.claim_hallucination } };
+        metrics: { latency: r.time_minutes * 60, baseline: r.baseline, delta: r.delta,
+          claims: r.claims, responseHallucination: r.response_hallucination, claimHallucination: r.claim_hallucination } };
     });
   },
 };

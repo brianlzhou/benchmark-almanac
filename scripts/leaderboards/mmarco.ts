@@ -5,16 +5,18 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2108.13897';
+const mmarcoLanguages = ['English (Orig.)', 'Spanish', 'French', 'Italian', 'Portuguese', 'Indonesian', 'German', 'Russian', 'Chinese', 'Japanese', 'Dutch', 'Vietnamese', 'Hindi', 'Arabic'];
 const board: Leaderboard = {
   benchmark: 'mmarco', feed, url: feed, static: 'paper', terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The paper reports no overall MRR@10, so this is the plain mean across its fourteen language rows.',
+  parts: Object.fromEntries(mmarcoLanguages.map(language => [language, language])),
+  stats: Object.fromEntries(mmarcoLanguages.map(language => [language + ' R@1k', { name: language + ' Recall@1000', unit: 'score' as const, better: 'higher' as const, note: 'Stored from 0 to 1.' }])),
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.join('|') === '||R@1k|R@1k|MRR@10|MRR@10|MRR@10|MRR@10' && t[1]?.join('|') === '|Language|BM25|mColB.|BM25|mT5|mMiniLM|mColB.');
     if (!table) throw Error('Missing mMARCO main results');
     const languages = table.slice(2).filter(r => /^\(\d+\)$/.test(r[0]));
     if (languages.length !== 14) throw Error('Missing mMARCO language');
-    board.parts = Object.fromEntries(languages.map(([, language]) => [language, language]));
     return checked(table[1].slice(4).map((label, i) => {
       const metrics: Record<string, number> = {};
       let sum = 0;

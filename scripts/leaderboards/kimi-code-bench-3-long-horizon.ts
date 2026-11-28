@@ -43,7 +43,7 @@ const ROWS: LeaderboardRow[] = [
   }
 ];
 const board: Leaderboard = {
-  benchmark: 'kimi-code-bench-3-long-horizon', url: 'https://www.kimi.com/en/blog/kimi-k3-1-pro', feed: IMAGE + ' (transcribed 2026-11-10)',
+  benchmark: 'kimi-code-bench-3-long-horizon', static: 'paper', url: 'https://www.kimi.com/en/blog/kimi-k3-1-pro', feed: IMAGE + ' (transcribed 2026-11-10)',
   terms: 'Moonshot publishes this comparison image publicly; the almanac credits Moonshot AI and links the source.',
   fetch: () => checkedImageRows(IMAGE, 'da7bd9b37dbb885c12590c7b320bb8a94dd855dbf593c5dd866b2ec086eda419', ROWS),
 };

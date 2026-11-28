@@ -9,10 +9,19 @@ import { SUPERGLUE_ALIASES, SUPERGLUE_FEED, SUPERGLUE_PAGE, SUPERGLUE_TERMS, sup
 const board: Leaderboard = {
   verified: 'approved for publication by SuperGLUE administrators',
   benchmark: 'cb',
+  stats: {
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
+  },
   url: SUPERGLUE_PAGE,
   feed: `${SUPERGLUE_FEED}, task CB accuracy`,
   terms: SUPERGLUE_TERMS,
   aliases: SUPERGLUE_ALIASES,
-  fetch: () => superglueRows((_, task) => task('CB')?.accuracy),
+  fetch: () => superglueRows(
+    (_, task) => task('CB')?.accuracy,
+    (_, task) => {
+      const f1 = task('CB')?.score;
+      return typeof f1 === 'number' && Number.isFinite(f1) ? { macroF1: Number((f1 * 100).toFixed(2)) } : undefined;
+    },
+  ),
 };
 export default board;

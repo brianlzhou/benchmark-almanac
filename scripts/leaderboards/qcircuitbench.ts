@@ -6,13 +6,24 @@ import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.
 import { numberCell, paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://arxiv.org/html/2410.07961';
+const ALGORITHMS = [
+  'Bernstein Vazirani', 'Deutsch Jozsa', 'Grover', 'Phase Estimation', 'QFT', 'Simon', 'GHZ',
+  'Random Number Generator', 'Swap Test', 'W State', 'Generalized Simon (multi-str)',
+  'Generalized Simon (ternary)', 'Shor', 'VQE', 'QAOA', 'QAE', 'ENC',
+];
+const PARTS: Record<string, string> = {
+  syntaxAverage: 'Average syntax score',
+  ...Object.fromEntries(['semantic', 'syntax'].flatMap(kind =>
+    ALGORITHMS.map(name => [kind + name.replace(/[^a-zA-Z0-9]/g, ''), name + ' ' + kind]),
+  )),
+};
 const board: Leaderboard = {
   benchmark: 'qcircuitbench', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  parts: PARTS,
   aliases: { Llama3: 'llama-3-8b' },
   async fetch() {
     const html = await paperHtml(feed);
     const rows = new Map<string,LeaderboardRow>();
-    const parts: Record<string,string> = { syntaxAverage: 'Average syntax score' };
     for (const [id,kind] of [['S4.T2','semantic'],['S4.T1','syntax']]) {
       const f = html.split('<figure id="' + id + '"')[1]?.split('</figure>')[0];
       const t = f && flatPaperTables(f).map(grid)[0];
@@ -31,14 +42,12 @@ const board: Leaderboard = {
           const metric = kind + name.replace(/[^a-zA-Z0-9]/g,'');
           const error = uncertainty[j+2].match(/^\(±([\d.]+)\)$/);
           if (!error) throw Error('Unexpected uncertainty cell');
-          parts[metric] = name + ' ' + kind;
           row.metrics![metric] = numberCell(values[j]);
-          row.metrics![metric + 'Uncertainty'] = numberCell(error[1]);
+          row.metrics![metric + 'Std'] = numberCell(error[1]);
         }
         rows.set(key,row);
       }
     }
-    board.parts = parts;
     return checked([...rows.values()], 8);
   },
 };

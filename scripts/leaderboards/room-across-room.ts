@@ -12,7 +12,10 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2010.07954",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-  
+  stats: {
+    successRate: { name: 'Success rate', unit: '%', better: 'higher' },
+    successDTW: { name: 'Success-weighted DTW', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[1]?.[0]?.text==='Split'&&t[1]?.[1]?.text==='Method');
     if(!t)throw new Error('RxR test table missing');let split='';const out:LeaderboardRow[]=[];

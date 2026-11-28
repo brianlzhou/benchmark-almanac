@@ -15,6 +15,14 @@ interface Entry {
   Avg?: string;
   Size?: string;
   Link?: string;
+  NAT?: string;
+  SOC?: string;
+  LAN?: string;
+  TXT?: string;
+  IMG?: string;
+  NO?: string;
+  'G1-6'?: string;
+  'G7-12'?: string;
 }
 
 const board: Leaderboard = {
@@ -31,6 +39,16 @@ const board: Leaderboard = {
     'InstructBLIP (Vicuna-13B)': 'instructblip-vicuna-13b',
     'InstructBLIP (Vicuna-7B)': 'instructblip-vicuna-7b',
   },
+  parts: {
+    nat: { name: 'Natural science', group: 'Subject' },
+    soc: { name: 'Social science', group: 'Subject' },
+    lan: { name: 'Language science', group: 'Subject' },
+    txt: { name: 'Text context', group: 'Context' },
+    img: { name: 'Image context', group: 'Context' },
+    no: { name: 'No context', group: 'Context' },
+    g1to6: { name: 'Grades 1 to 6', group: 'Grade' },
+    g7to12: { name: 'Grades 7 to 12', group: 'Grade' },
+  },
   async fetch() {
     const src = await fetchText(FEED);
     const list = JSON.parse(src.slice(src.indexOf('['), src.lastIndexOf(']') + 1)) as Entry[];
@@ -41,8 +59,23 @@ const board: Leaderboard = {
       if (!model || !Number.isFinite(score) || /^(human performance|random chance)$/i.test(model)) continue;
       const d = e.Date?.match(/^(\d\d)-(\d\d)-(\d\d)$/);
       const size = e.Size?.match(/^([\d.]+)([MB])$/);
-      rows.push({ model, score, params: size ? Number(size[1]) / (size[2] === 'M' ? 1000 : 1) : undefined,
-        link: /^https:\/\/(?:arxiv.org|aclanthology.org)\//.test(e.Link ?? '') ? e.Link : undefined, ...(d ? { date: `20${d[1]}-${d[2]}-${d[3]}` } : {}) });
+      const metrics: Record<string, number> = {};
+      for (const [col, key] of [
+        ['NAT', 'nat'], ['SOC', 'soc'], ['LAN', 'lan'],
+        ['TXT', 'txt'], ['IMG', 'img'], ['NO', 'no'],
+        ['G1-6', 'g1to6'], ['G7-12', 'g7to12'],
+      ] as const) {
+        const v = Number(e[col]);
+        if (Number.isFinite(v)) metrics[key] = v;
+      }
+      rows.push({
+        model,
+        score,
+        params: size ? Number(size[1]) / (size[2] === 'M' ? 1000 : 1) : undefined,
+        link: /^https:\/\/(?:arxiv.org|aclanthology.org)\//.test(e.Link ?? '') ? e.Link : undefined,
+        ...(d ? { date: `20${d[1]}-${d[2]}-${d[3]}` } : {}),
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     if (rows.length < 50) throw new Error(`only ${rows.length} ScienceQA rows`);
     return rows;

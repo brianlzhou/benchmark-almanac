@@ -17,7 +17,6 @@ const board: Leaderboard = {
     insufficient: { name: 'Insufficient responses', unit: '%', better: 'lower' },
     contrarian: { name: 'Contrarian rate', unit: '%', better: 'lower', note: 'Responses that reject both opposing narrators.' },
     covered: { name: 'Covered cases', unit: 'count' },
-    expected: { name: 'Expected cases', unit: 'count' },
   },
   async fetch() {
     const tables = markdownTables(await fetchText(FEED));
@@ -32,7 +31,7 @@ const board: Leaderboard = {
       const [score,conditional,decisiveCoverage,stripped,insufficient] = scores.map(pct);
       const effort = label.match(/ \(([^()]+)\)$/);
       return { model: effort ? label.slice(0,-effort[0].length) : label, setting: effort?.[1], score,
-        metrics: { conditional, decisiveCoverage, stripped, insufficient, contrarian: pct(second[6]), covered: coverageCounts[0], expected: coverageCounts[1] } };
+        metrics: { conditional, decisiveCoverage, stripped, insufficient, contrarian: pct(second[6]), covered: coverageCounts[0] } };
     });
   },
 };

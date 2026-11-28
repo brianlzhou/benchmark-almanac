@@ -73,7 +73,7 @@ const ladderTitle = levels.length > 1 ? `From ${lowerLabel(levels[0].l.name)} to
 const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmarks/?area=a:${area.id}`, label: area.name }];
 ---
 
-<Base title={name} description={`${name} benchmarks by difficulty and kind, and who held the top score on each over time.`} crumbs={trail}>
+<Base title={name} searchTitle={`${name} benchmarks for AI models, with leaders`} description={`${name} benchmarks by difficulty and kind, and who held the top score on each over time.`} crumbs={trail}>
   <div class="page">
     <header class="head">
       <Crumbs items={trail} />

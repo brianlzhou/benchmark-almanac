@@ -20,8 +20,14 @@ interface PerRollout {
 interface Agent {
   model: string;
   harness?: string;
+  effort?: string;
   overall?: { avg3?: number; ci?: number; pass3?: number };
-  cost?: PerRollout;
+  verifier?: { avg3?: number; ci?: number; pass3?: number };
+  score?: { mean?: number; ci?: number };
+  passes?: number;
+  rollouts?: number;
+  tasksSolved?: number;
+  cost?: PerRollout & { tasks?: number };
   outputTokens?: PerRollout;
   minutes?: PerRollout;
   steps?: PerRollout;
@@ -57,10 +63,20 @@ const board: Leaderboard = {
   feed: `${URL} (agents JSON in the page's script chunks: overall.avg3, costs and times per rollout)`,
   terms: 'Server-rendered public page; the site has no robots.txt restrictions and no terms.',
   aliases: {},
-  stats: { minutes: { name: 'Minutes per rollout', unit: 'minutes', better: 'lower' }, steps: { name: 'Steps per rollout', unit: 'count' }, passAt3: { name: 'Pass@3', unit: '%', better: 'higher' } },
+  stats: {
+    minutes: { name: 'Minutes per rollout', unit: 'minutes', better: 'lower' },
+    steps: { name: 'Steps per rollout', unit: 'count', better: 'lower' },
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    verifierAvg3: { name: 'Verifier pass rate', unit: '%', better: 'higher' },
+    verifierPassAt3: { name: 'Verifier Pass@3', unit: '%', better: 'higher' },
+    partialScore: { name: 'Partial credit score', unit: '%', better: 'higher' },
+    passes: { name: 'Passed rollouts', unit: 'count', better: 'higher' },
+    rollouts: { name: 'Rollouts', unit: 'count' },
+    tasksSolved: { name: 'Tasks solved', unit: 'count', better: 'higher' },
+  },
   chart: {
     title: 'Agent Performance',
-    note: 'Overall pass rate against the average agent wall-clock time per rollout, on a log scale; the board marks the Pareto frontier.',
+    note: 'Overall pass rate against the average agent wall-clock time per rollout, on a log scale. The board marks the Pareto frontier.',
     x: { key: 'minutes', label: 'Wall-clock per rollout', unit: 'min', better: 'lower', log: true },
     y: { key: 'score', label: 'Overall pass rate', unit: '%', better: 'higher' },
   },
@@ -86,15 +102,23 @@ const board: Leaderboard = {
         ['minutes', a.minutes?.perRollout],
         ['steps', a.steps?.perRollout],
         ['passAt3', a.overall?.pass3],
+        ['verifierAvg3', a.verifier?.avg3],
+        ['verifierPassAt3', a.verifier?.pass3],
+        ['partialScore', a.score?.mean],
+        ['passes', a.passes],
+        ['rollouts', a.rollouts],
+        ['tasksSolved', a.tasksSolved],
         ['ci', a.overall?.ci],
       ] as const)
         if (finite(v) !== undefined) metrics[k] = v as number;
+      const trials = finite(a.rollouts) && finite(a.cost?.tasks) && a.cost!.tasks! > 0 ? Math.round(a.rollouts! / a.cost!.tasks!) : undefined;
       rows.push({
         model: effort ? a.model.slice(0, effort.index).trim() : a.model.trim(),
         score,
         ...(finite(a.overall?.ci) !== undefined ? { low: score - a.overall!.ci!, high: score + a.overall!.ci! } : {}),
-        setting: effort?.[1].toLowerCase(),
+        setting: effort?.[1].toLowerCase() ?? a.effort?.toLowerCase(),
         harness: a.harness || undefined,
+        trials,
         cost: finite(a.cost?.perRollout),
         tokens: finite(a.outputTokens?.perRollout),
         ...(Object.keys(metrics).length ? { metrics } : {}),

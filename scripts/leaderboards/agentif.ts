@@ -17,8 +17,29 @@ const snapshot = (href: string) => {
   return m ? `${m[1]}-${m[2]}-${m[3]}` : undefined;
 };
 
+const AGENTIF_COLS = [
+  [2, 'vanilla'],
+  [3, 'condition'],
+  [4, 'example'],
+  [5, 'formatting'],
+  [6, 'semantic'],
+  [7, 'tool'],
+  [8, 'isr'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'agentif',
+  parts: {
+    vanilla: { name: 'Vanilla', group: 'Presentation Type' },
+    condition: { name: 'Condition', group: 'Presentation Type' },
+    example: { name: 'Example', group: 'Presentation Type' },
+    formatting: { name: 'Formatting', group: 'Constraint Type' },
+    semantic: { name: 'Semantic', group: 'Constraint Type' },
+    tool: { name: 'Tool', group: 'Constraint Type' },
+  },
+  stats: {
+    isr: { name: 'Instruction success rate (ISR)', unit: '%', better: 'higher' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML, second leaderboard table, CSR)`,
   terms: 'Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.',
@@ -41,11 +62,21 @@ const board: Leaderboard = {
       const score = num(text(cells.at(-1) ?? ''));
       if (!link || score === undefined) continue;
       const tag = cells[1].match(/\[([TN])\]/)?.[1];
+      const metrics: Record<string, number> = {};
+      if (cells.length >= 10) {
+        for (const [idx, key] of AGENTIF_COLS) {
+          const v = num(text(cells[idx] ?? ''));
+          if (v !== undefined) metrics[key] = v;
+        }
+      }
+      const href = link[1] ? new URL(link[1], PAGE).href : undefined;
       rows.push({
         model: text(link[2]),
         score,
         setting: tag === 'T' ? 'thinking' : tag === 'N' ? 'non-thinking' : undefined,
         date: snapshot(link[1]) ?? PAPER_DATE,
+        link: href,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
       });
     }
     if (!rows.length) throw new Error('no rows in the AgentIF original-setting table');

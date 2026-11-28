@@ -8,7 +8,12 @@ const board: Leaderboard = {
   url: 'https://www.clbench.com/',
   feed: clbenchFeed('life-data.json'),
   terms: CLBENCH_TERMS,
+  parts: {
+    interpersonal: { name: 'Communication and social interactions', unit: '%' },
+    thought: { name: 'Fragmented information and revisions', unit: '%' },
+    behavior: { name: 'Behavioral records and activity trails', unit: '%' },
+  },
   aliases: CLBENCH_ALIASES,
-  fetch: () => clbenchRows('life-data.json'),
+  fetch: () => clbenchRows('life-data.json', ['interpersonal', 'thought', 'behavior']),
 };
 export default board;

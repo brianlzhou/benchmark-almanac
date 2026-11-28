@@ -28,7 +28,6 @@ const board: Leaderboard = {
   },
   stats: {
     flaggedChats: { name: 'Flagged chats', unit: 'count', note: 'Chats with at least one critical safety check rated as a fail.' },
-    conversations: { name: 'Conversations', unit: 'count' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(PAGE)).find((t) => t[0]?.map((c) => c.text).join('|') === 'Model|Flagged chats|Share flagged|Range across scenario mixes');
@@ -45,7 +44,7 @@ const board: Leaderboard = {
         date: '2026-09-23',
         low: Number(range[1]),
         high: Number(range[2]),
-        metrics: { flaggedChats: Number(flagged[1]), conversations: Number(flagged[2]), rangeLow: Number(range[1]), rangeHigh: Number(range[2]) },
+        metrics: { flaggedChats: Number(flagged[1]), rangeLow: Number(range[1]), rangeHigh: Number(range[2]) },
       };
     });
   },

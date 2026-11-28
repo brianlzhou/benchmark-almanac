@@ -3,6 +3,7 @@ import type { Leaderboard } from './types.ts';
 import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage } from './aime-2026.ts';
 
 import { MATHARENA_STATS, matharenaRows } from '../lib/boards/matharena.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const COMP = 'aime--aime_2025';
 
@@ -16,4 +17,4 @@ const board: Leaderboard = {
   stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
-export default board;
+export default withKaggle(board, { owner: 'open-benchmarks', slug: 'aime-2025', task: 'aime_task', scale: 100 });

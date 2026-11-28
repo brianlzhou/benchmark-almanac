@@ -8,10 +8,10 @@ const board: Leaderboard = {
   benchmark: "swewic",
   url: "https://lab.kb.se/leaderboard/results",
   feed,
-  stats: { N: { name: 'Items', unit: 'count' }, alpha: { name: 'Krippendorff alpha', unit: 'score', better: 'higher' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' }, f1: { name: 'F1', unit: 'score', better: 'higher' } },
+  stats: { accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' }, f1: { name: 'F1', unit: 'score', better: 'higher' } },
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
   async fetch() {
-    return superlimRows("swewic", 13);
+    return (await superlimRows("swewic", 13)).map(({ metrics: { N: _, alpha: __, ...metrics } = {}, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

@@ -9,6 +9,7 @@ const feed = "https://www.axisspatial.com/arena/evaluations/thinkgeo";
 
 const board: Leaderboard = {
   benchmark: "thinkgeo",
+  harnesses: 'system',
   url: "https://www.axisspatial.com/arena/evaluations/thinkgeo",
   feed,
   terms: "The agent can use code. Axis Spatial restricts the tasks to outputs its checks can verify. Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",

@@ -7,6 +7,7 @@ const feed = "https://developers.databricks.com/ai-index";
 
 const board: Leaderboard = {
   benchmark: "databricks-ai-index",
+  harnesses: 'system',
   url: "https://developers.databricks.com/ai-index",
   feed,
   terms: "The publisher displays results at https://developers.databricks.com/ai-index. I could not verify reuse terms. The site allows this path in robots.txt.",

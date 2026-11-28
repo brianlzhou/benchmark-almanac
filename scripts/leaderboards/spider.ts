@@ -47,10 +47,11 @@ const board: Leaderboard = {
         if (!system || score === undefined || /^human/i.test(system)) continue;
         const ambiguous = base && /^(GPT-4|ChatGPT|GPT-3\.5-turbo)$/i.test(base);
         const model = ambiguous ? `${base} (snapshot unspecified)` : base ?? system;
-        const dev = num(r[head.indexOf('Dev')]?.text);
-        rows.push({ model, score, harness: system, date: isoDate(r[0]?.text ?? ''),
-          metrics: { ...(dev === undefined ? {} : { developmentExecution: dev }),
-            ...(exact.get(system) === undefined ? {} : { exactMatch: exact.get(system)! }) } });
+        const inst = text(r[1]?.html.match(/<p[^>]*class="institution"[^>]*>([\s\S]*?)<\/p>/i)?.[1] ?? '');
+        const org = inst && !/^anonymous$/i.test(inst) ? inst : undefined;
+        const link = r[1]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+        rows.push({ model, score, harness: system, agentOrg: org, submitter: org, link, date: isoDate(r[0]?.text ?? ''),
+          metrics: exact.get(system) === undefined ? undefined : { exactMatch: exact.get(system)! } });
       }
     }
     return rows;

@@ -1,6 +1,40 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-27",
   "items": [
+    {
+      "key": "https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-can-read-them/#coversharnessoverfittingandgradervalidityxudong07452910",
+      "title": "RSI reading list: Covers harness overfitting and grader validity ( @Xudong07452910 ).",
+      "url": "https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-can-read-them/",
+      "source": "AINews",
+      "date": "2026-11-25",
+      "first": "2026-11-26",
+      "last": "2026-11-27",
+      "benchmarks": [
+        "rsi-bench-scale"
+      ],
+      "problems": [
+        "broken-grader",
+        "harness-differences"
+      ],
+      "score": 5
+    },
+    {
+      "key": "https://arxiv.org/abs/2611.33943",
+      "title": "What Does Skill Lift Actually Measure? A Source-Code-Level Audit and Noise-Aware Reanalysis of SkillsBench",
+      "url": "https://arxiv.org/abs/2611.33943",
+      "source": "arXiv",
+      "date": "2026-11-25",
+      "first": "2026-11-26",
+      "last": "2026-11-27",
+      "benchmarks": [
+        "skillsbench"
+      ],
+      "problems": [
+        "broken-grader",
+        "harness-differences"
+      ],
+      "score": 5
+    },
     {
       "key": "https://arxiv.org/abs/2611.29744",
       "title": "Who Sent It or How It Moved? Sender Shortcuts in Cryptocurrency Anti-Money-Laundering Benchmarks, Audited on Elliptic2 and Elliptic++",
@@ -8,7 +42,7 @@
       "source": "arXiv",
       "date": "2026-11-22",
       "first": "2026-11-24",
-      "last": "2026-11-24",
+      "last": "2026-11-25",
       "benchmarks": [
         "agent-memory-leaderboard"
       ],

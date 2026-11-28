@@ -4,9 +4,17 @@ import { fetchText } from "../lib/util.ts";
 import { num, tables } from "../lib/html.ts";
 const board: Leaderboard = {
   benchmark: "spatial-agent-index-2",
+  harnesses: 'system',
+  reference: ['Terminus-2'],
   url: "https://www.axisspatial.com/arena/agent-index",
   feed: "https://www.axisspatial.com/arena/agent-index",
   terms: "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy Its robots.txt allows the ranking page.",
+  parts: {
+    'Earth-Bench V2': 'Earth-Bench V2',
+    GeoBenchX: 'GeoBenchX',
+    'GS-QA2': 'GS-QA2',
+    'Vision agents': 'Vision agents',
+  },
   stats: {
     textOnly: { name: 'Text-only index', unit: 'index', better: 'higher' },
     textAndVision: { name: 'Text-and-vision index', unit: 'index', better: 'higher' },
@@ -24,7 +32,6 @@ const board: Leaderboard = {
     const split = all.find(t=>t[0]?.[1]?.text==='Earth-Bench V2' && t[0].at(-1)?.text==='Spatial Agent Index: Text + vision');
     if (!rank || rank.length<93 || !cost || !tokens || !turns || !split) throw new Error('Missing Spatial Agent Index tables');
     const parts = split[0].slice(1,5).map(c=>c.text);
-    this.parts = Object.fromEntries(parts.map(p=>[p,p]));
     return rank.slice(1).map(r=>{
       const name = r[0].text;
       const match = name.match(/^(.+) \(([^()]+)\), (.+)$/);

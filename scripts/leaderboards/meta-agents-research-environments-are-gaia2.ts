@@ -14,8 +14,27 @@ interface Config {
   components: { id: number; type: string; props: { value?: { headers?: string[]; data?: unknown[][] } } }[];
 }
 
+const GAIA2_PARTS = [
+  ['execution', 'Execution'],
+  ['search', 'Search'],
+  ['ambiguity', 'Ambiguity'],
+  ['adaptability', 'Adaptability'],
+  ['time', 'Time'],
+  ['noise', 'Noise'],
+  ['a2a', 'A2A'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'meta-agents-research-environments-are-gaia2',
+  parts: {
+    execution: { name: 'Execution', group: 'Capability' },
+    search: { name: 'Search', group: 'Capability' },
+    ambiguity: { name: 'Ambiguity', group: 'Capability' },
+    adaptability: { name: 'Adaptability', group: 'Capability' },
+    time: { name: 'Time', group: 'Capability' },
+    noise: { name: 'Noise', group: 'Capability' },
+    a2a: { name: 'Agent-to-agent (A2A)', group: 'Capability' },
+  },
   url: 'https://huggingface.co/spaces/meta-agents-research-environments/leaderboard',
   feed: `${SPACE}/config (Vanilla Gaia2 Leaderboard dataframe, pass@1)`,
   terms: 'Public Hugging Face Space; its robots.txt allows every path and the Space states no terms of its own.',
@@ -37,16 +56,26 @@ const board: Leaderboard = {
     const h = table.headers;
     const iModel = h.indexOf('Model');
     const iScore = h.indexOf('pass@1');
+    const iSubmitter = h.indexOf('Submitter');
     const iDate = h.indexOf('Date');
+    const partCols = GAIA2_PARTS.map(([key, col]) => [key, h.indexOf(col)] as const).filter(([, idx]) => idx >= 0);
     return table.data.map((r) => {
       const name = String(r[iModel] ?? '').trim();
       const effort = /\((high|low|medium|minimal)\)$/i.exec(name)?.[1]?.toLowerCase();
       const date = String(r[iDate] ?? '');
+      const submitter = iSubmitter >= 0 ? String(r[iSubmitter] ?? '').trim() || undefined : undefined;
+      const metrics: Record<string, number> = {};
+      for (const [key, idx] of partCols) {
+        const v = Number(r[idx]);
+        if (r[idx] !== '' && r[idx] != null && Number.isFinite(v)) metrics[key] = v;
+      }
       return {
         model: effort ? name.replace(/\s*\([^)]*\)$/, '') : name,
         score: Number(r[iScore]),
         setting: effort ?? (/thinking/i.test(name) ? 'thinking' : undefined),
+        submitter,
         date: /^\d{4}-\d\d-\d\d$/.test(date) ? date : undefined,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
       };
     });
   },

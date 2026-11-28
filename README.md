@@ -60,6 +60,7 @@ These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` 
 | `node scripts/meaning-eval.ts` | Tests search by meaning against `scripts/meaning/queries.json`, plain-language requests with the benchmarks each should find, and prints recall and MRR for the dev and held-out requests. Needs the same package as `embed.ts` and the dev server (for the index builder's benchmark list). `--fallback` tests the ranking browsers without WebGPU get. |
 | `npm run og:film` | Films the link-preview loops and posters in `public/og/`. It needs ffmpeg and a Chrome or Chromium. Rerun it after a sync that changes the charts. |
 | `node scripts/submission.ts --list` | Prints the open benchmark submissions as JSON lines, with the same check the submission workflow runs. It needs the GitHub CLI, signed in. |
+| `node scripts/indexnow.ts --commit <sha> --dry-run` | Prints the pages that the deploy of that commit changed, which the IndexNow workflow sends to Bing and the other IndexNow search engines. The commit must be the live deploy. Without `--dry-run`, it sends them. |
 | `node scripts/tasks.ts` | Prints the open tasks on the Contribute page as JSON lines. `--kind <kind>` keeps one kind. `--issues <n> [--dry]` keeps up to n of them open as "good first issue" issues, and needs `GITHUB_TOKEN` and `GITHUB_REPOSITORY`. |
 
 The discovery score has two stages. Stage A asks whether an item is a benchmark at all, from its title
@@ -83,6 +84,7 @@ mix across versions.
 | `check.yml` | Every pull request and every push to `main` | Runs the data check, the type check, the tests and the build. |
 | `discover.yml` | Daily, 10:30 UTC | Runs the discovery job and keeps one pull request open with the new queue. |
 | `sync.yml` | Daily, 12:00 UTC | Syncs Epoch AI, the leaderboards, GitHub facts and new abstracts, checks and builds, and keeps one pull request open with the changes. |
+| `indexnow.yml` | Vercel finishes a production deploy of `main` | Sends the pages that the deploy changed to IndexNow, so Bing and the other IndexNow search engines crawl them soon. The build finds those pages by comparing each page's text with the live site's (`scripts/lib/indexnow.ts`). |
 | `submission.yml` | A benchmark submission issue opens or changes | Replies to the issue and labels it. |
 | `tasks.yml` | Only when run by hand | Keeps up to a chosen number of Contribute-page tasks open as "good first issue" issues. It never opens a second issue for a task, never reopens a closed one, and closes an issue once the data has the answer. |
 

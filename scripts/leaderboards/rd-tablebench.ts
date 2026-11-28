@@ -43,6 +43,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "rd-tablebench",
+  static: 'paper',
   url: "https://reducto.ai/blog/rd-tablebench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

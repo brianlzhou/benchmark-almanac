@@ -8,10 +8,12 @@ const feed = "https://veris.ai/leaderboard/findesk";
 
 const board: Leaderboard = {
   benchmark: "findesk-bench",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://veris.ai/leaderboard/findesk",
   feed,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions The robots.txt rules allow the leaderboard.",
-  stats: { pass3: { name: 'Pass@3', unit: '%', better: 'higher' } },
+  stats: { pass3: { name: 'pass^3', unit: '%', better: 'higher', note: 'All three attempts pass.' } },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.[1]?.text.includes('pass@1'));
     if (!t || t.length < 17 || t[0].length !== 7 || !t[0][2].text.includes('95%') || t[0][5].text !== 'Harness') throw new Error('Missing FinDesk results');

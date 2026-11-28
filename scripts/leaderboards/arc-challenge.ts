@@ -15,9 +15,7 @@ const board: Leaderboard = {
       const source = tables(await fetchText(FEED));
       const t = source.find(t => t.some(r => r[0]?.text === 'Solver'));
       if (!t) throw new Error('ARC test table missing');
-      const splitTable = source.find(table => table.some(row => row[0]?.text === 'Train') && table.some(row => row[0]?.text === 'Test'));
-      const questions = num(splitTable?.find(row => row[0]?.text === 'Test')?.[1]?.text);
-      return t.filter(r => r.length === 3 && num(r[1].text) !== undefined && !/dataset defn|random/i.test(r[0].text)).map(r => ({model:r[0].text.replace(/[‡†]/g,''),score:num(r[1].text)!, metrics: questions === undefined ? undefined : { questions },
+      return t.filter(r => r.length === 3 && num(r[1].text) !== undefined && !/dataset defn|random/i.test(r[0].text)).map(r => ({model:r[0].text.replace(/[‡†]/g,''),score:num(r[1].text)!,
         link: r[0].text.includes('‡') ? 'https://github.com/allenai/arc-solvers' : undefined}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

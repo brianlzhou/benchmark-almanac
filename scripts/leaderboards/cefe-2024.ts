@@ -15,9 +15,9 @@ const board: Leaderboard = {
     const table = markdownTables(source.split('## Overall')[1] ?? '')[0];
     if (table?.[0].join('|') !== 'Rank|Team Name|Track1|Track2|Track3|Overall|System report' || table.length < 11)
       throw new Error('Missing final CEFE standings');
-    return table.slice(1).map(([, model, t1, t2, t3, overall, report]) => {
+    return table.slice(1).map(([, model, t1, t2, t3, overall]) => {
       if (!model || !/^\d+(?:\.\d+)?$/.test(overall)) throw new Error('Invalid overall score');
-      const metrics: Record<string, number> = { systemReport: Number(report === 'Yes') };
+      const metrics: Record<string, number> = {};
       for (const [i, value] of [t1, t2, t3].entries()) {
         if (!/^\d+(?:\.\d+)?(?:\(b\))?$/.test(value)) throw new Error('Invalid track score');
         // The organizers substitute a baseline in the average when a team skips a track.

@@ -14,7 +14,7 @@ const board: Leaderboard = {
     latency: { name: 'First round latency', unit: 'seconds', better: 'lower' },
     mean: { name: 'Mean success rate', unit: '%', better: 'higher' },
     pass3: { name: 'Three-round pass rate', unit: '%', better: 'higher' },
-    totalTokensPerTask: { name: 'First round tokens per task', unit: 'tokens' },
+    totalTokens: { name: 'First round total tokens', unit: 'tokens' },
     toolCalls: { name: 'First round tool calls', unit: 'count' },
     round1: { name: 'Round 1 success rate', unit: '%', better: 'higher' },
     round2: { name: 'Round 2 success rate', unit: '%', better: 'higher' },

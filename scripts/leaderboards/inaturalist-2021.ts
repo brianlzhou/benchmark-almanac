@@ -7,7 +7,9 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://www.sota2.com/research/sota/image-classification-on-inaturalist-2021';
 type Entry = {methodName: string, primaryMetricValue: number, metricValues: Record<string, number>,
-  inferenceConfig: Record<string, string | number>};
+  inferenceConfig: Record<string, string | number>, reportPaperPublishedAt?: string | null,
+  methodOriginPaperPublishedAt?: string | null, methodOriginImplementationUrl?: string | null,
+  methodOriginGithubRepo?: string | null};
 export default {
   benchmark: 'inaturalist-2021', host: 'SOTA2 Research', url: feed, feed,
   terms: 'SOTA2 credits the reporting papers at ' + feed,
@@ -23,7 +25,11 @@ export default {
       const {backbone, ...config} = row.inferenceConfig;
       const settings = Object.entries(config).filter(([,v]) => v !== '-').map(([k,v]) => k + ': ' + v);
       if (backbone) settings.unshift(row.methodName);
-      return {model: String(backbone || row.methodName), score, setting: settings.join(', ') || undefined};
+      const rawDate = (row.reportPaperPublishedAt ?? row.methodOriginPaperPublishedAt)?.slice(0, 10);
+      const date = rawDate && /^\d{4}-\d\d-\d\d$/.test(rawDate) ? rawDate : undefined;
+      const repo = row.methodOriginGithubRepo;
+      const link = row.methodOriginImplementationUrl || (repo ? (/^https?:\/\//.test(repo) ? repo : 'https://github.com/' + repo) : undefined);
+      return {model: String(backbone || row.methodName), score, setting: settings.join(', ') || undefined, date, link};
     }), 82);
   },
 } satisfies Leaderboard;

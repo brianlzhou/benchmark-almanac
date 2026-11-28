@@ -57,6 +57,7 @@ function literalToJson(s: string): string {
 
 const board: Leaderboard = {
   benchmark: 'frontier-design-benchmark',
+  costPer: 'run',
   url: PAGE,
   feed: `${FEED} (window.FDB_OURS.models)`,
   terms: 'robots.txt allows the site. Contra Labs states no data license. Results are credited to Contra Labs and BenchFlow.',
@@ -74,6 +75,7 @@ const board: Leaderboard = {
         model: m.name,
         score: m.elo,
         ...(m.ci ? { low: m.elo - m.ci, high: m.elo + m.ci } : {}),
+        ...(typeof m.cost === 'number' && Number.isFinite(m.cost) && m.cost > 0 ? { cost: m.cost } : {}),
         metrics: {
           ...(Number.isFinite(m.win) ? { winRate: m.win! } : {}),
           ...(Number.isFinite(m.winLo) ? { winRateLow: m.winLo!, winRateHigh: m.winHi! } : {}),

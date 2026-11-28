@@ -56,7 +56,7 @@ const board: Leaderboard = {
         const value = entry.byCategory?.[key]?.accuracy;
         if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value * 100;
       }
-      return { model, score: entry.accuracy * 100, date: '2026-10-06', metrics };
+      return { model, score: entry.accuracy * 100, date: '2026-10-06', cost: entry.costPer1k / 1000, metrics };
     });
   },
 };

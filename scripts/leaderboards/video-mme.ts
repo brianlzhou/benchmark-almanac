@@ -16,6 +16,13 @@ const board: Leaderboard = {
     medium: { name: 'Medium', group: 'Length' },
     long: { name: 'Long', group: 'Length' },
   },
+  stats: {
+    languageModelParamsB: { name: 'Language model parameters', unit: 'billions' },
+    experts: { name: 'MoE experts', unit: 'count' },
+    paramsPerExpertB: { name: 'Parameters per expert', unit: 'billions' },
+    frames: { name: 'Sampled frames', unit: 'count' },
+    framesPerSecond: { name: 'Frame sampling rate', unit: 'score', note: 'Frames sampled per second.' },
+  },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, Overall without and with subtitles)`,
   terms: 'Static GitHub Pages site that states no terms; the scores are cited to the Video-MME team.',

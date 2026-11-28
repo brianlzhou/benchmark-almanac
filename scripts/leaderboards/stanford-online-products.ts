@@ -17,7 +17,8 @@ const board: Leaderboard = {
       if (!model || (cells.length === 5 && cells[2] !== 'Stanford Online Products' && !/^\d\.\d+$/.test(cells[2]))) continue;
       if (!/^\d\.\d+$/.test(cells[1])) throw new Error('Model zoo CMC@1 missing for ' + model);
       const open = /\]\(https?:\/\//.test(cells[3] ?? '') ? true : undefined;
-      rows.push({model, score: Number((Number(cells[1]) * 100).toFixed(3)), setting: '224 x 224', open});
+      const link = cells[4]?.match(/\]\((https?:\/\/[^)]+)\)/)?.[1] ?? cells[3]?.match(/\]\((https?:\/\/[^)]+)\)/)?.[1];
+      rows.push({model, score: Number((Number(cells[1]) * 100).toFixed(3)), setting: '224 x 224', open, link});
     }
     return checked(rows, 23);
   },
