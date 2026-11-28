@@ -6,6 +6,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
+import { withKaggle } from '../lib/boards/kaggle.ts';
 
 const FEED = 'https://raw.githubusercontent.com/scicode-bench/scicode-bench.github.io/main/docs/leaderboard.md';
 
@@ -56,4 +57,19 @@ const board: Leaderboard = {
     return rows;
   },
 };
-export default board;
+export default withKaggle(board, {
+  owner: 'open-benchmarks',
+  slug: 'scicode',
+  task: 'SciCode Main Standard',
+  scale: 100,
+  extra: {
+    subproblem: { task: 'SciCode Subproblem Standard', scale: 100 },
+    mainWithBackground: { task: 'SciCode Main With Background', scale: 100 },
+    subproblemWithBackground: { task: 'SciCode Subproblem With Background', scale: 100 },
+  },
+  // only Kaggle's runs give the model the scientists' background text, so these are its own measures, not parts
+  stats: {
+    mainWithBackground: { name: 'Main problems with background', unit: '%', better: 'higher' },
+    subproblemWithBackground: { name: 'Subproblems with background', unit: '%', better: 'higher' },
+  },
+});

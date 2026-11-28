@@ -15,6 +15,10 @@ const board: Leaderboard = {
   url: 'https://tatsu-lab.github.io/alpaca_eval/',
   feed: `${FEED} (length_controlled_winrate, all submission groups)`,
   terms: 'CSV in the tatsu-lab/alpaca_eval repository, which is Apache-2.0.',
+  stats: {
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    length: { name: 'Average output length', unit: 'count', note: 'Average output length in characters.' },
+  },
   aliases: {
     // "(MM/DD)" names the API snapshot
     'GPT-4 Omni (05/13)': 'gpt-4o-may-2024',

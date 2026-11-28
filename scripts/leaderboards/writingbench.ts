@@ -71,6 +71,14 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/WritingBench/WritingBench',
   feed: `${FEED} (Overall)`,
   terms: 'Workbook in the WritingBench/WritingBench Hugging Face Space, licensed Apache-2.0.',
+  stats: {
+    style_R: { name: 'Style queries (all criteria)', unit: 'score', better: 'higher', note: 'Mean score on style-related queries across all criteria.' },
+    style_C: { name: 'Style queries (style criteria only)', unit: 'score', better: 'higher', note: 'Mean score on style-related queries over style-specific criteria.' },
+    format_R: { name: 'Format queries (all criteria)', unit: 'score', better: 'higher', note: 'Mean score on format-related queries across all criteria.' },
+    format_C: { name: 'Format queries (format criteria only)', unit: 'score', better: 'higher', note: 'Mean score on format-related queries over format-specific criteria.' },
+    length_R: { name: 'Length queries (all criteria)', unit: 'score', better: 'higher', note: 'Mean score on length-related queries across all criteria.' },
+    length_C: { name: 'Length queries (length criteria only)', unit: 'score', better: 'higher', note: 'Mean score on length-related queries over length-specific criteria.' },
+  },
   aliases: {
     // the plain names are the first releases: the board lists the later snapshots under their own dated names
     'deepseek-r1': 'deepseek-r1',
@@ -108,7 +116,7 @@ const board: Leaderboard = {
       }
       const metrics: Record<string, number> = {};
       for (const [key, cell] of Object.entries(r)) {
-        if (!cell.trim() || !Number.isFinite(Number(cell)) || ['Overall', 'Model', 'Organization'].includes(key)) continue;
+        if (!cell.trim() || !Number.isFinite(Number(cell)) || ['Overall', 'Model', 'Organization', 'Count'].includes(key)) continue;
         metrics[key] = Number(cell);
         const domain = key.match(/^Domain([12])_(.+)$/);
         if (domain) (board.parts ??= {})[key] = { name: domain[2], group: domain[1] === '1' ? 'Domain' : 'Writing task' };

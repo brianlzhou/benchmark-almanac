@@ -11,7 +11,10 @@ const feed = 'https://raw.githubusercontent.com/shubhangithub/collusionguard/HEA
 const board: Leaderboard = {
   benchmark: 'neural-activation-reading-for-collusion-benchmark', url: repo + '/blob/HEAD/' + report, feed,
   terms: 'MIT license. ' + repo + '/blob/HEAD/LICENSE',
-  stats: { contextDelta: { name: 'Context receiver operating characteristic difference', unit: 'score', note: 'Difference between full-context and legacy-context ablation AUROC.' } },
+  stats: {
+    contextDelta: { name: 'Context receiver operating characteristic difference', unit: 'score', note: 'Difference between full-context and legacy-context ablation AUROC.' },
+    parseFailures: { name: 'Parse failures', unit: 'count', better: 'lower' },
+  },
   aliases: { 'Llama-3.1-70B-Instruct': 'llama-3-1-70b' },
   async fetch() {
     const text = await fetchText(feed);

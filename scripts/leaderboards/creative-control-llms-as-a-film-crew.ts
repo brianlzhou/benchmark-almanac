@@ -8,6 +8,15 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/chenlufried/creative-control-llms-as-a-film-crew',
   feed: kaggleFeed('chenlufried', 'creative-control-llms-as-a-film-crew'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('chenlufried', 'creative-control-llms-as-a-film-crew', "(Overall)", 1),
+  parts: {
+    creativeControlA: 'Creative control A',
+    creativeControlB: 'Creative control B',
+    cameraStorytelling: 'Camera storytelling',
+  },
+  fetch: () => kaggleRowsWithBounds('chenlufried', 'creative-control-llms-as-a-film-crew', "(Overall)", 1, {
+    creativeControlA: { task: 'creative_control_a' },
+    creativeControlB: { task: 'creative_control_b' },
+    cameraStorytelling: { task: 'camera_storytelling' },
+  }),
 };
 export default board;

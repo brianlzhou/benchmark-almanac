@@ -9,13 +9,13 @@ const board: Leaderboard = {
  benchmark: "robogate", url: "https://github.com/liveplex-cpu/robogate-leaderboard", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  stats: {
-  scenariosTotal: { name: 'Scenarios', unit: 'count' },
+  scenariosPassed: { name: 'Scenarios passed', unit: 'count', better: 'higher' },
   graspMissRate: { name: 'Grasp miss rate', unit: '%', better: 'lower' },
   latency: { name: 'Inference latency', unit: 'seconds', better: 'lower' },
  },
 
  async fetch() {
-const d=await fetchJson<any>(FEED);return d.policies.filter((r:any)=>typeof r.success_rate==='number').map((r:any)=>({model:r.model.startsWith('octo-')?r.model+' [policy variant]':r.model,score:r.success_rate*100,setting:d.suite+'; real-inference protocol',date:r.run_date??undefined,metrics:{scenariosPassed:r.scenarios_pass,scenariosTotal:r.scenarios_total,graspMissRate:r.grasp_miss_rate*100,...(typeof r.inference_avg_ms==='number'?{latency:r.inference_avg_ms/1000}:{})}}));
+const d=await fetchJson<any>(FEED);return d.policies.filter((r:any)=>typeof r.success_rate==='number').map((r:any)=>({model:r.model.startsWith('octo-')?r.model+' [policy variant]':r.model,score:r.success_rate*100,setting:d.suite+'; real-inference protocol',date:r.run_date??undefined,metrics:{scenariosPassed:r.scenarios_pass,graspMissRate:r.grasp_miss_rate*100,...(typeof r.inference_avg_ms==='number'?{latency:r.inference_avg_ms/1000}:{})}}));
  },
 };
 export default board;

@@ -20,15 +20,27 @@ const board: Leaderboard = {
     'LLaVA-NeXT-34B': 'llava-v1-6-34b',
     'Claude3-Opus': 'claude-3-opus',
   },
+  parts: {
+    math: 'Math',
+    physics: 'Physics',
+  },
   async fetch() {
     const all = mdTables(await fetchText(FEED));
     const t = all.find((x) => /full benchmark/i.test(x.heading));
     if (!t) throw new Error('full benchmark table not found');
     const iAvg = t.head.findIndex((h) => /^avg/i.test(h));
+    const iMath = t.head.findIndex((h) => /^math$/i.test(h));
+    const iPhysics = t.head.findIndex((h) => /^physics$/i.test(h));
     const rows: LeaderboardRow[] = [];
     for (const r of t.rows) {
       const score = Number(r[iAvg]);
-      if (r[0] && Number.isFinite(score)) rows.push({ model: r[0], score, setting: 'Full benchmark' });
+      if (!r[0] || !Number.isFinite(score)) continue;
+      const metrics: Record<string, number> = {};
+      const math = iMath >= 0 ? Number(r[iMath]) : NaN;
+      const physics = iPhysics >= 0 ? Number(r[iPhysics]) : NaN;
+      if (Number.isFinite(math)) metrics.math = math;
+      if (Number.isFinite(physics)) metrics.physics = physics;
+      rows.push({ model: r[0], score, setting: 'Full benchmark', ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

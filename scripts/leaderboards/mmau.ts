@@ -41,7 +41,8 @@ export async function mmauRows(file: string): Promise<LeaderboardRow[]> {
         if (value !== undefined && !(category === 'Avg' && split === 'Test-mini')) metrics[category + '_' + split] = value;
       }
     }
-    rows.push({ metrics, open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: e.info.link?.startsWith('https://github.com/') ? e.info.link : undefined, model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
+    const link = e.info.link?.trim();
+    rows.push({ metrics, open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: link && /^https?:\/\/\S+$/.test(link) ? link : undefined, model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
   }
   return rows;
 }
@@ -49,7 +50,13 @@ export async function mmauRows(file: string): Promise<LeaderboardRow[]> {
 const board: Leaderboard = {
   benchmark: 'mmau',
   parts: {
-    'Sound_Test-mini': 'Sound', 'Music_Test-mini': 'Music', 'Speech_Test-mini': 'Speech',
+    'Sound_Test-mini': { name: 'Sound', group: 'Test-mini split' },
+    'Music_Test-mini': { name: 'Music', group: 'Test-mini split' },
+    'Speech_Test-mini': { name: 'Speech', group: 'Test-mini split' },
+    Avg_Test: { name: 'Average', group: 'Test split' },
+    Sound_Test: { name: 'Sound', group: 'Test split' },
+    Music_Test: { name: 'Music', group: 'Test split' },
+    Speech_Test: { name: 'Speech', group: 'Test split' },
   },
   url: MMAU_PAGE,
   feed: `${MMAU_PAGE}leaderboard_data.json (Avg, test-mini)`,

@@ -21,6 +21,11 @@
       "permanent": true
     },
     {
+      "source": "/benchmarks/kradleverse/",
+      "destination": "/benchmarks/kradlebench/",
+      "permanent": true
+    },
+    {
       "source": "/reporting/",
       "destination": "/insights/reporting/",
       "permanent": true
@@ -31,6 +36,17 @@
         {
           "type": "host",
           "value": "benchmarks.brianzhou.org"
+        }
+      ],
+      "destination": "https://www.benchmarkalmanac.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "benchmark-almanac.vercel.app"
         }
       ],
       "destination": "https://www.benchmarkalmanac.com/$1",

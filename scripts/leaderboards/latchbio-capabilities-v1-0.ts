@@ -20,22 +20,37 @@ interface Row {
 
 const board: Leaderboard = {
   benchmark: 'latchbio-capabilities-v1-0',
+  harnesses: 'system',
+  reference: ['Pi'],
   url: 'https://benchmarks.bio/results/v1/',
   feed: `${FEED} (capabilitiesLeaderboard)`,
   terms: 'JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.',
   stats: {
     benchmarksCovered: { name: 'Benchmarks covered', unit: 'count' },
-    benchmarksPossible: { name: 'Benchmarks possible', unit: 'count' },
   },
   parts: {
+    spatialbench: { name: 'SpatialBench', group: 'Multiomics' },
+    'spatialbench-long': { name: 'SpatialBench-Long', group: 'Multiomics' },
+    scbench: { name: 'scBench', group: 'Multiomics' },
+    'scbench-long': { name: 'scBench-Long', group: 'Multiomics' },
+    epibench: { name: 'EpiBench', group: 'Multiomics' },
+    variantbench: { name: 'VariantBench', group: 'Multiomics' },
+    metagenomics: { name: 'MetagenomicsBench', group: 'Multiomics' },
+    'txbench-ab': { name: 'TxBench-Antibody-Discovery', group: 'Therapeutics' },
+    'txbench-pp': { name: 'TxBench-Preclinical-Pharmacology', group: 'Therapeutics' },
+    'txbench-od': { name: 'TxBench-Oligo-Discovery', group: 'Therapeutics' },
     'txbench-abdev': { name: 'TxBench-Antibody-Development', group: 'Therapeutics' },
+    'biosecbench-surveillance': { name: 'BioSecBench-Surveillance', group: 'Biosecurity' },
+    functionbench: { name: 'BioSecBench-Function', group: 'Biosecurity' },
     'biosecbench-respvirus-surveillance': { name: 'BioSecBench-RespiratoryVirus-Surveillance', group: 'Biosecurity' },
     'biosecbench-respvirus-countermeasures': { name: 'BioSecBench-RespiratoryVirus-Countermeasures', group: 'Biosecurity' },
-    rarediseasebench: { name: 'RareDiseaseBench', group: 'Applications' },
-    tissuemicroscopybench: { name: 'TissueMicroscopyBench', group: 'Bioscience' },
-    neurosciencebench: { name: 'NeuroscienceBench', group: 'Bioscience' },
     'biosecbench-refusal': { name: 'BioSecBench-Refusal', group: 'Biosecurity' },
     'biosecbench-structure': { name: 'BioSecBench-Structure', group: 'Biosecurity' },
+    oncologybench: { name: 'OncologyBench', group: 'Applications' },
+    rarediseasebench: { name: 'RareDiseaseBench', group: 'Applications' },
+    tissuemicroscopybench: { name: 'TissueMicroscopyBench', group: 'Bioscience' },
+    cellmicroscopybench: { name: 'CellMicroscopyBench', group: 'Bioscience' },
+    neurosciencebench: { name: 'NeuroscienceBench', group: 'Bioscience' },
   },
   aliases: {
     // the only Nemotron 3 Ultra in the registry (550B total, 55B active)
@@ -44,9 +59,6 @@ const board: Leaderboard = {
   async fetch() {
     const data = await fetchJson<{ resultVersion?: string; benchmarks: {id: string; label: string; category: string; assessment: string; excludeFromOverall: boolean}[]; capabilitiesLeaderboard: Row[] }>(FEED);
     if (data.resultVersion && data.resultVersion !== 'v1') throw new Error(`unexpected result version ${data.resultVersion}`);
-    board.parts = Object.fromEntries(data.benchmarks
-      .filter(b => b.assessment === 'capabilities' && !b.excludeFromOverall)
-      .map(b => [b.id, {name: b.label, group: b.category}]));
     const rows: LeaderboardRow[] = [];
     for (const r of data.capabilitiesLeaderboard) {
       if (typeof r.overallScorePct !== 'number') continue;
@@ -54,7 +66,6 @@ const board: Leaderboard = {
       const coverage = r.benchmarkCoverage?.match(/^(\d+)\/(\d+)$/);
       if (coverage) {
         metrics.benchmarksCovered = Number(coverage[1]);
-        metrics.benchmarksPossible = Number(coverage[2]);
       }
       rows.push({
         model: r.model.replace(/\*+$/, '').trim(),

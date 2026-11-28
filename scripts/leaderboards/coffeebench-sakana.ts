@@ -21,6 +21,13 @@ const board: Leaderboard = {
   benchmark:'coffeebench-sakana',static:'paper',url,feed:replay+' and '+url,costPer:'run',
   terms:'The authors publish the replay at https://pub.sakana.ai/coffeebench/trajectories.html and list the paper license at https://arxiv.org/abs/2606.16613.',
   headline:'The score is Roaster A’s mean 90-day net income in simulated dollars.',
+  stats:{
+    revenue:{name:'Revenue',unit:'score',better:'higher',note:'Mean 90-day revenue in simulated dollars.'},
+    margin:{name:'Profit margin',unit:'%',better:'higher'},
+    actions:{name:'Actions',unit:'count',note:'Mean coffee commands other than wait_for_next_day.'},
+    dms:{name:'Direct messages',unit:'count',note:'Mean inter-agent messages sent.'},
+    llmCalls:{name:'LLM calls',unit:'count',note:'Mean calls to the model API.'},
+  },
   async fetch() {
     const old = await fetchJson<{agent_under_eval:string,day_axis:number[],models:{display:string,cum_net_income:number[]}[]}>(replay);
     if (old.agent_under_eval !== 'roaster_A' || old.day_axis.length !== 90 || old.day_axis.some((day,i) => day !== i)) throw new Error('Invalid 90-day series');

@@ -8,14 +8,25 @@ import { numberCell, paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttle
 const feed = 'https://arxiv.org/html/2310.12815';
 const models = ['GPT-4','PaLM 2 text-bison-001','GPT-3.5-Turbo','Bard','Vicuna-33b-v1.3','Flan-UL2',
   'Llama-2-13b-chat','Vicuna-13b-v1.3','Llama-2-7b-chat','InternLM-chat-7b'];
+const TASKS = [
+  'Duplicate sentence detection', 'Grammar correction', 'Hate detection',
+  'Natural language inference', 'Sentiment analysis', 'Spam detection', 'Summarization',
+];
+const PARTS: NonNullable<Leaderboard['parts']> = Object.fromEntries(
+  TASKS.flatMap((t, i) => TASKS.map((inj, j) => [
+    'target' + (i + 1) + 'Injected' + (j + 1),
+    { name: t + ' / ' + inj, unit: '%' as const, better: 'lower' as const },
+  ])),
+);
 const board: Leaderboard = {
   benchmark: 'open-prompt-injection', static: 'paper', url: feed, feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { "Llama-2-13b-chat": "llama-2-13b", "Llama-2-7b-chat": "llama-2-7b" },
   headline: 'The headline is mean attack success value across 49 task pairs, expressed as a percentage. Lower values indicate better resistance.',
+  parts: PARTS,
+  stats: { matchRate: { name: 'Matching rate', unit: '%', better: 'lower', note: 'Mean agreement between attacked output and direct injected-task output across 49 task pairs.' } },
   async fetch() {
     const paper = await paperHtml(feed);
     const rows: LeaderboardRow[] = [];
-    const parts: NonNullable<Leaderboard['parts']> = {};
     for (const [i, model] of models.entries()) {
       const id = i === 0 ? 'S6.T5' : 'A1.T' + (11+i);
       const figure = paper.split('<figure id="' + id + '"')[1]?.split('</figure>')[0];
@@ -28,7 +39,6 @@ const board: Leaderboard = {
           const col = 2 + 3*j;
           if (table[2][col] !== 'ASV' || table[2][col+1] !== 'MR') throw Error('Metric columns changed');
           const key = 'target' + (target+1) + 'Injected' + (j+1);
-          parts[key] = { name: row[0] + ' / ' + table[1][col], unit: '%', better: 'lower' };
           metrics[key] = 100 * numberCell(row[col]);
           asv += metrics[key];
           matchRate += 100 * numberCell(row[col+1]);
@@ -37,7 +47,6 @@ const board: Leaderboard = {
       metrics.matchRate = matchRate / 49;
       rows.push({ model, score: asv/49, setting: 'Combined Attack', metrics });
     }
-    board.parts = parts;
     return checked(rows, 10);
   },
 };

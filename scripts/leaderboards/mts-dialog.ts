@@ -9,6 +9,15 @@ const URL = 'https://aclanthology.org/2023.eacl-main.168.pdf';
 const board: Leaderboard = {
   benchmark: 'mts-dialog', static: 'paper', url: 'https://aclanthology.org/2023.eacl-main.168/', feed: URL,
   terms: 'ACL Anthology paper, available under its published license: https://aclanthology.org/info/license/',
+  stats: {
+    rouge2: { name: 'ROUGE-2 F1', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    rougeL: { name: 'ROUGE-L F1', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    factCore: { name: 'MedCon core factuality', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    factFull: { name: 'MedCon full factuality', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    bertScoreM1: { name: 'BERTScore M1', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    bertScoreM2: { name: 'BERTScore M2', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    bleurt20: { name: 'BLEURT-20', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+  },
   async fetch() {
     const text = await pdfText(URL);
     if (!text.includes('Table 7: Evaluation of the summarization models')) throw new Error('MTS-Dialog Table 7 missing');

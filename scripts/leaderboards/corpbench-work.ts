@@ -77,6 +77,8 @@ board.stats = {
   medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' },
   medianInputTokens: { name: 'Median input tokens', unit: 'tokens' },
   avgDurationSeconds: { name: 'Average duration', unit: 'seconds', better: 'lower' },
+  providerFailureRate: { name: 'Provider failure rate', unit: 'score', better: 'lower', note: 'Fraction of runs with provider failures, from 0 to 1.' },
+  providerFailures: { name: 'Provider failures', unit: 'count', better: 'lower' },
   scoredRuns: { name: 'Scored runs', unit: 'count' },
   allVariantsPassRate: { name: 'All variants pass rate', unit: 'score', better: 'higher', note: 'Fraction of workflow variants that passed, from 0 to 1.' },
   costPerSuccessfulWorkflow: { name: 'Cost per successful workflow', unit: 'usd', better: 'lower' },

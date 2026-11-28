@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "gdpval-mm",
+ static: 'paper',
  url: "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

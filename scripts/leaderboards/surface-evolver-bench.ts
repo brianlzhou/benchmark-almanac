@@ -13,13 +13,12 @@ const board: Leaderboard = {
   stats: {
     passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
     totalTokens: { name: 'Total tokens', unit: 'tokens' },
-    runs: { name: 'Runs', unit: 'count' },
   },
   chart: {"title": "Surface Evolver score versus cost", "x": {"key": "cost", "label": "Mean cost per task", "unit": "$", "better": "lower"}, "y": {"key": "score", "label": "Mean score", "unit": "%", "better": "higher"}},
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const s=await fetchText(FEED);const d=jsonAfter<any>(s,'<script id="chart-data" type="application/json">');
-      return d.models.map((r:any)=>({model:r.key.replace(/\s*\([^)]*\)$/,''),setting:r.key.match(/\(([^)]*)\)$/)?.[1],score:r.mean_score*100,cost:r.mean_total_cost_usd,metrics:{passRate:r.pass_rate*100,cost:r.mean_total_cost_usd,totalTokens:r.mean_total_tokens,runs:r.runs}}));
+      return d.models.map((r:any)=>({model:r.key.replace(/\s*\([^)]*\)$/,''),setting:r.key.match(/\(([^)]*)\)$/)?.[1],score:r.mean_score*100,cost:r.mean_total_cost_usd,metrics:{passRate:r.pass_rate*100,totalTokens:r.mean_total_tokens}}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

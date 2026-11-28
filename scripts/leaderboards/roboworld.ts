@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "Public results published by the benchmark authors at gym-anything.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
   stats: {
+    'Test Success': { name: 'Test success rate', unit: '%', better: 'higher' },
     'Easier Success': { name: 'Easier subset success rate', unit: '%', better: 'higher' },
     'Easier subset Arms': { name: 'Easier subset arms success rate', unit: '%', better: 'higher' },
     'Easier subset Mobile': { name: 'Easier subset mobile success rate', unit: '%', better: 'higher' },

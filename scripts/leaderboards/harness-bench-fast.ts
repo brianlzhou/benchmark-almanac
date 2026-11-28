@@ -11,7 +11,7 @@ const board: Leaderboard = {
   benchmark: 'harness-bench-fast', url: repo + '/blob/' + revision + '/README.md#results', feed,
   terms: 'MIT License, AI Forever. ' + repo + '/blob/' + revision + '/LICENSE',
   harnesses: 'system',
-  stats: { passed: { name: 'Passed tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' } },
+  stats: { passed: { name: 'Passed tasks', unit: 'count' } },
   async fetch() {
     const source = await fetchText(feed);
     const header = '| # | Date | Runner | Model | Harness adapt | Result | % |';
@@ -26,7 +26,7 @@ const board: Leaderboard = {
       if (!pass || !value) throw new Error('Unexpected v0.3.0 result');
       const [model, detail] = label.split(' (');
       const setting = ['v0.3.0', detail?.replace(/\)$/, ''), 'Harness adaptation: ' + adaptation].filter(Boolean).join(', ');
-      rows.push({ model, harness, setting, date, score: Number(value[1]), metrics: { passed: Number(pass[1]), tasks: 231 } });
+      rows.push({ model, harness, setting, date, score: Number(value[1]), metrics: { passed: Number(pass[1]) } });
     }
     return checked(rows, 18);
   },

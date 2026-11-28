@@ -13,8 +13,23 @@ const SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1
 /** CSV lines split into cells; the sheet has no quoted commas in the rows read here. */
 const cells = (line: string) => line.split(',').map((c) => c.trim());
 
+const ENV_COLS = [
+  ['alfworld', 'ALFWorld'],
+  ['db', 'DB'],
+  ['kg', 'KG'],
+  ['os', 'OS'],
+  ['webshop', 'WebShop'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'agentbench-fc',
+  parts: {
+    alfworld: { name: 'ALFWorld', group: 'Environment' },
+    db: { name: 'DB', group: 'Environment' },
+    kg: { name: 'KG', group: 'Environment' },
+    os: { name: 'OS', group: 'Environment' },
+    webshop: { name: 'WebShop', group: 'Environment' },
+  },
   url: `${SHEET}/pubhtml`,
   feed: `${SHEET}/pub?output=csv (AVG)`,
   terms: 'Published Google Sheet linked from the THUDM/AgentBench README (Apache-2.0); docs.google.com robots.txt allows /spreadsheet paths.',
@@ -31,6 +46,7 @@ const board: Leaderboard = {
     const head = lines.findIndex((r) => r.includes('AVG'));
     if (head < 0) throw new Error('AVG column not found');
     const iAvg = lines[head].indexOf('AVG');
+    const envIdx = ENV_COLS.map(([key, col]) => [key, lines[head].indexOf(col)] as const).filter(([, i]) => i >= 0);
     const rows: LeaderboardRow[] = [];
     for (const r of lines.slice(head + 1)) {
       const name = r[0];
@@ -39,7 +55,17 @@ const board: Leaderboard = {
       const thinking = / Thinking\b/.test(name);
       const alias = name.replace(/ Thinking\b/, '');
       const model = /\(\d{4}-\d{2}-\d{2}\)$/.test(alias) && !board.aliases?.[alias] ? alias.replace(/\s*\(\d{4}-\d{2}-\d{2}\)$/, '') : alias;
-      rows.push({ model, score, setting: thinking ? 'thinking' : undefined });
+      const metrics: Record<string, number> = {};
+      for (const [key, i] of envIdx) {
+        const v = num(r[i]);
+        if (v !== undefined) metrics[key] = v;
+      }
+      rows.push({
+        model,
+        score,
+        setting: thinking ? 'thinking' : undefined,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },

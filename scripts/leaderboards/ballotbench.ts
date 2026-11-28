@@ -4,10 +4,11 @@ import { fetchText } from "../lib/util.ts";
 
 const board: Leaderboard = {
   benchmark: "ballotbench",
+  harnesses: 'system',
   url: "https://ballotbench.com",
   feed: "https://ballotbench.com",
   terms: "BallotBench disallows crawlers during forecasting. The public election page credits Thoughtful Lab and specifies no separate score license.",
-  stats: { called:{name:'Called races',unit:'count'}, favoriteWon:{name:'Favorite won',unit:'count'} },
+  stats: { favoriteWon:{name:'Favorite won',unit:'count'} },
   async fetch() {
     const page = await fetchText(this.url);
     const state = JSON.parse(page.match(/<script id="election-data" type="application\/json">([\s\S]*?)<\/script>/)?.[1] || '');
@@ -35,7 +36,7 @@ const board: Leaderboard = {
         if (forecast.every((p, j) => j === winner || p < forecast[winner])) favoriteWon++;
         called++;
       }
-      if (called) rows.push({ model: agent.label, harness: agent.harness, score: total / called, metrics: { called, favoriteWon } });
+      if (called) rows.push({ model: agent.label, harness: agent.harness, score: total / called, metrics: { favoriteWon } });
     }
     if (rows.length < 9) throw new Error('Missing BallotBench forecasters');
     return rows;

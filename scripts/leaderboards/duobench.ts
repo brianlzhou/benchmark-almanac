@@ -11,10 +11,10 @@ const board: Leaderboard = {
   terms: 'The authors publish these simulation results at https://duobench.github.io/.',
   headline: 'The project reports no overall score, so the headline averages the success rates on its 11 simulation tasks.',
   stats: Object.fromEntries([
-    'Hinge-Chest Final progress', 'Spring-Door Final progress', 'Spring-Door: box + door pass rate',
-    'Pour-Marbles Final progress', 'Carry-Pot Final progress', 'Carry-Pot: grasp + lift pass rate',
-    'Ball-Maze Final progress', 'Ball-Maze: ball to goal pass rate', 'Block-Balance Final progress',
-    'Join-Blocks Final progress', 'Transfer-Cube Final progress', 'Transfer-Cube: pick cube pass rate',
+    'Hinge-Chest Final progress', 'Hinge-Chest: cube + lid pass rate', 'Hinge-Chest: lid or cube pass rate', 'Spring-Door Final progress', 'Spring-Door: box + door pass rate',
+    'Pour-Marbles Final progress', 'Pour-Marbles: pour all pass rate', 'Carry-Pot Final progress', 'Carry-Pot: grasp + lift pass rate',
+    'Ball-Maze Final progress', 'Ball-Maze: ball to goal pass rate', 'Block-Balance Final progress', 'Block-Balance: grasp rects pass rate',
+    'Join-Blocks Final progress', 'Join-Blocks: connect pass rate', 'Transfer-Cube Final progress', 'Transfer-Cube: pick cube pass rate',
     'Transfer-Gate Final progress', 'Transfer-Gate: pick box pass rate', 'Transfer-Reorient Final progress',
     'Transfer-Reorient: insert pass rate', 'Bin-Sort Final progress', 'Bin-Sort: pick 2nd pass rate',
   ].map(key => [key, { name: key, unit: 'score', better: 'higher', note: 'Success or progress value from 0 to 1.' }])),
@@ -36,8 +36,8 @@ const board: Leaderboard = {
         const stage = row[3+3*i].text.match(/^(.+) \(([\d.]+)\)$/);
         if (!match || !/^\d+\.\d+$/.test(progress) || !stage) throw new Error('Invalid DuoBench data for ' + task);
         metrics[task] = Number(match[1]);
-        metrics[task + ' Low'] = Number(match[2]);
-        metrics[task + ' High'] = Number(match[3]);
+        metrics[task + 'Low'] = Number(match[2]);
+        metrics[task + 'High'] = Number(match[3]);
         metrics[task + ' Final progress'] = Number(progress);
         metrics[task + ': ' + stage[1] + ' pass rate'] = Number(stage[2]);
         sum += metrics[task];

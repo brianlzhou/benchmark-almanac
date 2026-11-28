@@ -7,6 +7,8 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://benchmarks.bio/benchmarks/scbench/latest.json";
 const board: Leaderboard = {
  benchmark: "scbench-latchbio-singlecellbench",
+ harnesses: 'system',
+ reference: ['Pi'],
  url: "https://benchmarks.bio/scbench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
@@ -15,7 +17,7 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const data=await fetchJson<{resultVersion:string;dataUpdatedAt:string;results:{model:string;harness:string;scorePct:number;modelVariant?:string|null}[]}>(FEED);
   const rows:LeaderboardRow[]=data.results.filter(r=>typeof r.scorePct==='number').map(r=>({model:r.model.replace(/\*$/,''),harness:r.harness,score:r.scorePct,
-    setting:`published ${data.resultVersion}${r.modelVariant?'; '+r.modelVariant:''}`,date:data.dataUpdatedAt}));
+    setting:`published ${data.resultVersion}${r.modelVariant?', '+r.modelVariant:''}`,date:data.dataUpdatedAt}));
   return rows;
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

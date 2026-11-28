@@ -24,7 +24,6 @@ const board: Leaderboard = {
     grocery_bench: { name: 'Grocery', group: 'Task type' },
     product_bench: { name: 'Product', group: 'Task type' },
   },
-  stats: { turns:{name:'Turns scored',unit:'count'} },
   url: "https://audioarena.ai/leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
@@ -44,9 +43,6 @@ const board: Leaderboard = {
       const rates=groups.map(rs=>rs.reduce((s:number,r:any)=>s+(r.passRate??0),0)/rs.length);
       const metrics:Record<string,number>=Object.fromEntries(scenarios.map((k,i)=>[k,rates[i]]));
       const selected=groups.flat();
-      if (selected.every(r=>Number.isFinite(r.turnsScored))) {
-        metrics.turns=groups.reduce((sum,rs)=>sum+rs.reduce((s:number,r:any)=>s+r.turnsScored,0)/rs.length,0)/6;
-      }
       for (const [key,denom] of Object.entries({toolUse:'toolUseDenom', instructionFollowing:'turnsScored',
         kbGrounding:'turnsScored', stateTracking:'stateTrackingDenom', ambiguityHandling:'ambiguityDenom'})) {
         const total=selected.reduce((s,r)=>s+(denom==='turnsScored' ? r.turnsScored??0 : r.scores?.[denom]??0),0);

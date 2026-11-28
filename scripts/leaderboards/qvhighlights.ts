@@ -15,7 +15,7 @@ export default {
   return checked(t.slice(3).flatMap(r=>{
    const score=num(r[1]);if(score===undefined)return [];
    const metrics:Record<string,number>={};
-   keys.forEach((k,i)=>{const n=num(r[i+2]);if(n!==undefined)metrics[k]=n;const sd=num(r[i+2]?.split('\\pm')[1]);if(sd!==undefined)metrics[k+'Stddev']=sd;});
+   keys.forEach((k,i)=>{const n=num(r[i+2]);if(n!==undefined)metrics[k]=n;const sd=num(r[i+2]?.split('\\pm')[1]);if(sd!==undefined)metrics[k+'Std']=sd;});
    const sd=num(r[1].split('\\pm')[1]);if(sd!==undefined)metrics.std=sd;
    return [{model:r[0].replace(' w/ PT',''),score,trials:r[0].startsWith('Moment-DETR')?5:undefined,setting:r[0].includes('w/ PT')?'HowTo100M pretraining':'paper default',metrics}];
   }),3);

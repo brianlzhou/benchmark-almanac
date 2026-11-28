@@ -7,6 +7,7 @@ const feed = "https://cdn.prod.website-files.com/668c00971d3dfeff704769f4/6a963f
 
 const board: Leaderboard = {
   benchmark: "long-horizon-freight-auditbench-challenge",
+  static: 'paper',
   url: "https://www.loop.com/article/introducing-the-long-horizon-auditbench-for-supply-chain-ai",
   feed,
   terms: "Loop reserves all rights. Its article reports relative inference costs. https://www.loop.com/article/introducing-the-long-horizon-auditbench-for-supply-chain-ai The robots.txt request returned 403.",

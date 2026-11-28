@@ -10,6 +10,10 @@ const board: Leaderboard = {
   benchmark: 'hm3dsem-walks', url: 'https://hovsg.github.io/', feed, static: 'paper',
   terms: 'The authors publish Table V at https://arxiv.org/abs/2403.17846.',
   parts: { room: 'Object and room', floor: 'Object, room and floor' },
+  stats: {
+    floorNavigation: { name: 'Object, room and floor navigation success rate', unit: '%', better: 'higher' },
+    roomNavigation: { name: 'Object and room navigation success rate', unit: '%', better: 'higher' },
+  },
   headline: 'The paper gives no overall retrieval success rate, so this is the plain mean across its two query types.',
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>
@@ -23,7 +27,6 @@ const board: Leaderboard = {
         const row = cells.find(r => r[0] === query);
         if (!row || row.length !== 5) throw new Error('Missing query type for ' + label);
         metrics[key] = numberCell(row[3]);
-        metrics[key + 'MeanTrialsPerScene'] = numberCell(row[2]);
         if (row[4] !== '-') metrics[key + 'Navigation'] = numberCell(row[4]);
       }
       return { model: label.replace(' (ours)', ''), metrics, score: (metrics.floor + metrics.room) / 2 };

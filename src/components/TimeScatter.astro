@@ -20,6 +20,9 @@ export interface Pt {
   harness?: string | null;
   low?: number | null;
   high?: number | null;
+  /** The benchmark and the run's facts, so a board that adds another source's runs names it on hover. */
+  benchmark?: string;
+  info?: { source?: string };
 }
 
 interface Props {

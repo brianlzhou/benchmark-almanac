@@ -20,14 +20,29 @@ const board: Leaderboard = {
         const lines = h.split(/<br>/i).map(text).filter(Boolean);
         const name = lines[0]; if (!name) continue;
         const m = name.match(/^(.*?)\s*(?:\[([^\]]+)\])?$/)!;
-        for (const metric of ['refuse', 'permit']) {
-          const score = lines.find(l => l.startsWith(`BioTIER-${metric}:`))?.match(/:\s*([\d.]+)%/)?.[1];
-          if (score === undefined) continue;
+        const scores: Record<'refuse' | 'permit', number | undefined> = {
+          refuse: Number(lines.find(l => l.startsWith('BioTIER-refuse:'))?.match(/:\s*([\d.]+)%/)?.[1]),
+          permit: Number(lines.find(l => l.startsWith('BioTIER-permit:'))?.match(/:\s*([\d.]+)%/)?.[1]),
+        };
+        const evaluated = lines.find(l => l.startsWith('Evaluated:'))?.slice(10).trim();
+        const stamp = evaluated ? Date.parse(evaluated + ' UTC') : NaN;
+        const date = Number.isFinite(stamp) ? new Date(stamp).toISOString().slice(0, 10) : undefined;
+        for (const metric of ['refuse', 'permit'] as const) {
+          const score = scores[metric];
+          if (!Number.isFinite(score)) continue;
+          const other = metric === 'refuse' ? scores.permit : scores.refuse;
           const setting = [`BioTIER-${metric}`, m[2]].filter(Boolean).join('; ');
-          const evaluated = lines.find(l => l.startsWith('Evaluated:'))?.slice(10).trim();
-          const stamp = metric === 'permit' && evaluated ? Date.parse(evaluated + ' UTC') : NaN;
-          const date = Number.isFinite(stamp) ? new Date(stamp).toISOString().slice(0, 10) : undefined;
-          out.set(`${name}:${metric}`, {model: identity(m[1].trim()), score: Number(score), setting, ...(date ? { date } : {}), ...sbFacts(lines, `BioTIER-${metric}`)});
+          const metrics: Record<string, number> | undefined = Number.isFinite(other)
+            ? (metric === 'refuse' ? { permitRate: other! } : { refuseRate: other! })
+            : undefined;
+          out.set(`${name}:${metric}`, {
+            model: identity(m[1].trim()),
+            score: score!,
+            setting,
+            ...(date ? { date } : {}),
+            ...(metrics ? { metrics } : {}),
+            ...sbFacts(lines, `BioTIER-${metric}`),
+          });
         }
       }
     }

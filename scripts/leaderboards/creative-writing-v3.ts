@@ -161,6 +161,8 @@ const board: Leaderboard = {
     elo: { name: 'Elo rating', unit: 'elo', better: 'higher' },
     length: { name: 'Average response length', unit: 'count' },
     repetition: { name: 'Repetition score', unit: 'score', better: 'lower' },
+    vocabularyComplexity: { name: 'Vocabulary complexity', unit: 'score', better: 'higher' },
+    slopScore: { name: 'Slop score', unit: 'score', better: 'lower' },
   },
   url: 'https://eqbench.com/creative_writing.html',
   feed: `${eqbenchFeed('creative_writing.js', 'leaderboardDataCreativeWritingV3')} creative_writing_score x 5`,

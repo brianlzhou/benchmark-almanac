@@ -12,7 +12,6 @@ const board: Leaderboard = {
   terms: 'The benchmark repository publishes this release file under its MIT license. https://github.com/lgalabru/machine-trading/blob/main/LICENSE',
   stats: {
     reward: { name: 'Reward', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
-    tasks: { name: 'Tasks', unit: 'count' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const release = await fetchJson<Release>(feed);
@@ -27,7 +26,7 @@ const board: Leaderboard = {
         grouped.set(model, current);
       }
     }
-    const rows = [...grouped].map(([model, value]) => ({ model, score: value.skills.reduce((a, b) => a + b, 0) / value.skills.length, trials: value.trials, metrics: { reward: value.rewards.reduce((a, b) => a + b, 0) / value.rewards.length, tasks: value.skills.length } }));
+    const rows = [...grouped].map(([model, value]) => ({ model, score: value.skills.reduce((a, b) => a + b, 0) / value.skills.length, trials: value.trials, metrics: { reward: value.rewards.reduce((a, b) => a + b, 0) / value.rewards.length } }));
     if (rows.length < 2 || rows.some((row) => !Number.isFinite(row.score))) throw new Error('Machine Trading release rows missing');
     return rows;
   },

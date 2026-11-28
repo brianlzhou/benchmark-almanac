@@ -7,7 +7,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 
 const feed = 'https://raw.githubusercontent.com/SKYLENAGE-AI/SWE-CI/HEAD/docs/result.png';
 const board: Leaderboard = {
-  benchmark: 'swe-ci', url: 'https://github.com/SKYLENAGE-AI/SWE-CI#leaderboard', feed,
+  benchmark: 'swe-ci', static: 'paper', url: 'https://github.com/SKYLENAGE-AI/SWE-CI#leaderboard', feed,
   terms: 'The makers publish the benchmark under Apache 2.0. https://huggingface.co/datasets/skylenage-ai/SWE-CI',
   headline: 'EvoScore at gamma = 1, read from the leaderboard chart to the nearest percentage point.',
   aliases: { 'QWen3-Max-2026-01-23': 'qwen3-max-jan-2026' },

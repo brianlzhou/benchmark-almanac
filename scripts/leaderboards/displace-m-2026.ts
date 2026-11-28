@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark:'displace-m-2026',url:paper,feed,terms:'The authors publish Figure 2 and Tables 1 and 2 at https://arxiv.org/abs/2603.02813. Source licensing applies.',
   parts:{der:{name:'Speaker diarization',unit:'%',better:'lower'},tcpWer:{name:'Automatic speech recognition (tcpWER)',unit:'%',better:'lower'},
     topicRougeL:{name:'Topic identification (ROUGE-L)',unit:'score',better:'higher'},summaryRougeL:{name:'Dialogue summarization (ROUGE-L)',unit:'score',better:'higher'}},
+  stats:{cer:{name:'Character error rate',unit:'%',better:'lower'},wer:{name:'Word error rate',unit:'%',better:'lower'},topicRouge1:{name:'Topic identification (ROUGE-1)',unit:'score',better:'higher'}},
   async fetch() {
     const svg = await paperHtml(feed);
     const labels = [...svg.matchAll(/<use data-text="([^"]+)"[^>]+transform="matrix\(16\.313542,-7\.607129,/g)].map(m=>m[1]).join('');

@@ -14,7 +14,7 @@ const board: Leaderboard = {
   benchmark: 'reponormbench', url, feed,
   terms: 'SYSUSELab publishes the leaderboard under the MIT license. ' + url + '/blob/main/LICENSE',
   stats: {
-    functionalPass: { name: 'Functional passes', unit: 'count' }, jointPass: { name: 'Joint passes', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' }, functionalSubsetMicro: { name: 'Functional subset micro score', unit: '%', better: 'higher' },
+    functionalPass: { name: 'Functional passes', unit: 'count' }, jointPass: { name: 'Joint passes', unit: 'count' }, functionalSubsetMicro: { name: 'Functional subset micro score', unit: '%', better: 'higher' },
     overallMicro: { name: 'Overall micro score', unit: '%', better: 'higher' }, overallCoverage: { name: 'Overall coverage', unit: '%', better: 'higher' }, overallTasks: { name: 'Overall tasks', unit: 'count' },
     contributionMicro: { name: 'Contribution micro score', unit: '%', better: 'higher' }, contributionCoverage: { name: 'Contribution coverage', unit: '%', better: 'higher' }, contributionTasks: { name: 'Contribution tasks', unit: 'count' },
     prompt_omittedMicro: { name: 'Prompt-omitted micro score', unit: '%', better: 'higher' }, prompt_omittedCoverage: { name: 'Prompt-omitted coverage', unit: '%', better: 'higher' }, prompt_omittedTasks: { name: 'Prompt-omitted tasks', unit: 'count' },
@@ -27,7 +27,7 @@ const board: Leaderboard = {
       const agents = new Set(Object.keys(entry.configuration_counts).map(id => data.configurations[id].agent));
       if (agents.size !== 1) throw new Error('Inconsistent harness');
       const metrics: Record<string, number> = {functionalPass: entry.functional_pass, joint: 100 * entry.joint_rate, jointPass: entry.joint_pass,
-        tasks: entry.tasks, functionalSubsetMicro: 100 * entry.functional_subset.micro};
+        functionalSubsetMicro: 100 * entry.functional_subset.micro};
       for (const name of ['overall', 'contribution', 'prompt_omitted']) {
         const scope = entry.scopes[name];
         metrics[name] = 100 * scope.task_macro;

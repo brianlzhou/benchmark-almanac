@@ -10,7 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "Table 2 ranks human construction accuracy. The JSON contains individual judgments. The repository lists no license. ACL Anthology returned 404 for robots.txt.",
   stats: {
-    translations: { name: 'Translations', unit: 'count' }, evaluated: { name: 'Evaluated translations', unit: 'count' }, ratings: { name: 'Ratings', unit: 'count' },
+    evaluated: { name: 'Evaluated translations', unit: 'count' }, ratings: { name: 'Ratings', unit: 'count' },
     meaningPreserved: { name: 'Meaning preserved', unit: '%', better: 'higher' }, meaningWidth: { name: 'Meaning interval width', unit: '%' },
     translationAccuracy: { name: 'Translation accuracy', unit: '%', better: 'higher' }, translationWidth: { name: 'Translation interval width', unit: '%' },
   },
@@ -32,7 +32,7 @@ const board: Leaderboard = {
       const [meaningPreserved, meaningWidth] = interval(meaning);
       const [translationAccuracy, translationWidth] = interval(translation);
       if (!model || ![count, judged, ratings].every(v => /^\d+$/.test(v))) throw new Error('Missing rating counts');
-      return { model, score, low: score - width, high: score + width, metrics: { translations: Number(count), evaluated: Number(judged), ratings: Number(ratings),
+      return { model, score, low: score - width, high: score + width, metrics: { evaluated: Number(judged), ratings: Number(ratings),
         meaningPreserved, meaningWidth, translationAccuracy, translationWidth } };
     });
   },

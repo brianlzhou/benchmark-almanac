@@ -15,7 +15,10 @@ const board: Leaderboard = {
     const rows = table.slice(1).map(cells => {
       const model = cells[1].text.replace(/\s*☆ Uses extra data$/, '');
       if (!/^\d+(?:\.\d+)?$/.test(cells[2].text)) throw Error('Invalid accuracy for ' + model);
-      return { model, score: Number(cells[2].text), setting: cells[1].text.endsWith('Uses extra data') ? 'Uses extra data' : undefined };
+      const code = cells[7]?.html.match(/href="(https?:\/\/[^"]+)"/i)?.[1];
+      const paper = cells[6]?.html.match(/href="(\/[^"]+)"/i)?.[1];
+      const link = code ?? (paper ? `https://scholarcompass.net${paper.replaceAll('&amp;', '&')}` : undefined);
+      return { model, score: Number(cells[2].text), setting: cells[1].text.endsWith('Uses extra data') ? 'Uses extra data' : undefined, ...(link ? { link } : {}) };
     });
     return checked(rows, 2);
   },

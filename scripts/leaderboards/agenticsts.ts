@@ -15,6 +15,10 @@ const board: Leaderboard = {
   terms:'The agent code uses Apache 2.0. https://github.com/AlayaLab/AgenticSTS/blob/HEAD/AgenticSTS/LICENSE',
   stats: {
     meanScore: { name: 'Mean score', unit: 'score', better: 'higher' },
+    meanFloor: { name: 'Mean floor', unit: 'score', better: 'higher' },
+    medianFloor: { name: 'Median floor', unit: 'score', better: 'higher' },
+    bosses: { name: 'Bosses defeated', unit: 'count', better: 'higher' },
+    meanDecisions: { name: 'Mean decisions per run', unit: 'count' },
   },
   async fetch() {
     const readme = (await fetchText(feed)).replaceAll('**','');

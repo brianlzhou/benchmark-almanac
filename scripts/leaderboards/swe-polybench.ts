@@ -13,6 +13,7 @@ const TAB = 'leaderboard-Full';
 
 const board: Leaderboard = {
   benchmark: 'swe-polybench',
+  harnesses: 'system',
   parts: {
     Java: { name: 'Java', group: 'Language' },
     Python: { name: 'Python', group: 'Language' },

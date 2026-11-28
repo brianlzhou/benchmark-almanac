@@ -12,6 +12,8 @@ const board: Leaderboard = {
   terms: "The organizers claim copyright on the results page. The paper permits academic access to the dataset. https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom The competition host returns 404 for robots.txt.",
   stats: {
     recallAt1: { name: 'Recall at 1', unit: 'score', better: 'higher', note: 'Fraction of queries whose correct object is ranked first, stored from 0 to 1.' },
+    recallAt5: { name: 'Recall at 5', unit: 'score', better: 'higher', note: 'Fraction of queries whose correct object is ranked in the top 5, stored from 0 to 1.' },
+    recallAt10: { name: 'Recall at 10', unit: 'score', better: 'higher', note: 'Fraction of queries whose correct object is ranked in the top 10, stored from 0 to 1.' },
   },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Team|R@1|R@5|R@10|MRR');

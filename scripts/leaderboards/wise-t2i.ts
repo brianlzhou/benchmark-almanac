@@ -31,7 +31,6 @@ const board: Leaderboard = {
   "feed": FEED,
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
-  stats: { samples: { name: 'Samples', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const data = markdownTables(source);
@@ -45,10 +44,8 @@ const board: Leaderboard = {
         model = model.replace(/ \(w\/ CoT\)$/, '');
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
         const row: LeaderboardRow = { model: identity(model), score: value * 1 };
-        row.setting = 'WISE_Verified' + (/w\/ CoT/.test(r[1]) ? '; CoT' : '');
+        row.setting = 'WISE_Verified' + (/w\/ CoT/.test(r[1]) ? ', CoT' : '');
         row.metrics = {};
-        const samples = numeric(r[t[0].indexOf('Samples')]);
-        if (samples !== undefined) row.metrics.samples = samples;
         { const n = numeric(r[3]); if (n !== undefined) row.metrics["culture"] = n; }
         { const n = numeric(r[4]); if (n !== undefined) row.metrics["time"] = n; }
         { const n = numeric(r[5]); if (n !== undefined) row.metrics["space"] = n; }

@@ -10,7 +10,7 @@ const board: Leaderboard = {
  url: "https://cg-bench.github.io/leaderboard/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { publishedTableRank: { name: 'Published table rank', unit: 'count' }, llmParams: { name: 'Language model parameters', unit: 'billions' }, clueFrames: { name: 'Clue frames', unit: 'count' }, longFrames: { name: 'Long-video frames', unit: 'count' }, clueAccuracy: { name: 'Clue accuracy', unit: '%', better: 'higher' }, longAccuracy: { name: 'Long-video accuracy', unit: '%', better: 'higher' }, mIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' }, recallAtIoU: { name: 'Recall at intersection over union', unit: '%', better: 'higher' }, accuracyAtIoU: { name: 'Accuracy at intersection over union', unit: '%', better: 'higher' }, CRR: { name: 'Correct response rate', unit: '%', better: 'higher' }, openEndedAccuracy: { name: 'Open-ended accuracy', unit: '%', better: 'higher' } },
+ stats: { clueAccuracy: { name: 'Clue accuracy', unit: '%', better: 'higher' }, mIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' }, recallAtIoU: { name: 'Recall at intersection over union', unit: '%', better: 'higher' }, accuracyAtIoU: { name: 'Accuracy at intersection over union', unit: '%', better: 'higher' }, CRR: { name: 'Correct response rate', unit: '%', better: 'higher' }, openEndedAccuracy: { name: 'Open-ended accuracy', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
@@ -18,11 +18,8 @@ const board: Leaderboard = {
   if(!t)throw new Error('CG-Bench leaderboard missing');
   return t.slice(2).filter(r=>num(r[6]?.text)!==undefined).map(r=>({model:r[1].text,score:num(r[6].text)!,
     params:/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? parseFloat(r[2].text) : undefined,
-    setting:`long MCQ; params=${r[2].text}; clue frames=${r[3].text}; long frames=${r[4].text}`,
-    metrics:{publishedTableRank:num(r[0].text)!, ...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParams:parseFloat(r[2].text)} : {}),
-      ...(/^\d+$/.test(r[3].text) ? {clueFrames:Number(r[3].text)} : {}),
-      ...(/^\d+$/.test(r[4].text) ? {longFrames:Number(r[4].text)} : {}),
-      ...Object.fromEntries(['clueAccuracy' ,'longAccuracy','mIoU','recallAtIoU','accuracyAtIoU','CRR','openEndedAccuracy'].map((h,i)=>[h,num(r[i+5]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))}
+    setting:`long MCQ, params=${r[2].text}, clue frames=${r[3].text}, long frames=${r[4].text}`,
+    metrics:Object.fromEntries(([['clueAccuracy',5],['mIoU',7],['recallAtIoU',8],['accuracyAtIoU',9],['CRR',10],['openEndedAccuracy',11]] as const).map(([h,i]):[string,number|undefined]=>[h,num(r[i]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))
   }));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

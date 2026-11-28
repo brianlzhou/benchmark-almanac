@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "answer-factuality-perplexity",
+ static: 'paper',
  url: "https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

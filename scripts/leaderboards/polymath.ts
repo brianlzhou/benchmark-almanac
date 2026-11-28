@@ -10,8 +10,15 @@ import { num, tables } from '../lib/html.ts';
 
 const PAGE = 'https://qwen-polymath.github.io/';
 
+const LANGUAGES: Record<string, string> = {
+  en: 'English', zh: 'Chinese', ar: 'Arabic', bn: 'Bangla', de: 'German', es: 'Spanish',
+  fr: 'French', id: 'Indonesian', it: 'Italian', ja: 'Japanese', ko: 'Korean', ms: 'Malay',
+  pt: 'Portuguese', ru: 'Russian', sw: 'Swahili', te: 'Telugu', th: 'Thai', vi: 'Vietnamese',
+};
+
 const board: Leaderboard = {
   benchmark: 'polymath',
+  parts: Object.fromEntries(Object.entries(LANGUAGES).map(([code, name]) => [code, { name, group: 'Language' }])),
   url: PAGE,
   feed: `${PAGE} (static HTML table, Overall)`,
   terms: 'Static GitHub Pages site that states no license or terms; the PolyMath dataset card on Hugging Face is Apache-2.0.',
@@ -34,8 +41,6 @@ const board: Leaderboard = {
     const head = t?.[0]?.map((c) => c.text);
     if (!head || head[1] !== 'Model' || head[3] !== 'Overall') throw new Error(`unexpected PolyMath header: ${head?.join(' | ')}`);
     const languages = head.slice(4, -1);
-    const names = new Intl.DisplayNames(['en'], { type: 'language' });
-    board.parts = Object.fromEntries(languages.map(code => [code, { name: names.of(code) ?? code, group: 'Language' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const score = num(r[3]?.text);

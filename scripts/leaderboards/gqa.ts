@@ -25,6 +25,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   stats: {
+    grounding: { name: 'Grounding', unit: '%', better: 'higher', note: 'Visual attention grounding on question-relevant regions.' },
     validity: { name: 'Validity', unit: '%', better: 'higher', note: 'Answers that fall within the question scope.' },
     plausibility: { name: 'Plausibility', unit: '%', better: 'higher', note: 'Answers that are reasonable for the question subject.' },
     consistency: { name: 'Consistency', unit: '%', better: 'higher', note: 'Accuracy over questions entailed by correctly answered questions.' },

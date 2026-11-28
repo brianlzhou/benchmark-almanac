@@ -43,8 +43,6 @@ const board: Leaderboard = {
         if(resolution) {metrics.width=Number(resolution[1]);metrics.height=Number(resolution[2]);}
         metrics.fps=num(info[4])!;
         metrics.videoSeconds=num(info[6])!;
-        metrics.motionControl=Number(info[8]==='✅');
-        metrics.cameraControl=Number(info[9]==='✅');
       }
       const detail=scores.get(key(r));
       if(details && detail) for(let i=2;i<details[0].length;i++) {

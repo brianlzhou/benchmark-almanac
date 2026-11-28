@@ -26,14 +26,16 @@ export async function code3dRows(agent = false): Promise<LeaderboardRow[]> {
     const parts = m.display_name.split(' · ');
     const metrics: Record<string, number> = {};
     for (const [key, value] of Object.entries(m)) {
-      if (key !== 'id' && typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+      if (key !== 'id' && key !== 'bt_elo_combined' && typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
     }
-    if (typeof m.bt_elo_combined_lo === 'number') metrics.ciLow = m.bt_elo_combined_lo;
-    if (typeof m.bt_elo_combined_hi === 'number') metrics.ciHigh = m.bt_elo_combined_hi;
+    const low = typeof m.bt_elo_combined_lo === 'number' && Number.isFinite(m.bt_elo_combined_lo) ? m.bt_elo_combined_lo : undefined;
+    const high = typeof m.bt_elo_combined_hi === 'number' && Number.isFinite(m.bt_elo_combined_hi) ? m.bt_elo_combined_hi : undefined;
+    if (low !== undefined) metrics.ciLow = low;
+    if (high !== undefined) metrics.ciHigh = high;
     const cost = costs.get(m.display_name);
     if (cost !== undefined) metrics.listPriceCostPerQuery = cost;
     rows.push({ model: agent ? parts[0].replace(/^Fable /, 'Claude Fable ') : m.slug, score: m.bt_elo_combined,
-      ...(agent ? { harness: parts.slice(1).join(' · ') } : {}), ...(cost !== undefined ? { cost } : {}), metrics });
+      ...(agent ? { harness: parts.slice(1).join(' · ') } : {}), ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}), ...(cost !== undefined ? { cost } : {}), metrics });
   }
   if (!rows.length) throw new Error('3DCodeArena ratings missing');
   return rows;

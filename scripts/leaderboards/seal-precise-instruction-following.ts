@@ -9,7 +9,7 @@ import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFe
 function interval(e: ScaleEntry) {
   const half = Number((e as ScaleEntry & { confidenceInterval_upper?: number }).confidenceInterval_upper);
   const score = Number(e.score);
-  return half > 0 ? { metrics: { ciLow: score - half, ciHigh: score + half } } : undefined;
+  return half > 0 ? { low: score - half, high: score + half, metrics: { ciLow: score - half, ciHigh: score + half } } : undefined;
 }
 
 const PAGE = scaleUrl('instruction_following');

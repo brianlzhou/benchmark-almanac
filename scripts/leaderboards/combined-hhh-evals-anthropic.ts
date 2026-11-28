@@ -46,7 +46,6 @@ const board: Leaderboard = {
       ['non_embedding_params','nonEmbeddingParams'],['flop_matched_non_embedding_params','flopMatchedNonEmbeddingParams']]) {
       if (typeof d.model[source]==='number') metrics[key]=d.model[source];
     }
-    if (typeof d.model.decoding_params?.temperature==='number') metrics.temperature=d.model.decoding_params.temperature;
     rows.push({model: `${d.model.model_family} ${d.model.model_name}`, score: score * 100, setting: `${s.number_of_shots}-shot`,
       params:typeof d.model.total_params==='number' ? d.model.total_params/1e9 : undefined,link:f.download_url,metrics});
    }

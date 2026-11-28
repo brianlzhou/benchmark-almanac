@@ -45,8 +45,21 @@ function pct(v: string | undefined): number | undefined {
   return (parts.find((p) => p.mode === 'think') ?? parts.find((p) => p.mode === 'nothink') ?? parts[0])?.v;
 }
 
+const TRACK_KEYS: Record<string, string> = {
+  'WorkBuddyBench-Code': 'code',
+  'WorkBuddyBench-Web': 'web',
+  'WorkBuddyBench-Office': 'office',
+  'WorkBuddyBench-Security': 'security',
+};
+
 const board: Leaderboard = {
   benchmark: 'workbuddy-bench-tencent',
+  parts: {
+    code: { name: 'Code', group: 'Track' },
+    web: { name: 'Web', group: 'Track' },
+    office: { name: 'Office', group: 'Track' },
+    security: { name: 'Security', group: 'Track' },
+  },
   url: `${SITE}index.html`,
   feed: `${SITE}roster.js and ${SITE}data.js (core-track Avg per harness)`,
   terms: 'Static data scripts on workbuddybench.com, which has no robots.txt and publishes no terms of use.',
@@ -71,7 +84,20 @@ const board: Leaderboard = {
       for (const m of roster) {
         const vals = core.map((t) => pct(current.get(t.name)?.[h.field]?.[m.key])).filter((v): v is number => v !== undefined);
         if (!vals.length) continue;
-        rows.push({ model: m.label, trials: 3, open: m.type === 'open' ? true : m.type === 'proprietary' ? false : undefined, score: Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1)), harness: h.name });
+        const metrics: Record<string, number> = {};
+        for (const t of tracks) {
+          const key = TRACK_KEYS[t.name];
+          const v = key ? pct(current.get(t.name)?.[h.field]?.[m.key]) : undefined;
+          if (key && v !== undefined) metrics[key] = v;
+        }
+        rows.push({
+          model: m.label,
+          trials: 3,
+          open: m.type === 'open' ? true : m.type === 'proprietary' ? false : undefined,
+          score: Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1)),
+          harness: h.name,
+          metrics: Object.keys(metrics).length ? metrics : undefined,
+        });
       }
     }
     return rows;

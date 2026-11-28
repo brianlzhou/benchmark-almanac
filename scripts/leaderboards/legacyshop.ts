@@ -8,6 +8,17 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/iseoluwaolowogoke/legacyshop-can-an-ai-maintain-a-real-codebase',
   feed: kaggleFeed('iseoluwaolowogoke', 'legacyshop-can-an-ai-maintain-a-real-codebase'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('iseoluwaolowogoke', 'legacyshop-can-an-ai-maintain-a-real-codebase', "(Overall)", 1),
+  parts: {
+    repoBugfix: 'Repository bugfix',
+    memoryReasoning: 'Memory reasoning',
+    knowingWhenToAsk: 'Knowing when to ask',
+    complexityAnalysis: 'Complexity analysis',
+  },
+  fetch: () => kaggleRowsWithBounds('iseoluwaolowogoke', 'legacyshop-can-an-ai-maintain-a-real-codebase', "(Overall)", 1, {
+    repoBugfix: { task: 'repo_bugfix_v2', interval: true },
+    memoryReasoning: { task: 'memory_reasoning_v4', interval: true },
+    knowingWhenToAsk: { task: 'knowing_when_to_ask_repo_v4', interval: true },
+    complexityAnalysis: { task: 'complexity_analysis_repo_v5', interval: true },
+  }),
 };
 export default board;

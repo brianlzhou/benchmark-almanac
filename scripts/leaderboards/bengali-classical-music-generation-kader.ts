@@ -17,8 +17,6 @@ const board: Leaderboard = {
     adherence: { name: 'Adherence rating', unit: 'score', better: 'higher' },
     harmony: { name: 'Harmony rating', unit: 'score', better: 'higher' },
     genreAccuracy: { name: 'Genre accuracy', unit: '%', better: 'higher' },
-    samples: { name: 'Samples', unit: 'count' },
-    annotators: { name: 'Annotators', unit: 'count' },
   },
   async fetch() {
     const header = ["Model", "Structure", "Emotion", "Adherence", "Harmony", "Genre acc.", "Style acc."];
@@ -29,7 +27,7 @@ const board: Leaderboard = {
       if (values.length !== 6 || values.some(v => !v || !Number.isFinite(Number(v)))) throw new Error('Missing listening score');
       const [structure, emotion, adherence, harmony, genre, style] = values.map(Number);
       return { model, score: style * 100, setting: 'Level 3 prompts',
-        metrics: { structure, emotion, adherence, harmony, genreAccuracy: genre * 100, samples: 20, annotators: 3 } };
+        metrics: { structure, emotion, adherence, harmony, genreAccuracy: genre * 100 } };
     });
   },
 };

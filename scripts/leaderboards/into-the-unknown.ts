@@ -28,7 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://prometheus-eval.github.io/into-the-unknown/viewer/app.js";
 // The viewer publishes per-gate pass rates, median time per paper and a results route per model.
 const board: Leaderboard = {
-  stats: { almostPass: { name: 'Almost-pass rate', unit: '%', better: 'higher' }, integrity: { name: 'Integrity gate rate', unit: '%', better: 'higher' }, direction: { name: 'Direction gate rate', unit: '%', better: 'higher' }, papers: { name: 'Papers', unit: 'count' }, almostG1: { name: 'Almost-pass gate 1 rate', unit: '%', better: 'higher' }, almostG2: { name: 'Almost-pass gate 2 rate', unit: '%', better: 'higher' }, almostG3: { name: 'Almost-pass gate 3 rate', unit: '%', better: 'higher' }, medianHours: { name: 'Median hours per paper', unit: 'hours', better: 'lower' }, medianLatency: { name: 'Median latency per paper', unit: 'seconds', better: 'lower' } },
+  stats: { almostPass: { name: 'Almost-pass rate', unit: '%', better: 'higher' }, integrity: { name: 'Integrity gate rate', unit: '%', better: 'higher' }, direction: { name: 'Direction gate rate', unit: '%', better: 'higher' }, almostG1: { name: 'Almost-pass gate 1 rate', unit: '%', better: 'higher' }, almostG2: { name: 'Almost-pass gate 2 rate', unit: '%', better: 'higher' }, almostG3: { name: 'Almost-pass gate 3 rate', unit: '%', better: 'higher' }, medianHours: { name: 'Median hours per paper', unit: 'hours', better: 'lower' }, medianLatency: { name: 'Median latency per paper', unit: 'seconds', better: 'lower' } },
   parts: {
     strictG1: {name: 'Honesty', group: 'Strict gates'},
     strictG2: {name: 'Completeness', group: 'Strict gates'},
@@ -49,7 +49,7 @@ const board: Leaderboard = {
     return data.models.flatMap((model:any) => {
       const agent=data.leaderboard.agents.find((a:any)=>a.model===model.dir); if(!agent) return [];
       const count=(mode:string)=>data.leaderboard.submissions.filter((s:any)=>s.model===model.dir && ['G1','G2','G3'].every(k=>s[mode][k]===true)).length;
-      const metrics:Record<string,number>={almostPass:100*count('almost')/n, integrity:agent.R_integrity, direction:agent.R_direction, papers:n};
+      const metrics:Record<string,number>={almostPass:100*count('almost')/n, integrity:agent.R_integrity, direction:agent.R_direction};
       for (const mode of ['strict', 'almost']) {
         for (const gate of ['G1', 'G2', 'G3']) {
           const value = agent[mode]?.[gate];

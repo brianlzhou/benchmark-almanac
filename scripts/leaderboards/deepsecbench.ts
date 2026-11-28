@@ -13,14 +13,16 @@ const URL = 'https://vercel.com/ai-gateway/leaderboards/deepsecbench';
 
 const board: Leaderboard = {
   benchmark: 'deepsecbench',
+  harnesses: 'system',
+  reference: ['Pi'],
   url: URL,
   feed: `${URL} (server-rendered HTML table, Score)`,
   terms: 'Server-rendered public page; robots.txt allows /ai-gateway/leaderboards and the Vercel terms do not restrict reading it.',
   costPer: 'run',
-  stats: { recall: { name: 'Recall', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, fp: { name: 'False positives', unit: 'count', better: 'lower' }, tokensK: { name: 'Total tokens', unit: 'thousands', better: 'lower' }, time: { name: 'Total time', unit: 'seconds', better: 'lower' } },
+  stats: { recall: { name: 'Recall', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, fp: { name: 'False positives', unit: 'count', better: 'lower' }, tokensK: { name: 'Total tokens', unit: 'thousands', better: 'lower' }, runHours: { name: 'Total time', unit: 'hours', better: 'lower' } },
   chart: {
     title: 'Score vs. total time',
-    note: 'Each point is one model configuration; the Pareto frontier joins configurations that no other beats on both score and total time.',
+    note: 'Each point is one model configuration, and the Pareto frontier joins configurations that no other beats on both score and total time.',
     x: { key: 'runHours', label: 'Total time', unit: 'h', better: 'lower' },
     y: { key: 'score', label: 'Score', better: 'higher' },
   },
@@ -51,7 +53,6 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       for (const [k, v] of [['recall', at(iRecall)], ['precision', at(iPrecision)], ['fp', at(iFp)], ['runHours', iTime < 0 ? undefined : hours(r[iTime]?.text.trim())], ['tokensK', at(iTokens)]] as const)
         if (v !== undefined) metrics[k] = v;
-      if (metrics.runHours !== undefined) metrics.time = metrics.runHours * 3600;
       rows.push({ model: name, score, setting: effort?.toLowerCase(), harness: r[iHarness]?.text || undefined, cost: at(iCost), metrics });
     }
     return rows;

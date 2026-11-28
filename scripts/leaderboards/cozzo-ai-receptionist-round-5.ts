@@ -17,7 +17,6 @@ for (const industry of industries) {
   stats[industry + 'MedianReplyMs'] = { name: industry + ' median reply time', unit: 'ms', better: 'lower' };
   stats[industry + 'Replies'] = { name: industry + ' replies', unit: 'count' };
   stats[industry + 'InterruptionSeconds'] = { name: industry + ' interruption time', unit: 'seconds', better: 'lower' };
-  for (const key of (industry === 'Roofing' ? ['Quote', 'Booking', 'Readback', 'Triage', 'Afterhours'] : ['Quote', 'Booking', 'Triage', 'Afterhours'])) stats[industry + key + 'Calls'] = { name: industry + ' ' + key.toLowerCase() + ' calls', unit: 'count' };
 }
 const board: Leaderboard = {
   benchmark: 'cozzo-ai-receptionist-round-5', url: feed, feed, parts, harnesses: 'system',
@@ -50,8 +49,6 @@ const board: Leaderboard = {
             if (!ratio || !Number(ratio[2])) throw new Error('Invalid call outcome');
             const key = industry + label.replaceAll('-', '');
             metrics[key] = 100 * Number(ratio[1]) / Number(ratio[2]);
-            metrics[key + 'Calls'] = Number(ratio[2]);
-            parts[key] = { name: label, group: industry, unit: '%' };
           }
         }
       }

@@ -11,7 +11,7 @@ const parts: Record<string, BoardPart> = Object.fromEntries(['area','count','dir
 const questionFamilies = ['area','count','direction','distance','entity_name','length','location','raster_focal','raster_global','raster_local','raster_overall','raster_zonal'];
 const board: Leaderboard = {
   benchmark: 'gs-qa-2', url, feed, parts, harnesses: 'system',
-  stats: Object.fromEntries(questionFamilies.map(key => [key + 'Questions', { name: key.replaceAll('_', ' ') + ' questions', unit: 'count' }])),
+  stats: { parsedRecall: { name: 'Entity-name parsed recall', unit: '%', better: 'higher' } },
   terms: 'The authors provide these leaderboard results for reuse. https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard',
   async fetch() {
     const rows = new Map<string, LeaderboardRow>();
@@ -23,15 +23,13 @@ const board: Leaderboard = {
       const value = key === 'entity_name' ? r.parsed_f1 : r.accuracy;
       if (value == null || !Number.isFinite(value) || value < 0 || value > 1 || key in row.metrics!) throw new Error('Invalid group ' + key);
       row.metrics![key] = 100 * value;
-      row.metrics![key + 'Questions'] = r.n;
-      parts[key] = { name: key.replaceAll('_', ' '), unit: '%' };
       if (key === 'entity_name') {
         row.score = value * 100;
         if (r.parsed_recall !== null) row.metrics!.parsedRecall = r.parsed_recall * 100;
       }
       rows.set(r.system_label, row);
     }
-    for (const row of rows.values()) if (!('raster_overall' in row.metrics!) || Object.keys(row.metrics!).filter(k => k.endsWith('Questions')).length !== 12) throw new Error('Incomplete answer families');
+    for (const row of rows.values()) if (questionFamilies.some(k => !(k in row.metrics!))) throw new Error('Incomplete answer families');
     return checked([...rows.values()], 3);
   },
 };

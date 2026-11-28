@@ -6,7 +6,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://videosimpleqa.github.io/";
 const board: Leaderboard = {
- stats: { llmParamsB: { name: 'LLM parameters', unit: 'billions' }, correct: { name: 'Correct answers', unit: '%', better: 'higher' }, incorrect: { name: 'Incorrect answers', unit: '%', better: 'lower' }, notAttempted: { name: 'Not attempted', unit: '%', better: 'lower' }, correctGivenAttempted: { name: 'Correct given attempted', unit: '%', better: 'higher' }, fScore: { name: 'F score', unit: '%', better: 'higher' } },
+ stats: { correct: { name: 'Correct answers', unit: '%', better: 'higher' }, incorrect: { name: 'Incorrect answers', unit: '%', better: 'lower' }, notAttempted: { name: 'Not attempted', unit: '%', better: 'lower' }, correctGivenAttempted: { name: 'Correct given attempted', unit: '%', better: 'higher' } },
  benchmark: "video-simpleqa",
  parts: {
    engineering: { name: 'Engineering', group: 'Domain' },
@@ -27,7 +27,8 @@ const board: Leaderboard = {
     setting:'source release month '+r[3].text,
     date:/^\d{4}-\d{2}$/.test(r[3].text) ? r[3].text+'-01' : undefined,
     params:/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? Number.parseFloat(r[2].text) : undefined,
-    metrics:{...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParamsB:Number.parseFloat(r[2].text)} : {}), ...Object.fromEntries(['correct','incorrect','notAttempted','correctGivenAttempted','fScore','engineering','nature','socialCultureArts','societyActivities'].map((h,i)=>[h,num(r[i+4].text)!]))}
+    link:r[1].html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&'),
+    metrics:Object.fromEntries(([['correct',4],['incorrect',5],['notAttempted',6],['correctGivenAttempted',7],['engineering',9],['nature',10],['socialCultureArts',11],['societyActivities',12]] as const).map(([h,i])=>[h,num(r[i].text)!]))
   }));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

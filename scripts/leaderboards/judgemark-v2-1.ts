@@ -19,6 +19,11 @@ const board: Leaderboard = {
   terms: EQBENCH_TERMS,
   aliases: EQBENCH_ALIASES,
   costPer: 'run',
+  stats: {
+    stability: { name: 'Stability', unit: 'score', better: 'higher', note: 'Consistency of scores across repeated judging runs, from 0 to 1.' },
+    separability: { name: 'Separability', unit: 'score', better: 'higher', note: 'Ability to distinguish stronger writers from weaker ones, from 0 to 1.' },
+    humanCorr: { name: 'Human correlation', unit: 'score', better: 'higher', note: 'Correlation with human ratings, from 0 to 1.' },
+  },
   async fetch() {
     const js = await fetchText(`https://eqbench.com/${FILE}`);
     const at = js.search(new RegExp(`\\b${VARIABLE}\\s*=\\s*\``));
@@ -27,7 +32,20 @@ const board: Leaderboard = {
     const lines = js.slice(open, js.indexOf('`', open)).trim().split('\n');
     return lines
       .map((l) => l.split(','))
-      .map(([model, score, , , , cost]): LeaderboardRow => ({ model: (model ?? '').replace(/^\*/, '').trim(), score: parseFloat(score), link: `https://eqbench.com/results/judgemark-v2/charts/judgemark_3chart_${(model ?? '').replace(/^[*!]+/, '').replace(/\//g, '__').replace(/[^\w\-]/g, '-')}.png`, cost: num(cost) }))
+      .map(([model, score, stab, sep, corr, cost]): LeaderboardRow => {
+        const metrics: Record<string, number> = {};
+        const stability = parseFloat(stab), separability = parseFloat(sep), humanCorr = parseFloat(corr);
+        if (Number.isFinite(stability)) metrics.stability = stability;
+        if (Number.isFinite(separability)) metrics.separability = separability;
+        if (Number.isFinite(humanCorr)) metrics.humanCorr = humanCorr;
+        return {
+          model: (model ?? '').replace(/^\*/, '').trim(),
+          score: parseFloat(score),
+          link: `https://eqbench.com/results/judgemark-v2/charts/judgemark_3chart_${(model ?? '').replace(/^[*!]+/, '').replace(/\//g, '__').replace(/[^\w\-]/g, '-')}.png`,
+          cost: num(cost),
+          ...(Object.keys(metrics).length ? { metrics } : {}),
+        };
+      })
       .filter((r) => r.model && Number.isFinite(r.score));
   },
 };

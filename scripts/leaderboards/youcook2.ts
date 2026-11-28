@@ -12,6 +12,14 @@ const board:Leaderboard={benchmark:'youcook2',url:'https://github.com/LuoweiZhou
   'B@3': { name: 'BLEU-3 score', unit: 'score', better: 'higher' },
   'B@4': { name: 'BLEU-4 score', unit: 'score', better: 'higher' },
   M: { name: 'METEOR score', unit: 'score', better: 'higher' },
+  macroBleu3: { name: 'Macro BLEU-3 score', unit: 'score', better: 'higher' },
+  macroBleu4: { name: 'Macro BLEU-4 score', unit: 'score', better: 'higher' },
+  macroMeteor: { name: 'Macro METEOR score', unit: 'score', better: 'higher' },
+  macroCIDEr: { name: 'Macro CIDEr score', unit: 'score', better: 'higher' },
+  paragraphBleu4: { name: 'Paragraph BLEU-4 score', unit: 'score', better: 'higher' },
+  paragraphMeteor: { name: 'Paragraph METEOR score', unit: 'score', better: 'higher' },
+  paragraphCIDEr: { name: 'Paragraph CIDEr score', unit: 'score', better: 'higher' },
+  paragraphRepetition4: { name: 'Paragraph 4-gram repetition', unit: 'score', better: 'lower' },
  },
  async fetch():Promise<LeaderboardRow[]>{
   const s=(await fetchText(feed)).split('## Video Captioning')[1]?.split('## Dense Video Description')[0];

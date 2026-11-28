@@ -35,7 +35,7 @@ const board: Leaderboard = {
           || !(Number(run.test_cases) > 0)) throw new Error('Invalid Aider run');
       const metrics: Record<string, number> = {};
       for (const [key, value] of Object.entries(run)) {
-        if (typeof value === 'number' && key !== 'pass_rate_1') metrics[key === 'seconds_per_case' ? 'latency' : key] = value;
+        if (typeof value === 'number' && key !== 'pass_rate_1' && key !== 'commit_hash' && key !== 'test_timeouts') metrics[key === 'seconds_per_case' ? 'latency' : key] = value;
       }
       return { model: run.model, harness: 'aider', setting: String(run.edit_format), date: String(run.date),
         score: Number(run.pass_rate_1), cost: Number(run.total_cost) > 0 ? Number(run.total_cost) / Number(run.test_cases) : undefined, metrics };

@@ -19,7 +19,7 @@ const board: Leaderboard = {
         throw new Error('Invalid EduVideoBench leaderboard row');
       const metrics = Object.fromEntries(Object.keys(parts).map(key => [key, numberCell(row[key])]));
       return {model:row.model, setting:row.signal, score:numberCell(row.KSA),
-        metrics:{...metrics, blockRate:numberCell(row.block_rate), safetyGate:Number(row.safety_gate === 'PASS')}};
+        metrics:{...metrics, blockRate:numberCell(row.block_rate)}};
     });
     return checked(rows,10);
   },

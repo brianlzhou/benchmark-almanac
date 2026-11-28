@@ -29,7 +29,7 @@ const feed = "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Resul
 
 const board: Leaderboard = {
   benchmark: "jam-alt",
-  stats: { CER: { name: 'Character error rate', unit: '%', better: 'lower' }, WER: { name: 'Word error rate', unit: '%', better: 'lower' }, "WER'": { name: 'Word error rate, alternate', unit: '%', better: 'lower' }, 'F-score (P)': { name: 'F-score, phonetic', unit: '%', better: 'higher' }, 'F-score (L)': { name: 'F-score, lexical', unit: '%', better: 'higher' }, 'F-score (S)': { name: 'F-score, syllabic', unit: '%', better: 'higher' }, realTimeFactor: { name: 'Real-time factor', unit: 'score', better: 'lower' } },
+  stats: { CER: { name: 'Character error rate', unit: '%', better: 'lower' }, WER: { name: 'Word error rate', unit: '%', better: 'lower' }, "WER'": { name: 'Word error rate, alternate', unit: '%', better: 'lower' }, 'F-score (P)': { name: 'Punctuation F-score', unit: '%', better: 'higher' }, 'F-score (B)': { name: 'Parentheses F-score', unit: '%', better: 'higher' }, 'F-score (L)': { name: 'Line-break F-score', unit: '%', better: 'higher' }, 'F-score (S)': { name: 'Section-break F-score', unit: '%', better: 'higher' }, realTimeFactor: { name: 'Real-time factor', unit: 'score', better: 'lower' } },
   url: "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results#Jam-ALT",
   feed,
   terms: "The MIREX wiki lists GNU Free Documentation License 1.2 unless otherwise noted. https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results The robots.txt URL returns 404.",

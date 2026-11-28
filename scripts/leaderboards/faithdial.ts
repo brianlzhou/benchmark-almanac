@@ -10,6 +10,20 @@ const board: Leaderboard = {
   benchmark: 'faithdial', url: feed, feed, static: 'paper',
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2204.10757",
   headline: 'The headline is the Critic hallucination rate in Table 5, where a lower percentage is better.',
+  stats: {
+    'Q2 F1': { name: 'Q2 F1', unit: '%', better: 'higher' },
+    'Q2 NLI': { name: 'Q2 NLI', unit: '%', better: 'higher' },
+    BERTScore: { name: 'BERTScore', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    F1: { name: 'Token F1', unit: '%', better: 'higher' },
+    BLEU: { name: 'BLEU', unit: 'score', better: 'higher' },
+    ROUGE: { name: 'ROUGE', unit: 'score', better: 'higher' },
+    'Human: Interpretable': { name: 'Human interpretable rate', unit: '%', better: 'higher' },
+    'Human: Hallucination': { name: 'Human hallucination rate', unit: '%', better: 'lower' },
+    'Human: Cooperativeness': { name: 'Human cooperativeness', unit: 'score', better: 'higher', note: 'Likert scale from 1 to 4.' },
+    'Human: Abstractiveness': { name: 'Human abstractiveness', unit: 'score', better: 'higher', note: 'Likert scale from 1 to 4.' },
+    'Human: Engagingness': { name: 'Human engagingness', unit: 'score', better: 'higher', note: 'Likert scale from 1 to 4.' },
+    'Human: Generic': { name: 'Human generic response rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[0]?.[2]?.startsWith('Critic') && t[0]?.[5]?.startsWith('BERTScore'));
@@ -28,7 +42,6 @@ const board: Leaderboard = {
       const row = rows.find(r => r.model === model && r.setting === 'Trained on ' + dataset);
       if (!row || values.length !== 6) throw new Error('Unmatched human evaluation');
       humanMetrics.forEach((k,i) => {row.metrics!['Human: ' + k] = measure(values[i]);});
-      row.metrics!.humanResponses = 200;
     }
     return checked(rows,20);
   },

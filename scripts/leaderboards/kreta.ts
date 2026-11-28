@@ -11,8 +11,29 @@ import { ghRaw } from './big-bench-extra-hard.ts';
 const REPO = 'tabtoyou/KRETA';
 const FEED = ghRaw(REPO, 'README.md');
 
+const KRETA_COLS = [
+  ['system1', 'System1', 'System 1', 'Reasoning'],
+  ['system2', 'System2', 'System 2', 'Reasoning'],
+  ['gov', 'Gov.', 'Government', 'Domain'],
+  ['econ', 'Econ.', 'Economy', 'Domain'],
+  ['mktg', 'Mktg.', 'Marketing', 'Domain'],
+  ['comm', 'Comm.', 'Communication', 'Domain'],
+  ['edu', 'Edu.', 'Education', 'Domain'],
+  ['med', 'Med.', 'Medicine', 'Domain'],
+  ['tech', 'Tech.', 'Technology', 'Domain'],
+  ['arts', 'Arts.', 'Arts', 'Domain'],
+  ['transp', 'Transp.', 'Transportation', 'Domain'],
+  ['tour', 'Tour.', 'Tourism', 'Domain'],
+  ['fnb', 'FnB.', 'Food and beverage', 'Domain'],
+  ['ent', 'Ent.', 'Entertainment', 'Domain'],
+  ['life', 'Life.', 'Lifestyle', 'Domain'],
+  ['sci', 'Sci.', 'Science', 'Domain'],
+  ['hist', 'Hist.', 'History', 'Domain'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'kreta',
+  parts: Object.fromEntries(KRETA_COLS.map(([k, , name, group]) => [k, { name, group }])),
   url: `https://github.com/${REPO}`,
   feed: `${FEED} (Full Leaderboard, Overall)`,
   terms: 'README table in the tabtoyou/KRETA GitHub repository, which states no license; scores are cited to the KRETA authors.',
@@ -34,7 +55,10 @@ const board: Leaderboard = {
   async fetch() {
     const t = tables(await fetchText(FEED)).find((x) => x[0]?.[0]?.text === 'Models' && x[0].some((c) => c.text === 'Overall'));
     if (!t) throw new Error('KRETA full leaderboard not found');
-    const iScore = t[0].findIndex((c) => c.text === 'Overall');
+    const head = t[0].map((c) => c.text);
+    const iOpen = head.indexOf('Open-Source');
+    const iScore = head.indexOf('Overall');
+    const partIdx = KRETA_COLS.map(([k, col]) => [k, head.indexOf(col)] as const).filter(([, i]) => i >= 0);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       let model = r[0]?.text ?? '';
@@ -46,8 +70,24 @@ const board: Leaderboard = {
         date = `20${stamp[1]}-${stamp[2]}-${stamp[3]}`;
         model = model.slice(0, stamp.index);
       }
+      const pMatch = model.match(/\(([\d.]+)B\)/i);
+      const params = pMatch ? Number(pMatch[1]) : undefined;
       model = model.replace(/\s*\(([\d.]+B)\)/i, ' $1').trim();
-      rows.push({ model, score, date });
+      const openCell = iOpen >= 0 ? r[iOpen]?.text ?? '' : '';
+      const open = openCell.includes('✅') ? true : openCell.includes('✘') ? false : undefined;
+      const metrics: Record<string, number> = {};
+      for (const [k, i] of partIdx) {
+        const v = num(r[i]?.text);
+        if (v !== undefined) metrics[k] = v;
+      }
+      rows.push({
+        model,
+        score,
+        date,
+        open,
+        params,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },

@@ -11,13 +11,12 @@ const board: Leaderboard = {
   terms: 'OpenAI publishes the evaluation report under its site terms at https://openai.com/policies/terms-of-use/.',
   aliases: { 'GPT-4o (May 2024)': 'gpt-4o-may-2024', 'OpenAI o3': 'o3', 'GPT-5 Instant': 'gpt-5-chat',
     'GPT-5 Thinking': 'gpt-5', 'GPT-5.4 Thinking': 'gpt-5-4' },
-  stats: { graderSamples: { name: 'Grader samples per response', unit: 'count' } },
   async fetch() {
     const report = text(await fetchText(feed));
     const statement = report.match(/Overall compliance rates are (.*?)\.\s*Model Spec compliance/);
     if (!statement) throw new Error('Overall compliance results missing');
     const rows = [...statement[1].matchAll(/(\d+(?:\.\d+)?)%\s*\(([^)]+)\)/g)].map(([, value, label]) => ({
-      model: label === 'GPT-4o' ? 'GPT-4o (May 2024)' : label, score: Number(value), trials: 20, metrics: { graderSamples: 5 },
+      model: label === 'GPT-4o' ? 'GPT-4o (May 2024)' : label, score: Number(value), trials: 20,
     }));
     return checked(rows, 6);
   },

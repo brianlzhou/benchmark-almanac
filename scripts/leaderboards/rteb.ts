@@ -34,7 +34,6 @@ const board: Leaderboard = {
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
   stats: {
-    completedTasks: { name: 'Completed tasks', unit: 'count' }, totalTasks: { name: 'Total tasks', unit: 'count' },
     activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum context tokens', unit: 'tokens' },
     embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, zeroShotPct: { name: 'Zero-shot percentage', unit: '%' },
     opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' },
@@ -55,7 +54,7 @@ const board: Leaderboard = {
       const keyOf = (label: string) => label.replace(/^[A-Z]/, c => c.toLowerCase())
         .replace(/[^a-zA-Z0-9]+(.)?/g, (_, c: string | undefined) => c?.toUpperCase() ?? '');
       const result = data.rows.filter(r => Number.isFinite(r.meanTask) && data.tasks.every(task => Number.isFinite(r.scoresByTask?.[task]))).map(r => {
-        const metrics: Record<string, number> = {completedTasks: data.tasks.length, totalTasks: data.tasks.length};
+        const metrics: Record<string, number> = {};
         for (const [key, value] of Object.entries(r.scoresByTaskType)) {
           if (Number.isFinite(value)) metrics[key] = value * 100;
         }
@@ -78,7 +77,7 @@ const board: Leaderboard = {
         if (typeof r.meanPublic === 'number') addPart('Public', r.meanPublic, 'Split', 'meanPublic');
         if (typeof r.meanPrivate === 'number') addPart('Private', r.meanPrivate, 'Split', 'meanPrivate');
         return {
-          model: r.model.name, setting: 'RTEB beta; all tasks', score: r.meanTask * 100, metrics,
+          model: r.model.name, setting: 'RTEB beta, all tasks', score: r.meanTask * 100, metrics,
           params: r.totalParamsB ?? undefined, open: r.model.openWeights ?? undefined,
           license: r.model.license || undefined,
         };

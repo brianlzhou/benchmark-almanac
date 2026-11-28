@@ -74,12 +74,14 @@ function sourceOf(row: Record<string, string>): { name: string; link: string; no
 
 /**
  * Files whose rows name no source, where Epoch AI's own page for the benchmark says which public leaderboard it
- * copies ("We source results from the public ... leaderboard"), checked on 2026-11-11. APEX-Agents, ARC-AGI-2 and
- * HLE name none, so their rows stay 'unknown'.
+ * copies ("We source results from the public ... leaderboard"), checked on 2026-11-11. ARC-AGI-2 and HLE name none,
+ * so their rows stay 'unknown'. APEX-Agents names none either, but its rows equal Mercor's 1.1 board on every
+ * column (scripts/lib/epoch-mapping.ts, checked 2026-11-25), so it is that board's copy.
  */
 const FILE_SOURCE: Record<string, string> = {
   'ale_bench_external.csv': 'ALE-Bench leaderboard',
   'algotune_external.csv': 'AlgoTune leaderboard',
+  'apex_agents_external.csv': 'APEX-Agents leaderboard',
   'cl_bench_external.csv': 'CL-bench leaderboard',
   'cl_bench_life_external.csv': 'CL-bench Life leaderboard',
   'exploitbench_external.csv': 'ExploitBench leaderboard',

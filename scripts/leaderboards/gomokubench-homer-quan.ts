@@ -25,7 +25,7 @@ const board: Leaderboard = {
         throw new Error('Missing Gomoku result');
       const label = cells[0].match(/^(.+?) \(([^)]+)\)$/);
       return { model: label?.[1] ?? cells[0], setting: label?.[2], score, trials: wins + losses + draws,
-        metrics: { wins, losses, draws, winMoves, lossMoves } };
+        metrics: { losses, lossMoves } };
     });
   },
 };

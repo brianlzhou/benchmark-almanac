@@ -26,7 +26,8 @@ const board: Leaderboard = {
       row.trials = num(cell('Runs'));
       row.harness = 'HermesBridge';
       row.setting = 'A0-zero-shot';
-      row.metrics = { victories: Number(cell('Victories')), maxFloor: Number(cell('Max Floor')),
+      // All five models in Trial v0 recorded zero victories, so omit the constant column.
+      row.metrics = { maxFloor: Number(cell('Max Floor')),
         meanTotalTokens: Number(cell('Mean Tokens').replace(/M$/, '')) * 1e6, meanHours: Number(cell('Mean Wall (h)')) };
       return row;
     });

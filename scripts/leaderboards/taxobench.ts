@@ -12,6 +12,23 @@ const board: Leaderboard = {
   benchmark: 'taxobench', static: 'paper', url: feed, feed, harnesses: 'system',
   terms: 'The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2601.12369',
   headline: 'The score is the paper’s adjusted Rand index for leaf-level clustering, expressed on its percentage scale.',
+  stats: {
+    vMeasure: { name: 'V-Measure', unit: '%', better: 'higher' },
+    overlap: { name: 'Retrieved expert papers', unit: 'count', better: 'higher', note: 'Mean number of expert-cited papers retrieved.' },
+    coveredARI: { name: 'Covered adjusted Rand index', unit: '%', better: 'higher', note: 'ARI over surveys with at least two aligned papers.' },
+    coveredVMeasure: { name: 'Covered V-Measure', unit: '%', better: 'higher', note: 'V-Measure over surveys with at least two aligned papers.' },
+    treeEditDistance: { name: 'Unordered semantic tree edit distance', unit: 'score', better: 'lower' },
+    normalizedTreeEditDistance: { name: 'Normalized semantic tree edit distance', unit: '%', better: 'lower' },
+    semPath: { name: 'Semantic path similarity', unit: '%', better: 'higher' },
+    recall: { name: 'Retrieval recall', unit: '%', better: 'higher' },
+    precision: { name: 'Retrieval precision', unit: '%', better: 'higher' },
+    f1: { name: 'Retrieval F1', unit: '%', better: 'higher' },
+    homogeneity: { name: 'Homogeneity', unit: '%', better: 'higher' },
+    completeness: { name: 'Completeness', unit: '%', better: 'higher' },
+    depth: { name: 'Mean taxonomy depth', unit: 'score' },
+    categories: { name: 'Mean category count', unit: 'count' },
+    singleton: { name: 'Singleton category rate', unit: '%' },
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(feed));
     const retrieval = tables.find(t => t[0][0] === 'Deep Research agent' && t[0][1].startsWith('Recall'));

@@ -21,6 +21,7 @@ const board: Leaderboard = {
   benchmark: "ds-arena-code",
   url: "https://api-docs.deepseek.com/news/news0905",
   feed: FEED,
+  static: 'paper',
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
   async fetch(): Promise<LeaderboardRow[]> {
     return checkedImageRows(IMAGE, SHA256, ROWS);

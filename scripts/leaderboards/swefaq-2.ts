@@ -8,10 +8,10 @@ const board: Leaderboard = {
   benchmark: "swefaq-2",
   url: "https://lab.kb.se/leaderboard/results",
   feed,
-  stats: { N: { name: 'Items', unit: 'count' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher', note: 'Accuracy stored from 0 to 1.' }, pseudoalpha: { name: 'Pseudo-alpha', unit: 'score', better: 'higher' } },
+  stats: { pseudoalpha: { name: 'Pseudo-alpha', unit: 'score', better: 'higher' } },
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.1.html The feed host returns no robots.txt.",
   async fetch() {
-    return superlimRows("swefaq", 13, true);
+    return (await superlimRows("swefaq", 13, true)).map(({ metrics: { N: _, accuracy: __, ...metrics } = {}, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

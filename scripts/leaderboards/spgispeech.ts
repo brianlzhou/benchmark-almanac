@@ -15,6 +15,9 @@ const board: Leaderboard = {
     "google/gemma-4-E4B-it": "gemma-4-e4b-it"
 },
   terms: 'The public Space is subject to the Hugging Face terms at https://huggingface.co/terms-of-service.',
+  stats: {
+    rtfx: { name: 'Inverse real-time factor', unit: 'speedup', better: 'higher', note: 'Average transcription speed across the Open ASR suite.' },
+  },
   async fetch() {
     type Table = { headers: string[]; data: (string | number | null)[][] };
     const config = await fetchJson<{ components: { type: string; props: { value?: Table } }[] }>(feed);
@@ -22,12 +25,14 @@ const board: Leaderboard = {
     if (!table) throw new Error('Open ASR short-form WER table missing');
     const name = table.headers.indexOf('model');
     const wer = table.headers.indexOf('SPGISpeech');
+    const rtfxIdx = table.headers.findIndex(h => h.startsWith('RTFx'));
     if (name < 0) throw new Error('Open ASR model column missing');
     const rows = table.data.filter(r => r[wer] != null).map(r => {
       const link = String(r[name]).match(/<a\b[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/i);
       const score = r[wer];
       if (!link || typeof score !== 'number') throw new Error('Invalid SPGISpeech row');
-      return { model: text(link[2]), link: link[1], score };
+      const rtfx = rtfxIdx >= 0 && typeof r[rtfxIdx] === 'number' && Number.isFinite(r[rtfxIdx]) ? r[rtfxIdx] : undefined;
+      return { model: text(link[2]), link: link[1], score, ...(rtfx !== undefined ? { metrics: { rtfx } } : {}) };
     });
     return checked(rows, 68);
   },

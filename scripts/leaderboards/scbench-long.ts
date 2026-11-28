@@ -5,6 +5,8 @@ import { BIO_ALIASES, BIO_PAGE, BIO_TERMS, bioFeed, bioRows } from './biosecbenc
 
 const board: Leaderboard = {
   benchmark: 'scbench-long',
+  harnesses: 'system',
+  reference: ['Pi'],
   url: BIO_PAGE,
   feed: bioFeed('scbench-long'),
   terms: BIO_TERMS,

@@ -11,7 +11,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: "iuk-1-5",
-  stats: { highestTierPassed: { name: 'Highest tier passed', unit: 'count', better: 'higher' }, t1ApiErrors: { name: 'Tier 1 API errors', unit: 'count', better: 'lower' }, t2ApiErrors: { name: 'Tier 2 API errors', unit: 'count', better: 'lower' }, t3SafetyFailures: { name: 'Tier 3 safety failures', unit: 'count', better: 'lower' }, t3ApiErrors: { name: 'Tier 3 API errors', unit: 'count', better: 'lower' }, t4SafetyFailures: { name: 'Tier 4 safety failures', unit: 'count', better: 'lower' }, t4ApiErrors: { name: 'Tier 4 API errors', unit: 'count', better: 'lower' } },
+  stats: { highestTierPassed: { name: 'Highest tier passed', unit: 'count', better: 'higher' }, t1SafetyFailures: { name: 'Tier 1 safety failures', unit: 'count', better: 'lower' }, t1ApiErrors: { name: 'Tier 1 API errors', unit: 'count', better: 'lower' }, t2SafetyFailures: { name: 'Tier 2 safety failures', unit: 'count', better: 'lower' }, t2ApiErrors: { name: 'Tier 2 API errors', unit: 'count', better: 'lower' }, t3SafetyFailures: { name: 'Tier 3 safety failures', unit: 'count', better: 'lower' }, t3ApiErrors: { name: 'Tier 3 API errors', unit: 'count', better: 'lower' }, t4SafetyFailures: { name: 'Tier 4 safety failures', unit: 'count', better: 'lower' }, t4ApiErrors: { name: 'Tier 4 API errors', unit: 'count', better: 'lower' } },
   url: "https://www.relayforge.tools/dawes/#v15-archive",
   feed,
   terms: "RelayForge licenses its aggregate results under CC BY 4.0 with attribution. https://www.relayforge.tools/dawes/ Hugging Face allows the archive feed in robots.txt.",

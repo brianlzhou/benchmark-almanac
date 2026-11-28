@@ -16,6 +16,7 @@ const rows: LeaderboardRow[] = [
 
 const board: Leaderboard = {
   benchmark: "healthbench-consensus-global-health",
+  static: 'paper',
   url: "https://cdn.openai.com/gpt-5-system-card.pdf",
   terms: "OpenAI publishes the system card on its CDN. The CDN returned 404 for robots.txt. OpenAI terms apply.",
   aliases: {"gpt-5-thinking-mini": "gpt-5-mini", "gpt-5-main": "gpt-5-chat"},

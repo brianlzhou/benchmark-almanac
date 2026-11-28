@@ -10,6 +10,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/databricks/officeqa/HEAD/figures/officeqa_pro_v2_agent_harness_performance.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "officeqa-pro-v2",
+ static: 'paper',
  url: "https://github.com/databricks/officeqa",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -15,8 +15,7 @@ interface Summary {
 const board: Leaderboard = {
   benchmark: 'py-bug-trace-level-3', feed, url: 'https://neomatrix369.github.io/pages/laguna-py-bug-trace.html',
   terms: 'The authors publish the matrix on Hugging Face. https://huggingface.co/terms-of-service',
-  stats: { rank: { name: 'Level 3 rank', unit: 'count', better: 'lower' },
-    delta: { name: 'Difference from Laguna-XS.2 in percentage points', unit: 'score', better: 'higher' } },
+  stats: { delta: { name: 'Difference from Laguna-XS.2 in percentage points', unit: 'score', better: 'higher' } },
   async fetch() {
     const summary = await fetchJson<Summary>(feed);
     const detail = summary.levels['3'];
@@ -24,11 +23,9 @@ const board: Leaderboard = {
     board.parts = Object.fromEntries(detail.tasks.map(t => [t.name, t.name]));
     return checked(summary.cross_level.map(row => {
       const score = row.levels['3'];
-      const rank = row.rank_by_level['3'];
       const delta = row.delta_vs_target['3'];
-      if (![score, delta].every(Number.isFinite) || (rank !== null && !Number.isFinite(rank))) throw new Error('Missing Level 3 result');
+      if (![score, delta].every(Number.isFinite)) throw new Error('Missing Level 3 result');
       const metrics: Record<string, number> = { delta: delta * 100 };
-      if (rank !== null) metrics.rank = rank;
       const i = detail.models.findIndex(m => m.model === row.model_id);
       let attempts = 0;
       let outputTokens = 0;

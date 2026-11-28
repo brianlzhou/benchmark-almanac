@@ -21,7 +21,7 @@ const board:Leaderboard={
     await new Promise(r=>setTimeout(r,1050));
     const bt=new Map(jsonAfter<Entry[]>(nextFlight(await fetchText(URL+'?board=bradley-terry')),'"initialData":').map(r=>[identity(r),r]));
     const rows=raw.filter(r=>r.modelName&&Number.isFinite(r.rating)&&r.matchesPlayed>0).map(r=>{
-      const metrics:Record<string,number>={matches:r.matchesPlayed,wins:r.wins,losses:r.losses,winRate:r.winRate,provisional:Number(r.isProvisional)};
+      const metrics:Record<string,number>={matches:r.matchesPlayed,wins:r.wins,losses:r.losses,winRate:r.winRate};
       const b=bt.get(identity(r));if(b&&Number.isFinite(b.rating))metrics.bradleyTerry=b.rating;
       const model=/^(?:GPT|gpt)[- ]/.test(r.modelName)?r.modelName:r.providerName+' '+r.modelName;
       return {model,score:r.rating,date:r.lastUpdated?.slice(0,10),metrics};

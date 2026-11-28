@@ -10,7 +10,6 @@ const board: Leaderboard = {
   terms: "Public results published in Lech Mazur’s project README.",
   stats: {
     top1Accuracy: { name: 'Top-1 accuracy', unit: '%', better: 'higher' },
-    cases: { name: 'Cases', unit: 'count' },
   },
   async fetch() {
     const source = await fetchText(feed);
@@ -26,7 +25,7 @@ const board: Leaderboard = {
         return Number(raw);
       };
       const effort = model.match(/^(.+) \(([^()]+reasoning)\)$/i);
-      rows.push({ model: effort?.[1] ?? model, score: number(3), metrics: { "top1Accuracy": number(2), "cases": number(4) }, setting: effort?.[2] });
+      rows.push({ model: effort?.[1] ?? model, score: number(3), metrics: { "top1Accuracy": number(2) }, setting: effort?.[2] });
     }
     if (rows.length < 30) throw new Error('Expected at least 30 published results');
     return rows;

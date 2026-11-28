@@ -22,7 +22,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (server-rendered matrix, overall test-set view)`,
   terms: 'Server-rendered page under the Google Terms of Service, which bar only automated access against robots.txt (it disallows just /api/); the dataset is CC BY 4.0 and the code Apache-2.0.',
-  stats: { latency: { name: 'Latency', unit: 'minutes', better: 'lower' } },
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   chart: { title: 'Score versus cost per task', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Score', better: 'higher' } },
   aliases: {
     'GPT 6 Astra': 'gpt-6-astra',
@@ -49,8 +49,7 @@ const board: Leaderboard = {
         cost: num(cost?.replace(/<[^>]+>/g, '').replace(/[^\d.]/g, ' ')),
         metrics: {
           ...(minutes ? { latency: Number(minutes) * 60 } : {}),
-          ...(cell.match(/title="± ([\d.]+) across runs"/) ? { runSpread: Number(cell.match(/title="± ([\d.]+) across runs"/)![1]) } : {}),
-          ...(cost?.includes('≈') ? { estimatedCost: 1 } : {}),
+          ...(cell.match(/title="± ([\d.]+) across runs"/) ? { std: Number(cell.match(/title="± ([\d.]+) across runs"/)![1]) } : {}),
         },
       });
     }
@@ -62,10 +61,9 @@ const board: Leaderboard = {
         const metrics = row.metrics ??= {};
         metrics[body[2]] = Number(m[3]);
         const spread = m[4].match(/title="± ([\d.]+) across runs"/);
-        if (spread) metrics[body[2] + ':runSpread'] = Number(spread[1]);
+        if (spread) metrics[body[2] + ':std'] = Number(spread[1]);
       }
     }
-    for (const row of rows) if (row.cost !== undefined) (row.metrics ??= {}).cost = row.cost;
     if (!rows.length) throw new Error('No PLE overall test scores');
     return rows;
   },

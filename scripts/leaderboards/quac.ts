@@ -37,21 +37,22 @@ const board: Leaderboard = {
   },
   async fetch() {
     const source = await fetchText(FEED);
-    const data = tables(source).map(t => t.map(r => r.map(c => c.text)));
+    const data = tables(source);
     const rows: LeaderboardRow[] = [];
     {
-      const t = data.find(t => new RegExp("Rank.*Model.*F1", "i").test(t.slice(0, 1).flat().join(" | ")));
-      if (!t || !new RegExp("Rank.*Model.*F1", "i").test(t.slice(0, 1).flat().join(" | "))) throw new Error("Results table changed");
+      const t = data.find(t => new RegExp("Rank.*Model.*F1", "i").test((t[0] ?? []).map(c => c.text).join(" | ")));
+      if (!t) throw new Error("Results table changed");
       for (const r of t.slice(1)) {
-        const value = numeric(r[2]);
-        let model = clean(r[1] ?? "");
+        const value = numeric(r[2]?.text);
+        let model = clean(r[1]?.text ?? "");
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
         if (!(!/^Human Performance/i.test(model))) continue;
-        const row: LeaderboardRow = { model: identity(model), score: value * 1 };
+        const href = r[1]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+        const row: LeaderboardRow = { model: identity(model), score: value * 1, ...(href ? { link: href } : {}) };
         row.setting = /ensemble|essemble/i.test(model) ? 'ensemble' : /single model/i.test(model) ? 'single model' : undefined;
         row.metrics = {};
-        { const n = numeric(r[3]); if (n !== undefined) row.metrics["heqq"] = n; }
-        { const n = numeric(r[4]); if (n !== undefined) row.metrics["heqd"] = n; }
+        { const n = numeric(r[3]?.text); if (n !== undefined) row.metrics["heqq"] = n; }
+        { const n = numeric(r[4]?.text); if (n !== undefined) row.metrics["heqd"] = n; }
         rows.push(row);
       }
     }

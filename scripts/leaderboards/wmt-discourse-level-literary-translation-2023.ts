@@ -11,7 +11,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Table 3 ranks primary systems and baselines within separate groups. ACL publishes the paper under CC BY 4.0. https://aclanthology.org/faq/copyright/ The robots URL returns HTML.",
   stats: {
-    'd-BLEU': { name: 'd-BLEU', unit: 'score', better: 'higher' }, groupRank: { name: 'Group rank', unit: 'count', better: 'lower' },
+    'd-BLEU': { name: 'd-BLEU', unit: 'score', better: 'higher' },
     BLEU: { name: 'BLEU', unit: 'score', better: 'higher' }, chrF: { name: 'chrF', unit: 'score', better: 'higher' }, COMET: { name: 'COMET', unit: 'score', better: 'higher' }, TER: { name: 'TER', unit: 'score', better: 'lower' },
   },
   async fetch() {
@@ -25,11 +25,11 @@ const board: Leaderboard = {
       match[2].trim().split(/\s+/).forEach((s, i) => { if (s !== 'n/a') metrics[['BLEU', 'chrF', 'COMET', 'TER', 'd-BLEU'][i]] = Number(s); });
       metricsByModel.set(match[1], metrics);
     }
-    const rows = [...human.matchAll(/^ *(?:(?:Baselines|Primary|\(con\)|\(uncon\))\s+)?([\w-]+)(⋆?)\s+(\d+\.\d+)\s+(\d+)\b/gm)].map(([, model, star, score, rank]) => {
+    const rows = [...human.matchAll(/^ *(?:(?:Baselines|Primary|\(con\)|\(uncon\))\s+)?([\w-]+)(⋆?)\s+(\d+\.\d+)\s+(\d+)\b/gm)].map(([, model, star, score]) => {
       const metrics = metricsByModel.get(model);
       if (!metrics) throw new Error('Missing automatic scores for ' + model);
       const setting = ['GPT-4', 'Google', 'Llama-MT'].includes(model) ? 'Baselines' : star ? 'Primary (unconstrained)' : 'Primary (constrained)';
-      return { model, setting, score: Number(score), metrics: { ...metrics, groupRank: Number(rank) } };
+      return { model, setting, score: Number(score), metrics };
     });
     if (rows.length < 10) throw new Error('Missing WMT primary systems or baselines');
     return rows;

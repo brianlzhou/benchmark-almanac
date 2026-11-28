@@ -20,7 +20,7 @@ const board: Leaderboard = {
   stats: {
     cost_per_solved_task: { name: 'Cost per solved task', unit: 'usd', better: 'lower' },
     steps: { name: 'Steps', unit: 'count', better: 'lower' },
-    average_total_tokens: { name: 'Average total tokens', unit: 'tokens' },
+    totalTokens: { name: 'Average total tokens', unit: 'tokens' },
     tasks: { name: 'Tasks', unit: 'count' },
     attempts_per_task: { name: 'Attempts per task', unit: 'count', better: 'lower' },
     pass_at_k: { name: 'Pass@k', unit: '%', better: 'higher' },

@@ -42,7 +42,8 @@ const board: Leaderboard = {
       const sized = ['Otter','OpenFlamingo'].includes(name) ? `${name} (${r['Language Model']})` : /^(LLaVA-1.5|Vicuna|LLaMA|MiniGPT-4|Flan-T5)$/.test(name) ? `${name}-${size}` : name;
       const metrics: Record<string, number> = {};
       for (const [k, v] of Object.entries(r).slice(6)) { const n = num(v); if (n !== undefined && n > 0) metrics[k] = n; }
-      rows.push({ model: identity(sized), score, setting: r['Evaluation Method'], params: /^\d+(?:\.\d+)?B$/i.test(size) ? parseFloat(size) : undefined, metrics });
+      const link = r.Model?.match(/\]\((https?:\/\/[^)\s]+)\)/)?.[1];
+      rows.push({ model: identity(sized), score, setting: r['Evaluation Method'], link, params: /^\d+(?:\.\d+)?B$/i.test(size) ? parseFloat(size) : undefined, metrics });
     }
     if (!rows.length) throw new Error('SEED-Bench CSV empty');
     return rows;

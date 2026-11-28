@@ -7,13 +7,13 @@ import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/";
 const board: Leaderboard = {
- benchmark: "frontierchallenge", url: "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/", feed: FEED,
+ benchmark: "frontierchallenge", harnesses: 'system', url: "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  stats: { nativeMeanScore: { name: 'Native mean score', unit: 'score', better: 'higher' } },
 
  async fetch() {
 const html=await fetchText(FEED);const script=html.match(/src="(script\.js[^"]*)"/)?.[1];if(!script)throw new Error('Missing results script');await new Promise(r=>setTimeout(r,1100));const js=await fetchText(new URL(script,FEED).href);const data=jsonAfter<any[]>(js,'const results =');
- return data.map(r=>({model:r[0].replace(/\s*\(max\)/,''),harness:r[1],score:r[3],setting:'Historical native Score >=99.9; 97 tasks'+(r[0].includes('(max)')?'; max':''),metrics:{nativeMeanScore:r[4]}}));
+ return data.map(r=>({model:r[0].replace(/\s*\(max\)/,''),harness:r[1],score:r[3],setting:'Historical native Score >=99.9, 97 tasks'+(r[0].includes('(max)')?', max':''),metrics:{nativeMeanScore:r[4]}}));
  },
 };
 export default board;

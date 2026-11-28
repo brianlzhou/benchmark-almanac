@@ -10,7 +10,6 @@ const board: Leaderboard = {
   terms: "The repository uses MIT and requests credit to Wincon and the model for programs. The site permits crawling and the raw file host has no robots.txt.",
   parts: {"points":"New frontier points","solved":"Puzzles solved","proximity":{"name":"Record proximity","unit":"%"}},
   aliases: {"Opus 5.5":"claude-opus-5-5","Sonnet 5.5":"claude-sonnet-5-5","Fable 5.1":"claude-fable-5-1","Haiku 5.5":"claude-haiku-5-5"},
-  stats: { rank:{name:'Leaderboard rank',unit:'count',better:'lower'} },
   async fetch() {
     const source = await fetchText(feed);
     const headers = ["model","puzzles_with_new_frontier_points","new_frontier_points","puzzles_solved","record_proximity"];
@@ -25,7 +24,7 @@ const board: Leaderboard = {
       const model = r["model"];
       if (!model) throw new Error('Missing model name');
       return { model, score: numeric(r["puzzles_with_new_frontier_points"]),
-        metrics: { points: numeric(r["new_frontier_points"]), solved: numeric(r["puzzles_solved"]), proximity: numeric(r["record_proximity"]), rank: numeric(r["rank"]) } };
+        metrics: { points: numeric(r["new_frontier_points"]), solved: numeric(r["puzzles_solved"]), proximity: numeric(r["record_proximity"]) } };
     });
     if (rows.length < 16) throw new Error('Incomplete results');
     return rows;

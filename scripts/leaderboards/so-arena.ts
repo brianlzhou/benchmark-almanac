@@ -15,6 +15,7 @@ type Model = {
 const tierNames: Record<string, string> = { E: 'Easy', M: 'Medium', H: 'Hard', V: 'Very hard', All: 'All' };
 const board: Leaderboard = {
   benchmark: 'so-arena', url, feed,
+  aliases: { 'Jev API 1.14': 'jev-1-14-0' },
   stats: {
     R: {name: 'Reliability', unit: '%', better: 'higher', note: 'Geometric mean of stability and non-degeneracy.'},
     S: {name: 'Stability', unit: 'score', better: 'higher'}, N: {name: 'Non-degeneracy', unit: 'score', better: 'higher'},

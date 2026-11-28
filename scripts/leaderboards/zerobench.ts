@@ -20,7 +20,12 @@ const board: Leaderboard = {
   stats: {
     passAt1: { name: 'pass@1 score', unit: '%', better: 'higher' },
     pass5: { name: 'pass^5 score', unit: '%', better: 'higher', note: 'Share of questions solved correctly in all five samplings.' },
+    totalTokens: { name: 'Mean total tokens per question', unit: 'tokens', better: 'lower' },
     subquestionPassAt1: { name: 'Subquestion pass@1 score', unit: '%', better: 'higher' },
+    subquestionsCorrect: { name: 'Subquestions answered correctly', unit: 'count', better: 'higher' },
+    passAt1Samples: { name: 'pass@1 sampling count', unit: 'count' },
+    previousPassAt5: { name: 'Previous pass@5 score', unit: '%', better: 'higher', note: 'Earlier published pass@5 score before re-evaluation.' },
+    previousPass5: { name: 'Previous pass^5 score', unit: '%', better: 'higher', note: 'Earlier published pass^5 score before re-evaluation.' },
   },
   aliases: {
     'Claude 3.5 Sonnet v2': 'claude-3-5-sonnet-october-2024',

@@ -27,7 +27,7 @@ const points: Pt[] = [
   ...cardScores.filter((x) => x.benchmark === b.id && x.unit === unit),
 ]
   .filter((x) => x.date)
-  .map((x) => ({ date: x.date!, value: x.value, model: x.model, source: x.source, via: x.via, from: x.from, setting: x.setting, harness: x.harness }));
+  .map((x) => ({ date: x.date!, value: x.value, model: x.model, source: x.source, via: x.via, from: x.from, setting: x.setting, harness: x.harness, benchmark: x.benchmark, ...(x.info?.source ? { info: { source: x.info.source } } : {}) }));
 
 const refs: { v: number; label: string }[] = [];
 if (unit === '%') {
@@ -48,13 +48,16 @@ const ownFrontier = (): FrontierPoint[] => {
 };
 const frontier = entries === 'same' ? ownFrontier() : s.frontier.filter((p) => points.some((q) => q.model === p.model));
 const host = LEADERBOARDS[b.id]?.host;
+// other sources whose runs the board adds, such as Kaggle Benchmarks, named beside it
+const alsoNames = Object.values(LEADERBOARDS[b.id]?.sources ?? {}).map((o) => o.name);
+const also = alsoNames.length ? ` (with ${alsoNames.join(' and ')} runs)` : '';
 // a copied board and a collected claim both come through Epoch AI; the legend tells them apart
 const credit = sourcesCredit(
   points.map((p) => ({ source: p.source === 'collected' && p.via !== 'board' ? 'claim' : p.source })),
-  { ...SOURCE_CREDIT, leaderboard: host ? `${host}’s leaderboard` : `official ${b.name} leaderboard`, collected: `other boards, via ${EPOCH_CREDIT}` },
+  { ...SOURCE_CREDIT, leaderboard: `${host ? `${host}’s leaderboard` : `official ${b.name} leaderboard`}${also}`, collected: `other boards, via ${EPOCH_CREDIT}` },
 );
 const kinds = [
-  points.some((p) => p.source === 'leaderboard') && (host ? `${host}’s leaderboard` : 'the official leaderboard'),
+  points.some((p) => p.source === 'leaderboard') && `${host ? `${host}’s leaderboard` : 'the official leaderboard'}${also}`,
   points.some((p) => p.source === 'epoch') && 'Epoch AI’s own runs',
   points.some((p) => p.source === 'collected') && 'boards and claims Epoch AI collected',
   points.some((p) => p.source === 'card') && 'labs’ model cards',

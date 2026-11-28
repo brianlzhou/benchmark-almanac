@@ -11,6 +11,7 @@ const board: Leaderboard = {
  benchmark: "cc-bench-v2-chained-tasks-zai",
  url: "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png",
  feed: FEED,
+ static: 'paper',
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {

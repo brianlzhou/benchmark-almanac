@@ -71,7 +71,8 @@ const segs = (h: HeldRow) =>
       <div class="sh-row">
         <div class="sh">
           <h2>Where has it been number one?</h2>
-          <p>{caption}</p>
+          {/* a reign that still runs adds a day to the median every day, so the IndexNow fingerprint skips the caption (scripts/lib/indexnow.ts) */}
+          <p data-volatile>{caption}</p>
         </div>
         <button
           type="button"

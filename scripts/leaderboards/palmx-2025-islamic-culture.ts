@@ -16,7 +16,7 @@ const board: Leaderboard = {
     return table.slice(1).map(c => {
       const model = c[1].text, score = num(c[3].text);
       if (!model || score == null) throw new Error('Missing PalmX team or accuracy');
-      return { model, score, submitter: c[2].text };
+      return { model, score, submitter: c[4].text || undefined, agentOrg: c[2].text || undefined };
     });
   },
 };

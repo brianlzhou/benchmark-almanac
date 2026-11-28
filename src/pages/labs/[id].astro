@@ -75,7 +75,7 @@ const bragCaps = JSON.stringify(Object.fromEntries(brag.map((x) => [x.id, x.cap]
 const color = labColor(id);
 ---
 
-<Base title={lab.name} description={`${lab.name}'s AI models, their benchmark scores, and what its model cards report.`} film="index" crumbs={[{ href: '/labs/', label: 'Labs' }]}>
+<Base title={lab.name} searchTitle={`${lab.name} AI models and benchmark scores`} description={`${lab.name}'s AI models, their benchmark scores, and what its model cards report.`} film="index" crumbs={[{ href: '/labs/', label: 'Labs' }]}>
   <div class="page">
     <header class="head" style={`--lc:${color}`}>
       <Crumbs items={[{ href: '/labs/', label: 'Labs' }]} />

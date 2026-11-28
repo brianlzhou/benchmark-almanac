@@ -14,8 +14,7 @@ const board: Leaderboard = {
   parts, stats: {
     pass3: { name: 'Tasks passed in every run', unit: '%', better: 'higher' },
     calls: { name: 'Median tool calls per run', unit: 'count' },
-    minutes: { name: 'Median minutes per run', unit: 'minutes' },
-    medianCost: { name: 'Median model cost per run', unit: 'usd' },
+    minutes: { name: 'Median minutes per run', unit: 'minutes', better: 'lower' },
     opened: { name: 'Runs that opened the deciding record', unit: '%' },
   },
   async fetch() {
@@ -50,8 +49,12 @@ const board: Leaderboard = {
       row.metrics!.pass3 = rate(cell(main, 'Tasks passed in every run', i));
       row.metrics!.calls = Number(cell(medians, 'Tool calls', i));
       row.metrics!.minutes = Number(cell(medians, 'Minutes', i));
-      const cost = cell(medians, 'Model cost', i);
-      if (cost !== 'not metered') row.metrics!.medianCost = Number(cost.replace('$',''));
+      const costCell = cell(medians, 'Model cost', i);
+      if (costCell !== 'not metered') {
+        const cost = Number(costCell.replace('$', ''));
+        if (!Number.isFinite(cost)) throw new Error('Invalid legal-world cost');
+        row.cost = cost;
+      }
       return row;
     });
     rows[2].metrics!.opened = rate(cell(grok, 'Runs that opened the deciding record', 1));

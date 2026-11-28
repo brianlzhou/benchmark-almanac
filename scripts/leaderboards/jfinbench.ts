@@ -17,6 +17,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The leaderboard page gives no separate reuse license. https://pub.sakana.ai/jfinbench/#leaderboard",
   parts,
+  chart: {
+    title: 'Overall score vs. cost per question',
+    x: { key: 'cost', label: 'Cost per question', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Overall score', unit: '%', better: 'higher' },
+    note: 'JFinBench plots overall exam score against average cost per question on a log scale.',
+  },
   async fetch() {
     const data = jsonAfter<{ models: Model[] }>(await fetchText(FEED), 'window.JFB =');
     const rows: LeaderboardRow[] = [];

@@ -13,6 +13,14 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard",
   feed: FEED,
   terms: "The repository lists MIT for code and CC BY 3.0 for reference transcriptions. https://github.com/finebooks/bhl-ocr-eval",
+  parts: {
+    content_cer: 'Content CER',
+    sparse_cer: 'Sparse CER',
+    de: { name: 'German', group: 'Language' },
+    en: { name: 'English', group: 'Language' },
+    fr: { name: 'French', group: 'Language' },
+    la: { name: 'Latin', group: 'Language' },
+  },
   stats: {
     pages: { name: 'Pages', unit: 'count' },
     cer_dip: { name: 'Digitization-induced CER', unit: '%', better: 'lower' },
@@ -24,18 +32,14 @@ const board: Leaderboard = {
   async fetch() {
     const data = jsonAfter<Result[]>(await fetchText(FEED),'const DATA=');
     if (data.length < 26) throw new Error('Incomplete BHL OCR table');
-    this.parts = {content_cer: 'Content CER', sparse_cer: 'Sparse CER'};
     return data.filter(r => r.eligible).map((r): LeaderboardRow => {
       if (!r.name || !Number.isFinite(r.cer_read) || r.ci.length !== 2 || !r.ci.every(Number.isFinite)) throw new Error('Invalid BHL OCR score');
-      const metrics: Record<string,number> = {pages: r.n, errors: r.err};
+      const metrics: Record<string,number> = {pages: r.n};
       for (const k of ['cer_dip','recall','overx','loop','furn','content_cer','sparse_cer'] as const) {
         if (!(k in r)) throw new Error('Missing BHL OCR field ' + k);
         if (r[k] != null) metrics[k] = 100*r[k];
       }
-      for (const [lang,cer] of Object.entries(r.lang)) {
-        metrics[lang] = 100*cer;
-        this.parts![lang] = {name: lang, group: 'Language'};
-      }
+      for (const [lang,cer] of Object.entries(r.lang)) metrics[lang] = 100*cer;
       return {model: r.name, score: r.cer_read*100, low: r.ci[0]*100, high: r.ci[1]*100, params: r.params ?? undefined, link: r.repo ? 'https://huggingface.co/'+r.repo : undefined, metrics};
     });
   },

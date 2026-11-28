@@ -7,6 +7,8 @@ const feed = "https://www.autofactorybench.com/data/bench.json";
 
 const board: Leaderboard = {
   benchmark: "autofactory-bench",
+  harnesses: 'system',
+  reference: ['mini-swe-agent'],
   url: "https://www.autofactorybench.com/leaderboard",
   feed,
   terms: "The maker offers research access and licensing for the full data. The public leaderboard does not specify score reuse terms. https://www.autofactorybench.com/ Robots.txt permits the public data path.",

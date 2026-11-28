@@ -27,13 +27,15 @@ const board: Leaderboard = {
       // the name is the first span after the vendor logo. The Open or Closed badge is a later span
       const spans = [...(r[iModel]?.html ?? '').matchAll(/<span[^>]*>([^<]+)<\/span>/g)].map((m) => text(m[1]));
       const model = spans.find((s) => !/^(open|closed)$/i.test(s));
+      const badge = spans.find((s) => /^(open|closed)$/i.test(s));
+      const open = badge ? /^open$/i.test(badge) : undefined;
       // "Claude Code max ( with fallback )": the effort badge sits inside the harness text
       const harnessText = r[iHarness]?.text ?? '';
       const effort = harnessText.match(/\b(max|xhigh|high|medium|low)\b/i)?.[1];
       const harness = (effort ? harnessText.replace(effort, '') : harnessText).replace(/\(\s+/g, '(').replace(/\s+\)/g, ')').replace(/\s+/g, ' ').trim();
       const score = num(r[iScore]?.text);
       if (!model || score === undefined) continue;
-      rows.push({ model, score, harness: harness || undefined, setting: effort?.toLowerCase() });
+      rows.push({ model, score, harness: harness || undefined, setting: effort?.toLowerCase(), open });
     }
     return rows;
   },

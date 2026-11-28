@@ -4,20 +4,20 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text, jsonAfter } from '../lib/html.ts';
 const FEED = "https://swescience.github.io/";
  const board: Leaderboard = {
-  benchmark: "swe-bench-science", stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' } }, parts: {
-  public: { name: 'Public', group: 'Split' }, private: { name: 'Private', group: 'Split' }, fail2Pass: { name: 'Fail to pass', group: 'Outcome' }, pass2Pass: { name: 'Pass to pass', group: 'Outcome' }, overall: { name: 'Overall', group: 'Split' },
+  benchmark: "swe-bench-science", harnesses: 'system', stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' } }, parts: {
+  public: { name: 'Public', group: 'Split' }, private: { name: 'Private', group: 'Split' }, fail2Pass: { name: 'Fail to pass', group: 'Outcome' }, pass2Pass: { name: 'Pass to pass', group: 'Outcome' },
   issue: { name: 'Issue driven', group: 'Task type' },
   expert: { name: 'Expert exploratory', group: 'Task type' },
   engineering: { name: 'Engineering', group: 'Task type' },
   hard70: { name: 'HARD70', group: 'Split' },
 }, url: "https://swescience.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
-  chart:{title:"Pass@1 versus output tokens",x:{key:"outputTokens",label:"Mean output tokens per task",better:"lower",log:true},y:{key:"score",label:"Overall Pass@1",unit:"%",better:"higher"}},
+  chart:{title:"Pass@1 versus output tokens",x:{key:"tokens",label:"Mean output tokens per task",better:"lower",log:true},y:{key:"score",label:"Overall Pass@1",unit:"%",better:"higher"}},
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    const payload=[...source.matchAll(/self\.__next_f\.push\((\[1,.*?\])\)<\/script>/g)].map(m=>JSON.parse(m[1])[1]).join("");const d=jsonAfter<any>(payload,'"data":');for(const r of d.models){rows.push({model:r.family,score:r.scores.overall,harness:r.harness,setting:r.reasoningDepth,tokens:r.tokens.output*1e6,metrics:{...r.scores,inputTokens:r.tokens.input*1e6,outputTokens:r.tokens.output*1e6}});}const t=all.find(t=>t[0]?.includes("Pass@1"));if(t)for(const r of t.slice(1)){const score=num(r[3]);if(score===undefined)continue;const m=r[1].match(/^(.*?) \(([^)]+)\)$/);const row=rows.find(x=>x.model===(m?m[1]:r[1])&&x.harness===r[2]&&x.setting===(m?.[2]??"default"));if(row)row.metrics={...row.metrics,hard70:score};}
+    const payload=[...source.matchAll(/self\.__next_f\.push\((\[1,.*?\])\)<\/script>/g)].map(m=>JSON.parse(m[1])[1]).join("");const d=jsonAfter<any>(payload,'"data":');for(const r of d.models){const {overall,...restScores}=r.scores;rows.push({model:r.family,score:overall,harness:r.harness,setting:r.reasoningDepth,tokens:r.tokens.output*1e6,metrics:{...restScores,inputTokens:r.tokens.input*1e6}});}const t=all.find(t=>t[0]?.includes("Pass@1"));if(t)for(const r of t.slice(1)){const score=num(r[3]);if(score===undefined)continue;const m=r[1].match(/^(.*?) \(([^)]+)\)$/);const row=rows.find(x=>x.model===(m?m[1]:r[1])&&x.harness===r[2]&&x.setting===(m?.[2]??"default"));if(row)row.metrics={...row.metrics,hard70:score};}
     if (!rows.length) throw new Error("No swe-bench-science score rows");
     return rows;
   },

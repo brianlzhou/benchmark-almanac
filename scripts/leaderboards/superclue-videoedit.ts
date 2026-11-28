@@ -16,6 +16,6 @@ export default workbookBoard({
   minimum: 7,
   parts: ["基础能力", "应用能力"],
   settings: ["获取方式"],
-  metrics: {"completedQuestions": "完成题数", "questions": "总题数"},
+  metrics: {"completedQuestions": "完成题数"},
   details: [{"sheet": "基础能力", "model": "模型", "parts": ["分数", "主体与属性编辑", "场景与风格编辑", "画面修复与增强", "运动与镜头编辑", "文字与符号编辑"]}, {"sheet": "应用能力", "model": "模型", "parts": ["分数", "广告与电商营销", "影视后期与创意特效", "社交媒体与个人创作"]}, {"sheet": "完成度统计", "model": "模型", "parts": ["生成视频数", "有效评测数", "评测完成率(%)"]}],
 });

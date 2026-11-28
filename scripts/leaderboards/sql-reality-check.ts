@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/dhruvb2028/sql-reality-check',
   feed: kaggleFeed('dhruvb2028', 'sql-reality-check'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('dhruvb2028', 'sql-reality-check', "(Overall)", 100),
+  parts: {
+    netRevenue: 'Net revenue',
+    ticketState: 'Ticket state as of',
+  },
+  fetch: () => kaggleRowsWithBounds('dhruvb2028', 'sql-reality-check', "(Overall)", 100, {
+    netRevenue: { task: 'SQL Reality Check - Net Revenue', scale: 100 },
+    ticketState: { task: 'SQL Reality Check - Ticket State As Of', scale: 100 },
+  }),
 };
 export default board;

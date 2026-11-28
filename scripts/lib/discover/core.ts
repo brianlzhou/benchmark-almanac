@@ -228,6 +228,19 @@ export function introName(abstract: string): string | undefined {
   return undefined;
 }
 
+// "we introduce RUIBench, comprising 30 manipulation tasks": a name that says benchmark by itself, right after the verb
+// and closed by punctuation or a short word, needs no benchmark word after it. "We present SWE-bench results" does not
+// count. Added 2026-11-25, after the scan missed RUIBench and HIVE-Bench at 4 points.
+const INTRO_BENCH =
+  /\b(?:[Ww]e|[Tt]his (?:paper|work))\s+(?:also\s+)?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\s+(?:the\s+|our\s+)?([\w.+-]+(?:[ ][A-Z0-9][\w.+-]*){0,2}?)(?=\s*[,(:;—–]|\s+-\s|\.(?:\s|$)|\s+(?:to|that|which|with|for)\b|$)/g;
+// a Gym named this way is a training environment more often than a test (MobileGym-Lite, TeleGym in November 2026)
+const TEST_TAIL = /(?:Bench|BENCH|bench|Eval|EVAL|Evals|Arena|Exam|Leaderboard)(?![a-z])/;
+/** The Bench-style name an abstract introduces with no benchmark word after it, if there is one. */
+export function introBench(abstract: string): string | undefined {
+  for (const m of abstract.matchAll(INTRO_BENCH)) if (names(m[1]).some((n) => TEST_TAIL.test(n))) return m[1];
+  return undefined;
+}
+
 /**
  * A paper's benchmark name: a Bench-style name its abstract introduces when the title's head is not one, else the
  * part before the colon when it is short, else a Bench-style name in the title, else the name the abstract
@@ -236,7 +249,8 @@ export function introName(abstract: string): string | undefined {
  */
 export function paperName(title: string, abstract = ''): string {
   const head = title.split(':')[0].trim();
-  const intro = introName(abstract);
+  // "To benchmark these capabilities, we introduce HH-Bench, comprising 12 tasks" names the find HH-Bench, not Heave-Ho
+  const intro = introName(abstract) ?? introBench(abstract);
   if (intro && benchLike(intro) && !benchLike(head)) return intro;
   if (head !== title && head.length <= 40 && head.split(/\s+/).length <= 4) return head;
   return names(title)[0] ?? intro ?? title;
@@ -280,15 +294,17 @@ export function stageA(title: string, abstract: string, hasArtifact: boolean): n
   if (titleNames.length) s += 3;
   if (TITLE.test(title)) s += 2;
   const intro = abstract.match(INTRO);
-  if (intro) {
+  // "we introduce RUIBench, comprising..." counts like an introduction that names its benchmark
+  const bench = intro ? undefined : introBench(abstract);
+  if (intro || bench) {
     s += 3;
     // the abstract names what it introduces. "the Collaborative Intelligence Benchmark" counts like "StateBench".
-    if (names(intro[0]).length || introName(abstract)) s += 1;
+    if (bench || names(intro![0]).length || introName(abstract)) s += 1;
     // and tests a set of models on it (added 2026-11-04, after the scan missed that benchmark at 3 points)
     if (SWEEP.test(abstract)) s += 1;
   }
   if (hasArtifact) s += 1;
-  if (METHOD.test(abstract) && !intro && !TITLE.test(title) && !titleNames.length) s -= 2;
+  if (METHOD.test(abstract) && !intro && !bench && !TITLE.test(title) && !titleNames.length) s -= 2;
   if (STUDY.test(abstract)) s -= 2;
   return s;
 }

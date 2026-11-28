@@ -11,6 +11,14 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: { 'Task 1': 'Task 1: Single-patient information extraction', 'Task 2': 'Task 2: Information extraction with distractors',
     'Task 3': 'Task 3: Insufficient information' },
+  stats: {
+    'Task 1 minimum': { name: 'Task 1 minimum accuracy', unit: '%', better: 'higher' },
+    'Task 1 maximum': { name: 'Task 1 maximum accuracy', unit: '%', better: 'higher' },
+    'Task 2 minimum': { name: 'Task 2 minimum accuracy', unit: '%', better: 'higher' },
+    'Task 2 maximum': { name: 'Task 2 maximum accuracy', unit: '%', better: 'higher' },
+    'Task 3 minimum': { name: 'Task 3 minimum accuracy', unit: '%', better: 'higher' },
+    'Task 3 maximum': { name: 'Task 3 maximum accuracy', unit: '%', better: 'higher' },
+  },
   headline: 'The paper reports no overall accuracy, so this is the plain mean of the three task accuracies.',
   async fetch() {
     const paper = await paperHtml(feed);

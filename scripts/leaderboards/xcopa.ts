@@ -20,7 +20,11 @@ const board: Leaderboard = {
   vi: { name: 'Vietnamese', group: 'Language' },
   zh: { name: 'Mandarin Chinese', group: 'Language' },
 }, url: "https://github.com/cambridgeltl/xcopa", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed. Their source license and site terms apply.',
+ stats: {
+  qu_fallback: { name: 'Southern Quechua (fallback)', unit: '%', better: 'higher' },
+  ht_fallback: { name: 'Haitian Creole (fallback)', unit: '%', better: 'higher' },
+ },
 
  async fetch() {
 

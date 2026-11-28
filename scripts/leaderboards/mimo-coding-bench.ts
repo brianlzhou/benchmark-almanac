@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://mimo.xiaomi.com/mimo-v2-5-pro/index.html",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' } },
   
   async fetch() {
     const s=await fetchText(FEED);

@@ -10,6 +10,8 @@ interface Results {
 
 const board: Leaderboard = {
   benchmark: "neurosciencebench-latchbio",
+  harnesses: 'system',
+  reference: ['Pi'],
   url: "https://benchmarks.bio/neuroscience",
   feed,
   terms: "The publisher supplies a citation and download on the board. https://benchmarks.bio/neuroscience The site permits crawling in robots.txt.",

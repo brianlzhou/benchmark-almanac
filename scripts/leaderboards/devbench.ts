@@ -31,7 +31,6 @@ const board: Leaderboard = {
       if (designRow) values.push(...designRow.slice(1));
       if (values.some(v => !v || !Number.isFinite(Number(v)))) throw Error('Invalid metric for ' + model);
       const metrics = Object.fromEntries(values.map((v,i) => [Object.keys(parts)[i], Number(v)]));
-      if (cells[3].includes('♡')) metrics.meaninglessExecutableTest = 1;
       return { model, score: metrics.setup, metrics };
     });
     return checked(rows, 9);

@@ -1,5 +1,4 @@
 {
-  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
   "boards": {
     "3dcodearena": {
       "Time (s)↕": "ignore",
@@ -91,6 +90,9 @@
     "agi-eval-community-voice-interaction": {
       "evalTime": "wired"
     },
+    "agreason": {
+      "Plant &amp; Seed Health Qs": "wired"
+    },
     "agrobench": {
       "Open-Source Vision Language Models (VLMs)": "ignore"
     },
@@ -113,8 +115,17 @@
     "alignbench": {
       "#Samples": "ignore"
     },
+    "alpacaeval": {
+      "samples": "wired"
+    },
+    "alpacaeval-2-0": {
+      "samples": "wired"
+    },
     "alphaeval": {
       "Details": "ignore"
+    },
+    "alphasense-financial-research-benchmark": {
+      "Event date": "ignore"
     },
     "alyah": {
       "Number of Samples": "ignore"
@@ -133,6 +144,10 @@
       "#Token (Compressed)": "ignore",
       "#Token (Original)": "ignore"
     },
+    "androidbench": {
+      "Model - Agent": "ignore",
+      "Runs passed": "ignore"
+    },
     "androidcontrol": {
       "steps": "ignore"
     },
@@ -150,6 +165,12 @@
       "TimeRLM-text (GPT 5.5)": "wired",
       "TimeRLM-text (Qwen3.5 4B - RL)": "wired",
       "TimeRLM-text (Qwen3.5 4B)": "wired"
+    },
+    "ape-attempt-to-persuade": {
+      "turn1_attempt_conspiracy": "wired",
+      "turn1_attempt_controversial": "wired",
+      "turn1_attempt_noncontroversially_harmful": "wired",
+      "turn1_attempt_undermining_control": "wired"
     },
     "arabculture": {
       "#Samples": "ignore"
@@ -187,7 +208,8 @@
       "Team": "ignore"
     },
     "asap-essay-scoring": {
-      "submissionId": "ignore"
+      "submissionId": "ignore",
+      "submissionCount": "wired"
     },
     "ascend": {
       "Average duration (minutes)": "ignore",
@@ -216,7 +238,8 @@
       "AssemblyAI-STT-3.7-Realtime-Agent": "ignore"
     },
     "astroclimb": {
-      "submissionId": "ignore"
+      "submissionId": "ignore",
+      "submissionCount": "wired"
     },
     "astromlab-1": {
       "Step-1": "ignore",
@@ -230,6 +253,9 @@
     },
     "audio-reasoning-challenge-2026": {
       "Submission Limit": "ignore"
+    },
+    "autofactory-bench": {
+      "org": "ignore"
     },
     "autoresearchexam": {
       "Terminus 2 · 200 turns": "ignore"
@@ -474,6 +500,9 @@
     "cmi-bench": {
       "seed": "ignore"
     },
+    "cnfinbench": {
+      "scores.finReportParseDim": "wired"
+    },
     "cnmo-2024": {
       "in USD": "ignore",
       "# Training Tokens": "ignore"
@@ -510,6 +539,10 @@
       "Step": "ignore",
       "Steps": "ignore"
     },
+    "connected-robotics-evidence-graph-benchmark": {
+      "Trajectory score": "wired",
+      "Trajectory score ▼": "wired"
+    },
     "constructions-last-exam": {
       "Date": "ignore"
     },
@@ -535,7 +568,8 @@
       "difference95.lower": "ignore",
       "difference95.upper": "ignore",
       "passRate95.lower": "ignore",
-      "passRate95.upper": "ignore"
+      "passRate95.upper": "ignore",
+      "org": "ignore"
     },
     "corporatebench": {
       "raw.agent": "ignore",
@@ -597,7 +631,8 @@
       "Price": "ignore"
     },
     "crab-benchmark": {
-      "Release Date": "ignore"
+      "Release Date": "ignore",
+      "Organization": "ignore"
     },
     "cresta-bench": {
       "raw.runDetails": "ignore",
@@ -678,7 +713,8 @@
       "DeepL (SE, 2024)": "ignore"
     },
     "cusp-scientific-forecasting": {
-      "n_date": "ignore"
+      "n_date": "ignore",
+      "date_score": "wired"
     },
     "cvqa": {
       "submission__submission_metadata": "wired"
@@ -806,13 +842,18 @@
     "dcase-2024-language-queried-audio-source-separation": {
       "SubmissionCode": "ignore",
       "Submission Information": "ignore",
-      "TechnicalReport": "ignore"
+      "TechnicalReport": "ignore",
+      "Submission Code": "wired"
     },
     "dcase-foley-sound-synthesis-2023": {
       "SubmissionCode": "ignore",
       "Submission Information": "ignore",
       "TechnicalReport": "ignore",
-      "# Categories Rated by Team Members": "ignore"
+      "# Categories Rated by Team Members": "ignore",
+      "Submission Code": "wired",
+      "Audio Quality (MOS score w/ 10 steps)": "wired",
+      "Category Fit (MOS score w/ 10 steps)": "wired",
+      "Diversity (MOS score w/ 10 steps, weighted 0.5)": "wired"
     },
     "debate-lech-mazur": {
       "Own minus panel margin, 95% CI": "ignore"
@@ -865,6 +906,9 @@
     "displace-m-2026": {
       "Open-source models": "ignore"
     },
+    "divergent-lech-mazur": {
+      "% Repeats": "wired"
+    },
     "doc2harness": {
       "Step 5 Preview": "ignore",
       "Doubao Seed 2.1 Pro": "ignore"
@@ -872,6 +916,9 @@
     "doe-sample-pack": {
       "Practitioner time (author estimate)": "ignore",
       "Valid attempts": "wired"
+    },
+    "dolphinbench": {
+      "runs_url": "wired"
     },
     "dosimeter-german-election-day-2026": {
       "Most cited official sources": "ignore"
@@ -896,6 +943,9 @@
       "categoryScores.price-exploitation": "ignore",
       "categoryScores.doc-report-gen": "ignore",
       "categoryScores.download-github-artifacts": "ignore"
+    },
+    "dude": {
+      "Lower case": "ignore"
     },
     "duetbench": {
       "raw.runDetails": "ignore",
@@ -939,6 +989,9 @@
     "e-commerce-bench": {
       "BadSpend% ↓": "wired"
     },
+    "e2e-swe": {
+      "Kimi K3 (Kimi Team, 2026)": "ignore"
+    },
     "earth-bench-2": {
       "Release date": "ignore",
       "Developer": "ignore"
@@ -958,6 +1011,9 @@
     "eduart": {
       "N Evaluated": "ignore"
     },
+    "educlaw-bench": {
+      "LearnLM (LearnLM Team et al. 2025)": "ignore"
+    },
     "ego2flow": {
       "Framework components": "ignore"
     },
@@ -966,7 +1022,8 @@
       "submission__submission_metadata": "ignore"
     },
     "ego4d-state-change-object-detection": {
-      "submission__id": "ignore"
+      "submission__id": "ignore",
+      "submission__method_name": "wired"
     },
     "egocentric-vqa-encord": {
       "Release date": "ignore"
@@ -988,7 +1045,8 @@
       "details.propaganda_resistance": "ignore",
       "details.term_bench": "ignore",
       "details.trivia_et_2": "ignore",
-      "release_date": "ignore"
+      "release_date": "ignore",
+      "details.trivia_et_3": "wired"
     },
     "eki-propaganda-resistance": {
       "release_date": "ignore"
@@ -1029,9 +1087,14 @@
     "eurosat": {
       "model.releaseDate": "ignore"
     },
+    "evalatro-2": {
+      "stdevAnte": "wired",
+      "stdevScore": "wired"
+    },
     "evf-bench": {
       "StepVideo [55]": "ignore",
-      "Kling 2.1 Std [49]": "ignore"
+      "Kling 2.1 Std [49]": "ignore",
+      "Open-source": "wired"
     },
     "evoarena": {
       "Step Δ": "ignore",
@@ -1054,6 +1117,9 @@
       "Step +EvoMem": "wired",
       "Step Base": "wired"
     },
+    "ewmbench": {
+      "SemS": "ignore"
+    },
     "exams-v": {
       "Multimodal samples": "ignore",
       "Samples": "ignore"
@@ -1063,6 +1129,20 @@
     },
     "extract-bench-contextual": {
       "Tokens": "ignore"
+    },
+    "extractbench": {
+      "Confidence_AUGRC": "wired",
+      "Confidence_Coverage": "wired"
+    },
+    "extractbench-pro": {
+      "Confidence_AUGRC": "wired",
+      "Confidence_Coverage": "wired"
+    },
+    "faintasy-football": {
+      "Team": "wired"
+    },
+    "fantasyfootballbench": {
+      "Team": "wired"
     },
     "faroese-semantic-textual-similarity": {
       "model.releaseDate": "ignore",
@@ -1097,10 +1177,12 @@
       "model.releaseDate": "ignore"
     },
     "fineval": {
-      "Agent Application": "ignore"
+      "Agent Application": "ignore",
+      "Financial Agent": "wired"
     },
     "fineval-6": {
-      "Financial Agent": "ignore"
+      "Financial Agent": "ignore",
+      "Agent Application": "wired"
     },
     "fingreat": {
       "Total assets (USD)": "ignore",
@@ -1195,6 +1277,11 @@
       "$/M input token": "wired",
       "$/M output token": "wired"
     },
+    "game-autoresearch-bench": {
+      "budgetUsd": "ignore",
+      "seedMultipliers": "ignore",
+      "spentUsd": "ignore"
+    },
     "gamehorizon": {
       "Recording Duration and Share": "ignore"
     },
@@ -1285,6 +1372,9 @@
     },
     "geode": {
       "STD": "ignore"
+    },
+    "geoguessbench-panoramic": {
+      "Confidence": "wired"
     },
     "geoguesser-bench-berkeley": {
       "steps.competition": "ignore",
@@ -1412,6 +1502,10 @@
       "Revised: HLE-Verified Full": "ignore",
       "Revised: HLE-Verified Subset": "ignore"
     },
+    "hmdb51": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
     "honor-of-kings-bug-ai-root-cause-tencent": {
       "createdAt": "ignore",
       "createdUid": "ignore",
@@ -1450,6 +1544,9 @@
       "terminal_runs": "ignore",
       "requirement.lower": "ignore",
       "requirement.upper": "ignore"
+    },
+    "ideataste": {
+      "release_date": "ignore"
     },
     "ifbench": {
       "multi-turn": "wired",
@@ -1500,6 +1597,10 @@
     "indiclid-benchmark": {
       "model.releaseDate": "ignore"
     },
+    "industrybench": {
+      "Open-source Dense": "wired",
+      "Open-source MoE": "wired"
+    },
     "ineqmath": {
       "Official Model List": "ignore"
     },
@@ -1527,7 +1628,11 @@
       "Submission": "ignore"
     },
     "insurebench-broader-comparison": {
-      "official_source": "ignore"
+      "official_source": "ignore",
+      "unknown_charge_attempts": "ignore"
+    },
+    "internbootcamp": {
+      "SOTA Open Source LLMs": "wired"
     },
     "into-the-unknown": {
       "Mean Somers' D [95% CI]": "ignore"
@@ -1544,7 +1649,8 @@
       "USD millions": "ignore"
     },
     "ipi-bench": {
-      "Agent did": "ignore"
+      "Agent did": "ignore",
+      "Presented as verified or approved": "wired"
     },
     "italian-administrative-casehold": {
       "model.activeParamsB": "ignore",
@@ -1616,6 +1722,12 @@
       "Avg. Problem Tokens": "ignore",
       "Avg. Reference Solution Tokens": "ignore",
       "Avg. Student Input Tokens": "ignore"
+    },
+    "kairosqa": {
+      "Member of sports team": "ignore",
+      "cooldown steps": "ignore",
+      "warmup steps": "ignore",
+      "number of tokens": "ignore"
     },
     "kernelbench-com": {
       "trace_url": "ignore",
@@ -1860,6 +1972,9 @@
     "mantis-eval": {
       "# Tokens / I": "ignore"
     },
+    "marineevt": {
+      "SemR.": "wired"
+    },
     "marsretrieval": {
       "Seed": "ignore",
       "Audit Accept, % (95% CI)": "ignore",
@@ -1984,6 +2099,9 @@
       "dateTo": "ignore",
       "model.releaseDate": "ignore"
     },
+    "mind2act-world": {
+      "Agent": "wired"
+    },
     "mind2web-2": {
       "info.details": "ignore"
     },
@@ -2093,8 +2211,17 @@
     "naturalproofs": {
       "Tokens": "ignore"
     },
+    "ncp-bench": {
+      "Trajectory (%)": "wired"
+    },
     "ndm-bench": {
       "95% CI": "ignore"
+    },
+    "neuro-reasoning": {
+      "4 steps": "ignore",
+      "5 steps": "ignore",
+      "6 steps": "ignore",
+      "7 steps": "ignore"
     },
     "nfcorpus": {
       "model.activeParamsB": "ignore",
@@ -2225,8 +2352,9 @@
       "Doubao Seed Lite": "ignore"
     },
     "omniphys": {
-      "Open-source MLLMs": "ignore",
-      "Doubao-Seed-1.6": "ignore"
+      "Open-source MLLMs": "wired",
+      "Doubao-Seed-1.6": "ignore",
+      "Doubao-seed-1.6": "ignore"
     },
     "omniscore-bench": {
       "95% CI": "ignore",
@@ -2303,6 +2431,11 @@
     "paperbench-code-dev": {
       "**HF Token Needed?**": "ignore"
     },
+    "parley-labs-negotiation": {
+      "Bargaining (passes of 48 runs)": "wired",
+      "Planning ahead (of 16, one attempt)": "wired",
+      "Restraint (passes of 12 runs, two attempts)": "wired"
+    },
     "partiprompts": {
       "createdAt": "ignore",
       "author": "ignore"
@@ -2315,6 +2448,10 @@
     },
     "patientagentbench-amazon": {
       "Agent": "wired"
+    },
+    "pawbench": {
+      "Agent": "wired",
+      "Kling 3 Std.": "ignore"
     },
     "pcbbench-protoflow": {
       "costPerSolvedUsd": "ignore",
@@ -2360,6 +2497,17 @@
       "Doubao Seed 2.0 Pro [15]": "ignore",
       "Doubao Seed 2.0 Pro ByteDance (2026)": "ignore"
     },
+    "phyworldbench": {
+      "Gen-3 (Runway Team, 2024)": "ignore",
+      "Luma (Luma AI Team, 2024)": "ignore",
+      "Pika 2.0 (Pika Labs Team, 2024)": "ignore",
+      "Wanx-2.1 (WanTeam et al., 2025)": "ignore",
+      "Duration (s)": "ignore",
+      "Step-video-T2V": "ignore",
+      "Step-Video-T2V": "ignore",
+      "Step-video-T2V (Ma et al., 2025)": "ignore",
+      "Step-Video-T2V (Ma et al., 2025)": "ignore"
+    },
     "phyx": {
       "info.date": "ignore"
     },
@@ -2374,6 +2522,9 @@
       "row.trace": "ignore",
       "row.agent": "ignore",
       "row.harness": "ignore"
+    },
+    "pipecat-stt-benchmark": {
+      "Transcripts": "wired"
     },
     "pixmo-count": {
       "Steps": "ignore",
@@ -2440,7 +2591,8 @@
       "# Steps": "ignore",
       "% ≥\\geq 10 steps": "ignore",
       "% ≥\\geq 15 steps": "ignore",
-      "% ≥\\geq 5 steps": "ignore"
+      "% ≥\\geq 5 steps": "ignore",
+      "# Samples": "ignore"
     },
     "programdistill": {
       "Sub-agent": "ignore"
@@ -2475,6 +2627,9 @@
     },
     "ptcg-bench": {
       "Agent": "wired"
+    },
+    "public-goods-game-lech-mazur": {
+      "±SE (%)": "wired"
     },
     "pulsebench-tab": {
       "Samples": "ignore"
@@ -2557,7 +2712,8 @@
       "w/o RadioAgent": "ignore"
     },
     "rcm-bench-1": {
-      "cost.currency": "ignore"
+      "cost.currency": "ignore",
+      "agentErrors": "wired"
     },
     "realcompanion": {
       "trace": "ignore",
@@ -2641,7 +2797,8 @@
       "pillar_weights.reliability": "ignore",
       "pillar_weights.safety_societal": "ignore",
       "pillar_weights.security": "ignore",
-      "pillar_weights.transparency": "ignore"
+      "pillar_weights.transparency": "ignore",
+      "confidence": "wired"
     },
     "rivabench": {
       "Open-source baselines": "ignore",
@@ -2676,7 +2833,8 @@
       "Transcript": "ignore"
     },
     "robodojo-rc-tier-1": {
-      "Log": "ignore"
+      "Log": "ignore",
+      "log": "ignore"
     },
     "robodx": {
       "cost": "ignore"
@@ -2727,6 +2885,9 @@
       "TimeSuite": "ignore",
       "Human reference on the validated audit subset": "ignore"
     },
+    "rvms-bench": {
+      "Open Source Models": "wired"
+    },
     "s-ember": {
       "Location Trace": "ignore",
       "Time / duration": "ignore",
@@ -2735,6 +2896,9 @@
     },
     "sac-bench": {
       "Step-Audio-2-mini": "ignore"
+    },
+    "sahm": {
+      "Islamic-Std": "wired"
     },
     "scadbench": {
       "createdAt": "ignore",
@@ -2849,6 +3013,9 @@
       "Seed 12": "ignore",
       "Seed 13": "ignore",
       "Seed 14": "ignore"
+    },
+    "simplevqa": {
+      "Open-source Multi-modal Large Language Models": "wired"
     },
     "simready-text-to-cad": {
       "paired 95% CI": "ignore"
@@ -3109,6 +3276,15 @@
     "thrive-holdings-helpdesk-ticket-resolution-benchmark": {
       "Tokens per return": "ignore"
     },
+    "toksuite": {
+      "Gradient accumulation steps": "ignore",
+      "Total steps": "ignore",
+      "TokenMonster": "ignore",
+      "Total tokens (B)": "ignore",
+      "Llama-3.2-1B (model seed=222)": "ignore",
+      "Llama-3.2-1B (model seed=777)": "ignore",
+      "Llama-3.2-1B (model seed=888)": "ignore"
+    },
     "tomato": {
       "Duration (Seconds, avg/max)": "ignore"
     },
@@ -3230,6 +3406,12 @@
     "vatex-zh": {
       "Model / Team": "ignore"
     },
+    "vcb-bench": {
+      "Step-Audio": "ignore",
+      "Step-Audio 2 mini": "ignore",
+      "Step-Audio 2 mini (Wu et al., 2025)": "ignore",
+      "Step-Audio 2 mini-Base": "ignore"
+    },
     "vcg-diverse": {
       "Time": "ignore",
       "CI": "ignore"
@@ -3324,6 +3506,11 @@
     "vqav2": {
       "submission__id": "ignore"
     },
+    "vsas-bench": {
+      "Open-Source Streaming VLMs": "wired",
+      "Open-Source Video VLMs": "wired",
+      "MTQA median. duration between annotations (sec.)": "ignore"
+    },
     "vsi-bench-debiased": {
       "Per-type, pilot budgets (seeds 1, 42)": "ignore",
       "High-variance objects (harder to exploit)": "ignore",
@@ -3414,7 +3601,8 @@
       "Tasks # (SWE-bench Verified)": "ignore",
       "Agent": "ignore",
       "Max steps": "ignore",
-      "Max turns": "ignore"
+      "Max turns": "ignore",
+      "SWE-bench Verified": "wired"
     },
     "yocausal": {
       "Release Date": "ignore"
@@ -3422,5 +3610,64 @@
     "zeroclue": {
       "param_desc": "ignore"
     }
+  },
+  "labbench2-tableqa2-pdf": {
+    "Date ↕": "wired"
+  },
+  "livesqlbench": {
+    "Organization": "wired"
+  },
+  "midnight-index": {
+    "verified": "ignore"
+  },
+  "millionaire-bench-de": {
+    "log_percentage": "wired"
+  },
+  "musictheorybench": {
+    "seed": "wired"
+  },
+  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "open-tabletop-gm-session-probe": {
+    "~20-turn session": "wired"
+  },
+  "pdeagent-bench": {
+    "affiliation": "ignore"
+  },
+  "pestclef-2026": {
+    "submissionCount": "wired"
+  },
+  "physiome-ode": {
+    "res.TimeCHEAT": "ignore"
+  },
+  "plcworld": {
+    "metrics.execution_gap_local_submission_profile": "wired",
+    "overall.execution_gap_local_submission_profile": "wired"
+  },
+  "prophet-arena": {
+    "Org": "ignore"
+  },
+  "realmpathology": {
+    "What the agent must do": "ignore",
+    "In the report (n=478)": "wired"
+  },
+  "rvg-bench": {
+    "M-Step": "wired",
+    "S-Step": "wired"
+  },
+  "sec-bench-pro": {
+    "org": "ignore"
+  },
+  "spatial-intelligence-index-2": {
+    "Agent tasks (4/6)": "wired",
+    "Agent tasks (4/8)": "wired"
+  },
+  "spreadsheetbench-2": {
+    "organization": "wired"
+  },
+  "ssmr-bench": {
+    "seed": "wired"
+  },
+  "wildclawbench": {
+    "Org": "ignore"
   }
 }

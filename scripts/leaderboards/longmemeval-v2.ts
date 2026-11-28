@@ -3,43 +3,50 @@
 // Table 2 identifies Qwen3.5-9B as the fixed reader and GPT-5.4-mini as the controller for the coding agents.
 import type { BoardPart, Leaderboard, LeaderboardRow } from './types.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
-import { fetchText } from '../lib/util.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const url = 'https://xiaowu0162.github.io/longmemeval-v2/';
-const feed = url + 'static/js/index.js';
-const tiers = ['small', 'medium'];
-const measures = ['Accuracy', 'Static', 'Dynamic', 'Procedure', 'Gotchas', 'Latency'];
+const feed = url + 'static/data/leaderboard.json';
+const tiers = ['small', 'medium'] as const;
+const measures = ['Accuracy', 'Static', 'Dynamic', 'Procedure', 'Gotchas', 'Latency'] as const;
 const parts: Record<string, BoardPart> = {};
 for (const tier of tiers) {
   for (const name of measures.filter(m => m !== 'Latency')) {
     parts[tier + name] = { name, group: tier === 'small' ? 'LME-V2-Small' : 'LME-V2-Medium' };
   }
 }
+interface OperatingPoint { accuracy: number; static: number; dynamic: number; procedure: number; gotchas: number; latency: number }
+interface SystemEntry { name: string; results: Partial<Record<'small' | 'medium', { operatingPoints: OperatingPoint[] }>> }
 const board: Leaderboard = {
   benchmark: 'longmemeval-v2', feed, url, parts, harnesses: 'system',
   terms: 'The authors publish the leaderboard on GitHub Pages under https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   headline: 'The leaderboard reports accuracy for each tier separately, so this is the plain mean of Small and Medium accuracy.',
   stats:{smallLatency:{name:'Small query latency',unit:'seconds',better:'lower'},mediumLatency:{name:'Medium query latency',unit:'seconds',better:'lower'}},
+  chart: {
+    title: 'Accuracy vs. memory-query latency',
+    x: { key: 'smallLatency', label: 'Small query latency', unit: 's', better: 'lower', log: true },
+    y: { key: 'smallAccuracy', label: 'Small accuracy', unit: '%', better: 'higher' },
+    note: 'LongMemEval-V2 plots answer accuracy against memory-query latency on a log scale with a reference frontier.',
+  },
   async fetch() {
-    const script = await fetchText(feed);
-    const list = script.match(/const leaderboardEntries\s*=\s*\[([\s\S]*?)\n\];/)?.[1];
-    if (!list) throw new Error('Missing leaderboard entries');
+    const data = await fetchJson<{ systems: SystemEntry[] }>(feed);
+    if (!Array.isArray(data.systems) || !data.systems.length) throw new Error('Missing leaderboard entries');
     const rows: LeaderboardRow[] = [];
-    for (const [block] of list.matchAll(/\{[^{}]*\}/g)) {
-      if (/tiers:\s*\["small"\]/.test(block)) continue;
-      const system = block.match(/system:\s*"([^"]+)"/)?.[1];
-      if (!system) throw new Error('Missing memory system');
+    for (const entry of data.systems) {
+      const small = entry.results?.small?.operatingPoints?.[0];
+      const medium = entry.results?.medium?.operatingPoints?.[0];
+      if (!small || !medium) continue;
+      const system = entry.name;
       const coding = ['Codex', 'AgentRunbook-C'].includes(system);
       if (!coding && !['No retrieval', 'RAG: query to slice', 'RAG: query to slice + notes', 'AgentRunbook-R'].includes(system)) {
         throw new Error('Review the controller and reader for ' + system);
       }
       const metrics: Record<string, number> = {};
-      for (const tier of tiers) {
+      for (const [tier, pt] of [['small', small], ['medium', medium]] as const) {
         for (const measure of measures) {
-          const key = tier + measure;
-          const value = block.match(new RegExp(key + 'Value:\\s*([\\d.]+)\\s*,'))?.[1];
-          if (!value || !Number.isFinite(Number(value))) throw new Error('Missing ' + key + ' for ' + system);
-          metrics[key] = Number(value);
+          const val = pt[measure.toLowerCase() as keyof OperatingPoint];
+          if (!Number.isFinite(val)) throw new Error('Missing ' + tier + measure + ' for ' + system);
+          metrics[tier + measure] = val;
         }
       }
       rows.push({

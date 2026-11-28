@@ -13,10 +13,20 @@ const board: Leaderboard = {
   terms: 'The repository uses Apache 2.0 at ' + url + '/blob/HEAD/LICENSE.',
   aliases: { 'LLaVA-1.6-Mistral-7B': 'llava-v1-6-mistral-7b' },
   async fetch() {
-    const table = markdownTables(await fetchText(feed)).find(t => t[0].some(c => c.startsWith('JA-VLM-Bench-In-the-Wild (ROUGE-L')));
+    const all = markdownTables(await fetchText(feed));
+    const metaTbl = all.find(t => t[0]?.[0] === 'Model' && t[0].includes('Size') && t[0].includes('License'));
+    const meta = new Map<string, { params?: number; license?: string }>();
+    if (metaTbl) {
+      const iSize = metaTbl[0].indexOf('Size'), iLic = metaTbl[0].indexOf('License');
+      for (const r of metaTbl.slice(1)) {
+        const p = r[iSize]?.match(/^(\d+(?:\.\d+)?)B$/i);
+        meta.set(r[0], { params: p ? Number(p[1]) : undefined, license: r[iLic]?.trim() || undefined });
+      }
+    }
+    const table = all.find(t => t[0].some(c => c.startsWith('JA-VLM-Bench-In-the-Wild (ROUGE-L')));
     if (!table || table[0][0] !== 'Model') throw new Error('Missing Japanese VLM comparison');
     const idx = table[0].findIndex(c => c.startsWith('JA-VLM-Bench-In-the-Wild (ROUGE-L'));
-    return checked(table.slice(1).map(row => ({ model: row[0], score: numberCell(row[idx]) })), 4);
+    return checked(table.slice(1).map(row => ({ model: row[0], score: numberCell(row[idx]), ...meta.get(row[0]) })), 4);
   },
 };
 export default board;

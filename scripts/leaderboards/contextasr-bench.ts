@@ -28,7 +28,6 @@ const board: Leaderboard = {
       const metrics:Record<string,number>={};
       groups.forEach((group,i)=>measures.forEach((measure,j)=>{ metrics[group+': '+measure]=numberCell(values[i][j]); }));
       const score = groups.reduce((s,g)=>s+metrics[g+': WER'],0)/groups.length;
-      if(context.includes('∗')) metrics.severeHallucinationObserved=1;
       const setting = context==='/'?'No context':context.startsWith('Fine')?'Fine-grained context':'Coarse-grained context';
       rows.push({model,setting,score,metrics,params:Number(params[1])/(params[2]==='M'?1000:1)});
     }

@@ -20,6 +20,16 @@ const board: Leaderboard = {
     vocal: { name: 'Vocal sounds correct', unit: 'count', better: 'higher' },
     vocalNearMisses: { name: 'Vocal sounds near misses', unit: 'count' },
     words: { name: 'Words correct', unit: 'count', better: 'higher' },
+    wordsNearMisses: { name: 'Words near misses', unit: 'count' },
+    sentences: { name: 'Sentences correct', unit: 'count', better: 'higher' },
+    sentencesNearMisses: { name: 'Sentences near misses', unit: 'count' },
+    latency: { name: 'Total run time', unit: 'seconds', better: 'lower' },
+  },
+  chart: {
+    title: 'Clips correct vs. API cost',
+    x: { key: 'cost', label: 'API run cost', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Clips correct', better: 'higher' },
+    note: 'HearingBench plots clips answered correctly out of 100 against API cost on a log scale with a Pareto frontier.',
   },
   aliases: {
     'Gemini 4 Carbon': 'gemini-4-carbon',
@@ -71,6 +81,7 @@ const board: Leaderboard = {
       const tierNames = ['everyday', 'instrument', 'vocal', 'words', 'sentences'];
       const tips = [...body.matchAll(/data-tip="<b>([^<]+)<\/b><br>(\d+) of 20 correct, (\d+) near misses/g)];
       tips.slice(0, 5).forEach((m, i) => { metrics[tierNames[i]] = Number(m[2]); metrics[`${tierNames[i]}NearMisses`] = Number(m[3]); });
+      if (numbers?.time !== undefined && Number.isFinite(numbers.time)) metrics.latency = numbers.time;
       const harness = body.match(/<small>([^<]+)<\/small>/)?.[1]?.replace(/Â·/g, '·').split('·').pop()?.trim();
       rows.push({ model: name, setting: effort, harness, score: Number(score), tokens: numbers?.tokens, cost: numbers?.cost, metrics });
     }

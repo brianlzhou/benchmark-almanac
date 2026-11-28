@@ -8,6 +8,11 @@ const feed = 'https://aclanthology.org/W17-2623.pdf';
 const board: Leaderboard = {
   benchmark: 'newsqa', url: 'https://aclanthology.org/W17-2623/', feed, static: 'paper',
   terms: 'ACL Anthology publishes the paper under the terms at https://aclanthology.org/info/copyright/.',
+  stats: {
+    exactMatch: { name: 'Test exact match', unit: '%', better: 'higher' },
+    devF1: { name: 'Development F1', unit: '%', better: 'higher' },
+    devExactMatch: { name: 'Development exact match', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split('Table 5: Neural model performance on SQuAD and NewsQA.')[1]?.split(/\n\s*\n/)[0];

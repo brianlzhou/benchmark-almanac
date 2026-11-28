@@ -12,6 +12,7 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       return parseCsv(await fetchText(FEED)).map(r=>({model:/^(gpt4|gpt3.5|claude2)$/.test(r.Model)?r.Model+' (snapshot unspecified)':r.Model,score:Number(r.total),open:r['Open or Not']==='1'?true:r['Open or Not']==='0'?false:undefined,
+        link:/^https?:\/\//.test(r.Link?.trim() ?? '') ? r.Link.trim() : undefined,
         params:r.Model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b\b/i)?.[1] ? Number(r.Model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b\b/i)![1]) : undefined}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

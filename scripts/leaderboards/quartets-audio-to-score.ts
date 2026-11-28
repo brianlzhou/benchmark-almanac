@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The wiki lists the GNU Free Documentation License 1.2 for its content. https://futuremirex.com/mirex/wiki/2026:Audio-to-Score_Transcription_Results The host has no published robots directives at /robots.txt.",
   parts: { cer: { name: 'CER', unit: 'score', better: 'lower' }, ler: { name: 'LER', unit: 'score', better: 'lower' }, mv2h: { name: 'MV2H', better: 'higher' } },
+  stats: { realTimeFactor: { name: 'Real-time factor', unit: 'score', better: 'lower' } },
   async fetch() {
     const html = await fetchText(FEED);
     const roster = tables(html).find(t => t[0]?.[0]?.text === 'Team');

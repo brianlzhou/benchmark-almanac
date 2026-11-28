@@ -16,7 +16,7 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const ts=tables(await fetchText(FEED)).filter(t=>t[0]?.length===3 && /embeddings|representations|baselines/i.test(t[0][0].text));
   if(!ts.length)throw new Error('WiC test tables missing');
-  return ts.flatMap(t=>t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>({model:r[0].text.replace(/\s*†/g,''),setting:t[0][0].text,harness:r[1].text,score:num(r[2].text)!})));
+  return ts.flatMap(t=>t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>({model:r[0].text.replace(/\s*†/g,''),setting:t[0][0].text,harness:r[1].text,score:num(r[2].text)!,link:r[0].html.match(/href="(https?:\/\/[^"]+)"/i)?.[1]})));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

@@ -15,7 +15,7 @@ const board: Leaderboard = {
   'AO (%)': { name: 'Action order', group: 'Category' },
   'RC (%)': { name: 'Repetition count', group: 'Category' },
   dev: { name: 'Development accuracy', group: 'Split' },
-}, url: "https://motion-bench.github.io", feed: FEED,
+}, stats: { activeParams: { name: 'Active parameters', unit: 'billions' } }, url: "https://motion-bench.github.io", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

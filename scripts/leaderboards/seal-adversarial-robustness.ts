@@ -10,7 +10,8 @@ const PAGE = scaleUrl('adversarial_robustness');
 const ci = (e: ScaleEntry & { confidenceInterval_upper?: number }) => {
   const h = Number(e.confidenceInterval_upper);
   const s = Number(e.score);
-  return Number.isFinite(h) && h > 0 ? { ciLow: Math.max(0, +(s - h).toFixed(2)), ciHigh: +(s + h).toFixed(2) } : undefined;
+  const low = Math.max(0, +(s - h).toFixed(2)), high = +(s + h).toFixed(2);
+  return Number.isFinite(h) && h > 0 ? { low, high, metrics: { ciLow: low, ciHigh: high } } : undefined;
 };
 
 const board: Leaderboard = {
@@ -23,6 +24,6 @@ const board: Leaderboard = {
     // the version field says gemini-1.5-flash-preview-0514
     'Gemini 1.5 Flash': 'gemini-1-5-flash-may-2024',
   },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (_, e) => (ci(e) ? { metrics: ci(e) } : undefined)),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (_, e) => ci(e)),
 };
 export default board;

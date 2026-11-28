@@ -16,6 +16,7 @@ const board: Leaderboard = {
     short: { name: 'Short', group: 'Length' }, medium: { name: 'Medium', group: 'Length' },
     long: { name: 'Long', group: 'Length' },
   },
+  stats: { contextTokens: { name: 'Context window', unit: 'tokens' } },
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table)`,
   terms: 'Static GitHub Pages project page with no stated terms; the LongBench repository is MIT-licensed.',

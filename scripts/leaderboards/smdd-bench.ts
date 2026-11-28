@@ -20,12 +20,16 @@ const board: Leaderboard = {
   aliases: {
     'kimi-k2.5': 'kimi-k2-5',
   },
+  parts: {
+    '2dPharmacophoreIdentification': { name: '2D Pharmacophore Identification', group: 'Task type' },
+    interactionPointDiscovery: { name: 'Interaction Point Discovery', group: 'Task type' },
+    scaffoldHopping: { name: 'Scaffold Hopping', group: 'Task type' },
+    leadOptimization: { name: 'Lead Optimization', group: 'Task type' },
+    fragmentAssembly: { name: 'Fragment Assembly', group: 'Task type' },
+  },
   stats: {
     latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' },
-    tasks: { name: 'Tasks', unit: 'count' },
     tasks_passed: { name: 'Tasks passed', unit: 'count' },
-    boltz_budget: { name: 'Boltz budget', unit: 'count' },
-    admet_budget: { name: 'ADMET budget', unit: 'count' },
   },
   async fetch() {
     const html = await fetchText(PAGE);
@@ -40,29 +44,24 @@ const board: Leaderboard = {
     }
     if (!source) throw new Error('no runs module in the SMDD-Bench chunks');
     const rows: LeaderboardRow[] = [];
-    const parts: NonNullable<Leaderboard['parts']> = {};
     const types = [...source.matchAll(/\bid:"(\d+)",title:"([^"]+)"/g)];
     for(const m of source.matchAll(/runs:(\[\{run_id:)/g)){
       const part=source.slice(m.index!+5).replace(/:\.(\d)/g,':0.$1').replace(/([{,])(\d+):/g,'$1"$2":');
       for(const r of jsLiteral<any[]>(part,0)){
         if(r.tasks_total !== TASKS) continue;
         const model=r.model_id.split('/').at(-1).replace(/-preview$/i,'');const effort=r.display_name.match(/_(minimal|low|medium|high|xhigh|max)_/)?.[1]??(/-thinking_/.test(r.display_name)?'thinking':undefined);
-        const metrics:Record<string,number>={latency:r.avg_runtime_seconds,tasks:r.tasks_total};for(const k of ['avg_successful','avg_unique_successful','avg_pct_novel_successful','avg_pairwise_tanimoto'])if(typeof r[k]==='number')metrics[k]=r[k];
+        const metrics:Record<string,number>={latency:r.avg_runtime_seconds};for(const k of ['avg_successful','avg_unique_successful','avg_pct_novel_successful','avg_pairwise_tanimoto'])if(typeof r[k]==='number')metrics[k]=r[k];
         for (const [, id, name] of types) {
           const rate = r.by_type?.[id]?.rate;
           if (typeof rate !== 'number') continue;
           const key = name.toLowerCase().replace(/[^a-z0-9]+(.)?/g, (_, c: string | undefined) => c?.toUpperCase() ?? '');
           metrics[key] = rate * 100;
-          parts[key] = {name, group: 'Task type'};
         }
-        for (const key of ['tasks_passed', 'boltz_budget', 'admet_budget']) {
-          if (typeof r[key] === 'number') metrics[key] = r[key];
-        }
+        if (typeof r.tasks_passed === 'number') metrics.tasks_passed = r.tasks_passed;
         const harness = r.display_name.endsWith('_minimalist_agent') ? 'Minimalist Agent' : undefined;
         rows.push({model,score:r.overall_rate*100,setting:effort,harness,date:r.timestamp?.slice(0,10),cost:r.cost_per_task,metrics});
       }
     }
-    board.parts = parts;
     return rows;
   },
 };

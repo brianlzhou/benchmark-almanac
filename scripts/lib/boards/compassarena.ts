@@ -9,7 +9,7 @@ interface Response {success:boolean;data:{totalModels:number;totalVotes:number;l
 export function compassArena(multimodal=false):Leaderboard{
  return {benchmark:multimodal?'compassarena-multimodal':'compassarena',url:'https://rank.opencompass.org.cn/leaderboard-arena'+(multimodal?'-multimodal':''),feed:API,
   terms:'Public CompassArena ranking API. The site offers research use with limited safeguards. The almanac credits and links the source.',
-  stats:{votes:{name:'Votes',unit:'count'},upperBoundRank:{name:'Upper bound rank',unit:'count',better:'lower'},...(multimodal?{}:{rankChange:{name:'Rank change',unit:'count'}}),poolModels:{name:'Models in pool',unit:'count'},poolVotes:{name:'Votes in pool',unit:'count'}},
+  stats:{votes:{name:'Votes',unit:'count'}},
   aliases:{'Qwen3.7 Max':'qwen3-7-max','GPT-4.1-20250414':'gpt-4-1','GPT-5-2025-08-07':'gpt-5','Claude 3.5 Sonnet 20241022':'claude-3-5-sonnet-october-2024'},
   async fetch():Promise<LeaderboardRow[]>{
    const response=await fetchJson<Response>(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({rankingType:multimodal?1:0})});
@@ -17,10 +17,12 @@ export function compassArena(multimodal=false):Leaderboard{
    const d=response.data,rows:LeaderboardRow[]=[];
    for(const r of d.rankings){
     if(!r.model||!Number.isFinite(r.eloRating))continue;
-    const metrics:Record<string,number>={votes:r.votes,upperBoundRank:r.rankingUB,rankChange:r.rankingChanges,poolModels:d.totalModels,poolVotes:d.totalVotes};
+    const metrics:Record<string,number>={votes:r.votes};
     const ci=r.eloCI95?.match(/^\+(\d+(?:\.\d+)?)\/-([\d.]+)$/);
-    if(ci){metrics.ciLow=r.eloRating-Number(ci[2]);metrics.ciHigh=r.eloRating+Number(ci[1]);}
-    rows.push({model:r.model,score:r.eloRating,date:d.lastUpdate,metrics});
+    const low=ci?r.eloRating-Number(ci[2]):undefined;
+    const high=ci?r.eloRating+Number(ci[1]):undefined;
+    if(low!==undefined&&high!==undefined){metrics.ciLow=low;metrics.ciHigh=high;}
+    rows.push({model:r.model,score:r.eloRating,date:d.lastUpdate,...(low!==undefined&&high!==undefined?{low,high}:{}),metrics});
    }
    if(!rows.length)throw new Error('CompassArena numeric ratings missing');
    return rows;

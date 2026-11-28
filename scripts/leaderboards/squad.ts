@@ -22,7 +22,11 @@ const board: Leaderboard = {
     const config=label.match(/\s*\((single(?: model)?|ensemble)\)/i);
     const dateText=r[0].html.match(/class="date[^\"]*">([^<]+)/)?.[1];
     const date=dateText?new Date(dateText+' UTC'):undefined;
-    return {model:label.replace(/\s*\((single(?: model)?|ensemble)\)/i,''),setting:'SQuAD 1.1'+(config?'; '+config[1]:''),score:num(r[3].text)!,
+    const inst=text(r[1].html.match(/<p[^>]*class="institution"[^>]*>([\s\S]*?)<\/p>/i)?.[1] ?? '');
+    const submitter=inst && !/^anonymous$/i.test(inst) ? inst : undefined;
+    const link=r[1].html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]?.replace(/&amp;/g, '&');
+    return {model:label.replace(/\s*\((single(?: model)?|ensemble)\)/i,''),setting:'SQuAD 1.1'+(config?', '+config[1]:''),score:num(r[3].text)!,
+      submitter, link,
       date:date && Number.isFinite(date.getTime())?date.toISOString().slice(0,10):undefined,metrics:{exactMatch:num(r[2].text)!}};
   });
   })();

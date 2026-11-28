@@ -23,6 +23,18 @@ const board: Leaderboard = {
     iogt: { name: 'Intersection over the ground truth', unit: 'score', better: 'higher', note: 'Bounding-box intersection area divided by the ground-truth area.' },
     hausdorff: { name: 'Hausdorff distance', unit: 'score', better: 'lower' },
     compileRate: { name: 'Compile rate', unit: '%', better: 'higher', note: 'Percentage of generated CAD programs that compile successfully.' },
+    SimpleIogt: { name: 'Simple IoGT', unit: 'score', better: 'higher' },
+    SimpleHausdorff: { name: 'Simple Hausdorff distance', unit: 'score', better: 'lower' },
+    SimpleCompileRate: { name: 'Simple compile rate', unit: '%', better: 'higher' },
+    ModerateComplexIogt: { name: 'Moderate complexity IoGT', unit: 'score', better: 'higher' },
+    ModerateComplexHausdorff: { name: 'Moderate complexity Hausdorff distance', unit: 'score', better: 'lower' },
+    ModerateComplexCompileRate: { name: 'Moderate complexity compile rate', unit: '%', better: 'higher' },
+    ComplexIogt: { name: 'Complex IoGT', unit: 'score', better: 'higher' },
+    ComplexHausdorff: { name: 'Complex Hausdorff distance', unit: 'score', better: 'lower' },
+    ComplexCompileRate: { name: 'Complex compile rate', unit: '%', better: 'higher' },
+    VeryComplexIogt: { name: 'Very complex IoGT', unit: 'score', better: 'higher' },
+    VeryComplexHausdorff: { name: 'Very complex Hausdorff distance', unit: 'score', better: 'lower' },
+    VeryComplexCompileRate: { name: 'Very complex compile rate', unit: '%', better: 'higher' },
   },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
@@ -40,11 +52,13 @@ const board: Leaderboard = {
       if (!/^[\d.]+%$/.test(compile)) throw new Error('Missing compile rate');
       const metrics: Record<string, number> = { iqr, iogt, iogtIqr, hausdorff, hausdorffIqr, compileRate: parseFloat(compile) };
       if (name === 'GPT-4' && setting === 'Few-shot') {
-        for (const [group, mechanism,, subsetCloud] of split.slice(1)) {
+        for (const [group, mechanism, subsetOverlap, subsetCloud, subsetHausdorff, subsetCompile] of split.slice(1)) {
           if (mechanism !== feedback) continue;
           const key = group.replaceAll(' ', '');
-          parts[key] = group;
           [metrics[key], metrics[key + 'Iqr']] = pair(subsetCloud);
+          [metrics[key + 'Iogt'], metrics[key + 'IogtIqr']] = pair(subsetOverlap);
+          [metrics[key + 'Hausdorff'], metrics[key + 'HausdorffIqr']] = pair(subsetHausdorff);
+          if (/^[\d.]+%$/.test(subsetCompile)) metrics[key + 'CompileRate'] = parseFloat(subsetCompile);
         }
       }
       rows.push({ model, setting, harness: feedback === 'Generated' ? undefined : feedback.replace(' (Ours)', ''), score, metrics });

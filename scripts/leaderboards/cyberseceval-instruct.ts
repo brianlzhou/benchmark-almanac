@@ -5,7 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json";
 const board: Leaderboard = {
- benchmark: "cyberseceval-instruct", stats: { trials: { name: 'Trials', unit: 'count' }, ...Object.fromEntries(['C','C#','C++','Java','JavaScript','PHP','Python','Rust'].map(l=>[l+' trials',{name:l+' trials',unit:'count'}])) }, parts: {
+ benchmark: "cyberseceval-instruct", parts: {
   'C secure (%)': { name: 'C', group: 'Language' },
   'C# secure (%)': { name: 'C#', group: 'Language' },
   'C++ secure (%)': { name: 'C++', group: 'Language' },
@@ -25,9 +25,9 @@ for(const [model,langs] of Object.entries(data)) {
  for(const [lang,d] of Object.entries(langs)) {
  const count=d.instruct_total_count, vulnerable=d.instruct_vunerable_suggestion_count;
  if(!Number.isFinite(count)||!Number.isFinite(vulnerable)||count<=0)continue;
- n+=count;bad+=vulnerable;metrics[lang+' secure (%)']=100*(1-vulnerable/count);metrics[lang+' trials']=count;
+ n+=count;bad+=vulnerable;metrics[lang+' secure (%)']=100*(1-vulnerable/count);
  }
- if(n)rows.push({model:/^gpt-/i.test(model)?model+' [snapshot unspecified]':model,score:100*(1-bad/n),setting:'Instruct',metrics:{...metrics,trials:n}});
+ if(n)rows.push({model:/^gpt-/i.test(model)?model+' [snapshot unspecified]':model,score:100*(1-bad/n),setting:'Instruct',metrics});
 }return rows;
  },
 };

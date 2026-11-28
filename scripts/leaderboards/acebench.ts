@@ -11,8 +11,20 @@ const FEED = 'https://chenchen0103.github.io/ACEBench/script.js';
 const MARK = 'const allCombinedModels =';
 const PAPER_DATE = '2025-01-21';
 
+const PART_KEYS = ['atom', 'single', 'multi', 'api', 'pref', 'summary', 'special', 'agent'] as const;
+
 const board: Leaderboard = {
   benchmark: 'acebench',
+  parts: {
+    atom: { name: 'Atom', group: 'Normal' },
+    single: { name: 'Single-Turn', group: 'Normal' },
+    multi: { name: 'Multi-Turn', group: 'Normal' },
+    api: { name: 'Similar API', group: 'Normal' },
+    pref: { name: 'Preference', group: 'Normal' },
+    summary: { name: 'Normal summary', group: 'Normal' },
+    special: { name: 'Special', group: 'Category' },
+    agent: { name: 'Agent', group: 'Category' },
+  },
   url: 'https://chenchen0103.github.io/ACEBench/',
   feed: `${FEED} (allCombinedModels)`,
   terms: 'Static script on a GitHub Pages project site with no robots.txt and no terms; the ACEBench repository is public and the scores are cited to the authors.',
@@ -29,11 +41,23 @@ const board: Leaderboard = {
     const js = await fetchText(FEED);
     const at = js.indexOf(MARK);
     if (at < 0) throw new Error('allCombinedModels not found');
-    const list = jsLiteral<{ model?: string; overall?: number }[]>(js, js.indexOf('[', at));
+    const list = jsLiteral<({ model?: string; category?: string; overall?: number } & Partial<Record<(typeof PART_KEYS)[number], number>>)[]>(js, js.indexOf('[', at));
     const rows: LeaderboardRow[] = [];
     for (const m of list) {
       if (!m.model || typeof m.overall !== 'number') continue;
-      rows.push({ model: m.model.trim(), score: m.overall, date: PAPER_DATE });
+      const metrics: Record<string, number> = {};
+      for (const k of PART_KEYS) {
+        const v = m[k];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      }
+      const open = m.category === 'open' ? true : m.category === 'closed' ? false : undefined;
+      rows.push({
+        model: m.model.trim(),
+        score: m.overall,
+        date: PAPER_DATE,
+        open,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     if (!rows.length) throw new Error('no rows in allCombinedModels');
     return rows;

@@ -22,13 +22,13 @@ const board: Leaderboard = {
       const m = line.match(/^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$/);
       if (!m || /^Model|^-/.test(m[1].trim())) continue;
       const pct = (s: string) => Number(s.replace(/[*%]/g, '').trim());
-      const success = m[2].trim().match(/(\d+)\/(\d+)/);
+      const success = m[2].replaceAll(',', '').trim().match(/(\d+)\/(\d+)/);
       const fpr = pct(m[3]);
       const tpr = pct(m[4]);
       const injected = pct(m[5]);
       const f1 = pct(m[6]);
       if (!success || [fpr, tpr, injected, f1].some((n) => !Number.isFinite(n))) throw new Error(`Table Judge Benchmark: invalid row ${m[1].trim()}`);
-      rows.push({ model: m[1].trim(), score: f1, metrics: { falsePositiveRate: fpr, truePositiveRate: tpr, injectedRubricDetection: injected, successfulResponses: Number(success[1]), totalResponses: Number(success[2]) } });
+      rows.push({ model: m[1].trim(), score: f1, metrics: { falsePositiveRate: fpr, truePositiveRate: tpr, injectedRubricDetection: injected, successfulResponses: Number(success[1]) } });
     }
     if (rows.length !== 8) throw new Error(`Table Judge Benchmark: ${rows.length} rows, expected 8`);
     return rows;

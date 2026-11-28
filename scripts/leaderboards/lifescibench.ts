@@ -25,9 +25,11 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = chartValues(specs, 'LifeSciBench Overall Scores').map(r => {
       if (typeof r.model !== 'string' || typeof r.score_percent !== 'number') throw new Error('Invalid LifeSciBench row');
       const metrics: Record<string, number> = {};
-      if (typeof r.ci_low_percent === 'number') metrics.ciLow = r.ci_low_percent;
-      if (typeof r.ci_high_percent === 'number') metrics.ciHigh = r.ci_high_percent;
-      return { model: r.model === 'GPT-Rosalind' ? r.model + ' (snapshot unspecified)' : r.model, score: r.score_percent, metrics };
+      const low = typeof r.ci_low_percent === 'number' ? r.ci_low_percent : undefined;
+      const high = typeof r.ci_high_percent === 'number' ? r.ci_high_percent : undefined;
+      if (low !== undefined) metrics.ciLow = low;
+      if (high !== undefined) metrics.ciHigh = high;
+      return { model: r.model === 'GPT-Rosalind' ? r.model + ' (snapshot unspecified)' : r.model, score: r.score_percent, ...(low !== undefined && high !== undefined && low <= high ? { low, high } : {}), metrics };
     });
     for (const spec of specs) {
       const title = chartTitle(spec);

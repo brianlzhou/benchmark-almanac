@@ -37,6 +37,7 @@ const board: Leaderboard = {
   feed: `${PAGE}runs.<hash>.json (trials on the capability and Pareto boards)`,
   terms: 'Public run export of robocurve.org; robots.txt allows all paths (content signals: search yes, AI training no) and the site states no other terms.',
   stats: {
+    latency: { name: 'Time per task attempt', unit: 'seconds', better: 'lower' },
     totalTokens: { name: 'Total tokens', unit: 'tokens' },
     calls: { name: 'Tool calls', unit: 'count' },
     inputTokens: { name: 'Input tokens', unit: 'tokens' },
@@ -46,7 +47,7 @@ const board: Leaderboard = {
   },
   chart: {
     title: 'Robotics Capabilities vs Time',
-    note: 'Mean score against wall-clock time per task attempt, 120 attempts per configuration; robot policies (VLAs) always run to their 3,600-step cap.',
+    note: 'Mean score against wall-clock time per task attempt, 120 attempts per configuration. Robot policies (VLAs) always run to their 3,600-step cap.',
     x: { key: 'latency', label: 'Time per task attempt', unit: 's', better: 'lower', log: true },
     y: { key: 'score', label: 'Mean score', unit: '%', better: 'higher' },
   },

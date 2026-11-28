@@ -21,6 +21,7 @@ const rows: LeaderboardRow[] = [
 
 const board: Leaderboard = {
   benchmark: "longfact-objects",
+  static: 'paper',
   url: "https://cdn.openai.com/gpt-5-system-card.pdf",
   terms: "OpenAI publishes the system card on its CDN. The CDN returned 404 for robots.txt. OpenAI terms apply.",
   host: "OpenAI",

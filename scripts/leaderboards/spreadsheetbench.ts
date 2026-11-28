@@ -14,6 +14,8 @@ export const ssbFeed = (file: string) => `${SSB_PAGE}data/${file}`;
 interface Entry {
   model: string;
   scaffold?: string;
+  organization?: string;
+  url?: string;
   score?: number;
   date?: string;
   verified?: boolean;
@@ -26,7 +28,15 @@ export async function spreadsheetRows(file: string): Promise<LeaderboardRow[]> {
     if (!e.model || typeof e.score !== 'number') continue;
     const harness = e.scaffold && e.scaffold !== e.model ? e.scaffold : undefined;
     // "OpenAI o3": the maker's name is not part of the model name
-    rows.push({ model: e.model.replace(/^OpenAI\s+/, '').trim(), score: e.score, harness, date: e.date, verified: e.verified });
+    rows.push({
+      model: e.model.replace(/^OpenAI\s+/, '').trim(),
+      score: e.score,
+      harness,
+      agentOrg: e.organization?.trim() || undefined,
+      link: e.url && /^https?:\/\//.test(e.url) ? e.url : undefined,
+      date: e.date,
+      verified: e.verified,
+    });
   }
   return rows;
 }

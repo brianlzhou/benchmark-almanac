@@ -34,9 +34,9 @@ const board: Leaderboard = {
           if (margin === undefined) throw new Error('Missing confidence interval');
           const key = name.replace(/[^a-z0-9]/gi,'');
           metrics[key] = value;
-          metrics[key+'Margin95'] = margin;
+          metrics[key+'Ci95'] = margin;
         }
-        const score = metrics.Prioritization, margin = metrics.PrioritizationMargin95;
+        const score = metrics.Prioritization, margin = metrics.PrioritizationCi95;
         const row = {model, setting, score, low: +(score-margin).toFixed(2), high: +(score+margin).toFixed(2), metrics};
         const previous = rows.get(model);
         if (previous && previous.score !== score) throw new Error('Repeated model has a different headline');

@@ -3,8 +3,14 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2406.05756';
+const DATASETS = ['MP3D', 'AI2-THOR', 'ScanNet'] as const;
+const RELATIONS = ['above', 'below', 'left', 'right', 'close', 'far'] as const;
 const board: Leaderboard = {
   benchmark: 'embspatialbench', static: 'paper', url: URL, feed: URL + ' (generation and likelihood on the complete benchmark)', terms: PAPER_TERMS,
+  parts: {
+    ...Object.fromEntries(DATASETS.map(d => [d, { name: d, group: 'Dataset' }])),
+    ...Object.fromEntries(DATASETS.flatMap(d => RELATIONS.map(rel => [`${d}:${rel}`, { group: d, name: rel[0].toUpperCase() + rel.slice(1) }]))),
+  },
   aliases: {"LLaVA-1.6 7B": "llava-v1-6-vicuna-7b"},
   async fetch() {
     const ts = inlinePaperTables(await paperHtml(URL));
@@ -21,7 +27,6 @@ const board: Leaderboard = {
     }
     const byDataset = ts.find(t => t[1]?.includes('AI2-THOR') && t[1]?.includes('All'));
     const relations = ts.find(t => t[2]?.includes('above'));
-    board.parts = {};
     const variants = new Map<string, LeaderboardRow>();
     let mode = '';
     for (const r of byDataset?.slice(2) ?? []) {
@@ -37,7 +42,6 @@ const board: Leaderboard = {
       for (let i = 1; i <= 3; i++) {
         const key = byDataset![1][i];
         (row.metrics ??= {})[key] = Number(r[i]);
-        board.parts[key] = { name: key, group: 'Dataset' };
       }
     }
     for (const r of relations?.slice(3) ?? []) {
@@ -48,7 +52,6 @@ const board: Leaderboard = {
         const group = relations![1][i].replace('AI2THOR', 'AI2-THOR'), name = relations![2][i];
         const key = group + ':' + name;
         (row.metrics ??= {})[key] = Number(r[i]);
-        board.parts[key] = { group, name };
       }
     }
     if (rows.length < 3) throw new Error('EmbSpatialBench has too few rows');

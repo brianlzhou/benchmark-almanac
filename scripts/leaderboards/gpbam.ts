@@ -20,8 +20,7 @@ const board: Leaderboard = {
     legalReferenceSimilarity:{name:'Legal reference similarity',unit:'score',better:'higher',note:'Jaccard overlap of unique law and section references.'},
     recitationGP:{name:'Article recitation ROUGE-L F1 on GPBam laws',unit:'%',better:'higher'},
     recitationCited:{name:'Article recitation ROUGE-L F1 on most-cited laws',unit:'%',better:'higher'},
-    inputTokens:{name:'Input tokens',unit:'tokens'},
-    outputTokens:{name:'Output tokens',unit:'tokens'},
+    inputTokens:{name:'Input tokens per case',unit:'tokens'},
     goldNormsCited:{name:'Gold norms cited by the essay',unit:'%',better:'higher'},
   },
   async fetch() {
@@ -41,13 +40,14 @@ const board: Leaderboard = {
       const metrics: Record<string,number> = {stderr:numberCell(match[2]),judgeGPT:numberCell(r[3]),judgeQwen:numberCell(r[4]),
         judgeDeepSeek:numberCell(r[5]),legalReferenceSimilarity:numberCell(r[6]),recitationGP:numberCell(r[7].replace(' ‡','')),
         recitationCited:numberCell(r[8])};
+      let tokens: number | undefined;
       if (cost) {
         metrics.inputTokens=Number(cost.prompt_tokens)/81;
-        metrics.outputTokens=Number(cost.completion_tokens)/81;
+        tokens=Math.round(Number(cost.completion_tokens)/81);
         metrics.costImputed=Number(cost.cost_source==='imputed');
       }
       rows.push({model,setting:'No retrieval',harness:r[0].includes('†')?'Claude Code':undefined,
-        score:numberCell(match[1]),cost:cost?Number(cost.cost_usd):undefined,metrics});
+        score:numberCell(match[1]),cost:cost?Number(cost.cost_usd):undefined,tokens,metrics});
     }
     const variants:Record<string,string>={'Gemma-4-31B':'Gemma-4-31B-I','Qwen3-Next-80B-A3B':'Qwen3-next-80b',
       'Magistral-Small':'Magistral-S','Mistral-Small-3.2':'Mistral-S-3.2-24B-I'};

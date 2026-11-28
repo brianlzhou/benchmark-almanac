@@ -14,7 +14,8 @@ const board: Leaderboard = {
   },
   url: "https://github.com/cookieApril/EnvSimBench",
   feed: FEED,
-  terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
+  terms: "Public results published by the benchmark authors at raw.githubusercontent.com. Retain source attribution and follow the upstream terms.",
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' } },
   aliases: {},
   
   async fetch() {

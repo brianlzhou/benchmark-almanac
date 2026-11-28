@@ -16,6 +16,12 @@ const board: Leaderboard = {
   parts: Object.fromEntries(levels.map(name => [name, name])),
   stats: Object.fromEntries(levels.flatMap(level => labels.filter(n => n !== 'Fast@1').map(name =>
     [level + ': ' + name, { name: level + ': ' + name, better: 'higher', unit: name.includes('%') ? '%' : name === 'Correct Speedup' ? 'speedup' : 'score' }]))),
+  chart: {
+    title: 'Memory efficiency vs. speedup (Level 1)',
+    x: { key: 'Level 1: Correct Speedup', label: 'Level 1 correct speedup', unit: 'x', better: 'higher' },
+    y: { key: 'Level 1: Correct Mem Eff', label: 'Level 1 memory efficiency', better: 'higher' },
+    note: 'KernelBench Verified plots per-level geometric-mean memory efficiency against speedup over PyTorch on correct kernels.',
+  },
   async fetch() {
     const html = await fetchText(feed);
     const rows = new Map<string, LeaderboardRow>();

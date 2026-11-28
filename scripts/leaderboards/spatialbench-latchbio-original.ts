@@ -10,7 +10,6 @@ const board: Leaderboard = {
   stats: {
     steps: { name: 'Steps', unit: 'count' },
     latencySeconds: { name: 'Latency', unit: 'seconds', better: 'lower' },
-    costUsd: { name: 'Cost', unit: 'usd', better: 'lower' },
   },
   async fetch() {
     const table = paperTables(await paperHtml(URL)).map(grid).find((rows) => rows[0]?.join('|') === 'Model|Accuracy (%)|Steps|Latency (s)|Cost (USD)');
@@ -19,7 +18,18 @@ const board: Leaderboard = {
     for (const cells of table.slice(1)) {
       const scoreMatch = cells[1]?.match(/^([\d.]+)\s*\[([\d.]+),\s*([\d.]+)\]/);
       if (!cells[0] || !scoreMatch) continue;
-      rows.push({ model: cells[0], score: Number(scoreMatch[1]), low: Number(scoreMatch[2]), high: Number(scoreMatch[3]), metrics: { steps: Number(cells[2].match(/[\d.]+/)?.[0]), latencySeconds: Number(cells[3].match(/[\d.]+/)?.[0]), costUsd: Number(cells[4].match(/[\d.]+/)?.[0]) } });
+      const cost = Number(cells[4].match(/[\d.]+/)?.[0]);
+      rows.push({
+        model: cells[0],
+        score: Number(scoreMatch[1]),
+        low: Number(scoreMatch[2]),
+        high: Number(scoreMatch[3]),
+        ...(Number.isFinite(cost) ? { cost } : {}),
+        metrics: {
+          steps: Number(cells[2].match(/[\d.]+/)?.[0]),
+          latencySeconds: Number(cells[3].match(/[\d.]+/)?.[0]),
+        },
+      });
     }
     return checked(rows, 7);
   },

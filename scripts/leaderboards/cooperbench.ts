@@ -20,13 +20,15 @@ interface Index {
 
 const board: Leaderboard = {
   benchmark: 'cooperbench',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: `${SITE}/leaderboard`,
   feed: `${FEEDS.join(' and ')} (stats.rate)`,
   terms: 'Static JSON behind the leaderboard page; the cooperbench.com robots.txt (Cloudflare content signals only) sets no rules and the site states no terms.',
   aliases: {
     'Qwen3-Coder-30B': 'qwen3-coder-30b-a3b-instruct',
   },
-  stats: { tasks: { name: 'Tasks', unit: 'count' }, passed: { name: 'Tasks passed', unit: 'count' }, tasksWithTrajectory: { name: 'Tasks with trajectory', unit: 'count' }, tasksWithConflict: { name: 'Tasks with conflict', unit: 'count' } },
+  stats: { passed: { name: 'Tasks passed', unit: 'count' }, tasksWithTrajectory: { name: 'Tasks with trajectory', unit: 'count' }, tasksWithConflict: { name: 'Tasks with conflict', unit: 'count' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const feed of FEEDS) {
@@ -40,7 +42,7 @@ const board: Leaderboard = {
         const fw = parts.find((p) => !/^git$/i.test(p));
         const harness = `${fw ? (FRAMEWORK[fw] ?? fw) : 'OpenHands'}${git ? ' + git' : ''}`;
         rows.push({ model: m ? m[1] : name, harness, score: s.rate, metrics: {
-          tasks: s.total, passed: s.passed,
+          passed: s.passed,
           tasksWithTrajectory: d.tasks.filter(task => task.hasTrajectory?.[key] === true).length,
           tasksWithConflict: d.tasks.filter(task => task.results[key]?.hasConflict === true).length,
         } });

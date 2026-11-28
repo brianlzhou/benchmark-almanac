@@ -9,8 +9,15 @@ const domains = ['Credit','Research','Resumes','Sports','SEC 10-K/Q'];
 const percent = (cell:string) => numberCell(cell.replace(/%$/, '')) / 100;
 const board: Leaderboard = {
   stats: {
-    validDocuments: { name: 'Valid documents', unit: 'count' }, validAccuracy: { name: 'Valid document accuracy', unit: 'score', better: 'higher' },
-    'Credit fields passed': { name: 'Credit fields passed', unit: 'count' }, 'Credit fields evaluated': { name: 'Credit fields evaluated', unit: 'count' }, 'Research fields passed': { name: 'Research fields passed', unit: 'count' }, 'Research fields evaluated': { name: 'Research fields evaluated', unit: 'count' }, 'Resumes fields passed': { name: 'Resumes fields passed', unit: 'count' }, 'Resumes fields evaluated': { name: 'Resumes fields evaluated', unit: 'count' }, 'Sports fields passed': { name: 'Sports fields passed', unit: 'count' }, 'Sports fields evaluated': { name: 'Sports fields evaluated', unit: 'count' }, 'SEC 10-K/Q fields evaluated': { name: 'SEC 10-K/Q fields evaluated', unit: 'count' }, Overall: { name: 'Overall failure rate', unit: 'score', better: 'lower' }, 'Overall fields passed': { name: 'Overall fields passed', unit: 'count' }, 'Overall fields evaluated': { name: 'Overall fields evaluated', unit: 'count' }, 'Empty response': { name: 'Empty response failures', unit: 'count' }, 'Trailing comma': { name: 'Trailing comma failures', unit: 'count' }, 'PDF page limit': { name: 'PDF page limit failures', unit: 'count' }, 'Truncated JSON': { name: 'Truncated JSON failures', unit: 'count' }, 'Total failures': { name: 'Total failures', unit: 'count' },
+    validDocuments: { name: 'Valid documents', unit: 'count', better: 'higher' },
+    validAccuracy: { name: 'Valid document accuracy', unit: 'score', better: 'higher' },
+    'Overall fields passed': { name: 'Overall fields passed', unit: 'count', better: 'higher' },
+    'Empty response': { name: 'Empty response failures', unit: 'count', better: 'lower' },
+    'Trailing comma': { name: 'Trailing comma failures', unit: 'count', better: 'lower' },
+    'PDF page limit': { name: 'PDF page limit failures', unit: 'count', better: 'lower' },
+    'Truncated JSON': { name: 'Truncated JSON failures', unit: 'count', better: 'lower' },
+    'Context length': { name: 'Context length failures', unit: 'count', better: 'lower' },
+    'Total failures': { name: 'Total failures', unit: 'count', better: 'lower' },
   },
   benchmark: 'extract-bench-contextual', url: feed, feed, static: 'paper',
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2602.12247",
@@ -28,17 +35,21 @@ const board: Leaderboard = {
       const model = /^(Sonnet|Opus)/.test(label) ? 'Claude '+label : label;
       const [validDocuments,trials] = valid.split('/').map(numberCell);
       const metrics: Record<string,number> = {validDocuments, validAccuracy:percent(cells[6])};
+      let score = NaN;
       for (const [i, key] of [...domains,'Overall'].entries()) {
         const match = cells[i].match(/^(\d+)\/(\d+) \(([\d.]+%)\)$/);
         if (!match) throw new Error('Missing field counts');
-        metrics[key] = percent(match[3]);
-        metrics[key + ' fields passed'] = numberCell(match[1]);
-        metrics[key + ' fields evaluated'] = numberCell(match[2]);
+        if (key === 'Overall') {
+          score = percent(match[3]);
+          metrics['Overall fields passed'] = numberCell(match[1]);
+        } else {
+          metrics[key] = percent(match[3]);
+        }
       }
       const j = errors[0].findIndex(k => (errorNames[k] || k) === model);
       if (j < 1) throw new Error('Missing failure counts');
       for (const r of errors.slice(1)) metrics[r[0]] = r[j] === '—' ? 0 : numberCell(r[j]);
-      rows.push({model,setting:'Baseline',trials,score:metrics.Overall,metrics});
+      rows.push({model,setting:'Baseline',trials,score,metrics});
     }
     for (const [model,credit,research,sports,overall] of structured.slice(1)) {
       if (model === 'Total') continue;

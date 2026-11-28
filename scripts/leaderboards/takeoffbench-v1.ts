@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.handoff.ai/tech/h1-model-release",
   feed,
   terms: "Handoff reserves rights to the technical report. The repository lists no score reuse license. https://www.handoff.ai/tech/h1-model-release Handoff allows crawling. The raw file host returns 404 for robots.txt.",
+  notModels: /^human-estimator$/i,
   async fetch(){
     const svg=await fetchText(feed);const labels=new Map<string,string>();const scores=new Map<string,number>();
     for(const m of svg.matchAll(/<text\b([^>]*\bdominant-baseline="central"[^>]*)>([^<]+)<\/text>/g)){
@@ -20,7 +21,6 @@ const board: Leaderboard = {
     }
     const rows:LeaderboardRow[]=[];
     for(const [y,model] of labels){
-      if(model==='human-estimator') continue;
       const score=scores.get(y);if(score===undefined || !Number.isFinite(score)) throw new Error('Missing accuracy for '+model);
       rows.push({model,score});
     }

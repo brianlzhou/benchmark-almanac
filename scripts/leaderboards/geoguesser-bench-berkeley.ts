@@ -21,7 +21,7 @@ const board: Leaderboard = {
         const part = m.main[c.key];
         if (!Number.isFinite(part?.value)) throw new Error('Missing ' + c.label);
         metrics[c.key] = part.value;
-        metrics[c.key + 'SE'] = part.se;
+        metrics[c.key + 'Se'] = part.se;
       }
       if (!m.name || !Number.isFinite(m.avg_rank)) throw new Error('Missing average rank');
       return { model: m.name, score: m.avg_rank, metrics };

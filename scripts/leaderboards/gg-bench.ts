@@ -8,7 +8,6 @@ const feed = 'https://raw.githubusercontent.com/vivek3141/gg-bench/master/README
 const board:Leaderboard = {
   benchmark:'gg-bench',url:'https://github.com/vivek3141/gg-bench#results',feed,
   terms:'The repository uses the MIT License. https://github.com/vivek3141/gg-bench/blob/master/LICENSE',
-  stats:{gamesPerEnvironment:{name:'Games per environment',unit:'count'}},
   aliases:{'meta-llama-3.3-70B':'llama-3-3-70b'},
   async fetch() {
     const section = (await fetchText(feed)).split('## Results')[1]?.split('## Citing')[0];
@@ -18,7 +17,7 @@ const board:Leaderboard = {
       const m = line.replaceAll('*','').match(/^\|\s*([^|]+?)\s*\|\s*([\d.]+)\s*\(±\s*([\d.]+)\)\s*\|/);
       if (!m) throw new Error('Invalid benchmark score: '+line);
       const score = Number(m[2]), margin = Number(m[3]);
-      return {model:m[1],score,low:Number((score-margin).toFixed(2)),high:Number((score+margin).toFixed(2)),metrics:{gamesPerEnvironment:30}};
+      return {model:m[1],score,low:Number((score-margin).toFixed(2)),high:Number((score+margin).toFixed(2))};
     }),7);
   },
 };

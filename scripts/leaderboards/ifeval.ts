@@ -24,7 +24,13 @@ const board: Leaderboard = {
   feed: `${HELM_BUCKET}/capabilities/benchmark_output/releases/<newest>/groups/ifeval.json`,
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
-  stats: { latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' } },
+  stats: {
+    latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Prompt tokens', unit: 'tokens' },
+    evalInstances: { name: 'Evaluated instances', unit: 'count' },
+    trainInstances: { name: 'Training instances', unit: 'count' },
+    truncated: { name: 'Truncated responses', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const release = await helmNewest('capabilities');
     const [table] = await fetchJson<Table[]>(`${HELM_BUCKET}/${release}groups/ifeval.json`);

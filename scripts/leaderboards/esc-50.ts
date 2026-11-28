@@ -13,7 +13,10 @@ const board: Leaderboard = {
       if (!m || /human accuracy|random forest|baseline -|baseline SVM|baseline k-NN/i.test(m[1])) return [];
       const model = m[1].replace(/<[^>]+>/g, '').replace(/[*:]/g, '').trim();
       const setting = m[2].replace(/<[^>]+>/g, '').replace(/[*:]/g, '').trim();
-      return [{ model, setting, score: Number(m[3]) }];
+      const cells = line.trim().replace(/^\||\|$/g, '').split('|');
+      const linkOf = (cell?: string) => cell?.match(/\((https?:\/\/[^)\s]+)\)|href=["'](https?:\/\/[^"']+)["']/i)?.slice(1).find(Boolean);
+      const link = linkOf(cells[3]) ?? linkOf(cells[4]);
+      return [{ model, setting, score: Number(m[3]), ...(link ? { link } : {}) }];
     });
     return checked(rows, 50);
   },

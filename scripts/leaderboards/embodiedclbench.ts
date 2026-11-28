@@ -7,7 +7,7 @@ import { fetchText } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url='https://pku-value-lab.github.io/EmbodiedCLBench-homepage/';
 const board:Leaderboard={
-  benchmark:'embodiedclbench',url,feed:url,terms:'The authors publish the comparison at https://pku-value-lab.github.io/EmbodiedCLBench-homepage/.',
+  benchmark:'embodiedclbench',harnesses:'system',url,feed:url,terms:'The authors publish the comparison at https://pku-value-lab.github.io/EmbodiedCLBench-homepage/.',
   parts:{basic:'Basic task success (zero-shot)'},
   headline:'The headline measures success on advanced tasks, where the authors test transfer from basic tasks.',
   async fetch(){

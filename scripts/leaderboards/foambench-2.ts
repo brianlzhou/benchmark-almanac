@@ -10,7 +10,7 @@ type Split = Record<string, number>;
 type Results = { basic: Split; advanced: Split };
 type Data = { v2_models: { name: string; foam: { old: Results; new: Results } }[]; agents: { name: string; foam: Results }[] };
 const board: Leaderboard = {
-  benchmark: 'foambench-2', url: 'https://nithinsomu.github.io/cfdllmbench_v2/#results', feed,
+  benchmark: 'foambench-2', harnesses: 'system', url: 'https://nithinsomu.github.io/cfdllmbench_v2/#results', feed,
   terms: 'The authors publish FoamBench V2 results and request attribution. https://nithinsomu.github.io/cfdllmbench_v2/#data',
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'Llama 4 Maverick 17B Instruct': 'llama-4-maverick' },
   parts: { basic: 'Basic', advanced: 'Advanced' },

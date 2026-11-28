@@ -12,7 +12,6 @@ const board: Leaderboard = {
   terms: "The repository lists no license. https://github.com/Michael-Andrzejewski/balatro-bench The feed host returns no robots.txt.",
   stats: {
     bestHand: { name: 'Best single hand', unit: 'count', better: 'higher' },
-    rank: { name: 'Rank', unit: 'count', better: 'lower' },
   },
   aliases: {"Sol / GPT-5.6": "gpt-5-6-sol", "Wake / Fable 5.1": "claude-fable-5-1"},
   async fetch() {
@@ -29,8 +28,7 @@ const board: Leaderboard = {
       const [model, planner] = label[1].split(' + ');
       const hands = best.replace(/,/g, '').match(/\d+(?:\.\d+)?(?:e\d+)?/gi);
       if (!hands) throw new Error('Missing best hand');
-      const metrics: Record<string, number> = { bestHand: Math.max(...hands.map(Number)), wonBaseGame: Number(won === 'Yes') };
-      if (/^\d+$/.test(rank)) metrics.rank = Number(rank);
+      const metrics: Record<string, number> = { bestHand: Math.max(...hands.map(Number)) };
       const path = lines[i]?.match(/\[(?:result|journal|screenshot)\]\(([^)]+)\)/i)?.[1];
       rows.push({ model, setting: label[2], score, date, metrics,
         harness: planner, models: planner ? [model, planner.replace(/ planner$/, '')] : undefined,

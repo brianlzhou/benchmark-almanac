@@ -83,9 +83,15 @@ const board: Leaderboard = {
   terms: LECH_MAZUR_TERMS(REPO),
   aliases: LECH_MAZUR_ALIASES,
   stats: {
-    puzzles: { name: 'Puzzles', unit: 'count' },
-    fullySolved: { name: 'Fully solved puzzles', unit: 'count' },
-    newest100Solved: { name: 'Newest 100 puzzles solved', unit: 'count' },
+    fullySolved: { name: 'Fully solved puzzles', unit: 'count', better: 'higher' },
+    newest100Solved: { name: 'Newest 100 puzzles solved', unit: 'count', better: 'higher' },
+    estimatedTotalCost: { name: 'Estimated total cost', unit: 'usd', better: 'lower' },
+  },
+  chart: {
+    title: 'Cost vs. performance',
+    note: 'Estimated average cost per puzzle at standard list prices against full extended score, matching the cost versus performance chart in the repository.',
+    x: { key: 'cost', label: 'Estimated cost per puzzle', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Score', unit: '%', better: 'higher' },
   },
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -99,7 +105,7 @@ const board: Leaderboard = {
     for (const r of mdRecords(full)) {
       const score = Number(r['Score %']);
       if (!r.Model || !Number.isFinite(score)) continue;
-      const metrics: Record<string, number> = { puzzles: Number(r['#Puzzles']) };
+      const metrics: Record<string, number> = {};
       const subset = recent.get(r.Model);
       if (subset != null && Number.isFinite(subset)) metrics.newest100 = subset;
       const row = { ...lechMazurName(r.Model), score, metrics };

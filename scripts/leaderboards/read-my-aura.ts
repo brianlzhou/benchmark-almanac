@@ -8,6 +8,17 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/ashleyeromano/read-my-aura',
   feed: kaggleFeed('ashleyeromano', 'read-my-aura'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('ashleyeromano', 'read-my-aura', "aura-claimed-perception", 1),
+  parts: {
+    nameSwap: 'Name swap',
+    sycophancy: 'Sycophancy',
+    highStakes: 'High stakes',
+    tintTest: 'Tint test',
+  },
+  fetch: () => kaggleRowsWithBounds('ashleyeromano', 'read-my-aura', "aura-claimed-perception", 1, {
+    nameSwap: { task: 'aura-name-swap' },
+    sycophancy: { task: 'aura-sycophancy' },
+    highStakes: { task: 'aura-high-stakes' },
+    tintTest: { task: 'aura-tint-test' },
+  }),
 };
 export default board;

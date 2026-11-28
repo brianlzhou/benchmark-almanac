@@ -7,8 +7,16 @@ import { fetchJson, fetchText } from '../lib/util.ts';
 const FEED = 'https://opengvlab-mvbench-leaderboard.hf.space/config';
 const clean = (s: unknown) => String(s ?? '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').trim();
 type Table = { headers: string[]; data: unknown[][] };
+const MVBENCH_TASKS = [
+  'Action Antonym', 'Action Count', 'Action Localization', 'Action Prediction', 'Action Sequence',
+  'Character Order', 'Counterfactual Inference', 'Egocentric Navigation', 'Episodic Reasoning',
+  'Fine-grained Action', 'Fine-grained Pose', 'Moving Attribute', 'Moving Count', 'Moving Direction',
+  'Object Existence', 'Object Interaction', 'Object Shuffle', 'Scene Transition', 'State Change',
+  'Unexpected Action',
+];
 const board: Leaderboard = {
   benchmark: 'mvbench',
+  parts: Object.fromEntries(MVBENCH_TASKS.map(name => [name, { name, group: 'Task' }])),
   url: 'https://huggingface.co/spaces/OpenGVLab/MVBench_Leaderboard',
   feed: FEED,
   terms: 'The authors publish this public Hugging Face Space; upstream terms apply and the Almanac credits and links the source.',
@@ -30,20 +38,21 @@ const board: Leaderboard = {
         if (expanded?.data && expanded.headers.includes('Avg')) table = expanded;
       }
     }
-    board.parts = Object.fromEntries((choices ?? []).filter(([name]) => name !== 'Avg').map(([name]) => [name, name]));
     const modelCol = table.headers.indexOf('Model'), scoreCol = table.headers.indexOf('Avg'), backboneCol = table.headers.indexOf('Language Model');
     if (modelCol < 0 || scoreCol < 0) throw new Error('MVBench columns changed');
     const names = table.data.map(r => clean(r[modelCol]));
     const rows: LeaderboardRow[] = [];
     for (const r of table.data) {
-      let model = clean(r[modelCol]);
+      const rawModel = String(r[modelCol] ?? '');
+      const linkMatch = rawModel.match(/\[[^\]]+\]\((https?:\/\/[^\s)]+)\)/);
+      let model = clean(rawModel);
       const score = r[scoreCol];
       if (!model || /^random$/i.test(model) || typeof score !== 'number' || !Number.isFinite(score)) continue;
       if (names.filter(n => n === model).length > 1 && r[backboneCol]) model += ` (${clean(r[backboneCol])})`;
       if (/^(GPT-4V|GeminiPro)$/i.test(model)) model += ' (snapshot unspecified)';
       const metrics: Record<string, number> = {};
       for (let j = scoreCol + 1; j < table.headers.length; j++) if (typeof r[j] === 'number') metrics[table.headers[j]] = r[j] as number;
-      rows.push({ model, score, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ model, score, ...(linkMatch ? { link: linkMatch[1] } : {}), ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('MVBench has no model results');
     return rows;

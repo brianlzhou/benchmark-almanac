@@ -2,8 +2,8 @@
   "source": "Arena (formerly LMArena), text leaderboard with style control",
   "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
   "license": "CC BY 4.0",
-  "retrieved": "2026-11-24",
-  "commit": "62968a5a5be5cdfafef2b0fcab3a66fcd5f53190",
+  "retrieved": "2026-11-26",
+  "commit": "4e9c2f140324df03c630a1fe91aaeacfb241f1ca",
   "subset": "text_style_control",
   "category": "overall",
   "columns": [

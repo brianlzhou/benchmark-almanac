@@ -14,7 +14,14 @@
 // (decided 2026-11-10) with credit and a link, as Design Arena's own API license asks of data shown publicly. The
 // importer sends the almanac's user agent and reads each endpoint once per run.
 import { fetchText } from '../util.ts';
-import type { LeaderboardRow } from '../../leaderboards/types.ts';
+import type { BoardChart, LeaderboardRow } from '../../leaderboards/types.ts';
+
+export const DA_CHART_SPEED: BoardChart = {
+  title: 'Preference vs. speed',
+  x: { key: 'generationSeconds', label: 'Generation time', unit: 's', better: 'lower', log: true },
+  y: { key: 'score', label: 'Elo rating', unit: 'Elo', better: 'higher' },
+  note: 'Design Arena plots Elo rating against average generation time on a log scale with a Pareto frontier.',
+};
 
 /** Board names the shared resolver cannot place, when the name pins one snapshot. */
 export const DA_ALIASES: Record<string, string> = {
@@ -41,15 +48,12 @@ export const DA_STATS_TIME = {
   losses: DA_STATS_FULL.losses,
   battles: DA_STATS_FULL.battles,
   generationSeconds: DA_STATS_FULL.generationSeconds,
-  costCount: DA_STATS_FULL.costCount,
 };
 export const DA_STATS_BASIC = {
   winRate: DA_STATS_FULL.winRate,
   wins: DA_STATS_FULL.wins,
   losses: DA_STATS_FULL.losses,
   battles: DA_STATS_FULL.battles,
-  generationSeconds: DA_STATS_FULL.generationSeconds,
-  costCount: DA_STATS_FULL.costCount,
 };
 
 export interface DaBoard {

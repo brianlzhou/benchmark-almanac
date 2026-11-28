@@ -8,7 +8,6 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/MoonshotAI/PerceptionBench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "perceptionbench-moonshot",
- stats: { Count: { name: 'Item count', unit: 'count' }, '#': { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
  parts: {
    Depth: { name: 'Depth', group: 'Task type' },
    OCR: { name: 'OCR', group: 'Task type' },
@@ -19,6 +18,7 @@ const board: Leaderboard = {
    FGR: { name: 'Fine-grained recognition', group: 'Task type' },
    Ctx: { name: 'Contextual integration', group: 'Task type' },
    Hallu: { name: 'Perception-related hallucination', group: 'Task type' },
+   Count: { name: 'Counting', group: 'Task type' },
  },
  url: "https://github.com/MoonshotAI/PerceptionBench#leaderboard",
  feed: FEED,
@@ -30,7 +30,7 @@ const board: Leaderboard = {
   if (!t) throw new Error('perceptionbench-moonshot table missing');
   const rows = t.slice(1).filter(r=>r[1] && !/human|random/i.test(r[1]) && num(r[2])!==undefined).map(r=>({
     model:r[1], score:num(r[2])!*1, 
-    metrics:Object.fromEntries(t[0].map((h,i)=>[h, i!==1 && i!==2 ? num(r[i]) : undefined]).filter((p): p is [string,number]=>typeof p[1]==='number')),
+    metrics:Object.fromEntries(t[0].map((h,i)=>[h, i!==1 && i!==2 && h !== '#' ? num(r[i]) : undefined]).filter((p): p is [string,number]=>typeof p[1]==='number')),
   }));
   if (!rows.length) throw new Error('perceptionbench-moonshot has no scored rows');
   return rows;

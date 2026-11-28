@@ -28,7 +28,9 @@ const board: Leaderboard = {
       const model = r.Model?.trim();
       const score = num(r[key('Success Rate')]);
       if (!model || score === undefined) continue;
-      rows.push({ model: model === 'Gemini-1.5-Pro' ? `${model} (snapshot unspecified)` : model, score, setting: r[key('Screen')]?.trim().toLowerCase() || undefined });
+      const sizeMatch = r[key('Model Size')]?.trim().match(/^(\d+(?:\.\d+)?)B$/i);
+      const params = sizeMatch ? Number(sizeMatch[1]) : undefined;
+      rows.push({ model: model === 'Gemini-1.5-Pro' ? `${model} (snapshot unspecified)` : model, score, setting: r[key('Screen')]?.trim().toLowerCase() || undefined, params });
     }
     return rows;
   },

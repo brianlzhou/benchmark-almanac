@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/maddiebrooks208/invented-oclock',
   feed: kaggleFeed('maddiebrooks208', 'invented-oclock'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('maddiebrooks208', 'invented-oclock', "(Overall)", 100),
+  parts: {
+    solve: 'Solve',
+    abstain: 'Abstain',
+  },
+  fetch: () => kaggleRowsWithBounds('maddiebrooks208', 'invented-oclock', "(Overall)", 100, {
+    solve: { task: 'invented_oclock_solve', scale: 100 },
+    abstain: { task: 'invented_oclock_abstain', scale: 100 },
+  }),
 };
 export default board;

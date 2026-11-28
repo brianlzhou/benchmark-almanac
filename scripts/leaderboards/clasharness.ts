@@ -31,9 +31,9 @@ const board: Leaderboard = {
   "benchmark": "clasharness",
   "url": "https://github.com/google-research/CLASHarness",
   "feed": "https://raw.githubusercontent.com/google-research/CLASHarness/main/README.md",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
-  stats: { meanCheckScore: { name: 'Mean check score', unit: 'score', better: 'higher' }, reportedCostUsd: { name: 'Reported cost', unit: 'usd', better: 'lower' }, reportedTokens: { name: 'Reported tokens', unit: 'tokens' } },
+  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  costPer: 'run',
+  stats: { meanCheckScore: { name: 'Mean check score', unit: 'score', better: 'higher' }, reportedTokens: { name: 'Reported total tokens', unit: 'tokens' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = tables(await fetchText(FEED));
     const rows = new Map<string,LeaderboardRow>();
@@ -49,9 +49,9 @@ const board: Leaderboard = {
     for(const r of main.slice(2)) {
       const model=r[0].text.replace(/†/g,'').trim();const c=r.map(c=>c.text);add(model,'high',c.slice(1));
       const row=rows.get(`${model}|high`)!;const cost=c[6]?.match(/\$([\d,]+)/);const tokens=c[6]?.match(/\(([\d.]+)M\)/);
-      if(cost)row.metrics!.reportedCostUsd=Number(cost[1].replace(/,/g,''));
+      if(cost)row.cost=Number(cost[1].replace(/,/g,''));
       if(tokens)row.metrics!.reportedTokens=Number(tokens[1])*1e6;
-      if(/†/.test(r[0].text))row.setting+='; OCR transcripts';
+      if(/†/.test(r[0].text))row.setting+=', OCR transcripts';
     }
     let model='';
     for(const r of sweep.slice(2)) {

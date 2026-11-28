@@ -27,7 +27,6 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mobileworld',
-  stats: { maxSteps: { name: 'Maximum steps', unit: 'count' }, historyImages: { name: 'History images', unit: 'count' } },
   parts: {
     guiOnly: { name: 'GUI only', group: 'Task type' },
     userInteraction: { name: 'User interaction', group: 'Task type' },
@@ -53,15 +52,13 @@ const board: Leaderboard = {
       rows.push({
         model: pair ? pair[1].trim() : r.model.trim(),
         score: ((r.gui_only ?? 0) * counts[0] + (r.user_int ?? 0) * counts[1] + (r.mcp ?? 0) * counts[2]) / total,
-        setting: [r.max_steps != null ? `max_steps=${r.max_steps}` : null, r.runs != null ? `runs=${r.runs}` : null].filter(Boolean).join("; ") || undefined,
+        setting: [r.max_steps != null ? `max_steps=${r.max_steps}` : null, r.num_images_in_history != null ? `history_images=${r.num_images_in_history}` : null, r.runs != null ? `runs=${r.runs}` : null].filter(Boolean).join(", ") || undefined,
         harness: pair ? `with ${pair[2].trim()} grounding` : r.agent_type,
         agentOrg: r.organization,
         link: r.traj_file ? new URL(r.traj_file, FEED).href : undefined,
         trials: typeof r.runs === 'number' && r.runs > 0 ? r.runs : undefined,
         date: r.date,
         metrics: {
-                ...(typeof r.max_steps === 'number' ? {maxSteps: r.max_steps} : {}),
-                ...(typeof r.num_images_in_history === 'number' ? {historyImages: r.num_images_in_history} : {}),
                 guiOnly: r.gui_only,
                 ...(typeof r.user_int === 'number' ? { userInteraction: r.user_int } : {}),
                 ...(typeof r.mcp === 'number' ? { mcp: r.mcp } : {}),

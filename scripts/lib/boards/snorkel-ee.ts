@@ -13,10 +13,11 @@ export function snorkelEE(benchmark: string, slug: string, feedName: string): Le
     aliases: { 'Nemotron 3 Ultra 550B': 'nemotron-3-ultra', 'Gemini Flash 3.8': 'gemini-3-8-flash' },
     chart: { title: 'Pass@1 vs. cost per trial', x: { key: 'cost', label: 'Cost per trial', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' } },
     async fetch(): Promise<LeaderboardRow[]> {
-      const data = await fetchJson<{ rows: { model: string; score: number; pass_at_5?: number; cost_per_trial?: number; cost_per_task?: number }[] }>(feed);
+      const data = await fetchJson<{ as_of?: string; rows: { model: string; score: number; pass_at_5?: number; cost_per_trial?: number; cost_per_task?: number }[] }>(feed);
+      const date = typeof data.as_of === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.as_of) ? data.as_of : undefined;
       const rows = data.rows.filter(r => r.model && Number.isFinite(r.score)).map(r => ({
         model: /^(Opus|Fable|Haiku|Sonnet)\b/.test(r.model) ? `Claude ${r.model}` : r.model,
-        score: r.score, cost: r.cost_per_trial,
+        score: r.score, date, cost: r.cost_per_trial,
         metrics: { ...(typeof r.pass_at_5 === 'number' ? { passAt5: r.pass_at_5 } : {}), ...(typeof r.cost_per_task === 'number' ? { costFiveAttempts: r.cost_per_task } : {}) },
       }));
       if (!rows.length) throw new Error('Snorkel EE v2 rows missing');

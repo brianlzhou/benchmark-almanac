@@ -7,6 +7,8 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://leililab.github.io/susvibes-leaderboard/submissions/index.json";
 const board: Leaderboard = {
   benchmark: "susvibes",
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: "https://leililab.github.io/susvibes-leaderboard/submissions/index.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

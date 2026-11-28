@@ -42,9 +42,13 @@ const board: Leaderboard = {
       }
       const score = num(r[5]?.text);
       if (!name || score === undefined || /human/i.test(name)) continue;
+      const affil = text(r[1]?.html.match(/<span[^>]*class="affiliation"[^>]*>([\s\S]*?)<\/span>/i)?.[1] ?? '');
+      const submitter = affil && !/^anonymous$/i.test(affil) ? affil : undefined;
+      const link = (r[3]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1]
+        ?? r[4]?.html.match(/href="\s*(https?:\/\/[^"\s]+)\s*"/)?.[1])?.replace(/&amp;/g, '&');
       const metrics: Record<string, number> = {};
       for (const [i,k] of [[6,'hardAccuracy'],[7,'satScore'],[8,'hardSatScore']] as const) { const v = num(r[i]?.text); if (v !== undefined) metrics[k] = v; }
-      rows.push({ model: name, score, harness, date: `${m[2]}-${m[3]}-01`, metrics });
+      rows.push({ model: name, score, harness, submitter, link, date: `${m[2]}-${m[3]}-01`, metrics });
     }
     return rows;
   },

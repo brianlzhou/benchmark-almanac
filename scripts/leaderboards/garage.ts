@@ -9,6 +9,17 @@ const feed = "https://arxiv.org/html/2506.07671";
 export default {
   benchmark: "garage", static: 'paper', url: "https://arxiv.org/abs/2506.07671", feed,
   terms: "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://creativecommons.org/licenses/by-nc-sa/4.0/.",
+  stats: {
+    eligibility: { name: 'Eligibility', unit: '%', better: 'higher' },
+    unadjustedFactuality: { name: 'Unadjusted factuality', unit: '%', better: 'higher' },
+    factuality: { name: 'Factuality', unit: '%', better: 'higher' },
+    uRAF: { name: 'Unadjusted relevance-aware factuality', unit: '%', better: 'higher' },
+    truePositive: { name: 'Deflection true positive rate', unit: '%', better: 'higher' },
+    falsePositive: { name: 'Deflection false positive rate', unit: '%', better: 'lower' },
+    attributionPrecision: { name: 'Attribution precision', unit: '%', better: 'higher' },
+    attributionRecall: { name: 'Attribution recall', unit: '%', better: 'higher' },
+    attributionF1: { name: 'Attribution F1', unit: '%', better: 'higher' },
+  },
   aliases: {"Nova Micro":"amazon-nova-micro","Nova Lite":"amazon-nova-lite","Nova Pro":"amazon-nova-pro", "Claude Haiku": "claude-3-5-haiku", "Claude Sonnet": "claude-3-5-sonnet-october-2024", "Gpt-4o": "gpt-4o-nov-2024", "Qwen 14b": "qwen2-5-14b", "Qwen 32b": "qwen2-5-32b"},
   async fetch() {
     const html = await paperHtml(feed);

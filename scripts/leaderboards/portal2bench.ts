@@ -11,7 +11,12 @@ const board: Leaderboard = {
   url: "https://kingstonyip.com/portal2bench",
   feed,
   terms: "The maker's results page gives no reuse license. robots.txt allows the feed path.",
-  stats: { attempted: { name: 'Attempted chambers', unit: 'count' }, tiebreak: { name: 'Tiebreak score', unit: 'score', better: 'higher' } },
+  stats: {
+    attempted: { name: 'Attempted chambers', unit: 'count' },
+    tiebreak: { name: 'Tiebreak score', unit: 'score', better: 'higher' },
+    fullGameSolved: { name: 'Full-game chambers solved', unit: 'count', better: 'higher' },
+    fullGameAttempted: { name: 'Full-game chambers attempted', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     if (!html.includes('Chambers solved')) throw new Error('Missing chambers solved column');

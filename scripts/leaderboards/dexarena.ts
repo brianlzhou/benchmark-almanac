@@ -4,17 +4,29 @@ import { fetchJson } from '../lib/util.ts';
 
 const url = "https://sipair-elastic.github.io/DexArena-website/leaderboard/";
 const feed = "https://sipair-elastic.github.io/DexArena-website/assets/results/paper-results.json";
+const stageTasks = [
+  'OpenLunchBox', 'PlaceBread', 'ScoopTomato', 'OpenCabinet', 'PickBottle', 'UnscrewCap', 'PourBeads', 'OpenDrawer', 'PickCharger', 'InsertPlug',
+  'PickBolt', 'SeatNut', 'TurnNut', 'OpenLaptop', 'TypeKeys', 'ClickMouse', 'LayFlatPanel', 'InsertRail', 'FastenScrew', 'AspirateLiquid',
+  'DispenseLiquid', 'OpenFridge', 'AppleToBlender', 'CloseFridge', 'PlaceLid', 'PressButton', 'OpenPackage', 'ExtractApple', 'PickDebris', 'DumpDustpan',
+];
+const longHorizonTasks = [
+  'Meal preparation', 'Cabinet and pouring', 'Drawer and plug', 'Nut and bolt', 'Office desk',
+  'Furniture assembly', 'Pipette transfer', 'Juice preparation', 'Package opening', 'Table cleaning',
+];
 
 const board: Leaderboard = {
-  benchmark: 'dexarena', url, feed, stats: { episodesPerTask: { name: 'Episodes per task', unit: 'count' } },
+  benchmark: 'dexarena', url, feed,
   terms: "The authors do not specify separate terms for leaderboard scores on https://sipair-elastic.github.io/DexArena-website/leaderboard/" ,
+  parts: Object.fromEntries([
+    ...stageTasks.map(name => ['stage ' + name, {name, group: 'Stage benchmark'}]),
+    ...stageTasks.map(name => ['generalization ' + name, {name, group: 'Scene generalization'}]),
+    ...longHorizonTasks.map(name => ['longHorizon ' + name, {name, group: 'Long-horizon benchmark'}]),
+  ]),
   async fetch() {
     type Value = {mean: number; std?: number};
     type Summary = {reportedAverage: Value[]; rows: {name: string; values: Value[]}[]};
     const data = await fetchJson<{models: {name: string}[]; protocol: {episodes: number; stageTasks: number; longHorizonTasks: number}} & Record<'stage' | 'generalization' | 'longHorizon', Summary>>(feed);
     const labels = {stage:'Stage benchmark', generalization:'Scene generalization', longHorizon:'Long-horizon benchmark'};
-    const parts: Record<string, {name: string; group: string}> = {};
-    board.parts = parts;
     if (data.models.length < 6 || !(data.protocol.episodes > 0)) throw new Error('Missing DexArena protocol or methods');
     return (Object.keys(labels) as (keyof typeof labels)[]).flatMap(key => {
       const section = data[key];
@@ -23,11 +35,10 @@ const board: Leaderboard = {
       return data.models.map(({name}, i) => {
         const avg = section.reportedAverage[i];
         if (!name || !Number.isFinite(avg.mean)) throw new Error('Missing protocol average');
-        const metrics: Record<string, number> = {episodesPerTask: data.protocol.episodes};
+        const metrics: Record<string, number> = {};
         if (avg.std !== undefined) metrics.std = avg.std;
         for (const task of section.rows) {
           const metric = key + ' ' + task.name;
-          parts[metric] = {name: task.name, group: labels[key]};
           const value = task.values[i];
           if (!Number.isFinite(value?.mean)) throw new Error('Missing ' + metric);
           metrics[metric] = value.mean;

@@ -13,6 +13,11 @@ type Setting = { passed: number[]; total: number };
 
 const board: Leaderboard = {
   benchmark: 'minictx-v2',
+  stats: {
+    bestOf2: { name: 'Best-of-2', unit: '%', better: 'higher' },
+    bestOf4: { name: 'Best-of-4', unit: '%', better: 'higher' },
+    bestOf8: { name: 'Best-of-8', unit: '%', better: 'higher' },
+  },
   url: PAGE,
   feed: `${FEED} (in-file, best-of-1)`,
   terms: 'Static JSON on the project GitHub Pages site (no robots.txt); the page credits EvalPlus for its layout and states no other terms.',
@@ -22,11 +27,22 @@ const board: Leaderboard = {
   async fetch() {
     const data = await fetchJson<Record<string, Record<string, Setting | string>>>(FEED);
     const rows: LeaderboardRow[] = [];
+    const pct = (n: number, total: number) => Number(((n / total) * 100).toFixed(1));
     for (const [name, v] of Object.entries(data)) {
       const s = v['in-file'] as Setting | undefined;
       if (!s?.passed?.length || !s.total) continue;
       const model = name.includes('11/20/2024') ? name : name.replace(/\s*\([^)]*\)\s*$/, '');
-      rows.push({ model, score: Number(((s.passed[0] / s.total) * 100).toFixed(1)) });
+      const metrics: Record<string, number> = {};
+      if (typeof s.passed[1] === 'number') metrics.bestOf2 = pct(s.passed[1], s.total);
+      if (typeof s.passed[3] === 'number') metrics.bestOf4 = pct(s.passed[3], s.total);
+      if (typeof s.passed[7] === 'number') metrics.bestOf8 = pct(s.passed[7], s.total);
+      const link = typeof v.link === 'string' && /^https?:\/\//.test(v.link) ? v.link : undefined;
+      rows.push({
+        model,
+        score: pct(s.passed[0], s.total),
+        link,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },

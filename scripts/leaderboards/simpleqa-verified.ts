@@ -48,7 +48,6 @@ const board: Leaderboard = {
         high: ci != null ? (value + ci) * 100 : undefined,
         metrics: {
           ...(ci != null ? { ciLow: (value - ci) * 100, ciHigh: (value + ci) * 100 } : {}),
-          ...(task?.taskVersion != null ? { taskVersion: task.taskVersion } : {}),
         },
       });
     }

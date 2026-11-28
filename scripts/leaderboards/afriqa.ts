@@ -9,6 +9,14 @@ const parts = { bem: 'Bemba', fon: 'Fon', hau: 'Hausa', ibo: 'Igbo', kin: 'Kinya
   twi: 'Twi', wol: 'Wolof', yor: 'Yoruba', zul: 'Zulu' };
 const board: Leaderboard = {
   benchmark: 'afriqa', feed, url: feed, static: 'paper', parts, harnesses: 'system',
+  stats: {
+    exactMatch: { name: 'Average exact match', unit: '%', better: 'higher' },
+    bleu: { name: 'Average BLEU', unit: '%', better: 'higher' },
+    ...Object.fromEntries(Object.entries(parts).flatMap(([code, name]) => [
+      [code + 'BLEU', { name: name + ' BLEU', unit: '%' as const, better: 'higher' as const }],
+      [code + 'EM', { name: name + ' exact match', unit: '%' as const, better: 'higher' as const }],
+    ])),
+  },
   terms: 'The authors release their paper under CC BY 4.0, https://creativecommons.org/licenses/by/4.0/.',
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

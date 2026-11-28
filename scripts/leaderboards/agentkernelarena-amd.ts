@@ -12,7 +12,6 @@ const parts = Object.fromEntries(tasks.map(name=>[name,{name,unit:'speedup' as c
 const board: Leaderboard = {
   benchmark:'agentkernelarena-amd',url:feed,feed,static:'paper',terms:PAPER_TERMS,parts,
   stats: {
-    'HIP-to-HIPStd': { name: 'HIP-to-HIP run standard deviation', unit: 'speedup' },
     'HIP-to-HIPGeoMean': { name: 'HIP-to-HIP geometric mean speedup', unit: 'speedup', better: 'higher' },
     'HIP-to-HIPCompiled': { name: 'HIP-to-HIP compilation rate', unit: '%', better: 'higher' },
     'HIP-to-HIPCorrect': { name: 'HIP-to-HIP correctness rate', unit: '%', better: 'higher' },
@@ -20,7 +19,6 @@ const board: Leaderboard = {
     'HIP-to-HIPFast1': { name: 'HIP-to-HIP fast 1 rate', unit: '%', better: 'higher' },
     'HIP-to-HIPFast2': { name: 'HIP-to-HIP fast 2 rate', unit: '%', better: 'higher' },
     'HIP-to-HIPOutputTokens': { name: 'HIP-to-HIP output tokens', unit: 'tokens' },
-    'HIP-to-HIPTask Std': { name: 'HIP-to-HIP task standard deviation', unit: 'speedup' },
     'HIP-to-HIPP25': { name: 'HIP-to-HIP 25th percentile speedup', unit: 'speedup' },
     'HIP-to-HIPP75': { name: 'HIP-to-HIP 75th percentile speedup', unit: 'speedup' },
     'HIP-to-HIPP90': { name: 'HIP-to-HIP 90th percentile speedup', unit: 'speedup' },
@@ -31,11 +29,9 @@ const board: Leaderboard = {
     'Triton-to-TritonFast1': { name: 'Triton-to-Triton fast 1 rate', unit: '%', better: 'higher' },
     'Triton-to-TritonFast2': { name: 'Triton-to-Triton fast 2 rate', unit: '%', better: 'higher' },
     'Triton-to-TritonOutputTokens': { name: 'Triton-to-Triton output tokens', unit: 'tokens' },
-    'Triton-to-TritonTask Std': { name: 'Triton-to-Triton task standard deviation', unit: 'speedup' },
     'Triton-to-TritonP25': { name: 'Triton-to-Triton 25th percentile speedup', unit: 'speedup' },
     'Triton-to-TritonP75': { name: 'Triton-to-Triton 75th percentile speedup', unit: 'speedup' },
     'Triton-to-TritonP90': { name: 'Triton-to-Triton 90th percentile speedup', unit: 'speedup' },
-    'PyTorch-to-HIPStd': { name: 'PyTorch-to-HIP run standard deviation', unit: 'speedup' },
     'PyTorch-to-HIPGeoMean': { name: 'PyTorch-to-HIP geometric mean speedup', unit: 'speedup', better: 'higher' },
     'PyTorch-to-HIPCompiled': { name: 'PyTorch-to-HIP compilation rate', unit: '%', better: 'higher' },
     'PyTorch-to-HIPCorrect': { name: 'PyTorch-to-HIP correctness rate', unit: '%', better: 'higher' },
@@ -43,11 +39,9 @@ const board: Leaderboard = {
     'PyTorch-to-HIPFast1': { name: 'PyTorch-to-HIP fast 1 rate', unit: '%', better: 'higher' },
     'PyTorch-to-HIPFast2': { name: 'PyTorch-to-HIP fast 2 rate', unit: '%', better: 'higher' },
     'PyTorch-to-HIPOutputTokens': { name: 'PyTorch-to-HIP output tokens', unit: 'tokens' },
-    'PyTorch-to-HIPTask Std': { name: 'PyTorch-to-HIP task standard deviation', unit: 'speedup' },
     'PyTorch-to-HIPP25': { name: 'PyTorch-to-HIP 25th percentile speedup', unit: 'speedup' },
     'PyTorch-to-HIPP75': { name: 'PyTorch-to-HIP 75th percentile speedup', unit: 'speedup' },
     'PyTorch-to-HIPP90': { name: 'PyTorch-to-HIP 90th percentile speedup', unit: 'speedup' },
-    outputTokens: { name: 'Output tokens', unit: 'tokens' },
   },
   headline:'Mean speedup weights the three published category means by their task counts across all 196 tasks.',
   aliases:{'Opus 4.6':'claude-opus-4-6','Opus 4.7':'claude-opus-4-7','Sonnet 4.6':'claude-sonnet-4-6'},
@@ -78,15 +72,14 @@ const board: Leaderboard = {
         Object.assign(row.metrics!,{[task]:Number(arithmetic[1]),[task+'Std']:Number(arithmetic[2]),[task+'GeoMean']:Number(geo[1]),
           [task+'GeoStd']:Number(geo[2]),[task+'Compiled']:Number(compiled),[task+'Correct']:Number(correct),[task+'Score']:Number(points),
           [task+'Fast1']:Number(fast1),[task+'Fast2']:Number(fast2),[task+'OutputTokens']:Number(tok[i+2])*1000});
-        distribution[0].slice(3).forEach((name,j)=>{row.metrics![task+name]=parseFloat(dist[j+3]);});
+        distribution[0].slice(3).forEach((name,j)=>{row.metrics![task+name.replace(/\s+/g,'')]=parseFloat(dist[j+3]);});
         groups.set(key,row);
       }
     }
     const total = counts.reduce((a,b)=>a+b,0);
     return checked([...groups.values()].map(row=>{
       const mean = (suffix:string)=>tasks.reduce((s,t,i)=>s+counts[i]*row.metrics![t+suffix],0)/total;
-      row.metrics!.outputTokens = mean('OutputTokens');
-      return {...row,score:mean('')};
+      return {...row,score:mean(''),tokens:Math.round(mean('OutputTokens'))};
     }),8);
   },
 };

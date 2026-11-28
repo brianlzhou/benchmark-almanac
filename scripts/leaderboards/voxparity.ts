@@ -14,7 +14,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/bhavikmangla/voxparity-leaderboard",
   feed: FEED,
   terms: "The Space declares CC BY 4.0 in https://huggingface.co/spaces/bhavikmangla/voxparity-leaderboard/blob/main/README.md.",
-  stats: { cueCredit: {name: 'Cue credit', unit: 'score', better: 'higher'}, items: {name: 'Items', unit: 'count'}, observations: {name: 'Observations', unit: 'count'}, bothRight: {name: 'Both right rate', unit: 'score', better: 'higher'}, holmP: {name: 'Holm p-value', unit: 'score', better: 'lower'}, probe: {name: 'Probe score', unit: 'score', better: 'higher'}, probeAnswers: {name: 'Probe answers', unit: 'count'} },
+  stats: { cueCredit: {name: 'Cue credit', unit: 'score', better: 'higher'}, bothRight: {name: 'Both right rate', unit: 'score', better: 'higher'}, holmP: {name: 'Holm p-value', unit: 'score', better: 'lower'}, probe: {name: 'Probe score', unit: 'score', better: 'higher'}, probeAnswers: {name: 'Probe answers', unit: 'count'} },
   aliases: {"Qwen2.5-Omni-7B (local)":"qwen2-5-omni-7b","Phi-4-multimodal (local, MLX bf16)":"phi-4-multimodal","Nemotron-3-Nano-Omni":"nemotron-3-nano-omni-30b-a3b"},
   async fetch() {
     const data = await fetchJson<{ rows: Entry[]; counts: { contestants: number; twin_bearing: number } }>(FEED);
@@ -27,7 +27,7 @@ const board: Leaderboard = {
       if (!r.name || ![r.gain.mean, r.gain.lo, r.gain.hi, r.cue_credit.mean].every(Number.isFinite))
         throw new Error('Missing VoxParity gain or cue credit');
       const metrics: Record<string, number> = { cueCredit: r.cue_credit.mean, cueCreditLow: r.cue_credit.lo,
-        cueCreditHigh: r.cue_credit.hi, items: r.gain.items, observations: r.gain.n };
+        cueCreditHigh: r.cue_credit.hi };
       if (r.both_right != null) metrics.bothRight = r.both_right;
       if (r.p_holm != null) metrics.holmP = r.p_holm;
       if (r.probe) Object.assign(metrics, { probe: r.probe.mean, probeLow: r.probe.lo, probeHigh: r.probe.hi, probeAnswers: r.probe.n });

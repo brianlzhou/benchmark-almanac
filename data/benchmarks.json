@@ -1299,7 +1299,8 @@
     "released": "2026-09",
     "links": {
       "dataset": "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR",
-      "leaderboard": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      "leaderboard": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+      "kaggle": "https://www.kaggle.com/benchmarks/artificial-analysis/aa-lcr"
     },
     "access": "public",
     "note": "Version 1.1 corrects 16 answer keys and adds a judge system prompt. Questions and documents are unchanged, but the maker says 1.0 and 1.1 scores are not directly comparable.",
@@ -7164,7 +7165,8 @@
     "links": {
       "repo": "https://github.com/eth-sri/matharena",
       "dataset": "https://huggingface.co/datasets/MathArena/aime_2025",
-      "leaderboard": "https://matharena.ai"
+      "leaderboard": "https://matharena.ai",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025"
     },
     "access": "public",
     "note": "The problems were published in February 2025, so models trained later may have seen them.",
@@ -8375,6 +8377,62 @@
       "https://arxiv.org/abs/2504.15280"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "allfaith-conversion-bias",
+    "name": "AllFaith Conversion Bias",
+    "category": "safety-alignment",
+    "subcategory": "safety-bias",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models advise people considering a change between 14 faith or nonreligious identities. A judge rates whether each answer encourages or discourages the change.",
+    "org": "CEFE-AI",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/CEFEAI/allfaith-conversion-bias",
+      "site": "https://cefeai.org/",
+      "leaderboard": "https://cefeai.org/"
+    },
+    "access": "public",
+    "note": "CEFE-AI reports total bias as the percentage of possible deviation from neutrality. Signed scores for individual traditions measure direction.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-conversion-bias",
+      "https://github.com/CEFEAI/allfaith-conversion-bias",
+      "https://cefeai.org/"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "allfaith-religious-representation",
+    "name": "AllFaith Religious Representation",
+    "category": "safety-alignment",
+    "subcategory": "safety-bias",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer 150 everyday ethics questions that do not mention religion. A judge rates how prominently each answer discusses religious ideas, practices or leaders.",
+    "org": "CEFE-AI",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/CEFEAI/allfaith-religious-representation",
+      "site": "https://cefeai.org/",
+      "leaderboard": "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation"
+    },
+    "access": "public",
+    "note": "The judge uses a scale from zero to four. Higher ratings indicate more religious content, independent of factual accuracy.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/cefe-ai/allfaith-religious-representation",
+      "https://github.com/CEFEAI/allfaith-religious-representation",
+      "https://cefeai.org/"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "allocine",
@@ -10390,6 +10448,30 @@
     "added": "2026-11-20"
   },
   {
+    "id": "kaggle-animated-story-arena",
+    "name": "Animated Story Arena",
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models make short animated stories explaining topics such as lightning or compound interest. People compare the stories, and their votes determine Elo ratings.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
+    },
+    "access": "public",
+    "note": "Kaggle lists ten story prompts. Some specify the age of the intended audience.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "animation-bench-physera",
     "name": "Animation Bench",
     "category": "coding",
@@ -10469,7 +10551,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.03,
+    "edi": 121.96,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -11504,14 +11586,6 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.87,
-    "epoch": {
-      "epoch_name": "APEX-Agents",
-      "random": 0,
-      "ceiling": 100,
-      "runs": "external",
-      "in_eci": true
-    },
     "evidence": [
       "https://www.mercor.com/blog/introducing-apex-agents-1-1/",
       "https://www.mercor.com/apex/",
@@ -11545,7 +11619,8 @@
       "repo": "https://github.com/Mercor-Intelligence/archipelago",
       "site": "https://www.mercor.com/blog/introducing-apex-agents-1-1/",
       "dataset": "https://huggingface.co/datasets/mercor/apex-agents",
-      "leaderboard": "https://www.mercor.com/apex/apex-agents-leaderboard/"
+      "leaderboard": "https://www.mercor.com/apex/apex-agents-leaderboard/",
+      "kaggle": "https://www.kaggle.com/benchmarks/mercor/apex-agents-1-1"
     },
     "access": "public",
     "note": "Mercor audited the tasks three times, changed the judge model and the system prompt to stop scattergunning. Rankings shifted against 1.0.",
@@ -11555,7 +11630,24 @@
     "evidence": [
       "https://www.mercor.com/blog/introducing-apex-agents-1-1/"
     ],
-    "added": "2026-11-01"
+    "added": "2026-11-01",
+    "metric": "Mean score",
+    "measures": [
+      {
+        "id": "pass-1",
+        "name": "Pass@1",
+        "kind": "metric",
+        "note": "The share of tasks fully passed on the first attempt. The board ranks by mean score."
+      }
+    ],
+    "epoch": {
+      "epoch_name": "APEX-Agents",
+      "random": 0,
+      "ceiling": 100,
+      "runs": "external",
+      "in_eci": true
+    },
+    "edi": 156.57
   },
   {
     "id": "apex-swe",
@@ -12727,7 +12819,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.33,
+    "edi": 94.66,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -14408,7 +14500,8 @@
       "paper": "https://arxiv.org/abs/2605.00674",
       "site": "https://matharena.ai/arxivmath/",
       "dataset": "https://huggingface.co/datasets/MathArena/arxivmath",
-      "leaderboard": "https://matharena.ai/?comp=overall--arxivmath"
+      "leaderboard": "https://matharena.ai/?comp=overall--arxivmath",
+      "kaggle": "https://www.kaggle.com/benchmarks/matharena/arxiv-math-august"
     },
     "access": "public",
     "note": "MathArena adds a new problem set each month from that month's arXiv papers. From the August 2026 set, models run in their own harnesses with Python and SageMath, and problems center on resolved conjectures. Scores before and after that change do not compare.",
@@ -18491,7 +18584,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.71,
+    "edi": 154.7,
     "epoch": {
       "epoch_name": "Balrog",
       "random": 0,
@@ -19983,7 +20076,8 @@
     "org": "BenchCAD team",
     "released": "2026-10",
     "links": {
-      "repo": "https://github.com/BenchCAD-org/benchcad-2-main"
+      "repo": "https://github.com/BenchCAD-org/benchcad-2-main",
+      "kaggle": "https://www.kaggle.com/benchmarks/benchcad-org/benchcad-2-1-core"
     },
     "access": "public+private-holdout",
     "note": "Models use 60 rounds and 500,000 output tokens in the standard harness. The revised scorer makes scores incomparable with earlier versions. Core requires a Hugging Face account with access. Public samples are available.",
@@ -20880,7 +20974,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 105.78,
+    "edi": 105.98,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -24826,7 +24920,8 @@
     "released": "2025-04",
     "links": {
       "repo": "https://github.com/openai/simple-evals",
-      "paper": "https://arxiv.org/abs/2504.12516"
+      "paper": "https://arxiv.org/abs/2504.12516",
+      "kaggle": "https://www.kaggle.com/benchmarks/openai/browsecomp"
     },
     "access": "public",
     "note": "Questions ship encrypted in simple-evals. Context-management settings (compaction at 300K vs full 1M) change scores by several points.",
@@ -26467,7 +26562,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.1,
+    "edi": 139.09,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -30663,7 +30758,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.81,
+    "edi": 161.72,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -32393,7 +32488,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 180.63,
+    "edi": 180.32,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -32428,7 +32523,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.23,
+    "edi": 177.01,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -44365,7 +44460,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.12,
+    "edi": 146.13,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -46974,7 +47069,8 @@
       "repo": "https://github.com/surge-ai/dayjob",
       "site": "https://surgehq.ai/blog/dayjob",
       "dataset": "https://huggingface.co/datasets/surgeai/DAYJOB-finance",
-      "leaderboard": "https://surgehq.ai/benchmarks/dayjob-finance"
+      "leaderboard": "https://surgehq.ai/benchmarks/dayjob-finance",
+      "kaggle": "https://www.kaggle.com/benchmarks/surge-ai/dayjob-finance"
     },
     "access": "public",
     "note": "80 tasks. Surge calls DAYJOB its evolution of GDPval. Also hosted on Kaggle Benchmarks and in the Fireworks Specialized Intelligence Index.",
@@ -47007,7 +47103,8 @@
       "repo": "https://github.com/surge-ai/dayjob",
       "site": "https://surgehq.ai/blog/dayjob",
       "dataset": "https://huggingface.co/datasets/surgeai/DAYJOB-healthcare",
-      "leaderboard": "https://surgehq.ai/benchmarks/dayjob-healthcare"
+      "leaderboard": "https://surgehq.ai/benchmarks/dayjob-healthcare",
+      "kaggle": "https://www.kaggle.com/benchmarks/surge-ai/dayjob-healthcare"
     },
     "access": "public",
     "note": "50 tasks across clinical decision support, pharmacy, payer work and compliance. The best models scored under 25% at launch.",
@@ -48441,7 +48538,7 @@
     "note": "The official judge model changed from Gemini 2.5 Pro to GPT-5.5 in May 2026, so older and newer scores do not compare directly.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.76,
+    "edi": 154.74,
     "epoch": {
       "epoch_name": "DeepResearch Bench",
       "random": 0,
@@ -55618,7 +55715,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.82,
+    "edi": 163.39,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -62225,7 +62322,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.34,
+    "edi": 163.26,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -62470,7 +62567,8 @@
       "paper": "https://arxiv.org/abs/2607.29677",
       "repo": "https://github.com/run-llama/ExtractBench",
       "site": "https://www.llamaindex.ai/blog/introducing-extractbench",
-      "dataset": "https://huggingface.co/datasets/llamaindex/ExtractBench"
+      "dataset": "https://huggingface.co/datasets/llamaindex/ExtractBench",
+      "kaggle": "https://www.kaggle.com/benchmarks/llamaindex-org/extractbench"
     },
     "access": "public",
     "note": "370 documents, 4,869 pages, 8 business domains and 67 document types. A later dataset revision added grounding boxes with documents and schemas unchanged. LlamaIndex says its own tiers now score above 93%.",
@@ -64511,7 +64609,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 133.41,
+    "edi": 133.39,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -67772,6 +67870,30 @@
     "added": "2026-11-20"
   },
   {
+    "id": "kaggle-fps-arena",
+    "name": "FPS Arena",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build a mouse-controlled 3D first-person shooter in a single browser page. Human votes determine its Elo rating.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
+    },
+    "access": "public",
+    "note": "Kaggle gives models one game prompt and reports the number of comparisons for each entry.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "fquad",
     "name": "FQuAD",
     "aliases": [
@@ -68477,7 +68599,7 @@
       "runs": "external",
       "in_eci": true
     },
-    "edi": 163.9
+    "edi": 163.81
   },
   {
     "id": "frontiercode-2-0",
@@ -68710,7 +68832,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 150.78,
+    "edi": 150.79,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -68787,7 +68909,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.08,
+    "edi": 159,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -68827,7 +68949,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.73,
+    "edi": 158.69,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -68867,7 +68989,7 @@
     "note": "Version 2 fixed errors in 42 percent of problems, and Epoch says the tiers are nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.73,
+    "edi": 150.74,
     "epoch": {
       "epoch_name": "FrontierMath-Tiers-1-3-v2-Private",
       "random": 0,
@@ -69164,7 +69286,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.54,
+    "edi": 165.58,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -69632,7 +69754,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 166.19,
+    "edi": 166.02,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -71002,6 +71124,38 @@
     "added": "2026-11-01"
   },
   {
+    "id": "game-autoresearch-bench",
+    "name": "Game Autoresearch Bench",
+    "aliases": [
+      "Game Autoresearch",
+      "GameAutoresearch Bench"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents get a GPU budget and a game simulator and write a recipe that trains a reinforcement learning network for Polytopia, Pokémon, Generals.io or Hex. The graders retrain each recipe from scratch on a fixed budget and grade the network it produces against held-out opponents.",
+    "org": "Kevin Zhang and Max Bittker",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/gameautoresearch/gameautoresearch.github.io",
+      "site": "https://gameautoresearch.github.io/",
+      "leaderboard": "https://gameautoresearch.github.io/"
+    },
+    "access": "public",
+    "note": "Ten models ran six tasks in Harbor's Terminus-2 harness, with NVIDIA L40S time on Modal: Polytopia from an empty file, Polytopia recipes on five research budgets, Pokémon 3v3, a Generals tournament, Hex 13×13, and forecasting how training runs will turn out. Each task is standardized so 50 is the ten models' average and 10 points is one standard deviation, and the overall score averages them. Modal supported the work, which used about 3,000 GPU-hours. In the November 25, 2026 results, Gemini 4 Neon led with 59.3 and Claude Fable 5.2 was second with 56.5.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://gameautoresearch.github.io/",
+      "https://github.com/gameautoresearch/gameautoresearch.github.io",
+      "https://x.com/kzdagoof/status/2125615293473137061"
+    ],
+    "added": "2026-11-25"
+  },
+  {
     "id": "gameadsbench",
     "name": "GameAdsBench",
     "aliases": [
@@ -71115,6 +71269,38 @@
       "https://api.primeintellect.ai/api/v1/environmentshub/primeintellect/gamedevbench/@latest"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "gamedojo",
+    "name": "GameDojo",
+    "aliases": [
+      "Game Dojo"
+    ],
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents fight 120 boss encounters from 20 video games at three difficulty levels, either with time paused between steps or in real time. Progress is the share of the boss's health removed, and win rate counts fights won.",
+    "org": "Tsinghua University and others",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.30771",
+      "repo": "https://github.com/THUSI-Lab/GameDojo",
+      "site": "https://gamedojo-benchmark.github.io/",
+      "leaderboard": "https://gamedojo-benchmark.github.io/#results"
+    },
+    "access": "public",
+    "note": "Coding agents rebuilt the encounters and wrote gameplay scripts, which also produced 600 hours of training trajectories (GameDojo-Data). Models act through a computer-use interface (mouse and keyboard) or a semantic one (named game actions). Time-paused runs get 300 steps, one gameplay minute. Real-time runs get three physical minutes, and there every frontier model falls below a random policy. At Medium difficulty, GPT-6.1 Sol removed 44.6% of boss health with time paused and won 3.3% of fights.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://gamedojo-benchmark.github.io/",
+      "https://huggingface.co/papers/2611.30771",
+      "https://github.com/THUSI-Lab/GameDojo"
+    ],
+    "added": "2026-11-25"
   },
   {
     "id": "gameenginebench",
@@ -71719,7 +71905,8 @@
       "dataset": "https://huggingface.co/datasets/surgeai/GDP.pdf",
       "leaderboard": "https://surgehq.ai/benchmarks/gdp-pdf",
       "paper": "https://arxiv.org/abs/2607.11192",
-      "site": "https://surgehq.ai/blog/gdp-pdf-can-100b-ai-models-master-the-documents-that-run-the-world"
+      "site": "https://surgehq.ai/blog/gdp-pdf-can-100b-ai-models-master-the-documents-that-run-the-world",
+      "kaggle": "https://www.kaggle.com/benchmarks/surge-ai/gdp-pdf"
     },
     "access": "public",
     "note": "Part of the Artificial Analysis Intelligence Index v4.3.2 (10% weight). The HF dataset returned 401 to an anonymous fetch (may be gated).",
@@ -71825,7 +72012,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.73,
+    "edi": 154.75,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -73056,7 +73243,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 118.94,
+    "edi": 119.09,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -76576,7 +76763,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 93.84,
+    "edi": 94.15,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -76743,7 +76930,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.86,
+    "edi": 159.82,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -79798,7 +79985,8 @@
     "links": {
       "dataset": "https://openaipublic.blob.core.windows.net/simple-evals/healthbench_professional/assets.zip",
       "paper": "https://arxiv.org/abs/2604.27470",
-      "repo": "https://github.com/openai/simple-evals/blob/main/simple_evals.py"
+      "repo": "https://github.com/openai/simple-evals/blob/main/simple_evals.py",
+      "kaggle": "https://www.kaggle.com/benchmarks/openai/healthbench-professional"
     },
     "access": "public",
     "note": "Enriched about 3.5x for examples that are hard for OpenAI models. About one third adversarial.",
@@ -80270,7 +80458,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 61.47,
+    "edi": 62.21,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -83166,6 +83354,38 @@
       "https://github.com/laude-institute/harbor/tree/main/adapters/humanevalfix",
       "https://github.com/laude-institute/harbor/blob/main/registry.json"
     ]
+  },
+  {
+    "id": "hfe",
+    "name": "Humanity's First Exam (HFE)",
+    "aliases": [
+      "Humanity's First Exam",
+      "HFE"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "544 simple text and image prompts that people almost always get right, in 136 families of four close variants. A model passes a family only when all 16 of its tries (four per prompt) are correct, so the score measures how reliably a model solves easy tasks, not whether it can solve them once.",
+    "org": "Google DeepMind",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf",
+      "site": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/humanitys-first-exam/",
+      "dataset": "https://www.kaggle.com/datasets/deepmind/hfe-public",
+      "leaderboard": "https://www.kaggle.com/benchmarks/deepmind/hfe"
+    },
+    "access": "public+private-holdout",
+    "note": "The Kaggle board ranks models by family pass^4. 112 prompts (28 families) are public under CC BY 4.0, and the other 432 stay private. A Kaggle competition through 2026-12-15 collects new everyday questions that models still get wrong.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/deepmind/hfe",
+      "https://storage.googleapis.com/deepmind-media/papers/hfe_tech_paper.pdf"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "humanitys-last-exam",
@@ -95829,6 +96049,9 @@
   {
     "id": "kradlebench",
     "name": "KradleBench",
+    "aliases": [
+      "KradleVerse"
+    ],
     "category": "games-long-horizon",
     "subcategory": "games-multi-agent",
     "level": "everyday",
@@ -95843,39 +96066,16 @@
       "blog": "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic"
     },
     "access": "unknown",
-    "note": "Kradle launched it on November 18, 2026 with 26 models and one skilled human player (battery kb-1.8.2). Runs last 2 to 15 minutes, and every model uses the same harness, prompt and skills.",
+    "note": "Kradle launched it on November 18, 2026 with 26 models and one skilled human player (battery kb-1.8.2). Runs last 2 to 15 minutes, and every model uses the same harness, prompt and skills. KradleVerse (kradleverse.com) redirects to Kradle's play page, which shows these standings.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.kradle.ai/bench/methodology",
-      "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "kradleverse",
-    "name": "KradleVerse",
-    "category": "games-long-horizon",
-    "subcategory": "games-video-games",
-    "level": "everyday",
-    "scoring": "head-to-head",
-    "format": "agent-task",
-    "description": "Agent harnesses compete in a live Minecraft arena.",
-    "org": "KradleVerse",
-    "released": "2026-01",
-    "links": {
-      "site": "https://www.kradleverse.com/"
-    },
-    "access": "public",
-    "note": "The public site describes a live arena where agent harnesses compete. It does not state a model count or best score.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
+      "https://blog.kradle.ai/p/announcing-kradlebench-a-dynamic",
       "https://www.kradleverse.com/"
     ],
-    "added": "2026-11-19"
+    "added": "2026-11-20"
   },
   {
     "id": "kreta",
@@ -97439,7 +97639,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 41.74,
+    "edi": 43.28,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -100564,7 +100764,8 @@
       "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
       "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
       "leaderboard": "https://livecodebench.github.io/leaderboard.html",
-      "paper": "https://arxiv.org/abs/2403.07974"
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v1"
     },
     "access": "public",
     "note": "Rolling time windows (v5, v6) make cross-card comparison hard. Top models near 90%.",
@@ -100606,6 +100807,111 @@
     ]
   },
   {
+    "id": "livecodebench-v2",
+    "name": "LiveCodeBench v2",
+    "aliases": [
+      "LiveCodeBench release_v2"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v2",
+    "description": "Models write programs for 511 contest problems published from May 2023 through May 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v2 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v2",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/356356a5c3a6baf7748838d82c5c36c62235ca50"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "livecodebench-v3",
+    "name": "LiveCodeBench v3",
+    "aliases": [
+      "LiveCodeBench release_v3"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v3",
+    "description": "Models write programs for 612 contest problems published from May 2023 through July 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v3 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v3",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/b9e169151fc9cb803690a6b1a72f2f11a7da6334"
+    ],
+    "added": "2026-11-26"
+  },
+  {
+    "id": "livecodebench-v4",
+    "name": "LiveCodeBench v4",
+    "aliases": [
+      "LiveCodeBench release_v4"
+    ],
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "code",
+    "family": "livecodebench",
+    "version": "v4",
+    "description": "Models write programs for 713 contest problems published from May 2023 through September 2024. Hidden tests check each solution.",
+    "org": "UC Berkeley / MIT / Cornell",
+    "released": "2024-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
+      "site": "https://livecodebench.github.io",
+      "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
+      "leaderboard": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4"
+    },
+    "access": "public",
+    "note": "LiveCodeBench adds contest problems to each cumulative release. Kaggle reports code generation accuracy for v4 using its own harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v4",
+      "https://github.com/LiveCodeBench/LiveCodeBench",
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/94753272a13ab63f91040131208e64ae6c96615b"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "livecodebench-v5",
     "name": "LiveCodeBench v5",
     "category": "coding",
@@ -100622,7 +100928,8 @@
       "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
       "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
       "leaderboard": "https://livecodebench.github.io/leaderboard.html",
-      "paper": "https://arxiv.org/abs/2403.07974"
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v5"
     },
     "access": "public",
     "note": "Problems released from May 2023 to January 2025, 880 in all.",
@@ -100650,7 +100957,8 @@
       "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
       "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
       "leaderboard": "https://livecodebench.github.io/leaderboard.html",
-      "paper": "https://arxiv.org/abs/2403.07974"
+      "paper": "https://arxiv.org/abs/2403.07974",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench-release-v6"
     },
     "access": "public",
     "note": "Problems released from May 2023 to April 2025, 1,055 in all.",
@@ -102951,7 +103259,7 @@
     "note": "Same benchmark as the lmca record, from the same arXiv paper 2607.27499.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.07,
+    "edi": 152.14,
     "epoch": {
       "epoch_name": "LMCA",
       "random": 0,
@@ -108069,7 +108377,8 @@
     "links": {
       "repo": "https://github.com/openai/prm800k",
       "dataset": "https://huggingface.co/datasets/HuggingFaceH4/MATH-500",
-      "paper": "https://arxiv.org/abs/2305.20050"
+      "paper": "https://arxiv.org/abs/2305.20050",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/math-500"
     },
     "access": "public",
     "note": "Near saturation, since DeepSeek-R1 already scored 97.3 percent in January 2025.",
@@ -108592,7 +108901,8 @@
       "repo": "https://github.com/lupantech/MathVista",
       "dataset": "https://huggingface.co/datasets/AI4Math/MathVista",
       "leaderboard": "https://mathvista.github.io",
-      "paper": "https://arxiv.org/abs/2310.02255"
+      "paper": "https://arxiv.org/abs/2310.02255",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/mathvista"
     },
     "access": "public",
     "note": "Near-saturated.",
@@ -108931,7 +109241,8 @@
     "released": "2026-10",
     "links": {
       "site": "https://maxxbench.unlap.ai/research/why-maxxbench/",
-      "leaderboard": "https://maxxbench.unlap.ai/"
+      "leaderboard": "https://maxxbench.unlap.ai/",
+      "kaggle": "https://www.kaggle.com/benchmarks/unlap/maxxbench"
     },
     "access": "public",
     "note": "The maker dates the methodology October 20. Task success requires passing the modified tests.",
@@ -114116,7 +114427,8 @@
     "released": "2022-10",
     "links": {
       "repo": "https://github.com/google-research/url-nlp",
-      "paper": "https://arxiv.org/abs/2210.03057"
+      "paper": "https://arxiv.org/abs/2210.03057",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/mgsm"
     },
     "access": "public",
     "note": "Saturated.",
@@ -115486,7 +115798,8 @@
     "links": {
       "repo": "https://github.com/Ammaar-Alam/minebench",
       "site": "https://minebench.ai",
-      "leaderboard": "https://minebench.ai"
+      "leaderboard": "https://minebench.ai",
+      "kaggle": "https://www.kaggle.com/benchmarks/minebench/minebench-arena"
     },
     "access": "public",
     "note": "The maker says it is an arena of vibes with no correct answers. Kaggle also hosts a MineBench Arena board. About 340 GitHub stars.",
@@ -116210,7 +116523,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.91,
+    "edi": 160.05,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -118565,14 +118878,15 @@
     "links": {
       "repo": "https://github.com/hendrycks/test",
       "dataset": "https://huggingface.co/datasets/cais/mmlu",
-      "paper": "https://arxiv.org/abs/2009.03300"
+      "paper": "https://arxiv.org/abs/2009.03300",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/mmlu"
     },
     "access": "public",
     "note": "Saturated and contaminated. Reported only as a base-model metric. Google reports a medical subject aggregate called MMLU Med in the MedGemma model card.",
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.29,
+    "edi": 102.52,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -118855,7 +119169,8 @@
       "repo": "https://github.com/TIGER-AI-Lab/MMLU-Pro",
       "dataset": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro",
       "leaderboard": "https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro",
-      "paper": "https://arxiv.org/abs/2406.01574"
+      "paper": "https://arxiv.org/abs/2406.01574",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro"
     },
     "access": "public",
     "note": "Launch posts report it widely. The makers fixed answers and formatting many times from 2024-07 to 2026-01, including a leading-space shortcut in STEM options on 2026-01-18, and kept one dataset.",
@@ -123796,7 +124111,8 @@
       "repo": "https://github.com/facebookresearch/multiloko",
       "dataset": "https://huggingface.co/datasets/facebook/multiloko",
       "paper": "https://arxiv.org/abs/2504.10356",
-      "leaderboard": "https://github.com/facebookresearch/multiloko#leaderboard"
+      "leaderboard": "https://github.com/facebookresearch/multiloko#leaderboard",
+      "kaggle": "https://www.kaggle.com/benchmarks/metaresearch/multiloko"
     },
     "access": "public+private-holdout",
     "unit": "%",
@@ -125118,7 +125434,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.28,
+    "edi": 164.12,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -133728,7 +134044,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 92.92,
+    "edi": 93.31,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -135628,7 +135944,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.7,
+    "edi": 146.69,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -135673,7 +135989,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.89,
+    "edi": 169.82,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -135986,7 +136302,7 @@
     "note": "Epoch AI added it as a harder successor to MATH Level 5, which was nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 137.16,
+    "edi": 137.17,
     "epoch": {
       "epoch_name": "OTIS Mock AIME 2024-2025",
       "random": 0.1,
@@ -137611,7 +137927,8 @@
       "repo": "https://github.com/run-llama/ParseBench",
       "site": "https://parsebench.ai",
       "dataset": "https://huggingface.co/datasets/llamaindex/ParseBench",
-      "leaderboard": "https://parsebench.ai"
+      "leaderboard": "https://parsebench.ai",
+      "kaggle": "https://www.kaggle.com/benchmarks/llamaindex-org/parsebench"
     },
     "access": "public",
     "note": "On Hugging Face's official benchmark list, with 168 likes.",
@@ -141189,7 +141506,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 59.97,
+    "edi": 60.84,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -143065,7 +143382,8 @@
       "dataset": "https://huggingface.co/datasets/aisa-group/PostTrainBench-Trajectories",
       "leaderboard": "http://posttrainbench.com/",
       "paper": "https://arxiv.org/abs/2603.08640",
-      "site": "https://posttrainbench.com/blog/posttrainbench-1-1/"
+      "site": "https://posttrainbench.com/blog/posttrainbench-1-1/",
+      "kaggle": "https://www.kaggle.com/benchmarks/aisa-group/kaggle-posttrainbench"
     },
     "access": "public",
     "note": "Version 1.1 added judges for contamination and API use, and banned distillation from hosted models. Runs that broke the rules score as the base model.",
@@ -143097,7 +143415,8 @@
       "dataset": "https://huggingface.co/datasets/aisa-group/PostTrainBench-Trajectories",
       "leaderboard": "http://posttrainbench.com/",
       "paper": "https://arxiv.org/abs/2603.08640",
-      "site": "https://posttrainbench.com/blog/posttrainbench-1-2/"
+      "site": "https://posttrainbench.com/blog/posttrainbench-1-2/",
+      "kaggle": "https://www.kaggle.com/benchmarks/aisa-group/kaggle-posttrainbench-v1-2"
     },
     "access": "public",
     "note": "Version 1.2 dropped BFCL, reweighted the other six benchmarks, fixed HumanEval scoring, and averages up to five seeds.",
@@ -143116,7 +143435,7 @@
       "runs": "external",
       "in_eci": true
     },
-    "edi": 174.6
+    "edi": 175.32
   },
   {
     "id": "powerbench",
@@ -143420,6 +143739,36 @@
       "https://huggingface.co/api/datasets/AirsideLabs/pre-flight-06"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "pretraining-index",
+    "name": "Pre-training Index",
+    "aliases": [
+      "Pretraining Index",
+      "Pre-training Index v0"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reading",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Open base and post-trained models predict the text of documents from about 260 curated sources and Uncheatable Eval. The score is bits per byte, so it measures how well each model compresses code, math and science, systems writing and essays.",
+    "org": "Elie Bakouch",
+    "released": "2026-11",
+    "links": {
+      "site": "https://eliebak.com/pretraining-index",
+      "leaderboard": "https://eliebak.com/pretraining-index"
+    },
+    "access": "public",
+    "note": "Version 0 scores 27 open models, 14 base and 13 post-trained. Half of the index is Uncheatable Eval, whose documents were published after every model's knowledge cutoff. The curated sources make up the other half: code 25%, math and science 10%, systems writing 10% and ideas writing 5%. Old documents that some model predicts far better than expected (loss at least 4 times lower), and so likely trained on, are left out for every model. The maker didn't recover base behavior for the post-trained models, so their base models likely score lower. In the November 24, 2026 results, Kimi K3.1 Pro had the lowest bits per byte, 0.392, and beat the other models on 94% of documents.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://eliebak.com/pretraining-index",
+      "https://x.com/eliebakouch/status/2125403710931005852"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "precedent-vs-spec",
@@ -144493,6 +144842,34 @@
     ]
   },
   {
+    "id": "prompt-injection-robustness-jamble",
+    "name": "Prompt Injection Robustness (Chaitanya Jamble)",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer ordinary requests using documents that contain conflicting instructions. The score is the fraction of responses that keep a designated token private.",
+    "org": "Chaitanya Jamble",
+    "released": "2026-08",
+    "links": {
+      "site": "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness",
+      "dataset": "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
+      "leaderboard": "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness"
+    },
+    "access": "public",
+    "note": "The dataset pairs 486 altered documents with 486 clean controls. The published notebook samples 30 altered documents and reports a fraction from zero to one.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/chaitanyajamble/prompt-injection-robustness",
+      "https://www.kaggle.com/datasets/chaitanyajamble/prompt-injection-robustness-data",
+      "https://www.kaggle.com/code/chaitanyajamble/prompt-injection-robustness"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "prompt-injection-adaptive-browser-use-anthropic",
     "name": "Prompt injection robustness against adaptive attackers, browser use (Anthropic)",
     "aliases": [
@@ -144790,7 +145167,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.49,
+    "edi": 156.47,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -148369,6 +148746,30 @@
     "added": "2026-11-19"
   },
   {
+    "id": "kaggle-racing-arena",
+    "name": "Racing Arena",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build a keyboard-controlled 3D racing game that runs in a single browser page. Human votes determine its Elo rating.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
+    },
+    "access": "public",
+    "note": "Kaggle gives models one game prompt. The vote count records how many comparisons included each entry.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "radiobench",
     "name": "RadioBench",
     "category": "engineering-design",
@@ -151894,7 +152295,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.11,
+    "edi": 177.3,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -153528,6 +153929,30 @@
       "https://github.com/stepjam/RLBench"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "rlbench-interactive-learning",
+    "name": "RLBench (Interactive Learning)",
+    "category": "science-reasoning",
+    "subcategory": "science-puzzles",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models query hidden environments and use numerical feedback to revise their guesses within a step limit. The suite covers 30 puzzles.",
+    "org": "kdcyberdude",
+    "released": "2026-04",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
+    },
+    "access": "unknown",
+    "note": "The board reports scores from zero to one. Each puzzle defines the feedback and step budget.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kdcyberdude/rlbench"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "rmbench",
@@ -158762,7 +159187,8 @@
       "repo": "https://github.com/scicode-bench/SciCode",
       "dataset": "https://huggingface.co/datasets/SciCode1/SciCode",
       "leaderboard": "https://scicode-bench.github.io",
-      "paper": "https://arxiv.org/abs/2407.13168"
+      "paper": "https://arxiv.org/abs/2407.13168",
+      "kaggle": "https://www.kaggle.com/benchmarks/open-benchmarks/scicode"
     },
     "access": "public",
     "note": "Mistral cites 'SciCode-Verified' (pass@1, n=6). Kimi uses Artificial Analysis numbers. Test-set answers partly held out.",
@@ -160214,7 +160640,8 @@
       "repo": "https://github.com/SEC-bench/SEC-bench-Pro",
       "site": "https://sec-bench.github.io",
       "dataset": "https://huggingface.co/datasets/SEC-bench/SEC-bench-Pro",
-      "leaderboard": "https://sec-bench.github.io"
+      "leaderboard": "https://sec-bench.github.io",
+      "kaggle": "https://www.kaggle.com/benchmarks/university-of-illinois-urbana-champaign/sec-bench-pro-v8"
     },
     "access": "public",
     "note": "344 instances: 103 V8, 104 SpiderMonkey and 137 Linux. Dated 17 June 2026 and the board default. The maker calls SEC-bench Pro self-evolving and lets readers switch snapshots. The earlier 260505 snapshot had 183 instances.",
@@ -161990,6 +162417,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "shellbench",
+    "name": "ShellBench",
+    "category": "tool-use",
+    "subcategory": "tools-assistants",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents complete 100 everyday requests, such as reconciling receipts or sorting an inbox. A task requires both the requested result and safe handling.",
+    "org": "OpenClaw Foundation and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.32946",
+      "site": "https://openclaw.ai/blog/shellbench",
+      "dataset": "https://huggingface.co/datasets/OpenClaw/ShellBench",
+      "leaderboard": "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench"
+    },
+    "access": "public+private-holdout",
+    "note": "A judge checks 90 tasks against rubrics. Code checks the other ten. The public split contains 20 tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/openclaw-foundation/shellbench",
+      "https://arxiv.org/abs/2611.32946",
+      "https://openclaw.ai/blog/shellbench",
+      "https://huggingface.co/datasets/OpenClaw/ShellBench"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "sherlock-holmes-qa-gutenberg",
     "name": "Sherlock Holmes Q&A",
     "category": "knowledge-qa",
@@ -162655,7 +163112,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.36,
+    "edi": 152.32,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -162692,7 +163149,8 @@
       "repo": "https://github.com/openai/simple-evals",
       "dataset": "https://huggingface.co/datasets/OpenEvals/SimpleQA",
       "paper": "https://arxiv.org/abs/2411.04368",
-      "site": "https://openai.com/index/introducing-simpleqa/"
+      "site": "https://openai.com/index/introducing-simpleqa/",
+      "kaggle": "https://www.kaggle.com/benchmarks/openai/simpleqa"
     },
     "access": "public",
     "note": "Google DeepMind released SimpleQA Verified, a cleaned 1,000 question subset, because the original has label errors and duplicates.",
@@ -162754,7 +163212,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.03,
+    "edi": 157.28,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -165592,6 +166050,32 @@
     "added": "2026-11-15"
   },
   {
+    "id": "socrates-social-cognition",
+    "name": "SOCRATES (Social Cognition)",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models interpret social cues and choose actions in tasks about cooperation, negotiation, risk and other people’s beliefs.",
+    "org": "alfaxadeyembe",
+    "released": "2026-04",
+    "links": {
+      "dataset": "https://www.kaggle.com/datasets/alfaxadeyembe/socrates",
+      "leaderboard": "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates"
+    },
+    "access": "public",
+    "note": "The public development set contains 359 items adapted from six sources. The score balances task families within each module.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/alfaxadeyembe/socrates",
+      "https://www.kaggle.com/datasets/alfaxadeyembe/socrates"
+    ],
+    "added": "2026-11-26"
+  },
+  {
     "id": "sofc-exp",
     "name": "SOFC-Exp",
     "aliases": [
@@ -167934,7 +168418,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 176.76,
+    "edi": 174.78,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -168243,7 +168727,8 @@
       "dataset": "https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2",
       "leaderboard": "https://spreadsheetbench.github.io/",
       "paper": "https://arxiv.org/abs/2606.29955",
-      "site": "https://spreadsheetbench.github.io/"
+      "site": "https://spreadsheetbench.github.io/",
+      "kaggle": "https://www.kaggle.com/benchmarks/spreadsheet-bench-team/spreadsheetbench-v2"
     },
     "access": "public",
     "unit": "%",
@@ -173203,7 +173688,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.73,
+    "edi": 150.79,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -178613,7 +179098,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 149.44,
+    "edi": 149.45,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -180437,7 +180922,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.99,
+    "edi": 145.94,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -183239,7 +183724,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 48.11,
+    "edi": 49.55,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -183973,6 +184458,32 @@
       "https://github.com/SesameAILabs/turnbench"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "turnbench-executive-functions",
+    "name": "TurnBench (Executive Functions)",
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models play two turn-based games across 800 scenarios. They adapt to changing goals in a farm game and infer hidden rules in a creature battle.",
+    "org": "Simon Zhang and Bill Cai",
+    "released": "2026-04",
+    "links": {
+      "site": "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879",
+      "leaderboard": "https://www.kaggle.com/benchmarks/zxsimon2/turnbench"
+    },
+    "access": "public",
+    "note": "Each game has four modes with 100 scenarios per mode. The game engine checks whether the model wins.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/zxsimon2/turnbench",
+      "https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/new-writeup-1775940834879"
+    ],
+    "added": "2026-11-26"
   },
   {
     "id": "tut-urban-acoustic-scenes-2018",
@@ -195176,7 +195687,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 153.16,
+    "edi": 153.12,
     "epoch": {
       "epoch_name": "VPCT",
       "random": 33.33,
@@ -196985,7 +197496,7 @@
     "successor": "weirdml-v3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.51,
+    "edi": 145.5,
     "epoch": {
       "epoch_name": "WeirdML",
       "random": 0,
@@ -197022,7 +197533,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 168.08,
+    "edi": 167.91,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -198602,7 +199113,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.31,
+    "edi": 102.52,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,
@@ -200301,6 +200812,39 @@
       "https://huggingface.co/papers/2502.08047"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "worldleague",
+    "name": "WorldLeague",
+    "aliases": [
+      "World League"
+    ],
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "AI systems control simulated robots on 60 tasks in three suites: exploring scenes to gather evidence (WorldSeek), rearranging objects (WorldShape) and adapting to changes (WorldShift). The Interactive Score measures progress toward each task's physical goal from the robot's trajectory.",
+    "org": "xML Lab, National University of Singapore",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.30989",
+      "repo": "https://github.com/xyangzhou/WorldLeague",
+      "site": "https://xyangzhou.github.io/WorldLeague/",
+      "leaderboard": "https://xyangzhou.github.io/WorldLeague/",
+      "dataset": "https://huggingface.co/datasets/xyangzhou/WorldLeague"
+    },
+    "access": "public",
+    "note": "The leaderboard compares 13 systems built on OmniGibson with BEHAVIOR-1K assets. Eight vision-language models choose targets and motions through the board's WorldHarness, and three vision-language-action models and two world-action models use their native controls on 59 of the tasks. Physical success counts episodes where the full goal and every constraint hold, and it stays far below the Interactive Score. In the November 24, 2026 results, Claude Fable 5.2 led with 28.58 and 21.67% physical success. The paper had 135 Hugging Face upvotes a day after release.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://xyangzhou.github.io/WorldLeague/",
+      "https://huggingface.co/papers/2611.30989",
+      "https://github.com/xyangzhou/WorldLeague"
+    ],
+    "added": "2026-11-25"
   },
   {
     "id": "worldmodelbench",

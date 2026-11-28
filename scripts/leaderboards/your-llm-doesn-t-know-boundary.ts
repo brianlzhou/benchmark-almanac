@@ -8,6 +8,21 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/trexbytes/your-llm-doesnt-know-boundary',
   feed: kaggleFeed('trexbytes', 'your-llm-doesnt-know-boundary'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('trexbytes', 'your-llm-doesnt-know-boundary', "(Overall)", 1),
+  parts: {
+    blockedRelease: 'Blocked release (v1)',
+    monthEndTotal: 'Month-end total (v3)',
+    escalationReport: 'Escalation report (v3)',
+    issueFix: 'Issue fix (v3)',
+    ticketCloseout: 'Ticket closeout (v3)',
+    blockedReleaseV3: 'Blocked release (v3)',
+  },
+  fetch: () => kaggleRowsWithBounds('trexbytes', 'your-llm-doesnt-know-boundary', "(Overall)", 1, {
+    blockedRelease: { task: 'boundary-t18-blocked-release' },
+    monthEndTotal: { task: 'boundary-v3-t01-month-end-total' },
+    escalationReport: { task: 'boundary-v3-t05-escalation-report' },
+    issueFix: { task: 'boundary-v3-t08-issue-fix' },
+    ticketCloseout: { task: 'boundary-v3-t11-ticket-closeout' },
+    blockedReleaseV3: { task: 'boundary-v3-t18-blocked-release' },
+  }),
 };
 export default board;

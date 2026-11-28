@@ -15,11 +15,16 @@ const board: Leaderboard = {
   
   async fetch() {
     const rows: LeaderboardRow[] = [];
-    for (const t of mdTables(await fetchText(FEED))) {
-      if (!t.head.includes('Seal-0 w/o Search')) continue;
-      for (const r of t.rows) for (const column of ['Seal-0 w/o Search', 'Seal-0 w/ Search']) {
-        const score = num(r[t.head.indexOf(column)]);
-        if (r[0] && score !== undefined) rows.push({ model: identity(r[0]), score, setting: column.replace('Seal-0 ', '') });
+    const md = await fetchText(FEED);
+    const sections = md.split(/(?=^### )/m);
+    for (const section of sections) {
+      const open = /^### Open-weight models/i.test(section) ? true : /^### Closed-source models/i.test(section) ? false : undefined;
+      for (const t of mdTables(section)) {
+        if (!t.head.includes('Seal-0 w/o Search')) continue;
+        for (const r of t.rows) for (const column of ['Seal-0 w/o Search', 'Seal-0 w/ Search']) {
+          const score = num(r[t.head.indexOf(column)]);
+          if (r[0] && score !== undefined) rows.push({ model: identity(r[0]), score, setting: column.replace('Seal-0 ', ''), open });
+        }
       }
     }
     if (!rows.length) throw new Error('Seal-0 table missing');

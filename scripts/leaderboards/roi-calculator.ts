@@ -20,8 +20,8 @@ interface Page { result: { data: { json: { evaluations: Evaluation[]; pagination
 const board: Leaderboard = {
   benchmark: 'roi-calculator', url, feed: pageUrl(0),
   terms: 'Prime Intellect publishes the public evaluation results under its terms. https://www.primeintellect.ai/terms-of-service',
-  stats: { samples: { name: 'Scored samples', unit: 'count' }, inputTokens: { name: 'Mean input tokens', unit: 'tokens' },
-    outputTokens: { name: 'Mean output tokens', unit: 'tokens' }, min: { name: 'Minimum sample reward', unit: 'score' },
+  stats: { inputTokens: { name: 'Mean input tokens', unit: 'tokens' },
+    min: { name: 'Minimum sample reward', unit: 'score' },
     max: { name: 'Maximum sample reward', unit: 'score' }, error: { name: 'Mean error rate', unit: 'score', better: 'lower' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -33,8 +33,9 @@ const board: Leaderboard = {
         const usage = e.metadata.usage;
         rows.push({ model: e.model_name, date: e.started_at.slice(0, 10), setting: 'v' + e.semanticVersion + ', run ' + e.started_at,
           score: e.avg_score, submitter: e.user.name, trials: e.metadata.rollouts_per_example,
-          metrics: { samples: e.total_samples, min: e.min_score, max: e.max_score, error: e.metrics.avg_error,
-            ...(usage && { inputTokens: usage.input_tokens, outputTokens: usage.output_tokens }) } });
+          ...(usage && Number.isFinite(usage.output_tokens) ? { tokens: Math.round(usage.output_tokens) } : {}),
+          metrics: { min: e.min_score, max: e.max_score, error: e.metrics.avg_error,
+            ...(usage && { inputTokens: usage.input_tokens }) } });
       }
       if (!pagination.hasMore) break;
       if (evaluations.length !== 100) throw new Error('Incomplete ROI evaluation page');

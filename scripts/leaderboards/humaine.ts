@@ -19,8 +19,9 @@ const board: Leaderboard = {
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
   stats: {
     p_best: { name: 'Probability of being best', unit: 'score', better: 'higher', note: 'Probability that the model ranks first in the fitted comparison model.' },
-    expected_rank: { name: 'Expected rank', unit: 'count', better: 'lower' },
     total_comparisons: { name: 'Total comparisons', unit: 'count' },
+    ess: { name: 'Effective sample size', unit: 'count' },
+    tier: { name: 'Tier', unit: 'count', better: 'lower' },
   },
   aliases: {
     'qwen3-235b-a22b-2507': 'qwen3-235b-a22b-instruct-jul-2025',
@@ -36,10 +37,11 @@ const board: Leaderboard = {
       for (const r of list ?? []) {
         if (!r.model_name || typeof r.score !== 'number') continue;
         const metrics: Record<string, number> = {};
-        for (const k of ['p_best','expected_rank','score_std','total_comparisons']) if (typeof r[k] === 'number') metrics[k === 'score_std' ? 'std' : k] = r[k];
-        if (r.score_ci_95) {metrics.ciLow = r.score_ci_95.lower; metrics.ciHigh = r.score_ci_95.upper;}
+        for (const k of ['p_best','score_std','total_comparisons','ess','tier']) if (typeof r[k] === 'number') metrics[k === 'score_std' ? 'std' : k] = r[k];
+        let low: number | undefined, high: number | undefined;
+        if (r.score_ci_95) {low = r.score_ci_95.lower; high = r.score_ci_95.upper; metrics.ciLow = low!; metrics.ciHigh = high!;}
         const name = r.model_name.split('/').at(-1);
-        out.push({model: identity(name), score: r.score, setting, metrics});
+        out.push({model: identity(name), score: r.score, setting, low, high, metrics});
       }
     }
     add(data.overall_rankings, 'Overall');

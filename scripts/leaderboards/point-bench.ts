@@ -17,13 +17,25 @@ const board: Leaderboard = {
     'llava-onevision-qwen2-7b-ov-hf': 'llava-onevision-7b',
     'llava-onevision-qwen2-72b-ov-hf': 'llava-onevision-72b',
   },
+  parts: {
+    affordance: 'Affordance',
+    spatial: 'Spatial',
+    reasoning: 'Reasoning',
+    steerability: 'Steerability',
+    counting: 'Counting',
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(FEED))) {
       const model = (r[''] ?? Object.values(r)[0] ?? '').trim();
       const score = Number(r.Average);
       if (!model || /^human$/i.test(model) || !Number.isFinite(score)) continue;
-      rows.push({ model, score, date: PAPER_DATE });
+      const metrics: Record<string, number> = {};
+      for (const [col, key] of [['Affordance', 'affordance'], ['Spatial', 'spatial'], ['Reasoning', 'reasoning'], ['Steerability', 'steerability'], ['Counting', 'counting']] as const) {
+        const v = Number(r[col]);
+        if (Number.isFinite(v)) metrics[key] = v;
+      }
+      rows.push({ model, score, date: PAPER_DATE, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no rows in point-bench2.csv');
     return rows;

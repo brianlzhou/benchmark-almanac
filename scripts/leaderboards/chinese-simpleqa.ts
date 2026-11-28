@@ -15,6 +15,12 @@ const board: Leaderboard = {
   benchmark: 'chinese-simpleqa',
   parts: { CC: 'Chinese Culture', HU: 'Humanities', ETAS: 'Engineering, Technology, and Applied Sciences',
     LAC: 'Life, Art, and Culture', SO: 'Society', NS: 'Natural Science' },
+  stats: {
+    CO: { name: 'Correct', unit: '%', better: 'higher' },
+    NA: { name: 'Not attempted', unit: '%' },
+    IN: { name: 'Incorrect', unit: '%', better: 'lower' },
+    CGA: { name: 'Correct given attempted', unit: '%', better: 'higher' },
+  },
   url: URL,
   feed: `${URL} (leaderboard table)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the dataset is CC BY-NC-SA 4.0 and the scores are cited to the authors.',

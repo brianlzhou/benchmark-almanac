@@ -7,6 +7,7 @@ const FEED = "https://assets.st-note.com/img/1788343264-bpD7ZaRqvFm5e3tCnQHWj6X8
 
 const board: Leaderboard = {
   benchmark: "sugars-kitchen-ai-cooking-battle-17",
+  static: 'paper',
   url: "https://note.com/sugar_arc_works/n/n8eb45d051541",
   feed: FEED,
   terms: "The organizer permits use of the recipes. The post gives no separate license for the standings or artwork. https://note.com/sugar_arc_works/n/n8eb45d051541 The note.com robots file restricts API paths and allows this article.",

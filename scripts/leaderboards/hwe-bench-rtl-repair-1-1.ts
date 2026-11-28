@@ -7,18 +7,31 @@ const board: Leaderboard = {
   url: "https://pku-liang.github.io/hwe-bench/",
   feed: "https://pku-liang.github.io/hwe-bench/scores-v1.1.json",
   terms: "The author repository uses Apache License 2.0. https://raw.githubusercontent.com/pku-liang/hwe-bench/main/LICENSE The project host serves no robots.txt.",
+  parts: {
+    opentitan: { name: 'OpenTitan', group: 'Repository' },
+    ibex: { name: 'Ibex', group: 'Repository' },
+    cva6: { name: 'CVA6', group: 'Repository' },
+    caliptra: { name: 'Caliptra', group: 'Repository' },
+    xiangshan: { name: 'XiangShan', group: 'Repository' },
+    rocketchip: { name: 'Rocket Chip', group: 'Repository' },
+  },
   stats: {
     precision: { name: 'Precision', unit: '%', better: 'higher' },
     inputTokensTotal: { name: 'Total input tokens', unit: 'tokens' },
     cachedTokensTotal: { name: 'Total cached tokens', unit: 'tokens' },
     outputTokensTotal: { name: 'Total output tokens', unit: 'tokens' },
   },
+  chart: {
+    title: 'Resolved rate vs. run cost',
+    x: { key: 'cost', label: 'Run cost', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Resolved rate', unit: '%', better: 'higher' },
+    note: 'HWE-Bench plots resolved rate across all 417 tasks against full run cost on a log scale.',
+  },
   costPer: "run",
   async fetch() {
     const {benchmark,models} = JSON.parse(await fetchText(this.feed));
     const repos: {id:string,name:string,cases:number}[] = benchmark.repos;
     if (benchmark.version !== 'v1.1' || benchmark.total !== 417 || repos.length !== 6 || models.length < 7) throw new Error('HWE-Bench version or coverage changed');
-    this.parts = Object.fromEntries(repos.map(r => [r.id,r.name]));
     return models.map((m: {name:string,effort?:string,agent:string,group:string,overall:number,costs:number,tokens:{input:number,cached:number,output:number},precision:number,resolved:Record<string,number>}) => {
       const metrics: Record<string,number> = {precision:m.precision*100,inputTokensTotal:m.tokens.input,cachedTokensTotal:m.tokens.cached,outputTokensTotal:m.tokens.output};
       for (const r of repos) metrics[r.id] = 100*m.resolved[r.id]/r.cases;

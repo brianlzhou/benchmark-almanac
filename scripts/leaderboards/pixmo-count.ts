@@ -24,9 +24,12 @@ export default {
       }
       cells[0] = cells[0].replace(/\s*\\dagger$/, '');
       if (cells.length !== 15 || !cells[0]) throw new Error("Incomplete result row");
+      const pMatch = /^MolmoE-/i.test(cells[0]) ? null : cells[0].match(/[- ](\d+(?:\.\d+)?)B\b/i);
+      const params = pMatch ? Number(pMatch[1]) : undefined;
       rows.push({
         model: cells[0], score: numberCell(cells[11]),
         open,
+        ...(params !== undefined ? { params } : {}),
       });
     }
     if (rows.length < 27) throw new Error("Expected at least 27 results for pixmo-count");

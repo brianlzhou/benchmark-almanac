@@ -16,6 +16,7 @@ const board: Leaderboard = {
   terms: 'RoboARCade publishes the leaderboard and its JSON assets without a separate score license.',
   stats: {
     saturation: { name: 'Saturation', unit: '%', better: 'higher' },
+    costLowerBoundUsd: { name: 'Cost lower bound per trial', unit: 'usd', better: 'lower' },
   },
   async fetch() {
     const html = await fetchText(page);

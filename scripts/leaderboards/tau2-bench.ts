@@ -112,10 +112,33 @@ export const ALIASES: Record<string, string> = {
   'Kimi-k2': 'kimi-k2-jul-2025',
 };
 
+export const TAU_PARTS: NonNullable<Leaderboard['parts']> = {
+  retail: { name: 'Retail', group: 'Domain' },
+  airline: { name: 'Airline', group: 'Domain' },
+  telecom: { name: 'Telecom', group: 'Domain' },
+};
+export const TAU_STATS: NonNullable<Leaderboard['stats']> = {
+  pass2: { name: 'Pass^2', unit: '%', better: 'higher' },
+  pass3: { name: 'Pass^3', unit: '%', better: 'higher' },
+  pass4: { name: 'Pass^4', unit: '%', better: 'higher' },
+  retailPass2: { name: 'Retail Pass^2', unit: '%', better: 'higher' },
+  retailPass3: { name: 'Retail Pass^3', unit: '%', better: 'higher' },
+  retailPass4: { name: 'Retail Pass^4', unit: '%', better: 'higher' },
+  airlinePass2: { name: 'Airline Pass^2', unit: '%', better: 'higher' },
+  airlinePass3: { name: 'Airline Pass^3', unit: '%', better: 'higher' },
+  airlinePass4: { name: 'Airline Pass^4', unit: '%', better: 'higher' },
+  telecomPass2: { name: 'Telecom Pass^2', unit: '%', better: 'higher' },
+  telecomPass3: { name: 'Telecom Pass^3', unit: '%', better: 'higher' },
+  telecomPass4: { name: 'Telecom Pass^4', unit: '%', better: 'higher' },
+  retailCostUsd: { name: 'Retail cost per task', unit: 'usd', better: 'lower' },
+  airlineCostUsd: { name: 'Airline cost per task', unit: 'usd', better: 'lower' },
+  telecomCostUsd: { name: 'Telecom cost per task', unit: 'usd', better: 'lower' },
+};
+
 const board: Leaderboard = {
   benchmark: 'tau2-bench',
-  stats: { pass2: { name: 'Pass@2', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass4: { name: 'Pass@4', unit: '%', better: 'higher' } },
-  parts: { retail: { name: 'Retail', group: 'Domain' }, airline: { name: 'Airline', group: 'Domain' }, telecom: { name: 'Telecom', group: 'Domain' } },
+  stats: TAU_STATS,
+  parts: TAU_PARTS,
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: `${BASE}/manifest.json (legacy_submissions)`,
   terms: TERMS,

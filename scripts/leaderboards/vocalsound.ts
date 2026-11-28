@@ -15,10 +15,11 @@ const board: Leaderboard = {
     const rows = [];
     for (const line of lines.slice(header + 2)) {
       if (!line.startsWith('|')) break;
-      const [method, architecture, , accuracy] = line.split('|').slice(1).map(s => s.trim());
+      const [method, architecture, , accuracy, code = ''] = line.split('|').slice(1).map(s => s.trim());
       const name = method.match(/^\[([^\]]+)\]/)?.[1];
       if (!name || !/^\d+(?:\.\d+)?$/.test(accuracy)) throw new Error('Unexpected VocalSound result');
-      rows.push({ model: name === 'Baseline' ? architecture : name, score: Number(accuracy) });
+      const link = code.match(/\((https?:\/\/[^)]+)\)/)?.[1] ?? method.match(/\((https?:\/\/[^)]+)\)/)?.[1];
+      rows.push({ model: name === 'Baseline' ? architecture : name, score: Number(accuracy), link });
     }
     return checked(rows, 2);
   },

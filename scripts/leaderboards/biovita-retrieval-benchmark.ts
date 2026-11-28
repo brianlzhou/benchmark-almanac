@@ -5,7 +5,15 @@ import type { Leaderboard, LeaderboardRow, BoardPart } from './types.ts';
 import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2603.23883';
-const parts: Record<string, BoardPart> = {};
+const GROUPS = ['Seen species', 'Unseen species', 'Genus', 'Family'] as const;
+const DIRECTIONS = ['Audio to Text', 'Text to Audio', 'Audio to Image', 'Image to Audio', 'Image to Text', 'Text to Image', 'Average'] as const;
+const RANKS = ['Top 1', 'Top 5'] as const;
+const parts: Record<string, BoardPart> = Object.fromEntries(
+  GROUPS.flatMap(group => DIRECTIONS.flatMap(dir => RANKS.map(rank => {
+    const name = dir + ' ' + rank;
+    return [(group + name).replaceAll(' ', ''), { name: group + ': ' + name, group, unit: '%' as const }];
+  }))),
+);
 const board: Leaderboard = {
   benchmark: 'biovita-retrieval-benchmark', url: feed, feed, static: 'paper', parts,
   terms: 'The authors publish their tables on arXiv. https://arxiv.org/abs/2603.23883',
@@ -25,7 +33,6 @@ const board: Leaderboard = {
         for (let i = offset; i < r.length; i++) {
           const name = t[0][i].replace('\\rightarrow', ' to ') + ' ' + t[1][i];
           const key = (group + name).replaceAll(' ', '');
-          parts[key] = { name: group + ': ' + name, group };
           row.metrics![key] = numberCell(r[i]);
         }
         rows.set(model, row);

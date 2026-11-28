@@ -101,5 +101,5 @@ const ROWS: LeaderboardRow[] = [
     "setting": "DeepSeek-R1-0528 judge; mean of German and English means"
   }
 ];
-const board: Leaderboard = {benchmark:'lexam-hard',url:'https://huggingface.co/datasets/joelniklaus/LEXam-hard',feed:IMAGE,terms:'Official public dataset-card results. The almanac credits SwissLegalEvals and links the source.',fetch:()=>checkedImageRows(IMAGE,'465bd17d3554c9e7cb9bd8ef74dacc13480f3450789d76902154315e46975ac2',ROWS)};
+const board: Leaderboard = {benchmark:'lexam-hard',static:'paper',url:'https://huggingface.co/datasets/joelniklaus/LEXam-hard',feed:IMAGE,terms:'Official public dataset-card results. The almanac credits SwissLegalEvals and links the source.',fetch:()=>checkedImageRows(IMAGE,'465bd17d3554c9e7cb9bd8ef74dacc13480f3450789d76902154315e46975ac2',ROWS)};
 export default board;

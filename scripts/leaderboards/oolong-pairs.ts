@@ -6,7 +6,7 @@ import { tables } from '../lib/html.ts';
 
 const PAGE = 'https://www.primeintellect.ai/blog/prime-agent';
 const board: Leaderboard = {
-  benchmark: 'oolong-pairs', url: PAGE, feed: PAGE,
+  benchmark: 'oolong-pairs', harnesses: 'system', url: PAGE, feed: PAGE,
   terms: 'Prime Intellect publishes the comparison table in its public research article. https://www.primeintellect.ai/blog/prime-agent',
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(PAGE)).find((rows) => rows.some((row) => row.some((cell) => cell.text.includes('OOLONG-Pairs'))));

@@ -51,7 +51,9 @@ const board: Leaderboard = {
       }
       const metrics = Object.fromEntries(Object.entries(e.MMBench_TEST_EN ?? {})
         .filter(([key, value]) => key !== 'Overall' && Number.isFinite(value)));
+      const link = e.META?.Method?.[1]?.trim();
       rows.push({ model, score, setting, date, metrics,
+        link: link && /^https?:\/\/\S+$/.test(link) ? link : undefined,
         verified: e.META?.Verified === 'Yes' ? true : e.META?.Verified === 'No' ? false : undefined,
         open: e.META?.OpenSource === 'Yes' ? true : e.META?.OpenSource === 'No' ? false : undefined,
         params: /^\d+(?:\.\d+)?B$/i.test(e.META?.Parameters ?? '') ? parseFloat(e.META!.Parameters!) : undefined,

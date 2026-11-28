@@ -17,7 +17,6 @@ const board: Leaderboard = {
   parts: { english: 'English', portuguese: 'Portuguese' },
   stats: {
     defended: { name: 'Defended attempts', unit: 'count' },
-    prompts: { name: 'Prompts evaluated', unit: 'count' },
   },
   async fetch() {
     const files = (await fetchJson<{ type: string, path: string }[]>(feed)).filter(f => f.type === 'file' && f.path.endsWith('.parquet'));
@@ -41,7 +40,7 @@ const board: Leaderboard = {
       const total = english.total + portuguese.total;
       return { model, setting: model.endsWith('-FP8') ? 'FP8' : undefined, score: 100 * (english.defended + portuguese.defended) / total,
         metrics: { english: 100 * english.defended / english.total, portuguese: 100 * portuguese.defended / portuguese.total,
-          defended: english.defended + portuguese.defended, prompts: total } };
+          defended: english.defended + portuguese.defended } };
     }), 14);
   },
 };

@@ -12,6 +12,10 @@ const board: Leaderboard = {
   benchmark: 'mmae', static: 'paper', url: 'https://arxiv.org/abs/2606.07229', feed,
   terms: 'The authors publish Table 2 under the terms at https://arxiv.org/abs/2606.07229.',
   parts: Object.fromEntries(groups.flat().filter(k=>k !== 'Overall').map(name => [name,name])),
+  stats: Object.fromEntries(groups.flat().flatMap(name => [
+    [name + 'Consistency', { name: name + ' consistency rate', unit: '%' as const, better: 'higher' as const }],
+    [name + 'ExactMatch', { name: name + ' exact match rate', unit: '%' as const, better: 'higher' as const }],
+  ])),
   async fetch() {
     const pdf = await pdfText(feed);
     const page = pdf.split('Table 2 Main results on the MMAE benchmark.')[1]?.split('\f')[0];

@@ -10,8 +10,21 @@ import { num, tables } from '../lib/html.ts';
 
 const PAGE = 'https://livedeepresearch.github.io/';
 
+const CRITERIA_COLS = [
+  ['presentation', 'Presentation & Organization'],
+  ['factLogic', 'Fact & Logic Consistency'],
+  ['coverage', 'Coverage & Comprehensiveness'],
+  ['citation', 'Citation Association'],
+] as const;
+
 const board: Leaderboard = {
   benchmark: 'liveresearchbench',
+  parts: {
+    presentation: { name: 'Presentation & Organization', group: 'Criterion' },
+    factLogic: { name: 'Fact & Logic Consistency', group: 'Criterion' },
+    coverage: { name: 'Coverage & Comprehensiveness', group: 'Criterion' },
+    citation: { name: 'Citation Association', group: 'Criterion' },
+  },
   url: PAGE,
   feed: `${PAGE} (server-rendered table, Avg)`,
   terms: 'Static GitHub Pages project page (no robots.txt, so nothing is disallowed); it publishes no terms.',
@@ -25,6 +38,7 @@ const board: Leaderboard = {
     if (!t) throw new Error('LiveResearchBench table not found');
     const head = t[0].map((c) => c.text);
     const [iName, iAvg] = [head.indexOf('Agent Name'), head.indexOf('Avg')];
+    const critIdx = CRITERIA_COLS.map(([k, h]) => [k, head.indexOf(h)] as const).filter(([, i]) => i >= 0);
     const rows: LeaderboardRow[] = [];
     let group = '';
     for (const r of t.slice(1)) {
@@ -35,9 +49,15 @@ const board: Leaderboard = {
       const name = r[iName]?.text ?? '';
       const score = num(r[iAvg]?.text);
       if (!name || score === undefined) continue;
+      const metrics: Record<string, number> = {};
+      for (const [k, i] of critIdx) {
+        const v = num(r[i]?.text);
+        if (v !== undefined) metrics[k] = v;
+      }
+      const mOpt = Object.keys(metrics).length ? { metrics } : {};
       const w = name.match(/^(.+?)\s*\(w\.\s*([^)]+)\)$/);
-      if (w) rows.push({ model: w[2].trim(), score, harness: w[1].trim() });
-      else rows.push({ model: name, score, harness: /web search/i.test(group) ? 'web search' : undefined });
+      if (w) rows.push({ model: w[2].trim(), score, harness: w[1].trim(), ...mOpt });
+      else rows.push({ model: name, score, harness: /web search/i.test(group) ? 'web search' : undefined, ...mOpt });
     }
     return rows;
   },

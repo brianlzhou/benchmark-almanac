@@ -6,10 +6,11 @@ import { CAIS_ALIASES, CAIS_PAGE, CAIS_TERMS, caisIndexRows } from './cais-text-
 
 const board: Leaderboard = {
   benchmark: 'cais-vision-capabilities-index',
+  parts: { erqa: 'ERQA', mindcube: 'MindCube', spatialviz: 'SpatialViz', intphys2: 'IntPhys 2', enigmaeval: 'EnigmaEval' },
   url: CAIS_PAGE,
   feed: `${CAIS_PAGE} (page JS chunk, mean of erqa, mindcube, spatialviz, intphys2 and enigmaeval)`,
   terms: CAIS_TERMS,
   aliases: CAIS_ALIASES,
-  fetch: () => caisIndexRows(['erqa', 'mindcube', 'spatialviz', 'intphys2', 'enigmaeval'], [], (m) => m.isTextOnlyModel === true),
+  fetch: () => caisIndexRows(['erqa', 'mindcube', 'spatialviz', 'intphys2', 'enigmaeval'], [], (m) => m.isTextOnlyModel === true, true),
 };
 export default board;

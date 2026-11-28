@@ -8,6 +8,17 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/maksimsilchenko/fairscreen-testing-llm-hiring-decisions',
   feed: kaggleFeed('maksimsilchenko', 'fairscreen-testing-llm-hiring-decisions'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('maksimsilchenko', 'fairscreen-testing-llm-hiring-decisions', "(Overall)", 100),
+  parts: {
+    direct: 'Direct',
+    fairnessInstruction: 'Fairness instruction',
+    structured: 'Structured',
+    evidenceSufficiency: 'Evidence sufficiency',
+  },
+  fetch: () => kaggleRowsWithBounds('maksimsilchenko', 'fairscreen-testing-llm-hiring-decisions', "(Overall)", 100, {
+    direct: { task: 'fairscreen-direct', scale: 100, interval: true },
+    fairnessInstruction: { task: 'fairscreen-fairness-instruction', scale: 100, interval: true },
+    structured: { task: 'fairscreen-structured', scale: 100, interval: true },
+    evidenceSufficiency: { task: 'fairscreen-evidence-sufficiency', scale: 100, interval: true },
+  }),
 };
 export default board;

@@ -8,6 +8,13 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/mariofilho/tombo-full-transcript',
   feed: kaggleFeed('mariofilho', 'tombo-full-transcript'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('mariofilho', 'tombo-full-transcript', "(Overall)", 1),
+  parts: {
+    diplomatic: 'Diplomatic transcription',
+    lowEffort: 'Diplomatic transcription (low reasoning)',
+  },
+  fetch: () => kaggleRowsWithBounds('mariofilho', 'tombo-full-transcript', "(Overall)", 1, {
+    diplomatic: { task: 'tombo-transcricao-diplomatica' },
+    lowEffort: { task: 'tombo-transcricao-diplomatica-low' },
+  }),
 };
 export default board;

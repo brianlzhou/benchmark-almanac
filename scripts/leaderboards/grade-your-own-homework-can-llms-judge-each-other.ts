@@ -8,6 +8,25 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/anish23101/grade-your-own-homework-can-llms-judge-each-other',
   feed: kaggleFeed('anish23101', 'grade-your-own-homework-can-llms-judge-each-other'),
   terms: KAGGLE_TERMS,
-  fetch: () => kaggleRowsWithBounds('anish23101', 'grade-your-own-homework-can-llms-judge-each-other', "(Overall)", 1),
+  parts: {
+    homework: 'Homework',
+    gradingAccuracy: 'Grading accuracy',
+    ownMistakes: 'Own mistakes',
+    positionSwap: 'Position swap',
+    confidenceBait: 'Confidence bait',
+    nameOnAnswer: 'Name on answer',
+    whichIsMine: 'Which is mine',
+    solveFirst: 'Solve first',
+  },
+  fetch: () => kaggleRowsWithBounds('anish23101', 'grade-your-own-homework-can-llms-judge-each-other', "(Overall)", 1, {
+    homework: { task: 'ggh-homework' },
+    gradingAccuracy: { task: 'ggh-grading-accuracy' },
+    ownMistakes: { task: 'ggh-own-mistakes' },
+    positionSwap: { task: 'ggh-position-swap' },
+    confidenceBait: { task: 'ggh-confidence-bait' },
+    nameOnAnswer: { task: 'ggh-name-on-answer' },
+    whichIsMine: { task: 'ggh-which-is-mine' },
+    solveFirst: { task: 'ggh-solve-first' },
+  }),
 };
 export default board;

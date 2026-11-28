@@ -11,7 +11,6 @@ const URL = 'https://medxpertqa.github.io/';
 const board: Leaderboard = {
   benchmark: 'medxpertqa-mm',
   parts: { Reasoning: 'Reasoning', Understanding: 'Understanding' },
-  stats: { publishedTableRank: { name: 'Published table rank', unit: 'count' } },
   url: URL,
   feed: `${URL} (static HTML table, MM subset, Avg)`,
   terms: 'Static GitHub Pages site; the MedXpertQA repository is MIT-licensed and the page states no other terms.',
@@ -37,9 +36,9 @@ const board: Leaderboard = {
       const date = r[iDate]?.text;
       const openness = r[head.indexOf('Opensource?')]?.text;
       const metrics: Record<string, number> = {};
-      for (const key of ['Reasoning', 'Understanding', '#']) {
+      for (const key of ['Reasoning', 'Understanding']) {
         const value = num(r[head.indexOf(key)]?.text);
-        if (value !== undefined) metrics[key === '#' ? 'publishedTableRank' : key] = value;
+        if (value !== undefined) metrics[key] = value;
       }
       if (model && score !== undefined) rows.push({ model, score, metrics, setting: r[head.indexOf('Reasoning?')]?.text, open: openness === 'open-source' ? true : openness === 'proprietary' ? false : undefined, date: /^\d{4}-\d\d$/.test(date ?? '') ? `${date}-01` : undefined });
     }

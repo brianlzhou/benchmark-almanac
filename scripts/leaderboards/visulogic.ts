@@ -86,6 +86,14 @@ const URL = 'https://visulogic-benchmark.github.io/VisuLogic/';
 
 const board: Leaderboard = {
   benchmark: 'visulogic',
+  parts: {
+    qua: { name: 'Quantitative', group: 'Category' },
+    spa: { name: 'Spatial', group: 'Category' },
+    pos: { name: 'Positional', group: 'Category' },
+    att: { name: 'Attribute', group: 'Category' },
+    sty: { name: 'Stylistic', group: 'Category' },
+    oth: { name: 'Other', group: 'Category' },
+  },
   url: URL,
   feed: `${URL} (leaderboard table)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the VisuLogic repository is MIT and the scores are cited to the authors.',
@@ -99,6 +107,14 @@ const board: Leaderboard = {
       score: /^Overall$/i,
       skip: /^(Human|Random)/i,
       name: (c) => c.text.replace(/\s+new$/i, ''),
+      metrics: {
+        qua: /^Qua\.$/i,
+        spa: /^Spa\.$/i,
+        pos: /^Pos\.$/i,
+        att: /^Att\.$/i,
+        sty: /^Sty\.$/i,
+        oth: /^Oth\.$/i,
+      },
     }),
 };
 export default board;

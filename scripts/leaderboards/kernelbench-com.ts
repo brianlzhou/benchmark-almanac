@@ -11,7 +11,7 @@ interface Entry {name:string;benches:Record<string,Run & {gpus:Record<string,Run
 const board:Leaderboard={
   benchmark:'kernelbench-com',url:'https://kernelbench.com/models',feed,parts,
   terms:'The author publishes the leaderboard and its methodology at https://kernelbench.com/models.',
-  stats:{hardPassed:{name:'Hard problems passed',unit:'count'},hardProblems:{name:'Hard problems',unit:'count'},hardPerformance:{name:'Hard performance',unit:'score',better:'higher'},cudaPassed:{name:'Compute Unified Device Architecture problems passed',unit:'count'},cudaProblems:{name:'Compute Unified Device Architecture problems',unit:'count'},cudaPerformance:{name:'Compute Unified Device Architecture performance',unit:'score',better:'higher'},megaPerformance:{name:'Mega performance',unit:'score',better:'higher'}},
+  stats:{hardPassed:{name:'Hard problems passed',unit:'count',better:'higher'},hardPerformance:{name:'Hard performance',unit:'score',better:'higher'},cudaPassed:{name:'CUDA problems passed',unit:'count',better:'higher'},cudaPerformance:{name:'CUDA performance',unit:'score',better:'higher'},megaPassed:{name:'Mega problems passed',unit:'count',better:'higher'},megaPerformance:{name:'Mega performance',unit:'score',better:'higher'}},
   async fetch(){
     const data=await fetchJson<{models:Entry[],methodology:string,benches:Record<string,{gpu_labels:Record<string,string>}>}>(feed);
     if(!data.methodology.includes('valid passes')||!data.methodology.includes('problems'))throw new Error('Ranking definition changed');
@@ -31,7 +31,7 @@ const board:Leaderboard={
           const key=JSON.stringify([setting,result.harness]);
           const row=runs.get(key)??{model,harness:result.harness,setting,score:0,metrics:{}};
           row.metrics![part]=result.passed/result.total_problems;
-          row.metrics![part+'Passed']=result.passed;row.metrics![part+'Problems']=result.total_problems;
+          row.metrics![part+'Passed']=result.passed;
           if(typeof result.perf==='number')row.metrics![part+'Performance']=result.perf;
           runs.set(key,row);
         }

@@ -12,6 +12,8 @@ const board: Leaderboard = {
   benchmark: 'eqbench-longform-writing',
   parts: Object.fromEntries(chapters.map((key, i) => [key, { name: 'Chapter ' + (i + 1), group: 'Chapter', unit: 'score' }])),
   stats: {
+    finalJudgement: { name: 'Final chapter judgment', unit: 'score', better: 'higher' },
+    degradation: { name: 'Chapter quality degradation', unit: 'score', better: 'lower', note: 'Relative quality decline across the eight chapters.' },
     length: { name: 'Average chapter length', unit: 'count' },
     vocab: { name: 'Vocabulary complexity', unit: 'score', better: 'higher' },
     slop: { name: 'Slop score', unit: 'score', better: 'lower' },
