@@ -17868,49 +17868,6 @@
         }
       }
     },
-    "animweb-bench": {
-      "url": "https://starry1001.github.io/AnimWeb-Bench-website/",
-      "feed": "https://starry1001.github.io/AnimWeb-Bench-website/",
-      "terms": "Published openly on GitHub Pages by the AnimWeb-Bench authors with no robots.txt restrictions.",
-      "headline": "Plain mean of the four Static Appearance Fidelity and four Animation Fidelity metrics (0 to 1), since the leaderboard reports the eight dimensions separately.",
-      "retrieved": "2026-11-24",
-      "rows": 14,
-      "unmatched": [],
-      "parts": {
-        "staticStructure": {
-          "name": "Structure",
-          "group": "Static appearance"
-        },
-        "staticText": {
-          "name": "Text",
-          "group": "Static appearance"
-        },
-        "staticColor": {
-          "name": "Color",
-          "group": "Static appearance"
-        },
-        "staticClip": {
-          "name": "CLIP",
-          "group": "Static appearance"
-        },
-        "animPosition": {
-          "name": "Position",
-          "group": "Animation fidelity"
-        },
-        "animSize": {
-          "name": "Size",
-          "group": "Animation fidelity"
-        },
-        "animVelocity": {
-          "name": "Velocity",
-          "group": "Animation fidelity"
-        },
-        "animClip": {
-          "name": "CLIP",
-          "group": "Animation fidelity"
-        }
-      }
-    },
     "anli-r1": {
       "url": "https://github.com/facebookresearch/anli",
       "feed": "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
@@ -132459,6 +132416,42 @@
         }
       }
     },
+    "generalist-gaming-agents-kaggle": {
+      "url": "https://generalistgaming.org/",
+      "feed": "https://generalistgaming.org/data/results.json",
+      "terms": "Public initial-release benchmark JSON published at generalistgaming.org/data/results.json.",
+      "retrieved": "2026-11-28",
+      "rows": 40,
+      "unmatched": [
+        "Decider (v1.2)",
+        "Drex Max (v1)",
+        "Elephant 9B",
+        "Jev 1.14",
+        "Mammoth 27B",
+        "Microsoft-Decision-1.1",
+        "d1.2",
+        "d1.2-ultra"
+      ],
+      "chart": {
+        "title": "Score vs. cost",
+        "x": {
+          "key": "cost",
+          "label": "Average cost per game",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean score",
+          "better": "higher"
+        },
+        "note": "Mean normalized score across 32 browser games (0 to 1) against average US dollar cost per game."
+      },
+      "reference": [
+        "Prime Agent"
+      ]
+    },
     "geneval": {
       "url": "https://github.com/djghosh13/geneval",
       "feed": "https://raw.githubusercontent.com/djghosh13/geneval/main/README.md",
@@ -206170,20 +206163,16 @@
     },
     "ml-energy-leaderboard-v3": {
       "url": "https://ml.energy/leaderboard/",
-      "feed": "https://ml.energy/leaderboard/data/tasks/lm-arena-chat.json",
+      "feed": "https://ml.energy/leaderboard/data/tasks/gpqa.json",
       "terms": "Public CC-BY-4.0 benchmark data published by the ML.ENERGY Initiative at the University of Michigan.",
-      "retrieved": "2026-11-24",
-      "rows": 21,
+      "retrieved": "2026-11-28",
+      "rows": 18,
       "unmatched": [
-        "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
-        "meta-llama/Llama-3.1-405B-Instruct",
-        "meta-llama/Llama-3.1-405B-Instruct-FP8",
-        "meta-llama/Llama-3.1-70B-Instruct",
-        "meta-llama/Llama-3.1-8B-Instruct",
+        "Qwen/Qwen3-235B-A22B-Thinking-2507-FP8",
         "nvidia/NVIDIA-Nemotron-Nano-12B-v2"
       ],
       "chart": {
-        "title": "Energy per response versus inter-token latency",
+        "title": "Energy per token versus inter-token latency",
         "x": {
           "key": "medianItlMs",
           "label": "Median ITL",
@@ -206192,25 +206181,25 @@
         },
         "y": {
           "key": "score",
-          "label": "Energy per response (J)",
-          "unit": "J",
+          "label": "Energy per token (J)",
+          "unit": "J/tok",
           "better": "lower"
         },
-        "note": "Matches the latency versus energy Pareto scatter plot on the ML.ENERGY v3 Conversational AI Chatbot leaderboard (under the default 500 ms ITL deadline)."
+        "note": "Matches the latency versus energy Pareto scatter plot on the ML.ENERGY v3 Problem Solving leaderboard under a 300 ms median ITL deadline."
       },
       "parts": {
-        "gpqaEnergyJ": {
-          "name": "GPQA Reasoning (J/response)",
+        "chatEnergyPerTokenJ": {
+          "name": "Text Conversation (J/token)",
           "unit": "score",
           "better": "lower"
         }
       },
       "stats": {
-        "energyPerTokenJ": {
-          "name": "Energy per token (J)",
+        "energyPerRequestJ": {
+          "name": "Energy per response (J)",
           "unit": "score",
           "better": "lower",
-          "note": "Average GPU energy in joules consumed to generate one output token."
+          "note": "Average GPU energy in joules consumed to generate one full response."
         },
         "medianItlMs": {
           "name": "Median ITL",
@@ -296916,7 +296905,7 @@
       "url": "https://mattersec-labs.github.io/seclens/",
       "feed": "https://mattersec-labs.github.io/seclens/",
       "terms": "Public research benchmark website published by MatterSec Labs.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 12,
       "unmatched": [],
       "chart": {
@@ -296930,7 +296919,7 @@
         "y": {
           "key": "score",
           "label": "Aggregate score",
-          "unit": "score",
+          "unit": "%",
           "better": "higher"
         },
         "note": "Matches the Chart.js cost-versus-score scatter plot on the SecLens leaderboard."
@@ -345937,7 +345926,7 @@
       "url": "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
       "feed": "https://voicearena.com/data/stt-v2/stt_brazilian-portuguese.csv",
       "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 8,
       "unmatched": [
         "Amazon Transcribe (Streaming)",
@@ -346037,12 +346026,12 @@
       },
       "stats": {
         "cer": {
-          "name": "Character error rate",
+          "name": "Semantic CER",
           "unit": "%",
           "better": "lower"
         },
         "hfWer": {
-          "name": "Standard WER",
+          "name": "Normalized WER",
           "unit": "%",
           "better": "lower"
         }
@@ -346052,7 +346041,7 @@
       "url": "https://voicearena.com/stt-leaderboard/hindi",
       "feed": "https://voicearena.com/data/stt-v2/stt_hindi.csv",
       "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 7,
       "unmatched": [
         "Amazon Transcribe",
@@ -346136,7 +346125,7 @@
       },
       "stats": {
         "cer": {
-          "name": "Character error rate",
+          "name": "Semantic CER",
           "unit": "%",
           "better": "lower"
         },
@@ -346161,7 +346150,7 @@
       "url": "https://voicearena.com/stt-leaderboard/indian-english",
       "feed": "https://voicearena.com/data/stt-v2/stt_indian-english.csv",
       "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 8,
       "unmatched": [
         "Amazon Transcribe (Streaming)",
@@ -346259,12 +346248,12 @@
       },
       "stats": {
         "cer": {
-          "name": "Character error rate",
+          "name": "Semantic CER",
           "unit": "%",
           "better": "lower"
         },
         "hfWer": {
-          "name": "Standard WER",
+          "name": "Normalized WER",
           "unit": "%",
           "better": "lower"
         }
@@ -346274,7 +346263,7 @@
       "url": "https://voicearena.com/stt-leaderboard/romanian",
       "feed": "https://voicearena.com/data/stt-v2/stt_romanian.csv",
       "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 6,
       "unmatched": [
         "Amazon Transcribe (Streaming)",
@@ -346366,7 +346355,7 @@
       },
       "stats": {
         "cer": {
-          "name": "Character error rate",
+          "name": "Semantic CER",
           "unit": "%",
           "better": "lower"
         }
@@ -346376,7 +346365,7 @@
       "url": "https://voicearena.com/stt-leaderboard/us-english",
       "feed": "https://voicearena.com/data/stt-v2/stt_us-english.csv",
       "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
-      "retrieved": "2026-11-24",
+      "retrieved": "2026-11-28",
       "rows": 8,
       "unmatched": [
         "Amazon Transcribe (Streaming)",
@@ -346476,12 +346465,12 @@
       },
       "stats": {
         "cer": {
-          "name": "Character error rate",
+          "name": "Semantic CER",
           "unit": "%",
           "better": "lower"
         },
         "hfWer": {
-          "name": "Standard WER",
+          "name": "Normalized WER",
           "unit": "%",
           "better": "lower"
         }

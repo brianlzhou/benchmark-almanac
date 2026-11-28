@@ -118,7 +118,7 @@ const board: Leaderboard = {
   chart: {
     title: 'Aggregate score versus cost per case',
     x: { key: 'cost', label: 'Cost per case', unit: '$', better: 'lower' },
-    y: { key: 'score', label: 'Aggregate score', unit: 'score', better: 'higher' },
+    y: { key: 'score', label: 'Aggregate score', unit: '%', better: 'higher' },
     note: 'Matches the Chart.js cost-versus-score scatter plot on the SecLens leaderboard.',
   },
   parts: {

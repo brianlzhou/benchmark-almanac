@@ -1,5 +1,5 @@
 // RoboTAP — Google DeepMind and UCL robotic manipulation point-tracking benchmark (arXiv:2308.15975).
-// Reads Table 4 (overall RoboTAP Average Jaccard %) and Table 5 (Static/Moving Camera and Static/Moving Points)
+// Reads Table III (overall RoboTAP Average Jaccard %) and Table IV (Static/Moving Camera and Static/Moving Points)
 // from arXiv:2308.15975 across the four baseline trackers evaluated in the benchmark paper.
 
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -28,7 +28,7 @@ const board: Leaderboard = {
     const overallTbl = tables.find(
       (g) => g.length >= 4 && g[0].some((c) => /^RoboTAP$/i.test(c.trim())) && g[0].some((c) => /DAVIS/i.test(c)),
     );
-    if (!overallTbl) throw new Error('RoboTAP Table 4 not found in arXiv HTML');
+    if (!overallTbl) throw new Error('RoboTAP Table III not found in arXiv HTML');
 
     const partsTbl = tables.find(
       (g) =>

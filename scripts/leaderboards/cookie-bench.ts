@@ -1,5 +1,5 @@
 // Cookie-Bench — Interactive front-end web generation benchmark (arXiv:2605.30000).
-// Reads Table 1 from arXiv:2605.30000 scoring 13 frontier models across both React (agent scaffold)
+// Reads Table 2 from arXiv:2605.30000 scoring 13 frontier models across both React (agent scaffold)
 // and HTML (direct chat) generation modes, with Dynamic/Static totals and Functionality/Aesthetics stats.
 
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -47,7 +47,7 @@ const board: Leaderboard = {
           g[0].some((c) => /React/i.test(c)) &&
           g[0].some((c) => /HTML/i.test(c)),
       );
-    if (!tbl) throw new Error('Cookie-Bench Table 1 not found in arXiv HTML');
+    if (!tbl) throw new Error('Cookie-Bench Table 2 not found in arXiv HTML');
 
     const rows: LeaderboardRow[] = [];
     for (const r of tbl.slice(3)) {

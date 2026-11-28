@@ -221,8 +221,8 @@ export function voiceArenaStt(cfg: VoiceArenaSttConfig): Leaderboard {
     ...Object.fromEntries(cfg.ageBands.map((band) => [AGE_KEY(band), { name: AGE_LABEL(band), group: 'Speaker age' }])),
   };
   const stats: Record<string, BoardStat> = {
-    cer: { name: 'Character error rate', unit: '%', better: 'lower' },
-    ...(cfg.hasHfWer ? { hfWer: { name: 'Standard WER', unit: '%', better: 'lower' } } : {}),
+    cer: { name: 'Semantic CER', unit: '%', better: 'lower' },
+    ...(cfg.hasHfWer ? { hfWer: { name: 'Normalized WER', unit: '%', better: 'lower' } } : {}),
     ...(cfg.hasPublicErrorBreakdown
       ? {
           publicSub: { name: 'Public substitution rate', unit: '%', better: 'lower' },

@@ -43,7 +43,7 @@ const board: Leaderboard = {
   chart: {
     title: 'Cost vs Performance',
     x: { key: 'cost', label: 'Average cost per task', unit: '$', better: 'lower', log: true },
-    y: { key: 'score', label: 'Data Intelligence Index', unit: '%', better: 'higher' },
+    y: { key: 'score', label: 'Data Intelligence Index', better: 'higher' },
     note: 'Overall Data Intelligence Index across all 500 tasks against average API cost per task.',
   },
   parts: {
