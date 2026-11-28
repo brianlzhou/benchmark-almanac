@@ -3210,7 +3210,7 @@
     ["norquad","NorBERT2",null,null,77.86,null,null,null,{"wikiEM":57.76,"wikiF1":71.89,"newsEM":64.05,"newsF1":76.93},{"low":77.21,"high":78.51}],
     ["norquad","mBERT",null,null,76,null,null,null,{"wikiEM":55.7,"wikiF1":71.21,"newsEM":63.12,"newsF1":73.96},{"low":75.17,"high":76.83}],
     ["norregel","nb-llama-3.1-8b-instruct-cardtmpl:latest","v2",null,8.5,null,null,1190,{"outdated":1.2,"outdatedLow":0.3,"outdatedHigh":2.4,"error":21.6,"errorLow":15,"errorHigh":28.3,"uninterpreted":68.6,"uninterpretedLow":59.8,"uninterpretedHigh":78.1,"tokensIn":164520,"tokensOut":1047300},{"low":3.4,"high":14.3}],
-    ["norregel","normistral-7b-warm-instruct-cardtmpl:latest","v2",null,0,null,null,476,{"correctExactUpper":0.4,"outdated":0,"outdatedLow":0,"outdatedHigh":0,"outdatedExactUpper":0.4,"error":0.2,"errorLow":0,"errorHigh":0.6,"uninterpreted":99.8,"uninterpretedLow":99.4,"uninterpretedHigh":100,"tokensIn":170450,"tokensOut":419140},{"low":0,"high":0}],
+    ["norregel","normistral-7b-warm-instruct-cardtmpl:latest","v2",null,0,null,null,476,{"correctExactUpper":0.4,"outdated":0,"outdatedLow":0,"outdatedHigh":0,"outdatedExactUpper":0.4,"error":0.2,"errorLow":0,"errorHigh":0.6,"uninterpreted":99.8,"uninterpretedLow":99.4,"uninterpretedHigh":100,"tokensIn":170450,"tokensOut":419140}],
     ["norsid","nbbert_en_nb_norsid_5epochs","LTG 3",null,98.02,null,null,null,{"intent0":98,"intent1":97.2,"intent2":98.27,"intent3":98.2},{"submitter":"LTG"}],
     ["norsid","nbbert_en_nb","LTG 1",null,97.89,null,null,null,{"intent0":98.2,"intent1":97.2,"intent2":98.33,"intent3":97.84},{"submitter":"LTG"}],
     ["norsid","nbbert_en_nb_norsid","LTG 2",null,97.85,null,null,null,{"intent0":98.2,"intent1":97.3,"intent2":98.13,"intent3":97.84},{"submitter":"LTG"}],
