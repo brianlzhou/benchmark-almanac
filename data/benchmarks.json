@@ -3232,6 +3232,8 @@
   {
     "id": "aec-geometric-bench-kamai",
     "name": "AEC-Geometric-Bench",
+    "family": "aec-geometric-bench",
+    "version": "August 2026",
     "aliases": [
       "AEC-Geometric-Bench-312",
       "AEC-Geometric-Bench-15"
@@ -207590,6 +207592,38 @@
       "https://tracelite.ai/twinenv-leaderboard.html",
       "https://tracelite.ai/twinenv-bench.html",
       "https://huggingface.co/datasets/TraceLite-AI/TwinEnv-Bench"
+    ],
+    "added": "2026-11-28"
+  },
+  {
+    "id": "aec-geometric-bench-nov-2026",
+    "name": "AEC-Geometric-Bench (November 2026)",
+    "family": "aec-geometric-bench",
+    "version": "November 2026",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models extract doors, windows, fixtures, walls, and rooms from 312 construction drawing PDFs. The November 2026 revision scores ten object classes including elevators and stairs under looser found-object matching and lets frontier models use code tools.",
+    "org": "Kamai",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/paper/paper.pdf",
+      "repo": "https://github.com/KamaiEnterprises/aec-geometric-bench",
+      "dataset": "https://github.com/KamaiEnterprises/aec-geometric-bench/tree/main/dataset",
+      "leaderboard": "https://github.com/KamaiEnterprises/aec-geometric-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "Kamai scores its November and August 2026 pipelines alongside three agentic frontier models and one single-call model on 312 sheets, releasing 15 redacted sheets and predictions. Scores are not comparable to the August 2026 edition because the November revision loosens object matching and adds elevators and stairs.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/KamaiEnterprises/aec-geometric-bench",
+      "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/README.md",
+      "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/paper/paper.pdf",
+      "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/dataset/per_sheet_scores.json"
     ],
     "added": "2026-11-28"
   }
