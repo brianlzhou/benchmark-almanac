@@ -16,16 +16,13 @@ const board: Leaderboard = {
   chart: { title: 'Cost per Task vs Quality', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass rate', unit: '%' } },
   async fetch() {
     const source = nextFlight(await fetchText(feed)).split('"title":"Cost per Task vs Quality"')[1];
-    type Point = { name: string; harness: string; quality: number; cost: number; avg_turns: number | null; avg_latency_min: number | null };
+    type Point = { name: string; harness: string; quality: number; cost: number; avg_turns: number; avg_latency_min: number };
     const points = jsonAfter<Point[]>(source, '"models":');
     if (points.length < 20) throw new Error('Missing coding frontier points');
     return points.map(p => {
-      if (!p.name || !p.harness || ![p.quality, p.cost].every(Number.isFinite)) throw new Error('Incomplete coding frontier point');
-      const metrics: Record<string, number> = {};
-      if (typeof p.avg_latency_min === 'number' && Number.isFinite(p.avg_latency_min)) metrics.latency = p.avg_latency_min * 60;
-      if (typeof p.avg_turns === 'number' && Number.isFinite(p.avg_turns)) metrics.turns = p.avg_turns;
+      if (!p.name || !p.harness || ![p.quality, p.cost, p.avg_turns, p.avg_latency_min].every(Number.isFinite)) throw new Error('Incomplete coding frontier point');
       return { model: p.name.replace(/ \((?:claude code|codex)\)$/i, ''), harness: p.harness, score: p.quality, cost: p.cost,
-        ...(Object.keys(metrics).length ? { metrics } : {}) };
+        metrics: { latency: p.avg_latency_min * 60, turns: p.avg_turns } };
     });
   },
 };
