@@ -203673,6 +203673,7 @@
     "access": "public",
     "note": "The default Problem Solving view sorts by joules per token (J/token) with a 300 ms median inter-token latency deadline, where lower energy is better. Text Conversation is a separate workload.",
     "unit": "score",
+    "metric": "Joules per token",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
