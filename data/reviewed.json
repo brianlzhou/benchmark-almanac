@@ -1051,6 +1051,11 @@
       "via": "We followed the publisher’s evaluation resources to the primary source."
     },
     {
+      "id": "airis",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from arXiv and Hugging Face Papers with a live 45-VLM leaderboard on the Tencent Robotics X Lab project page."
+    },
+    {
       "id": "airtbench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -3091,6 +3096,11 @@
       "via": "Official repository announces version 2 and links its separate results page."
     },
     {
+      "id": "bizgeneval",
+      "date": "2026-11-28",
+      "via": "Reported on NVIDIA Nemotron-Labs-Image-30B-A3B model card, with a live Hugging Face Space leaderboard scoring 27 image models."
+    },
+    {
       "id": "blackjack-basic-strategy",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -4519,6 +4529,11 @@
       "id": "clinical-laboratory-test-reports",
       "date": "2026-11-19",
       "via": "MedGemma 1.5 model card reports results for this evaluation."
+    },
+    {
+      "id": "clinical3d-bench",
+      "date": "2026-11-28",
+      "via": "Hugging Face dataset and project leaderboard scoring 35 zero-shot MLLMs and three fine-tuned models on 3,368 3D hospital spatial questions."
     },
     {
       "id": "clinicare-bench",
@@ -7314,6 +7329,11 @@
       "id": "drbench",
       "date": "2026-11-19",
       "via": "An enterprise benchmark search led to the authors’ paper."
+    },
+    {
+      "id": "drbench-pro",
+      "date": "2026-11-28",
+      "via": "Vetted from /new/ discovery queue: Zhejiang University and Tencent live JSON leaderboard scoring 16 deep research models across 24 domains."
     },
     {
       "id": "dreaddit",
@@ -10386,6 +10406,11 @@
       "via": "Benchmark Radar. Clear-use test: 112 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
+      "id": "grape-bench",
+      "date": "2026-11-28",
+      "via": "Vetted from /new/ discovery queue: dedicated project leaderboard scoring 30 proprietary and open video reasoning models on degraded real-world video."
+    },
+    {
       "id": "graphicdesignbench",
       "date": "2026-11-19",
       "via": "The publisher lists this evaluation on Harbor Hub."
@@ -11604,6 +11629,11 @@
       "id": "iclayout-bench",
       "date": "2026-11-20",
       "via": "Searching chip design repositories for layout generation tests led to the authors’ published layout results."
+    },
+    {
+      "id": "iclworld",
+      "date": "2026-11-28",
+      "via": "Project leaderboard scoring six frontier models on 160 online computer-use and robot-use in-context rule-learning tasks."
     },
     {
       "id": "icnale-edited-essays-scoring",
@@ -18756,6 +18786,11 @@
       "via": "The DKR-GUI results placed Kairos beside CAGUI, and the original Android paper identified the held-out trajectories."
     },
     {
+      "id": "os-omni",
+      "date": "2026-11-28",
+      "via": "NeurIPS 2026 cross-platform GUI agent benchmark with over 100 GitHub stars, 101 Hugging Face upvotes, and seven frontier models scored."
+    },
+    {
       "id": "osi-bench",
       "date": "2026-11-12",
       "via": ""
@@ -19374,6 +19409,11 @@
       "id": "phybench",
       "date": "2026-11-01",
       "via": "Seed2.0 model card Table 3 lists Phybench, and the almanac had no record."
+    },
+    {
+      "id": "phycove",
+      "date": "2026-11-28",
+      "via": "Maintained project leaderboard scoring seven commercial and open video editing models on 533 physical counterfactual video editing cases."
     },
     {
       "id": "phyre",
@@ -20021,6 +20061,11 @@
       "via": "Intern-S1 model card scientific rows."
     },
     {
+      "id": "proteomicsbench",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from LatchBio benchmarks.bio V1 leaderboard with 38 ranked model and harness runs."
+    },
+    {
       "id": "protocollm",
       "date": "2026-11-20",
       "via": "The RTLBench score table listed a protocol generation suite beside two established Verilog benchmarks."
@@ -20029,6 +20074,11 @@
       "id": "prowbench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
+    },
+    {
+      "id": "proxygenbench",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from arXiv and Hugging Face Papers (36 upvotes) with a five-model leaderboard on the project site."
     },
     {
       "id": "proxywar",
@@ -21026,6 +21076,11 @@
       "via": "Harbor lists this evaluation in its official registry."
     },
     {
+      "id": "rezepteval",
+      "date": "2026-11-28",
+      "via": "Independent live German culinary leaderboard scoring 46 models across six disciplines with open Zenodo per-item results and cost data."
+    },
+    {
       "id": "rgraph-eval",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -21131,6 +21186,11 @@
       "via": "StepFun Step 5 Preview benchmark table reports RoadmapBench."
     },
     {
+      "id": "roam-bench",
+      "date": "2026-11-28",
+      "via": "Vetted from /new/ discovery queue: HKU and JD.com project leaderboard scoring seven frontier vision-language models on 250 embodied spatial exploration tasks."
+    },
+    {
       "id": "roark-live-bench-1-3",
       "date": "2026-11-20",
       "via": "We followed a customer support phone benchmark to Roark’s change log and checked which industry calls its current suite scores."
@@ -21184,6 +21244,11 @@
       "id": "robocurve-rci",
       "date": "2026-11-01",
       "via": "The Robocurve sitemap lists an rci page next to the RoboDojo-RC and RoboHarm posts."
+    },
+    {
+      "id": "robodojo-mirror",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from arXiv and Hugging Face Papers (34 upvotes) evaluating five robot policies across mirror scene conditions."
     },
     {
       "id": "robodx",
@@ -23076,6 +23141,11 @@
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
     },
     {
+      "id": "spatialarena",
+      "date": "2026-11-28",
+      "via": "Maintained live leaderboard with active submissions scoring 53 geometric foundation models and five vision-language models across five 3D tasks."
+    },
+    {
       "id": "spatialbench-latchbio-original",
       "date": "2026-11-20",
       "via": "The LatchBio publication archive and version guide distinguish the task sets and the scores."
@@ -24456,6 +24526,11 @@
       "via": "We traced Suh’s survey dataset to the independent leaderboard that scores models against it."
     },
     {
+      "id": "synthdcb",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from Hugging Face Papers and Datasets with a live 22-model leaderboard and cost data on the SJTU X-LANCE Lab site."
+    },
+    {
       "id": "synthdocbench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
@@ -25564,6 +25639,11 @@
       "id": "tweetsentbr",
       "date": "2026-11-19",
       "via": "Stanford HELM includes a configuration for this evaluation."
+    },
+    {
+      "id": "twinenv-bench",
+      "date": "2026-11-28",
+      "via": "Discovery queue item from Hugging Face Datasets and Harbor Hub backed by TraceLite AI live leaderboard across nine frontier models."
     },
     {
       "id": "twitter-financial-news-sentiment",
@@ -28617,6 +28697,12 @@
       "date": "2026-11-19"
     },
     {
+      "name": "Agents' Last Exam",
+      "url": "https://snorkel.ai/blog/agents-last-exam-reading-group/",
+      "reason": "Reading group blog post recapping existing agents-last-exam and agents-last-exam-1-1 rather than a new benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "AgentThreatBench",
       "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/agent_threat_bench",
       "reason": "No paper or users found.",
@@ -30003,6 +30089,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "BrowseComp Benchmark",
+      "url": "https://parallel.ai/articles/browsecomp-benchmark",
+      "reason": "Third-party explainer article and web search API evaluation of OpenAI BrowseComp (already cataloged as browsecomp), not a separate benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "browserbase/gaia",
       "url": "https://app.primeintellect.ai/dashboard/environments/browserbase/gaia",
       "reason": "This port runs the web-navigation subset of GAIA with Browserbase and checks answers against the reference answers.",
@@ -30405,6 +30497,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Code Project Page Benchmark",
+      "url": "https://allenai.org/blog/robotrack",
+      "reason": "Navigation link scraped from the Ai2 RoboTrack blog post rather than a separate benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Code2Video-AA",
       "url": null,
       "reason": "The official source does not report a readable lab-owned score for this Artificial Analysis comparison.",
@@ -30601,6 +30699,12 @@
       "url": null,
       "reason": "The existing record already carries this evaluation under benchmark id(s): math-side-tasking-monitor-evasion-openai, honeypot-exploitation-monitorability-openai.",
       "date": "2026-11-12"
+    },
+    {
+      "name": "councilof-ai__gspc-card-corpus",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/councilof-ai__gspc-card-corpus",
+      "reason": "Signed card corpus covers only older small open models and custom baselines, with no frontier models or independent adoption.",
+      "date": "2026-11-28"
     },
     {
       "name": "Countix",
@@ -31179,6 +31283,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "DiagnosticIQ",
+      "url": "https://research.ibm.com/publications/diagnosticiq-a-benchmark-for-llm-based-industrial-maintenance-action-recommendation-from-symbolic-rules",
+      "reason": "Industrial maintenance MCQ paper from IBM Research with 6 Hugging Face upvotes, no independent leaderboard, no frontier lab report, and narrow asset-maintenance scope (AssetOpsBench is already cataloged as assetopsbench).",
+      "date": "2026-11-28"
+    },
+    {
       "name": "DialBench",
       "url": "https://arxiv.org/abs/2511.21982",
       "reason": "criteria: Both the original comparison and the independent predictions score only pointer meter readings.",
@@ -31207,6 +31317,12 @@
       "url": "https://eqbench.com/diplobench.html",
       "reason": "The maker says it is not a benchmark yet: single high-variance Diplomacy game runs.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "DivDynBench",
+      "url": "https://huggingface.co/papers/2611.30013",
+      "reason": "Narrow 3D rigging and motion test set built to evaluate the paper's own Agentic Motion Framework across only a few models.",
+      "date": "2026-11-28"
     },
     {
       "name": "djdumpling/dpo-to-rupo",
@@ -31437,6 +31553,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "ec2-bench-edge-only",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/ec2-bench-edge-only",
+      "reason": "Every Eval Ever extract of only three Qwen3.5 models from one arXiv paper table, with no leaderboard or adoption.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Eco-LLM ecological knowledge evaluation",
       "url": "https://github.com/filipgdorm/eco-llm",
       "reason": "criteria: The results cover fewer than five models, and the evidence of wider use falls below the inclusion bar.",
@@ -31471,6 +31593,12 @@
       "url": "https://arxiv.org/abs/2405.19644",
       "reason": "criteria: The evaluator only assigns surgical phase labels within one operative workflow.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "EgoUseBench",
+      "url": "https://huggingface.co/papers/2611.34466",
+      "reason": "Static six-model paper table with no maintained leaderboard and below the community traction threshold (20 Hugging Face upvotes, 34 GitHub stars).",
+      "date": "2026-11-28"
     },
     {
       "name": "eigenpaul/impossible-lcb-forking",
@@ -31839,6 +31967,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "expandr-beir",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/expandr-beir",
+      "reason": "Every Eval Ever extract of two retrieval models from an EMNLP 2025 method paper evaluated on existing BEIR.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Expenditure Horizon (METR)",
       "url": "https://metr.org/research",
       "reason": "A proposed metric of optimization ability, shown on the NanoGPT speedrun, which the almanac already has.",
@@ -32125,6 +32259,12 @@
       "url": "https://aclanthology.org/2020.finnlp-1.8.pdf",
       "reason": "Only BERT and BiLSTM-CRF results reported",
       "date": "2026-11-20"
+    },
+    {
+      "name": "FinSearchComp Benchmark",
+      "url": "https://parallel.ai/articles/finsearchcomp-benchmark",
+      "reason": "Third-party explainer article and web search API evaluation of ByteDance Seed FinSearchComp (already cataloged as finsearchcomp), not a separate benchmark.",
+      "date": "2026-11-28"
     },
     {
       "name": "FinSim 2020",
@@ -33327,6 +33467,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "hmmt",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/register/hmmt",
+      "reason": "Inspect Evals wrapper bundling existing hmmt-2024, hmmt-2025, hmmt-nov-2025, and hmmt-2026 records.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Hoi! ECCV 2026 Force Prediction Challenge",
       "url": "https://hoi-dataset.ethz.ch/workshop.html",
       "reason": "criteria: The challenge predicts two instrument readings from a gripper manipulating objects.",
@@ -33379,6 +33525,12 @@
       "url": "https://arxiv.org/abs/2610.36523",
       "reason": "Hokkaido University benchmark of 1,039 tasks on agent handoffs. No code link, no HF page, no outside users.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "HSCO-Bench",
+      "url": "https://research.ibm.com/publications/hsco-bench-an-agent-driven-end-to-end-hardware-software-co-design-benchmark-for-systems-on-chip",
+      "reason": "NeurIPS 2026 paper evaluating five models on an FPGA hardware-software SoC co-design flow, with 1 GitHub star, no independent leaderboard, no frontier lab report, and narrow FPGA scope.",
+      "date": "2026-11-28"
     },
     {
       "name": "hua/arithmetic-harbor",
@@ -34479,6 +34631,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "IFBench_test",
+      "url": "https://huggingface.co/datasets/allenai/IFBench_test",
+      "reason": "Dataset split of existing benchmark id ifbench.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "IFC-Bench v1",
       "url": "https://doi.org/10.35490/EC3.2025.265",
       "reason": "criteria: We found outside scores for the successor but no qualifying run on v1.",
@@ -35199,6 +35357,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Kitaru Bench v0",
+      "url": "https://hub.harborframework.com/datasets/zenml/kitaru-bench",
+      "reason": "Vendor-specific 37-task Harbor evaluation testing coding agents only on ZenML Kitaru 0.27.7, with one GitHub star and no independent leaderboard or adoption.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Know Your Camera / VLA-REPLICA / GLAM / ConRFT / EXPO-FT / ZPRL / SO-101 task sets",
       "url": "https://vlaleaderboard.com/",
       "reason": "Paper-specific task suites shown on the VLA Leaderboard aggregator. Each is a method paper test set with no outside users.",
@@ -35341,6 +35505,12 @@
       "url": "https://arxiv.org/abs/2508.19958",
       "reason": "Long-horizon CALVIN variant from the Long-VLA method paper. No outside users found.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "l1-l2-bench-2.0",
+      "url": "https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench-2.0",
+      "reason": "Duplicate Harbor Hub listing of existing enterprise-bench-l1-l2-v2 with no published leaderboard scores.",
+      "date": "2026-11-28"
     },
     {
       "name": "l1-l2-bench-v2",
@@ -35673,6 +35843,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "longmab-multihop",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/longmab-multihop",
+      "reason": "Every Eval Ever extract of four models from an ACL 2026 preference optimization method paper rather than a qualifying benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "LongProc",
       "url": "https://arxiv.org/abs/2501.05414",
       "reason": "36 stars, 1 HF upvote.",
@@ -35767,6 +35943,12 @@
       "url": "https://finance.sina.com.cn/tech/roll/2025-04-08/doc-inesmkuv7110319.shtml",
       "reason": "criteria: The published recognition rates distinguish vehicle configurations without establishing which general-purpose models ran.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "LuminaBench",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-hydrogen-builders/",
+      "reason": "Creator handle showcased in a Gemini 4 Hydrogen blog post, not a benchmark.",
+      "date": "2026-11-28"
     },
     {
       "name": "M-IFEval",
@@ -36663,6 +36845,12 @@
       "date": "2026-11-19"
     },
     {
+      "name": "monitorbench-goal-sandbag-engineering",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/register/monitorbench-goal-sandbag-engineering",
+      "reason": "Inspect Evals register entry for a single subset of existing monitorbench.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Morphology-to-molecule matching (internal)",
       "url": null,
       "reason": "Already recorded for this release under benchmark id morphology-to-molecule-matching-anthropic.",
@@ -36847,6 +37035,12 @@
       "url": "https://arxiv.org/abs/2401.05060",
       "reason": "Audio toxicity detection dataset for classifiers, not a model capability benchmark.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "MVHBench ACC",
+      "url": "https://huggingface.co/nvidia/nemotron-labs-audio-visual-flamingo-hf",
+      "reason": "Model-card typo and accuracy suffix for MVBench (already cataloged as mvbench, which already lists MVHBench as an alias).",
+      "date": "2026-11-28"
     },
     {
       "name": "my-solo-team-frank/python-coding-base",
@@ -37359,6 +37553,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "On Your Marks. Benchmark",
+      "url": "https://thezvi.wordpress.com/2026/11/26/ai-196-the-return/",
+      "reason": "Recurring section heading from Zvi Mowshowitz newsletter roundup rather than a benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Oolong",
       "url": "https://arxiv.org/abs/2511.02817",
       "reason": "Long-context aggregation benchmark, 4 HF upvotes. Used in recursive LM work. Borderline.",
@@ -37521,6 +37721,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "oruk-asr-evaluations",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/oruk-asr-evaluations",
+      "reason": "Single-model first-party evaluation of Oruk Fourier 2B on the existing GigaSpeechBench benchmark.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "OSMA-Bench (Obstacle-Conditioned Safety in Household Robot Navigation)",
       "url": "https://arxiv.org/abs/2610.34674",
       "reason": "Seoul National University paper on obstacle-aware robot navigation speed and clearance. Narrow robotics metric, 2 stars, 11 HF upvotes, no outside users.",
@@ -37597,6 +37803,12 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/web-search/parallel-search-capability-leaderboard",
       "reason": "Composite of 100 DeepSearchQA, 100 HLE and 100 WISER questions run with Parallel search. Not a new test. WISER itself is queued for a check.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "parammute-cofaithfulqa",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/parammute-cofaithfulqa",
+      "reason": "Single-model table extract from a RAG method paper with no leaderboard or independent adoption.",
+      "date": "2026-11-28"
     },
     {
       "name": "ParetoRSI-Gym",
@@ -37999,6 +38211,12 @@
       "url": "https://poleval.pl/files/poleval2021.pdf",
       "reason": "2021 shared task, pre-LLM systems",
       "date": "2026-11-20"
+    },
+    {
+      "name": "polistemics",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/polistemics",
+      "reason": "Every Eval Ever evaluation of only three models on ResPolitica with one GitHub star and no independent leaderboard or adoption.",
+      "date": "2026-11-28"
     },
     {
       "name": "popfido/kernelbench",
@@ -38823,6 +39041,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Pro Worlds",
+      "url": "https://huggingface.co/papers/2611.32884",
+      "reason": "Synthetic training and ablation environment built for the paper's own RLVB reinforcement learning method.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Procedurally Generated Matrices",
       "url": "https://arxiv.org/abs/1807.04225",
       "reason": "repository-only older vision task with no current model result cited",
@@ -38943,6 +39167,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "PURE",
+      "url": "https://huggingface.co/papers/2611.22343",
+      "reason": "Narrow e-commerce product SKU identity matching dataset with three GitHub stars, nine Hugging Face upvotes, and no public leaderboard.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "purururu/xlam-qwencoder-env",
       "url": "https://app.primeintellect.ai/dashboard/environments/purururu/xlam-qwencoder-env",
       "reason": "The port grades tool calls from Salesforce’s xLAM training split using the Qwen3 format and identifies no held-out evaluation.",
@@ -38953,6 +39183,12 @@
       "url": "https://arxiv.org/abs/2508.08292",
       "reason": "1 HF upvote, no lab use found.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Puzzling-Bench",
+      "url": "https://huggingface.co/datasets/puzzling-bench/puzzling-bench",
+      "reason": "Paper dataset with two GitHub stars, four Hugging Face upvotes, and no maintained leaderboard or external adoption.",
+      "date": "2026-11-28"
     },
     {
       "name": "PXRD-Bench",
@@ -39825,6 +40061,30 @@
       "date": "2026-11-01"
     },
     {
+      "name": "RoboTrack",
+      "url": "https://allenai.org/blog/robotrack",
+      "reason": "Ai2 blog entry for RoboTrack-Bench, whose scored task measures only point position and visibility in manipulation video.",
+      "date": "2026-11-28"
+    },
+    {
+      "name": "RoboTrack-Bench",
+      "url": "https://allenai.org/blog/robotrack",
+      "reason": "Ai2 reports the benchmark in its model card, but the scored task measures only point position and visibility in manipulation video.",
+      "date": "2026-11-28"
+    },
+    {
+      "name": "RoboTrack-Bench AJ",
+      "url": "https://huggingface.co/allenai/RoboTracker-Warp",
+      "reason": "Average Jaccard metric column from the RoboTrack-Bench model card, whose scored task measures only point position and visibility in manipulation video.",
+      "date": "2026-11-28"
+    },
+    {
+      "name": "RoboTrack-Bench OA",
+      "url": "https://huggingface.co/allenai/RoboTracker-Warp",
+      "reason": "Occlusion accuracy metric column from the RoboTrack-Bench model card, whose scored task measures only point position and visibility in manipulation video.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "RoboVerity",
       "url": "https://www.kaggle.com/benchmarks/malthumkarpavani/roboverity",
       "reason": "The published harness contains one fixed obstacle question with a single expected word.",
@@ -39841,6 +40101,12 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/rohiitspace/androidworld-dense",
       "reason": "The androidworld-dense environment uses AndroidWorld tasks.",
       "date": "2026-11-19"
+    },
+    {
+      "name": "RoMo Hands",
+      "url": "https://huggingface.co/papers/2611.31766",
+      "reason": "Primarily a 542K-sequence text-to-hand-motion training dataset with 1 Hugging Face upvote, 30 GitHub stars, and no independent leaderboard.",
+      "date": "2026-11-28"
     },
     {
       "name": "ronaldnetawat/blackjack",
@@ -39885,6 +40151,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "RUIBench",
+      "url": "https://huggingface.co/papers/2611.31115",
+      "reason": "Paper evaluates only three agents across robot interface abstractions, below the five-model leaderboard threshold with 19 GitHub stars and 22 Hugging Face upvotes.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "RuLES 3.0",
       "url": "https://arxiv.org/abs/2311.04235",
       "reason": "criteria: This is a renamed version of RuLES already represented by rules-llm, and the note says its scores are incomparable with prior results.",
@@ -39913,6 +40185,12 @@
       "url": null,
       "reason": "The existing record already carries this evaluation under benchmark id(s): internal-codebase-sabotage-propensity-anthropic.",
       "date": "2026-11-12"
+    },
+    {
+      "name": "SAFE-Teen: Teen Mental Health & Safety",
+      "url": "https://www.vals.ai/benchmarks/mental-health",
+      "reason": "Duplicate of existing benchmark id vals-safe-teen.",
+      "date": "2026-11-28"
     },
     {
       "name": "safeagents judge bench (v0)",
@@ -40023,6 +40301,12 @@
       "date": "2026-11-19"
     },
     {
+      "name": "scBench",
+      "url": "https://benchmarks.bio/scbench",
+      "reason": "Duplicate of existing benchmark id scbench-latchbio-singlecellbench.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "SCFbench",
       "url": "https://huggingface.co/datasets/ByteDance-Seed/SCFbench",
       "reason": "criteria: Remove because it fails the inclusion bar. source opened (200). The public Hugging Face page is only a named dataset, with no paper, leaderboard, lab report, or other use evidence in the checked sources.",
@@ -40047,6 +40331,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "SciResearch-Eval",
+      "url": "https://arxiv.org/abs/2611.21541",
+      "reason": "The leaderboard compares nine models, but every task measures material properties through the same heat-conduction experiment, which meets the single scientific measurement exclusion.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "SciValidityBench",
       "url": "https://arxiv.org/abs/2610.34767",
       "reason": "Two-author benchmark factory on whether scientific agents use remembered evidence validly, 64 task specs. No code link, no HF page, no outside users.",
@@ -40063,6 +40353,12 @@
       "url": "https://huggingface.co/datasets/vtllms/sealqa",
       "reason": "Larger sibling split of Seal-0 in SealQA. No card reports it and the paper has 5 HF upvotes",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Search API Benchmark",
+      "url": "https://parallel.ai/articles/how-we-evaluate-web-search-apis",
+      "reason": "Vendor methodology guide comparing web search APIs rather than AI models.",
+      "date": "2026-11-28"
     },
     {
       "name": "SearchHorizonBench",
@@ -40105,6 +40401,12 @@
       "url": null,
       "reason": "Already recorded for this release under benchmark id securecodereview-xai.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Seeing Is Locating",
+      "url": "https://arxiv.org/abs/2611.30564",
+      "reason": "Academic geographic bias study with one GitHub star, one Hugging Face upvote, and no independent leaderboard or adoption.",
+      "date": "2026-11-28"
     },
     {
       "name": "SeePhys",
@@ -40581,6 +40883,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "spark-mrqa",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/spark-mrqa",
+      "reason": "Two-model table extract from a RAG method paper evaluated on existing MRQA.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "SpatialSceneBench",
       "url": "https://github.com/selfishout/spatial-scene-bench",
       "reason": "Individual's procedural 3D scene generator for VLM counting and spatial questions, added to VLMEvalKit on 2026-10-28. 0 stars, no paper, no outside users beyond the VLMEvalKit entry.",
@@ -40879,6 +41187,12 @@
       "url": "https://github.com/timpal0l/sts-benchmark-swedish",
       "reason": "Only reported evaluation uses Swedish BERT",
       "date": "2026-11-20"
+    },
+    {
+      "name": "SWEEP-Bench",
+      "url": "https://huggingface.co/papers/2611.30637",
+      "reason": "Simulation test evaluating eight fine-tuned robot policies on a moving conveyor belt, with 2 Hugging Face upvotes, 4 GitHub stars, and no independent leaderboard of general models.",
+      "date": "2026-11-28"
     },
     {
       "name": "sweetisland/luetin-tanakh-gematria-resonance",
@@ -41223,6 +41537,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "toolmaster-ood",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/toolmaster-ood",
+      "reason": "Two-model table extract from a tool-learning method paper with no leaderboard or adoption.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "Toot Books VAT benchmark",
       "url": "https://toot-books.com/blog/glm-5-2-vat-benchmark",
       "reason": "Vendor blog test of bookkeeping on its own data, HN 225 points, no outside use.",
@@ -41233,6 +41553,12 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/eigenpaul/transitbench",
       "reason": "Individual's Prime Intellect RL environment for an exoplanet transit-search pipeline, tagged as an RL environment. No paper, leaderboard or users.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "translate-and-revise",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/translate-and-revise",
+      "reason": "Single-model table extract from a 2024 constrained translation method paper.",
+      "date": "2026-11-28"
     },
     {
       "name": "translation task group",
@@ -41517,6 +41843,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "uncode-math-decoding",
+      "url": "https://huggingface.co/datasets/evaleval/EEE_datastore/tree/main/data/uncode-math-decoding",
+      "reason": "Two-model decoding bias study on existing math benchmarks from an ACL 2026 paper.",
+      "date": "2026-11-28"
+    },
+    {
       "name": "unemployedvibecoder/citation-laundering-reward-hack",
       "url": "https://app.primeintellect.ai/dashboard/environments/unemployedvibecoder/citation-laundering-reward-hack",
       "reason": "The author reports reward hacking during hosted training on policy citations and does not reserve separate evaluation cases.",
@@ -41545,6 +41877,18 @@
       "url": "https://github.com/SalesforceAIResearch/UniDoc-Bench",
       "reason": "criteria: The available evidence does not establish a qualifying inclusion test.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "UniGenBench++ long",
+      "url": "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B",
+      "reason": "Long-prompt split of UniGenBench (already cataloged as unigenbench, which lists UniGenBench++ and UniGenBench English Long as aliases).",
+      "date": "2026-11-28"
+    },
+    {
+      "name": "UniGenBench++ short",
+      "url": "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B",
+      "reason": "Short-prompt split of UniGenBench (already cataloged as unigenbench, which lists UniGenBench++ as an alias and covers short and long forms).",
+      "date": "2026-11-28"
     },
     {
       "name": "UniMath, UniSwarm, UniScientist, SWE-Vision (UniPat)",
@@ -42073,6 +42417,12 @@
       "url": "https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals",
       "reason": "Internal experiment on agent configuration. Next.js Agent Evals logged instead.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Vernier",
+      "url": "https://arxiv.org/abs/2611.31619",
+      "reason": "Statistical resolution-reporting methodology and Python library for analyzing forecasting leaderboards, not a benchmark.",
+      "date": "2026-11-28"
     },
     {
       "name": "VeRO (Scale)",
