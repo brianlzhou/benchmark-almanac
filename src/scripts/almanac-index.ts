@@ -70,6 +70,8 @@ function init(root: HTMLElement) {
     state.domain = R.defaultDomain(c, state.domain);
     state.who = R.defaultWho(c, state.who);
     text('ix-title', R.title(c));
+    // the tab names the version too, so a shared tab or a bookmark says which one it shows
+    document.title = document.title.replace(/Almanac Index \d\d\.\d\d/, R.title(c));
     set('ix-lede', R.lede(c));
     set('ix-vseg', R.versionSeg(c));
     text('ix-vnote', R.versionNote(c));
