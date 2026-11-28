@@ -32621,29 +32621,6 @@
         "xlm-roberta-large"
       ]
     },
-    "bearcubs": {
-      "url": "https://bear-cubs.github.io/",
-      "feed": "https://bear-cubs.github.io/",
-      "terms": "Public leaderboard table published on GitHub Pages by the BEARCUBS authors.",
-      "retrieved": "2026-11-24",
-      "rows": 8,
-      "unmatched": [
-        "Anthropic Computer Use",
-        "Convergence AI Proxy",
-        "Gemini Deep Research",
-        "Grok3 DeepSearch"
-      ],
-      "parts": {
-        "textOnly": {
-          "name": "Text only",
-          "group": "Modality"
-        },
-        "multimodal": {
-          "name": "Multimodal",
-          "group": "Modality"
-        }
-      }
-    },
     "bedside-bench": {
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/healthcare/bedside-bench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
@@ -99434,77 +99411,6 @@
       },
       "static": "paper"
     },
-    "egodepth-bench": {
-      "url": "https://egodepth-bench.github.io/",
-      "feed": "https://egodepth-bench.github.io/",
-      "terms": "Published openly on GitHub Pages by the EgoDepth-Bench authors with no robots.txt restrictions.",
-      "retrieved": "2026-11-24",
-      "rows": 2,
-      "unmatched": [
-        "CUT3R",
-        "DA3 Metric-Large",
-        "DAC",
-        "Depth Anything v2",
-        "Depth Pro",
-        "FoundationStereo",
-        "GeoStereo",
-        "MASt3R",
-        "Marigold",
-        "Metric3D v2",
-        "MoGe",
-        "UniDAC",
-        "UniDepth v2",
-        "UniK3D",
-        "VGGT",
-        "VGGT-Ω",
-        "ZoeDepth"
-      ],
-      "parts": {
-        "handsMae": {
-          "name": "Hands MAE Z (cm)",
-          "group": "Subset",
-          "unit": "score",
-          "better": "lower",
-          "note": "Depth mean absolute error in centimeters on the annotated hands subset."
-        },
-        "objectsMae": {
-          "name": "Objects MAE Z (cm)",
-          "group": "Subset",
-          "unit": "score",
-          "better": "lower",
-          "note": "Depth mean absolute error in centimeters on the annotated objects subset."
-        }
-      },
-      "stats": {
-        "fullMae": {
-          "name": "Full image MAE Z (cm)",
-          "unit": "score",
-          "better": "lower",
-          "note": "Depth mean absolute error in centimeters across the full image."
-        },
-        "delta1": {
-          "name": "Delta 1 accuracy",
-          "unit": "score",
-          "better": "higher",
-          "note": "Fraction of pixels within a 1.25x relative depth threshold."
-        },
-        "coverage": {
-          "name": "Full image coverage",
-          "unit": "%",
-          "better": "higher"
-        },
-        "handsCoverage": {
-          "name": "Hands coverage",
-          "unit": "%",
-          "better": "higher"
-        },
-        "objectsCoverage": {
-          "name": "Objects coverage",
-          "unit": "%",
-          "better": "higher"
-        }
-      }
-    },
     "egohome": {
       "url": "https://huggingface.co/datasets/PerceptronAI/EgoHome#egohome-results",
       "feed": "https://huggingface.co/datasets/PerceptronAI/EgoHome/raw/main/README.md (results table, Subtask column)",
@@ -106996,54 +106902,6 @@
         }
       }
     },
-    "evident-gui": {
-      "url": "https://huggingface.co/datasets/KORMo-VL/EVIDENT",
-      "feed": "https://huggingface.co/datasets/KORMo-VL/EVIDENT/raw/main/README.md",
-      "terms": "Dataset card in KORMo-VL/EVIDENT on Hugging Face reproducing Table 2 of arXiv:2611.20488.",
-      "headline": "The paper reports English and Korean Grounded Success Rate side by side without pooling. The headline is the plain mean of English GSR and Korean GSR.",
-      "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 6,
-      "unmatched": [],
-      "parts": {
-        "enGsr": {
-          "name": "English GSR",
-          "group": "Language",
-          "note": "Grounded Success Rate on the 70 English web agent tasks."
-        },
-        "koGsr": {
-          "name": "Korean GSR",
-          "group": "Language",
-          "note": "Grounded Success Rate on the 150 Korean web agent tasks."
-        }
-      },
-      "stats": {
-        "enTsr": {
-          "name": "English TSR",
-          "unit": "%",
-          "better": "higher",
-          "note": "Task Success Rate on English tasks before checking evidence grounding."
-        },
-        "enEsr": {
-          "name": "English ESR",
-          "unit": "%",
-          "better": "higher",
-          "note": "Evidence Success Rate on English tasks."
-        },
-        "koTsr": {
-          "name": "Korean TSR",
-          "unit": "%",
-          "better": "higher",
-          "note": "Task Success Rate on Korean tasks before checking evidence grounding."
-        },
-        "koEsr": {
-          "name": "Korean ESR",
-          "unit": "%",
-          "better": "higher",
-          "note": "Evidence Success Rate on Korean tasks."
-        }
-      }
-    },
     "evmbench": {
       "url": "https://openai.com/index/introducing-evmbench/",
       "feed": "https://cdn.openai.com/evmbench/evmbench.pdf",
@@ -109197,65 +109055,6 @@
           "name": "Lineup efficiency",
           "unit": "%",
           "better": "higher"
-        }
-      }
-    },
-    "fairchem-leaderboard": {
-      "url": "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
-      "feed": "https://facebook-fairchem-leaderboard.hf.space/config",
-      "terms": "Public Hugging Face Gradio Space published by Meta FAIR.",
-      "headline": "Mean energy MAE in meV across the seven OMol25 chemistry tasks (lower is better), computed over complete entries in the FAIR Chemistry Overview table.",
-      "retrieved": "2026-11-24",
-      "rows": 0,
-      "unmatched": [
-        "AllScAIP-md-cons.",
-        "AllScAIP-md-d.",
-        "AllScAIP-md-ft-cons.",
-        "AllScAIP-sm-ft-cons.",
-        "GemNet-OC-r12",
-        "GemNet-OC-r6",
-        "MACE-POLAR-1-L (FP64)",
-        "Mena-3M",
-        "Mena-LAM-S",
-        "PET-OMOL-L",
-        "UMA-M-1p1",
-        "UMA-S-1.2.1 D4rev",
-        "UMA-S-1p1",
-        "UMA-S-1p2",
-        "eSEN-md-d.",
-        "eSEN-sm-cons.",
-        "mace-omol-L-0",
-        "uma-s-1.2.1-d4rev-c1",
-        "uma-s-1.2.1-d4rev-c2"
-      ],
-      "parts": {
-        "ligandPocket": {
-          "name": "Ligand pocket Ixn Energy MAE",
-          "group": "OMol25 task"
-        },
-        "ligandStrain": {
-          "name": "Ligand strain Energy MAE",
-          "group": "OMol25 task"
-        },
-        "conformers": {
-          "name": "Conformers Energy MAE",
-          "group": "OMol25 task"
-        },
-        "protonation": {
-          "name": "Protonation Energy MAE",
-          "group": "OMol25 task"
-        },
-        "distanceScaling": {
-          "name": "Distance scaling LR Energy MAE",
-          "group": "OMol25 task"
-        },
-        "ieEa": {
-          "name": "IE/EA Energy MAE",
-          "group": "OMol25 task"
-        },
-        "spinGap": {
-          "name": "Spin gap Energy MAE",
-          "group": "OMol25 task"
         }
       }
     },
@@ -214556,59 +214355,6 @@
         }
       }
     },
-    "moonworks-lunara-art-eval": {
-      "url": "https://huggingface.co/datasets/moonworks/lunara-art-eval",
-      "feed": "https://huggingface.co/datasets/moonworks/lunara-art-eval/raw/main/README.md",
-      "terms": "Dataset card in moonworks/lunara-art-eval on Hugging Face, licensed Apache 2.0, reporting Table results from arXiv:2609.22272.",
-      "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 4,
-      "unmatched": [
-        "AuraFlow",
-        "HiDream-I1 Fast",
-        "Moonworks Lunara",
-        "SD 3.5 Turbo"
-      ],
-      "stats": {
-        "aestheticWinRate": {
-          "name": "Aesthetic win rate",
-          "unit": "%",
-          "better": "higher"
-        },
-        "emotionalResonance": {
-          "name": "Emotional Resonance",
-          "unit": "score",
-          "better": "higher",
-          "note": "Judge score for affective impression and expressive impact."
-        },
-        "emotionalWinRate": {
-          "name": "Emotional win rate",
-          "unit": "%",
-          "better": "higher"
-        },
-        "contentIntegrity": {
-          "name": "Content Integrity",
-          "unit": "score",
-          "better": "higher",
-          "note": "Judge score for structural coherence and requested subject completeness."
-        },
-        "contentWinRate": {
-          "name": "Content win rate",
-          "unit": "%",
-          "better": "higher"
-        },
-        "clipScore": {
-          "name": "CLIPScore",
-          "unit": "score",
-          "better": "higher"
-        },
-        "laionAesthetic": {
-          "name": "LAION Aesthetic",
-          "unit": "score",
-          "better": "higher"
-        }
-      }
-    },
     "moosebench": {
       "url": "https://github.com/HaningZS/moose-ifs/blob/main/results/derived/main_tables.json",
       "feed": "https://raw.githubusercontent.com/HaningZS/moose-ifs/0592e1134fce7e3577c85e99e62c674acccc4cfd/results/derived/main_tables.json",
@@ -287315,62 +287061,6 @@
         }
       }
     },
-    "robotrack-bench": {
-      "url": "https://github.com/allenai/robotrack",
-      "feed": "https://raw.githubusercontent.com/allenai/robotrack/main/README.md",
-      "terms": "Public Apache-2.0 repository and evaluation tables published by the Allen Institute for AI.",
-      "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 0,
-      "unmatched": [
-        "AllTracker",
-        "BootsTAPNext",
-        "CoTracker3 (offline)",
-        "CoTracker3 (online)",
-        "CoWTracker",
-        "RoboTracker",
-        "RoboTracker-Warp",
-        "TAPNext"
-      ],
-      "parts": {
-        "droidFranka": {
-          "name": "DROID Franka",
-          "group": "Source"
-        },
-        "molmoact2Yam": {
-          "name": "MolmoAct2 YAM",
-          "group": "Source"
-        },
-        "molmoact2So100": {
-          "name": "MolmoAct2 SO-100",
-          "group": "Source"
-        },
-        "egoverseEva": {
-          "name": "EgoVerse EVA",
-          "group": "Source"
-        },
-        "egoverseHuman": {
-          "name": "EgoVerse human",
-          "group": "Source"
-        },
-        "egoExo4dHuman": {
-          "name": "Ego-Exo4D human",
-          "group": "Source"
-        }
-      },
-      "stats": {
-        "deltaAvg": {
-          "name": "Position accuracy (<δavg)",
-          "unit": "%",
-          "better": "higher"
-        },
-        "oa": {
-          "name": "Occlusion accuracy",
-          "unit": "%",
-          "better": "higher"
-        }
-      }
-    },
     "robots-txt-benchmark": {
       "url": "https://www.kaggle.com/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/oldjard/robots-txt-benchmark-can-llms-read-and-write-robo/leaderboard",
@@ -295837,38 +295527,6 @@
         "GA Reader",
         "TableILP"
       ]
-    },
-    "sciresearch-eval": {
-      "url": "https://btwestyo.github.io/sciresearch-eval/",
-      "feed": "https://btwestyo.github.io/sciresearch-eval/",
-      "terms": "Public CC-BY-4.0 benchmark and static GitHub Pages leaderboard published by Lawrence Livermore National Laboratory.",
-      "retrieved": "2026-11-24",
-      "rows": 21,
-      "unmatched": [],
-      "chart": {
-        "title": "Coverage vs tokens",
-        "x": {
-          "key": "tokens",
-          "label": "Median output tokens per episode",
-          "unit": "tokens",
-          "better": "lower",
-          "log": true
-        },
-        "y": {
-          "key": "coverage",
-          "label": "95% interval coverage",
-          "unit": "%",
-          "better": "higher"
-        },
-        "note": "Share of true parameter values inside reported 95% confidence intervals against median output tokens per episode across reasoning settings."
-      },
-      "stats": {
-        "coverage": {
-          "name": "95% interval coverage",
-          "unit": "%",
-          "note": "Share of true parameter values inside the model’s reported 95% confidence intervals. Target is 95%, so higher above 95% is not necessarily better."
-        }
-      }
     },
     "scitaste-bench": {
       "url": "https://huggingface.co/datasets/skylenage/SciTaste-benchmark",
@@ -351237,55 +350895,6 @@
           "unit": "score",
           "better": "higher",
           "note": "Scale-invariant signal-to-distortion ratio in dB."
-        }
-      }
-    },
-    "whatifbench": {
-      "url": "https://github.com/zju-gt/WhatIfBench",
-      "feed": "https://raw.githubusercontent.com/zju-gt/WhatIfBench/main/README.md",
-      "terms": "The authors publish the WhatIfBench Main Results table in the public zju-gt/WhatIfBench GitHub repository.",
-      "static": "paper",
-      "retrieved": "2026-11-24",
-      "rows": 6,
-      "unmatched": [],
-      "parts": {
-        "stemPm": {
-          "name": "STEM (Process)",
-          "group": "Process metric"
-        },
-        "hssPm": {
-          "name": "HSS (Process)",
-          "group": "Process metric"
-        },
-        "hybridPm": {
-          "name": "Hybrid (Process)",
-          "group": "Process metric"
-        },
-        "stemRm": {
-          "name": "STEM (Rubric)",
-          "group": "Rubric metric"
-        },
-        "hssRm": {
-          "name": "HSS (Rubric)",
-          "group": "Rubric metric"
-        },
-        "hybridRm": {
-          "name": "Hybrid (Rubric)",
-          "group": "Rubric metric"
-        }
-      },
-      "stats": {
-        "overallPm": {
-          "name": "Overall process metric",
-          "unit": "%",
-          "better": "higher",
-          "note": "Graph-level causal validity across all 220 questions."
-        },
-        "overallRm": {
-          "name": "Overall rubric metric",
-          "unit": "%",
-          "better": "higher",
-          "note": "Answer-level explanatory adequacy across all 220 questions."
         }
       }
     },

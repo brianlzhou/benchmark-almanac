@@ -204030,66 +204030,6 @@
     "added": "2026-11-24"
   },
   {
-    "id": "whatifbench",
-    "name": "WhatIfBench",
-    "aliases": [
-      "What If Bench",
-      "WhatIf-Bench"
-    ],
-    "category": "science-reasoning",
-    "subcategory": "science-research",
-    "level": "university",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Diagnostic benchmark of 220 open-domain, long-horizon counterfactual causal reasoning questions across STEM, humanities and social sciences, and hybrid scenarios. The PRISM evaluator converts each response into a semantic causal graph and averages graph-level Process Metric with rubric-level explanatory adequacy.",
-    "org": "Zhejiang University, Alibaba Group and City University of Hong Kong",
-    "released": "2026-08",
-    "links": {
-      "paper": "https://arxiv.org/abs/2608.27953",
-      "repo": "https://github.com/zju-gt/WhatIfBench",
-      "dataset": "https://huggingface.co/datasets/zju-gt/WhatIfBench"
-    },
-    "access": "public",
-    "note": "Published in Findings of EMNLP 2026, with code and Hugging Face dataset released in November 2026. Scores 6 frontier LLMs using GPT-5.4 as unified causal-graph parser and rubric judge (temperature 0.0), led by GPT-5.5 at 64.62% ahead of Claude Opus 4.7 (59.11%) and Gemini 3.1 Pro Preview (56.33%).",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://github.com/zju-gt/WhatIfBench",
-      "https://huggingface.co/datasets/zju-gt/WhatIfBench",
-      "https://arxiv.org/abs/2608.27953"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "evident-gui",
-    "name": "EVIDENT",
-    "category": "computer-use-browser",
-    "subcategory": "computer-web",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "agent-task",
-    "description": "Two hundred twenty live web agent tasks (150 Korean and 70 English) paired with human-authored evidence checks that separate surface task completion from evidence-grounded answers.",
-    "org": "KAIST (KORMo-VL)",
-    "released": "2026-11",
-    "links": {
-      "paper": "https://arxiv.org/abs/2611.20488",
-      "repo": "https://github.com/yerinNam/EVIDENT",
-      "dataset": "https://huggingface.co/datasets/KORMo-VL/EVIDENT"
-    },
-    "access": "public",
-    "unit": "%",
-    "better": "higher",
-    "metric": "Grounded Success Rate",
-    "confidence": "verified",
-    "evidence": [
-      "https://huggingface.co/datasets/KORMo-VL/EVIDENT",
-      "https://arxiv.org/abs/2611.20488",
-      "https://github.com/yerinNam/EVIDENT"
-    ],
-    "added": "2026-11-24"
-  },
-  {
     "id": "ko-online-mind2web",
     "name": "Ko-Online-Mind2Web",
     "category": "computer-use-browser",
@@ -204168,32 +204108,6 @@
     "added": "2026-11-24"
   },
   {
-    "id": "moonworks-lunara-art-eval",
-    "name": "Moonworks Lunara Art Eval",
-    "category": "multimodal-vision",
-    "subcategory": "image-generation",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "One thousand art prompts (500 across 14 artistic styles and 500 open-ended) scoring text-to-image models on aesthetic quality, emotional resonance, and content integrity.",
-    "org": "Moonworks",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2609.22272",
-      "dataset": "https://huggingface.co/datasets/moonworks/lunara-art-eval"
-    },
-    "access": "public",
-    "unit": "score",
-    "better": "higher",
-    "metric": "Aesthetic Quality",
-    "confidence": "verified",
-    "evidence": [
-      "https://huggingface.co/datasets/moonworks/lunara-art-eval",
-      "https://arxiv.org/abs/2609.22272"
-    ],
-    "added": "2026-11-24"
-  },
-  {
     "id": "multilangbench-openai",
     "name": "MultiLangBench",
     "category": "coding",
@@ -204214,35 +204128,6 @@
     "confidence": "verified",
     "evidence": [
       "https://github.com/openai/MultiLangBench"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "loco-mujoco",
-    "name": "LocoMuJoCo",
-    "category": "robotics-embodied",
-    "subcategory": "robotics-simulation",
-    "level": "expert",
-    "scoring": "verified",
-    "format": "agent-task",
-    "description": "A MuJoCo imitation learning benchmark for humanoid and quadruped whole-body locomotion and motion-capture tracking across simulated and sim-to-real robot embodiments.",
-    "org": "TU Darmstadt IAS",
-    "released": "2023-11",
-    "links": {
-      "paper": "https://arxiv.org/abs/2611.26293",
-      "repo": "https://github.com/robfiras/loco-mujoco",
-      "site": "https://loco-mujoco.readthedocs.io/"
-    },
-    "access": "public",
-    "note": "Original v0.1.0 paper is arXiv:2311.02496 (NeurIPS 2023 Robot Learning Workshop).",
-    "unit": "score",
-    "better": "higher",
-    "metric": "Mean return",
-    "confidence": "verified",
-    "evidence": [
-      "https://github.com/robfiras/loco-mujoco",
-      "https://arxiv.org/abs/2611.26293",
-      "https://arxiv.org/abs/2311.02496"
     ],
     "added": "2026-11-24"
   },
@@ -204303,66 +204188,6 @@
       "https://21st.dev/benchmarks/copy",
       "https://github.com/21st-dev/copy-bench",
       "https://hub.harborframework.com/datasets/21st/copy-bench"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "sciresearch-eval",
-    "name": "SciResearch-Eval",
-    "category": "science-reasoning",
-    "subcategory": "science-research",
-    "level": "frontier",
-    "scoring": "verified",
-    "format": "agent-task",
-    "description": "Autonomous agents measure a material’s thermal properties by designing heating experiments and fitting a supplied simulator that may be under-resolved or missing real physics, reporting 95% confidence intervals scored against exact ground truth.",
-    "org": "Lawrence Livermore National Laboratory",
-    "released": "2026-11",
-    "links": {
-      "site": "https://btwestyo.github.io/sciresearch-eval/",
-      "leaderboard": "https://btwestyo.github.io/sciresearch-eval/",
-      "paper": "https://arxiv.org/abs/2611.21541",
-      "repo": "https://github.com/Btwestyo/sciresearch-eval"
-    },
-    "access": "public",
-    "note": "Headline leaderboard scores 9 models across 21 reasoning settings on 38 held-out physics-trap tasks by geometric-mean interval score (lower is better), with 95% interval coverage, output tokens, and API cost per episode.",
-    "unit": "score",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://btwestyo.github.io/sciresearch-eval/",
-      "https://arxiv.org/abs/2611.21541",
-      "https://github.com/Btwestyo/sciresearch-eval",
-      "https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "robotrack-bench",
-    "name": "RoboTrack-Bench",
-    "category": "robotics-embodied",
-    "subcategory": "robotics-real",
-    "level": "expert",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Point trackers estimate 2D trajectories and frame-by-frame occlusion visibility for 2,522 hand-annotated point tracks across 307 real-world robotic and human manipulation videos, scored by Average Jaccard.",
-    "org": "Allen Institute for AI",
-    "released": "2026-11",
-    "links": {
-      "site": "https://robotrack.allen.ai",
-      "paper": "https://allenai.org/papers/robotrack",
-      "repo": "https://github.com/allenai/robotrack",
-      "leaderboard": "https://github.com/allenai/robotrack"
-    },
-    "access": "public",
-    "note": "Evaluates 10 point-tracking checkpoints across six model families under one uniform protocol, with per-source Average Jaccard breakdowns across DROID Franka, MolmoAct2, EgoVerse, and Ego-Exo4D clips.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://allenai.org/blog/robotrack",
-      "https://github.com/allenai/robotrack",
-      "https://huggingface.co/datasets/allenai/RoboTrack-Bench",
-      "https://huggingface.co/allenai/RoboTracker-Warp"
     ],
     "added": "2026-11-24"
   },
@@ -206000,35 +205825,6 @@
     "added": "2026-11-24"
   },
   {
-    "id": "egodepth-bench",
-    "name": "EgoDepth-Bench",
-    "category": "robotics-embodied",
-    "subcategory": "robotics-reasoning",
-    "level": "frontier",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Evaluates foundation metric-depth and 3D reconstruction models on synchronized multi-camera egocentric manipulation video with laser-scanned ground truth across full-image, hand, and object subsets.",
-    "org": "EgoDepth-Bench Authors",
-    "released": "2026-11",
-    "links": {
-      "site": "https://egodepth-bench.github.io/",
-      "leaderboard": "https://egodepth-bench.github.io/",
-      "paper": "https://arxiv.org/abs/2611.30734",
-      "repo": "https://github.com/Chris004869/EgoDepth-Bench"
-    },
-    "access": "public",
-    "note": "Headline score is full-image AbsRel (absolute relative depth error, lower is better) across 19 metric monocular, stereo, multi-view, and oracle-aligned foundation depth models, alongside MAE Z (cm), delta-1 accuracy, and coverage.",
-    "unit": "score",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://egodepth-bench.github.io/",
-      "https://arxiv.org/abs/2611.30734",
-      "https://github.com/Chris004869/EgoDepth-Bench"
-    ],
-    "added": "2026-11-24"
-  },
-  {
     "id": "safeclawarena",
     "name": "SafeClawArena",
     "category": "cyber",
@@ -206145,33 +205941,6 @@
       "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
       "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
       "https://motion-graphics-bench.github.io/"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "bearcubs",
-    "name": "BEARCUBS",
-    "category": "computer-use-browser",
-    "subcategory": "computer-web",
-    "level": "expert",
-    "scoring": "verified",
-    "format": "agent-task",
-    "description": "Live web-browsing benchmark testing computer-use and search agents on information-seeking questions across real websites that require multi-step navigation, interaction, and visual or textual synthesis.",
-    "org": "University of Massachusetts Amherst",
-    "released": "2025-03",
-    "links": {
-      "site": "https://bear-cubs.github.io/",
-      "leaderboard": "https://bear-cubs.github.io/",
-      "paper": "https://arxiv.org/abs/2503.07919"
-    },
-    "access": "private",
-    "note": "Evaluates 12 computer-use agents, deep-research agents, and search-augmented LLM baselines across overall, text-only, and multimodal accuracy splits.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://bear-cubs.github.io/",
-      "https://arxiv.org/abs/2503.07919"
     ],
     "added": "2026-11-24"
   },
@@ -206754,33 +206523,6 @@
       "https://arxiv.org/abs/2605.30000",
       "https://huggingface.co/datasets/Y36521478Y/Cookie-Bench",
       "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview"
-    ],
-    "added": "2026-11-24"
-  },
-  {
-    "id": "fairchem-leaderboard",
-    "name": "FAIR Chemistry Leaderboard",
-    "category": "science-reasoning",
-    "subcategory": "science-research",
-    "level": "frontier",
-    "scoring": "verified",
-    "format": "prediction",
-    "description": "Chemistry and materials modeling leaderboard evaluating atomistic foundation models across Open Molecules 2025 (OMol25) and Open Catalyst 2020 (OC20) energy and force benchmarks.",
-    "org": "Meta FAIR",
-    "released": "2025-08",
-    "links": {
-      "repo": "https://github.com/facebookresearch/fairchem",
-      "site": "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
-      "leaderboard": "https://huggingface.co/spaces/facebook/fairchem_leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "Lower energy MAE in meV is better. Importer reads complete entries from the live OMol25 Overview table across seven chemistry tasks.",
-    "unit": "score",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
-      "https://github.com/facebookresearch/fairchem"
     ],
     "added": "2026-11-24"
   },

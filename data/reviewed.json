@@ -2611,11 +2611,6 @@
       "via": "EleutherAI publishes a task configuration for this evaluation."
     },
     {
-      "id": "bearcubs",
-      "date": "2026-11-24",
-      "via": "UMass Amherst live web-browsing benchmark scoring 12 computer-use agents, deep-research systems, and search baselines."
-    },
-    {
       "id": "bedside-bench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, healthcare domain."
@@ -7746,11 +7741,6 @@
       "via": "We followed the ENIGMA citation to the industry questions and then checked the EgoCross challenge report."
     },
     {
-      "id": "egodepth-bench",
-      "date": "2026-11-24",
-      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.30734) with a live leaderboard at egodepth-bench.github.io scoring 19 foundation depth models."
-    },
-    {
       "id": "egohome",
       "date": "2026-11-13",
       "via": "Perceptron released it with Perceptron Egocentric 1.0, with code on GitHub and data on Hugging Face."
@@ -8496,11 +8486,6 @@
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
     },
     {
-      "id": "evident-gui",
-      "date": "2026-11-24",
-      "via": "Hugging Face dataset KORMo-VL/EVIDENT (104 likes) paired with arXiv:2611.20488."
-    },
-    {
       "id": "evmbench",
       "date": "2026-11-01",
       "via": "Listing OpenAI frontier-evals projects while checking PaperBench showed an evmbench folder the almanac lacks."
@@ -8764,11 +8749,6 @@
       "id": "faintasy-football",
       "date": "2026-11-20",
       "via": "Searching for fantasy team managers led from Premier League assistants to an NFL league with published results."
-    },
-    {
-      "id": "fairchem-leaderboard",
-      "date": "2026-11-24",
-      "via": "Meta FAIR Hugging Face org sweep found FAIR Chemistry Leaderboard evaluating atomistic foundation models across OMol25 and OC20."
     },
     {
       "id": "fairface",
@@ -14311,11 +14291,6 @@
       "via": "We followed an in-car ordering lead to Meituan’s Xiaotuan team and found its separate evaluation of local merchant search."
     },
     {
-      "id": "loco-mujoco",
-      "date": "2026-11-24",
-      "via": "GitHub repository robfiras/loco-mujoco (1,494 stars) and arXiv:2611.26293."
-    },
-    {
       "id": "locomo",
       "date": "2026-11-01",
       "via": "Checking long-term memory benchmarks next to LongMemEval that the almanac lacked."
@@ -16624,11 +16599,6 @@
       "id": "monthly-swebench",
       "date": "2026-11-01",
       "via": "The UniPat AI benchmarks page lists Monthly-SWEBench, and the almanac lacks it."
-    },
-    {
-      "id": "moonworks-lunara-art-eval",
-      "date": "2026-11-24",
-      "via": "Hugging Face dataset moonworks/lunara-art-eval (45 likes) paired with arXiv:2609.22272."
     },
     {
       "id": "moosebench",
@@ -21276,11 +21246,6 @@
       "via": "Gemini Robotics On-Device 2 model card reports results for this evaluation."
     },
     {
-      "id": "robotrack-bench",
-      "date": "2026-11-24",
-      "via": "Published and reported by Allen Institute for AI on its launch blog and RoboTracker model cards across 10 point-tracking checkpoints."
-    },
-    {
       "id": "robots-evolved-gui-lessons",
       "date": "2026-11-19",
       "via": "The publisher lists this evaluation on Harbor Hub."
@@ -22024,11 +21989,6 @@
       "id": "scireasoner-bench",
       "date": "2026-11-01",
       "via": "Intern-S2-397B model card scientific table."
-    },
-    {
-      "id": "sciresearch-eval",
-      "date": "2026-11-24",
-      "via": "Independent public leaderboard from Lawrence Livermore National Laboratory scoring 9 models across 21 reasoning settings, also covered in Import AI #482."
     },
     {
       "id": "scitaste-bench",
@@ -27694,11 +27654,6 @@
       "id": "whamr",
       "date": "2026-11-20",
       "via": "We followed the WHAM project page to the reverberant extension and checked the authors’ paper and a separate test harness."
-    },
-    {
-      "id": "whatifbench",
-      "date": "2026-11-24",
-      "via": "Waiting-list triage of data/discovered.json (Hugging Face zju-gt/WhatIfBench) confirmed an EMNLP 2026 Findings counterfactual reasoning benchmark with 6 frontier LLMs scored under PRISM on GitHub."
     },
     {
       "id": "whatifibought",
