@@ -16,7 +16,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (thinking and non-thinking tables, all memory settings Avg@4)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the scores are cited to the VitaBench authors.',
-  stats: { fullContextRank: {name: 'Full context rank', unit: 'count'}, passAt4: {name: 'Full context pass@4', unit: '%', better: 'higher'}, pass4: {name: 'Full context pass^4', unit: '%', better: 'higher'} },
+  stats: { passAt4: { name: 'pass@4', unit: '%', better: 'higher' }, pass4: { name: 'pass^4', unit: '%', better: 'higher', note: 'all four attempts pass' } },
   aliases: {
     'Claude-4.5-Sonnet': 'claude-sonnet-4-5',
   },
@@ -29,11 +29,10 @@ const board: Leaderboard = {
         for (const [offset, harness] of [[2, 'Full Context'], [5, "Agentic Memory"], [8, "RAG Memory"]] as const) {
         const score = num(r[offset]?.text);
         if (!r[1]?.text || score === undefined) continue;
-        // the second header row starts at Avg@4, so the full-context Pass@4 and Pass^4 cells follow the score
+        // the second header row starts at Avg@4, so Pass@4 and Pass^4 follow each memory setting's score
         const pass4 = t[1]?.[1]?.text === 'Pass@4' ? num(r[offset+1]?.text) : undefined;
         const passHat4 = t[1]?.[2]?.text === 'Pass^4' ? num(r[offset+2]?.text) : undefined;
-        const rank = num(r[0]?.text);
-        const metrics = { ...(rank !== undefined ? { fullContextRank: rank } : {}), ...(pass4 === undefined ? {} : { passAt4: pass4 * 100 }), ...(passHat4 === undefined ? {} : { pass4: passHat4 * 100 }) };
+        const metrics = { ...(pass4 === undefined ? {} : { passAt4: pass4 * 100 }), ...(passHat4 === undefined ? {} : { pass4: passHat4 * 100 }) };
         rows.push({ model: r[1].text, score: score * 100, trials: 4, harness, setting: k === 0 ? 'thinking' : 'non-thinking', ...(Object.keys(metrics).length ? { metrics } : {}) });
         }
       }

@@ -17,11 +17,18 @@ const board: Leaderboard = {
   terms: 'Static public page; the site has no robots.txt and no terms, and the o11y-bench repository (grafana/o11y-bench) is public.',
   aliases: {},
   chart:{title:'Pass^3 vs. cost',x:{key:'cost',label:'Cost per trial',unit:'$',better:'lower'},y:{key:'score',label:'Pass^3',unit:'%',better:'higher'}},
+  parts: {
+    Dashboards: { name: 'Dashboards', group: 'Task category' },
+    'Grafana API': { name: 'Grafana API', group: 'Task category' },
+    Investigation: { name: 'Investigation', group: 'Task category' },
+    Logs: { name: 'Logs', group: 'Task category' },
+    Metrics: { name: 'Metrics', group: 'Task category' },
+    Traces: { name: 'Traces', group: 'Task category' },
+  },
   stats: {
-    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    passAt3: { name: 'pass@3', unit: '%', better: 'higher' },
     totalTokens: { name: 'Total tokens per trial', unit: 'tokens' },
     solved: { name: 'Solved trials', unit: 'count' },
-    tasks: { name: 'Tasks', unit: 'count' },
   },
   async fetch(){
     const html = await fetchText(URL);
@@ -30,7 +37,6 @@ const board: Leaderboard = {
     const ts=tables(html);const t=ts.find(t=>t[0]?.some(c=>/^Tokens \/ trial/.test(c.text)));
     if(!t)throw new Error('Missing o11y ranking table');const rows:LeaderboardRow[]=[];
     const categories = ts.find(table => table[0]?.some(c => c.text === 'Dashboards'));
-    board.parts = Object.fromEntries((categories?.[0].slice(2) ?? []).map(c => [c.text, { name: c.text, group: 'Task category' }]));
     for(const r of t.slice(1)){
       const model=text(r[1].html.replace(/<span[^>]*title="Open-weight model"[^>]*>[\s\S]*?<\/span>/g,''));
       const score=num(r[3]?.text);if(!model||score===undefined)continue;
@@ -44,7 +50,7 @@ const board: Leaderboard = {
         if (value !== undefined) metrics[categories![0][i + 2].text] = value;
       });
       const counts = r[5]?.text.match(/^(\d+)\/(\d+)$/);
-      if (counts) Object.assign(metrics, { solved: Number(counts[1]), tasks: Number(counts[2]) });
+      if (counts) metrics.solved = Number(counts[1]);
       if (raw?.avg_total_tokens_per_trial) metrics.totalTokens = Number(raw.avg_total_tokens_per_trial);
       rows.push({model,score, trials: 3, open: raw ? raw['open-weight'] === 'true' : undefined, setting:r[2]?.text||undefined,cost:raw?.avg_cost_per_trial_usd ? Number(raw.avg_cost_per_trial_usd) : num(r[6]?.text),date:r[8]?.text,metrics});
     }return rows;

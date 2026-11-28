@@ -15,7 +15,32 @@ const board: Leaderboard = {
   url: 'https://htihle.github.io/weirdml_v2.html',
   feed: `${FEED} (avg_acc)`,
   terms: "CSV on the author's public GitHub Pages site, which states no license or terms.",
-  stats: { code_len_p10: {name: 'Code length 10th percentile', unit: 'tokens', better: 'lower'}, code_len_p50: {name: 'Code length median', unit: 'tokens', better: 'lower'}, code_len_p90: {name: 'Code length 90th percentile', unit: 'tokens', better: 'lower'}, time: {name: 'Median execution time', unit: 'seconds', better: 'lower'} },
+  parts: {
+    shapes_easy: { name: 'Shapes easy', group: 'Task' },
+    shapes_hard: { name: 'Shapes hard', group: 'Task' },
+    digits_unsup: { name: 'Digits unsup', group: 'Task' },
+    chess_winners: { name: 'Chess winners', group: 'Task' },
+    kolmo_shuffle: { name: 'Kolmo shuffle', group: 'Task' },
+    classify_sentences: { name: 'Classify sentences', group: 'Task' },
+    classify_shuffled: { name: 'Classify shuffled', group: 'Task' },
+    insert_patches: { name: 'Insert patches', group: 'Task' },
+    blunders_easy: { name: 'Blunders easy', group: 'Task' },
+    blunders_hard: { name: 'Blunders hard', group: 'Task' },
+    digits_generalize: { name: 'Digits generalize', group: 'Task' },
+    shapes_variable: { name: 'Shapes variable', group: 'Task' },
+    xor_easy: { name: 'XOR easy', group: 'Task' },
+    xor_hard: { name: 'XOR hard', group: 'Task' },
+    splash_easy: { name: 'Splash easy', group: 'Task' },
+    splash_hard: { name: 'Splash hard', group: 'Task' },
+    number_patterns: { name: 'Number patterns', group: 'Task' },
+  },
+  stats: {
+    code_len_p10: { name: 'Code length 10th percentile', unit: 'tokens', better: 'lower' },
+    code_len_p50: { name: 'Code length median', unit: 'tokens', better: 'lower' },
+    code_len_p90: { name: 'Code length 90th percentile', unit: 'tokens', better: 'lower' },
+    time: { name: 'Median execution time', unit: 'seconds', better: 'lower' },
+    tokensPerCall: { name: 'Output tokens per response', unit: 'tokens', better: 'lower' },
+  },
   chart: {
     title: 'Average accuracy against output tokens',
     note: 'Average total output tokens per response (reasoning plus completion) against average accuracy over all tasks.',
@@ -36,7 +61,6 @@ const board: Leaderboard = {
   },
   async fetch() {
     const rows: LeaderboardRow[] = [];
-    board.parts = {};
     for (const r of parseCsv(await fetchText(FEED))) {
       const acc = Number(r.avg_acc);
       if (!r.display_name || !Number.isFinite(acc)) continue;
@@ -48,9 +72,7 @@ const board: Leaderboard = {
       for (const [key, cell] of Object.entries(r)) {
         if (!cell.trim() || !Number.isFinite(Number(cell))) continue;
         if (key.endsWith('_acc') && key !== 'avg_acc') {
-          const task = key.slice(0, -4);
-          metrics[task] = Number(cell) * 100;
-          board.parts[task] = { name: task.replace(/_/g, ' '), group: 'Task' };
+          metrics[key.slice(0, -4)] = Number(cell) * 100;
         } else if (key === 'avg_acc_standard_error') metrics.stderr = Number(cell) * 100;
         else if (key.startsWith('code_len_')) metrics[key] = Number(cell);
       }
