@@ -466,6 +466,11 @@
       "via": "AECFoundry’s comparison of similarly named construction benchmarks led to Kamai’s drawings and an independent OpenTakeoff run."
     },
     {
+      "id": "aec-geometric-bench-nov-2026",
+      "date": "2026-11-28",
+      "via": "Kamai replaced the AEC-Geometric-Bench repository README with a November 2026 revision that changes object matching, adds elevators and stairs, and runs frontier models as PDF code agents."
+    },
+    {
       "id": "aecbench-liang",
       "date": "2026-11-20",
       "via": "A building environmental engineering citation led to Liang’s project page, its nine-model results table, and the released question files."

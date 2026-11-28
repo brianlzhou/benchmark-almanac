@@ -3455,6 +3455,138 @@
         }
       }
     },
+    "aec-geometric-bench-nov-2026": {
+      "url": "https://github.com/KamaiEnterprises/aec-geometric-bench",
+      "feed": "https://raw.githubusercontent.com/KamaiEnterprises/aec-geometric-bench/main/README.md",
+      "terms": "Kamai licenses released drawings and derived dataset files under CC BY-NC 4.0 and the scorer under Apache 2.0. https://github.com/KamaiEnterprises/aec-geometric-bench/blob/main/dataset/LICENSE-DATA.md",
+      "retrieved": "2026-11-28",
+      "rows": 4,
+      "unmatched": [
+        "Kamai Aug26",
+        "Kamai Nov26"
+      ],
+      "chart": {
+        "title": "Object F1 vs. price per sheet",
+        "x": {
+          "key": "cost",
+          "label": "Price per sheet",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Object F1",
+          "better": "higher"
+        },
+        "note": "Object F1 against mean token price per sheet on a log scale across all 312 sheets, matching the README scatter plot."
+      },
+      "parts": {
+        "wall": {
+          "name": "Wall pixel F1",
+          "group": "Geometry"
+        },
+        "area": {
+          "name": "Area pixel F1",
+          "group": "Geometry"
+        },
+        "instance": {
+          "name": "Area instance F1",
+          "group": "Geometry"
+        },
+        "singleSwingDoor": {
+          "name": "Single swing door F1",
+          "group": "Object class"
+        },
+        "doubleSwingDoor": {
+          "name": "Double swing door F1",
+          "group": "Object class"
+        },
+        "window": {
+          "name": "Window F1",
+          "group": "Object class"
+        },
+        "sink": {
+          "name": "Sink F1",
+          "group": "Object class"
+        },
+        "toilet": {
+          "name": "Toilet F1",
+          "group": "Object class"
+        },
+        "bathtub": {
+          "name": "Bathtub F1",
+          "group": "Object class"
+        },
+        "shower": {
+          "name": "Shower F1",
+          "group": "Object class"
+        },
+        "cooktops": {
+          "name": "Cooktops F1",
+          "group": "Object class"
+        },
+        "elevator": {
+          "name": "Elevator F1",
+          "group": "Object class"
+        },
+        "stairs": {
+          "name": "Stairs F1",
+          "group": "Object class"
+        },
+        "releasedF1": {
+          "name": "Object F1 on 15 released sheets",
+          "group": "Released 15 sheets"
+        },
+        "releasedWall": {
+          "name": "Wall pixel F1 on 15 released sheets",
+          "group": "Released 15 sheets"
+        },
+        "releasedArea": {
+          "name": "Area pixel F1 on 15 released sheets",
+          "group": "Released 15 sheets"
+        },
+        "releasedInstance": {
+          "name": "Area instance F1 on 15 released sheets",
+          "group": "Released 15 sheets"
+        },
+        "tagsF1": {
+          "name": "Door and window tags F1",
+          "group": "Tags benchmark"
+        }
+      },
+      "stats": {
+        "precision": {
+          "name": "Precision",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "recall": {
+          "name": "Recall",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored from 0 to 1."
+        },
+        "releasedPrecision": {
+          "name": "Released-sheet precision",
+          "unit": "score",
+          "better": "higher",
+          "note": "Precision on 15 released sheets, stored from 0 to 1."
+        },
+        "releasedRecall": {
+          "name": "Released-sheet recall",
+          "unit": "score",
+          "better": "higher",
+          "note": "Recall on 15 released sheets, stored from 0 to 1."
+        },
+        "latency": {
+          "name": "Median time per sheet",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
+    },
     "aecbench-liang": {
       "url": "https://github.com/ArchiAI-LAB/AECBench#evaluation-results",
       "feed": "https://raw.githubusercontent.com/ArchiAI-LAB/AECBench/main/README.md",
